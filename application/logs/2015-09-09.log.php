@@ -1,0 +1,4 @@
+<?php defined('SYSPATH') or die('No direct script access.'); ?>
+
+2015-09-09 18:06:52 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file system/core/Kohana.php on line 1162
+2015-09-09 19:33:51 +05:30 --- error: Uncaught Kohana_Database_Exception: There was an SQL error: Unknown column 'product.for_store_cred' in 'where clause' - select category_url, category.category_id, category_name , product , count(product.deal_id) as product_count from category join product on product.category_id = category.category_id join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id where category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1 and product.for_store_cred = 0    and  store_status = 1 and city_status=1  group by category.category_id  order by category_name ASC in file system/libraries/drivers/Database/Mysqli.php on line 142
