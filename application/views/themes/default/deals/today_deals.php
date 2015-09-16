@@ -183,13 +183,13 @@
             <?php if ($ads->ads_position == "rs1" && $ads->page_position==2) {  ?>                     
                                   <div class="banner_right_add2 wloader_parent">
                                       <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
-										 <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+										 <a href="javascript:load_club();" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
                                   </div>
               <?php } ?>
               <?php if ($ads->ads_position == "rs2" && $ads->page_position==2){  ?>   
                          <div class="banner_right_add wloader_parent">
                                       <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
-										 <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a> </div>
+										 <a href="javascript:load_club();" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a> </div>
             <?php } ?>
         <?php } ?>
     <?php } ?>
