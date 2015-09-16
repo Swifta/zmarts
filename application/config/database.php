@@ -59,7 +59,7 @@ $config['default'] = array
 		'host'     => 'localhost',
 		'port'     => FALSE,
 		'socket'   => FALSE,
-		'database' => 'zmart09092015'
+		'database' => 'zmart16092015'
 	),
 	'character_set' => 'utf8',
 	'table_prefix'  => '',
