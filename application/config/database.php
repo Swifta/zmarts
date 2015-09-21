@@ -55,7 +55,7 @@ $config['default'] = array
 	(
 		'type'     => 'mysqli',
 		'user'     => 'root',
-		'pass'     => '',
+		'pass'     => 'adminadminroot',
 		'host'     => 'localhost',
 		'port'     => FALSE,
 		'socket'   => FALSE,

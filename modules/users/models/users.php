@@ -131,6 +131,9 @@ class Users_Model extends Model
 		
 		$result = $this->db->insert("users", array("firstname" => $post->f_name, "email" => $post->email, "password" =>  md5($post->password),"city_id" => $post->city, "country_id" => $post->country, "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key));
 		
+			$this->session->set(array("UserID" => $result->insert_id(), "UserName" => $post->f_name, "UserEmail" => $post->email, "city_id" => $post->city, "UserType" => 4, "Club" => 0));
+		
+		
 		$result_city = $this->db->select("category_id,city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 		        if(count($result_city) > 0) {
                         $city_subscribe = $result_city->current()->city_id;
@@ -141,12 +144,6 @@ class Users_Model extends Model
 			$category_subscribe = $category_result->current()->category_id;
 		        $result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $result->insert_id(), "email_id" => $post->email,"city_id" => $post->city,"country_id" =>$post->country,"category_id" =>$category_subscribe));
   		      }
-		/*
-			TODO
-			Add club member to this session.
-			@Live
-		*/
-		$this->session->set(array("UserID" => $result->insert_id(), "UserName" => $post->f_name, "UserEmail" => $post->email, "city_id" => $post->city, "UserType" => 4, "Club" => 0));
 		
 		return 1;
 	}
@@ -902,6 +899,34 @@ class Users_Model extends Model
 		$result = $this->db->update("users", array("unique_identifier" => $unique_identifier,"user_auto_key"=>$user_auto_key), array("user_id" => $this->UserID));print_r($result);exit;
 	}
 	
+	/**  UPDATE UNIQUE IDENTIFIER
+		
+		Customize this for updating after account verification.
+		@Live
+		
+	**/
+	public function update_unique_identifier1($unique_identifier="")
+	{
+		if($unique_identifier !=""){ 
+			$user_auto_key = text::random($type = 'alnum', $length = 4);
+			$this->session->set("user_auto_key",$user_auto_key);
+			$this->session->set("prime_customer",1);
+		} else {
+			$user_auto_key ="";
+			$this->session->delete("user_auto_key");
+			$this->session->set("prime_customer",0);
+		}
+		try{
+			
+			$result = $this->db->update("users", array("unique_identifier" => $unique_identifier,"user_auto_key"=>$user_auto_key), array("user_id" => $this->UserID));
+			
+			return 1;
+			
+		}catch(Expection $e){
+			return -1;
+		}
+	}
+	
 	public function get_gift($gift_id="")
 	{
 		$resulkt=$this->db->select("gift_name")->from("free_gift")->where(array("gift_status" => 1,"gift_id" =>$gift_id))->get();
@@ -978,11 +1003,8 @@ class Users_Model extends Model
          * WE SEND AN EMAIL TO THE USER
          * @param JSONObject of valid required fields to Open an account
         */
-        public function update_user_to_club_membership($create_account = false, $params=""){
+        public function update_user_to_club_membership($create_account = false, $account_number=""){
             
-						
-			$params_obj = arr::to_object($params);	
-			
 			try{
 				
 				/*
@@ -994,14 +1016,13 @@ class Users_Model extends Model
 				
 				
 				$u_tb_name = 'users';
-				$u_columns = array('nuban'=>$params_obj->account_number, 'club_member'=>1);
+				$u_columns = array('nuban'=>$account_number, 'club_member'=>1);
 				$u_where = array('user_id'=>$this->UserID);
 				$results = $this->db->update($u_tb_name, $u_columns, $u_where);
 				
 				$this->session->set(array("Club"=>1));
-				update_unique_identifier("0000000000");	
+				return $this->update_unique_identifier1("0000000000");	
 				
-				return 1;
 					
 			} catch(Exception $e){
 				/*

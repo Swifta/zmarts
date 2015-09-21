@@ -1,3 +1,0 @@
-# zmarts 
-
-zenith test deployment
