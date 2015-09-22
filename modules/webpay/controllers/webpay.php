@@ -19,7 +19,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->cust_name_desc = "";
                 $this->txn_ref = "";
                 $this->pay_item_id = 101;
-                $this->pay_item_name = "eMarketPlace";
+                $this->pay_item_name = "Payment Name";
                 $this->xml_data = "";
                 $this->hash = "";
                 $this->xml_data = "";
@@ -75,7 +75,7 @@ class Webpay_Controller extends Layout_Controller
                 {
                     var_dump(curl_error($ch));
                 }
-                //var_dump(json_decode($response));
+                var_dump(json_decode($response)); die;
                 $interswitch = json_decode($response);
                 //echo $url_call."<br />";
                 //echo $hash;
@@ -236,7 +236,7 @@ class Webpay_Controller extends Layout_Controller
                     //then run a code to get the splitting xml file and co
                     
                     $this->xml_data = '<payment_item_detail>'. 
-                        '<item_details detail_ref="eMarketPlace" institution="Store" sub_location="Lagos" location="Lagos">';
+                        '<item_details detail_ref="'.$TRANSACTIONID.'" institution="Store" sub_location="Lagos" location="Lagos">';
                     $this->xml_data .= $this->webpay->get_split_marchant_xml($TRANSACTIONID);//pass in the transaction ID
                         //'<item_detail item_id="1" item_name="Butter" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4356789876" />'.
                         //    '<item_detail item_id="2" item_name="Grape" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4351189876" />'. 

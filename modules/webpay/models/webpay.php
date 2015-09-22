@@ -36,7 +36,8 @@ class Webpay_Model extends Model
 
                     $item_id = $row->product_id;
                     $item_name = urlencode($row->deal_title." (".$row->quantity.")");
-                    $acct_num = $row->nuban;
+                    //$acct_num = $row->nuban;
+                    $acct_num = "2087778360";
                     $item_amt = intval($row->amount * 100);
                     $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
                             $item_amt.'" bank_id="117" acct_num="'.$acct_num.'" />';

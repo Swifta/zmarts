@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-class Webservices_Controller extends Layout_Controller
+class Webservices_Controller extends Controller
 {
 	//const ALLOW_PRODUCTION = TRUE;
 	public function __construct()
