@@ -973,6 +973,8 @@ $content_text = array(
 			"MERCHANT_MANAGE"=>"Manage Merchant Accounts",
 
 			"PAYMENT_ACC"=>"Payment Account",
+    
+    "M_ACC_NO"=>"Merchant Account Number",
 			
 			"ARAMAX_ACC"=>"Aramax Shipping Account",
 

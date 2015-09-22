@@ -50,7 +50,7 @@ class Users_Controller extends Layout_Controller {
                   $this->name = "UNKNOWN";
               }
               $status = $this->users->add_users_social($this->name, $this->email, $this->password);
-              
+              //echo $status; die;
                 if($status == 1){
                   $this->signup=1;
                   $from = CONTACT_EMAIL;
@@ -73,9 +73,9 @@ class Users_Controller extends Layout_Controller {
                   //url::redirect(PATH."users/my-account.html");
                   //$this->UserID = $this->session->get("UserID");
                 }
-                $_SESSION['Club'] = 1;
+                $_SESSION['Club'] = 0;
                 //url::redirect(PATH."");
-                //var_dump($_SESSION);
+                var_dump($_SESSION);
                 //echo $status; die;
                 url::redirect(PATH."users/my-account.html"); 
               die;

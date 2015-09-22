@@ -42,6 +42,7 @@ lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cd
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
 })();
 </script>  */ ?>
+                    </head>             
         <body><?php if(isset($this->sector)) {
 				if($this->theme_name) { 
 					$sector =$this->theme_name; 

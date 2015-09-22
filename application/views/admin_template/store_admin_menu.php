@@ -133,8 +133,8 @@ function toggle(ids){
         <a href="<?php echo PATH?>store-admin-auction/winner-list.html" class="menu_rgt" title="<?php echo $this->Lang['WIN_LIST2']; ?>"><span class="customer_comments"><?php echo $this->Lang['WIN_LIST2']; ?></span></a></li>
         <li <?php if(isset($this->shipping_delivery)){ ?> class="menu_active"  <?php } ?> >        
         <a href="<?php echo PATH?>store-admin-auction/shipping-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['SHIP_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['SHIP_DEL']; ?></span></a></li>        
-       <?php /* <li <?php if(isset($this->cod_delivery)){ ?> class="menu_active"  <?php } ?> >        
-        <a href="<?php echo PATH?>store-admin-auction/cod-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>*/?>
+       <li <?php if(isset($this->cod_delivery)){ ?> class="menu_active"  <?php } ?> >        
+        <a href="<?php echo PATH?>store-admin-auction/cod-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>
         <?php }}  ?>
 
         <?php if(isset($this->mer_merchant_act)){ ?>
@@ -160,15 +160,15 @@ function toggle(ids){
         <?php if (PRIVILEGES_TRANSACTIONS) { ?>
      <?php if((PRIVILEGES_DEALS)||(PRIVILEGES_PRODUCTS)||(PRIVILEGES_AUCTIONS)){ ?>
         
-        <!--
-        <?php if(isset($this->mer_fund_act)){ ?>	
+        
+        <?php /*if(isset($this->mer_fund_act)){ ?>	
         <li <?php if(isset($this->manage_fund_request)){ ?> class="menu_active"  <?php } ?> >        
         <a class="menu_rgt"  href="<?php echo PATH?>store-admin/fund_request.html" title="<?php echo $this->Lang["FUND_REQ_REP"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["FUND_REQ_REP"]; ?></span></a></li>
         <?php if(PRIVILEGES_FUNDREQUEST_EDIT==1){?>
         <li <?php if(isset($this->add_fund_request)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH?>store-admin/add_fund_request.html" title="<?php echo $this->Lang["WITHDRAW_FUND"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["WITHDRAW_FUND"]; ?></span></a></li>
-        <?php } }?>
-        -->
+        <?php } }*/?>
+       
 	<?php   if(isset($this->mer_transactions_act)){ ?>    
 	<li <?php if(isset($this->dashboard_transaction)){ ?> class="menu_active"  <?php } ?>>        
         <a href="<?php echo PATH?>store-admin/transaction-dashboard.html" class="menu_rgt" title="<?php echo $this->Lang['TRANS_DASH']; ?>"><span class="payment_transactions"><?php echo $this->Lang['TRANS_DASH']; ?></span></a></li>	

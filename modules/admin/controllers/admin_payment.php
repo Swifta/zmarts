@@ -774,8 +774,10 @@ class Admin_payment_Controller extends website_Controller
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		$this->transaction_list = $this->payment->get_transaction_chart_list();
 		$this->deals_transaction_list = $this->payment->get_transaction_list_count();
+                //echo "here"; die;
+                $this->template->title = $this->Lang["TRANS_DASH"];
 		$this->template->content = new View("payment/transaction_dashboard");
-		$this->template->title = $this->Lang["TRANS_DASH"];
+		
 	}
 	/*** STORE CREDITS TRANSACTION***/
 

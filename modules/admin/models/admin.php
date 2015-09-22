@@ -1294,13 +1294,32 @@ class Admin_Model extends Model
 			$this->db->update("category",array("order_by"=>0),array("category_id"=>$category_id));
 			return 1;
 		}else{
-			$result = $this->db->count_records("category",array("order_by"=>$order,"category_id!="=>$category_id));
-			if($result==0){
-				$this->db->update("category",array("order_by"=>$order),array("category_id"=>$category_id));
-				return 1;
-			}else{
-				return -1;
-			}
+                    $old_owner = 0;
+			//$result = $this->db->get("category",array("order_by"=>$order,"category_id!="=>$category_id));
+                        $this->db->select("category_id")->from("category")->where("category_id != '".
+                                $category_id."' AND order_by='".$order."'");
+                        $result = $this->db->get();
+                        if(count($result) > 0){
+                            foreach($result as $u){
+                                $old_owner = $u->category_id;
+                                break;
+                            }
+                            //echo $old_owner;die;
+                            $this->db->update("category",array("order_by"=>0),array("category_id"=>$old_owner));
+                            $this->db->update("category",array("order_by"=>$order),array("category_id"=>$category_id));
+                            return 1;
+                        }
+                        else{
+                            $this->db->update("category",array("order_by"=>$order),array("category_id"=>$category_id));
+                            return 1;
+                        }
+                        //update duplicate... set it to -
+//			if($result==0){
+//				$this->db->update("category",array("order_by"=>$order),array("category_id"=>$category_id));
+//				return 1;
+//			}else{
+//				return -1;
+//			}
 		}
 	}
 	

@@ -55,11 +55,11 @@ $config['default'] = array
 	(
 		'type'     => 'mysqli',
 		'user'     => 'root',
-		'pass'     => 'adminadminroot',
+		'pass'     => '',
 		'host'     => 'localhost',
 		'port'     => FALSE,
 		'socket'   => FALSE,
-		'database' => 'zmart16092015'
+		'database' => 'emarketplace'
 	),
 	'character_set' => 'utf8',
 	'table_prefix'  => '',

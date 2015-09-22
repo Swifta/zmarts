@@ -559,7 +559,7 @@
                        </li>  
                        <?php }?>
                        <?php if(ADMIN_PRIVILEGES_FUNDREQUEST){?>
-                       <li>
+                       <!--<li>
                      <div class="dash_active_left"> </div> 
                      <div class="dash_active_mid">
                                           
@@ -577,7 +577,7 @@
                       
                        </div> <div class="dash_active_right">  </div> 
                        
-                       </li>
+                       </li>-->
 			<?php }?>
 			
 			

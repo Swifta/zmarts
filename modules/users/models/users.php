@@ -174,8 +174,13 @@ class Users_Model extends Model
 				    $referred_user_id  = $result_referral->current()->user_id;
 			    }
 		    }
+                    
+                    if(empty($fb_profile->name)){
+                        $fb_profile->name = "UNKNOWN";
+                    }
 			
-			$insert = $this->db->insert("users",array("firstname" => $fb_profile->name/*, "lastname" => $fb_profile->last_name */, "email" => $fb_profile_email, "password" => md5($password), "city_id" => $city_id , "country_id" => $country_value,"referral_id" => $referral_id,"referred_user_id" =>$referred_user_id,"joined_date" => time(), "last_login" => time(),  "fb_user_id" => $fb_profile->id , "fb_session_key" => $fb_access_token ,"login_type"=>"3"));
+			$insert = $this->db->insert("users",array("firstname" => $fb_profile->name,"UserType" => "4"/*, "lastname" => $fb_profile->last_name */, "email" => $fb_profile_email, "password" => md5($password), 
+                            "city_id" => $city_id , "country_id" => $country_value,"referral_id" => $referral_id,"referred_user_id" =>$referred_user_id,"joined_date" => time(), "last_login" => time(),  "fb_user_id" => $fb_profile->id , "fb_session_key" => $fb_access_token ,"login_type"=>"3"));
 
 			$result_city = $this->db->select("category_id")->from("email_subscribe")->where(array("email_id" =>$fb_profile_email))->get();
 			if(count($result_city) > 0){

@@ -54,7 +54,9 @@ $(document).ready(function(){
 });
 </script>
 <div class="bread_crumb"><a href="<?php echo PATH."admin.html"; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang["HOME"]; ?> <span class="fwn">&#155;&#155;</span></a><p><?php echo $this->template->title; ?></p></div>
-
+<?php
+//echo "here";die;
+?>
 <div class="cont_container mt15 mt10">
 <div class="content_top">
   <div class="top_left"></div>

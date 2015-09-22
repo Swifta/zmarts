@@ -95,9 +95,9 @@
         
         <a href="<?php echo PATH; ?>admin/shipping-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['SHIP_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['SHIP_DEL']; ?></span></a></li>
         <?php }?>
-		<?php /*<li <?php if(isset($this->cash_delivery)){ ?> class="menu_active"  <?php } ?> >
+	<li <?php if(isset($this->cash_delivery)){ ?> class="menu_active"  <?php } ?> >
         
-        <a href="<?php echo PATH; ?>admin/cash-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>*/?>
+        <a href="<?php echo PATH; ?>admin/cash-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>
         <?php /*
 		<li <?php if(isset($this->product_comments)){ ?> class="menu_active"  <?php } ?>>
         
@@ -144,9 +144,9 @@
         <a href="<?php echo PATH; ?>admin-auction/shipping-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['SHIP_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['SHIP_DEL']; ?></span></a></li>
         <?php }?>
 
-        <?php /*<li <?php if(isset($this->cod_delivery)){ ?> class="menu_active"  <?php } ?> >
+        <li <?php if(isset($this->cod_delivery)){ ?> class="menu_active"  <?php } ?> >
         
-        <a href="<?php echo PATH; ?>admin-auction/cod-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>*/?>
+        <a href="<?php echo PATH; ?>admin-auction/cod-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>
         
        <?php /* <li <?php if(isset($this->auction_comments)){ ?> class="menu_active"  <?php } ?>>
         
@@ -411,7 +411,6 @@
         </ul>
       </li>*/?>
   
-      <!--
   <?php /*if(ADMIN_PRIVILEGES_FUNDREQUEST){
       
     <div class="menu_title"><p> <img style="float:left;padding:0px 0px 10px 10px;" src="<?php echo PATH ?>images/title_fund_request.png" alt="title_fund_request"/><span><?php echo $this->Lang['FUND_REQ']; ?></span></p></div>
