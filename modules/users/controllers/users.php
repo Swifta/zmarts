@@ -50,7 +50,7 @@ class Users_Controller extends Layout_Controller {
                   $this->name = "UNKNOWN";
               }
               $status = $this->users->add_users_social($this->name, $this->email, $this->password);
-              //echo $status; die;
+              
                 if($status == 1){
                   $this->signup=1;
                   $from = CONTACT_EMAIL;
@@ -73,9 +73,9 @@ class Users_Controller extends Layout_Controller {
                   //url::redirect(PATH."users/my-account.html");
                   //$this->UserID = $this->session->get("UserID");
                 }
-                $_SESSION['Club'] = 0;
+                $_SESSION['Club'] = 1;
                 //url::redirect(PATH."");
-                var_dump($_SESSION);
+                //var_dump($_SESSION);
                 //echo $status; die;
                 url::redirect(PATH."users/my-account.html"); 
               die;
@@ -102,7 +102,7 @@ class Users_Controller extends Layout_Controller {
 				
 				/*
 					TODO
-					Need to send both emarketplace and club membership signup
+					Need to send both emarketplace and club membership signup emails
 					@Live
 				*/
 					
@@ -122,15 +122,24 @@ class Users_Controller extends Layout_Controller {
 				$this->password =$_POST['password'];  
 				$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
+				
+				$send_status = false;
 				if(EMAIL_TYPE==2){
 					
-					email::smtp($from, $post->email,$subject, $message);
+					$send_status = email::smtp($from, $post->email,$subject, $message);
 				} else {
 					email::sendgrid($from, $post->email,$subject, $message);
 				}
 				
 				common::message(1, $this->Lang["SUCC_SIGN"]);
+				if($send_status){
+					email::add_account_to_sendinblue("user", $post->email);
+				}
+				
                 url::redirect(PATH."users/my-account.html");
+				
+				
+	
 				
 				
                     }
