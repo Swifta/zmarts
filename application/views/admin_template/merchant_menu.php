@@ -101,7 +101,18 @@ function toggle(ids){
 				<li><a href="<?php echo PATH; ?>merchant/storecredit/failed-transaction.html" class="menu_rgt1" title="<?php echo $this->Lang['FAIL_ORD']; ?>"><span class="pl15"><?php echo $this->Lang['FAIL_ORD']; ?></span></a></li>
 			</ul>
 		</li>
-        
+<li <?php if(isset($this->cash_delivery)){ ?> class="menu_active"  <?php } ?> >
+        <a href="<?php echo PATH; ?>merchant/cash-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>
+        <li onclick="toggle(4)" <?php if(isset($this->free_gift)){ ?> class="menu_active"  <?php } ?> >
+        <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['SPENT_FREE_GIFT']; ?>"><span class="category_management fl"><?php echo $this->Lang["SPENT_FREE_GIFT"]; ?></span><img id="left_menubutton_3" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
+        <ul class="toggleul_4">
+            <li>
+                <a href="<?php echo PATH; ?>merchant/add-free-gift.html" class="menu_rgt1" title="<?php echo $this->Lang['ADD_FREE_GIFT']; ?>"><span class="pl15"><?php echo $this->Lang["ADD_FREE_GIFT"]; ?></span></a></li>
+                <li>
+                <a href="<?php echo PATH; ?>merchant/manage-free-gift.html" class="menu_rgt1" title="<?php echo $this->Lang['MANAGE_FREE_GIFT']; ?>"><span class="pl15"><?php echo $this->Lang["MANAGE_FREE_GIFT"]; ?></span></a>
+            </li>
+        </ul>
+      </li>
          <?php /*<li <?php if(isset($this->cash_delivery)){ ?> class="menu_active"  <?php } ?> >
         <a href="<?php echo PATH; ?>merchant/cash-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['CASH_ON_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['CASH_ON_DEL']; ?></span></a></li>
         <li onclick="toggle(4)" <?php if(isset($this->free_gift)){ ?> class="menu_active"  <?php } ?> >

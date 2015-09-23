@@ -53,7 +53,8 @@
                                 <div class="payment_sucess_common">
                                     <div class="payment_sucss_lft">                                        
                                         <a href="#" title="<?php echo $this->Lang['WEBPAY_RESPONSE']; ?>">
-                                            <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/payment_failed.jpg" alt="" />
+<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/<?php if($this->success){ echo "payment-successful";}else
+    { echo "payment_failed"; } ?>.jpg" alt="" />
                                         </a>
                                     </div>
                                     <div class="payment_sucss_rgt">

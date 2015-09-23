@@ -26,6 +26,7 @@ class Webservices_Controller extends Controller
             else{
                 $ret['description'] = $result->msg;
             }
+            header("Content-type: application/json");
             echo json_encode($ret);
             exit;
         }
@@ -37,6 +38,7 @@ class Webservices_Controller extends Controller
             $amount = $this->input->get('amount');
             $description = $this->input->get('description');
             $response = json_decode($this->webservices->pay($admin, $key, $trnx, $amount, $description));
+            header("Content-type: application/json");
             echo json_encode($response);
             exit;
         }
