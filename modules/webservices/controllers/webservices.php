@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-class Webservices_Controller extends Layout_Controller
+class Webservices_Controller extends Controller
 {
 	//const ALLOW_PRODUCTION = TRUE;
 	public function __construct()
@@ -26,6 +26,7 @@ class Webservices_Controller extends Layout_Controller
             else{
                 $ret['description'] = $result->msg;
             }
+            header("Content-type: application/json");
             echo json_encode($ret);
             exit;
         }
@@ -37,7 +38,9 @@ class Webservices_Controller extends Layout_Controller
             $trnx = $this->input->get('transaction_id');
             $amount = $this->input->get('amount');
             $description = $this->input->get('description');
-            $response = json_decode($this->webservices->pay($admin, $key, $trnx, $amount, $description), JSON_PRETTY_PRINT);
+            $response = json_decode($this->webservices->pay($admin, $key, $trnx, $amount, $description));
+            header("Content-type: application/json");
+
             echo json_encode($response);
             exit;
         }

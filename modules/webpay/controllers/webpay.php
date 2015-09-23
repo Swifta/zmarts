@@ -19,7 +19,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->cust_name_desc = "";
                 $this->txn_ref = "";
                 $this->pay_item_id = 101;
-                $this->pay_item_name = "eMarketPlace";
+                $this->pay_item_name = "Payment Name";
                 $this->xml_data = "";
                 $this->hash = "";
                 $this->xml_data = "";
@@ -35,8 +35,13 @@ class Webpay_Controller extends Layout_Controller
         }
         
         public function confirm(){
+            $txnref = "";
+            $this->success = false;
             $this->response_code = "UNKNOWN";
             $this->response_discription = "";
+            $this->PaymentReference = "FAILED";
+            $this->CardNumber = "0000";
+            $this->RetrievalReferenceNumber = 0;
             $this->paid_amount = 0;
 //            echo "Interswitch Called Redirect URL HERE<br />"; 
 //            echo $_REQUEST['resp']."<br />";
@@ -73,28 +78,37 @@ class Webpay_Controller extends Layout_Controller
 
                 if($response == false)
                 {
-                    var_dump(curl_error($ch));
+                    //var_dump(curl_error($ch));
                 }
-                //var_dump(json_decode($response));
-                $interswitch = json_decode($response);
-                //echo $url_call."<br />";
-                //echo $hash;
-                $this->response_code = $interswitch->ResponseCode;
-                $this->response_discription = $interswitch->ResponseDescription;
-                if($interswitch->Amount > 0){
-                    $this->paid_amount = intval($interswitch->Amount/100);
+                else{
+                    //var_dump(json_decode($response)); die;
+                    $interswitch = json_decode($response);
+                    //echo $url_call."<br />";
+                    //echo $hash;
+                    $this->response_code = $interswitch->ResponseCode;
+                    $this->response_discription = $interswitch->ResponseDescription;
+                    $this->PaymentReference = $interswitch->PaymentReference;
+                    $this->CardNumber = $interswitch->CardNumber;
+                    if($interswitch->Amount > 0){
+                        $this->success = true;
+                        $this->paid_amount = intval($interswitch->Amount/100);
+                    }
                 }
-                
                 curl_close($ch);
             }
-            //die;
+            
+            $this->webpay->payUpdate($txnref, $this->response_code, $this->response_discription, $this->PaymentReference, 
+                    $this->CardNumber, $this->success);
+            
+            //send an email on failed or success transaction here
+            
             $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => "FAILED TRANSACTION","AMT"=> $this->paid_amount,"CURRENCYCODE"=>CURRENCY_CODE);
             $this->transaction_result['T_ID'] = $txnref;
             $this->result_transaction = arr::to_object($this->transaction_result);
             $this->session->set('payment_result', $this->result_transaction);
             $this->template->title = $this->result_transaction->ACK." Interswitch Payment System";
             $this->template->content = new View("themes/".THEME_NAME."/interswitch/payment_finished");   
-			$this->session->delete('payment_result');
+            $this->session->delete('payment_result');
         }
 
 
@@ -236,7 +250,7 @@ class Webpay_Controller extends Layout_Controller
                     //then run a code to get the splitting xml file and co
                     
                     $this->xml_data = '<payment_item_detail>'. 
-                        '<item_details detail_ref="eMarketPlace" institution="Store" sub_location="Lagos" location="Lagos">';
+                        '<item_details detail_ref="'.$TRANSACTIONID.'" institution="Store" sub_location="Lagos" location="Lagos">';
                     $this->xml_data .= $this->webpay->get_split_marchant_xml($TRANSACTIONID);//pass in the transaction ID
                         //'<item_detail item_id="1" item_name="Butter" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4356789876" />'.
                         //    '<item_detail item_id="2" item_name="Grape" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4351189876" />'. 
@@ -249,7 +263,7 @@ class Webpay_Controller extends Layout_Controller
                     //die;
                     //var_dump($_SESSION);
                     //die;
-               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+               $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
                 $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
                 $this->result_transaction = arr::to_object($this->transaction_result);
                 //dont need the line of code below
@@ -259,7 +273,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->template->title = "Interswitch Payment System";
                 $this->template->content = new View("themes/".THEME_NAME."/interswitch/payment_process");                     
                     //echo $this->txn_ref; die;
-	            //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+	            $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
 				
 
 	               // url::redirect(PATH.'transaction.html');

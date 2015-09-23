@@ -10,9 +10,18 @@ class Webpay_Model extends Model
 		$this->UserName = $this->session->get("UserName");
 	}
         
-        public function pay(){
-            $ret = array();
-            return json_encode($ret);
+        public function payUpdate($tranx_id, $response_code, $response_discription, $PaymentReference, $CardNumber, $status){
+            //$ret = array();
+            $payment_status = "Failed";
+            if($status){
+                $payment_status = "SUCCESS";
+                //$this->session->delete("count");
+            }
+            $this->db->update("transaction", array("payment_status" => $payment_status, "reason_code" => $response_code, 
+                "pending_reason" => $response_discription, "captured_transaction_id" => $PaymentReference, 
+                "captured_ack" => $CardNumber, "type" => 7), 
+                    array("transaction_id" => $tranx_id));
+            //return json_encode($ret);
         }
         
         public function get_split_marchant_xml($transaction_id){
@@ -36,8 +45,11 @@ class Webpay_Model extends Model
 
                     $item_id = $row->product_id;
                     $item_name = urlencode($row->deal_title." (".$row->quantity.")");
-                    $acct_num = $row->nuban;
-                    $item_amt = intval($row->amount * 100);
+                    //$acct_num = $row->nuban;
+                    $acct_num = "2087778360";
+                    $temp_item_amt = intval($row->amount * 100);
+                    $item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
+                    //echo $item_amt; die;
                     $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
                             $item_amt.'" bank_id="117" acct_num="'.$acct_num.'" />';
                     $ret.=$xml;
@@ -67,7 +79,7 @@ class Webpay_Model extends Model
 	        $ip_country_name="";
 	        $ip_city_name="";		
 		$url = "http://api.ipinfodb.com/v3/ip-city/?key=8042c4ccb295723ec0791f306df5f9e92632e9b1ba0beda3e1ff399f207d2767&ip=$ip";
-		$data = file_get_contents($url);
+		$data = @file_get_contents($url);
 		$dat = explode(";",$data);
 		if($dat[3] != "-"){
 		        $ip_country_code=$dat[3];
