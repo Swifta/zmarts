@@ -742,9 +742,7 @@ public function smtp_sendinblue($from = "",$receiver = array(), $subject = "", $
 			$cc = array(); 
 			$bcc = array();
 			$replyto = array($from,"support@zmart"); 
-			$attachment = array();
-			var_dump($message);
-			exit; 
+			$attachment = array(); 
 			$headers = array("Content-Type"=> "text/html; charset=iso-8859-1","X-Ewiufkdsjfhn"=> "hello","X-Custom" => "Custom");
             $r = $mail->send_email($to,$subject,$from, $message," ", $cc,$bcc,$replyto,$attachment,$headers);
 			

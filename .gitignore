@@ -1,6 +1,6 @@
-/cache/
-/db_test/
-/application/logs/
+/cache/*.*
+/db_test/*.*
+/application/logs/*.*
 /application/controllers/sample.php
 /application/controllers/sendinblue_test.php
 /application/controllers/et.php
