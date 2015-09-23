@@ -1583,6 +1583,7 @@ $pdf->Output('voucher.pdf', 'I');
 	public function user_subscriber(){
 		$email=$this->input->get('email');
 		$this->add_email_subscriber=$this->users->add_email_subscriber($email);
+		
 		if($this->add_email_subscriber==1)
 		{
 			common::message(1, $this->Lang['YOU_SUBSCRIBE_SUCCESS']);

@@ -31,12 +31,13 @@ class Webservices_Controller extends Layout_Controller
         }
         
         public function pay(){
+			header("Content-type: application/json");
             $admin = $this->input->get('admin');
             $key = $this->input->get('key');
             $trnx = $this->input->get('transaction_id');
             $amount = $this->input->get('amount');
             $description = $this->input->get('description');
-            $response = json_decode($this->webservices->pay($admin, $key, $trnx, $amount, $description));
+            $response = json_decode($this->webservices->pay($admin, $key, $trnx, $amount, $description), JSON_PRETTY_PRINT);
             echo json_encode($response);
             exit;
         }

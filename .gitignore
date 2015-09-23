@@ -7,3 +7,6 @@
 /modules/fashion2/config/
 /modules/fashion3/config/
 /modules/food1/config/
+/themes/default/images/
+/application/config/database.php
+/.htaccess
