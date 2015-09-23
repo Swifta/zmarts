@@ -201,7 +201,7 @@ function check_subscribe(){
 	$('#email_subscriber_error').html('');
 	if(x > 0){
 		
-		$('#email_subscriber_error').html('<?php echo $this->Lang["INVAL_EMAIL"];?>');
+		$('#email_subscriber_error').html('<?php echo $this->Lang["INV_EMAIL"];?>');
 		
 	}else if(x == 0){
 		
