@@ -106,9 +106,6 @@ class Email{
 					}
 			}
 			
-			var_dump($message);
-			exit;
-			
 			$r = $mail->Send();
             if(!$r){
 			  	common::message(-1,  "Operation was complete but sending email failed. Please contact administrator");

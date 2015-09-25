@@ -1173,6 +1173,8 @@ $content_text = array(
 
 "THK_U" => "Thank you",
 
+"M_SIGNUP_THK_U" => "Thank you for registering with",
+
 "DEAR" => "Dear",
 
 "YOUR" => "Your",
