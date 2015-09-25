@@ -764,6 +764,8 @@ $content_text = array(
 
 "REG_COMPLETE" => "Registration has been Completed",
 
+"M_REG_COMPLETE" => "Registration",
+
 "SUCC_SIGN" => "Hurray enjoy you are the proud member of $THIS_SITENAME ..!! Shop unlimitedly with us..!!", 
 
 "SUCC_LOGIN" => "Successfully logged in!",
@@ -1010,7 +1012,7 @@ $content_text = array(
 
 "ORDER_DETAILS"=>"Order Details",
 
-"EMAIL_F" => "E-mail",
+"EMAIL_F" => "Email",
 
 "EMAIL_REQUIRED" =>  "Email And Password required",
 
@@ -1177,9 +1179,12 @@ $content_text = array(
 
 "REG_COMP_SUCCESS" => "Registration has been completed successfully.",
 
+
 "SUCC_SUB" => "Your are successfully subscribed on",
 
 "YOUR_PASS" => "Your password",
+
+"E_Y_PASS" => "Password",
 
 "TEAM" => "Team",
 

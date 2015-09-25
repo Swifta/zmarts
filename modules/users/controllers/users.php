@@ -120,7 +120,8 @@ class Users_Controller extends Layout_Controller {
 				$this->name=$_POST['f_name'];
 				$this->email =$_POST['email'];
 				$this->password =$_POST['password'];  
-				$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
+				/*$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];*/
+				$subject = SITENAME.' '.$this->Lang['M_REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
 				
 				$send_status = false;
