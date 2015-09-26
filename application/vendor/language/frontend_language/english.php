@@ -61,9 +61,9 @@ $content_text = array(
 
 "ENTER_PASS"=>"Enter your password here",
 
-"PLS_ENT_CPASS" => "Please enter your confirm password here",
+"PLS_ENT_CPASS" => "Please confirm your password here",
 
-"ENTER_CPASS"=>"Enter your confirm password here",
+"ENTER_CPASS"=>"Please confirm your password here",
 
 "SUCC_MAIL" => "Success payment mail",
 
@@ -766,7 +766,9 @@ $content_text = array(
 
 "M_REG_COMPLETE" => "Registration",
 
-"SUCC_SIGN" => "Hurray enjoy you are the proud member of $THIS_SITENAME ..!! Shop unlimitedly with us..!!", 
+//"SUCC_SIGN" => "Hurray enjoy you are the proud member of $THIS_SITENAME ..!! Shop unlimitedly with us..!!", 
+
+"SUCC_SIGN" => "Hurray! Your registration on $THIS_SITENAME was successful. Please check your email for more details.",
 
 "SUCC_LOGIN" => "Successfully logged in!",
 
@@ -784,15 +786,15 @@ $content_text = array(
 
 "CATEGORY_SUB_UPDATE" => "Subscription updated Successfully",
 
-"YOUR_PASS_RE_SUCC" => "Your password reset successfully.",
+"YOUR_PASS_RE_SUCC" => "Your password has been successfully reset.",
 
-"PWD_RESET" => "Password reset and sent to your email.",
+"PWD_RESET" => "You have successfully reset your password. Please check your mail for details.",
 
 "INV_EMAIL" => "Invalid Email",
 
 "EMAIL_NOT_EXIST" => "Email does not exist",
 
-"PROB_FB_CONNECT" =>"Problem in facebook connect! try again later.",
+"PROB_FB_CONNECT" =>"Problem connectin to facebook. Please again later.",
 
 "UPDATE_SUCCESS" => "Updated successfully",
 
@@ -1180,6 +1182,14 @@ $content_text = array(
 "YOUR" => "Your",
 
 "REG_COMP_SUCCESS" => "Registration has been completed successfully.",
+
+"E_REG_COMP_SUCCESS" => "registration has been completed successfully.",
+
+"SIGN_CRED" => "Below are your login credentials",
+
+"THE" => "The",
+
+"REG_ADMIN" => "Admin Registration",
 
 
 "SUCC_SUB" => "Your are successfully subscribed on",
