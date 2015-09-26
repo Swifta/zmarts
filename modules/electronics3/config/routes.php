@@ -163,4 +163,3 @@
 //$config['Musty-International-Store/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Musty-International-Store/$1/$2";
 //// Musty-International-Store End
 
-$config['Supermart'] = "electronics3/stores_home_page/*";
