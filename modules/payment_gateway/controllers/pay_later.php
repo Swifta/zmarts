@@ -231,11 +231,11 @@ class Pay_later_Controller extends Layout_Controller
 		$message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
 
 		if(EMAIL_TYPE==2) {
-			var_dump($message_merchant);
+			/*var_dump($message_merchant);
 			$view = new View("payment_mail_product_merchant.ignore");
 			$view->render(TRUE);
 			var_dump("Hello");
-			exit;
+			exit;*/
 			email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 			
 		}else{
