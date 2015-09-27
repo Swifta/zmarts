@@ -313,10 +313,8 @@ exit;
               
 
 		//$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
-
 		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_detail");
-
-		
+	
 	}
 	
 	public function user_subscriber_signup()

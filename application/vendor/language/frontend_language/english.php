@@ -121,7 +121,7 @@ $content_text = array(
 
 "PRIVACY"=>"Privacy Policy",
 
-"FOOTER_COPYRIGHT" => "Copyright © 2013",
+"FOOTER_COPYRIGHT" => "Copyright © 2015",
 
 "FOOTER_ALLRIGHT" => "All rights reserved",
 
