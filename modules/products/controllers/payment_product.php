@@ -439,8 +439,13 @@ class Payment_product_Controller extends Layout_Controller {
 											$merchant_email = $this->merchant_details->email;
 											$from = CONTACT_EMAIL;
 											 if(EMAIL_TYPE==2){
+												
 												email::smtp($from,$merchant_email, $this->Lang['THANKS_APPR'] ,$message_merchant);
 												email::smtp($from,$user_email, $this->Lang['THANKS_CHOOS'] ,$message_user);
+												
+												
+												
+												
 											} else {
 												email::sendgrid($from,$merchant_email, $this->Lang['THANKS_APPR'] ,$message_merchant);
 												email::sendgrid($from,$user_email, $this->Lang['THANKS_CHOOS'] ,$message_user);

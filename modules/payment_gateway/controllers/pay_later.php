@@ -71,7 +71,11 @@ class Pay_later_Controller extends Layout_Controller
             
             }
         }
+		
+		
 		if($_POST){
+			
+			
 			$referral_amount = $this->input->post("p_referral_amount");
 			$prime_customer = $this->input->post("prime_customer");
 		    $this->userPost = $this->input->post();
@@ -191,12 +195,15 @@ class Pay_later_Controller extends Layout_Controller
 			}else{
 				$this->free_gift="";
 				$transaction = $this->pay_later->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 6, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
-
+					
 					$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
 			}
 				}
                             }
 			}
+			
+			
+			
 	        $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
 
 			$this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);

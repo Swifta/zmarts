@@ -32,6 +32,7 @@ class Webservices_Controller extends Controller
         }
         
         public function pay(){
+			header("Content-type: application/json");
             $admin = $this->input->get('admin');
             $key = $this->input->get('key');
             $trnx = $this->input->get('transaction_id');
@@ -39,6 +40,7 @@ class Webservices_Controller extends Controller
             $description = $this->input->get('description');
             $response = json_decode($this->webservices->pay($admin, $key, $trnx, $amount, $description));
             header("Content-type: application/json");
+
             echo json_encode($response);
             exit;
         }

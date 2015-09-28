@@ -3977,5 +3977,24 @@ $content_text = array(
 			"FR_STR_EXA" => " For example For 2 months type 2, for three months type 3 etc ",
 			
 			"STORE_CRED" => "For store credit",
+			
+			"E_Y_PASS" => "Password",
+			
+			
+			"REG_COMP_SUCCESS" => "Registration has been completed successfully.",
+			
+			"E_REG_COMP_SUCCESS" => "registration has been completed successfully.",
+			
+			"SIGN_CRED" => "Below are your login credentials",
+			
+			"THE" => "The",
+			
+			"REG_ADMIN" => "Admin Registration",
+			
+			"M_SIGNUP_THK_U" => "Thank you for registering with",
+			
+			"M_REG_COMPLETE" => "Registration",
+			
+			
 
 			);

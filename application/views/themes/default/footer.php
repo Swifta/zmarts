@@ -6,8 +6,10 @@
                 <label><?php echo $this->Lang['GET_UR_LATEST_NS_UTS'];?></label>
                 <div class="subscribe_lft_txt_field">
                     <input type="text" value="" id="subscribe" name="subscribe" placeholder="<?php echo $this->Lang['ENTER_EMAIL'];?>" onkeypress="return check_color();"/>
+                
                     <input type="submit" value="<?php echo $this->Lang['SUBSCRIBE'];?>" onclick="return check_subscribe();"/>
                     <em id="email_subscriber_error"></em>
+                    
                 </div>
             </div>
             <div class="new_footer_social">
@@ -168,7 +170,8 @@
 <div class="new_footer_bottom_outer">
     <div class="new_footer_bottom_inner">
         <div class="new_footer_bottom_common">
-            <p class="new_footer_copyright">Copyright  &copy;2015 emarketplace.com All rights reserved</p>
+           <!-- <p class="new_footer_copyright">Copyright  &copy;2015 emarketplace.com All rights reserved</p>-->
+           	<p class="new_footer_copyright"><?php echo $this->Lang['FOOTER_COPYRIGHT']." ";?> <a href="<?php echo PATH; ?>"><?php echo SITENAME;?></a> All rights reserved</p>
             <div class="payment_img">
                 <img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/new_foot_pay_img.png"/>
             </div>
@@ -183,6 +186,7 @@ function check_subscribe(){
 	var email = $("#subscribe").val();
 	var atpos=email.indexOf("@");
 	var dotpos=email.lastIndexOf(".");
+	$('#email_subscriber_error').text('');
 	var x=0;
 	if(email == '') {
 		$('.subscribe_lft_txt_field').css('border','1px solid red');
@@ -192,17 +196,26 @@ function check_subscribe(){
 		$('.subscribe_lft_txt_field').css('border','1px solid red');
 	}else {
 		x=0;
-		$('#email_subscriber_error').html('');
+		
 	}
-	if(x==0){
+	
+	$('#email_subscriber_error').html('');
+	if(x > 0){
+		
+		$('#email_subscriber_error').html('<?php echo $this->Lang["INV_EMAIL"];?>');
+		
+	}else if(x == 0){
+		
 		var url= Path+'users/check_user_signup/?email='+email;
 		$.post(url,function(check){
 			if(check == -1){
 				$('.subscribe_lft_txt_field').css('border','1px solid red');
 				$("#subscribe").val('');
 				$("#subscribe").attr('placeholder','<?php echo $this->Lang['EMAIL_EXIST']; ?>');
+				$('#email_subscriber_error').text('<?php echo $this->Lang['EMAIL_EXIST']; ?>');
 				return false;
 			}else{
+				
 				var url= Path+'users/user_subscriber/?email='+email;
 				$.ajax(
 				{
