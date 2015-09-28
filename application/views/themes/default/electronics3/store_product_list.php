@@ -54,7 +54,7 @@ if($avg_rating!=''){
 <?php } ?>
                                                         </div>
                                       
-                                      <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . $products->deal_value; ?> <?php echo CURRENCY_CODE; ?> </p>                                                       
+                                      <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . number_format($products->deal_value); ?> <?php echo CURRENCY_CODE; ?> </p>                                                       
 									</div>
 									<div class="store_product_list_hover">
 										<div class=" store_product_list_img_hover"></div> 

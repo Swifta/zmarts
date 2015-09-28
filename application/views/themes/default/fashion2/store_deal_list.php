@@ -69,7 +69,7 @@ if($avg_rating!=''){
 <?php } ?>
                                                             </div>
                                                                                 
-                                                                                <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . $deals_categories->deal_value; ?></p>
+                                                                                <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>
 								</div>
 
 							</div> 

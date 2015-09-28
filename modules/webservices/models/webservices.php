@@ -38,6 +38,7 @@ class Webservices_Model extends Model
                         $data['transaction_type'] = $row->transaction_type;
 
                         $product = array();
+                        $product['transaction_id'] = $transaction_id;
                         $product['product_id'] = $row->product_id;
                         $product['product_descr'] = $row->deal_title;
                         $product['quantity'] = $row->quantity;
@@ -53,7 +54,7 @@ class Webservices_Model extends Model
                         //var_dump($result);
                         $loop++;
                     }
-                    if($total_amount == intval($amount)){
+                    if($total_amount == $amount){
                         $ret['success'] = true;
                         $ret['msg'] = "OK";
                         $data['total_amount'] = $total_amount;

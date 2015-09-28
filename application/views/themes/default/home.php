@@ -310,10 +310,10 @@ $(".slidetabs").tabs(".images > div", {
                                             <h2><a href="<?php echo PATH .$new_arrival->store_url_title. '/product/' . $new_arrival->deal_key . '/' . $new_arrival->url_title . '.html'; ?>" title="<?php echo $new_arrival->deal_title; ?>"><?php echo substr(ucfirst($new_arrival->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
 											 <?php if($new_arrival->deal_price!=0) { ?>	
-												<p><?php echo $symbol . "" . $new_arrival->deal_price; ?> </p>
-												<span><?php echo $symbol . "" . $new_arrival->deal_value; ?></span>
+                                                <p><?php echo $symbol . "" . number_format($new_arrival->deal_price); ?> </p>
+												<span><?php echo $symbol . "" . number_format($new_arrival->deal_value); ?></span>
 											   <?php } else  { ?>
-												<span><?php echo $symbol."".$new_arrival->deal_value; ?> </span>
+												<span><?php echo $symbol."".number_format($new_arrival->deal_value); ?> </span>
 												<?php } ?> 
                                             </div>
                                         </div>
@@ -397,10 +397,10 @@ $(".slidetabs").tabs(".images > div", {
                                            <h2><a href="<?php echo PATH .$best_sel->store_url_title. '/product/' . $best_sel->deal_key . '/' . $best_sel->url_title . '.html'; ?>" title="<?php echo $best_sel->deal_title; ?>"><?php echo substr(ucfirst($best_sel->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
 												 <?php if($best_sel->deal_price!=0) { ?>	
-												<p><?php echo $symbol . "" . $best_sel->deal_price; ?> </p>
-												<span><?php echo $symbol . "" . $best_sel->deal_value; ?></span>
+												<p><?php echo $symbol . "" . number_format($best_sel->deal_price); ?> </p>
+												<span><?php echo $symbol . "" . number_format($best_sel->deal_value); ?></span>
 											   <?php } else  { ?>
-												<span><?php echo $symbol."".$best_sel->deal_value; ?> </span>
+												<span><?php echo $symbol."".number_format($best_sel->deal_value); ?> </span>
 												<?php } ?> 
 											
                                             </div>
@@ -487,8 +487,8 @@ $(".slidetabs").tabs(".images > div", {
                                         <div class="new_prdt_listing_details">
                                             <h2><a href="<?php echo PATH . $new_arrival->store_url_title.'/deals/' . $new_arrival->deal_key . '/' . $new_arrival->url_title . '.html'; ?>" title="<?php echo $new_arrival->deal_title; ?>"><?php echo substr(ucfirst($new_arrival->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
-                                                <p><?php echo $symbol . " " . $new_arrival->deal_price; ?></p>
-                                                <span><?php echo $symbol . " " . $new_arrival->deal_value; ?></span>
+                                                <p><?php echo $symbol . " " . number_format($new_arrival->deal_price); ?></p>
+                                                <span><?php echo $symbol . " " . number_format($new_arrival->deal_value); ?></span>
                                             </div>
                                         </div>
                                         <div class="list_bottom">
@@ -571,8 +571,8 @@ $(".slidetabs").tabs(".images > div", {
                                         <div class="new_prdt_listing_details">
                                             <h2><a href="<?php echo PATH.$new_arrival->store_url_title.'/auction/'.$new_arrival->deal_key.'/'.$new_arrival->url_title.'.html';?>" title="<?php echo $new_arrival->deal_title;?>"><?php echo substr(ucfirst($new_arrival->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
-                                                <p><?php echo $symbol . " " . $new_arrival->deal_price; ?></p>
-                                                <span><?php echo $symbol . " " . $new_arrival->deal_value; ?></span>
+                                                <p><?php echo $symbol . " " . number_format($new_arrival->deal_price); ?></p>
+                                                <span><?php echo $symbol . " " . number_format($new_arrival->deal_value); ?></span>
                                             </div>
                                         </div>
                                         <div class="list_bottom">
@@ -682,10 +682,10 @@ $(".slidetabs").tabs(".images > div", {
                                            <h2><a href="<?php echo PATH .$pro->store_url_title. '/product/' . $pro->deal_key . '/' . $pro->url_title . '.html'; ?>" title="<?php echo $pro->deal_title; ?>"><?php echo substr(ucfirst($pro->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
 												 <?php if($pro->deal_price!=0) { ?>	
-												<p><?php echo $symbol . "" . $pro->deal_price; ?> </p>
-												<span><?php echo $symbol . "" . $pro->deal_value; ?></span>
+                                                <p><?php echo $symbol . "" . number_format($pro->deal_price); ?> </p>
+                                                <span><?php echo $symbol . "" . number_format($pro->deal_value); ?></span>
 											   <?php } else  { ?>
-												<span><?php echo $symbol."".$pro->deal_value; ?> </span>
+                                                <span><?php echo $symbol."".number_format($pro->deal_value); ?> </span>
 												<?php } ?> 
                                             </div>
                                         </div>
@@ -790,9 +790,9 @@ $(".slidetabs").tabs(".images > div", {
 												<?php }?>
 											</div>
 											 <?php if($cat_pro->deal_price!=0) { ?>	
-												<p><?php echo $symbol . " " . $cat_pro->deal_value; ?> <span><?php echo $symbol . " " . $cat_pro->deal_price; ?></span></p>
+                                                                                                <p><?php echo $symbol . " " . number_format($cat_pro->deal_value); ?> <span><?php echo $symbol . " " . number_format($cat_pro->deal_price); ?></span></p>
 											   <?php } else  { ?>
-												<p><?php echo $symbol . " " . $cat_pro->deal_value; ?> <span></span></p>
+                                                                                                <p><?php echo $symbol . " " . number_format($cat_pro->deal_value); ?> <span></span></p>
 												<?php } ?> 
 											
 											</div>

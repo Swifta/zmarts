@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="bid_value">
                                         <label><?php echo $this->Lang['BID_AMOUNT']; ?> :</label>
-                                        <span><?php /* echo date("d-m-Y",$deals->enddate); */ ?><?php echo $symbol . " " . $deals->deal_value; ?>	</span>
+                                        <span><?php /* echo date("d-m-Y",$deals->enddate); */ ?><?php echo $symbol . " " . number_format($deals->deal_value); ?>	</span>
                                 </div>
 			<?php } ?>
 			
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="bid_value">
                                         <label><?php echo $this->Lang['LAST_BID_AMOUNT']; ?> :</label>
-                                        <span><?php /* echo date("d-m-Y",$deals->enddate); */ ?><?php echo $symbol . " " . $deals->deal_price; ?>	</span>
+                                        <span><?php /* echo date("d-m-Y",$deals->enddate); */ ?><?php echo $symbol . " " . number_format($deals->deal_price); ?>	</span>
                                 </div>
 			<?php } ?>
 		</div>

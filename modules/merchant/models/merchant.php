@@ -295,8 +295,8 @@ class Merchant_Model extends Model
                                 $conditions .= " and city.city_id = ".$city;
                         }
                         if($name){
-                                $conditions .= " and (deals.deal_title like '%".mysql_real_escape_string($name)."%'";
-                                $conditions .= " or stores.store_name like '%".mysql_real_escape_string($name)."%')";
+                                $conditions .= " and (deals.deal_title like '%".strip_tags($name)."%'";
+                                $conditions .= " or stores.store_name like '%".strip_tags($name)."%')";
                         }
                         if($today == 1)
                         {
@@ -369,8 +369,8 @@ class Merchant_Model extends Model
                                 $conditions .= " and city.city_id = ".$city;
                         }
                         if($name){
-                                $conditions .= " and (deals.deal_title like '%".mysql_real_escape_string($name)."%'";
-                                $conditions .= " or stores.store_name like '%".mysql_real_escape_string($name)."%')";
+                                $conditions .= " and (deals.deal_title like '%".strip_tags($name)."%'";
+                                $conditions .= " or stores.store_name like '%".strip_tags($name)."%')";
                         }
                         
                         if($today == 1)
@@ -523,11 +523,11 @@ class Merchant_Model extends Model
 		if($_GET){
 
 		        if($name){
-				        $contitions .= ' and (users.firstname like "%'.mysql_real_escape_string($name).'%"';
-                        $contitions .= ' OR deals.deal_title like "%'.mysql_real_escape_string($name).'%")';
+				        $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' OR deals.deal_title like "%'.strip_tags($name).'%")';
 					}
                     if($code){
-						$contitions .= ' and transaction_mapping.coupon_code like "%'.mysql_real_escape_string($code).'%"';
+						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags($code).'%"';
 					}
 
                        $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions");
@@ -548,11 +548,11 @@ class Merchant_Model extends Model
 		$contitions = "transaction_mapping.coupon_code_status=0 AND deals.merchant_id = $this->user_id";
 		if($_GET){
 					if($name){
-				        $contitions .= ' and (users.firstname like "%'.mysql_real_escape_string($name).'%"';
-                        $contitions .= ' OR deals.deal_title like "%'.mysql_real_escape_string($name).'%")';
+				        $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' OR deals.deal_title like "%'.strip_tags($name).'%")';
 					}
                     if($code){
-						$contitions .= ' and transaction_mapping.coupon_code like "%'.mysql_real_escape_string($code).'%"';
+						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags($code).'%"';
 					}
                        $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ");
 		}
@@ -603,7 +603,7 @@ class Merchant_Model extends Model
                         }
 
                         if($name){
-			        $contitions .= ' and store_name like "%'.mysql_real_escape_string($name).'%"';
+			        $contitions .= ' and store_name like "%'.strip_tags($name).'%"';
                         }
                          $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ORDER BY stores.store_id $limit1");
 
@@ -627,7 +627,7 @@ class Merchant_Model extends Model
                         }
 
                         if($name){
-			        $contitions .= ' and store_name like "%'.mysql_real_escape_string($name).'%"';
+			        $contitions .= ' and store_name like "%'.strip_tags($name).'%"';
                         }
                          $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ");
 
@@ -946,7 +946,7 @@ class Merchant_Model extends Model
 			}
 
 			if($name){
-				$conditions .= " and deal_title like '%".mysql_real_escape_string($name)."%'";
+				$conditions .= " and deal_title like '%".strip_tags($name)."%'";
 			}
 			if($today == 1)
                         {
@@ -1033,8 +1033,8 @@ class Merchant_Model extends Model
 			        $conditions .= " and city.city_id = ".$city;
 			}
 			if($name){
-			        $conditions .= " and (deal_title like '%".mysql_real_escape_string($name)."%'";
-			        $conditions .= " or store_name like '%".mysql_real_escape_string($name)."%')";
+			        $conditions .= " and (deal_title like '%".strip_tags($name)."%'";
+			        $conditions .= " or store_name like '%".strip_tags($name)."%')";
 			}
 			if($today == 1)
                         {
@@ -1309,9 +1309,9 @@ class Merchant_Model extends Model
 
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= 'OR u.email like "%'.mysql_real_escape_string($name).'%"';
-            		$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= 'OR u.email like "%'.strip_tags($name).'%"';
+            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
 
 					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ");
 
@@ -1336,9 +1336,9 @@ class Merchant_Model extends Model
 
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= ' OR u.email like "%'.mysql_real_escape_string($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
 
                   $result = $this->db->query("select s.shipping_id  from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ");
 		}
@@ -1382,7 +1382,7 @@ class Merchant_Model extends Model
 			}
 			$conditions = "";
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions .= "transaction.id > 0";
 		          }else {
@@ -1482,7 +1482,7 @@ class Merchant_Model extends Model
 			}
 			
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0 ";
 		          }else {
@@ -1573,7 +1573,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -1652,7 +1652,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -1747,7 +1747,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -1845,7 +1845,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -1937,7 +1937,7 @@ class Merchant_Model extends Model
 	                $time=time();
 			$conditions="";
               		if($code || $code=='0'){
-                                $conditions= "transaction_mapping.coupon_code ='".mysql_real_escape_string($code)."'";
+                                $conditions= "transaction_mapping.coupon_code ='".strip_tags($code)."'";
                          }
                         $query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id and transaction_mapping.deal_id=transaction.deal_id where $conditions and deals.expirydate > $time and merchant_id = '$this->user_id' limit 1 ";
                         $result = $this->db->query($query);
@@ -2150,8 +2150,8 @@ class Merchant_Model extends Model
 			$conditions .= " and city.city_id = ".$city;
 			}
 			if($name){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($name)."%'";
-			$conditions .= " or store_name like '%".mysql_real_escape_string($name)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($name)."%'";
+			$conditions .= " or store_name like '%".strip_tags($name)."%')";
 			}
 			if($today == 1)
                         {
@@ -2225,8 +2225,8 @@ class Merchant_Model extends Model
                         }
 
                         if($name){
-                                $conditions .= " and (deal_title like '%".mysql_real_escape_string($name)."%'";
-			        $conditions .= " or store_name like '%".mysql_real_escape_string($name)."%')";
+                                $conditions .= " and (deal_title like '%".strip_tags($name)."%'";
+			        $conditions .= " or store_name like '%".strip_tags($name)."%')";
                         }
 
                         if($today == 1)
@@ -2355,9 +2355,9 @@ class Merchant_Model extends Model
 					$condition = " AND t.type = 5 AND d.merchant_id = $this->user_id ";
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= 'OR u.email like "%'.mysql_real_escape_string($name).'%"';
-            		$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= 'OR u.email like "%'.strip_tags($name).'%"';
+            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
 
                    $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC  $limit1 ");
 				}
@@ -2379,9 +2379,9 @@ class Merchant_Model extends Model
 
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= ' OR u.email like "%'.mysql_real_escape_string($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
 
                    $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC ");
 		}
@@ -2402,8 +2402,8 @@ class Merchant_Model extends Model
 
 		if($_GET){
 
-		        	   $contitions .= ' and (users.firstname like "%'.mysql_real_escape_string($name).'%"';
-                       $contitions .= ' OR auction.deal_title like "%'.mysql_real_escape_string($name).'%")';
+		        	   $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
+                       $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
 
 		}
 
@@ -2422,8 +2422,8 @@ class Merchant_Model extends Model
 		$contitions = "auction.winner != 0 and auction.merchant_id = $this->user_id and bidding.winning_status!=0 ";
 
 		if($_GET){
-		        	   $contitions .= ' and (users.firstname like "%'.mysql_real_escape_string($name).'%"';
-                       $contitions .= ' OR auction.deal_title like "%'.mysql_real_escape_string($name).'%")';
+		        	   $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
+                       $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
                        $result = $this->db->query("SELECT count(bidding.bid_id) as count FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions ");
 			}
 
@@ -3148,10 +3148,10 @@ class Merchant_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
@@ -3203,10 +3203,10 @@ class Merchant_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
 
 						$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
@@ -3495,7 +3495,7 @@ class Merchant_Model extends Model
 		$contitions = ' duration_merchantid = '.$this->user_id;
 		if($_GET){
 			if($name){
-				$contitions .= ' and duration_period like "%'.mysql_real_escape_string($name).'%"';
+				$contitions .= ' and duration_period like "%'.strip_tags($name).'%"';
 			}
 		}
 		$result = $this->db->query("select duration_id from duration where $contitions order by duration_period ASC ");
@@ -3507,7 +3507,7 @@ class Merchant_Model extends Model
 		$contitions = ' duration_merchantid = '.$this->user_id;
 		if($_GET){
 			if($name){
-				$contitions .= ' and duration_period like "%'.mysql_real_escape_string($name).'%"';
+				$contitions .= ' and duration_period like "%'.strip_tags($name).'%"';
 			}
 			$result = $this->db->query("select * from duration where $contitions order by duration_period ASC limit $offset,$record");
         } else{
@@ -3551,7 +3551,7 @@ class Merchant_Model extends Model
 	/** SPENT GIFT AMOUNT **/
 	public function add_gift($post="")
 	{
-		/*$result=$this->db->query("select gift_id from free_gift where gift_Amount=$post->amount and merchant_id=$this->user_id and gift_name LIKE '%".mysql_real_escape_string($post->gift)."%'");
+		/*$result=$this->db->query("select gift_id from free_gift where gift_Amount=$post->amount and merchant_id=$this->user_id and gift_name LIKE '%".strip_tags($post->gift)."%'");
 		if(count($result)>0)
 		{
 			return 0;
@@ -3637,7 +3637,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "storecredit_transaction.id > 0";
 		          }else {
@@ -3733,7 +3733,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "storecredit_transaction.id > 0";
 		          }else {

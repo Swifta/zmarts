@@ -87,8 +87,8 @@ if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_
                             <label> <span time="<?php echo $deals->enddate; ?>" class="kkcount-down" ></span></label>
                     </div>
                 <div class="deal_listing_price_details">
-                <strike><?php echo $symbol . " " . $deals->deal_price; ?></strike> 
-                <p><?php echo $symbol." ".$deals->deal_value; ?></p>
+                <strike><?php echo $symbol . " " . number_format($deals->deal_price); ?></strike> 
+                <p><?php echo $symbol." ".number_format($deals->deal_value); ?></p>
                 </div>
                 
                 </div>

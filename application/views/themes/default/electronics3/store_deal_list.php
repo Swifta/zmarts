@@ -67,7 +67,7 @@ if($avg_rating!=''){
                                             </div>
                                     
                                     <?php /* <p><?php echo $symbol . " " . $deals_categories->deal_price; ?></p> */ ?>
-					<p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . $deals_categories->deal_value; ?></p>
+					<p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>
 					<?php /*<div class="store_add_to_cart">
 						<a href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?></a>
 					</div>   */ ?>                                                                                                                        
@@ -84,7 +84,7 @@ if($avg_rating!=''){
 						<label> <span time="<?php echo $deals_categories->enddate; ?>" class="kkcount-down" ></span></label>
 					</div>
 				</div>    */ ?>                                                  
-					<p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . $deals_categories->deal_value; ?></p>
+					<p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>
 					<?php /*<div class="store_add_to_cart">
 						<a href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?></a>
 					</div>   */ ?>                                                                                                                        

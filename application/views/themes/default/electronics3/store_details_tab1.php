@@ -82,7 +82,7 @@
 																	<img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/gray.png"/>
 																<?php } ?>
                                                         </div>
-                                                        <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . $products->deal_value; ?> <?php echo CURRENCY_CODE; ?> </p>                                                       
+                                                        <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . number_format($products->deal_value); ?> <?php echo CURRENCY_CODE; ?> </p>                                                       
                                                         <?php /*<div class="store_add_to_cart">
                                                             <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $this->Lang['ADD_TO_CART']; ?>"><?php echo $this->Lang['ADD_TO_CART']; ?></a>                                                                     
                                                         </div> */ ?>
@@ -211,7 +211,7 @@ if($avg_rating!=''){
                                                             </div>
 
   <?php /* <p><?php echo $symbol . " " . $deals_categories->deal_price; ?></p> */ ?>
-                                                            <p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . $deals_categories->deal_value; ?></p>
+                                                            <p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>
                                                             <?php /*<div class="store_add_to_cart">
                                                                 <a href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?></a>
                                                             </div>   */ ?>                                                                                                                        
@@ -228,7 +228,7 @@ if($avg_rating!=''){
                                                                 <label> <span time="<?php echo $deals_categories->enddate; ?>" class="kkcount-down" ></span></label>
                                                             </div>
                                                         </div>    */ ?>                                                  
-                                                            <p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . $deals_categories->deal_value; ?></p>
+                                                            <p style="font:18px arial;color:#5BB110;"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>
                                                             <?php /*<div class="store_add_to_cart">
                                                                 <a href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?></a>
                                                             </div>   */ ?>                                                                                                                        
@@ -347,13 +347,13 @@ if($avg_rating!=''){
                                                             ?>
             <?php if ($q == 1) { ?>
                                                             <p style="font:12px arial;color:#111;"><?php echo $this->Lang['LAST_BID']; ?> : <span><?php echo substr(ucfirst($firstname), 0, 10) . '..'; ?></span></p>
-                                                            <p style="font:12px arial;color:#111;"><?php echo $this->Lang['BID']; ?> : <span><?php echo $symbol . " " . $deals1->deal_value; ?></span></p>                                                                    
+                                                            <p style="font:12px arial;color:#111;"><?php echo $this->Lang['BID']; ?> : <span><?php echo $symbol . " " . number_format($deals1->deal_value); ?></span></p>                                                                    
 
 
             <?php } ?>
             <?php if ($q == 0) { ?>
                                                             <p style="font:12px arial;color:#111;"><?php echo $this->Lang['LAST_BID']; ?> : <span><?php echo $this->Lang['NOT_YET_BID']; ?></span></p>
-                                                            <p style="font:12px arial;color:#111;"><?php echo $this->Lang['CLOSE_T']; ?> : <span><?php echo $symbol . " " . $deals1->deal_price; ?></span></p>                                                                    	
+                                                            <p style="font:12px arial;color:#111;"><?php echo $this->Lang['CLOSE_T']; ?> : <span><?php echo $symbol . " " . number_format($deals1->deal_price); ?></span></p>                                                                    	
             <?php } ?>                                                            
                                                             <?php /*<a class="buy_it list_buy_it bid_it" href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a> */ ?>                                                                   
                                                         </div>
