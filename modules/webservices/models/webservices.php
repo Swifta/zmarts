@@ -73,8 +73,9 @@ class Webservices_Model extends Model
         
         public function pay($admin = "", $key = "", $transaction_id = "", $amount = "", $transaction_description = ""){
             $ret = array();
-            $ret['success'] = false;
-            $ret['msg'] = "Authentication Failed";
+            $ret['status'] = false;
+            $ret['description'] = "Authentication Failed";
+            $ret['data'] = array();
             $result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
             if(count($result) == 1){
 	         $result = $this->db->from("transaction")
@@ -93,21 +94,21 @@ class Webservices_Model extends Model
                             "pending_reason" => $transaction_description), 
                                 array("transaction_id"=>$transaction_id));
                         if(count($result) > 0){
-                            $ret['msg'] = "Payment Successful";
-                            $ret['success'] = true;
+                            $ret['description'] = "Payment Successful";
+                            $ret['status'] = true;
                         }
                         else{
-                            $ret['msg'] = "Internal Error: Cannot Complete Payment Request or Duplicate Payment";
+                            $ret['description'] = "Internal Error: Cannot Complete Payment Request or Duplicate Payment";
                         }
                         //var_dump($result);
                     }
                     else{
-                        $ret['msg'] = "Amount Paid not Whats on the Invoice";
+                        $ret['description'] = "Amount Paid not Whats on the Invoice";
                     }
                    
                 }
                 else{
-                    $ret['msg'] = "No Such Transaction Found [INVALID]";
+                    $ret['description'] = "No Such Transaction Found [INVALID]";
                 }
             }
             return json_encode($ret);            

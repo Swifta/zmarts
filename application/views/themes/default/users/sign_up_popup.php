@@ -143,7 +143,7 @@
         data-requestvisibleactions="http://schemas.google.com/AddActivity"
         data-width="wide">Hello
     </button>--><br />
-                        <a class="t_connect" onclick="disconnectUser();" title="<?php echo $this->Lang['TWITTER_CONN']; ?>">&nbsp;</a>                        
+                        <a class="t_connect" onclick="connectTwitter();" title="<?php echo $this->Lang['TWITTER_CONN']; ?>">&nbsp;</a>                        
                         <p><?php echo $this->Lang['ALREADY_A_MEMBER']; ?> <a class="forget_link" title="<?php echo $this->Lang['SIGN_IN']; ?> " href="javascript:showlogin();"><?php echo $this->Lang['SIGN_IN']; ?> </a> </p>                                                   
                     </div>
                 </div>                          
@@ -151,6 +151,14 @@
               
 
 <script type="text/javascript">
+    
+    function connectTwitter(){
+        var url = "<?php echo PATH."twitter-connect.php"; ?>"
+        //window.open(url, '_blank', 'width=900, height=500');
+        location.href = url;
+        return false;
+    }
+    
 $(document).ready(function(){
 $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
 $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer 				   		   

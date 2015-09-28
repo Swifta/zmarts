@@ -5,6 +5,8 @@ class Users_Controller extends Layout_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+                define('YOUR_CONSUMER_KEY', 'RrKl1dAAutQmwY1o64RKnMbjH');
+                define('YOUR_CONSUMER_SECRET', 'DLRbmzANxfqMIaLR8Ozqj60pNahz1N4zzC8dkVIdQUzjttuhGq');
 		$actual_link = $_SERVER['HTTP_HOST'];                
                 $serverurl= $_SERVER['HTTP_HOST']; 
                 if( $actual_link != $serverurl)
@@ -40,6 +42,100 @@ class Users_Controller extends Layout_Controller {
 		}
 	}
 
+        public function twitter(){
+
+            require_once 'twitteroauth.php';
+            $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET);
+            // Requesting authentication tokens, the parameter is the URL we will be redirected to
+            $request_token = $twitteroauth->getRequestToken(PATH.'twitter-connected.php');
+
+            // Saving them into the session
+
+            $_SESSION['oauth_token'] = $request_token['oauth_token'];
+            $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+
+            // If everything goes well..
+            if ($twitteroauth->http_code == 200) {
+                // Let's generate the URL and redirect
+                $url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
+                header('Location: ' . $url);
+            } else {
+                // It's a bad idea to kill the script, but we've got to know when there's an error.
+                die('Something wrong happened.');
+            }
+        }
+        
+        public function twitter_login(){
+            require_once 'twitteroauth.php';
+            if (!empty($_GET['oauth_verifier']) && !empty($_SESSION['oauth_token']) && !empty($_SESSION['oauth_token_secret'])) {
+                // We've got everything we need
+                $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
+            // Let's request the access token
+                $access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']);
+            // Save it in a session var
+                $_SESSION['access_token'] = $access_token;
+            // Let's get the user's info
+                $user_info = $twitteroauth->get('account/verify_credentials');
+            // Print user's info
+
+                if (isset($user_info->error)) {
+                    // Something's wrong, go back to square 1  
+                   echo'<script language="javascript"> window.location.href="'.PATH.'"</script>';
+                } else if(!empty ($user_info->screen_name)){
+                       $twitter_otoken=$_SESSION['oauth_token'];
+                       $twitter_otoken_secret=$_SESSION['oauth_token_secret'];
+                        $password = text::random($type = 'alnum', $length = 10);
+                        //var_dump($user_info); die;
+                        $this->name = $user_info->name;
+                        $this->email = $user_info->screen_name;
+                        $this->password = $password;
+                        //echo $this->name." and ".$this->email." and ".$this->password;die;
+                        if($this->name == ""){
+                            $this->name = "UNKNOWN";
+                        }
+                        $status = $this->users->add_users_social($this->name, $this->email, $this->password);
+
+                      if($status == 1){
+                        $this->signup=1;
+                        $from = CONTACT_EMAIL;
+                        $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
+                        $message = new View("themes/".THEME_NAME."/mail_template");
+                        if(EMAIL_TYPE==2){
+                                email::smtp($from, $this->email,$subject, $message);
+                        } else {
+                                email::sendgrid($from, $this->email,$subject, $message);
+                        }
+                        common::message(1, $this->Lang["SUCC_SIGN"]);
+                        //url::redirect(PATH."users/my-account.html");
+                        $this->UserID = $this->session->get("UserID");
+                        $_SESSION['Club'] = 0;
+                      }
+                      else if($status == 2){
+                          //welcome back user
+                          //echo "here";
+                          //die;
+                        common::message(1, "Welcome back, ".$this->name);
+                        //url::redirect(PATH."users/my-account.html");
+                        //$this->UserID = $this->session->get("UserID");
+                      }
+                      //$_SESSION['Club'] = 0;
+                      //url::redirect(PATH."");
+                      //var_dump($_SESSION);
+                      //echo $status; die;
+                      url::redirect(PATH."users/my-account.html"); 
+
+                  }
+                  else{
+                      common::message(1, "Authentication Failed");
+                      
+                  }
+              } else {
+                  common::message(1, "Authentication Failed");
+              }
+              url::redirect(PATH); 
+            die;
+        }
+        
           public function google(){
               $password = text::random($type = 'alnum', $length = 10);
               $this->name=$this->input->get('full_name');
@@ -64,6 +160,7 @@ class Users_Controller extends Layout_Controller {
                   common::message(1, $this->Lang["SUCC_SIGN"]);
                   //url::redirect(PATH."users/my-account.html");
                   $this->UserID = $this->session->get("UserID");
+                  $_SESSION['Club'] = 0;
                 }
                 else if($status == 2){
                     //welcome back user
@@ -73,7 +170,7 @@ class Users_Controller extends Layout_Controller {
                   //url::redirect(PATH."users/my-account.html");
                   //$this->UserID = $this->session->get("UserID");
                 }
-                $_SESSION['Club'] = 1;
+                //$_SESSION['Club'] = 0;
                 //url::redirect(PATH."");
                 //var_dump($_SESSION);
                 //echo $status; die;

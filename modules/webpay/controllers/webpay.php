@@ -36,6 +36,7 @@ class Webpay_Controller extends Layout_Controller
         
         public function confirm(){
             $txnref = "";
+            $ack = "FAILED TRANSACTION";
             $this->success = false;
             $this->response_code = "UNKNOWN";
             $this->response_discription = "";
@@ -91,6 +92,7 @@ class Webpay_Controller extends Layout_Controller
                     $this->CardNumber = $interswitch->CardNumber;
                     if($interswitch->Amount > 0){
                         $this->success = true;
+                        $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
                     }
                 }
@@ -102,7 +104,7 @@ class Webpay_Controller extends Layout_Controller
             
             //send an email on failed or success transaction here
             
-            $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => "FAILED TRANSACTION","AMT"=> $this->paid_amount,"CURRENCYCODE"=>CURRENCY_CODE);
+            $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $ack,"AMT"=> $this->paid_amount,"CURRENCYCODE"=>CURRENCY_CODE);
             $this->transaction_result['T_ID'] = $txnref;
             $this->result_transaction = arr::to_object($this->transaction_result);
             $this->session->set('payment_result', $this->result_transaction);
@@ -251,14 +253,17 @@ class Webpay_Controller extends Layout_Controller
                     
                     $this->xml_data = '<payment_item_detail>'. 
                         '<item_details detail_ref="'.$TRANSACTIONID.'" institution="Store" sub_location="Lagos" location="Lagos">';
-                    $this->xml_data .= $this->webpay->get_split_marchant_xml($TRANSACTIONID);//pass in the transaction ID
+                    $this->xml_data .= $this->webpay->get_split_marchant_xml($TRANSACTIONID, $pay_amount1);//pass in the transaction ID
+                    //and the total amount to be paid here
                         //'<item_detail item_id="1" item_name="Butter" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4356789876" />'.
                         //    '<item_detail item_id="2" item_name="Grape" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4351189876" />'. 
                     $this->xml_data .= '</item_details></payment_item_detail>';
                     //var_dump($this->xml_data);die;
                     //var_dump($this->xml_data); die;
-                    $combination = $TRANSACTIONID.$this->product_id.$this->pay_item_id.($pay_amount1*100).
+                    $combination = $TRANSACTIONID.$this->product_id.$this->pay_item_id.  intval($pay_amount1*100).
                             $this->site_redirect_url.$this->mac_key;
+                    //echo $TRANSACTIONID.$this->product_id.$this->pay_item_id.intval($pay_amount1*100).
+                            //$this->site_redirect_url; die;
                     $this->hash = hash("sha512", $combination);
                     //die;
                     //var_dump($_SESSION);

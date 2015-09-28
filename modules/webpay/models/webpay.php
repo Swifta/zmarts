@@ -24,9 +24,19 @@ class Webpay_Model extends Model
             //return json_encode($ret);
         }
         
-        public function get_split_marchant_xml($transaction_id){
+        public function get_split_marchant_xml($transaction_id, $total_amount_shopped){
             $ret = "";
-             $result = $this->db->from("transaction")
+            $is_above_2k = false;
+            $tmp_2k = 0.015 * $total_amount_shopped;
+            if($tmp_2k > 2000){
+                $is_above_2k = true;
+//                if(is_float($tmp_2k)){
+//                    $op = explode(".", $tmp_2k);
+//                    $real_num = $op[0];
+//                }
+            }
+              
+            $result = $this->db->from("transaction")
                         ->where(array("transaction.transaction_id"=>$transaction_id))
                         ->join("product","product.deal_id","transaction.product_id")
                         ->join("users","users.user_id","transaction.user_id")
@@ -45,10 +55,27 @@ class Webpay_Model extends Model
 
                     $item_id = $row->product_id;
                     $item_name = urlencode($row->deal_title." (".$row->quantity.")");
-                    //$acct_num = $row->nuban;
-                    $acct_num = "2087778360";
+                    //$acct_num = $row->nuban; //comment this out on production because merchants are supposed to have a
+                    //nuban number set in there profile
+                    $acct_num = rand(1000000000, 9999999999);
                     $temp_item_amt = intval($row->amount * 100);
-                    $item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
+                    //if($total_amount > )
+                    if(!$is_above_2k){
+                        //if not above 2k cap
+                        $transaction_fee = 0.015 * $temp_item_amt;
+                        //$item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
+                    }
+                    else{
+                        $weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
+                        $transaction_fee = $weight_fraction_of_sales * 2000; //from 2,000naira. whats my transaction fee here           
+                    }
+                    if(strpos($transaction_fee, ".")){
+                        $op = explode(".", $transaction_fee);
+                        $real_num = intval($op[0]); //convert to kobo
+                        $decimal_part = intval($op[1]);
+                        $transaction_fee = $real_num + $decimal_part;
+                    }
+                    $item_amt = $temp_item_amt - $transaction_fee;
                     //echo $item_amt; die;
                     $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
                             $item_amt.'" bank_id="117" acct_num="'.$acct_num.'" />';
@@ -79,13 +106,17 @@ class Webpay_Model extends Model
 	        $ip_country_name="";
 	        $ip_city_name="";		
 		$url = "http://api.ipinfodb.com/v3/ip-city/?key=8042c4ccb295723ec0791f306df5f9e92632e9b1ba0beda3e1ff399f207d2767&ip=$ip";
-		$data = @file_get_contents($url);
-		$dat = explode(";",$data);
-		if($dat[3] != "-"){
-		        $ip_country_code=$dat[3];
-		        $ip_country_name=$dat[4];
-		        $ip_city_name=$dat[5];
-		} else {
+		
+                $data = @file_get_contents($url);
+                if($data){
+                    $dat = explode(";",$data);
+                    if($dat[3] != "-"){
+                            $ip_country_code=$dat[3];
+                            $ip_country_name=$dat[4];
+                            $ip_city_name=$dat[5];
+                    } 
+                }
+                else {
                         $geodata = Kogeoip::getRecord($ip);
                         if(isset($geodata->country_code)){
                                 $ip_country_code=$geodata->country_code;
