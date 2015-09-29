@@ -79,7 +79,7 @@ class Webservices_Model extends Model
                             }
                             else{
                                 $merchant_breakdown_tmp[$looper] = new Merchant($value['merchant_id'], $value['shop_id'],
-                                        $value['amount']);
+                                        $value['merchant_account'], $value['amount']);
                                 $looper++;
                             }
                         }
@@ -161,11 +161,13 @@ class Webservices_Model extends Model
 class Merchant{
     private $merchant_id;
     private $shop_id;
+    private $nuban;
     private $pay = 0;
     
-    public function __construct($m, $s, $a) {
+    public function __construct($m, $s, $n, $a) {
         $this->merchant_id = $m;
         $this->shop_id = $s;
+        $this->nuban = $n;
         $this->pay = $a;
     }
     
@@ -187,6 +189,7 @@ class Merchant{
         $ret['merchant_id'] = $this->merchant_id;
         $ret['shop_id'] = $this->shop_id;
         $ret['pay'] = $this->pay;
+        $ret['nuban'] = $this->nuban;
         return $ret;
     }
     
