@@ -42,6 +42,10 @@
 			<?php if(($this->uri->segment(2) == "view-deal")&&($this->uri->segment(2) == "view-products")){  ?>	
 			<th align="left" ><?php echo $this->Lang["TRANS_ID"]; ?></span></th>
 			<?php } ?>
+                        
+                        <th align="left" >Transaction ID</th>
+                        <th align="left" >REF</th>
+                        
 			<?php if(($this->uri->segment(2) == "view-deal")||($this->uri->segment(2) == "view-products")||($this->uri->last_segment() == "all-transaction.html")||($this->uri->segment(2) == "all-transaction")){  ?>			
 			<th align="left" ><?php echo $this->Lang["STATUS"]; ?></th> 
 			<?php } ?>
@@ -83,7 +87,19 @@
 		     
 		    <td align="center"><span class="align"><?php echo ($u->deal_value-$commission)*$u->quantity; ?></span></td>
 		    <?php $tot_amount +=($u->deal_value)*$u->quantity; ?>
-		    
+                    
+                        
+                        
+                    <?php
+                        //my code snippet to manage interswitch transactions and patches
+                        $interswitch_tranx_ref = "-";
+                        $requery_btn = "";
+                        $tranx_id = $u->transaction_id;
+                        if($u->type=="7"){
+                            $interswitch_tranx_ref = $u->captured_transaction_id;
+                        }
+                    
+                    ?>	    
 		   		    
 		    <!--<td align="center"><span class="align"><?php echo $commission*$u->quantity; ?></span></td>  -->
 		    <?php /*$tot_commission +=$commission*$u->quantity; */ ?>
@@ -94,27 +110,33 @@
 		    <?php if(($this->uri->segment(2) == "view-deal")&&($this->uri->segment(2) == "view-products")){  ?>	
 		    <td ><span class="align"><?php echo $u->transaction_id; ?></span></td>
 		   <?php }?>
+                    
+                    <td><?php echo $tranx_id; ?></td>
+                    <td><?php echo $interswitch_tranx_ref; ?></td>
+                    
+                    
 		    <?php if(($this->uri->segment(2) == "view-deal")||($this->uri->segment(2) == "view-products")||($this->uri->last_segment() == "all-transaction.html")||($this->uri->segment(2) == "all-transaction")){  ?>
 		    <td ><span class="align">
 		    <?php if($u->payment_status=="SuccessWithWarning"){ echo '<span class="clor">'. $this->Lang["SUCCESS"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Completed"){ echo '<span class="clor3">'. $this->Lang["COMPLETED"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Success"){ echo '<span class="clor">'. $this->Lang["SUCCESS"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Pending"){ echo '<span class="clor4">'.$this->Lang["PENDING"].'</span>'; } ?>
-		    
+		    <?php if($u->payment_status=="Failed"){ echo '<span class="clor4">Failed</span>'; } ?>
+                    <?php if($u->payment_status=="Pending"){ echo '<span class="clor4"></span>'; } ?>
 		    </span></td>
 		    <?php } ?>	
 
 			
                     <td align="left"><?php echo date('d-M-Y h:i:s',$u->transaction_date); ?></td>
-                    
-                    <td ><span class="align">
+                    <td style="text-align: center"><span class="align">
 		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PAYPAL_CREDIT"] .'</span>'; } ?>
 		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PAYPAL"] .'</span>'; } ?>
 		    <?php if($u->type=="3"){ echo '<span class="clor2">'. $this->Lang["REF_PAYMENT"] .'</span>'; } ?>
 		    <?php if($u->type=="4"){ echo '<span class="clor2">'. "Authorize.net(".$u->transaction_type.")" .'</span>'; } ?>
 		    <?php if($u->type=="5"){ echo '<span class="clor2">'.$u->transaction_type.'</span>'; } ?>
 		     <?php if($u->type=="6"){ echo '<span class="clor2">'. $this->Lang["PAY_LATER"] .'</span>'; } ?>
-		    <?php if($u->type=="7"){ echo '<span class="clor2">'. $u->transaction_type .'</span>'; } ?>
+		    <?php if($u->type=="7"){ echo '<span class="clor2">'. $u->transaction_type .
+                            '</span><br /><span style="font-size:89%; color:blue;">'.$requery_btn.'<span>'; } ?>
 		    </span></td>
 		   
             <?php  $i++;} ?> 

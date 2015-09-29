@@ -151,7 +151,7 @@ class Merchant_Controller extends website_Controller
 
 							common::message(1, $this->Lang["MERCHANT_SET_SUC"]);
 						}
-					url::redirect(PATH.'merchant/settings.html');
+					url::redirect(PATH.'merchant/Edit_info.html');
 				}
 				else{
 					$this->form_error = error::_error($post->errors());
@@ -162,7 +162,7 @@ class Merchant_Controller extends website_Controller
 			$this->user_data = $this->merchant->get_users_data();
 		if(count($this->user_data) == 0){
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-			url::redirect(PATH."merchant/settings.html");
+			url::redirect(PATH."merchant/Edit_info.html");
 		}
 		$this->country_list = $this->merchant->getcountrylist();
 		$this->template->title = $this->Lang["EDIT_MERCHANT"];

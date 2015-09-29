@@ -11,12 +11,14 @@ class Webservices_Model extends Model
             $ret = array();
             $ret['success'] = false;
             $ret['msg'] = "Invalid User Credentials/Priviledge";
+            $product_breakdown = array();
+            $merchant_breakdown = array();
             $result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
             if(count($result) == 1){
 	         $result = $this->db->from("transaction")
                             ->where(array("transaction.transaction_id"=>$transaction_id))
                             ->join("product","product.deal_id","transaction.product_id")
-                            ->join("users","users.user_id","transaction.user_id")
+                            ->join("users","users.user_id","product.merchant_id")
                             ->join("city","city.city_id","users.city_id")
                             ->get();
                 if(count($result) > 0){
@@ -55,10 +57,42 @@ class Webservices_Model extends Model
                         $loop++;
                     }
                     if($total_amount == $amount){
+                        //break merchant pay
+                        $looper = 0;
+                        $merchant_breakdown_tmp = array();
+                        foreach ($product_breakdown as $value){
+                            $found = false;
+                            $id_found = 0;
+                            $amount_to_add = 0;
+                            foreach($merchant_breakdown_tmp as $v){
+                                if($v->isSame($value['merchant_id'],$value['shop_id'])){
+                                    $found= true;
+                                    $amount_to_add = $value['amount'];
+                                    break;
+                                }
+                                else{
+                                    $id_found++;
+                                }
+                            }
+                            if($found){
+                                $merchant_breakdown_tmp[$id_found]->addPay($amount_to_add);
+                            }
+                            else{
+                                $merchant_breakdown_tmp[$looper] = new Merchant($value['merchant_id'], $value['shop_id'],
+                                        $value['amount']);
+                                $looper++;
+                            }
+                        }
+                        $y = 0;
+                        foreach($merchant_breakdown_tmp as $value){
+                            $merchant_breakdown[$y] = $value->getArray();
+                            $y++;
+                        }
                         $ret['success'] = true;
                         $ret['msg'] = "OK";
                         $data['total_amount'] = $total_amount;
                         $data['product_breakdown'] = $product_breakdown;
+                        $data['merchant_breakdown'] = $merchant_breakdown;
                         $ret['data'] = $data;
                     }
                     else{
@@ -82,7 +116,7 @@ class Webservices_Model extends Model
 	         $result = $this->db->from("transaction")
                             ->where(array("transaction.transaction_id"=>$transaction_id))
                             ->join("product","product.deal_id","transaction.product_id")
-                            ->join("users","users.user_id","transaction.user_id")
+                            ->join("users","users.user_id","product.merchant_id")
                             ->join("city","city.city_id","users.city_id")
                             ->get();
                 if(count($result) > 0){
@@ -121,4 +155,39 @@ class Webservices_Model extends Model
             }
             return json_encode($ret);            
         }
+}
+
+
+class Merchant{
+    private $merchant_id;
+    private $shop_id;
+    private $pay = 0;
+    
+    public function __construct($m, $s, $a) {
+        $this->merchant_id = $m;
+        $this->shop_id = $s;
+        $this->pay = $a;
+    }
+    
+    public function isSame($m, $s){
+        if($this->merchant_id == $m && $this->shop_id == $s){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public function addPay($am){
+        $this->pay += $am;
+    }
+    
+    public function getArray(){
+        $ret = array();
+        $ret['merchant_id'] = $this->merchant_id;
+        $ret['shop_id'] = $this->shop_id;
+        $ret['pay'] = $this->pay;
+        return $ret;
+    }
+    
 }

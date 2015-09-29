@@ -35,9 +35,9 @@ input[type=button],input[type=submit] ,input[type=reset]{cursor:pointer; }
 
 /*header*/
 .header{width:100%;background:url(../images/header_bg.png) repeat-x; padding-bottom:5px;}
-.header_in{margin:0 auto;width:1024px;height:80px;}
-.logo{margin:15px 0px 0px 0px;}
-.head_rgt{float:right;margin-top:30px;}
+.header_in{margin:0 auto;width:90%;height:80px;}
+.logo{margin:15px 0px 0px 15px;}
+.head_rgt{float:right;margin-top:30px;margin-right: 10px;}
 .head_out{width:100%;}
 .con_out{width:100%;}
 .foot_out{width:100%;}
@@ -45,18 +45,18 @@ input[type=button],input[type=submit] ,input[type=reset]{cursor:pointer; }
 .head_rgt p{color:#000; padding:0 5px 0 0;}
 .head_rgt a{color:#E52F2A;}
 /*menu*/
-.con_in{margin:0 auto;width:1025px;}
-.con_bdy{width:1024px;margin-top:10px;}
-.cont_rgt{width:799px;min-height:400px;background:#fff;margin-top:1px;}
-.right_content{width:779px;padding:10px;}
-.container_content{width:799px;float:left;background:#fff url(../images/content_bg.png) top left repeat-x;padding-bottom:30px; min-height:280px;}
-.container_rgt_head{float:left;clear:both;width:799px;height:50px;background:url(../images/content_rgt_head.png) repeat-x;border-bottom:1px solid #D4D4D4;}
-.container_rgt_head h1{width:700px;float:left;font-size:20px;font-weight:bold;line-height:50px;margin-left:20px; }
-.menu{float:left;width:225px;background:#fff;height:100%;padding-bottom:8px;}
-.menu_container{width:225px;float:left;background:#fff url(../images/admin_sidebar_bg.png) top left repeat-y;}
+.con_in{margin:0 auto;width:100%;}
+.con_bdy{width:100%;margin-top:10px;}
+.cont_rgt{width:80%;min-height:400px;background:#fff;margin-top:1px;}
+.right_content{width:100%;padding:10px;}
+.container_content{width:100%;float:left;background:#fff url(../images/content_bg.png) top left repeat-x;padding-bottom:30px; min-height:280px;}
+.container_rgt_head{float:left;clear:both;width:100%;height:50px;background:url(../images/content_rgt_head.png) repeat-x;border-bottom:1px solid #D4D4D4;}
+.container_rgt_head h1{width:100%;float:left;font-size:20px;font-weight:bold;line-height:50px;margin-left:20px; }
+.menu{float:left;width:19%;background:#fff;height:100%;padding-bottom:8px;}
+.menu_container{width:19%;float:left;margin-left: 10px;background:#fff url(../images/admin_sidebar_bg.png) top left repeat-y;}
 .menu_title{float:left;width:210px;color:#000; font-size:18px;padding:10px 0px 0px 10px;}
 .menu_container ul{width:225px;clear:both;float:left;margin-top:5px;}
-.menu_container ul li{float:left;clear:both;width:225px;margin-top:1px;margin-left:8px;border: 1px solid #656564; border-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;background: #424241; /* Old browsers */
+.menu_container ul li{float:left;clear:both;width:100%;margin-top:1px;margin-left:8px;border: 1px solid #656564; border-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;background: #424241; /* Old browsers */
     background: -moz-linear-gradient(top, #424241 0%, #40403f 50%, #2c2c2b 51%, #383837 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#424241), color-stop(50%,#40403f), color-stop(51%,#2c2c2b), color-stop(100%,#383837)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #424241 0%,#40403f 50%,#2c2c2b 51%,#383837 100%); /* Chrome10+,Safari5.1+ */
@@ -130,22 +130,23 @@ input[type=button],input[type=submit] ,input[type=reset]{cursor:pointer; }
 
 
 
-.cont_container{width:779px;float:left;clear:both;margin:10px 0px 0px 10px;}
-.content_top{float:left;clear:both;width:779px;}
-.content_bot{float:left;clear:both;width:779px;}
+.cont_container{width:100%;clear:both;margin:10px 0px 0px 10px;}
+.content_top{float:left;clear:both;width:100%;}
+.content_bot{float:left;clear:both;width:100%;}
+/*
 .top_left{width:20px;height:21px;float:left;background:url(../images/left_top.png) no-repeat;}
-.top_rgt{float:left;width:20px;height:21px;background:url(../images/rgt_top.jpg) no-repeat;}
-.top_center{float:left;width:739px; height:21px;background:url(../images/middle_bg.jpg) repeat-x;}
+.top_rgt{float:right;width:20px;height:21px;background:url(../images/rgt_top.jpg) no-repeat;}
+.top_center{float:left;width:95%; height:21px;background:url(../images/middle_bg.jpg) repeat-x;}
 .bot_left{width:20px;height:21px;float:left;background:url(../images/bot_left.png) no-repeat;}
-.bot_rgt{float:left;width:20px;height:21px;background:url(../images/bot_rgt.jpg) no-repeat;}
+.bot_rgt{float:right;width:20px;height:21px;background:url(../images/bot_rgt.jpg) no-repeat;}
+
+
+*/
 
 
 
-
-
-
-.bot_center{float:left;width:739px; height:21px;background:url(../images/bot_middle.jpg) repeat-x;}
-.content_middle{float:left;clear:both;width:757px;border-right:1px solid #C5C5C5;border-left:1px solid #C5C5C5;background:#fff;padding:0 10px;}
+.bot_center{width:95%; height:21px;background:url(../images/bot_middle.jpg) repeat-x;}
+.content_middle{clear:both;width:95%;border-right:1px solid #C5C5C5;border-left:1px solid #C5C5C5;background:#fff;padding:0 10px;}
 
 .admin_form table td{padding:5px;}
 .admin_form table label{font:bold 12px arial;color:#333;}
@@ -432,9 +433,9 @@ html[xmlns] .clearfix { display: block;}
 .left_setting_bg{width:23px;height:25px;float:left;background:url(../images/left_setting_bg.png) no-repeat;margin:1px 0px 0px 0px;}
 .left_user_log_bg{width:23px;height:25px;float:left;background:url(../images/left_user_log_bg.png) no-repeat;margin:1px 0px 0px 0px;}
 
-.dash_main_menu{clear:both; width:1024px; margin:0 auto;}
+.dash_main_menu{clear:both; width:100%; margin:0 auto;}
 
-.dash_main_menu ul{ float:left; clear:both; width:1024px; border:1px solid #CECECE; border-left:none; background:url(../images/dash_mnu_bg.png) repeat-x;}
+.dash_main_menu ul{ float:left; clear:both; width:100%; border:1px solid #CECECE; border-left:none; background:url(../images/dash_mnu_bg.png) repeat-x;}
 .dash_main_menu ul li{ float:left; clear:none; text-transform:uppercase;}
 .dash_main_menu ul li a{ float:left; border-left:1px solid #cecece;padding:15px 11px; font: normal 12px/15px arial; color:#7F7D7D;}
 .dash_main_menu ul li a:hover{background:url(../images/dash_main_mnu_hover.png) repeat-x;font: normal 12px/15px arial; color:#FFF;}

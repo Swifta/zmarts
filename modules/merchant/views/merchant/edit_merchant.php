@@ -78,10 +78,11 @@
                         </tr>
                         
                         <tr> 
-                                <td><label><?php echo $this->Lang["PAYMENT_ACC"]; ?></label><span>*</span></td>
+                                <td><label>Payment Account Number<?php //echo $this->Lang["PAYMENT_ACC"]; ?></label><span></span></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="payment" maxlength="255" value="<?php echo $u->payment_account_id;?>"/>
-                                <em><?php if(isset($this->form_error['payment'])){ echo $this->form_error["payment"]; }?></em>
+                                <td><input type="text" maxlength="255" value="<?php echo $u->nuban;?>" disabled/>
+                                    <input type="hidden" name="payment" maxlength="255" value="<?php echo $u->nuban;?>"/>
+                                <em><?php /*if(isset($this->form_error['payment'])){ echo $this->form_error["payment"]; } */?></em>
                                 </td>
                         </tr>
                         
