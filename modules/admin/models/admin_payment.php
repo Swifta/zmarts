@@ -14,7 +14,7 @@ class Admin_payment_Model extends Model
 	public function count_fund_request_list($field = "", $type = "", $search_key = "",$today="", $startdate = "", $enddate = "")
 	{	
 		 if($_GET){
-		         $search_key = mysql_real_escape_string($search_key);
+		         $search_key = strip_tags($search_key);
 		        if($type=="") {
 		                $conditions = "request_id > 0";
 		        }else {
@@ -106,7 +106,7 @@ class Admin_payment_Model extends Model
                         }
 		        
 		        if($_GET){
-		               $search_key = mysql_real_escape_string($search_key);
+		               $search_key = strip_tags($search_key);
 		               $result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%") order by request_id DESC '.$limit1.'');
          		} else {
 			        $result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' order by request_id DESC '.$limit1.'');
@@ -229,7 +229,7 @@ class Admin_payment_Model extends Model
 		}
 		       	
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions .= " and transaction.id > 0";
 		          }else {
@@ -318,7 +318,7 @@ class Admin_payment_Model extends Model
 				}
 				
 			if($_GET){ 
-				$search_key = mysql_real_escape_string($search_key);
+				$search_key = strip_tags($search_key);
 				    if(($type=="")||($type=="mail")) {
 				            $conditions .= " and transaction.id > 0";
 				    }else {
@@ -401,7 +401,7 @@ class Admin_payment_Model extends Model
 			}
 			
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0 ";
 		          }else {
@@ -536,7 +536,7 @@ class Admin_payment_Model extends Model
 	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
                         }
 				
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			 $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions and ( users.firstname like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%') $limit1 ");
 		} 
 		else{
@@ -587,7 +587,7 @@ class Admin_payment_Model extends Model
 					$conditions .= " AND transaction.type != 5";
 				}
 			if($_GET){ 
-				$search_key = mysql_real_escape_string($search_key);
+				$search_key = strip_tags($search_key);
 				    if(($type=="")||($type=="mail")) {
 				            $conditions .= " and transaction.id > 0";
 				    }else {
@@ -710,7 +710,7 @@ class Admin_payment_Model extends Model
 	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
                         }
 			
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			
 			 $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where $conditions and (users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%') order by transaction.id DESC  $limit1 "); 
 
@@ -772,7 +772,7 @@ class Admin_payment_Model extends Model
 				}
 				
 			if($_GET){ 
-				$search_key = mysql_real_escape_string($search_key);
+				$search_key = strip_tags($search_key);
 				    if(($type=="")||($type=="mail")) {
 				            $conditions .= " and transaction.id > 0";
 				    }else {
@@ -861,7 +861,7 @@ class Admin_payment_Model extends Model
 					$conditions .= " AND transaction.type != 5 AND store_credit_id !=0";
 				}
 			if($_GET){ 
-				$search_key = mysql_real_escape_string($search_key);
+				$search_key = strip_tags($search_key);
 				    if(($type=="")||($type=="mail")) {
 				            $conditions .= " and transaction.id > 0";
 				    }else {
@@ -935,7 +935,7 @@ class Admin_payment_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "storecredit_transaction.id > 0";
 		          }else {
@@ -1033,7 +1033,7 @@ class Admin_payment_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = mysql_real_escape_string($search_key);
+			 $search_key = strip_tags($search_key);
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "storecredit_transaction.id > 0";
 		          }else {

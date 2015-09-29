@@ -72,7 +72,7 @@ if($avg_rating!=''){
 <?php } ?>
                                                         </div>
                                                     
-                                                    <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . $products->deal_value; ?> <?php echo CURRENCY_CODE; ?> </p>                                                       
+                                                    <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . number_format($products->deal_value); ?> <?php echo CURRENCY_CODE; ?> </p>                                                       
 						<?php /*	<div class="store_add_to_cart_out">
 								<div class="store_add_to_cart">
 									<a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $this->Lang['ADD_TO_CART']; ?>"><?php echo $this->Lang['ADD_TO_CART']; ?></a>                                                                     

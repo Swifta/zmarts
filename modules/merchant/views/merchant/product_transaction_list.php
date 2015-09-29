@@ -34,9 +34,9 @@
 			<th align="lefft" > <?php echo $this->Lang["AMOUNT"]; ?><?php echo '('.CURRENCY_SYMBOL.')';?> </th>
 			<?php   }  ?>
 			
-			<?php if($this->uri->segment(2) != "view-user"){  ?>	
+			<?php /*if($this->uri->segment(2) != "view-user"){  ?>	
 			<th align="left" ><?php echo $this->Lang["ADMIN_COMMISSION"]; ?><?php echo '('.CURRENCY_SYMBOL.')';?></th>
-			<?php } ?>
+			<?php } */?>
 			<th align="lefft" > <?php echo $this->Lang['SHIP_ING']; ?> <?php echo '('.CURRENCY_SYMBOL.')';?></th>
 			<?php /**<th align="lefft" > <?php echo $this->Lang['TAX']; ?> <?php echo '('.CURRENCY_SYMBOL.')';?></th> */ ?>
 			<?php if(($this->uri->segment(2) == "view-deal")&&($this->uri->segment(2) == "view-products")){  ?>	
@@ -78,15 +78,15 @@
 		    
 		     <?php $commission_val=$u->deal_merchant_commission; ?> 
 		    <?php  
-		        $commission=$u->deal_value *($commission_val/100);
+		        $commission=0; //$u->deal_value *($commission_val/100);
 		    ?>	   
 		     
 		    <td align="center"><span class="align"><?php echo ($u->deal_value-$commission)*$u->quantity; ?></span></td>
 		    <?php $tot_amount +=($u->deal_value)*$u->quantity; ?>
 		    
 		   		    
-		    <td align="center"><span class="align"><?php echo $commission*$u->quantity; ?></span></td>  
-		    <?php $tot_commission +=$commission*$u->quantity; ?>
+		    <!--<td align="center"><span class="align"><?php echo $commission*$u->quantity; ?></span></td>  -->
+		    <?php /*$tot_commission +=$commission*$u->quantity; */ ?>
 		    <td align="center"><?php echo $u->shippingamount; ?></td>
 		    <?php /**<td align="center"><?php echo $u->tax_amount; ?></td> */ ?>
 		    <?php $tot_shipping +=$u->shippingamount; ?>
@@ -131,7 +131,7 @@
            <div class="value_amount"><p align="left"> <?php echo $this->Lang["TOT_PURC_QUAN"]; ?> </p> <b>:</b><span align="center"><?php echo $tot_quan; ?></span></div>
             <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_PURC_AMOUNT"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.($tot_amount+$tot_shipping+$tot_tax); ?> </span></div>
             
-           <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_ADM_COMM"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.$tot_commission; ?> </span></div>
+           <!--<div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_ADM_COMM"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.$tot_commission; ?> </span></div>-->
            
            <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_MER_AMOU"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.($tot_amount-$tot_commission); ?> </span></div>
            

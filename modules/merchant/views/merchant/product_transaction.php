@@ -144,7 +144,7 @@
 		        
 		        <option value="<?php echo PATH.'merchant-product/failed-transaction.html';?>" <?php if(($this->uri->last_segment() == "failed-transaction.html")||($this->uri->segment(2)== "failed-transaction")){  ?>  selected="selected" <?php }  ?>><?php echo $this->Lang["FAI_TRAN"]; ?></option>
 		        
-		        <option value="<?php echo PATH.'merchant-product/hold-transaction.html';?>" <?php if(($this->uri->last_segment() == "hold-transaction.html")||($this->uri->segment(2)== "hold-transaction")){  ?>  selected="selected" <?php }  ?>><?php echo $this->Lang["HOLD_TRAN"]; ?></option>         
+		        <option value="<?php echo PATH.'merchant-product/hold-transaction.html';?>" <?php if(($this->uri->last_segment() == "hold-transaction.html")||($this->uri->segment(2)== "hold-transaction")){  ?>  selected="selected" <?php }  ?>><?php echo "Pending Transactions"; ?></option>         
 		        </select></span>
                    </div>
                     </div>

@@ -12,9 +12,9 @@ class Webpay_Model extends Model
         
         public function payUpdate($tranx_id, $response_code, $response_discription, $PaymentReference, $CardNumber, $status){
             //$ret = array();
-            $payment_status = "Failed";
+            $payment_status = "Pending";
             if($status){
-                $payment_status = "SUCCESS";
+                $payment_status = "Success";
                 //$this->session->delete("count");
             }
             $this->db->update("transaction", array("payment_status" => $payment_status, "reason_code" => $response_code, 

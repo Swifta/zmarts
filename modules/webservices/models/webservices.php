@@ -87,19 +87,26 @@ class Webservices_Model extends Model
                             ->get();
                 if(count($result) > 0){
                     $total_amount = 0;
+                    $payment_status = "";
                     foreach($result as $row){
                         $total_amount += $row->amount;
+                        $payment_status = $row->payment_status;
                     }
                     if($amount == $total_amount){
-                        $result = $this->db->update("transaction", array("payment_status" => "Success", 
-                            "pending_reason" => $transaction_description), 
-                                array("transaction_id"=>$transaction_id));
-                        if(count($result) > 0){
-                            $ret['description'] = "Payment Successful";
-                            $ret['status'] = true;
+                        if($payment_status == "Success"){
+                            $ret['description'] = "Internal Error: Cannot Complete Payment Request or Duplicate Payment";
                         }
                         else{
-                            $ret['description'] = "Internal Error: Cannot Complete Payment Request or Duplicate Payment";
+                            $result = $this->db->update("transaction", array("payment_status" => "Success", 
+                                "pending_reason" => $transaction_description), 
+                                    array("transaction_id"=>$transaction_id));
+                            if(count($result) > 0){
+                                $ret['description'] = "Payment Successful";
+                                $ret['status'] = true;
+                            }
+                            else{
+                                $ret['description'] = "Internal Error: Cannot Complete Payment Request or Duplicate Payment";
+                            }
                         }
                         //var_dump($result);
                     }
