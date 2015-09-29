@@ -5,6 +5,7 @@
 /application/controllers/sendinblue_test.php
 /application/controllers/et.php
 /application/views/et.php
+/php-wsdl-2.3/cache/*.*
 *.ignore.*
 
 
