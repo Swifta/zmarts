@@ -158,7 +158,7 @@ if($avg_rating!=''){
 <?php } ?>
                                             </div>
                                             
-                                            <p><?php echo $symbol . " " . $best->deal_value; ?></p>
+                                            <p><?php echo $symbol . " " . number_format($best->deal_value); ?></p>
                                         </div>
                                             <div class="store_product_list_hover">
                                                 <a href="<?php echo PATH . $best->store_url_title . '/product/' . $best->deal_key . '/' . $best->url_title . '.html'; ?>"><div class=" store_product_list_img_hover"></div></a>

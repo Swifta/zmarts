@@ -226,8 +226,8 @@ $symbol = CURRENCY_SYMBOL;
                                             <a class="cursor" href="<?php echo PATH . $h->store_url_title.'/auction/' . $h->deal_key . '/' . $h->url_title . '.html'; ?>" title="<?php echo $h->deal_title; ?>"><?php echo substr(ucfirst($h->deal_title), 0, 100); ?></a>
                                         </h2>
                                         <div class="deal_listing_price_details">
-                                            <strike><?php echo $symbol . " " . $h->deal_price; ?></strike>
-                                            <p><?php echo $symbol . " " . $h->deal_value; ?></p>
+                                            <strike><?php echo $symbol . " " . number_format($h->deal_price); ?></strike>
+                                            <p><?php echo $symbol . " " . number_format($h->deal_value); ?></p>
                                         </div>
                                     </div>
                                     <div class="list_bottom">
@@ -482,7 +482,7 @@ $symbol = CURRENCY_SYMBOL;
                                         <div class="bid_cont">
                                         <div class="bid_value">
                                             <label>Bid :</label>
-                                            <span><?php echo $symbol . " " . $deals1->deal_value; ?></span>
+                                            <span><?php echo $symbol . " " . number_format($deals1->deal_value); ?></span>
                                         </div>
                                     </div>
                                         <div class="deal_timer">

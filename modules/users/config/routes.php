@@ -25,6 +25,7 @@ $config['users/edit-profile-images.html'] = "/users/update_prfile_photo";
 $config['facebook-connect.php'] = "/users/facebook";
 $config['google-connect.php'] = "/users/google";
 $config['twitter-connect.php'] = "/users/twitter";
+$config['twitter-connected.php'] = "/users/twitter_login";
 $config['facebook-connect-share.php'] = "/users/facebook_share";
 $config['pdf.html'] = "/users/pdf";
 $config['users/edit-profile-images.html'] = "/users/update_prfile_photo";
