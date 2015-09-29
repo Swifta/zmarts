@@ -209,7 +209,7 @@ $(".slidetabs").tabs(".images > div", {
 								   	*	Modification to add club membership signup banner conditions
 									*	@Live
 								   	*/
-									 if(strcmp($banner->banner_id, '28') == 0){?>
+									 if(strcmp($banner->banner_id, '253') == 0){?>
 										  <a target="_self" id="id_banner_club"  href="javascript:load_club();"<?php //echo $banner->redirect_url;?>
 										 <?php }else{?>
                                          <a target="_blank" href="<?php echo $banner->redirect_url;	 
