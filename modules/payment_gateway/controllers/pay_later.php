@@ -302,7 +302,6 @@ class Pay_later_Controller extends Layout_Controller
 				$this->admin_email = $this->admin_list->current()->email;
                 $message = new View("themes/".THEME_NAME."/payment_mail_product");
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
-
                 if(EMAIL_TYPE==2) {
 					email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 					email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
