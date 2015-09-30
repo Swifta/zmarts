@@ -175,7 +175,7 @@
 
 
                                 
-                                <li class="fullname" style="margin-top: -30px;">
+                                <li class="frm_clr" style="float:left; margin-top: -5px;">
                                     <label><?php echo $this->Lang["STORE_PREVIEW"]; ?> :</label>
                                     <a href="javascript:openMainView();">
                                         <img src="" class="preview_theme_selected" style="width:150px;height:150px;"/>
