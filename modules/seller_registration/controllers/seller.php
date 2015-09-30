@@ -252,6 +252,9 @@ class Seller_Controller extends Layout_Controller {
 										$adminmessage = new View("themes/".THEME_NAME."/merchant_signup_admin_mail_template");
 										$merchantmessage = new View("themes/".THEME_NAME."/merchant_signup_mail_template");
 										
+                                                                                //echo "admin subject: ".$subject." and merchant_subject:".$merchant_subject."<br />";
+                                                                                //echo "admin msg: ".$admin_message." and merchant_msg:".$merchant_message."<br />";
+                                                                                //die;
 										//echo $adminmessage; echo "<br> <br> <br>"; echo $merchantmessage; exit;
 										if($_FILES['image']['name']){
 											$filename = upload::save('image'); 						

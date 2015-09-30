@@ -97,6 +97,7 @@
                         $tranx_id = $u->transaction_id;
                         if($u->type=="7"){
                             $interswitch_tranx_ref = $u->captured_transaction_id;
+                            $requery_btn = "<a href=''>ReQuery</a>";
                         }
                     
                     ?>	    
@@ -112,7 +113,7 @@
 		   <?php }?>
                     
                     <td><?php echo $tranx_id; ?></td>
-                    <td><?php echo $interswitch_tranx_ref; ?></td>
+                    <td style="text-align: center"><?php echo $interswitch_tranx_ref; ?></td>
                     
                     
 		    <?php if(($this->uri->segment(2) == "view-deal")||($this->uri->segment(2) == "view-products")||($this->uri->last_segment() == "all-transaction.html")||($this->uri->segment(2) == "all-transaction")){  ?>

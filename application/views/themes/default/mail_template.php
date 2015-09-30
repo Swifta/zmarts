@@ -107,15 +107,15 @@
 				     <tr>
                                         <td>
                                         <?php if(isset($this->moderator) ||  isset($this->admin_signup)) { ?>
-					    <a href="<?php  echo PATH.'../../modules/users/views/admin-login.html'; ?>"> <?php  echo PATH.'admin-login.html'; ?></a>
+					    Login URL: <a href="<?php  echo PATH.'../../modules/users/views/admin-login.html'; ?>"> <?php  echo PATH.'admin-login.html'; ?></a>
                                            <?php } else if(isset($this->store_admin)) { ?>
-                                           <a href="<?php  echo PATH.'../../modules/users/views/store-admin-login.html'; ?>"> <?php  echo PATH.'store-admin-login.html'; ?></a>
+                                           Login URL: <a href="<?php  echo PATH.'../../modules/users/views/store-admin-login.html'; ?>"> <?php  echo PATH.'store-admin-login.html'; ?></a>
                                            <?php } ?>
                                         </td>
                                     </tr>
                                      <?php if(isset($this->moderator_privileges)) { ?>
                                     <tr>
-										<td style="font:normal 18px/21px arial;color:#666;">Your can access below mentioned module privileges :</td>
+										<td style="font:normal 18px/21px arial;color:#666;">Your privileges are below :</td>
                                     </tr>
                                     <tr>
 										<td><?php echo $this->moderator_privileges; ?></td>

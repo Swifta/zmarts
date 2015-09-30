@@ -205,7 +205,7 @@ class Users_Model extends Model
 			$userid = $result->current()->user_id;
 			$name = $result->current()->firstname;
 			$user_type = $result->current()->user_type;
-			$this->session->set(array("UserID" => $userid, "UserName" => $name, "UserEmail" => $fb_profile_email,"UserType" => $user_type));
+			$this->session->set(array("UserID" => $userid, "UserName" => $name, "UserEmail" => $fb_profile_email,"UserType" => 4));
 			return 1;
 		}
 		

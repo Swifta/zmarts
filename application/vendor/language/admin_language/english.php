@@ -3544,7 +3544,7 @@ $content_text = array(
 						
 						"MODERATOR" => "Moderator",
 						
-						"MER_MOD_REGISTRATION" => "Moderator registration is completed  successfully..",
+						"MER_MOD_REGISTRATION" => "Your Moderator account for has been successfully created.",
 
 		"SELECT_B" => "Sector blocked successfully.",
 			

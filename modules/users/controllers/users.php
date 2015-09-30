@@ -150,7 +150,7 @@ class Users_Controller extends Layout_Controller {
                 if($status == 1){
                   $this->signup=1;
                   $from = CONTACT_EMAIL;
-                  $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
+                  $subject = $this->Lang['YOUR'].' '.SITENAME.' Google Registration Details';
                   $message = new View("themes/".THEME_NAME."/mail_template");
                   if(EMAIL_TYPE==2){
                           email::smtp($from, $this->email,$subject, $message);

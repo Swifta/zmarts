@@ -145,7 +145,7 @@ return {
                         //alert(fName);
                         //alert(email);
                         disconnectUser();
-                        location.href='/zmart/google-connect.php?full_name='+fName+'&email='+email
+                        location.href='<?php echo PATH; ?>google-connect.php?full_name='+fName+'&email='+email
                         //$("#inputFullname").val(fName);
 //                        /$("#inputEmail").val(email);
                         

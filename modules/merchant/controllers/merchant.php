@@ -816,10 +816,10 @@ class Merchant_Controller extends website_Controller
 					$this->store_admin = 1;
 					$message = new View("themes/".THEME_NAME."/mail_template");
 					if(EMAIL_TYPE==2){				
-						email::smtp($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
+						email::smtp($from, $this->email, SITENAME ." - Moderator Account Creation" , $message);
 					}
 					else{
-						email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
+						email::sendgrid($from, $this->email, SITENAME ." - Moderator Account Creation" , $message);
 					}
 				/*	if($_FILES['image']['name']){
 						$filename = upload::save('image');

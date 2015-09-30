@@ -143,15 +143,15 @@
                                         <p><?php echo $u->duration_period." Months"; ?></p>
                                     </td>
                                     <td align="center">
-                                        <p><?php echo CURRENCY_SYMBOL . $amount_paid; ?> </p>
+                                        <p><?php echo CURRENCY_SYMBOL . number_format($amount_paid); ?> </p>
                                     </td>
                                    
                                     <td align="center">
-                                        <p><?php echo CURRENCY_SYMBOL . $balance_to_be_paid; ?> </p>
+                                        <p><?php echo CURRENCY_SYMBOL . number_format($balance_to_be_paid); ?> </p>
                                     </td>
                                     <td align="center">
                                         <p><?php $total = $u->product_value;
-        echo CURRENCY_SYMBOL . $total; ?></p>
+        echo CURRENCY_SYMBOL . number_format($total); ?></p>
                                     </td>
                                      <td align="center">
                                         <p><?php if ($u->credit_status==1) { ?>
