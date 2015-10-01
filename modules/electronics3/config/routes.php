@@ -160,3 +160,21 @@ $config['Spaced-shop-.com-me/products/c/(.*)/(.*).html'] = "/electronics3/produc
 $config['Spaced-shop-.com-me/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Spaced-shop-.com-me/$1/$2";
 $config['Spaced-shop-.com-me/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Spaced-shop-.com-me/$1/$2";
 // Spaced-shop-.com-me End
+// Kesha Start
+$config['Kesha'] ="electronics3/stores_home_page/Kesha";
+$config['Kesha/products.html'] = "/electronics3/product_list/Kesha";
+$config['Kesha/today-deals.html'] = "/electronics3/deal_list/Kesha";
+$config['Kesha/auction.html'] = "/electronics3/auction_list/Kesha";
+$config['Kesha/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Kesha/$1/$2";
+$config['Kesha/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Kesha/$1/$2";
+$config['Kesha/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Kesha/$1/$2";
+// Kesha End
+// Live-Store Start
+$config['Live-Store'] ="electronics3/stores_home_page/Live-Store";
+$config['Live-Store/products.html'] = "/electronics3/product_list/Live-Store";
+$config['Live-Store/today-deals.html'] = "/electronics3/deal_list/Live-Store";
+$config['Live-Store/auction.html'] = "/electronics3/auction_list/Live-Store";
+$config['Live-Store/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Live-Store/$1/$2";
+$config['Live-Store/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Live-Store/$1/$2";
+$config['Live-Store/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Live-Store/$1/$2";
+// Live-Store End

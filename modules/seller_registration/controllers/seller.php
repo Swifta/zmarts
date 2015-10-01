@@ -263,7 +263,8 @@ class Seller_Controller extends Layout_Controller {
 											common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
 											unlink($filename);
 										}
-
+										
+										
 										if(EMAIL_TYPE==2){		
 											email::smtp($from, $to, $subject , $adminmessage);
 											if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".SITENAME ." - ".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
