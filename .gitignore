@@ -6,7 +6,7 @@
 /application/controllers/et.php
 /application/views/et.php
 /php-wsdl-2.3/cache/*.*
-*.ignore.*
+*ignore*
 
 
 
