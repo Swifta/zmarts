@@ -160,7 +160,7 @@ $config['Spaced-shop-.com-me/products/c/(.*)/(.*).html'] = "/electronics3/produc
 $config['Spaced-shop-.com-me/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Spaced-shop-.com-me/$1/$2";
 $config['Spaced-shop-.com-me/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Spaced-shop-.com-me/$1/$2";
 // Spaced-shop-.com-me End
-<<<<<<< HEAD
+
 // Kesha Start
 $config['Kesha'] ="electronics3/stores_home_page/Kesha";
 $config['Kesha/products.html'] = "/electronics3/product_list/Kesha";
@@ -179,8 +179,7 @@ $config['Live-Store/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Li
 $config['Live-Store/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Live-Store/$1/$2";
 $config['Live-Store/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Live-Store/$1/$2";
 // Live-Store End
-||||||| merged common ancestors
-=======
+
 // Musty-Electronics-Intl-Test Start
 $config['Musty-Electronics-Intl-Test'] ="electronics3/stores_home_page/Musty-Electronics-Intl-Test";
 $config['Musty-Electronics-Intl-Test/products.html'] = "/electronics3/product_list/Musty-Electronics-Intl-Test";
@@ -190,4 +189,3 @@ $config['Musty-Electronics-Intl-Test/products/c/(.*)/(.*).html'] = "/electronics
 $config['Musty-Electronics-Intl-Test/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Musty-Electronics-Intl-Test/$1/$2";
 $config['Musty-Electronics-Intl-Test/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Musty-Electronics-Intl-Test/$1/$2";
 // Musty-Electronics-Intl-Test End
->>>>>>> e1578f4b82945a13d08165aa0b648d82508489ca
