@@ -85,7 +85,7 @@ class Seller_Model extends Model
 			
 			
 			$shipping_result = $this->db->insert("shipping_module_settings", array("free" =>$this->session->get('free'),"flat" => $this->session->get('flat'), "per_product" => $this->session->get('product'),'per_quantity' => $this->session->get('quantity'), 'aramex' => $this->session->get('aramex'),'ship_user_id' => $merchant_id));
-		 
+		 $website="http://".$post->website;
 				/*$result_country1 = $this->db->select("country_id")->from("city")->where(array("city_id" => $post->city ))->limit(1)->get(); // for store country value
 				$country_value1 = $result_country1->current()->country_id; */
 
@@ -94,10 +94,17 @@ class Seller_Model extends Model
 
 	if($post->store_email_id != ""){
 		 $res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email_id,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$country_value1, 'phone_number' => $post->mobile,"user_sector_id"=>$this->session->get("sub_sector")));
-        }	
+                 $m_id = $res->insert_id();
+        }
+        else{
+            $m_id = $merchant_id;
+        }
 		
-			$website="http://".$post->website;
-				$store_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $country_value1, 'phone_number' => $post->mobile, 'website' => $website, 'zipcode' => $post->zipcode,'latitude' => $post->latitude, 'longitude' => $post->longitude,'store_type' => '1','merchant_id'=>$merchant_id,"store_status" => '0',"created_date" => time(),'created_by'=>$merchant_id,'about_us'=>$post->data,"store_admin_id"=>$res->insert_id(),"store_sector_id" =>$this->session->get('sector'),"store_subsector_id" =>$this->session->get("sub_sector")));
+			
+				$store_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),
+                                    'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $country_value1, 
+                                    'phone_number' => $post->mobile, 'website' => $website, 'zipcode' => $post->zipcode,'latitude' => $post->latitude, 'longitude' => $post->longitude,
+                                    'store_type' => '1','merchant_id'=>$merchant_id,"store_status" => '0',"created_date" => time(),'created_by'=>$merchant_id,'about_us'=>$post->data,"store_admin_id"=>$m_id,"store_sector_id" =>$this->session->get('sector'),"store_subsector_id" =>$this->session->get("sub_sector")));
                                 $result = $this->db->insert("merchant_attribute", array("merchant_id" => $merchant_id,"storeid" =>$store_result->insert_id()));
 				$admin = $this->db->select('email')->from('users')->where(array('user_type' =>1))->limit(1)->get();
 

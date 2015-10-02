@@ -145,10 +145,26 @@
                                 </td>
                         </tr>
                         
+                        <?php
+                         //var_dump($_SESSION);
+                        ?>
                         <tr>
                                 <td><label><?php echo $this->Lang["EMAIL_ID"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="email" maxlength="255" value="<?php echo $u->email;?>" />
+                                <td>
+                                    <?php
+                                    if($u->email == $this->session->get("user_email")){
+                                        echo "<strong>".$u->email."</strong>";
+                                    ?>
+<input type="hidden" name="email" maxlength="255" value="<?php echo $u->email;?>" />
+                                    <?php
+                                    }
+                                    else{
+                                    ?>
+                                    <input type="text" name="email" maxlength="255" value="<?php echo $u->email;?>" />
+                                    <?php
+                                    }
+                                    ?>
                                 <em><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></em>
                                 </td>
                         </tr>
