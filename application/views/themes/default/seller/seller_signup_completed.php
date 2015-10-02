@@ -38,7 +38,8 @@
                         <div class="p_inner_block clearfix">
                             <h
                             <p class="merchant_intro">
-                                    ....................
+                                    Thank you for registering on Zmart. <br />
+                                    Your registration is pending approval. You will be notified once your registration is approved.
                             <?php /** echo $this->Lang['SELLER_INTRODUCTION']; **/?>
                             
                             </p>
