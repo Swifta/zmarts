@@ -1036,7 +1036,7 @@ class Merchant_Controller extends website_Controller
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					->add_rules('email', 'required',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
+					->add_rules('email', 'required'/*,array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier')*/)
 					->add_rules('sector', 'required')
 					->add_rules('subsector', 'required')
 					->add_rules('username', 'required');
@@ -1047,6 +1047,7 @@ class Merchant_Controller extends website_Controller
 					}
 
 				if($post->validate()){
+                                    
 					$storename = $this->input->post("storename");
 					$store_details = $this->merchant->get_store_name($storeid);	
 					$old_store_name = $store_details[0]->store_url_title;
@@ -1060,6 +1061,7 @@ class Merchant_Controller extends website_Controller
 					
 
 					$status = $this->merchant->edit_merchant_shop($storeid, arr::to_object($this->userpost));
+                                        
 					if($status > 0){
 						/*if($_FILES['image']['name']){
 							$filename = upload::save('image');
@@ -1149,7 +1151,7 @@ class Merchant_Controller extends website_Controller
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
-
+                                                
 						if((url::title($storename) != $old_store_name) || ($modules_name != $old_modules_name) ){
 
 							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
@@ -1207,8 +1209,10 @@ class Merchant_Controller extends website_Controller
 						
 						common::message(1, $this->Lang["STORES_SET_SUC"]);
 						$lastsession = $this->session->get("lasturl");
+                                        //var_dump($lastsession); die;
 		                                if($lastsession){
-		                                url::redirect(PATH.$lastsession);
+		                                //url::redirect($lastsession);
+                                                    url::redirect(PATH."merchant/manage-shop.html");
 		                                } else {
 		                                url::redirect(PATH."merchant/manage-shop.html");
 		                                }

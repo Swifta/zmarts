@@ -565,7 +565,7 @@ function validate() {
                                         <?php if($this->free_shipping_setting == 1 && $free == 1){ $submit = "1"; ?>
                                         <tr><td><input type="radio" name="shipping" value="1" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 1){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)" >Free Shipping</td></tr>
                                         <?php } if($this->flat_shipping_setting == 1 && $flat == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="2" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 2){ ?> checked <?php } } ?>onchange="return checkedretailprice(this)">Flat Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="2" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 2){ ?> checked <?php } } ?>onchange="return checkedretailprice(this)">Flat Rate Shipping</td></tr>
                                          <?php } if($this->per_product_setting == 1 && $per_product == 1){ $submit = "1"; ?>
                                         <tr><td><input type="radio" name="shipping" value="3" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 3){ ?> checked <?php } } ?>id="perproduct" onchange="return checkedwholesaleprice(this)" >Per product base Shipping</td></tr>
                                          <?php } if($this->per_quantity_setting == 1 && $per_quantity == 1){ $submit = "1"; ?>
@@ -654,13 +654,13 @@ function validate() {
                         <input type="hidden" onchange="return checkedsizeadd(this)" name="size_val" value="1">
                         
                         <tr>
-                    <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span>*</span></td>
+                    <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span> </span></td>
                     <td><label>:</label></td>
                                 
                     <td>
  
                         <select name="size_tag[]" id="SizeText" class="selectsize">
-			              <option value=""><?php echo $this->Lang['SELE__S']; ?></option>
+			              <option value=""><?php echo $this->Lang['SELE__S']; ?>  [Optional]</option>
 			            <?php foreach($this->product_size as $size){
 			            ?>
 			            <option value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
@@ -668,7 +668,7 @@ function validate() {
 			            } ?>
 			            </select>
 			            
-			            <em><?php if(isset($this->form_error["size_tag[]"])){ echo $this->form_error["size_tag[]"]; }?></em>
+			            <!--<em><?php if(isset($this->form_error["size_tag[]"])){ echo $this->form_error["size_tag[]"]; }?></em>-->
                     </td>
                 </tr>
                 <tr>

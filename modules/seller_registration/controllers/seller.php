@@ -68,6 +68,8 @@ class Seller_Controller extends Layout_Controller {
                 }
                 else{
                     //error occured
+                    $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:red'>"
+                            . "Something went wrong when trying to complete your request. Please try again !</p>");
                     common::message(-1, "Something went wrong when trying to complete your request. Please try again.");
                     //url::redirect(PATH."merchant-signup-step2.html");
                 }
@@ -81,6 +83,8 @@ class Seller_Controller extends Layout_Controller {
                 $fun_resp_branch = @$soap->getBranchList($arg);
                 $fun_resp_class = @$soap->getAccountClass($arg);
                 if($fun_resp_branch == ""|| $fun_resp_class == ""){
+                    $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:red'>"
+                            . "Something went wrong when trying to load this service. Please try again.</p>");
                     common::message(-1, "Something went wrong when trying to load this service. Please try again.");
                     url::redirect(PATH."merchant-signup-step2.html");                    
                 }
@@ -92,6 +96,8 @@ class Seller_Controller extends Layout_Controller {
                 }
               }
               catch(Exception $e){
+                $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:red'>"
+                        . "Something went wrong when trying to load this service. Please try again.</p>");
 		common::message(-1, "Something went wrong when trying to load this service. Please try again.");
 		url::redirect(PATH."merchant-signup-step2.html");
               }
@@ -111,6 +117,10 @@ class Seller_Controller extends Layout_Controller {
 		
 	}
 
+        public function merchant_completed(){
+                $this->template->title = "Merchant Sign Up Complere";
+                $this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_completed");
+        }
 	/** SELLER  SIGNUP STEP 2 **/
 
 	public function seller_signup_step2()
@@ -369,13 +379,15 @@ class Seller_Controller extends Layout_Controller {
                                                                                 $this->session->delete('nuban');
 										$this->session->delete('sector'); 
 										$this->session->delete('subsector'); 
+                                                                                $this->session->delete('nuban_session');
 										
 											common::message(1, $this->Lang['SUCC_COM_FINAL']);
-											url::redirect(PATH);
+											//url::redirect(PATH);
+                                                                                        url::redirect(PATH."merchant-signup-completed.html");
 								}
 								else{
 									common::message(-1, $this->Lang['PLZ_TRY_ONS']);
-									url::redirect(PATH);
+									//url::redirect(PATH);
 								}
 						}else{
 								$this->form_error = error::_error($post->errors());	
