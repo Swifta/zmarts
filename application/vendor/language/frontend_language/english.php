@@ -1400,7 +1400,7 @@ $content_text = array(
 "CLR_COMP_ITMS" =>"Clear all the product in the Product comparison list ",
 
 
-"USER_BUY" => "User buying from $THIS_SITENAME ",
+"USER_BUY" => "Order Received On $THIS_SITENAME ",
 
 "MERCHANT_NAME" =>"Merchant Name",
 
