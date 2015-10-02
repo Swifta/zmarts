@@ -14,7 +14,7 @@
                         </div>
                         <div class="seller_signup_form_submit">
                             <span>02</span>
-                            <p><?php echo $this->Lang['SIGN_UP']; ?></p>
+                            <p>Merchant <?php echo $this->Lang['SIGN_UP']; ?></p>
                         </div>
                         <?php /*<div class="seller_signup_finish">                            
                             <span>03</span>

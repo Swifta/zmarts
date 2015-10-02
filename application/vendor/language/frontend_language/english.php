@@ -261,7 +261,7 @@ $content_text = array(
 
 "LOGOUT" => "Log Out",
 
-"SIGN_UP"  => "Merchant Sign Up",
+"SIGN_UP"  => "Sign Up",
 
 "FB"  => "Facebook",
 
