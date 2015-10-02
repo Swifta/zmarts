@@ -309,11 +309,11 @@ foreach($this->store_details as $deta){
                 </li>
                 <li>
                     <div class="lft_bg">
-                        <a href="<?php echo PATH; ?>merchant/store-personalized.html"><img src="<?php echo PATH;?>/images/new_5.png"/></a>
+                        <a href="<?php echo PATH; ?>merchant/store-personalized/<?php echo $this->session->get("store_name_id"); ?>.html"><img src="<?php echo PATH;?>/images/new_5.png"/></a>
                     </div>
                     <div class="new_rgt_con">
                         <strong>Personalize Theme</strong>
-                        <a href="<?php echo PATH; ?>merchant/store-personalized.html">Personalize Theme</a>
+                        <a href="<?php echo PATH; ?>merchant/store-personalized/<?php echo $this->session->get("store_name_id"); ?>.html">Personalize Theme</a>
                     </div>
                 </li>
                 <li>

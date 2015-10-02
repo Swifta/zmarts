@@ -109,6 +109,8 @@ class Merchant_Controller extends website_Controller
 		$this->store_data = $this->merchant->get_store_data();
                 foreach($this->store_data as $value){
                     $this->session->set("store_name_swifta", $value->store_name);
+                    $this->session->set("store_name_id", $value->store_subsector_id);
+                    //echo $value->store_subsector_id; die;
                 }
                 
 		if($count == 1){
@@ -948,7 +950,7 @@ class Merchant_Controller extends website_Controller
 		$this->city_list = $this->merchant->get_city_lists();
 		$this->sector_list = $this->merchant->get_all_sector_data();
 		$this->sub_sector_list=$this->merchant->get_all_sub_sectors();
-
+                //var_dump($this->sub_sector_list); die;
 		$this->template->title = $this->Lang["ADD_SHOPS"];
 		$this->template->content = new View("merchant/add_merchant_shop");
 	}
