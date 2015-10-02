@@ -786,7 +786,7 @@ public function smtp_sendinblue($from = "",$receiver = array(), $subject = "", $
 		   
 			$response = arr::to_object($response);
 			$code = $response->code;
-			var_dump($response);
+			
 			$message = $response->message;
 			Kohana::log("debug", "Sendinblue response code: ".$code. " response message: ".$message);
    
