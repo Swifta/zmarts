@@ -364,7 +364,8 @@ class Admin_merchant_Controller extends website_Controller {
 							common::message(1, $this->Lang["MERCHANT_SET_SUC"]);
 							$lastsession = $this->session->get("lasturl");
 		                                        if($lastsession){
-		                                        url::redirect(PATH.$lastsession);
+                                                            url::redirect(PATH."admin/merchant.html");
+		                                        //url::redirect(PATH.$lastsession);
 		                                        } else {
 		                                        url::redirect(PATH."admin/merchant.html");
 		                                        }

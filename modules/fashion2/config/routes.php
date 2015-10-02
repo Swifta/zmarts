@@ -28,12 +28,21 @@ $config['test-store/auction.html'] = "/fashion2/auction_list/test-store";
 $config['test-store/products/c/(.*)/(.*).html'] = "/fashion2/product_list/test-store/$1/$2";
 $config['test-store/deal/c/(.*)/(.*).html'] = "/fashion2/deal_list/test-store/$1/$2";
 $config['test-store/auction/c/(.*)/(.*).html'] = "/fashion2/auction_list/test-store/$1/$2";
-// test-store End// Je Start
-$config['Je'] ="fashion3/stores_home_page/Je";
-$config['Je/products.html'] = "/fashion3/product_list/Je";
-$config['Je/today-deals.html'] = "/fashion3/deal_list/Je";
-$config['Je/auction.html'] = "/fashion3/auction_list/Je";
-$config['Je/products/c/(.*)/(.*).html'] = "/fashion3/product_list/Je/$1/$2";
-$config['Je/deal/c/(.*)/(.*).html'] = "/fashion3/deal_list/Je/$1/$2";
-$config['Je/auction/c/(.*)/(.*).html'] = "/fashion3/auction_list/Je/$1/$2";
-// Je End
+// test-store End// Musty-Electronics-InternatiionalTTT Start
+$config['Musty-Electronics-InternatiionalTTT'] ="fashion3/stores_home_page/Musty-Electronics-InternatiionalTTT";
+$config['Musty-Electronics-InternatiionalTTT/products.html'] = "/fashion3/product_list/Musty-Electronics-InternatiionalTTT";
+$config['Musty-Electronics-InternatiionalTTT/today-deals.html'] = "/fashion3/deal_list/Musty-Electronics-InternatiionalTTT";
+$config['Musty-Electronics-InternatiionalTTT/auction.html'] = "/fashion3/auction_list/Musty-Electronics-InternatiionalTTT";
+$config['Musty-Electronics-InternatiionalTTT/products/c/(.*)/(.*).html'] = "/fashion3/product_list/Musty-Electronics-InternatiionalTTT/$1/$2";
+$config['Musty-Electronics-InternatiionalTTT/deal/c/(.*)/(.*).html'] = "/fashion3/deal_list/Musty-Electronics-InternatiionalTTT/$1/$2";
+$config['Musty-Electronics-InternatiionalTTT/auction/c/(.*)/(.*).html'] = "/fashion3/auction_list/Musty-Electronics-InternatiionalTTT/$1/$2";
+// Musty-Electronics-InternatiionalTTT End
+// Musty-Electronics-InternatiionalTTTYJJ Start
+$config['Musty-Electronics-InternatiionalTTTYJJ'] ="fashion3/stores_home_page/Musty-Electronics-InternatiionalTTTYJJ";
+$config['Musty-Electronics-InternatiionalTTTYJJ/products.html'] = "/fashion3/product_list/Musty-Electronics-InternatiionalTTTYJJ";
+$config['Musty-Electronics-InternatiionalTTTYJJ/today-deals.html'] = "/fashion3/deal_list/Musty-Electronics-InternatiionalTTTYJJ";
+$config['Musty-Electronics-InternatiionalTTTYJJ/auction.html'] = "/fashion3/auction_list/Musty-Electronics-InternatiionalTTTYJJ";
+$config['Musty-Electronics-InternatiionalTTTYJJ/products/c/(.*)/(.*).html'] = "/fashion3/product_list/Musty-Electronics-InternatiionalTTTYJJ/$1/$2";
+$config['Musty-Electronics-InternatiionalTTTYJJ/deal/c/(.*)/(.*).html'] = "/fashion3/deal_list/Musty-Electronics-InternatiionalTTTYJJ/$1/$2";
+$config['Musty-Electronics-InternatiionalTTTYJJ/auction/c/(.*)/(.*).html'] = "/fashion3/auction_list/Musty-Electronics-InternatiionalTTTYJJ/$1/$2";
+// Musty-Electronics-InternatiionalTTTYJJ End
