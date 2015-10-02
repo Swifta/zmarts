@@ -28,4 +28,12 @@ $config['test-store/auction.html'] = "/fashion2/auction_list/test-store";
 $config['test-store/products/c/(.*)/(.*).html'] = "/fashion2/product_list/test-store/$1/$2";
 $config['test-store/deal/c/(.*)/(.*).html'] = "/fashion2/deal_list/test-store/$1/$2";
 $config['test-store/auction/c/(.*)/(.*).html'] = "/fashion2/auction_list/test-store/$1/$2";
-// test-store End
+// test-store End// Je Start
+$config['Je'] ="fashion3/stores_home_page/Je";
+$config['Je/products.html'] = "/fashion3/product_list/Je";
+$config['Je/today-deals.html'] = "/fashion3/deal_list/Je";
+$config['Je/auction.html'] = "/fashion3/auction_list/Je";
+$config['Je/products/c/(.*)/(.*).html'] = "/fashion3/product_list/Je/$1/$2";
+$config['Je/deal/c/(.*)/(.*).html'] = "/fashion3/deal_list/Je/$1/$2";
+$config['Je/auction/c/(.*)/(.*).html'] = "/fashion3/auction_list/Je/$1/$2";
+// Je End

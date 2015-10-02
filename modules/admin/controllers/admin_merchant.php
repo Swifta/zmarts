@@ -245,6 +245,7 @@ class Admin_merchant_Controller extends website_Controller {
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."admin.html");
 		}
+		
 	        if($_POST){
 			$post = Validation::factory($_POST)->pre_filter('trim')->add_rules('message', 'required');		
 				if($post->validate()){
@@ -261,7 +262,7 @@ class Admin_merchant_Controller extends website_Controller {
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Mail Successfully Sent");
 				url::redirect(PATH."admin/merchant.html");
 			}
 			else{	
@@ -1387,7 +1388,7 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->template->title = $this->Lang["MERCHANT_DASHBOARD"];
 	}
 
-	public function approvedisapprove_merchant($type = "",$merchant_id="")
+	public function approvedisapprove_merchant($type_n = "",$merchant_id="")
 	{ 
 	
 	if($this->user_type != 1)
@@ -1395,15 +1396,22 @@ class Admin_merchant_Controller extends website_Controller {
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."admin.html");
 		}
-		$status = $this->merchant->approvedisapprove_merchant($type,base64_decode($merchant_id));
+		
+		
+		$password = text::random($type = 'alnum', $length = 8);
+		
+		$status = $this->merchant->approvedisapprove_merchant($type_n,base64_decode($merchant_id), $password);
 		if($status == 1){
 			$details = $this->merchant->get_merchant_details(base64_decode($merchant_id));
-			if($type == 1){
+			if($type_n == 1){
 				
 				$from = CONTACT_EMAIL;
 				$subject = SITENAME." - ".$this->Lang['MER_APP'];
 				
-				$merchant_message = "<p> <b>".$this->Lang['CONGRA']."! ".$this->Lang['YOUR_APP_MER']."  </b></p><p> ".$this->Lang['YOR_EMAIL']." : ".$details[0]->email."</p> <p>".$this->Lang['UR_DEAL_COMM']."  : ".$details[0]->merchant_commission." % <p/> <p> ".$this->Lang['LOGIN_URL']." :  <a href='".PATH."merchant-login.html' > Click here </a>";
+				$merchant_message = "<p> <b>".$this->Lang['CONGRA']."! ".$this->Lang['YOUR_APP_MER']."  </b></p><p> ".$this->Lang['YOR_EMAIL']." : ".$details[0]->email."</p> 
+				<p> ".$this->Lang['YOUR_PASS']." : ".$password."</p> 
+				<p>".$this->Lang['UR_DEAL_COMM']."  : ".$details[0]->merchant_commission." % <p/> <p> ".$this->Lang['LOGIN_URL']." :  <a href='".PATH."merchant-login.html' > Click here </a>";
+				
 				
 				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;
 				$this->merchant_message = $merchant_message;
@@ -1441,11 +1449,15 @@ class Admin_merchant_Controller extends website_Controller {
 		else{
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");
+		//$lastsession = $this->session->get("lasturl");
+		
+		
+		$lastsession = (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:PATH."admin/merchant.html";
+
 		if($lastsession){
-		url::redirect(PATH.$lastsession);
+		url::redirect($lastsession);
 		} else {
-		url::redirect(PATH."admin/merchant.html");
+			url::redirect($lastsession);
 		}
 		
 	}
