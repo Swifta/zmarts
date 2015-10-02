@@ -70,7 +70,7 @@
                               <li id="store_admin_email_li" style="display: none;">
                                 <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>
                                  <div class="fullname">
-                                 <input type="text" name="store_email_id" id="store_email_id"  placeholder="<?php echo $this->userPost['store_email_id'];?>" />
+                                 <input type="text" name="store_email_id" id="store_email_id"  placeholder="<?php echo @$this->userPost['store_email_id'];?>" />
                                  </div>
                              </li>
                              <script>
