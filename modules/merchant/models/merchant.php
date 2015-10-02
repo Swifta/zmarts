@@ -116,6 +116,13 @@ class Merchant_Model extends Model
                 return $result;
 	}
 
+	public function get_store_data()
+	{
+
+                $result = $this->db->from("stores")->where(array("merchant_id" => $this->user_id1))->limit(1)->get();
+                return $result;
+	}
+        
 	/** GET CITY LIST **/
 
 	public function getCityList()

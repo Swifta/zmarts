@@ -261,7 +261,7 @@ $content_text = array(
 
 "LOGOUT" => "Log Out",
 
-"SIGN_UP"  => "Sign Up",
+"SIGN_UP"  => "Merchant Sign Up",
 
 "FB"  => "Facebook",
 
@@ -1276,8 +1276,12 @@ $content_text = array(
 "THE_DET" => "The details",
 
 "WEL_SEL_SIGN" => "Welcome to merchant sign up!",
+    
+"WEL_M_Z_SIGN" => "Welcome to merchant bank account opening!",
 
 "YOU_GUIDED_CRTE_STRE" =>"You will now be guided through a few steps to create your own personal online store!",
+    
+"YOU_GUIDED_CRTE_ACCT_OPEN" =>"Complete account opening form and wait for Zenith Bank customer care to contact you!",
 
 "INTRO" =>"Introduction",
 
@@ -1310,6 +1314,8 @@ $content_text = array(
 "GOOG_MAP" => "Google Maps",
 
 "IM_UP_S" => "Image upload size",
+    
+"LOGO_UP" => "Logo upload",
 
 "LATITUDE" => "Latitude",
 

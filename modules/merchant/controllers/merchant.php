@@ -104,9 +104,17 @@ class Merchant_Controller extends website_Controller
 		if($this->merchant_dashboard_data['stores'] > 1){
 		$count = 1;
 		} 
+                
+                
+		$this->store_data = $this->merchant->get_store_data();
+                foreach($this->store_data as $value){
+                    $this->session->set("store_name_swifta", $value->store_name);
+                }
+                
 		if($count == 1){
 		$this->template->content = new View("merchant/home");
 		} else {
+                    
 		$this->template->content = new View("merchant/home_new");
 		}
 		

@@ -254,7 +254,7 @@ foreach($this->store_details as $deta){
 <div class="bread_crumb">
 	<?php /* <a title="<?php echo $this->Lang['HOME']; ?>" href="<?php echo PATH ?>merchant.html"><?php echo $this->Lang['MERCHANT']; ?> <span class="fwn">  &raquo;</span>
 	</a> */ ?>
-	<p> Welcome to <?php echo SITENAME; ?>, <?php echo $this->session->get("name"); ?></p>
+	<p> Welcome to <?php echo SITENAME; ?>, <?php echo $this->session->get("store_name_swifta"); ?></p>
 	<p class="acc_bal">
 		<?php echo $this->Lang['TOTAL_SALES']; ?> :
                 <span class="blink"><?php echo " ".CURRENCY_SYMBOL." ".number_format($this->balance, 0); ?>

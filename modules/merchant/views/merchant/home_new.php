@@ -266,7 +266,7 @@ foreach($this->store_details as $deta){
     
     <div class="merchant_home">
         <div class="merchant_home_banner">
-            <h2>Welcome to <?php echo SITENAME; ?>, <?php echo $this->session->get("name"); ?></h2>
+            <h2>Welcome to <?php echo SITENAME; ?>, <?php echo $this->session->get("store_name_swifta"); ?></h2>
             <img src="<?php echo PATH;?>/images/merchant_banner.png"/>
         </div>
         <div class="merchant_home_content">

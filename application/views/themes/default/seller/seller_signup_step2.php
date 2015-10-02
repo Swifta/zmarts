@@ -33,7 +33,7 @@
                     </div>
                 <form action="" method="post" name="signup2" id="signup2"  onclick="return atleast_onecheckbox(event)" >
                     <div class="payouter_block pay_br">
-                        <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['SIGN_UP']; ?></h3>
+                        <h3 class="paybr_title pay_titlebg">Merchant account: <?php echo $this->Lang['SIGN_UP']; ?></h3>
                         <div class="p_inner_block clearfix">
                             <div class="payment_form_section">
                                 <div class="payment_form payment_shipping_form ">
@@ -90,13 +90,15 @@
                                     
                                 <li >
                                         <label><?php echo $this->Lang["ZENITH_ACCOUNT_ENTER"]; ?> <span style="color:red;">*</span>:</label>
-								<div class="fullname">
-									<input type="text" name="nuban" class="required number" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
-									<?php if($this->session->get('nuban_session')) { ?>
-									value="<?php  echo $this->session->get('nuban_session'); ?>"  /> 			 <?php } else { ?>
-									value="<?php if(!isset($this->form_error['error_nuban']) && isset($this->userPost['error_nuban'])){echo $this->userPost['error_nuban'];}?>" placeholder="<?php echo $this->Lang["ZENITH_ACCOUNT_ENTER_PLACEHOLDER"]; ?>"  />
-									<?php } ?>
-									<em><?php if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
+				<div class="fullname">
+                                        <input type="text" name="nuban" class="required number" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
+                                        <?php if($this->session->get('nuban_session')) { ?>
+                                        value="<?php  echo $this->session->get('nuban_session'); ?>"  /> 			 <?php } else { ?>
+                                        value="<?php if(!isset($this->form_error['error_nuban']) && isset($this->userPost['error_nuban'])){echo $this->userPost['error_nuban'];}?>" placeholder="<?php echo $this->Lang["ZENITH_ACCOUNT_ENTER_PLACEHOLDER"]; ?>"  />
+                                        <?php } ?>
+                                        <em><?php if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
+                                        <br /><span style="font-size:92%;"><strong style="color:blue;">Dont have a zenith bank account ? </strong> 
+                                            <a href="<?php echo PATH; ?>merchant-signup-account-opening.html" style="color:green;">Open an Account Here</a></span>
                                 </div>
                                 </li>
                                 
@@ -184,7 +186,10 @@
                                 
                                 
                                 <li >
-                                    <label>Shipping method <span style="color:red;">*</span>:</label>
+                                    <label>Shipping method <span style="color:red;">*</span>:
+                                      <br />
+                                      <em style="font-size:90%">Select shipping methods you offer customers respectively.</em>
+                                    </label>
                          <table> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
@@ -195,7 +200,7 @@
                                         <input type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
                                        <td><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Flat Shipping</label></td></tr>
+                                        checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping</label></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="flat" value="0" >
                                         <?php } if($this->per_product_setting == 1){ ?>

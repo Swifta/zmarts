@@ -7,3 +7,6 @@ $config['merchant-signup-step2.html'] = "/seller/seller_signup_step2";
 $config['merchant-signup-step3.html'] = "/seller/seller_signup_step3";
 $config['merchant-signup-step4.html'] = "/seller/seller_signup_step4";
 
+$config['merchant-signup-account-opening.html'] = "/seller/seller_signup_zenith";
+
+
