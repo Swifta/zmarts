@@ -605,12 +605,13 @@ class Admin_merchant_Model extends Model
 		public function approvedisapprove_merchant($type="",$merchant_id=0, $password = "")
 		{
 			
-			$status = 0;
+						$status = 0;
                         if($type == 1){
                                 $status = 1;
                         }
-			
-			$result = $this->db->update("users",array("approve_status" => $status),array("user_id" =>$merchant_id), array("password" =>md5($password)));
+						
+			$p = md5($password);
+			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p), array("user_id" =>$merchant_id));
 			return count($result);
 		}
 		

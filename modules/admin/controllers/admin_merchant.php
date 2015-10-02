@@ -1401,7 +1401,10 @@ class Admin_merchant_Controller extends website_Controller {
 		
 		$password = text::random($type = 'alnum', $length = 8);
 		
+		
+		
 		$status = $this->merchant->approvedisapprove_merchant($type_n,base64_decode($merchant_id), $password);
+		
 		if($status == 1){
 			$details = $this->merchant->get_merchant_details(base64_decode($merchant_id));
 			if($type_n == 1){
