@@ -229,14 +229,14 @@ class Pay_later_Controller extends Layout_Controller
 		$this->merchant_lastname = $this->get_merchant_details->current()->lastname;
 		$this->merchant_email = $this->get_merchant_details->current()->email;
 		$message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
-
+		
 		if(EMAIL_TYPE==2) {
 			email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 			
 		}else{
 			email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
-
+		
 		$user_details = $this->pay_later->get_purchased_user_details();
 		foreach($user_details as $U){
 			if($U->referred_user_id && $U->deal_bought_count == $qty){

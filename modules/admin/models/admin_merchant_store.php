@@ -491,18 +491,6 @@ class Admin_merchant_Model extends Model
 		return $result;
 	}
 	
-	/** GET STORE DETAILS BY MERCHANT ID, or STORE ADMIN ID**/
-	
-	public function get_store_details1_a($id = ""){
-		$result = $this->db->from("stores")->join("city","city.city_id","stores.city_id")
-		                   ->join("country","country.country_id","stores.country_id")
-		                   ->join("users","users.user_id","stores.store_admin_id","left")
-		                   ->where(array("merchant_id" => $id))
-		                   ->orderby("store_id")->get();
-						   
-		return $result;
-	}
-	
 	/** GET USER LIST **/
 	public function get_user_list()
 	{               
@@ -600,17 +588,16 @@ class Admin_merchant_Model extends Model
 			}
 				$result = $this->db->update("users", array("rating" => $rate), array("user_id" => $merchant_id,'user_type' =>3));
                 return count($result);
+
 		}
 
-		public function approvedisapprove_merchant($type="",$merchant_id=0, $password = "")
+		public function approvedisapprove_merchant($type="",$merchant_id=0)
 		{
-			
 			$status = 0;
                         if($type == 1){
                                 $status = 1;
                         }
-			
-			$result = $this->db->update("users",array("approve_status" => $status),array("user_id" =>$merchant_id), array("password" =>$password));
+			$result = $this->db->update("users",array("approve_status" => $status),array("user_id" =>$merchant_id));
 			return count($result);
 		}
 		

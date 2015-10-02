@@ -88,6 +88,10 @@ class Seller_Model extends Model
 		 $website="http://".$post->website;
 				/*$result_country1 = $this->db->select("country_id")->from("city")->where(array("city_id" => $post->city ))->limit(1)->get(); // for store country value
 				$country_value1 = $result_country1->current()->country_id; */
+
+				
+		 $res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email_id,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>0,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$country_value1, 'phone_number' => $post->mobile,"user_sector_id"=>$this->session->get("sub_sector")));
+
 	if($post->store_email_id != ""){
 		 $res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email_id,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$country_value1, 'phone_number' => $post->mobile,"user_sector_id"=>$this->session->get("sub_sector")));
                  $m_id = $res->insert_id();

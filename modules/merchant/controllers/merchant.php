@@ -959,6 +959,7 @@ class Merchant_Controller extends website_Controller
 
 	public function manage_merchant_shop($page="")
 	{
+		
 		if(PRIVILEGES_SHOPS!= 1){
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."merchant.html");	        
