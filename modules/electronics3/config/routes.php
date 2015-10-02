@@ -178,3 +178,12 @@ $config['Musty-Electronics-Internatiional2/products/c/(.*)/(.*).html'] = "/elect
 $config['Musty-Electronics-Internatiional2/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Musty-Electronics-Internatiional2/$1/$2";
 $config['Musty-Electronics-Internatiional2/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Musty-Electronics-Internatiional2/$1/$2";
 // Musty-Electronics-Internatiional2 End
+// Musty-Electronics-InternatiionalTTTY Start
+$config['Musty-Electronics-InternatiionalTTTY'] ="electronics3/stores_home_page/Musty-Electronics-InternatiionalTTTY";
+$config['Musty-Electronics-InternatiionalTTTY/products.html'] = "/electronics3/product_list/Musty-Electronics-InternatiionalTTTY";
+$config['Musty-Electronics-InternatiionalTTTY/today-deals.html'] = "/electronics3/deal_list/Musty-Electronics-InternatiionalTTTY";
+$config['Musty-Electronics-InternatiionalTTTY/auction.html'] = "/electronics3/auction_list/Musty-Electronics-InternatiionalTTTY";
+$config['Musty-Electronics-InternatiionalTTTY/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Musty-Electronics-InternatiionalTTTY/$1/$2";
+$config['Musty-Electronics-InternatiionalTTTY/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Musty-Electronics-InternatiionalTTTY/$1/$2";
+$config['Musty-Electronics-InternatiionalTTTY/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Musty-Electronics-InternatiionalTTTY/$1/$2";
+// Musty-Electronics-InternatiionalTTTY End
