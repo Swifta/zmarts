@@ -81,10 +81,10 @@ class Seller_Controller extends Layout_Controller {
                     url::redirect(PATH."merchant-signup-step2.html");                    
                 }
                 foreach($fun_resp_branch->getBranchListResult->Branches as $value){
-                    $this->branch_options.= '<option value="'.$value->BranchNo.'">'.$value->BranchName.'</option>';
+                    $this->branch_options.= '<option value="'.@$value->BranchNo.'">'.@$value->BranchName.'</option>';
                 }
                 foreach($fun_resp_class->getAccountClassResult->ClassCode as $value){
-                    $this->class_code_options.= '<option value="'.$value->ClassCodes.'">'.$value->ClassName.'</option>';
+                    $this->class_code_options.= '<option value="'.@$value->ClassCodes.'">'.@$value->ClassName.'</option>';
                 }
               }
               catch(Exception $e){
