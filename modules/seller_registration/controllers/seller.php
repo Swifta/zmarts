@@ -35,6 +35,7 @@ class Seller_Controller extends Layout_Controller {
         
 	public function seller_signup_zenith()
 	{
+
           $arg = array();
           $arg['userName'] = ZENITH_TEST_USER;
           $arg['Pwd'] = ZENITH_TEST_PASS;
@@ -60,6 +61,8 @@ class Seller_Controller extends Layout_Controller {
                 //var_dump($arg);
                 $fun_resp = $soap->CreateAccount($arg);
                 if($fun_resp->CreateAccountResult->errorMessage == ""){
+                    $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:green'>"
+                            . "Your bank account as been opened. Wait for bank to get intouch !</p>");
                     common::message(1, "Your bank account as been opened. Wait for bank to get intouch !");
                     url::redirect(PATH."merchant-signup-step2.html");                    
                 }
@@ -72,6 +75,7 @@ class Seller_Controller extends Layout_Controller {
             }
             $this->branch_options= "";
             $this->class_code_options= "";
+
 
               try{
                 $fun_resp_branch = @$soap->getBranchList($arg);
