@@ -32,6 +32,72 @@ class Seller_Controller extends Layout_Controller {
 	        $this->seller_signup = 0;
 	}
 	
+        
+	public function seller_signup_zenith()
+	{
+          $arg = array();
+          $arg['userName'] = ZENITH_TEST_USER;
+          $arg['Pwd'] = ZENITH_TEST_PASS;
+          $soap = new SoapClient(ZENITH_TEST_ENDPOINT, array('trace' => 1));            
+            if($_POST){
+                $f_name = strip_tags(addslashes($_REQUEST['f_name']));
+                $l_name = strip_tags(addslashes($_REQUEST['l_name']));
+                $email = strip_tags(addslashes($_REQUEST['email']));
+                $phone = strip_tags(addslashes($_REQUEST['phone']));
+                $addr = strip_tags(addslashes($_REQUEST['addr']));
+                $gender = strip_tags(addslashes($_REQUEST['gender']));
+                $branch_no = strip_tags(addslashes($_REQUEST['branch_no']));
+                $class_code = strip_tags(addslashes($_REQUEST['class_code']));
+                
+                $arg['FirstName'] = $f_name;
+                $arg['LastName'] = $l_name;
+                $arg['EmailAddress'] = $email;
+                $arg['MobilePhoneNo'] = $phone;
+                $arg['AddressLine'] = $addr;
+                $arg['Sex'] = $gender;
+                $arg['Branchno'] = $branch_no;
+                $arg['ClassCode'] = $class_code;
+                //var_dump($arg);
+                $fun_resp = $soap->CreateAccount($arg);
+                if($fun_resp->CreateAccountResult->errorMessage == ""){
+                    common::message(1, "Your bank account as been opened. Wait for bank to get intouch !");
+                    url::redirect(PATH."merchant-signup-step2.html");                    
+                }
+                else{
+                    //error occured
+                    common::message(-1, "Something went wrong when trying to complete your request. Please try again.");
+                    //url::redirect(PATH."merchant-signup-step2.html");
+                }
+                //var_dump($fun_resp);
+            }
+            $this->branch_options= "";
+            $this->class_code_options= "";
+
+              try{
+                $fun_resp_branch = @$soap->getBranchList($arg);
+                $fun_resp_class = @$soap->getAccountClass($arg);
+                if($fun_resp_branch == ""|| $fun_resp_class == ""){
+                    common::message(-1, "Something went wrong when trying to load this service. Please try again.");
+                    url::redirect(PATH."merchant-signup-step2.html");                    
+                }
+                foreach($fun_resp_branch->getBranchListResult->Branches as $value){
+                    $this->branch_options.= '<option value="'.$value->BranchNo.'">'.$value->BranchName.'</option>';
+                }
+                foreach($fun_resp_class->getAccountClassResult->ClassCode as $value){
+                    $this->class_code_options.= '<option value="'.$value->ClassCodes.'">'.$value->ClassName.'</option>';
+                }
+              }
+              catch(Exception $e){
+		common::message(-1, "Something went wrong when trying to load this service. Please try again.");
+		url::redirect(PATH."merchant-signup-step2.html");
+              }
+
+		$this->template->title = $this->Lang['MER_SIGN_1'];
+		$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_zenith");
+		
+	}
+        
+        
 	/** SELLER  SIGNUP STEP 1 **/
 
 	public function seller_signup_step1()
@@ -167,7 +233,7 @@ class Seller_Controller extends Layout_Controller {
 							->add_rules('latitude', 'required','chars[0-9.-]')
 							->add_rules('longitude', 'required','chars[0-9.-]')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-							->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
+							//->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 							->add_rules('username', 'required');
 						if($post->validate())
 						{      

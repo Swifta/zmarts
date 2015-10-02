@@ -50,7 +50,7 @@
                              </li>
                              
                               <li>
-                                        <label><?php echo $this->Lang["USER_NAME"]; ?> <span style="color:red">*</span>:</label>
+                                <label><?php echo $this->Lang["USER_NAME"]; ?> <span style="color:red">*</span>:</label>
                                  <div class="fullname">
                                  <input type="text" name="username" class="required" placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus />
 				<em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
@@ -58,13 +58,26 @@
                              </li>
                              
                               <li>
-                                        <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>
+                                  
+                                  <label style="color:blue;">Have a store admin representative ? 
+                                      <br />
+                                      <em style="font-size:90%">Check this box if you want to register someone to manage this store for you.</em>
+                                  </label>
+                                <div class="fullname">
+                                    <input type="checkbox" id="store_email_id" id="have_store_admin" style="margin-top:15px;"/>
+                                 </div>
+                             </li>                         
+                              <li id="store_admin_email_li" style="display: none;">
+                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>
                                  <div class="fullname">
-                                 <input type="text" name="store_email_id" id="store_email_id"  class="required" placeholder="<?php echo $this->Lang["ENTER_STORE_EMAIL_ID"]; ?>"  value="<?php if(!isset($this->form_error['store_email_id']) && isset($this->userPost['store_email_id'])){echo $this->userPost['store_email_id'];}?>" autofocus />
-				<em><?php if(isset($this->form_error['store_email_id'])){ echo $this->form_error["store_email_id"]; }?></em>
+                                 <input type="text" name="store_email_id" id="store_email_id"  placeholder="<?php echo @$this->userPost['store_email_id'];?>" />
                                  </div>
                              </li>
-                             
+                             <script>
+$('#store_email_id').click(function () {
+    $("#store_admin_email_li").toggle(this.checked);
+})
+                             </script>
                             <li>
                              <label><?php echo $this->Lang["PHONE"]; ?> <span style="color:red">*</span>:</label>
                                  <div class="fullname">
@@ -171,7 +184,7 @@
 					</div>
 				    </li>
                                     <li>
-                                        <label><?php echo $this->Lang['IM_UP_S']; ?>:</label>
+                                        <label><?php echo $this->Lang['LOGO_UP']; ?> *:</label>
                                  <div class="fullname">
 									<input type="file" name="image" class="required" />
 									
@@ -217,9 +230,9 @@
 			   required: "<?php echo $this->Lang['ENTER_STORE_USER_NAME']; ?>"                         
 		   },
 		   
-		    store_email_id: {
-			   required: "<?php echo $this->Lang['ENTER_STORE_EMAIL_ID']; ?>"                         
-		   },
+		   // store_email_id: {
+			//   required: "<?php echo $this->Lang['ENTER_STORE_EMAIL_ID']; ?>"                         
+		   //},
 
 		   city: {
 			   required: "<?php echo $this->Lang['SELECT UR CITY HERE']; ?>"                         
