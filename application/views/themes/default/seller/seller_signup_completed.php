@@ -46,7 +46,7 @@
                         </div>
                     </div>                    
                     <div class="merchant_submit_buttons clearfix">                      
-                        <a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it">Goto: Store Homepage</a>
+                        <a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it">Goto: Store Homepage</a>
                     </div>
                 </div>
             </div>
