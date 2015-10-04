@@ -251,6 +251,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 
 	public function do_captured_transaction1($captured = "", $deal_id = "", $qty = "",$transaction = "",$transid ="")
 	{
+		
 		$user_details = $this->cod->get_purchased_user_details();
 		foreach($user_details as $U){
 
