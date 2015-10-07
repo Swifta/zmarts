@@ -109,7 +109,7 @@
   background-repeat: no-repeat;
 
  
- color: #A61C00;
+ /*color: #A61C00;*/
  font-size:large;
 
 }
@@ -236,10 +236,7 @@ padding: 0 5px 0 0;
 
  }
 input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px solid #ccc;}
-/*test style closed*/
-/*.fullname input[type=text],.fullname input[type=password],.fullname textarea{border: 1px solid #d9d9d9;font:normal 12px arial;  width:220px;color:#000;  padding: 7px;
-    box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;
-}*/
+
 </style>
 
 
@@ -282,12 +279,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         
                                 <div class="">
                                     <span class="asterisks_input">  </span>
-                                    <input autofocus type="text" name="firstname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>"
-									<?php if($this->session->get('firstname')) { ?>
-									value="<?php  echo $this->session->get('firstname'); ?>"  /> 			<?php } else { ?>
-									value="<?php  if(!isset($this->form_error['firstname']) && isset($this->userPost['firstname'])){echo $this->userPost['firstname'];} ?>" placeholder= "<?php echo $this->Lang['FIRST_NAME']; ?>" />
-									<?php } ?>
-									<em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
+                                    
+<!--                                     <div class="">
+                                    <input class="swifta_input" name="f_name" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" autofocus required/>
+                                   <em id="f_name_err"></em>
+                                </div> -->
+<input class="swifta_input" type="text" name="firstname"  placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" value="" autofocus required />
+									
+                                          <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 <!--									<span class="asterisk_input">  </span> -->
 								</div>
                                     </li>
@@ -296,12 +295,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
 								          <span class="asterisks_input">  </span>
 									<input type="text" name="lastname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" 
-									<?php if($this->session->get('lastname')) { ?>
-									value="<?php  echo $this->session->get('lastname'); ?>" /> 			                <?php } else { ?>
-									value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>" placeholder= "<?php echo $this->Lang["LAST_NAME"]; ?>"  />
-									<?php } ?>
-									<em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
+									value="" autofocus required />
 <!--								<span class="asterisk_input">  </span> -->
+                                                                        <em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
                                                                 </div>
                                     </li>
                                     <li>
@@ -309,12 +305,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
                                                                       <span class="asterisks_input">  </span>
 									<input type="text" name="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
-									<?php if($this->session->get('memail')) { ?>
-									value="<?php  echo $this->session->get('memail'); ?>"  /> 			                <?php } else { ?>
-									 value="<?php if(!isset($this->form_error['email']) && isset($this->userPost['email'])){echo $this->userPost['email'];}?>" placeholder= "<?php echo $this->Lang["EMAIL_F"]; ?>"  />
-									 <?php  } ?>
-									<em> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
+									value="" autofocus required />
+                                                                        <em> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
 <!--								<span class="asterisk_input">  </span> -->
+                                                                        
                                                                 </div>
                                     </li>
                                     <li style="display: none;">
@@ -322,11 +316,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <div class="">
                                   <span class="asterisks_input">  </span>
 									<input type="text" name="payment_acc" class="swifta_input" 
-									<?php if($this->session->get('payment_acc')) { ?>
-									value="<?php  echo $this->session->get('payment_acc'); ?>" placeholder= "<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" /> 			                        <?php } else { ?>
-									value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>" placeholder="<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" />
-									<?php } ?>
-									<em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+									value="" autofocus required />
+                                                                        <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
 <!--                               <span class="asterisk_input">  </span> -->
                                 </div>
                                     </li>
@@ -338,12 +329,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 				<div class="">
                                       <span class="asterisks_input">  </span>
                                         <input type="text" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
-                                        <?php if($this->session->get('nuban_session')) { ?>
-                                        value="<?php  echo $this->session->get('nuban_session'); ?>"  /> 			 <?php } else { ?>
-                                        value="<?php if(!isset($this->form_error['error_nuban']) && isset($this->userPost['error_nuban'])){echo $this->userPost['error_nuban'];}?>" placeholder="<?php echo $this->Lang["ZENITH_ACCOUNT_ENTER_PLACEHOLDER"]; ?>"  />
-                                        <?php } ?>
+                                       value="" autofocus required />
                                         <em><?php if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
-                                        <br /><span style="font-size:92%;"><strong style="color:blue;">Dont have a zenith bank account ? </strong> 
+                                        <br /><span style="font-size:92%;"><strong style="color:blue;">Don't have a Zenith Bank Account? </strong> 
                                             <a href="<?php echo PATH; ?>merchant-signup-account-opening.html" style="color:green;">Open an Account Here</a></span>
                               
                                 </div>
@@ -354,10 +342,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
                                                                       <span class="asterisks_input">  </span>
 									<input type="text" name="mr_address1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
-									<?php if($this->session->get('mraddress1')) { ?>
-									value="<?php  echo $this->session->get('mraddress1'); ?>"  /> 			 <?php } else { ?>
-									value="<?php if(isset($this->userPost['mr_address1'])){echo $this->userPost['mr_address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" />
-									<?php } ?>
+									value="" required autofocus/>
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
 <!--                                        <span class="asterisk_input">  </span> -->
                                                                 </div>
@@ -367,11 +352,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                  <div class="">
 					  <span class="asterisks_input">  </span>			
-                                     <input type="text" name="mr_address2" class="swifta_input" 
-									<?php if($this->session->get('mraddress2')) { ?>
-									value="<?php  echo $this->session->get('mraddress2'); ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			 <?php } else { ?>
-									value="<?php if(isset($this->userPost['mr_address2'])){echo $this->userPost['mr_address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" />
-									<?php } ?>
+                                     <input type="text" name="mr_address2" class="swifta_input" value="<?php  echo $this->session->get('mraddress2'); ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" value="" required autofocus /> 			
 									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                 
                                  </div>
@@ -380,11 +361,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
 								<div class="">
                                                                       <span class="asterisks_input">  </span>
-									<input type="text" name="mr_mobile" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
-									<?php if($this->session->get('mphone_number')) { ?>
-									value="<?php  echo $this->session->get('mphone_number'); ?>"  /> 			 <?php } else { ?>
-									value="<?php if(!isset($this->form_error['mr_mobile']) && isset($this->userPost['mr_mobile'])){echo $this->userPost['mr_mobile'];}?>" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>"  />
-									<?php } ?>
+									<input type="text" name="mr_mobile" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>" value="" required autofocus/>
+									
 									<em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
                                  
                                                                 </div>
@@ -416,7 +394,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 </select> 
                                 <?php }else{ ?>
                                 
-                                <select name="subsector" id="subSector" class="required" onchange="previewTheme(this.text);">
+                                <select name="subsector" id="subSector" class="swifta_input" onchange="previewTheme(this.text);">
                                 <option value=""><?php echo $this->Lang['SELECT_SECTORS_FIRST']; ?></option>
                                
                                 </select>

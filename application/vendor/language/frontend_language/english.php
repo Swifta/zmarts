@@ -1277,7 +1277,7 @@ $content_text = array(
 
 "WEL_SEL_SIGN" => "Create A Merchant Account!",
     
-"WEL_M_Z_SIGN" => "Welcome to merchant bank account opening!",
+"WEL_M_Z_SIGN" => "Create A Merchant Bank Account!",
 
 "YOU_GUIDED_CRTE_STRE" =>"",
     
@@ -1648,9 +1648,9 @@ $content_text = array(
 
 "ENTER_ZIP_CODE" => "Enter your zipcode here",
 
-"STORE_WEBSITE" => "Enter your store website url here",
+"STORE_WEBSITE" => "Enter your store website url here e.g www.example.com",
 
-"HELP_TOKNOW" => "Help your customers to know about you more",
+"HELP_TOKNOW" => "Help your customers to know about you more ",
 
 "SUBSECTOR" => "Sector Theme",
 
