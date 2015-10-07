@@ -18,6 +18,8 @@
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
                 
+                
+                
                 <td>
 					
                 <input type='checkbox' name='product' <?php if($row->product == 1) { ?>checked='checked' <?php } else { ?><?php } ?> value='<?php echo $row->product; ?>'>&nbsp;Product
@@ -25,6 +27,34 @@
                 <input type='checkbox' name='auction'  <?php if($row->auction == 1) { ?>checked='checked' <?php } else { ?><?php } ?> value='<?php echo $row->auction; ?>'>&nbsp;Auction
                 </td>
                 </tr>
+                
+                <!--
+               		Club membership options.
+                	@Live
+                	-->
+                    
+                     
+              <?php $y_checked = "";
+			  		 $n_checked = "";
+					 
+			   if(strcmp($row->redirect_url, '#" onclick="javascript:load_club();return false;') == 0){
+				   	   $y_checked = 'checked = "checked"';
+				   }else{
+					   $n_checked = 'checked = "checked"';
+				   }?>
+                    
+                    <tr>
+                    <td><label>Zenith Club Membership Banner</label></td>
+                    <td><label>:</label></td>
+                    <td>
+                    	<input name="z_offer" type="radio" value="0" <?php echo $n_checked?> >No</input><br />
+                    	<input name="z_offer" type="radio" value="1" <?php echo $y_checked?>  />Yes</input><br />
+                    	
+                    </td>
+                </tr>
+                
+                  
+                
                 <tr>
                     <td><label><?php echo $this->Lang['UP_BA_IM']; ?></label></td>
                     <td><label>:</label></td>
@@ -40,7 +70,16 @@
                     <td><label><?php echo $this->Lang['REDIRECT']; ?></label></td>
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" name="redirect_url" value="<?php echo $row->redirect_url; ?>" />
+                    
+                    <?php $url = $row->redirect_url;
+			  		 
+					 
+			   if(strcmp($row->redirect_url, '#" onclick="javascript:load_club();return false;') == 0)
+				   	    $url = PATH."#";
+					   
+					   ?>
+				  
+                    	<input type="text" name="redirect_url" value="<?php echo $url; ?>" />
                     	<em><?php if(isset($this->form_error["redirect_url"])){ echo $this->form_error["redirect_url"]; }?></em>
                     </td>
                 </tr>

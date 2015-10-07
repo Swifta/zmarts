@@ -724,7 +724,14 @@ const ALLOW_PRODUCTION = FALSE;
 							->add_rules('image', 'upload::required','upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 								
 		 	if($post->validate()){
-				$status = $this->settings->add_banner_image($_POST['title'],$_POST['redirect_url'],arr::to_object($this->userPost));
+				
+				$redirect_url = $_POST['redirect_url']; 
+				
+				$z_offer =     $_POST['z_offer'];
+				if($z_offer == 1)
+					$redirect_url = '#" onclick="javascript:load_club();return false;';
+					
+				$status = $this->settings->add_banner_image($_POST['title'],$redirect_url,arr::to_object($this->userPost));
 				if($status>0){
 					$filename = upload::save('image');
 						$IMG_NAME =$status.".png";	
@@ -792,7 +799,18 @@ const ALLOW_PRODUCTION = FALSE;
 							->add_rules('redirect_url','required', 'valid::url')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 		 	if($post->validate()){
-					$status = $this->settings->edit_banner_image($banner_id,$_POST['title'],$_POST['redirect_url'],arr::to_object($this->userPost));
+				
+				/*
+					Add club membership redirect url option
+					@Live
+				*/
+				$redirect_url = $_POST['redirect_url']; 
+				
+				$z_offer = $_POST['z_offer'];
+				if($z_offer == 1)
+					$redirect_url = '#" onclick="javascript:load_club();return false;';
+					
+					$status = $this->settings->edit_banner_image($banner_id,$_POST['title'],$redirect_url,arr::to_object($this->userPost));
 				if($status>0){
 					if($_FILES['image']['name']!=''){
 

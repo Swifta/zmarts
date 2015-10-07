@@ -4,7 +4,7 @@
     <div class="content_top"><div class="top_left"></div><div class="top_center"></div><div class="top_rgt"></div></div>
     <div class="content_middle">	
          <form action="" method="post" class="admin_form" enctype="multipart/form-data">
-            <table width="100%">
+            <table width="40%">
 			<tr><td><label><?php echo $this->Lang["ADD_TITLE"]; ?>:</label><span>*</span></td>
 
 			<td><input type="text" name="add_title" value="<?php if(!isset($this->form_error['add_title']) && isset($this->AddPost['add_title'])){ echo $this->AddPost['add_title']; }?>" autofocus ><em><?php if(isset($this->form_error["add_title"])){ echo $this->form_error["add_title"]; }?></em></td>
@@ -45,7 +45,7 @@
 			}else if((!isset($this->AddPost['pages'])) || isset($this->AddPost['pages']) && $this->AddPost['pages']==''){?>
              <option value=''><?php echo $this->Lang['SELECT_PAGE_POSITION_FIRST'];?></option> 
             <?php }?>
-		    </select><em><?php if(isset($this->form_error["ads_position"])){ echo $this->form_error["ads_position"]; }?>
+		    </select><em><?php if(isset($this->form_error["ads_position"])){ echo $this->form_error["ads_position"]; }?></em>
                </td> 
                </tr>
 
@@ -54,6 +54,21 @@
 			<td><label><?php echo $this->Lang["ADD_CODE"]; ?> :</label><span>*</span></td>
 			<td><textarea  cols="5" rows="5" name="add_code"value="<?php if(!isset($this->form_error['add_code']) && isset($this->AddPost['add_code'])){ echo $this->AddPost['add_code']; }?>" rows="6" cols="80"></textarea><em><?php if(isset($this->form_error["add_code"])){ echo $this->form_error["add_code"]; }?></em></td>
 		</tr> */ ?>
+        
+         <!-- 
+                	Club membership options.
+                	@Live
+                -->
+                  <tr>
+              <td><label style="text-wrap:suppress">Zenith Club Membership Ad.</label></td>
+              
+              <td>
+                  	<input name="z_offer" type="radio" value="0" checked="checked" >No</input><br />
+                    <input name="z_offer" type="radio" value="1"  />Yes</input><br />
+                    
+                   	
+              </td>
+                </tr>
 		
 				
                 <tr>
@@ -72,6 +87,7 @@
                    	<em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
               </td>
                 </tr>
+               
 
 		<tr><td></td>
 			<td><input type="submit" value="<?php echo $this->Lang['SUBMIT']; ?>"/>

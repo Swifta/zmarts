@@ -203,19 +203,19 @@ $(".slidetabs").tabs(".images > div", {
                                         <img src="<?php echo PATH . 'images/banner_images/' . $banner->banner_id . '.png'; ?>" alt="<?php echo $banner->image_title; ?>">
                                     </a>-->
                                     
-                                     <?php
-								   /*  
-								    *	
-								   	*	Modification to add club membership signup banner conditions
-									*	@Live
-								   	*/
-									 if(strcmp($banner->banner_id, '253') == 0){?>
-										  <a target="_self" id="id_banner_club"  href="javascript:load_club();"<?php //echo $banner->redirect_url;?>
-										 <?php }else{?>
-                                         <a target="_blank" href="<?php echo $banner->redirect_url;	 
-										 }?>"  title = "<?php echo $banner->image_title; ?>">
-                                        <img src="<?php echo PATH . 'images/banner_images/' . $banner->banner_id . '.png'; ?>" alt="<?php echo $banner->image_title; ?>">
-                                    </a>
+                                 
+								  
+										 
+                                         <a  href="<?php echo $banner->redirect_url;	 ?>"  title = "<?php echo $banner->image_title; ?>" target="_blank">
+                                         
+                                           <img src="<?php echo PATH . 'images/banner_images/' . $banner->banner_id . '.png'; ?>" alt="<?php echo $banner->image_title; ?>">
+                                         </a>
+                                         
+                                         
+                                        
+                                         
+                                      
+                                    
                                 
                                   
                                     
@@ -250,7 +250,7 @@ $(".slidetabs").tabs(".images > div", {
             <?php if ($ads->ads_position == "hr1" && $ads->page_position==1) {  ?>                     
                                   <div class="banner_right_add wloader_parent">
                                       <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
-										 <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+										 <a   href="<?php echo $ads->redirect_url; ?>" target="_blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
 										<?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
                                   </div>
               <?php } }?>
