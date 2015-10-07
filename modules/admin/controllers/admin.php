@@ -1501,6 +1501,7 @@ class Admin_Controller extends website_Controller
 			}
 			else{
 				$this->form_error = error::_error($post->errors());
+				common::message(-1, "Message contains invalid characters");
 			}
 
 		}

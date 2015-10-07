@@ -182,6 +182,6 @@ $this->UserName = $this->session->get("UserName");
   
   
 </table>
-<?php echo "store credit payment mail(request approval mail)";?>
+<!--<?php echo "store credit payment mail(request approval mail)";?>-->
 </body>
 </html>

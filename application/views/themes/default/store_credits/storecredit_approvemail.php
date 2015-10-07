@@ -126,7 +126,7 @@ $this->UserName = $this->session->get("UserName");
 			} ?>  
                                                                  <?php if($u->duration_period!=""){?>
                                                                  <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-                                                                <td width="80%" align="center"><?php echo "Store Credits : ".$u->duration_period." Months"; ?></td></tr>
+                                                                <td width="80%" align="center"><?php echo "Store Credit Duration : ".$u->duration_period." Months"; ?></td></tr>
                                                                 <?php } ?>
 																<?php if($u->duration_period!=""){ 
 																	for($i=1;$i<=$u->duration_period;$i++) { ?>
@@ -390,4 +390,4 @@ $this->UserName = $this->session->get("UserName");
 </table>
 </body>
 </html>
-<?php echo "store credit approval mail(Customer checkout)";?>
+<!--<?php echo "store credit approval mail(Customer checkout)";?>-->

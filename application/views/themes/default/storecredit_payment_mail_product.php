@@ -197,7 +197,7 @@ $this->UserName = $this->session->get("UserName");
 	<table cellpadding="0" cellspacing="0" width="100%">
 		<?php if($p->duration_period!=""){?>
 		 <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-		<td width="80%" align="center"><?php echo "Store Credits : ".$p->duration_period." Months"; ?></td></tr>
+		<td width="80%" align="center"><?php echo "Store Credit Duration : ".$p->duration_period." Months"; ?></td></tr>
 		<?php } ?>
 		<?php if($p->duration_period!=""){ 
 			for($i=1;$i<=$p->duration_period;$i++) { ?>
@@ -590,4 +590,4 @@ $this->UserName = $this->session->get("UserName");
 </body>
 </html>
 
-<?php echo "store credit product payment (customermm)";?>
+<!--<?php echo "store credit product payment (customermm)";?>-->

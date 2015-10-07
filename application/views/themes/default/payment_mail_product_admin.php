@@ -196,7 +196,7 @@ $this->UserName = $this->session->get("UserName");
                                 
                                 <?php if($u->store_credit_period!="" && $u->store_credit_period!=0){?>
                                 <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-                                  <td width="80%" align="center"><?php echo "Store Credits : ".$u->store_credit_period?></td>
+                                  <td width="80%" align="center"><?php echo "Store Credit Duration : ".$u->store_credit_period?></td>
                                 </tr>
                                 <?php } ?>
                                 
@@ -572,7 +572,7 @@ ship_address2' => string 'test address2' (length=13)
         <?php } ?>
         <?php if($u->store_credit_period!="" && $u->store_credit_period!=0){?>
         <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-          <td colspan="7" width="80%" align="center"><?php echo "Store Credits : ".$u->store_credit_period?></td>
+          <td colspan="7" width="80%" align="center"><?php echo "Store Credit Duration : ".$u->store_credit_period?></td>
         </tr>
         <?php } ?>
         <?php $this->gift=$this->creditcard_paypal_pay->get_gift($p->gift_id);?>
@@ -821,7 +821,7 @@ $this->UserName = $this->session->get("UserName");
                                                                 </tr>
                                                                 <?php if($u->store_credit_period!=""){?>
                                                                  <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-                                                                <td width="80%" align="center"><?php echo "Store Credits : ".$u->store_credit_period." Months"; ?></td></tr>
+                                                                <td width="80%" align="center"><?php echo "Store Credit Duration : ".$u->store_credit_period." Months"; ?></td></tr>
                                                                 <?php } ?>
                                                                 
                                                                 </table>
