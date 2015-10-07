@@ -36,7 +36,7 @@ class Cash_on_delivery_Model extends Model
 	        $ip_country_code="";
 	        $ip_country_name="";
 	        $ip_city_name="";		
-		/*$url = "http://api.ipinfodb.com/v3/ip-city/?key=8042c4ccb295723ec0791f306df5f9e92632e9b1ba0beda3e1ff399f207d2767&ip=$ip";
+		$url = "http://api.ipinfodb.com/v3/ip-city/?key=8042c4ccb295723ec0791f306df5f9e92632e9b1ba0beda3e1ff399f207d2767&ip=$ip";
 		$data = @file_get_contents($url);
                 if($data != ""){
                     $dat = explode(";",$data);
@@ -68,7 +68,7 @@ class Cash_on_delivery_Model extends Model
                             $ip_country_name="Other";
                             $ip_city_name="Other";
                     }
-                }*/
+                }
                 if($prime_customer == ""){
                     $prime_customer = 0;
                 }
