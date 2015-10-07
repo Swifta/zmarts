@@ -18,6 +18,8 @@
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
                 
+                
+                
                 <td>
 					
                 <input type='checkbox' name='product' <?php if($row->product == 1) { ?>checked='checked' <?php } else { ?><?php } ?> value='<?php echo $row->product; ?>'>&nbsp;Product
@@ -25,6 +27,24 @@
                 <input type='checkbox' name='auction'  <?php if($row->auction == 1) { ?>checked='checked' <?php } else { ?><?php } ?> value='<?php echo $row->auction; ?>'>&nbsp;Auction
                 </td>
                 </tr>
+                
+                <!--
+               		Club membership options.
+                	@Live
+                	-->
+                    
+                    <tr>
+                    <td><label>Zenith Club Membership Banner</label></td>
+                    <td><label>:</label></td>
+                    <td>
+                    	<input name="z_offer" type="radio" value="0" checked="checked" >No</input><br />
+                    	<input name="z_offer" type="radio" value="1"  />Yes</input><br />
+                    	
+                    </td>
+                </tr>
+                
+                  
+                
                 <tr>
                     <td><label><?php echo $this->Lang['UP_BA_IM']; ?></label></td>
                     <td><label>:</label></td>

@@ -45,6 +45,20 @@
                 <em><?php if(isset($this->form_error["ads_position"])){ echo $this->form_error["ads_position"]; }?></em>
             </td>
         </tr>
+       			 <!--
+               		Club membership options.
+                	@Live
+                	-->
+                  <tr>
+              <td><label style="text-wrap:suppress">Zenith Club Membership Ad.</label></td>
+              
+              <td>
+                  	<input name="z_offer" type="radio" value="0" checked="checked" >No</input><br />
+                    <input name="z_offer" type="radio" value="1"  />Yes</input><br />
+                    
+                   	
+              </td>
+                </tr>
 	<?php /*	<tr>
 			<td valign="top"><label><?php echo $this->Lang["ADD_CODE"]; ?>:</label></td>
 			<td align="left"><textarea cols="20" rows="8" name="ad_code"><?php echo $ads->ads_code; ?></textarea><em><?php if(isset($this->form_error["ad_code"])){ echo $this->form_error["ad_code"]; }?></em></td>

@@ -87,7 +87,7 @@ $content_text = array(
 
 "AMTPAID" =>"Amount Paid",
 
-"AMO_TO_B_PAID" => "Amount to be paid",
+"AMO_TO_B_PAID" => "Amount To Be Paid",
 
 "TAX" => "Tax",
 
@@ -1071,7 +1071,7 @@ $content_text = array(
 
 "LIMIT_OFF" => " Limited offer hurry up!",
 
-"THANKS_BUY" => "Thanks for buying from $THIS_SITENAME ",
+"THANKS_BUY" => "Order Confirmation ",
 
 "THANK_FOR_PURCH" =>"Thank you for your purchase.Please verify your buy list for more details.",
 
@@ -1297,19 +1297,19 @@ $content_text = array(
 
 "CONTINUE" =>"Continue",
 
-"NEW_MERCHANT_ADD" => "A new merchant added in",
+"NEW_MERCHANT_ADD" => "Merchant Account Registration",
 
 "EMAIL1"=>"Email",
 
 "SHOP_WEB" => "Shop Website",
 
-"MERCHANT_ADD_SUC" => " Merchant account has been successfully created!",
+"MERCHANT_ADD_SUC" => "Merchant Account Registration",
 
 "YOR_EMAIL" => "Your email address ",
 
 "YOUR_SHOP_NAM" => "Your Shop Name",
 
-"CRT_MER_ACC" => "Created merchant account",
+"CRT_MER_ACC" => "Merchant Account Registration",
 
 "GOOG_MAP" => "Google Maps",
 
@@ -1400,7 +1400,7 @@ $content_text = array(
 "CLR_COMP_ITMS" =>"Clear all the product in the Product comparison list ",
 
 
-"USER_BUY" => "Order Received On $THIS_SITENAME ",
+"USER_BUY" => "Order Received  ",
 
 "MERCHANT_NAME" =>"Merchant Name",
 
@@ -1695,9 +1695,9 @@ $content_text = array(
 
 "MER_PRD_MSG" => "Please approve for the confirmation for the store credit product",
 
-"THANKS_CHOOS" => "Thanks for choosing store credit product from $THIS_SITENAME ",
+"THANKS_CHOOS" => "Store Credit Request  ",
 
-"THANKS_APPR" => "You got one approve request mail for store credit product from $THIS_SITENAME ",
+"THANKS_APPR" => "Store Credit Request  ",
 
 "STR_CRD_APPR" => "NOTE: Stored credit transaction is awaiting for merchant approval ",
 
@@ -1839,4 +1839,6 @@ $content_text = array(
 "DIRECT_DEBIT" =>"Direct Debit",
     
 "WEBPAY_RESPONSE" => "Webpay Transaction Response",
+
+"INSTALL_PAY" => "Installment Payment ",
 			);
