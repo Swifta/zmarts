@@ -5,6 +5,246 @@
 .error{float: left;width: 50%; } 
 </style>
 
+<style>
+    /*test style*/
+
+.swifta_h1, .swifta_input::-webkit-input-placeholder, button {
+
+ font-family: 'roboto', sans-serif;
+
+ -webkit-transition: all 0.40s ease-in-out;
+
+ transition: all 0.40s ease-in-out;
+
+}
+
+
+
+
+.swifta_h1 {
+
+  height: 70px;
+
+  width: 100%;
+
+  font-size: 18px;
+
+  /*background: #18aa8d;*/
+  
+  background:#A61C00;
+
+  color: white;
+
+  line-height: 150%;
+
+  border-radius: 3px 3px 0 0;
+
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+
+.swifta_form {
+
+ box-sizing: border-box;
+
+  width: 570px;
+
+  margin: 150px auto 0;
+
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+
+  padding-bottom: 40px;
+
+  border-radius: 3px;
+
+}
+
+
+
+
+.swifta_form .swifta_h1  {
+
+  box-sizing: border-box;
+
+  padding: 20px;
+
+}
+
+
+
+
+.swifta_input  {
+
+ margin: 5px 0px;
+ 
+  width: 500px;
+
+  display: block;
+
+  border: none;
+
+  padding: 10px 0;
+  
+  outline:none;
+
+  
+/*  border-bottom: solid 1px #A61C00;*/
+
+    border-bottom: thin 1px #A61C00;
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #A61C00 4%);
+
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #A61C00 4%);
+
+  background-position: -500px 0;
+
+  background-size: 500px 100%;
+
+  background-repeat: no-repeat;
+
+ 
+ color: #A61C00;
+ font-size:large;
+
+}
+
+
+/*.swifta_input  {
+
+  margin: 40px 25px;
+
+  width: 500px;
+
+  display: block;
+
+  border: none;
+
+  padding: 10px 0;
+  
+  outline:none;
+
+  
+  border-bottom: solid 1px #A61C00;
+
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #A61C00 4%);
+
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #A61C00 4%);
+
+  background-position: -500px 0;
+
+  background-size: 500px 100%;
+
+  background-repeat: no-repeat;
+
+  color: #0e6252;
+ color: A61C00;
+
+}*/
+.swifta_input:focus, .swifta_input:valid {
+
+ box-shadow: none;
+
+ outline: none;
+
+ background-position: 0 0;
+
+}
+
+.swifta_input:focus::-webkit-input-placeholder, swifta_input:valid::-webkit-input-placeholder {
+
+ /*color: #1abc9c;*/
+ color:#A61C00;
+ font-size: 11px;
+
+ -webkit-transform: translateY(-20px);
+
+ transform: translateY(-20px);
+
+ visibility: visible !important;
+ 
+
+}
+
+
+
+
+.swifta_button {
+
+  border: none;
+
+  /*background: #1abc9c;*/
+ background:#A61C00;
+  cursor: pointer;
+
+  border-radius: 3px;
+
+  padding: 6px;
+
+  width: 200px;
+
+  color: white;
+
+  margin-left: 205px;
+
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+
+
+
+.swifta_button:hover {
+
+  -webkit-transform: translateY(-3px);
+
+  -ms-transform: translateY(-3px);
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.asterisk_input:after
+{
+content:"*"; 
+color: #e32;
+position: absolute; 
+margin: 10px 0px 0px -57px; 
+font-size: small; 
+padding: 0 5px 0 0;
+
+ }
+ .asterisks_input:after
+{
+content:"*"; 
+color: #e32;
+position: absolute; 
+margin: -5px 0px 0px 492px; 
+font-size: small; 
+padding: 0 5px 0 0;
+
+ }
+input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px solid #ccc;}
+/*test style closed*/
+/*.fullname input[type=text],.fullname input[type=password],.fullname textarea{border: 1px solid #d9d9d9;font:normal 12px arial;  width:220px;color:#000;  padding: 7px;
+    box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;
+}*/
+</style>
+
+
+
+
 <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
         <div class="contianer_inner">
@@ -33,65 +273,71 @@
                     </div>
                 <form action="" method="post" name="signup2" id="signup2"  onclick="return atleast_onecheckbox(event)" >
                     <div class="payouter_block pay_br">
-                        <h3 class="paybr_title pay_titlebg">Merchant account: <?php echo $this->Lang['SIGN_UP']; ?></h3>
+<!--                        <h3 class="paybr_title pay_titlebg">Merchant account: <?php echo $this->Lang['SIGN_UP']; ?></h3>-->
                         <div class="p_inner_block clearfix">
                             <div class="payment_form_section">
                                 <div class="payment_form payment_shipping_form ">
                                 <ul>
                                     <li>
-                                        <label><?php echo $this->Lang["FIRST_NAME"]; ?> <span style="color:red;">*</span>:</label>
-                                <div class="fullname">
-									<input autofocus type="text" name="firstname" class="required " placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
+                                        
+                                <div class="">
+                                    <span class="asterisks_input">  </span>
+                                    <input autofocus type="text" name="firstname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>"
 									<?php if($this->session->get('firstname')) { ?>
 									value="<?php  echo $this->session->get('firstname'); ?>"  /> 			<?php } else { ?>
 									value="<?php  if(!isset($this->form_error['firstname']) && isset($this->userPost['firstname'])){echo $this->userPost['firstname'];} ?>" placeholder= "<?php echo $this->Lang['FIRST_NAME']; ?>" />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
-									
+<!--									<span class="asterisk_input">  </span> -->
 								</div>
                                     </li>
 					<li>			
-                                            <label><?php echo $this->Lang["LAST_NAME"]; ?> <span style="color:red;">*</span>:</label>
-								<div class="fullname">
-								        
-									<input type="text" name="lastname" class="required " placeholder= "<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" 
+                                           
+								<div class="">
+								          <span class="asterisks_input">  </span>
+									<input type="text" name="lastname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" 
 									<?php if($this->session->get('lastname')) { ?>
 									value="<?php  echo $this->session->get('lastname'); ?>" /> 			                <?php } else { ?>
 									value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>" placeholder= "<?php echo $this->Lang["LAST_NAME"]; ?>"  />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
-								</div>
+<!--								<span class="asterisk_input">  </span> -->
+                                                                </div>
                                     </li>
                                     <li>
-                                        <label><?php echo $this->Lang["EMAIL_F"]; ?> <span style="color:red;">*</span>:</label>
-								<div class="fullname">
-									<input type="text" name="email"  class="required email " placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
+                                        
+								<div class="">
+                                                                      <span class="asterisks_input">  </span>
+									<input type="text" name="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
 									<?php if($this->session->get('memail')) { ?>
 									value="<?php  echo $this->session->get('memail'); ?>"  /> 			                <?php } else { ?>
 									 value="<?php if(!isset($this->form_error['email']) && isset($this->userPost['email'])){echo $this->userPost['email'];}?>" placeholder= "<?php echo $this->Lang["EMAIL_F"]; ?>"  />
 									 <?php  } ?>
 									<em> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
-								</div>
+<!--								<span class="asterisk_input">  </span> -->
+                                                                </div>
                                     </li>
                                     <li style="display: none;">
-                                        <label><?php echo $this->Lang['ADD_PAYPAL_ACC']; ?> <span style="color:red;">*</span>:</label>
-                                <div class="fullname">
-                                
-									<input type="text" name="payment_acc" class=" " 
+                                        
+                                <div class="">
+                                  <span class="asterisks_input">  </span>
+									<input type="text" name="payment_acc" class="swifta_input" 
 									<?php if($this->session->get('payment_acc')) { ?>
 									value="<?php  echo $this->session->get('payment_acc'); ?>" placeholder= "<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" /> 			                        <?php } else { ?>
 									value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>" placeholder="<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+<!--                               <span class="asterisk_input">  </span> -->
                                 </div>
                                     </li>
                                     
                                     
                                     
                                 <li >
-                                        <label><?php echo $this->Lang["ZENITH_ACCOUNT_ENTER"]; ?> <span style="color:red;">*</span>:</label>
-				<div class="fullname">
-                                        <input type="text" name="nuban" class="required number" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
+                                       
+				<div class="">
+                                      <span class="asterisks_input">  </span>
+                                        <input type="text" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
                                         <?php if($this->session->get('nuban_session')) { ?>
                                         value="<?php  echo $this->session->get('nuban_session'); ?>"  /> 			 <?php } else { ?>
                                         value="<?php if(!isset($this->form_error['error_nuban']) && isset($this->userPost['error_nuban'])){echo $this->userPost['error_nuban'];}?>" placeholder="<?php echo $this->Lang["ZENITH_ACCOUNT_ENTER_PLACEHOLDER"]; ?>"  />
@@ -99,48 +345,55 @@
                                         <em><?php if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
                                         <br /><span style="font-size:92%;"><strong style="color:blue;">Dont have a zenith bank account ? </strong> 
                                             <a href="<?php echo PATH; ?>merchant-signup-account-opening.html" style="color:green;">Open an Account Here</a></span>
+                              
                                 </div>
                                 </li>
                                 
 					<li class="frm_clr">			
-                                            <label><?php echo $this->Lang["ADDR1"]; ?> <span style="color:red;">*</span>:</label>
-								<div class="fullname">
-									<input type="text" name="mr_address1" class="required " placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
+                                            
+								<div class="">
+                                                                      <span class="asterisks_input">  </span>
+									<input type="text" name="mr_address1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
 									<?php if($this->session->get('mraddress1')) { ?>
 									value="<?php  echo $this->session->get('mraddress1'); ?>"  /> 			 <?php } else { ?>
 									value="<?php if(isset($this->userPost['mr_address1'])){echo $this->userPost['mr_address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
-                                        </div>
+<!--                                        <span class="asterisk_input">  </span> -->
+                                                                </div>
                                     </li>
                                     
                                 <li>
-                                    <label><?php echo $this->Lang["ADDR2"]; ?> <span style="color:red;">*</span>:</label>
-                                 <div class="fullname">
-									<input type="text" name="mr_address2" class="required " 
+                                    
+                                 <div class="">
+					  <span class="asterisks_input">  </span>			
+                                     <input type="text" name="mr_address2" class="swifta_input" 
 									<?php if($this->session->get('mraddress2')) { ?>
 									value="<?php  echo $this->session->get('mraddress2'); ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			 <?php } else { ?>
 									value="<?php if(isset($this->userPost['mr_address2'])){echo $this->userPost['mr_address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
+                                
                                  </div>
                                 </li>
                                 <li class="frm_clr">
-                                    <label><?php echo $this->Lang["PHONE"]; ?> <span style="color:red;">*</span>:</label>
-								<div class="fullname">
-									<input type="text" name="mr_mobile" class="required number" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+                                    
+								<div class="">
+                                                                      <span class="asterisks_input">  </span>
+									<input type="text" name="mr_mobile" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
 									<?php if($this->session->get('mphone_number')) { ?>
 									value="<?php  echo $this->session->get('mphone_number'); ?>"  /> 			 <?php } else { ?>
 									value="<?php if(!isset($this->form_error['mr_mobile']) && isset($this->userPost['mr_mobile'])){echo $this->userPost['mr_mobile'];}?>" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>"  />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
-                                </div>
+                                 
+                                                                </div>
                                 </li>
 
                                  <li >
-                                <label><?php echo $this->Lang["SECTOR"]; ?> <span style="color:red;">*</span>:</label>
-				<div class="fullname">
-                                <select name="sector" id="sector"  class="select required"  onchange="changing_sectors(this.value)">
+                               
+				<div class="">
+                                <select name="sector" id="sector"  class="swifta_input"  onchange="changing_sectors(this.value)">
                                 <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
                                
                                 <?php foreach ($this->sector_list as $c) { ?>
@@ -151,10 +404,10 @@
                                 </div>
                                 </li>
                                 <li class="subsector_list">
-                                <label><?php echo $this->Lang['SUBSECTOR']; ?> <span style="color:red;">*</span>: </label>
-                                <div class="fullname">
+                                
+                                <div class="">
 				<?php if($this->session->get('sector')){ ?>
-                                <select name="subsector" id="subSector"  class="select required" onchange="previewTheme(this.text);">
+                                <select name="subsector" id="subSector"  class="swifta_input" onchange="previewTheme(this.text);">
                                             
                                 <?php foreach ($this->sub_sector_list as $c) { ?>
                                 <?php if($this->session->get('sector')==$c->main_sector_id){?>
@@ -188,7 +441,7 @@
                                 <li >
                                     <label>Shipping method <span style="color:red;">*</span>:
                                       <br />
-                                      <em style="font-size:90%">Select shipping methods you offer customers respectively.</em>
+                                      <em style="font-size:110%">Select shipping methods you offer customers respectively.</em>
                                     </label>
                          <table> 
                                  <label>
