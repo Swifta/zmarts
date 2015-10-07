@@ -163,7 +163,7 @@ $content_text = array(
 
 "SUBMIT" => "Submit",
 
-"FORGOT_PASS" => "Forgot password",
+"FORGOT_PASS" => "Forgot password?",
 
 "CANCEL" => "Cancel",
 
