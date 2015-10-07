@@ -1464,6 +1464,9 @@ class Admin_Controller extends website_Controller
 		$this->manage_contacts="1";
 
 		if($_POST){
+			
+			
+			
 				$post = Validation::factory($_POST)->pre_filter('trim')->add_rules('message', 'required','chars[a-zA-Z0-9 _-]');
 			if($post->validate()){
 
@@ -1476,9 +1479,14 @@ class Admin_Controller extends website_Controller
 				$fromEmail = NOREPLY_EMAIL;
 				$message = new View("themes/".THEME_NAME."/admin_mail_template");
 				
+				
+				
 				$fromEmail = NOREPLY_EMAIL;
 				if(EMAIL_TYPE==2){
-				email::smtp($fromEmail,$email_id, SITENAME, $message);
+					
+					email::smtp($fromEmail,$email_id, $this->Lang['R_INQUIRY'], $message);
+				
+				
 				}else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}

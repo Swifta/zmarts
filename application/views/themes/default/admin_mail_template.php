@@ -58,11 +58,11 @@
                                 <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <td>
                                         <?php echo $this->Lang['EMAIL_F']; ?> : <a style=" font:normal 12px/25px arial; color:#144F5D;" title="<?php if(isset($this->email_id)) { echo $this->email_id; } ?>" ><?php if(isset($this->email_id)) { echo $this->email_id; }  ?></a> 
                                         </td>
-                                    </tr>
+                                    </tr>-->
                                     <?php } ?>
                                     <tr height="10">
                                         <td></td>
@@ -105,3 +105,4 @@
         </table>
     </body>
 </html>
+

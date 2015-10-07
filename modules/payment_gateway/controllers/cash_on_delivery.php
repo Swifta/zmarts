@@ -266,6 +266,9 @@ class Cash_on_delivery_Controller extends Layout_Controller
 			$friend_details = $this->cod->get_friend_transaction_details($deal_id, $transaction);
 			$friend_email = $friend_details->current()->friend_email;
 			$friend_name = $friend_details->current()->friend_name;
+			
+			
+			
             if($friend_email != "xxxyyy@zzz.com"){
                 $from = CONTACT_EMAIL;
                 $this->transaction_mail =array("deal_title" => $deal_title, "item_qty" => $qty ,"total" => ($deal_amount * $qty) ,"amount"=> ($deal_amount * $qty),"ref_amount"=> "0","value" =>$deal_amount,"friend_name" => $friend_name,"value" =>$deal_amount);
@@ -294,6 +297,8 @@ class Cash_on_delivery_Controller extends Layout_Controller
 				$this->admin_email = $this->admin_list->current()->email;
                 $message = new View("themes/".THEME_NAME."/payment_mail_product");
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
+				
+				
 
                 if(EMAIL_TYPE==2) {
 					email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);

@@ -220,9 +220,9 @@ class Store_credit_Controller extends Layout_Controller
 				$message_merchant = new View("themes/".THEME_NAME."/storecredit_product_merchant");
 
 		if(EMAIL_TYPE==2) {
-			email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+			email::smtp($from,$this->merchant_email, $this->Lang['INSTALL_PAY'] ,$message_merchant);
 		}else{
-			email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+			email::sendgrid($from,$this->merchant_email, $this->Lang['INSTALL_PAY'] ,$message_merchant);
 		}
 
 		$user_details = $this->cash->get_purchased_user_details();
@@ -329,8 +329,8 @@ class Store_credit_Controller extends Layout_Controller
                
 
         if(EMAIL_TYPE==2) {
-			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::smtp($from,$U->email, $this->Lang['INSTALL_PAY'] ,$message);
+			email::smtp($from,$this->admin_email,$this->Lang['INSTALL_PAY'] ,$message_admin);
 		}else{
 			email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);

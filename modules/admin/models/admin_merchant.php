@@ -13,7 +13,7 @@ class Admin_merchant_Model extends Model
 	 
         public function add_merchant($post = "" ,$adminid = "",$store_key = "",$password="",$store_admin_password='')
         {
-               // $password = text::random($type = 'alnum', $length = 8);
+               
                  
             	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission));
             	
@@ -43,7 +43,7 @@ class Admin_merchant_Model extends Model
                 $result = $this->db->insert("shipping_module_settings", array("free" => $free,"flat" => $flat, "per_product" => $product,'per_quantity' => $quantity, 'aramex' => $aramex,'ship_user_id' => $merchant_id));
                 $website="http://".$post->website;
                 
-                $res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>0,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$post->subsector));
+                $res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$post->subsector));
                 
                 $stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode,"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description, 'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'store_type' => '1','merchant_id'=>$merchant_id,'created_by'=>$adminid,"created_date" => time(),"about_us"=>$post->about_us,"store_admin_id"=>$res->insert_id(),'store_sector_id' => $post->sector,"store_subsector_id" =>$post->subsector));
 
@@ -611,7 +611,7 @@ class Admin_merchant_Model extends Model
                         }
 						
 			$p = md5($password);
-			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p), array("user_id" =>$merchant_id));
+			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p, "user_status" => $status), array("user_id" =>$merchant_id));
 			return count($result);
 		}
 		

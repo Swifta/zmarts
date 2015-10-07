@@ -2234,7 +2234,7 @@ $content_text = array(
 
 			"TAX" => "Tax",
 
-			"AMO_TO_B_PAID" => "Amount to be paid",
+			"AMO_TO_B_PAID" => "Amount To Be Paid",
 
 			"OR_DATE" => "Order Date",
 
@@ -3010,7 +3010,7 @@ $content_text = array(
 
 			"YOUR_SHOP_NAM" => "Your Shop Name",
 
-			"CRT_MER_ACC" => "Created Merchant Account",
+			"CRT_MER_ACC" => "Merchant Account Registration ",
 			
 			"CRT_NEWSHOP_ACC" => "Created New Shop Account",
 
@@ -3032,11 +3032,11 @@ $content_text = array(
 
 			"LOGIN_URL" => "Login url",
 
-			"MER_APP" => "Merchant approved mail",
+			"MER_APP" => "Merchant Account Approval",
 
-			"MER_DIS_APP" => "Merchant disapproved mail",
+			"MER_DIS_APP" => "Merchant Disapproved",
 
-			"YOUR_APP_MER" => "You are approved by admin",
+			"YOUR_APP_MER" => "We are glad to inform you that your merchant account has been approved:",
 
 			"YOUR_DIS_APP_MER" => "You are disapproved by admin",
 
@@ -3919,7 +3919,7 @@ $content_text = array(
 			
 			"MER_PRD_APPR_MSG" => " Your Storecredit request for the product is approved by the Merchant. You can Purchase the Product.",
 			
-			"STR_APPR_MAIL" => "Storecredit product approval mail",	
+			"STR_APPR_MAIL" => "Store Credit Approval ",	
 			
 			"STA_CHG_SUCC" => "Status has been changed successfully",	
 			
@@ -3994,6 +3994,10 @@ $content_text = array(
 			"M_SIGNUP_THK_U" => "Thank you for registering with",
 			
 			"M_REG_COMPLETE" => "Registration",
+			
+			"R_INQUIRY" => "Response from $THIS_SITENAME",
+			
+			"INSTALL_PAY" => "Installment Payment ",
 			
 			
 

@@ -1410,11 +1410,13 @@ class Admin_merchant_Controller extends website_Controller {
 			if($type_n == 1){
 				
 				$from = CONTACT_EMAIL;
-				$subject = SITENAME." - ".$this->Lang['MER_APP'];
+				$subject = $this->Lang['MER_APP']. " on ".SITENAME;
 				
-				$merchant_message = "<p> <b>".$this->Lang['CONGRA']."! ".$this->Lang['YOUR_APP_MER']."  </b></p><p> ".$this->Lang['YOR_EMAIL']." : ".$details[0]->email."</p> 
-				<p> ".$this->Lang['YOUR_PASS']." : ".$password."</p> 
-				<p>".$this->Lang['UR_DEAL_COMM']."  : ".$details[0]->merchant_commission." % <p/> <p> ".$this->Lang['LOGIN_URL']." :  <a href='".PATH."merchant-login.html' > Click here </a>";
+				$merchant_message = "<p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+				<p style = \"text-decoration: none; color: #666;\"> ".$this->Lang['YOUR_APP_MER']."</p>
+				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
+				<p style = \"text-decoration: none; color: #666;\"> The password is : ".$password."</p> 
+				<p style = \"text-decoration: none; color: #666;\"> To access your account, please  <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >  <form style=\"display:inline;\"><input type = \"button\" value = \" click this to login\" /></form>  </a></p>";
 				
 				
 				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;
@@ -1427,11 +1429,11 @@ class Admin_merchant_Controller extends website_Controller {
 					email::sendgrid($from, $details[0]->email, $subject , $merchantmessage);
 				}
 				
-				common::message(1, $this->Lang["COMM_DIS_SUCC"]);
+				common::message(1, "Merchant has been approved.");
 			}
 			else{
 				$from = CONTACT_EMAIL;
-				$subject = SITENAME." - ".$this->Lang['MER_DIS_APP'];
+				$subject = $this->Lang['MER_DIS_APP']." on ".SITENAME;
 				$merchant_message = "<p> <b>".$this->Lang['YOUR_DIS_APP_MER']." </b></p><p> ".$this->Lang['YOR_EMAIL']." : ".$details[0]->email."</p>";
 				
 				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;

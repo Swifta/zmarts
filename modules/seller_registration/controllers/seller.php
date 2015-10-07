@@ -316,11 +316,105 @@ class Seller_Controller extends Layout_Controller {
 										
 										fclose($f);   */
 										/** for send mail to the admin  **/
-										$subject=$this->Lang['NEW_MERCHANT_ADD']." ".SITENAME;
-										$admin_message = "<p><b>".$this->Lang['NEW_MERCHANT_ADD']." ".SITENAME."  </b></p><p></p><p> ".$this->Lang['EMAIL1']." : ".$this->session->get('memail')."</p> <p>".$this->Lang['STORE_NAME']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['CITY']."   : ".$city_name." <p/><p>".$this->Lang['COUNTRY']."   : ".$country_name." <p/><p>".$this->Lang['ZIP_CODE']."   : ".$post->zipcode." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><p>".$this->Lang['STORE_URL']." : <a href=".PATH.url::title($post->storename)."/>".PATH.url::title($post->storename)."/ </p>";
+										
+										$subject=$this->Lang['NEW_MERCHANT_ADD']." on ".SITENAME;
+										$admin_message = "<table>
+										<tr><th colspan=\"3\">New Merchant Just Registered on <a title = \"".SITENAME."\" href=\"".PATH."\"> ".SITENAME."!</a></th></tr>
+										<tr><td colspan=\"3\">Below are the merchant details: </td></tr>
+										<!--<b>".$this->Lang['NEW_MERCHANT_ADD']." on ".SITENAME."  </b>-->
+										<tr>
+										<td align=\"left\">".$this->Lang['EMAIL1']." : </td>
+										<td>".$this->session->get('memail')."</td> 
+										<td align=\"left\">".$this->Lang['STORE_NAME']." : </td>
+										<td> ".$post->storename."</td>
+										<td>&nbsp;</td>
+										
+										</tr>
+										
+										<tr>
+										<td align=\"left\">".$this->Lang['SHOP_ADDR']."   : </td>
+										<td> ".$post->address1.",".$post->address2." </td>
+										<td align=\"left\">".$this->Lang['CITY']."    : </td>
+										<td> ".$city_name." </td>
+										<td align=\"left\">".$this->Lang['COUNTRY']."    : </td>
+										<td> ".$country_name." </td>
+										</tr>
+										
+										
+										<tr>
+										<td align=\"left\">".$this->Lang['ZIP_CODE']."   : </td>
+										<td> ".$post->zipcode." </td>
+										<td align=\"left\">".$this->Lang['SHOP_WEB']."   : </td>
+										<td> ".$post->website." </td>
+										<td>&nbsp;</td>
+										
+										</tr>
+										
+										<tr>
+										<td align=\"left\" colspan=\"3\">".$this->Lang['STORE_URL']."  : </td>
+										<td> <a href=".PATH.url::title($post->storename).">".PATH.url::title($post->storename)."</a>
+										 </td>
+										  </tr></table>									 ";
+										 ?><?php 
+$admin_message	= '									 
+
+<table>										 
+  <tr>
+    <td colspan="2" style="font-family: Arial, Helvetica, sans-serif bold 12px;color:#666;">A new merchant just registered on <a style = "text-decoration: none; color: #666;" title = "SITE" href="<?php echo PATH ?>"> '.SITENAME.'</a> and awaiting aproval.</td>
+  </tr>
+  <tr>
+    <td colspan="2" style="font-family: Arial, Helvetica, sans-serif normal 12px ;color:#666;">Below are the details: </td>
+  </tr>
+ 
+  <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">Email : </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666;padding-left: 15px; "><a style="color: #666; text-decoration: none;">'.$this->session->get('memail').'</a></td>
+    </tr><tr>
+    
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ; color:#666;">Store Name: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'. $post->storename.'</td>
+    
+  </tr>
+  <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;" >Addres 1: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; " >'.$post->address1.'</td>
+     </tr>
+  <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">Addres 2: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$post->address2.'</td>
+     </tr>
+  <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">City: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$city_name.'</td>
+     </tr>
+  <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ; color:#666;">Country: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'. $country_name.'</td>
+  </tr>
+  <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">Zip code: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$post->zipcode.'</td>
+    </tr>
+  <tr>
+    <td style=" font-family: Arial, Helvetica, sans-serif bold 12px ; color:#666;">Store website: </td>
+    <td style=" font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; "> <a style="color: #666; text-decoration: none;">'. $post->website.'</a></td>
+    </tr>
+  <tr>
+   
+  </tr>
+  <tr>
+    <td style=" font-family: Arial,  sans-serif bold 12px ; color:#666;">Store url: </td>
+    <td style=" font-family: Arial,  normal 12px ; color:#666; padding-left: 15px; " ><a href="'.PATH.url::title($post->storename).'" style="text-decoration:none; color: #666; ">'.PATH.url::title($post->storename).'</a></td>
+  </tr>
+  
+</table';?>
+
+<?php
+										 
+										
 
 										/** for send mail to the merchant  **/
-										$merchant_subject = SITENAME." - ".$this->Lang['MERCHANT_ADD_SUC'];
+										$merchant_subject = $this->Lang['MERCHANT_ADD_SUC'];
 										
 										/*
 											Rush fix.
@@ -329,12 +423,16 @@ class Seller_Controller extends Layout_Controller {
 										
 										/*$merchant_message = "<p><b>".$this->Lang['MERCHANT_ADD_SUC']." </b> </p><p></p><p> ".$this->Lang['YOR_EMAIL']." : ".$this->session->get('memail')."</p> <p>".$this->Lang['YOUR_PASS'].": ".$password."</p> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['CITY']."   : ".$city_name." <p/><p>".$this->Lang['COUNTRY']."   : ".$country_name." <p/><p>".$this->Lang['ZIP_CODE']."   : ".$post->zipcode." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><p>".$this->Lang['STORE_URL']." : <a href=".PATH.url::title($post->storename)."/>".PATH.url::title($post->storename)."/ </p>";*/
 										
-										$merchant_message = "<p><b>".$this->Lang['MERCHANT_ADD_SUC']." </b> </p><p> Your Merchant account on <a href=\"".PATH."\">".SITENAME."</a> has been successfully created. Please await approval which will contain your login and setup details.</p><p></p>";
+										$merchant_message = "<p><b> Congratulations! </b> </p><p> Your Merchant account on <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a> has been successfully created!</p><p> Please await approval which will contain your login and setup details.</p><p></p>";
+										
+										$merchant_message = "<p><b> Congratulations! </b> </p><p>Your merchant account has been created successfully! Please await approval from the team at <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a>. The approval will also contain your merchant account access information on the platform.</p>
+										<p  >Merchant Account Email: <a style=\"color: #666; text-decoration: none;\">".$this->session->get('memail')."</a></p>";
+
 										
 										$this->adminname = $this->Lang['ADMIN'];
 										$this->admin_message = $admin_message;
 										
-										$this->name = ucfirst($this->session->get('firstname'))." ".$this->session->get('lastname');
+										$this->name = ucfirst($this->session->get('firstname'))." ".ucfirst($this->session->get('lastname'));
 										$this->merchant_message = $merchant_message;
 										
 										$adminmessage = new View("themes/".THEME_NAME."/merchant_signup_admin_mail_template");
@@ -353,9 +451,13 @@ class Seller_Controller extends Layout_Controller {
 										}
 										
 										
-										if(EMAIL_TYPE==2){		
+										if(EMAIL_TYPE==2){
+											
+												
+										
+										
 											email::smtp($from, $to, $subject , $adminmessage);
-											if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".SITENAME ." - ".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
+											if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
 											email::add_account_to_sendinblue("merchant", $this->session->get('memail'));
 											
 										}

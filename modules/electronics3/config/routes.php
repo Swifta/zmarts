@@ -406,3 +406,93 @@ $config['Musty-Electronics-InternatiionalTTTY/products/c/(.*)/(.*).html'] = "/el
 $config['Musty-Electronics-InternatiionalTTTY/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Musty-Electronics-InternatiionalTTTY/$1/$2";
 $config['Musty-Electronics-InternatiionalTTTY/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Musty-Electronics-InternatiionalTTTY/$1/$2";
 // Musty-Electronics-InternatiionalTTTY End
+// Awesom-S Start
+$config['Awesom-S'] ="electronics3/stores_home_page/Awesom-S";
+$config['Awesom-S/products.html'] = "/electronics3/product_list/Awesom-S";
+$config['Awesom-S/today-deals.html'] = "/electronics3/deal_list/Awesom-S";
+$config['Awesom-S/auction.html'] = "/electronics3/auction_list/Awesom-S";
+$config['Awesom-S/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Awesom-S/$1/$2";
+$config['Awesom-S/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Awesom-S/$1/$2";
+$config['Awesom-S/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Awesom-S/$1/$2";
+// Awesom-S End
+// Kenk-S Start
+$config['Kenk-S'] ="electronics3/stores_home_page/Kenk-S";
+$config['Kenk-S/products.html'] = "/electronics3/product_list/Kenk-S";
+$config['Kenk-S/today-deals.html'] = "/electronics3/deal_list/Kenk-S";
+$config['Kenk-S/auction.html'] = "/electronics3/auction_list/Kenk-S";
+$config['Kenk-S/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Kenk-S/$1/$2";
+$config['Kenk-S/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Kenk-S/$1/$2";
+$config['Kenk-S/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Kenk-S/$1/$2";
+// Kenk-S End
+// Ksing Start
+$config['Ksing'] ="electronics3/stores_home_page/Ksing";
+$config['Ksing/products.html'] = "/electronics3/product_list/Ksing";
+$config['Ksing/today-deals.html'] = "/electronics3/deal_list/Ksing";
+$config['Ksing/auction.html'] = "/electronics3/auction_list/Ksing";
+$config['Ksing/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Ksing/$1/$2";
+$config['Ksing/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Ksing/$1/$2";
+$config['Ksing/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Ksing/$1/$2";
+// Ksing End
+// Awesom-Sd Start
+$config['Awesom-Sd'] ="electronics3/stores_home_page/Awesom-Sd";
+$config['Awesom-Sd/products.html'] = "/electronics3/product_list/Awesom-Sd";
+$config['Awesom-Sd/today-deals.html'] = "/electronics3/deal_list/Awesom-Sd";
+$config['Awesom-Sd/auction.html'] = "/electronics3/auction_list/Awesom-Sd";
+$config['Awesom-Sd/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Awesom-Sd/$1/$2";
+$config['Awesom-Sd/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Awesom-Sd/$1/$2";
+$config['Awesom-Sd/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Awesom-Sd/$1/$2";
+// Awesom-Sd End
+// Awesom-Sx Start
+$config['Awesom-Sx'] ="electronics3/stores_home_page/Awesom-Sx";
+$config['Awesom-Sx/products.html'] = "/electronics3/product_list/Awesom-Sx";
+$config['Awesom-Sx/today-deals.html'] = "/electronics3/deal_list/Awesom-Sx";
+$config['Awesom-Sx/auction.html'] = "/electronics3/auction_list/Awesom-Sx";
+$config['Awesom-Sx/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Awesom-Sx/$1/$2";
+$config['Awesom-Sx/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Awesom-Sx/$1/$2";
+$config['Awesom-Sx/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Awesom-Sx/$1/$2";
+// Awesom-Sx End
+// Knang Start
+$config['Knang'] ="electronics3/stores_home_page/Knang";
+$config['Knang/products.html'] = "/electronics3/product_list/Knang";
+$config['Knang/today-deals.html'] = "/electronics3/deal_list/Knang";
+$config['Knang/auction.html'] = "/electronics3/auction_list/Knang";
+$config['Knang/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Knang/$1/$2";
+$config['Knang/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Knang/$1/$2";
+$config['Knang/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Knang/$1/$2";
+// Knang End
+// Septa-Market Start
+$config['Septa-Market'] ="electronics3/stores_home_page/Septa-Market";
+$config['Septa-Market/products.html'] = "/electronics3/product_list/Septa-Market";
+$config['Septa-Market/today-deals.html'] = "/electronics3/deal_list/Septa-Market";
+$config['Septa-Market/auction.html'] = "/electronics3/auction_list/Septa-Market";
+$config['Septa-Market/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Septa-Market/$1/$2";
+$config['Septa-Market/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Septa-Market/$1/$2";
+$config['Septa-Market/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Septa-Market/$1/$2";
+// Septa-Market End
+// Sumba Start
+$config['Sumba'] ="electronics3/stores_home_page/Sumba";
+$config['Sumba/products.html'] = "/electronics3/product_list/Sumba";
+$config['Sumba/today-deals.html'] = "/electronics3/deal_list/Sumba";
+$config['Sumba/auction.html'] = "/electronics3/auction_list/Sumba";
+$config['Sumba/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Sumba/$1/$2";
+$config['Sumba/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Sumba/$1/$2";
+$config['Sumba/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Sumba/$1/$2";
+// Sumba End
+// Shifashop Start
+$config['Shifashop'] ="electronics3/stores_home_page/Shifashop";
+$config['Shifashop/products.html'] = "/electronics3/product_list/Shifashop";
+$config['Shifashop/today-deals.html'] = "/electronics3/deal_list/Shifashop";
+$config['Shifashop/auction.html'] = "/electronics3/auction_list/Shifashop";
+$config['Shifashop/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Shifashop/$1/$2";
+$config['Shifashop/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Shifashop/$1/$2";
+$config['Shifashop/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Shifashop/$1/$2";
+// Shifashop End
+// Simobre Start
+$config['Simobre'] ="electronics3/stores_home_page/Simobre";
+$config['Simobre/products.html'] = "/electronics3/product_list/Simobre";
+$config['Simobre/today-deals.html'] = "/electronics3/deal_list/Simobre";
+$config['Simobre/auction.html'] = "/electronics3/auction_list/Simobre";
+$config['Simobre/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Simobre/$1/$2";
+$config['Simobre/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Simobre/$1/$2";
+$config['Simobre/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Simobre/$1/$2";
+// Simobre End

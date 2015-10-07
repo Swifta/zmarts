@@ -437,6 +437,9 @@ class Payment_product_Controller extends Layout_Controller {
 											
 											$user_email = $this->session->get("UserEmail");
 											$merchant_email = $this->merchant_details->email;
+											
+											$this->merchant_name =   ucfirst($this->merchant_details->firstname)." ". ucfirst($this->merchant_details->lastname);
+											
 											$from = CONTACT_EMAIL;
 											 if(EMAIL_TYPE==2){
 												
