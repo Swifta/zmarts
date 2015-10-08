@@ -18,7 +18,7 @@
                         </div>
                         <div class="seller_signup_form_submit">
                             <span>02</span>
-                            <p>Merchant <?php echo $this->Lang['SIGN_UP']; ?></p>
+                            <p style=" font-weight: bold; color:#000000">Merchant <?php echo $this->Lang['SIGN_UP']; ?></p>
                         </div>
                         <?php /*<div class="seller_signup_finish">                            
                             <span>03</span>
@@ -26,7 +26,7 @@
                         </div>*/?>
                         <div class="seller_signup_finish">                            
                             <span>03</span>
-                            <p><?php echo $this->Lang['FINISH']; ?></p>                            
+                            <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['FINISH']; ?></p>                            
                         </div>
                         
                     </div>                    
@@ -34,13 +34,13 @@
 <!--                        <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['INTRO']; ?></h3>-->
                         <div class="p_inner_block clearfix">
                             <p class="merchant_intro">
-                            <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
-                            <br><input type="checkbox" /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
+                            <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a  style="text-decoration: underline;"href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
+                            <br><input type="checkbox" id="toggle" checked/> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             
                             </p>
                         </div>
                     </div>                    
-                    <div class="merchant_submit_buttons clearfix">                      
+                    <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
                         <a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
                     </div>
                 </div>
@@ -48,3 +48,5 @@
         </div>
     </div>
     <!-- SELLER SIGNUP -->
+   
+      

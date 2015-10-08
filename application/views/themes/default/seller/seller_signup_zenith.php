@@ -252,7 +252,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     <div class="seller_signup_menu">
                         <div class="seller_signup_introduction">
                             <span>01</span>
-                            <p><?php echo $this->Lang['INTRO']; ?></p>
+                            <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['INTRO']; ?></p>
                         </div>
                         <div class="seller_signup_form_submit active_tab">
                             <span>02</span>
@@ -265,7 +265,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         </div>*/?>
                         <div class="seller_signup_finish">                            
                             <span>03</span>
-                            <p><?php echo $this->Lang['FINISH']; ?></p>                            
+                            <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['FINISH']; ?></p>                            
                         </div>
                     </div>
                     <div class="payment_form payment_shipping_form ">
@@ -280,6 +280,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             <li>
                               
                                 <div class="">
+                                     <span class="asterisks_input">  </span>
                                     <input class="swifta_input" name="f_name" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" autofocus required/>
                                    <em id="f_name_err"></em>
                                 </div> 
@@ -288,6 +289,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                              
                                 
                                 <div class="">
+                                     <span class="asterisks_input">  </span>
                                    <input name="l_name" class="swifta_input" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" required/>
                                    <em id="l_name_err"></em>
                                 </div>  
@@ -297,6 +299,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             <li>
                                 
                                 <div class="">
+                                     <span class="asterisks_input">  </span>
                                   <input name="email" class="swifta_input" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" required/>
                                   <em id="email_err"></em>
                                 </div>     
@@ -304,6 +307,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                              <li>
                                 
                                 <div class="">
+                                     <span class="asterisks_input">  </span>
                                    <input name="phone" class="swifta_input" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value=""  required/>
                                    <em id="phone_err"></em>
                                 </div>  
@@ -313,6 +317,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 
                                 <div class="">
+                                     <span class="asterisks_input">  </span>
                                    <input name="addr" class="swifta_input" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="" required />
                                    <em id="addr_err"></em>
                                 </div>   
