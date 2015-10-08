@@ -1,7 +1,12 @@
 // JavaScript Document
 var scripts = document.getElementsByTagName("script"),
 SrcPath = scripts[0].src;
-Path = SrcPath.replace("js/jquery.js", "");
+if(SrcPath.indexOf("js/jquery.js") > -1){
+    Path = SrcPath.replace("js/jquery.js", "");
+}
+if(SrcPath.indexOf("bootstrap/themes/js/jquery-1.7.2.min.js") > -1){
+    Path = SrcPath.replace("bootstrap/themes/js/jquery-1.7.2.min.js", "");
+}
 
 /*
 	Zenith API flags
