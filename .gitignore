@@ -7,10 +7,9 @@
 /application/views/et.php
 /php-wsdl-2.3/cache/*.*
 *ignore*
+/images/store_credit/*
+/images/merchant/*
+/images/products/*
+/images/banner_images/*
 
 
-
-/modules/fashion9/config/routes.php
-/cache/
-/images/
-/application/config/

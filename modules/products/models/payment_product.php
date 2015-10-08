@@ -176,7 +176,7 @@ class Payment_product_Model extends Model
 	
 	public function get_merchant_details($user_id="")
 	{
-		$result = $this->db->select("email")->from("users")->where(array("user_id"=>$user_id))->get()->current();
+		$result = $this->db->select("email, firstname, lastname")->from("users")->where(array("user_id"=>$user_id))->get()->current();
 		return $result;
 	}
 

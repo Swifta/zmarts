@@ -6887,11 +6887,18 @@ class Merchant_Controller extends website_Controller
 			$this->user_details = $this->merchant->get_user_details($storecreditid);
 			$change_status = $this->merchant->update_storecredit_status($status,$storecreditid);
 			$message_merchant = new View("themes/".THEME_NAME."/store_credits/storecredit_merchant_approvemail");
+			
+			
+			
 			$this->username = $this->user_details->current()->firstname;
 			$this->email = $this->user_details->current()->email;
 			$fromEmail = NOREPLY_EMAIL;
+			
+			
 			if(EMAIL_TYPE==2){
 				email::smtp($fromEmail,$this->email,$this->Lang['STR_APPR_MAIL'],$message_merchant);
+				
+				
 			}else {
 				email::sendgrid($fromEmail,$this->email,$this->Lang['STR_APPR_MAIL'],$message_merchant);
 			}
@@ -6910,6 +6917,7 @@ class Merchant_Controller extends website_Controller
 			$this->email = $this->user_details->current()->email;
 			$fromEmail = NOREPLY_EMAIL;
 			if(EMAIL_TYPE==2){
+				
 				email::smtp($fromEmail,$this->email,$this->Lang['STR_APPR_MAIL'],$message_merchant);
 			}else {
 				email::sendgrid($fromEmail,$this->email,$this->Lang['STR_APPR_MAIL'],$message_merchant);

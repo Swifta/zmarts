@@ -26,6 +26,9 @@ class Ads_Controller extends website_Controller
 		if($_POST){
 			
 			$this->AddPost = $this->input->post();
+			
+			
+			
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 				->pre_filter('trim')
 				->add_rules('ads_position', 'required')
@@ -42,6 +45,15 @@ class Ads_Controller extends website_Controller
 				$position = $this->AddPost["ads_position"];
 				$page_position = $this->AddPost["pages"];
 				$redirect_url = $this->AddPost["redirect_url"];	
+				
+				/*
+					Add club membership redirect url option
+					@Live
+				*/
+				$z_offer = $this->AddPost['z_offer'];
+				if($z_offer == 1)
+					$redirect_url = '#" onclick="javascript:load_club();return false;';
+				
 				$status = $this->ads->add_ads($addtitle,$position,$page_position,$redirect_url);
 				if($status){ 
 					$filename = upload::save('image');
@@ -143,6 +155,14 @@ class Ads_Controller extends website_Controller
 				$new_position = $this->AddPost["ads_position"];
 				$page_position = $this->AddPost["pages"];
 				$redirect_url = $this->AddPost["redirect_url"];	
+				
+				/*
+					Add club membership redirect url option
+					@Live
+				*/
+				$z_offer = $this->AddPost['z_offer'];
+				if($z_offer == 1)
+					$redirect_url = '#" onclick="javascript:load_club();return false;';
 				
 				$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('ads_position', 'required')

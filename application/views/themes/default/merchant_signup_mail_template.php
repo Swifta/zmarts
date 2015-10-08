@@ -34,15 +34,13 @@
                             <td>
                                 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border:1px solid #e3e3e3;padding:10px;color:#666666;font:normal 13px/19px arial;">
                                     <tr>
-                                        <td style="font:normal 18px/21px arial;color:#000;">
+                                        <td style="font:bold 12px arial;color:#666666; padding-top:30px">
                                          <?php if(isset($this->name)) { ?>
-                                           <?php echo $this->Lang['DEAR']; ?> <?php echo $this->name; ?>,
+                                           <?php echo $this->Lang['DEAR']; ?> <?php echo ucfirst($this->name); ?>,
                                            <?php } ?>
                                         </td> 
                                     </tr>
-                                    <tr height="10">
-                                        <td></td>
-                                    </tr>
+                                   
                                <tr>
                                <td>
                                 <?php if(isset($this->merchant_message)) { ?>
@@ -61,14 +59,14 @@
                         
                         <tr>
                             <td align="left" style="font:normal 13px/19px arial;color:#333;">
-                               <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#000000; text-decoration:none;"><?php echo PATH; ?></a> ,
+                               <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#666;; text-decoration:none;"><?php echo PATH; ?></a> ,
                             </td> 
                         </tr>
                         <tr height="5">
                             <td></td>
                         </tr>
                          <tr>      
-                            <td align="left" style="font:normal 13px/19px arial;color:#333;">
+                            <td align="left" style="font:normal 12px arial;color:#666; text-decoration:none">
                              <?php echo $this->Lang['THK_U']; ?>,
                             </td>
                         </tr>
@@ -76,8 +74,8 @@
                             <td></td>
                         </tr>
                          <tr>
-                            <td align="left" style="font:normal 13px/19px arial;color:#333;">
-                              <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#000000; text-decoration:none;"><?php echo SITENAME; ?></a> <?php echo $this->Lang['TEAM']; ?> .
+                            <td align="left" style="font:normal 13px/19px arial;color:#666;">
+                              <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#666; text-decoration:none;"><?php echo SITENAME; ?></a> <?php echo $this->Lang['TEAM']; ?> .
                             </td>
                         </tr>
                         
@@ -87,3 +85,5 @@
         </table>
     </body>
 </html>
+
+

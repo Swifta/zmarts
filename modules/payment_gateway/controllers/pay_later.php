@@ -293,6 +293,7 @@ class Pay_later_Controller extends Layout_Controller
 					email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 				}
             } else {
+				
                 $from = CONTACT_EMAIL;
 				$this->products_list = $this->pay_later->get_products_coupons_list($transaction,$deal_id);
 				$this->product_size = $this->pay_later->get_shipping_product_size();
@@ -302,6 +303,8 @@ class Pay_later_Controller extends Layout_Controller
 				$this->admin_email = $this->admin_list->current()->email;
                 $message = new View("themes/".THEME_NAME."/payment_mail_product");
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
+				
+				
                 if(EMAIL_TYPE==2) {
 					email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 					email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);

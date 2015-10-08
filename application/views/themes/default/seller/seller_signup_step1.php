@@ -1,5 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
+<style>
+    
+    .merchant_intro{font:normal 16px/21px arial;color:#666666;}
+</style>
  <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
         <div class="contianer_inner">
@@ -27,10 +31,11 @@
                         
                     </div>                    
                     <div class="payouter_block pay_br">
-                        <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['INTRO']; ?></h3>
+<!--                        <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['INTRO']; ?></h3>-->
                         <div class="p_inner_block clearfix">
                             <p class="merchant_intro">
-                            <?php echo $this->Lang['SELLER_INTRODUCTION']; ?>
+                            <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
+                            <br><input type="checkbox" /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             
                             </p>
                         </div>
