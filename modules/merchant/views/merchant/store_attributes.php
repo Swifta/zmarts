@@ -42,9 +42,9 @@
 			<select name="subsector" class="required" >
 				
 				<?php foreach($this->sub_sector_list as $s){?>
-				<?php if($uu->store_sector_id==$s->main_sector_id){
+				<?php if(intval($uu->store_sector_id) == intval($s->main_sector_id)){
 					$theme_check = true;
-						$theme_name = strtolower($s->sector_name);
+						$theme_name = strtolower(trim($s->sector_name));
 						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/controllers/'.$theme_name.'.php'))
 							$theme_check = false;
 						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/models/'.$theme_name.'.php'))

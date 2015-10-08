@@ -265,6 +265,7 @@ $(".slidetabs").tabs(".images > div", {
         <?php } ?>
     <?php } ?>
   </div>
+  
                     </div>                  
                     
                 </div> 

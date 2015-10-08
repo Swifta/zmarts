@@ -452,22 +452,30 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <?php if($this->free_shipping_setting == 1){ ?>
                                         <tr><td><label><input type="checkbox" name="free" value="1" 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Free Shipping</label></td>
+                                        checked <?php } } else { ?> checked <?php } ?>>Free Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102); text-transform:none">
+                                        NO shipping cost incurred by customer to ship the item.
+                                        </span></label></td>
                                         <?php } else { ?>
                                         <input type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
                                        <td><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping</label></td></tr>
+                                        checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102); text-transform:none; ">
+                                       The shipping cost value is the same on all types of items.
+                                        </span></label></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="flat" value="0" >
                                         <?php } if($this->per_product_setting == 1){ ?>
                                         <tr><td><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping</label></td>
+                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102);  text-transform:none; ">
+                                        The shipping cost value varies from item to item.
+                                        </span></label></td>
                                         <?php } else { ?>
                                         <input type="hidden" name="product" value="0" >
                                         <?php } if($this->per_quantity_setting == 1){ ?>
                                         <td><label><input type="checkbox" name="quantity" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('quantity')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping</label></td></tr>
+                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102);  text-transform:none; ">
+                                        The shipping cost value varies basing on the quantity of items purchased.
+                                        </span></label></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="quantity" value="0" >
                                         <?php } if($this->aramex_setting == 1){ ?>
@@ -580,7 +588,27 @@ function previewTheme(s){
  function submit_form()
  {
 	document.signup2.submit();
+	
 	 
+	 
+ }
+ 
+ function show_ship_desc(desc){
+	var descs = $('.class_ship_desc');
+	for(i = 0; i < descs.length; i++)
+	 $($(descs[i])).css({'display':'none'});
+	 
+	 var desc = $(desc).next('span');
+	 desc.css({'display':'block', 'opacity':1}).animate({'opacity': 1}, 4000, function(){
+		 
+		 		desc.animate({'opacity': 0}, 1000, function(){
+					desc.css({'display':'none'})
+				});
+				
+		 });
+	 
+	 
+	 return false;
  }
  </script>
  
