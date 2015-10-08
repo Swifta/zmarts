@@ -1,4 +1,5 @@
 /cache/*.*
+/.htaccess
 /db_test/*.*
 /application/logs/*.*
 /application/controllers/sample.php
