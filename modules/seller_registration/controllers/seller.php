@@ -103,6 +103,8 @@ class Seller_Controller extends Layout_Controller {
               }
 
 		$this->template->title = $this->Lang['MER_SIGN_1'];
+		
+		
 		$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_zenith");
 		
 	}
