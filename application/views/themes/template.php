@@ -30,11 +30,196 @@
         echo $this->template->style;
         echo $this->template->javascript;
 ?>
-
-
- 
-            
-
 </head>
 
+<body>
+<?php if(isset($this->sector)) {
+				if($this->theme_name) { 
+					$sector =$this->theme_name; 
+				} else{
+				    $sector="default";
+				 }?>
+
+<!--sector header start-->
+<?php if($sector =="default" || $sector =="fashion9" ) { 
+ if($sector =="default" ) { 
+				     echo new View("themes/" . THEME_NAME . "/header");
+				}else{
+					
+				    echo new View("themes/" . THEME_NAME ."/".$sector."/header"); 
+				} ?>
+<div class="mt10" style="display:none;" id="citylist">
+  <ul>
+    <?php
+                    $a = '';
+                    foreach ($this->all_city_list as $city) {
+                        ?>
+    <li <?php if ($a != $city->country_name) { ?>  style="clear:both; color:#E14948;float:left;" <?php } ?> >
+      <?php
+                            if ($a != $city->country_name) {
+                                $a = $city->country_name;
+                                echo ucfirst($city->country_name);
+                            } else {
+                                ?>
+      <p>&nbsp;</p>
+      <?php } ?>
+      <a  onclick="return changecity('<?php echo $city->city_id; ?>', '<?php echo $city->city_url; ?>');" ><?php echo ucfirst($city->city_name); ?> </a></li>
+    <?php } ?>
+  </ul>
+</div >
+<?php }else{
+	
+	
+}?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+
+<!-- header start--> 
+<?php echo new View("themes/" . THEME_NAME . "/header"); ?> 
+
+<!--header End-->
+<?php }
+	 ?>
+
+<!--
+            <span id="success_message"></span>
+<?php if (!empty($this->response)) { ?>
+                <div class="msg_show"  id="messagedisplay">            
+                    <div class="session_wrap">
+                        <div class="session_container">
+                            <div class="success_session">
+                                <p><span ><?php echo $this->response; ?>.</span></p>
+                                <div class="close_session_2">
+                                    <a class="closestatus cur" title="Close"  onclick="return closeerr();" >&nbsp;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+<?php if (!empty($this->error_response)) { ?>
+                <div class="msg_show" id="error_messagedisplay">  
+                    <div class="session_wrap">
+                        <div class="session_container">
+                            <div class="failure_session">
+                                <p ><span><?php echo $this->Lang['ERROR']; ?>!&nbsp;</span> <?php echo $this->error_response; ?></p>
+                                <div class="close_session">
+                                    <a  title="<?php echo $this->Lang['CLOSE']; ?>" title="Close" onclick="return closeerr('err');" > &nbsp;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            -->
+
+<?php
+    
+        if($this->response != "" || $this->error_response != ""){
+            $success_alert = false;
+            $msg_to_alert = $this->error_response;
+            if($this->response != ""){
+                $success_alert = true;
+                $msg_to_alert = $this->response;
+            }
+    ?>
+<script type="text/javascript">
+	
+	$(window).load(function() {
+					$(".wloader_img").fadeOut("slow");
+					$(".wloader_img").css("visibility:visible");
+				})
+    $(document).ready(function() {
+        var jNotify = $.JNotify({
+
+          // addional CSS class
+          'className':'JNotify-success', 
+
+          // warning, info, success or error
+          'theme':'error', 
+
+          // background color
+          'backgroundColor':'#FFFFFF', 
+
+          // border color
+          'borderColor':'#BCE8F1',
+
+          // border radius
+          'borderRadius':'3px', 
+
+          // left, center or right
+          'position':'center',
+
+          // max width
+          'maxWidth':'390px',
+
+          // top position
+          'top':20, 
+
+          // z-index
+          'zIndex': 888,
+
+
+          // height
+          'height':null, 
+
+          // padding
+          'padding':'8px',
+
+          // custom message
+          'message':'<?php echo $msg_to_alert; ?>',
+
+          // font size
+          'fontSize':'19px', 
+
+          // font color
+          'fontColor': '#FFFFFF', 
+
+          // auto close
+          'autoClose':true,
+
+          // shows a close button
+          'showCloseButton':true,
+
+          // show / close duration
+          'showDuration':5000,  
+          'closeDuration':1000
+
+        });
+        <?php if($success_alert){ ?>
+        jNotify.setTheme('success');
+        <?php } ?>
+    });
+    <?php
+        }
+    ?>
+				
+			</script> 
+
+<!--container start--> 
+<?php echo $this->template->content; ?> 
+<!--container_end-->
+
+<?php if(isset($this->sector)) {
+				if($this->theme_name) { 
+					$sector =$this->theme_name; 
+				} else{
+				    $sector="default";
+				    }?>
+
+<!--sector header start-->
+<?php if($sector =="default") { 
+				     echo new View("themes/" . THEME_NAME . "/footer");
+				}else{
+				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
+				} ?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+<!--footer start--> 
+<?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
+<!--footer end-->
+<?php } ?>
+</body>
 </html>
