@@ -126,10 +126,7 @@
     ?>
 <script type="text/javascript">
 	
-	$(window).load(function() {
-					$(".wloader_img").fadeOut("slow");
-					$(".wloader_img").css("visibility:visible");
-				})
+	
     $(document).ready(function() {
         var jNotify = $.JNotify({
 
@@ -221,5 +218,13 @@
 <?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
 <!--footer end-->
 <?php } ?>
+<script type="text/javascript">
+$(window).load(function() {
+					$(".wloader_img").fadeOut("slow");
+					$(".wloader_img").css("visibility:visible");
+				});
+				
+				alert("HEllo");
+</script>
 </body>
 </html>
