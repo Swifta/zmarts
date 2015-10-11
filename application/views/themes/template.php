@@ -28,7 +28,9 @@
         ?>
 <?php 
         echo $this->template->style;
-        echo $this->template->javascript; ?>
+        echo $this->template->javascript;
+?>
+
 </head>
 <body>
 <?php if(isset($this->sector)) {
@@ -44,11 +46,8 @@
 				    echo new View("themes/" . THEME_NAME ."/".$sector."/header"); 
 				} ?>
 <!--Sector header End-->
-<?php } else {  ?>
-<!-- header start--> 
-<?php echo new View("themes/" . THEME_NAME . "/header"); ?> 
-<!--header End-->
-<?php } ?>
+ 
+
 <div class="mt10" style="display:none;" id="citylist">
   <ul>
     <?php
@@ -68,8 +67,35 @@
     <?php } ?>
   </ul>
 </div >
-<!--
-            <span id="success_message"></span>
+
+<?php } else {  ?>
+<!-- header start--> 
+<?php echo new View("themes/" . THEME_NAME . "/header"); ?> 
+<!--header End-->
+
+<div class="mt10" style="display:none;" id="citylist">
+  <ul>
+    <?php
+                    $a = '';
+                    foreach ($this->all_city_list as $city) {
+                        ?>
+    <li <?php if ($a != $city->country_name) { ?>  style="clear:both; color:#E14948;float:left;" <?php } ?> >
+      <?php
+                            if ($a != $city->country_name) {
+                                $a = $city->country_name;
+                                echo ucfirst($city->country_name);
+                            } else {
+                                ?>
+      <p>&nbsp;</p>
+      <?php } ?>
+      <a  onclick="return changecity('<?php echo $city->city_id; ?>', '<?php echo $city->city_url; ?>');" ><?php echo ucfirst($city->city_name); ?> </a></li>
+    <?php } ?>
+  </ul>
+</div >
+
+<?php } ?>
+
+<!--          <span id="success_message"></span>
 <?php if (!empty($this->response)) { ?>
                 <div class="msg_show"  id="messagedisplay">            
                     <div class="session_wrap">
@@ -97,10 +123,8 @@
                         </div>
                     </div>
                 </div>
-            <?php } ?>
-            --> 
-<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
-<script type="text/javascript">
+            <?php } ?>        --> 
+
     <?php
     
         if($this->response != "" || $this->error_response != ""){
@@ -111,75 +135,6 @@
                 $msg_to_alert = $this->response;
             }
     ?>
-    $(document).ready(function() {
-        var jNotify = $.JNotify({
-
-          // addional CSS class
-          'className':'JNotify-success', 
-
-          // warning, info, success or error
-          'theme':'error', 
-
-          // background color
-          'backgroundColor':'#FFFFFF', 
-
-          // border color
-          'borderColor':'#BCE8F1',
-
-          // border radius
-          'borderRadius':'3px', 
-
-          // left, center or right
-          'position':'center',
-
-          // max width
-          'maxWidth':'390px',
-
-          // top position
-          'top':20, 
-
-          // z-index
-          'zIndex': 888,
-
-          // height
-          'height':null, 
-
-          // padding
-          'padding':'8px',
-
-          // custom message
-          'message':'<?php echo $msg_to_alert; ?>',
-
-          // font size
-          'fontSize':'19px', 
-
-          // font color
-          'fontColor': '#FFFFFF', 
-
-          // auto close
-          'autoClose':true,
-
-          // shows a close button
-          'showCloseButton':true,
-
-          // show / close duration
-          'showDuration':5000,  
-          'closeDuration':1000
-
-        });
-        <?php if($success_alert){ ?>
-        jNotify.setTheme('success');
-        <?php } ?>
-    });
-    <?php
-        }
-    ?>
-				$(window).load(function() {
-					$(".wloader_img").fadeOut("slow");
-					$(".wloader_img").css("visibility:visible");
-				})
-			</script> 
-<!--container start--> 
 <?php echo $this->template->content; ?> 
 <!--container_end-->
 <?php if(isset($this->sector)) {
