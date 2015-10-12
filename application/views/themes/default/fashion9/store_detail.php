@@ -77,7 +77,7 @@ if(count($this->merchant_personalised_details)>0) {
                         //echo "No Image file";
 ?>
                 <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
                 </li>
 <?php
                     }
@@ -96,6 +96,9 @@ else{?>
                     <p><span>Up to 50% Off</span></p>
                     <p><span>On selected items online and in stores</span></p>
             </div>
+    </li>
+    <li>
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
     </li>
 
 <!-- display default banners-->
@@ -180,7 +183,7 @@ foreach($this->merchant_personalised_details as $m) {
 if((count($this->best_seller)>0) || (count($this->get_product_categories)>0)) { 
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if(count($this->best_seller)>0) {
     $displayed = 1;	
@@ -235,7 +238,7 @@ $avg_rating = round($avg_rating); ?>
         </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -249,19 +252,19 @@ $avg_rating = round($avg_rating); ?>
 
  }
  
- if((count($this->best_seller)>4) || (count($this->get_product_categories)>0)) {
+ if((count($this->best_seller)>5) || (count($this->get_product_categories)>0)) {
  ?>
     <div class="item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php 
-    if(count($this->best_seller)>4) {
+    if(count($this->best_seller)>5) {
 
     $displayed = 1;
     $start = 1;
     foreach($this->best_seller as $best) {  
      $symbol = CURRENCY_SYMBOL;
-     if($start > 4){
+     if($start > 5){
  ?>
 <li class="span3">
         <div class="product-box">
@@ -312,7 +315,7 @@ $avg_rating = round($avg_rating); ?>
 <?php
         $displayed++;
      }
-     if($displayed > 4){
+     if($displayed > 5){
          break;
      }
      
@@ -354,7 +357,7 @@ $avg_rating = round($avg_rating); ?>
 if(count($this->get_product_categories) > 0) {
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if($this->product_setting) {
     $displayed = 1;	
@@ -409,7 +412,7 @@ $avg_rating = round($avg_rating); ?>
         </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -423,19 +426,19 @@ $avg_rating = round($avg_rating); ?>
 
  }
  
- if(count($this->get_product_categories) > 4) {
+ if(count($this->get_product_categories) > 5) {
  ?>
     <div class="item">
                 <ul class="thumbnails">
 
 <?php 
-    if(count($this->get_product_categories) > 4) {
+    if(count($this->get_product_categories) > 5) {
 
     $displayed = 1;
     $start = 1;
     foreach($this->get_product_categories as $products) {  
      $symbol = CURRENCY_SYMBOL;
-     if($start > 4){
+     if($start > 5){
  ?>
 <li class="span3">
         <div class="product-box">
@@ -486,7 +489,7 @@ $avg_rating = round($avg_rating); ?>
 <?php
         $displayed++;
      }
-     if($displayed > 4){
+     if($displayed > 5){
          break;
      }
      
@@ -527,7 +530,7 @@ $avg_rating = round($avg_rating); ?>
 if(count($this->get_deals_categories) > 0) {
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if(($this->deal_setting)) {
     $displayed = 1;	
@@ -549,7 +552,7 @@ if(count($this->get_deals_categories) > 0) {
          <img src="<?php echo PATH .'images/products/1000_800/'.$deals_categories->deal_key.'_1'.'.png'?>" />
         <?php } ?>
         <?php } else { ?>
-            <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
+            <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $deals_categories->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
         <?php } ?>
     </a>
             </p>
@@ -592,7 +595,7 @@ $avg_rating = round($avg_rating); ?>
         </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -606,19 +609,19 @@ $avg_rating = round($avg_rating); ?>
 
  }
 
- if(count($this->get_deals_categories) > 4) {
+ if(count($this->get_deals_categories) > 5) {
  ?>
     <div class="item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php 
-    if(count($this->get_deals_categories) > 4) {
+    if(count($this->get_deals_categories) > 5) {
 
     $displayed = 1;
     $start = 1;
     foreach($this->get_deals_categories as $deals_categories) {  
      $symbol = CURRENCY_SYMBOL;
-     if($start > 4){
+     if($start > 5){
  ?>
 <li class="span3">
         <div class="product-box">
@@ -671,7 +674,7 @@ $avg_rating = round($avg_rating); ?>
 <?php
         $displayed++;
      }
-     if($displayed > 4){
+     if($displayed > 5){
          break;
      }
      
@@ -714,7 +717,7 @@ $avg_rating = round($avg_rating); ?>
 if(count($this->get_auction_categories) > 0) {
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if(($this->auction_setting)) {
     $displayed = 1;	
@@ -796,7 +799,7 @@ $avg_rating = round($avg_rating); ?>
             </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;

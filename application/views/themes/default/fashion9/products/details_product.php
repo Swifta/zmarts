@@ -52,6 +52,7 @@
 
 </script>
 <?php
+//echo "hello world"; die;
 foreach ($this->product_deatils as $products) {
     $symbol = CURRENCY_SYMBOL;
     ?>
