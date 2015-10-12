@@ -192,6 +192,9 @@ $symbol = CURRENCY_SYMBOL;
         <?php } ?>
     <?php } ?>
                             </div>
+                            
+                            
+                            
                          <?php if (count($this->view_hot_products_list ) > 0) {  ?>
                         <div class=" home_hot_prdt product_lisitng">
                             <ul>

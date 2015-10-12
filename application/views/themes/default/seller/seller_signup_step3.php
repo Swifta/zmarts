@@ -259,11 +259,11 @@ input[type=text],input[type=password]
                        <div class="seller_signup_menu clearfix">
                         <div class="seller_signup_introduction">
                             <span>01</span>
-                            <p><?php echo $this->Lang['INTRO']; ?></p>
+                            <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['INTRO']; ?></p>
                         </div>
                         <div class="seller_signup_form_submit">
                             <span>02</span>
-                            <p>Merchant <?php echo $this->Lang['SIGN_UP']; ?></p>                            
+                            <p style=" font-weight: bold; color:#000000">Merchant <?php echo $this->Lang['SIGN_UP']; ?></p>                            
                         </div>
                         <?php /*<div class="seller_signup_finish">                            
                             <span>03</span>
@@ -323,7 +323,7 @@ input[type=text],input[type=password]
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo @$this->userPost['store_email_id'];?>" required autofocus />
+                                 <input type="text" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo @$this->userPost['store_email_id'];?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>
@@ -458,7 +458,7 @@ $('#store_email_id').click(function () {
 				   
                                 </ul>
                                 <div class="merchant_submit_buttons step3_new" id="submit32">
-                                    <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" onclick="comfirm_click()" class="sign_submit" />
+                                    <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" onclick="comfirm_click()"  class="sign_submit" />
                                     <a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['GO_BACK'];?>" class="sign_cancel"><?php echo $this->Lang['GO_BACK'];?></a>                        
                                 
                                 </div>
@@ -471,82 +471,12 @@ $('#store_email_id').click(function () {
         </div>
     </div>
     <!-- SELLER SIGNUP -->
-<script src="<?php echo PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'; ?>" type="text/javascript"></script>
  <script>
  
-    $(document).ready(function(){
-         $("form#signup4").validate({
-			 rules: {
-				website: {
-				  //required: true,
-				  //url: true
-				}
-				
-			  },
-  
-			 messages: {
-				 
-		   storename: {
-			   required: "<?php echo $this->Lang['PLS_ENT_STR_NAM']; ?>"                         
-		   },
-		   
-		    username: {
-			   required: "<?php echo $this->Lang['ENTER_STORE_USER_NAME']; ?>"                         
-		   },
-		   
-		   // store_email_id: {
-			//   required: "<?php echo $this->Lang['ENTER_STORE_EMAIL_ID']; ?>"                         
-		   //},
+     $(document).ready(function(){
 
-		   city: {
-			   required: "<?php echo $this->Lang['SELECT UR CITY HERE']; ?>"                         
-		   },
-		   
-		   country: {
-			   required: "<?php echo $this->Lang['SELECT UR COUNTRY HERE']; ?>"                         
-		   },
-
-		   /*latitude: {
-				required:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
-			},
-			
-			longitude: {
-				required:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
-			}, */
-		   
-		   address1: {
-			   required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-		   },
-			address2: {
-			   required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-		   },
-		  mobile : {
-			   required: "<?php echo $this->Lang['PLZ_ETR_PHO']; ?>",
-			   number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
-			},
-		zipcode : {
-		   required: "<?php echo $this->Lang['PLS_ENT_ZIP']; ?>",
-		   number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
-		},
-		//website : {
-		   //required: "<?php echo $this->Lang['PLS_ENT_URL']; ?>",
-		   //url: "<?php echo $this->Lang['PLS_ENT_URL']; ?>"                             
-		//},
-		data : {
-		   required: "<?php echo $this->Lang['PLZ_DESCRIBE']; ?>"
-		},
-		
-    },
- submitHandler: function(form) {
-     
-   // some other code
-   // maybe disabling submit button
-   // then:
-	$('div#submit').hide();
-   form.submit();
- }
 });
-});
+ 
  
  </script>
  
@@ -554,6 +484,16 @@ $('#store_email_id').click(function () {
 function comfirm_click(){
     //alert("here");
     //<?php echo PATH; ?>logout.html
+    var x = document.forms["signup4"]["storename"].value;
+   // var x1 = document.forms["signup4"]["store_email_id"].value;
+    var x2 = document.forms["signup4"]["username"].value;
+    var x3 = document.forms["signup4"]["mobile"].value;
+    
+    if (x == null || x == "" || x2 == null || x2 == "" || x3 == null || x3 == "" ) {
+        //alert("Name must be filled out");
+        return false;
+    }
+    
     swal({   
         title: "Registration Completed",   
         text: "You have successfully completed your sign up, Kindly wait for approval from Zmart admin",   

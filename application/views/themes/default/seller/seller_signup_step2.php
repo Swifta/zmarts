@@ -252,7 +252,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     <div class="seller_signup_menu">
                         <div class="seller_signup_introduction">
                             <span>01</span>
-                            <p><?php echo $this->Lang['INTRO']; ?></p>
+                            <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['INTRO']; ?></p>
                         </div>
                         <div class="seller_signup_form_submit active_tab">
                             <span>02</span>
@@ -265,7 +265,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         </div>*/?>
                         <div class="seller_signup_finish">                            
                             <span>03</span>
-                            <p><?php echo $this->Lang['FINISH']; ?></p>                            
+                            <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['FINISH']; ?></p>                            
                         </div>
                     </div>
                 <form action="" method="post" name="signup2" id="signup2"  onclick="return atleast_onecheckbox(event)" >
@@ -284,9 +284,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <input class="swifta_input" name="f_name" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" autofocus required/>
                                    <em id="f_name_err"></em>
                                 </div> -->
-<input class="swifta_input" type="text" name="firstname"  placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" value="" autofocus required />
-									
-                                          <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
+                             <input class="swifta_input" type="text" name="firstname"  placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
+                                    <?php if($this->session->get('firstname')) { ?>
+                                    value="<?php  echo $this->session->get('firstname'); ?>" required autofocus  /> 			<?php } else { ?>
+									value="<?php  if(!isset($this->form_error['firstname']) && isset($this->userPost['firstname'])){echo $this->userPost['firstname'];} ?>" placeholder= "<?php echo $this->Lang['FIRST_NAME']; ?>" />
+									<?php } ?>
+                                          <em><?php  if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 <!--									<span class="asterisk_input">  </span> -->
 								</div>
                                     </li>
@@ -295,7 +298,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
 								          <span class="asterisks_input">  </span>
 									<input type="text" name="lastname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" 
-									value="" autofocus required />
+									<?php if($this->session->get('lastname')) { ?>
+									value="<?php  echo $this->session->get('lastname'); ?>" required autofocus /> 			                <?php } else { ?>
+									value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>" placeholder= "<?php echo $this->Lang["LAST_NAME"]; ?>"  />
+									<?php } ?>
 <!--								<span class="asterisk_input">  </span> -->
                                                                         <em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
                                                                 </div>
@@ -305,7 +311,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
                                                                       <span class="asterisks_input">  </span>
 									<input type="text" name="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
-									value="" autofocus required />
+									<?php if($this->session->get('memail')) { ?>
+									value="<?php  echo $this->session->get('memail'); ?>" required autofocus /> 			                <?php } else { ?>
+									 value="<?php if(!isset($this->form_error['email']) && isset($this->userPost['email'])){echo $this->userPost['email'];}?>" placeholder= "<?php echo $this->Lang["EMAIL_F"]; ?>"  />
+									 <?php  } ?>
                                                                         <em> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
 <!--								<span class="asterisk_input">  </span> -->
                                                                         
@@ -316,7 +325,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <div class="">
                                   <span class="asterisks_input">  </span>
 									<input type="text" name="payment_acc" class="swifta_input" 
-									value="" autofocus required />
+									<?php if($this->session->get('payment_acc')) { ?>
+									value="<?php  echo $this->session->get('payment_acc'); ?>" placeholder= "<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" required autofocus /> 			                        <?php } else { ?>
+									value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>" placeholder="<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" />
+									<?php } ?>
                                                                         <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
 <!--                               <span class="asterisk_input">  </span> -->
                                 </div>
@@ -329,7 +341,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 				<div class="">
                                       <span class="asterisks_input">  </span>
                                         <input type="text" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
-                                       value="" autofocus required />
+                                        <?php if($this->session->get('nuban_session')) { ?>
+                                        value="<?php  echo $this->session->get('nuban_session'); ?>" required autofocus /> 			 <?php } else { ?>
+                                        value="<?php if(!isset($this->form_error['error_nuban']) && isset($this->userPost['error_nuban'])){echo $this->userPost['error_nuban'];}?>" placeholder="<?php echo $this->Lang["ZENITH_ACCOUNT_ENTER_PLACEHOLDER"]; ?>"  />
+                                        <?php } ?>
                                         <em><?php if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
                                         <br /><span style="font-size:92%;"><strong style="color:blue;">Don't have a Zenith Bank Account? </strong> 
                                             <a href="<?php echo PATH; ?>merchant-signup-account-opening.html" style="color:green;">Open an Account Here</a></span>
@@ -341,8 +356,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             
 								<div class="">
                                                                       <span class="asterisks_input">  </span>
-									<input type="text" name="mr_address1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
-									value="" required autofocus/>
+									<input type="text" name="mr_address1" class="swifta_input" 
+									<?php if($this->session->get('mraddress2')) { ?>
+                                                                               value="<?php  echo $this->session->get('mraddress2'); ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" required autofocus /> 			 <?php } else { ?>
+									value="<?php if(isset($this->userPost['mr_address2'])){echo $this->userPost['mr_address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" />
+									<?php } ?>
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
 <!--                                        <span class="asterisk_input">  </span> -->
                                                                 </div>
@@ -352,7 +370,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                  <div class="">
 					  <span class="asterisks_input">  </span>			
-                                     <input type="text" name="mr_address2" class="swifta_input" value="<?php  echo $this->session->get('mraddress2'); ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" value="" required autofocus /> 			
+                                     <input type="text" name="mr_address2" class="swifta_input" 
+									<?php if($this->session->get('mraddress2')) { ?>
+									value="<?php  echo $this->session->get('mraddress2'); ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			 <?php } else { ?>
+									value="<?php if(isset($this->userPost['mr_address2'])){echo $this->userPost['mr_address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" />
+									<?php } ?>                                          
 									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                 
                                  </div>
@@ -361,8 +383,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
 								<div class="">
                                                                       <span class="asterisks_input">  </span>
-									<input type="text" name="mr_mobile" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>" value="" required autofocus/>
-									
+									<input type="text" name="mr_mobile" class="swifta_input" 
+                                                                               placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+									<?php if($this->session->get('mphone_number')) { ?>
+									value="<?php  echo $this->session->get('mphone_number'); ?>"  /> 			 <?php } else { ?>
+									value="<?php if(!isset($this->form_error['mr_mobile']) && isset($this->userPost['mr_mobile'])){echo $this->userPost['mr_mobile'];}?>" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>"  />
+									<?php } ?>
 									<em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
                                  
                                                                 </div>
@@ -426,22 +452,30 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <?php if($this->free_shipping_setting == 1){ ?>
                                         <tr><td><label><input type="checkbox" name="free" value="1" 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Free Shipping</label></td>
+                                        checked <?php } } else { ?> checked <?php } ?>>Free Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102); text-transform:none">
+                                        NO shipping cost incurred by customer to ship the item.
+                                        </span></label></td>
                                         <?php } else { ?>
                                         <input type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
                                        <td><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping</label></td></tr>
+                                        checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102); text-transform:none; ">
+                                       The shipping cost value is the same on all types of items.
+                                        </span></label></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="flat" value="0" >
                                         <?php } if($this->per_product_setting == 1){ ?>
                                         <tr><td><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping</label></td>
+                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102);  text-transform:none; ">
+                                        The shipping cost value varies from item to item.
+                                        </span></label></td>
                                         <?php } else { ?>
                                         <input type="hidden" name="product" value="0" >
                                         <?php } if($this->per_quantity_setting == 1){ ?>
                                         <td><label><input type="checkbox" name="quantity" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('quantity')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping</label></td></tr>
+                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping<a id="id_ship_desc_free_qtn"  onclick="show_ship_desc(this);return false;" href="#">&nbsp;<i class="fa fa-question-circle"></i><i></i></a><span class="class_ship_desc" id="id_ship_free_desc"  style=" font-family:Arial, Helvetica, sans-serif; font-weight:normal; display: none; width: 200px; word-wrap: break-word; margin: 4px; border-bottom: 1px solid rgb(166, 28, 0); border-left: 1px solid rgb(166, 28, 0); border-radius: 4px; padding: 4px 4px 6px 6px; color: rgb(102, 102, 102);  text-transform:none; ">
+                                        The shipping cost value varies basing on the quantity of items purchased.
+                                        </span></label></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="quantity" value="0" >
                                         <?php } if($this->aramex_setting == 1){ ?>
@@ -504,49 +538,49 @@ function previewTheme(s){
 }
 
     $(document).ready(function(){
-        $('.popup_block_theme').css({'display' : 'none'});
-         $("#signup2").validate({
-			 messages: {				 
-		   firstname: {
-			   required: "<?php echo $this->Lang['PLS_ENT_FNAM']; ?>"                         
-		   },
-
-		   lastname: {
-			   required: "<?php echo $this->Lang['PLS_ENT_LNAM']; ?>"                         
-		   },
-
-		   email: {
-				required:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
-				email:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                       
-			},
-		   
-		   mr_address1: {
-			   required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-		   },
-		     mr_address2: {
-			   required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-		   },
-		  mr_mobile : {
-			   required: "<?php echo $this->Lang['PLZ_ETR_PHO']; ?>",
-			   number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
-			},
-		  error_nuban : {
-			   required: "<?php echo $this->Lang['PLZ_ETR_NUBAN']; ?>",
-			   number: "<?php echo $this->Lang['PLS_ENT_NUBAN']; ?>"                             
-			},
-			payment_acc: {
-				required:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
-				email:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                       
-			},
-    },
- submitHandler: function(form) {
-   // some other code
-   // maybe disabling submit button
-   // then:
-	// $('div#submit').hide();
-   form.submit();
- }
-});
+//        $('.popup_block_theme').css({'display' : 'none'});
+//         $("#signup2").validate({
+//			 messages: {				 
+//		   firstname: {
+//			   required: "<?php //echo $this->Lang['PLS_ENT_FNAM']; ?>"                         
+//		   },
+//
+//		   lastname: {
+//			   required: "<?php //echo $this->Lang['PLS_ENT_LNAM']; ?>"                         
+//		   },
+//
+//		   email: {
+//				required:"<?php //echo $this->Lang['PLS_ENT_EMAIL']; ?>",
+//				email:"<?php //echo $this->Lang['PLS_ENT_EMAIL']; ?>"                       
+//			},
+//		   
+//		   mr_address1: {
+//			   required: "<?php //echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
+//		   },
+//		     mr_address2: {
+//			   required: "<?php //echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
+//		   },
+//		  mr_mobile : {
+//			   required: "<?php //echo $this->Lang['PLZ_ETR_PHO']; ?>",
+//			   number: "<?php //echo $this->Lang['PLS_ENT_NO']; ?>"                             
+//			},
+//		  error_nuban : {
+//			   required: "<?php //echo $this->Lang['PLZ_ETR_NUBAN']; ?>",
+//			   number: "<?php //echo $this->Lang['PLS_ENT_NUBAN']; ?>"                             
+//			},
+//			payment_acc: {
+//				required:"<?php //echo $this->Lang['PLS_ENT_EMAIL']; ?>",
+//				email:"<?php // $this->Lang['PLS_ENT_EMAIL']; ?>"                       
+//			},
+//    },
+// submitHandler: function(form) {
+//   // some other code
+//   // maybe disabling submit button
+//   // then:
+//	// $('div#submit').hide();
+//   form.submit();
+// }
+//});
 });
    
 
@@ -554,7 +588,27 @@ function previewTheme(s){
  function submit_form()
  {
 	document.signup2.submit();
+	
 	 
+	 
+ }
+ 
+ function show_ship_desc(desc){
+	var descs = $('.class_ship_desc');
+	for(i = 0; i < descs.length; i++)
+	 $($(descs[i])).css({'display':'none'});
+	 
+	 var desc = $(desc).next('span');
+	 desc.css({'display':'block', 'opacity':1}).animate({'opacity': 1}, 4000, function(){
+		 
+		 		desc.animate({'opacity': 0}, 1000, function(){
+					desc.css({'display':'none'})
+				});
+				
+		 });
+	 
+	 
+	 return false;
  }
  </script>
  

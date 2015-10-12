@@ -496,3 +496,30 @@ $config['Simobre/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Simob
 $config['Simobre/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Simobre/$1/$2";
 $config['Simobre/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Simobre/$1/$2";
 // Simobre End
+// olsoft Start
+$config['olsoft'] ="electronics3/stores_home_page/olsoft";
+$config['olsoft/products.html'] = "/electronics3/product_list/olsoft";
+$config['olsoft/today-deals.html'] = "/electronics3/deal_list/olsoft";
+$config['olsoft/auction.html'] = "/electronics3/auction_list/olsoft";
+$config['olsoft/products/c/(.*)/(.*).html'] = "/electronics3/product_list/olsoft/$1/$2";
+$config['olsoft/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/olsoft/$1/$2";
+$config['olsoft/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/olsoft/$1/$2";
+// olsoft End
+// olm Start
+$config['olm'] ="electronics3/stores_home_page/olm";
+$config['olm/products.html'] = "/electronics3/product_list/olm";
+$config['olm/today-deals.html'] = "/electronics3/deal_list/olm";
+$config['olm/auction.html'] = "/electronics3/auction_list/olm";
+$config['olm/products/c/(.*)/(.*).html'] = "/electronics3/product_list/olm/$1/$2";
+$config['olm/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/olm/$1/$2";
+$config['olm/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/olm/$1/$2";
+// olm End
+// Tests Start
+$config['Tests'] ="electronics3/stores_home_page/Tests";
+$config['Tests/products.html'] = "/electronics3/product_list/Tests";
+$config['Tests/today-deals.html'] = "/electronics3/deal_list/Tests";
+$config['Tests/auction.html'] = "/electronics3/auction_list/Tests";
+$config['Tests/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Tests/$1/$2";
+$config['Tests/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Tests/$1/$2";
+$config['Tests/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Tests/$1/$2";
+// Tests End

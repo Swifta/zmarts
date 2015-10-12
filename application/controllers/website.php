@@ -4,6 +4,7 @@ class Website_Controller extends Template_Controller
 	public $template='themes/template';                 
 	function __construct()
 	{
+		
 		parent::__construct();
 		$this->session = Session::instance();
 		include Kohana::find_file('vendor/language/admin_language', DEFAULT_LANGUAGE);
@@ -28,6 +29,9 @@ class Website_Controller extends Template_Controller
 		} else {
 			$this->template->style = html::stylesheet(array(PATH.'css/main.css'));
 		}
+		
+		$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/font-awesome-4.4.0/css/font-awesome.min.css'));
+		
 		$this->template->javascript = html::script(array(PATH.'js/jquery.js',PATH.'js/script.js'));
 		$this->user_id = $this->session->get("user_id");
 		$this->user_id1 = $this->session->get("user_id1");

@@ -1,4 +1,5 @@
 /cache/*.*
+/.htaccess
 /db_test/*.*
 /application/logs/*.*
 /application/controllers/sample.php
@@ -11,5 +12,4 @@
 /images/merchant/*
 /images/products/*
 /images/banner_images/*
-
 
