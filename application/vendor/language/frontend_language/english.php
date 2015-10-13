@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-$THIS_SITENAME = SITENAME;
+//$THIS_SITENAME = SITENAME;
 $content_text = array(
 
 // general
@@ -23,6 +23,8 @@ $content_text = array(
 
 "PAYPAL_CREDIT" => "Credit card using paypal",
 
+"STORE_EMAIL_ID" => "Please enter store email",
+    
 "AUTHORIZE" => "Authorize.net",
 
 "DESC" => "Description",
@@ -1636,6 +1638,8 @@ $content_text = array(
 
 "ENTER_FIRST_NAME" => "Enter your first name here",
 
+"ENTER_COMPANY_NAME" => "Enter your company name here",
+    
 "ENTER_LAST_NAME" => "Enter your last name here",
 
 "ENTE_EMAIL_F" => "Enter a valid email address",
