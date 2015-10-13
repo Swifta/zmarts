@@ -134,7 +134,6 @@ else{?>
 <!--for adverts -->
 <section>
 <?php 
-/*
 $ads_check = "";
 if(count($this->merchant_personalised_details)>0) { 
 foreach($this->merchant_personalised_details as $m) {
@@ -159,7 +158,7 @@ foreach($this->merchant_personalised_details as $m) {
 
     </ul>  
 </div>
-<?php  } } */?>
+<?php  } } ?>
 </section>
 <!--end of for adverts-->
 <!--<section class="header_text">
@@ -848,20 +847,20 @@ $avg_rating = round($avg_rating); ?>
                 </ul>
             </div>
             <?php }*/?>
-<!--<section class="header_text">
+<section class="header_text">
 <?php foreach ($this->get_store_details as $store) { ?> 
     <strong><?php echo ucfirst($store->store_name) ; ?>  </strong>                  
     <?php /* <h2 class="deal_sub_title store_address_title"><?php echo $this->Lang['ADDRES']; ?></h2> */ ?>                        
-        <h3><?php echo $store->store_name; ?>,</h3>
+        <!--<h3><?php echo $store->store_name; ?>,</h3>-->
         ,<?php echo $store->address1; ?>,
         <?php echo $store->address2; ?>,                                    
         <?php echo $store->city_name; ?>, <?php echo $store->country_name; ?>. <br />                  
-        <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  <br />
+        <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  
         <strong><?php echo $this->Lang['WEBSITE']; ?></strong>: <a href="<?php echo $store->website; ?>" target="blank" class="deal_web_link"> <?php echo $store->website; ?></a>    
 <?php } ?>
-</section>-->
+</section>
 <div class="row feature_box">
-    <div class="span5">
+    <div class="span6">
         <?php foreach ($this->get_store_details as $store) { ?>
 
                 <div id="map_main" style="height:306px;"></div>
@@ -896,19 +895,8 @@ $avg_rating = round($avg_rating); ?>
 
         <?php } ?>
     </div>
-    <div class="span3">
-        <?php foreach ($this->get_store_details as $store) { ?> 
-            <strong><?php echo ucfirst($store->store_name) ; ?>  </strong>                  
-            <?php /* <h2 class="deal_sub_title store_address_title"><?php echo $this->Lang['ADDRES']; ?></h2> */ ?>                        
-                <!--<h3><?php echo $store->store_name; ?>,</h3>-->
-                ,<?php echo $store->address1; ?>,<br />
-                <?php echo $store->address2; ?>,    <br />                                
-                <?php echo $store->city_name; ?>, <?php echo $store->country_name; ?>. <br />                  
-                <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  
-                <strong><?php echo $this->Lang['WEBSITE']; ?></strong>: <a href="<?php echo $store->website; ?>" target="blank" class="deal_web_link"> <?php echo $store->website; ?></a>    
-        <?php } ?>       
-    </div>
-    <div class="span4">
+    
+    <div class="span6">
 
         <div class="title_outer">
             <h2 class="title_inner2"><?php echo $this->Lang['COMM']; ?></h2>  
@@ -981,9 +969,9 @@ $avg_rating = round($avg_rating); ?>
             
             
             
-<div class="store_subscribe_part_outer" style="background:white;">
-    <div class="store_subscribe_part" style="background:white;">
-        <div class="store_subscribe_part_inner" style="background:white;">
+<div class="store_subscribe_part_outer">
+    <div class="store_subscribe_part">
+        <div class="store_subscribe_part_inner">
             <h2>Subscribe</h2>
             <p>Subscribe to receive our news everyday !</p>
             <div class="sub_cont">

@@ -36,7 +36,9 @@ $(".slidetabs").tabs(".images > div", {
     });
 </script>
 <!--Carousel Script-->
+
 <!-- banner start-->
+
 <section  class="homepage-slider" id="home-slider">
     <div class="flexslider">
             <ul class="slides">
@@ -106,20 +108,18 @@ else{?>
 </section>
             <!-- banner end-->
  <?php 
-				$font_color = "";
-				$bg_color ="";
-				$font_size ="";
-				
-//				if(count($this->merchant_personalised_details)>0) { 
-//					foreach($this->merchant_personalised_details as $m) {  
-//						$font_color = "color:".$m->font_color.";";
-//						$bg_color ="background:".$m->bg_color.";";
-//						$font_size = $m->font_size."px";
-//					} 
-//				}	 
-                                ?>
-            
-            
+    $font_color = "";
+    $bg_color ="";
+    $font_size ="";
+
+//    if(count($this->merchant_personalised_details)>0) { 
+//            foreach($this->merchant_personalised_details as $m) {  
+//                    $font_color = "color:".$m->font_color.";";
+//                    $bg_color ="background:".$m->bg_color.";";
+//                    $font_size = $m->font_size."px";
+//            } 
+//    }	 
+?>
             
 <section class="main-content" style="<?php echo $bg_color; ?>">
     <div class="row text-center">
@@ -135,7 +135,7 @@ else{?>
         
 
 
-    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_deal_list"); ?>
+    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_product_list"); ?>
                 
             
                 
@@ -149,16 +149,16 @@ else{?>
 </div>
                 <!--</div>-->
      
-    <?php if(($this->all_deals_count > 12)) { ?>
+    <?php if(($this->all_products_count > 12)) { ?>
         <div id="loading">
         <?php if (($this->pagination) != "") { ?>
-                    <div class="feature_viewmore text-center">
-                            <div class="fea_view_more text-center">                                                
-                                    <a class="view_more view_more1 view_more_but">
-                                            <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_DEALS']; ?><span class="view_more_icon">- - -</span>
-                                    </a> 
-                            </div>
-                    </div>
+                        <div class="feature_viewmore text-center">
+                                <div class="fea_view_more text-center">                                                
+                                        <a class="view_more view_more1 view_more_but" onclick="viewMore();">
+                                                <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_PROD']; ?><span class="view_more_icon">- - -</span>
+                                        </a> 
+                                </div>
+                        </div>
                 <?php } ?>
         </div>
     <?php } ?>
@@ -179,11 +179,10 @@ else{?>
         </div>
     </div>
 </section>
-            
 
-<div class="store_subscribe_part_outer" style="background:white;">
-    <div class="store_subscribe_part" style="background:white;">
-        <div class="store_subscribe_part_inner" style="background:white;">
+<div class="store_subscribe_part_outer">
+    <div class="store_subscribe_part">
+        <div class="store_subscribe_part_inner">
             <h2>Subscribe</h2>
             <p>Subscribe to receive our news everyday !</p>
             <div class="sub_cont">
@@ -197,9 +196,10 @@ else{?>
         </div>
     </div>    
 </div>
-<input type="hidden" name="offset" id="offset" value="12">
-<input type="hidden" name="record" id="record" value="12">
-<input type="hidden" name="record" id="record1" value="<?php echo $this->all_deals_count; ?>">
+
+<input type="hidden" name="offset" id="offset" value="12" />
+<input type="hidden" name="record" id="record" value="12" />
+<input type="hidden" name="record1" id="record1" value="<?php echo $this->all_products_count; ?>" />
 <script>
 function store_subscriber_validate1(store_url)
 {
@@ -262,14 +262,15 @@ function check_color(){
 	$('.sub_cont_inner').css('border-bottom','2px solid #404040');
 }
 
-$(document).ready(function() {
-	$('a.view_more1').live("click", function(e) {
+function viewMore(){
 		var offset = 0;
 		offset = document.getElementById('offset').value;
 		var record = document.getElementById('record').value;
 		var record1 = document.getElementById('record1').value;
-		var url = '<?php echo PATH; ?>' + '<?php echo $this->theme_name;?>/all_deal_list/<?php echo $this->storeurl;?>/'+ offset + '/' + record+'/'+'<?php echo $this->cat_type; ?>'+'/'+'<?php echo $this->category_url; ?>'+'/'+'<?php echo $this->search_key;?>' + '/' + '<?php echo $this->search_cate_id;?>';
+                
+		var url = '<?php echo PATH; ?>' + '<?php echo $this->theme_name;?>/all_product_list/<?php echo $this->storeurl;?>/'+ offset + '/' + record+'/'+'<?php echo $this->cat_type; ?>'+'/'+'<?php echo $this->category_url; ?>'+'/'+'<?php echo $this->search_key;?>' + '/' + '<?php echo $this->search_cate_id;?>';
 		$.post(url, function(check) {
+                    
 			if (check) {
 				$('#product').append(check);
 				$('#loading').show();
@@ -280,11 +281,12 @@ $(document).ready(function() {
 					$('#loading').hide();
 				}
 			} 
-		});  
-	}); 
+		}); 
+}
+
+$(document).ready(function() {
+//	$('a.view_more1').live("click", function(e) {
+// 
+//	}); 
 });
 </script>
-
-<style>
-	.store_pro_list li{width:285px !important;}
-</style>

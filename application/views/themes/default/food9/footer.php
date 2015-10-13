@@ -43,7 +43,7 @@
             </div>
             <?php }
             }else if(count($this->admin_details)>0) { foreach($this->admin_details as $admin) { ?>
-            <div class="span3">
+            <div class="footer_three footer_list">
                <ul>
                    <li>
                        <div class="foot_location">

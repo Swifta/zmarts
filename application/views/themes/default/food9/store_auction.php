@@ -1,4 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("body").kkCountDowndetail({
@@ -104,6 +106,7 @@ else{?>
             </ul>
     </div>
 </section>
+
             <!-- banner end-->
  <?php 
 				$font_color = "";
@@ -117,8 +120,8 @@ else{?>
 //						$font_size = $m->font_size."px";
 //					} 
 //				}	 
+                                
                                 ?>
-            
             
             
 <section class="main-content" style="<?php echo $bg_color; ?>">
@@ -135,7 +138,7 @@ else{?>
         
 
 
-    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_deal_list"); ?>
+    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_auction_list"); ?>
                 
             
                 
@@ -149,13 +152,13 @@ else{?>
 </div>
                 <!--</div>-->
      
-    <?php if(($this->all_deals_count > 12)) { ?>
+    <?php if(($this->all_auction_count > 12)) { ?>
         <div id="loading">
         <?php if (($this->pagination) != "") { ?>
                     <div class="feature_viewmore text-center">
                             <div class="fea_view_more text-center">                                                
                                     <a class="view_more view_more1 view_more_but">
-                                            <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_DEALS']; ?><span class="view_more_icon">- - -</span>
+                                            <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_AUC']; ?><span class="view_more_icon">- - -</span>
                                     </a> 
                             </div>
                     </div>
@@ -165,8 +168,9 @@ else{?>
 </div>
 </section>
             
-            
-            
+
+
+
 <section  id="messagedisplay1" style="display:none;">      
     <div class="session_wrap">
         <div class="session_container">
@@ -180,10 +184,10 @@ else{?>
     </div>
 </section>
             
-
-<div class="store_subscribe_part_outer" style="background:white;">
-    <div class="store_subscribe_part" style="background:white;">
-        <div class="store_subscribe_part_inner" style="background:white;">
+            
+<div class="store_subscribe_part_outer">
+    <div class="store_subscribe_part">
+        <div class="store_subscribe_part_inner">
             <h2>Subscribe</h2>
             <p>Subscribe to receive our news everyday !</p>
             <div class="sub_cont">
@@ -199,7 +203,7 @@ else{?>
 </div>
 <input type="hidden" name="offset" id="offset" value="12">
 <input type="hidden" name="record" id="record" value="12">
-<input type="hidden" name="record" id="record1" value="<?php echo $this->all_deals_count; ?>">
+<input type="hidden" name="record" id="record1" value="<?php echo $this->all_auction_count; ?>">
 <script>
 function store_subscriber_validate1(store_url)
 {
@@ -268,7 +272,7 @@ $(document).ready(function() {
 		offset = document.getElementById('offset').value;
 		var record = document.getElementById('record').value;
 		var record1 = document.getElementById('record1').value;
-		var url = '<?php echo PATH; ?>' + '<?php echo $this->theme_name;?>/all_deal_list/<?php echo $this->storeurl;?>/'+ offset + '/' + record+'/'+'<?php echo $this->cat_type; ?>'+'/'+'<?php echo $this->category_url; ?>'+'/'+'<?php echo $this->search_key;?>' + '/' + '<?php echo $this->search_cate_id;?>';
+		var url = '<?php echo PATH; ?>' + '<?php echo $this->theme_name;?>/all_auction_list/<?php echo $this->storeurl;?>/'+ offset + '/' + record+'/'+'<?php echo $this->cat_type; ?>'+'/'+'<?php echo $this->category_url; ?>'+'/'+'<?php echo $this->search_key;?>' + '/' + '<?php echo $this->search_cate_id;?>';
 		$.post(url, function(check) {
 			if (check) {
 				$('#product').append(check);
