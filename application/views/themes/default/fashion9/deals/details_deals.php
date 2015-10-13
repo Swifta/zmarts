@@ -74,7 +74,6 @@
         });
     });
 </script>
-
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
 <div class="contianer_outer1">
     <div class="contianer_inner">

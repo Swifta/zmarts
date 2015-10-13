@@ -50,6 +50,7 @@
     .uneditable-input.span4 {
         width: 290px;
     }
+    li.span3,
     input.span3,
     textarea.span3,
     .uneditable-input.span3 {

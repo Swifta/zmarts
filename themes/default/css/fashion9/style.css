@@ -298,8 +298,8 @@ em{float: left;clear:both;font:normal 12px arial;color:#f00; width: 100%; paddin
 .footer_two ul li a{float: left;font:normal 12px arial;color:#ffb0b0;text-decoration: none;}
 .footer_two ul li a:hover{text-decoration: underline;}
 .footer_title{float: left;font: normal 16px arial;color:#fff;width: 100%;padding: 0 0 15px 0;}
-.footer_three{float: left;width:180px;padding-left: 60px;border-left: 1px solid #890202;}
-.footer_three ul{float: left;width:100%;}
+.footer_three{float: left;width:180px;padding-left: 5px;border-left: 1px solid #890202;}
+.footer_three ul{float: left;width:100%; padding-top: 14px;}
 .footer_three ul li{float: left;width:100%;}
 .footer_three ul li a{float: left;font:normal 12px arial;color:#ffb0b0;}
 .foot_location{float: left;width: 100%;background: url(../../images/new/foot_location_icon.png) left top no-repeat;padding-left: 40px;}
