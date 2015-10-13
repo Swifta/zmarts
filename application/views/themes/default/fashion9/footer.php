@@ -60,6 +60,7 @@
 </a>
                     </p>
                         <p><?php echo $stores->about_us; ?> </p>
+                        <p>i want to debug this </p>
                 </div>					
         </div>
 <?php

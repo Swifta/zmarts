@@ -110,7 +110,7 @@
 
  
  /*color: #A61C00;*/
- font-size:large;
+ font-size:small;
 
 }
 
@@ -308,7 +308,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="phone" class="swifta_input" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value=""  required/>
+                                   <input name="phone" class="swifta_input" type="text" maxlength="11"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value=""  required/>
                                    <em id="phone_err"></em>
                                 </div>  
                             </li>
@@ -506,6 +506,15 @@ function previewTheme(s){
  </script>
  
  <script> 
+     function isNumberKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
 function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
