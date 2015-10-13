@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-//$THIS_SITENAME = SITENAME;
+$THIS_SITENAME = SITENAME;
 $content_text = array(
 
 // general

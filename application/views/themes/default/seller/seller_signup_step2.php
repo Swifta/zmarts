@@ -405,7 +405,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 				<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
                                 </div>
                                 </li>
-                                <li class="subsector_list">
+                                <li>
                                 <label><?php echo $this->Lang['SUBSECTOR']; ?> <span style="color:red;">*</span>: </label>
                                 <div class="">
 				<?php if($this->session->get('sector')){ ?>
@@ -418,7 +418,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 </select> 
                                 <?php }else{ ?>
                                 
-                                <select name="subsector" id="subSector" class="required" onchange="previewTheme(this.text);">
+                                <select name="subsector" id="subSector" class="swifta_input" onchange="previewTheme(this.text);">
                                 <option value=""><?php echo $this->Lang['SELECT_SECTORS_FIRST']; ?></option>
                                
                                 </select>
@@ -494,7 +494,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         <input type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
                     </div>
                             
-                               <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:250px;">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:250px;">
   
       <div class="modal-dialog">
           
@@ -550,7 +550,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
         </div>
         
         
-        <div class='popup_block_theme'><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
+        <div class='popup_block_theme'>
+            <?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?>
+        </div>
     <!-- SELLER SIGNUP -->
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
@@ -563,6 +565,40 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
     
 <script src="script.js"></script>
  <script>
+     
+     function closeDialog(){
+        $('.popup_block_theme').css({'display' : 'none'});
+
+        $('#fade').css({'visibility' : 'hidden'});
+                //  location.reload();
+
+        return false;         
+     }
+     
+$(document).ready(function(){
+    $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
+    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer 				   		   
+    //Close Popups and Fade Layer
+
+    $('#close_preview_theme').live('click', function() {
+            $('.popup_block_theme').css({'display' : 'none'});
+
+            $('#fade').css({'visibility' : 'hidden'});
+                    //  location.reload();
+
+            return false;
+    });
+
+
+    $(document).keyup(function(e) { 
+            if (e.keyCode == 27) { // esc keycode
+                    $('.popup_block_theme').css({'display' : 'none'});
+                    $('#fade').css({'visibility' : 'hidden'});
+            return false;
+            }
+    });
+
+});
  
 function openMainView(){
 	$('#fade').css({'visibility' : 'visible'});
