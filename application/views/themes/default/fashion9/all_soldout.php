@@ -210,7 +210,7 @@ else{?>
                 </div>
             </div>    
              <?php 
-            $ads_check = "";
+            /*$ads_check = "";
             if(count($this->merchant_personalised_details)>0) { 
 	foreach($this->merchant_personalised_details as $m) {
 		 ?>        
@@ -234,7 +234,7 @@ else{?>
                    
                 </ul>  
             </div>
-            <?php  } } ?>
+            <?php  } } */?>
            
            
             <div class="store_page_listing">
