@@ -1,5 +1,16 @@
 <script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery(1).js"  type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+$(".slidetabs").tabs(".images > div", {
+	effect: 'fade',
+	fadeOutSpeed: "medium",
+	rotate: true
+}).slideshow();
+});
+</script>
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery('#mycarousel11').jcarousel({
@@ -21,6 +32,17 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel16').jcarousel({
+            wrap: 'last',
+            auto: true
+        });
+    });
+</script>
+
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery('#mycarousel14').jcarousel({
@@ -35,23 +57,7 @@
         });
     });
 </script>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        jQuery('#mycarousel16').jcarousel({
-            wrap: 'last',
-            auto: true
-        });
-    });
-</script>
-<script type="text/javascript">
-    $(function() {
-$(".slidetabs").tabs(".images > div", {
-	effect: 'fade',
-	fadeOutSpeed: "medium",
-	rotate: true
-}).slideshow();
-});
-</script>
+
 <div class="contianer_outer">
     <div class="contianer_inner">
         <div class="contianer">

@@ -1,0 +1,37 @@
+@import url('w3layout.css')
+@import url('zoome.min.css')
+@import url('nivo-slider.css')
+@import url('megamenu.css');
+@import url('magnific-popup.css')
+@import url('fwslider.css')
+@import url('form.css')
+@import url('etalage.css')
+@import url('default.css')
+
+@charset "utf-8";
+/*
+	Author: Livepwndz
+	Company: Swifta Systems & Services ltd.
+	Author URL: http://swifta.com
+	License: Creative Commons Attribution 3.0 Unported
+	License URL: http://creativecommons.org/licenses/by/3.0/
+*/ 
+
+.header-top-left.swifta {
+	width: auto;
+}
+
+.header-bottom-left.swifta {
+	margin-top:0px;
+}
+
+.store_credit {background: #AE0700;border-radius: 10px;margin: 3px 0 0 2%;}
+.store_credit a {font:13px arial;color:#fff;padding: 4px 10px;}
+
+.menu.swifta {
+	margin-top: 3%;
+}
+
+p.title.swifta {
+	white-space:nowrap;
+}

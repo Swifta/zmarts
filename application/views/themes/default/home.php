@@ -2,6 +2,7 @@
 <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel16').jcarousel({
             auto: 1,
             wrap: 'last',
@@ -16,29 +17,60 @@
         });
     });
 </script>
+
+
+
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel12').jcarousel({
             wrap: 'circular'
         });
     });
 </script>
+
+
+
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel13').jcarousel({
             wrap: 'circular'
         });
     });
 </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+	$(".slidetabs").tabs(".images > div", {
+	effect: 'fade',
+	fadeOutSpeed: "medium",
+	rotate: true
+	}).slideshow();
+
+
+    });
+</script>
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel14').jcarousel({
             wrap: 'circular'
         });
     });
 </script>
+
+
+
+
+
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel15').jcarousel({
             wrap: 'circular'
         });
@@ -46,6 +78,7 @@
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel17').jcarousel({
             wrap: 'circular'
         });
@@ -53,21 +86,16 @@
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
+		
         jQuery('#mycarousel18').jcarousel({
+			
             wrap: 'circular'
         });
     });
 </script>
 
-<script type="text/javascript">
-    $(function() {
-$(".slidetabs").tabs(".images > div", {
-	effect: 'fade',
-	fadeOutSpeed: "medium",
-	rotate: true
-}).slideshow();
-});
-</script>
+
+
 <div class="contianer_outer">
     <div class="contianer_inner">
         <div class="contianer">
@@ -879,3 +907,5 @@ $(".slidetabs").tabs(".images > div", {
         </div>
     </div>
 </div>
+
+
