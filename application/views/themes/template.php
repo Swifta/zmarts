@@ -181,9 +181,6 @@
 				})
 			</script> 
             
-            
-            
-            ccc
 <!--container start--> 
 <?php echo $this->template->content; ?> 
 <!--container_end-->
