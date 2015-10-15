@@ -284,13 +284,7 @@ input[type=text],input[type=password]
 <div class="payment_form payment_shipping_form">
                                 <ul>
                                     <li>
-<!--                                       <div class="">
-								          <span class="asterisks_input">  </span>
-									<input type="text" name="lastname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" 
-									value="" autofocus required />
-								<span class="asterisk_input">  </span> 
-                                                                        <em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
-                                                                </div>-->
+                                    
                                  <div class="">
                                      <span class="asterisks_input">  </span>
                                  <input type="text" name="storename" id="storename" tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>" autofocus required />
@@ -298,18 +292,8 @@ input[type=text],input[type=password]
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>
-                             
-                              <li>
-                               
-                                 <div class="">
-                                     <span class="asterisks_input">  </span>
-                                 <input type="text" name="username" id="username" tabindex="5" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
-				<em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
-<!--                                     <span class="asterisk_input">  </span>-->
-                                 </div>
-                             </li>
-                             
-                              <li>
+                             .
+                             <li>
                                   
                                   <label style="color:blue;">Have a store admin representative ? 
                                       
@@ -318,6 +302,17 @@ input[type=text],input[type=password]
                                   </label>
                               
                              </li>  
+                              <li>
+                               
+                                 <div class="">
+                                     <span class="asterisks_input">  </span>
+                                 <input type="text" name="username" id="username" tabindex="2" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
+				<em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
+<!--                                     <span class="asterisk_input">  </span>-->
+                                 </div>
+                             </li>
+                              
+                             
                              
                                      
                               <li id="store_admin_email_li" style="display: none;">
@@ -333,40 +328,12 @@ $('#store_email_id').click(function () {
     $("#store_admin_email_li").toggle(this.checked);
 })
                              </script>
-                            <li>
-                            
-                                 <div class="">
-                                     <span class="asterisks_input">  </span>
-                                     <input type="text" name="mobile" maxlength="11" tabindex="6" id="phone" maxlength="11" onkeypress="return isNumberKey(event)" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
-                                     <em><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
-                                 </div>
-                                </li>
+                          
                             
                                  <li>
-                                    
-                                 <div class="">
-                                     <span class="asterisks_input">  </span>
-                                     <input type="text" name="address1" class="swifta_input" id="addrs1" tabindex="2" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
-                            
-								<em><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
-<!--                                    <span class="asterisk_input">  </span>-->
-                                 </div>
-                                     </li>
-                                    <li>
-                                        
-				 <div class="">		
-                                     <span class="asterisks_input">  </span>
-                            <input type="text" name="address2" class="swifta_input" tabindex="7" id="addrs2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" required autofocus />
-                            
-								<em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
-<!--                                  <span class="asterisk_input">  </span>-->
-                                 </div>
-                                 </li>
-                                 
-                                <li>
                                 
                                 <div class="">
-                                <select name="country" id="country" tabindex="3"  onchange="return city_change_payment_step(this.value);" class="swifta_input">
+                                <select name="country" id="country" tabindex="7"  onchange="return city_change_payment_step(this.value);" class="swifta_input">
                                 <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option> 
                                 <?php foreach ($this->country_list as $c) { ?>
                                 <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
@@ -378,6 +345,16 @@ $('#store_email_id').click(function () {
                                 } ?></em>
                                 </li>
                             
+                                     
+                                      <li>
+                            
+                                 <div class="">
+                                     <span class="asterisks_input">  </span>
+                                     <input type="text" name="mobile" maxlength="11" tabindex="3" id="phone" maxlength="11" onkeypress="return isNumberKey(event)" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
+                                     <em><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
+                                 </div>
+                                </li>
+                                    
                                 <li class="">
                                 
                                 <div class="">
@@ -393,13 +370,41 @@ $('#store_email_id').click(function () {
                                 } ?></em>
 
                                 </li>
-
+                                 <li>
+                                    
+                                 <div class="">
+                                     <span class="asterisks_input">  </span>
+                                     <input type="text" name="address1" class="swifta_input" id="addrs1" tabindex="4" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
+                            
+								<em><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
+<!--                                    <span class="asterisk_input">  </span>-->
+                                 </div>
+                                     </li>
+                                <li>
+                                        
+                                 <div class="">
+                                     <span class="asterisks_input">  </span>
+									<input type="text" name="zipcode" tabindex="9" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
+									<em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
+                                 </div>
+                                        </li>
+                                
+ <li>
+                                        
+				 <div class="">		
+                                     <span class="asterisks_input">  </span>
+                            <input type="text" name="address2" class="swifta_input" tabindex="5" id="addrs2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" required autofocus />
+                            
+								<em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
+<!--                                  <span class="asterisk_input">  </span>-->
+                                 </div>
+                                 </li>
                                 <li class="frm_clr">
                                         <label style="width:480px"><?php echo $this->Lang["SEARCH_LOCATION"]; ?> <span style="color:red">*</span>:</label>
                                         <div class="fullname map_loc_section map_re_w">
                                         <div class="gllpLatlonPicker">
                                         <div class="top_popup_select2">        
-                                            <input type="text" class="gllpSearchField required" tabindex="4"  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) " required>
+                                            <input type="text" class="gllpSearchField required" tabindex="6"  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) " required>
                                         <input type="button" class="gllpSearchButton sign_submit"  value="<?php echo $this->Lang['SEARCH']; ?>">
                                         </div>
                                         <br/>
@@ -420,17 +425,10 @@ $('#store_email_id').click(function () {
                                         </div>
                                 </li>
                                 
-                                    <li>
-                                        
-                                 <div class="">
-                                     <span class="asterisks_input">  </span>
-									<input type="text" name="zipcode" tabindex="9" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
-									<em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
-                                 </div>
-                                        </li>
+                                    
                                     <li>
                                        
-                                 <div class="">
+                                 <div class="" style='margin-top:-57px;'>
                                      
                                      <input type="text" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>" required autofocus />
 									
@@ -450,7 +448,7 @@ $('#store_email_id').click(function () {
                                     <li>
                                         <label><?php echo $this->Lang['LOGO_UP']; ?> *:</label>
                                  <div class="fullname">
-                                     <input type="file" name="image" class="required" required id="fil" />
+                                     <input type="file" name="image" class="required" tabindex="12" required id="fil" />
 									
 									<em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
                                  <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
