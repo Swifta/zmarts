@@ -544,7 +544,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         <input type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
                     </div>
                             
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:250px;">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:50px;">
   
       <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 30px;  width: 85%;">
           
@@ -1062,7 +1062,7 @@ function atleast_onecheckbox(e) {
 //    
 //}
 
-);
+//);
 InvalidInputHelper(document.getElementById("compname"), {
     defaultText: "Please enter your company!",
     emptyText: "Please enter your company!",
