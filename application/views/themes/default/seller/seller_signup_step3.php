@@ -333,7 +333,7 @@ $('#store_email_id').click(function () {
                                  <li>
                                 
                                 <div class="">
-                                <select name="country" id="country" tabindex="7"  onchange="return city_change_payment_step(this.value);" class="swifta_input">
+                                <select name="country" id="country" tabindex="7"  onchange="return city_change_payment_step(this.value);" class="swifta_input" required>
                                 <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option> 
                                 <?php foreach ($this->country_list as $c) { ?>
                                 <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
@@ -358,7 +358,7 @@ $('#store_email_id').click(function () {
                                 <li class="">
                                 
                                 <div class="">
-                                <select name="city" id="CitySD"  tabindex="8" class="swifta_input">
+                                <select name="city" id="CitySD"  tabindex="8" class="swifta_input" required>
                                 <option value=""><?php echo $this->Lang["COUNTRY_FIRST"]; ?></option>
                                 <?php foreach ($this->all_city_list as $c) { ?>
                                 <option  <?php  if(isset($this->userPost['city'])){ if ($c->city_id == $this->userPost['city']) { ?> selected <?php } } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
@@ -384,7 +384,7 @@ $('#store_email_id').click(function () {
                                         
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-									<input type="text" name="zipcode" tabindex="9" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
+									<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
 									<em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
                                  </div>
                                         </li>
@@ -393,7 +393,7 @@ $('#store_email_id').click(function () {
                                         
 				 <div class="">		
                                      <span class="asterisks_input">  </span>
-                            <input type="text" name="address2" class="swifta_input" tabindex="5" id="addrs2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>" required autofocus />
+                            <input type="text" name="address2" class="swifta_input" tabindex="5" id="addrs2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>"  autofocus />
                             
 								<em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
 <!--                                  <span class="asterisk_input">  </span>-->
@@ -426,15 +426,17 @@ $('#store_email_id').click(function () {
                                 </li>
                                 
                                     
-                                    <li>
-                                       
+                                    
+                                     <li>   
                                  <div class="" style='margin-top:-57px;'>
-                                     
-                                     <input type="text" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>" required autofocus />
+                                    
+                                     <input type="text" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
 									
 									<em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
+                                 
+                                 
                                  </div>
-                                        </li>
+                                    </li>    
 					 <li>
 <!--					<label><?php echo $this->Lang["ABT"]; ?>:</label>-->
 					<div class="">
@@ -489,15 +491,15 @@ function comfirm_click(){
     var x3 = document.forms["signup4"]["phone"].value;
      var x4 = document.forms["signup4"]["storename"].value;
     var x5 = document.forms["signup4"]["addrs1"].value;
-    var x6 = document.forms["signup4"]["addrs2"].value;
+   // var x6 = document.forms["signup4"]["addrs2"].value;
     var x7 = document.forms["signup4"]["zipcode"].value;
-    var x8 = document.forms["signup4"]["website"].value;
+   // var x8 = document.forms["signup4"]["website"].value;
      var x9 = document.forms["signup4"]["knwu"].value;
     var x10 = document.forms["signup4"]["gf"].value;
     var x11 = document.forms["signup4"]["fil"].value;
     
     
-    if (x == null || x == "" || x2 == null || x2 == "" || x3 == null || x3 == "" || x4 == null || x4 == "" || x5 == null || x5 == "" || x6 == null || x6 == "" || x7 == null || x7 == "" || x8 == null || x8 == "" || x9 == null || x9 == "" || x10 == null || x10 == "" || x10 == null || x10 == ""  || x11 =="" || x11 == "" ) {
+    if (x == null || x == "" || x2 == null || x2 == "" || x3 == null || x3 == "" || x4 == null || x4 == "" || x5 == null || x5 == "" || x7 == null || x7 == "" || x9 == null || x9 == "" || x10 == null || x10 == "" || x11 =="" || x11 == "" ) {
         //alert("Name must be filled out");
         return false;
     }
@@ -640,31 +642,31 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
 
 );
 
+//  
+//    InvalidInputHelper(document.getElementById("addrs2"), {
+//    defaultText: "Please enter your address!",
+//    emptyText: "Please enter your address!",
+//    invalidText: function (input) {
+//        return 'The address  "' + input.value + '" is invalid!';
+//    }
+//    
+//    
+//}
+//
+//);
+
   
-    InvalidInputHelper(document.getElementById("addrs2"), {
-    defaultText: "Please enter your address!",
-    emptyText: "Please enter your address!",
-    invalidText: function (input) {
-        return 'The address  "' + input.value + '" is invalid!';
-    }
-    
-    
-}
-
-);
-
-  
-    InvalidInputHelper(document.getElementById("website"), {
-    defaultText: "Please enter your website!",
-    emptyText: "Please enter your phone website!",
-    invalidText: function (input) {
-        return 'The website  "' + input.value + '" is invalid!';
-    }
-    
-    
-}
-
-);
+//    InvalidInputHelper(document.getElementById("website"), {
+//    defaultText: "Please enter your website!",
+//    emptyText: "Please enter your phone website!",
+//    invalidText: function (input) {
+//        return 'The website  "' + input.value + '" is invalid!';
+//    }
+//    
+//    
+//}
+//
+//);
 
  InvalidInputHelper(document.getElementById("fil"), {
     defaultText: "Please upload a file!",
@@ -726,4 +728,14 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
         }
     });
 });
+
+function isNumberKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
         </script>
