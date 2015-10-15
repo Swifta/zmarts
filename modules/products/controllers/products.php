@@ -5,7 +5,7 @@ class Products_Controller extends Layout_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
+		
 		/*if(LANGUAGE == "french" ){
 			$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/french_style.css',PATH.'themes/'.THEME_NAME.'/css/fr_multi_style.css'));
 		} else if(LANGUAGE == "spanish"){
@@ -13,6 +13,8 @@ class Products_Controller extends Layout_Controller
 		} else {
 			$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
 		}*/
+		
+		
 		if(isset($_SESSION['select_lang'])){
 			if($_SESSION['select_lang']==2){
 				$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/ha_style.css',PATH.'themes/'.THEME_NAME.'/css/ha_multi_style.css'));
@@ -376,11 +378,14 @@ class Products_Controller extends Layout_Controller
 	/** VIEW PRODUCTS **/
 
 	public function details_product($storeurl="",$deal_key= "", $url_title = "",$type = "")
-	{
+	{	
+		
 	        $this->is_details = 1;
 		$this->store_url=$storeurl;
 		$this->storeurl = $storeurl;
 		$this->product_deatils = $this->products->get_product_details($deal_key, $url_title,$type);
+		
+		
 		if(count($this->product_deatils)==0){
 		        common::message(-1, $this->Lang["PAGE_NOT"]);
 		        url::redirect(PATH);
@@ -438,6 +443,12 @@ class Products_Controller extends Layout_Controller
 		if($this->theme_name) { 
 			
 			//$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
+
+			//var_dump("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
+
+			$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
+			
+
                         if($this->theme_name == "fashion9"){
                             //echo "was here"; die;
                             $style_sheets = array();
@@ -462,11 +473,13 @@ class Products_Controller extends Layout_Controller
                         else{
                             $this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
                         }	
+
 			$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
 		} else {
 			
 			$this->template->content = new View("themes/".THEME_NAME."/products/details_product");
 		}
+	
 	}
 
 	/**  PRODUCT STAR RATING  **/

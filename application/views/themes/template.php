@@ -15,6 +15,7 @@
 <meta name="description" content="<?php echo $this->template->description; ?>" />
 <meta name="keywords" content="<?php echo $this->template->keywords; ?>" />
 <link rel="shortcut icon" href="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/favicon.png&w=<?php echo FAVICON_WIDTH; ?>&h=<?php echo FAVICON_HEIGHT; ?>" type="image/x-icon" />
+
 <?php
         if ($this->city_id) {
             foreach ($this->all_city_list as $CX) {
@@ -28,27 +29,26 @@
         ?>
 <?php 
         echo $this->template->style;
-        echo $this->template->javascript; ?>
+        echo $this->template->javascript;
+?>
 </head>
+
 <body>
 <?php if(isset($this->sector)) {
 				if($this->theme_name) { 
 					$sector =$this->theme_name; 
 				} else{
 				    $sector="default";
-				    }?>
+				 }?>
+
 <!--sector header start-->
-<?php if($sector =="default") { 
+<?php if($sector =="default" || $sector =="fashion9" ) { 
+ if($sector =="default" ) { 
 				     echo new View("themes/" . THEME_NAME . "/header");
 				}else{
+					
 				    echo new View("themes/" . THEME_NAME ."/".$sector."/header"); 
 				} ?>
-<!--Sector header End-->
-<?php } else {  ?>
-<!-- header start--> 
-<?php echo new View("themes/" . THEME_NAME . "/header"); ?> 
-<!--header End-->
-<?php } ?>
 <div class="mt10" style="display:none;" id="citylist">
   <ul>
     <?php
@@ -68,6 +68,22 @@
     <?php } ?>
   </ul>
 </div >
+<?php }else{
+	
+	 echo new View("themes/" . THEME_NAME ."/".$sector."/header");
+	
+}?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+
+<!-- header start--> 
+<?php echo new View("themes/" . THEME_NAME . "/header"); ?> 
+
+<!--header End-->
+<?php }
+	 ?>
+
 <!--
             <span id="success_message"></span>
 <?php if (!empty($this->response)) { ?>
@@ -98,11 +114,46 @@
                     </div>
                 </div>
             <?php } ?>
-            --> 
- 
-           <script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
+<<<<<<< HEAD
+            -->
+
+
+
+<!--container start--> 
+<?php echo $this->template->content; ?> 
+<!--container_end-->
+
+<?php if(isset($this->sector)) {
+				if($this->theme_name) { 
+					$sector =$this->theme_name; 
+				} else{
+				    $sector="default";
+				    }?>
+
+<!--sector header start-->
+<?php if($sector =="default") { 
+				     echo new View("themes/" . THEME_NAME . "/footer");
+				}else{
+				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
+				} ?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+<!--footer start--> 
+<?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
+<!--footer end-->
+<?php } ?>
+
+
+
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
 <script type="text/javascript">
-    <?php
+<?php
+
+
+
+    
+   
     
         if($this->response != "" || $this->error_response != ""){
             $success_alert = false;
@@ -112,6 +163,9 @@
                 $msg_to_alert = $this->response;
             }
     ?>
+<script type="text/javascript">
+	
+	
     $(document).ready(function() {
         var jNotify = $.JNotify({
 
@@ -142,6 +196,7 @@
           // z-index
           'zIndex': 888,
 
+
           // height
           'height':null, 
 
@@ -161,7 +216,7 @@
           'autoClose':true,
 
           // shows a close button
-          'showCloseButton':true,
+          'showCloseButton':false,
 
           // show / close duration
           'showDuration':5000,  
@@ -175,12 +230,9 @@
     <?php
         }
     ?>
-				$(window).load(function() {
-					$(".wloader_img").fadeOut("slow");
-					$(".wloader_img").css("visibility:visible");
-				})
+				
 			</script> 
-            
+
 <!--container start--> 
 <?php echo $this->template->content; ?> 
 <!--container_end-->
@@ -189,20 +241,16 @@
 					$sector =$this->theme_name; 
 				} else{
 				    $sector="default";
-				    }?>
+				}}?>
 
-<!--sector header start-->
-<?php if($sector =="default") { 
-				     echo new View("themes/" . THEME_NAME . "/footer");
-				}else{
-				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
-				} ?>
 
-<!--Sector header End-->
-<?php } else {  ?>
-<!--footer start--> 
-<?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
-<!--footer end-->
-<?php } ?>
+
+<script type="text/javascript">
+$(window).load(function() {
+					$(".wloader_img").fadeOut("slow");
+					$(".wloader_img").css("visibility:visible");
+				});
+				
+</script>
 </body>
 </html>

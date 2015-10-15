@@ -40,9 +40,13 @@
                     <td><label><?php echo $this->Lang['SUBSECTOR']; ?>:</label><span>*</span></td>
                     
                     <td>
+                    
+                    	
 				 
                         <select name="subsector" class="required">
 			<?php  foreach($this->sub_sector_list as $p){ if($uu->store_sector_id == $p->main_sector_id) { 
+						
+					    
 						$theme_check = true;
 						$theme_name = strtolower($p->sector_name);
 						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/controllers/'.$theme_name.'.php'))

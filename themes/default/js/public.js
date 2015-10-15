@@ -750,6 +750,7 @@ function fine_prints() {
                 $("#terms_conditions").removeClass("act4");
 
 }
+
 //Terms and Conditions
 function terms_conditions() {
                 $('.terms_conditions').show();
@@ -1744,3 +1745,4 @@ function open_zenith_account(form_html){
 
 	          });	  
 }
+

@@ -487,15 +487,10 @@ $config['Shifashop/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Shi
 $config['Shifashop/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Shifashop/$1/$2";
 $config['Shifashop/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Shifashop/$1/$2";
 // Shifashop End
-// Simobre Start
-$config['Simobre'] ="electronics3/stores_home_page/Simobre";
-$config['Simobre/products.html'] = "/electronics3/product_list/Simobre";
-$config['Simobre/today-deals.html'] = "/electronics3/deal_list/Simobre";
-$config['Simobre/auction.html'] = "/electronics3/auction_list/Simobre";
-$config['Simobre/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Simobre/$1/$2";
-$config['Simobre/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Simobre/$1/$2";
-$config['Simobre/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Simobre/$1/$2";
-// Simobre End
+
+
+
+
 // olsoft Start
 $config['olsoft'] ="electronics3/stores_home_page/olsoft";
 $config['olsoft/products.html'] = "/electronics3/product_list/olsoft";

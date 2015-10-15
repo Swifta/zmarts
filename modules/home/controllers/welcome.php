@@ -6,6 +6,8 @@ class Welcome_Controller extends Layout_Controller
 	{
 		parent::__construct();
 		$this->home = new Home_Model();
+		
+		
 		if(isset($_SESSION['select_lang'])){
 			if($_SESSION['select_lang']==2){
 				$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/ha_style.css',PATH.'themes/'.THEME_NAME.'/css/ha_multi_style.css'));
@@ -941,6 +943,30 @@ class Welcome_Controller extends Layout_Controller
 			$_SESSION["select_lang"]=1;
 		}
 		print_r($_SESSION);exit;
+	}
+	
+	public function leo_sign(){
+		$this->session->set('leo_redirect_case', '1');
+		
+		url::redirect(PATH);
+		
+		
+	}
+	
+	public function leo_login(){
+		$this->session->set('leo_redirect_case', '2');
+		
+		url::redirect(PATH);
+		
+		
+	}
+	
+	public function leo_zenith(){
+		$this->session->set('leo_redirect_case', '3');
+		
+		url::redirect(PATH);
+		
+		
 	}
 	
 }
