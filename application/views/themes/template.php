@@ -114,7 +114,6 @@
                     </div>
                 </div>
             <?php } ?>
-<<<<<<< HEAD
             -->
 
 
@@ -233,9 +232,6 @@
 				
 			</script> 
 
-<!--container start--> 
-<?php echo $this->template->content; ?> 
-<!--container_end-->
 <?php if(isset($this->sector)) {
 				if($this->theme_name) { 
 					$sector =$this->theme_name; 
