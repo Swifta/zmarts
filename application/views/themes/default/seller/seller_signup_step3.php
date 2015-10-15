@@ -427,15 +427,7 @@ input[type=text],input[type=password]
 <!--					   <span class="asterisk_input">  </span>-->
                                         </div>
 				    </li>
-                                    <li>
-                                        <label><?php echo $this->Lang['LOGO_UP']; ?> *:</label>
-                                 <div class="fullname">
-                                     <input type="file" name="image" class="required" tabindex="12" required id="fil" />
-									
-									<em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
-                                 <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
-                                 </div>
-                                   </li>
+                                    
                                    
                              <li>
                                   
@@ -446,15 +438,26 @@ input[type=text],input[type=password]
                                   </label>
                               
                              </li> 
-                             
+
                               <li id="store_admin_email_li" style="display: none;">
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" value="<?php echo "@yahoo.com" ?>" name="store_email_id" id="store_email_ids" class="swifta_input"  placeholder="<?php echo @$this->Lang['STORE_EMAIL_ID'];?>"  />
+                                 <input type="text" value="" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_adim@store.com" ?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>
+                             
+                                    <li>
+                                        <label><?php echo $this->Lang['LOGO_UP']; ?> *:</label>
+                                 <div class="fullname">
+                                     <input type="file" name="image" class="required" tabindex="12" required id="fil" />
+									
+									<em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
+                                 <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
+                                 </div>
+                                   </li>
+
                                    
                              <script>
 $('#store_email_id').click(function () {
