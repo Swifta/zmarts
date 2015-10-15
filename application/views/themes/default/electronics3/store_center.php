@@ -213,7 +213,7 @@
             <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
             <div style="">                                                                                
                 <a href=""  title = "Default Ads">
-                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo $i; ?>.jpg"/>
+                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo rand(1, 3); ?>.jpg"/>
                 </a>
             </div>
             
@@ -228,22 +228,10 @@
             <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
             <div style="display: none;">                                                                                
                 <a href=""  title = "Default Ads">
-                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/1.jpg"/>
+                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo rand(1, 3); ?>.jpg"/>
                 </a>
             </div>
-            <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
-            <div style="display: none;">                                                                                
-                <a href=""  title = "Default Ads">
-                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/2.jpg"/>
-                </a>
-            </div>
-            <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
-            <div style="display: none;">                                                                                
-                <a href=""  title = "Default Ads">
-                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/3.jpg"/>
-                </a>
-            </div>
-                                            <?php } ?>
+                        <?php } ?>
                                    </div>      
                                             <div class="controls">                                                    
                                                     <div class="slidetabs">
