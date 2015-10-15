@@ -1,74 +1,94 @@
-<section id="footer-bar">
-<?php if(count($this->about_us_footer)>0) { 
-    foreach($this->about_us_footer as $stores) { ?>
-        <div class="row">
-                <div class="span5 text-center">
-                    <p class="">
-<a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
-    <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
-</a>
-                    </p>
-                    <p><?php echo $stores->about_us; ?> </p>
-                </div>
-                <div class="span4">
-                        <h4>Shopping Guide</h4>
-                    <ul>
-                        <li><a href="<?php echo PATH; ?>" title="Home">Home</a></li>
-                         <?php if ($this->cms_setting == 0) {
-            foreach ($this->get_all_cms_title as $d) { ?>
-            <?php if($d->cms_title != "Help"){ ?>
-                                    <li> <a <?php if ($d->type == 3) { ?>href="<?php echo $d->cms_desc; ?>" <?php } else { ?> href="<?php echo PATH . $d->cms_url . '.php' ?>" <?php } ?> title="<?php echo $d->cms_title; ?>"> <?php echo $d->cms_title; ?></a></li>
-                            <?php } ?>
-                        <?php }
-                    } ?>
-                    </ul>
-                </div>
-                <div class="span3">
-              <?php if(isset($this->footer_merchant_details) && count($this->footer_merchant_details)>0){
-				foreach($this->footer_merchant_details as $admin){ ?>
-				<div class="footer_three footer_list">
-               <h2 class="footer_title"></h2>
-               <ul>
-                   <li>
-                       <div class="foot_location">
-                           <p><?php echo $admin->address1; ?>, </p>
-                           <p><?php echo $admin->address2; ?></p>
-                           <p><?php echo $admin->city_name; ?></p>
-                           <p><?php echo $admin->country_name; ?></p>
-                       </div>
-                   </li>
-                   <li><p class="call_icon"><?php echo $admin->phone_number;?></p></li>
-                   <li><a class="foot_mail_icon" href="mailto:<?php echo $admin->email; ?>" title="<?php echo $admin->email; ?>"><?php echo $admin->email; ?></a></li>
-               </ul>
-            </div>
-            <?php }
-            }else if(count($this->admin_details)>0) { foreach($this->admin_details as $admin) { ?>
-            <div class="footer_three footer_list">
-               <ul>
-                   <li>
-                       <div class="foot_location">
-                           <p><?php echo $admin->address1; ?>, </p>
-                           <p><?php echo $admin->address2; ?></p>
-                           <p><?php echo $admin->city_name; ?></p>
-                           <p><?php echo $admin->country_name; ?></p>
-                       </div>
-                   </li>
-                   <li><p class="call_icon"><?php echo PHONE1;?>,<?php echo PHONE2;?></p></li>
-                   <li><a class="foot_mail_icon" href="mailto:<?php echo CONTACT_EMAIL; ?>" title="<?php echo CONTACT_EMAIL; ?>"><?php echo  CONTACT_EMAIL; ?></a></li>
-               </ul>
-            </div>
-            <?php } } ?>
-					
-                </div>
-        </div>
-<?php
-    }
-}
-?>
-</section>
-<section id="copyright">
-        <span><?php echo $this->Lang['FOOTER_COPYRIGHT']; ?> <?php echo SITENAME; ?> <?php echo $this->Lang['FOOTER_ALLRIGHT']; ?></span>
-</section>
+<div class="margin-top-50"></div>
 
+<!-- Footer
+================================================== -->
+<div id="footer">
+
+	<!-- Container -->
+	<div class="container">
+
+		<div class="four columns">
+			<img src="images/logo-footer.png" alt="" class="margin-top-10"/>
+			<p class="margin-top-15">Nulla facilisis feugiat magna, ut molestie metus hendrerit vitae. Vivamus tristique lectus at varius rutrum. Integer lobortis mauris non consectetur eleifend.</p>
+		</div>
+
+		<div class="four columns">
+
+			<!-- Headline -->
+			<h3 class="headline footer">Customer Service</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+
+			<ul class="footer-links">
+				<li><a href="#">Order Status</a></li>
+				<li><a href="#">Payment Methods</a></li>
+				<li><a href="#">Delivery & Returns</a></li>
+				<li><a href="#">Privacy Policy</a></li>
+				<li><a href="#">Terms & Conditions</a></li>
+			</ul>
+
+		</div>
+
+		<div class="four columns">
+
+			<!-- Headline -->
+			<h3 class="headline footer">My Account</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+
+			<ul class="footer-links">
+				<li><a href="#">My Account</a></li>
+				<li><a href="#">Order History</a></li>
+				<li><a href="#">Wish List</a></li>
+			</ul>
+
+		</div>
+
+		<div class="four columns">
+
+			<!-- Headline -->
+			<h3 class="headline footer">Newsletter</h3>
+			<span class="line"></span>
+			<div class="clearfix"></div>
+			<p>Sign up to receive email updates on new product announcements, gift ideas, special promotions, sales and more.</p>
+
+			<form action="#" method="get">
+				<button class="newsletter-btn" type="submit">Join</button>
+				<input class="newsletter" type="text" placeholder="mail@example.com" value=""/>
+			</form>
+		</div>
+
+	</div>
+	<!-- Container / End -->
+
+</div>
+<!-- Footer / End -->
+
+<!-- Footer Bottom / Start -->
+<div id="footer-bottom">
+
+	<!-- Container -->
+	<div class="container">
+
+		<div class="eight columns">© Copyright 2014 by <a href="#">trizzy</a>. All Rights Reserved.</div>
+		<div class="eight columns">
+			<ul class="payment-icons">
+				<li><img src="images/visa.png" alt="" /></li>
+				<li><img src="images/mastercard.png" alt="" /></li>
+				<li><img src="images/skrill.png" alt="" /></li>
+				<li><img src="images/moneybookers.png" alt="" /></li>
+				<li><img src="images/paypal.png" alt="" /></li>
+			</ul>
+		</div>
+
+	</div>
+	<!-- Container / End -->
+
+</div>
+<!-- Footer Bottom / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
 </div>
 
