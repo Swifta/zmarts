@@ -171,7 +171,7 @@ $content_text = array(
 
 "NAME" => "Name",
 
-"ENTER_NAME"=>"Enter your name here",
+"ENTER_NAME"=>"Enter your first name here",
 
 "SEL_CITY" => "Select City",
 
@@ -1267,7 +1267,7 @@ $content_text = array(
 
 "MER_SIGN_3" => "Merchant sign up step 3",
 
-"SUCC_COM_STEP2" =>"Successfully completed the step 2",
+"SUCC_COM_STEP2" =>"Successfully completed step 2",
 
 "SUCC_COM_FINAL" =>"Merchant account has been successfully created !",
 
@@ -1732,7 +1732,7 @@ $content_text = array(
  
  "BRANCH_DESC" => "Branch Description",
  
- "ENTER_STORE_USER_NAME" => "Enter Store User Name",
+ "ENTER_STORE_USER_NAME" => "Enter Store Admin User Name",
  
  "ENTER_STORE_EMAIL_ID" => "Enter Store Admin Email Id",
  

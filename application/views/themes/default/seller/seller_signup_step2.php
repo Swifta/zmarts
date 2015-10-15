@@ -5,7 +5,7 @@
 .error{float: left;width: 50%; } 
 </style>                   
 <!-- SELLER SIGNUP -->
-    </style>
+   
 
 <style>
     
@@ -20,6 +20,26 @@
         
     }
     /*test style*/
+    
+a.tooltips {outline:none; }
+a.tooltips strong {line-height:30px;}
+a.tooltips:hover {text-decoration:none;} 
+a.tooltips span {
+    z-index:10;display:none; padding:14px 20px;
+    margin-top:-30px; margin-left:28px;
+    width:300px; line-height:16px;
+}
+a.tooltips:hover span{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA; background:#fffAF0;}
+.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+    
+/*CSS3 extras*/
+a.tooltips span
+{
+    border-radius:4px;
+    box-shadow: 5px 5px 8px #CCC;
+}
 
 .swifta_h1, .swifta_input::-webkit-input-placeholder, button {
 
@@ -263,6 +283,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 </style>
 
+<?php $tcmsg = ""; ?>
+
 
                    <div class="contianer_outer">
         <div class="contianer_inner">
@@ -331,29 +353,29 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 									<em> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
 								</div>
                                     </li>
-                                    <li style="display: none;">
-                                        <label><?php echo $this->Lang['ADD_PAYPAL_ACC']; ?> <span style="color:red;">*</span>:</label>
-                                <div class="">
+                                    <li style="display:none;">
+                                        <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
-									<input type="text" name="payment_acc" class="swifta_input" 
+                                
+									<input type="hidden" name="payment_acc" class="swifta_input" 
 									<?php if($this->session->get('payment_acc')) { ?>
 									value="<?php  echo $this->session->get('payment_acc'); ?>" placeholder= "<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" /> 			                        <?php } else { ?>
 									value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>" placeholder="<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" />
 									<?php } ?>
-									<em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
-                                </div>
+									<em><?php //if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+                              
                                     </li>
                                     
                                     
                                     
                                 <li >
                                         
-								<div class="" style="display:none;">
-									<input type="text" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
+								
+									<input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
 									<?php if($this->session->get('nuban_session')) { ?>
                                                                         value="<?php  echo "1111111111"; }?>"  /> 			 
-									<em><?php if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
-                                </div>
+									<em><?php //if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
+                                
                                 </li>
                                 
 					<li class="frm_clr">			
@@ -371,8 +393,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                 <li>
                                     
-                                 <div class="" style="display:none;">
-									<input type="text" name="mr_address2" class="swifta_input" 
+                                 <div class="" style="display:;">
+									<input type="hidden" name="mr_address2" class="swifta_input" 
 									<?php if($this->session->get('mraddress2')) { ?>
                                                                         value="<?php  echo "address";} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
 									
@@ -383,7 +405,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                    
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
-									<input type="text" name="mr_mobile" class="swifta_input" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+                                                                    <input type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
 									<?php if($this->session->get('mphone_number')) { ?>
 									value="<?php  echo $this->session->get('mphone_number'); ?>" required autofocus /> 			 <?php } else { ?>
 									value="<?php if(!isset($this->form_error['mr_mobile']) && isset($this->userPost['mr_mobile'])){echo $this->userPost['mr_mobile'];}?>" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>"  />
@@ -418,7 +440,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 </select> 
                                 <?php }else{ ?>
                                 
-                                <select name="subsector" id="subSector" class="required" onchange="previewTheme(this.text);">
+                                <select name="subsector" id="subSector" class="swifta_input" onchange="previewTheme(this.text);">
                                 <option value=""><?php echo $this->Lang['SELECT_SECTORS_FIRST']; ?></option>
                                
                                 </select>
@@ -440,29 +462,57 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 </li>
                                 
                                 
-                                <li >
+                                <li>
                                     <label>Shipping method <span style="color:red;">*</span>:</label>
-                         <table> 
+                     <table style="width:;"> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
-                                        <tr><td><label><input type="checkbox" name="free" value="1" 
+                                        <tr><td style="width:px;"><label><input type="checkbox" name="free" value="1" 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Free Shipping</label></td>
+                                                              checked <?php } } else { ?> checked <?php } ?>>Free Shipping
+                                                    
+                                         </label></td><td style="width:30px; padding-left:5px;"><label><a id="id_ship_desc_free_qtn" class="tooltips" href="#"> <i class="fa fa-question-circle"></i><i></i>
+                                                    <span>
+        
+        <strong>Free Shipping</strong><br />
+       NO shipping cost incurred by customer to ship the item.
+    </span>
+                                                    
+                                                    </a></label></td>
                                         <?php } else { ?>
                                         <input type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
-                                       <td><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Flat Shipping</label></td></tr>
+                                       <td style="width:px;"><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
+                                        checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping 
+                                              </label></td><td> <a href="#" class="tooltips">
+                                                   &nbsp;<i class="fa fa-question-circle"></i>
+    <span>
+        <strong>Flat Rate Shipping</strong><br />
+        The shipping cost value is the same on all types of items.
+    </span>
+                                               </a></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="flat" value="0" >
                                         <?php } if($this->per_product_setting == 1){ ?>
-                                        <tr><td><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping</label></td>
+                                        <tr><td style="width:;"><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
+                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping</td><td><a href="#" class="tooltips">
+                                                   &nbsp;<i class="fa fa-question-circle"></i>
+    <span>
+        <strong>Per product base Shipping</strong><br />
+        The shipping cost value varies from item to item.
+    </span>
+                                               </a></td></label>
                                         <?php } else { ?>
                                         <input type="hidden" name="product" value="0" >
                                         <?php } if($this->per_quantity_setting == 1){ ?>
                                         <td><label><input type="checkbox" name="quantity" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('quantity')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping</label></td></tr>
+                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping</td><td><a href="#" class="tooltips">
+                                                   &nbsp;<i class="fa fa-question-circle"></i>
+    <span>
+        <strong>Per quantity base Shipping</strong><br />
+       The shipping cost value varies basing on the quantity of items purchased.
+    </span>
+                                               </a></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="quantity" value="0" >
                                         <?php } if($this->aramex_setting == 1){ ?>
@@ -487,33 +537,267 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                
                             <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a data-toggle="modal" data-target="#confirm-delete" href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
                             <br><input type="checkbox" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
-                            
+                            <p id="tcerror" style="color:red;"></p>
                             </p>
                         </div>       
                     <div class="buy_it complete_order_button" style="margin-left:300px;">
                         <input type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
                     </div>
                             
-                               <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:250px;">
+                               <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:120px;">
   
-      <div class="modal-dialog">
+      <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 30px;  width: 85%;">
           
   <div class="modal-content">
             
                
  <div class="modal-header">
    
-                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<!--                 <button  type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                 
-    <h4 class="modal-title" id="myModalLabel">Agreement</h4>
+    <h4 class="modal-title" id="myModalLabel">TERMS AND CONDITIONS</h4>
                 </div>
             
                
  <div class="modal-body">
                    
- <p>Agreement.</p>
+ <div>
+ <h style="color:red;">TERMS AND CONDITIONS FOR THE ZENITH MARKETPLACE<h>
+ <p style="color:black;">This serves to verify that you have had adequate opportunity to read and 
+     
+     understand the terms and conditions, and that you are aware of all the terms printed in bold.
+     Please contact us if you need further explanation of anything referred to herein or related to the use of the Zenith MarketPlace. 
+     We can be reached via our email address <h style="color:red;">zenithmarketplacesupport@Zenith Bank PLC.com,</h> you can speak with a Zenith Direct consultant 
+     via our interactive call center helpline- 0000000700  or visit any Zenith Bank Branch.
+
+By using the Zenith MarketPlace, you unconditionally agree to be bound by the laws, rules, regulations and official issuances 
+applicable on the matter, now existing or which may hereinafter be enacted, issued or enforced. These terms and conditions comprise 
+the agreement between Zenith Bank PLC (“Zenith Bank PLC”) and the Merchant in connection with the display of its goods and services on 
+the Zenith MarketPlace.</p>
+
+<h style="text-align: center; color: red;">Obligations of the merchant</h><br>
+<p style="color:black;">The Merchant shall establish and maintain its Webpage, including the contents of same in line with the terms of this Agreement and
+as specified by Zenith Bank PLC from time to time.<br><br>
+
+The Merchant shall ensure that information provided on its Webpage is accurate and complete and in the form specified by Zenith Bank
+PLC from time to time.<br><br>
+
+The Merchant shall keep its Account details confidential and shall promptly notify Zenith Bank PLC of any unauthorized use of its Account.<br>
+
+The Merchant shall be available upon request by Zenith Bank PLC to resolve any issues relating to its Webpage and resolution of complaints 
+and disputes from individuals patronizing the Merchant's webpage.<br><br>
+
+The Merchant shall comply with requests from Zenith Bank PLC to conduct due diligence and establish the true identity, nature, ownership,
+source of funds, operational and transaction history of the business<br><br>
+
+The Merchant shall publicly disclose on its Webpage its delivery, fulfillment exchange and returns policies and also ensure that it is at 
+all times compliant with same.<br><br>
+
+The Merchant is prohibited from the display, sale of any products or engagement in any activity declared illegal under the Law including but
+not limited to narcotics, hard drugs, firearms, tobacco or tobacco products, armament productions, casino or companies where the principal 
+source of income is gambling, immoral and illegal activities, including but not limited to the display of pornographic photographs or materials
+or the sale of pornographic products, production or activities involving harmful or exploitative forms of forced labor and/or child labor, trade 
+in wildlife or wildlife products that have been expressly prohibited by Law for public sale, production or trade in radioactive materials, unbounded 
+asbestos fibers, and hazardous chemicals; and investments harmful to the environment or any item which may cause public offence or has been expressly 
+prohibited by Law.<br><br>
+
+The Merchant shall ensure that sizes of the images pasted on its Webpage shall be as prescribed by Zenith Bank PLC from time to time to ensure 
+that the Platform functions at optimal capacity.<br><br>
+
+The Merchant shall not switch from the sale of one category of Products to the other without the express written permission of Zenith Bank PLC.<br><br>
+
+The Merchant shall ensure the safety and security of all data or any information stored on its Webpage<br><br>
+
+The Merchant shall pay a non- refundable annual Platform Membership Fee(“PlatformFee”) of N10,000.00 ( ten thousand Naira only).
+The Platform Fee shall be subject to periodic review at the sole discretion of Zenith Bank PLC. Any such reviews shall be communicated to
+the merchant and shall become binding from the effective date.<br><br></p>
+     
+<p>
+    
+<h style="text-align: center; color: red;">  Obligations of Zenith Bank Plc </h>
+<p style="color:black;">Zenith Bank PLC shall be responsible for the provision of the Services and shall grant the Merchant non-exclusive access to the use of the Services provided that the Merchant is in compliance with the terms of this Agreement.<br><br>
+
+Zenith Bank PLC shall provide parameters for the provision of images and videos of the Products to be displayed on the Platform and the content of the information to be uploaded on the Platform and Webpage Zenith Bank PLC shall as much as it is within its ability, endeavors to provide necessary administrative and technical support for the Platform.<br><br>
+
+Zenith Bank PLC may revise the terms and conditions of this Agreement from time to time and such revised terms and conditions shall automatically be binding on the parties and shall replace the current provisions of this Agreement accordingly affected thereby..<br><br>
+</p>   
+    
+<h style="color:red"> Representation and warranties <h>
+<p style="color:black;">The Merchant hereby represents and warrants to Zenith Bank PLC as follows:<br><br>
+
+That the Merchant is duly incorporated, validly existing and in good standing under the laws of Nigeria and has the legal authority to enter into this Agreement<br><br>
+
+That the Merchant has the requisite skills, experienced management, certified personnel and technology to execute the services stated herein.;<br><br>
+
+That all the information relating to the Merchant or otherwise relevant to the matters contemplated by this Agreement which have been provided to Zenith Bank PLC by the Merchant are true and correct in all respects and shall notify Zenith Bank PLC of any material change in such information;<br><br>
+
+The Merchant represents that it shall comply with all applicable privacy, consumer protection and other laws and regulations with respect to the Services<br><br>
+  
+</p>
+<h style="color:red;"> Event of default </h>
+<p style="color:black;">The following provisions and a breach of any of the terms of this Agreement by the Merchant shall constitute an event of default under this Agreement:<br><br>
+
+If any representation, warranty or information provided or statement made or deemed to be made by the Merchant is or proves to be incorrect or misleading false in any material respect;<br><br>
+
+If any corporate action, legal proceedings or other adverse procedure or step is taken against the Merchant.<br><br>
+
+If any event, fact or circumstance which has or could in the opinion of Zenith Bank PLC be likely to have a material adverse effect on the ability of the Merchant to perform any of its obligations under this Agreement;<br><br>
+
+Any other reasons which in the sole opinion of Zenith Bank PLC constitutes an event of default and such decision is taken in the best interest of the general public.<br><br>
+
+In the event of any default of any obligation by the Merchant pursuant to this Agreement, Zenith Bank PLC reserves the right to terminate this Agreement immediately without notice and Merchants shall lose their access to its Webpage and Services therein terminated immediately and Zenith Bank Plc will not be liable whatsoever for such termination.    <br><br>
+<p> 
+ 
+<h style="color:red;">Termination</>
+<p style="color:black;">Without prejudice to any remedy or right reserved by the Parties, Zenith Bank PLC may terminate this Agreement or suspend the Merchant's access to the Services at anytime without notice to the Merchant for the violation of any of the terms of this Agreement.<br><br>
+
+The Merchant shall give Zenith Bank PLC minimum a 14 days notice of its intention to discontinue the use of the Services.<br><br>
+
+This Agreement shall automatically terminate if:<br><br>
+
+The Merchant is wound up or goes into liquidation or for any reason ceases or threatens is likely to cease to carry on its business or transfers its business;<br><br>
+
+The obligations of the Merchant become prohibited by law or any other regulatory authority;<br><br>
+
+The Merchant fails to perform its obligations under this Agreement in accordance with the agreed terms and conditions of this Agreement and any further terms and conditions as may be advised by Zenith Bank PLC from time to time.<br><br>
+
+If any event or series of events occurs which may render the Merchant unable to comply with its obligations under the terms of this Agreement, or any other agreement between the Parties;<br><br>
+
+If the Merchant carries out any act that will or is likely to have a material adverse effect on the reputation, image and goodwill of Zenith Bank PLC;<br><br>
+
+Upon termination of this Agreement, the Merchant shall return to Zenith Bank PLC all the properties and materials of Zenith Bank PLC that are in the Merchant's possession.<br><br>
+    </p>
+    
+ 
+    <h style="color:red;">Indemnification</h>
+<p style="color:black;"> 
+    The Merchant recognizes and acknowledges that Zenith Bank PLC shall be providing the Services on the Platform on an “as is” basis.<br><br>
+
+The Merchant agrees to indemnify and keep Zenith Bank PLC fully indemnified against all losses, liabilities, damages, claims, costs, adverse judgment, legal costs, professional or attorney's fees and other expenses of any nature whatsoever incurred or suffered by Zenith Bank PLC whether direct or consequential (including any economic loss on turnover, profit, business or goodwill) as a result of or in connection with or in any way related to the use of the Platform under this Agreement or the use of its website which users on the Platform may be directed to access and the Merchant shall be liable for any loss or damage suffered by<br>
+Zenith Bank PLC as a result of such action and upon demand reimburse Zenith Bank PLC for any such loss or damages.<br><br>
+
+In the event of any proceeding, litigation or suit against Zenith Bank PLC by any regulatory agency or in the event of any court action or other legal or judicial proceeding challenging or otherwise arising out of any matter herein contemplated, the Merchant shall co-operate fully with Zenith Bank PLC in the preparation of the defense of such action or proceeding and also co-operate with Zenith Bank PLC and its attorneys, as may be required.
+<br><br>
+The foregoing indemnification obligations shall survive the termination of this Agreement. <br><br></p>
+
+<h style="color:red;">Intellectual property</h>
+<p style="color:black;">The Merchant agrees that except as otherwise set forth herein, all rights, title and interest in and to all registered and unregistered trademarks, service marks and logos, patent, patent applications and patentable ideas, inventions, trade secrets, proprietary information and know-how, registered and unregistered copyrights including without limitation to any forms, images, audio-visual displays, text, soft-ware and all other intellectual property, proprietary rights or rights related to intangible property which are used, developed, embodied in the Services are owned by Zenith Bank PLC and agrees to make no claim of interest in or ownership of any such Zenith Bank PLC's intellectual property.<br><br> The Merchant further agrees
+that no title to Zenith Bank PLC's proprietary right is transferred to the Merchant, and that the Merchant does not obtain any rights, express or implied by use of the Platform.<br><br>
+
+The Merchant shall be authorized to use its trademarks on the Platform and shall not infringe on the rights of third parties. The Merchant agrees that the display of its products or designs on the Platform shall not infringe on the intellectual rights of third parties and that it shall not rent, sell, resell, lease, sublicense or loan the components of the Service therefrom.<br><br>
+</p>
+
+    
+<h style="color:red;"> Account registration </h><p style="color:black;">
+The Merchant shall establish an Account with Zenith Bank PLC for the Products. Such Account shall not in any way be misleading, offensive or infringing. The Merchant shall be responsible for keeping its Account and password secure and prevent same from unauthorized use. The Merchant is responsible for all activities relating to its Account.
+</p>
+
+
+<h style="color:red;">Management of the platform </h>
+
+<p <p style="color:black;">Zenith Bank PLC shall appoint a team to handle the platform/Website Management and Quality Control. The team will have the responsibility of auditing and maintaining the Platform from time to time to ensure the Platform is being operated legally and that no offensive contents or images are posted on the Merchant's 
+    Webpage.The Website Manager reserves the right upon giving prior notice to Zenith Bank PLC to suspend or delete the Webpage 
+    of any Merchant who breaches any term of this Agreement.<br><br>
+
+Zenith Bank PLC shall provide sample images, website themes/templates, newsletters, text messages or any other items as may be needed to upload on the Website.<br><br>
+</p>
+
+<h style="color:red;">Eligibility to use the service</h>
+<p style="color:black;">The Merchants represents that he/she is not less than 21 years of Age in the case of the<br>
+Proprietor of a Business Enterprise or persons representing Merchants who are Limited Liability Companies are not less than 21 years of Age.<br><br>
+</p>
+
+<h style="color:red;">Confidentiality</h>
+
+<p style="color:black;">Zenith Bank PLC may provide the Merchant with its confidential information in oral or electronic form in furtherance of this Agreement. The Merchant agrees to keep any such confidential information confidential and not to disclose it to any third party, other than its employees and directors on a need-to-know basis, without the prior written consent of Zenith Bank PLC, save as required by law or regulation. The confidential information shall exclude any information that is in the public domain in the same format or context. This clause shall survive the expiration or termination of this Agreement.<br><br>
+
+The Merchant acknowledges that the unauthorized disclosure of confidential information to a third party may cause pecuniary loss or damage to Zenith Bank PLC. Accordingly the Merchant hereby indemnifies Zenith Bank PLC against any loss, claim or damage arising from a breach of the confidentiality obligations under this Agreement;</p><br><br>
+
+<h style="color:red">Non-assignment</h>
+<p style="color:black;">The Merchant hereby covenants that it shall not during the subsistence of this Agreement, assign all or any portion of its obligations under this Agreement to any other individual, body or corporation.</p><br><br>
+
+
+<h style="color:red;">Disclaimers and limitation of warranty and liability</h>
+
+<p style="color:black;">Except as expressly set forth above; Zenith Bank PLC or any of its directors, employees and agents make no warranty of any kind, express, implied or statutory regarding the Services or this Platform.<br><br>
+
+In no event will Zenith Bank Plc be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this the Platform nor do Zenith Bank Plc commit to ensuring that the Platform shall remain available or un-interrupted, error free or that the material on the Platform is kept up-to-date or that all errors shall be corrected.<br><br>
+
+</p>
+
+<h style="color:red;">Force majeure </h>
+<p style="color:black;">Notwithstanding anything to the contrary herein contained, neither Party shall be liable or responsible for failure to perform or delay in performance of any of its obligations under this Agreement if such failure or delay is due to or attributable to any act of God, war, warlike conditions, hostilities, riots, civil commotion, system downtime, glitches, malfunction, strikes or any other cause or circumstance of whatsoever nature beyond the reasonable control of either Party. Such Force Majeure situation shall be notified to the other Party within 15 business days from the occurrence of the same. If such situation continues for a period of 1 month the other party shall be entitled to terminate the Agreement on the expiry of the said period after duly intimating the same to the other Party;</p><br><br>
+
+<h style="color:red;">Severability<h>
+<p style="color:black;">If any provision of this Agreement is held by a court of law to be unlawful, void or unenforceable, such provision shall to the extent required be severed from this Agreement and rendered ineffective as far as possible without modifying the remaining provision of this Agreement and without having any effect whatsoever on the validity or enforceability of this Agreement. </p>  <br><br>
+
+
+<h style="color:red;">Glossary</h>
+<p style="color:black;">“Account” : This means the unique user identification and password assigned to each Merchant by Zenith Bank PLC for use on the Platform.<br>
+Disclaimer: This absolves Zenith Bank PLC of transactions done between the merchant and the subscriber/shopper.<br>
+"Agreement” means these Terms and Conditions and any annexures hereto,<br>
+“Commencement Date” means the date of execution of this Agreement by the Parties or the date of signing up to the Platform by the Merchant.<br>
+“Intellectual Property” means “any patent, copyright, registered design, trademark or other industrial or intellectual property right in respect of the Platform and/or any other applications.<br>
+“Merchant, You or Your” means the Customer of Zenith Bank PLC desirous of displaying its goods and services on the Zenith MarketPlace<br>
+“Parties” means Zenith Bank PLC and the Merchant<br>
+“Services” mean features provided by Zenith Bank PLC on the Platform and all other aspects of the Platform including Merchant user content which may be subject to change from time to time.<br>
+“Zenith MarketPlace” means the Zenith Bank PLC Multi-merchant e-commerce platform where Merchants can display their goods and services for the general public to view and purchase same.<br>
+“Webpage” means the space provided by and allocated to the Merchant on the Platform where a Merchant can display its Products for the general public to view and purchase same.<br>
+“Website Manager” means a designated web manager appointed by Zenith Bank PLC to audit or carry out other services on the Platform on a periodic basis or as directed by Zenith Bank PLC from time to time.<br>
+COMMENCEMENT AND TENURE This Agreement shall take effect from the date hereof and shall continue and be in force until terminated in line with the provisions of this Agreement.<br><br>
+</p>
+<h style="red;">Nigerian law and general provisions</h>
+
+<p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
+
+Zenith Bank PLC and The Merchant hereby expressly acknowledge and agree that regarding the relationship between the parties created by this Agreement:
+
+The parties are not, and shall not be deemed, joint ventures or partners;
+
+The Merchant is not, and shall not be deemed, an agent of Zenith Bank PLC.
+
+I (We) have read the Terms and Conditions as stated above and I (We) agree to its contents.<br>
+
+Company:........................................................................<br>
+
+Name...............................................................................<br>
+
+Designation:.....................................................................<br>
+
+Signature and Date:.......................................................<br>
+
+
+
+Company:........................................................................<br>
+
+Name...............................................................................<br>
+
+Designation:.....................................................................<br>
+
+Signature and Date:.......................................................<br>
+
+
+
+Company:........................................................................<br>
+
+Name...............................................................................<br>
+
+Designation:.....................................................................<br>
+
+Signature and Date:.......................................................<br>
+
+
+
+Company:........................................................................<br>
+
+Name...............................................................................<br>
+
+Designation:.....................................................................<br>
+
+Signature and Date:.......................................................<br></p>
+</div>
    
-                 <p>Do you want to proceed?</p>
+                
                     
 <p class="debug-url"></p>
                
@@ -522,9 +806,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
   
                 <div class="modal-footer">
     
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
    
-                 <a class="btn btn-danger btn-ok">Yes</a>
+<!--                 <a class="btn btn-danger btn-ok">Yes</a>-->
                 </div>
             </div>
       
@@ -556,9 +840,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  
+
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   
+
   <link rel="stylesheet" href="style.css" />
     
 <script src="script.js"></script>
@@ -655,15 +940,20 @@ function atleast_onecheckbox(e) {
           }
 }
 
-function checkCheckBoxes(signup2) {
+  function checkCheckBoxes(signup2) {
 	if (signup2.ch1.checked == false ) 
 	{
-		alert ('Please accept the terms and condition');
+		$('#tcerror').html("<?php echo "*You must agree to terms and condition"; ?>");
+                <?php // $tcmsg = "You must agree to terms and condition"; ?>
 		return false;
 	} else { 	
 		return true;
 	}
 }
+
+
+
+
 
     function isNumberKey(evt)
        {
@@ -726,15 +1016,15 @@ function checkCheckBoxes(signup2) {
 //    
 //}
 //);
-InvalidInputHelper(document.getElementById("fname"), {
-    defaultText: "Please enter your firstname!",
-    emptyText: "Please enter your firstname!",
-    invalidText: function (input) {
-       return 'Make sure "' + input.value + '" is valid!';
-    }
-    
-    
-}
+//InvalidInputHelper(document.getElementById("fname"), {
+//    defaultText: "Please enter your firstname!",
+//    emptyText: "Please enter your firstname!",
+//    invalidText: function (input) {
+//       return 'Make sure "' + input.value + '" is valid!';
+//    }
+//    
+//    
+//}
 
 );
 InvalidInputHelper(document.getElementById("compname"), {
@@ -834,15 +1124,36 @@ InvalidInputHelper(document.getElementById("email"), {
           return true;
        }
        
-       function checkCheckBoxes(signup2) {
-	if (signup2.ch1.checked == false ) 
-	{
-		alert ('Please check the box');
-		return false;
-	} else { 	
-		return true;
-	}
-}
+     
 
-      
+ function show_ship_desc(desc){
+	var descs = $('.class_ship_desc');
+	for(i = 0; i < descs.length; i++)
+	 $($(descs[i])).css({'display':'none'});
+	 
+	 var desc = $(desc).next('span');
+	 desc.css({'display':'block', 'opacity':1}).animate({'opacity': 1}, 4000, function(){
+		 
+		 		desc.animate({'opacity': 0}, 1000, function(){
+					desc.css({'display':'none'})
+				});
+				
+		 });
+	 
+	 
+	 return false;
+ }     
+ 
+ function isNumberKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
+       //-->
+       
+  
 </script>
