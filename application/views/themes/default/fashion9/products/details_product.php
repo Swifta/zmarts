@@ -674,8 +674,6 @@ foreach ($this->product_deatils as $products) {
         </div>
     </div>
     </div>
-    </div>
-    </div>
 <?php } ?>
 <div class="popup_block7" style="display:none;">
   <div class='offer_details'>

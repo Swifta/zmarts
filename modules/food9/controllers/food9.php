@@ -40,8 +40,9 @@ class Food9_Controller extends Bootstrap_Controller
 		$style_sheets = array();
                 $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
                 $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
-                $style_sheets[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/stle.css';
-                $style_sheets[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/color/green.css';
+                //$style_sheets[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/font-awesome.css';
+                $style_sheets[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/style.css';
+                $style_sheets[4] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/colors/green.css';
 //                $style_sheets[4] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/bootstrappage.css';
 //                $style_sheets[5] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/flexslider.css';
 //                $style_sheets[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/main.css';
@@ -55,14 +56,26 @@ class Food9_Controller extends Bootstrap_Controller
                 $java_scripts[4] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
                 $java_scripts[5] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
                 $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
-                $java_scripts[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
-                $java_scripts[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
-                $java_scripts[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
-                $java_scripts[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
-                $java_scripts[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
-                $java_scripts[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
-                
-                
+                $java_scripts[7] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
+                $java_scripts[8] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.themepunch.plugins.min.js';
+                $java_scripts[9] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.themepunch.revolution.min.js';
+                $java_scripts[10] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.themepunch.showbizpro.min.js';
+                $java_scripts[11] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.magnific-popup.min.js';
+                $java_scripts[12] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/hoverIntent.js';
+                $java_scripts[13] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.pureparallax.js';
+                $java_scripts[14] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.pricefilter.js';
+                $java_scripts[15] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.selectric.min.js';
+                $java_scripts[16] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.royalslider.min.js';
+                $java_scripts[17] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/SelectBox.js';
+                $java_scripts[18] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/modernizr.custom.js';
+                $java_scripts[19] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/waypoints.min.js';
+                $java_scripts[20] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.flexslider-min.js';
+                $java_scripts[21] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.counterup.min.js';
+                $java_scripts[22] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.tooltips.min.js';
+                $java_scripts[23] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.isotope.min.js';
+                $java_scripts[24] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/puregrid.js';
+                $java_scripts[25] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/stacktable.js';
+                $java_scripts[26] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/custom.js';             
                 $this->template->javascript = html::script($java_scripts);
 		$this->stores = new Food9_Model();
 

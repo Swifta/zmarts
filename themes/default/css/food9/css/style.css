@@ -8,7 +8,7 @@
 /* ------------------------------------------------------------------- */
 /* Import Section
 ---------------------------------------------------------------------- */
-@import url("base.css");				/* Default Reset, Typography, Forms, etc. */
+@import url("base.css");	/* Default Reset, Typography, Forms, etc. */
 @import url("responsive.css");			/* Responsive Grid */
 @import url("font-awesome.css");		/* Font Awesome Icons */
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
@@ -7167,7 +7167,9 @@ html[xmlns] .slides {display: block;}
 		line-height: 32px;
 	}
 
-	#additional-menu { display: none; }
+       #merchant_login { display: none; }
+        
+	#additional-menu { /*display: none; */}
 
 	#cart { float: left; }
 

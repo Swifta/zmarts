@@ -3413,7 +3413,7 @@ $content_text = array(
 
 						"STORE_PERSONALIZED_UPDATE" => "Store Personalized updated successfully",
 
-						"BG_COLOR" => "BG Color",
+						"BG_COLOR" => "Background Color",
 
 						"FONT_COLOR" => "Font Color",
 
@@ -3568,7 +3568,7 @@ $content_text = array(
 			
 			"STORE_PERSONALIZED_UPDATE" => "Store Personalized updated successfully",
 			
-			"BG_COLOR" => "BG Color",
+			"BG_COLOR" => "Background Color",
 			
 			"FONT_COLOR" => "Font Color",
 			
