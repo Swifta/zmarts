@@ -315,11 +315,11 @@ input[type=text],input[type=password]
                              
                              
                                      
-                              <li id="store_admin_email_li" style="display: none;">
+                              <li id="store_admin_email_li">
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" value="<?php echo "@yahoo.com" ?>" name="store_email_id" id="store_email_ids" class="swifta_input"  placeholder="<?php echo @$this->Lang['STORE_EMAIL_ID'];?>"  />
+                                 <input type="text" value="<?php  ?>" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo @$this->Lang['STORE_EMAIL_ID'];?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>

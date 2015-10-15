@@ -393,12 +393,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                 <li>
                                     
-                                 <div class="" style="display:;">
+                                 <div class="">
 									<input type="hidden" name="mr_address2" class="swifta_input" 
 									<?php if($this->session->get('mraddress2')) { ?>
                                                                         value="<?php  echo "address";} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
 									
-									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
+									<em><?php //if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                  </div>
                                 </li>
                                 <li class="frm_clr">
