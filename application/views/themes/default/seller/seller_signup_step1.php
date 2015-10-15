@@ -1002,7 +1002,7 @@ function show_gifs(obj){
 					
                                         if(check == 1){
 						sub_btn_parent.html(sub_btn_parent_bak);
-						$('#z_acc_error').html("<?php echo ", Account verification Sucessful.! <a id='shw' href='<?php echo PATH; ?>merchant-signup-step2.html' title='<?php echo $this->Lang['ACC']; ?>' class='buy_it'><?php echo $this->Lang['ACC']; ?></a>"; ?>");
+						$('#z_acc_error').html("<?php echo ", Account verification Sucessful.! <a id='shw' href='".PATH."merchant-signup-step2.html' title='".$this->Lang['ACC']."' class='buy_it'>".$this->Lang['ACC']."</a>"; ?>");
                                                 document.getElementById("shw").visible = true;
 						return true;
 					}
