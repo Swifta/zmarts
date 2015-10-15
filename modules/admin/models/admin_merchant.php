@@ -685,6 +685,7 @@ class Admin_merchant_Model extends Model
 	public function get_all_sub_sectors()
 	{
 		$result=$this->db->select("sector_id","sector_name","main_sector_id")->from("sector")->where(array("type"=>2))->get();
+		
 		return $result;
 		
 	}

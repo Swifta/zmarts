@@ -25,7 +25,6 @@
     jQuery(document).ready(function() {
 		
         jQuery('#mycarousel12').jcarousel({
-			
             wrap: 'circular'
         });
     });
@@ -46,7 +45,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-    alert("GOODDIIIZZ");
 	$(".slidetabs").tabs(".images > div", {
 	effect: 'fade',
 	fadeOutSpeed: "medium",
@@ -59,7 +57,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
-		alert(jQuery('#mycarousel14'));
+		
         jQuery('#mycarousel14').jcarousel({
             wrap: 'circular'
         });
@@ -909,3 +907,5 @@
         </div>
     </div>
 </div>
+
+

@@ -258,7 +258,7 @@ class Payment_product_Controller extends Layout_Controller {
 	     if($this->UserID){
 	        $this->payment = new Payment_Model();
 	        $this->get_cart_products_list = $this->payment_products->get_cart_products();
-		$this->shipping_address = $this->payment_products->get_user_data_list();
+			$this->shipping_address = $this->payment_products->get_user_data_list();
 	        $this->user_referral_balance = $this->payment->get_user_referral_balance_details();
 	        $this->template->content = new View("themes/".THEME_NAME."/products/cart");
 	     } else {
@@ -996,6 +996,9 @@ class Payment_product_Controller extends Layout_Controller {
 	}
 	function cart_product_remove($product_cart_id="")
 	{
+		var_dump($product_cart_id);
+		exit;
+		
 		$val = 1; 
 	        $deal_id = substr($product_cart_id,15);
                 foreach($_SESSION as $key=>$value)
@@ -1019,7 +1022,11 @@ class Payment_product_Controller extends Layout_Controller {
                         url::redirect(PATH);
                 }
 					
+	
 	}
+	
+	
+	
 	
 	
 }

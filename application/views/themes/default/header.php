@@ -85,7 +85,7 @@ $this->language_List = str_replace(".php", "", $DL);
     		@Live
    		-->
     <li class="mnav_dnone">|</li>
-	<li style="color:green;font-weight: bold;"><a href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
+	<li   style="color:green;font-weight: bold;"><a id="leo_id" style="background:#00F;" href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
 								<li class="mnav_dnone">|</li>
                                                                 <li><a href="<?php if($this->session->get("count") > 0){ echo 'javascript:logout_click();'; }else{ echo PATH."logout.html"; } ?>" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
 							<?php } else { ?>
@@ -1444,4 +1444,63 @@ function load_club(){
 
 	 
 }
+
+
 </script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(e) {
+	
+	
+	<?php if($this->session->get('leo_redirect_case')){?>
+		<?php 
+			$leo_case = $this->session->get('leo_redirect_case');
+			$this->session->delete('leo_redirect_case');
+			?><?php if($leo_case == 1){?>
+			
+				$('#header').click(function(e) {
+					javascript:showsignup();
+   				 });
+				
+			<?php } ?>
+			
+			<?php if($leo_case == 2){?>
+			
+				$('#header').click(function(e) {
+					javascript:showsignup();
+   				 });
+				
+			<?php } ?>
+			
+			<?php if($leo_case == 2){?>
+			
+				$('#header').click(function(e) {
+				javascript:showlogin();
+				});
+				
+			<?php } ?>
+			
+			<?php if($leo_case == 3){?>
+			
+				$('#header').click(function(e) {
+					load_club();
+			  });
+				
+			<?php } ?>
+		
+				$('#header').trigger('click');
+	
+	<?php } ?>
+	
+	
+	
+        
+    });
+	
+	
+
+	
+</script>
+
+

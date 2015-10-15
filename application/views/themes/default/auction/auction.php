@@ -318,7 +318,7 @@ $symbol = CURRENCY_SYMBOL;
                                 </div>
                             </div>
                         </div>
-                                            <!--sidebar start-->
+                        <!--sidebar start-->
                         <div class="conntent_left">
                             <div class="category_sidebar">
                                     <form action="" method="get" name="form1"  >

@@ -14,7 +14,7 @@ foreach ($this->all_products_list as $products) {
         <i class="wloader_img">&nbsp;</i>
        <?php if(count($image)>0){?>
 			<div class="new_prdt_listing_img1">
-				<a href="<?php echo PATH .$products->store_url_title. '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img alt="" src="<?php echo PATH.'resize.php';?>?src=<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_'.$image[0].'.png'?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"/></a> 
+				<a href="<?php echo PATH .$products->store_url_title. '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img alt="" src="<?php echo PATH.'resize.php';?>?src=<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_'.$image[0].'.png'?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"/></a>
 			</div>
 			<?php if(isset($image[1]) && $image[1]!=''){?>
 			<div class="new_prdt_listing_img2">
@@ -33,7 +33,7 @@ foreach ($this->all_products_list as $products) {
         $categories = $products->category_url; ?>
             <div class="new_prdt_listing_details">
                 <h2><a href="<?php echo PATH .  $products->store_url_title.'/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><?php echo substr(ucfirst($products->deal_title), 0, 100) ; ?></a>                </h2>
-<!--<h3><?php //echo substr(ucfirst(strip_tags($products->deal_description)), 0, 25) . ".."; ?></h3>-->
+<?php //echo substr(ucfirst(strip_tags($products->deal_description)), 0, 25) . ".."; ?>
                 <div class="new_price_details">
 					<?php if($products->deal_price!=0) { ?>	
 						<p><?php echo $symbol . "" . $products->deal_price; ?> </p>
@@ -74,7 +74,7 @@ foreach ($this->all_products_list as $products) {
                         <li class="new_cart"><a href="<?php echo PATH .$products->store_url_title. '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $this->Lang['ADD_TO_CART'];?>"></a></li>
                     </ul>
                 </div>
-            </div>        
+            </div>      
         </div>
         <?php if(($i%4) == 0){ ?>
         <?php /*<div class="listingspliter"></div> */ ?>

@@ -4,6 +4,7 @@ class Stores_Controller extends Layout_Controller
 	const ALLOW_PRODUCTION = FALSE;
 	public function __construct()
 	{
+		
 		parent::__construct();
 		if(isset($_SESSION['select_lang'])){
 			if($_SESSION['select_lang']==2){
@@ -41,6 +42,7 @@ class Stores_Controller extends Layout_Controller
 		));
 		$this->template->title = $this->Lang["STORE_LIST"]." | ".SITENAME;
 		$this->store_details = $this->stores->get_store_details($this->pagination->sql_offset, $this->pagination->items_per_page);
+		
 		
 		$this->template->content = new View("themes/".THEME_NAME."/store_listing");
 	}

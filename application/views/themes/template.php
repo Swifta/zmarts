@@ -15,6 +15,7 @@
 <meta name="description" content="<?php echo $this->template->description; ?>" />
 <meta name="keywords" content="<?php echo $this->template->keywords; ?>" />
 <link rel="shortcut icon" href="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/favicon.png&w=<?php echo FAVICON_WIDTH; ?>&h=<?php echo FAVICON_HEIGHT; ?>" type="image/x-icon" />
+
 <?php
         if ($this->city_id) {
             foreach ($this->all_city_list as $CX) {
@@ -69,6 +70,7 @@
 </div >
 <?php }else{
 	
+	 echo new View("themes/" . THEME_NAME ."/".$sector."/header");
 	
 }?>
 
@@ -114,7 +116,37 @@
             <?php } ?>
             -->
 
+
+
+<!--container start--> 
+<?php echo $this->template->content; ?> 
+<!--container_end-->
+
+<?php if(isset($this->sector)) {
+				if($this->theme_name) { 
+					$sector =$this->theme_name; 
+				} else{
+				    $sector="default";
+				    }?>
+
+<!--sector header start-->
+<?php if($sector =="default") { 
+				     echo new View("themes/" . THEME_NAME . "/footer");
+				}else{
+				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
+				} ?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+<!--footer start--> 
+<?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
+<!--footer end-->
+<?php } ?>
+
+
 <?php
+
+
     
         if($this->response != "" || $this->error_response != ""){
             $success_alert = false;
@@ -177,7 +209,7 @@
           'autoClose':true,
 
           // shows a close button
-          'showCloseButton':true,
+          'showCloseButton':false,
 
           // show / close duration
           'showDuration':5000,  
@@ -194,37 +226,13 @@
 				
 			</script> 
 
-<!--container start--> 
-<?php echo $this->template->content; ?> 
-<!--container_end-->
 
-<?php if(isset($this->sector)) {
-				if($this->theme_name) { 
-					$sector =$this->theme_name; 
-				} else{
-				    $sector="default";
-				    }?>
-
-<!--sector header start-->
-<?php if($sector =="default") { 
-				     echo new View("themes/" . THEME_NAME . "/footer");
-				}else{
-				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
-				} ?>
-
-<!--Sector header End-->
-<?php } else {  ?>
-<!--footer start--> 
-<?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
-<!--footer end-->
-<?php } ?>
 <script type="text/javascript">
 $(window).load(function() {
 					$(".wloader_img").fadeOut("slow");
 					$(".wloader_img").css("visibility:visible");
 				});
 				
-				alert("HEllo");
 </script>
 </body>
 </html>
