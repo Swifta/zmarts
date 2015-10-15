@@ -7167,7 +7167,9 @@ html[xmlns] .slides {display: block;}
 		line-height: 32px;
 	}
 
-	#additional-menu { display: none; }
+       #merchant_login { display: none; }
+        
+	#additional-menu { /*display: none; */}
 
 	#cart { float: left; }
 

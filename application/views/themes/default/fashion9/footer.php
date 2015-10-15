@@ -2,7 +2,8 @@
 <?php if(count($this->about_us_footer)>0) { 
     foreach($this->about_us_footer as $stores) { ?>
         <div class="row">
-                <div class="span5 text-center">
+            <div class="span1"></div>
+            <div class="span4 text-center" style="">
                     <p class="">
 <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
     <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
@@ -43,7 +44,7 @@
                             </ul>
                         </div>
                 </div>
-                <div class="span3">
+                <div class="span3" style="padding-left: 15px;">
                         <h4>Shopping Guide</h4>
                     <ul>
                         <li><a href="<?php echo PATH; ?>" title="Home">Home</a></li>
@@ -56,7 +57,7 @@
                     } ?>
                     </ul>
                 </div>
-                <div class="span4">
+                <div class="span3" >
               <?php if(isset($this->footer_merchant_details) && count($this->footer_merchant_details)>0){
 				foreach($this->footer_merchant_details as $admin){ ?>
 				<div class="footer_three footer_list">
@@ -76,7 +77,7 @@
             </div>
             <?php }
             }else if(count($this->admin_details)>0) { foreach($this->admin_details as $admin) { ?>
-            <div class="span3">
+            <div class="span3" >
                <ul>
                    <li>
                        <div class="foot_location">
@@ -93,6 +94,7 @@
             <?php } } ?>
 					
                 </div>
+            <div class="span1"></div>
         </div>
 <?php
     }

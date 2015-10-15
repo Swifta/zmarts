@@ -30,14 +30,17 @@
                        e.preventDefault();
                        $(this).closest('form')
                                .submit();                                               
-                });
+         });
+         
+            $(".slider_home").tabs(".images > div", {
+                    effect: 'fade',
+                    fadeOutSpeed: "medium",
+                    rotate: true
+            }).slideshow();
+
         });
 $(function() {
-$(".slidetabs").tabs(".images > div", {
-	effect: 'fade',
-	fadeOutSpeed: "medium",
-	rotate: true
-}).slideshow();
+
 });
 </script>
 

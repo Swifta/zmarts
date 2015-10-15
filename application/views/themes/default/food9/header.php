@@ -63,43 +63,40 @@ $this->language_List = str_replace(".php", "", $DL);
 	<div class="container">
 
 		<!-- Top Bar Menu -->
-		<div class="ten columns">
+		<div class="six columns">
 			<ul class="top-bar-menu">
-				<li><i class="fa fa-phone"></i> (564) 123 4567</li>
-				<li><i class="fa fa-envelope"></i> <a href="#">mail@example.com</a></li>
-				<li>
-					<div class="top-bar-dropdown">
-						<span>English</span>
-						<ul class="options">
-							<li><div class="arrow"></div></li>
-							<li><a href="#">English</a></li>
-							<li><a href="#">Polish</a></li>
-							<li><a href="#">Deutsch</a></li>
-						</ul>
-					</div>
-				</li>
-				<li>
-					<div class="top-bar-dropdown">
-						<span>USD</span>
-						<ul class="options">
-							<li><div class="arrow"></div></li>
-							<li><a href="#">USD</a></li>
-							<li><a href="#">PLN</a></li>
-							<li><a href="#">EUR</a></li>
-						</ul>
-					</div>
-				</li>
+         <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
+                        <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/warranty.html'; ?>"><?php echo $this->Lang["WARRANTY"]; ?></a></li>
+
+                        <?php } ?>
+                         <?php if($this->merchant_cms->current()->return_policy_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/return_policy.html'; ?>" title=" <?php echo $this->Lang["RET_POLICY"]; ?>"> <?php echo $this->Lang["RET_POLICY"]; ?></a></li>
+
+                        <?php } ?>
+                         <?php if($this->merchant_cms->current()->terms_conditions_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/shipping.html'; ?>" title="<?php echo $this->Lang["SHIP_ING"]; ?>"><?php echo $this->Lang["SHIP_ING"]; ?></a></li>
+      
+                        <?php } ?>                                          
+            <?php } }} ?>
+                            <li>
+        <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+                    <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+                            </li>
+        <?php  if($this->session->get('user_auto_key')) { ?>
+        <li  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
+        <?php } ?>
+        
+ 
 			</ul>
 		</div>
-
-		<!-- Social Icons -->
-		<div class="six columns">
-			<ul class="social-icons">
-				<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-				<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-				<li><a class="dribbble" href="#"><i class="icon-dribbble"></i></a></li>
-				<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-				<li><a class="pinterest" href="#"><i class="icon-pinterest"></i></a></li>
+                
+		<div class="ten columns float-rt" id="merchant_login">
+			<ul class="top-bar-menu text-right"  style="float:right;">
+                            <li><strong><?php echo $this->Lang['MERCHANT_ACC']; ?> ::</strong></li>
+                    <li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
+                    <li>|</li>
+                    <li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
 			</ul>
 		</div>
 
@@ -117,20 +114,77 @@ $this->language_List = str_replace(".php", "", $DL);
 
 	<!-- Logo -->
 	<div class="four columns">
-		<div id="logo">
-			<h1><a href="index.html"><img src="images/logo.png" alt="Trizzy" /></a></h1>
+		<div id="logo">                 
+			<h1>
+            <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
+     <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
+            <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+    <?php /* <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/> */ ?></a>
+      <?php } } ?>
+                        </h1>
 		</div>
 	</div>
 
 
 	<!-- Additional Menu -->
-	<div class="twelve columns">
+	<div class="twelve columns" style="margin-top:-20px;">
 		<div id="additional-menu">
 			<ul>
-				<li><a href="shopping-cart.html">Shopping Cart</a></li>
-				<li><a href="wishlist.html">WishList <span>(2)</span></a></li>
-				<li><a href="checkout-billing-details.html">Checkout</a></li>
-				<li><a href="my-account.html">My Account</a></li>
+       <li><a href="<?php echo PATH;?>">Home</a></li>
+
+        <?php if ($this->session->get('UserID')) { ?>
+                <li class=""><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+
+                <li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
+
+
+        <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+
+
+                <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
+
+                <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
+                <li  class="" >
+                <?php $compare = $this->session->get("product_compare"); 
+                if(is_array($compare) && count($compare)>1){  ?>
+                <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
+                <li class=""> <?php $compare = $this->session->get("product_compare"); 
+                if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
+
+
+        <?php } ?>
+                <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
+
+                <li><a href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
+        <?php } else { ?>
+
+        <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+                <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
+
+                <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
+
+                <li  class="" >
+                <?php $compare = $this->session->get("product_compare"); 
+                if(is_array($compare) && count($compare)>1){  ?>
+                <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
+                <li class=""> <?php $compare = $this->session->get("product_compare"); 
+                if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
+
+        <?php } ?>
+
+                <li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
+
+                <li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+                <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
+        <?php } ?>
+        <?php if (FB_PAGE) { ?>
+        <!-- <li><a class="faceb" href="<?php echo FB_PAGE; ?>" target="blank" title="<?php echo $this->Lang['FB']; ?>">&nbsp;</a></li>-->
+        <?php }if (TWITTER_PAGE) { ?>
+        <!-- <li><a class="twitt" href="<?php echo TWITTER_PAGE; ?>" target="blank" title="<?php echo $this->Lang['TW']; ?>">&nbsp;</a></li>-->
+        <?php }if (LINKEDIN_PAGE) { ?>
+        <!--  <li><a class="linked" href="<?php echo LINKEDIN_PAGE; ?>" target="blank" title="<?php echo $this->Lang['LINK']; ?>">&nbsp;</a></li>-->
+        <?php } if ($this->city_id) { 
+        }  ?>
 			</ul>
 		</div>
 	</div>
@@ -140,10 +194,24 @@ $this->language_List = str_replace(".php", "", $DL);
 	<div class="twelve columns">
 
 		<div id="cart">
-
 			<!-- Button -->
 			<div class="cart-btn">
-				<a href="#" class="button adc">$178.00</a>
+                        <a class="button adc" href="<?php echo PATH; ?>cart.html"  title="<?php echo $this->Lang['CART']; ?>(<?php
+                        if ($this->session->get('count') != '') {
+                                echo $this->session->get('count');
+                        } else {
+                                echo '0';
+                        }
+                        ?>)">      
+                        <span>
+                           <?php
+		           if ($this->session->get('count') != "") {
+			           echo $this->session->get('count');
+		           } else {
+			           echo "0";
+		           }
+		           ?>
+                            </span><?php echo $this->Lang['CART']; ?>(s)</a>
 			</div>
 
 			<div class="cart-list">
