@@ -77,7 +77,7 @@ if(count($this->merchant_personalised_details)>0) {
                         //echo "No Image file";
 ?>
                 <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
                 </li>
 <?php
                     }
@@ -96,6 +96,9 @@ else{?>
                     <p><span>Up to 50% Off</span></p>
                     <p><span>On selected items online and in stores</span></p>
             </div>
+    </li>
+    <li>
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
     </li>
 
 <!-- display default banners-->
@@ -131,6 +134,7 @@ else{?>
 <!--for adverts -->
 <section>
 <?php 
+/*
 $ads_check = "";
 if(count($this->merchant_personalised_details)>0) { 
 foreach($this->merchant_personalised_details as $m) {
@@ -155,7 +159,7 @@ foreach($this->merchant_personalised_details as $m) {
 
     </ul>  
 </div>
-<?php  } } ?>
+<?php  } } */?>
 </section>
 <!--end of for adverts-->
 <!--<section class="header_text">
@@ -180,7 +184,7 @@ foreach($this->merchant_personalised_details as $m) {
 if((count($this->best_seller)>0) || (count($this->get_product_categories)>0)) { 
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if(count($this->best_seller)>0) {
     $displayed = 1;	
@@ -235,7 +239,7 @@ $avg_rating = round($avg_rating); ?>
         </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -249,19 +253,19 @@ $avg_rating = round($avg_rating); ?>
 
  }
  
- if((count($this->best_seller)>4) || (count($this->get_product_categories)>0)) {
+ if((count($this->best_seller)>5) || (count($this->get_product_categories)>0)) {
  ?>
     <div class="item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php 
-    if(count($this->best_seller)>4) {
+    if(count($this->best_seller)>5) {
 
     $displayed = 1;
     $start = 1;
     foreach($this->best_seller as $best) {  
      $symbol = CURRENCY_SYMBOL;
-     if($start > 4){
+     if($start > 5){
  ?>
 <li class="span3">
         <div class="product-box">
@@ -312,7 +316,7 @@ $avg_rating = round($avg_rating); ?>
 <?php
         $displayed++;
      }
-     if($displayed > 4){
+     if($displayed > 5){
          break;
      }
      
@@ -354,7 +358,7 @@ $avg_rating = round($avg_rating); ?>
 if(count($this->get_product_categories) > 0) {
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if($this->product_setting) {
     $displayed = 1;	
@@ -409,7 +413,7 @@ $avg_rating = round($avg_rating); ?>
         </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -423,19 +427,19 @@ $avg_rating = round($avg_rating); ?>
 
  }
  
- if(count($this->get_product_categories) > 4) {
+ if(count($this->get_product_categories) > 5) {
  ?>
     <div class="item">
                 <ul class="thumbnails">
 
 <?php 
-    if(count($this->get_product_categories) > 4) {
+    if(count($this->get_product_categories) > 5) {
 
     $displayed = 1;
     $start = 1;
     foreach($this->get_product_categories as $products) {  
      $symbol = CURRENCY_SYMBOL;
-     if($start > 4){
+     if($start > 5){
  ?>
 <li class="span3">
         <div class="product-box">
@@ -486,7 +490,7 @@ $avg_rating = round($avg_rating); ?>
 <?php
         $displayed++;
      }
-     if($displayed > 4){
+     if($displayed > 5){
          break;
      }
      
@@ -527,7 +531,7 @@ $avg_rating = round($avg_rating); ?>
 if(count($this->get_deals_categories) > 0) {
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if(($this->deal_setting)) {
     $displayed = 1;	
@@ -549,7 +553,7 @@ if(count($this->get_deals_categories) > 0) {
          <img src="<?php echo PATH .'images/products/1000_800/'.$deals_categories->deal_key.'_1'.'.png'?>" />
         <?php } ?>
         <?php } else { ?>
-            <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
+            <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $deals_categories->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
         <?php } ?>
     </a>
             </p>
@@ -592,7 +596,7 @@ $avg_rating = round($avg_rating); ?>
         </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -606,19 +610,19 @@ $avg_rating = round($avg_rating); ?>
 
  }
 
- if(count($this->get_deals_categories) > 4) {
+ if(count($this->get_deals_categories) > 5) {
  ?>
     <div class="item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php 
-    if(count($this->get_deals_categories) > 4) {
+    if(count($this->get_deals_categories) > 5) {
 
     $displayed = 1;
     $start = 1;
     foreach($this->get_deals_categories as $deals_categories) {  
      $symbol = CURRENCY_SYMBOL;
-     if($start > 4){
+     if($start > 5){
  ?>
 <li class="span3">
         <div class="product-box">
@@ -671,7 +675,7 @@ $avg_rating = round($avg_rating); ?>
 <?php
         $displayed++;
      }
-     if($displayed > 4){
+     if($displayed > 5){
          break;
      }
      
@@ -714,7 +718,7 @@ $avg_rating = round($avg_rating); ?>
 if(count($this->get_auction_categories) > 0) {
 ?>
     <div class="active item">
-                <ul class="thumbnails">
+                <ul class="thumbnails text-center">
 
 <?php if(($this->auction_setting)) {
     $displayed = 1;	
@@ -796,7 +800,7 @@ $avg_rating = round($avg_rating); ?>
             </div>
 </li>
 <?php
-     if($displayed >= 4){
+     if($displayed >= 5){
          break;
      }
      $displayed++;
@@ -844,20 +848,20 @@ $avg_rating = round($avg_rating); ?>
                 </ul>
             </div>
             <?php }*/?>
-<section class="header_text">
+<!--<section class="header_text">
 <?php foreach ($this->get_store_details as $store) { ?> 
     <strong><?php echo ucfirst($store->store_name) ; ?>  </strong>                  
     <?php /* <h2 class="deal_sub_title store_address_title"><?php echo $this->Lang['ADDRES']; ?></h2> */ ?>                        
-        <!--<h3><?php echo $store->store_name; ?>,</h3>-->
+        <h3><?php echo $store->store_name; ?>,</h3>
         ,<?php echo $store->address1; ?>,
         <?php echo $store->address2; ?>,                                    
         <?php echo $store->city_name; ?>, <?php echo $store->country_name; ?>. <br />                  
-        <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  
+        <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  <br />
         <strong><?php echo $this->Lang['WEBSITE']; ?></strong>: <a href="<?php echo $store->website; ?>" target="blank" class="deal_web_link"> <?php echo $store->website; ?></a>    
 <?php } ?>
-</section>
+</section>-->
 <div class="row feature_box">
-    <div class="span6">
+    <div class="span5">
         <?php foreach ($this->get_store_details as $store) { ?>
 
                 <div id="map_main" style="height:306px;"></div>
@@ -892,8 +896,19 @@ $avg_rating = round($avg_rating); ?>
 
         <?php } ?>
     </div>
-    
-    <div class="span6">
+    <div class="span3">
+        <?php foreach ($this->get_store_details as $store) { ?> 
+            <strong><?php echo ucfirst($store->store_name) ; ?>  </strong>                  
+            <?php /* <h2 class="deal_sub_title store_address_title"><?php echo $this->Lang['ADDRES']; ?></h2> */ ?>                        
+                <!--<h3><?php echo $store->store_name; ?>,</h3>-->
+                ,<?php echo $store->address1; ?>,<br />
+                <?php echo $store->address2; ?>,    <br />                                
+                <?php echo $store->city_name; ?>, <?php echo $store->country_name; ?>. <br />                  
+                <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  
+                <strong><?php echo $this->Lang['WEBSITE']; ?></strong>: <a href="<?php echo $store->website; ?>" target="blank" class="deal_web_link"> <?php echo $store->website; ?></a>    
+        <?php } ?>       
+    </div>
+    <div class="span4">
 
         <div class="title_outer">
             <h2 class="title_inner2"><?php echo $this->Lang['COMM']; ?></h2>  
@@ -966,9 +981,9 @@ $avg_rating = round($avg_rating); ?>
             
             
             
-<div class="store_subscribe_part_outer">
-    <div class="store_subscribe_part">
-        <div class="store_subscribe_part_inner">
+<div class="store_subscribe_part_outer" style="background:white;">
+    <div class="store_subscribe_part" style="background:white;">
+        <div class="store_subscribe_part_inner" style="background:white;">
             <h2>Subscribe</h2>
             <p>Subscribe to receive our news everyday !</p>
             <div class="sub_cont">

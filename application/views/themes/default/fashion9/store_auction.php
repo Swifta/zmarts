@@ -1,5 +1,4 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
-<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery(1).js"  type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
 <script type="text/javascript">
@@ -39,131 +38,156 @@ $(".slidetabs").tabs(".images > div", {
     });
 </script>
 <!--Carousel Script-->
-<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js"></script>
 <!-- banner start-->
-<?php 
+<section  class="homepage-slider" id="home-slider">
+    <div class="flexslider">
+            <ul class="slides">
+
+<?php
 $banner_check ="";
 if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {  ?>
-            <div class="banner">
-                                <div class="slider_home">
-									
-                                    <div class="images wloader_parent">
-										<?php $tabs=0;for ($i = 1; $i <= 3; $i++) {?>
-										<?php if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
-											$banner_link="";
-											
-											if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { $banner_check = 1;
-											if($i==1) { $banner_link = $m->banner_1_link; } else if($i==2) { $banner_link = $m->banner_2_link; } else if($i==3) { $banner_link = $m->banner_3_link; }}  ?>
-										
-                                        <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
-                                        <div style="display: none;">                                                                                
-                                            <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
-                                                <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
-                                            </a>
-                                        </div>
-                                        <?php $tabs++;} ?>
-                                       
-                                            <?php }
-                                            if($tabs==0){ ?>
-											<img alt="Banner image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/fashion_banner.png"/>											
-                                            <?php } ?>                                  
-                                      </div>  
-                                      
-                                                               
-                                            <div class="controls">                                                    
-                                                    <div class="slidetabs">
-														
-						<?php for ($i = 1; $i <= $tabs; $i++) {  if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { ?>
-                                                       <a href="" class="slider_dot current">&nbsp;</a> 
-                                                        
-                                                        <?php } } ?>
-                                                       
-                                                    </div>                                                                                                   
-                                            </div>
-                                             
-                                    </div>
+	foreach($this->merchant_personalised_details as $m) {  
+                $tabs=0;
+                for ($i = 1; $i <= 3; $i++) {
+                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
+                            $banner_link="";
+
+                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
+                                $banner_check = 1;
+                                if($i==1) { 
+                                    $banner_link = $m->banner_1_link; 
+                                } else if($i==2) { 
+                                    $banner_link = $m->banner_2_link; 
+                                } else if($i==3) { 
+                                    $banner_link = $m->banner_3_link; 
+                                }
+                                
+                            }
+?>
+<li>                                                                                
+    <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
+        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
+    </a>
+</li>
+<?php
+                    }
+                    else{
+                        //echo "No Image file";
+?>
+                <li>
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
+                </li>
+<?php
+                    }
+                }
+        }
+}
+else{?>
+
+    <li>
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
+    </li>
+    <li>
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-2.jpg" alt="" />
+            <div class="intro">
+                    <h1>Mid season sale</h1>
+                    <p><span>Up to 50% Off</span></p>
+                    <p><span>On selected items online and in stores</span></p>
             </div>
-            <?php   }  } ?>
+    </li>
+    <li>
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
+    </li>
+
+<!-- display default banners-->
+<?php
+}
+?>
+            </ul>
+    </div>
+</section>
+
             <!-- banner end-->
  <?php 
 				$font_color = "";
 				$bg_color ="";
 				$font_size ="";
 				
-				if(count($this->merchant_personalised_details)>0) { 
-					foreach($this->merchant_personalised_details as $m) {  
-						$font_color = "color:".$m->font_color.";";
-						$bg_color ="background:".$m->bg_color.";";
-						$font_size = $m->font_size."px";
-					} 
-				}	 ?>
-<div class="contianer_outer1" style="<?php echo $bg_color; ?>">
-    <div class="contianer_inner">
-        <div class="contianer">
-            <div  id="messagedisplay1" style="display:none;">      
-                <div class="session_wrap">
-                    <div class="session_container">
-                        <div class="success_session">
-                            <p><span ><?php echo $this->Lang['COMM_POST_SUCC']; ?>.</span></p>
-                            <div class="close_session_2">
-                                <a class="closestatus cur" title="<?php echo $this->Lang['CLOSE']; ?>"  onclick="return closeerr();" >&nbsp;</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-            <?php if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {
-		 if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  ?>        
-            <div class="advertice_part">
-                <ul>
-					<?php for ($i = 1; $i <= 3; $i++) { ?>
-										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->merchant_id.'_'.$i.'_ads.png')) { 
-											$ads_link="";
-											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; }  ?>
-                    <li>
-                        <div class="advertice_inner">
-                            <a href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
-                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->merchant_id.'_'.$i.'_ads.png'; ?>"/>  
-                            </a>
-                        </div>
-                    </li>
-                    <?php } } ?>
-                </ul>  
-            </div>
-            <?php } } } ?>
-            <div class="store_page_listing" >
-				<div class="product_list_inner">
-						<div class="title_outer">
-							<h2 class="title_inner2"><?php echo $this->title_display; ?></h2>  
-						</div>                 
-						<div class="store_product" id="product">
-							<?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_auction_list"); ?>
-						</div>
-				</div>
-            </div>
+//				if(count($this->merchant_personalised_details)>0) { 
+//					foreach($this->merchant_personalised_details as $m) {  
+//						$font_color = "color:".$m->font_color.";";
+//						$bg_color ="background:".$m->bg_color.";";
+//						$font_size = $m->font_size."px";
+//					} 
+//				}	 
+                                
+                                ?>
             
-            <?php if(($this->all_auction_count > 1)) { ?>
-				<div id="loading">
-				<?php if (($this->pagination) != "") { ?>
-						<div class="feature_viewmore">
-							<div class="fea_view_more">                                                
-								<a class="view_more view_more1 view_more_but">
-									<span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_AUC']; ?><span class="view_more_icon">- - -</span>
-								</a> 
-							</div>
-						</div>
-					<?php } ?>
-					</div>
-			<?php } ?>
-			
-		</div>
-	</div>
+            
+<section class="main-content" style="<?php echo $bg_color; ?>">
+    <div class="row text-center">
+        <h2 class=""><?php echo $this->title_display; ?></h2> 
+    </div>
+                <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>
+                <!--<div class="store_product" id="product">-->
+<div class="row">
+    <div class="span12">
+<div class="row">
+            <div class="span12">
+<ul class="thumbnails text-center">
+        
+
+
+    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_auction_list"); ?>
+                
+            
+                
+                    <span  id="product">
+                    </span>
+                
+
+</ul>
+                </div>
 </div>
-<div class="store_subscribe_part_outer">
-    <div class="store_subscribe_part">
-        <div class="store_subscribe_part_inner">
+</div>
+                <!--</div>-->
+     
+    <?php if(($this->all_auction_count > 12)) { ?>
+        <div id="loading">
+        <?php if (($this->pagination) != "") { ?>
+                    <div class="feature_viewmore text-center">
+                            <div class="fea_view_more text-center">                                                
+                                    <a class="view_more view_more1 view_more_but">
+                                            <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_AUC']; ?><span class="view_more_icon">- - -</span>
+                                    </a> 
+                            </div>
+                    </div>
+                <?php } ?>
+        </div>
+    <?php } ?>
+</div>
+</section>
+            
+
+
+
+<section  id="messagedisplay1" style="display:none;">      
+    <div class="session_wrap">
+        <div class="session_container">
+            <div class="success_session">
+                <p><span ><?php echo $this->Lang['COMM_POST_SUCC']; ?>.</span></p>
+                <div class="close_session_2">
+                    <a class="closestatus cur" title="<?php echo $this->Lang['CLOSE']; ?>"  onclick="return closeerr();" >&nbsp;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+            
+            
+<div class="store_subscribe_part_outer" style="background:white;">
+    <div class="store_subscribe_part" style="background:white;">
+        <div class="store_subscribe_part_inner" style="background:white;">
             <h2>Subscribe</h2>
             <p>Subscribe to receive our news everyday !</p>
             <div class="sub_cont">

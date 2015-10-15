@@ -114,6 +114,7 @@
                     </div>
                 </div>
             <?php } ?>
+<<<<<<< HEAD
             -->
 
 
@@ -144,9 +145,15 @@
 <?php } ?>
 
 
+
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
+<script type="text/javascript">
 <?php
 
 
+
+    
+   
     
         if($this->response != "" || $this->error_response != ""){
             $success_alert = false;
@@ -225,6 +232,17 @@
     ?>
 				
 			</script> 
+
+<!--container start--> 
+<?php echo $this->template->content; ?> 
+<!--container_end-->
+<?php if(isset($this->sector)) {
+				if($this->theme_name) { 
+					$sector =$this->theme_name; 
+				} else{
+				    $sector="default";
+				}}?>
+
 
 
 <script type="text/javascript">

@@ -411,11 +411,16 @@ section.navbar{
 
 /* product box
 ----------------------------------------------------------------------------- */
+
+.cmpr, .wish{
+    background: #f8f8f8;
+}
+
 .product-box{
 	text-align:center;
 	padding-bottom:15px;
 	position: relative;
-	background-color:#f8f8f8;
+	background-color:white; /*#f8f8f8;*/
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -431,7 +436,7 @@ section.navbar{
 	left:0;
 }
 .product-box:hover{
-	background-color:#eb4800;
+	background-color:#f8f8f8; /*#eb4800;*/
 	-webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
@@ -440,7 +445,7 @@ section.navbar{
 	box-shadow: 0px 0px 5px #ccc;
 }
 .product-box:hover a{
-	color:#fff !important;
+	/*color:#fff !important;*/
 }
 .product-box img{
 	overflow:hidden;
@@ -775,4 +780,8 @@ section.our_client .row{
 	.feature_box .service{	
 		border-bottom:1px solid #eee;
 	}
+}
+
+.add_cart{
+    background: #eb4800;
 }

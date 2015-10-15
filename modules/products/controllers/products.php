@@ -443,11 +443,37 @@ class Products_Controller extends Layout_Controller
 		if($this->theme_name) { 
 			
 			//$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
+
+			//var_dump("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
+
 			$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
 			
-			
-			//var_dump("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
-			
+
+                        if($this->theme_name == "fashion9"){
+                            //echo "was here"; die;
+                            $style_sheets = array();
+                            $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
+                            $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
+                            $style_sheets[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/bootstrap/css/bootstrap.min.css';
+                            $style_sheets[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/bootstrap/css/bootstrap-responsive.min.css';
+                            $style_sheets[4] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/bootstrappage.css';
+                            $style_sheets[5] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/flexslider.css';
+                            $style_sheets[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/main.css';
+                            $this->template->style = html::stylesheet($style_sheets);
+                            $java_scripts = array();
+                            $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
+                            $java_scripts[1] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
+                            $java_scripts[2] = PATH.'bootstrap/js/bootstrap.min.js';
+                            $java_scripts[3] = PATH.'bootstrap/themes/js/jquery.scrolltotop.js';
+                            $java_scripts[4] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
+                            $java_scripts[5] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
+                            $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
+                            $this->template->javascript = html::script($java_scripts);
+                        }
+                        else{
+                            $this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
+                        }	
+
 			$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
 		} else {
 			

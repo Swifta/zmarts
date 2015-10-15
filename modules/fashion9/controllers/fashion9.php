@@ -64,7 +64,7 @@ class Fashion9_Controller extends Bootstrap_Controller
 		        url::redirect(PATH);
 		}
 	}
-	
+    
 	/** STORE LIST  PAGE **/
 
 	public function store_list($page = "" )
@@ -360,7 +360,7 @@ exit;
 	public function product_list($store_url_title = "", $cat_type = "",$category = ""){
 		$this->is_store_details = $this->is_product = 1;
 		$this->storeurl = $store_url_title;
-		
+		//echo "hello world"; die;
 		$this->get_theme_name = common::get_theme($store_url_title);  
 		if(count($this->get_theme_name)>0) {
 			$this->sector = $this->get_theme_name->current()->sector_name;

@@ -375,6 +375,11 @@ function show_gif(obj){
 						return false;
 					}
 					
+                                        if(check == 1){
+						sub_btn_parent.html(sub_btn_parent_bak);
+						$('#z_acc_error').html("<?php echo ", Account verification Completed. ."; ?>");
+						return false;
+					}
 					
 					sub_btn_parent.html(sub_btn_parent_bak);
 					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
