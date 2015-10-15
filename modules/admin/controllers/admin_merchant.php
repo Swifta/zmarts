@@ -540,6 +540,7 @@ class Admin_merchant_Controller extends website_Controller {
 						}
 						
 						if(($modules_name != $old_modules_name) ){
+							/*
 							
 							
 							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
@@ -588,8 +589,63 @@ class Admin_merchant_Controller extends website_Controller {
 							fclose($f);
 							fclose($fp);
 
+						*/
+								
+							
+							
+							
+							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
+
+							$old_line = file($old_modules_file);
+
+							$old_file = DOCROOT.'modules/'.$old_modules_name.'/config/main_routes.php';
+							$old_f = fopen($old_file, "r");
+
+							unset($old_line[0]);
+
+							$new_array = array();
+							$i =0 ;
+							foreach( $old_line as $key => $value )
+							{
+								if( $value != "" && !is_array($value) ) { $new_array[$i] = $value; $i++;} 
+	
+							}
+
+							$change_line = array();
+							while ( $line = fgets($old_f, 1000) ) {
+								$change_line[] = str_replace("CHANGE",url::title($old_store_name),$line);
+							}
+
+							$new_array = array_diff($new_array,$change_line);
+
+							$data = implode('', array_values($new_array));
+							
+							$file = fopen($old_modules_file,"w+");
+							fputs($file, "<?php defined('SYSPATH') OR die('No direct access allowed.');\n");
+							fputs($file, $data);
+							fclose($file);
+	
+							
+							
+							$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+							$f = fopen($main_routes, "r");
+
+
+							$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+							$fp = fopen($file, "a");
+						
+							while ( $line = fgets($f, 1000) ) {
+								$change_line = str_replace("CHANGE",url::title($merchant_store_name),$line);
+								fputs($fp, $change_line);	
+							}
+
+							fclose($f);
+							fclose($fp);
+
+						
 						}
-					
+						
+						$this->response = $this->Lang["STORE_PERSONALIZED_UPDATE"];
 				        common::message(1, $this->Lang["STORE_PERSONALIZED_UPDATE"]);
 			        }
 			       // $lastsession = $this->session->get("lasturl");
