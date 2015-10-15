@@ -1136,5 +1136,100 @@ function(isConfirm){
 //	
 //}
 
+function show_gifs(obj){
+	
+			var sub_btn = $(obj).parent();
+			var sub_btn_parent = sub_btn.parent();
+			var sub_btn_parent_bak = sub_btn_parent.html();
+			
+			$('#z_acc_error').html('');
+			
+			var nuban = $('#acctnum').val();
+			if(nuban == ''){
+				alert("Empty field");
+				return false;
+			}
+			
+			var reg = /\d{10}/;
+			var is_no = reg.exec(nuban);
+			if(!is_no){
+				if(nuban.length != 10){
+					alert("Zenith A/C no must be 10 digits.");
+					return false;
+				}
+				
+				alert("Only digits (i.e. 0,1, 2... 9)");
+				return false;
+			}
+			
+			if(is_z_verify_account_api_running){
+				return false;	
+			}
+			
+			
+	
+			is_z_verify_account_api_running = true;
+			var url = Path+'users/club_registration_logged_in_user/'; 
+			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
+			
+			$.ajax(
+	            {
+		        type:'POST',
+		        url:url,
+				data:{nuban:nuban},
+		        cache:false,
+		        async:true,
+		        global:false,
+		        dataType:"html",
+		        success:function(check)
+		        {
+					is_z_verify_account_api_running = false;
+					if(isNaN(check)){
+						sub_btn_parent.html(sub_btn_parent_bak);
+						window.location.href = check;
+						return false;
+					}
+					
+					/*
+					  TODO
+					  Need to internationalize the string below.
+					  @Live
+					 */
+					
+					if(check == -1){
+						sub_btn_parent.html(sub_btn_parent_bak);
+						$('#z_acc_error').html("<?php echo "Sorry, Account verification failed. Please try again."; ?>");
+						return false;
+					}
+					
+                                        if(check == 1){
+						sub_btn_parent.html(sub_btn_parent_bak);
+						$('#z_acc_error').html("<?php echo ", Account verification Sucessful.! <a id='shw' href='".PATH."merchant-signup-step2.html' title='".$this->Lang['ACC']."' class='buy_it'>".$this->Lang['ACC']."</a>"; ?>");
+                                                document.getElementById("shw").visible = true;
+						return true;
+					}
+					
+					sub_btn_parent.html(sub_btn_parent_bak);
+					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
+					return false;
+						
+			
+				 
+		          
+		        },
+		        error:function()
+		        {
+					sub_btn_parent.html(sub_btn_parent_bak);
+					is_z_verify_account_api_running = false;
+					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
+					return false;
+		        }
+
+	         });
+			 
+			return false;
+	
+}
+
 
 </script>

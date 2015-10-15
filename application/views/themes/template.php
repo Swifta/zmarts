@@ -1,82 +1,90 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <meta property="og:image"  content="<?php echo $this->template->metaimage; ?>"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <title> <?php echo $this->template->title; ?> </title>
-        <meta name="description" content="<?php echo $this->template->description; ?>" />
-        <meta name="keywords" content="<?php echo $this->template->keywords; ?>" />
-        <link rel="shortcut icon" href="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/favicon.png&w=<?php echo FAVICON_WIDTH; ?>&h=<?php echo FAVICON_HEIGHT; ?>" type="image/x-icon" />		
-       
-        <?php
+<meta property="og:image"  content="<?php echo $this->template->metaimage; ?>"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title><?php echo $this->template->title; ?></title>
+<meta name="description" content="<?php echo $this->template->description; ?>" />
+<meta name="keywords" content="<?php echo $this->template->keywords; ?>" />
+<link rel="shortcut icon" href="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/favicon.png&w=<?php echo FAVICON_WIDTH; ?>&h=<?php echo FAVICON_HEIGHT; ?>" type="image/x-icon" />
+
+<?php
         if ($this->city_id) {
             foreach ($this->all_city_list as $CX) {
                 if ($this->city_id == $CX->city_id) {
                     ?>
-                    <link rel="alternate" type="application/atom+xml" title="<?php echo ucfirst($CX->city_name); ?> deals" href="<?php echo PATH . 'deals/rss/' . $this->city_id . '/' . $CX->city_url; ?>"  />
-                    <?php
+<link rel="alternate" type="application/atom+xml" title="<?php echo ucfirst($CX->city_name); ?> deals" href="<?php echo PATH . 'deals/rss/' . $this->city_id . '/' . $CX->city_url; ?>"  />
+<?php
                 }
             }
         }
         ?>
-        <?php 
+<?php 
         echo $this->template->style;
-        echo $this->template->javascript; ?>
-                  <?php /*  <link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/demo.css" type="text/css" media="screen" /> 
+        echo $this->template->javascript;
+?>
+</head>
 
-        <script type="text/javascript">
-var __lc = {};
-__lc.license = 1098049;
-
-(function() {
-var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-})();
-</script>  */ ?>
-                    </head>             
-        <body><?php if(isset($this->sector)) {
+<body>
+<?php if(isset($this->sector)) {
 				if($this->theme_name) { 
 					$sector =$this->theme_name; 
 				} else{
 				    $sector="default";
-				    }?> 
-			 <!--sector header start-->
-				<?php if($sector =="default") { 
+				 }?>
+
+<!--sector header start-->
+<?php if($sector =="default" || $sector =="fashion9" ) { 
+ if($sector =="default" ) { 
 				     echo new View("themes/" . THEME_NAME . "/header");
 				}else{
+					
 				    echo new View("themes/" . THEME_NAME ."/".$sector."/header"); 
 				} ?>
-			<!--Sector header End-->
-			<?php } else {  ?>
-            <!-- header start-->
-				<?php echo new View("themes/" . THEME_NAME . "/header"); ?>
-            <!--header End-->
-            <?php } ?>
-            <div class="mt10" style="display:none;" id="citylist">
-                <ul>
-                    <?php
+<div class="mt10" style="display:none;" id="citylist">
+  <ul>
+    <?php
                     $a = '';
                     foreach ($this->all_city_list as $city) {
                         ?>
-                        <li <?php if ($a != $city->country_name) { ?>  style="clear:both; color:#E14948;float:left;" <?php } ?> > <?php
+    <li <?php if ($a != $city->country_name) { ?>  style="clear:both; color:#E14948;float:left;" <?php } ?> >
+      <?php
                             if ($a != $city->country_name) {
                                 $a = $city->country_name;
                                 echo ucfirst($city->country_name);
                             } else {
-                                ?> <p>&nbsp;</p> <?php } ?>  <a  onclick="return changecity('<?php echo $city->city_id; ?>', '<?php echo $city->city_url; ?>');" ><?php echo ucfirst($city->city_name); ?>  </a></li>
-<?php } ?>
-                </ul>
-            </div >
-            <!--
+                                ?>
+      <p>&nbsp;</p>
+      <?php } ?>
+      <a  onclick="return changecity('<?php echo $city->city_id; ?>', '<?php echo $city->city_url; ?>');" ><?php echo ucfirst($city->city_name); ?> </a></li>
+    <?php } ?>
+  </ul>
+</div >
+<?php }else{
+	
+	 echo new View("themes/" . THEME_NAME ."/".$sector."/header");
+	
+}?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+
+<!-- header start--> 
+<?php echo new View("themes/" . THEME_NAME . "/header"); ?> 
+
+<!--header End-->
+<?php }
+	 ?>
+
+<!--
             <span id="success_message"></span>
 <?php if (!empty($this->response)) { ?>
                 <div class="msg_show"  id="messagedisplay">            
@@ -107,10 +115,44 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc
                 </div>
             <?php } ?>
             -->
-<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script>
 
+
+
+<!--container start--> 
+<?php echo $this->template->content; ?> 
+<!--container_end-->
+
+<?php if(isset($this->sector)) {
+				if($this->theme_name) { 
+					$sector =$this->theme_name; 
+				} else{
+				    $sector="default";
+				    }?>
+
+<!--sector header start-->
+<?php if($sector =="default") { 
+				     echo new View("themes/" . THEME_NAME . "/footer");
+				}else{
+				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
+				} ?>
+
+<!--Sector header End-->
+<?php } else {  ?>
+<!--footer start--> 
+<?php echo new View("themes/" . THEME_NAME . "/footer"); ?> 
+<!--footer end-->
+<?php } ?>
+
+
+
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
 <script type="text/javascript">
-    <?php
+<?php
+
+
+
+    
+   
     
         if($this->response != "" || $this->error_response != ""){
             $success_alert = false;
@@ -120,6 +162,9 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc
                 $msg_to_alert = $this->response;
             }
     ?>
+<script type="text/javascript">
+	
+	
     $(document).ready(function() {
         var jNotify = $.JNotify({
 
@@ -150,6 +195,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc
           // z-index
           'zIndex': 888,
 
+
           // height
           'height':null, 
 
@@ -169,7 +215,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc
           'autoClose':true,
 
           // shows a close button
-          'showCloseButton':true,
+          'showCloseButton':false,
 
           // show / close duration
           'showDuration':5000,  
@@ -183,35 +229,24 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc
     <?php
         }
     ?>
-				$(window).load(function() {
-					$(".wloader_img").fadeOut("slow");
-					$(".wloader_img").css("visibility:visible");
-				})
-			</script>
-            <!--container start-->
-<?php echo $this->template->content; ?>
-            <!--container_end-->
-            <?php if(isset($this->sector)) {
+				
+			</script> 
+
+<?php if(isset($this->sector)) {
 				if($this->theme_name) { 
 					$sector =$this->theme_name; 
 				} else{
 				    $sector="default";
-				    }?> 
-				    
-			 <!--sector header start-->
-				<?php if($sector =="default") { 
-				     echo new View("themes/" . THEME_NAME . "/footer");
-				}else{
-				    echo new View("themes/" . THEME_NAME ."/".$sector."/footer"); 
-				} ?> 
-			 
+				}}?>
+
+
+
+<script type="text/javascript">
+$(window).load(function() {
+					$(".wloader_img").fadeOut("slow");
+					$(".wloader_img").css("visibility:visible");
+				});
 				
-			<!--Sector header End-->
-			<?php } else {  ?>
-            <!--footer start-->            
-<?php echo new View("themes/" . THEME_NAME . "/footer"); ?>   
-            <!--footer end-->
-            <?php } ?>
-			
-        </body>
+</script>
+</body>
 </html>

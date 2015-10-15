@@ -611,9 +611,5 @@ foreach ($this->product_deatils as $products) {
     </div>
 <?php } ?>
 
-<script>
-    function redirect_url(url){
-        window.location.href = url;
-    }
-</script>
+
 

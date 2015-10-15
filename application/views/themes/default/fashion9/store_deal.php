@@ -181,9 +181,9 @@ else{?>
 </section>
             
 
-<div class="store_subscribe_part_outer">
-    <div class="store_subscribe_part">
-        <div class="store_subscribe_part_inner">
+<div class="store_subscribe_part_outer" style="background:white;">
+    <div class="store_subscribe_part" style="background:white;">
+        <div class="store_subscribe_part_inner" style="background:white;">
             <h2>Subscribe</h2>
             <p>Subscribe to receive our news everyday !</p>
             <div class="sub_cont">

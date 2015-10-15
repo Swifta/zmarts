@@ -50,8 +50,7 @@ class Layout_Controller extends Template_Controller
 		$this->template->metaimage = PATH."themes/".THEME_NAME."/images/logo.png";
 		$this->template->style = "";
 		$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/font-awesome-4.4.0/css/font-awesome.min.css'));
-		
-		$this->template->javascript = html::script(array(PATH.'js/jquery.js',PATH.'themes/'.THEME_NAME.'/js/public.js'));
+		$this->template->javascript = html::script(array(PATH.'js/jquery.js',PATH.'themes/'.THEME_NAME.'/js/public.js', PATH.'themes/'.THEME_NAME.'/toastr/jquery.jnotify.js'));
 		$this->response = $this->session->get('Success');
 		$this->session->delete('Success');
 		$this->error_response = $this->session->get('Error');

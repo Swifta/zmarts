@@ -10,6 +10,8 @@ class Store2_Controller extends Layout_Controller
 		$url = str_replace('\\', '/', $url);
 		$array = end(explode('/modules/',$url)); 
 		$array = explode('/controllers',$array); 
+		
+		
 
 		$this->theme_name = $array[0]; 
 

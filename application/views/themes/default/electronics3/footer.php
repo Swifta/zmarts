@@ -48,6 +48,9 @@
                     
                     </ul>
                 </div>
+                
+                
+                
             </div>
             <div class=" footer_list footer_two">
                 <h2 class="footer_title">Shopping Guide</h2>
