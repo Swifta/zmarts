@@ -118,16 +118,6 @@ $config['Supermart/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Supermart/
 $config['Supermart/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Supermart/$1/$2";
 // Supermart End
 
-// Yudala Start
-$config['Yudala'] ="electronics3/stores_home_page/Yudala";
-$config['Yudala/products.html'] = "/electronics3/product_list/Yudala";
-$config['Yudala/today-deals.html'] = "/electronics3/deal_list/Yudala";
-$config['Yudala/auction.html'] = "/electronics3/auction_list/Yudala";
-$config['Yudala/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Yudala/$1/$2";
-$config['Yudala/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Yudala/$1/$2";
-$config['Yudala/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Yudala/$1/$2";
-// Yudala End
-
 
 
 // Midas-toy-Store Start
@@ -317,15 +307,6 @@ $config['Supermart/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Supermart/
 $config['Supermart/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Supermart/$1/$2";
 // Supermart End
 
-// Yudala Start
-$config['Yudala'] ="electronics3/stores_home_page/Yudala";
-$config['Yudala/products.html'] = "/electronics3/product_list/Yudala";
-$config['Yudala/today-deals.html'] = "/electronics3/deal_list/Yudala";
-$config['Yudala/auction.html'] = "/electronics3/auction_list/Yudala";
-$config['Yudala/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Yudala/$1/$2";
-$config['Yudala/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Yudala/$1/$2";
-$config['Yudala/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Yudala/$1/$2";
-// Yudala End
 
 
 
