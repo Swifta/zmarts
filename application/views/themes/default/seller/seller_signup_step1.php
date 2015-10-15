@@ -985,7 +985,7 @@ function show_gif(obj){
 			
 	
 			//is_z_verify_account_api_running = true;
-			var url = Path+'users/club_registration_logged_in_user/'; 
+			var url = Path+'users/merchant_registration_validation/'; 
 			sub_btn_parent.html("<img src = \"<?php //echo PATH."image/anim/6.gif";?>\" /><p>.</p>");
 			
 			$.ajax(

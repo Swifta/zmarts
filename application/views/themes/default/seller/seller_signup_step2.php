@@ -322,9 +322,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
                                 <div class="">
                                     <span class="asterisks_input">  </span>
-									<input autofocus type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
+									<input type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
 									<?php if($this->session->get('firstname')) { ?>
-                                                                        value="<?php  echo $this->session->get('firstname');} ?>" required autofocus  /> 			
+                                                                        value="<?php  echo $this->session->get('firstname');} ?>"  /> 			
 									<em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
 								</div>
@@ -357,12 +357,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
                                 
-									<input type="hidden" name="payment_acc" class="swifta_input" 
-									<?php if($this->session->get('payment_acc')) { ?>
-									value="<?php  echo $this->session->get('payment_acc'); ?>" placeholder= "<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" /> 			                        <?php } else { ?>
-									value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>" placeholder="<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" />
-									<?php } ?>
-									<em><?php //if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+					<input type="hidden" name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
+							
                               
                                     </li>
                                     
@@ -372,9 +368,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         
 								
 									<input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
-									<?php if($this->session->get('nuban_session')) { ?>
-                                                                        value="<?php  echo "1111111111"; }?>"  /> 			 
-									<em><?php //if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
+                                                                               value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
                                 
                                 </li>
                                 
@@ -393,12 +387,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                 <li>
                                     
-                                 <div class="" style="display:;">
-									<input type="hidden" name="mr_address2" class="swifta_input" 
+                                 <div class="" style="">
+									<input type="text" name="mr_address2" class="swifta_input" 
 									<?php if($this->session->get('mraddress2')) { ?>
-                                                                        value="<?php  echo "address";} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
+                                                                               value="<?php echo $this->session->get('mraddress2');} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
 									
-									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                  </div>
                                 </li>
                                 <li class="frm_clr">

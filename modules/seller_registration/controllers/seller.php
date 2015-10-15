@@ -129,14 +129,14 @@ class Seller_Controller extends Layout_Controller {
 	{
 			if($_POST){ 
 			$this->userPost = $this->input->post();
+                        //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('firstname', 'required')
 						->add_rules('mr_mobile', 'required',array($this, 'validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mr_address1', 'required')
-						->add_rules('mr_address2', 'required')
 						->add_rules('lastname', 'required')
-						->add_rules('nuban', 'required', array($this, 'nuban_available'))
+						->add_rules('nuban', 'required')
 						->add_rules('sector', 'required')
 						->add_rules('subsector', 'required')
 						->add_rules('email', 'required','valid::email',array($this, 'email_available'));
@@ -170,7 +170,13 @@ class Seller_Controller extends Layout_Controller {
                                                 $aramex = $post->aramex;
                                                 }
                                                 
-						 $this->session->set(array("firstname" => $post->firstname,"lastname" => $post->lastname, 'mraddress1' => $post->mr_address1, 'mraddress2' => $post->mr_address2, 'mphone_number' => $post->mr_mobile,"memail"=>$post->email,"nuban_session" => $post->nuban,"free" => $free,"flat" => $flat, "product" => $product,'quantity' => $quantity, 'aramex' => $aramex,"sector"=>$post->sector,"sub_sector"=>$post->subsector));
+						 $this->session->set(array("firstname" => $post->firstname,"lastname" => $post->lastname, 
+                                                     'mraddress1' => $post->mr_address1, 'mraddress2' => $post->mr_address2, 
+                                                     'mphone_number' => $post->mr_mobile,"memail"=>$post->email,
+                                                     "nuban_session" => $post->nuban,"free" => $free,"flat" => $flat, 
+                                                     "product" => $product,'quantity' => $quantity, 'aramex' => $aramex,
+                                                     "sector"=>$post->sector,"sub_sector"=>$post->subsector));
+                                                 
 							common::message(1, $this->Lang['SUCC_COM_STEP2']);
                                                         //echo "Got here"; die;
 							url::redirect(PATH."merchant-signup-step3.html");
@@ -493,7 +499,8 @@ $admin_message	= '
 										$this->session->delete('sector'); 
 										$this->session->delete('subsector'); 
                                                                                 $this->session->delete('nuban_session');
-										
+										$this->session->delete('merchant_reg_nuban');
+                                                                                
 											common::message(1, $this->Lang['SUCC_COM_FINAL']);
 											//url::redirect(PATH);
                                                                                         url::redirect(PATH."merchant-signup-completed.html");
