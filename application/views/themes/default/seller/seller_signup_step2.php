@@ -544,7 +544,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         <input type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
                     </div>
                             
-                               <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:120px;">
+                               <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
   
       <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 30px;  width: 85%;">
           
@@ -943,7 +943,7 @@ function atleast_onecheckbox(e) {
   function checkCheckBoxes(signup2) {
 	if (signup2.ch1.checked == false ) 
 	{
-		$('#tcerror').html("<?php echo "*You must agree to terms and condition"; ?>");
+		$('#tcerror').html("<?php echo "*You must agree to the terms and conditions"; ?>");
                 <?php // $tcmsg = "You must agree to terms and condition"; ?>
 		return false;
 	} else { 	
