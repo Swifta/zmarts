@@ -292,16 +292,7 @@ input[type=text],input[type=password]
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>
-                             .
-                             <li>
-                                  
-                                  <label style="color:blue;">Have a store admin representative ? 
-                                      
-                                      <em style="font-size:90%"><input type="checkbox" id="store_email_id"  id="have_store_admin" style="margin-top:px;" />Check this box if you want to register someone to manage this store for you. </em>
-                                     
-                                  </label>
-                              
-                             </li>  
+ 
                               <li>
                                
                                  <div class="">
@@ -313,41 +304,27 @@ input[type=text],input[type=password]
                              </li>
                               
                              
-                             
-                                     
-                              <li id="store_admin_email_li">
-<!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
-                                 <div class="">
-                                     <span class="asterisks_input">  </span>
-                                 <input type="text" value="<?php  ?>" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo @$this->Lang['STORE_EMAIL_ID'];?>"  />
-<!--                                   <span class="asterisk_input">  </span>-->
-                                 </div>
-                             </li>
-                             <script>
-$('#store_email_id').click(function () {
-    $("#store_admin_email_li").toggle(this.checked);
-})
-                             </script>
+                    
                           
                             
-                                 <li>
-                                
-                                <div class="">
-                                <select name="country" id="country" tabindex="7"  onchange="return city_change_payment_step(this.value);" class="swifta_input" required>
-                                <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option> 
-                                <?php foreach ($this->country_list as $c) { ?>
-                                <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
-                                <?php } ?>
-                                </select> 
-                                </div>
-                                <em><?php if (isset($this->form_error['country'])) {
-                                echo $this->form_error["country"];
-                                } ?></em>
+                                 <li>                                
+                                    <div class="">
+                                        <span class="asterisks_input">  </span>
+                                        
+                                    <select name="country" id="country" tabindex="7"  onchange="return city_change_payment_step(this.value);" class="swifta_input" required>
+                                    <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option> 
+                                    <?php foreach ($this->country_list as $c) { ?>
+                                    <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
+                                    <?php } ?>
+                                    </select> 
+                                    </div>
+                                    <em><?php if (isset($this->form_error['country'])) {
+                                    echo $this->form_error["country"];
+                                    } ?></em>
                                 </li>
                             
                                      
-                                      <li>
-                            
+                                <li>                           
                                  <div class="">
                                      <span class="asterisks_input">  </span>
                                      <input type="text" name="mobile" maxlength="11" tabindex="3" id="phone" maxlength="11" onkeypress="return isNumberKey(event)" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
@@ -355,9 +332,11 @@ $('#store_email_id').click(function () {
                                  </div>
                                 </li>
                                     
-                                <li class="">
+                                <li>
                                 
                                 <div class="">
+                                    <span class="asterisks_input">  </span>
+                                    
                                 <select name="city" id="CitySD"  tabindex="8" class="swifta_input" required>
                                 <option value=""><?php echo $this->Lang["COUNTRY_FIRST"]; ?></option>
                                 <?php foreach ($this->all_city_list as $c) { ?>
@@ -370,16 +349,17 @@ $('#store_email_id').click(function () {
                                 } ?></em>
 
                                 </li>
+                                
                                  <li>
                                     
-                                 <div class="">
+                                 <div>
                                      <span class="asterisks_input">  </span>
                                      <input type="text" name="address1" class="swifta_input" id="addrs1" tabindex="4" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
                             
 								<em><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
-                                     </li>
+                                </li>
                                 <li>
                                         
                                  <div class="">
@@ -387,9 +367,9 @@ $('#store_email_id').click(function () {
 									<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
 									<em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
                                  </div>
-                                        </li>
+                                  </li>
                                 
- <li>
+                                <li>
                                         
 				 <div class="">		
                                      <span class="asterisks_input">  </span>
@@ -428,7 +408,7 @@ $('#store_email_id').click(function () {
                                     
                                     
                                      <li>   
-                                 <div class="" style='margin-top:-57px;'>
+                                 <div class="" style='margin-top:-1px;'>
                                     
                                      <input type="text" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
 									
@@ -456,7 +436,31 @@ $('#store_email_id').click(function () {
                                  <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
                                  </div>
                                    </li>
-				   
+                                   
+                             <li>
+                                  
+                                  <label style="color:blue;">Have a store admin representative ? 
+                                      
+                                      <em style="font-size:90%"><input type="checkbox" id="store_email_id"  id="have_store_admin" style="margin-top:px;" />Check this box if you want to register someone to manage this store for you. </em>
+                                     
+                                  </label>
+                              
+                             </li> 
+                             
+                              <li id="store_admin_email_li" style="display: none;">
+<!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
+                                 <div class="">
+                                     <span class="asterisks_input">  </span>
+                                 <input type="text" value="<?php echo "@yahoo.com" ?>" name="store_email_id" id="store_email_ids" class="swifta_input"  placeholder="<?php echo @$this->Lang['STORE_EMAIL_ID'];?>"  />
+<!--                                   <span class="asterisk_input">  </span>-->
+                                 </div>
+                             </li>
+                                   
+                             <script>
+$('#store_email_id').click(function () {
+    $("#store_admin_email_li").toggle(this.checked);
+})
+                             </script>
                                 </ul>
                                 <div class="merchant_submit_buttons step3_new" id="submit32">
                                     <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" onclick="comfirm_click()"  class="sign_submit" />
@@ -515,8 +519,9 @@ function comfirm_click(){
         closeOnConfirm: false,   
         closeOnCancel: true 
     }, function(isConfirm){   
-        if (isConfirm) {     
-            location.href = "<?php echo PATH; ?>#"; 
+        if (isConfirm) {
+            //$('#signup4').submit();
+            location.href = "<?php echo PATH; ?>"; 
         } else {     
             location.href = "<?php echo PATH; ?>"; 
         } 

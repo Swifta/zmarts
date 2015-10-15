@@ -322,9 +322,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
                                 <div class="">
                                     <span class="asterisks_input">  </span>
-									<input autofocus type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
+									<input type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
 									<?php if($this->session->get('firstname')) { ?>
-                                                                        value="<?php  echo $this->session->get('firstname');} ?>" required autofocus  /> 			
+                                                                        value="<?php  echo $this->session->get('firstname');} ?>"  /> 			
 									<em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
 								</div>
@@ -357,12 +357,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
                                 
-									<input type="hidden" name="payment_acc" class="swifta_input" 
-									<?php if($this->session->get('payment_acc')) { ?>
-									value="<?php  echo $this->session->get('payment_acc'); ?>" placeholder= "<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" /> 			                        <?php } else { ?>
-									value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>" placeholder="<?php echo $this->Lang['ADD_PAYPAL_ACC']; ?>" />
-									<?php } ?>
-									<em><?php //if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+					<input type="hidden" name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
+							
                               
                                     </li>
                                     
@@ -372,9 +368,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         
 								
 									<input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
-									<?php if($this->session->get('nuban_session')) { ?>
-                                                                        value="<?php  echo "1111111111"; }?>"  /> 			 
-									<em><?php //if(isset($this->form_error['error_nuban'])){ echo $this->form_error["error_nuban"]; }?></em>
+                                                                               value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
                                 
                                 </li>
                                 
@@ -393,12 +387,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                 <li>
                                     
-                                 <div class="">
-									<input type="hidden" name="mr_address2" class="swifta_input" 
+                                 <div class="" style="">
+									<input type="text" name="mr_address2" class="swifta_input" 
 									<?php if($this->session->get('mraddress2')) { ?>
-                                                                        value="<?php  echo "address";} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
+                                                                               value="<?php echo $this->session->get('mraddress2');} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
 									
-									<em><?php //if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                  </div>
                                 </li>
                                 <li class="frm_clr">
@@ -464,7 +457,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <li>
                                     <label>Shipping method <span style="color:red;">*</span>:</label>
-                     <table style="width:;"> 
+                     <table style=""> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
                                         <tr><td style="width:px;"><label><input type="checkbox" name="free" value="1" 
@@ -494,7 +487,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <?php } else { ?>
                                         <input type="hidden" name="flat" value="0" >
                                         <?php } if($this->per_product_setting == 1){ ?>
-                                        <tr><td style="width:;"><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
+                                        <tr><td style=""><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping</td><td><a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
     <span>
@@ -746,7 +739,7 @@ Disclaimer: This absolves Zenith Bank PLC of transactions done between the merch
 “Website Manager” means a designated web manager appointed by Zenith Bank PLC to audit or carry out other services on the Platform on a periodic basis or as directed by Zenith Bank PLC from time to time.<br>
 COMMENCEMENT AND TENURE This Agreement shall take effect from the date hereof and shall continue and be in force until terminated in line with the provisions of this Agreement.<br><br>
 </p>
-<h style="red;">Nigerian law and general provisions</h>
+<h style="color:red;">Nigerian law and general provisions</h>
 
 <p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
 
@@ -1004,29 +997,6 @@ function atleast_onecheckbox(e) {
     exports.InvalidInputHelper = InvalidInputHelper;
 })(window);
 
-
-
-//InvalidInputHelper(document.getElementById("fnames"), {
-//    defaultText: "Please enter your firstname!",
-//    emptyText: "Please enter your firstname!",
-//    invalidText: function (input) {
-//       return 'The firstname  "' + input.value + '" is invalid!';
-//    }
-//    
-//    
-//}
-//);
-//InvalidInputHelper(document.getElementById("fname"), {
-//    defaultText: "Please enter your firstname!",
-//    emptyText: "Please enter your firstname!",
-//    invalidText: function (input) {
-//       return 'Make sure "' + input.value + '" is valid!';
-//    }
-//    
-//    
-//}
-
-);
 InvalidInputHelper(document.getElementById("compname"), {
     defaultText: "Please enter your company!",
     emptyText: "Please enter your company!",
