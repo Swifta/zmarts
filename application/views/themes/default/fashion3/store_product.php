@@ -63,11 +63,20 @@ if(count($this->merchant_personalised_details)>0) {
                                                 <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
                                             </a>
                                         </div>
-                                        <?php $tabs++;} ?>
+                                        <?php $tabs++;}else{
+                                        ?>
+                                        <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
+                                        <div style="display: none;">                                                                                
+                                            <a href=""  title = "">
+                                                <img alt="Banner image" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo $i; ?>.jpg"/>
+                                            </a>
+                                        </div>
+                                        <?php
+                                        } ?>
                                        
                                             <?php }
                                             if($tabs==0){ ?>
-											<img alt="Banner image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/fashion_banner.png"/>											
+                                        <img alt="Banner image" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo rand(1, 2); ?>.jpg"/>											
                                             <?php } ?>                                  
                                       </div>  
                                       
@@ -75,10 +84,10 @@ if(count($this->merchant_personalised_details)>0) {
                                             <div class="controls">                                                    
                                                     <div class="slidetabs">
 														
-						<?php for ($i = 1; $i <= $tabs; $i++) {  if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { ?>
+						<?php for ($i = 1; $i <= $tabs; $i++) {  if (true) { ?>
                                                        <a href="" class="slider_dot current">&nbsp;</a> 
                                                         
-                                                        <?php } } ?>
+                                                        <?php }} ?>
                                                        
                                                     </div>                                                                                                   
                                             </div>
