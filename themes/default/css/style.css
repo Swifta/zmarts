@@ -1876,7 +1876,8 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .type_form_title{color: #333;font: 15px Arial;padding:10px 0;border-bottom: 1px dashed #eae7e2;float:left;width:100%;}
 .type_form_sub_title{border-bottom: 1px solid #ECE9E4;border-top: 1px solid #ECE9E4;color: #333;font:normal 15px arial;padding:10px 0 ;margin:20px 0;width:100%;float:left;}
 .payment_form_section{width:100%;float:left;}
-.payment_form{width:50%;float:left;}
+/*.payment_form{width:50%;float:left;}*/
+.payment_form{width:50%;float:right;}
 .payment_form ul{width:100%;float:left;}
 .payment_form ul li{padding:5px 0;float:left;width:100%;}
 .payment_form li label{display:block;font:normal 13px  arial;color:#333;padding:5px 0 2px;width:100%;text-transform: capitalize;}
