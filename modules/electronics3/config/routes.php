@@ -491,15 +491,6 @@ $config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/electronics3/product_list/A
 $config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/ABC-Pvt-Ltd/$1/$2";
 $config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/ABC-Pvt-Ltd/$1/$2";
 // ABC-Pvt-Ltd End
-// TESTING-TEMPLATE-HERE Start
-$config['TESTING-TEMPLATE-HERE'] ="electronics3/stores_home_page/TESTING-TEMPLATE-HERE";
-$config['TESTING-TEMPLATE-HERE/products.html'] = "/electronics3/product_list/TESTING-TEMPLATE-HERE";
-$config['TESTING-TEMPLATE-HERE/today-deals.html'] = "/electronics3/deal_list/TESTING-TEMPLATE-HERE";
-$config['TESTING-TEMPLATE-HERE/auction.html'] = "/electronics3/auction_list/TESTING-TEMPLATE-HERE";
-$config['TESTING-TEMPLATE-HERE/products/c/(.*)/(.*).html'] = "/electronics3/product_list/TESTING-TEMPLATE-HERE/$1/$2";
-$config['TESTING-TEMPLATE-HERE/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/TESTING-TEMPLATE-HERE/$1/$2";
-$config['TESTING-TEMPLATE-HERE/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/TESTING-TEMPLATE-HERE/$1/$2";
-// TESTING-TEMPLATE-HERE End
 
 // mko Start
 $config['mko'] ="electronics3/stores_home_page/mko";
