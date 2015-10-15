@@ -735,7 +735,7 @@
                 <img src="<?php echo PATH."themes/default/images/leo/";?>t-img3.jpg"  alt="" />-->
                 
                 
-                 <?php if (count($this->get_product_categories) > 0) { ?>
+                 <!--<?php if (count($this->get_product_categories) > 0) { ?>
              
              <?php if ($this->product_setting) { ?>
              <?php if (count($this->get_product_categories) > 0) { ?>
@@ -777,12 +777,51 @@
              <?php } ?> <!-- Ending 2nd if -->
              
              <?php } ?> <!-- Ending 1st if -->
+             
+              <?php if (count($this->ads_details) > 0) { ?>   
+                                    <?php foreach ($this->ads_details as $ads) { ?>    
+            <?php if ($ads->ads_position == "rs1" && $ads->page_position==3) {  ?>
+            					    
+                                  <?php 
+								  	$ads->redirect_url = trim($ads->redirect_url);
+									
+								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
+									  
+                                      <a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+									  
+								 <?php  }else{?>
+								 
+                                 <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+								  
+								  <?php }?>
+                                     
+										 
+                                 
+              <?php } ?>
+              <?php if ($ads->ads_position == "rs2" && $ads->page_position==3){  ?>   
+                         <?php 
+								  	$ads->redirect_url = trim($ads->redirect_url);
+									
+								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
+                                  
+									   <a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a> 
+                                       
+                                      <?php  }else{?>
+                                      
+                                       <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a> 
+                                       
+                                       <?php }?>
+                                     
+										
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>
 			 
                 
 				
               </div>
              </div>
-              <div class="btn"><a href="single.html">Check it Out</a></div>
+              <div class="btn"><a href="<?php echo PATH."leo_zenith.html"; ?>">Check it Out</a></div>
              </div>
            <div class="top-border"> </div>
 			<div class="sidebar-bottom">
@@ -810,5 +849,8 @@
 	</div>
 	</div>
 	</div>
+    
+   
+    
     
    
