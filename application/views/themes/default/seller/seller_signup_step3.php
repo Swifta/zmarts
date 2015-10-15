@@ -488,7 +488,7 @@ input[type=text],input[type=password]
 <tr>
 <td>
  <div class="merchant_submit_buttons step3_new" id="submit32">
-                                    <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" class="sign_submit" />
+     <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" class="sign_submit" onclick="comfirm_click();"/>
                                     <a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['GO_BACK'];?>" class="sign_cancel"><?php echo $this->Lang['GO_BACK'];?></a>                        
                                 </div>
  
