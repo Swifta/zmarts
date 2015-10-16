@@ -171,7 +171,7 @@ $content_text = array(
 
 "NAME" => "Name",
 
-"ENTER_NAME"=>"Enter your name here",
+"ENTER_NAME"=>"Enter your first name here",
 
 "SEL_CITY" => "Select City",
 
@@ -1801,7 +1801,7 @@ $content_text = array(
 
 "ORD_COMPL_COD" => "Purchase Complete. Please await shipping updates from merchant.",
 
-"Z_BY_CLICKING_SUBMIT"=>"By clicking Open Account, you agree to $THIS_SITENAME",
+"Z_BY_CLICKING_SUBMIT"=>"By clicking Open Account, you agree to Zenith Bank's ",
 
 "ZENITH_BRANCH" => "Branch",
 

@@ -357,8 +357,7 @@ input[type=text],input[type=password]
 <td>
                                         <div class="">
                                      <span class="asterisks_input">  </span>
-									<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
-									<em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
+				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus />
                                  </div>
                                         </td>
 
@@ -467,7 +466,7 @@ input[type=text],input[type=password]
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" value="" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_adim@store.com" ?>"  />
+                                 <input type="text" value="" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>

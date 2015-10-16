@@ -921,7 +921,7 @@ $('#submit_accxm').click(function() {
 			var is_no = reg.exec(nuban);
 			if(!is_no){
 				if(nuban.length != 10){
-					alert("Zenith A/C no must be 10 digits.");
+					alert("Zenith A/C number must be 10 digits.");
 					return false;
 				}
 				
@@ -970,7 +970,7 @@ function show_gif(obj){
 			var is_no = reg.exec(nuban);
 			if(!is_no){
 				if(nuban.length != 10){
-					alert("Zenith A/C no must be 10 digits.");
+					alert("Zenith A/C number must be 10 digits.");
 					return false;
 				}
 				
