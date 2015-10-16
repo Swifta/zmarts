@@ -356,7 +356,6 @@ input[type=text],input[type=password]
                                 </td>
 <td>
                                         <div class="">
-                                     <span class="asterisks_input">  </span>
 				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus />
                                  </div>
                                         </td>
