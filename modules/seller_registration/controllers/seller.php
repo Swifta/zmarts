@@ -64,7 +64,7 @@ class Seller_Controller extends Layout_Controller {
                     $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:green'>"
                             . "Your bank account as been opened. Wait for bank to get intouch !</p>");
                     common::message(1, "Your bank account as been opened. Wait for bank to get intouch !");
-                    url::redirect(PATH."merchant-signup-step2.html");                    
+                    url::redirect(PATH."merchant-signup-step1.html");                    
                 }
                 else{
                     //error occured

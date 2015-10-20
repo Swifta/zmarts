@@ -363,9 +363,7 @@ input[type=text],input[type=password]
                                 </td>
 <td>
                                         <div class="">
-                                     <span class="asterisks_input">  </span>
-									<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" required autofocus />
-									<em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
+				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus />
                                  </div>
                                         </td>
 
@@ -474,7 +472,7 @@ input[type=text],input[type=password]
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" value="" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_adim@store.com" ?>"  />
+                                 <input type="text" value="" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
                              </li>
@@ -495,7 +493,7 @@ input[type=text],input[type=password]
 <tr>
 <td>
  <div class="merchant_submit_buttons step3_new" id="submit32">
-                                    <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" class="sign_submit" />
+     <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" class="sign_submit" onclick="comfirm_click();"/>
                                     <a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['GO_BACK'];?>" class="sign_cancel"><?php echo $this->Lang['GO_BACK'];?></a>                        
                                 </div>
  
