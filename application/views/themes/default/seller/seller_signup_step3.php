@@ -3,6 +3,13 @@
 .error{float: left;width: 50%; } 
 </style>
 
+
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  
 <style>
     /*test style*/
 table, th, td {
@@ -291,9 +298,9 @@ input[type=text],input[type=password]
                             <div class="payment_form_section">
 <!--                            <div class="payment_form merchant_paymet_form">-->
 <div class="payment_form payment_shipping_form">
-                                <table style="width:100%">
+                                <table style="width:100%;" class="table table-striped">
   
-  
+                                    <tbody>
   <tr>
     <td>
                                        <div class="">
@@ -509,6 +516,7 @@ $('#store_email_id').click(function () {
 
 
 </tr>
+</tbody>
 </table>
                                 
                             </div>

@@ -170,7 +170,7 @@ foreach($this->merchant_personalised_details as $m) {
 <section class="main-content" style="<?php echo $bg_color; ?>">
 <div class="row">
     <div class="span12">
-        <div class="row">
+     <div class="row">
             <div class="span12">
                     <h4 class="title">
                             <span class="pull-left"><span class="text"><span class="line">Best <strong>Seller</strong></span></span></span>
