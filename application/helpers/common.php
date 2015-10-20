@@ -577,6 +577,20 @@ class common{
 	     }
 	   closedir($dp);
 	}
+	
+	public function truncate_item_name($name){
+		if(!$name)
+			return "No name";
+			
+		$name = trim($name);
+		
+		if(strlen($name) <= 16)
+			return $name;
+		
+		$name = substr($name, 0, 15);
+		$name = $name." ...";
+		return $name;
+	}
 
 }
 ?>

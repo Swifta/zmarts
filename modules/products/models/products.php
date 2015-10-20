@@ -530,6 +530,7 @@ class Products_Model extends Model
                                 ->join("users","users.user_id","product.merchant_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->get();
+								
                 return $result;
 	}
 

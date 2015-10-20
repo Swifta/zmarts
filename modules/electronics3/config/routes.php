@@ -11,13 +11,8 @@ $config['BMPRO/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/BMPRO/$1
 // BM|PRO End
 
 // C&C-Collections Start
-$config['CC-Collections'] ="electronics3/stores_home_page/CC-Collections";
-$config['CC-Collections/products.html'] = "/electronics3/product_list/CC-Collections";
 $config['CC-Collections/today-deals.html'] = "/electronics3/deal_list/CC-Collectionse";
 $config['CC-Collections/auction.html'] = "/electronics3/auction_list/C&C-Collections";
-$config['CC-Collections/products/c/(.*)/(.*).html'] = "/electronics3/product_list/CC-Collections/$1/$2";
-$config['CC-Collections/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/CC-Collections/$1/$2";
-$config['CC-Collections/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/CC-Collections/$1/$2";
 // C&C-Collections End
 
 // test-store Start
@@ -200,13 +195,8 @@ $config['BMPRO/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/BMPRO/$1
 // BM|PRO End
 
 // C&C-Collections Start
-$config['CC-Collections'] ="electronics3/stores_home_page/CC-Collections";
-$config['CC-Collections/products.html'] = "/electronics3/product_list/CC-Collections";
 $config['CC-Collections/today-deals.html'] = "/electronics3/deal_list/CC-Collectionse";
 $config['CC-Collections/auction.html'] = "/electronics3/auction_list/C&C-Collections";
-$config['CC-Collections/products/c/(.*)/(.*).html'] = "/electronics3/product_list/CC-Collections/$1/$2";
-$config['CC-Collections/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/CC-Collections/$1/$2";
-$config['CC-Collections/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/CC-Collections/$1/$2";
 // C&C-Collections End
 
 // test-store Start

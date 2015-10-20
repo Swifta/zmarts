@@ -108,6 +108,8 @@ class Leo_Controller extends Layout_Controller
 	public function store_detail($storekey = "",$store_url_title = "" )
 	{
 		
+		
+		
 		$this->is_store_details = 1;
 		$search="";
 		if($this->input->get('q')) {
@@ -245,6 +247,8 @@ exit;
 	
 	public function stores_home_page($store_url_title="") 
 	{
+		
+		
 		$this->is_store_details = 1;
 		$this->storeurl = $store_url_title;
 		$search="";
@@ -316,14 +320,12 @@ exit;
 		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
 		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
 		
-		///var_dump(count($this->banner_details));
-		//exit;
-        //      
-		
-		//var_dump($this->get_product_categories);
-						//exit;
 		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_detail");
+		
 	
+	
+		
+		
 	}
 	
 	public function user_subscriber_signup()
@@ -345,7 +347,147 @@ exit;
 	
 	public function product_list($store_url_title = "", $cat_type = "",$category = ""){
 		
+		
 		$this->url_cat = trim($this->input->get('c_'));
+		$cat_type = "main";
+		$category =  trim($this->input->get('c_'));
+		
+		
+		
+	        //print_r($cat_type); exit;
+		
+		$this->color_id="";
+		$this->category_id = "";
+		$this->sub_cat="";
+		$this->category_url = $category;
+		$category_name="";
+		$category_name_main = "";
+		$this->products = $this->stores;
+
+		if($cat_type=="sub"){
+		        $this->sub_cat= $category;
+				$category_deatils = $this->products->get_categoryname($category);
+				$this->category_id = $category_deatils[0]->main_category_id;
+				$category_name = $category_deatils[0]->category_name;
+				$category_name_main = $category_deatils[0]->category_name;
+		}
+		elseif($cat_type=="sec"){
+		        $this->sub_cat= "2";
+				$category_deatils = $this->products->get_categoryname($category);
+				$this->category_id = $category_deatils[0]->main_category_id;
+				$category_name = $category_deatils[0]->category_name;
+		}
+		else if($cat_type=="third"){
+		        $this->sub_cat= "3";
+				$category_deatils = $this->products->get_categoryname($category);
+				$this->category_id = $category_deatils[0]->main_category_id;
+				$category_name = $category_deatils[0]->category_name;
+		}
+		else {
+			
+			$category_deatils = $this->products->get_categoryname($category);
+			$this->category_id = $category_deatils[0]->category_id;
+			$category_name = $category_deatils[0]->category_name;
+			
+			
+		}
+		
+		
+		$this->storeid = $this->stores->get_store_id($store_url_title);
+
+		$this->all_products = $this->products->get_products_count_category($cat_type,$category, $this->storeid);
+		
+		$this->all_products_count = count($this->all_products);
+		
+		
+		 
+		
+		$this->get_product_categories = $this->all_products;
+		
+		
+		$this->best_seller = $this->all_products;
+		
+		$page = "products";
+	   
+		
+		$this->pagination = new Pagination(array(
+				'base_url'       => 'products/c/'.base64_encode($cat_type).'/'.$category.'.html/page/'.$page,
+				'uri_segment'    => 6,
+				'total_items'    => $this->all_products_count,
+				'items_per_page' => 12,
+				'style'          => 'digg',
+				'auto_hide' => TRUE
+		));
+		//$this->all_products_list = $this->products->get_products_list($cat_type,$category, $this->pagination->sql_offset, $this->pagination->items_per_page);
+		
+		
+		
+		//$this->view_products_list = $this->products->get_products_view();
+		//$this->view_hot_products_list = $this->products->get_hot_products_view();
+		$this->category_name = $category_name;
+		//$this->categeory_list = $this->products->get_subcategory_list();
+		//$this->products_list = $this->products->get_products_min_max();
+		/*foreach ($this->products_list as $pro ){
+		$this->pro_max=$pro->max_deal;
+		$this->pro_min=$pro->min_deal;
+		}*/
+		//$this->color_list = $this->products->get_color_list();
+		//$this->size_list = $this->products->get_size_list();
+		
+		$this->storeurl = $store_url_title;
+		
+		$this->get_theme_name = common::get_theme($store_url_title);  
+		if(count($this->get_theme_name)>0) {
+			$this->sector = $this->get_theme_name->current()->sector_name;
+		} else {
+			$this->sector ="";
+		}
+		
+		$storekey = $this->stores->get_store_key($store_url_title);
+		$this->get_store_details = $this->stores->get_store_detailspage($storekey,$store_url_title);
+		if(count($this->get_store_details) == 0){		
+			common::message(-1, $this->Lang["NO_DATA_APP"]);
+			url::redirect(PATH);
+		}
+		foreach($this->get_store_details as $store) {
+			$this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id);
+			$this->about_us_footer = $this->stores->get_about_us_footer_data($store->store_id);
+		}
+		
+		
+		
+		
+		$this->template->title = rtrim($this->Lang["PRODUCTS"].' / '.$category_name." | ".SITENAME);
+        $this->title_display = rtrim($this->Lang["PRODUCTS"].' / '.$category_name);
+		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product");
+
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*$this->url_cat = trim($this->input->get('c_'));
 		
 		$this->is_store_details = $this->is_product = 1;
 		$this->storeurl = $store_url_title;
@@ -404,6 +546,12 @@ exit;
 		}
 		
 		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
+		
+		var_dump($this->categeory_list_product);
+		exit;
+		$this->get_product_categories = $this->categeory_list_product;
+		$this->best_seller = $this->categeory_list_product;
+		
 		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
 		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
 
@@ -452,8 +600,7 @@ exit;
 		$this->best_seller = $this->all_products_list;
 		
 		
-		//$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
-		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product");
+		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product");*/
 		
 	}
 	
@@ -835,6 +982,8 @@ exit;
 		} else {
 			$this->sector ="";
 		}
+		
+		
 		
 		
 		if($this->theme_name) { 

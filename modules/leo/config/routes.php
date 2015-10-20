@@ -23,3 +23,22 @@ $config['Yudala/products/c/(.*)/(.*).html'] = "/leo/product_list/Yudala";
 $config['Yudala/deal/c/(.*)/(.*).html'] = "/leo/deal_list/Yudala";
 $config['Yudala/auction/c/(.*)/(.*).html'] = "/leo/auction_list/Yudala/$1/$2";
 //Yudala end
+
+//CC-Collections start
+$config['CC-Collections'] ="/leo/stores_home_page/CC-Collections";
+$config['CC-Collections/products.html'] = "/leo/product_list/CC-Collections";
+$config['CC-Collections/today-deals.html'] = "/leo/deal_list/CC-Collections";
+$config['CC-Collections/auction.html'] = "/leo/auction_list/CC-Collections";
+$config['CC-Collections/products/c/(.*)/(.*).html'] = "/leo/product_list/CC-Collections";
+$config['CC-Collections/deal/c/(.*)/(.*).html'] = "/leo/deal_list/CC-Collections";
+$config['CC-Collections/auction/c/(.*)/(.*).html'] = "/leo/auction_list/CC-Collections/$1/$2";
+//CC-Collections end
+//ABC-Pvt-Ltd start
+$config['ABC-Pvt-Ltd'] ="/leo/stores_home_page/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products.html'] = "/leo/product_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/today-deals.html'] = "/leo/deal_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/auction.html'] = "/leo/auction_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/leo/product_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/leo/deal_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/leo/auction_list/ABC-Pvt-Ltd/$1/$2";
+//ABC-Pvt-Ltd end

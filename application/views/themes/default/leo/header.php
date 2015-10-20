@@ -1,7 +1,14 @@
 
+<?php if(!isset($this->get_product_categories)){?>
+
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/fwslider.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/jquery.easydropdown.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/toastr/jquery.jnotify.js"></script>
+<?php }?>
 
 <script src="<?php echo PATH."themes/default/js/leo/";?>js/jquery1.min.js"></script>
-
 <script type="text/javascript" src="<?php echo PATH."themes/default/js/leo/";?>megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 <script type="text/javascript" src="<?php echo PATH."themes/default/js/leo/";?>jquery.jscrollpane.min.js"></script>
@@ -45,73 +52,6 @@
 		</script>
 <script type="text/javascript" src="<?php echo PATH."themes/default/js/leo/"?>jquery.flexisel.js"></script>
 
-<script type="text/javascript">
-	
-	
-       
-    
-		var item_add_count = 0;
-		var item_remove_count = 0;
-		/*$('#id_cart_item_count').html('<li ><a href="#" >Cart('+item_add_count+')</a></li>');
-		*/
-		function leo_add_to_cart(){
-			var cart_last_add = parseInt($('#id_cart_add_last_state').val());
-			var cart_last_remove = parseInt($('#id_cart_remove_last_state').val());
-			if(cart_last_add == cart_last_remove)
-				 $('#id_cart_state').empty();
-				
-			
-			item_remove_count = cart_last_remove;
-			
-			var item_add_count = cart_last_add+1;
-			item_count = item_add_count-item_remove_count; 
-			$('#id_cart_add_last_state').val(item_add_count);
-			$('#id_cart_item_count').html('<li ><a href="#" >Cart('+item_count+')</a></li>');
-			
-			
-			
-			var items_c = $('#id_cart_state');
-			var items_c_in = items_c.html();
-			
-			items_c_in = items_c_in + '<i id = "id_item_no_'+item_add_count+'"><li><a href="#"><h3>Beats Audio Headphones</h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item('+item_add_count+'); return false;" href="#" id="leo_id_remove_cart">Remove</a></p></li></i>';
-			items_c.html(items_c_in);
-			
-			
-			
-		}
-		
-		function leo_remove_cart_item(rm_id = 0){
-			
-			
-			var cart_last_add = parseInt($('#id_cart_add_last_state').val());
-			var cart_last_remove = parseInt($('#id_cart_remove_last_state').val());
-			
-			
-			if(cart_last_add == cart_last_remove)
-				return false;
-			
-				
-			item_add_count =  cart_last_add;
-			item_remove_count = cart_last_remove+1;
-			item_count = item_add_count-item_remove_count; 
-			$('#id_cart_remove_last_state').val(item_remove_count);
-			$('#id_cart_item_count').html('<li ><a href="#" >Cart('+item_count+')</a></li>');
-			id_item_no_rm = "id_item_no_"+rm_id;
-			$('#'+id_item_no_rm).remove();
-			
-			if(item_add_count == item_remove_count)
-				$('#id_cart_state').html('<li><a href="#"><h3>No Items</h3></a></li><li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>');
-				
-				
-			
-			
-			
-			
-		}
-		
-		
-	
-	</script>
 
 
 <div class="header-top">
@@ -611,7 +551,7 @@
 							 ?>
                             <!--<li><a href="#"><h3><?php echo  $p_ds->current()->url_title?></h3></a></li>
 							<li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>-->
-							 <i id = "id_item_no_<?php echo $d_id; ?>"><li><a href="#"><h3><?php echo $p_ds->current()->url_title; ?></h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $d_id ?>); return false;" href="#">Remove</a></p></li></i>
+							 <i id = "id_item_no_<?php echo $d_id; ?>"><li><a href="#"><h3 title="<?php echo $p_ds->current()->url_title; ?>"><?php echo common::truncate_item_name($p_ds->current()->url_title); ?></h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $d_id ?>); return false;" href="#">Remove</a></p></li></i>
                              
                              <?php }?>
 					
@@ -641,10 +581,8 @@
 	</div>
     
     
-    <?php
+   
 
-
-    
 
     
     

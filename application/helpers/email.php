@@ -67,26 +67,33 @@ class Email{
 
     public function smtp($from = "",$receiver = array(), $subject = "", $message = "",$file = "")
     {
-
+		
+		
 		
         $sitename = SITENAME;
         if(!$sitename){
             $sitename = $_SERVER['HTTP_HOST'];
         }
+		
+		
         $fromEmail = NOREPLY_EMAIL;
         if(!$fromEmail){
             $fromEmail = "noreply@".$_SERVER['HTTP_HOST'];
         }
+		
+		
         require_once(APPPATH.'vendor/mail/class.phpmailer.php');
         $mail = new PHPMailer(TRUE);
         $mail->IsSMTP();
+		
+		
 		
 		
         try {
             
             $mail->SMTPDebug  = 2;
             $mail->SMTPAuth   = TRUE;
-            $mail->SMTPSecure = "tls";
+            $mail->SMTPSecure = "ssl";
             $mail->Host       = HOST;
             $mail->Port       = PORT; 
             $mail->Username   = USERNAME;
@@ -96,9 +103,12 @@ class Email{
             $mail->SetFrom($from);
             $mail->Subject = $subject;
             $mail->MsgHTML($message);
+			
+			
 
             if($file != "")
 			{
+				
 					foreach($file as $f){
 						$mail->AddAttachment($f);
 						
@@ -113,7 +123,10 @@ class Email{
 			var_dump($_SERVER);
 			exit;*/
 			
+			
 			$r = $mail->Send();
+			
+
             if(!$r){
 			  	common::message(-1,  "Operation was complete but sending email failed. Please contact administrator");
 				return FALSE;
@@ -124,14 +137,18 @@ class Email{
 
         }
         catch(phpmailerException $e) {
+			
             common::message(-1,  $e->errorMessage());
 			return FALSE;
 
         }
         catch (Exception $e) {
+			
             common::message(-1,  $e->getMessage());
 			return FALSE;
         }
+		
+		
 		return TRUE;
         
     }
