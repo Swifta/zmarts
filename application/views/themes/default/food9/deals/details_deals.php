@@ -497,8 +497,8 @@
                                                                     </label>
                                                             </div>
                                                             <div class="new_deal_price_details">
-                                                               <strike><?php echo $symbol . " " . $deals->deal_price; ?></strike>
-                                                                <p><?php echo $symbol . " " . $deals1->deal_value; ?></p>
+                                                               <strike><?php echo $symbol . " " . number_format($deals->deal_price); ?></strike>
+                                                                <p><?php echo $symbol . " " . number_format($deals1->deal_value); ?></p>
                                                             </div>											
                                                             
                                                         </div>

@@ -28,7 +28,7 @@ if(count($this->merchant_personalised_details)>0) {
             $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
-            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+            <?php if(true) { ?>
                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
                             <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
@@ -41,7 +41,7 @@ if(count($this->merchant_personalised_details)>0) {
             $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
-            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+            <?php if(true) { ?>
                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
                             <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
@@ -132,7 +132,7 @@ if(count($this->merchant_personalised_details)>0) {
             $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
-            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+            <?php if(true) { ?>
                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
                             <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
@@ -145,7 +145,7 @@ if(count($this->merchant_personalised_details)>0) {
             $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
-            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+            <?php if(true) { ?>
                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
                             <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
@@ -234,7 +234,7 @@ if(count($this->merchant_personalised_details)>0) {
             $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
-            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+            <?php if(true) { ?>
                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
                             <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
@@ -247,7 +247,7 @@ if(count($this->merchant_personalised_details)>0) {
             $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
-            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+            <?php if(true) { ?>
                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
                             <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />

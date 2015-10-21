@@ -344,11 +344,11 @@ foreach ($this->product_deatils as $products) {
                         <span>(<?php echo round($products->deal_percentage); ?>% <?php echo $this->Lang['OFFER']; ?>)</span>
                         <?php } ?>
 						 <?php if($products->deal_price!=0) { ?>	
-							<strike><?php echo $symbol . "" . $products->deal_price; ?> </strike>
-							<b><?php echo $symbol . "" . $products->deal_value; ?></b>
+                        <strike><?php echo $symbol . "" . number_format($products->deal_price); ?> </strike>
+							<b><?php echo $symbol . "" . number_format($products->deal_value); ?></b>
 						<?php } else  { ?>
 							<strike></strike>
-							<b><?php echo $symbol."".$products->deal_value; ?> </b>
+							<b><?php echo $symbol."".number_format($products->deal_value); ?> </b>
 						<?php } ?> 
                         <?php  if($products->Including_tax  == 1){ ?>
                         <p><?php echo $this->Lang['INCLU_OF_TAXES']; ?></p>
@@ -356,11 +356,11 @@ foreach ($this->product_deatils as $products) {
                         <?php  if($products->shipping  == 1){ ?>
                         <p><?php echo $this->Lang['FREE_SHIPP_PROD']; ?></p>
                         <?php } elseif($products->shipping  == 2){ ?>
-                        <p><?php echo $this->Lang['FLAT_SHIPP_T_PRO_AMO']; ?>( <?php echo $symbol . " " . $this->userflat_amount; ?> )</p>
+                        <p><?php echo $this->Lang['FLAT_SHIPP_T_PRO_AMO']; ?>( <?php echo $symbol . " " . number_format($this->userflat_amount); ?> )</p>
                         <?php } elseif($products->shipping  == 3){ ?>
-                        <p><?php echo $this->Lang['PER_PRO_SHIPP_PRODUCT_SHIPP']; ?>( <?php  echo $symbol . " " .$products->shipping_amount; ?> )</p>
+                        <p><?php echo $this->Lang['PER_PRO_SHIPP_PRODUCT_SHIPP']; ?>( <?php  echo $symbol . " " .number_format($products->shipping_amount); ?> )</p>
                         <?php } elseif($products->shipping  == 4){ ?>
-                        <p><?php echo $this->Lang['PER_ITEM_PRODU_SHIPPING_AMOU']; ?>( <?php  echo $symbol . " " .$products->shipping_amount; ?> )</p>
+                        <p><?php echo $this->Lang['PER_ITEM_PRODU_SHIPPING_AMOU']; ?>( <?php  echo $symbol . " " .number_format($products->shipping_amount); ?> )</p>
                         <?php } elseif($products->shipping  == 5){ ?>
                         <p><?php echo $this->Lang['ARAMEX_SHIPP_PROD']; ?></p>
                         <?php } ?>

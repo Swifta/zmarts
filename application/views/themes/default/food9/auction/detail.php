@@ -271,7 +271,7 @@ foreach ($this->deals_deatils as $deals) {
                                     </li>
                                     <?php } ?>
                                     <li class="clearfix">                                                                                    
-                                        <span class="bid_price"><?php echo $symbol . " " . $deals->deal_value; ?></span>                                        
+                                        <span class="bid_price"><?php echo $symbol . " " . number_format($deals->deal_value); ?></span>                                        
                                     <?php if ($deals->winner != 0 && $deals->auction_status != 0) { ?>
                                             <a style="margin-right:8px;" class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } else { if ($deals->deal_status != 0) {?>
@@ -305,14 +305,14 @@ foreach ($this->deals_deatils as $deals) {
                                      
     } else { ?>
                                     <li class="bid_enter_value">
-                                            <a style="cursor:default;" title="<?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . ' ' . $deals->deal_price; ?>"><?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . " "; ?><span class="bidamountval"><?php echo $deals->deal_price; ?></span> OR MORE.</a>                                        
+                                            <a style="cursor:default;" title="<?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . ' ' . number_format($deals->deal_price); ?>"><?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . " "; ?><span class="bidamountval"><?php echo $deals->deal_price; ?></span> OR MORE.</a>                                        
                                     </li>
                                     <?php } ?>
                                     <li class="bid_pricing_details">                                        
                                         <h4><?php echo $this->Lang['WIT_ECH']; ?></h4>   
-                                        <p><?php echo $this->Lang['START_B_FROM']; ?> </p><span><?php echo $symbol . " " . $deals->deal_value; ?></span>                                     
-                                        <p><?php echo $this->Lang['BID_INCR']; ?></p><span><?php echo $symbol . " " . $deals->bid_increment; ?></span>
-                                        <p><?php echo $this->Lang['RE_PRIC']; ?></p><span><?php echo $symbol . " " . $deals->product_value; ?></span>
+                                        <p><?php echo $this->Lang['START_B_FROM']; ?> </p><span><?php echo $symbol . " " . number_format($deals->deal_value); ?></span>                                     
+                                        <p><?php echo $this->Lang['BID_INCR']; ?></p><span><?php echo $symbol . " " . number_format($deals->bid_increment); ?></span>
+                                        <p><?php echo $this->Lang['RE_PRIC']; ?></p><span><?php echo $symbol . " " . number_format($deals->product_value); ?></span>
                                         
                                 <p><?php echo $this->Lang['AUC_TYPE']; ?></p><span><?php echo $this->Lang['RESE_AUC']; ?></span>
                                         </li>
