@@ -75,22 +75,35 @@
     });
 </script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
-<div class="contianer_outer1">
-    <div class="contianer_inner">
-        <div class="contianer">
-            <div class="bread_crumb">
-                <ul>
-                    <li><p><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
-                    <li>
-                        <p><a href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>"><?php echo $this->Lang['DEALS']; ?></a></p>
-                    </li>
-                    <?php foreach ($this->deals_deatils as $deals) {
-                        $symbol = CURRENCY_SYMBOL;
-                        ?>
-                        <li class="act"><p><?php echo ucfirst($deals->deal_title); ?></p></li>
-<?php } ?>
-                </ul>
-            </div>
+
+<?php foreach ($this->deals_deatils as $deals) {
+    $symbol = CURRENCY_SYMBOL;
+    ?>
+
+<!-- Titlebar
+================================================== -->
+<section class="parallax-titlebar fullwidth-element"  data-background="#000" data-opacity="0.45" data-height="160">
+
+    <img src="<?php echo PATH; ?>bootstrap/themes/images/food/banners/<?php echo rand(1, 3); ?>.jpg" alt="" />
+	<div class="parallax-overlay"></div>
+
+	<div class="parallax-content">
+            <h2><span><?php echo ucfirst($deals->deal_title); ?></span></h2>
+
+		<nav id="breadcrumbs">
+			<ul>
+				<li><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></li>
+				<li><a href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>"><?php echo $this->Lang['DEALS']; ?></a></li>
+			</ul>
+		</nav>
+	</div>
+
+</section>
+
+    <div class="container">
+        <div class="sixteen columns">
+            <div >
+
             <div  id="messagedisplay1" style="display:none;">
                 <div class="session_wrap">
                     <div class="session_container">
@@ -103,13 +116,11 @@
                     </div>
                 </div>
             </div>
-            <?php
-            foreach ($this->deals_deatils as $deals) {
-                $symbol = CURRENCY_SYMBOL;   ?>
                 <!--content start-->
                 <div class="detail_block">
                     <div class="deal_content">
-                        <div class="deal_image wloader_parent">
+                        <div class="sixteen columns">
+                        <div class="eight columns deal_image wloader_parent">
                             <i class="wloader_img" style="min-height: 300px;">&nbsp;</i>           
                           <div class="deal_image_inner">
                                 <?php $image_count = "";
@@ -190,7 +201,8 @@
     } */
     ?>  </div>
                         </div>
-                        <div class="deal_info">
+
+                        <div class="" style="float:right;width:47%;">
                             <h2 class="deal_title"><?php echo ucfirst($deals->deal_title); ?></h2>
                             <div class="deal_buy_detail clearfix">
                                 <div class="deal_rating">
@@ -316,7 +328,7 @@
                                                         });
                                                         </script>
                                                         <?php if ($deals->deal_status == "1"){ ?>
-                                    <a class="buy_it" id="auction" href="<?php echo PATH . 'deals_payment/p/' . $deals->deal_key . '/' . $deals->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?> </a>
+                                    <a class="buy_it" style="margin-left:10px;" id="auction" href="<?php echo PATH . 'deals_payment/p/' . $deals->deal_key . '/' . $deals->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?> </a>
                                                         
                                     
                                     <a class="buy_it" id="sold" titile="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;" ><?php echo $this->Lang['SOLD_OUT2']; ?></a>
@@ -328,6 +340,7 @@
 
 
                         </div>
+                                                    </div>
                     </div>
 
                     <div class="deal_descripe clearfix">
@@ -510,9 +523,6 @@
 </div>
     <?php } ?>
                     <!--slider_right content end -->
-                    
-<?php } ?>
-                <!--end-->
 
             </div>
         </div>
@@ -520,7 +530,9 @@
 
     </div>
 </div>
-
+<?php
+} 
+?> 
 
 <script type="text/javascript">
     $(document).ready(function(){

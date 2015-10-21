@@ -1,5 +1,7 @@
 @import url('reset.css');
 @import url('font.css');
+@import url("css/style.css");
+@import url("css/colors/green.css");
 
 /*body{top: 0 !important;}*/
 
@@ -950,8 +952,8 @@ box-shadow:0 2px 4px rgba(0, 0, 0, 0.5);-moz-box-shadow:0 2px 4px rgba(0, 0, 0, 
 .action_links{position: absolute;bottom: -42px;height: 42px;width: 100%;text-align: center;background: #ad0800;transition: all 0.3s ease-out;-webkit-transition: all 0.3s ease-out;opacity: 0;}
 .seller_listing:hover .action_links,.store_product_list:hover .action_links,.latest_product_common:hover .action_links,.store_pro_list:hover .action_links{bottom: 0;opacity: 1;}
 .latest_product_common:hover .action_links{bottom: -35px;opacity: 1;}
-.wish{float: right;width: 25%;border-left: 1px solid #d9504a;text-align: center;box-sizing: border-box;-webkit-box-sizing: border-box;}
-.cmpr{float: left;width: 25%;border-right: 1px solid #d9504a;text-align: center;box-sizing: border-box;-webkit-box-sizing: border-box;}
+.wish{float: right;width: 25%;text-align: center;box-sizing: border-box;-webkit-box-sizing: border-box;}
+.cmpr{float: left;width: 25%;text-align: center;box-sizing: border-box;-webkit-box-sizing: border-box;}
 .crt{float: left;width:50%;text-align: center;}
 .wish a {background: url(../../images/new/new_wishlist_icon.png) center center no-repeat;width: 100%;height: 42px;display: inline-block;margin: 0;}
 .cmpr a {background: url(../../images/new/new_compare_icon_white.png) center center no-repeat;width: 100%;height: 42px;display: inline-block;margin: 0;}
