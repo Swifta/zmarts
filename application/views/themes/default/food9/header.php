@@ -59,8 +59,8 @@ $this->language_List = str_replace(".php", "", $DL);
         }
         
         .product .mediaholder img{
-            width:<?php echo PRODUCT_LIST_WIDTH; ?>;
-            height: <?php echo PRODUCT_LIST_HEIGHT; ?>;
+            width:<?php echo PRODUCT_LIST_WIDTH; ?>px;
+            height: <?php echo PRODUCT_LIST_HEIGHT; ?>px;
         }
 </style>
 <?php if (($this->uri->last_segment() == "near-map.html") || ($this->uri->last_segment() == "nearmap.html")) { } else {} ?>
