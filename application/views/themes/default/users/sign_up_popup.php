@@ -109,7 +109,7 @@
                             </li>-->
                            <li class="check_box">
                                 <p><input type="checkbox" name="terms" id="termsquantity" value="terms"><?php echo $this->Lang['BY_CLICKING_SUBMIT']; ?> 									
-                                <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>terms-and-conditions.php"><?php echo $this->Lang['TEMRS']; ?></a>									
+                                <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>Terms-and-Conditions.php"><?php echo $this->Lang['TEMRS']; ?></a>									
                                 </p>
                                 <em id="terms_error"></em>
                             </li>

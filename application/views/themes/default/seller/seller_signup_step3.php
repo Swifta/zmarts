@@ -298,7 +298,7 @@ input[type=text],input[type=password]
                             <div class="payment_form_section">
 <!--                            <div class="payment_form merchant_paymet_form">-->
 <div class="payment_form payment_shipping_form">
-                                <table style="width:100%;" class="table table-striped">
+                                <table style="width:100%;">
   
                                     <tbody>
   <tr>

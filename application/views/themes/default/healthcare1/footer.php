@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>
 <footer id="footer">
   <section class="footersocial">
     <div class="container">
