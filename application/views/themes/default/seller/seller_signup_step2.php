@@ -322,7 +322,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
                                 <div class="">
                                     <span class="asterisks_input">  </span>
-									<input type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_FIRST_NAME']; ?>" 
+									<input type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
 									<?php if($this->session->get('firstname')) { ?>
                                                                         value="<?php  echo $this->session->get('firstname');} ?>"  /> 			
 									<em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
@@ -332,10 +332,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					<li>			
                                             
 								<div class="">
-								        <span class="asterisks_input">  </span>
-									<input type="text" name="lastname" class="swifta_input" id="lname" placeholder= "<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" 
+								        <span>  </span>
+									<input type="text" name="lastname" class="swifta_input" id="lname" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
 									<?php if($this->session->get('lastname')) { ?>
-									value="<?php  echo $this->session->get('lastname'); ?>" required autofocus/> 			                <?php } else { ?>
+									value="<?php  echo $this->session->get('lastname'); ?>"  autofocus/> 			                <?php } else { ?>
 									value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>" placeholder= "<?php echo $this->Lang["LAST_NAME"]; ?>"  />
 									<?php } ?>
 									<em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
@@ -464,14 +464,16 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
                                                               checked <?php } } else { ?> checked <?php } ?>>Free Shipping
                                                     
-                                         </label></td><td style="width:30px; padding-left:5px;"><label><a id="id_ship_desc_free_qtn" class="tooltips" href="#"> <i class="fa fa-question-circle"></i><i></i>
+                                         </label></td><td style="width:30px; padding-left:5px;">
+                                                 <a href="#" class="tooltips">
+                                                     <i class="fa fa-question-circle"></i>
                                                     <span>
         
         <strong>Free Shipping</strong><br />
-       NO shipping cost incurred by customer to ship the item.
+   No shipping cost incurred by customer to ship the item.
     </span>
                                                     
-                                                    </a></label></td>
+                                                    </a></td>
                                         <?php } else { ?>
                                         <input type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
@@ -481,17 +483,17 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                    &nbsp;<i class="fa fa-question-circle"></i>
     <span>
         <strong>Flat Rate Shipping</strong><br />
-        The shipping cost value is the same on all types of items.
+        The shipping cost value is the same for all types of items.
     </span>
                                                </a></td></tr>
                                         <?php } else { ?>
                                         <input type="hidden" name="flat" value="0" >
                                         <?php } if($this->per_product_setting == 1){ ?>
                                         <tr><td style=""><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per product base Shipping</td><td><a href="#" class="tooltips">
+                                        checked <?php } } else { ?> checked <?php } ?>>Per product based Shipping</td><td><a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
     <span>
-        <strong>Per product base Shipping</strong><br />
+        <strong>Per product based Shipping</strong><br />
         The shipping cost value varies from item to item.
     </span>
                                                </a></td></label>
@@ -499,11 +501,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <input type="hidden" name="product" value="0" >
                                         <?php } if($this->per_quantity_setting == 1){ ?>
                                         <td><label><input type="checkbox" name="quantity" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('quantity')) { ?>
-                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity base Shipping</td><td><a href="#" class="tooltips">
+                                        checked <?php } } else { ?> checked <?php } ?>>Per quantity based Shipping</td><td><a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
     <span>
-        <strong>Per quantity base Shipping</strong><br />
-       The shipping cost value varies basing on the quantity of items purchased.
+        <strong>Per quantity based Shipping</strong><br />
+       The shipping cost value varies based on the quantity of items purchased.
     </span>
                                                </a></td></tr>
                                         <?php } else { ?>
@@ -1002,18 +1004,6 @@ InvalidInputHelper(document.getElementById("compname"), {
     emptyText: "Please enter your company!",
     invalidText: function (input) {
         return 'The company  "' + input.value + '" is invalid!';
-    }
-    
-    
-}
-
-); 
-
-InvalidInputHelper(document.getElementById("lname"), {
-    defaultText: "Please enter your lastname!",
-    emptyText: "Please enter your lastname!",
-    invalidText: function (input) {
-        return 'The lastname  "' + input.value + '" is invalid!';
     }
     
     

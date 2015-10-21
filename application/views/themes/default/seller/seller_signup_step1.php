@@ -510,12 +510,15 @@ $('#autoUpdate').fadeOut('slow');
     
     
     </script>  -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
   
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  
   <link rel="stylesheet" href="style.css" />
     
 <script src="script.js"></script>
@@ -541,8 +544,9 @@ $('#autoUpdate').fadeOut('slow');
             
          {    swal({   
        title: "Do you want to open a new account?",  
-text: "",
-type: "info",  
+text: "",  
+imageUrl:src="<?php echo PATH; ?>custom/images/zeeniths1.jpg",
+//imageSize: '100x180',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "Yes, Proceed!",   
@@ -1001,9 +1005,11 @@ function show_gif(obj){
 		        {
                             //alert(check);
 swal({   
-title: "Account verification successful?",  
+title: "Account verification successful",  
 text: "Proceed to Merchant Registration.",
-type: "success",  
+//type: "success",  
+imageUrl:src="<?php echo PATH; ?>custom/images/zeeniths1.jpg",
+imageSize: '90x90',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "Yes, Proceed!",   
