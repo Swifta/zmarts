@@ -42,7 +42,7 @@
 <!-- banner start-->
 <!-- Slider
 ================================================== -->
-<div class="container fullwidth-element home-slider">
+<div class="container">
 
 	<div class="tp-banner-container">
 		<div class="tp-banner">
@@ -228,7 +228,7 @@ if(count($this->best_seller)>0) {
         <?php } else { ?>
          <img src="<?php echo PATH .'images/products/1000_800/'.$best->deal_key.'_1'.'.png'?>" />
             <div class="cover">
-                <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $best->deal_title; ?>" title="<?php echo $best->deal_title; ?>" />
+                <img src="<?php echo PATH .'images/products/1000_800/'.$best->deal_key.'_1'.'.png'?>" />
             </div>
         <?php } ?>
         <?php } else { ?>

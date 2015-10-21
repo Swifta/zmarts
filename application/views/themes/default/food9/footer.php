@@ -86,10 +86,10 @@ echo $stores->about_us;
 
 			<ul class="footer-links">
                             <li>
-                           <?php echo $admin->address1; ?>, <br />
-                           <?php echo $admin->address2; ?>, <br />
-                           <?php echo $admin->city_name; ?>, <br />
-                           <?php echo $admin->country_name; ?>.
+                           <?php echo $admin->address1; ?>, </li>
+                          <li> <?php echo $admin->address2; ?>, </li>
+                           <li><?php echo $admin->city_name; ?>, </li>
+                           <li><?php echo $admin->country_name; ?>.
                             </li>
 				<li><?php echo $admin->phone_number;?></li>
 				<li><a href="mailto:<?php echo $admin->email; ?>" title="<?php echo $admin->email; ?>"><?php echo $admin->email; ?></a></li>
@@ -105,10 +105,10 @@ echo $stores->about_us;
 
 			<ul class="footer-links">
                             <li>
-                           <?php echo $admin->address1; ?>, <br />
-                           <?php echo $admin->address2; ?>, <br />
-                           <?php echo $admin->city_name; ?>, <br />
-                           <?php echo $admin->country_name; ?>.
+                           <?php echo $admin->address1; ?>, </li>
+                           <li><?php echo $admin->address2; ?>, </li>
+                           <li><?php echo $admin->city_name; ?>, </li>
+                           <li><?php echo $admin->country_name; ?>.
                             </li>
 			<li><?php echo PHONE1;?>,<?php echo PHONE2;?></li>
 			<li><a class="foot_mail_icon" href="mailto:<?php echo CONTACT_EMAIL; ?>" title="<?php echo CONTACT_EMAIL; ?>"><?php echo  CONTACT_EMAIL; ?></a></li>

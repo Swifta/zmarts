@@ -57,6 +57,11 @@ $this->language_List = str_replace(".php", "", $DL);
         .buy_it:hover{
             background:#606060;
         }
+        
+        .product .mediaholder img{
+            width:<?php echo PRODUCT_LIST_WIDTH; ?>;
+            height: <?php echo PRODUCT_LIST_HEIGHT; ?>;
+        }
 </style>
 <?php if (($this->uri->last_segment() == "near-map.html") || ($this->uri->last_segment() == "nearmap.html")) { } else {} ?>
 <!--header start-->
@@ -360,7 +365,6 @@ $srch = $this->Lang['SRCH_STR'];
 		        $pr ++;
 		        } }
 		        $arr_product = explode(",", substr($val_pro,0,-1));
-                        //onclick="filtercategory_store('<?php echo $sub_cate->category_url; ?>', 'products', '<?php echo base64_encode("sub"); ?>','<?php echo $this->storeurl; ?>');"
         ?>
         
         <?php if($this->categeory_list_product){  
