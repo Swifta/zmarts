@@ -13,6 +13,7 @@
 <link href="<?php echo PATH; ?>/css/magiczoomplus.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo PATH; ?>/css/magicscroll.css" rel="stylesheet" type="text/css" />
 
+
 <script type="text/javascript">
     $(document).ready(function () {
         //jCarousel Plugin
@@ -74,7 +75,6 @@
         });
     });
 </script>
-
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
 <div class="contianer_outer1">
     <div class="contianer_inner">
@@ -193,13 +193,17 @@
                         </div>
                         <div class="deal_info">
                             <h2 class="deal_title"><?php echo ucfirst($deals->deal_title); ?></h2>
+                            
                             <div class="deal_buy_detail clearfix">
                                 <div class="deal_rating">
                                     <a class="basic<?php echo $deals->deal_id; ?>" id="<?php echo $this->avg_rating; ?>" title="<?php echo $this->avg_rating; ?> / 5" >
+                                    
                                         <link href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/jRating.jquery.css" rel="stylesheet" type="text/css"/>
                                         <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jRating.jquery.js"></script>
                                         <script type="text/javascript">
                                             $(document).ready(function(){
+												
+												
                                                 $(".basic<?php echo $deals->deal_id; ?>").jRating({
                                                     bigStarsPath : '<?php echo PATH; ?>/images/star_03.png', // path of the icon stars.png
                                                     smallStarsPath : '<?php echo PATH; ?>/images/new/white_star.png', // path of the icon small.png

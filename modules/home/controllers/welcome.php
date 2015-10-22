@@ -771,6 +771,18 @@ class Welcome_Controller extends Layout_Controller
 		
            	$this->session->set("Skip",1); 
 			$this->session->set('Club', 0);
+			
+			$leo_case = $this->session->get('leo_redirect_case');
+			if($leo_case == 0){
+				$url = $this->session->get('leo_redirect_url');
+				$this->session->set('leo_redirect_case', -999);
+				if(!isset($url)){
+					$url = PATH;
+				}
+				
+				url::redirect($this->session->get('leo_redirect_url'));
+			}
+			
 	        url::redirect(PATH);
   	 }
   	 
@@ -954,6 +966,7 @@ class Welcome_Controller extends Layout_Controller
 	}
 	
 	public function leo_login(){
+		
 		$this->session->set('leo_redirect_case', '2');
 		
 		url::redirect(PATH);
@@ -962,9 +975,20 @@ class Welcome_Controller extends Layout_Controller
 	}
 	
 	public function leo_zenith(){
+		
 		$this->session->set('leo_redirect_case', '3');
 		
 		url::redirect(PATH);
+		
+		
+	}
+	
+	
+	public function leo_logout(){
+		
+		$this->session->set('leo_redirect_case', '4');
+		
+		url::redirect(PATH."logout.html");
 		
 		
 	}

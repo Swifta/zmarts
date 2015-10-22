@@ -1,91 +1,114 @@
-
-
 <?php 
 
-	if(!isset($this->get_product_categories)){
+
+		if(!isset($this->product)){
+			
+			
 		
-		$this->stores = new Leo_Model();
-		
-		$store_url_title = $this->storeurl;
-		$this->is_store_details = 1;
-		$store_url_title;
-		$search="";
-		
-		$this->type = "products";
 		$storeurl = $this->storeurl;
 		
-		if(count($this->product_deatils)==0){
-		        common::message(-1, $this->Lang["PAGE_NOT"]);
-		        url::redirect(PATH);
+		$this->is_todaydeals = 1;
+                $this->is_details = 1;
+		$deal_key = $this->deal_key;
+        $url_title = $this->url_title;
+		
+		$type = $this->type;
+		
+		$this->type = "today-deals";
+		
+		$this->deals = new Deals_Model();
+		
+		$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
+		if(count($this->deals_deatils) == 0){
+			common::message(-1, $this->Lang["PAGE_NOT"]);
+			url::redirect(PATH);
 		}
-		$this->home = new Home_Model();
-		$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
-		$this->stores = new Stores_Model();
-		$this->admin_details = $this->stores->get_admin_details();
 		
 		$this->product = null;
-		
-		
-		
-		foreach($this->product_deatils as $Deal){
-						$this->product = $Deal;
-                        $this->avg_rating =$this->products->get_product_rating($Deal->deal_id);
-                        $this->sum_rating =$this->products->get_product_rating_sum($Deal->deal_id);
-                        $this->delivery_details =$this->products->get_product_delivery($Deal->deal_id);
-                        $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
-                        $this->products_list_name = $this->Lang['REL_PRODUCT'];
-                        if(count($this->all_products_list) < 3){        
-                        $this->all_products_list = $this->products->get_hot_all_products_view($Deal->deal_id);
-                         $this->products_list_name = $this->Lang['HOT_PRODUCT'];
-                                 if(count($this->all_products_list) < 3){ 
-                                        $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
-                                         $this->products_list_name = $this->Lang['REL_PRODUCT'];
-                                  }
-                        }
-						
-						
-						$this->get_product_categories = $this->all_products_list;
-						
-                        $userflat_deatils = $this->products->get_userflat_amount($Deal->merchant_id);
-                        $this->userflat_amount = $userflat_deatils->flat_amount;
-                        $this->color_deatils = $this->products->get_color_data($Deal->deal_id);
-                        $this->size_deatils = $this->products->get_size_data($Deal->deal_id);
-                        $this->product_size = $this->products->get_product_one_size($Deal->deal_id);
-                        $this->product_color = $this->products->get_product_color($Deal ->deal_id);
-                        $this->merchant_cms = $this->products->get_merchant_cms($Deal ->merchant_id);
-			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
-			if($Deal->meta_description){
-				$this->template->description = $Deal->meta_description;
-			}
-			if($Deal->meta_keywords){
-				$this->template->keywords = $Deal->meta_keywords;
-			}
-			if($Deal->deal_key){
-				$this->template->metaimage = PATH.'images/products/1000_800/'.$Deal->deal_key.'_1.png';
+		foreach($this->deals_deatils as $Deal){
+			
+			$this->product = $Deal;
+			$this->all_deals_list = $this->deals->get_related_category_deals_list($Deal->deal_id, $Deal->sec_category_id);
+			$this->products_list_name = $this->Lang['REL_DEAL'];
+			if(count($this->all_deals_list) < 3){     
+			        $this->all_deals_list= $this->deals->get_hot_all_deals_view($Deal->deal_id);
+			        $this->products_list_name = $this->Lang['HOT_DEAL'];
+			         if(count($this->all_deals_list) < 3){     
+			                $this->all_deals_list = $this->deals->get_related_category_deals_list($Deal->deal_id, $Deal->sec_category_id);
+			                $this->products_list_name = $this->Lang['REL_DEAL'];
+			         }
 			}
 			
-			$this->theme_name = $this->products->get_theme_name($Deal->shop_id);
-			$this->footer_merchant_details = $this->products->get_merchant_details($Deal->merchant_id);
+			$this->get_related_categories = $this->all_deals_list;
+			
+ 			$this->avg_rating =$this->deals->get_deal_rating($Deal->deal_id);
+ 			$this->sum_rating =$this->deals->get_deal_rating_sum($Deal->deal_id);
+			$this->comments_deatils = $this->deals->get_comments_data($Deal->deal_id,1);
+			$this->like_details = $this->deals->get_like_data($Deal->deal_id,1);
+			$this->unlike_details = $this->deals->get_unlike_data($Deal->deal_id,1);
+			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
+				if($Deal->meta_description){
+					$this->template->description = $Deal->meta_description;
+				}
+				if($Deal->meta_keywords){
+					$this->template->keywords = $Deal->meta_keywords;
+				}
+				if($Deal->deal_key){
+				        $this->template->metaimage = PATH.'images/deals/1000_800/'.$Deal->deal_key.'_1.png';
+			    }
+			    /* Merchant Cms footer starts */
+				$this->home = new Home_Model();
+				$this->merchant_cms = $this->home->get_merchant_cms_data($storeurl);
+				$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
+				$this->stores = new Stores_Model();
+				$this->admin_details = $this->stores->get_admin_details();
+				/* Merchant Cms footer ends */
+				$this->theme_name = $this->deals->get_theme_name($Deal->shop_id);
+				$this->footer_merchant_details = $this->deals->get_merchant_details($Deal->merchant_id);
+		   }
+		   $this->storeid = $this->deals->get_store_id($storeurl);
+		   
+		   $this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
+		   $this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
+		   $this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
+		
+		   $this->get_theme_name = common::get_theme($storeurl);
+			if(count($this->get_theme_name)>0) { 
+				$this->sector = $this->get_theme_name->current()->sector_name;
+			} else {
+				$this->sector ="";
+			}
+			
+			
 		}
-		$this->storeid = $this->products->get_store_id($storeurl);
+			
+	
 		
-		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
-		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
-		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
-		
-		
-		
-		
-		$this->get_theme_name = common::get_theme($storeurl);
-		if(count($this->get_theme_name)>0) { 
-			$this->sector = $this->get_theme_name->current()->sector_name;
-		} else {
-			$this->sector ="";
-		}
-		
-		}
-		
-		
+	
+
+
+?>
+
+
+
+
+
+
+
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").kkCountDowndetail({
+            colorText: '#7b7b7b',
+            addClass: 'shadow'
+        });
+    });
+</script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
+
+<?php $deals = $this->product;?>
+<?php $symbol = CURRENCY_SYMBOL; ?>
+<?php 
 ?>
 
  
@@ -99,7 +122,7 @@
   
     <div class="wrap">
       <ul class="breadcrumb breadcrumb__t">
-        <a class="home" href="<?php echo PATH.$this->storeurl;?>">Home</a> / <a href="<?php echo PATH.$this->storeurl."/products.html";?>">Products</a> / <?php echo  $this->product->deal_title; ?>
+        <a class="home" href="<?php echo PATH.$this->storeurl;?>">Home</a> / <a href="<?php echo PATH.$this->storeurl."/today-deals.html";?>">Deals</a> / <?php echo  $this->product->deal_title; ?>
       </ul>
       <div class="cont span_2_of_3">
         <div class="grid images_3_of_2">
@@ -110,7 +133,7 @@
               <?php $image_count = 1;
 				$products = $this->product;
 				for ($i = 1; $i <= 5; $i++) { ?>
-							  <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) {
+							  <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_' . $i . '.png')) {
 				              $image_count +=1;
 				}
 				} ?>
@@ -120,33 +143,28 @@
               <?php for ($i = 1; $i <=  $image_count; $i++) { ?>
              
                <?php if($image_count == 1 ){?>
-                      <li><a href="#">
-                       <img class="etalage_source_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
-                       
-                       
-             		   <img class="etalage_thumb_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
-                      
+                      <li><a href="#"> <img class="etalage_source_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
               
-              </a></li>
+              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" /></a></li>
               
               <?php break; ?>
                 
                 <?php } ?>
                 
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) { 
-			  					$image_url = PATH . 'images/products/1000_800/' . $this->product->deal_key . '_'.$i.'.png';  
+              <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_' . $i . '.png')) { 
+			  					$image_url = PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i.'.png';  
                                 $size = getimagesize($image_url);  ?>
               <?php if(($size[0] > PRODUCT_DETAIL_WIDTH) && ($size[1] > PRODUCT_DETAIL_HEIGHT)) { ?>
               <li><a href="#">
-              <img class="etalage_source_image img-responsive" style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
-              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
+              <img class="etalage_source_image img-responsive" style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" src="<?php echo PATH .'images/deals/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/deals/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
               </a></li>
 			  <?php } else { ?>
               <li><a href="#">
               
-              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"  class="etalage_source_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"  class="etalage_source_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
               
-              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" class="etalage_thumb_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" class="etalage_thumb_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
               
                </a></li>              <?php } ?>
               <?php } ?>
@@ -216,37 +234,164 @@
           </ul>
           <div class="clearfix"></div>
         </div>
+        
         <div class="desc1 span_3_of_2">
           <h3 class="m_3"> <?php echo $this->product->deal_title; ?></h3>
-          <p class="m_5"><?php echo CURRENCY_SYMBOL.$this->product->deal_value; ?>&nbsp;
+          <span class="deal_bought_price swifta" >(<?php echo round($deals->deal_percentage); ?>% <?php echo $this->Lang['OFFER']; ?>)</span>
+          <p class="m_5">
             <?php if($this->product->deal_value < $this->product->deal_price){?>
             <span class="reducedfrom"><?php echo CURRENCY_SYMBOL.$this->product->deal_price; ?></span>
+            
             <?php } ?>
+            
+            &nbsp;<?php echo CURRENCY_SYMBOL.$this->product->deal_value; ?>
           </p>
-        
-          <div class="btn_form">
+          
+         
+          
+          <p class="deal_bought_price swifta" ><?php echo $this->Lang['INCLU_OF_TAXES']; ?></p>
+         <?php if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) || ($deals->enddate < time())) { ?><?php
+			 
+			  if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) ) {?>
+       				   <div class="btn_form">
             <form onSubmit="return false;">
-              <input type="submit" id="id_leo_add_to_cart" onClick="leo_add_to_cart();"  value="Add to Cart" title="">
+              <input type="submit"  value="SOLD OUT" title="">
             </form>
           </div>
           
+          <?php }else{
+			  
+			   ?>
+          	
+          <!--  <div class="btn_form">
+            <form onSubmit="return false;">
+              <input type="submit" id="id_leo_add_to_cart" onClick="leo_add_to_cart();"  value="Buy Now (NEED MORE CONTROL)" title="">
+            </form>
+          </div>-->
+          
+          <div class="btn_form">
+            <form onSubmit="return false;">
+              <input type="submit" onClick="return false"  value="Expired" title="">
+            </form>
+          </div>
+          
+          <?php 
+		  } ?>
+          
+          <?php } else {?>
+          
+          <div class="btn_form">
+            <form onSubmit="buy_now('<?php echo PATH; ?>deals_payment/p/<?php echo $deals->deal_key;?>/<?php echo $deals->url_title?>.html'); return false">
+             <input style=" margin-bottom:20px;"type="submit"  value="Buy Now" title="Buy Now" />
+            </form>
+          </div>
+		  <?php }?>
+          
+          
+          
+          <div class="btn_form deal_details swifta" style="">
+          
+          <div class="price_common" style=" text-align:center;"><p>Value</p><p class = "price_common_v" ><?php echo $symbol . " " . number_format($deals->deal_price); ?></p></div>
+          <div class="price_common" style=" text-align:center;"><p>Discount</p><p class = "price_common_v" ><?php echo round($deals->deal_percentage); ?>%</p></div>
+          <div class="price_common" style=" text-align:center;"><p>You save</p><p class = "price_common_v" ><?php echo $symbol . " " . number_format($deals->deal_savings); ?></p></div>
+          
+           
+         
+             
+          </div>
+          
+            
+          
+           <?php if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) || ($deals->enddate < time())) { ?>
+                                <?php } else 
+								{
+									 ?>
+                                     <div class="clear"></div>
+                                      <div class="btn_form deal_details">
+                                <?php if (($deals->purchase_count) < ($deals->minimum_deals_limit)) { ?>
+                                <?php $total = ($deals->purchase_count * 100) / $deals->minimum_deals_limit; ?>
+                                <h3><?php echo $deals->purchase_count; ?> <?php echo $this->Lang['BOUGHT']; ?></h3>
+                                <div class="pg_bar"><div class="range_but" style="margin-left:<?php echo $total; ?>%"></div></div>
+                                <p><span class="range_left">This deal has a limit of 0</span><span class="range_right"><?php echo $deals->minimum_deals_limit; ?></span></p>
+                                <?php } else { ?>
+                                <h3 style="font: 12px/15px arial;
+color: #888;" class="success_deal_on">This deal is still on &nbsp;<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/success_tick.png" alt="" title=""><div><?php echo $deals->purchase_count; ?> <?php echo $this->Lang['BOUGHT']; ?>. Check timer for closure time</div>
+                                </h3>
+                                <?php } ?>
+                                <?php 
+								} ?></div>
+          
+           <div class="clear"></div>
+          
+         
+          
+           <?php if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) || ($deals->enddate < time())) { ?>
+                                
+                                <?php } else { ?>
+                                
+         <!-- <div class="btn_form deal_details swifta" style="background:#063;">
+          <div class="price_common" style="background: #039; text-align:center;"><p>Day(s)</p><p class = "price_common_v" >788</p> </div> 
+          <div class="price_common dot" style="background: #039; text-align:center;"> :  </div>   
+          <div class="price_common" style="background: #039; text-align:center;"><p>HH</p><p class = "price_common_v" >88</p></div> 
+          <div class="price_common dot" style="background: #039; text-align:center;"> :  </div>  
+          <div class="price_common" style="background: #039; text-align:center;"><p>MM</p><p class = "price_common_v" >N 200</p></div> 
+          <div class="price_common dot" style="background: #039; text-align:center;"> :  </div>   
+          <div class="price_common" style="background: #039; text-align:center;"><p>SS</p><p class = "price_common_v" >N 200</p></div> -->
+          <div class="clear"></div>
+         <div class="btn_form deal_details">
+          <span time="<?php echo $deals->enddate; ?>" class="kkcount-down-detail" ></span>
+          </div>
+          
+           <div class="clear"></div>
+          
+           <?php } ?>
+          <!-- 
+           <span time="1446057000" class="kkcount-down-detail shadow">
+           
+           <span class="show_timer">
+           <p class="show_close_time_detail">
+           <span><i>8</i><b>Days</b></span>
+           <span class="time_divider">:</span>
+           <span><i>05</i><b>Hours</b></span>
+           <span class="time_divider">:</span>
+           <span><i>59</i><b>Min</b></span>
+           <span class="time_divider">:</span>
+           <span><i>58</i><b>Sec</b></span>
+           </p>
+           </span>
+           </span>-->
+           
+           
+         
+         
+             
+          
+          
+          
+          <div class="clear"></div>
+          
+          
+          
           <!--<span class="m_link"><a href="#">login to save in wishlist</a> </span>-->
           <!--<p class="m_text2"><?php echo $this->product->deal_description;?>. </p>-->
+          
+          
+          
+          
           <a href="#id_prod_details">
-          <p class="m_text2"> View Details</p>
+          <p class="m_text2"></p>
           </a>
-          
-          
+          			   
         </div>
-        
         <div class="clear"></div>
+        <?php $this->get_product_categories = $this->get_related_categories;?>
         <div class="clients">
           <?php if (count($this->get_product_categories) > 0) { ?>
           <h3 class="m_3">
-            <?php  echo count($this->get_product_categories); ?>
+            <?php  echo count($this->get_product_categories)-1; ?>
             Other Product(s) in the same category</h3>
           <ul id="flexiselDemo3">
-            <?php if ($this->product_setting) { ?>
+           
             <?php if (count($this->get_product_categories) > 0) { ?>
             <?php
                      $k = 1;
@@ -258,11 +403,11 @@
 					 }
 						 ?>
             <li><a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+              <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-              <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+              <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
               <?php } else { ?>
-              <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+              <img src="<?php echo PATH .'images/deals/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
               <?php } ?>
               <?php } else { ?>
               <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
@@ -302,13 +447,12 @@
 			<li><img src="images/s8.jpg" /><a href="#">Category</a><p>Rs 550</p></li>
 			<li><img src="images/s9.jpg" /><a href="#">Category</a><p>Rs 750</p></li>-->
           </ul>
-          <?php } ?>
-          <!-- Ending 1st if --> 
+        
           
         </div>
       
         <div class="toogle">
-          <h3 class="m_3" id = "id_prod_details" >Product Details</h3>
+          <h3 class="m_3" id = "id_prod_details" >Deal Details</h3>
           <p class="m_text"><?php echo $this->product->deal_description;?>.</p>
         </div>
         
@@ -319,13 +463,7 @@
           <option value="1">Products</option>
           <?php 
 				
-				
-				if($this->product_setting) {
-				?>
-          <?php 
-				$cat = explode(",", substr($this->session->get('categoryID'), 0, -1));
-                 $cat1 = array_unique($cat);
-				 
+			
 				?>
           <?php 
 				 if(count($this->categeory_list_product)>0){?>
@@ -356,9 +494,7 @@
           <?php } ?>
           <!-- Ending 1st foreach -->
           
-          <?php }?>
-          <!-- Ending 2nd if -->
-          
+         
           <?php }else{ ?>
           <!-- (Ending 1st if) Products custom menu ending here -->
           <option value="4"> No products in this store yet.</option>
@@ -368,11 +504,7 @@
         </select>
         <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
           <option value="1">Deals</option>
-          <?php 
-				$cat = explode(",", substr($this->session->get('categoryID'), 0, -1));
-                 $cat1 = array_unique($cat);
-				 
-				?>
+         
           <?php 
 				 if(count($this->categeory_list_deal)>0){?>
           <?php  foreach ($this->categeory_list_deal as $d) {
@@ -410,12 +542,8 @@
           
         </select>
         <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
-        <option value="1" onclick="alert(888);"> <a onclick ="alert(22);"> Auctions</a></option>
-          <?php 
-				$cat = explode(",", substr($this->session->get('categoryID'), 0, -1));
-                 $cat1 = array_unique($cat);
-				 
-				?>
+          <option value="1">Auction</option>
+          
           <?php 
 				 if(count($this->categeory_list_auction)>0){?>
           <?php  foreach ($this->categeory_list_auction as $d) {
@@ -654,8 +782,6 @@
 			items_c.html(items_c_in);
 		
 			add_item_to_cart1();
-			
-			
 		
 		
 		
@@ -666,7 +792,6 @@
 <script type="text/javascript">
 	function add_item_to_cart1(){
 	url = "<?php echo PATH ?>/leo/cart_items?deal_id=<?php echo $this->product->deal_id; ?>";
-	
     $.ajax({
 		        type:'GET',
 		        url:url,
@@ -717,7 +842,7 @@
 					$('#id_cart_item_count').html('<li ><a href="#" >Cart('+check+')</a></li>');
 					<?php //$this->response = "Item has been successfully added to cart!";?>
 					
-						window.location.reload();
+					window.location.reload();
 						
 					}
 					return false;
@@ -736,6 +861,18 @@
 			
 }
 
+
+
+
+
+</script>
+
+<script type="text/javascript" >
+
+    function buy_now(url_buy_now){
+		
+		window.location.href = url_buy_now;
+	}
 </script>
     
       

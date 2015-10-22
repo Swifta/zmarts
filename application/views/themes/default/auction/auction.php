@@ -74,6 +74,7 @@ $symbol = CURRENCY_SYMBOL;
 									$cat1 = array_unique($cat);
 									foreach ($this->categeory_list_auction as $d) {
 										$check_sub_cat = $d->auction_count;
+										
 										$subcate_count = 1;
 										$subcat_style = ($subcate_count==0)?"background:none":"";
 										$encode_catid = $d->category_id;
@@ -414,6 +415,8 @@ $symbol = CURRENCY_SYMBOL;
                         <ul id="carousel" class="jcarousel jcarousel-skin-tango">
 			<?php
 					foreach ($this->view_auction_list as $deals1) {
+						
+						
 						$symbol = CURRENCY_SYMBOL;
                                         ?>
                             <li>
@@ -463,6 +466,12 @@ $symbol = CURRENCY_SYMBOL;
 					<?php }?>
 					
                                     </div>
+                                    
+                                    
+                                 
+                                    
+                                    
+                                    
                                     <div class="product_listing_detail">
 					<?php $url = PATH . $deals1->store_url_title.'/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>
                                         <h2>

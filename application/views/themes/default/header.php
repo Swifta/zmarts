@@ -1446,55 +1446,85 @@ function load_club(){
 }
 
 
+
+	
 </script>
+
+
 
 <script type="text/javascript">
 
 	$(document).ready(function(e) {
+		
+	<?php $leo_case = $this->session->get('leo_redirect_case');?>
 	
 	
-	<?php if($this->session->get('leo_redirect_case')){?>
+	<?php if(isset($leo_case) && $this->session->get('leo_redirect_case') >= 0){?>
 		<?php 
 			$leo_case = $this->session->get('leo_redirect_case');
-			$this->session->delete('leo_redirect_case');
+			
+		
+			if($leo_case == 0){
+				$url = $this->session->get('leo_redirect_url');
+				$this->session->set('leo_redirect_case', -999);
+				if(!isset($url)){
+					$url = PATH;
+				}
+				
+				url::redirect($this->session->get('leo_redirect_url'));
+			}
+			
+			
+			$this->session->set('leo_redirect_case', 0);
+	
+			
 			?><?php if($leo_case == 1){?>
 			
-				$('#header').click(function(e) {
+				
 					javascript:showsignup();
-   				 });
+   				
 				
 			<?php } ?>
 			
 			<?php if($leo_case == 2){?>
 			
-				$('#header').click(function(e) {
+				
 					javascript:showsignup();
-   				 });
+   				
 				
 			<?php } ?>
 			
 			<?php if($leo_case == 2){?>
 			
-				$('#header').click(function(e) {
+				
 				javascript:showlogin();
-				});
+				
 				
 			<?php } ?>
 			
 			<?php if($leo_case == 3){?>
 			
-				$('#header').click(function(e) {
+					
 					load_club();
-			  });
+					
+			
+			  
+			  
 				
 			<?php } ?>
+			
+			
 		
-				$('#header').trigger('click');
+				
+				
+				
+				
+				
+				
 	
 	<?php } ?>
 	
-	
-	
+		
         
     });
 	
@@ -1502,5 +1532,9 @@ function load_club(){
 
 	
 </script>
+
+
+
+	
 
 

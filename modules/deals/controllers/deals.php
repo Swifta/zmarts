@@ -284,6 +284,9 @@ class Deals_Controller extends Layout_Controller
 		$this->is_todaydeals = 1;
                 $this->is_details = 1;
         $this->storeurl = $storeurl;
+		$this->deal_key = $deal_key;
+		$this->url_title = $url_title;
+		$this->type = $type;
 		$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
 		if(count($this->deals_deatils) == 0){
 			common::message(-1, $this->Lang["PAGE_NOT"]);

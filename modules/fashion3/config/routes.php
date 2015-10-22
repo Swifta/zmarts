@@ -19,3 +19,4 @@
 //$config['Musty-Test-Company/deal/c/(.*)/(.*).html'] = "/fashion3/deal_list/Musty-Test-Company/$1/$2";
 //$config['Musty-Test-Company/auction/c/(.*)/(.*).html'] = "/fashion3/auction_list/Musty-Test-Company/$1/$2";
 // Musty-Test-Company End
+

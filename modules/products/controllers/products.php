@@ -46,6 +46,8 @@ class Products_Controller extends Layout_Controller
 		$category_id="";
 		$cur_category="";
 		$this->color_id="";
+		
+		
 			if(!$this->session->get('categoryID')){
 			        $this->session->set('categoryID',"");
 			}
@@ -197,6 +199,11 @@ class Products_Controller extends Layout_Controller
 
 	public function categoery_list($cat_type = "",$category = "", $page = "")
 	{
+		/*var_dump($cat_type);
+		var_dump($category);
+		var_dump($cat_type=base64_decode($cat_type));
+		exit;*/
+		
 	        //print_r($cat_type); exit;
 		$cat_type=base64_decode($cat_type);
 		$this->color_id="";
@@ -229,6 +236,11 @@ class Products_Controller extends Layout_Controller
 			$category_deatils = $this->products->get_categoryname($category);
 			$this->category_id = $category_deatils[0]->category_id;
 			$category_name = $category_deatils[0]->category_name;
+			
+			/*var_dump($category_deatils);
+			var_dump($this->category_id);
+			var_dump($category_name);
+			exit;*/
 		}
 
 		$this->all_products_count = $this->products->get_products_count($cat_type,$category);
@@ -380,7 +392,7 @@ class Products_Controller extends Layout_Controller
 	public function details_product($storeurl="",$deal_key= "", $url_title = "",$type = "")
 	{	
 		
-	        $this->is_details = 1;
+	    $this->is_details = 1;
 		$this->store_url=$storeurl;
 		$this->storeurl = $storeurl;
 		$this->product_deatils = $this->products->get_product_details($deal_key, $url_title,$type);
@@ -395,8 +407,12 @@ class Products_Controller extends Layout_Controller
 		$this->stores = new Stores_Model();
 		$this->admin_details = $this->stores->get_admin_details();
 		
+		$this->product = null;
+		
+		
 		
 		foreach($this->product_deatils as $Deal){
+						$this->product = $Deal;
                         $this->avg_rating =$this->products->get_product_rating($Deal->deal_id);
                         $this->sum_rating =$this->products->get_product_rating_sum($Deal->deal_id);
                         $this->delivery_details =$this->products->get_product_delivery($Deal->deal_id);
@@ -472,9 +488,11 @@ class Products_Controller extends Layout_Controller
                         }
                         else{
                             $this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
+							// $this->template->javascript = html::script(array(PATH.'themes/'.THEME_NAME.'/js/'.$this->theme_name.'/public.js'));
                         }	
 
 			$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
+			
 		} else {
 			
 			$this->template->content = new View("themes/".THEME_NAME."/products/details_product");
@@ -883,6 +901,8 @@ class Products_Controller extends Layout_Controller
 			common::message(-1,$this->Lang["YOU_CNT"]);
 			url::redirect(PATH); 
 		}
+		
+	
 		$this->session->set('cate','');
 		$this->category_name="";
 		$this->category_id = "";
