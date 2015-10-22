@@ -16,6 +16,14 @@ class Leo_Model extends Model
 		
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = 'and product.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition_arr = true:$this->club_condition_arr = false;
+	
+		
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->deal_club_condition = 'and deals.for_store_cred = '.$_SESSION['Club'].' ':$this->deal_club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->deal_club_condition_arr = true:$this->deal_club_condition_arr = false;
+		
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition = 'and auction.for_store_cred = '.$_SESSION['Club'].' ':$this->auction_club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition_arr = true:$this->auction_club_condition_arr = false;
+		
 		
 	
 	}
@@ -790,6 +798,45 @@ class Leo_Model extends Model
 
 		}
 		return $result;
+	}
+	
+	
+	
+	
+	
+	
+	public function get_deals_view($store_id = "")
+	{
+	
+	if(CITY_SETTING){ 
+	$query = "select deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating  from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where stores.store_id = ".$store_id." and enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and stores.city_id = '$this->city_id' and  store_status = 1 order by deals.view_count DESC limit 6 ";
+
+	$result = $this->db->query($query);
+	} else {
+	$query = "select deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating  from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where stores.store_id = ".$store_id." and  enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1 order by deals.view_count DESC limit 6 ";
+
+	$result = $this->db->query($query);
+	}
+		return $result;
+	}
+	
+	
+	
+	
+	
+	
+	public function  get_hot_auctions_view($store_id = "")
+	{
+	        if(CITY_SETTING){ 
+		 $conditions = "enddate > ".time()." and  deal_status = 1 ".$this->auction_club_condition."  and category.category_status = 1 and  store_status = 1 and auction_status = 0 ";
+		$query = "select *,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where  stores.store_id = ".$store_id." and   $conditions and deal_feature = 1 and stores.city_id = '$this->city_id'  and users.user_status=1 and city.city_status=1 ORDER BY RAND() limit 4";
+		$result = $this->db->query($query);
+		} else {
+		$conditions = "enddate > ".time()." and  deal_status = 1 ".$this->auction_club_condition."  and category.category_status = 1 and  store_status = 1 and auction_status = 0 ";
+		$query = "select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where  stores.store_id = ".$store_id." and   $conditions and deal_feature = 1 and users.user_status=1 and city.city_status=1 ORDER BY RAND() limit 4";
+		$result = $this->db->query($query);
+		}
+	        return $result;
 	}
 	
 	

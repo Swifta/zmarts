@@ -1,7 +1,5 @@
 
-<?php if(!isset($this->get_product_categories)){ ?>
-
-
+<?php if(!isset($this->get_product_categories)){?>
 
 <script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/css3-mediaqueries.js"></script>
@@ -148,7 +146,7 @@
                       <li class="active"><a href="<?php echo PATH."users/my-account.html"; ?>">Account</a></li> |
                       <li><a href="<?php echo PATH; ?>cart.html">Checkout</a></li> |
                       <li><a href="<?php echo PATH;?>leo_zenith.html" >Zenith Offers</a></li> |
-                   	  <li><a href="<?php echo PATH;?>leo_logout.html">Logout</a></li>
+                   	  <li><a href="<?php echo PATH;?>logout.html">Logout</a></li>
                     
 					 
                     <?php }else{ ?>
@@ -242,23 +240,53 @@
                  <?php 
 				 if(count($this->categeory_list_product)>0){?>
                  	
-                    <?php  foreach ($this->categeory_list_product as $d) {?>
-                                <?php $check_sub_cat = $d->product_count;?>
+                    <?php  foreach ($this->categeory_list_product as $d) {
+                                	$check_sub_cat = $d->product_count;
+									var_dump($check_sub_cat);
+									var_dump($d->category_url);
+									
+								 /*   COUNT OF SUBCATEGORY   */
+								//$subcate_count = common::get_subcat_count1($d->category_id,$d->type);
+								$subcate_count = 1;
+								$subcat_style = ($subcate_count==0)?"background:none":"";
+								$encode_catid = $d->category_id;
+								?>
+                                <?php $subcate_count = 1;
+								$subcat_style = ($subcate_count==0)?"background:none":"";
+								$encode_catid = $d->category_id; ?>
                                 
-                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
+                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {
+								?>
                                 
                                 <?php $type = "products";
 								$categories = $d->category_url; ?>
                                 
                                 
-                             <div class="col1">
+                                	<div class="col1">
 							<div class="h_nav">
-								<h4><a href="<?php echo PATH.$this->storeurl."/".$type."/c/".base64_encode("main")."/". $d->category_url."."."html?c = $categories";?>"> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></a>
+								<h4><a href="<?php echo PATH.$this->storeurl."/".$type."/c/".base64_encode("main")."/".$categories."."."html?c = $categories";?>"> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></a>
+                                
+								
                                 
                                 </h4>
 								<ul>
                                 
+                                <?php if(count($this->subcategories_list)>0){
+										
+								?> 
                                 
+                                <?php foreach($this->subcategories_list as $sub_cate){?>
+                                <?php if($sub_cate->main_category_id == $d->category_id){?>
+                                
+                             
+                               
+                               <!--<?php echo base64_encode("main"); ?>-->
+                                
+                                <?php } ?> <!-- Ending 5th if -->
+                                
+                                <?php } ?> <!-- Ending 2nd foreach -->
+                                
+                                <?php } ?> <!-- Ending 4th if -->
 									<!--<li><a href="mens.html">Daily-wear soft lenses</a></li>
 									<li><a href="mens.html">Extended-wear</a></li>
 									<li><a href="mens.html">Lorem ipsum </a></li>
@@ -296,31 +324,58 @@
                 <!-- PRODUCTS END HERE -->
                 
                 <!-- DEALS START HERE -->
-           		 <li><a class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/today-deals.html">Deals</a>
+           		 <li><a class="color5" href="#">Deals</a>
                 <div class="megapanel">
-               
-               
+                
+                <?php 
+				$cat = explode(",", substr($this->session->get('categoryID'), 0, -1));
+                 $cat1 = array_unique($cat);
+				 
+				?>
+                
                 
                  <?php 
 				 if(count($this->categeory_list_deal)>0){?>
                  	
-                    <?php  foreach ($this->categeory_list_deal as $d) {?>
-                                <?php $check_sub_cat = $d->deal_count;?>
+                    <?php  foreach ($this->categeory_list_deal as $d) {
+                                $check_sub_cat = $d->deal_count;
+								 /*   COUNT OF SUBCATEGORY   */
+								//$subcate_count = common::get_subcat_count1($d->category_id,$d->type);
+								$subcate_count = 1;
+								$subcat_style = ($subcate_count==0)?"background:none":"";
+								$encode_catid = $d->category_id;
+								?>
+                                <?php $subcate_count = 1;
+								$subcat_style = ($subcate_count==0)?"background:none":"";
+								$encode_catid = $d->category_id; ?>
                                 
-                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
+                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {
+								?>
                                 
-                                <?php $type = "deal";
+                                <?php $type = "products";
 								$categories = $d->category_url; ?>
                                 
                                 
-                             <div class="col1">
-							<div class="h_nav">
-								<h4><a href="<?php echo PATH.$this->storeurl."/".$type."/c/".base64_encode("main")."/". $d->category_url."."."html?c = $categories";?>"> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></a>
                                 
-                                </h4>
+                            <div class="col1">
+							<div class="h_nav">
+								<h4> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></h4>
 								<ul>
                                 
+                                <?php if(count($this->subcategories_list)>0){
+										
+								?> 
                                 
+                                <?php foreach($this->subcategories_list as $sub_cate){?>
+                                <?php if($sub_cate->main_category_id == $d->category_id){?>
+                                
+                               <li><a href="mens.html"> <?php echo ucfirst($sub_cate->category_name);?></a></li>
+                                
+                                <?php } ?> <!-- Ending 5th if -->
+                                
+                                <?php } ?> <!-- Ending 2nd foreach -->
+                                
+                                <?php } ?> <!-- Ending 4th if -->
 									<!--<li><a href="mens.html">Daily-wear soft lenses</a></li>
 									<li><a href="mens.html">Extended-wear</a></li>
 									<li><a href="mens.html">Lorem ipsum </a></li>
@@ -335,52 +390,84 @@
                                 <?php } ?> <!-- Ending 3rd if -->
                                 
                                 <?php } ?> <!-- Ending 1st foreach -->
-                                
-                
-                <?php }else{ ?> <!-- (Ending 1st if) Products custom menu ending here -->
-                		<div class="col1">
+                 
+                 <?php } else {?><!-- Ending 2nd if and starting else of 2nd if-->
+                 
+              			 <div class="col1">
 							<div class="h_nav">
-								<h4>NO DEALS</h4>
+								<h4>No Deals</h4>
 								<ul>
-									<li><a href="mens.html">Sorry, No Deals in this store yet.</a></li>
+									<li><a style="text-decoration:none; text-transform:none;" href="#">Sorry, store has no deals yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
 									<li><a href="mens.html">Progressive</a></li>-->
-								</ul>
+								</ul>	
 							</div>												
 						</div>
-                <?php } ?> <!-- End else of 1st if -->
+                 
+                 <?php } ?> <!-- Ending else of 2nd if-->
+                 
+					 
+                
+                		
+                
                 </div>
                 </li>
                 <!-- DEALS END HERE -->
                 
                  <!-- AUCTIONS START HERE -->
-                 <li><a class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/auction.html">Auctions</a>
+                 <li><a class="color5" href="#">Auctions</a>
                 <div class="megapanel">
-               
-               
+                
+                <?php 
+				$cat = explode(",", substr($this->session->get('categoryID'), 0, -1));
+                 $cat1 = array_unique($cat);
+				 
+				?>
                 
                  <?php 
 				 if(count($this->categeory_list_auction)>0){?>
                  	
-                    <?php  foreach ($this->categeory_list_auction as $d) {?>
-                                <?php $check_sub_cat = $d->auction_count;?>
+                    <?php  foreach ($this->categeory_list_auction as $d) {
+                                $check_sub_cat = $d->auction_count;
+								 /*   COUNT OF SUBCATEGORY   */
+								//$subcate_count = common::get_subcat_count1($d->category_id,$d->type);
+								$subcate_count = 1;
+								$subcat_style = ($subcate_count==0)?"background:none":"";
+								$encode_catid = $d->category_id;
+								?>
+                                <?php $subcate_count = 1;
+								$subcat_style = ($subcate_count==0)?"background:none":"";
+								$encode_catid = $d->category_id; ?>
                                 
-                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
+                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {
+								?>
                                 
-                                <?php $type = "auction";
+                                <?php $type = "products";
 								$categories = $d->category_url; ?>
                                 
                                 
-                             <div class="col1">
-							<div class="h_nav">
-								<h4><a href="<?php echo PATH.$this->storeurl."/".$type."/c/".base64_encode("main")."/". $d->category_url."."."html?c = $categories";?>"> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></a>
                                 
-                                </h4>
+                            <div class="col1">
+							<div class="h_nav">
+								<h4> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></h4>
 								<ul>
                                 
+                                <?php if(count($this->subcategories_list)>0){
+										
+								?> 
                                 
+                                <?php foreach($this->subcategories_list as $sub_cate){?>
+                                <?php if($sub_cate->main_category_id == $d->category_id){?>
+                                
+                               <li><a href="mens.html"> <?php echo ucfirst($sub_cate->category_name);?></a></li>
+                                
+                                <?php } ?> <!-- Ending 5th if -->
+                                
+                                <?php } ?> <!-- Ending 2nd foreach -->
+                                
+                                <?php } ?> <!-- Ending 4th if -->
 									<!--<li><a href="mens.html">Daily-wear soft lenses</a></li>
 									<li><a href="mens.html">Extended-wear</a></li>
 									<li><a href="mens.html">Lorem ipsum </a></li>
@@ -395,24 +482,30 @@
                                 <?php } ?> <!-- Ending 3rd if -->
                                 
                                 <?php } ?> <!-- Ending 1st foreach -->
-                                
-                
-                <?php }else{ ?> <!-- (Ending 1st if) Products custom menu ending here -->
-                		<div class="col1">
+                 
+                 <?php } else {?><!-- Ending 2nd if and starting else of 2nd if-->
+                 
+              			 <div class="col1">
 							<div class="h_nav">
-								<h4>NO AUCTIONS</h4>
+								<h4>No Auctions</h4>
 								<ul>
-									<li><a href="mens.html">Sorry, No Auctions in this store yet.</a></li>
+									<li><a style="text-decoration:none; text-transform:none;" href="#">Sorry, store has no auctions yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
 									<li><a href="mens.html">Progressive</a></li>-->
-								</ul>
+								</ul>	
 							</div>												
 						</div>
-                <?php } ?> <!-- End else of 1st if -->
+                 
+                 <?php } ?> <!-- Ending else of 2nd if-->
+                 
+					 
+                
+                		
+                
                 </div>
-                 </li>
+                </li>
                 <!-- AUCTIONS END HERE -->
 				
 			</ul>
@@ -420,10 +513,8 @@
 		</div>
 	   <div class="header-bottom-right">
          <div class="search">	  
-         		<form  onsubmit="validate();return false;">
-				<input type="text" id = "s_q"  name="q" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-				<input  type="submit" value="Subscribe" id="submit" style="display:inline">
-                </form>
+				<input type="text" disabled="disabled" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+				<input disabled="disabled" type="submit" value="Subscribe" id="submit" name="submit">
 				<div id="response"> </div>
 		 </div>
 	  <div class="tag-list">
@@ -484,9 +575,6 @@
      <div class="clear"></div>
      </div>
 	</div>
-    
-    
-    
     
     
    

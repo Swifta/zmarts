@@ -591,6 +591,41 @@ class common{
 		$name = $name." ...";
 		return $name;
 	}
+	
+	
+	
+	
+	
+	function url_origin($s, $use_forwarded_host=false)
+{
+	exit;
+    $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
+    $sp = strtolower($s['SERVER_PROTOCOL']);
+    $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+    $port = $s['SERVER_PORT'];
+    $port = ((!$ssl && $port=='80') || ($ssl && $port=='443')) ? '' : ':'.$port;
+    $host = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
+    $host = isset($host) ? $host : $s['SERVER_NAME'] . $port;
+    return $protocol . '://' . $host;
+}
+public function full_url($s, $use_forwarded_host=false)
+{
+	 $ssl = (!empty($s['HTTPS']) && $s['HTTPS'] == 'on');
+	 $spp = $_SERVER['SERVER_PROTOCOL'];
+  	 $sp = strtolower($spp);
+     $protocol = substr($sp, 0, strpos($sp, '/')) . (($ssl) ? 's' : '');
+     $port = $_SERVER['SERVER_PORT'];
+   	 $port = ((!$ssl && $port=='80') || ($ssl && $port=='443')) ? '' : ':'.$port;
+   	 $host = ($use_forwarded_host && isset($s['HTTP_X_FORWARDED_HOST'])) ? $s['HTTP_X_FORWARDED_HOST'] : (isset($s['HTTP_HOST']) ? $s['HTTP_HOST'] : null);
+     $host = isset($host) ? $host : $_SERVER['SERVER_NAME'] . $port;
+	
+    return $protocol . '://' . $host. $_SERVER['REQUEST_URI'];
+   
+	
+	
+}
+
+
 
 }
 ?>

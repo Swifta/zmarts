@@ -151,7 +151,7 @@
 <script type="text/javascript">
 
 function remove_item_from_cart1(deal_id){
-	
+		
 			url = "<?php echo PATH ?>/leo/cart_product_remove?deal_id="+deal_id;
 	
     $.ajax(
@@ -178,7 +178,7 @@ function remove_item_from_cart1(deal_id){
 					switch(check){
 						case -1:{
 							
-							<?php $this->error_response = 'Invalid item Data.';?>
+							<?php //$this->error_response = 'Invalid item Data.';?>
 							location.reload();
 							break;
 						}
@@ -186,7 +186,7 @@ function remove_item_from_cart1(deal_id){
 						
 						default:{
 							
-            				<?php $this->error_response = 'Invalid response';?>
+            				<?php //$this->error_response = 'Invalid response';?>
 							location.reload();
 							return false;
 							
@@ -202,16 +202,16 @@ function remove_item_from_cart1(deal_id){
 				
 					}
 					
-					<?php $this->response = "Operation has been successful!";?>
+					
 					location.reload();
 					
-					return true;
+					return false;
 		          
 		        },
 		        error:function()
 		        {
 					
-					<?php $this->error_response = 'Error in connection. Please check your network.';?>
+					<?php //$this->error_response = 'Error in connection. Please check your network.';?>
 					location.reload();
 					return false;
 		        }
@@ -222,3 +222,40 @@ function remove_item_from_cart1(deal_id){
 }
 </script> 
 
+<?php 
+		$absolute_url = common::full_url($_SERVER);
+		$this->session->set('leo_redirect_url', $absolute_url);
+		
+?>
+
+<script type="text/javascript">
+		function validate(){
+			$('#s_q').css('border-color', '#FFF');
+			$('#s_q').attr('title', 'Search');
+				
+			q = $('#s_q').val();
+			if(!q || q == 'Search'){
+				alert(q);
+				$('#s_q').css('border-color', '#F00');
+				$('#s_q').attr('title', 'Value required for search');
+				return false;
+			}
+			
+			
+			
+			
+			url = "<?php echo PATH;?>";
+			
+			<?php if(isset($this->type)){?>
+				url = url+"<?php echo $this->storeurl."/".$this->type;?>.html/?q="+q;
+			<?php }else{?>
+				url = url+"<?php echo $this->storeurl;?>/?q="+q;
+			<?php }?>
+			//alert(url);
+			/*window.location.href = "<?php echo PATH.$this->storeurl?>/products.html?q="+q;*/
+			window.location.href = url;
+			
+			
+			
+		}
+    </script>

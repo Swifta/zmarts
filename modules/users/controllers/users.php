@@ -256,8 +256,9 @@ class Users_Controller extends Layout_Controller {
 
     	/** USER LOGIN  **/
 
-	public function login()
-	{
+	public function login(){
+		
+		
                /*
 					Added conditioning to add club membership flags
 					@Live
@@ -281,11 +282,13 @@ class Users_Controller extends Layout_Controller {
 						  	 echo PATH.$url_redirect;
 					
 						  }else{
+							  common::message(1, $this->Lang["SUCC_LOGIN"]);
 							  echo 1;
 						  } 
 						 
 						  exit;
 					  }
+					
 		            common::message(1, $this->Lang["SUCC_LOGIN"]);
 		             if($url_redirect){
 				                url::redirect(PATH.$url_redirect);

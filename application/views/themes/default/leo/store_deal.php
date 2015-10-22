@@ -123,14 +123,14 @@
 		 	$k = 1;
 		    $just_opened = true;?>
           <?php }?>
-          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-deal-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
             <div class="inner_content clearfix">
               <div class="product_image" >
-                <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+                <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
                 <?php } else { ?>
-                <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                <img src="<?php echo PATH .'images/deals/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
                 <?php } else { ?>
                 <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
@@ -159,7 +159,7 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
+						<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -196,10 +196,129 @@
      <?php }else{ ?> <!-- Ending if of category url -->
      
      
-        <h2 class="head">New Arrivals</h2>
+     
+     
+     	<h2 class="head">Hot Deals</h2>
         <div class="top-box"> 
       	
-         <!--<div class="col_1_of_3 span_1_of_3">
+        <!-- <div class="col_1_of_3 span_1_of_3">
+			   	 <a href="single.html">
+					<div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="<?php echo PATH."themes/default/images/leo/";?>pic1.jpg" alt=""/>
+					</div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Lorem Ipsum simply</p>
+							<div class="price1">
+							  <span class="actual">$12.00</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>				
+                   </div>
+                   </a>
+				</div>-->
+          <?php $this->get_product_categories = $this->best_seller;?>
+         
+         
+          <?php if (count($this->get_product_categories) > 0) { ?>
+          <?php
+                     $k = 1;
+					 $just_opened = false;
+					 
+                     foreach ($this->get_product_categories as $products) {?>
+						 
+						
+<?php
+                     $symbol = CURRENCY_SYMBOL;
+					 $just_opened = false;
+                     ?>
+          <?php if($k % 4 == 0){?>
+          <div class="clear"></div>
+        	</div>
+         <div class="top-box">
+         <?php 
+		 	$k = 1;
+		    $just_opened = true;?>
+          <?php }?>
+          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-deal-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+            <div class="inner_content clearfix">
+              <div class="product_image" >
+                <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';
+												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } else { ?>
+                <img src="<?php echo PATH .'images/deals/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                <?php } ?>
+                <?php } else { ?>
+                <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+              </div>
+              <div class="sale-box"><span class="on_sale title_shop">HOT</span></div>
+              <div class="price">
+                <div class="cart-left">
+                  <p class="title swifta" style="text-wrap:normal;"><?php echo common::truncate_item_name($products->deal_title); ?></p>
+                  <div class="price1"> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </div>
+                </div>
+                <div class="cart-right"> </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+            </a> </div>
+          <?php $k++; } ?>
+          <!-- Ending 1st foreach -->
+          
+        
+          <?php }else {
+			  
+			  ?>
+			     <!-- Ending 1st if, beginning else -->
+                 
+                 <?php $just_opened = true; ?>
+                 
+				 <div class="section group">
+			  <div class="col_1_of_3 span_1_of_3">
+			  	 <a href="#">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>
+					</div>
+                    <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
+                   <!--<div class="price">
+					   <div class="cart-left">
+							<p class="title">Lorem Ipsum simply</p>
+							<div class="price1">
+							  <span class="actual">$12.00</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>-->				
+                   </div>
+                   </a>
+				</div>
+			  
+			  
+			<div class="clear"></div>
+			</div>
+			 
+			 <?php } ?>
+          <!-- Ending else of 1st if -->
+          <?php if($just_opened || $k < 5){?>
+          
+          		<div class="clear"></div>
+        		</div>
+                
+        <?php } ?>
+        
+     
+     
+        <h2 class="head">All Deals</h2>
+        <div class="top-box"> 
+      	
+        <!-- <div class="col_1_of_3 span_1_of_3">
 			   	 <a href="single.html">
 					<div class="inner_content clearfix">
 					<div class="product_image">
@@ -219,7 +338,7 @@
                    </a>
 				</div>-->
           <?php $this->get_product_categories = $this->get_recent_product_categories;?>
-          <?php  if (count($this->get_product_categories) > 0) { ?>
+         
          
           <?php if (count($this->get_product_categories) > 0) { ?>
           <?php
@@ -241,20 +360,20 @@
 		 	$k = 1;
 		    $just_opened = true;?>
           <?php }?>
-          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-deal-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
             <div class="inner_content clearfix">
               <div class="product_image" >
-                <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+                <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
                 <?php } else { ?>
-                <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                <img src="<?php echo PATH .'images/deals/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
                 <?php } else { ?>
                 <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
                 <?php } ?>
               </div>
-              <div class="sale-box"><span class="on_sale title_shop">Newest</span></div>
+              <div class="sale-box"><span class="on_sale title_shop">All</span></div>
               <div class="price">
                 <div class="cart-left">
                   <p class="title swifta" style="text-wrap:normal;"><?php echo common::truncate_item_name($products->deal_title); ?></p>
@@ -268,9 +387,7 @@
           <?php $k++; } ?>
           <!-- Ending 1st foreach -->
           
-          <?php } ?>
-          <!-- Ending 3rd if -->
-          
+        
           <?php }else {
 			  
 			  ?>
@@ -283,7 +400,7 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
+						<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -316,104 +433,7 @@
         
         
         
-         <h2 class="head">Top Selling</h2>
-        <div class="top-box"> 
-      	
-          <?php $this->get_product_categories =  $this->best_seller?>
-          <?php  if (count($this->get_product_categories) > 0) { ?>
-         
-          <?php if (count($this->get_product_categories) > 0) { ?>
-          <?php
-                     $k = 1;
-					 $just_opened = false;
-					 
-                     foreach ($this->get_product_categories as $products) {?>
-						 
-						
-<?php
-                     $symbol = CURRENCY_SYMBOL;
-					 $just_opened = false;
-                     ?>
-          <?php if($k % 4 == 0){?>
-          <div class="clear"></div>
-        	</div>
-         <div class="top-box">
-         <?php 
-		 	$k = 1;
-		    $just_opened = true;?>
-          <?php }?>
-          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-            <div class="inner_content clearfix">
-              <div class="product_image" >
-                <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
-												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-                <?php } else { ?>
-                <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
-                <?php } ?>
-                <?php } else { ?>
-                <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-                <?php } ?>
-              </div>
-              <div class="sale-box"><span class="on_sale title_shop">Top Selling</span></div>
-              <div class="price">
-                <div class="cart-left">
-                  <p class="title swifta" style="text-wrap:normal;"><?php echo common::truncate_item_name($products->deal_title); ?></p>
-                  <div class="price1"> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </div>
-                </div>
-                <div class="cart-right"> </div>
-                <div class="clear"></div>
-              </div>
-            </div>
-            </a> </div>
-          <?php $k++; } ?>
-          <!-- Ending 1st foreach -->
-          
-          <?php } ?>
-          <!-- Ending 3rd if -->
-          
-          <?php }else {
-			  
-			  ?>
-			     <!-- Ending 1st if, beginning else -->
-                 
-                 <?php $just_opened = true; ?>
-                 
-				 <div class="section group">
-			  <div class="col_1_of_3 span_1_of_3">
-			  	 <a href="#">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
-                   <!--<div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>-->				
-                   </div>
-                   </a>
-				</div>
-			  
-			  
-			<div class="clear"></div>
-			</div>
-			 
-			 <?php } ?>
-          <!-- Ending else of 1st if -->
-          <?php if($just_opened || $k < 5){?>
-          
-          		<div class="clear"></div>
-        		</div>
-                
-        <?php } ?>
-        
+  
    
    <?php } ?>  <!-- Ending else of category url if -->
         
@@ -442,7 +462,7 @@
                 
                  <!--<?php if (count($this->get_product_categories) > 0) { ?>
              
-             <?php if ($this->product_setting) { ?>
+              
              <?php if (count($this->get_product_categories) > 0) { ?>
              
             
@@ -461,11 +481,11 @@
             		 <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
                    
                      
-                     <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+                     <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
 												<?php } else { ?>
-												 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+												 <img src="<?php echo PATH .'images/deals/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
 												<?php } ?>
                                                 <?php } else { ?>
 														<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
@@ -481,7 +501,6 @@
              
              <?php } ?> <!-- Ending 2nd if -->
              
-             <?php } ?> <!-- Ending 1st if -->
              
               <?php if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    

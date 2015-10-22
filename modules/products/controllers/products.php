@@ -392,7 +392,7 @@ class Products_Controller extends Layout_Controller
 	public function details_product($storeurl="",$deal_key= "", $url_title = "",$type = "")
 	{	
 		
-	        $this->is_details = 1;
+	    $this->is_details = 1;
 		$this->store_url=$storeurl;
 		$this->storeurl = $storeurl;
 		$this->product_deatils = $this->products->get_product_details($deal_key, $url_title,$type);
