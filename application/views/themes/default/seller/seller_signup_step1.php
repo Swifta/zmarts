@@ -407,7 +407,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <!--                            <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a  style="text-decoration: underline;"href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
                             <br><input type="checkbox" id="toggle" checked/> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             -->
-                            <img style="width:100%" src="<?php echo PATH; ?>custom/images/zmarts.jpg"></img>
+                            <img style="width:100%" src="<?php echo PATH; ?>custom/images/WelcomeToZmart.png"></img>
 <!--                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>-->
                             <p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
                           
@@ -545,7 +545,7 @@ $('#autoUpdate').fadeOut('slow');
          {    swal({   
        title: "Do you want to open a new account?",  
 text: "",  
-imageUrl:src="<?php echo PATH; ?>custom/images/zeeniths1.jpg",
+imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
 //imageSize: '100x180',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
@@ -1008,7 +1008,7 @@ swal({
 title: "Account verification successful",  
 text: "Proceed to Merchant Registration.",
 //type: "success",  
-imageUrl:src="<?php echo PATH; ?>custom/images/zeeniths1.jpg",
+imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
 imageSize: '90x90',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   

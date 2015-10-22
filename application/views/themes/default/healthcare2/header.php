@@ -22,10 +22,7 @@ $this->language_List = str_replace(".php", "", $DL);
 
 /** For Front end language  end * */
 ?>
-<!--[if lt IE 9]>			
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <script src="js/respond.min.js"></script>
-<![endif]-->
+
 <script>
     $(document).ready(function() {
         $('.submit-link2').click(function(e) {
@@ -56,20 +53,16 @@ $this->language_List = str_replace(".php", "", $DL);
 <!--header start-->
 
 <header>
- <div class="headerstrip">
+    <div class="headerstrip">
         <div class="container">
             <div class="row">
-                <div class="span2"> <div class="logo">
-    <h1>
-            <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
-     <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
-            <img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
-
-    <?php /* <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/> */ ?></a>
-      <?php } } ?>
-    </h1>
-    </div>
+                <div class="span12"> 
+                     <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
+                    <a href=href="<?php echo PATH.$stores->store_url_title.'/';?>"  class="logo pull-left" ><img src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>" 
+                      alt="<?php echo $this->Lang['LOGO']; ?>"  title="<?php echo $stores->store_name; ?>"></a> 
                     <!-- Top Nav Start -->
+                     <?php /* <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/> */ ?></a>
+      <?php } } ?>
                     <div class="pull-left">
                         <div class="navbar" id="topnav">
                             <div class="navbar-inner">
@@ -77,16 +70,25 @@ $this->language_List = str_replace(".php", "", $DL);
                                     <?php  if($this->session->get('user_auto_key')) { ?>
         <li  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
         <?php } ?>
-                                    <li><a class="home active" href="<?php echo PATH;?>">Home</a></li>
-                                    <li class="mnav_dnone"></li>
-        <?php if ($this->session->get('UserID')) { ?>
-                <li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+                                    <li><a class="home active"  href="<?php echo PATH;?>">Home</a> </li>
+                                    
+                                    <?php if ($this->session->get('UserID')) { ?>
+                                    <li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
                 <li class="mnav_dnone"></li>
                 <li><a class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
                 <li class="mnav_dnone"></li>
                  <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
 
-
+                                    
+                                    
+                                    
+                 
+               
+                
+                
+                
+                
+                
                 <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
 
                 <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
@@ -117,12 +119,15 @@ $this->language_List = str_replace(".php", "", $DL);
 
         <?php } ?>
 
-                <li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
+                <li><a id="login" class="checkout" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
                 <li class="mnav_dnone"></li>
-                <li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+                <li><a href="javascript:showsignup();" class="shoppingcart" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
                 <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
         
                     <?php } ?>
+                
+                
+                  
                 
         <?php if (FB_PAGE) { ?>
         <!-- <li><a class="faceb" href="<?php echo FB_PAGE; ?>" target="blank" title="<?php echo $this->Lang['FB']; ?>">&nbsp;</a></li>-->
@@ -141,33 +146,47 @@ $this->language_List = str_replace(".php", "", $DL);
                                 <?php
                         }
                 } */
-        }  ?>                   
+        }  ?>             
+                
+                
+                
+                
                 
                 <li class="">
         <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
                     <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
             </li>
-                                    <li><a class="shoppingcart" href="#"></a> </li>
-                                    
-                                    
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                                   
+                                  
                                 </ul>
+                                  
                             </div>
                         </div>
                     </div>
                     <!-- Top Nav End -->
-                    <div class="pull-right">
-
+<!--                    <div class="pull-right">
+                        <form class="form-search top-search">
+                            <input type="text" class="input-medium search-query" placeholder="Search Hereâ€¦">
+                        </form>
+                    </div>-->
                 </div>
             </div>
         </div>
     </div>
-    
-    </header>
     <div class="container">
         <div class="headerdetails">
             <div class="pull-left">
-                                       <div>
-<?php
+                <?php
 $ajax_type = 0;
 $srch = $this->Lang['SEARCH'];
 
@@ -204,10 +223,10 @@ $srch = $this->Lang['SRCH_STR'];
 }  else {
 		$srch = $this->Lang['SRCH_PRD'];
 	?>
-<form id="myform" class="form-search top-search" action="<?php echo PATH.$this->storeurl; ?>/products.html">
+    <form id="myform" class="form-search top-search" action="<?php echo PATH.$this->storeurl; ?>/products.html">
 
 <?php } ?>
-    <div class="cities" style="float:left;margin-left:10px;z-index: 2299;border:1px solid white;width:40%;padding-top:5px;">
+    <div class="cities pull-right" style="float:left;margin-left:10px;z-index: 2299;border:1px solid white;width:40%;padding-top:5px;">
 		<ul>
 	        <li>
                 <?php
@@ -237,22 +256,18 @@ $srch = $this->Lang['SRCH_STR'];
         </ul>
         <input type="hidden" name="d_id" id="cat" value="" />
         </div>
-<!--                        <form class="form-search top-search">-->
-<div class="" style="float:left;width:50%; padding-top: -20px;">
+        <div class="" style="float:left;width:50%; padding-top: -20px;">
 <?php $search = $this->input->get('q'); ?>
-     <input type="text" class="input-medium search-query" size="6" style="border:1px solid #eb4800" name="q" class="input-medium search-query" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>  AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?>  placeholder="Search Hereâ€¦"/>
+     <input type="text" class="input-medium search-query " size="6" style="border:1px solid #eb4800" name="q" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>  AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?>  placeholder="Search Hereâ€¦"/>
                             
    <div id="suggestions" class="search_suggestions"></div>		
 </div>
 
                            
                         </form>
-                    </div>
-                
-            
             </div>
             <div class="pull-right">
-                 <div class="merchant_log text-center" style="margin:1px auto;">
+                <div class="merchant_log text-center" style="margin:1px auto;">
              <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
             <ul>
                 <li><p><?php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
@@ -261,8 +276,8 @@ $srch = $this->Lang['SRCH_STR'];
                     <li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
             </ul>
 	</div>
-                             <ul class="nav topcart pull-left">
-                    <li class="dropdown hover carticon "> <a href="<?php echo PATH; ?>cart.html" class="dropdown-toggle" > Shopping Cart <span class="label label-orange font14">1 item(s)</span> - $589.50 <b class="caret"></b></a>
+                 <ul class="nav topcart pull-left">
+                    <li class="dropdown hover carticon "> <a href="<?php echo PATH; ?>cart.html" class="dropdown-toggle" > Shopping Cart <span class="label label-orange font14"><b class="caret"></b></a>
                         <ul class="dropdown-menu topcartopen ">
                             <li>
                                 
@@ -292,9 +307,11 @@ $srch = $this->Lang['SRCH_STR'];
                         </ul>
                     </li>
                 </ul>
+                    </li>
+                </ul>
             </div>
         </div>
-      <div id="categorymenu">
+       <div id="categorymenu">
             <nav class="subnav">
                 <ul class="nav-pills categorymenu">
                     
@@ -404,15 +421,9 @@ $srch = $this->Lang['SRCH_STR'];
                     <li><a href="features.html">Features</a> </li>
                 </ul>
             </nav>
-        </div>
+        </div> 
     </div>
-   
-
-
-		
-        <!--header end-->
-
-<?php /*}*/ ?>
+</header>
 
 <div class='popup_block'><?php echo new View("themes/" . THEME_NAME . '/users/login_popup'); ?></div>
 <div class='popup_block1'><?php echo new View("themes/" . THEME_NAME . '/users/sign_up_popup'); ?></div>
