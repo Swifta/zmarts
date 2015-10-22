@@ -472,15 +472,7 @@ $config['Tests/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Tests/$1/$2";
 $config['Tests/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Tests/$1/$2";
 // Tests End
 
-// ABC-Pvt-Ltd Start
-$config['ABC-Pvt-Ltd'] ="electronics3/stores_home_page/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products.html'] = "/electronics3/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/today-deals.html'] = "/electronics3/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction.html'] = "/electronics3/auction_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/electronics3/product_list/ABC-Pvt-Ltd/$1/$2";
-$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/ABC-Pvt-Ltd/$1/$2";
-$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/ABC-Pvt-Ltd/$1/$2";
-// ABC-Pvt-Ltd End
+
 
 // mko Start
 $config['mko'] ="electronics3/stores_home_page/mko";
