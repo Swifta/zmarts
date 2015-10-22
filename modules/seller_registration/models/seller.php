@@ -79,7 +79,7 @@ class Seller_Model extends Model
 			$result = $this->db->insert("users", array("firstname" => $this->session->get('firstname'),"lastname" => $this->session->get('lastname'), "email" =>$this->session->get('memail'),'password' => md5($password),"payment_account_id" =>$this->session->get('payment_acc'),
                             'address1' => $this->session->get('mraddress1'), 'address2' => $this->session->get('mraddress2'), 'city_id' =>$post->city, 'country_id' => $country_value1, 
                             'phone_number' => $this->session->get('mphone_number'), 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),"user_status" =>0,"approve_status" => 0,"user_sector_id" =>$this->session->get('sector'),
-                            "user_sub_sector_id" =>$this->session->get("sub_sector"), "nuban"=>  $this->session->get("nuban")));
+                            "user_sub_sector_id" =>$this->session->get("sub_sector"), "nuban"=>  $this->session->get("merchant_reg_nuban")));
 			
 			$merchant_id = $result->insert_id();
 			

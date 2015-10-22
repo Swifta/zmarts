@@ -94,74 +94,25 @@ $(".slidetabs").tabs(".images > div", {
 </script>
 
 
-<!-- banner start-->
-<section  class="homepage-slider" id="home-slider">
-    <div class="flexslider">
-            <ul class="slides">
+<!-- Titlebar
+================================================== -->
+<section class="parallax-titlebar fullwidth-element"  data-background="#000" data-opacity="0.45" data-height="160">
 
-<?php 
-$banner_check ="";
-if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {  
-                $tabs=0;
-                for ($i = 1; $i <= 3; $i++) {
-                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
-                            $banner_link="";
+    <img src="<?php echo PATH; ?>bootstrap/themes/images/food/banners/<?php echo rand(1, 3); ?>.jpg" alt="" />
+	<div class="parallax-overlay"></div>
 
-                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
-                                $banner_check = 1;
-                                if($i==1) { 
-                                    $banner_link = $m->banner_1_link; 
-                                } else if($i==2) { 
-                                    $banner_link = $m->banner_2_link; 
-                                } else if($i==3) { 
-                                    $banner_link = $m->banner_3_link; 
-                                }
-                                
-                            }
-?>
-<li>                                                                                
-    <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
-        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
-    </a>
-</li>
-<?php
-                    }
-                    else{
-                        //echo "No Image file";
-?>
-                <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
-                </li>
-<?php
-                    }
-                }
-        }
-}
-else{?>
+	<div class="parallax-content">
+            <h2><span>Sold Out</span></h2>
 
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
-    </li>
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-2.jpg" alt="" />
-            <div class="intro">
-                    <h1>Mid season sale</h1>
-                    <p><span>Up to 50% Off</span></p>
-                    <p><span>On selected items online and in stores</span></p>
-            </div>
-    </li>
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
-    </li>
+		<nav id="breadcrumbs">
+			<ul>
+                            <li><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></li>
+			</ul>
+		</nav>
+	</div>
 
-<!-- display default banners-->
-<?php
-}
-?>
-            </ul>
-    </div>
 </section>
+
             <!-- banner end-->
             <?php /*if(count($this->merchant_personalised_details)==0 || $banner_check==0){?>
             <div class="banner">
@@ -185,9 +136,9 @@ else{?>
 //					} 
 //				}	 
                                 ?>
-<div class="contianer_outer1" style="<?php echo $bg_color; ?>">
-    <div class="contianer_inner">
-        <div class="contianer">
+    <div class="container">
+        <div class="sixteen columns">
+            <div >
             <?php /*<div class="bread_crumb">
                 <ul>
                     <li><p><a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
@@ -209,7 +160,11 @@ else{?>
                     </div>
                 </div>
             </div>    
-             <?php 
+<!--for adverts -->
+<!-- Featured
+================================================== -->
+<div class="container" >
+            <?php 
             $ads_check = "";
             if(count($this->merchant_personalised_details)>0) { 
 	foreach($this->merchant_personalised_details as $m) {
@@ -221,20 +176,31 @@ else{?>
 											$ads_link="";
 											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
 											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
-                    <li>
-                        <div class="advertice_inner">
-                            <a href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
-                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>  
+                        <div class="one-third column">
+                            <a class="img-caption" href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
+                                <figure>
+                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>
+                              </figure>
                             </a>
                         </div>
-                    </li>
                     <?php }else{?>
-						<li><img alt="Banner image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/fashion_add.png"/></li>
+	<div class="one-third column">
+		<a href="#" class="img-caption" >
+			<figure>
+				<img src="<?php echo PATH; ?>bootstrap/themes/images/food/ads/<?php echo $i; ?>.jpg" alt="" />
+			</figure>
+		</a>
+	</div>
                     <?php }}?> 
                    
                 </ul>  
             </div>
             <?php  } } ?>
+
+
+</div>
+<div class="clearfix"></div>
+<!--for adverts -->
            
            
             <div class="store_page_listing">
@@ -419,83 +385,3 @@ else{?>
     </div>
 </div>
 </div>
-<div class="store_subscribe_part_outer">
-    <div class="store_subscribe_part">
-        <div class="store_subscribe_part_inner">
-            <h2>Subscribe</h2>
-            <p>Subscribe to receive our news everyday !</p>
-            <div class="sub_cont">
-                <div class="sub_cont_inner">
-                    <input type="text" name="store_subscriber" id="store_subscriber1"  placeholder="Enter Email Address" onkeypress="return check_color();" />
-                     <input type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');" value=""/>
-                    <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
-                </div>  
-                <em id="email_subscriber_error1"></em>
-            </div>
-        </div>
-    </div>    
-</div>
-
-<script>
-function store_subscriber_validate1(store_url)
-{
-	var email = $("#store_subscriber1").val();
-	var atpos=email.indexOf("@");
-	var dotpos=email.lastIndexOf(".");
-	var x=0;
-	if(email == '') {
-			$('.sub_cont_inner').css('border','1px solid red');
-			x++;
-		}
-		else if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
-		{
-			x++;
-			$('.sub_cont_inner').css('border','1px solid red');
-		}else {
-			x=0;
-			$('#email_subscriber_error1').html('');
-		}
-		if(x==0){
-		var url= Path+'users/check_user_signup/?email='+email;
-		$.post(url,function(check){
-			if(check == -1){
-				$('.sub_cont_inner').css('border','1px solid red');
-				$("#store_subscriber1").val('');
-				$("#store_subscriber1").attr('placeholder','<?php echo $this->Lang['EMAIL_EXIST']; ?>');
-				return false;
-			}
-			add_store_email_subscriber(email,store_url);
-			
-		});
-	}
-	
-}
-function add_store_email_subscriber(email,store_url)
-{
-	var store_id=$("#subscriber_store_id1").val();
-	var url= Path+'stores/user_subscriber_signup/?email='+email+'&store_id='+store_id+'&store_url='+store_url;
-	$.ajax(
-	{
-		type:'POST',
-		url:url,
-		cache:false,
-		async:true,
-		global:false,
-		dataType:"html",
-		success:function(check)
-		{
-			window.location.href=Path+store_url+'/';
-			
-		},
-		error:function()
-		{
-			
-		}
-	});
-}
-function check_color(){
-	$('.sub_cont_inner').css('border','none');
-	$('.sub_cont_inner').css('border-bottom','2px solid #404040');
-}
-</script>
-

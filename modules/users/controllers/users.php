@@ -1987,6 +1987,49 @@ $pdf->Output('voucher.pdf', 'I');
   
   }
   
+  
+  
+  public function merchant_registration_validation(){
+		  if($_POST){
+			  $nuban = $this->input->post('nuban');
+                          $this->session->set("merchant_reg_nuban", $nuban);
+                          if(true){
+				 
+				  $r = $this->users->check_zenith_account_used($nuban);
+				  if(isset($r) && $r == "1"){
+					   $fun_resp = null;
+						try{
+						
+						  $arg = array();
+						  $arg['userName'] = ZENITH_TEST_USER;
+						  $arg['Pwd'] = ZENITH_TEST_PASS;
+						  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
+						  $arg['account_number'] = $nuban;
+						  $fun_resp = $soap->VerifyAccount($arg);
+							
+					  } catch(Exception $e){
+						  echo -1;
+						  exit;
+					  }
+				  
+				  $response = (array)$fun_resp->VerifyAccountResult;
+				  
+					  if($response){
+						  $nuban_response = (isset($response['errorMessage']))?-1:1;
+						  if($nuban_response == 1){
+							 $this->session->set("merchant_reg_nuban", $nuban);
+							  
+						  }
+					  }
+                                    }
+						  echo -1;
+						  exit;
+				 
+			  }
+			  
+			 }      
+  }
+  
    /*
 		  * ZENITH BANK VALIDATE ACCOUNT NUMBER FOR LOGGED IN USERS IF VALIDATION IS SUCCESSFUL
 		  * WE UPDATE THE DB AND FLAG USER ROW AS A CLUB MEMBER AND INSERT USER'S 

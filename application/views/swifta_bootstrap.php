@@ -43,7 +43,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc
 })();
 </script>  */ ?>
                     </head>             
-        <body>
+        <body >
             <?php if(isset($this->sector)) {
 				if($this->theme_name) { 
 					$sector =$this->theme_name; 

@@ -8,7 +8,7 @@
 /* ------------------------------------------------------------------- */
 /* Import Section
 ---------------------------------------------------------------------- */
-@import url("base.css");				/* Default Reset, Typography, Forms, etc. */
+@import url("base.css");	/* Default Reset, Typography, Forms, etc. */
 @import url("responsive.css");			/* Responsive Grid */
 @import url("font-awesome.css");		/* Font Awesome Icons */
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
@@ -4560,7 +4560,7 @@ a.product-button i {
 	font-weight: 700;
 	color: #606060;
 	padding: 1px 0 5px 0;
-	display: block;
+	/*display: block;*/
 }
 
 .product-price-discount {
@@ -7167,7 +7167,9 @@ html[xmlns] .slides {display: block;}
 		line-height: 32px;
 	}
 
-	#additional-menu { display: none; }
+       #merchant_login { display: none; }
+        
+	#additional-menu { /*display: none; */}
 
 	#cart { float: left; }
 
@@ -7436,3 +7438,6 @@ only screen and (min-device-pixel-ratio: 2) {
 	}
 	
 	@media only screen and (max-width: 1024px) {#style-switcher {display: none;}}
+        .buy_it{
+            background:rgba(0,0,0,0.06);
+        }

@@ -171,7 +171,7 @@ $content_text = array(
 
 "NAME" => "Name",
 
-"ENTER_NAME"=>"Enter your name here",
+"ENTER_NAME"=>"Enter your first name here",
 
 "SEL_CITY" => "Select City",
 
@@ -327,7 +327,7 @@ $content_text = array(
 
 "PAY_MTD" =>"Payment Methods",
 
-"YOU_TUBE" => "You Tube",
+"YOU_TUBE" => "YouTube",
 
 // Auction
 
@@ -1077,7 +1077,7 @@ $content_text = array(
 
 "THANK_FOR_PURCH" =>"Thank you for your purchase.Please verify your buy list for more details.",
 
-// deal,product,auction payment pages and Modules->controllers
+// deal,product,IM_UP_S payment pages and Modules->controllers
 
 "MAX_PURCH_LIMIT"=>"Maximum purchase limit reached",
 
@@ -1315,7 +1315,7 @@ $content_text = array(
 
 "GOOG_MAP" => "Google Maps",
 
-"IM_UP_S" => "Image upload size",
+"IM_UP_S" => "Logo upload size",
     
 "LOGO_UP" => "Logo upload",
 
@@ -1644,9 +1644,13 @@ $content_text = array(
 
 "ENTE_EMAIL_F" => "Enter a valid email address",
 
-"ENTER_ADDR1" => "Enter your address1 here",
+"ENTER_ADDR1" => "Enter your address 1 here",
 
-"ENTER_ADDR2" => "Enter your address2 here",
+"ENTER_ADDR2" => "Enter your address 2 here",
+    
+"ENTER_COMPANY_NAME" => "Enter company name",
+    
+"ENTER_FULL_NAME" => "Enter your fullname",
 
 "ENTER_STORE_NAME" => "Enter the store name here",
 
@@ -1801,7 +1805,7 @@ $content_text = array(
 
 "ORD_COMPL_COD" => "Purchase Complete. Please await shipping updates from merchant.",
 
-"Z_BY_CLICKING_SUBMIT"=>"By clicking Open Account, you agree to $THIS_SITENAME",
+"Z_BY_CLICKING_SUBMIT"=>"By clicking Open Account, you agree to Zenith Bank's ",
 
 "ZENITH_BRANCH" => "Branch",
 

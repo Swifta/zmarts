@@ -28,6 +28,7 @@ $config['Yudala/auction.html'] = "/leo/auction_list/Yudala";
 $config['Yudala/products/c/(.*)/(.*).html'] = "/leo/product_list/Yudala";
 $config['Yudala/deal/c/(.*)/(.*).html'] = "/leo/deal_list/Yudala";
 $config['Yudala/auction/c/(.*)/(.*).html'] = "/leo/auction_list/Yudala/$1/$2";
+
 //Yudala end
 
 //CC-Collections start

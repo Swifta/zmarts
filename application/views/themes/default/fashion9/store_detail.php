@@ -170,7 +170,7 @@ foreach($this->merchant_personalised_details as $m) {
 <section class="main-content" style="<?php echo $bg_color; ?>">
 <div class="row">
     <div class="span12">
-        <div class="row">
+     <div class="row">
             <div class="span12">
                     <h4 class="title">
                             <span class="pull-left"><span class="text"><span class="line">Best <strong>Seller</strong></span></span></span>
@@ -898,13 +898,13 @@ $avg_rating = round($avg_rating); ?>
     </div>
     <div class="span3">
         <?php foreach ($this->get_store_details as $store) { ?> 
-            <strong><?php echo ucfirst($store->store_name) ; ?>  </strong>                  
+            <strong><?php echo ucfirst($store->store_name) ; ?>  </strong>, <br />                 
             <?php /* <h2 class="deal_sub_title store_address_title"><?php echo $this->Lang['ADDRES']; ?></h2> */ ?>                        
                 <!--<h3><?php echo $store->store_name; ?>,</h3>-->
-                ,<?php echo $store->address1; ?>,<br />
+                <?php echo $store->address1; ?>,<br />
                 <?php echo $store->address2; ?>,    <br />                                
                 <?php echo $store->city_name; ?>, <?php echo $store->country_name; ?>. <br />                  
-                <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  
+                <strong><?php echo $this->Lang['MOBILE']; ?></strong>: <?php echo $store->phone_number; ?>,  <br />
                 <strong><?php echo $this->Lang['WEBSITE']; ?></strong>: <a href="<?php echo $store->website; ?>" target="blank" class="deal_web_link"> <?php echo $store->website; ?></a>    
         <?php } ?>       
     </div>

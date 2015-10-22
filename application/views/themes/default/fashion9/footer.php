@@ -1,16 +1,50 @@
-<section id="footer-bar">
+<section id="footer-bar" style="padding:10px;">
 <?php if(count($this->about_us_footer)>0) { 
     foreach($this->about_us_footer as $stores) { ?>
         <div class="row">
-                <div class="span5 text-center">
+            <div class="span1"></div>
+            <div class="span4 text-center" style="">
                     <p class="">
 <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
     <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
 </a>
                     </p>
                     <p><?php echo $stores->about_us; ?> </p>
+                        <div class="footer_one_social">
+                            <h2 style="color:#fd4004">Join Us On</h2>
+                            <ul class="foot_social_icons">
+                                        <?php if (FB_PAGE) { ?>
+                                    <li><a class="facebook1" href="<?php echo FB_PAGE; ?>"  target="blank" title="<?php echo $this->Lang['FB']; ?>"></a></li>
+                                <?php }if (TWITTER_PAGE) { ?>
+                                    <li><a class="twitter1" href="<?php echo TWITTER_PAGE; ?>" target="blank" title="<?php echo $this->Lang['TW']; ?>"></a></li>
+                                <?php }if (LINKEDIN_PAGE) { ?>
+                                    <li><a class="linke_in" href="<?php echo LINKEDIN_PAGE; ?>" target="blank" title="<?php echo $this->Lang['LINK']; ?>"></a></li>
+                                <?php }if (YOUTUBE_URL) { ?>
+                                    <li><a class="youtube" href="<?php echo YOUTUBE_URL; ?>" target="blank" title="<?php echo $this->Lang['YOU_TUBE']; ?>"></a></li>
+            <?php } ?>
+            <?php if (INSTAGRAM_PAGE) { ?>
+                                    <li><a class="instagram" href="<?php echo INSTAGRAM_PAGE; ?>" target="blank" title="<?php echo $this->Lang['INST']; ?>"></a></li>
+            <?php } ?>
+                                 <?php if(CITY_SETTING) {
+             if ($this->city_id) { ?>
+                <?php foreach ($this->all_city_list as $CX) {
+                    if ($this->city_id == $CX->city_id) { ?>
+                                            <li><a class="rss_1" href="<?php echo PATH . 'deals/rss/' . $this->city_id . '/' . $CX->city_url; ?>" target="blank" title="<?php echo $this->Lang['RSS_FEED']; ?>"></a></li>
+
+                    <?php }
+                }
+            } 
+
+            }  else { ?>
+
+            <li><a class="rss_1" href="<?php echo PATH . 'rss'; ?>" target="_blank" title="<?php echo $this->Lang['RSS_FEED']; ?>"></a></li>
+
+          <?php  }?>   
+
+                            </ul>
+                        </div>
                 </div>
-                <div class="span4">
+                <div class="span3" style="padding-left: 15px;">
                         <h4>Shopping Guide</h4>
                     <ul>
                         <li><a href="<?php echo PATH; ?>" title="Home">Home</a></li>
@@ -23,11 +57,11 @@
                     } ?>
                     </ul>
                 </div>
-                <div class="span3">
+                <div class="span3" >
               <?php if(isset($this->footer_merchant_details) && count($this->footer_merchant_details)>0){
 				foreach($this->footer_merchant_details as $admin){ ?>
 				<div class="footer_three footer_list">
-               <h2 class="footer_title"></h2>
+               <!--<h2 class="footer_title"></h2>-->
                <ul>
                    <li>
                        <div class="foot_location">
@@ -43,7 +77,7 @@
             </div>
             <?php }
             }else if(count($this->admin_details)>0) { foreach($this->admin_details as $admin) { ?>
-            <div class="span3">
+            <div class="span3" >
                <ul>
                    <li>
                        <div class="foot_location">
@@ -60,6 +94,7 @@
             <?php } } ?>
 					
                 </div>
+            <div class="span1"></div>
         </div>
 <?php
     }

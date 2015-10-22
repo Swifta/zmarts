@@ -920,7 +920,6 @@ function remove_cart_item(item)
 /* Add to compare */
 function addToCompare(product_id,tis,t) {
 
-
 	if(tis != ""){
 	        var a = $(tis).is(':checked');
 	} else {
@@ -1365,6 +1364,7 @@ function changing_sectors(sector)
 }
 function filtercategory_store(category_url,type,cat_type,store_url)
 {
+    //alert(category_url+" "+type+" "+cat_type+" "+store_url);
       if(category_url && type == "products"){
                   window.location.href = Path+store_url+"/products/c/"+cat_type+"/"+category_url+'.html';
       }
