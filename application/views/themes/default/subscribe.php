@@ -360,13 +360,13 @@ $(document).ready(function(){
                         <div class="subscribe_bg">
                             <div class="content_deals_midd">
                                    <span><?php echo $this->Lang["SUB_FOR"]; ?> <?php if (isset($this->is_deals)) {
-                                        echo "deal";
+                                        echo "deals";
                                     } elseif (isset($this->is_product)) {
                                         echo "product";
                                     } elseif (isset($this->is_auction)) {
-                                        echo "auction";
+                                        echo "auctions";
                                     } else {
-                                        echo "deal";
+                                        echo "deals";
                                     } ?> <?php echo $this->Lang["NEWSLETTER"]; ?></span>                
                                 <div class="cont_deal_city subscribe_frm">
                                     <form name="Subscribe" method="post" id="commentForm_deals_sub" action="<?php echo PATH; ?>users/subscribe_city">
@@ -409,13 +409,13 @@ $(document).ready(function(){
                             </div>
                             <div class="deals_under_bg">
                                 <p><?php echo $this->Lang['SORRY_CATE']; ?> <?php if (isset($this->is_deals)) {
-        echo "deal";
+        echo "deals";
     } elseif (isset($this->is_product)) {
         echo "product";
     } elseif (isset($this->is_auction)) {
-        echo "auction";
+        echo "auctions";
     } else {
-        echo "deal";
+        echo "deals";
     } ?> <?php echo $this->Lang["TODAY"]; ?>
                                 </p>
                             </div>

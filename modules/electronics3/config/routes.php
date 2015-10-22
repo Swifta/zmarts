@@ -83,15 +83,6 @@ $config['Cash-n-Carry/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Cash-n-
 $config['Cash-n-Carry/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Cash-n-Carry/$1/$2";
 // Cash-n-Carry End
 
-// Slot-Systems-Limited Start
-$config['Slot-Systems-Limited'] ="electronics3/stores_home_page/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/products.html'] = "/electronics3/product_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/today-deals.html'] = "/electronics3/deal_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/auction.html'] = "/electronics3/auction_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Slot-Systems-Limited/$1/$2";
-$config['Slot-Systems-Limited/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Slot-Systems-Limited/$1/$2";
-$config['Slot-Systems-Limited/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Slot-Systems-Limited/$1/$2";
-// Slot-Systems-Limited End
 
 // Supermart Start
 $config['Supermart'] ="electronics3/stores_home_page/Supermart";
@@ -267,15 +258,6 @@ $config['Cash-n-Carry/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Cash-n-
 $config['Cash-n-Carry/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Cash-n-Carry/$1/$2";
 // Cash-n-Carry End
 
-// Slot-Systems-Limited Start
-$config['Slot-Systems-Limited'] ="electronics3/stores_home_page/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/products.html'] = "/electronics3/product_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/today-deals.html'] = "/electronics3/deal_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/auction.html'] = "/electronics3/auction_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Slot-Systems-Limited/$1/$2";
-$config['Slot-Systems-Limited/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Slot-Systems-Limited/$1/$2";
-$config['Slot-Systems-Limited/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Slot-Systems-Limited/$1/$2";
-// Slot-Systems-Limited End
 
 // Supermart Start
 $config['Supermart'] ="electronics3/stores_home_page/Supermart";
@@ -489,3 +471,59 @@ $config['Tests/products/c/(.*)/(.*).html'] = "/electronics3/product_list/Tests/$
 $config['Tests/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Tests/$1/$2";
 $config['Tests/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Tests/$1/$2";
 // Tests End
+
+// ABC-Pvt-Ltd Start
+$config['ABC-Pvt-Ltd'] ="electronics3/stores_home_page/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products.html'] = "/electronics3/product_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/today-deals.html'] = "/electronics3/deal_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/auction.html'] = "/electronics3/auction_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/electronics3/product_list/ABC-Pvt-Ltd/$1/$2";
+$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/ABC-Pvt-Ltd/$1/$2";
+$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/ABC-Pvt-Ltd/$1/$2";
+// ABC-Pvt-Ltd End
+
+// mko Start
+$config['mko'] ="electronics3/stores_home_page/mko";
+$config['mko/products.html'] = "/electronics3/product_list/mko";
+$config['mko/today-deals.html'] = "/electronics3/deal_list/mko";
+$config['mko/auction.html'] = "/electronics3/auction_list/mko";
+$config['mko/products/c/(.*)/(.*).html'] = "/electronics3/product_list/mko/$1/$2";
+$config['mko/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/mko/$1/$2";
+$config['mko/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/mko/$1/$2";
+// mko End
+// njnj Start
+$config['njnj'] ="electronics3/stores_home_page/njnj";
+$config['njnj/products.html'] = "/electronics3/product_list/njnj";
+$config['njnj/today-deals.html'] = "/electronics3/deal_list/njnj";
+$config['njnj/auction.html'] = "/electronics3/auction_list/njnj";
+$config['njnj/products/c/(.*)/(.*).html'] = "/electronics3/product_list/njnj/$1/$2";
+$config['njnj/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/njnj/$1/$2";
+$config['njnj/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/njnj/$1/$2";
+// njnj End
+// fdgh Start
+$config['fdgh'] ="electronics3/stores_home_page/fdgh";
+$config['fdgh/products.html'] = "/electronics3/product_list/fdgh";
+$config['fdgh/today-deals.html'] = "/electronics3/deal_list/fdgh";
+$config['fdgh/auction.html'] = "/electronics3/auction_list/fdgh";
+$config['fdgh/products/c/(.*)/(.*).html'] = "/electronics3/product_list/fdgh/$1/$2";
+$config['fdgh/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/fdgh/$1/$2";
+$config['fdgh/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/fdgh/$1/$2";
+// fdgh End
+// njo Start
+$config['njo'] ="electronics3/stores_home_page/njo";
+$config['njo/products.html'] = "/electronics3/product_list/njo";
+$config['njo/today-deals.html'] = "/electronics3/deal_list/njo";
+$config['njo/auction.html'] = "/electronics3/auction_list/njo";
+$config['njo/products/c/(.*)/(.*).html'] = "/electronics3/product_list/njo/$1/$2";
+$config['njo/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/njo/$1/$2";
+$config['njo/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/njo/$1/$2";
+// njo End
+// mklll Start
+$config['mklll'] ="electronics3/stores_home_page/mklll";
+$config['mklll/products.html'] = "/electronics3/product_list/mklll";
+$config['mklll/today-deals.html'] = "/electronics3/deal_list/mklll";
+$config['mklll/auction.html'] = "/electronics3/auction_list/mklll";
+$config['mklll/products/c/(.*)/(.*).html'] = "/electronics3/product_list/mklll/$1/$2";
+$config['mklll/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/mklll/$1/$2";
+$config['mklll/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/mklll/$1/$2";
+// mklll End

@@ -12,3 +12,13 @@
 
             </div>
         </div>
+<script type="text/javascript">
+    function closeDialog(){
+                    $('.popup_block_theme').css({'display' : 'none'});
+
+                    $('#fade').css({'visibility' : 'hidden'});
+                            //  location.reload();
+
+            return false;        
+    }
+</script>

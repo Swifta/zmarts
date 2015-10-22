@@ -57,41 +57,36 @@ $this->language_List = str_replace(".php", "", $DL);
     
 <div id="top-bar" class="container ">
     <div class="row">
-        <div class="span12">
-        <!--<div class="header_top_left">  
-            <a class="toggleMenu1 htop_navicon1" href="javascript:;" title="Menu">&nbsp;</a>
-         <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
-                                                    <ul class="htop_nav1">
-                                                                                                        <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
-                                                                                                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/warranty.html'; ?>"><?php echo $this->Lang["WARRANTY"]; ?></a></li>
+        <div class="span12 clearfix">
+        <!--<a class="toggleMenu1 htop_navicon1" href="javascript:;" title="Menu">&nbsp;</a>-->
+        
 
-                                                                                                        <li class="mnav_dnone">|</li>
-                                                        <?php } ?>
-                                                         <?php if($this->merchant_cms->current()->return_policy_status ==1) { ?>
-                                                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/return_policy.html'; ?>" title=" <?php echo $this->Lang["RET_POLICY"]; ?>"> <?php echo $this->Lang["RET_POLICY"]; ?></a></li>
-                                                        <li class="mnav_dnone">|</li>
-                                                        <?php } ?>
-                                                         <?php if($this->merchant_cms->current()->terms_conditions_status ==1) { ?>
-                                                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/shipping.html'; ?>" title="<?php echo $this->Lang["SHIP_ING"]; ?>"><?php echo $this->Lang["SHIP_ING"]; ?></a></li>
-                                                        <li class="mnav_dnone">|</li>      
-                                                        <?php } ?>                                          
-                                                    </ul>	
-                                  <?php } }} ?>  
-        </div>-->
-        <!--<div class="header_top_left">
-            <div class="refer_friend">
-            <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-                    <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-            </div>
-        </div>
-        -->
-
-        <?php  if($this->session->get('user_auto_key')) { ?>
-        <div  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></div>
-        <?php } ?>
         <div class="account pull-right">
-            <!--<a class="toggleMenu htop_navicon" href="javascript:;" title="Menu">&nbsp;</a>-->
+
         <ul class="user-menu">
+            
+            <li>
+        <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+                    <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+            </li>
+            
+         <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
+                    <!--<ul class="htop_nav1">-->
+                        <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/warranty.html'; ?>"><?php echo $this->Lang["WARRANTY"]; ?></a></li>
+
+                        <li class="mnav_dnone">|</li>
+                        <?php } ?>
+                         <?php if($this->merchant_cms->current()->return_policy_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/return_policy.html'; ?>" title=" <?php echo $this->Lang["RET_POLICY"]; ?>"> <?php echo $this->Lang["RET_POLICY"]; ?></a></li>
+                        <li class="mnav_dnone">|</li>
+                        <?php } ?>
+                         <?php if($this->merchant_cms->current()->terms_conditions_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/shipping.html'; ?>" title="<?php echo $this->Lang["SHIP_ING"]; ?>"><?php echo $this->Lang["SHIP_ING"]; ?></a></li>
+                        <li class="mnav_dnone">|</li>      
+                        <?php } ?>                                          
+                    <!--</ul>-->
+            <?php } }} ?>  
         <?php /* <li class="header_language">                                                                
         <a class="select_lang <?php echo ucfirst(LANGUAGE); ?>" title="<?php echo ucfirst(LANGUAGE); ?>" alt="<?php echo ucfirst(LANGUAGE); ?>" ><?php echo ucfirst(LANGUAGE); ?><span class="lang_arrow">&nbsp;</span></a>
                         <ul class="header_top_sup_menu">    <?php foreach ($this->language_List as $lan) {
@@ -103,6 +98,10 @@ $this->language_List = str_replace(".php", "", $DL);
                 ?>
          </ul>
         </li> */ ?>
+        <?php  if($this->session->get('user_auto_key')) { ?>
+        <li  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
+        <?php } ?>
+        
         <li><a href="<?php echo PATH;?>">Home</a></li>
         <li class="mnav_dnone">|</li>
         <?php if ($this->session->get('UserID')) { ?>
@@ -176,7 +175,7 @@ $this->language_List = str_replace(".php", "", $DL);
     
     
     
-<div class="row">
+<div class="row" style="padding-top:8px;">
    
 <div class="span2">
     <div class="logo">
@@ -191,7 +190,7 @@ $this->language_List = str_replace(".php", "", $DL);
     </div>
 </div>
 
-<div class="span5">
+<div class="span6">
 <?php
 $ajax_type = 0;
 $srch = $this->Lang['SEARCH'];
@@ -232,7 +231,7 @@ $srch = $this->Lang['SRCH_STR'];
 <form id="myform" action="<?php echo PATH.$this->storeurl; ?>/products.html">
 
 <?php } ?>
-    <div class="cities" style="float:left;margin-left:10px;z-index: 2299;">
+    <div class="cities" style="float:left;margin-left:10px;z-index: 2299;border:1px solid white;width:40%;padding-top:5px;">
 		<ul>
 	        <li>
                 <?php
@@ -263,9 +262,9 @@ $srch = $this->Lang['SRCH_STR'];
         <input type="hidden" name="d_id" id="cat" value="" />
         </div>
     
-<div class="text_box_header" style="float:right;width:200px">
+<div class="text_box_header" style="float:right;width:50%">
 <?php $search = $this->input->get('q'); ?>
-<input type="text" size="6"  name="q" class="search_tbox textbg" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>  AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?> />
+    <input type="text" size="6" style="border:1px solid #eb4800" name="q" class="search_tbox textbg" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>  AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?> />
    <div id="suggestions" class="search_suggestions"></div>		
 </div>
 		
@@ -273,7 +272,7 @@ $srch = $this->Lang['SRCH_STR'];
         <!--div class="sub"><input type="submit" value="" title="<?php echo $this->Lang['SEARCH']; ?>" /></div>-->
         </form>
 </div>
-<div class="msearch_cart_block span5">
+<div class="msearch_cart_block span4">
 
          <div class="merchant_log text-center" style="margin:1px auto;">
              <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
@@ -383,7 +382,8 @@ $srch = $this->Lang['SRCH_STR'];
 
 
 
-        <?php } ?>
+        <?php } 
+        ?>
 
         <?php if ($this->deal_setting) { ?>
         <li class="<?php if (isset($this->is_todaydeals)) echo "active"; ?> "><a href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>">
@@ -489,7 +489,7 @@ $srch = $this->Lang['SRCH_STR'];
         <?php if ($this->store_setting) { ?>
 	        <li <?php
 		        if (isset($this->is_store)) {
-			        echo "class='active'";
+			        echo "class=''";
 		        }
 		        ?>>
 		        <a href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">

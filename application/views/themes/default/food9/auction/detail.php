@@ -113,19 +113,30 @@ foreach ($this->deals_deatils as $deals) {
     </script>
     <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js "></script>
 
-    </div> <!--for header -->
-    </div>
-    </div>
-    <div class="contianer_outer1">
-        <div class="contianer_inner">
-            <div class="contianer">
-                <div class="bread_crumb">
-                    <ul>
-                        <li><p><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
-                        <li><p><a href="<?php echo PATH.$this->storeurl; ?>/auction.html" title="<?php echo $this->Lang['AUCTION']; ?>"><?php echo $this->Lang['AUCTION']; ?></a></p></li>
-                        <li><p><?php echo ucfirst($deals->deal_title); ?></p></li>
-                    </ul>
-                </div>
+<!-- Titlebar
+================================================== -->
+<section class="parallax-titlebar fullwidth-element"  data-background="#000" data-opacity="0.45" data-height="160">
+
+    <img src="<?php echo PATH; ?>bootstrap/themes/images/food/banners/<?php echo rand(1, 3); ?>.jpg" alt="" />
+	<div class="parallax-overlay"></div>
+
+	<div class="parallax-content">
+            <h2><span><?php echo ucfirst($deals->deal_title); ?></span></h2>
+
+		<nav id="breadcrumbs">
+			<ul>
+				<li><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></li>
+				<li><a href="<?php echo PATH.$this->storeurl; ?>/auction.html" title="<?php echo $this->Lang['AUCTION']; ?>"><?php echo $this->Lang['AUCTION']; ?></a></li>
+			</ul>
+		</nav>
+	</div>
+
+</section>
+
+    <div class="container">
+        <div class="sixteen columns">
+            <div >
+                
                 <div  id="messagedisplay1" style="display:none;">
                     <div class="session_wrap">
                         <div class="session_container">
@@ -141,7 +152,8 @@ foreach ($this->deals_deatils as $deals) {
                 <!--content start-->
                 <div class="auction_block">
                     <div class="deal_content auction_content">
-                        <div class="auction_image wloader_parent">                            
+                        <div class="sixteen columns">
+                        <div class="five columns auction_image wloader_parent">                            
                             <i class="wloader_img" style="min-height: 300px;">&nbsp;</i>           
                                        <div class="auction_image_inner">
                                 <?php $image_count = "";
@@ -228,7 +240,8 @@ foreach ($this->deals_deatils as $deals) {
     ?>
                         </div>
                         </div>
-                        <div class="bid_history">
+
+                        <div class="eleven columns bid_history" style="float:right;width:65%;">
                             <div class="mbid_history_inner">
                             <div class="bid_history_content">					
                                 <ul>
@@ -258,9 +271,9 @@ foreach ($this->deals_deatils as $deals) {
                                     </li>
                                     <?php } ?>
                                     <li class="clearfix">                                                                                    
-                                        <span class="bid_price"><?php echo $symbol . " " . $deals->deal_value; ?></span>                                        
+                                        <span class="bid_price"><?php echo $symbol . " " . number_format($deals->deal_value); ?></span>                                        
                                     <?php if ($deals->winner != 0 && $deals->auction_status != 0) { ?>
-                                            <a class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
+                                            <a style="margin-right:8px;" class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } else { if ($deals->deal_status != 0) {?>
                                     
                                                         <script type="text/javascript">
@@ -285,21 +298,21 @@ foreach ($this->deals_deatils as $deals) {
                                     echo $this->UserID;
                                 } ?>','<?php echo $deals->deal_key; ?>','<?php echo $deals->url_title; ?>');"  title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a>
                                            
-                                            <a class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
+                                            <a style="margin-right:8px;" class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } } ?>                                         
                                     </li>
                                      <?php if ($deals->winner != 0 && $deals->auction_status = 1) {
                                      
     } else { ?>
                                     <li class="bid_enter_value">
-                                            <a style="cursor:default;" title="<?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . ' ' . $deals->deal_price; ?>"><?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . " "; ?><span class="bidamountval"><?php echo $deals->deal_price; ?></span> OR MORE.</a>                                        
+                                            <a style="cursor:default;" title="<?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . ' ' . number_format($deals->deal_price); ?>"><?php echo $this->Lang['BID_ENTER']; ?> <?php echo $symbol . " "; ?><span class="bidamountval"><?php echo $deals->deal_price; ?></span> OR MORE.</a>                                        
                                     </li>
                                     <?php } ?>
                                     <li class="bid_pricing_details">                                        
                                         <h4><?php echo $this->Lang['WIT_ECH']; ?></h4>   
-                                        <p><?php echo $this->Lang['START_B_FROM']; ?> </p><span><?php echo $symbol . " " . $deals->deal_value; ?></span>                                     
-                                        <p><?php echo $this->Lang['BID_INCR']; ?></p><span><?php echo $symbol . " " . $deals->bid_increment; ?></span>
-                                        <p><?php echo $this->Lang['RE_PRIC']; ?></p><span><?php echo $symbol . " " . $deals->product_value; ?></span>
+                                        <p><?php echo $this->Lang['START_B_FROM']; ?> </p><span><?php echo $symbol . " " . number_format($deals->deal_value); ?></span>                                     
+                                        <p><?php echo $this->Lang['BID_INCR']; ?></p><span><?php echo $symbol . " " . number_format($deals->bid_increment); ?></span>
+                                        <p><?php echo $this->Lang['RE_PRIC']; ?></p><span><?php echo $symbol . " " . number_format($deals->product_value); ?></span>
                                         
                                 <p><?php echo $this->Lang['AUC_TYPE']; ?></p><span><?php echo $this->Lang['RESE_AUC']; ?></span>
                                         </li>

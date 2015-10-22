@@ -1,12 +1,4 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-  
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-  
   <script>
      
      
@@ -231,8 +223,6 @@
 }
 
 
-
-
 .swifta_button {
 
   border: none;
@@ -249,8 +239,8 @@
 
   color: white;
 
-  margin-left: 150px;
-
+  margin-left: 350px;
+  
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 
 }
@@ -269,6 +259,97 @@
   box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 
 }
+
+
+
+.swifta_input2  {
+
+/* margin: 5px 0px;*/
+ 
+  width: 250px;
+
+  display: inline;
+
+  border: none;
+  
+  outline:none;
+
+  
+ border-bottom: solid 1px #F1F1F1;
+
+   /* border-bottom: thin 1px #A61C00;*/
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #A61C00 4%);
+
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #A61C00 4%);
+
+  background-position: -250px 0;
+
+  background-size: 250px 100%;
+
+  background-repeat: no-repeat;
+
+ 
+ /*color: #A61C00;*/
+ font-size:large;
+
+}
+
+
+.swifta_input2:focus, .swifta_input2:valid {
+
+ box-shadow: none;
+
+ outline: none;
+
+ background-position: 0 0;
+
+}
+
+.swifta_input2:focus::-webkit-input-placeholder, swifta_input2:valid::-webkit-input-placeholder {
+
+ /*color: #1abc9c;*/
+ color:#A61C00;
+ font-size: 11px;
+
+ -webkit-transform: translateY(-20px);
+
+ transform: translateY(-20px);
+
+ visibility: visible !important;
+ 
+
+}
+
+.swifta_button2 {
+    
+  margin-left: 5px;
+
+  border: none;
+
+  /*background: #1abc9c;*/
+  background:#A61C00;
+  cursor: pointer;
+
+  border-radius: 3px;
+
+  padding: 6px;
+
+  width: 100px;
+
+  color: white;
+
+/*  margin-left: 340px;*/
+  
+/*  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);*/
+
+}
+
+
+
 
 .asterisk_input:after
 {
@@ -326,12 +407,13 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <!--                            <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a  style="text-decoration: underline;"href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
                             <br><input type="checkbox" id="toggle" checked/> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             -->
-                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>
+                            <img style="width:100%" src="<?php echo PATH; ?>custom/images/zmarts.jpg"></img>
+<!--                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>-->
                             <p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
                           
                            <form name="formName" method="post"><p style="font-size:20px; margin-left:5px;margin-top: 10px; font-family: sans-serif;">Do you have a Zenith Bank account ? </p><p style="margin-left:10px;">
 <input type="checkbox" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" /><label for="priorityHigh" >Yes</label>
-<input type="checkbox" name="priorityLow" id="priorityLow"  value="ye" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
+<input type="checkbox" name="priorityLow" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
  
 
 
@@ -339,14 +421,18 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a>-->
 <div id="autoUpdate" class="autoUpdate" style="display:none">
 
-    <input type = "textbox" name="acctnum" id="acctnum" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="swifta_input" autofocus required/>
+<!-- Account validation div starts here-->
+    <div style="margin-top: 20px;">  
+        <input type = "textbox" name="acctnum" id="acctnum" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="swifta_input2" autofocus required/>
+        <input type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button2" onclick="show_gif(this);">
+    </div>
 <!--   <input type="submit"  name="submit" value="proceed" class="swifta_button " onclick="validateForm();">-->
 <em id="z_acc_error"></em>
  <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
-                      <input type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">  
+                      <input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">  
      <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
                     </div>
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:250px;">
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
   
       <div class="modal-dialog">
           
@@ -424,7 +510,15 @@ $('#autoUpdate').fadeOut('slow');
     
     
     </script>  -->
-
+    <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
+  
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  
   <link rel="stylesheet" href="style.css" />
     
 <script src="script.js"></script>
@@ -450,8 +544,9 @@ $('#autoUpdate').fadeOut('slow');
             
          {    swal({   
        title: "Do you want to open a new account?",  
-text: "",
-type: "info",  
+text: "",  
+imageUrl:src="<?php echo PATH; ?>custom/images/zeeniths1.jpg",
+//imageSize: '100x180',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "Yes, Proceed!",   
@@ -462,16 +557,30 @@ function(isConfirm){
     if (isConfirm) {     
         location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html"  
     } else {     
-        swal("Cancelled", "Please, come back and complete your merchant sign up", "warning");
-    }
+      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
+        location.href ="<?php echo PATH; ?>"
+   }
+
+     
+ 
+//   if(cancelButtonText = 'ok')
+//{
+//    //alert("try");
+//    location.href ="<?php echo PATH; ?>"  
+//} 
+
+
     });
-           
-           $('#autoUpdate').hide('slow') //&& $('#g').fadeIn('slow') ; 
+      
+   
+
+$('#autoUpdate').hide('slow') //&& $('#g').fadeIn('slow') ; 
             //$('#g').hide('slow');
        } else 
             $('#autoUpdate').hide('slow');
     });
 });
+
 
 
  function isNumberKey(evt)
@@ -816,7 +925,7 @@ $('#submit_accxm').click(function() {
 			var is_no = reg.exec(nuban);
 			if(!is_no){
 				if(nuban.length != 10){
-					alert("Zenith A/C no must be 10 digits.");
+					alert("Zenith A/C number must be 10 digits.");
 					return false;
 				}
 				
@@ -865,7 +974,7 @@ function show_gif(obj){
 			var is_no = reg.exec(nuban);
 			if(!is_no){
 				if(nuban.length != 10){
-					alert("Zenith A/C no must be 10 digits.");
+					alert("Zenith A/C number must be 10 digits.");
 					return false;
 				}
 				
@@ -880,7 +989,7 @@ function show_gif(obj){
 			
 	
 			//is_z_verify_account_api_running = true;
-			var url = Path+'users/club_registration_logged_in_user/'; 
+			var url = Path+'users/merchant_registration_validation/'; 
 			sub_btn_parent.html("<img src = \"<?php //echo PATH."image/anim/6.gif";?>\" /><p>.</p>");
 			
 			$.ajax(
@@ -896,9 +1005,11 @@ function show_gif(obj){
 		        {
                             //alert(check);
 swal({   
-title: "Proceed to Merchant Registration?",  
-text: "Account verification successful.",
-type: "success",  
+title: "Account verification successful",  
+text: "Proceed to Merchant Registration.",
+//type: "success",  
+imageUrl:src="<?php echo PATH; ?>custom/images/zeeniths1.jpg",
+imageSize: '90x90',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "Yes, Proceed!",   
@@ -933,101 +1044,5 @@ function(isConfirm){
 			return false;
 	
 }
-
-function show_gifs(obj){
-	
-			var sub_btn = $(obj).parent();
-			var sub_btn_parent = sub_btn.parent();
-			var sub_btn_parent_bak = sub_btn_parent.html();
-			
-			$('#z_acc_error').html('');
-			
-			var nuban = $('#acctnum').val();
-			if(nuban == ''){
-				alert("Empty field");
-				return false;
-			}
-			
-			var reg = /\d{10}/;
-			var is_no = reg.exec(nuban);
-			if(!is_no){
-				if(nuban.length != 10){
-					alert("Zenith A/C no must be 10 digits.");
-					return false;
-				}
-				
-				alert("Only digits (i.e. 0,1, 2... 9)");
-				return false;
-			}
-			
-			if(is_z_verify_account_api_running){
-				return false;	
-			}
-			
-			
-	
-			is_z_verify_account_api_running = true;
-			var url = Path+'users/club_registration_logged_in_user/'; 
-			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
-			
-			$.ajax(
-	            {
-		        type:'POST',
-		        url:url,
-				data:{nuban:nuban},
-		        cache:false,
-		        async:true,
-		        global:false,
-		        dataType:"html",
-		        success:function(check)
-		        {
-					is_z_verify_account_api_running = false;
-					if(isNaN(check)){
-						sub_btn_parent.html(sub_btn_parent_bak);
-						window.location.href = check;
-						return false;
-					}
-					
-					/*
-					  TODO
-					  Need to internationalize the string below.
-					  @Live
-					 */
-					
-					if(check == -1){
-						sub_btn_parent.html(sub_btn_parent_bak);
-						$('#z_acc_error').html("<?php echo "Sorry, Account verification failed. Please try again."; ?>");
-						return false;
-					}
-					
-                                        if(check == 1){
-						sub_btn_parent.html(sub_btn_parent_bak);
-						$('#z_acc_error').html("<?php echo ", Account verification Sucessful.! <a id='shw' href='".PATH."merchant-signup-step2.html' title='".$this->Lang['ACC']."' class='buy_it'>".$this->Lang['ACC']."</a>"; ?>");
-                                                document.getElementById("shw").visible = true;
-						return true;
-					}
-					
-					sub_btn_parent.html(sub_btn_parent_bak);
-					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
-					return false;
-						
-			
-				 
-		          
-		        },
-		        error:function()
-		        {
-					sub_btn_parent.html(sub_btn_parent_bak);
-					is_z_verify_account_api_running = false;
-					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
-					return false;
-		        }
-
-	         });
-			 
-			return false;
-	
-}
-
 
 </script>

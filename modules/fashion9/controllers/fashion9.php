@@ -265,6 +265,7 @@ exit;
 	public function stores_home_page($store_url_title="") 
 	{
 		$this->is_store_details = 1;
+                $this->is_home = true;
 		$this->storeurl = $store_url_title;
 		$search="";
 		if($this->input->get('q')) {

@@ -23,7 +23,7 @@ ul li a,a{
 a{
 	color:#eb4800;
 }
-a:hover{
+a:hover, footer_one_social a:hover{
 	color:#fd4004;
 	text-decoration:none;
 }
@@ -164,7 +164,7 @@ iframe{
 	*display: inline;
 	zoom: 1;
 	border-right: 1px solid #eee;
-	padding: 5px 12px;
+	padding: 0px 12px;
 }
 #top-bar .user-menu li:last-child{
 	border-right:0;
@@ -782,6 +782,7 @@ section.our_client .row{
 	}
 }
 
-.add_cart{
+.add_cart,.product_buy_but a, .buy_it{
     background: #eb4800;
+    color:white;
 }

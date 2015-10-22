@@ -202,22 +202,40 @@
 											if($i==1) { $banner_link = $m->banner_1_link; } else if($i==2) { $banner_link = $m->banner_2_link; } else if($i==3) { $banner_link = $m->banner_3_link; }}  ?>
 										
                                         <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
-                                        <div style="display: none;">                                                                                
+                                        <div style="">                                                                                
                                             <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
                                                 <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
                                             </a>
                                         </div>
-                                        <?php $tabs++;}?>
+                                        <?php }
+                                        else{
+                                            ?>
+            <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
+            <div style="">                                                                                
+                <a href=""  title = "Default Ads">
+                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo rand(1, 3); ?>.jpg"/>
+                </a>
+            </div>
+            
+                                        <?php
+                                            }
+                                            $tabs++;
+                                        ?>
                                             
                                     
                                    <?php }
                                    if($tabs==0){ ?>
-                                   <img alt="Banner image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/banner_noimage.png"/>
-                                            <?php } ?>
+            <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>   
+            <div style="display: none;">                                                                                
+                <a href=""  title = "Default Ads">
+                    <img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/banners/<?php echo rand(1, 3); ?>.jpg"/>
+                </a>
+            </div>
+                        <?php } ?>
                                    </div>      
                                             <div class="controls">                                                    
                                                     <div class="slidetabs">
-						<?php for ($i = 1; $i <= $tabs; $i++) { if (file_exists(DOCROOT . 'images/merchant/banner/' .$m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { ?>
+						<?php for ($i = 1; $i <= $tabs; $i++) { if (true) { ?>
                                                        <a href="" class="slider_dot current">&nbsp;</a>
                                                         <?php } } ?>
                                                     </div>                                                                                                   
@@ -254,7 +272,8 @@
                         </div>
                     </li>
                     <?php }else{?>
-                    <li><img alt="add image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/add_noimage.png"/></li>
+                    <li><img alt="Default Ads" src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $m->sector_name ?>/ads/<?php echo $i; ?>.jpg"/></li>
+                    <!--<li><img alt="add image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/add_noimage.png"/></li>-->
                     
                     <?php  }} ?>
                 </ul>  
