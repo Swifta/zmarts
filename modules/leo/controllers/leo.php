@@ -29,7 +29,7 @@ class Leo_Controller extends Layout_Controller
 		}else{
 			$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',));
 			
-			/*$this->template->javascript = html::script(array( PATH.'themes/'.THEME_NAME.'/js/'.$this->theme_name.'/jquery1.min.js', PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/megamenu.js', PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/jquery-ui.min.js', PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/css3-mediaqueries.js',PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/fwslider.js',PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/jquery.easydropdown.js',PATH.'themes/'.THEME_NAME.'/toastr/jquery.jnotify.js', ));*/
+			$this->template->javascript .= html::script(array( PATH.'themes/'.THEME_NAME.'/js/'.$this->theme_name.'/jquery1.min.js', PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/megamenu.js', PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/jquery-ui.min.js', PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/css3-mediaqueries.js',PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/fwslider.js',PATH.'themes/'.THEME_NAME.'/'.$this->theme_name.'/js/jquery.easydropdown.js',PATH.'themes/'.THEME_NAME.'/toastr/jquery.jnotify.js', ));
 			
 			
 		}

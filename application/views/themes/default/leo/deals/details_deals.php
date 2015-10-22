@@ -156,15 +156,15 @@
                                 $size = getimagesize($image_url);  ?>
               <?php if(($size[0] > PRODUCT_DETAIL_WIDTH) && ($size[1] > PRODUCT_DETAIL_HEIGHT)) { ?>
               <li><a href="#">
-              <img class="etalage_source_image img-responsive" style="max-width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; max-height:<?php echo PRODUCT_DETAIL_HEIGHT?>" src="<?php echo PATH .'images/deals/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
-              <img style="max-width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; max-height:<?php echo PRODUCT_DETAIL_HEIGHT?>"class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/deals/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
+              <img class="etalage_source_image img-responsive" style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" src="<?php echo PATH .'images/deals/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/deals/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
               </a></li>
 			  <?php } else { ?>
               <li><a href="#">
               
-              <img class="etalage_source_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"  class="etalage_source_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
               
-               <img class="etalage_thumb_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" class="etalage_thumb_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
               
                </a></li>              <?php } ?>
               <?php } ?>

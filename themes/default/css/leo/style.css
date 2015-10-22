@@ -445,4 +445,25 @@ input[type="text"],  input[type="password"] {
     padding: 8px;
 }
 
+#fwslider .slideNext span {
+    background-image: url("../../images/leo/img-sprite.png");
+    width: 80px;
+    height: 70px;
+    float: left;
+    background-position: -110px -4px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+#fwslider .slidePrev span {
+    background-image: url("../../images/leo/img-sprite.png");
+    width: 80px;
+    height: 70px;
+    float: left;
+    background-position: -12px -4px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
 
