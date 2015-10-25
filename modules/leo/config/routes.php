@@ -50,3 +50,12 @@ $config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/leo/product_list/ABC-Pvt-Lt
 $config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/leo/deal_list/ABC-Pvt-Ltd";
 $config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/leo/auction_list/ABC-Pvt-Ltd/$1/$2";
 //ABC-Pvt-Ltd end
+//test-store start
+$config['test-store'] ="/leo/stores_home_page/test-store";
+$config['test-store/products.html'] = "/leo/product_list/test-store";
+$config['test-store/today-deals.html'] = "/leo/deal_list/test-store";
+$config['test-store/auction.html'] = "/leo/auction_list/test-store";
+$config['test-store/products/c/(.*)/(.*).html'] = "/leo/product_list/test-store";
+$config['test-store/deal/c/(.*)/(.*).html'] = "/leo/deal_list/test-store";
+$config['test-store/auction/c/(.*)/(.*).html'] = "/leo/auction_list/test-store/$1/$2";
+//test-store end
