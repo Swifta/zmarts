@@ -39,6 +39,7 @@ class Products_Controller extends Layout_Controller
 
 	public function all_products($page = "")
 	{
+		
 		$this->session->set('cate','');
 		$this->category_name="";
 		$this->category_id = "";

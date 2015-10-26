@@ -466,4 +466,12 @@ input[type="text"],  input[type="password"] {
     cursor: pointer;
 }
 
+.more_button {
+	
+	backgroundx:#30F;
+	padding: 15px;
+	text-align:center;
+	
+}
+
 

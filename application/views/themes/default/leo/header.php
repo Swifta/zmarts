@@ -282,7 +282,7 @@
 							<div class="h_nav">
 								<h4>NO DEALS</h4>
 								<ul>
-									<li><a href="mens.html">Sorry, No products in this store yet.</a></li>
+									<li><a href="#">Sorry, No products in this store yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
@@ -342,7 +342,7 @@
 							<div class="h_nav">
 								<h4>NO DEALS</h4>
 								<ul>
-									<li><a href="mens.html">Sorry, No Deals in this store yet.</a></li>
+									<li><a href="#">Sorry, No Deals in this store yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
@@ -402,7 +402,7 @@
 							<div class="h_nav">
 								<h4>NO AUCTIONS</h4>
 								<ul>
-									<li><a href="mens.html">Sorry, No Auctions in this store yet.</a></li>
+									<li><a href="#">Sorry, No Auctions in this store yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
@@ -441,12 +441,17 @@
                 <?php 
 					$this->payment_products = new Payment_Product_Model();
 					$item_count = 0;
+					//var_dump($_SESSION);
+					//exit;
 					
 					
 				 ?>
                
                 <?php foreach($_SESSION as $key=>$value)
                     { ?>
+                    <?php if(is_array($value))
+							continue;
+					?>
                     	<?php $d_id = "";?>
                     	<?php if($value && $key == "product_cart_id".$value){
 							$item_count = 1;

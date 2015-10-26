@@ -363,6 +363,8 @@ exit;
 		$category_name="";
 		$category_name_main = "";
 		$this->products = $this->stores;
+		$this->storeurl = $store_url_title;
+		
 
 		if($cat_type=="sub"){
 		        $this->sub_cat= $category;
@@ -630,6 +632,8 @@ exit;
 	
 	
 	public function all_product_list($store_url_title='',$offset='',$record='',$cat_type='',$category='',$search_key='',$search_cate_id=''){
+		
+		
 		$this->is_store_details = $this->is_product = 1;
 		$this->storeurl = $store_url_title;
 		
@@ -653,7 +657,9 @@ exit;
 		
 		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
 		/*echo $this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product_list");*/
-		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_detail");
+		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product_list");
+		
+		exit;
 		
 	}
 	
@@ -1504,6 +1510,73 @@ exit;
 			echo new View("themes/".THEME_NAME."/leo/auction/bid_history");
 			
 			exit;
+	}
+	
+	
+	
+	public function all_products_1($page = "")
+	{
+		
+		
+
+		$deal_record = $this->input->get('record');
+		$deal_offset = $this->input->get('offset');
+		$size = $this->input->get("size");
+		$color = $this->input->get("color");
+		$discount = $this->input->get("discount");
+		$price = $this->input->get("price");
+		$main_cat = $this->input->get("main");
+		$sub_cat = $this->input->get("sub");
+		$sec_cat = $this->input->get("sec");
+		$third_cat = $this->input->get("third");
+		$price_text = $this->input->get("price1");
+		$this->load_count = $this->input->get("load_count");
+		$storeurl = $this->input->get("store_url_title");
+		
+		
+		
+
+		//$this->all_products_count = $this->products->get_products_count($size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat);
+		$this->record = $this->input->get('record');
+		
+		$this->storeid = $this->stores->get_store_id($storeurl);
+		
+		try{
+		$this->all_products_list = $this->stores->get_products_list_by_store("","",$deal_offset, $deal_record,"","","",$size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat,$price_text, $this->storeid);
+		} catch (Exception $e){
+			
+			exit;
+		}
+		
+		//$this->view_products_list = $this->products->get_products_view();
+		//$this->view_hot_products_list = $this->products->get_hot_products_view();
+		//$this->template->title = $this->Lang["ALL_PRODUCT_LIST"]." | ".SITENAME;
+		//$this->title_display = $this->Lang["ALL_PRODUCT_LIST"];
+		echo new View("themes/".THEME_NAME."/leo/products/products_list");
+		exit;
+	}
+	
+	
+	
+	public function all_product_list1($store_url_title='',$offset='',$record='',$cat_type='',$category='',$search_key='',$search_cate_id=''){
+		
+		$store_url_title = $this->input->get("store_url_title");
+		$offset = $this->input->get("offset");
+		$record = $this->input->get("record");
+		$cat_type = $this->input->get("cat_type");
+		$category = $this->input->get("category");
+		$search_key = $this->input->get("search_key");
+		$search_cate_id = $this->input->get("search_cate_id");
+		
+		
+		$this->storeid = $this->stores->get_store_id($store_url_title);
+		
+		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
+		
+		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/products/products_list");
+		
+		exit;
+		
 	}
 	
 	

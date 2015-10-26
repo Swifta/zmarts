@@ -41,15 +41,6 @@ $config['CC-Collections/deal/c/(.*)/(.*).html'] = "/leo/deal_list/CC-Collections
 $config['CC-Collections/auction/c/(.*)/(.*).html'] = "/leo/auction_list/CC-Collections/$1/$2";
 //CC-Collections end
 
-//ABC-Pvt-Ltd start
-$config['ABC-Pvt-Ltd'] ="/leo/stores_home_page/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products.html'] = "/leo/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/today-deals.html'] = "/leo/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction.html'] = "/leo/auction_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/leo/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/leo/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/leo/auction_list/ABC-Pvt-Ltd/$1/$2";
-//ABC-Pvt-Ltd end
 //test-store start
 $config['test-store'] ="/leo/stores_home_page/test-store";
 $config['test-store/products.html'] = "/leo/product_list/test-store";
