@@ -447,6 +447,11 @@
                
                 <?php foreach($_SESSION as $key=>$value)
                     { ?>
+               		<?php
+						if(is_array($value))
+							continue; 
+					
+					?>
                     	<?php $d_id = "";?>
                     	<?php if($value && $key == "product_cart_id".$value){
 							$item_count = 1;
