@@ -7,6 +7,12 @@
 $(document).ready(function(e) {
 
     $ = jQuery;
+    
+    $("nav ul li").hover(function(){
+        $(this).children('ul').stop(true, true).fadeIn(700);
+    }, function(){
+        $(this).children('ul').stop(true, true).fadeOut(500);
+    });
 
 
     $("select").selectBox();
@@ -27,11 +33,6 @@ $(document).ready(function(e) {
         social_tools: ''
     });
 
-    $("nav ul li").hover(function(){
-        $(this).children('ul').stop(true, true).fadeIn(700);
-    }, function(){
-        $(this).children('ul').stop(true, true).fadeOut(500);
-    });
 
     $(".offers figure").hover(function(){
         $(this).children('.overlay').stop(true, true).fadeIn(700);

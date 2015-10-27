@@ -48,14 +48,14 @@ class Manufacturing1_Controller extends Layout_Controller
 //                $style_sheets[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/main.css';
                 $this->template->style = html::stylesheet($style_sheets);
                 $java_scripts = array();
-                //$java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
+                $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
                 
-                $java_scripts[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-1.9.1.min.js';
+                //$java_scripts[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-1.9.1.min.js';
                 $java_scripts[1] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
                 
-                $java_scripts[4] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
-                $java_scripts[5] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
-                $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
+                $java_scripts[2] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
+                $java_scripts[3] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
+                //$java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
                 
 //                $java_scripts[7] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-ui.js';
 //                $java_scripts[8] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.cycle.all.js';
