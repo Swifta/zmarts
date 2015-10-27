@@ -610,6 +610,15 @@ foreach ($this->product_deatils as $products) {
     </div>
     </div>
 <?php } ?>
+<script type="text/javascript" >
+	function add_to_compare(deal_id, deal_title){
+		alert("HELLO");
+	}
+	
+	function add_to_wishlist(deal_id, deal_title){
+	}
+</script>
+
 
 
 

@@ -474,4 +474,191 @@ input[type="text"],  input[type="password"] {
 	
 }
 
+p.item_axillary {
+	
+	padding: 5px;
+	color: #BBB;
+	
+	
+}
+
+ p.item_axillary i {
+	 
+	 color: #4CB1CA;
+ }
+ 
+ p.item_axillary a:hover i {
+	 
+	 color:#555;
+ }
+ 
+ .c1 {
+
+    width: 28px;
+	height: 28px;
+ }
+ 
+ .c2 {
+    width: 28px;
+	height: 28px;
+ }
+ 
+ .profile_img i {
+	 
+	 size: 14px;
+ }
+ 
+ .profile_img {
+	 backgroundx:#066;
+	 vertical-align:baseline;
+ }
+ 
+ ul.last {
+	 backgroundx:#093;
+	 vertical-align:central;
+	 margin:0;
+ }
+ 
+ .tag-list {
+	 backgroundx:#0FC;
+	  vertical-align:baseline;
+	  paddingx-top: 15px;
+ }
+ 
+  .tag-list ul {
+	  
+	  margin-left: 5px;
+	  margin-top: 15px;
+	  
+  }
+  
+  .profile_img a i {
+	  
+  		color: #492;
+  }
+  
+   .profile_img a:hover i {
+	  
+  		color: #777;
+  }
+  
+  .color {
+	  
+	  background: #FFF;
+	  
+  }
+  
+  
+  .color a div {
+   color: #000;
+   text-align: center;
+   text-shadow: 1px 0px 0px #FFF;
+   background: #FFF;
+   width: 30px;
+   height: 30px;
+   display:inline-block;
+   margin-right: 10px;
+   border: 4px solid #4CB1CA;
+   border-radius: 2px;
+   text-align:center;
+   vertical-align:central;
+  }
+  
+  .color a:hover div {
+	  
+	   border: 4px solid #777;
+  }
+  
+  .color a:active div {
+	  color:  #FFF;
+	  background: #777;
+  }
+ 
+  p i.color_header {
+	 
+	background: #F7F7F7;
+	padding: 8px;
+	border: 1px solid #ECE9E4;
+	border-radius: 2px;
+	text-align: center;
+	font: 12px/15px arial;
+	color: #888;
+	margin-right: 10px;
+	
+
+ }
+ 
+ span.color_space {
+	 display:block;
+	 backgroundx: #000;
+	 height: 15px;
+ }
+ 
+ .size a div {
+	 
+	width:auto;
+	height:auto;
+	padding: 5px;
+	text-align: center;
+	color:  #4CB1CA;
+ 
+ }
+ 
+ .size a:hover div { 
+	 color:  #777;
+ }
+ 
+ .size a:active div { 
+	 color:  #FFF;
+	 background: #777;
+ }
+ 
+ .p_rating {
+	 
+	font: 11px/18px arial;
+	color: #888;
+	vertical-align: top;
+	
+ }
+ 
+ p.p_rating span {
+	 
+	 display:inline;
+ }
+ 
+ .leo_size_selected {
+	 
+	  color:  #FFF;
+	  background: #777;
+ }
+ 
+ .leo_color_selected {
+	 
+	  color:  #FFF;
+	  background: #777;
+ }
+ 
+ 
+ .leo_current_size {
+	 
+	 background-color:#777;
+	 color:#FFF;
+	 display:none;
+ }
+ 
+ i.rating {
+	 display:inline;
+ }
+ 
+ .box.swifta {
+	 width: auto;
+	 margin-right: 0px;
+ }
+ 
+ 
+
+ 
+  
+ 
+
 

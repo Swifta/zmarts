@@ -104,7 +104,7 @@
                     
    			 </div>-->
              <div class="header-top-left swifta">
-			  	   
+			  
                     
                     
                     
@@ -122,8 +122,15 @@
                     
 				</ul>
 			</div>
-                    
-                    
+            
+                   <div class="box swifta">
+   				        <select tabindex="4" class="dropdown">
+							<option value="" class="label" >Merchants</option>
+							<option value="1">Register</option>
+							<option value="2">Login</option>
+						</select>
+   				    </div>
+                   
                     
                     
    			 </div>
@@ -427,7 +434,7 @@
 				<div id="response"> </div>
 		 </div>
 	  <div class="tag-list">
-	    <!--<ul class="icon1 sub-icon1 profile_img">
+       <!--<ul class="icon1 sub-icon1 profile_img">
 			<li><a class="active-icon c1" href="#"> </a>
 				<ul class="sub-icon1 list">
 					<li><h3>sed diam nonummy</h3><a href=""></a></li>
@@ -435,8 +442,76 @@
 				</ul>
 			</li>
 		</ul>-->
-		<ul class="icon1 sub-icon1 profile_img">
-			<li><a class="active-icon c2" href="#"> </a>
+        
+        <?php 
+		if($this->session->get('UserID')){?>
+	    <ul class="icon1 sub-icon1 profile_img">
+			<li><a class="active-icon"  href="<?php echo PATH;?>wishlist.html"><i class="fa fa-heart fa-lg" title="go to wishlist"></i> </a>
+				<!--<ul class="sub-icon1 list">
+					<li><h3>sed diam nonummy</h3><a href=""></a></li>
+					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+				</ul>-->
+			</li>
+		</ul>
+       <?php }?>
+        <ul class="icon1 sub-icon1 profile_img">
+        <li><a class="active-icon" href="#"><i class="fa fa-balance-scale fa-lg" title="comparison list"></i> </a>
+        <ul class="sub-icon1 list">
+        <?php 
+			
+			
+				$this->p_comp = new Products_Model();
+			$comp_list = $this->session->get("product_compare");
+			if($comp_list && count($comp_list) > 0){
+				$total_prods = count($comp_list); ?>
+                <?php if($total_prods >1){?>
+                <li><p><a href="<?php echo PATH; ?>product-compare.html" title="go to comparison page">Compare now</a></p></li>
+                <?php } ?>
+				
+				
+				<?php foreach($comp_list as $p_comp_id){
+					
+					$cate_detail = $this->p_comp->get_category_details($p_comp_id);
+					if(count($cate_detail)){
+						$product_title = $cate_detail[0]->deal_title; ?>
+						<li title="<?php echo $product_title; ?>"><h3><?php echo common::truncate_item_name($product_title); ?></h3><a href="#"></a></li>
+                        <li><p><a onclick="remove_from_compare(<?php echo $p_comp_id; ?>, '', 'detail'); return false;" href="#">Remove</a></p></li>
+                        <?php
+					
+					}
+				}
+			
+			}else{?>
+            
+            <li><h3>No items</h3><a href=""></a></li>
+			<li><p><a href="#">No items added to compare yet.</a></p></li>
+            
+			<?php }?>
+        </ul>
+        </li>
+			<!--<li><a class="active-icon" href="#"><i class="fa fa-balance-scale fa-lg" title="comparison list"></i> </a>
+				<ul class="sub-icon1 list">
+                	
+					<li><h3>sed diam nonummy</h3><a href=""></a></li>
+					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                    
+                    
+				</ul>
+			</li>-->
+		</ul>
+        
+        <!--<ul class="icon1 sub-icon1 profile_img">
+			<li><a class="active-icon" href="#"><i class="fa fa-shopping-cart fa-lg" title="add to favorite"></i> </a>
+				<ul class="sub-icon1 list">
+					<li><h3>sed diam nonummy</h3><a href=""></a></li>
+					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+				</ul>
+			</li>
+		</ul>-->
+		<ul class="icon1 sub-icon1 profile_img" style="displayx:none;">
+			<li><!--<a class="active-icon c2" href="#"> </a>-->
+            <a class="active-icon" href="#"><i class="fa fa-shopping-cart fa-lg" title="cart items"></i> </a>
+            
 				<ul class="sub-icon1 list" id="id_cart_state">
                 <?php 
 					$this->payment_products = new Payment_Product_Model();
@@ -461,7 +536,7 @@
 							 ?>
                             <!--<li><a href="#"><h3><?php echo  $p_ds->current()->url_title?></h3></a></li>
 							<li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>-->
-							 <i id = "id_item_no_<?php echo $d_id; ?>"><li><a href="#"><h3 title="<?php echo $p_ds->current()->url_title; ?>"><?php echo common::truncate_item_name($p_ds->current()->url_title); ?></h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $d_id ?>); return false;" href="#">Remove</a></p></li></i>
+							 <i id = "id_item_no_<?php echo $d_id; ?>"><li><a href="#"><h3 title="<?php echo $p_ds->current()->url_title; ?>"><?php echo common::truncate_item_name($p_ds->current()->url_title); ?></h3></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $d_id ?>); return false;" href="#">Remove</a></p></li></i>
                              
                              <?php }?>
 					
@@ -481,7 +556,7 @@
 			</li>
             
 		</ul>
-	    <ul class="last"  id="id_cart_item_count"><li ><a href="<?php echo PATH."cart.html"?>" >Cart(<?php if($this->session->get('count')){echo $this->session->get('count'); }else { echo "0"; }?>)</a></li></ul>
+	    <ul class="last"  id="id_cart_item_count"><li ><a  title="go to cart" href="<?php echo PATH."cart.html"?>" >Cart(<?php if($this->session->get('count')){echo $this->session->get('count'); }else { echo "0"; }?>)</a></li></ul>
         <input type="hidden" id="id_cart_add_last_state" value="0" />
         <input type="hidden" id="id_cart_remove_last_state" value="0" />
 	  </div>
@@ -489,6 +564,8 @@
      <div class="clear"></div>
      </div>
 	</div>
+    
+   
     
     
     

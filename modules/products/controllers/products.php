@@ -288,6 +288,7 @@ class Products_Controller extends Layout_Controller
 	    $this->session->set('product_size_qty'.$deals,$size);
 	     /*  $product_deals = $this->products->get_cart_products($deals);
 	    url::redirect(PATH.'product/'.$product_deals->current()->deal_key.'/'.$product_deals->current()->url_title.'.html');*/
+		
 	    echo $size; exit;
 
 	}
@@ -494,6 +495,10 @@ class Products_Controller extends Layout_Controller
 
 			$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/products/details_product");
 			
+			/*$this->theme_name = NULL;
+			$this->sector = NULL;
+			$this->template->content = new View("themes/".THEME_NAME."/products/details_product");*/
+			
 		} else {
 			
 			$this->template->content = new View("themes/".THEME_NAME."/products/details_product");
@@ -620,6 +625,7 @@ class Products_Controller extends Layout_Controller
 
 			$product_id=$this->input->get("product_id");
 			$type=$this->input->get("type");
+			
 			$cate_detail = $this->products->get_category_details($product_id);
 			$product_cat=$product_cat_name="";
 			if(count($cate_detail)){
@@ -629,6 +635,7 @@ class Products_Controller extends Layout_Controller
 			}
 
 			$action=$this->input->get("act");
+			$action_m=$this->input->get("action");
 			$compare_cat = $this->session->get("product_compare_cat");
 			empty($compare_cat)?$this->session->set("product_compare_cat",$product_cat):"";
 
@@ -650,6 +657,7 @@ class Products_Controller extends Layout_Controller
 						$ses_compare[]+=$product_id;
 						$this->session->set("product_compare",$ses_compare);
 						echo $this->Lang['PRD_CMP_ADD'].$product_title.$this->Lang['TXT_FOR'].$link.$arraycount;
+						common::message(1, "Item added to comparison list successfully!");
 						//echo "1";
 						exit;
 					}else{
@@ -657,6 +665,7 @@ class Products_Controller extends Layout_Controller
 						$ses_compare[]+=$product_id;
 						$this->session->set("product_compare",$ses_compare);
 						echo $this->Lang['PRD_CMP_ADD'].$product_title.$this->Lang['TXT_FOR'].$link.$arraycount;
+						common::message(1, "Item added to comparison list successfully!");
 						//echo "1";
 						exit;
 					}
@@ -668,21 +677,41 @@ class Products_Controller extends Layout_Controller
 					}
 					$this->session->set("product_compare",$ses_compare);
 					echo $this->Lang['REV_COMPARE'].$arraycount;
+					
+					common::message(1, "Item removed from comparison list successfully!");
 					exit;
-				}else{
+				} else if((is_string($action_m) && $action_m=='false')){
+					$key = array_search($product_id, $ses_compare);
+					$arraycount = count($ses_compare)-2;
+					if (false !== $key) {
+						unset($ses_compare[$key]);
+					}
+					$this->session->set("product_compare",$ses_compare);
+					echo $this->Lang['REV_COMPARE'].$arraycount;
+					
+					common::message(1, "Item removed from comparison list successfully!");
+					exit;
+				} else{
 					echo ($type=='detail')?$this->Lang['PRD_CMP_ALREADY_ADD']:$this->Lang['REV_COMPARE'];
+					common::message(-1, "You have already added this item for comparison.");
 					exit;
 					//echo $this->Lang['REV_COMPARE'];
 				}
 			}else{
 				echo $this->Lang['ERR_PRD_CMP'];
+				common::message(-1, "Error occured while adding item to comparison list.");
 				exit;
 			}
 		}
 		else{
 
 			//echo $link = $this->Lang['U_CANT_COMP']." ".$product_cat_name.$this->Lang['ABV_ITMS']." . <a href='".PATH."products/remove_compare/?product_id=d' title='".$this->Lang['PRODUCT_COMPARE']."'> (".$this->Lang['CLR_COMP_ITMS'].") </a>";
-			echo $link = $this->Lang['U_CANT_COMP']." ".$product_cat_name.$this->Lang['ABV_ITMS']." . <a href='".PATH."product-compare.html' title='".$this->Lang['PRODUCT_COMPARE']."'> (".$this->Lang['CLR_COMP_ITMS'].") </a>";
+			$link = $this->Lang['U_CANT_COMP']." ".$product_cat_name.$this->Lang['ABV_ITMS']." . <a href='".PATH."product-compare.html' title='".$this->Lang['PRODUCT_COMPARE']."'> (".$this->Lang['CLR_COMP_ITMS'].") </a>";
+			
+			echo $link;
+			$link_err = "Product attribute mismatch. Empty comparison list first <a href=\"".PATH."product-compare.html\">here</a> or compare a different item.";
+			//$link = "Sorry comparison not possible!";
+			common::message(-1, $link_err);
 		}
 			exit;
 
@@ -789,9 +818,13 @@ class Products_Controller extends Layout_Controller
 	//Add to wish list
 	public function add_wishlist()
 	{
+		
 		if($this->UserID)
 		{
 			$id=$_GET["product_id"];
+			
+			
+			
 			$wishlist = array();
 			$status = $this->products->get_productcount($id);
 			$wishlist[] = $id;
@@ -809,6 +842,7 @@ class Products_Controller extends Layout_Controller
 						}
 						else
 						{
+							common::message(-1, "You already have this item in your wishlist.");
 							echo "2"; exit;
 						}
 					}
@@ -816,16 +850,19 @@ class Products_Controller extends Layout_Controller
 				$result = $this->products->update_wishlist($wishlist);
 				if($result == 1)
 				{
+					common::message(1, "Item added to wishlist successfully!");
 					echo $result; exit;
 				}
 			}
 			else
 			{
+				common::message(-1, "Item details corrupt. Please try again.");
 				echo "0"; exit;
 			}
 		}
 		else
 		{
+			common::message(-1, "You need to be logged in to add to wishlist.");
 			echo "3"; exit;
 		}
 	}

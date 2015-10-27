@@ -174,6 +174,13 @@
 
 			self.$items.on({
 				'click.easyDropDown': function(){
+					if($(this).html() == "Register")
+						window.location.href = Path+"merchant-signup-step1.html";
+					 if($(this).html() == "Login")
+					 	window.location.href = Path+"merchant-login.html";
+						 
+						
+						
 					var index = $(this).index();
 					self.select(index);
 					self.$select.focus();

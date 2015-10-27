@@ -88,6 +88,7 @@
 		
 ?>
 
+<link href="<?php echo PATH.'themes/'.THEME_NAME.'/font-awesome-4.4.0/css/font-awesome.min.css'?>" rel="stylesheet" type="text/css" />
  
 
 <div class="mens">
@@ -223,13 +224,177 @@
             <span class="reducedfrom"><?php echo CURRENCY_SYMBOL.$this->product->deal_price; ?></span>
             <?php } ?>
           </p>
+          
+          <p>&nbsp;</p>
+          <div>
+          
+          
+          
+         
+         
+         
+          
+          
+          
+           <?php if(isset($this->product_size) && count($this->product_size) > 0){?>
+           		<?php $nosize = "";
+					   $c = 0; $i = 0; ?>
+           		<?php foreach($this->product_size as $size){?>
+                		
+               			 <?php if($size->size_name == "None"){
+						 			$nosize = 1;
+						 } else {?>
+                         		<?php $c = 1; break; ?>
+                         <?php } ?>
+                		
+				<?php }?>
+                
+                <?php if($c != 0){?>
+                		<p><span class="color_space">&nbsp;</span>
+          <i class="color_header">Choose Size</i>
+           <span class="color_space">&nbsp;</span>
+          <div class="color size">
+          
+                		<?php foreach ($this->product_size as $size) { ?>
+                        			
+                        			 <?php if ($size->quantity != 0) { ?>
+                                     	<?php $i++;?>
+                                     	<a onclick="javascript:select_size('<?php echo $size->size_id;?>', '<?php echo $this->product->deal_id?>', '<?php echo $size->quantity?>' ); return false;" href="#">
+                                        <div id="id_leo_size_<?php  echo $size->size_id?>"<?php if(strcmp($size->size_id, $this->session->get('product_size_qty' . $this->product->deal_id)) == 0){?> style ="background-color:#777; color:#FFF; border-color: #777;" <?php }?>>
+										
+										<?php  $len = strlen($size->size_name);
+												$s_name = $size->size_name;
+												switch($len){
+													case 1:{
+														$s_name = "&nbsp;".$s_name."&nbsp;";
+														break;
+													}
+													
+													case 2:{
+														$s_name = $s_name."&nbsp;";
+														break;
+													}
+													
+													case 3:
+													default:{
+														break;
+													}
+												}
+										 echo $s_name;?>
+                                        
+                                        
+                                        </div></a>	
+                                        
+                                     <?php }else {?>
+                                      <!-- Size sold out -->
+									 <?php } ?>
+                        <?php } ?>
+                        </div>
+         				 </p>
+				<?php }?>
+                
+                
+		  <?php };?>
+         
+         <?php $color_count = 0;
+		 	if (count($this->product_color) > 0) {
+       		 $color_count = 1; ?>
+             <?php if($c != 0){?>
+             		 <p>&nbsp;</p>
+         			 <p>
+                     <i class="color_header">Choose Color</i>
+                     <span class="color_space">&nbsp;</span>
+                     <div class="color">
+             		<?php foreach($this->product_color as $color){?>
+                    	<a href="#" onclick="select_color('<?php echo $color->color_code_id?>','<?php echo $this->product->deal_id?>'); return false;"><div id="id_leo_selected_color_<?php echo $color->color_code_id;?>" style="background:#<?php echo $color->color_name;?> 
+                        <?php if($color->color_code_id == $this->session->get('product_color_qty'.$this->product->deal_id)){?>;border-color:#777 <?php } ?>">&nbsp;</div></a>
+					<?php }?>
+                    </div></p>
+             <?php } ?>
+             
+		 <?php }?>
+          <!--<p>&nbsp;</p>-->
+          <!--<p>
+          <i class="color_header">Choose Color</i>
+           <span class="color_space">&nbsp;</span>
+          <div class="color">
+          <a href="#"><div style="background:#3C6;">&nbsp;</div></a><a href="#"><div style="background:#936;">&nbsp;</div></a><a href="#"><div style="background:#F0F;">&nbsp;</div></a>
+          </div>
+          </p>-->
+          
+          
+          
+          
+             <input type="hidden" name="nosize" id="no_size" value="<?php echo $nosize; ?>">
+             <input type="hidden" name="color_count" id="color_count" value="<?php echo $color_count; ?>" />
+             <input type="hidden" name="select_color" id="sel_color" value="<?php echo $this->session->get('product_color_qty' . $this->product->deal_id); ?>" />
+			<input type="hidden" name="select_size" id="sel_size" value="<?php echo $this->session->get('product_size_qty' . $this->product->deal_id); ?>" />
+			<input type="hidden" name="select_quantity" id="sel_quant" value="<?php echo $this->session->get('product_quantity_qty' . $this->product->deal_id); ?>" />
+          
+          <!--<p>
+           <span class="color_space">&nbsp;</span>
+          <i class="color_header">Choose Size</i>
+           <span class="color_space">&nbsp;</span>
+          <div class="color size">
+          <a href="#"><div>XL</div></a><a href="#"><div >&nbsp; M &nbsp;</div></a><a href="#"><div >XXL</div></a>
+          </div>
+          </p>-->
+          
+          <p>&nbsp;</p>
+          
+           <p class="item_axillary"><a  href="javascript:add_to_wishlist('<?php echo $this->product->deal_id; ?>','<?php echo $this->product->url_title; ?>');"><i title="add to favorites" class="fa fa-heart" ></i>&nbsp;</a> | <a href="javascript:add_to_compare('<?php echo $this->product->deal_id; ?>','','detail');"><i class="fa fa-balance-scale" title="add to compare"></i>&nbsp;</a></p>
+         
+          </div>
         
           <div class="btn_form">
             <form onSubmit="return false;">
               <input type="submit" id="id_leo_add_to_cart" onClick="leo_add_to_cart();"  value="Add to Cart" title="">
             </form>
+            <p>&nbsp;</p>
+             <p>&nbsp;</p>
+             
+          	<i class="rating">
+          								<link href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/jRating.jquery.css" rel="stylesheet" type="text/css"/>
+                                        <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jRating.jquery.js"></script>
+                                     	<script type="text/javascript">
+                                            $(document).ready(function(){
+                                                $(".basic<?php echo $this->product->deal_id; ?>").jRating({
+                                                    bigStarsPath : '<?php echo PATH; ?>images/star_03.png', // path of the icon stars.png
+                                                    smallStarsPath : '<?php echo PATH; ?>images/small.png', // path of the icon small.png
+                                                    phpPath : '<?php echo PATH; ?>product-rating.html', // path of the php file jRating.php
+                                                    length : 5,
+                                                    rateMax : 5,
+                                                    step:true,
+
+                                                    //decimalLength:1,
+                                                    showRateInfo: false,
+                                                    canRateAgain : true,
+                                                    nbRates : 10,
+                                                    onError : function(){
+														
+                                                        //$('.jStar').css({backgroundColor: 'white'});
+                                                        //showlogin();
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        <?php if($this->session->get('UserID')){ ?>
+                                        <label class="basic<?php echo $this->product->deal_id; ?>" id="<?php echo $this->avg_rating; ?>" title="<?php echo $this->avg_rating; ?> / 5">
+                                        <?php } ?>
+                                            <!--
+                                                    Check the images folder for 'black_star.png' and 'white_star.png'
+                                            -->
+                                        </label>
+                                        <span class="p_rating"><?php echo $this->sum_rating; ?> rating(s)</span>
+                                        
+                                       
+          </i>
+            
           </div>
-          
+         
+         
+
+
           <!--<span class="m_link"><a href="#">login to save in wishlist</a> </span>-->
           <!--<p class="m_text2"><?php echo $this->product->deal_description;?>. </p>-->
           <a href="#id_prod_details">
@@ -649,8 +814,7 @@
 			
 			var items_c = $('#id_cart_state');
 			var items_c_in = items_c.html();
-			
-			items_c_in = items_c_in + '<i id = "id_item_no_<?php echo $this->product->deal_id ?>"><li><a href="#"><h3><?php echo $this->product->deal_title; ?></h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $this->product->deal_id ?>); return false;" href="#" id="leo_id_remove_cart">Remove</a></p></li></i>';
+			items_c_in = items_c_in + "<i id = 'id_item_no_<?php echo $this->product->deal_id ?>'><li><a href='#'><h3><?php echo $this->product->deal_title; ?></h3><a href=''></a></li><li><p><a onclick='leo_remove_cart_item(<?php echo $this->product->deal_id ?>); return false;' href='#' id='leo_id_remove_cart'>Remove</a></p></li></i>";
 			items_c.html(items_c_in);
 		
 			add_item_to_cart1();
@@ -665,7 +829,20 @@
 		</script>  
 <script type="text/javascript">
 	function add_item_to_cart1(){
+		 
+		
 	url = "<?php echo PATH ?>/leo/cart_items?deal_id=<?php echo $this->product->deal_id; ?>";
+			var sel_color = $('#sel_color').val();
+			var sel_size = $('#sel_size').val();
+	<?php if($c != 0 && $color_count != 0){?>
+			
+			if(!sel_size){
+				url = "<?php echo PATH ?>/leo/cart_items?sel_size=error";
+			}else if(!sel_color){
+				url = "<?php echo PATH ?>/leo/cart_items?sel_color=error";
+			}
+		<?php }?>
+		 
 	
     $.ajax({
 		        type:'GET',
@@ -737,6 +914,109 @@
 }
 
 </script>
+
+
+<script type="text/javascript">
+function select_size(size_id, product_id, quantity){
+	
+	var size_sel = $("#sel_size").val();
+	if(size_sel!=size_id){
+		var url = "<?php echo PATH; ?>products/addmore_size/"+size_id+"/"+product_id+'/'+quantity;
+		$.post(url, function(check){
+				
+				if(check && !isNaN(check)){
+					
+					obj_arr = $('.size > a > div');
+					for(i = 0; i <  obj_arr.length; i++){
+						
+						$(obj_arr[i]).css({'background-color':'#FFF', 'color':'#777', 'border-color':'#4CB1CA'});
+					}
+				
+					$('#'+'id_leo_size_'+size_id).css({'background-color':'#777', 'color':'#FFF', 'border-color':'#777'});
+					$("#sel_size").val(size_id);
+					
+					
+					
+				}
+				
+				return false;
+				
+				$(".size_"+check).addClass("act");
+				$(".size_"+size_sel).removeClass("act");
+				$("#sel_size").val(size_id);
+				$("#sel_quant").val(quantity);
+				$('.error_size').hide();
+                                $('.error_color').hide();
+                                $('.error_all').hide();
+		});
+   }
+}
+
+
+
+function select_color(color_id, product_id)
+{
+	var color_sel = $("#sel_color").val();
+	if(color_sel!=color_id){
+		var url = "<?php echo PATH;?>products/addmore_color/"+color_id+"/"+product_id;
+		 $.post(url,function(check){
+			if(check && !isNaN(check)){
+				
+				 var obj_arr = $('.color a div');
+				 
+				 for(i = 0; i < obj_arr.length; i++){
+					 $(obj_arr[i]).css({'border-color':'#4CB1CA'});
+				 }
+				 
+				 $('#'+'id_leo_selected_color_'+color_id).css({'border-color':'#777'});
+				 $("#sel_color").val(color_id);
+				
+				 
+			 }
+			 
+			 /*$('#'+'id_leo_selected_color_'+color_id).css({'border-color':'#777'});
+			 alert(check);*/
+			 return false;
+			 
+			  $(".color_"+check).addClass("active");
+
+			  $(".color_"+color_sel).removeClass("active");
+			  $("#sel_color").val(color_id);
+			    $('.error_size').hide();
+                                $('.error_color').hide();
+                                $('.error_all').hide();
+		});
+	}
+}
+
+</script>
+
+<script type="text/javascript" >
+$(document).ready(function(e) {
+	
+	/*
+	$('.jRatingAverage').css({'z-index': 999});
+	alert($('.jStar'));
+	$('.jRatingAverage').hover(function (e){
+		
+		$('.jRatingAverage').css({'background':'#F00'});
+		
+	}, function(e){
+		
+		$('.jRatingAverage').css({'background':'#FFF'});
+		
+	});
+    
+});*/
+
+
+
+</script>
+
+
+
+
+
     
       
  

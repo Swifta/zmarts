@@ -1237,7 +1237,22 @@ exit;
 
 	public function cart_items()
 	{
+		 	$size = $this->input->get('sel_size');
+			$color = $this->input->get('sel_color');
 		
+			if(isset($size)){ 
+				common::message(-1, "Please choose prferred size of the item");
+				echo -1;
+				exit;
+				
+			}
+			
+			if(isset($color)){ 
+				common::message(-1, "Please choose prferred color of the item");
+				echo -1;
+				exit;
+				
+			}
 			
 			$this->payment_products = new Payment_Product_Model();
             $product_cart_id = $this->input->get('deal_id');
@@ -1534,6 +1549,30 @@ exit;
 		$storeurl = $this->input->get("store_url_title");
 		
 		
+		$q = $this->input->get('q');
+		
+		if(isset($q) && $q != ""){
+			
+		
+		
+		
+		$cat_type ="main";
+		$category = $main_cat;
+		$search_key = $q;
+		$search_cate_id = "";
+		
+		
+		$this->storeid = $this->stores->get_store_id($store_url_title);
+		
+		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
+		echo new View("themes/".THEME_NAME."/leo/products/products_list");
+		exit;
+			
+		}
+		
+		
+		
+		
 		
 
 		//$this->all_products_count = $this->products->get_products_count($size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat);
@@ -1577,6 +1616,71 @@ exit;
 		
 		exit;
 		
+	}
+	
+	
+	public function remove_wishlist($id="")
+	{
+		
+		$id = $_GET['product_id'];
+		$this->UserID = $this->session->get('UserID');
+		
+		
+		
+		if(!isset($this->UserID)){
+			common::message(-1, "You need to be logged in to modify wishlist.");
+			echo -1;
+			exit;
+			
+		}
+		
+		
+		
+		$wishlist = array();
+		if(!isset($this->products))
+			$this->products = new Products_Model();
+			
+		$status = $this->products->get_productcount($id);
+		$wishlist[] = $id;
+		
+		
+			
+		if(count($status) > 0)
+		{
+			$result = $this->products->get_userwishlist();
+			$pro_id = unserialize($result->wishlist);
+			if(isset($result->wishlist) && $result->wishlist!="")
+			{
+				$key = array_search($id, $pro_id);
+				
+				
+			
+				if(count($key)>0)
+				{
+					
+					$p_data = array_flip($pro_id);
+					unset($p_data[$id]);
+					$pr_data = array_flip($p_data);
+					$result = $this->products->update_wishlist($pr_data);
+					
+					if($result == 1)
+					{
+						common::message(1, "Item has been removed from wishlist successfully!");
+						exit;
+					}
+				}
+				else
+				{
+					common::message(-1, "Invalid item data. Please try again.");
+					exit;
+				}
+			}
+		}
+		else
+		{
+			common::message(-1, "Invalid item data. Please try again.");
+			exit;
+		}
 	}
 	
 	
