@@ -363,6 +363,8 @@ exit;
 		$category_name="";
 		$category_name_main = "";
 		$this->products = $this->stores;
+		$this->storeurl = $store_url_title;
+		
 
 		if($cat_type=="sub"){
 		        $this->sub_cat= $category;
@@ -630,6 +632,8 @@ exit;
 	
 	
 	public function all_product_list($store_url_title='',$offset='',$record='',$cat_type='',$category='',$search_key='',$search_cate_id=''){
+		
+		
 		$this->is_store_details = $this->is_product = 1;
 		$this->storeurl = $store_url_title;
 		
@@ -653,7 +657,9 @@ exit;
 		
 		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
 		/*echo $this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product_list");*/
-		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_detail");
+		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product_list");
+		
+		exit;
 		
 	}
 	
@@ -1231,7 +1237,22 @@ exit;
 
 	public function cart_items()
 	{
+		 	$size = $this->input->get('sel_size');
+			$color = $this->input->get('sel_color');
 		
+			if(isset($size)){ 
+				common::message(-1, "Please choose prferred size of the item");
+				echo -1;
+				exit;
+				
+			}
+			
+			if(isset($color)){ 
+				common::message(-1, "Please choose prferred color of the item");
+				echo -1;
+				exit;
+				
+			}
 			
 			$this->payment_products = new Payment_Product_Model();
             $product_cart_id = $this->input->get('deal_id');
@@ -1504,6 +1525,162 @@ exit;
 			echo new View("themes/".THEME_NAME."/leo/auction/bid_history");
 			
 			exit;
+	}
+	
+	
+	
+	public function all_products_1($page = "")
+	{
+		
+		
+
+		$deal_record = $this->input->get('record');
+		$deal_offset = $this->input->get('offset');
+		$size = $this->input->get("size");
+		$color = $this->input->get("color");
+		$discount = $this->input->get("discount");
+		$price = $this->input->get("price");
+		$main_cat = $this->input->get("main");
+		$sub_cat = $this->input->get("sub");
+		$sec_cat = $this->input->get("sec");
+		$third_cat = $this->input->get("third");
+		$price_text = $this->input->get("price1");
+		$this->load_count = $this->input->get("load_count");
+		$storeurl = $this->input->get("store_url_title");
+		
+		
+		$q = $this->input->get('q');
+		
+		if(isset($q) && $q != ""){
+			
+		
+		
+		
+		$cat_type ="main";
+		$category = $main_cat;
+		$search_key = $q;
+		$search_cate_id = "";
+		
+		
+		$this->storeid = $this->stores->get_store_id($store_url_title);
+		
+		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
+		echo new View("themes/".THEME_NAME."/leo/products/products_list");
+		exit;
+			
+		}
+		
+		
+		
+		
+		
+
+		//$this->all_products_count = $this->products->get_products_count($size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat);
+		$this->record = $this->input->get('record');
+		
+		$this->storeid = $this->stores->get_store_id($storeurl);
+		
+		try{
+		$this->all_products_list = $this->stores->get_products_list_by_store("","",$deal_offset, $deal_record,"","","",$size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat,$price_text, $this->storeid);
+		} catch (Exception $e){
+			
+			exit;
+		}
+		
+		//$this->view_products_list = $this->products->get_products_view();
+		//$this->view_hot_products_list = $this->products->get_hot_products_view();
+		//$this->template->title = $this->Lang["ALL_PRODUCT_LIST"]." | ".SITENAME;
+		//$this->title_display = $this->Lang["ALL_PRODUCT_LIST"];
+		echo new View("themes/".THEME_NAME."/leo/products/products_list");
+		exit;
+	}
+	
+	
+	
+	public function all_product_list1($store_url_title='',$offset='',$record='',$cat_type='',$category='',$search_key='',$search_cate_id=''){
+		
+		$store_url_title = $this->input->get("store_url_title");
+		$offset = $this->input->get("offset");
+		$record = $this->input->get("record");
+		$cat_type = $this->input->get("cat_type");
+		$category = $this->input->get("category");
+		$search_key = $this->input->get("search_key");
+		$search_cate_id = $this->input->get("search_cate_id");
+		
+		
+		$this->storeid = $this->stores->get_store_id($store_url_title);
+		
+		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
+		
+		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/products/products_list");
+		
+		exit;
+		
+	}
+	
+	
+	public function remove_wishlist($id="")
+	{
+		
+		$id = $_GET['product_id'];
+		$this->UserID = $this->session->get('UserID');
+		
+		
+		
+		if(!isset($this->UserID)){
+			common::message(-1, "You need to be logged in to modify wishlist.");
+			echo -1;
+			exit;
+			
+		}
+		
+		
+		
+		$wishlist = array();
+		if(!isset($this->products))
+			$this->products = new Products_Model();
+			
+		$status = $this->products->get_productcount($id);
+		$wishlist[] = $id;
+		
+		
+			
+		if(count($status) > 0)
+		{
+			$result = $this->products->get_userwishlist();
+			$pro_id = unserialize($result->wishlist);
+			if(isset($result->wishlist) && $result->wishlist!="")
+			{
+				$key = array_search($id, $pro_id);
+				
+				
+			
+				if(count($key)>0)
+				{
+					
+					$p_data = array_flip($pro_id);
+					unset($p_data[$id]);
+					$pr_data = array_flip($p_data);
+					$result = $this->products->update_wishlist($pr_data);
+					
+					if($result == 1)
+					{
+						common::message(1, "Item has been removed from wishlist successfully!");
+						exit;
+					}
+				}
+				else
+				{
+					common::message(-1, "Invalid item data. Please try again.");
+					exit;
+				}
+			}
+		}
+		else
+		{
+			common::message(-1, "Invalid item data. Please try again.");
+			exit;
+		}
 	}
 	
 	

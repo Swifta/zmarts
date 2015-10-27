@@ -12,15 +12,8 @@ $config['TESTING-TEMPLATE-HERE/deal/c/(.*)/(.*).html'] = "/fashion2/deal_list/TE
 $config['TESTING-TEMPLATE-HERE/auction/c/(.*)/(.*).html'] = "/fashion2/auction_list/TESTING-TEMPLATE-HERE/$1/$2";
 // TESTING-TEMPLATE-HERE End
 
-// test-store Start
-$config['test-store'] ="fashion2/stores_home_page/test-store";
-$config['test-store/products.html'] = "/fashion2/product_list/test-store";
-$config['test-store/today-deals.html'] = "/fashion2/deal_list/test-store";
-$config['test-store/auction.html'] = "/fashion2/auction_list/test-store";
-$config['test-store/products/c/(.*)/(.*).html'] = "/fashion2/product_list/test-store/$1/$2";
-$config['test-store/deal/c/(.*)/(.*).html'] = "/fashion2/deal_list/test-store/$1/$2";
-$config['test-store/auction/c/(.*)/(.*).html'] = "/fashion2/auction_list/test-store/$1/$2";
-// test-store End// Musty-Electronics-InternatiionalTTT Start
+
+// store End// Musty-Electronics-InternatiionalTTT Start
 $config['Musty-Electronics-InternatiionalTTT'] ="fashion3/stores_home_page/Musty-Electronics-InternatiionalTTT";
 $config['Musty-Electronics-InternatiionalTTT/products.html'] = "/fashion3/product_list/Musty-Electronics-InternatiionalTTT";
 $config['Musty-Electronics-InternatiionalTTT/today-deals.html'] = "/fashion3/deal_list/Musty-Electronics-InternatiionalTTT";

@@ -165,7 +165,7 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>
+						<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg&w=285&h=285" alt="no deal found"/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -294,7 +294,8 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>
+						<!--<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>-->
+                        <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg&w=285&h=285" alt="no deal found"/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -414,7 +415,8 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>
+						<!--<img src="<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg" alt=""/>-->
+                        <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg&w=285&h=285" alt="no deal found"/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">

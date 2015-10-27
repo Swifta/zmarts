@@ -94,6 +94,88 @@
     </div>
 
 <!--/slider -->
+
+<!-- Pagination JS start 
+	 @Live
+ -->
+ 
+ <script type="text/javascript">
+    $(document).ready(function() {
+		
+		
+       /* $('#size_filter').hide();
+        $('#color_filter').hide();
+        $('#discount_filter').hide();
+        $('#price_filter').hide();
+        $('#pricetext_filter').hide();*/
+		
+        $('a.view_more1').live("click", function(e) {
+            var offset = 0;
+			
+			/*var size = "";*/
+		/*	$(".size input:checked").each(function() {
+				size += this.value+',';
+			});
+			var color = "";
+			$(".color input:checked").each(function() {
+				color += this.value+',';
+			});
+			var discount = "";
+			$(".discount input:checked").each(function() {
+				discount += this.value+',';
+			});
+			var price = "";
+			$(".price input:checked").each(function() {
+				price += this.value+',';
+			});
+			var price_text = $("#amount1").val();
+			if(price_text==undefined){
+			        var price_text = "";
+			}*/
+			
+			var size = "";
+			var color = "";
+			var discount = "";
+			var price = "";
+			var price_text = "";
+			
+			<?php
+				   $sub = "";
+				   $sub_cat = "";
+				   $sec = "";
+				   $sec_cat = "";
+				   $third_cat = "";
+				   
+				   
+				   ?>
+			
+			
+            offset = document.getElementById('offset').value;
+            var record = document.getElementById('record').value;
+            var record1 = document.getElementById('record1').value;
+			var load_count = document.getElementById('load_count').value;
+			var new_content_id_no = parseInt(load_count) - 1;
+			var store_url =  document.getElementById('store_url').value;
+			var main_cat = document.getElementById('main_cat').value;
+			
+            var url = '<?php echo PATH; ?>' + 'leo/all_products_1?offset=' + offset + '&record=' + record+'&size='+size+'&color='+color+'&discount='+discount+'&price='+price+'&main='+main_cat+'&sub='+'<?php echo $sub_cat; ?>'+'&sec='+'<?php echo $sec_cat; ?>'+'&third='+'<?php echo $third_cat; ?>'+'&price1='+price_text+'&load_count='+load_count+'&store_url_title='+store_url;
+			$('#id_more_text').val("loading...");
+            $.post(url, function(check) {
+                if (check) {
+					$('#id_more_text').val("Load more");
+                    $('#more_products_'+new_content_id_no).append(check);
+                    $('#id_btn_load_more').show();
+                   // $('.wloader_img').hide();
+                    offset = parseInt(offset) + 6;
+                    $("#offset").val(offset);
+					load_count = parseInt(load_count) + 1;
+					$('#load_count').val(load_count);
+                    if (offset >= record1) {
+                       $('#id_btn_load_more').hide();
+                    }} });  }); });
+</script>
+
+<!-- Pagination JS end -->
 <div class="main">
   <div class="wrap">
     <div class="section group">
@@ -166,7 +248,8 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
+						<!--<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>-->
+                        <img src="<?php echo PATH . 'resize.php?src='; ?><?php echo PATH."themes/default/images/leo/";?>no_prod.png&w=285&h=285" alt="no product found"/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -196,11 +279,21 @@
                 
         <?php } ?>
       
+       <div class="top-box" id="more_products_0">
+   
+   	   </div>
+       
+  	   <div class="clear"></div>
+   	   <div class="more_button btn_form" id="id_btn_load_more">
+  		 <a class="view_more1" ><form onsubmit="return false;"><input type="submit" id="id_more_text" value="Load more" /></form></a>
+   	  <div class="clear"></div>
+   	  </div>
       
       
       
       
      <?php }else{ ?> <!-- Ending if of category url -->
+     <?php $this->url_cat = ""?> 
      
      
         <h2 class="head">New Arrivals</h2>
@@ -254,10 +347,10 @@
                 <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
                 <!--<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=226&h=442" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
                 <?php } else { ?>
                 <!--<img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />-->
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=226&h=442" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
                 <?php } ?>
                 <?php } else { ?>
                 <!--<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
@@ -293,7 +386,8 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
+						<!--<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>-->
+                        <img src="<?php echo PATH . 'resize.php?src='; ?><?php echo PATH."themes/default/images/leo/";?>no_prod.png&w=285&h=285" alt="no product found"/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -322,6 +416,8 @@
         		</div>
                 
         <?php } ?>
+        
+       
         
         
         
@@ -397,7 +493,8 @@
 			  	 <a href="#">
 				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
+						<!--<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>-->
+                        <img src="<?php echo PATH . 'resize.php?src='; ?><?php echo PATH."themes/default/images/leo/";?>no_prod.png&w=285&h=285" alt="no product found"/>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
                    <!--<div class="price">
@@ -426,12 +523,23 @@
         		</div>
                 
         <?php } ?>
-        
+         <div class="top-box" id="more_products_0">
+   
+   </div>
+   		 <div class="clear"></div>
+   		 <div class="more_button btn_form" id="id_btn_load_more">
+   
+   <a class="view_more1" ><form onsubmit="return false;"><input type="submit" id="id_more_text" value="Load more" /></form></a>
+   <div class="clear"></div>
+   </div>
    
    <?php } ?>  <!-- Ending else of category url if -->
-        
-        
-      </div>
+   
+  
+   
+   </div>
+      
+      
       </div>
       </div>
       
@@ -521,3 +629,25 @@
     </div>
   </div>
 </div>
+
+
+<!-- Pagination hidden fields 
+	@Live
+-->
+<input type="hidden" name="offset" id="offset" value="6">
+<input type="hidden" name="record" id="record" value="6">
+<input type="hidden" name="record" id="record1" value="<?php echo $this->all_products_count; ?>"> 
+<input type="hidden" name="load_count" id="load_count" value="1">
+<input type="hidden" name="store_url" id="store_url" value="<?php echo $this->storeurl?>">
+<input type="hidden" name="main_cat" id="main_cat" value="<?php echo $this->url_cat?>">
+
+<script type="text/javascript">
+	$('#id_btn_load_more').hide();
+	var t_products = $('#record1').val();
+	t_products = parseInt(t_products);
+	if(t_products > 6){
+		$('#id_btn_load_more').show();
+	}	
+</script>
+
+

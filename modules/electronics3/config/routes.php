@@ -15,15 +15,7 @@ $config['CC-Collections/today-deals.html'] = "/electronics3/deal_list/CC-Collect
 $config['CC-Collections/auction.html'] = "/electronics3/auction_list/C&C-Collections";
 // C&C-Collections End
 
-// test-store Start
-$config['test-store'] ="electronics3/stores_home_page/test-store";
-$config['test-store/products.html'] = "/electronics3/product_list/test-store";
-$config['test-store/today-deals.html'] = "/electronics3/deal_list/test-store";
-$config['test-store/auction.html'] = "/electronics3/auction_list/test-store";
-$config['test-store/products/c/(.*)/(.*).html'] = "/electronics3/product_list/test-store/$1/$2";
-$config['test-store/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/test-store/$1/$2";
-$config['test-store/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/test-store/$1/$2";
-// test-store End
+
 
 // Neocourts-Hotel Start
 $config['Neocourts-Hotel'] ="electronics3/stores_home_page/Neocourts-Hotel";
@@ -190,15 +182,7 @@ $config['CC-Collections/today-deals.html'] = "/electronics3/deal_list/CC-Collect
 $config['CC-Collections/auction.html'] = "/electronics3/auction_list/C&C-Collections";
 // C&C-Collections End
 
-// test-store Start
-$config['test-store'] ="electronics3/stores_home_page/test-store";
-$config['test-store/products.html'] = "/electronics3/product_list/test-store";
-$config['test-store/today-deals.html'] = "/electronics3/deal_list/test-store";
-$config['test-store/auction.html'] = "/electronics3/auction_list/test-store";
-$config['test-store/products/c/(.*)/(.*).html'] = "/electronics3/product_list/test-store/$1/$2";
-$config['test-store/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/test-store/$1/$2";
-$config['test-store/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/test-store/$1/$2";
-// test-store End
+
 
 // Neocourts-Hotel Start
 $config['Neocourts-Hotel'] ="electronics3/stores_home_page/Neocourts-Hotel";
@@ -519,12 +503,12 @@ $config['mklll/products/c/(.*)/(.*).html'] = "/electronics3/product_list/mklll/$
 $config['mklll/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/mklll/$1/$2";
 $config['mklll/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/mklll/$1/$2";
 // mklll End
-// ABC-Pvt-Ltd Start
-$config['ABC-Pvt-Ltd'] ="electronics3/stores_home_page/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products.html'] = "/electronics3/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/today-deals.html'] = "/electronics3/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction.html'] = "/electronics3/auction_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/electronics3/product_list/ABC-Pvt-Ltd/$1/$2";
-$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/ABC-Pvt-Ltd/$1/$2";
-$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/ABC-Pvt-Ltd/$1/$2";
-// ABC-Pvt-Ltd End
+// test-store Start
+$config['test-store'] ="electronics3/stores_home_page/test-store";
+$config['test-store/products.html'] = "/electronics3/product_list/test-store";
+$config['test-store/today-deals.html'] = "/electronics3/deal_list/test-store";
+$config['test-store/auction.html'] = "/electronics3/auction_list/test-store";
+$config['test-store/products/c/(.*)/(.*).html'] = "/electronics3/product_list/test-store/$1/$2";
+$config['test-store/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/test-store/$1/$2";
+$config['test-store/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/test-store/$1/$2";
+// test-store End
