@@ -259,3 +259,157 @@ function remove_item_from_cart1(deal_id){
 			
 		}
     </script>
+    
+<script type="text/javascript" >
+	function add_to_compare(product_id = "", tis = "", t = ""){
+		
+		
+	var a = "false";
+		
+
+	if(tis && tis != ""){
+	        a = $(tis).is(':checked');
+	} else {
+	        a = "true";
+	}
+
+		var targeturl = "<?php echo PATH; ?>products/add_compare/?product_id="+product_id+'&title='+'&abc=false'+'&action=true'+'&act='+a+'&type='+t;
+
+			$.post(targeturl,function(response)
+			{
+				//console.log(response); return false;
+				if(response)
+				{
+					
+					window.location.reload();
+					return false;
+                                        
+				}
+				else
+				{
+					return false;
+				}
+			});
+
+		
+
+		
+	}
+	
+	
+	function remove_from_compare(product_id = "", tis = "", t = ""){
+		
+		
+	var a = "false";
+		
+
+	if(tis && tis != ""){
+	        a = $(tis).is(':checked');
+	} else {
+	        a = "true";
+	}
+	
+	var action = 'false';
+
+		var targeturl = "<?php echo PATH; ?>products/add_compare/?product_id="+product_id+'&title='+'&abc=false'+'&action='+action+'&act='+a+'&type='+t;
+
+			$.post(targeturl,function(response)
+			{
+				//console.log(response); return false;
+				if(response)
+				{
+					
+					window.location.reload();
+					return false;
+				}
+				else
+				{
+					return false;
+				}
+			});
+
+		
+	}
+		
+	
+	function add_to_wishlist(product_id, deal_title){
+		
+		
+		
+		var targeturl = "<?php echo PATH;?>products/add_wishlist/?product_id="+product_id;
+		
+		$.post(targeturl,function(response)
+		{
+			
+			
+			window.location.reload();
+			return false;
+			
+			if(response == "1")
+			{
+				$('#success_message').html(success_message1("Success: You have added "+ title +" to your <a href="+Path+"wishlist.html title='wish list' style='color: #0078CA;text-decoration: underline;'>wish list</a>!"));
+				animate_flash(8000);
+			}
+			else if(response == "2")
+			{
+				$('#success_message').html(error_message1("Error: You have already added "+ title +" to your <a href="+Path+"wishlist.html title='wish list' style='color: #0078CA;text-decoration: underline;' >wish list</a>!"));
+				animate_flash(8000);
+			}
+			else if(response == "3")
+			{
+				//$('#success_message').html(success_message1("You must <a onclick='showlogin()' title='login' style='color: #0078CA;text-decoration: underline;' >login</a>&nbsp;or&nbsp;<a onclick='showsignup()' title='create an account' style='color: #0078CA;text-decoration: underline;'>create an account</a> to save the product to your wish list!"));
+				//animate_flash(8000);
+				showlogin();
+			}
+			else
+			{
+				$('#success_message').html(error_message1("Error: No Data Found"));
+				animate_flash(8000);
+			}
+		});
+		
+		
+	}
+	
+	
+	function remove_from_wishlist(product_id, deal_title){
+		
+		
+		
+		
+		
+		var targeturl = "<?php echo PATH;?>leo/remove_wishlist/?product_id="+product_id;
+		
+		$.post(targeturl,function(response)
+		{
+			alert(response);
+			window.location.reload();
+			return false;
+			
+			if(response == "1")
+			{
+				$('#success_message').html(success_message1("Success: You have added "+ title +" to your <a href="+Path+"wishlist.html title='wish list' style='color: #0078CA;text-decoration: underline;'>wish list</a>!"));
+				animate_flash(8000);
+			}
+			else if(response == "2")
+			{
+				$('#success_message').html(error_message1("Error: You have already added "+ title +" to your <a href="+Path+"wishlist.html title='wish list' style='color: #0078CA;text-decoration: underline;' >wish list</a>!"));
+				animate_flash(8000);
+			}
+			else if(response == "3")
+			{
+				//$('#success_message').html(success_message1("You must <a onclick='showlogin()' title='login' style='color: #0078CA;text-decoration: underline;' >login</a>&nbsp;or&nbsp;<a onclick='showsignup()' title='create an account' style='color: #0078CA;text-decoration: underline;'>create an account</a> to save the product to your wish list!"));
+				//animate_flash(8000);
+				showlogin();
+			}
+			else
+			{
+				$('#success_message').html(error_message1("Error: No Data Found"));
+				animate_flash(8000);
+			}
+		});
+		
+		
+	
+	}
+</script>

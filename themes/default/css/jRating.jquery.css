@@ -11,6 +11,12 @@
 	z-index:2;
 	height:100%;
 }
+
+.jRatingAverage :hover {
+	
+	background: #000;
+	
+}
 .jRatingColor {
 	background-color:#E8B025;
 	position:relative;

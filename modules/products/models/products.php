@@ -1074,12 +1074,23 @@ class Products_Model extends Model
 
 	public function get_productcount($id="")
 	{
-		$n_condtion = array("deal_status" => 1,"deal_id"=>$id);
+		$n_condition = array("deal_status" => 1,"deal_id"=>$id);
+		
+		
 		
 		if($this->club_condition_arr)
-			$n_condtion = array("deal_status" => 1,"deal_id"=>$id, "for_store_cred" => 0);
+			$n_condition = array("deal_status" => 1,"deal_id"=>$id, "for_store_cred" => 0);
+			try{
+				
+				$result = $this->db->select("deal_id")->from("product")->where($n_condition)->get();
+				
+		
+			}catch (Exception $e){
+		
+				
+			}
 			
-		$result = $this->db->select("deal_id")->from("product")->where($n_condition)->get();
+			
 		return $result;
 
 	}

@@ -116,8 +116,8 @@ class Email{
 					}
 			}
 			
-			
-			/*var_dump($from);
+			/*
+			var_dump($from);
 			var_dump($receiver);
 			var_dump($message);
 			var_dump($_SERVER);
