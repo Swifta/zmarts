@@ -1,7 +1,6 @@
 <!-- start slider -->
 
-
-    <div id="fwslider">
+<div id="fwslider">
         <div class="slider_container">
             <!--<div class="slide"> -->
                 <!-- Slide image -->
@@ -52,7 +51,10 @@
 										 
                                        
                                          
-                                           <img  style="max-height:560px;" src="<?php echo PATH . 'images/banner_images/' . $banner->banner_id . '.png'; ?>" alt="<?php echo $banner->image_title; ?>">
+                                          <!-- <img  style="max-height:560px;" src="<?php echo PATH . 'images/banner_images/' . $banner->banner_id . '.png'; ?>" alt="<?php echo $banner->image_title; ?>">-->
+                                          
+                                           <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/banner_images/' . $banner->banner_id .  '.png' ?>&w=1570&h=561" alt="<?php echo $banner->image_title; ?>" title="<?php echo $banner->image_title; ?>" />
+                                        
                                         
                                          
                                          
@@ -90,23 +92,84 @@
         <div class="slideNext"><span></span></div>
          <div class="clear clearfix"></div>
     </div>
-    
-   
-    <!--/slider -->
+
+<!--/slider -->
 <div class="main">
-	<div class="wrap">
-		<div class="section group">
-		  <div class="cont span_2_of_3">
-		  	<h2 class="head">Featured Products</h2>
-			<div class="top-box">
-			 <!--<div class="col_1_of_3 span_1_of_3"> 
-			   <a href="single.html">
-				<div class="inner_content clearfix">
+  <div class="wrap">
+    <div class="section group">
+      <div class="cont span_2_of_3">
+     <?php  if(isset($this->url_cat)){ ?>
+     
+     
+     
+     
+      	  <h2 class="head"><?php echo $this->url_cat; ?></h2>
+          <div class="top-box">
+         
+          <?php if (count($this->get_product_categories) > 0) { ?>
+          <?php
+                     $k = 1;
+					 $just_opened = false;
+					 
+                     foreach ($this->get_product_categories as $products) {?>
+						 
+						
+<?php
+                     $symbol = CURRENCY_SYMBOL;
+					 $just_opened = false;
+                     ?>
+          <?php if($k % 4 == 0){?>
+          <div class="clear"></div>
+        	</div>
+         <div class="top-box">
+         <?php 
+		 	$k = 1;
+		    $just_opened = true;?>
+          <?php }?>
+          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+            <div class="inner_content clearfix">
+              <div class="product_image" >
+                <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                <!--<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                
+                <?php } else { ?>
+                <!--<img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+                <?php } else { ?>
+                <!--<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+              </div>
+              <div class="sale-box"><span class="on_sale title_shop"><?php echo $this->url_cat; ?></span></div>
+              <div class="price">
+                <div class="cart-left">
+                  <p class="title swifta" style="text-wrap:normal;"><?php echo common::truncate_item_name($products->deal_title); ?></p>
+                  <div class="price1"> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </div>
+                </div>
+                <div class="cart-right"> </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+            </a> </div>
+          <?php $k++; } ?>
+          <!-- Ending 1st foreach -->
+          
+          <?php }else{ ?>
+          <!-- Ending 3rd if -->
+                 <?php $just_opened = true; ?>
+                 
+				 <div class="section group">
+			  <div class="col_1_of_3 span_1_of_3">
+			  	 <a href="#">
+				 <div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic.jpg" alt=""/>
+						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
 					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
+                    <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
+                   <!--<div class="price">
 					   <div class="cart-left">
 							<p class="title">Lorem Ipsum simply</p>
 							<div class="price1">
@@ -115,11 +178,35 @@
 						</div>
 						<div class="cart-right"> </div>
 						<div class="clear"></div>
-					 </div>				
+					 </div>-->				
                    </div>
-                 </a>
-				</div>-->
-			 <!--<div class="col_1_of_3 span_1_of_3">
+                   </a>
+				</div>
+			  
+			  
+			<div class="clear"></div>
+			</div>
+			 
+			 <?php } ?>
+          <!-- Ending else of 1st if -->
+          <?php if($just_opened || $k < 5){?>
+          
+          		<div class="clear"></div>
+        		</div>
+                
+        <?php } ?>
+      
+      
+      
+      
+      
+     <?php }else{ ?> <!-- Ending if of category url -->
+     
+     
+        <h2 class="head">New Arrivals</h2>
+        <div class="top-box"> 
+      	
+         <!--<div class="col_1_of_3 span_1_of_3">
 			   	 <a href="single.html">
 					<div class="inner_content clearfix">
 					<div class="product_image">
@@ -138,76 +225,69 @@
                    </div>
                    </a>
 				</div>-->
-                
-                
-                
-             <?php $mark = 0; if (count($this->get_product_categories) > 0) { ?>
-             
-             <?php if ($this->product_setting) { ?>
-             <?php if (count($this->get_product_categories) > 0) { ?>
-             
-            
-              
-              		<?php
+          <?php $this->get_product_categories = $this->get_recent_product_categories;?>
+          <?php  if (count($this->get_product_categories) > 0) { ?>
+         
+          <?php if (count($this->get_product_categories) > 0) { ?>
+          <?php
                      $k = 1;
-                     foreach ($this->get_product_categories as $products) {
+					 $just_opened = false;
+					 
+                     foreach ($this->get_product_categories as $products) {?>
 						 
-						 if($products->category_url != $this->url_cat)
-							 continue;
-						 
-					$mark = 1;
+						
+<?php
                      $symbol = CURRENCY_SYMBOL;
+					 $just_opened = false;
                      ?>
-                     <?php if($k % 4 == 0){?>
-						 <div class="clear"></div>
-						</div>
-                        <div class="top-box">
-					 <?php }?>
-                     
-                  	<div class="col_1_of_3 span_1_of_3">
-            
-            		 <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-                    <div class="inner_content clearfix">
-					<div class="product_image" >
-                     
-                     <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+          <?php if($k % 4 == 0){?>
+          <div class="clear"></div>
+        	</div>
+         <div class="top-box">
+         <?php 
+		 	$k = 1;
+		    $just_opened = true;?>
+          <?php }?>
+          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+            <div class="inner_content clearfix">
+              <div class="product_image" >
+                <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-												<?php } else { ?>
-												 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
-												<?php } ?>
-                                                <?php } else { ?>
-														<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-												<?php } ?>
-                                                </div>
-                    <div class="sale-box"><span class="on_sale title_shop">Featured</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title swifta" style="text-wrap:normal;"><?php echo $products->deal_title; ?></p>
-							<div class="price1">
-							  <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>
-                    </div>
-                                                
-                     
-                     </a>
-                     </div>
-                     
-                                  
-                    <?php $k++; } ?> <!-- Ending 1st foreach -->
-              
-             <?php } ?> <!-- Ending 3rd if -->
-             
-             <?php } ?> <!-- Ending 2nd if -->
-             
-             <?php } ?> <!-- Ending 1st if -->
-             
-             
-             <?php if($mark == 0){?>
+                <!--<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=226&h=442" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } else { ?>
+                <!--<img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=226&h=442" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+                <?php } else { ?>
+                <!--<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+              </div>
+              <div class="sale-box"><span class="on_sale title_shop">Newest</span></div>
+              <div class="price">
+                <div class="cart-left">
+                  <p class="title swifta" style="text-wrap:normal;"><?php echo common::truncate_item_name($products->deal_title); ?></p>
+                  <div class="price1"> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </div>
+                </div>
+                <div class="cart-right"> </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+            </a> </div>
+          <?php $k++; } ?>
+          <!-- Ending 1st foreach -->
+          
+          <?php } ?>
+          <!-- Ending 3rd if -->
+          
+          <?php }else {
+			  
+			  ?>
+			     <!-- Ending 1st if, beginning else -->
+                 
+                 <?php $just_opened = true; ?>
+                 
 				 <div class="section group">
 			  <div class="col_1_of_3 span_1_of_3">
 			  	 <a href="#">
@@ -233,457 +313,85 @@
 			  
 			<div class="clear"></div>
 			</div>
-			 <?php } ?>
 			 
-                
-			<div class="clear"></div>
-			</div>	
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-				
-            
-            
-            
-            
-			<!--<div class="top-box1">
-			  <div class="col_1_of_3 span_1_of_3">
-			  	 <a href="single.html">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic6.jpg" alt=""/>
-					</div>
-                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-			  <div class="col_1_of_3 span_1_of_3">
-				 <a href="single.html">
-					<div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic7.jpg" alt=""/>
-					</div>
-					 <div class="sale-box1"><span class="on_sale title_shop">Sale</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="reducedfrom">$66.00</span>
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-			  <div class="col_1_of_3 span_1_of_3">
-				  <a href="single.html">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic8.jpg" alt=""/>
-					</div>
-                   	 <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-				<div class="clear"></div>
-			</div>	
-            
-		    <h2 class="head">Staff Pick</h2>
-		    <div class="top-box1">
-			 <div class="col_1_of_3 span_1_of_3">
-			  	 <a href="single.html">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic8.jpg" alt=""/>
-					</div>
-                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-			 <div class="col_1_of_3 span_1_of_3">
-					 <a href="single.html">
-					<div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic4.jpg" alt=""/>
-					</div>
-				    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-			 <div class="col_1_of_3 span_1_of_3">
-				 <a href="single.html">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic2.jpg" alt=""/>
-					</div>
-                   	 <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-		    <div class="clear"></div>
-			</div>-->
-            
-            
-            	
-	       	
-		   <!-- <div class="section group">
-			  <div class="col_1_of_3 span_1_of_3">
-			  	 <a href="#">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
-                   <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>			
-                   </div>
-                   </a>
-				</div>
-			  
-			  
-			<div class="clear"></div>
-			</div>-->
-            
-            
-            
-            
-            
-            <h2 class="head">Popular Products</h2>	
-		    <div class="section group">
-			
-          <?php $mark = 0; if(count($this->best_seller)>0) {
-			  $k = 1;
-			  ?>	
-    		
-            
-            
-            <?php foreach($this->best_seller as $best) {  $symbol = CURRENCY_SYMBOL;
-					
-					 if($best->category_url != $this->url_cat)
-							 continue;
-							 
-							 $mark = 1;
-			 ?>
-            		<?php if($k %4 == 0){?>
-						 <div class="clear"></div>
-						</div>
-            <div class="section group">
-					 <?php }?>
-           			<div class="col_1_of_3 span_1_of_3">
-            
-            		 <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $best->deal_key . '/' . $best->url_title . '.html'; ?>" title="<?php echo $best->deal_title; ?>">
-                    <div class="inner_content clearfix">
-					<div class="product_image" >
-                     
-                     <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $best->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $best->deal_key . '_1' . '.png';
-												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $best->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $best->deal_title; ?>" title="<?php echo $best->deal_title; ?>" />
-												<?php } else { ?>
-												 <img src="<?php echo PATH .'images/products/1000_800/'.$best->deal_key.'_1'.'.png'?>" />
-												<?php } ?>
-                                                <?php } else { ?>
-														<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $best->deal_title; ?>" title="<?php echo $best->deal_title; ?>" />
-												<?php } ?>
-                                                </div>
-                    <div class="sale-box"><span class="on_sale title_shop">Popular</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title swifta" style="text-wrap:normal;"><?php echo $best->deal_title; ?></p>
-							<div class="price1">
-							  <span class="actual"><?php echo $symbol . " " . number_format($best->deal_value); ?></span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>
-                    </div>
-                                                
-                     
-                     </a>
-                     </div>
-            <?php $k++;} ?> <!-- Ending 1st foreach -->
-            <?php } ?> <!-- Ending 1st if -->
-            
-              <?php if($mark == 0){?>
-				 <div class="section group">
-			  <div class="col_1_of_3 span_1_of_3">
-			  	 <a href="#">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>no_prod.png" alt=""/>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">NONE FOUND</span></div>	
-                   <!--<div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>-->				
-                   </div>
-                   </a>
-				</div>
-			  
-			  
-			<div class="clear"></div>
-			</div>
 			 <?php } ?>
-           <div class="clear"></div>
-		   </div>	
-            
-            
-            
-            
-            
-            
-            
-            <!--<h2 class="head">New Products</h2>	
-		    <div class="section group">
-			  <div class="col_1_of_3 span_1_of_3">
-			  	 <a href="single.html">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic5.jpg" alt=""/>
-					</div>
-                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-				<div class="col_1_of_3 span_1_of_3">
-					<a href="single.html">
-					<div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic2.jpg" alt=""/>
-					</div>
-					 <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-				<div class="col_1_of_3 span_1_of_3">
-				 <a href="single.html">
-				 <div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic3.jpg" alt=""/>
-					</div>
-                   	 <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>
-				<div class="clear"></div>
-			</div>-->	
-            
-            <h2 class="head">All Products</h2>
-			<div class="top-box">
-			 <!--<div class="col_1_of_3 span_1_of_3"> 
-			   <a href="single.html">
-				<div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic.jpg" alt=""/>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>	
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                 </a>
-				</div>-->
-			 <!--<div class="col_1_of_3 span_1_of_3">
-			   	 <a href="single.html">
-					<div class="inner_content clearfix">
-					<div class="product_image">
-						<img src="<?php echo PATH."themes/default/images/leo/";?>pic1.jpg" alt=""/>
-					</div>
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title">Lorem Ipsum simply</p>
-							<div class="price1">
-							  <span class="actual">$12.00</span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                   </a>
-				</div>-->
+          <!-- Ending else of 1st if -->
+          <?php if($just_opened || $k < 5){?>
+          
+          		<div class="clear"></div>
+        		</div>
                 
-                
-             <?php $mark = 0; if (count($this->get_product_categories) > 0) { ?>
-             
-             <?php if ($this->product_setting) { ?>
-             <?php if (count($this->get_product_categories) > 0) { ?>
-             
-            
-              
-              		<?php
+        <?php } ?>
+        
+        
+        
+        
+         <h2 class="head">Top Selling</h2>
+        <div class="top-box"> 
+      	
+          <?php $this->get_product_categories =  $this->best_seller?>
+          <?php  if (count($this->get_product_categories) > 0) { ?>
+         
+          <?php if (count($this->get_product_categories) > 0) { ?>
+          <?php
                      $k = 1;
-                     foreach ($this->get_product_categories as $products) {
+					 $just_opened = false;
+					 
+                     foreach ($this->get_product_categories as $products) {?>
 						 
-					 if($products->category_url != $this->url_cat)
-							 continue;
-							 $mark = 1;
+						
+<?php
                      $symbol = CURRENCY_SYMBOL;
+					 $just_opened = false;
                      ?>
-                     <?php if($k % 4 == 0){?>
-						 <div class="clear"></div>
-						</div>
-                        <div class="top-box">
-					 <?php }?>
-                     
-                  	<div class="col_1_of_3 span_1_of_3">
-                    
-                     
-                                
-                                
-            
-            		<a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><!--<a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">-->
-                    <div class="inner_content clearfix">
-					<div class="product_image" >
-                     
-                     <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+          <?php if($k % 4 == 0){?>
+          <div class="clear"></div>
+        	</div>
+         <div class="top-box">
+         <?php 
+		 	$k = 1;
+		    $just_opened = true;?>
+          <?php }?>
+          <div class="col_1_of_3 span_1_of_3"> <a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+            <div class="inner_content clearfix">
+              <div class="product_image" >
+                <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-												<?php } else { ?>
-												 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
-												<?php } ?>
-                                                <?php } else { ?>
-														<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-												<?php } ?>
-                                                </div>
-                    <div class="sale-box"><span class="on_sale title_shop">All</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<p class="title swifta" style="text-wrap:normal;"><?php echo $products->deal_title; ?></p>
-							<div class="price1">
-							  <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span>
-							</div>
-						</div>
-						<div class="cart-right"> </div>
-						<div class="clear"></div>
-					 </div>
-                    </div>
-                                                
-                     
-                     </a>
-                     </div>
-                     
-                                  
-                    <?php $k++; } ?> <!-- Ending 1st foreach -->
-              
-             <?php } ?> <!-- Ending 3rd if -->
-             
-             <?php } ?> <!-- Ending 2nd if -->
-             
-             <?php } ?> <!-- Ending 1st if -->
-			 
-             <?php if($mark == 0){?>
+                <!--<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } else { ?>
+                <!--<img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+                <?php } else { ?>
+                <!--<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />-->
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=285&h=285" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                <?php } ?>
+              </div>
+              <div class="sale-box"><span class="on_sale title_shop">Top Selling</span></div>
+              <div class="price">
+                <div class="cart-left">
+                  <p class="title swifta" style="text-wrap:normal;"><?php echo common::truncate_item_name($products->deal_title); ?></p>
+                  <div class="price1"> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </div>
+                </div>
+                <div class="cart-right"> </div>
+                <div class="clear"></div>
+              </div>
+            </div>
+            </a> </div>
+          <?php $k++; } ?>
+          <!-- Ending 1st foreach -->
+          
+          <?php } ?>
+          <!-- Ending 3rd if -->
+          
+          <?php }else {
+			  
+			  ?>
+			     <!-- Ending 1st if, beginning else -->
+                 
+                 <?php $just_opened = true; ?>
+                 
 				 <div class="section group">
 			  <div class="col_1_of_3 span_1_of_3">
 			  	 <a href="#">
@@ -709,17 +417,27 @@
 			  
 			<div class="clear"></div>
 			</div>
+			 
 			 <?php } ?>
-			<div class="clear"></div>
-			</div>						 			    
-		  </div>
+          <!-- Ending else of 1st if -->
+          <?php if($just_opened || $k < 5){?>
           
-          
-          
-          
-			<div class="rsidebar span_1_of_left">
-				<div class="top-border"> </div>
-				 <div class="border">
+          		<div class="clear"></div>
+        		</div>
+                
+        <?php } ?>
+        
+   
+   <?php } ?>  <!-- Ending else of category url if -->
+        
+        
+      </div>
+      </div>
+      </div>
+      
+      <div class="rsidebar span_1_of_left">
+        <div class="top-border"> </div>
+        <div class="border">
 	             <link href="<?php echo PATH."themes/default/css/leo/";?>default.css" rel="stylesheet" type="text/css" media="all" />
 	             <link href="<?php echo PATH."themes/default/css/leo/";?>nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
 				  <script src="<?php echo PATH."themes/default/js/leo/";?>jquery.nivo.slider.js"></script>
@@ -735,48 +453,7 @@
                 <img src="<?php echo PATH."themes/default/images/leo/";?>t-img3.jpg"  alt="" />-->
                 
                 
-                 <!--<?php if (count($this->get_product_categories) > 0) { ?>
-             
-             <?php if ($this->product_setting) { ?>
-             <?php if (count($this->get_product_categories) > 0) { ?>
-             
-            
-              
-              		<?php
-                     $k = 1;
-                     foreach ($this->get_product_categories as $products) {
-                     $symbol = CURRENCY_SYMBOL;
-                     ?>
-                     <?php if($k == 4){
-						 break;
-					  }?>
-                     
-                  	
-            
-            		 <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-                   
-                     
-                     <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
-												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-												<?php } else { ?>
-												 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
-												<?php } ?>
-                                                <?php } else { ?>
-														<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-												<?php } ?>
-                     
-                     </a>
-                    
-                     
-                                  
-                    <?php $k++; } ?> <!-- Ending 1st foreach -->
-              
-             <?php } ?> <!-- Ending 3rd if -->
-             
-             <?php } ?> <!-- Ending 2nd if -->
-             
-             <?php } ?> <!-- Ending 1st if -->
+                 
              
               <?php if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    
@@ -823,17 +500,12 @@
              </div>
               <div class="btn"><a href="<?php echo PATH."leo_zenith.html"; ?>">Check it Out</a></div>
              </div>
-           <div class="top-border"> </div>
-			<div class="sidebar-bottom">
-			    <h2 class="m_1">Newsletters<br> Subscription</h2>
-			    <p class="m_text">Be the first to know about hot deals and products by subscribing to our newsletter</p>
-			    <!--<div class="subscribe">
-					 <form>
-					    <input name="userName" placeholder="Enter your valid email" type="text" class="textbox">
-					    <input type="submit" value="Subscribe">
-					 </form>
-	  			</div>-->
-                <div class="subscribe">
+        <div class="top-border"> </div>
+        <div class="sidebar-bottom">
+          <h2 class="m_1">Newsletters<br>
+            Subscription</h2>
+          <p class="m_text">Be the first to know about hot deals and products by subscribing to our newsletter</p>
+          <div class="subscribe">
             <form onsubmit="return false;">
               <div class="subscribe_lft_txt_field">
                 <input  id="subscribe" name="subscribe" placeholder="Enter your valid email" type="text" class="textbox">
@@ -841,16 +513,11 @@
                 <em style="color:#F00;" id="email_subscriber_error"></em> </div>
               <input onclick="return check_subscribe();"  type="submit" value="Subscribe">
             </form>
-     
+             
           </div>
-			</div>
-	    </div>
-	   <div class="clear"></div>
-	</div>
-	</div>
-	</div>
-    
-   
-    
-    
-   
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,7 @@
 <?php 
         echo $this->template->style;
         echo $this->template->javascript;
+		
 ?>
 </head>
 
@@ -119,8 +120,10 @@
 
 
 <!--container start--> 
-<?php echo $this->template->content; ?> 
+<?php echo $this->template->content;?> 
 <!--container_end-->
+
+
 
 <?php if(isset($this->sector)) {
 				if($this->theme_name) { 
@@ -145,27 +148,33 @@
 
 
 
+
 <script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
 <script type="text/javascript">
 <?php
-
-
-
-    
-   
-    
+ 
         if($this->response != "" || $this->error_response != ""){
             $success_alert = false;
             $msg_to_alert = $this->error_response;
+			
             if($this->response != ""){
                 $success_alert = true;
                 $msg_to_alert = $this->response;
+				
+				
             }
+			
+			
+		
     ?>
-<script type="text/javascript">
+
+	
+
 	
 	
     $(document).ready(function() {
+		
+		
         var jNotify = $.JNotify({
 
           // addional CSS class
@@ -223,24 +232,20 @@
 
         });
         <?php if($success_alert){ ?>
+		
         jNotify.setTheme('success');
+		
         <?php } ?>
     });
     <?php
+	
+	$this->response = null;
+	$this->error_response = null;
+	
         }
     ?>
 				
 			</script> 
-
-<?php if(isset($this->sector)) {
-				if($this->theme_name) { 
-					$sector =$this->theme_name; 
-				} else{
-				    $sector="default";
-				}}?>
-
-
-
 <script type="text/javascript">
 $(window).load(function() {
 					$(".wloader_img").fadeOut("slow");
@@ -248,5 +253,8 @@ $(window).load(function() {
 				});
 				
 </script>
+
+
+
 </body>
 </html>

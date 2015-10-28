@@ -284,6 +284,7 @@ foreach ($this->deals_deatils as $deals) {
                                             <a class="buy_it auction_buy_it" id="auction"  href="javascript:show_auction('<?php if (isset($this->UserID)) {
                                     echo $this->UserID;
                                 } ?>','<?php echo $deals->deal_key; ?>','<?php echo $deals->url_title; ?>');"  title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a>
+                                
                                            
                                             <a class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } } ?>                                         

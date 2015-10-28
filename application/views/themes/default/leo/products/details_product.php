@@ -1,149 +1,206 @@
+
+
+<?php 
+
+	if(!isset($this->get_product_categories)){
+		
+		$this->stores = new Leo_Model();
+		
+		$store_url_title = $this->storeurl;
+		$this->is_store_details = 1;
+		$store_url_title;
+		$search="";
+		
+		$this->type = "products";
+		$storeurl = $this->storeurl;
+		
+		if(count($this->product_deatils)==0){
+		        common::message(-1, $this->Lang["PAGE_NOT"]);
+		        url::redirect(PATH);
+		}
+		$this->home = new Home_Model();
+		$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
+		$this->stores = new Stores_Model();
+		$this->admin_details = $this->stores->get_admin_details();
+		
+		$this->product = null;
+		
+		
+		
+		foreach($this->product_deatils as $Deal){
+						$this->product = $Deal;
+                        $this->avg_rating =$this->products->get_product_rating($Deal->deal_id);
+                        $this->sum_rating =$this->products->get_product_rating_sum($Deal->deal_id);
+                        $this->delivery_details =$this->products->get_product_delivery($Deal->deal_id);
+                        $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
+                        $this->products_list_name = $this->Lang['REL_PRODUCT'];
+                        if(count($this->all_products_list) < 3){        
+                        $this->all_products_list = $this->products->get_hot_all_products_view($Deal->deal_id);
+                         $this->products_list_name = $this->Lang['HOT_PRODUCT'];
+                                 if(count($this->all_products_list) < 3){ 
+                                        $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
+                                         $this->products_list_name = $this->Lang['REL_PRODUCT'];
+                                  }
+                        }
+						
+						
+						$this->get_product_categories = $this->all_products_list;
+						
+                        $userflat_deatils = $this->products->get_userflat_amount($Deal->merchant_id);
+                        $this->userflat_amount = $userflat_deatils->flat_amount;
+                        $this->color_deatils = $this->products->get_color_data($Deal->deal_id);
+                        $this->size_deatils = $this->products->get_size_data($Deal->deal_id);
+                        $this->product_size = $this->products->get_product_one_size($Deal->deal_id);
+                        $this->product_color = $this->products->get_product_color($Deal ->deal_id);
+                        $this->merchant_cms = $this->products->get_merchant_cms($Deal ->merchant_id);
+			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
+			if($Deal->meta_description){
+				$this->template->description = $Deal->meta_description;
+			}
+			if($Deal->meta_keywords){
+				$this->template->keywords = $Deal->meta_keywords;
+			}
+			if($Deal->deal_key){
+				$this->template->metaimage = PATH.'images/products/1000_800/'.$Deal->deal_key.'_1.png';
+			}
+			
+			$this->theme_name = $this->products->get_theme_name($Deal->shop_id);
+			$this->footer_merchant_details = $this->products->get_merchant_details($Deal->merchant_id);
+		}
+		$this->storeid = $this->products->get_store_id($storeurl);
+		
+		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
+		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
+		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
+		
+		
+		
+		
+		$this->get_theme_name = common::get_theme($storeurl);
+		if(count($this->get_theme_name)>0) { 
+			$this->sector = $this->get_theme_name->current()->sector_name;
+		} else {
+			$this->sector ="";
+		}
+		
+		}
+		
+		
+?>
+
+ 
+
 <div class="mens">
   <div class="main">
+  
+  
+  
+  
+  
     <div class="wrap">
       <ul class="breadcrumb breadcrumb__t">
-        <a class="home" href="<?php echo PATH.$this->storeurl;?>">Home</a> / <a href="<?php echo PATH.$this->storeurl."/".$this->item_type;?>"><?php echo $this->item_type; ?></a> / <?php echo $this->item_name; ?>
+        <a class="home" href="<?php echo PATH.$this->storeurl;?>">Home</a> / <a href="<?php echo PATH.$this->storeurl."/products.html";?>">Products</a> / <?php echo  $this->product->deal_title; ?>
       </ul>
       <div class="cont span_2_of_3">
         <div class="grid images_3_of_2">
           <ul id="etalage">
-            <li> <a href="#"> 
-              <!--<img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />--> 
               
-              <!-- <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $this->product->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $this->product->deal_key . '_1' . '.png';
-												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img class="etalage_thumb_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $this->product->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
-												<?php } else { ?>
-												 <img class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_1'.'.png'?>" />
-												<?php } ?>
-                                                <?php } else { ?>
-														<img class="etalage_thumb_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
-												<?php } ?>-->
               
-              <?php $image_count = "";
-$products = $this->product;
-for ($i = 1; $i <= 5; $i++) { ?>
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) {
-$image_count +=1;
-}
-} ?>
-              <?php for ($i = 1; $i <= 5; $i++) { ?>
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) { ?>
-              <?php break;
-                                        }
-                                    }?>
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) {     +
-                                     $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png';
+              
+              <?php $image_count = 1;
+				$products = $this->product;
+				for ($i = 1; $i <= 5; $i++) { ?>
+							  <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) {
+				              $image_count +=1;
+				}
+				} ?>
+                
+              
+                
+              <?php for ($i = 1; $i <=  $image_count; $i++) { ?>
+             
+               <?php if($image_count == 1 ){?>
+                      <li><a href="#">
+                       <img class="etalage_source_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
+                       
+                       
+             		   <img class="etalage_thumb_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
+                      
+              
+              </a></li>
+              
+              <?php break; ?>
+                
+                <?php } ?>
+                
+              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) { 
+			  					$image_url = PATH . 'images/products/1000_800/' . $this->product->deal_key . '_'.$i.'.png';  
                                 $size = getimagesize($image_url);  ?>
               <?php if(($size[0] > PRODUCT_DETAIL_WIDTH) && ($size[1] > PRODUCT_DETAIL_HEIGHT)) { ?>
+              <li><a href="#">
+              <img class="etalage_source_image img-responsive" style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
+              </a></li>
+			  <?php } else { ?>
+              <li><a href="#">
               
-              <!-- <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>" />--> 
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>"  class="etalage_source_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
               
-              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_1'.'.png'?>" />
-              <?php } else { ?>
-              <!--<img src="<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>" />--> 
-              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_1'.'.png'?>" />
-              <?php } ?>
-              <?php } else { ?>
+              <img style="width:<?php echo PRODUCT_DETAIL_WIDTH; ?>; height:<?php echo PRODUCT_DETAIL_HEIGHT?>" class="etalage_thumb_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $this->product->deal_key . '_'.$i. '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>&h=<?php echo PRODUCT_DETAIL_HEIGHT;?>" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
               
-              <!-- <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_details.png&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>"/>--> 
-              
-              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
-              <?php } ?>
-              <?php $k=0; if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_1.png')){ ?>
-              <?php for($i=1; $i<=5; $i++){
-											if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_'.$i.'.png')){
-									?>
-              <?php $k++; } } } ?>
-              <?php if($k>1){ ?>
-              <?php if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_1.png')){ ?>
-              <?php for($i=1; $i<=5; $i++){
-											if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_'.$i.'.png')){
-											  $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png';
-                                                                                        $size = getimagesize($image_url);  
-									?>
-              <?php if(($size[0] > PRODUCT_DETAIL_WIDTH) && ($size[1] > PRODUCT_DETAIL_HEIGHT)) { ?>
-              
-              <!--<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>&w=<?php echo PRODUCT_THUMB_WIDTH; ?>&h=<?php echo PRODUCT_THUMB_HEIGHT; ?>" />--> 
-              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_1'.'.png'?>" />
-              <?php } else { ?>
-              
-              <!-- <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>&w=<?php echo PRODUCT_THUMB_WIDTH; ?>&h=<?php echo PRODUCT_THUMB_HEIGHT; ?>" /> --> 
-              
-              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_1'.'.png'?>" />
-              <?php } ?>
-              <?php } } ?>
-              <?php } ?>
-              <?php } ?>
-              <?php $image_count = "";
-$products = $this->product;
-for ($i = 1; $i <= 5; $i++) { ?>
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) {
-$image_count +=1;
-}
-} ?>
-              <?php for ($i = 1; $i <= 5; $i++) { ?>
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) { ?>
-              <?php break;
-                                        }
-                                    }?>
-              <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png')) {     +
-                                     $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png';
-                                $size = getimagesize($image_url);  ?>
-              <?php if(($size[0] > PRODUCT_DETAIL_WIDTH) && ($size[1] > PRODUCT_DETAIL_HEIGHT)) { ?>
-              
-              <!-- <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>" />--> 
-              
-              <img class="etalage_source_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
-              <?php } else { ?>
-              <!--<img src="<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>" />--> 
-              <img class="etalage_source_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
-              <?php } ?>
-              <?php } else { ?>
-              
-              <!-- <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_details.png&w=<?php echo PRODUCT_DETAIL_WIDTH; ?>"/>--> 
-              
-              <img class="etalage_source_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
-              <?php } ?>
-              <?php $k=0; if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_1.png')){ ?>
-              <?php for($i=1; $i<=5; $i++){
-											if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_'.$i.'.png')){
-									?>
-              <?php $k++; } } } ?>
-              <?php if($k>1){ ?>
-              <?php if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_1.png')){ ?>
-              <?php for($i=1; $i<=5; $i++){
-											if(file_exists(DOCROOT.'images/products/1000_800/'.$products->deal_key.'_'.$i.'.png')){
-											  $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png';
-                                                                                        $size = getimagesize($image_url);  
-									?>
-              <?php if(($size[0] > PRODUCT_DETAIL_WIDTH) && ($size[1] > PRODUCT_DETAIL_HEIGHT)) { ?>
-              
-              <!--<img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>&w=<?php echo PRODUCT_THUMB_WIDTH; ?>&h=<?php echo PRODUCT_THUMB_HEIGHT; ?>" />--> 
-              <img class="etalage_source_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
-              <?php } else { ?>
-              
-              <!-- <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_' . $i . '.png' ?>&w=<?php echo PRODUCT_THUMB_WIDTH; ?>&h=<?php echo PRODUCT_THUMB_HEIGHT; ?>" /> --> 
-              
-              <img class="etalage_source_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_'.$i.'.png'?>" />
-              <?php } ?>
-              <?php } } ?>
-              <?php } ?>
+               </a></li>              <?php } ?>
               <?php } ?>
               
-              <!--<img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>/s1.jpg"  title="" />--> 
+               <?php }?>
               
-              <!-- <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $this->product->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $this->product->deal_key . '_1' . '.png';
-												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                 <img class="etalage_source_image img-responsive" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $this->product->deal_key . '_1' . '.png' ?>&w=600&h=600" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo  $this->product->deal_title; ?>" />
-												<?php } else { ?>
-												 <img class="etalage_source_image img-responsive" src="<?php echo PATH .'images/products/1000_800/'. $this->product->deal_key.'_1'.'.png'?>" />
-												<?php } ?>
-                                                <?php } else { ?>
-														<img class="etalage_source_image img-responsive" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png" alt="<?php echo  $this->product->deal_title; ?>" title="<?php echo $this->product->deal_title; ?>" />
-												<?php } ?>--> 
+          
+           	    <!--<li> <a href="#"> 
+              <img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              </a></li>-->
               
-              </a> </li>
+                <!--<li> <a href="#"> 
+              <img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              </a></li>-->
+              
+                <!--<li> <a href="#"> 
+              <img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              </a></li>-->
+              
+               	<!--<li> <a href="#"> 
+              <img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              </a></li>-->
+              
+               	<!--<li> <a href="#"> 
+              <img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              <img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img.jpg"  />
+              </a></li>-->
+              	
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
             <!--<li>
 								<img class="etalage_thumb_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s-img1.jpg"  />
 								<img class="etalage_source_image img-responsive" src="<?php echo PATH."themes/default/images/leo/"; ?>s2.jpg"  title="" />
@@ -160,25 +217,33 @@ $image_count +=1;
           <div class="clearfix"></div>
         </div>
         <div class="desc1 span_3_of_2">
-          <h3 class="m_3"> <?php echo $this->item_name; ?></h3>
-          <p class="m_5"><?php echo CURRENCY_SYMBOL.$this->deal_value; ?>&nbsp;
-            <?php if($this->deal_value < $this->deal_price){?>
-            <span class="reducedfrom"><?php echo CURRENCY_SYMBOL.$this->deal_price; ?></span>
+          <h3 class="m_3"> <?php echo $this->product->deal_title; ?></h3>
+          <p class="m_5"><?php echo CURRENCY_SYMBOL.$this->product->deal_value; ?>&nbsp;
+            <?php if($this->product->deal_value < $this->product->deal_price){?>
+            <span class="reducedfrom"><?php echo CURRENCY_SYMBOL.$this->product->deal_price; ?></span>
             <?php } ?>
           </p>
+        
           <div class="btn_form">
             <form onSubmit="return false;">
               <input type="submit" id="id_leo_add_to_cart" onClick="leo_add_to_cart();"  value="Add to Cart" title="">
             </form>
           </div>
+          
           <!--<span class="m_link"><a href="#">login to save in wishlist</a> </span>-->
-          <p class="m_text2"><?php echo $this->deal_description;?>. </p>
+          <!--<p class="m_text2"><?php echo $this->product->deal_description;?>. </p>-->
+          <a href="#id_prod_details">
+          <p class="m_text2"> View Details</p>
+          </a>
+          
+          
         </div>
+        
         <div class="clear"></div>
         <div class="clients">
           <?php if (count($this->get_product_categories) > 0) { ?>
           <h3 class="m_3">
-            <?php  echo count($this->get_product_categories)-1; ?>
+            <?php  echo count($this->get_product_categories); ?>
             Other Product(s) in the same category</h3>
           <ul id="flexiselDemo3">
             <?php if ($this->product_setting) { ?>
@@ -217,7 +282,7 @@ $image_count +=1;
               <!--</div>--> 
               
               </a>
-              <p style="white-space:nowrap"><?php echo $products->deal_title; ?></p>
+              <p style="white-space:nowrap"><?php echo common::truncate_item_name($products->deal_title); ?></p>
               <p><?php echo $symbol . " " . number_format($products->deal_value); ?></p>
             </li>
             <!-- </div>-->
@@ -241,16 +306,14 @@ $image_count +=1;
           <!-- Ending 1st if --> 
           
         </div>
+      
         <div class="toogle">
-          <h3 class="m_3">Product Details</h3>
-          <p class="m_text"><?php echo $this->deal_description;?>.</p>
+          <h3 class="m_3" id = "id_prod_details" >Product Details</h3>
+          <p class="m_text"><?php echo $this->product->deal_description;?>.</p>
         </div>
-        <div class="toogle">
-          <h3 class="m_3">More Information</h3>
-          <p class="m_text">No more information on this item.</p>
-        </div>
+        
       </div>
-      <div class="rsingle span_1_of_single">
+      <div class="rsingle span_1_of_single swifta">
         <h5 class="m_1">Categories</h5>
         <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
           <option value="1">Products</option>
@@ -347,7 +410,7 @@ $image_count +=1;
           
         </select>
         <select class="dropdown" tabindex="8" data-settings='{"wrapperClass":"metro"}'>
-          <option value="1">Auction</option>
+        <option value="1" onclick="alert(888);"> <a onclick ="alert(22);"> Auctions</a></option>
           <?php 
 				$cat = explode(",", substr($this->session->get('categoryID'), 0, -1));
                  $cat1 = array_unique($cat);
@@ -497,13 +560,16 @@ $image_count +=1;
 					   </ul>
 		       </section>--> 
         <script src="<?php echo PATH."themes/default/js/leo/";?>/jquery.easydropdown.js"></script> 
-      </div
-		      >
+      </div>
       <div class="clear"></div>
     </div>
-    <div class="clear"></div>
+    
+    
+    
+  <div class="clear"></div>
   </div>
 </div>
+
 
 
 <script type="text/javascript">
@@ -552,14 +618,19 @@ $image_count +=1;
 		    
 		});
 	</script> 
+
+<!--
+    Add Item to cart 
+	@Live
+-->
 <script type="text/javascript">
 
-
-    
+	
 	var item_add_count = 0;
 	var item_remove_count = 0;
 	/*$('#id_cart_item_count').html('<li ><a href="#" >Cart('+item_add_count+')</a></li>');*/
 	function leo_add_to_cart(){
+			
 			var cart_last_add = parseInt($('#id_cart_add_last_state').val());
 			var cart_last_remove = parseInt($('#id_cart_remove_last_state').val());
 			<?php if($this->session->get('count') == 0){?>
@@ -579,54 +650,23 @@ $image_count +=1;
 			var items_c = $('#id_cart_state');
 			var items_c_in = items_c.html();
 			
-			items_c_in = items_c_in + '<i id = "id_item_no_<?php echo $this->product->deal_id ?>"><li><a href="#"><h3><?php echo $this->item_name; ?></h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $this->product->deal_id ?>); return false;" href="#" id="leo_id_remove_cart">Remove</a></p></li></i>';
+			items_c_in = items_c_in + '<i id = "id_item_no_<?php echo $this->product->deal_id ?>"><li><a href="#"><h3><?php echo $this->product->deal_title; ?></h3><a href=""></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $this->product->deal_id ?>); return false;" href="#" id="leo_id_remove_cart">Remove</a></p></li></i>';
 			items_c.html(items_c_in);
 		
 			add_item_to_cart1();
+			
+			
 		
 		
 		
 		
 		}
 		
-		</script>      
-<script type="text/javascript">
-	
-	function leo_remove_cart_item(rm_id){
-			
-			
-			var cart_last_add = parseInt($('#id_cart_add_last_state').val());
-			var cart_last_remove = parseInt($('#id_cart_remove_last_state').val());
-			
-			
-			/*if(cart_last_add == cart_last_remove)
-				return false;*/
-			
-				
-			item_add_count =  cart_last_add;
-			item_remove_count = cart_last_remove+1;
-			item_count = item_add_count-item_remove_count; 
-			$('#id_cart_remove_last_state').val(item_remove_count);
-			/*$('#id_cart_item_count').html('<li ><a href="#" >Cart('+item_count+')</a></li>');*/
-			id_item_no_rm = "id_item_no_"+rm_id;
-			$('#'+id_item_no_rm).remove();
-			
-			
-				
-				
-			remove_item_from_cart1(rm_id);
-			
-			
-			
-		}
-	
-
-
-
-</script> 
+		</script>  
 <script type="text/javascript">
 	function add_item_to_cart1(){
 	url = "<?php echo PATH ?>/leo/cart_items?deal_id=<?php echo $this->product->deal_id; ?>";
+	
     $.ajax({
 		        type:'GET',
 		        url:url,
@@ -652,20 +692,20 @@ $image_count +=1;
 					switch(check){
 						case -1:{
 							
-							<?php $this->error_response = 'Invalid item data. Please try a different product';?>
+							<?php //$this->error_response = 'Invalid item data. Please try a different product';?>
 							location.reload();
 							break;
 						}
 						case -2:{
 							
-							<?php $this->response = "This item is already in cart!";?>
+							<?php //$this->response = "This item is already in cart!";?>
 							location.reload();
 							break;
 						}
 						
 						default:{
 							
-							<?php $this->error_response = 'Invalid response';?>
+							<?php //$this->error_response = 'Invalid response';?>
 							location.reload();
 							return false;
 							
@@ -675,9 +715,9 @@ $image_count +=1;
 					}else{
 					
 					$('#id_cart_item_count').html('<li ><a href="#" >Cart('+check+')</a></li>');
-					<?php $this->response = "Item has been successfully added to cart!";?>
+					<?php //$this->response = "Item has been successfully added to cart!";?>
 					
-					window.location.reload();
+						window.location.reload();
 						
 					}
 					return false;
@@ -686,7 +726,7 @@ $image_count +=1;
 		        error:function()
 		        {
 					
-					<?php $this->error_response = 'Error in connection. Please check your network.';?>
+					<?php //$this->error_response = 'Error in connection. Please check your network.';?>
 					location.reload();
 					return false;
 		        }
@@ -697,77 +737,9 @@ $image_count +=1;
 }
 
 </script>
-<script type="text/javascript">
+    
+      
+ 
 
-function remove_item_from_cart1(deal_id){
-	
-			url = "<?php echo PATH ?>/leo/cart_product_remove?deal_id="+deal_id;
-	
-    $.ajax(
-	       {
-		        type:'GET',
-		        url:url,
-		        cache:false,
-		        async:true,
-		        global:false,
-		        dataType:"text",
-		        success:function(check)
-		        {
-					
-					check_temp = -99;
-						
-					try{
-						check_temp = parseInt(check);
-					}catch(err){
-						
-					}
-					
-					check = check_temp;
-					if(check < 0)
-					switch(check){
-						case -1:{
-							
-							<?php $this->error_response = 'Invalid item Data.';?>
-							location.reload();
-							break;
-						}
-						
-						
-						default:{
-							
-            				<?php $this->error_response = 'Invalid response';?>
-							location.reload();
-							return false;
-							
-						}
-					}
-					
-					else
-					
-					$('#id_cart_item_count').html('<li ><a href="#" >Cart('+check+')</a></li>');
-					
-					if(check == 0){
-				$('#id_cart_state').html('<li><a href="#"><h3>No Items</h3></a></li><li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>');
-				
-					}
-					
-					<?php $this->response = "Operation has been successful!";?>
-					location.reload();
-					
-					return true;
-		          
-		        },
-		        error:function()
-		        {
-					
-					<?php $this->error_response = 'Error in connection. Please check your network.';?>
-					location.reload();
-					return false;
-		        }
 
-	         
-			});
-			
-}
-</script>
 

@@ -21,7 +21,7 @@ if(count($this->merchant_personalised_details)>0) {
         <div class="product-box">
             <span class="sale_tag"></span>
             <p>
-   <a href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $deals_categories->deal_title; ?>">
+   <a href="<?php echo PATH . $deals_categories->store_url_title . '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $deals_categories->deal_title; ?>">
         <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png')) { 
             $image_url = PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png';
             $size = getimagesize($image_url); 
@@ -101,7 +101,7 @@ $avg_rating = round($avg_rating); ?>
         <div class="product-box">
             <span class="sale_tag"></span>
             <p>
-   <a href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $deals_categories->deal_title; ?>">
+   <a href="<?php echo PATH . $deals_categories->store_url_title . '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $deals_categories->deal_title; ?>">
         <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png')) { 
             $image_url = PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png';
             $size = getimagesize($image_url); 
@@ -188,7 +188,7 @@ $avg_rating = round($avg_rating); ?>
         <div class="product-box">
             <span class="sale_tag"></span>
             <p>
-   <a href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $deals_categories->deal_title; ?>">
+   <a href="<?php echo PATH . $deals_categories->store_url_title . '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo $deals_categories->deal_title; ?>">
         <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png')) { 
             $image_url = PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png';
             $size = getimagesize($image_url); 

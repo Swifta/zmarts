@@ -4,19 +4,17 @@
         $('.error_size').hide();
         $('.error_color').hide();
         $('.error_all').hide();
-
         if($('#messagedisplay')){
             $('#messagedisplay').animate({opacity: 1.0}, 8000)
             $('#messagedisplay').fadeOut('slow');
         }
-
         if($('#error_messagedisplay')){
             $('#error_messagedisplay').animate({opacity: 1.0}, 8000)
             $('#error_messagedisplay').fadeOut('slow');
         }
-
     });
 </script>
+
 
 <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/jquery.jcarousel.css" media="all">
 <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/skin.css" media="all">
@@ -29,7 +27,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
         //jCarousel Plugin
         $('#carousel').jcarousel({
             horizontal: true,
@@ -39,9 +36,7 @@
             initCallback: mycarousel_initCallback
         });
     });
-
     //Carousel Tweaking
-
     function mycarousel_initCallback(carousel) {
         carousel.clip.hover(function() {
             carousel.stopAuto();
@@ -49,19 +44,20 @@
             carousel.startAuto();
         });
     }
-
 </script>
+
 <?php
-//echo "hello world"; die;
 foreach ($this->product_deatils as $products) {
     $symbol = CURRENCY_SYMBOL;
-    ?>
-    <div class="contianer_outer1">
-        <div class="contianer_inner">
-            <div class="contianer">
+?>
 
-                <!--header start-->
-                <div class="bread_crumb">
+    <div class="container">
+        <div class="sixteen columns">
+            <div >
+<div class="parallax-content">
+            
+
+		 <div class="bread_crumb">
                     <ul>
                         <li><p><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
                         <li><p><a href="<?php echo PATH.$this->storeurl; ?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang["PRODUCTS"]; ?></a></p></li>
@@ -69,7 +65,9 @@ foreach ($this->product_deatils as $products) {
                         <li><p><?php echo ucfirst($products->deal_title); ?></p></li>
                     </ul>
                 </div>
-                <!--end-->	<div  id="messagedisplay1" style="display:none;">
+            <h2><span><?php echo ucfirst($products->deal_title); ?></span></h2>
+	</div>
+                <div  id="messagedisplay1" style="display:none;">
                     <div class="session_wrap">
                         <div class="session_container">
                             <div class="success_session">
@@ -85,7 +83,8 @@ foreach ($this->product_deatils as $products) {
                 <!--content start-->
                 <div class="product_detail_block">
                     <div class="deal_content product_content">
-                        <div class="product_image wloader_parent">
+                        <div class="sixteen columns">
+                        <div class="eight columns product_image wloader_parent" >
                                <i class="wloader_img" style="min-height: 300px;">&nbsp;</i>           
 
                             <div class="product_image_inner">
@@ -155,7 +154,7 @@ foreach ($this->product_deatils as $products) {
 
 
                         </div>
-                        <div class="deal_info product_info">
+                        <div style="float:right;width:47%;">
                             <h2 class="deal_title"><?php echo ucfirst($products->deal_title); ?></h2>
                             <div class="deal_buy_detail clearfix">
                                 <div class="clearfix">
@@ -173,7 +172,6 @@ foreach ($this->product_deatils as $products) {
                                                     length : 5,
                                                     rateMax : 5,
                                                     step:true,
-
                                                     //decimalLength:1,
                                                     showRateInfo: false,
                                                     canRateAgain : true,
@@ -330,11 +328,11 @@ foreach ($this->product_deatils as $products) {
                         <span>(<?php echo round($products->deal_percentage); ?>% <?php echo $this->Lang['OFFER']; ?>)</span>
                         <?php } ?>
 						 <?php if($products->deal_price!=0) { ?>	
-							<strike><?php echo $symbol . "" . $products->deal_price; ?> </strike>
-							<b><?php echo $symbol . "" . $products->deal_value; ?></b>
+                        <strike><?php echo $symbol . "" . number_format($products->deal_price); ?> </strike>
+							<b><?php echo $symbol . "" . number_format($products->deal_value); ?></b>
 						<?php } else  { ?>
 							<strike></strike>
-							<b><?php echo $symbol."".$products->deal_value; ?> </b>
+							<b><?php echo $symbol."".number_format($products->deal_value); ?> </b>
 						<?php } ?> 
                         <?php  if($products->Including_tax  == 1){ ?>
                         <p><?php echo $this->Lang['INCLU_OF_TAXES']; ?></p>
@@ -342,11 +340,11 @@ foreach ($this->product_deatils as $products) {
                         <?php  if($products->shipping  == 1){ ?>
                         <p><?php echo $this->Lang['FREE_SHIPP_PROD']; ?></p>
                         <?php } elseif($products->shipping  == 2){ ?>
-                        <p><?php echo $this->Lang['FLAT_SHIPP_T_PRO_AMO']; ?>( <?php echo $symbol . " " . $this->userflat_amount; ?> )</p>
+                        <p><?php echo $this->Lang['FLAT_SHIPP_T_PRO_AMO']; ?>( <?php echo $symbol . " " . number_format($this->userflat_amount); ?> )</p>
                         <?php } elseif($products->shipping  == 3){ ?>
-                        <p><?php echo $this->Lang['PER_PRO_SHIPP_PRODUCT_SHIPP']; ?>( <?php  echo $symbol . " " .$products->shipping_amount; ?> )</p>
+                        <p><?php echo $this->Lang['PER_PRO_SHIPP_PRODUCT_SHIPP']; ?>( <?php  echo $symbol . " " .number_format($products->shipping_amount); ?> )</p>
                         <?php } elseif($products->shipping  == 4){ ?>
-                        <p><?php echo $this->Lang['PER_ITEM_PRODU_SHIPPING_AMOU']; ?>( <?php  echo $symbol . " " .$products->shipping_amount; ?> )</p>
+                        <p><?php echo $this->Lang['PER_ITEM_PRODU_SHIPPING_AMOU']; ?>( <?php  echo $symbol . " " .number_format($products->shipping_amount); ?> )</p>
                         <?php } elseif($products->shipping  == 5){ ?>
                         <p><?php echo $this->Lang['ARAMEX_SHIPP_PROD']; ?></p>
                         <?php } ?>
@@ -362,7 +360,7 @@ foreach ($this->product_deatils as $products) {
                                  <?php 
                                 $preview_type = "edit";
                                 if($products->deal_status==2){
-									$preview_type = "preview";} ?>
+				$preview_type = "preview";} ?>
                                 <?php if ($this->uri->last_segment() != "admin-manage-preview.html" && $this->uri->last_segment() != "merchant-manage-preview.html"){ 
                                 if($this->uri->last_segment() == "admin-preview.html"){ ?>
                                  <a href="<?php echo PATH; ?>/admin/confirm-product-status/<?php echo $products->deal_id; ?>/<?php echo base64_encode($preview_type);?>.html" class="buy_it" style="cursor:pointer;" id="allselect_nosize_1" title="<?php echo $this->Lang['SUBMIT']; ?>"><?php echo $this->Lang['SUBMIT']; ?></a>
@@ -415,6 +413,7 @@ foreach ($this->product_deatils as $products) {
                             </div>
                         </div>
                     </div>
+                        </div>
                    <?php if(count($this->merchant_cms)>0) { ?>
                     <div class="bid_advance_block">
 						
@@ -540,7 +539,6 @@ foreach ($this->product_deatils as $products) {
                                         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
                                         fjs.parentNode.insertBefore(js, fjs);
                                     }(document, 'script', 'facebook-jssdk'));
-
                                 </script>
                                 <div width="370" class="fb-comments" data-href="<?php echo PATH . $products->store_url_title.'/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" data-num-posts="10" ></div>
                             </div>
@@ -673,28 +671,16 @@ foreach ($this->product_deatils as $products) {
             <!--end-->
         </div>
     </div>
-    </div>
-<?php } ?>
-<div class="popup_block7" style="display:none;">
-  <div class='offer_details'>
-		  <h1><?php echo ucfirst($gift_name);?></h1>
-                  <a class="offer_close" href="javascript:;"><img src="<?php echo PATH;?>themes/<?php echo THEME_NAME;?>/images/new/compare_close1.png"/></a>
-          <?php if(file_exists(DOCROOT.'images/merchant/gift/'.$gift_id.'.png')){?>
-		  <div class="offer_det_left">
-			 <img src="<?php echo PATH.'images/merchant/gift/'.$gift_id.'.png';?>">
-		  </div>
-		  <?php }?>
-		  <div class="offer_det_right" <?php if(!file_exists(DOCROOT.'images/merchant/gift/'.$gift_id.'.png')){?> style="width:100%" <?php }?>>
-			<p><?php echo $gift_desc;?></p>
-			<span><?php if($gift_type==0){ echo "Free Gift"; }else{ echo "Purchase Above - ".CURRENCY_SYMBOL." ".$gift_amount.", You get this Gift"; };?></span>
-		  </div>
-  </div>
-</div>
+    </div>      
+
+<?php
+} 
+?> 
 <script>
 function redirect_url(url){
 	window.location.href = url;
 }
-$('.show_gift').click(function(){
+    $('.show_gift').click(function(){
     $('#fade').css({'visibility' : 'visible','display' : 'block'});
     $('.popup_block7').show();
     });
@@ -703,4 +689,3 @@ $('.show_gift').click(function(){
         $('#fade').css({'visibility' : 'hidden','display' : 'none'});
      });
 </script>
-

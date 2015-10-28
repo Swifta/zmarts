@@ -280,10 +280,26 @@ foreach ($this->deals_deatils as $deals) {
                                                         }, 1000);//time in milliseconds
                                                         });
                                                         </script>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
 
                                             <a class="buy_it auction_buy_it" id="auction"  href="javascript:show_auction('<?php if (isset($this->UserID)) {
                                     echo $this->UserID;
                                 } ?>','<?php echo $deals->deal_key; ?>','<?php echo $deals->url_title; ?>');"  title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                            
                                             <a class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } } ?>                                         
@@ -519,7 +535,7 @@ foreach ($this->deals_deatils as $deals) {
                                                                         <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>"><img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png" /></a>                                        
                                                                     </div>
                                     <?php if ($deals->startdate < time()) { ?>
-                                        <?php if ($this->UserID) { //if($count_user==0){   ?>
+                                        <?php if ($this->UserID) {  ?>
                                                                             <div class="place_midd_bott clearfix">
                                                                                 <div class="place_bott_top">
                                                                                     <h3><?php echo $this->Lang['BID_AMOU_LO_WIN']; ?></h3>
@@ -570,9 +586,10 @@ foreach ($this->deals_deatils as $deals) {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                         </div>
                                                     </form>
                                                     <!--end-->  
-                                                </div>
+                                               
                                             </div>
        <?php if (count($this->all_deals_list) > 0) { ?>
             <!--slider_right content start-->

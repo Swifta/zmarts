@@ -123,7 +123,7 @@ else{?>
             
 <section class="main-content" style="<?php echo $bg_color; ?>">
     <div class="row text-center">
-        <h2 class=""><?php echo $this->title_display; ?></h2> 
+        <h2 class=""><?php //echo $this->title_display; ?></h2> 
     </div>
                 <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>
                 <!--<div class="store_product" id="product">-->
@@ -180,7 +180,7 @@ else{?>
     </div>
 </section>
 
-<div class="store_subscribe_part_outer" style="background:white;">
+<!--<div class="store_subscribe_part_outer" style="background:white;">
     <div class="store_subscribe_part" style="background:white;">
         <div class="store_subscribe_part_inner" style="background:white;">
             <h2>Subscribe</h2>
@@ -195,7 +195,7 @@ else{?>
             </div>
         </div>
     </div>    
-</div>
+</div>-->
 
 <input type="hidden" name="offset" id="offset" value="12" />
 <input type="hidden" name="record" id="record" value="12" />

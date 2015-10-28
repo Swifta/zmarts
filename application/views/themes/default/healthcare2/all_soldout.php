@@ -1,6 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $("body").kkCountDowndetail({
@@ -93,172 +95,71 @@ $(".slidetabs").tabs(".images > div", {
     });
 </script>
 
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">
+     <!--  breadcrumb -->  
 
-<!-- banner start-->
-<section  class="homepage-slider" id="home-slider">
-    <div class="flexslider">
-            <ul class="slides">
-
-<?php 
-$banner_check ="";
-if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {  
-                $tabs=0;
-                for ($i = 1; $i <= 3; $i++) {
-                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
-                            $banner_link="";
-
-                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
-                                $banner_check = 1;
-                                if($i==1) { 
-                                    $banner_link = $m->banner_1_link; 
-                                } else if($i==2) { 
-                                    $banner_link = $m->banner_2_link; 
-                                } else if($i==3) { 
-                                    $banner_link = $m->banner_3_link; 
-                                }
-                                
-                            }
-?>
-<li>                                                                                
-    <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
-        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
-    </a>
-</li>
-<?php
-                    }
-                    else{
-                        //echo "No Image file";
-?>
-                <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
-                </li>
-<?php
-                    }
-                }
-        }
-}
-else{?>
-
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
-    </li>
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-2.jpg" alt="" />
-            <div class="intro">
-                    <h1>Mid season sale</h1>
-                    <p><span>Up to 50% Off</span></p>
-                    <p><span>On selected items online and in stores</span></p>
-            </div>
-    </li>
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
-    </li>
-
-<!-- display default banners-->
-<?php
-}
-?>
-            </ul>
-    </div>
-</section>
-            <!-- banner end-->
-            <?php /*if(count($this->merchant_personalised_details)==0 || $banner_check==0){?>
-            <div class="banner">
-                <div class="slider_home">
-                    <img alt="Banner image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/fashion_banner.png"/>
+      <ul class="breadcrumb">
+        <li>
+          <a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a>
+<!--            <a href="#">Home</a>-->
+          <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="<?php echo PATH.$this->storeurl; ?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang["PRODUCTS"]; ?></a></li>
+<!--        <li class="active">Category</li>-->
+ <div class="btn-group pull-right" style="margin-top: -5px;">
+                    <button class="btn" id="list"><i class="icon-th-list"></i>
+                    </button>
+                    <button class="btn btn-orange" id="grid"><i class="icon-th icon-white"></i></button>
+                  </div>
+      </ul>
+<!--      <div class="row">        
+         Sidebar Start
+        <aside class="span3">
+          Category  
+         <div class="sidewidt">
+          
+        </div>           
+           Best Seller   
+         
+          
+           Latest Product   
+          
+            Must have   
+          
+          </div>-->
+        </aside>
+        <!-- Sidebar End-->
+        <!-- Category-->
+        <div class="span12">          
+          <!-- Category Products-->
+          <section id="category">
+                <?php //if ($this->product_setting) { ?>     
+            <div class="row">
+              <div class="span9">
+               <!-- Sorting-->
+                
+                 
                 </div>
-            </div>
-            <?php }*/?>
-            
-            
- <?php 
-				$font_color = "";
-				$bg_color ="";
-				$font_size ="";
-				
-//				if(count($this->merchant_personalised_details)>0) { 
-//					foreach($this->merchant_personalised_details as $m) {  
-//						$font_color = "color:".$m->font_color.";";
-//						$bg_color ="background:".$m->bg_color.";";
-//						$font_size = $m->font_size."px";
-//					} 
-//				}	 
-                                ?>
-<div class="contianer_outer1" style="<?php echo $bg_color; ?>">
-    <div class="contianer_inner">
-        <div class="contianer">
-            <?php /*<div class="bread_crumb">
-                <ul>
-                    <li><p><a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
-                    <li><p><a href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>"><?php echo $this->Lang['STORES']; ?></a></p></li>
-                    <?php foreach ($this->get_store_details as $store) { ?>
-                        <li><p><?php echo ucfirst($store->store_name); ?></p></li>
-                    <?php } ?>
-                </ul>
-            </div> */ ?>
-            <div  id="messagedisplay1" style="display:none;">      
-                <div class="session_wrap">
-                    <div class="session_container">
-                        <div class="success_session">
-                            <p><span ><?php echo $this->Lang['COMM_POST_SUCC']; ?>.</span></p>
-                            <div class="close_session_2">
-                                <a class="closestatus cur" title="<?php echo $this->Lang['CLOSE']; ?>"  onclick="return closeerr();" >&nbsp;</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-             <?php 
-            /*$ads_check = "";
-            if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {
-		 ?>        
-            <div class="advertice_part">
-                <ul>
-					<?php for ($i = 1; $i <= 3; $i++) { ?>
-										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
-											$ads_link="";
-											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
-											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
-                    <li>
-                        <div class="advertice_inner">
-                            <a href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
-                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>  
-                            </a>
-                        </div>
-                    </li>
-                    <?php }else{?>
-						<li><img alt="Banner image" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME ?>/images/fashion_add.png"/></li>
-                    <?php }}?> 
+               <!-- Category-->
+                <section id="categorygrid">
+                       <ul>
+                        <?php if (count($this->get_sold_products) > 0) { ?> 
                    
-                </ul>  
-            </div>
-            <?php  } } */?>
-           
-           
-            <div class="store_page_listing">
-                <div class="product_list_inner">
-                 <?php if ($this->product_setting) { ?>                                                                            
-				
-                    <div class="related_product_list clearfix">
-                        <div class="title_outer">
-                            <h2 class="title_inner2"><?php echo $this->Lang['PRODUCTS']; ?></h2>  
-                        </div>  
-                            	<?php if (count($this->get_sold_products) > 0) { ?>                                 
-                            <div class="slider_wrap">
-                                    <ul  <?php if (count($this->get_sold_products) > 4) { ?> id="mycarousel2" class="jcarousel-skin-tango2" <?php } else { ?> <?php } ?>>                         
-                                        <?php
-                                        $l = 1;
-                                        foreach ($this->get_sold_products as $products) {
-                                            $symbol = CURRENCY_SYMBOL;
-                                            ?>
-                                            <li <?php if($l==4) { ?> class="margin_zero" <?php } ?>>
-
-                                                <div class="store_product_list">
-                                                    <div class=" store_product_list_img">
-                                                        <i class="wloader_img">&nbsp;</i>
-                                                        <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
+	<?php
+		$l = 1;
+		foreach ($this->get_sold_products as $products) {
+			$symbol = CURRENCY_SYMBOL; ?>
+                    <li class="span3">
+                        
+                      <a class="prdocutname" href="product.html">Product Name Here</a>
+                     
+                      <div class="thumbnail">
+                        <span class="sale tooltip-test">Sale</span>
+<!--                        <a href="#"><img alt="" src="img/product1.jpg"></a>-->
+                        <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
                                                         $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
                                                         $size = getimagesize($image_url);
                                                         ?>
@@ -272,168 +173,112 @@ else{?>
                                                                 <?php /* <img src="<?php echo PATH.'images/products/290_215/'.$products->deal_key.'_1'.'.png';?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"> */ ?></a>
                                                         <?php } else { ?>
                                                             <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
-                                                        <?php } ?>                                                            
-                                                    </div>
-
-                                                    <div class="store_product_list_detail">
-                                                        <a style="font-size:<?php echo $font_size; ?> arial;<?php echo $font_color; ?>" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><?php echo substr(ucfirst($products->deal_title), 0, 100); ?></a>
-                                                        <!--<h3><a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo substr(ucfirst(strip_tags($products->deal_description)), 0, 20) . '...'; ?>"><?php echo substr(ucfirst(strip_tags($products->deal_description)), 0, 25) . '...'; ?></a></h3>-->
-                                                            <?php /* <p> <?php echo $symbol . " " . $products->deal_price; ?> <?php echo CURRENCY_CODE; ?></p> */ ?>
-                                                        <p style="font:18px arial;color:#000;"><?php echo $symbol . " " . $products->deal_value; ?> <?php echo CURRENCY_CODE; ?> </p>
-                                                    </div>
-                                                </div> 
-                                            </li>
-                                        <?php $l++; } ?>
-
-                                    </ul>
-                              
-                            </div>
-                             <?php }else{ ?> 
-                              <div class="no_product_found"><?php echo $this->Lang['NO_PRODUCT_SOLD_OUT'];?></div>
-                             <?php }?>
-                                </div>
-                         <?php }?>   
-                         
+                                                        <?php } ?>       
+                        <div class="shortlinks" style="margin-top: -20px; background-color: #3a3c3c; color: white;">
+                 <a class="details"  href="<?php echo PATH . $best->store_url_title . '/product/' . $best->deal_key . '/' . $best->url_title . '.html'; ?>">DETAILS</a>
+              <a class="wishlist" href="#" onclick="addToWishList('<?php echo $best->deal_id; ?>','<?php echo addslashes($best->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">wishlist</a>
+              <a class="compare" href="#" onclick="addToCompare('<?php echo $best->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">compare</a>
+            
                 </div>
-            </div>
-              
-            <div class="store_page_listing">
-                <div class="product_list_inner">
-                        <?php if (($this->deal_setting)) { ?>
-                            <?php $m=1; ?>
-                    <div class="related_product_list clearfix"> 
-                        <div class="title_outer">
-                            <h2 class="title_inner2"><?php echo $this->Lang['DEALS']; ?> </h2>  
-                        </div>  
-                            <?php if (count($this->get_sold_deals) > 0) {  ?>
-                            <div class="slider_wrap">                                
-                                    <ul  <?php if (count($this->get_sold_deals) > 4) { ?> id="mycarousel3" class="jcarousel-skin-tango2" <?php } else { ?> <?php } ?>>
-                                        <?php
-                                        foreach ($this->get_sold_deals as $deals_categories) {
-                                            $symbol = CURRENCY_SYMBOL;
-                                            ?>
-                                            <li <?php if($m==4) { ?> class="margin_zero" <?php } ?>>
-                                                <div class="store_product_list">
-                                                    <div class="deal_list_img">
-                                                        <i class="wloader_img">&nbsp;</i>
-                                                        <?php if (file_exists(DOCROOT . 'images/category/icon/' . $deals_categories->category_url . '.png')) { ?>
+                        <div class="pricetag">
+                          <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                          <div class="price">
+                             <div class="pricenew"><?php echo $symbol . " " . number_format($best->deal_value); ?></div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <?php 
+                        if($l == 4){
+                            break;
+                        }
+                        $l++;
+                        
+                    } 
+                        ?>
 
-                                                        <?php } else { ?>
-
-                                                        <?php } ?>
-
-                                                        <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $deals_categories->deal_key . '_1' . '.png')) {
-                                                           $image_url = PATH . 'images/deals/1000_800/' . $deals_categories->deal_key . '_1' . '.png';
-                                                           $size = getimagesize($image_url); ?>
-                                                            <a href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" >
-                                                             <?php if(($size[0] > DEAL_LIST_WIDTH) && ($size[1] > DEAL_LIST_HEIGHT)) { ?>
-                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $deals_categories->deal_key . '_1' . '.png'; ?>&w=<?php echo DEAL_LIST_WIDTH; ?>&h=<?php echo DEAL_LIST_HEIGHT; ?>" alt="<?php echo $this->Lang['IMAGE']; ?>" title="<?php echo $this->Lang['IMAGE']; ?>" />
-                                                                <?php } else { ?>
-                                                                 <img src="<?php echo PATH .'images/deals/1000_800/'.$deals_categories->deal_key.'_1'.'.png'?>" />
-                                                                <?php } ?>
-                                                              </a>
-                                                        <?php } else { ?>
-                                                            <a href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" ><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_deals_list.png&w=<?php echo DEAL_LIST_WIDTH; ?>&h=<?php echo DEAL_LIST_HEIGHT; ?>"   alt="<?php echo $this->Lang['IMAGE']; ?>" title="<?php echo $this->Lang['IMAGE']; ?>"  ></a>
-                                                        <?php } ?>     
-                                                                                                                    
-                                                    </div>
-                                                    <div class="store_product_list_detail">
-                                                        <?php $type = "";
-                                            $categories = $deals_categories->category_url;
+		<?php }else{?>
+                                <p class="text-center"><?php //echo $this->Lang['NO_PRODUCTS'];?></p>
+<?php }?>
+                                
+                  </ul>
+                       
+                              
+                    
+                    <ul>  
+                        <?php if (count($this->get_sold_products) > 0) { ?> 
+                   
+	<?php
+		$l = 1;
+		foreach ($this->get_sold_products as $products) {
+			$symbol = CURRENCY_SYMBOL; ?>
+                                            <li>  
+                  
+                      <div class="thumbnail">
+                        <div class="row">
+                          <div class="span3">
+                            <span class="offer tooltip-test" >Offer</span>
+                           <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
+                                                        $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+                                                        $size = getimagesize($image_url);
                                                         ?>
-                                                            <a style="font-size:<?php echo $font_size; ?> arial; <?php echo $font_color; ?>" href="<?php echo PATH .$deals_categories->store_url_title. '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" title="<?php echo substr(ucfirst($deals_categories->deal_title), 0, 25) . "..."; ?>"><?php echo substr(ucfirst($deals_categories->deal_title), 0, 100) ; ?></a>
-                                                                                                                
-                                                    </div>
-
-                                                </div> 
-                                            </li>
-                                    <?php $m++; } ?>
-                                    </ul>
-                           
-                            </div>
-                             <?php }else{ ?>
-                             <div class="no_product_found"><?php echo $this->Lang['NO_DEAL_SOLD_OUT'];?></div>
-                             <?php }?>
-                                </div>    
-                                <?php }?>
-                </div> 
-            </div>
-           
-            <div class="store_page_listing">
-                <div class="product_list_inner">
-                  <?php if (($this->auction_setting)) { ?>
-                            
-                    <div class="related_product_list clearfix"> 
-                            <div class="title_outer">
-                                <h2 class="title_inner2"><?php echo $this->Lang['AUCT']; ?></h2>  
-                            </div>                                
-                               <?php if (count($this->get_sold_auction) > 0) { ?>
-                            <div class="slider_wrap">  
-                                    <ul <?php if (count($this->get_sold_auction) > 4) { ?> id="mycarousel4" class="jcarousel-skin-tango2" <?php } else { ?> <?php } ?>>
-                                        <?php
-                                        foreach ($this->get_sold_auction as $deals1) {
-                                            $symbol = CURRENCY_SYMBOL;
-                                            ?>			
-                                            <li>
-                                                <div class="store_product_list">
-                                                    <div class="store_product_list_img">
-                                                        <i class="wloader_img">&nbsp;</i>
-            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-               $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
-                                $size = getimagesize($image_url);
-                                ?>
-                                                            <a href="<?php echo PATH . $deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" title="<?php echo $deals1->deal_title; ?>">
-                                                                               <?php if(($size[0] > AUCTION_LIST_WIDTH) && ($size[1] > 130)) { ?>
-                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png'; ?>&w=<?php echo AUCTION_LIST_WIDTH; ?>&h=130" alt="<?php echo $deals1->deal_title; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" border="0" />
-                                                                <?php } else { ?>
-                                 <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+                                                            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                                                                 <?php } else { ?>
+                                 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
                                 <?php } ?>
                                                                 
-                                                            <?php /* <img src="<?php echo PATH.'images/auction/220_160/'.$deals1->deal_key.'_1'.'.png';?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" border="0" /> */ ?></a>
-
+                                                                <?php /* <img src="<?php echo PATH.'images/products/290_215/'.$products->deal_key.'_1'.'.png';?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"> */ ?></a>
                                                         <?php } else { ?>
-                                                            <a  href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" title="<?php echo $deals1->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_auctions_list.png&w=<?php echo AUCTION_LIST_WIDTH; ?>&h=130"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>"  border="0" /></a>
-												<?php } ?>
-                                                           
-                                                      
-                                                    </div>
-                                                    <div class="store_product_list_detail">
-                                                        <?php $type = "";$categories = $deals1->category_url;?>
-                                                        <a style="font-size:<?php echo $font_size; ?> arial;<?php echo $font_color; ?>" class="cursor" href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" title="<?php echo $deals1->deal_title; ?>"><?php echo substr(ucfirst($deals1->deal_title), 0, 50); ?></a>
-                                                       
-                                                    </div>
-                                                </div> 
-                                            </li>
-                                        <?php  } ?>                    
-                                </ul>
-                            </div> 
-                            <?php }else{?>
-                            <div class="no_product_found"><?php echo $this->Lang['NO_AUCTION_SOLD_OUT'];?></div>
-                            <?php }?>                                   
-                        </div>
-              <?php   }   ?>
-
-                </div>
-            </div>
+                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
+                                                        <?php } ?>
+                          </div>
+                          <div class="span6">
+                            <a class="prdocutname" href="product.html">Product Name Here</a>
+                            <div class="productdiscrption"> ... </div>
+                            <div class="pricetag">
+                              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                              <div class="price">
+                                <div class="pricenew"><?php echo $symbol . " " . number_format($best->deal_value); ?></div>
+                              </div>
+                            </div>
+                           <div class="shortlinks" style="margin-top: -20px; background-color: #3a3c3c; color: white;">
+                 <a class="details"  href="<?php echo PATH . $best->store_url_title . '/product/' . $best->deal_key . '/' . $best->url_title . '.html'; ?>">DETAILS</a>
+              <a class="wishlist" href="#" onclick="addToWishList('<?php echo $best->deal_id; ?>','<?php echo addslashes($best->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">wishlist</a>
+              <a class="compare" href="#" onclick="addToCompare('<?php echo $best->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">compare</a>
             
-    </div>
-</div>
-</div>
-<div class="store_subscribe_part_outer" style="background:white;">
-    <div class="store_subscribe_part" style="background:white;">
-        <div class="store_subscribe_part_inner" style="background:white;">
-            <h2>Subscribe</h2>
-            <p>Subscribe to receive our news everyday !</p>
-            <div class="sub_cont">
-                <div class="sub_cont_inner">
-                    <input type="text" name="store_subscriber" id="store_subscriber1"  placeholder="Enter Email Address" onkeypress="return check_color();" />
-                     <input type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');" value=""/>
-                    <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
-                </div>  
-                <em id="email_subscriber_error1"></em>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                      <?php 
+                        if($l == 4){
+                            break;
+                        }
+                        $l++;
+                        
+                    } 
+                        ?>
+
+		<?php }else{?>
+                                <p class="text-center"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
+<?php }?>
+                   
+                     
+                   
+                  </ul>
+                      
+                </section>
+              </div>
+              
             </div>
+          
+          </section>
         </div>
-    </div>    
+      </div>
+    </div>
+  </section>
 </div>
 
 <script>

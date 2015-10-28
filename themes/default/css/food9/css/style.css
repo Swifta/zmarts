@@ -4560,7 +4560,7 @@ a.product-button i {
 	font-weight: 700;
 	color: #606060;
 	padding: 1px 0 5px 0;
-	display: block;
+	/*display: block;*/
 }
 
 .product-price-discount {
@@ -7438,3 +7438,6 @@ only screen and (min-device-pixel-ratio: 2) {
 	}
 	
 	@media only screen and (max-width: 1024px) {#style-switcher {display: none;}}
+        .buy_it{
+            background:rgba(0,0,0,0.06);
+        }

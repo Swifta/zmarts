@@ -89,11 +89,6 @@ else{?>
     </li>
     <li>
             <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-2.jpg" alt="" />
-            <div class="intro">
-                    <h1>Mid season sale</h1>
-                    <p><span>Up to 50% Off</span></p>
-                    <p><span>On selected items online and in stores</span></p>
-            </div>
     </li>
     <li>
             <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />

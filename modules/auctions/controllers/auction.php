@@ -38,6 +38,7 @@ class Auction_Controller extends Layout_Controller
 
 	public function today_auction($page = "")
 	{
+		
 		//$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/anythingzoomer.css'));
 		$this->template->javascript .= html::script(array(PATH.'js/timer/kk_countdown_1_2_jquery_min.js'));
 	    $this->is_auction = 1;
@@ -94,6 +95,7 @@ class Auction_Controller extends Layout_Controller
 		//$this->banner_details = $this->deals->get_banner_list();
 		$this->template->title = $this->Lang["AUCTION"]." | ".SITENAME;
 		$this->title_display = $this->Lang["AUCTION"];
+		
 		$this->template->content = new View("themes/".THEME_NAME."/auction/auction");
 		if($id = $this->input->get('cate_id')){
 		$type = ($this->input->get('t'));
@@ -321,6 +323,11 @@ class Auction_Controller extends Layout_Controller
 	        $this->is_details = 1;
 	        $this->is_auction_refresh = 1;
 	        $this->storeurl = $storeurl;
+			
+			$this->deal_key = $deal_key;
+			$this->url_title = $url_title;
+			$this->type = $type;
+			
 	        $this->template->javascript .= html::script(array(PATH.'js/timer/kk_countdown_1_2_jquery_min.js'));
 		$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
                 $this->storeid = $this->deals->get_store_id($storeurl);
@@ -377,6 +384,8 @@ class Auction_Controller extends Layout_Controller
 			} else {
 				$this->sector ="";
 			}
+			
+			
 			
 			if($this->theme_name) { 
                         if($this->theme_name == "fashion9"){

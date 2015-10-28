@@ -197,11 +197,14 @@ class Layout_Controller extends Template_Controller
 	
 	public function logout()
 	{
+		
 		$city_id = $this->session->get("CityID");
 		$sess_lang = $this->session->get("front_language");		
 		$this->session->destroy();
 		setcookie("CityID_old", $city_id);
 		setcookie("front_language", $sess_lang);
+		
+		
 		url::redirect(PATH.'subscribe.html');
 	}
 

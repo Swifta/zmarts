@@ -1,4 +1,4 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.');
+get_product_categories<?php defined('SYSPATH') OR die('No direct access allowed.');
 class Healthcare2_Controller extends Layout_Controller
 {
 	const ALLOW_PRODUCTION = FALSE;
@@ -166,6 +166,7 @@ class Healthcare2_Controller extends Layout_Controller
 		}
 		
 		foreach($this->get_store_details as $store) {
+                    $this->storeid = $store->store_id;
                         $this->avg_rating =$this->stores->get_store_rating($store->store_id);
                         $this->get_sub_store_details = $this->stores->get_sub_store_detailspage($store->store_id);
                         $this->get_deals_categories = $this->stores->get_deals_categories($store->store_id,$search,1);

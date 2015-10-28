@@ -37,6 +37,10 @@ $config['wishlist.html/(.*)'] = "/products/wishlist/$1";
 $config['delete-wishlist/(.*).html'] = "/products/remove_wishlist/$1";
 
 $config['(.*)/product/(.*)/(.*).html'] ="/products/details_product/$1/$2/$3";
+
+
+
+
 /* store credits product */
 $config['storecredits-products.html'] = "/products/all_products_store_credits";
 $config['storecredits-products/page/(.*)'] = "/products/all_products_store_credits/$1";

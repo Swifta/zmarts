@@ -382,7 +382,8 @@ $srch = $this->Lang['SRCH_STR'];
 
 
 
-        <?php } ?>
+        <?php } 
+        ?>
 
         <?php if ($this->deal_setting) { ?>
         <li class="<?php if (isset($this->is_todaydeals)) echo "active"; ?> "><a href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>">
@@ -488,7 +489,7 @@ $srch = $this->Lang['SRCH_STR'];
         <?php if ($this->store_setting) { ?>
 	        <li <?php
 		        if (isset($this->is_store)) {
-			        echo "class='active'";
+			        echo "class=''";
 		        }
 		        ?>>
 		        <a href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">

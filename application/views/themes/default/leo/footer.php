@@ -106,4 +106,156 @@
 }
             
 		</script>
+        
+        
+        
+        
+<!--
+    Remove Item from cart 
+	@Live
+-->
+<script type="text/javascript">
+	
+	function leo_remove_cart_item(rm_id){
+			
+			
+			var cart_last_add = parseInt($('#id_cart_add_last_state').val());
+			var cart_last_remove = parseInt($('#id_cart_remove_last_state').val());
+			
+			
+			/*if(cart_last_add == cart_last_remove)
+				return false;*/
+			
+				
+			item_add_count =  cart_last_add;
+			item_remove_count = cart_last_remove+1;
+			item_count = item_add_count-item_remove_count; 
+			$('#id_cart_remove_last_state').val(item_remove_count);
+			/*$('#id_cart_item_count').html('<li ><a href="#" >Cart('+item_count+')</a></li>');*/
+			id_item_no_rm = "id_item_no_"+rm_id;
+			$('#'+id_item_no_rm).remove();
+			
+			
+				
+				
+			remove_item_from_cart1(rm_id);
+			
+			
+			
+		}
+	
 
+
+
+</script>
+<script type="text/javascript">
+
+function remove_item_from_cart1(deal_id){
+		
+			url = "<?php echo PATH ?>/leo/cart_product_remove?deal_id="+deal_id;
+	
+    $.ajax(
+	       {
+		        type:'GET',
+		        url:url,
+		        cache:false,
+		        async:true,
+		        global:false,
+		        dataType:"text",
+		        success:function(check)
+		        {
+					
+					check_temp = -99;
+						
+					try{
+						check_temp = parseInt(check);
+					}catch(err){
+						
+					}
+					
+					check = check_temp;
+					if(check < 0)
+					switch(check){
+						case -1:{
+							
+							<?php //$this->error_response = 'Invalid item Data.';?>
+							location.reload();
+							break;
+						}
+						
+						
+						default:{
+							
+            				<?php //$this->error_response = 'Invalid response';?>
+							location.reload();
+							return false;
+							
+						}
+					}
+					
+					else
+					
+					$('#id_cart_item_count').html('<li ><a href="#" >Cart('+check+')</a></li>');
+					
+					if(check == 0){
+				$('#id_cart_state').html('<li><a href="#"><h3>No Items</h3></a></li><li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>');
+				
+					}
+					
+					
+					location.reload();
+					
+					return false;
+		          
+		        },
+		        error:function()
+		        {
+					
+					<?php //$this->error_response = 'Error in connection. Please check your network.';?>
+					location.reload();
+					return false;
+		        }
+
+	         
+			});
+			
+}
+</script> 
+
+<?php 
+		$absolute_url = common::full_url($_SERVER);
+		$this->session->set('leo_redirect_url', $absolute_url);
+		
+?>
+
+<script type="text/javascript">
+		function validate(){
+			$('#s_q').css('border-color', '#FFF');
+			$('#s_q').attr('title', 'Search');
+				
+			q = $('#s_q').val();
+			if(!q || q == 'Search'){
+				alert(q);
+				$('#s_q').css('border-color', '#F00');
+				$('#s_q').attr('title', 'Value required for search');
+				return false;
+			}
+			
+			
+			
+			
+			url = "<?php echo PATH;?>";
+			
+			<?php if(isset($this->type)){?>
+				url = url+"<?php echo $this->storeurl."/".$this->type;?>.html/?q="+q;
+			<?php }else{?>
+				url = url+"<?php echo $this->storeurl;?>/?q="+q;
+			<?php }?>
+			//alert(url);
+			/*window.location.href = "<?php echo PATH.$this->storeurl?>/products.html?q="+q;*/
+			window.location.href = url;
+			
+			
+			
+		}
+    </script>

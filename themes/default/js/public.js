@@ -331,16 +331,23 @@ function showlogin(z_offer)
 	}
 }
 
+
+
+
 function show_auction(userid,auction_key,auction_title)
 {
+	
         if(!userid) {
+			
 	        $('input[name="auction_key"]').val(auction_key);
 	        $('input[name="auction_title"]').val(auction_title);
 	        $('#fade').css({'visibility' : 'visible'});
 	        $('.popup_block').css({'display' : 'block'});
         } else {
+			
 	        $('#fade').css({'visibility' : 'visible'});
 	        $('.popup_auction').css({'display' : 'block'});
+			
         }
 }
 
@@ -453,17 +460,23 @@ function check(){
 		var old_bid = $('#old_bid').val();
 		var new_bid = $('#new_bid').val();
 		var deal_id = $('input[name="bid_deal_id"]').val();
+		
+		$(".place_input").attr('title', 'Place new bid');
+		
 		if(parseFloat(new_bid)==""){
 			$(".place_input").css('border','1px solid red');
+				$(".place_input").attr('title', 'Please enter a value');
 				return false;
 		}
 		else if(filter.test(parseFloat(new_bid))==false){
 			$(".place_input").css('border','1px solid red');
 				$('#new_bid').val('');
+				$(".place_input").attr('title', 'Invalid value entered');
 				return false;
 		}
 		else if(parseFloat(old_bid) > parseFloat(new_bid)){
 			$(".place_input").css('border','1px solid red');
+			$(".place_input").attr('title', 'Bid amount is below minimum');
 			return false;
 		}
 		if(parseFloat(new_bid) >= parseFloat(old_bid)){
@@ -475,6 +488,7 @@ function check(){
 				 }
 				else {
 					$(".place_input").css('border','1px solid red');
+					$(".place_input").attr('title', 'Oops... looks like have already placed this bid.');
 					return false;
 				}
 			});
@@ -905,7 +919,6 @@ function remove_cart_item(item)
 
 /* Add to compare */
 function addToCompare(product_id,tis,t) {
-
 
 	if(tis != ""){
 	        var a = $(tis).is(':checked');
@@ -1351,6 +1364,7 @@ function changing_sectors(sector)
 }
 function filtercategory_store(category_url,type,cat_type,store_url)
 {
+    //alert(category_url+" "+type+" "+cat_type+" "+store_url);
       if(category_url && type == "products"){
                   window.location.href = Path+store_url+"/products/c/"+cat_type+"/"+category_url+'.html';
       }
@@ -1616,7 +1630,7 @@ function login_after_zenith_offer_click(email, password, z_offer){
 					if(response == 1)
 						showmembershipsignup(response);
 					else
-						window.location.href = response;
+						window.location.href = document.referrer;
 					
 					return true;
 				

@@ -1,6 +1,15 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<style>
+    
+    .nop{
+        
+       margin-left:150px;
+    }
+</style>
 <script type="text/javascript">
     $(document).ready(function() {
         $("body").kkCountDowndetail({
@@ -38,172 +47,343 @@ $(".slidetabs").tabs(".images > div", {
     });
 </script>
 <!--Carousel Script-->
-<!-- banner start-->
-<section  class="homepage-slider" id="home-slider">
-    <div class="flexslider">
-            <ul class="slides">
+<script type="text/javascript">
 
-<?php
-$banner_check ="";
-if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {  
-                $tabs=0;
-                for ($i = 1; $i <= 3; $i++) {
-                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
-                            $banner_link="";
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel').jcarousel({
+            wrap: 'circular'
+        });
+    });
 
-                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
-                                $banner_check = 1;
-                                if($i==1) { 
-                                    $banner_link = $m->banner_1_link; 
-                                } else if($i==2) { 
-                                    $banner_link = $m->banner_2_link; 
-                                } else if($i==3) { 
-                                    $banner_link = $m->banner_3_link; 
-                                }
-                                
-                            }
-?>
-<li>                                                                                
-    <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
-        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
-    </a>
-</li>
-<?php
-                    }
-                    else{
-                        //echo "No Image file";
-?>
-                <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
-                </li>
-<?php
-                    }
-                }
-        }
-}
-else{?>
+</script>
+<script type="text/javascript">
 
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
-    </li>
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-2.jpg" alt="" />
-            <div class="intro">
-                    <h1>Mid season sale</h1>
-                    <p><span>Up to 50% Off</span></p>
-                    <p><span>On selected items online and in stores</span></p>
-            </div>
-    </li>
-    <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
-    </li>
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel2').jcarousel({
+            wrap: 'circular'
+        });
+    });
 
-<!-- display default banners-->
-<?php
-}
-?>
+</script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel3').jcarousel({
+            wrap: 'circular'
+        });
+    });
+
+</script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel4').jcarousel({
+            wrap: 'circular'
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel5').jcarousel({
+            wrap: 'circular'
+        });
+    });
+
+</script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function() {
+        jQuery('#mycarousel6').jcarousel({
+            wrap: 'circular'
+        });
+    });
+</script>
+
+<div id="maincontainer">
+  <section id="product">
+    <div class="container">
+     <!--  breadcrumb -->  
+
+      <ul class="breadcrumb">
+        <li>
+          <a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a>
+<!--            <a href="#">Home</a>-->
+          <span class="divider">/</span>
+        </li>
+        <li>
+            <a href="<?php echo PATH.$this->storeurl; ?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang["PRODUCTS"]; ?></a></li>
+<!--        <li class="active">Category</li>-->
+<div class="btn-group pull-right" style="margin-top: -4px;">
+                    <button class="btn" id="list"><i class="icon-th-list"></i>
+                    </button>
+                    <button class="btn btn-orange" id="grid"><i class="icon-th icon-white"></i></button>
+                  </div>
+      </ul>
+      <div class="row">        
+        <!-- Sidebar Start-->
+        <aside class="span3">
+         <!-- Category-->  
+         <div class="sidewidt">
+         
+          
+        </div>           
+         <!--  Best Seller -->  
+         
+<!--          <div class="sidewidt">
+            <h2 class="heading2"><span>Best Seller</span></h2>
+            <ul class="bestseller">
+              <li>
+                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <a class="productname" href="product.html"> Product Name</a>
+                <span class="procategory">Women Accessories</span>
+                <span class="price">$250</span>
+              </li>
+              <li>
+                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <a class="productname" href="product.html"> Product Name</a>
+                <span class="procategory">Electronics</span>
+                <span class="price">$250</span>
+              </li>
+              <li>
+                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <a class="productname" href="product.html"> Product Name</a>
+                <span class="procategory">Electronics</span>
+                <span class="price">$250</span>
+              </li>
             </ul>
-    </div>
-</section>
+          </div>-->
+          <!-- Latest Product -->  
+<!--          <div class="sidewidt">
+            <h2 class="heading2"><span>Latest Products</span></h2>
+            <ul class="bestseller">
+              <li>
+                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <a class="productname" href="product.html"> Product Name</a>
+                <span class="procategory">Women Accessories</span>
+                <span class="price">$250</span>
+              </li>
+              <li>
+                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <a class="productname" href="product.html"> Product Name</a>
+                <span class="procategory">Electronics</span>
+                <span class="price">$250</span>
+              </li>
+              <li>
+                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <a class="productname" href="product.html"> Product Name</a>
+                <span class="procategory">Electronics</span>
+                <span class="price">$250</span>
+              </li>
+            </ul>
+          </div>-->
+          <!--  Must have -->  
+<!--          <div class="sidewidt">
+          <h2 class="heading2"><span>Must have</span></h2>
+          <div class="flexslider" id="mainslider">
+            <ul class="slides">
+              <li>
+                <img src="img/product1.jpg" alt="" />
+              </li>
+              <li>
+                <img src="img/product2.jpg" alt="" />
+              </li>
+            </ul>
+          </div>
+          </div>-->
+        </aside>
+        <!-- Sidebar End-->
+        <!-- Category-->
+        <div class="span9">          
+          <!-- Category Products-->
+          <section id="category">
+               
+            <div class="row">
+              <div class="span9">
+               <!-- Sorting-->
+<!--                <div class="sorting well">
+                  <form class=" form-inline pull-left">
+                    Sort By :
+                    <select class="span2">
+                      <option>Default</option>
+                      <option>Name</option>
+                      <option>Pirce</option>
+                      <option>Rating </option>
+                      <option>Color</option>
+                    </select>
+                    &nbsp;&nbsp;
+                    Show:
+                    <select class="span1">
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                      <option>25</option>
+                      <option>30</option>
+                    </select>
+                  </form>
+                  <div class="btn-group pull-right">
+                    <button class="btn" id="list"><i class="icon-th-list"></i>
+                    </button>
+                    <button class="btn btn-orange" id="grid"><i class="icon-th icon-white"></i></button>
+                  </div>
+                </div>-->
+               <!-- Category-->
+                <section id="categorygrid">
+                         
+                    <ul>
+                        <?php if (count($this->all_auction_list) > 0) { ?> 
+                   
+	<?php
+		$l = 1;
+		foreach ($this->all_auction_list as $products) {
+			$symbol = CURRENCY_SYMBOL; ?>
+<!--                    <li class="span3">-->
+                        
+                      <a class="prdocutname" href="product.html">Product Name Here</a>
+                     
+                      <div class="thumbnail">
+                        <span class="sale tooltip-test">Sale</span>
+<!--                        <a href="#"><img alt="" src="img/product1.jpg"></a>-->
+                        <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
+                                                        $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+                                                        $size = getimagesize($image_url);
+                                                        ?>
+                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+                                                            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                                                                 <?php } else { ?>
+                                 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                                <?php } ?>
+                                                                
+                                                                <?php /* <img src="<?php echo PATH.'images/products/290_215/'.$products->deal_key.'_1'.'.png';?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"> */ ?></a>
+                                                        <?php } else { ?>
+                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
+                                                        <?php } ?>       
+                        <div class="shortlinks" style="margin-top:-20px;">
+                         <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
+                          <a class="wishlist" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">&nbsp;</a>
+                          
+                          <a class="compare" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">COMPARE</a>
+                        </div>
+                        <div class="pricetag">
+                          <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                          <div class="price">
+                            <?php echo $symbol . " " . number_format($products->deal_value); ?>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    
+                    <?php 
+                        if($l == 4){
+                            break;
+                        }
+                        $l++;
+                        
+                    } 
+                        ?>
 
-            <!-- banner end-->
- <?php 
-				$font_color = "";
-				$bg_color ="";
-				$font_size ="";
-				
-//				if(count($this->merchant_personalised_details)>0) { 
-//					foreach($this->merchant_personalised_details as $m) {  
-//						$font_color = "color:".$m->font_color.";";
-//						$bg_color ="background:".$m->bg_color.";";
-//						$font_size = $m->font_size."px";
-//					} 
-//				}	 
-                                
-                                ?>
-            
-            
-<section class="main-content" style="<?php echo $bg_color; ?>">
-    <div class="row text-center">
-        <h2 class=""><?php echo $this->title_display; ?></h2> 
-    </div>
-                <i class="wloader_img" style="min-height: 525px;">&nbsp;</i>
-                <!--<div class="store_product" id="product">-->
-<div class="row">
-    <div class="span12">
-<div class="row">
-            <div class="span12">
-<ul class="thumbnails text-center">
-        
-
-
-    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_auction_list"); ?>
-                
-            
-                
-                    <span  id="product">
-                    </span>
-                
-
-</ul>
-                </div>
-</div>
-</div>
-                <!--</div>-->
-     
-    <?php if(($this->all_auction_count > 12)) { ?>
-        <div id="loading">
-        <?php if (($this->pagination) != "") { ?>
-                    <div class="feature_viewmore text-center">
-                            <div class="fea_view_more text-center">                                                
-                                    <a class="view_more view_more1 view_more_but">
-                                            <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_AUC']; ?><span class="view_more_icon">- - -</span>
-                                    </a> 
+		<?php }else{?>
+                                <p class="nop"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
+<?php }?>
+    
+                  </ul>
+                      
+               
+                  <ul class="thumbnails list row">
+                      <?php if (count($this->all_auction_list) > 0) { ?> 
+                   
+	<?php
+		$l = 1;
+		foreach ($this->all_auction_list as $products) {
+			$symbol = CURRENCY_SYMBOL; ?>
+                    <li>
+                      <div class="thumbnail">
+                        <div class="row">
+                          <div class="span3">
+                            <span class="offer tooltip-test" >Offer</span>
+                           <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
+                                                        $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+                                                        $size = getimagesize($image_url);
+                                                        ?>
+                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+                                                            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                                                                 <?php } else { ?>
+                                 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                                <?php } ?>
+                                                                
+                                                                <?php /* <img src="<?php echo PATH.'images/products/290_215/'.$products->deal_key.'_1'.'.png';?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"> */ ?></a>
+                                                        <?php } else { ?>
+                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
+                                                        <?php } ?>
+                          </div>
+                          <div class="span6">
+                            <a class="prdocutname" href="product.html">Product Name Here</a>
+                            <div class="productdiscrption"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.<br>
+                              <br>
+                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan </div>
+                            <div class="pricetag">
+                              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                              <div class="price">
+                                 <?php echo $symbol . " " . number_format($products->deal_value); ?>
+                              </div>
                             </div>
-                    </div>
-                <?php } ?>
-        </div>
-    <?php } ?>
-</div>
-</section>
-            
+                           <div class="shortlinks" style="margin-top:-20px;">
+                         <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
+                          <a class="wishlist" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">&nbsp;</a>
+                          
+                          <a class="compare" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">COMPARE</a>
+                        </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                      <?php 
+                        if($l == 4){
+                            break;
+                        }
+                        $l++;
+                        
+                    } 
+                        ?>
 
-
-
-<section  id="messagedisplay1" style="display:none;">      
-    <div class="session_wrap">
-        <div class="session_container">
-            <div class="success_session">
-                <p><span ><?php echo $this->Lang['COMM_POST_SUCC']; ?>.</span></p>
-                <div class="close_session_2">
-                    <a class="closestatus cur" title="<?php echo $this->Lang['CLOSE']; ?>"  onclick="return closeerr();" >&nbsp;</a>
-                </div>
+		<?php }else{?>
+                                <p class="nop"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
+<?php }?>
+                    
+                  </ul>
+                       
+                                    
+<!--                  <div class="pagination pull-right" id ="hide" >
+                    <ul>
+                      <li><a href="#">Prev</a>
+                      </li>
+                      <li class="active">
+                        <a href="#">1</a>
+                      </li>
+                      <li><a href="#">2</a>
+                      </li>
+                      <li><a href="#">3</a>
+                      </li>
+                      <li><a href="#">4</a>
+                      </li>
+                      <li><a href="#">Next</a>
+                      </li>
+                    </ul>
+                  </div>-->
+                </section>
+              </div>
             </div>
+          </section>
         </div>
+      </div>
     </div>
-</section>
-            
-            
-<div class="store_subscribe_part_outer" style="background:white;">
-    <div class="store_subscribe_part" style="background:white;">
-        <div class="store_subscribe_part_inner" style="background:white;">
-            <h2>Subscribe</h2>
-            <p>Subscribe to receive our news everyday !</p>
-            <div class="sub_cont">
-                <div class="sub_cont_inner">
-                    <input type="text" name="store_subscriber" id="store_subscriber1"  placeholder="Enter Email Address" onkeypress="return check_color();" />
-                     <input type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');" value=""/>
-                    <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
-                </div>  
-                <em id="email_subscriber_error1"></em>
-            </div>
-        </div>
-    </div>    
+  </section>
 </div>
-<input type="hidden" name="offset" id="offset" value="12">
-<input type="hidden" name="record" id="record" value="12">
-<input type="hidden" name="record" id="record1" value="<?php echo $this->all_auction_count; ?>">
 <script>
 function store_subscriber_validate1(store_url)
 {
@@ -265,30 +445,5 @@ function check_color(){
 	$('.sub_cont_inner').css('border','none');
 	$('.sub_cont_inner').css('border-bottom','2px solid #404040');
 }
-
-$(document).ready(function() {
-	$('a.view_more1').live("click", function(e) {
-		var offset = 0;
-		offset = document.getElementById('offset').value;
-		var record = document.getElementById('record').value;
-		var record1 = document.getElementById('record1').value;
-		var url = '<?php echo PATH; ?>' + '<?php echo $this->theme_name;?>/all_auction_list/<?php echo $this->storeurl;?>/'+ offset + '/' + record+'/'+'<?php echo $this->cat_type; ?>'+'/'+'<?php echo $this->category_url; ?>'+'/'+'<?php echo $this->search_key;?>' + '/' + '<?php echo $this->search_cate_id;?>';
-		$.post(url, function(check) {
-			if (check) {
-				$('#product').append(check);
-				$('#loading').show();
-				$('.wloader_img').hide();
-				offset = parseInt(offset) + 12;
-				$("#offset").val(offset);
-				if (offset >= record1) {
-					$('#loading').hide();
-				}
-			} 
-		});  
-	}); 
-});
 </script>
 
-<style>
-	.store_pro_list li{width:285px !important;}
-</style>
