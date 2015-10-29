@@ -66,11 +66,11 @@ foreach ($this->product_deatils as $products) {
                 <div class="title-bar">
                     <h1>
                     <?php 
-                    if(strlen($deals->deal_title) > 70){
-                        echo substr($deals->deal_title, 0, 70);
+                    if(strlen($products->deal_title) > 70){
+                        echo substr($products->deal_title, 0, 70);
                     }
                     else{
-                        echo ucfirst($deals->deal_title);
+                        echo ucfirst($products->deal_title);
                     }
                     ?>
                     </h1>
