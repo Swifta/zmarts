@@ -34,10 +34,10 @@ $this->language_List = str_replace(".php", "", $DL);
 
 <style>
         .buy_it{
-            background:#3acf87;
+            background:#474747;
         }
         .buy_it:hover{
-            background:#606060;
+            background:#cc2828;
         }
         
         .product .mediaholder img{
@@ -51,7 +51,7 @@ $this->language_List = str_replace(".php", "", $DL);
 <div class="header-bar">
     <div class="container">
         <div class="row">
-            <div class="span6">
+            <div class="span4">
                 <ul>
          <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
                         <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
@@ -71,70 +71,55 @@ $this->language_List = str_replace(".php", "", $DL);
         <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
                     <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
                             </li>
-        <?php  if($this->session->get('user_auto_key')) { ?>
-        <li  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
-        <?php } ?>
                 </ul>
             </div>
 
-            <div class="span6 right">
+            <div class="span8 right">
                 <div class="social-strip">
-                    <ul>
-       <li><a href="<?php echo PATH;?>" class="home">Home</a></li>
+                    <ul>  
+                        <li><a href="<?php echo PATH;?>">Home</a></li>
+							<?php if ($this->session->get('UserID')) { ?>
+								<li> &nbsp;&nbsp;<strong><?php echo $this->Lang['WELCOME']; ?> </strong> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+		        <?php  if($this->session->get('user_auto_key')) { ?>
+        <li> <a style="color:red" href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
+        <?php } ?>	
+								<li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
 
-        <?php if ($this->session->get('UserID')) { ?>
-                <li><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+						<?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+								<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare) > 1 ){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
 
-                <li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
+								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li>
 
+						<?php } ?>
+						                <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
+   		<!-- 
+    		Adding Zenith Offer Label to the header.
+    		@Live
+   		-->
+	<li ><a id="leo_id" href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
+	
+                                                                <li><a href="<?php if($this->session->get("count") > 0){ echo 'javascript:logout_click();'; }else{ echo PATH."logout.html"; } ?>" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
+							<?php } else { ?>
+							<?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+								<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare) > 1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
+																
+								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li>
+								
+							<?php } ?>
+                            
+	<li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
 
-        <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+	
+	<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+    <!-- 
+    	Adding Zenith Offer Label to the header.
+    	@Live
+    -->
 
-
-                <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
-
-                <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
-                <li  class="" >
-                <?php $compare = $this->session->get("product_compare"); 
-                if(is_array($compare) && count($compare)>1){  ?>
-                <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
-                <li class=""> <?php $compare = $this->session->get("product_compare"); 
-                if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
-
-
-        <?php } ?>
-                <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
-
-                <li><a href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
-        <?php } else { ?>
-
-        <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
-                <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
-
-                <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
-
-                <li  class="" >
-                <?php $compare = $this->session->get("product_compare"); 
-                if(is_array($compare) && count($compare)>1){  ?>
-                <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
-                <li class=""> <?php $compare = $this->session->get("product_compare"); 
-                if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
-
-        <?php } ?>
-
-                <li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
-
-                <li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
-                <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
-        <?php } ?>
-        <?php if (FB_PAGE) { ?>
-        <!-- <li><a class="faceb" href="<?php echo FB_PAGE; ?>" target="blank" title="<?php echo $this->Lang['FB']; ?>">&nbsp;</a></li>-->
-        <?php }if (TWITTER_PAGE) { ?>
-        <!-- <li><a class="twitt" href="<?php echo TWITTER_PAGE; ?>" target="blank" title="<?php echo $this->Lang['TW']; ?>">&nbsp;</a></li>-->
-        <?php }if (LINKEDIN_PAGE) { ?>
-        <!--  <li><a class="linked" href="<?php echo LINKEDIN_PAGE; ?>" target="blank" title="<?php echo $this->Lang['LINK']; ?>">&nbsp;</a></li>-->
-        <?php } if ($this->city_id) { 
-        }  ?>
+	<li style="color:green;font-weight: bold;"><a href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
+								<!--<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
+								<li><a  style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>
+							<?php } ?>
                     </ul>
                 </div>
 
@@ -328,8 +313,16 @@ $srch = $this->Lang['SRCH_STR'];
                 $check_sub_cat = $d->product_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
                     <div class="our-product">
-                        <h3><?php echo ucfirst($d->category_name); ?></h3>
-                        <p>
+                <h3><?php 
+                if(strlen($d->category_name) > 16){
+                    echo substr(ucfirst($d->category_name), 0, 16);
+                }
+                else{
+                    echo ucfirst($d->category_name);
+                }
+                ?>
+                </h3>
+                        <div>
                             <?php if(count($this->subcategories_list)>0){
                                 foreach($this->subcategories_list as $sub_cate){
                                     if($sub_cate->main_category_id == $d->category_id){
@@ -341,7 +334,7 @@ $srch = $this->Lang['SRCH_STR'];
 
                             }
                         ?>
-                        </p>
+                        </div>
                     </div>
                         <?php
                         }?>
@@ -379,9 +372,17 @@ $srch = $this->Lang['SRCH_STR'];
             foreach ($this->categeory_list_deal as $d) {
                 $check_sub_cat = $d->deal_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
-                    <h3><?php echo ucfirst($d->category_name); ?></h3>
+                <h3><?php 
+                if(strlen($d->category_name) > 16){
+                    echo substr(ucfirst($d->category_name), 0, 16);
+                }
+                else{
+                    echo ucfirst($d->category_name);
+                }
+                ?>
+                </h3>
                     <div class="our-product">
-                        <p>
+                        <div>
                             <?php if(count($this->subcategories_list)>0){
                                 foreach($this->subcategories_list as $sub_cate){
                                     if($sub_cate->main_category_id == $d->category_id){
@@ -393,7 +394,7 @@ $srch = $this->Lang['SRCH_STR'];
 
                             }
                         }?>
-                        </p>
+                        </div>
                     </div>
         <?php }} ?>
 
@@ -429,9 +430,17 @@ $srch = $this->Lang['SRCH_STR'];
                 $check_sub_cat = $d->auction_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
 
-                <h3><?php echo ucfirst($d->category_name); ?></h3>
+                <h3><?php 
+                if(strlen($d->category_name) > 16){
+                    echo substr(ucfirst($d->category_name), 0, 16);
+                }
+                else{
+                    echo ucfirst($d->category_name);
+                }
+                ?>
+                </h3>
                     <div class="our-product">
-                        <p>
+                        <div>
                             <?php if(count($this->subcategories_list)>0){
                                 foreach($this->subcategories_list as $sub_cate){
                                     if($sub_cate->main_category_id == $d->category_id){
@@ -443,7 +452,7 @@ $srch = $this->Lang['SRCH_STR'];
 
                             }
                         }?>
-                        </p>
+                        </div>
                     </div>
         <?php }} ?>
 
@@ -516,8 +525,35 @@ $srch = $this->Lang['SRCH_STR'];
 <div class='popup_block'><?php echo new View("themes/" . THEME_NAME . '/users/login_popup'); ?></div>
 <div class='popup_block1'><?php echo new View("themes/" . THEME_NAME . '/users/sign_up_popup'); ?></div>
 <div class='popup_block2'><?php echo new View("themes/" . THEME_NAME . '/users/forget_popup'); ?></div>
+<div class='popup_block3_0'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_verify_account_popup'); ?></div>
+<div class='popup_block3_1'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_open_account_popup'); ?></div>
+<div class='popup_block4'><?php echo new View("themes/" . THEME_NAME . '/users/fb_popup'); ?></div>
 
-
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" type="text/css" /> 
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
+<script>
+function logout_click(){
+    //alert("here");
+    //<?php echo PATH; ?>logout.html
+    swal({   
+        title: "Are you sure?",   
+        text: "Your Shopping Cart is not empty. It Will be Emptied",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Yes, Logout!",   
+        cancelButtonText: "No, Proceed!",   
+        closeOnConfirm: false,   
+        closeOnCancel: true 
+    }, function(isConfirm){   
+        if (isConfirm) {     
+            location.href = "<?php echo PATH; ?>logout.html"; 
+        } else {     
+            location.href = "<?php echo PATH; ?>"; 
+        } 
+    });
+}
+</script>
  <script type="text/javascript">
     $(document).ready(function() {
         $(".show1").click(function() {
@@ -681,4 +717,72 @@ $("#cart_window").mouseout(function(){
 
 
 </script>
+<script>
+$("#cart_window1").mouseover(function(){
+
+	var url=Path+'/payment_product/cart_window_products';
+			  $.ajax(
+			{
+				type:'POST',
+				url:url,
+				cache:false,
+				async:true,
+				global:false,
+				dataType:"html",
+				success:function(check)
+				{
+					$(".cart_window_products1").css({"display":"block"});
+					$(".cart_window_products1").html(check);
+				}
+			});
+});
+
+$("#cart_window1").mouseout(function(){
+	$(".cart_window_products1").css({"display":"none"});
+});
+
+
+function load_club(){
+	/* 
+	 *	Check session to see if user is logged and is of type 4 (customer)
+	 * If user is logged in but of any other type other than 4. return false.
+	 * If not logged in, prompt for login/signup
+	 * On logging in, check for club memebrship status.
+	 * If member already, notify.
+	 * If not member, prompt for membership signup
+	 * #Live
+	 */
+	 
+	
+	 
+	  <?php 
+	 if(isset($_SESSION['UserID'])){
+		
+		 if(isset($_SESSION['UserType']) && strcmp($_SESSION['UserType'], "4") == 0 && isset($_SESSION['Club']) && strcmp($_SESSION['Club'], "0") == 0 ){ 
+			 ?>
+			 
+			 javascript:showmembershipsignup(); 
+			 
+		 <?php }else if(isset($_SESSION['Club']) && strcmp($_SESSION['Club'], "1") == 0){?>
+			 alert("You are already a Zenith Club member. Please enjoy the offers!");
+			 return;
+			 <?php
+		 }else{?>
+		 alert("Sorry, something went wrong. Please contact the site administrator.");
+		 return;
+		 <?php }
+	 }else{?>
+		javascript:showlogin("1");
+		
+	<?php }?>
+	
+
+	 
+}
+
+
+
+	
+</script>
+
 

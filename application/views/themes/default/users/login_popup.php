@@ -14,7 +14,7 @@
         <div class="sign_up_outer">  
             <div class="sign_up_logo">
                 <a href="<?php echo PATH;?>"><img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH;?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/></a>        	
-                <a class="close2" title="<?php echo $this->Lang['CLOSE']; ?>" id="close">&nbsp;</a>                
+                <a class="close2" onclick="closeLogin();" title="<?php echo $this->Lang['CLOSE']; ?>">&nbsp;</a>                
             </div>
             <div class="signup_content clearfix">
               <div class="signup_form_block">
@@ -85,13 +85,22 @@
         return false;
     }
     
+    function closeLogin(){
+	$('#popup1').css({'visibility' : 'hidden'});
+		$('.popup_block').css({'display' : 'none'});
+		$('#fade').css({'visibility' : 'hidden'});
+		  //location.reload();
+	
+	
+	return false;
+    }
     
 $(document).ready(function(){
 
 $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
 $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer 				   		   
 //Close Popups and Fade Layer
-$('#close').live('click', function() { //When clicking on the close or fade layer...
+$('.close2').live('click', function() { //When clicking on the close or fade layer...
 	$('#popup1').css({'visibility' : 'hidden'});
 		$('.popup_block').css({'display' : 'none'});
 		$('#fade').css({'visibility' : 'hidden'});

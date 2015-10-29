@@ -1,16 +1,7 @@
 <!-- FOOTER -->
-<div class="shipping-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="shipping">
-                    <p><span>FREE SHIPPING </span> Offered by MAXSHOP - lorem ipsum dolor sit amet mauris accumsan vitate odio tellus</p>
-                    <a href="#" class="button">Learn more</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<?php if(count($this->about_us_footer)>0) { 
+    foreach($this->about_us_footer as $stores) { ?>
 
 <div class="footer-wrap">
     <div class="container">
@@ -20,48 +11,90 @@
 
                 <div class="span3">
                     <div class="widget">
-                        <h3>Customer Service</h3>
+<a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
+    <img class="margin-top-10" alt="<?php echo $this->Lang['LOGO']; ?>" 
+         src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+</a>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
+<li>
+    <?php 
+    if(strlen($stores->about_us) > 400){
+        echo substr($stores->about_us, 0, 400).".....";
+    }else{
+echo $stores->about_us; 
+    }
+    ?> 
+</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="span3">
                     <div class="widget">
-                        <h3>Information</h3>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                        </ul>
+			<h3>Shopping Guide</h3>
+			<ul>
+                        <li><a href="<?php echo PATH; ?>" title="Home">Home</a></li>
+                         <?php if ($this->cms_setting == 0) {
+            foreach ($this->get_all_cms_title as $d) { ?>
+            <?php if($d->cms_title != "Help"){ ?>
+                                    <li> <a <?php if ($d->type == 3) { ?>href="<?php echo $d->cms_desc; ?>" <?php } else { ?> href="<?php echo PATH . $d->cms_url . '.php' ?>" <?php } ?> title="<?php echo $d->cms_title; ?>"> <?php echo $d->cms_title; ?></a></li>
+                            <?php } ?>
+                        <?php }
+                    } ?>
+			</ul>
                     </div>
                 </div>
 
                 <div class="span3">
                     <div class="widget">
-                        <h3>My Account</h3>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Order History</a></li>
-                            <li><a href="#">Wish List</a></li>
-                            <li><a href="#">Newsletter</a></li>
-                        </ul>
+                    <?php
+                    if(isset($this->footer_merchant_details) && count($this->footer_merchant_details)>0){
+                    foreach($this->footer_merchant_details as $admin){
+                    ?>
+			<!-- Headline -->
+			<h3>Address</h3>
+
+			<ul>
+                            <li>
+                           <?php echo $admin->address1; ?>, </li>
+                          <li> <?php echo $admin->address2; ?>, </li>
+                           <li><?php echo $admin->city_name; ?>, </li>
+                           <li><?php echo $admin->country_name; ?>.
+                            </li>
+				<li><?php echo $admin->phone_number;?></li>
+				<li><a href="mailto:<?php echo $admin->email; ?>" title="<?php echo $admin->email; ?>"><?php echo $admin->email; ?></a></li>
+			</ul>
+            <?php 
+            
+                    }
+            }else if(count($this->admin_details)>0) { foreach($this->admin_details as $admin) { ?>
+			<!-- Headline -->
+			<h3>Address</h3>
+
+			<ul>
+                            <li>
+                           <?php echo $admin->address1; ?>, </li>
+                           <li><?php echo $admin->address2; ?>, </li>
+                           <li><?php echo $admin->city_name; ?>, </li>
+                           <li><?php echo $admin->country_name; ?>.
+                            </li>
+			<li><?php echo PHONE1;?>,<?php echo PHONE2;?></li>
+			<li><a class="foot_mail_icon" href="mailto:<?php echo CONTACT_EMAIL; ?>" title="<?php echo CONTACT_EMAIL; ?>"><?php echo  CONTACT_EMAIL; ?></a></li>
+			</ul>
+            <?php } } ?>
                     </div>
                 </div>
 
                 <div class="span3">
                     <div class="widget">
-                        <h3>Contact us</h3>
+			<!-- Headline -->
+			<h3>Newsletter</h3>
                         <ul>
-                            <li>support@maxshop.com</li>
-                            <li>+38649 123 456 789 00</li>
-                            <li>Lorem ipsum address street no 24 b41</li>
+			<li>Subscribe to receive our news everyday !</li>
                         </ul>
+            <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
+                <input class="newsletter" type="text" name="store_subscriber" id="store_subscriber1"  placeholder="Enter Email Address" onkeypress="return check_color();"/>
+                <button class="newsletter-btn btn btn-success" type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');">Join</button>
                     </div>
                 </div>
 
@@ -71,24 +104,36 @@
         <div class="row">
             <footer class="clearfix">
                 <div class="span5">
-                    <p>© 2013 Maxshop Design, All Rights Reserved</p>
+                    <p><?php echo $this->Lang['FOOTER_COPYRIGHT']; ?> <?php echo SITENAME; ?> <?php echo $this->Lang['FOOTER_ALLRIGHT']; ?></p>
                 </div>
                 <div class="span2 back-top">
-                    <a href="#"> <img src="images/back.png" alt=""></a>
+                    <a href="#"> <img src="<?php echo PATH; ?>bootstrap/img/back.png" alt=""></a>
                 </div>
                 <div class="span5">
                     <div class="social-icon">
-                        <a class="rss" href=""></a>
-                        <a class="twet" href=""></a>
-                        <a class="fb" href=""></a>
-                        <a class="google" href=""></a>
-                        <a class="pin" href=""> </a>
+            <?php if (FB_PAGE) { ?>
+                <a class="fb" href="<?php echo FB_PAGE; ?>"  target="blank" title="<?php echo $this->Lang['FB']; ?>"></a>
+            <?php }if (TWITTER_PAGE) { ?>
+                <a class="twet" href="<?php echo TWITTER_PAGE; ?>" target="blank" title="<?php echo $this->Lang['TW']; ?>"></a>
+            <?php }if (LINKEDIN_PAGE) { ?>
+                <!--<a class="linkedin" href="<?php echo LINKEDIN_PAGE; ?>" target="blank" title="<?php echo $this->Lang['LINK']; ?>"></a>-->
+            <?php }if (YOUTUBE_URL) { ?>
+                <a class="google" href="<?php echo YOUTUBE_URL; ?>" target="blank" title="<?php echo $this->Lang['YOU_TUBE']; ?>"></a>
+            <?php } ?>
+            <?php if (INSTAGRAM_PAGE) { ?>
+                <a class="instagram" href="<?php echo INSTAGRAM_PAGE; ?>" target="blank" title="<?php echo $this->Lang['INST']; ?>"></a>
+            <?php } ?>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
 </div>
+
+<?php
+    }
+}
+?>
 <!-- FOOTER -->
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-1.9.1.min.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-ui.js'; ?>"></script>
@@ -97,7 +142,7 @@
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.elastislide.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.carouFredSel-6.0.4-packed.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.selectBox.js'; ?>"></script>
-<script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/cjquery.tooltipster.min.js'; ?>"></script>
+<script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.tooltipster.min.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.prettyPhoto.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/custom.js'; ?>"></script>
 

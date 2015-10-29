@@ -57,31 +57,38 @@
 foreach ($this->product_deatils as $products) {
     $symbol = CURRENCY_SYMBOL;
 ?>
-<!-- Titlebar
-================================================== -->
-<section class="parallax-titlebar fullwidth-element"  data-background="#000" data-opacity="0.45" data-height="160">
 
-    <img src="<?php echo PATH; ?>bootstrap/themes/images/food/banners/<?php echo rand(1, 3); ?>.jpg" alt="" />
-	<div class="parallax-overlay"></div>
-
-	<div class="parallax-content">
-            <h2><span><?php echo ucfirst($products->deal_title); ?></span></h2>
-
-		<nav id="breadcrumbs">
-			<ul>
-				<li><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></li>
-				<li><a href="<?php echo PATH.$this->storeurl; ?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang["PRODUCTS"]; ?></a></li>
-			</ul>
-		</nav>
-	</div>
-
-</section>
-
-
+<!-- BAR -->
+<div class="bar-wrap">
     <div class="container">
-        <div class="sixteen columns">
-            <div >
+        <div class="row">
+            <div class="span12">
+                <div class="title-bar">
+                    <h1>
+                    <?php 
+                    if(strlen($deals->deal_title) > 70){
+                        echo substr($deals->deal_title, 0, 70);
+                    }
+                    else{
+                        echo ucfirst($deals->deal_title);
+                    }
+                    ?>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BAR -->
 
+
+
+    <!-- PRODUCT-OFFER -->
+    <div class="product_wrap">
+
+        <div class="container">
+            <div class="row">
+                <div class="span12">
                 <div  id="messagedisplay1" style="display:none;">
                     <div class="session_wrap">
                         <div class="session_container">
@@ -98,8 +105,8 @@ foreach ($this->product_deatils as $products) {
                 <!--content start-->
                 <div class="product_detail_block">
                     <div class="deal_content product_content">
-                        <div class="sixteen columns">
-                        <div class="eight columns product_image wloader_parent" >
+                        <div class="row">
+                        <div class="span5 product_image wloader_parent" >
                                <i class="wloader_img" style="min-height: 300px;">&nbsp;</i>           
 
                             <div class="product_image_inner">
@@ -169,7 +176,7 @@ foreach ($this->product_deatils as $products) {
 
 
                         </div>
-                        <div style="float:right;width:47%;">
+                        <div class="span7">
                             <h2 class="deal_title"><?php echo ucfirst($products->deal_title); ?></h2>
                             <div class="deal_buy_detail clearfix">
                                 <div class="clearfix">
@@ -500,6 +507,9 @@ foreach ($this->product_deatils as $products) {
                       <a href="#" title="Product Reviews">Product Reviews</a>
                       </div>
                       </div> */ ?>
+                        
+                        
+                        
                     <div class="deal_comment_block">
                         <div class="deal_address">
                             <h2 class="deal_sub_title"><?php echo $this->Lang['ADDRES']; ?></h2>
@@ -561,6 +571,12 @@ foreach ($this->product_deatils as $products) {
                             </div>
                         </div>
                     </div>
+                        
+                        
+                        
+                        
+                        
+                        
                     <!--slider_right content start-->
                      <?php if (count($this->all_products_list) > 0) { ?>
                     <div class="deal_list_slide_outer">
@@ -568,7 +584,7 @@ foreach ($this->product_deatils as $products) {
                             <div class="deal_list_slide clearfix">
                                 <div id="welcomeHero">
                                     <div id="slideshow-carousel"  <?php if (count($this->all_products_list) <= 5) { ?> class="deallist_slider_center" <?php } ?>>
-                                        <ul id="carousel"  <?php if (count($this->all_products_list) > 5) { ?> class="jcarousel jcarousel-skin-tango" <?php } ?>>
+                                        <ul  <?php if (count($this->all_products_list) > 5) { ?> class="jcarousel jcarousel-skin-tango" <?php } ?>>
             <?php
             $deal_offset = $this->input->get('offset');
             foreach ($this->all_products_list as $products_list) {
@@ -686,10 +702,10 @@ foreach ($this->product_deatils as $products) {
                 </div>
             </div>
             <!--end-->
+                </div>
+        </div>    
         </div>
     </div>
-    </div>      
-
 <?php
 } 
 ?> 
