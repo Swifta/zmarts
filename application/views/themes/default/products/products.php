@@ -4,6 +4,8 @@ $main_cat = (isset($this->sub_cat) && ($this->sub_cat == "") && ($this->sub_cat 
 $sub_cat = (isset($this->sub_cat) && ($this->sub_cat != "") && ($this->sub_cat !=2) && ($this->sub_cat !=3)) ? $this->category_url : "";
 $sec_cat = (isset($this->sub_cat) && ($this->sub_cat != "") && ($this->sub_cat ==2) && ($this->sub_cat !=3)) ? $this->category_url : "";
 $third_cat = (isset($this->sub_cat) && ($this->sub_cat != "") && ($this->sub_cat !=2) && ($this->sub_cat ==3)) ? $this->category_url : "";
+
+
 $symbol = CURRENCY_SYMBOL;
 ?>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
@@ -689,3 +691,5 @@ $symbol = CURRENCY_SYMBOL;
         }).slideshow();
     });
 </script>
+
+

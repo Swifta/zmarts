@@ -841,6 +841,175 @@ class Leo_Model extends Model
 	
 	
 	
+	public function  get_products_list_by_store($search = "", $category = "", $offset = "", $record = "",$cur_category="",$cur_size="",$maincatid="",$size="",$color="",$discount="",$price="",$main_cat="",$sub_cat="",$sec_cat="",$third_cat="",$price_text = "", $store_id = "")
+	{
+	        $conditions = "";
+			
+			
+
+		$join ="join category on category.category_id=product.category_id";
+		if($cur_category){
+			$conditions = "and category.category_id IN ($cur_category)";
+				}
+		if($cur_size){
+			$conditions = "and product_size.size_id IN ($cur_size) and product_size.quantity!=0";
+				}
+		if($category){
+			 $conditions = " and category.category_url='$category'";
+		}
+		if($search=='sub'){
+			$conditions = " and category.category_url='$category'";
+			$join =" join category on category.category_id=product.sub_category_id";
+		}
+		if($search=='sec'){
+			$conditions = " and category.category_url='$category'";
+			$join =" join category on category.category_id=product.sec_category_id";
+		}
+		if($search=='third'){
+			$conditions = " and category.category_url='$category'";
+			$join =" join category on category.category_id=product.third_category_id";
+		}
+
+		if($maincatid!= 0) {
+
+			$conditions .= " and category.category_id=$maincatid ";
+		}
+
+		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
+
+			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
+			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+		}
+
+		// filter start
+		if($main_cat){  // for main category
+			 $conditions .= " and category.category_url='$main_cat'";
+		}
+		if($sub_cat){ // for sub category
+			$conditions .= " and category.category_url='$sub_cat'";
+			$join ="join category on category.category_id=product.sub_category_id";
+		}
+		if($sec_cat){ // for 2nd level category
+			$conditions .= " and category.category_url='$sec_cat'";
+			$join ="join category on category.category_id=product.sec_category_id";
+		}
+		if($third_cat){ // for 3rd level category
+			$conditions .= " and category.category_url='$third_cat'";
+			$join ="join category on category.category_id=product.third_category_id";
+		}
+
+
+		if($size){
+			$size = rtrim($size, ",");
+			$conditions .= " and product_size.size_id in($size)";
+		}
+
+		if($color){
+			$color = rtrim($color, ",");
+			$join = $join." join color on color.deal_id=product.deal_id";
+			$conditions .= " and color.color_code_id in($color)";
+		}
+
+		if($discount){
+			$discount = rtrim($discount, ",");
+			$discount1 = explode(',',$discount);
+			$arr = array("1" => "<10", "2" => "10 and 20", "3" => "20 and 30", "4" => "30 and 50", "5" => "50 and 75", "6" => ">75");
+
+			if(count($discount1) == 1){
+
+				$val = $discount1[0];
+				$a = ($val ==1 || $val ==6)?"":"between";
+				$conditions .=" and (product.deal_percentage $a $arr[$val]) ";
+			}else{
+				for($i=0; $i<count($discount1); $i++){
+					$val = $discount1[$i];
+					if($i == 0){
+						if($val != 1 && $val != 6){
+							$conditions .="and (product.deal_percentage between $arr[$val]";
+						}else{
+							$conditions .="and (product.deal_percentage $arr[$val]";
+						}
+					}else if($i == count($discount1)-1){
+						if($val != 1 && $val != 6){
+							$conditions .=" or product.deal_percentage between $arr[$val])";
+						}else{
+							$conditions .=" or product.deal_percentage $arr[$val])";
+						}
+					}else{
+						if($val != 1 && $val != 6){
+							$conditions .=" or product.deal_percentage between $arr[$val]";
+						}else{
+							$conditions .=" or product.deal_percentage $arr[$val]";
+						}
+					}
+				}
+			}
+		}
+
+		if($price){
+			$price = rtrim($price, ",");
+			$price1 = explode(',',$price);
+			$arr = array("1" => "<500", "2" => "501 and 1000", "3" => "1001 and 1500", "4" => "1501 and 2000", "5" => "2001 and 2500", "6" => ">2500");
+
+			if(count($price1) == 1){
+
+				$val = $price1[0];
+				$a = ($val ==1 || $val ==6)?"":"between";
+				$conditions .=" and (product.deal_value $a $arr[$val]) ";
+			}else{
+				for($i=0; $i<count($price1); $i++){
+					$val = $price1[$i];
+					if($i == 0){
+						if($val != 1 && $val != 6){
+							$conditions .="and (product.deal_value between $arr[$val]";
+						}else{
+							$conditions .="and (product.deal_value $arr[$val]";
+						}
+					}else if($i == count($price1)-1){
+						if($val != 1 && $val != 6){
+							$conditions .=" or product.deal_value between $arr[$val])";
+						}else{
+							$conditions .=" or product.deal_value $arr[$val])";
+						}
+					}else{
+						if($val != 1 && $val != 6){
+							$conditions .=" or product.deal_value between $arr[$val]";
+						}else{
+							$conditions .=" or product.deal_value $arr[$val]";
+						}
+					}
+				}
+			}
+		}
+
+		if($price_text){
+			$price_text = str_replace(array(CURRENCY_SYMBOL," "),"",$price_text);
+			$price_array = explode("-", $price_text);
+			$conditions .=" and product.deal_value between $price_array[0] and $price_array[1]";
+		}
+
+		// filter end
+		
+		
+
+		if(CITY_SETTING){
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions and stores.store_id=".$store_id." group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+		$result = $this->db->query($query);
+
+
+		} else {
+
+			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  $conditions and stores.store_id=".$store_id."   group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+			$result = $this->db->query($query);
+			
+
+
+		} // print_r($result);
+		 return $result;
+	}
+	
+	
+	
 	
 	
 	
