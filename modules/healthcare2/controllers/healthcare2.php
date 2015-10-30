@@ -1,4 +1,4 @@
-get_product_categories<?php defined('SYSPATH') OR die('No direct access allowed.');
+<?php defined('SYSPATH') OR die('No direct access allowed.');
 class Healthcare2_Controller extends Layout_Controller
 {
 	const ALLOW_PRODUCTION = FALSE;

@@ -1,4 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+
+ <style>
+                   .centers{
+                       float: none;
+                       margin-left:-90px;;
+                       margin-right:0 auto;
+                       width: 300px;
+                   }
+                   
+               </style>
 <div id="maincontainer">          
       <section id="product">
     <div class="container">
@@ -187,9 +197,9 @@ if(count($this->merchant_personalised_details)>0) {
 }
 ?>
 
-
-                <section id="categorygrid">
-                  <ul class="thumbnails grid">
+              
+                <section id="categorygrid" >
+                  <ul class="thumbnails grid" >
                       <?php if (count($this->all_deals_list) > 0) { ?> 
                    
 	<?php
@@ -197,7 +207,11 @@ if(count($this->merchant_personalised_details)>0) {
 		foreach ($this->all_deals_list as $deals_categories){
 		$symbol = CURRENCY_SYMBOL; ?>
                     <li class="span3">
-                      <a class="prdocutname" href="product.html">Product Name Here</a>
+                       <a class="prdocutname"  href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>"
+                 
+                          title="<?php echo $deals_categories->deal_title; ?>"><?php 
+                 
+                 echo substr($deals_categories->deal_title,0,50); ?></a>
                       <div class="thumbnail">
                         <span class="sale tooltip-test">Sale</span>
 <!--                        <a href="#"><img alt="" src="img/product1.jpg"></a>-->
@@ -240,7 +254,7 @@ if(count($this->merchant_personalised_details)>0) {
                 }
                 ?></h5>
                         <div class="shortlinks">
-                          <a class="details" href="#">DETAILS</a>
+                            <a class="details"  href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>">DETAILS</a>
                           <a class="wishlist" onclick="addToWishList('<?php echo $deals_categories->deal_id; ?>','<?php echo addslashes($deals_categories->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>" href="#">WISHLIST</a>
                           <a class="compare" onclick="addToCompare('<?php echo $deals_categories->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>" href="#">COMPARE</a>
                           
@@ -248,8 +262,7 @@ if(count($this->merchant_personalised_details)>0) {
                         <div class="pricetag">
                           <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
                           <div class="price">
-                            <div class="pricenew">$4459.00</div>
-                            <div class="priceold">$5000.00</div>
+                             <p class="price"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>        
                           </div>
                         </div>
                       </div>
@@ -282,25 +295,55 @@ if(count($this->merchant_personalised_details)>0) {
                         <div class="row">
                           <div class="span3">
                             <span class="offer tooltip-test" >Offer</span>
-                            <a href="#"><img alt="" src="img/product1.jpg"></a>
+                                    <a href="#"><img alt="" src="img/product1.jpg"></a>-->
+                      <a href="<?php echo PATH . $deals_categories->store_url_title . '/deals/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>" 
+                                           title="<?php echo $deals_categories->deal_title; ?>">
+            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png';
+            $size = getimagesize($image_url);
+            ?>
+            <?php if(true) { ?>
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals_categories->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
+                   <?php } else { ?>
+                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals_categories->deal_key.'_1'.'.png'?>" />
+                <?php } ?>
+            <?php } else { ?>
+                    <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals_categories->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
+            <?php } ?> 
+                        <div class="cover">
+            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png';
+            $size = getimagesize($image_url);
+            ?>
+            <?php if(true) { ?>
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals_categories->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals_categories->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
+                   <?php } else { ?>
+                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals_categories->deal_key.'_1'.'.png'?>" />
+                <?php } ?>
+            <?php } else { ?>
+                    <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals_categories->deal_title; ?>" title="<?php echo $deals_categories->deal_title; ?>" />
+            <?php } ?>
+                        </div>
+					</a>
                           </div>
                           <div class="span6">
-                            <a class="prdocutname" href="product.html">Product Name Here</a>
-                            <div class="productdiscrption"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.<br>
-                              <br>
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan </div>
+                            <a class="prdocutname"  href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>"
+                 
+                          title="<?php echo $deals_categories->deal_title; ?>"><?php 
+                 
+                 echo substr($deals_categories->deal_title,0,50); ?></a>
+                            <div class="productdiscrption"></div>
                             <div class="pricetag">
                               <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
                               <div class="price">
-                                <div class="pricenew">$4459.00</div>
-                                <div class="priceold">$5000.00</div>
+                                <p class="price"><?php echo $symbol . " " . number_format($deals_categories->deal_value); ?></p>  
                               </div>
                             </div>
                             <div class="shortlinks">
-                              <a class="details" href="#">DETAILS</a>
-                              <a class="wishlist" href="#">WISHLIST</a>
-                              <a class="compare" href="#">COMPARE</a>
+                              <a class="details"  href="<?php echo PATH . $deals_categories->store_url_title . '/product/' . $deals_categories->deal_key . '/' . $deals_categories->url_title . '.html'; ?>">DETAILS</a>
+                          <a class="wishlist" onclick="addToWishList('<?php echo $deals_categories->deal_id; ?>','<?php echo addslashes($deals_categories->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>" href="#">WISHLIST</a>
+                          <a class="compare" onclick="addToCompare('<?php echo $deals_categories->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>" href="#">COMPARE</a>
+                          
                             </div>
                           </div>
                         </div>

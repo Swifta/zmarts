@@ -196,6 +196,19 @@ $(".slidetabs").tabs(".images > div", {
         </aside>
         <!-- Sidebar End-->
         <!-- Category-->
+         <?php
+$font_color = "#000000";
+$bg_color ="";
+$font_size ="";
+if(count($this->merchant_personalised_details)>0) { 
+	foreach($this->merchant_personalised_details as $m) {  
+		$font_color = "color:".$m->font_color.";";
+		$bg_color ="background:".$m->bg_color.";";
+		$font_size = $m->font_size."px";
+	} 
+}
+
+?>
         <div class="span9">          
           <!-- Category Products-->
           <section id="category">
@@ -230,37 +243,39 @@ $(".slidetabs").tabs(".images > div", {
                   </div>
                 </div>-->
                <!-- Category-->
-                <section id="categorygrid">
-                         
-                    <ul>
-                        <?php if (count($this->all_auction_list) > 0) { ?> 
+            <section id="categorygrid">
+                  <ul class="thumbnails grid">
+                       <?php if (count($this->all_auction_list) > 0) { ?> 
                    
 	<?php
 		$l = 1;
 		foreach ($this->all_auction_list as $products) {
 			$symbol = CURRENCY_SYMBOL; ?>
-<!--                    <li class="span3">-->
-                        
-                      <a class="prdocutname" href="product.html">Product Name Here</a>
-                     
+                    <li class="span3">
+                       
+<!--                      <a class="prdocutname" href="product.html">Product Name Here</a>-->
+ <a class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" 
+               title="<?php echo $products->deal_title; ?>" style="font-size:<?php echo $font_size; ?> arial; <?php //echo $font_color; ?>"> <?php echo common::truncate_item_name($products->deal_title);  ?></a>
+            
+                       <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+            $size = getimagesize($image_url);
+            ?>
+                    <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+                    <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                            <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                             <?php } else { ?>
+                                            <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                            <?php } ?></a>
+            <?php } else { ?>
+                    <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
+            <?php } ?>    
+<!--                       <a class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" 
+               title="<?php echo $products->deal_title; ?>" style="font-size:<?php echo $font_size; ?> arial; <?php //echo $font_color; ?>"> <?php echo $products->deal_title; ?></a>
+            -->
                       <div class="thumbnail">
                         <span class="sale tooltip-test">Sale</span>
 <!--                        <a href="#"><img alt="" src="img/product1.jpg"></a>-->
-                        <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
-                                                        $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
-                                                        $size = getimagesize($image_url);
-                                                        ?>
-                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-                                                            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-                                                                 <?php } else { ?>
-                                 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
-                                <?php } ?>
-                                                                
-                                                                <?php /* <img src="<?php echo PATH.'images/products/290_215/'.$products->deal_key.'_1'.'.png';?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"> */ ?></a>
-                                                        <?php } else { ?>
-                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
-                                                        <?php } ?>       
                         <div class="shortlinks" style="margin-top:-20px;">
                          <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
                           <a class="wishlist" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">&nbsp;</a>
@@ -268,13 +283,15 @@ $(".slidetabs").tabs(".images > div", {
                           <a class="compare" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">COMPARE</a>
                         </div>
                         <div class="pricetag">
-                          <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                          <span class="spiral"></span>
+                          <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="Add to cart" class="productcart">Add to cart</a>
                           <div class="price">
-                            <?php echo $symbol . " " . number_format($products->deal_value); ?>
+                           <?php echo $symbol . " " . number_format($products->deal_value); ?>
                           </div>
                         </div>
                       </div>
                     </li>
+                   
                     
                     <?php 
                         if($l == 4){
@@ -286,63 +303,70 @@ $(".slidetabs").tabs(".images > div", {
                         ?>
 
 		<?php }else{?>
-                                <p class="nop"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
+                                <p class="text-center"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
 <?php }?>
-    
+                   
+                   
+                   
+                    
                   </ul>
-                      
-               
                   <ul class="thumbnails list row">
-                      <?php if (count($this->all_auction_list) > 0) { ?> 
+                    <?php if (count($this->all_auction_list) > 0) { ?> 
                    
 	<?php
 		$l = 1;
 		foreach ($this->all_auction_list as $products) {
 			$symbol = CURRENCY_SYMBOL; ?>
+                    
                     <li>
                       <div class="thumbnail">
                         <div class="row">
                           <div class="span3">
                             <span class="offer tooltip-test" >Offer</span>
                            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { 
-                                                        $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
-                                                        $size = getimagesize($image_url);
-                                                        ?>
-                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-                                                            <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
-                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
-                                                                 <?php } else { ?>
-                                 <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
-                                <?php } ?>
-                                                                
-                                                                <?php /* <img src="<?php echo PATH.'images/products/290_215/'.$products->deal_key.'_1'.'.png';?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"> */ ?></a>
-                                                        <?php } else { ?>
-                                                            <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
-                                                        <?php } ?>
+            $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
+            $size = getimagesize($image_url);
+            ?>
+                    <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+                    <?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
+                            <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+                             <?php } else { ?>
+                                            <img src="<?php echo PATH .'images/products/1000_800/'.$products->deal_key.'_1'.'.png'?>" />
+                            <?php } ?></a>
+            <?php } else { ?>
+                    <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
+            <?php } ?>    
+                       <a class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" 
+               title="<?php echo $products->deal_title; ?>" style="font-size:<?php echo $font_size; ?> arial; <?php echo $font_color; ?>"> <?php echo $products->deal_title; ?></a>
+            
+                  
                           </div>
                           <div class="span6">
-                            <a class="prdocutname" href="product.html">Product Name Here</a>
-                            <div class="productdiscrption"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.<br>
-                              <br>
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan </div>
+                            <a class="prdocutname"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"
+                 
+                 title="<?php echo $products->deal_title; ?>"><?php 
+                 
+                 echo $products->deal_title; ?></a>
+                            <div class="productdiscrption"> <p class="price"><?php //echo $products->deal_description; ?></p> </div>
                             <div class="pricetag">
-                              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                              <span class="spiral"></span> <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="Add to cart" class="productcart">Add to cart</a>
                               <div class="price">
-                                 <?php echo $symbol . " " . number_format($products->deal_value); ?>
+                               <p class="price"><?php echo $symbol . " " . number_format($products->deal_value); ?></p>        
                               </div>
                             </div>
-                           <div class="shortlinks" style="margin-top:-20px;">
-                         <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
+                            <div class="shortlinks">
+                               <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
                           <a class="wishlist" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">&nbsp;</a>
                           
                           <a class="compare" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">COMPARE</a>
-                        </div>
+                       
+                            </div>
                           </div>
                         </div>
                       </div>
                     </li>
-                      <?php 
+                    
+                   <?php 
                         if($l == 4){
                             break;
                         }
@@ -352,13 +376,12 @@ $(".slidetabs").tabs(".images > div", {
                         ?>
 
 		<?php }else{?>
-                                <p class="nop"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
+                                <p class="text-center"><?php echo $this->Lang['NO_PRODUCTS'];?></p>
 <?php }?>
-                    
+                   
+                     
                   </ul>
-                       
-                                    
-<!--                  <div class="pagination pull-right" id ="hide" >
+<!--                  <div class="pagination pull-right">
                     <ul>
                       <li><a href="#">Prev</a>
                       </li>

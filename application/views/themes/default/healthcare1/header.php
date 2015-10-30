@@ -322,14 +322,12 @@ $srch = $this->Lang['SRCH_STR'];
                 
                     </li>
                       <?php if ($this->product_setting) { ?>
-
-                    <li class="<?php if (isset($this->is_product)) echo "active"; ?>">
+                    
+                    <li class="<?php if (isset($this->is_product)){ echo "";} ?>" >
                         <a href="<?php echo PATH.$this->storeurl; ?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>">
-                <?php echo $this->Lang['PRODUCTS']; ?>
+               <?php echo $this->Lang['PRODUCTS']; ?>
             </a>
-                        <div>
-                              <ul>
-        <?php $pr = 0; $pro = 0; $val_pro ="";
+                         <?php $pr = 0; $pro = 0; $val_pro ="";
         foreach ($this->categeory_list_product as $d) {
 		        //$check_sub_cat = common::get_subcat_count($d->category_id, 3, "main", $d->category_url); /*   COUNT OF SUBCATEGORY   */
 		        //$val_pro .= $check_sub_cat.","; 
@@ -340,29 +338,29 @@ $srch = $this->Lang['SRCH_STR'];
 		        } }
 		        $arr_product = explode(",", substr($val_pro,0,-1));
         ?>
-				<?php if($this->categeory_list_product){  
-					foreach ($this->categeory_list_product as $d) {
-						$check_sub_cat = $d->product_count;
-						if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
-                <!--<li><a><?php echo ucfirst($d->category_name); ?></a></li>-->
+        
+        <?php if($this->categeory_list_product){  
+            foreach ($this->categeory_list_product as $d) {
+                $check_sub_cat = $d->product_count;
+                if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
+                        <div>
+                              <ul>
+        
+                <li><a><?php echo ucfirst($d->category_name); ?></a></li>
+                <?php if(count($this->subcategories_list)>0){
+                                foreach($this->subcategories_list as $sub_cate){
+                                    if($sub_cate->main_category_id == $d->category_id){
+                            ?>
 								<!--<ul>-->
-									<?php if(count($this->subcategories_list)>0){
-										$hdn_second_cnt = 1;
-										foreach($this->subcategories_list as $sub_cate){
-											if($sub_cate->main_category_id == $d->category_id){
-												if($hdn_second_cnt<5){?>
-												<li><a href="javascript:filtercategory_store('<?php echo $sub_cate->category_url; ?>', 'products', '<?php echo base64_encode("sub"); ?>','<?php echo $this->storeurl; ?>');" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo ucfirst($sub_cate->category_name);?></a></li> 
-									<?php $hdn_second_cnt++;}
-									if($hdn_second_cnt==PHP_INT_MAX){?>
-									<li ><a href="javascript:filtercategory_store('<?php echo $d->category_url; ?>', 'products', '<?php echo base64_encode("main"); ?>','<?php echo $this->storeurl; ?>');" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo $this->Lang['VIW_MRE'];?></a></li> 
-									<?php break;}
-									}
-									
-									}
-									}?>
-								<!--</ul>-->
-					<?php }}}?>
+									<li><a href="<?php echo PATH.$this->storeurl.'/products/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo ucfirst($sub_cate->category_name);?></a></li> 
+                                                                         <?php 
+                                    }
+                                }
+
+                            }
+                        }?>
             </ul>
+                  <?php }} ?>        
                             <ul>
                                 <li><img style="display:block" src="img/proudctbanner.jpg" alt="" title="" > </li>
                             </ul>

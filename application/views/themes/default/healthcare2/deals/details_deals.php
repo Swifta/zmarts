@@ -75,7 +75,7 @@
     });
 </script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
-<div class="contianer_outer1">
+<div class="contianer_outer1" style="background-color: #fff;">
     <div class="contianer_inner">
         <div class="contianer">
             <div class="bread_crumb">
@@ -297,7 +297,7 @@
                                 </div>
 
     <?php if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) || ($deals->enddate < time())) { ?>
-                                    <a class="buy_it" titile="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;" ><?php echo $this->Lang['SOLD_OUT2']; ?></a>
+                                    <a class="buy_it" titile="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default; background-color: #30A6B1;" ><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                         <?php } else { ?>
                          <script type="text/javascript">
                                                         $(document).ready(function() {
@@ -316,10 +316,10 @@
                                                         });
                                                         </script>
                                                         <?php if ($deals->deal_status == "1"){ ?>
-                                    <a class="buy_it" id="auction" href="<?php echo PATH . 'deals_payment/p/' . $deals->deal_key . '/' . $deals->url_title . '.html'; ?>" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?> </a>
+                                    <a class="buy_it" id="auction" href="<?php echo PATH . 'deals_payment/p/' . $deals->deal_key . '/' . $deals->url_title . '.html'; ?>" style="background-color: #30A6B1;color:black;" title="<?php echo $this->Lang['BUY_NOW2']; ?>"><?php echo $this->Lang['BUY_NOW2']; ?> </a>
                                                         
                                     
-                                    <a class="buy_it" id="sold" titile="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;" ><?php echo $this->Lang['SOLD_OUT2']; ?></a>
+                                    <a class="buy_it" id="sold" titile="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;background-color: #30A6B1;color:black;" ><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } ?>
                         <?php } ?>
 

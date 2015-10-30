@@ -76,7 +76,7 @@ li.dropdown { list-style:none }
 .headerdetails ul.topcartopen { font-size:12px }
 .headerdetails ul.topcartopen li > table { border-collapse: collapse; width: 100%; margin-bottom: 5px; padding:10px }
 .headerdetails ul.topcartopen li > table td {
-color: #; vertical-align: top; padding: 5px 10px; border-bottom: 1px dashed #E7E7E7; }
+color: ; vertical-align: top; padding: 5px 10px; border-bottom: 1px dashed #E7E7E7; }
 .headerdetails ul.topcartopen li > table .image { width: 1px; }
 .headerdetails ul.topcartopen li > table .image img { text-align: left; }
 .headerdetails ul.topcartopen li > table .name small { color: #999999; }

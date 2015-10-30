@@ -223,6 +223,7 @@ function add_store_email_subscriber(email,store_url)
                 
                 
    <script src="<?php echo PATH; ?>js/jquery.js"></script> 
+<script src="<?php echo PATH.'themes/'.THEME_NAME.'/js/public.js'; ?>"></script>   
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name ?>/js/bootstrap.js"></script> 
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name ?>/js/respond.min.js"></script> 
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name ?>/js/application.js"></script> 

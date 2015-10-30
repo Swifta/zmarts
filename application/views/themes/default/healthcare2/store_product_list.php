@@ -226,13 +226,11 @@ if(count($this->merchant_personalised_details)>0) {
             <?php } else { ?>
                     <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>"></a>
             <?php } ?>    
-<!--                       <a class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" 
-               title="<?php echo $products->deal_title; ?>" style="font-size:<?php echo $font_size; ?> arial; <?php //echo $font_color; ?>"> <?php echo $products->deal_title; ?></a>
-            -->
+                    
                       <div class="thumbnail">
                         <span class="sale tooltip-test">Sale</span>
 <!--                        <a href="#"><img alt="" src="img/product1.jpg"></a>-->
-                        <div class="shortlinks" style="margin-top:-20px;">
+                        <div class="shortlinks" style="margin-top:-4px;">
                          <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
                           <a class="wishlist" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">&nbsp;</a>
                           
@@ -246,6 +244,20 @@ if(count($this->merchant_personalised_details)>0) {
                           </div>
                         </div>
                       </div>
+                    <div class="seller_listing_content">
+                
+                <div class="ratings">
+<?php 
+$avg_rating = $products->avg_rating;
+if($avg_rating!=''){
+$avg_rating = round($avg_rating); ?>
+<img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/star_<?php echo $avg_rating;?>.png"/>
+<?php } else { ?>
+<img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/gray.png"/>
+<?php } ?>
+                </div>
+                <!--<p style="font:18px arial;color: #000;"><?php echo $symbol . " " . $products->deal_value; ?></p>-->
+            </div>
                     </li>
                    
                     
@@ -303,20 +315,19 @@ if(count($this->merchant_personalised_details)>0) {
                  title="<?php echo $products->deal_title; ?>"><?php 
                  
                  echo $products->deal_title; ?></a>
-                            <div class="productdiscrption"> <p class="price"><?php echo $products->deal_description; ?></p> </div>
+                            <div class="productdiscrption"> <p class="price"><?php //echo $products->deal_description; ?></p> </div>
                             <div class="pricetag">
                               <span class="spiral"></span> <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="Add to cart" class="productcart">Add to cart</a>
                               <div class="price">
                                <p class="price"><?php echo $symbol . " " . number_format($products->deal_value); ?></p>        
                               </div>
                             </div>
-                            <div class="shortlinks">
-                               <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
-                          <a class="wishlist" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">&nbsp;</a>
-                          
-                          <a class="compare" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">COMPARE</a>
-                       
-                            </div>
+                           <div class="shortlinks" style="">
+                 <a class="details"  href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
+              <a class="wishlist" href="#" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php  addslashes($products->deal_title); ?>');" title="<?php echo $this->Lang['ADD_WISH_LIST'];?>">wishlist</a>
+              <a class="compare" href="#" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>">compare</a>
+            
+                </div>-->
                           </div>
                         </div>
                       </div>

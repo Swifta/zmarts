@@ -267,7 +267,7 @@ $(".slidetabs").tabs(".images > div", {
                <!-- Category-->
                 <section id="categorygrid">
                     <?php if (count($this->all_auction_list) > 0) { ?>      
-                  <ul   <?php if (count($this->all_auction_list) > 4) { ?> id="mycarousel2" class="thumbnails grid" <?php } else { ?> <?php } ?>>                         
+                  <ul   <?php if (count($this->all_auction_list) > 4) { ?> id="mycarousel2" class="" <?php } else { ?> <?php } ?>>                         
                                         <?php
                                         $l = 1;
                                         foreach ($this->all_auction_list as $products) {

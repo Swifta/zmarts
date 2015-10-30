@@ -303,7 +303,7 @@ foreach ($this->product_deatils as $products) {
                                             </ul>
                                         </div>
     <?php } ?>
-                                    <input type="hidden" name="nosize" id="no_size" value="<?php echo $nosize; ?>">
+                                    <input type="hidden" name="nosize" id="no_size" value="<?php //echo $nosize; ?>">
                                     <input type="hidden" name="color_count" id="color_count" value="<?php echo $color_count; ?>" />
                                     <input type="hidden" name="select_color" id="sel_color" value="<?php echo $this->session->get('product_color_qty' . $products->deal_id); ?>" />
                                     <input type="hidden" name="select_size" id="sel_size" value="<?php echo $this->session->get('product_size_qty' . $products->deal_id); ?>" />
@@ -376,7 +376,7 @@ foreach ($this->product_deatils as $products) {
                                 <?php if ($products->purchase_count >= $products->user_limit_quantity) { ?>
                                  <a class="buy_it"style="cursor:pointer" <?php echo $this->Lang['SOLD_OUT']; ?>></a>
                                 <?php } else { ?>
-                                 <a  class="buy_it" style="cursor:pointer;" id="allselect_nosize_1" onclick="check_validation('<?php echo $products->deal_id; ?>');" title="<?php echo $this->Lang['ADD_TO_CART']; ?>"><?php echo $this->Lang['ADD_TO_CART']; ?></a>
+                                 <a  class="buy_it" style="cursor:pointer; background-color: #30A6B1;" id="allselect_nosize_1" onclick="check_validation('<?php echo $products->deal_id; ?>');" title="<?php echo $this->Lang['ADD_TO_CART']; ?>"><?php echo $this->Lang['ADD_TO_CART']; ?></a>
                                 <?php } ?>
                                 
                                 <?php }
