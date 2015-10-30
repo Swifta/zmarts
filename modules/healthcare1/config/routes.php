@@ -27,12 +27,3 @@ $config['mko/products/c/(.*)/(.*).html'] = "/healthcare1/product_list/mko/$1/$2"
 $config['mko/deal/c/(.*)/(.*).html'] = "/healthcare1/deal_list/mko/$1/$2";
 $config['mko/auction/c/(.*)/(.*).html'] = "/healthcare1/auction_list/mko/$1/$2";
 // mko End
-// Slot-Systems-Limited Start
-$config['Slot-Systems-Limited'] ="healthcare1/stores_home_page/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/products.html'] = "/healthcare1/product_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/today-deals.html'] = "/healthcare1/deal_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/auction.html'] = "/healthcare1/auction_list/Slot-Systems-Limited";
-$config['Slot-Systems-Limited/products/c/(.*)/(.*).html'] = "/healthcare1/product_list/Slot-Systems-Limited/$1/$2";
-$config['Slot-Systems-Limited/deal/c/(.*)/(.*).html'] = "/healthcare1/deal_list/Slot-Systems-Limited/$1/$2";
-$config['Slot-Systems-Limited/auction/c/(.*)/(.*).html'] = "/healthcare1/auction_list/Slot-Systems-Limited/$1/$2";
-// Slot-Systems-Limited End

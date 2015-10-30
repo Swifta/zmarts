@@ -198,7 +198,7 @@ foreach ($this->product_deatils as $products) {
                                     </div>
                                     <ul class="product_compare_link">
                                         <li>
-                                            <a class="buy_it_fr add_compare_icon" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" title="<?php echo $this->Lang['ADD_COMPARE']; ?>"><?php echo $this->Lang['ADD_COMPARE']; ?></a>
+                                            
                                         </li>
                                         <li>|</li>
                                         <li>

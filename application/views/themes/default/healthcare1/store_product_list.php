@@ -1,3 +1,7 @@
+<?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <?php
 $font_color = "";
 $bg_color ="";

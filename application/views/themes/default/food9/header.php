@@ -421,6 +421,7 @@ $srch = $this->Lang['SRCH_STR'];
             foreach ($this->categeory_list_deal as $d) {
                 $check_sub_cat = $d->deal_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
+        
                 <div class="one-column">
                     <ul>
                         <li><span class="mega-headline"><?php echo ucfirst($d->category_name); ?></span></li>
