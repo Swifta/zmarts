@@ -495,7 +495,7 @@ $avg_rating = round($avg_rating); ?>
     <div class="container">
         <div class="row">
 
-            <div class="span5">
+            <div class="span4">
 
                     <figure>
         <?php foreach ($this->get_store_details as $store) { ?>
@@ -535,7 +535,7 @@ $avg_rating = round($avg_rating); ?>
 
             </div>
 
-            <div class="span2">
+            <div class="span4">
 
                     <figure>
                         <?php foreach ($this->get_store_details as $store) { ?> 
@@ -552,7 +552,7 @@ $avg_rating = round($avg_rating); ?>
 
             </div>
 
-            <div class="span5">
+            <div class="span4">
                     <figure>
                     <div class="title_outer">
                         <h2 class="title_inner2"><?php echo $this->Lang['COMM']; ?></h2>  
