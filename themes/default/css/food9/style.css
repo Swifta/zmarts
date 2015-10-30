@@ -96,11 +96,11 @@
 .cate_supmenu .cate_subarr,.cate_supmenu1 .cate_subarr,.cate_supmenu2 .cate_subarr,.cate_supmenu .cate_subarr:hover,.cate_supmenu1 .cate_subarr:hover,.cate_supmenu2 .cate_subarr:hover{background-position: 140px center;}
 
 /* Popup Start */
-.popup_block {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
-.popup_block1 {display:none;float: left; font-size: 1.2em; position: fixed; top: 20px; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
-.popup_block2 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
-.popup_block3 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
-.popup_block3 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
+.popup_block {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 999999999;width:630px;margin:0 0 0 -315px;}
+.popup_block1 {display:none;float: left; font-size: 1.2em; position: fixed; top: 20px; left:50%; z-index: 999999999;width:630px;margin:0 0 0 -315px;}
+.popup_block2 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 999999999; width:630px;margin:0 0 0 -315px;}
+.popup_block3 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 999999999; width:630px;margin:0 0 0 -315px;}
+.popup_block3 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 999999999; width:630px;margin:0 0 0 -315px;}
 
 #fade { visibility: hidden;  background: #000; position: fixed; left: 0; top: 0; z-index: 10; width: 100%; height: 100%; opacity: .50; z-index: 100; }
 
@@ -712,7 +712,7 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
     padding: 0 8px;display: block;font:normal 17px/30px arial;color:#fff;}
 
 
-.popup_auction {display:none;float: left; font-size: 1.2em; position: fixed; top: 40px; left:50%;width:430px;margin:0 0 0 -215px; z-index: 101;}
+.popup_auction {display:none;float: left; font-size: 1.2em; position: fixed; top: 40px; left:50%;width:430px;margin:0 0 0 -215px; z-index: 999999999;}
 .place_sign_up{float:left; width:100%; z-index: 9999;}
 .place_sign_midd{padding:0 20px;background: #fff;position: relative; }
 .place_midd_top{text-align:center; padding:20px 0 15px;border-bottom:1px solid #ECE9E4;}

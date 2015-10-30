@@ -113,29 +113,34 @@ foreach ($this->deals_deatils as $deals) {
     </script>
     <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js "></script>
 
-<!-- Titlebar
-================================================== -->
-<section class="parallax-titlebar fullwidth-element"  data-background="#000" data-opacity="0.45" data-height="160">
-
-    <img src="<?php echo PATH; ?>bootstrap/themes/images/food/banners/<?php echo rand(1, 3); ?>.jpg" alt="" />
-	<div class="parallax-overlay"></div>
-
-	<div class="parallax-content">
-            <h2><span><?php echo ucfirst($deals->deal_title); ?></span></h2>
-
-		<nav id="breadcrumbs">
-			<ul>
-				<li><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></li>
-				<li><a href="<?php echo PATH.$this->storeurl; ?>/auction.html" title="<?php echo $this->Lang['AUCTION']; ?>"><?php echo $this->Lang['AUCTION']; ?></a></li>
-			</ul>
-		</nav>
-	</div>
-
-</section>
+<!-- BAR -->
+<div class="bar-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="title-bar">
+                    <h1>
+                        <span>
+                    <?php 
+                    if(strlen($deals->deal_title) > 70){
+                        echo substr($deals->deal_title, 0, 70);
+                    }
+                    else{
+                        echo ucfirst($deals->deal_title);
+                    }
+                    ?>
+                        </span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BAR -->
 
     <div class="container">
-        <div class="sixteen columns">
-            <div >
+        <div class="row">
+            <div class="span12">
                 
                 <div  id="messagedisplay1" style="display:none;">
                     <div class="session_wrap">
@@ -152,8 +157,8 @@ foreach ($this->deals_deatils as $deals) {
                 <!--content start-->
                 <div class="auction_block">
                     <div class="deal_content auction_content">
-                        <div class="sixteen columns">
-                        <div class="five columns auction_image wloader_parent">                            
+                        <div class="row">
+                        <div class="span5 auction_image wloader_parent">                            
                             <i class="wloader_img" style="min-height: 300px;">&nbsp;</i>           
                                        <div class="auction_image_inner">
                                 <?php $image_count = "";
@@ -241,7 +246,7 @@ foreach ($this->deals_deatils as $deals) {
                         </div>
                         </div>
 
-                        <div class="eleven columns bid_history" style="float:right;width:65%;">
+                        <div class="bid_history" style="float:right;">
                             <div class="mbid_history_inner">
                             <div class="bid_history_content">					
                                 <ul>
@@ -399,6 +404,7 @@ foreach ($this->deals_deatils as $deals) {
                                 </div>
                                 </div>
                         </div>
+                            
                     </div>
                      <ul class="bid_advance_block">
                         <li>

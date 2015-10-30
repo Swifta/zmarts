@@ -7,7 +7,6 @@ if(SrcPath.indexOf("js/jquery.js") > -1){
 if(SrcPath.indexOf("bootstrap/themes/js/jquery-1.7.2.min.js") > -1){
     Path = SrcPath.replace("bootstrap/themes/js/jquery-1.7.2.min.js", "");
 }
-
 /*
 	Zenith API flags
 	@Live
@@ -20,7 +19,6 @@ var is_z_verify_account_api_running = false;
 
 
 $(document).ready(function () {
-        
 	if($('#messagedisplay')){
 		$('#messagedisplay').animate({opacity: 1.0}, 8000)
 		//$('#messagedisplay').fadeOut('slow');

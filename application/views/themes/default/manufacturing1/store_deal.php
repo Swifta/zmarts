@@ -35,30 +35,129 @@ $(".slidetabs").tabs(".images > div", {
         $('#messagedisplay1').hide();
     });
 </script>
+<div class="wrapper">
+    <div class="container">
+        <div class="row ">
+            
+            <!-- SLIDER -->
+            <div class="span9 slider">
+                <div class="slider-slides">
+<?php
+$font_color = "";
+$bg_color ="";
+$font_size ="";
 
+    
+$banner_check ="";
+if(count($this->merchant_personalised_details)>0) { 
+	foreach($this->merchant_personalised_details as $m) {  
+                $tabs=0;
+                for ($i = 1; $i <= 3; $i++) {
+                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
+                            $banner_link="";
 
+                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
+                                $banner_check = 1;
+                                if($i==1) { 
+                                    $banner_link = $m->banner_1_link; 
+                                } else if($i==2) { 
+                                    $banner_link = $m->banner_2_link; 
+                                } else if($i==3) { 
+                                    $banner_link = $m->banner_3_link; 
+                                }
+                                
+                            }
+?>
+<div class="slides">                                                                               
+    <a href="<?php echo $banner_link; ?>"  title="<?php echo $banner_link; ?>">
+        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" 
+             data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
+    </a>
+</div>
+<?php
+                    }
+                    else{
+                        //echo "No Image file";
+?>
+                <div class="slides">
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/<?php echo $i; ?>.jpg" alt="" />
+                </div>
+<?php
+                    }
+                }
+        }
+}
+else{?>
 
+    <div class="slides">
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/1.jpg" alt="" />
+    </div>
+    <div class="slides">
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/2.jpg" alt="" />
+    </div>
+    <div class="slides">
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/3.jpg" alt="" />
+    </div>
 
+<!-- display default banners-->
+<?php
+}
+?>
+    </div>
+    <a href="#" class="next"></a>
+    <a href="#" class="prev"></a>
+    <div class="slider-btn"></div>
+</div>
+<!-- SLIDER -->
 
-<!-- Titlebar
-================================================== -->
-<section class="parallax-titlebar fullwidth-element"  data-background="#000" data-opacity="0.45" data-height="160">
+            <!-- SPECIAL-OFFER -->
+            <div class="span3">
+            <?php 
+            $ads_check = "";
+            if(count($this->merchant_personalised_details)>0) { 
+	foreach($this->merchant_personalised_details as $m) {
+		 ?>        
+					<?php for ($i = 1; $i <= 2; $i++) { ?>
+										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
+											$ads_link="";
+											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
+											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
+                <div class="offers">
+                    <figure>
+                            <a class="img-caption" href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
+                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>
+                            </a>
+                    </figure>
+                </div>
+                    <?php }else{?>
+                <div class="offers">
+                    <figure>
+				<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/ads/<?php echo $i; ?>.jpg" alt="" />
+			</figure>
+                </div>
+                    <?php }}?> 
+            <?php  } } ?>
 
-	<img src="<?php echo PATH; ?>bootstrap/themes/images/food/banners/<?php echo rand(1, 3); ?>.jpg" alt="" />
-	<div class="parallax-overlay"></div>
+            </div>
+            <!-- SPECIAL-OFFER -->
+            
+        </div>
+    </div>
+</div>
 
-	<div class="parallax-content">
-		<h2><?php echo $this->title_display; ?></h2>
-
-		<nav id="breadcrumbs">
-			<ul>
-				<li><a href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></li>
-				<li><?php echo $this->title_display; ?></li>
-			</ul>
-		</nav>
-	</div>
-
-</section>
+<!-- BAR -->
+<div class="bar-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="title-bar">
+                    <h1><?php echo $this->title_display; ?></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BAR -->
 
  <?php 
 				$font_color = "";
@@ -73,34 +172,37 @@ $(".slidetabs").tabs(".images > div", {
 //					} 
 //				}	 
                                 ?>
-            
-<div class="container">
-	<!-- Products -->
-    <div class="products">
-        <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_deal_list"); ?>
-        <span  id="product">
-        </span>
-    </div>
-    <?php if(($this->all_deals_count > 12)) { ?>
-        <div id="loading">
-        <?php if (($this->pagination) != "") { ?>
-                    <div class="feature_viewmore text-center">
-                            <div class="fea_view_more text-center">                                                
-                                    <a class="view_more view_more1 view_more_but">
-                                            <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_DEALS']; ?><span class="view_more_icon">- - -</span>
-                                    </a> 
-                            </div>
+<div class="product_wrap">
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class=" clearfix">
+                    <div class="productsss">
+                    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_deal_list"); ?>
+                            <span  id="product">
+                            </span>
                     </div>
-                <?php } ?>
+                    <?php if(($this->all_deals_count > 12)) { ?>
+                        <div id="loading">
+                        <?php if (($this->pagination) != "") { ?>
+                                        <div class="feature_viewmore text-center">
+                                                <div class="fea_view_more text-center">                                                
+                                                        <a class="view_more view_more1 view_more_but" onclick="viewMore();">
+                                                                <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_PROD']; ?><span class="view_more_icon">- - -</span>
+                                                        </a> 
+                                                </div>
+                                        </div>
+                                <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
-    <?php } ?>
+    </div>
 </div>
 
 <div class="margin-top-15"></div>
-
-            
-            
-            
+  
             
 <section  id="messagedisplay1" style="display:none;">      
     <div class="session_wrap">

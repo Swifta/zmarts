@@ -358,6 +358,12 @@ class Deals_Controller extends Layout_Controller
                             $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
                             $this->template->javascript = html::script($java_scripts);
                         }
+                        else if($this->theme_name == "manufacturing1"){
+                            $style_sheets = array();
+                            $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/alt_style.css';
+                            $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
+                            $this->template->style = html::stylesheet($style_sheets);
+                        }
                         else{
                             $this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
                         }

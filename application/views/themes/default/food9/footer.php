@@ -13,7 +13,7 @@
 </a>
 <p class="margin-top-15">
     <?php 
-    if(strlen($stores->about_us) > 0){
+    if(strlen($stores->about_us) > 99){
         echo substr($stores->about_us, 0, 99).".....";
     }else{
 echo $stores->about_us; 

@@ -24,27 +24,27 @@ if(count($this->merchant_personalised_details)>0) {
                                     <i class="wloader_img">&nbsp;</i>
 					<a href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" 
                                            title="<?php echo $deals1->deal_title; ?>">
-            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-            $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
+            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
             <?php if(true) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
-                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                            <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
             <?php } else { ?>
                     <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
             <?php } ?> 
                         <div class="cover">
-            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-            $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
+            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
             <?php if(true) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
-                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                            <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
             <?php } else { ?>
                     <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
@@ -128,27 +128,27 @@ if(count($this->merchant_personalised_details)>0) {
                                     <i class="wloader_img">&nbsp;</i>
 					<a href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" 
                                            title="<?php echo $deals1->deal_title; ?>">
-            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-            $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
+            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
             <?php if(true) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
-                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                            <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
             <?php } else { ?>
                     <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
             <?php } ?> 
                         <div class="cover">
-            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-            $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
+            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
             <?php if(true) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
-                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                            <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
             <?php } else { ?>
                     <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
@@ -230,27 +230,27 @@ if(count($this->merchant_personalised_details)>0) {
                                     <i class="wloader_img">&nbsp;</i>
 					<a href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" 
                                            title="<?php echo $deals1->deal_title; ?>">
-            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-            $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
+            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
             <?php if(true) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
-                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                            <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
             <?php } else { ?>
                     <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
             <?php } ?> 
                         <div class="cover">
-            <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
-            $image_url = PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png';
+            <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png')) { 
+            $image_url = PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png';
             $size = getimagesize($image_url);
             ?>
             <?php if(true) { ?>
-                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
+                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $deals1->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />
                    <?php } else { ?>
-                            <img src="<?php echo PATH .'images/products/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
+                            <img src="<?php echo PATH .'images/auction/1000_800/'.$deals1->deal_key.'_1'.'.png'?>" />
                 <?php } ?>
             <?php } else { ?>
                     <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>"  alt="<?php echo $deals1->deal_title; ?>" title="<?php echo $deals1->deal_title; ?>" />

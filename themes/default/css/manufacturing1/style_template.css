@@ -82,7 +82,7 @@ blockquote p {}
 .social-strip { display: inline-block; }
 .social-strip ul { border-left: 1px solid #d6d6d6;}
 .social-strip ul li { display: inline-block; border-right: 1px solid #d6d6d6; }
-.social-strip ul li a { padding: 9px 10px 9px 30px; font:12px 'Open Sans' sans-serif; color: #000000; }
+.social-strip ul li a { padding: 9px 17px; font:12px 'Open Sans' sans-serif; color: #000000; }
 .social-strip ul li a.account { background: url("images/account.png") 10px center no-repeat; }
 .social-strip ul li a.wish { background: url("images/wish.png") 10px center no-repeat; }
 .social-strip ul li a.check { background: url("images/check.png") 8px center no-repeat; }
@@ -143,11 +143,11 @@ header nav > ul > li ul li a{display: block;}
 
 .sub-menu.menu-four {padding: 14px 14px 14px 14px; width: 630px !important; }
 .sub-menu.menu-four .our-product { width: 195px; float: left; margin: 0px 7.5px;}
-.sub-menu.menu-four .our-product > div { margin-bottom: 15px; }
+.sub-menu.menu-four .our-product > div { margin-bottom: 1px; }
 .sub-menu.menu-four .our-product > div:last-child { margin: 0px; }
-.sub-menu.menu-four .our-product div > a { transition: all 1s; -webkit-transition: all 1s; float: left; width: 70px; height: 50px; display: block; margin-right: 10px; }
-.sub-menu.menu-four .our-product div > a:hover { opacity: 0.5; }
-.sub-menu.menu-four .our-product div h4 { font-size: 13px; color: #ffffff}
+.sub-menu.menu-four .our-product div > a { color:#ffffff; transition: all 1s; -webkit-transition: all 1s; float: left; width: 170px; display: block; margin-right: 10px; }
+.sub-menu.menu-four .our-product div > a:hover { color:#ffffff; opacity: 0.5; }
+.sub-menu.menu-four .our-product div h4 { font-size: 12px; color: #f71919}
 .sub-menu.menu-four .our-product div span { color: #f71919; font: bold 13px 'Arial' sans-serif; }
 
 

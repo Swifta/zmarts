@@ -1,5 +1,4 @@
-fashion9
-    <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+<?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/jquery.jcarousel.css" media="all">
 <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/skin.css" media="all">
