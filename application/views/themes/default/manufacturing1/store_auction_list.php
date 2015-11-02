@@ -299,7 +299,7 @@ $avg_rating = round($avg_rating); ?>
 <img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/gray.png"/>
 <?php } ?>
                 </div>
-               <div class="auction_timer">                                                                                                                                           
+               <div class="auction_timer" >                                                                                                                                           
                       <span time="<?php echo $deals1->enddate; ?>" class="kkcount-down" ></span>                                                                
                 </div>
                 <div class="icon">

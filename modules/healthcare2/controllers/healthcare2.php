@@ -38,7 +38,8 @@ class Healthcare2_Controller extends Layout_Controller
                  * */
 
 		$style_sheets = array();
-                $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
+               // $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style_1.css';
+                 $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
                 $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
 //                
 //                $style_sheets[2] = "http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic";
@@ -77,13 +78,14 @@ class Healthcare2_Controller extends Layout_Controller
 //                $java_scripts[16] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/custom.js';       
 //                        
 //                
-//                $java_scripts[17] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
-//                $java_scripts[18] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
-//                $java_scripts[19] = PATH.'bootstrap/themes/js/superfish.js';
-//                $java_scripts[20] = PATH.'themes/'.THEME_NAME.'/js/jquery.js';
-//                
+                $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
+             $java_scripts[1] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
+               $java_scripts[2] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
+               $java_scripts[3] = PATH.'bootstrap/themes/js/superfish.js';
+              $java_scripts[4] = PATH.'themes/'.THEME_NAME.'/js/jquery.js';
+                
                 $this->template->javascript = html::script($java_scripts);
-		$this->stores = new Healthcare2_Model();
+		$this->stores = new healthcare2_Model();
 
 		$this->is_store = 1;
 		if(!$this->store_setting){
