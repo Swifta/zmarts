@@ -65,19 +65,36 @@ $this->language_List = str_replace(".php", "", $DL);
                     <div class="pull-left">
                         <div class="navbar" id="topnav">
                             <div class="navbar-inner">
-                                <ul class="nav" >
-                                      <?php  if($this->session->get('user_auto_key')) { ?>
+                               <ul class="nav" >
+                                    <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
+                        <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/warranty.html'; ?>"><?php echo $this->Lang["WARRANTY"]; ?></a></li>
+
+                        <?php } ?>
+                         <?php if($this->merchant_cms->current()->return_policy_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/return_policy.html'; ?>" title=" <?php echo $this->Lang["RET_POLICY"]; ?>"> <?php echo $this->Lang["RET_POLICY"]; ?></a></li>
+
+                        <?php } ?>
+                         <?php if($this->merchant_cms->current()->terms_conditions_status ==1) { ?>
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/shipping.html'; ?>" title="<?php echo $this->Lang["SHIP_ING"]; ?>"><?php echo $this->Lang["SHIP_ING"]; ?></a></li>
+      
+                        <?php } ?>                                          
+            <?php } }} ?>
+                <li><a class="home active" href="<?php echo PATH;?>">Home</a></li>  
+                  <?php if ($this->session->get('UserID')) { ?>
+                <li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+                
+                <?php  if($this->session->get('user_auto_key')) { ?>
         <li  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
         <?php } ?>
-                                    <li><a class="home active" href="<?php echo PATH;?>">Home</a> </li>
-                                    <?php if ($this->session->get('UserID')) { ?>
-                                    <li<span><?php echo $this->Lang['WELCOME']; ?> </span>><a class="myaccount"  ref="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>">
-                                            <b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a> </li>
-                                 
-                                      <li><a class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
+                                    
+                                   <li class="mnav_dnone"></li>
+      <li class="mnav_dnone"></li>
+                <li><a class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
                 <li class="mnav_dnone"></li>
                  <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
-                 
+
+
                 <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
 
                 <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
@@ -92,26 +109,28 @@ $this->language_List = str_replace(".php", "", $DL);
         <?php } ?>   
                 <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
                 <li class="mnav_dnone"></li>
-                <li><a href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
-        <?php } else { ?>
-              <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+                <!--<li><a href="<?php //echo PATH; ?>logout.html" title="<?php //echo $this->Lang['LOGOUT']; ?>"><?php // $this->Lang['LOGOUT']; ?></a> </li>-->
                 
-                 <li  class="addcomper" >
-                <?php $compare = $this->session->get("product_compare"); 
-                if(is_array($compare) && count($compare)>1){  ?>
-                <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
-                <li class="mnav_dnone"> <?php $compare = $this->session->get("product_compare"); 
-                if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
+                <li ><a id="leo_id" href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
+                  <li><a href="<?php if($this->session->get("count") > 0){ echo 'javascript:logout_click();'; }else{ echo PATH."logout.html"; } ?>" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
+        <?php } else { ?>
+             
+               <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
+								<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare) > 1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
+																
+								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li>
+								
+							<?php } ?>
+        
 
-        <?php } ?>
-             <li><a id="login"  href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>-->
+                <li><a class="myaccount" id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
                 <li class="mnav_dnone"></li>
-                <li><a href="javascript:showsignup();"  title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+                <li><a class="myaccount" href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
                 <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
         
                     <?php } ?>
-
-                 <?php if (FB_PAGE) { ?>
+                
+        <?php if (FB_PAGE) { ?>
         <!-- <li><a class="faceb" href="<?php echo FB_PAGE; ?>" target="blank" title="<?php echo $this->Lang['FB']; ?>">&nbsp;</a></li>-->
         <?php }if (TWITTER_PAGE) { ?>
         <!-- <li><a class="twitt" href="<?php echo TWITTER_PAGE; ?>" target="blank" title="<?php echo $this->Lang['TW']; ?>">&nbsp;</a></li>-->
@@ -128,20 +147,21 @@ $this->language_List = str_replace(".php", "", $DL);
                                 <?php
                         }
                 } */
-        }  ?>             
-                
-                
-                
-                
+        }  ?>                   
                 
                 <li class="">
-        <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+        <a class="myaccount" href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
                     <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
             </li>
+                                    <li><a class="shoppingcart" href="#"></a> </li>
+                                    
+                                    
                                 </ul>
                             </div>
                         </div>
+                        
                     </div>
+                    
                     <!-- Top Nav End -->
 <!--                    <div class="pull-right">
                         <form class="form-search top-search">
@@ -246,14 +266,7 @@ $srch = $this->Lang['SRCH_STR'];
             </ul>
 	</div>
                  <ul class="nav topcart pull-right">
-                    <li class="dropdown hover carticon "> <a href="<?php echo PATH; ?>cart.html" class="dropdown-toggle" > Shopping Cart </a>
-                        <ul class="dropdown-menu topcartopen ">
-                            <li>
-                                
-                               <?php if ($this->product_setting) { ?>
-        <div class="add_cart">
-        <div class="cart_mid" id="cart_window">
-	        <a href="<?php echo PATH; ?>cart.html"  title="<?php echo $this->Lang['CART']; ?>(<?php
+                    <li class="dropdown hover carticon "> <a href="<?php echo PATH; ?>cart.html"  title="<?php echo $this->Lang['CART']; ?>(<?php
 	        if ($this->session->get('count') != '') {
 		        echo $this->session->get('count');
 	        } else {
@@ -266,14 +279,9 @@ $srch = $this->Lang['SRCH_STR'];
 			           echo "0";
 		           }
 		           ?></span><?php echo $this->Lang['CART']; ?>(s)</a>
-            <div class="cart_window_products1" style="display:none"></div>
-        </div>
-        </div>
-        
-        <?php } ?>
-<!--                                <div class="well pull-right buttonwrap"> <a class="btn btn-orange" href="#">View Cart</a> <a class="btn btn-orange" href="#">Checkout</a> </div>-->
-                            </li>
-                        </ul>
+<!--                        <ul class="dropdown-menu topcartopen ">
+                            the cart
+                        </ul>-->
                     </li>
                 </ul>
                     </li>
@@ -310,8 +318,7 @@ $srch = $this->Lang['SRCH_STR'];
                     
                      <?php if ($this->product_setting) { ?>
                     <li class="<?php if (isset($this->is_product)){ echo "";} ?>">
-                        <a class="<?php if (isset($this->is_product)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>
-                           /products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang['PRODUCTS']; ?></a>
+<a class="<?php if (isset($this->is_product)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang['PRODUCTS']; ?></a>
                                  
                         <div><ul>
                             <?php $pr = 0; $pro = 0; $val_pro ="";
@@ -331,7 +338,7 @@ $srch = $this->Lang['SRCH_STR'];
                 $check_sub_cat = $d->product_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
                             
-                                <li style="height:30px;"><?php echo ucfirst($d->category_name); ?>  
+                                <li style="height:35px;"><?php echo ucfirst($d->category_name); ?>  
                                     
                                     <div>
                                         <ul>
@@ -368,8 +375,8 @@ $srch = $this->Lang['SRCH_STR'];
                     
                      <?php if ($this->deal_setting) { ?>
                     <li class="<?php if (isset($this->is_todaydeals)){ echo "";} ?>">
-                        <a class="<?php if (isset($this->is_todaydeals)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>
-                           /today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>"><?php echo $this->Lang['DEALS']; ?></a>
+                        <a class="<?php if (isset($this->is_todaydeals)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>"><?php echo $this->Lang['DEALS']; ?></a>
+                          
                                  
                         <div><ul>
                            <?php $de = 0; $dea = 0;  $val_de ="";
@@ -388,7 +395,7 @@ $srch = $this->Lang['SRCH_STR'];
             foreach ($this->categeory_list_deal as $d) {
                 $check_sub_cat = $d->deal_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
-                                <li style="height:30px;"><?php echo ucfirst($d->category_name); ?>  
+                                <li style="height:35px;"><?php echo ucfirst($d->category_name); ?>  
                                     
                                     <div>
                                         <ul>
@@ -397,7 +404,7 @@ $srch = $this->Lang['SRCH_STR'];
                                     if($sub_cate->main_category_id == $d->category_id){
                             
                             ?>
-                                            <li style="margin-left:-10px;"><a href="<?php echo PATH.$this->storeurl.'/products/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo ucfirst($sub_cate->category_name);?></a></li>
+                                            <li style="margin-left:-10px;"><a href="<?php echo PATH.$this->storeurl.'/deal/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo ucfirst($sub_cate->category_name);?></a></li>
                                      
  <?php 
                                     }
@@ -430,8 +437,8 @@ $srch = $this->Lang['SRCH_STR'];
                     
                      <?php if ($this->auction_setting) { ?>
                     <li class="<?php if (isset($this->is_auction)){ echo "";} ?>">
-                        <a class="<?php if (isset($this->is_auction)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>
-                           /auction.html" title="<?php echo $this->Lang['AUCTION']; ?>"><?php echo $this->Lang['AUCTION']; ?></a>
+                        <a class="<?php if (isset($this->is_auction)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>/auction.html" title="<?php echo $this->Lang['AUCTION']; ?>"><?php echo $this->Lang['AUCTION']; ?></a>
+                           
                                  
                         <div><ul>
                           <?php $au = 0; $aut = 0; $val = "";
@@ -450,7 +457,7 @@ $srch = $this->Lang['SRCH_STR'];
             foreach ($this->categeory_list_auction as $d) {
                 $check_sub_cat = $d->auction_count;
                 if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
-                                <li style="height:30px;"><?php echo ucfirst($d->category_name); ?>  
+                                <li style="height:35px;"><?php echo ucfirst($d->category_name); ?>  
                                     
                                     <div>
                                         <ul>
@@ -458,7 +465,7 @@ $srch = $this->Lang['SRCH_STR'];
                                 foreach($this->subcategories_list as $sub_cate){
                                     if($sub_cate->main_category_id == $d->category_id){
                             ?>
-                                           <li style="margin-left:-10px;" ><a href="<?php echo PATH.$this->storeurl.'/products/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo ucfirst($sub_cate->category_name);?></a></li>
+                                           <li style="margin-left:-10px;" ><a href="<?php echo PATH.$this->storeurl.'/auction/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>" title="<?php echo ucfirst($sub_cate->category_name);?>"><?php echo ucfirst($sub_cate->category_name);?></a></li>
                                      
  <?php 
                                     }
@@ -487,18 +494,18 @@ $srch = $this->Lang['SRCH_STR'];
 		        if (isset($this->is_soldout)) {
 			        echo "class='active'";
 		        }
-		        ?>>"><a  href="<?php echo PATH.$this->storeurl; ?>/soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>">
-			        <?php echo $this->Lang['SOLD_OUT2']; ?>
-		        </a> </li><?php } ?>
+		        ?>>"><a  href="<?php echo PATH.$this->storeurl; ?>/soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>"><?php echo $this->Lang['SOLD_OUT2']; ?> </a> </li><?php } ?>
+			        
+		       
                      <?php if ($this->store_setting) { ?>
                     <li
                         <?php
 		        if (isset($this->is_store)) {
 			        echo "class=''";
 		        }
-		        ?>><a href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">
-			        <?php echo $this->Lang['STORES']; ?>
-		        </a> </li><?php } ?>
+		        ?>><a href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>"> <?php echo $this->Lang['STORES']; ?></a> </li><?php } ?>
+			       
+		        
                      <?php if (($this->deal_setting == 1 || $this->product_setting == 1 || $this->auction_setting == 1 ) && $this->map_setting) { ?>
                      <li
                          
