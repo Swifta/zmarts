@@ -303,7 +303,7 @@ foreach ($this->product_deatils as $products) {
                                             </ul>
                                         </div>
     <?php } ?>
-                                    <input type="hidden" name="nosize" id="no_size" value="<?php //echo $nosize; ?>">
+                                    <input type="hidden" name="nosize" id="no_size" value="<?php echo $nosize; ?>">
                                     <input type="hidden" name="color_count" id="color_count" value="<?php echo $color_count; ?>" />
                                     <input type="hidden" name="select_color" id="sel_color" value="<?php echo $this->session->get('product_color_qty' . $products->deal_id); ?>" />
                                     <input type="hidden" name="select_size" id="sel_size" value="<?php echo $this->session->get('product_size_qty' . $products->deal_id); ?>" />
