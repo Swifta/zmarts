@@ -84,8 +84,8 @@ $this->language_List = str_replace(".php", "", $DL);
                                         </ul>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
-							<?php if (!$this->session->get('UserID')) { ?>                                                          
-		        <?php  if(!$this->session->get('user_auto_key')) { ?>
+							<?php if ($this->session->get('UserID')) { ?>                                                          
+		        <?php  if($this->session->get('user_auto_key')) { ?>
                                     <p> <b><a style="color:red" href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></b></p>
                                                         <?php } }?>
                                 </div>
@@ -141,12 +141,14 @@ $this->language_List = str_replace(".php", "", $DL);
         <div class="menu_wrap">
                         <div class="container">
                                 <div class="clearfix row">
-                                        <div class="col-lg-2 t_md_align_c m_md_bottom_15">
-                                                <a href="index.html" class="logo d_md_inline_b">
-                                                        <img src="images/logo.png" alt="">
-                                                </a>
-                                        </div>
-                                        <div class="col-lg-10 clearfix t_sm_align_c">
+        <div class="col-sm-2 t_md_align_c m_md_bottom_0">
+<?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
+<a class="logo d_md_inline_b" href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
+<img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+</a>
+<?php } } ?>
+        </div>
+                                        <div class="col-sm-10 clearfix t_sm_align_c">
                                                 <div class="clearfix t_sm_align_l f_left f_sm_none relative s_form_wrap m_sm_bottom_15 p_xs_hr_0 m_xs_bottom_5">
                                                         <!--button for responsive menu-->
                                                         <button id="menu_button" class="r_corners centered_db d_none tr_all_hover d_xs_block m_xs_bottom_5">
