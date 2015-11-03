@@ -157,7 +157,7 @@ $this->language_List = str_replace(".php", "", $DL);
                             <span class="centered_db r_corners"></span>
                     </button>
                     <!--main menu-->
-                    <nav role="navigation" class="f_left f_xs_none d_xs_none m_right_35 m_md_right_30 m_sm_right_0">	
+                    <nav role="navigation" class="f_left f_xs_none d_xs_none m_right_5 m_md_right_0 m_sm_right_0">	
                             <ul class="horizontal_list main_menu type_2 clearfix">
 <?php if(isset($this->is_home)||isset($this->is_product)||isset($this->is_todaydeals)||isset($this->is_auction)){ ?>
 <?php if(isset($this->is_details)){ ?>
@@ -376,8 +376,35 @@ $this->language_List = str_replace(".php", "", $DL);
         }
         ?>
          
-         
-         
+        <?php if ($this->past_deal_setting) { ?>
+
+	        <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0">
+		        <a class="tr_delay_hover color_dark tt_uppercase r_corners" href="<?php echo PATH.$this->storeurl; ?>/soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>">
+                            <b><?php echo $this->Lang['SOLD_OUT2']; ?></b>
+		        </a>
+	        </li>
+        <?php } ?>
+        <?php if ($this->store_setting) { ?>
+	        <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0">
+		        <a class="tr_delay_hover color_dark tt_uppercase r_corners" href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">
+                            <b><?php echo $this->Lang['STORES']; ?></b>
+		        </a></li>
+        <?php } ?>
+        <?php if (($this->deal_setting == 1 || $this->product_setting == 1 || $this->auction_setting == 1 ) && $this->map_setting) { ?>
+	        <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0">
+		        <a class="tr_delay_hover color_dark tt_uppercase r_corners" href="<?php echo PATH; ?>near-map.html" title="<?php echo $this->Lang['NEAR_MAP']; ?>">
+                            <b> <?php echo $this->Lang['NEAR_MAP']; ?></b>
+		        </a>
+	        </li>
+        <?php } ?>
+
+        <?php if ($this->blog_setting) { ?>
+        <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0">
+	        <a class="tr_delay_hover color_dark tt_uppercase r_corners" href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>">
+                    <b><?php echo $this->Lang['BLOG']; ?></b>
+	        </a>
+        </li>
+        <?php } ?>
         <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0"><a href="#" class="tr_delay_hover color_dark tt_uppercase r_corners"><b><?php echo $this->Lang['MERCHANT_ACC']; ?></b></a>
                 <!--sub menu-->
                 <div class="sub_menu_wrap top_arrow d_xs_none type_2 tr_all_hover clearfix r_corners">
@@ -405,13 +432,6 @@ $this->language_List = str_replace(".php", "", $DL);
                     </div>
             </div>
             <ul class="f_right horizontal_list d_sm_inline_b f_sm_none clearfix t_align_l site_settings">
-                    <!--like-->
-                    <li>
-                            <a role="button" href="#" class="button_type_1 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none"><i class="fa fa-heart-o f_size_ex_large"></i><span class="count circle t_align_c">12</span></a>
-                    </li>
-                    <li class="m_left_5">
-                            <a role="button" href="#" class="button_type_1 color_dark d_block bg_light_color_1 r_corners tr_delay_hover box_s_none"><i class="fa fa-files-o f_size_ex_large"></i><span class="count circle t_align_c">3</span></a>
-                    </li>
                     <!--shopping cart-->
                     <li class="m_left_5 relative container3d" id="shopping_button">
                             <a role="button" href="#" class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
