@@ -405,7 +405,10 @@ $this->language_List = str_replace(".php", "", $DL);
 	        </a>
         </li>
         <?php } ?>
-        <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0"><a href="#" class="tr_delay_hover color_dark tt_uppercase r_corners"><b><?php echo $this->Lang['MERCHANT_ACC']; ?></b></a>
+        <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0"><a href="#" 
+                    title="<?php echo $this->Lang['MERCHANT_ACC']; ?>" class="tr_delay_hover color_dark tt_uppercase r_corners">
+                 <i class="fa fa-heart-o f_size_ex_large"></i>
+                </a>
                 <!--sub menu-->
                 <div class="sub_menu_wrap top_arrow d_xs_none type_2 tr_all_hover clearfix r_corners">
                         <ul class="sub_menu">
