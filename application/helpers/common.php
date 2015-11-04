@@ -578,18 +578,36 @@ class common{
 	   closedir($dp);
 	}
 	
-	public function truncate_item_name($name){
+	public function truncate_item_name($name, $size = 16){
 		if(!$name)
 			return "No name";
 			
 		$name = trim($name);
 		
-		if(strlen($name) <= 16)
+		if(strlen($name) <= $size)
 			return $name;
 		
-		$name = substr($name, 0, 15);
+		$name = substr($name, 0, $size);
 		$name = $name." ...";
 		return $name;
+	}
+	
+	public function truncate_about_us($about, $less_limit = 145){
+		if(!$about)
+			return " ";
+			
+		$about = trim($about);
+		
+		if(strlen($about) <= $less_limit)
+			return $about;
+		
+		$about_part1 = substr($about, 0, $less_limit);
+		$last_space_pos = strpos($about, " ", $less_limit);
+		$last_word_len = $last_space_pos - $less_limit;
+		$about_last_word = substr($about, $less_limit, $last_word_len);
+		$about_more = substr($about, $last_space_pos);
+		$about = $about_part1.$about_last_word."<span class=\"more_control\">... <a title=\"more about us\" href=\"#\"> --more-- </a></span><span  class=\"more_content\" style=\"display:none;\">".$about_more."</span><a title=\"less about us\" href=\"#\"><span class=\"less_control\" style = \"display:none;\"><span>&nbsp;</span> --less--</span></a>";
+		return $about;
 	}
 	
 	
@@ -623,6 +641,21 @@ public function full_url($s, $use_forwarded_host=false)
    
 	
 	
+}
+
+
+function get_single_best_seller($store_id = "0", $merchant_id = "0"){
+	$this->stores = new Leo_Model();
+	 $this->b = $this->stores->get_best_seller_details($store_id,$merchant_id, 1);
+	 return $this->b->current();
+}
+
+
+function get_wishlist_count(){
+	$this->products = new Products_Model();
+	$wishlist_count = $this->products->get_user_wish_count();
+	$this->user_wishlist_count=(count($wishlist_count))?unserialize($wishlist_count[0]->wishlist):0;
+	return count($this->user_wishlist_count);
 }
 
 

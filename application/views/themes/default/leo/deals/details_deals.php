@@ -870,7 +870,6 @@ color: #888;" class="success_deal_on">This deal is still on &nbsp;<img src="<?ph
 <script type="text/javascript" >
 
     function buy_now(url_buy_now){
-		
 		window.location.href = url_buy_now;
 	}
 </script>

@@ -917,13 +917,9 @@ $(document).ready(function(){
 $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
 $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer
 }); 
-
-
 </script>
 
 <script type="text/javascript" >
-
-   
 	
 	$(document).keyup(function(e) {
     if (e.keyCode == 27) { //  esc keycode

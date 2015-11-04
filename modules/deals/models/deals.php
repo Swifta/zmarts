@@ -434,8 +434,9 @@ class Deals_Model extends Model
 
 	public function save_deal_rating($post="")
 	{
+		
 		$result= $this->db->from("rating")->where(array("type_id" => $post->deal_id, "user_id" => $this->UserID))->get();
-
+		
 		if(count($result)==0)
 		{
 			$result = $this->db->insert("rating", array("type_id" => $post->deal_id, "user_id" => $this->UserID, "rating" => $post->rate, "module_id" => 1));
@@ -443,6 +444,8 @@ class Deals_Model extends Model
 		elseif(count($result)>0)
 		{
 			$result= $this->db->update("rating", array("rating" => $post->rate), array("type_id" => $post->deal_id, "user_id" => $this->UserID, "module_id" => 1));
+			
+			
 		}
 	}
 
@@ -452,16 +455,22 @@ class Deals_Model extends Model
 	{
 
 		$result= $this->db->from("rating")->where(array("type_id" => $deal_id))->get();
+		
 		if(count($result)>0)
 		{
+			
 			$get_rate = count($result);
 			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=$deal_id AND module_id = 1");
+			
 			$get_sum=$sum->current()->sum;
 			$average= $get_sum/$get_rate;
+			
 			return $average;
 		}
 		elseif(count($result)==0)
 		{
+			
+			
 			return 0;
 		}
 	}

@@ -610,14 +610,262 @@ foreach ($this->product_deatils as $products) {
     </div>
     </div>
 <?php } ?>
-<script type="text/javascript" >
-	function add_to_compare(deal_id, deal_title){
-		alert("HELLO");
-	}
+
+
+
+<!-- Product Rating
+	@Live
+ -->
+ 
+ <script type="text/javascript">
+ 
+ function rate_this(rate, deal_id){
 	
-	function add_to_wishlist(deal_id, deal_title){
-	}
-</script>
+	 var url = "<?php echo PATH."sasa/product_rating";?>";
+	 
+	 $.post(url, {action:'rating', deal_id:deal_id, rate:rate, idBox:1}, function(status){
+		 
+		 
+		try{
+			status = parseInt(status);
+			rate = parseInt(rate);
+			
+		}catch(e){
+			status = -999;
+			rate = -999;
+		}
+		
+		switch(status){
+			case 1: {
+				$('#id_you_plus').text('you rate this at ');
+				$('#id_rate').text(rate);
+				
+				break;
+			}
+			
+			case 0: {
+				$('#id_you_plus').html('you now rate this at ');
+				$('#id_rate').text(rate);
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+		
+		
+		mark_rating(rate);
+		 	
+			
+		 });
+ }
+ 
+ 
+ function mark_rating(rate){
+	 
+	 try{
+			
+			rate = parseInt(rate);
+			
+		}catch(e){
+			rate = -999;
+		}
+		
+	 
+	 switch(rate){
+			case 1: {
+				
+				
+				
+				
+				$('.off.on').removeClass('on');
+				$('.off i').css({'color':'#999'});
+				$('.off.first i').css({'color': '#F25C27'});
+				$('.off.first').addClass('on');
+				
+				break;
+			}
+			
+			case 2: {
+				
+				
+				$('.off.on').removeClass('on');
+				$('.off i').css({'color':'#999'});
+				
+				
+				$('.off.first i').css({'color': '#F25C27'});
+				$('.off.first').addClass('on');
+				
+				$('.off.second i').css({'color': '#F25C27'});
+				$('.off.second').addClass('on');
+				
+				
+				break;
+			}
+			
+			case 3: {
+				
+				
+				$('.off.on').removeClass('on');
+				$('.off i').css({'color':'#999'});
+				
+				
+				$('.off.first i').css({'color': '#F25C27'});
+				$('.off.first').addClass('on');
+				
+				$('.off.second i').css({'color': '#F25C27'});
+				$('.off.second').addClass('on');
+				
+				$('.off.third i').css({'color': '#F25C27'});
+				$('.off.third').addClass('on');
+				
+				
+				break;
+			}
+			
+			
+			case 4: {
+				
+				
+				$('.off.on').removeClass('on');
+				$('.off i').css({'color':'#999'});
+				
+				
+				$('.off.first i').css({'color': '#F25C27'});
+				$('.off.first').addClass('on');
+				
+				$('.off.second i').css({'color': '#F25C27'});
+				$('.off.second').addClass('on');
+				
+				$('.off.third i').css({'color': '#F25C27'});
+				$('.off.third').addClass('on');
+				
+				$('.off.fourth i').css({'color': '#F25C27'});
+				$('.off.fourth').addClass('on');
+				
+				
+				break;
+			}
+			
+			
+			case 5: {
+				
+				
+				$('.off.on').removeClass('on');
+				$('.off i').css({'color':'#999'});
+				
+				
+				$('.off.first i').css({'color': '#F25C27'});
+				$('.off.first').addClass('on');
+				
+				$('.off.second i').css({'color': '#F25C27'});
+				$('.off.second').addClass('on');
+				
+				$('.off.third i').css({'color': '#F25C27'});
+				$('.off.third').addClass('on');
+				
+				$('.off.fourth i').css({'color': '#F25C27'});
+				$('.off.fourth').addClass('on');
+				
+				$('.off.fifth i').css({'color': '#F25C27'});
+				$('.off.fifth').addClass('on');
+				
+				break;
+			}
+			
+			
+			case 0: {
+				
+				$('.off.on').removeClass('on');
+				$('.off i').css({'color':'#999'});
+				
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+ }
+ 
+ 
+ $(document).ready(function(e) {
+	 
+	 $('.on').blur(function(e) {
+        $('a.on.off i').css({'color': '#F25C27'});
+		
+    });
+	 
+	 	$('.off.first').hover(function(e){
+			// alert("HOVER IN");
+			$('.off.first i').css({'color': '#F25C27'});
+			$('.off.on i').css({'color': '#F25C27'});
+		},
+		
+	 function(e){
+		 // alert("HOVER OUT OUT");
+		  	
+			$('.off i').css({'color': '#999'});
+			$('.off.on i').css({'color': '#F25C27'});
+		});
+		
+		
+		 $('.off.second').hover(function(e){
+			
+			$('.off.first i').css({'color': '#F25C27'});
+			$('.off.second i').css({'color': '#F25C27'});
+		},
+		
+	 function(e){
+		$('.off i').css({'color': '#999'});
+		$('.off.on i').css({'color': '#F25C27'});
+		});
+		
+		
+		 $('.off.third').hover(function(e){
+			 $('.off.first i').css({'color': '#F25C27'});
+			$('.off.second i').css({'color': '#F25C27'});
+			$('.off.third i').css({'color': '#F25C27'});
+		},
+		
+	 function(e){
+		$('.off i').css({'color': '#999'});
+		$('.off.on i').css({'color': '#F25C27'});
+		});
+		
+		
+		 $('.off.fourth').hover(function(e){
+			
+			$('.off.first i').css({'color': '#F25C27'});
+			$('.off.second i').css({'color': '#F25C27'});
+			$('.off.third i').css({'color': '#F25C27'});
+			$('.off.fourth i').css({'color': '#F25C27'});
+		},
+		
+	 function(e){
+		$('.off i').css({'color': '#999'});
+		$('.off.on i').css({'color': '#F25C27'});
+		});
+		
+		 $('.off.fifth').hover(function(e){
+			$('.off.first i').css({'color': '#F25C27'});
+			$('.off.second i').css({'color': '#F25C27'});
+			$('.off.third i').css({'color': '#F25C27'});
+			$('.off.fourth i').css({'color': '#F25C27'});
+			$('.off.fifth i').css({'color': '#F25C27'});
+		},
+		
+	 function(e){
+		
+		$('.off i').css({'color': '#999'});
+		$('.off.on i').css({'color': '#F25C27'});
+			
+		});
+		
+		
+    
+});
+ 	
+ </script>
 
 
 

@@ -14,7 +14,7 @@
         <div class="sign_up_outer">  
             <div class="sign_up_logo">
                 <a href="<?php echo PATH;?>"><img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH;?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/></a>        	
-                <a class="close2" title="<?php echo $this->Lang['CLOSE']; ?>" id="close">&nbsp;</a>                
+                <a class="close2 close" title="<?php echo $this->Lang['CLOSE']; ?>" id="close">&nbsp;</a>                
             </div>
             <div class="signup_content clearfix">
               <div class="signup_form_block">
@@ -204,6 +204,7 @@ function disconnectUser() {
 
 function validateForms()
 	{
+		
 		/*
 		var email = document.login.email.value;		
 		var password = document.login.password.value;
@@ -269,7 +270,9 @@ function validateForms()
 		}
 */
 
-var email = document.login.email.value;		
+		
+
+		var email = document.login.email.value;		
 		var password = document.login.password.value;
 		var atpos=email.indexOf("@");
 		var z_offer = $('#id_z_offer_click_status').val();
@@ -306,9 +309,11 @@ var email = document.login.email.value;
 		
 		else{
 			
-			var url= Path+'users/check_user_login/?email='+email+'&password='+password+'&z_offer='+z_offer;
+			var url= '<?php echo PATH; ?>users/check_user_login/?email='+email+'&password='+password+'&z_offer='+z_offer;
+			
 			
 			$.post(url,function(check){
+				
 				
 				if(check == -1)
 				{
@@ -331,7 +336,8 @@ var email = document.login.email.value;
 				
 				
 				else if(check == -999){
-					login_after_zenith_offer_click(email, password, z_offer);
+					
+					javascript:login_after_zenith_offer_click(email, password, z_offer);
 					return false;
 					
 				}

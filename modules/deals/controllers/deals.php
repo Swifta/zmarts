@@ -292,7 +292,10 @@ class Deals_Controller extends Layout_Controller
 			common::message(-1, $this->Lang["PAGE_NOT"]);
 			url::redirect(PATH);
 		}
+		
+		$this->product = NULL;
 		foreach($this->deals_deatils as $Deal){
+			$this->product = $Deal;
 			$this->all_deals_list = $this->deals->get_related_category_deals_list($Deal->deal_id, $Deal->sec_category_id);
 			$this->products_list_name = $this->Lang['REL_DEAL'];
 			if(count($this->all_deals_list) < 3){     
@@ -305,6 +308,7 @@ class Deals_Controller extends Layout_Controller
 			}
  			$this->avg_rating =$this->deals->get_deal_rating($Deal->deal_id);
  			$this->sum_rating =$this->deals->get_deal_rating_sum($Deal->deal_id);
+			
 			$this->comments_deatils = $this->deals->get_comments_data($Deal->deal_id,1);
 			$this->like_details = $this->deals->get_like_data($Deal->deal_id,1);
 			$this->unlike_details = $this->deals->get_unlike_data($Deal->deal_id,1);
@@ -335,6 +339,11 @@ class Deals_Controller extends Layout_Controller
 			} else {
 				$this->sector ="";
 			}
+			
+			$this->store_id = $Deal->shop_id;
+			$this->merchant_id = $Deal->merchant_id;
+		
+		
 			
 		if($this->theme_name) { 
                         if($this->theme_name == "fashion9"){
