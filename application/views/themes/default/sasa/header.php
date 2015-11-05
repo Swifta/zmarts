@@ -183,7 +183,7 @@
                                     <tbody>
                                         <tr>
                                             
-                                            <td class="name"><a href="product.html">No items added to cart yet.</a></td>
+                                            <td class="name"><a href="#">No items added to cart yet.</a></td>
                                             
                                           
                                         </tr>
@@ -230,14 +230,14 @@
 							
 						?>
                          <tr>
-                                            <td class="image" ><a href="product.html" title="<?php echo $cart_item->deal_title; ?>"><!--<img title="<?php echo $cart_item->deal_title; ?>" alt="<?php echo $cart_item->deal_title; ?>" width="50" height="50" src="<?php echo $this->img_assets_base_url?>/prodcut-40x40.jpg"  />-->
+                                            <td class="image" ><a href="#" title="<?php echo $cart_item->deal_title; ?>"><!--<img title="<?php echo $cart_item->deal_title; ?>" alt="<?php echo $cart_item->deal_title; ?>" width="50" height="50" src="<?php echo $this->img_assets_base_url?>/prodcut-40x40.jpg"  />-->
                                             		  <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $cart_item->deal_key . '_1' . '.png')) { ?>
 													<img width="50" src="<?php echo PATH . 'images/products/1000_800/' . $cart_item->deal_key . '_1' . '.png'; ?>"/>
 													   <?php } else { ?>
 													   <img width="50" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_products_list.png"/>
 													   <?php } ?>
                                             </a></td>
-                                            <td class="name" style="white-space:nowrap; vertical-align:middle"><a href="product.html" title="<?php echo $cart_item->deal_title; ?>" ><?php echo common::truncate_item_name($cart_item->deal_title, 14);?></a></td>
+                                            <td class="name" style="white-space:nowrap; vertical-align:middle"><a href="#" title="<?php echo $cart_item->deal_title; ?>" ><?php echo common::truncate_item_name($cart_item->deal_title, 14);?></a></td>
                                             <td class="quantity" style="vertical-align:middle;">x&nbsp;1</td>
                                             <td class="total" style="white-space:nowrap; vertical-align:middle;"><?php echo CURRENCY_SYMBOL." ".number_format($cart_item->deal_value); ?></td>
                                             <td class="remove"><a onclick="leo_remove_cart_item(<?php echo $cart_item->deal_id;?>);" href="#" title="remove from cart"><i class="icon-remove"></i></a></td></tr>
@@ -245,7 +245,8 @@
                             <?php } ?>
                   <?php } ?>
                 
-                  </tbody></table>
+                  </tbody></table></li>
+                  			<li style="text-align:center;"><div class="well pull-rightx buttonwrap"> <a class="btn btn-orange" href="<?php echo PATH;?>cart.html">View Cart</a> <a class="btn btn-orange" href="<?php echo PATH;?>cart.html">Checkout</a> </div>
                   </li></ul>
                   </li>
                   
