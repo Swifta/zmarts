@@ -467,7 +467,7 @@
                             </ul>
                         </div>
                     </li>
-                    <?php if(!isset($this->autokey) && isset($this->UserID)){?>
+                    <?php if(isset($this->autokey) && isset($this->UserID)){?>
                     <li><a href="<?php echo PATH?>storecredits-products.html">Store Credits</a> </li>
                     <?php } ?>
                     
