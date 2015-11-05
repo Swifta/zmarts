@@ -168,13 +168,16 @@ $(document).ready(function(e) {
       <?php $k++;} ?>
           <!-- Ending 1st foreach -->
            <?php }else {?>
-			     <li class="col-lg-3  col-sm-6">
+			     <!--<li class="col-lg-3  col-sm-6">
       			  <a class="prdocutname" href="#" title="No deals yet.">No Deal</a>
                   <div class="thumbnail">
        			  
        			  <a href="#">
                   <img title="no deal found" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg&w=287&h=246" alt=""/>
-                  </a></div><br /><br /></li>
+                  </a></div><br /><br /></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No Deal yet."><b>No Deal</b></a>
+                  <br /><br /></li>
            <?php } ?>
           <!-- Ending else of 1st if -->
           </ul>
@@ -354,13 +357,16 @@ $(document).ready(function(e) {
       <?php $k++;} ?>
           <!-- Ending 1st foreach -->
            <?php }else {?>
-			     <li class="col-lg-3  col-sm-6">
+			     <!--<li class="col-lg-3  col-sm-6">
       			  <a class="prdocutname" href="#" title="No deals yet.">No Deal</a>
                   <div class="thumbnail">
        			  
        			  <a href="#">
                   <img title="no deal found" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg&w=287&h=246" alt=""/>
-                  </a></div><br /><br /></li>
+                  </a></div><br /><br /></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No deals yet."><b>No Deal</b></a>
+                  <br /><br /></li>
            <?php } ?>
           <!-- Ending else of 1st if -->
           </ul>
@@ -370,81 +376,54 @@ $(document).ready(function(e) {
     </div>
   </section>
   
-
+  <!-- Section  End-->
   
-  
-  <!-- Section  Banner Start-->
-  <section class="container smbanner">
-  <br />
-  <br />
-  <h1 class="heading1"><span class="maintext">Ads</span></h1>
-    <div class="row">
+  <!-- Popular Brands-->
+  <section id="popularbrands" class="container mt40" style=" display:none;">
     
-    <?php if (count($this->ads_details) > 0) { ?>   
+    <h1 class="heading1"><span class="maintext">Popular Offers</span></h1>
+    <div class="brandcarousalrelative">
+       <ul id="brandcarousal" >
+       <?php if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    
-            <?php if ($ads->ads_position == "rs1" && $ads->page_position==3) {  ?>
+            
             					    
                                   <?php 
 								  	$ads->redirect_url = trim($ads->redirect_url);
 									
 								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
 									  
-                                      <div class="col-lg-3 col-sm-6"> <a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                      <!--<img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " />-->
-                                      <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></div>
+                                       <li><a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                               
+                                      <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></li>
 									  
 								 <?php  }else{?>
 								 
-                                 <div class="col-lg-3 col-sm-6"> <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                 <!--<img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " />-->
-                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></div>
+                                 <li> <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></li>
 								  
-								  <?php }?>
-                                     
-										 
-                                 
-              <?php } ?>
-              <?php if ($ads->ads_position == "rs2" && $ads->page_position==3){  ?>   
-                         <?php 
-								  	$ads->redirect_url = trim($ads->redirect_url);
-									
-								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
-                                  
-									    <div class="col-lg-3 col-sm-6"><a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                       <!--<img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png" />-->
-                                       <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" />
-                                       
-                                       
-                                       </a> </div>
-                                       
-                                      <?php  }else{?>
-                                      
-                                        <div class="col-lg-3 col-sm-6"><a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                       <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" />
-                                       
-                                       </a> </div>
-                                       
-                                       <?php }?>
-                                     
-										
-            <?php } ?>
+								  <?php }?>      
         <?php } ?>
-    <?php } ?>
-    
-      <!--<div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>
-      <div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>
-      <div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>
-      <div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>-->
+    <?php } else {?>
+			<li><div style="width: 100%;text-align:center; vertical-align:middle"><a href="#"><b>NO ADS</b></a></div></li>
+	<?php }?>
+      
+      </ul>
+      <div class="clearfix"></div>
+     
+      <a id="prev" class="prev" href="#">&lt;</a>
+      <a id="next" class="next" href="#">&gt;</a>
+      
     </div>
+    
+    
+    
+    
+    
+    
   </section>
-  <!-- Section  End-->
   
   
-  <!-- Newsletter Signup-->
   <!--<section id="newslettersignup" class="mt40">
     <div class="container">
       <div class="pull-left newsletter">

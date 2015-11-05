@@ -966,5 +966,18 @@ function remove_item_from_cart1(deal_id){
 </script>
 
 
+<script type="text/javascript">
+$(document).ready(function(e) {
+	 setInterval(function() {
+				$('#next').trigger('click');
+      			}, 5000);
+				
+				$('#popularbrands').css('display', 'block');
+   
+});
+</script>
+
+
+
 
  

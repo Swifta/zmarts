@@ -158,13 +158,16 @@ $(document).ready(function(e) {
       <?php $k++;} ?>
           <!-- Ending 1st foreach -->
            <?php }else {?>
-			     <li class="col-lg-3  col-sm-6">
+			     <!--<li class="col-lg-3  col-sm-6">
       			  <a class="prdocutname" href="#" title="No Product yet.">No Product</a>
                   <div class="thumbnail">
        			  
        			  <a href="#">
                   <img title="no product found" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_prod.png&w=287&h=246" alt=""/>
-                  </a></div><br /><br /></li>
+                  </a></div><br /><br /></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No Product yet."><b>No product</b></a>
+                  <br /><br /></li>
            <?php } ?>
           <!-- Ending else of 1st if -->
           </ul>
@@ -323,13 +326,16 @@ $(document).ready(function(e) {
           <!-- Ending 1st foreach -->
            <?php }else {?>
 			     <!-- Ending 1st if, beginning else -->
-                 <li class="col-lg-3  col-sm-6">
+                 <!--<li class="col-lg-3  col-sm-6">
       			  <a class="prdocutname" href="#" title="No Product yet.">No Product</a>
                   <div class="thumbnail">
        			  
        			  <a href="#">
                   <img title="no product found" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_prod.png&w=287&h=246" alt=""/>
-                  </a></div><br /><br /></li>
+                  </a></div><br /><br /></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No Product yet."><b>No product</b></a>
+                  <br /><br /></li>
            <?php } ?>
           <!-- Ending else of 1st if -->
           </ul>
@@ -482,7 +488,7 @@ $(document).ready(function(e) {
           <!-- Ending 1st foreach -->
            <?php }else {?>
 			     <!-- Ending 1st if, beginning else -->
-                 <li class="col-lg-3  col-sm-6">
+                 <!--<li class="col-lg-3  col-sm-6">
       			  <a class="prdocutname" href="#" title="No Deal yet.">No Deal</a>
                   <div class="thumbnail">
        			  
@@ -490,7 +496,10 @@ $(document).ready(function(e) {
                   
                   <img title="No deal found." src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_deal.jpg&w=287&h=246" alt="NO deal found"/>
                  
-                  </a></div><br /><br/></li>
+                  </a></div><br /><br/></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No Deals yet."><b>No Deal</b></a>
+                  <br /><br /></li>
            <?php } ?>
           <!-- Ending else of 1st if -->
           </ul>
@@ -644,13 +653,16 @@ $(document).ready(function(e) {
           <!-- Ending 1st foreach -->
            <?php }else {?>
 			     <!-- Ending 1st if, beginning else -->
-                  <li class="col-lg-3  col-sm-6">
+                  <!--<li class="col-lg-3  col-sm-6">
       			  <a class="prdocutname" href="#" title="No Auctions yet.">No Auction</a>
                   <div class="thumbnail">
        			  
        			  <a href="#">
                   <img title="no auction found" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_auc.png&w=287&h=246" alt=""/>
-                  </a></div></li>
+                  </a></div></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No Auctions yet."><b>No Auction</b></a>
+                  <br /><br /></li>
                  
            <?php } ?>
           <!-- Ending else of 1st if -->
@@ -662,86 +674,43 @@ $(document).ready(function(e) {
   <section class="container smbanner">
   <br />
   <br />
-  <h1 class="heading1"><span class="maintext">Ads</span></h1>
-    <div class="row">
-    
-    <?php if (count($this->ads_details) > 0) { ?>   
+  
+  <?php $k = count($this->get_sub_store_details);?>
+    <h1 class="heading1"><span class="maintext">branch(es)</span><span class="subtext"> <?php if( $k == 0 ){?> No store branch(es) yet.<?php }else{?>  Our other branch(es). Feel free to drop by sometime.<?php } ?></span></h1>
+  
+    <div class="row" style="padding-left:30px;">
+    <!--<?php if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    
-            <?php if ($ads->ads_position == "rs1" && $ads->page_position==3) {  ?>
+            
             					    
                                   <?php 
 								  	$ads->redirect_url = trim($ads->redirect_url);
 									
 								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
 									  
-                                      <div class="col-lg-3 col-sm-6"> <a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                      <!--<img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " />-->
-                                      <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></div>
+                                       <li><a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                               
+                                      <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></li>
 									  
 								 <?php  }else{?>
 								 
-                                 <div class="col-lg-3 col-sm-6"> <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                 <!--<img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " />-->
-                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></div>
+                                 <li> <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></li>
 								  
-								  <?php }?>
-                                     
-										 
-                                 
-              <?php } ?>
-              <?php if ($ads->ads_position == "rs2" && $ads->page_position==3){  ?>   
-                         <?php 
-								  	$ads->redirect_url = trim($ads->redirect_url);
-									
-								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
-                                  
-									    <div class="col-lg-3 col-sm-6"><a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                       <!--<img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png" />-->
-                                       <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" />
-                                       
-                                       
-                                       </a> </div>
-                                       
-                                      <?php  }else{?>
-                                      
-                                        <div class="col-lg-3 col-sm-6"><a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
-                                       <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" />
-                                       
-                                       </a> </div>
-                                       
-                                       <?php }?>
-                                     
-										
-            <?php } ?>
+								  <?php }?>      
         <?php } ?>
-    <?php } ?>
+    <?php } else {?>
+			<li><div style="width: 100%;text-align:center; vertical-align:middle"><a href="#"><b>NO ADS</b></a></div></li>
+	<?php }?>-->
     
-      <!--<div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>
-      <div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>
-      <div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>
-      <div class="col-lg-3 col-sm-6"><a href="#"><img src="<?php echo $this->img_assets_base_url;?>/smbanner.jpg" alt="" title=""></a>
-      </div>-->
-    </div>
-  </section>
-  <!-- Section  End-->
-  
-  <!-- Popular Brands-->
-  <section id="popularbrands" class="container mt40">
-    <?php $k = count($this->get_sub_store_details);?>
-    <h1 class="heading1"><span class="maintext">branch(es)</span><span class="subtext"> <?php if( $k == 0 ){?> No store branch(es) yet.<?php }else{?>  Our other branch(es). Feel free to drop by sometime.<?php } ?></span></h1>
-    <div class="brandcarousalrelative">
-      
-      
-     
-       <ul id="brandcarousal" <?php if( $k <= 5 ){?> class="swifta override branch" <?php } ?> >
+    
+    
+       
        <?php if ($k > 0) { ?> 
 		
 	
      <?php foreach ($this->get_sub_store_details as $stores) { ?>
-    									 <li>
+    									
 
                                            
                                                         <?php if (file_exists(DOCROOT . 'images/merchant/290_215/' . $stores->merchant_id . '_' . $stores->store_id . '.png')) { ?>
@@ -759,31 +728,61 @@ $(document).ready(function(e) {
                                                         
                                                     </div>                                                                                                                        
                                                
-                                            </li>
+                                            
                                 <?php  } ?>
                              <?php } else { ?>
-								 <li><a href="#" title="No other branches yet">
-                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH;?>themes/default/images/sasa/no_branch.png&w=150&h=130" alt="No other branch." title="No other branch" /> </a>
-                                 <div class="branch_details">
-                                                       
-                                                        <p style="font:11px/15px arial;color:#666;">No branch yet</p>  
-                                </div></li>
+								 <a href="#" title="No other branches yet">
+                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH;?>themes/default/images/sasa/no_branch.png&w=150&h=130" alt="No other branch." title="No other branch" /> 
+                                                                <div class="branch_details" style="text-align:left; margin-left:30px">
+                                                        <p><b>No branch yet</b></p>  
+                                </div>
+                                                                </a>
+                                 
 								  
 								 
 							<?php }?> 
                                 
-        <!--<li><img src="<?php echo $this->img_assets_base_url;?>/brand1.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand2.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand3.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand4.jpg" alt="" title=""/></li>-->
-        <!--<li><img src="<?php echo $this->img_assets_base_url;?>/brand1.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand2.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand3.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand4.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand1.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand2.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand3.jpg" alt="" title=""/></li>
-        <li><img src="<?php echo $this->img_assets_base_url;?>/brand4.jpg" alt="" title=""/></li>-->
+      
+      
+      
+     
+    
+    
+    </div>
+  </section>
+  <!-- Section  End-->
+  
+  <!-- Popular Brands-->
+  <section id="popularbrands" class="container mt40" style=" display:none;">
+   
+    
+    <h1 class="heading1"><span class="maintext">Popular offers</span></h1>
+    <div class="brandcarousalrelative">
+       <ul id="brandcarousal" >
+       <?php if (count($this->ads_details) > 0) { ?>   
+                                    <?php foreach ($this->ads_details as $ads) { ?>    
+            
+            					    
+                                  <?php 
+								  	$ads->redirect_url = trim($ads->redirect_url);
+									
+								  if($ads->redirect_url == '#" onclick="javascript:load_club();return false;'){?>
+									  
+                                       <li><a href="<?php echo PATH."leo_zenith.html"; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                               
+                                      <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></li>
+									  
+								 <?php  }else{?>
+								 
+                                 <li> <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                                 <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png&w=287&h=246" /></a></li>
+								  
+								  <?php }?>      
+        <?php } ?>
+    <?php } else {?>
+			<li><div style="width: 100%;text-align:center; vertical-align:middle"><a href="#"><b>NO ADS</b></a></div></li>
+	<?php }?>
+      
       </ul>
       <div class="clearfix"></div>
      
@@ -791,24 +790,15 @@ $(document).ready(function(e) {
       <a id="next" class="next" href="#">&gt;</a>
       
     </div>
+    
+    
+    
+    
+    
+    
   </section>
   
   <!-- Newsletter Signup-->
-  <!--<section id="newslettersignup" class="mt40">
-    <div class="container">
-      <div class="pull-left newsletter">
-        <h2> Newsletters Signup</h2>
-        Sign up to Our Newsletter & get attractive Offers by subscribing to our newsletters. </div>
-      <div class="pull-right">
-        <form class="form-horizontal">
-          <div class="input-prepend">
-            <input type="text" placeholder="Subscribe to Newsletter" id="inputIcon" class="input-xlarge">
-            <input value="Subscribe" class="btn btn-orange" type="submit">
-            Sign in </div>
-        </form>
-      </div>
-    </div>
-  </section>-->
   <section id="newslettersignup" class="mt40">
     <div class="container">
       <div class="pull-left newsletter">
@@ -827,7 +817,7 @@ $(document).ready(function(e) {
       
     </div>
   </section>
-</div>
+
 
 <script type="text/javascript">
 $(document).ready(function(e) {
@@ -848,4 +838,6 @@ $(document).ready(function(e) {
 	
 });
 </script>
+
+
 

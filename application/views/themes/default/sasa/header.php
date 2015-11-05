@@ -57,6 +57,8 @@
  <script src="<?php echo $this->js_base_url; ?>/jquery.js"></script>
  
  <script src="<?php echo PATH; ?>js/coffee.js" type="text/javascript"></script>
+ 
+ 
 
  
 
@@ -396,17 +398,8 @@
                                 
                 
                 <?php }else{ ?> <!-- (Ending 1st if) Products custom menu ending here -->
-                		
+                			<li><a href="#">Sorry! No deals in this store yet.</a> </li>
                				 <?php } ?> <!-- End else of 1st if -->
-                            
-                                <!--<li><a href="product.html">Product style 1</a> </li>
-                                <li><a href="product2.html">Product style 2</a> </li>
-                                <li><a href="#"> Women's Accessories</a> </li>
-                                <li><a href="#">Men's Accessories <span class="label label-success">Sale</span> </a> </li>
-                                <li><a href="#">Dresses </a> </li>
-                                <li><a href="#">Shoes <span class="label label-warning">(25)</span> </a> </li>
-                                <li><a href="#">Bags <span class="label label-info">(new)</span> </a> </li>
-                                <li><a href="#">Sunglasses </a> </li>-->
                             </ul>
                             <ul>
                                 <li><img style="display:block" src="<?php echo PATH?>themes/default/images/leo/no_deal.jpg" alt="" title="" > </li>
