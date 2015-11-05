@@ -30,10 +30,6 @@
 .header_top_right ul li a:hover{color:#AC0800;}
 .header_top_right ul li.head_fb{margin: 0;}
 .middle_header{float:left;width:100%;}
-/*.logo{float: left;width:210px;margin:16px 30px 16px 0;}
-.logo h1{float: left;padding: 0;margin: 0;width: 100%;}
-.logo h1 a{float: left;width: 100%;text-align:center;}
-.logo img{max-width: 100%;vertical-align:middle;}*/
 .msearch_cart_block{float: right;width:895px;}
 .cities{float: left;width: 148px;position: relative;margin: 1px;padding: 0px;}
 .cities ul li{float: left; list-style: none;padding: 0px;width:100%;}
@@ -102,10 +98,17 @@
 .popup_block {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
 .popup_block1 {display:none;float: left; font-size: 1.2em; position: fixed; top: 20px; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
 .popup_block2 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
-.popup_block3 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
-.popup_block3 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
+.popup_block3_0 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
+.popup_block3_1 { display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101; width:630px;margin:0 0 0 -315px;}
+.popup_block4 {float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:433px;margin:0 0 0 -216px;}
+.popup_block5 {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:730px;margin:0 0 0 -365px;}
+.popup_block6 {display:none;float: left; font-size: 1.2em; position: absolute; top: 0; left:50%; z-index: 101;width:1030px;margin:0 0 0 -515px;}
+.popup_auction {display:none;float: left; font-size: 1.2em; position: fixed; top: 40px; left:50%;width:430px;margin:0 0 0 -215px; z-index: 101;}
+.popup_block4 {display:none;float: left; font-size: 1.2em; position: fixed; top: 122px; left:50%; z-index: 101;width:410;margin:0 0 0 -270px;}
+.popup_block_theme {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
 
 #fade { visibility: hidden;  background: #000; position: fixed; left: 0; top: 0; z-index: 10; width: 100%; height: 100%; opacity: .50; z-index: 100; }
+/* Popup end */
 
 .sign_up_outer{background: #fff; padding: 10px 20px 20px;}
 .sign_up_logo{padding:5px 15px;text-align: center;border-bottom:1px solid #ECE9E4;}

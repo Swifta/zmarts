@@ -8,7 +8,7 @@
 		globalDfd.resolve();
 	});
 
-	$(function(){
+	//$(function(){
 
 	$.fx.speeds._default = 500;
 
@@ -29,8 +29,8 @@
 			}
 		});
 	}
-	$('#lang_button').css3Animate($('#lang_button').next('.dropdown_list'));
-	$('#currency_button').css3Animate($('#currency_button').next('.dropdown_list'));
+	//$('#lang_button').css3Animate($('#lang_button').next('.dropdown_list'));
+	//$('#currency_button').css3Animate($('#currency_button').next('.dropdown_list'));
 
 	// waypoints helper functions
 
@@ -1367,7 +1367,7 @@ rMenu.init();
 
 		})();
 
-	});
+	//});
 
 	
 	

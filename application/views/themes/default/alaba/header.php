@@ -138,17 +138,17 @@ $this->language_List = str_replace(".php", "", $DL);
         </section>
         <!--header bottom part-->
         <section class="h_bot_part">
-        <div class="menu_wrap">
+        <div class="menu_wrap" style="padding: 0px;" >
                         <div class="container">
-                                <div class="clearfix row">
-        <div class="col-sm-2 t_md_align_c m_md_bottom_0">
+                                <div class="clearfix row m_top_0 m_bottom_0">
+        <div class="col-sm-2 t_md_align_c m_top_0 m_bottom_0 m_md_bottom_0" style="padding-top: 6px;">
 <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
 <a class="logo d_md_inline_b" href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
-<img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+    <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
 </a>
 <?php } } ?>
         </div>
-    <div class="col-sm-10 clearfix t_sm_align_c">
+    <div class="col-sm-10 clearfix t_sm_align_c" style="padding-top:20px;">
             <div class="clearfix t_sm_align_l f_left f_sm_none relative s_form_wrap m_sm_bottom_15 p_xs_hr_0 m_xs_bottom_5">
                     <!--button for responsive menu-->
                     <button id="menu_button" class="r_corners centered_db d_none tr_all_hover d_xs_block m_xs_bottom_5">
@@ -398,16 +398,16 @@ $this->language_List = str_replace(".php", "", $DL);
 	        </li>
         <?php } ?>
 
-        <?php if ($this->blog_setting) { ?>
+        <?php /*if ($this->blog_setting) { ?>
         <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0">
 	        <a class="tr_delay_hover color_dark tt_uppercase r_corners" href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>">
                     <b><?php echo $this->Lang['BLOG']; ?></b>
 	        </a>
         </li>
-        <?php } ?>
+        <?php }*/ ?>
         <li class="relative f_xs_none m_xs_bottom_5 m_left_10 m_xs_left_0"><a href="#" 
                     title="<?php echo $this->Lang['MERCHANT_ACC']; ?>" class="tr_delay_hover color_dark tt_uppercase r_corners">
-                 <i class="fa fa-heart-o f_size_ex_large"></i>
+                 <i class="fa fa-user f_size_ex_large"></i>
                 </a>
                 <!--sub menu-->
                 <div class="sub_menu_wrap top_arrow d_xs_none type_2 tr_all_hover clearfix r_corners">
@@ -422,6 +422,10 @@ $this->language_List = str_replace(".php", "", $DL);
                     <button class="f_right search_button tr_all_hover f_xs_none d_xs_none">
                             <i class="fa fa-search"></i>
                     </button>
+<?php
+$ajax_type = 0;
+$srch = $this->Lang['SEARCH'];
+?>
                     <!--search form-->
                     <div class="searchform_wrap type_2 bg_tr tf_xs_none tr_all_hover w_inherit">
                             <div class="container vc_child h_inherit relative w_inherit">
@@ -522,39 +526,271 @@ $this->language_List = str_replace(".php", "", $DL);
                 </div>
         </section>
 </header>
-<!--slider-->
-<section class="revolution_slider">
-        <div class="r_slider">
-                <ul>
-                        <li class="f_left" data-transition="curtain-1" data-slotamount="7" data-custom-thumb="images/slide_02.jpg">
-                                <img src="images/fw_slide_03.jpg" alt="" data-bgrepeat="no-repeat" data-bgfit="cover" data-bgposition="center center">
-                                <div class="caption sfl str f_size_large color_light tt_uppercase slider_title_3" data-x="736" data-y="97" data-speed="500" data-start="2500">Meet New Theme</div>
-                                <div class="caption sfr stl slider_divider" data-x="787" data-y="129" data-speed="500" data-start="2500"></div>
-                                <div class="caption lft stb color_light slider_title tt_uppercase t_align_c" data-x="588" data-y="140" data-speed="1500" data-easing="easeOutBounce"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
-                                <div class="caption sft stb color_light slider_title_2" data-x="761" data-y="272" data-speed="900" data-start="2300">$<b>15.00</b></div>
-                                <div class="caption sft stb color_light" data-x="742" data-y="335" data-speed="900" data-start="2600">
-                                        <a href="#" role="button" class="button_type_4 bg_scheme_color color_light r_corners tt_uppercase">Buy Now</a>
-                                </div>
-                        </li>
-                        <li class="f_left" data-transition="cube" data-slotamount="7" data-custom-thumb="images/slide_01.jpg">
-                                <img src="images/fw_slide_02.jpg" alt="" data-bgrepeat="no-repeat" data-bgfit="cover" data-bgposition="center center">
-                                <div class="caption lft ltb f_size_large tt_uppercase slider_title_3 scheme_color" data-x="264" data-y="126" data-speed="300" data-start="1700">New arrivals</div>
-                                <div class="caption sfb stt slider_divider type_2" data-x="298" data-y="153" data-speed="400" data-start="1700"></div>
-                                <div class="caption lft ltb color_light slider_title tt_uppercase t_align_c" data-x="95" data-y="170" data-speed="500" data-easing="ease" data-start="1400"><b><span class="scheme_color">Spring/Summer 2014</span><br><span class="color_dark">Ready-To-Wear</span></b></div>
-                                <div class="caption lfb ltt color_light" data-x="206" data-y="318" data-speed="500" data-start="1700">
-                                        <a href="#" role="button" class="button_type_4 bg_scheme_color color_light r_corners tt_uppercase">View Collection</a>
-                                </div>
-                        </li>
-                        <li class="f_left" data-transition="cube" data-slotamount="7" data-custom-thumb="images/slide_03.jpg">
-                                <img src="images/fw_slide_01.jpg" alt="" data-bgrepeat="no-repeat" data-bgfit="cover" data-bgposition="center center">
-                                <div class="caption lft ltt" data-x="center" data-y="58" data-speed="1500" data-start="1200" data-easing="easeOutBounce">
-                                        <img src="images/slider_layer_img.png" alt="">
-                                </div>
-                                <div class="caption sfb stb color_light slider_title tt_uppercase t_align_c" data-x="center" data-y="246" data-speed="1000" data-easing="ease" data-start="2500"><b class="color_dark">up to 70% off</b></div>
-                                <div class="caption sfb stb color_light" data-x="center" data-y="352" data-speed="1000" data-start="2900">
-                                        <a href="#" role="button" class="button_type_4 bg_scheme_color color_light r_corners tt_uppercase">Shop Now</a>
-                                </div>
-                        </li>
-                </ul>
-        </div>
-</section>
+
+
+
+
+
+<div class='popup_block'><?php echo new View("themes/" . THEME_NAME . '/users/login_popup'); ?></div>
+<div class='popup_block1'><?php echo new View("themes/" . THEME_NAME . '/users/sign_up_popup'); ?></div>
+<div class='popup_block2'><?php echo new View("themes/" . THEME_NAME . '/users/forget_popup'); ?></div>
+<div class='popup_block3_0'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_verify_account_popup'); ?></div>
+<div class='popup_block3_1'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_open_account_popup'); ?></div>
+<div class='popup_block4'><?php echo new View("themes/" . THEME_NAME . '/users/fb_popup'); ?></div>
+
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" type="text/css" /> 
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
+<script>
+function logout_click(){
+    //alert("here");
+    //<?php echo PATH; ?>logout.html
+    swal({   
+        title: "Are you sure?",   
+        text: "Your Shopping Cart is not empty. It Will be Emptied",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Yes, Logout!",   
+        cancelButtonText: "No, Proceed!",   
+        closeOnConfirm: false,   
+        closeOnCancel: true 
+    }, function(isConfirm){   
+        if (isConfirm) {     
+            location.href = "<?php echo PATH; ?>logout.html"; 
+        } else {     
+            location.href = "<?php echo PATH; ?>"; 
+        } 
+    });
+}
+</script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".show1").click(function() {
+            $(".arro").toggle("slow", "linear");
+            $(".drop_down").toggle("slow", "linear");
+        });
+
+
+    });
+    
+    function lookup(inputString) {
+		var myString = inputString;
+		var str = myString;
+		var input_string=str.replace(/[^A-Za-z0-9-.]/g, " ");
+        if (input_string.length == 0) {
+            $('#suggestions').fadeOut(); // Hide the suggestions box
+        } else {
+            $.post("<?php echo PATH; ?>welcome/ajax_search/" + input_string + "/" + '<?php echo $ajax_type; ?>'+ ' / <?php echo $this->storeid;?>', function(data) { // Do an AJAX call
+                $('#suggestions').fadeIn(); // Show the suggestions box
+                $('#suggestions').html(data); // Fill the suggestions box
+            });
+        }
+    }
+    
+    function lookup(inputString) {
+		var myString = inputString;
+		var str = myString;
+		//var input_string=str.replace(/[^A-Za-z0-9-.]/g, " ");
+		var input_string=str.replace(/[^a-zA-Z0-9-.,()\s]/g,'');
+        if (input_string.length == 0) {
+            $('#suggestions').fadeOut(); // Hide the suggestions box
+        } else {
+            $.post("<?php echo PATH; ?>welcome/ajax_search/" + input_string + "/" + '<?php echo $ajax_type; ?>'+ ' / <?php echo $this->storeid;?>', function(data) { // Do an AJAX call
+                $('#suggestions').fadeIn(); // Show the suggestions box
+                $('#suggestions').html(data); // Fill the suggestions box
+            });
+        }
+    }
+
+
+    function changelang(lang) {
+
+        if (lang != "" && lang != "undefined") {
+
+            var dataString = "language=" + lang;
+            var url = '<?php echo PATH; ?>welcome/setlanguage';
+            $.ajax(
+                    {
+                        type: 'POST',
+                        url: url,
+                        data: dataString,
+                        success: function(result)
+                        {
+                            location.reload(true);
+                        }
+
+
+                        ,
+                        error: function()
+                        {
+                            alert('Language cannot be set.');
+                        }
+                    });
+
+        } else {
+            alert("Please select language!");
+        }
+
+    }
+
+    function ChangeCategory(catname, catid) {
+
+        $("#search_cat").html(catname);
+        $("#search_cat").attr("title", catname);
+        $("#search_cat").attr("data-caty", catid);
+        $('input[name=d_id]#cat').val(catid);
+    }
+
+
+
+</script>
+<script>
+    /*global jQuery:false */
+jQuery(document).ready(function($) {
+"use strict";
+
+		//add some elements with animate effect
+		$(".box").hover(
+			function () {
+			$(this).find('span.badge').addClass("animated fadeInLeft");
+			$(this).find('.ico').addClass("animated fadeIn");
+			},
+			function () {
+			$(this).find('span.badge').removeClass("animated fadeInLeft");
+			$(this).find('.ico').removeClass("animated fadeIn");
+			}
+		);
+		
+	(function() {
+
+		var $menu = $('.head_menu'),                        
+			optionsList = '<option value="" selected>Go to..</option>';
+
+		$menu.find('li').each(function() {
+			var $this   = $(this),
+				$anchor = $this.children('a'),
+				depth   = $this.parents('ul').length - 1,
+				indent  = '';
+
+			if( depth ) {
+				while( depth > 0 ) {
+					indent += ' - ';
+					depth--;
+				}
+
+			}
+			$(".head_menu li").parent().addClass("bold");
+
+			optionsList += '<option value="' + $anchor.attr('href') + '">' + indent + ' ' + $anchor.text() + '</option>';
+		}).end()
+		.after('<label class="head_categoryicon"><select class="head_category">' + optionsList + '</select></label>');
+		
+		$('select.head_category').on('change', function() {
+			window.location = $(this).val();
+		});
+		
+	})();
+
+		//Navi hover
+		$('ul.head_menu li.dropdown').hover(function () {
+			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
+		}, function () {
+			$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
+		});
+		
+});
+
+$("#cart_window").mouseover(function(){
+
+	var url=Path+'/payment_product/cart_window_products';
+			  $.ajax(
+			{
+				type:'POST',
+				url:url,
+				cache:false,
+				async:true,
+				global:false,
+				dataType:"html",
+				success:function(check)
+				{
+					$(".cart_window_products1").css({"display":"block"});
+					$(".cart_window_products1").html(check);
+				}
+			});
+});
+
+$("#cart_window").mouseout(function(){
+	
+	$(".cart_window_products1").hide();
+	});
+
+
+</script>
+<script>
+$("#cart_window1").mouseover(function(){
+
+	var url=Path+'/payment_product/cart_window_products';
+			  $.ajax(
+			{
+				type:'POST',
+				url:url,
+				cache:false,
+				async:true,
+				global:false,
+				dataType:"html",
+				success:function(check)
+				{
+					$(".cart_window_products1").css({"display":"block"});
+					$(".cart_window_products1").html(check);
+				}
+			});
+});
+
+$("#cart_window1").mouseout(function(){
+	$(".cart_window_products1").css({"display":"none"});
+});
+
+
+function load_club(){
+	/* 
+	 *	Check session to see if user is logged and is of type 4 (customer)
+	 * If user is logged in but of any other type other than 4. return false.
+	 * If not logged in, prompt for login/signup
+	 * On logging in, check for club memebrship status.
+	 * If member already, notify.
+	 * If not member, prompt for membership signup
+	 * #Live
+	 */
+	 
+	
+	 
+	  <?php 
+	 if(isset($_SESSION['UserID'])){
+		
+		 if(isset($_SESSION['UserType']) && strcmp($_SESSION['UserType'], "4") == 0 && isset($_SESSION['Club']) && strcmp($_SESSION['Club'], "0") == 0 ){ 
+			 ?>
+			 
+			 javascript:showmembershipsignup(); 
+			 
+		 <?php }else if(isset($_SESSION['Club']) && strcmp($_SESSION['Club'], "1") == 0){?>
+			 alert("You are already a Zenith Club member. Please enjoy the offers!");
+			 return;
+			 <?php
+		 }else{?>
+		 alert("Sorry, something went wrong. Please contact the site administrator.");
+		 return;
+		 <?php }
+	 }else{?>
+		javascript:showlogin("1");
+		
+	<?php }?>
+	
+
+	 
+}
+
+
+
+	
+</script>
+
