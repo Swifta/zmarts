@@ -319,6 +319,9 @@ class Auction_Controller extends Layout_Controller
 
 	public function details_auction($storeurl="",$deal_key = "", $url_title = "",$type = "")
 	{
+		
+		
+		
 	        $this->is_auction = 1;
 	        $this->is_details = 1;
 	        $this->is_auction_refresh = 1;
@@ -329,16 +332,23 @@ class Auction_Controller extends Layout_Controller
 			$this->type = $type;
 			
 	        $this->template->javascript .= html::script(array(PATH.'js/timer/kk_countdown_1_2_jquery_min.js'));
-		$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
+		  
+			$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
                 $this->storeid = $this->deals->get_store_id($storeurl);
 		if(count($this->deals_deatils) == 0){
 			common::message(-1, $this->Lang["PAGE_NOT"]);
 			url::redirect(PATH);
 		}
 		
+		$this->product = NULL;
+		
 		
 		foreach($this->deals_deatils as $Deal){
+			$this->product = $Deal;
 			$this->avg_rating =$this->deals->get_auction_rating($Deal->deal_id);
+			
+			$this->sum_rating = $this->deals->get_auction_rating_sum($Deal->deal_id);
+			
 			$this->all_deals_list = $this->deals->get_related_category_deals_list($Deal->deal_id, $Deal->sec_category_id);
 			$this->products_list_name = $this->Lang['REL_AUCTION'];
                         if(count($this->all_deals_list) < 3){      
@@ -349,6 +359,8 @@ class Auction_Controller extends Layout_Controller
                                         $this->products_list_name = $this->Lang['REL_AUCTION'];
                                 }
                         }
+						
+			$this->get_related_categories = $this->all_deals_list;
 			$this->all_payment_list = $this->deals->payment_list();
 			$this->comments_deatils = $this->deals->get_comments_data($Deal->deal_id,3);
 			$this->like_details = $this->deals->get_like_data($Deal->deal_id,3);
@@ -375,7 +387,14 @@ class Auction_Controller extends Layout_Controller
 				$this->admin_details = $this->stores->get_admin_details();
 				/* Merchant Cms footer ends */
 				$this->footer_merchant_details = $this->deals->get_merchant_details($Deal->merchant_id);
+				
+				
 		}
+		
+		
+		$this->store_id = $Deal->shop_id;
+		$this->merchant_id = $Deal->merchant_id;
+				
 		$this->get_theme_name = common::get_theme($storeurl);
 		$this->theme_name = $this->deals->get_theme_name($Deal->shop_id);
 		
@@ -408,12 +427,6 @@ class Auction_Controller extends Layout_Controller
                             $java_scripts[5] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
                             $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
                             $this->template->javascript = html::script($java_scripts);
-                        }
-                        else if($this->theme_name == "manufacturing1"){
-                            $style_sheets = array();
-                            $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/alt_style.css';
-                            $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
-                            $this->template->style = html::stylesheet($style_sheets);
                         }
                         else{
                             $this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
@@ -506,6 +519,7 @@ class Auction_Controller extends Layout_Controller
 				if($status>0)
 				{
 					$this->template->content = new View("themes/".THEME_NAME."/auction/success-auction");
+					common::message(1, "Your bid has been successfully placed. Thanks you!");
 				}
 				if($status==0)
 				{

@@ -7,8 +7,6 @@
 @import url('form.css');
 @import url('etalage.css');
 @import url('default.css');
-
-
 @import url('http://fonts.googleapis.com/css?family=Exo+2');
 
 @charset "utf-8";
@@ -16,8 +14,6 @@
 	Author: Livepwndz
 	Company: Swifta Systems & Services ltd.
 	Author URL: http://swifta.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
 */ 
 
 .header-top-left.swifta {
@@ -660,4 +656,5 @@ p.item_axillary {
  
   
  
+
 

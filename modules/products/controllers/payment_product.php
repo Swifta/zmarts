@@ -996,8 +996,6 @@ class Payment_product_Controller extends Layout_Controller {
 	}
 	function cart_product_remove($product_cart_id="")
 	{
-		var_dump($product_cart_id);
-		exit;
 		
 		$val = 1; 
 	        $deal_id = substr($product_cart_id,15);

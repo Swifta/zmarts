@@ -4,7 +4,7 @@
         <div class="sign_up_outer">  
             <div class="sign_up_logo">
                 <a href="<?php echo PATH;?>"><img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH;?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/></a>        	
-                <a class="close2" title="<?php echo $this->Lang['CLOSE']; ?>" id="close_verify_acc">&nbsp;</a>                
+                <a class="close2 close" title="<?php echo $this->Lang['CLOSE']; ?>" id="close_verify_acc">&nbsp;</a>                
             </div>
             <div class="signup_content clearfix">
               <div class="signup_form_block">

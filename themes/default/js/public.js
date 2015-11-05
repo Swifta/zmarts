@@ -1,12 +1,20 @@
 // JavaScript Document
 var scripts = document.getElementsByTagName("script"),
 SrcPath = scripts[0].src;
+var Path;
 if(SrcPath.indexOf("js/jquery.js") > -1){
     Path = SrcPath.replace("js/jquery.js", "");
 }
 if(SrcPath.indexOf("bootstrap/themes/js/jquery-1.7.2.min.js") > -1){
     Path = SrcPath.replace("bootstrap/themes/js/jquery-1.7.2.min.js", "");
 }
+
+
+if(Path){
+}else{
+	Path = $('#id_root').val();
+}
+
 /*
 	Zenith API flags
 	@Live
@@ -19,6 +27,7 @@ var is_z_verify_account_api_running = false;
 
 
 $(document).ready(function () {
+        
 	if($('#messagedisplay')){
 		$('#messagedisplay').animate({opacity: 1.0}, 8000)
 		//$('#messagedisplay').fadeOut('slow');
@@ -308,9 +317,12 @@ function show_popup()
 
 function showlogin(z_offer)
 {
+	
 	if(!z_offer){
 		z_offer = 0;
 	}
+	
+	
 	document.login.email.value='';
 	document.login.password.value='';
 	$('#email_error').html('');
@@ -327,6 +339,8 @@ function showlogin(z_offer)
 	if(f_offer_click_status){
 		f_offer_click_status.val(z_offer);
 	}
+	
+	
 }
 
 
@@ -334,7 +348,6 @@ function showlogin(z_offer)
 
 function show_auction(userid,auction_key,auction_title)
 {
-	
         if(!userid) {
 			
 	        $('input[name="auction_key"]').val(auction_key);
@@ -345,6 +358,9 @@ function show_auction(userid,auction_key,auction_title)
 			
 	        $('#fade').css({'visibility' : 'visible'});
 	        $('.popup_auction').css({'display' : 'block'});
+			
+			
+	
 			
         }
 }
@@ -1609,6 +1625,7 @@ function signup_after_zenith_offer_click(fname, email, password, cpassword, gend
 */
 
 function login_after_zenith_offer_click(email, password, z_offer){
+	
 	/*
 		TODO
 		Need to redirect page after club membership issues.
@@ -1619,12 +1636,13 @@ function login_after_zenith_offer_click(email, password, z_offer){
 	      $.ajax({
 		        type:'POST',
 		        url:url,
-				data:{username:email, password:password, z_offer:z_offer},
+				data:{email:email, password:password, z_offer:z_offer},
 		        cache:true,
 		        async:true,
 		        global:false,
 		        dataType:"html",
 		        success:function(response){
+					
 					if(response == 1)
 						showmembershipsignup(response);
 					else

@@ -629,11 +629,14 @@ class Products_Model extends Model
 		$result= $this->db->from("rating")->where(array("type_id" => $post->deal_id, "user_id" => $this->UserID))->get();
 		if(count($result)==0)
 		{
+			
 			$result = $this->db->insert("rating", array("type_id" => $post->deal_id, "user_id" => $this->UserID, "rating" => $post->rate, "module_id" => 2));
+			
 		}
 		elseif(count($result)>0)
 		{
 			$result= $this->db->update("rating", array("rating" => $post->rate), array("type_id" => $post->deal_id, "user_id" => $this->UserID, "module_id" => 2));
+			
 		}
 	}
 

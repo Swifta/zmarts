@@ -148,6 +148,8 @@ class Leo_Controller extends Layout_Controller
 			   
 		}
 		
+		$this->merchant_id = $store->merchant_id;
+		
 		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_detail");		
 	}
 /* STORE COMMENTS */
@@ -285,6 +287,7 @@ exit;
                         
                         $this->get_top_selling_product_categories = $this->stores->get_product_categories($store->store_id,$search,3);
                         $this->get_recent_product_categories = $this->stores->get_product_categories($store->store_id,$search,2);
+						
                         $this->get_top_sellingdeals_categories = $this->stores->get_deals_categories($store->store_id,$search,3);
                         $this->get_recent_deals_categories = $this->stores->get_deals_categories($store->store_id,$search,2);
                         $this->get_recent_auction_categories = $this->stores->get_auction_categories($store->store_id,$search,2);
@@ -312,13 +315,17 @@ exit;
 				    $this->template->metaimage = PATH.'images/merchant/600_370/'.$store->merchant_id.'_'.$store->store_id.'.png';
 			    }
 			    $this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id); // get the merchant personalised settings
-			    $this->best_seller = $this->stores->get_best_seller_details($store->store_id,$store->merchant_id); // get the best selling products of this store
+			    $this->best_seller = $this->stores->get_best_seller_details($store->store_id,$store->merchant_id, 6); // get the best selling products of this store
 			     $this->footer_merchant_details = $this->stores->get_merchant_details($store->merchant_id);
 		}
 		
 		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
 		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
 		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
+		
+		$this->merchant_id = $store->merchant_id;
+		$this->store_id = $this->storeid;
+		
 		
 		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_detail");
 		
@@ -346,10 +353,7 @@ exit;
 	}
 	
 	public function product_list($store_url_title = "", $cat_type = "",$category = ""){
-		
-		
-		
-		if($this->input->get('c_')){
+		/*if($this->input->get('c_')){
 	
 		$this->url_cat = trim($this->input->get('c_'));
 		
@@ -396,21 +400,12 @@ exit;
 		
 		
 		$this->storeid = $this->stores->get_store_id($store_url_title);
+		$this->store_id = $this->storeid;
 
 		$this->all_products = $this->products->get_products_count_category($cat_type,$category, $this->storeid);
-		
 		$this->all_products_count = count($this->all_products);
-		
-	
 		$this->get_product_categories = $this->all_products;
-		
-		
-		
-		
-		
-		
 		$page = "products";
-		
 		$this->type = "products";
 	
 	   
@@ -423,21 +418,9 @@ exit;
 				'style'          => 'digg',
 				'auto_hide' => TRUE
 		));
-		//$this->all_products_list = $this->products->get_products_list($cat_type,$category, $this->pagination->sql_offset, $this->pagination->items_per_page);
 		
-		
-		
-		//$this->view_products_list = $this->products->get_products_view();
-		//$this->view_hot_products_list = $this->products->get_hot_products_view();
 		$this->category_name = $category_name;
-		//$this->categeory_list = $this->products->get_subcategory_list();
-		//$this->products_list = $this->products->get_products_min_max();
-		/*foreach ($this->products_list as $pro ){
-		$this->pro_max=$pro->max_deal;
-		$this->pro_min=$pro->min_deal;
-		}*/
-		//$this->color_list = $this->products->get_color_list();
-		//$this->size_list = $this->products->get_size_list();
+		
 		
 		$this->storeurl = $store_url_title;
 		
@@ -458,6 +441,12 @@ exit;
 			$this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id);
 			$this->about_us_footer = $this->stores->get_about_us_footer_data($store->store_id);
 		}
+		
+		$this->admin_details = $this->stores->get_admin_details();
+		$this->footer_merchant_details = $this->stores->get_merchant_details($store->merchant_id);
+		
+		$this->merchant_id = $store ->merchant_id;
+		$this->store_id = $store->store_id;
 		
 		
 		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
@@ -484,7 +473,7 @@ exit;
 		
 		
 
-		}else{
+		}else{ */
 			
 		
 		
@@ -524,6 +513,24 @@ exit;
 		$category_name_main = "";
 		$this->cat_type = $cat_type;
 		
+		$this->url_cat = NULL;
+		
+		if($this->input->get('c_')){
+	
+		$this->url_cat = trim($this->input->get('c_'));
+		
+		$cat_type = "main";
+		$category =  trim($this->input->get('c_'));
+		$this->color_id="";
+		$this->category_id = "";
+		$this->sub_cat="";
+		$this->category_url = $category;
+		$category_name="";
+		$category_name_main = "";
+		$this->storeurl = $store_url_title;
+		
+		}
+		
 		if($cat_type=="sub"){
 		        $this->sub_cat= $category;
 				$category_deatils = $this->stores->get_categoryname($category);
@@ -553,18 +560,22 @@ exit;
 			$search = $this->input->get('q');	
 		}	
 		
-			$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
-		
-		 //$this->get_top_selling_product_categories = $this->stores->get_product_categories($this->storeid,$search,3);
-		 $this->best_seller = $this->stores->get_best_seller_details($store->store_id,$store->merchant_id);
-         $this->get_recent_product_categories = $this->stores->get_product_categories($store->store_id,$search,2);
-		
-		
-		$this->get_product_categories = $this->categeory_list_product;
-		
-		
+		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
 		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($store->store_id);
 		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($store->store_id);
+		$this->get_product_categories = $this->categeory_list_product;
+		
+		if(!isset($this->url_cat)){
+			$this->best_seller = $this->stores->get_best_seller_details($store->store_id,$store->merchant_id);
+        	$this->get_recent_product_categories = $this->stores->get_product_categories($store->store_id,$search,2);
+		}
+		
+		$this->store_id =$store->store_id;
+		$this->merchant_id = $store->merchant_id;
+		
+		$this->admin_details = $this->stores->get_admin_details();
+		$this->footer_merchant_details = $this->stores->get_merchant_details($store->merchant_id);
+		
 		
 		
 		
@@ -585,8 +596,9 @@ exit;
 				'auto_hide' => TRUE
 		));
 		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $this->pagination->sql_offset, $this->pagination->items_per_page,$this->search_key,$this->search_cate_id);
-		
-		
+		$this->all_products = $this->all_products_list;
+		$this->all_products_count = count($this->all_products);
+		$this->get_product_categories = $this->all_products;
 		
 		$this->category_name = $category_name;
 		
@@ -617,7 +629,7 @@ exit;
 		
 		$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product");
 		
-		}
+		//}
 		
 	}
 	
@@ -684,6 +696,8 @@ exit;
 		}
 		
 		
+		
+		
 		$this->is_store_details = $this->is_deals = 1;
 		$this->storeurl = $store_url_title;
 		
@@ -695,6 +709,8 @@ exit;
 		}
 		
 		$this->storeid = $this->stores->get_store_id($store_url_title);
+		
+		
 		$storekey = $this->stores->get_store_key($store_url_title);
 		$this->get_store_details = $this->stores->get_store_detailspage($storekey,$store_url_title);
 		if(count($this->get_store_details) == 0){	
@@ -706,6 +722,12 @@ exit;
 			$this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id);
 			$this->about_us_footer = $this->stores->get_about_us_footer_data($store->store_id);
 		}
+		
+		$this->store_id = $store->store_id;
+		$this->merchant_id = $store ->merchant_id;
+		
+		$this->admin_details = $this->stores->get_admin_details();
+		$this->footer_merchant_details = $this->stores->get_merchant_details($store->merchant_id);
 		
 		$this->color_id="";
 		$this->category_id = "";
@@ -919,6 +941,12 @@ exit;
 		
 		$this->get_recent_product_categories = $this->all_auction_list;
 		$this->best_seller =  $this->stores->get_hot_auctions_view($store->store_id);
+		
+		$this->store_id = $store->store_id;
+		$this->merchant_id = $store ->merchant_id;
+		
+		$this->admin_details = $this->stores->get_admin_details();
+		$this->footer_merchant_details = $this->stores->get_merchant_details($store->merchant_id);
 		
 		
 		
@@ -1241,14 +1269,14 @@ exit;
 			$color = $this->input->get('sel_color');
 		
 			if(isset($size)){ 
-				common::message(-1, "Please choose prferred size of the item");
+				common::message(-1, "Please choose preferred size of the item");
 				echo -1;
 				exit;
 				
 			}
 			
 			if(isset($color)){ 
-				common::message(-1, "Please choose prferred color of the item");
+				common::message(-1, "Please choose preferred color of the item");
 				echo -1;
 				exit;
 				
@@ -1260,8 +1288,12 @@ exit;
 			
             $this->product_details=$this->payment_products->get_product_details_cart($product_cart_id);
 			
-			if(count($this->product_details) != 1){
-				echo $product_cart_id;
+			
+			
+			if(count($this->product_details) == 0){
+				//echo $product_cart_id;
+				var_dump($this->product_details);
+				 common::message(-1, "Invalid item data. Please try again.!");
 				exit;
 			}
             $store_url_title=$this->product_details->current()->store_url_title;
@@ -1522,7 +1554,7 @@ exit;
 			$this->deals = new Auction_Model();
 			
 			$this->transaction_details = $this->deals->get_auction_transaction_data($deal_id);
-			echo new View("themes/".THEME_NAME."/leo/auction/bid_history");
+			echo new View("themes/".THEME_NAME."/".$this->theme_name."/auction/bid_history");
 			
 			exit;
 	}
@@ -1533,7 +1565,6 @@ exit;
 	{
 		
 		
-
 		$deal_record = $this->input->get('record');
 		$deal_offset = $this->input->get('offset');
 		$size = $this->input->get("size");
@@ -1562,10 +1593,12 @@ exit;
 		$search_cate_id = "";
 		
 		
+		
+		
 		$this->storeid = $this->stores->get_store_id($store_url_title);
 		
 		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
-		echo new View("themes/".THEME_NAME."/leo/products/products_list");
+		echo new View("themes/".THEME_NAME."/".$this->theme_name."/products/products_list");
 		exit;
 			
 		}
@@ -1591,7 +1624,7 @@ exit;
 		//$this->view_hot_products_list = $this->products->get_hot_products_view();
 		//$this->template->title = $this->Lang["ALL_PRODUCT_LIST"]." | ".SITENAME;
 		//$this->title_display = $this->Lang["ALL_PRODUCT_LIST"];
-		echo new View("themes/".THEME_NAME."/leo/products/products_list");
+		echo new View("themes/".THEME_NAME."/".$this->theme_name."/products/products_list");
 		exit;
 	}
 	
@@ -1681,6 +1714,255 @@ exit;
 			common::message(-1, "Invalid item data. Please try again.");
 			exit;
 		}
+	}
+	
+	
+	public function product_rating(){
+		
+		
+		if($this->UserID == ""){
+			echo -1;
+			exit;
+		}
+		
+			if(isset($_POST['action']) && $this->UserID)
+			{
+				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
+				{
+					
+						$id = intval($_POST['idBox']);
+						$rate = floatval($_POST['rate']);
+						$deal_id=$_POST['deal_id'];
+					
+						
+								
+								$this->userPost = $this->input->post();
+								try{
+									
+									$this->products = new Products_Model();
+									$this->product_rate = $this->products->save_product_rating(arr::to_object($this->userPost));
+									$ch="auction_sess_".$_POST['deal_id'];
+									$sta= $this->session->set($ch,$_POST['rate']);
+									
+									echo count($this->product_rate);
+									exit;
+									
+								}catch(Exception $e){
+									echo -2;
+									exit;
+								}
+								
+								
+						
+				}
+		}
+			echo -3;
+	        exit;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public function deal_rating(){
+		
+		
+		
+		if($this->UserID == ""){
+			echo -1;
+			exit;
+		}
+		
+			if(isset($_POST['action']) && $this->UserID)
+			{
+				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
+				{
+					
+						$id = intval($_POST['idBox']);
+						$rate = floatval($_POST['rate']);
+						$deal_id=$_POST['deal_id'];
+					
+						
+								
+								$this->userPost = $this->input->post();
+								try{
+									
+									$this->deals = new Deals_Model();
+									$this->product_rate = $this->deals->save_deal_rating(arr::to_object($this->userPost));
+									$ch="auction_sess_".$_POST['deal_id'];
+									$sta= $this->session->set($ch,$_POST['rate']);
+									echo count($this->product_rate);
+									exit;
+									
+								}catch(Exception $e){
+									echo -2;
+									exit;
+								}
+								
+								
+						
+				}
+		}
+			echo -3;
+	        exit;
+
+	}
+	
+	
+	
+	
+	
+	
+	public function auction_rating(){
+		
+		
+		
+		if($this->UserID == ""){
+			echo -1;
+			exit;
+		}
+		
+			if(isset($_POST['action']) && $this->UserID)
+			{
+				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
+				{
+					
+						$id = intval($_POST['idBox']);
+						$rate = floatval($_POST['rate']);
+						$deal_id=$_POST['deal_id'];
+					
+						
+								
+								$this->userPost = $this->input->post();
+								try{
+									
+									$this->deals = new Auction_Model();
+									$this->product_rate = $this->deals->save_auction_rating(arr::to_object($this->userPost));
+									$ch="auction_sess_".$_POST['deal_id'];
+									$sta= $this->session->set($ch,$_POST['rate']);
+									echo count($this->product_rate);
+									exit;
+									
+								}catch(Exception $e){
+									echo -2;
+									exit;
+								}
+								
+								
+						
+				}
+		}
+			echo -3;
+	        exit;
+
+	}
+	
+	
+	
+	public function add_compare()
+	{
+
+			$product_id=$this->input->get("product_id");
+			$type=$this->input->get("type");
+			$this->products = new Products_Model();
+			
+			$cate_detail = $this->products->get_category_details($product_id);
+			$product_cat=$product_cat_name="";
+			if(count($cate_detail)){
+				$product_cat = $cate_detail[0]->category_id;
+				$product_cat_name = $cate_detail[0]->category_name;
+				$product_title = $cate_detail[0]->deal_title;
+			}
+
+			$action=$this->input->get("act");
+			$action_m=$this->input->get("action");
+			$compare_cat = $this->session->get("product_compare_cat");
+			empty($compare_cat)?$this->session->set("product_compare_cat",$product_cat):"";
+
+			$compare_cat = $this->session->get("product_compare_cat");
+			if($compare_cat==$product_cat){
+
+			if(((int)$product_id > 0) && is_string($action)){
+				$compare = $this->session->get("product_compare");
+				$ses_compare = !empty($compare)?$compare:array();
+				$link = "<a href='".PATH."product-compare.html' title='".$this->Lang['PRODUCT_COMPARE']."'> ".$this->Lang['PRODUCT_COMPARE']." </a>";
+				
+				if(!in_array($product_id,$ses_compare) && (is_string($action) && $action=='true')){
+				$arraycount = count($ses_compare);
+				$link = $this->Lang['PRODUCT_COMPARE'];
+				if($arraycount > 0){
+				$link = "<a href='".PATH."product-compare.html' title='".$this->Lang['PRODUCT_COMPARE']."'> ".$this->Lang['PRODUCT_COMPARE']." </a>";
+				}
+					if(count($ses_compare) < 4){
+						$ses_compare[]+=$product_id;
+						$this->session->set("product_compare",$ses_compare);
+						//echo $this->Lang['PRD_CMP_ADD'].$product_title.$this->Lang['TXT_FOR'].$link.$arraycount;
+						common::message(1, "Item added to comparison list successfully!");
+						echo 1;
+						exit;
+					}else{
+						array_shift($ses_compare);
+						$ses_compare[]+=$product_id;
+						$this->session->set("product_compare",$ses_compare);
+						//echo $this->Lang['PRD_CMP_ADD'].$product_title.$this->Lang['TXT_FOR'].$link.$arraycount;
+						common::message(1, "Item added to comparison list successfully!");
+						echo 1;
+						exit;
+					}
+				}else if((is_string($action) && $action=='false')){
+					$key = array_search($product_id, $ses_compare);
+					$arraycount = count($ses_compare)-2;
+					if (false !== $key) {
+						unset($ses_compare[$key]);
+					}
+					$this->session->set("product_compare",$ses_compare);
+					echo $this->Lang['REV_COMPARE'].$arraycount;
+					
+					common::message(1, "Item removed from comparison list successfully!");
+					exit;
+				} else if((is_string($action_m) && $action_m=='false')){
+					$key = array_search($product_id, $ses_compare);
+					$arraycount = count($ses_compare)-2;
+					if (false !== $key) {
+						unset($ses_compare[$key]);
+					}
+					$this->session->set("product_compare",$ses_compare);
+					echo $this->Lang['REV_COMPARE'].$arraycount;
+					
+					common::message(1, "Item removed from comparison list successfully!");
+					exit;
+				} else{
+					//echo ($type=='detail')?$this->Lang['PRD_CMP_ALREADY_ADD']:$this->Lang['REV_COMPARE'];
+					common::message(-1, "You have already added this item for comparison.");
+					echo 2;
+					exit;
+					//echo $this->Lang['REV_COMPARE'];
+				}
+			}else{
+				//echo $this->Lang['ERR_PRD_CMP'];
+				common::message(-1, "Error occured while adding item to comparison list.");
+				echo -999;
+				exit;
+			}
+		}
+		else{
+
+			//echo $link = $this->Lang['U_CANT_COMP']." ".$product_cat_name.$this->Lang['ABV_ITMS']." . <a href='".PATH."products/remove_compare/?product_id=d' title='".$this->Lang['PRODUCT_COMPARE']."'> (".$this->Lang['CLR_COMP_ITMS'].") </a>";
+			$link = $this->Lang['U_CANT_COMP']." ".$product_cat_name.$this->Lang['ABV_ITMS']." . <a href='".PATH."product-compare.html' title='".$this->Lang['PRODUCT_COMPARE']."'> (".$this->Lang['CLR_COMP_ITMS'].") </a>";
+			
+			//echo $link;
+			$link_err = "Product attribute mismatch. Empty comparison list first <a href=\"".PATH."product-compare.html\">here</a> or compare a different item.";
+			//$link = "Sorry comparison not possible!";
+			common::message(-1, $link_err);
+			echo -1;
+			exit;
+		}
+			exit;
+
 	}
 	
 	

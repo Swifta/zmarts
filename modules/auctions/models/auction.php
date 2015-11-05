@@ -660,6 +660,28 @@ class Auction_Model extends Model
 			return 0;
 		}
 	}
+	
+	// SUM RATING ON PRODUCT
+	
+	public function get_auction_rating_sum($deal_id="")
+	{
+		$result= $this->db->from("rating")->where(array("type_id" => $deal_id))->get();
+		if(count($result)>0)
+		{
+			$get_rate = count($result);
+			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=$deal_id AND module_id = 3");
+			$get_sum=$sum->current()->sum;
+			return $get_sum;
+		}
+		elseif(count($result)==0)
+		{
+			return 0;
+		}
+	}
+	
+	
+	
+	
 	/* GET AUCTION RATING */
 	public function get_all_auction_rating()
 	{

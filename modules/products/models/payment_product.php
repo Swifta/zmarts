@@ -124,6 +124,7 @@ class Payment_product_Model extends Model
 	/** TO GET THE DETAILS OF PRODUCT JUST ADDED TO CART**/
 	public function get_product_details_cart($deal_id="")
 	{
+		
 		$result=$this->db->select('stores.store_url_title','product.deal_key','product.url_title')->from("product")->join("stores","stores.merchant_id","product.merchant_id")->where(array("product.deal_id" => $deal_id))->get();
 		return $result;
 	}

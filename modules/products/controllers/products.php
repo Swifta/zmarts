@@ -450,6 +450,10 @@ class Products_Controller extends Layout_Controller
 			$this->footer_merchant_details = $this->products->get_merchant_details($Deal->merchant_id);
 		}
 		$this->storeid = $this->products->get_store_id($storeurl);
+		$this->store_id = $this->storeid;
+		$this->merchant_id = $Deal->merchant_id;
+		
+		
 		$this->get_theme_name = common::get_theme($storeurl);
 		if(count($this->get_theme_name)>0) { 
 			$this->sector = $this->get_theme_name->current()->sector_name;
@@ -488,12 +492,6 @@ class Products_Controller extends Layout_Controller
                             $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
                             $this->template->javascript = html::script($java_scripts);
                         }
-                        else if($this->theme_name == "manufacturing1"){
-                            $style_sheets = array();
-                            $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/alt_style.css';
-                            $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
-                            $this->template->style = html::stylesheet($style_sheets);
-                        }
                         else{
                             $this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
 							// $this->template->javascript = html::script(array(PATH.'themes/'.THEME_NAME.'/js/'.$this->theme_name.'/public.js'));
@@ -513,8 +511,8 @@ class Products_Controller extends Layout_Controller
 	}
 
 	/**  PRODUCT STAR RATING  **/
-	public function product_rating()
-	{
+	public function product_rating(){
+		
 		$aResponse['error'] = false;
 		if($this->UserID == "") $aResponse['error'] = true;
 		$aResponse['message'] = '';
@@ -523,6 +521,7 @@ class Products_Controller extends Layout_Controller
 			{
 				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
 				{
+					
 						$id = intval($_POST['idBox']);
 						$rate = floatval($_POST['rate']);
 						$deal_id=$_POST['deal_id'];
@@ -875,6 +874,7 @@ class Products_Controller extends Layout_Controller
 
 	public function wishlist()
 	{
+		
                 if(!$this->UserID){
                         url::redirect(PATH);
                 }
@@ -884,8 +884,13 @@ class Products_Controller extends Layout_Controller
 		$this->template->title = $this->Lang["WISH_LIST"]." | ".SITENAME;
 		$this->title_display = $this->Lang["WISH_LIST"];
 		$wishlist_count = $this->products->get_user_wish_count();
+		
 		$this->user_wishlist_count=(count($wishlist_count))?unserialize($wishlist_count[0]->wishlist):0;
+		
 		$this->user_wishlist = $this->products->get_user_wish_list();
+		/*var_dump(count($this->user_wishlist_count));
+		exit;*/
+		
 		$this->template->content = new View("themes/".THEME_NAME."/users/wishlist");
 	}
 

@@ -917,7 +917,9 @@
 
 
 <script type="text/javascript">
+
 function select_size(size_id, product_id, quantity){
+	
 	
 	var size_sel = $("#sel_size").val();
 	if(size_sel!=size_id){

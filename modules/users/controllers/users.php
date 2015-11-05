@@ -257,8 +257,6 @@ class Users_Controller extends Layout_Controller {
     	/** USER LOGIN  **/
 
 	public function login(){
-		
-		
                /*
 					Added conditioning to add club membership flags
 					@Live
@@ -268,25 +266,35 @@ class Users_Controller extends Layout_Controller {
 				  $password = $this->input->post('password');
 				  $url_redirect = $this->input->post('url');
 				  
+				 
+				  
 				  $z_offer = "0";
 				  if(isset($_POST['z_offer'])){
 					  $z_offer = $this->input->post('z_offer');
 				  }
-				  
+				 
 				  $status = $this->users->login_users($email,$password);
-				  if($status == 1 || -999){
+				 
+				  if($status == 1 || $status == -999){
+					  
+					
 					  
 					  if(strcmp($z_offer, "1") == 0){
+						  
 						  if(isset($_SESSION['Club']) && strcmp($_SESSION['Club'], "1") == "0"){
+							  
 							  common::message(1, "You are already a Zenith Club member. Please enjoy the offers!");
-						  	 echo PATH.$url_redirect;
+						  	  echo PATH.$url_redirect;
+							 
 					
 						  }else{
+							  
 							  common::message(1, $this->Lang["SUCC_LOGIN"]);
 							  echo 1;
+							  exit;
 						  } 
-						 
-						  exit;
+						  
+						  
 					  }
 					
 		            common::message(1, $this->Lang["SUCC_LOGIN"]);
@@ -297,12 +305,22 @@ class Users_Controller extends Layout_Controller {
 			        }
 		        }
 		        else if($status == 8){
-				        common::message(-1, $this->Lang['USER_BLOCKED']);
-				        url::redirect(PATH."users/login");
+					
+				        common::message(-1, "Account is currently blocked. Please contact the support team.");
+				         if($url_redirect){
+				                url::redirect(PATH.$url_redirect);
+			        }else {
+				        url::redirect(PATH);
+			        }
 		        }
 		        else{
-		                common::message(-1,$this->Lang["DOESNOT_MATCH"]); 
-		                url::redirect(PATH."users/login");
+					
+		                common::message(-1, "Invalid username/password. Please try again."); 
+		                 if($url_redirect){
+				                url::redirect(PATH.$url_redirect);
+			        }else {
+				        url::redirect(PATH);
+			        }
 		         }
 	        }
 	}
@@ -311,6 +329,7 @@ class Users_Controller extends Layout_Controller {
 	
 	public function check_user_login()
 	{ 
+	
 	 /*
 		  Added zenith offer status, to autoload offer UI.
 		  @Live
