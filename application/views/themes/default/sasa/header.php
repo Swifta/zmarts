@@ -111,7 +111,7 @@
                    
                     <li class="dropdown hover category"> <a href="#" class="dropdown-toggle" data-category = "1", data-item-type = "2"  data-toggle=""><span id="id_selected_category" >ALL</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu language category">
-                            <li><a href="javascript:select_category(1);">ALL</a> </li>
+                            <li><a href="javascript:select_category(0);">ALL</a> </li>
                             
                             <?php if(count($this->categeory_list_product)>0){?>
                  			 <li><a >---Products---</a> </li>
@@ -133,7 +133,7 @@
                                 <?php $check_sub_cat = $d->deal_count;?>
                                 
                                 <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
-                                            <li><a href="javascript:select_category(2, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');");"><?php echo ucfirst($d->category_name)?></a> </li>
+                                            <li><a href="javascript:select_category(2, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');")><?php echo ucfirst($d->category_name)?></a> </li>
                                 
                                 <?php } ?>
                          <?php } ?>
@@ -147,7 +147,7 @@
                                 <?php $check_sub_cat = $d->auction_count;?>
                                 
                                 <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
-                                            <li><a href="href="javascript:select_category(3, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');"><?php echo ucfirst($d->category_name)?></a> </li>
+                                            <li><a href="javascript:select_category(3, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');"><?php echo ucfirst($d->category_name)?></a> </li>
                                 
                                 <?php } ?>
                          <?php } ?>
@@ -389,9 +389,6 @@
                                 
                             <li><a href="<?php echo PATH.$this->storeurl."/".$type."/c/".base64_encode("main")."/". $d->category_url."."."html?c = $categories";?>"> <?php echo ucfirst($d->category_name).' ('.$check_sub_cat.')'; ?></a></li>
                                 
-                              
-                                
-                                
                                 
                                 <?php } ?> <!-- Ending 3rd if -->
                                 
@@ -589,6 +586,9 @@
 				break;
 			}
 			default:{
+				$('#id_sasa_category_type').val("");
+				$('#id_sasa_item_type').val("");
+				category = "<span style='color: #ccc;' title = 'ALL'>ALL</span> "
 				break;
 			}
 		}
