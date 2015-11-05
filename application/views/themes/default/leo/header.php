@@ -528,7 +528,8 @@
 							continue;
 					?>
                     	<?php $d_id = "";?>
-                    	<?php if($value && $key == "product_cart_id".$value){
+                    	<?php if(!is_array($value)){
+                            if($key == "product_cart_id".$value){
 							$item_count = 1;
 							$d_id =  $value;
 							 $p_ds=$this->payment_products->get_product_details_cart($d_id);
@@ -538,7 +539,7 @@
 							<li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>-->
 							 <i id = "id_item_no_<?php echo $d_id; ?>"><li><a href="#"><h3 title="<?php echo $p_ds->current()->url_title; ?>"><?php echo common::truncate_item_name($p_ds->current()->url_title); ?></h3></a></li><li><p><a onclick="leo_remove_cart_item(<?php echo $d_id ?>); return false;" href="#">Remove</a></p></li></i>
                              
-                             <?php }?>
+                            <?php }}?>
 					
                     
                     <?php }?>

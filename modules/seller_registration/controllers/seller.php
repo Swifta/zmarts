@@ -440,7 +440,7 @@ $admin_message	= '
 										$this->adminname = $this->Lang['ADMIN'];
 										$this->admin_message = $admin_message;
 										
-										$this->name = ucfirst($this->session->get('firstname'))." ".ucfirst($this->session->get('lastname'));
+										$this->name = ucfirst($this->session->get('firstname'));//." ".ucfirst($this->session->get('lastname'));
 										$this->merchant_message = $merchant_message;
 										
 										$adminmessage = new View("themes/".THEME_NAME."/merchant_signup_admin_mail_template");

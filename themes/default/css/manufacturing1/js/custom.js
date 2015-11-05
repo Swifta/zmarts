@@ -7,6 +7,12 @@
 $(document).ready(function(e) {
 
     $ = jQuery;
+    
+    $("nav ul li").hover(function(){
+        $(this).children('ul').stop(true, true).fadeIn(700);
+    }, function(){
+        $(this).children('ul').stop(true, true).fadeOut(500);
+    });
 
 
     $("select").selectBox();
@@ -16,23 +22,8 @@ $(document).ready(function(e) {
         prev: '.prev',
         next: '.next'
     });
-
-    // ToolTip
-    $('.tooltip').tooltipster({
-        theme: '.tooltipster-punk'
-    });
-
-    // Lightbox
-    $("a.zoom").prettyPhoto({
-        social_tools: ''
-    });
-
-    $("nav ul li").hover(function(){
-        $(this).children('ul').stop(true, true).fadeIn(700);
-    }, function(){
-        $(this).children('ul').stop(true, true).fadeOut(500);
-    });
-
+   
+    
     $(".offers figure").hover(function(){
         $(this).children('.overlay').stop(true, true).fadeIn(700);
     }, function(){
@@ -44,22 +35,6 @@ $(document).ready(function(e) {
     }, function(){
         $(this).children('.overlay').stop(true, true).fadeOut(500);
     });
-
-    $('#carousel').elastislide({
-        speed : 2000
-    });
-
-    $('footer .back-top a').click(function(e){
-        e.preventDefault();
-        $("html, body").animate({ scrollTop: 0 }, 600);
-        return false;
-    });
-
-    //ACCORDION
-    $( "#accordion" ).accordion();
-    $( "#check-accordion" ).accordion();
-
-
 
     $('.product figure .overlay a').hover(
         function(){
@@ -75,6 +50,33 @@ $(document).ready(function(e) {
             )
         }
     );
+    // Lightbox
+    $("a.zoom").prettyPhoto({
+        social_tools: ''
+    });
+    
+    // ToolTip
+    $('.tooltip').tooltipster({
+        theme: '.tooltipster-punk'
+    });
+
+
+
+
+    $('#carousel').elastislide({
+        speed : 2000
+    });
+
+    $('footer .back-top a').click(function(e){
+        e.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
+
+    //ACCORDION
+    $( "#accordion" ).accordion();
+    $( "#check-accordion" ).accordion();
+
 
     $('.sorting-bar .sorting-btn a').hover(
         function(){

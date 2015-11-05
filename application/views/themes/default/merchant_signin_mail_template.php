@@ -30,7 +30,7 @@
                                     <tr>
                                         <td width="12px"></td>
                                         <td style="  font:bold 18px arial; color:#144F5D;">			
-                                            <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo ucfirst($_POST['firstname']); } ?> <?php if(isset($_POST['lastname'])) { echo ucfirst($_POST['lastname']); } ?> 
+                                            <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo ucfirst($_POST['firstname']); } ?> <?php if(isset($_POST['lastname'])) { /*echo ucfirst($_POST['lastname']); */} ?> 
                                         </td>
                                     </tr>
                                     <tr style="height:7px;"><td></td></tr>

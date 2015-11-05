@@ -75,15 +75,12 @@ $this->language_List = str_replace(".php", "", $DL);
                         <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
                         <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/warranty.html'; ?>"><?php echo $this->Lang["WARRANTY"]; ?></a></li>
 
-                        <li class="mnav_dnone">|</li>
                         <?php } ?>
                          <?php if($this->merchant_cms->current()->return_policy_status ==1) { ?>
                         <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/return_policy.html'; ?>" title=" <?php echo $this->Lang["RET_POLICY"]; ?>"> <?php echo $this->Lang["RET_POLICY"]; ?></a></li>
-                        <li class="mnav_dnone">|</li>
                         <?php } ?>
                          <?php if($this->merchant_cms->current()->terms_conditions_status ==1) { ?>
-                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/shipping.html'; ?>" title="<?php echo $this->Lang["SHIP_ING"]; ?>"><?php echo $this->Lang["SHIP_ING"]; ?></a></li>
-                        <li class="mnav_dnone">|</li>      
+                        <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/shipping.html'; ?>" title="<?php echo $this->Lang["SHIP_ING"]; ?>"><?php echo $this->Lang["SHIP_ING"]; ?></a></li>    
                         <?php } ?>                                          
                     <!--</ul>-->
             <?php } }} ?>  
@@ -103,12 +100,11 @@ $this->language_List = str_replace(".php", "", $DL);
         <?php } ?>
         
         <li><a href="<?php echo PATH;?>">Home</a></li>
-        <li class="mnav_dnone">|</li>
         <?php if ($this->session->get('UserID')) { ?>
                 <li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
-                <li class="mnav_dnone">|</li>
+
                 <li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
-                <li class="mnav_dnone">|</li>
+
 
         <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
 
@@ -126,7 +122,6 @@ $this->language_List = str_replace(".php", "", $DL);
 
         <?php } ?>
                 <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
-                <li class="mnav_dnone">|</li>
                 <li><a href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
         <?php } else { ?>
 
@@ -145,7 +140,6 @@ $this->language_List = str_replace(".php", "", $DL);
         <?php } ?>
 
                 <li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
-                <li class="mnav_dnone">|</li>
                 <li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
                 <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
         <?php } ?>
