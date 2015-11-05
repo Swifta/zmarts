@@ -913,6 +913,8 @@ function remove_item_from_cart1(deal_id){
 		$('#email_subscriber_error').html('<?php echo $this->Lang["INV_EMAIL"];?>');
 		$('#subscribe').attr('placeholder','invalid email');
 		
+		$('#subscribe').val('');
+		
 	}else if(x == 0){
 		
 		var url= '<?php echo PATH; ?>users/check_user_signup/?email='+email;
@@ -923,6 +925,8 @@ function remove_item_from_cart1(deal_id){
 				$("#subscribe").attr('placeholder','<?php echo $this->Lang['EMAIL_EXIST']; ?>');
 				$('#email_subscriber_error').text('<?php echo $this->Lang['EMAIL_EXIST']; ?>');
 				$('#subscribe').attr('placeholder','Email already used here');
+				
+				
 				
 				
 				return false;
