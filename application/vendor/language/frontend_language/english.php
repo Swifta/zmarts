@@ -1267,7 +1267,7 @@ $content_text = array(
 
 "MER_SIGN_3" => "Merchant sign up step 3",
 
-"SUCC_COM_STEP2" =>"Successfully completed the step 2",
+"SUCC_COM_STEP2" =>"Step 2 completed Successfully",
 
 "SUCC_COM_FINAL" =>"Merchant account has been successfully created !",
 
@@ -1656,9 +1656,9 @@ $content_text = array(
 
 "ENTER_ZIP_CODE" => "Enter your zipcode here",
 
-"STORE_WEBSITE" => "Enter your store website url here e.g www.example.com",
+"STORE_WEBSITE" => "Enter an existing website if any e.g www.example.com",
 
-"HELP_TOKNOW" => "Help your customers to know about you more ",
+"HELP_TOKNOW" => "Help your customers know more about you ",
 
 "SUBSECTOR" => "Sector Theme",
 

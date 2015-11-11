@@ -36,16 +36,15 @@
                     <div class="payouter_block pay_br">
                         <h3 class="paybr_title pay_titlebg">Further Instruction: </h3>
                         <div class="p_inner_block clearfix">
-                            <h
-                            <p class="merchant_intro">
+                            <h1 style="text-align:center;font-size: 200%;">
                                     Thank you for registering on Zmart. <br />
-                                    Your registration is pending approval. You will be notified once your registration is approved.
+                                    Your registration is pending approval. You will be notified via email once your registration is approved.
                             <?php /** echo $this->Lang['SELLER_INTRODUCTION']; **/?>
                             
-                            </p>
+                            </h1>
                         </div>
                     </div>                    
-                    <div class="merchant_submit_buttons clearfix">                      
+                    <div style="text-align:center;font-size: 120%;" class="merchant_submit_buttons clearfix">                      
                         <a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it">Go to Zmart Homepage</a>
                     </div>
                 </div>
