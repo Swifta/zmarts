@@ -1,6 +1,18 @@
+
 @import url('reset.css');
 @import url('font.css');
 
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic');
+@import url('http://fonts.googleapis.com/css?family=Crete+Round');
+@import url('http://fonts.googleapis.com/css?family=Crete+Round');
+@import url('css/bootstrap.css');
+@import url('css/bootstrap-responsive.css');
+@import url('css/style.css');
+@import url('css/style_1.css');
+@import url('css/flexslider.css');
+@import url('css/jquery.fancybox.css');
+@import url('css/cloud-zoom.css');
+@import url('css/portfolio.css');
 /*body{top: 0 !important;}*/
 
 /*fashion theme*/
