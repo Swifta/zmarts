@@ -1,12 +1,12 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+<?php defined('SYSPATH') OR die('No direct access allowed.');?>
 <style>
 .error{float: left;width: 50%; } 
 </style>
 
 
-<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   
@@ -291,7 +291,7 @@ input[type=text],input[type=password]
                         </div>
                         
                     </div>
-               <form action="" method="post" name="signup4"  id="signup4" enctype="multipart/form-data" >
+               <form action="" method="post" onsubmit="return save_last_step();" name="signup4"  id="signup4" enctype="multipart/form-data" >
 		<div class="payouter_block pay_br">
 <!--                   <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['FINISH']; ?></h3>-->
                         <div class="p_inner_block clearfix">
@@ -305,8 +305,8 @@ input[type=text],input[type=password]
     <td>
                                        <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" name="storename" id="storename" tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>" autofocus required />
-				<em><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
+                                 <input type="text" maxlength="50" onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
+				<em id="id_err_storename"><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
                              </td>
@@ -321,7 +321,7 @@ input[type=text],input[type=password]
                                     <?php } ?>
                                     </select> 
                                     </div>
-                                    <em><?php if (isset($this->form_error['country'])) {
+                                    <em id="id_err_country"><?php if (isset($this->form_error['country'])) {
                                     echo $this->form_error["country"];
                                     } ?></em>
                                 </td>
@@ -330,8 +330,8 @@ input[type=text],input[type=password]
     <td> 
                                          
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" name="username" id="username" tabindex="2" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
-				<em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
+                                 <input maxlength="50" type="text" name="username" id="username" tabindex="2" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
+				<em id="id_err_username"><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
 <!--                                     <span class="asterisk_input">  </span>-->
                                 
                              </td>
@@ -346,7 +346,7 @@ input[type=text],input[type=password]
                                 <?php } ?>
                                 </select> 
                                 </div>
-                                <em><?php if (isset($this->form_error['city'])) {
+                                <em id="id_err_city"><?php if (isset($this->form_error['city'])) {
                                 echo $this->form_error["city"];
                                 } ?></em>
 
@@ -357,13 +357,13 @@ input[type=text],input[type=password]
 <td>
                              <div class="">
                                      <span class="asterisks_input">  </span>
-                                     <input type="text" name="mobile" maxlength="11" tabindex="3" id="phone" maxlength="11" onkeypress="return isNumberKey(event)" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
-                                     <em><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
+                                     <input type="text" id="mobile" name="mobile"  tabindex="3" maxlength="11" onkeypress="return isNumberKey(event)" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
+                                     <em id="id_err_mobile"><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
                                  </div>
                                 </td>
 <td>
                                         <div class="">
-				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus />
+				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus  />
                                  </div>
                                         </td>
 
@@ -374,9 +374,9 @@ input[type=text],input[type=password]
 <td> 
                                       <div>
                                      <span class="asterisks_input">  </span>
-                                     <input type="text" name="address1" class="swifta_input" id="addrs1" tabindex="4" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
+                                     <input type="text" maxlength="50" name="address1" class="swifta_input" id="address1" tabindex="4" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
                             
-								<em><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
+								<em id="id_err_address1"><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
                                      </td>
@@ -386,7 +386,7 @@ input[type=text],input[type=password]
  
                                  <div class="" style='margin-top:-1px;'>
                                     
-                                     <input type="text" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
+                                     <input type="text" maxlength="50" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
 									
 									<em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
                                  
@@ -402,7 +402,7 @@ input[type=text],input[type=password]
     
       <div class="">		
                                      <span class="asterisks_input">  </span>
-                            <input type="text" name="address2" class="swifta_input" tabindex="5" id="addrs2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>"  autofocus />
+                            <input maxlength="50" type="text" name="address2" class="swifta_input" tabindex="5" id="address2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>"  autofocus />
                             
 								<em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
 <!--                                  <span class="asterisk_input">  </span>-->
@@ -416,9 +416,9 @@ input[type=text],input[type=password]
 <td>
   <div class="">
                                             <span class="asterisks_input">  </span>
-                                            <textarea required  name="data" tabindex="11" class="swifta_input" id="knwu" placeholder="<?php echo $this->Lang['HELP_TOKNOW'];?>" maxlength="1000"><?php if(!isset($this->form_error['data']) && isset($this->userPost['data'])){echo $this->userPost['data'];}?></textarea>
+                                            <textarea required name="data" tabindex="11" class="swifta_input" id="data" placeholder="<?php echo $this->Lang['HELP_TOKNOW'];?>" maxlength="1000"><?php if(!isset($this->form_error['data']) && isset($this->userPost['data'])){echo $this->userPost['data'];}?></textarea>
 
-					<em><?php if(isset($this->form_error['data'])){ echo $this->form_error["data"]; }?></em>
+					<em id="id_err_data"><?php if(isset($this->form_error['data'])){ echo $this->form_error["data"]; }?></em>
 <!--					   <span class="asterisk_input">  </span>-->
                                         </div>
 
@@ -435,7 +435,7 @@ input[type=text],input[type=password]
                                         <div class="fullname map_loc_section map_re_w">
                                         <div class="gllpLatlonPicker">
                                         <div class="top_popup_select2">        
-                                            <input type="text" class="gllpSearchField required" tabindex="6"  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) " required>
+                                            <input type="text" maxlength="50" class="gllpSearchField required" tabindex="6" required="required"  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
                                         <input type="button" class="gllpSearchButton sign_submit"  value="<?php echo $this->Lang['SEARCH']; ?>">
                                         </div>
                                         <br/>
@@ -444,11 +444,11 @@ input[type=text],input[type=password]
                                         <br/>
                                         
                                         <div class="">
-                                        <input type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
+                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
                                       
-                                        <input type="text" name="longitude" class="gllpLongitude required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
-                                          <em><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
-                                        <em><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
+                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
+                                          <em id="id_err_latitude"><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
+                                        <em id="id_err_longitude"><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
                                         </div>
                                         <input type="hidden" class="gllpZoom" value="3"/>
                                         <input type="hidden" class="gllpUpdateButton" value="update map">
@@ -462,7 +462,7 @@ input[type=text],input[type=password]
 
 <label style="color:blue;">Have a store admin representative ? 
                                       
-                                      <em style="font-size:90%"><input type="checkbox" id="store_email_id"  id="have_store_admin" style="margin-top:px;" />Check this box if you want to register someone to manage this store for you. </em>
+                                      <em style="font-size:90%"><input type="checkbox" id="have_store_admin" style="margin-top:px;" />Check this box if you want to register someone to manage this store for you. </em>
                                      
                                   </label>
                               
@@ -472,15 +472,17 @@ input[type=text],input[type=password]
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" value="" name="store_email_id" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
+                                 <input maxlength="150" type="text" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
+                                 <em id="id_err_memail"></em>
                              </li>
+                             <br/>
                             
                                  <div class="">
-                                     <input style="margin-top:20px;" type="file" name="image" class="required" tabindex="12" required id="fil" />
+                                     <input style="margin-top:20px;" type="file" name="image" id="image" class="required" tabindex="12" required />
 								
-									<em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
+									<em id="id_err_image"><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
                                  <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
                                  </div>
 
@@ -493,14 +495,18 @@ input[type=text],input[type=password]
 <tr>
 <td>
  <div class="merchant_submit_buttons step3_new" id="submit32">
-     <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" class="sign_submit" onclick="comfirm_click();"/>
-                                    <a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['GO_BACK'];?>" class="sign_cancel"><?php echo $this->Lang['GO_BACK'];?></a>                        
+     <label>&nbsp;</label><input type="submit" id="merchant_step3" value="<?php echo $this->Lang['FINISH'];?>" class="sign_submit"/>
+                                    <a id="id_step3_back" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['GO_BACK'];?>" class="sign_cancel"><?php echo $this->Lang['GO_BACK'];?></a>                        
                                 </div>
  
                                         
                                    
 <script>
-$('#store_email_id').click(function () {
+var check_store_admin_mail = false;
+$('#have_store_admin').click(function () {
+	
+	check_store_admin_mail = this.checked;
+	
     $("#store_admin_email_li").toggle(this.checked);
 })
                              </script>
@@ -537,26 +543,32 @@ $('#store_email_id').click(function () {
  
  <script>
 function comfirm_click(){
+	
+	
     //alert("here");
     //<?php echo PATH; ?>logout.html
-    var x = document.forms["signup4"]["storename"].value;
+	//alert(12122);
+/*    var x = document.forms["signup4"]["storename"].value;
    // var x1 = document.forms["signup4"]["store_email_id"].value;
     var x2 = document.forms["signup4"]["username"].value;
     var x3 = document.forms["signup4"]["phone"].value;
      var x4 = document.forms["signup4"]["storename"].value;
     var x5 = document.forms["signup4"]["addrs1"].value;
    // var x6 = document.forms["signup4"]["addrs2"].value;
-    var x7 = document.forms["signup4"]["zipcode"].value;
+   // var x7 = document.forms["signup4"]["zipcode"].value;
    // var x8 = document.forms["signup4"]["website"].value;
      var x9 = document.forms["signup4"]["knwu"].value;
     var x10 = document.forms["signup4"]["gf"].value;
     var x11 = document.forms["signup4"]["fil"].value;
     
     
-    if (x == null || x == "" || x2 == null || x2 == "" || x3 == null || x3 == "" || x4 == null || x4 == "" || x5 == null || x5 == "" || x7 == null || x7 == "" || x9 == null || x9 == "" || x10 == null || x10 == "" || x11 =="" || x11 == "" ) {
+    if (x == null || x == "" || x2 == null || x2 == "" || x3 == null || x3 == "" || x4 == null || x4 == "" || x5 == null || x5 == ""|| x9 == null || x9 == "" || x10 == null || x10 == "" || x11 =="" || x11 == "" ) {
         //alert("Name must be filled out");
         return false;
     }
+	
+	
+	*/
     
     swal({   
         title: "Registration Completed",   
@@ -570,10 +582,9 @@ function comfirm_click(){
         closeOnCancel: true 
     }, function(isConfirm){   
         if (isConfirm) {
-            //$('#signup4').submit();
-            location.href = "<?php echo PATH; ?>"; 
+            location.href = "<?php echo PATH; ?>merchant-signup-completed.html"; 
         } else {     
-            location.href = "<?php echo PATH; ?>"; 
+            location.href = "<?php echo PATH; ?>merchant-signup-completed.html"; 
         } 
     });
 }
@@ -598,7 +609,8 @@ function isNumberKey(evt)
     }
 
     function InvalidInputHelper(input, options) {
-        input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+		
+       // input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
 
         function changeOrInput() {
             if (input.value == "") {
@@ -616,18 +628,21 @@ function isNumberKey(evt)
             }
         }
 
-        input.addEventListener("change", changeOrInput);
-        input.addEventListener("input", changeOrInput);
-        input.addEventListener("invalid", invalid);
+	
+       input.addEventListener("change", changeOrInput);
+       input.addEventListener("input", changeOrInput);
+       input.addEventListener("invalid", invalid);
+	
+		
     }
     exports.InvalidInputHelper = InvalidInputHelper;
 })(window);
 
-
-
+$(document).ready(function(e) {
+	
 InvalidInputHelper(document.getElementById("storename"), {
-    defaultText: "Please enter your storename!",
-    emptyText: "Please enter your storename!",
+    defaultText: "Please enter your store name!",
+    emptyText: "Please enter your store name!",
     invalidText: function (input) {
         return 'The storename  "' + input.value + '" is invalid!';
     }
@@ -636,9 +651,10 @@ InvalidInputHelper(document.getElementById("storename"), {
 }
 
 );
+
 InvalidInputHelper(document.getElementById("username"), {
-    defaultText: "Please enter your store username!",
-    emptyText: "Please enter your store username!",
+    defaultText: "Please enter your store user name.",
+    emptyText: "Please enter your store user name.",
     invalidText: function (input) {
         return 'The username  "' + input.value + '" is invalid!';
     }
@@ -648,9 +664,9 @@ InvalidInputHelper(document.getElementById("username"), {
 
 ); 
 
-InvalidInputHelper(document.getElementById("store_email_ids"), {
-    defaultText: "Please enter your store_email_id!",
-    emptyText: "Please enter your store_email_id!",
+InvalidInputHelper(document.getElementById("store_email_id"), {
+    defaultText: "Please enter your store email.",
+    emptyText: "Please enter your store email.",
     invalidText: function (input) {
         return 'The email  "' + input.value + '" is invalid!';
     }
@@ -660,7 +676,7 @@ InvalidInputHelper(document.getElementById("store_email_ids"), {
 
 ); 
 
-InvalidInputHelper(document.getElementById("phone"), {
+InvalidInputHelper(document.getElementById("mobile"), {
     defaultText: "Please enter your phone!",
     emptyText: "Please enter your phone!",
     invalidText: function (input) {
@@ -673,7 +689,7 @@ InvalidInputHelper(document.getElementById("phone"), {
 ); 
     
     
-    InvalidInputHelper(document.getElementById("addrs1"), {
+    InvalidInputHelper(document.getElementById("address1"), {
     defaultText: "Please enter your address!",
     emptyText: "Please enter your address!",
     invalidText: function (input) {
@@ -685,7 +701,7 @@ InvalidInputHelper(document.getElementById("phone"), {
 
 );
 
-InvalidInputHelper(document.getElementById("Zipcode"), {
+/*InvalidInputHelper(document.getElementById("zipcode"), {
     defaultText: "Please enter your zipcode!",
     emptyText: "Please enter your zipcode!",
     invalidText: function (input) {
@@ -695,7 +711,7 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
     
 }
 
-);
+);*/
 
 //  
 //    InvalidInputHelper(document.getElementById("addrs2"), {
@@ -723,8 +739,8 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
 //
 //);
 
- InvalidInputHelper(document.getElementById("fil"), {
-    defaultText: "Please upload a file!",
+ InvalidInputHelper(document.getElementById("image"), {
+    defaultText: "Please select a logo to upload!",
     emptyText: "Please upload a file!",
     invalidText: function (input) {
         return 'The file  "' + input.value + '" is invalid!';
@@ -747,9 +763,9 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
 
 );
 
- InvalidInputHelper(document.getElementById("knwu"), {
-    defaultText: "Please let us know your better!",
-    emptyText: "Please let us know your better!",
+ InvalidInputHelper(document.getElementById("data"), {
+    defaultText: "Let your customers know more about you",
+    emptyText: "Let your customers know more about you.",
     invalidText: function (input) {
         return 'The Location  "' + input.value + '" is invalid!';
     }
@@ -758,6 +774,34 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
 }
 
 );
+
+InvalidInputHelper(document.getElementById("country"), {
+    defaultText: "Select country",
+    emptyText: "Please select country",
+    invalidText: function (input) {
+        return 'The Location  "' + input.value + '" is invalid!';
+    }
+    
+    
+}
+
+);
+
+
+InvalidInputHelper(document.getElementById("CitySD"), {
+    defaultText: "Select city",
+    emptyText: "Please select city",
+    invalidText: function (input) {
+        return 'The Location  "' + input.value + '" is invalid!';
+    }
+    
+    
+}
+
+);
+
+    
+});
 </script>
 
 <script type="text/javascript">
@@ -773,7 +817,7 @@ InvalidInputHelper(document.getElementById("Zipcode"), {
 
 <script>
         
-          $('form').each(function(){
+$('form').each(function(){
     var list  = $(this).find('*[tabindex]').sort(function(a,b){ return a.tabIndex < b.tabIndex ? -1 : 1; }),
         first = list.first();
     list.last().on('keydown', function(e){
@@ -793,4 +837,243 @@ function isNumberKey(evt)
 
           return true;
        }
+	   
+var sector_changed = true;
+var is_sector_valid = false;
+
+var email_changed = true;
+var is_email_valid = false;
+
+
+
+	   
+$(document).ready(function(e) {
+   
+	 sector_changed = true;
+	 is_sector_valid = false;
+	 
+	 email_changed = true;
+	 is_email_valid = false;
+	
+	
+	sector = document.signup4.storename.value;
+	email = "";
+	
+	if(check_store_admin_mail){
+		
+		email = $('#store_email_id').val();
+		if(email)
+			$('#store_email_id').focus();
+			$('#store_email_id').trigger('blur');
+		
+	}
+	
+	
+	
+	if(sector){
+		$('#storename').focus();
+		$('#storename').trigger('blur');
+	}
+	
+
+});
+
+
+function set_shop_changed(yes){
+	sector_changed = yes;
+}
+
+
+
+function verify_shop_name(sector){
+	sector = sector.value;
+	sector = sector.trim();
+	
+	if(!sector_changed)
+		return false;
+	is_sector_valid = false;
+	
+	
+	if(!sector)
+	return false;
+	
+	
+	var url = "<?php echo PATH; ?>seller/check_store_exist/"+sector+"/TRUE";
+	$.post(url, {}, function success(response){
+			
+			sector_changed = false;
+			is_sector_valid = false;
+			
+			if(response == "0"){
+				//alert("Email unique");
+				$('#id_err_storename').text('');
+				sector_changed = false;
+				is_sector_valid  = true;
+				return false;
+			}else if(response == "1"){
+				//alert("Email duplicate");
+				$('#id_err_storename').text("Already in use. Try a different name");
+				return false;
+			}else {
+				//alert("Unknown response from server");
+				$('#id_err_storename').text("Unknown response from server");
+			}
+		});
+}
+
+
+
+function verify_memail(field){
+	
+	if(!check_store_admin_mail)
+		return false;
+	if(!email_changed)
+		return false;
+	
+	is_email_valid = false;
+	email = field.value;
+	email = email+"".trim();
+	if(!email)
+		return false;
+	if(!verify_memail_client_side(email)){
+		//alert("Invalid email");
+		$('#id_err_memail').text('Invalid email');
+		return false;
+	}
+	 
+		var url = "<?php echo PATH; ?>seller/email_available/"+email+"/TRUE";
+		
+		
+		
+		
+		
+		
+	$.post(url, {}, function success(response){
+			email_changed = false;
+			is_email_valid = false;
+			if(response == "0"){
+				//alert("Email unique");
+				$('#id_err_memail').text('');
+				email_changed = false;
+				is_email_valid = true;
+				return false;
+			}else if(response == "1"){
+				//alert("Email duplicate");
+				$('#id_err_memail').text("Already in use. Try with another email");
+				return false;
+			}else {
+				//alert("Unknown response from server");
+				$('#id_err_memail').text("Unknown response from server");
+			}
+		});
+	
+	
+	
+}
+
+
+
+function verify_memail_client_side(email){
+
+	var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email)
+}
+
+function set_email_changed(yes){
+	email_changed = yes;
+}
+
+function last_email_check(){
+	$('#storename').trigger('blur');
+	if(!is_sector_valid){
+		$('#storename').focus();
+		return is_sector_valid;
+	}
+	
+	
+	
+	if(check_store_admin_mail){
+		$('#have_store_admin').trigger('blur');
+		if(!is_email_valid){
+			$('#have_store_admin').focus();
+			$('#id_err_memail').text('store admin email required.');
+			return is_email_valid;
+		}
+	}
+		
+	
+	return true;
+	
+	
+}
+
+function save_last_step(){
+	if(!last_email_check())
+		return false;
+		
+		
+		data = $(document.signup4).serialize();
+		//alert(data);
+		
+		$('#id_step3_back').hide();
+		$('#merchant_step3').val('Processing... Pleas wait.').attr('disabled','disabled');
+		
+		var url = "<?php echo PATH; ?>seller/seller_signup_step3/0/TRUE";
+	$.post(url, data,  function success(status){
+			
+			response = status;
+			try{
+			status = parseInt(status);
+			}catch(e){
+				
+			}
+			if(status == 0){
+				comfirm_click();
+				$('#merchant_step3').val('Complete!');
+				return false;
+			}else if(status == 1){
+				window.location.href = "<?php echo PATH;?>merchant-signup-step2.html";
+			}else{
+				
+			    $('#id_step3_back').show();
+				$('#merchant_step3').val('Finish').removeAttr('disabled');
+
+				
+				var is_json = true;
+				var jsonObj = null;
+				try{
+					
+					jsonObj = jQuery.parseJSON(response);
+					
+					
+				}catch(e){
+					is_json = false;
+				}
+				
+				if(is_json && typeof jsonObj == 'object' && jsonObj != null){
+					
+					//alert(jsonObj.length);
+					first_field = jsonObj[0];
+					for(id = 0; id < jsonObj.length;){
+						$('#id_err_'+jsonObj[id]).text(jsonObj[id+1]);
+						id +=2;
+					}
+					$('#'+first_field).focus();
+					return false;
+					
+				}
+				return false;
+				
+				
+			}
+			
+		});
+	
+	
+	return false;
+}
+
+
+
+
         </script>

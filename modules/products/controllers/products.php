@@ -102,6 +102,7 @@ class Products_Controller extends Layout_Controller
 			        'style'          => 'digg',
 			        'auto_hide' => TRUE
 	        ));
+			
 		$this->all_products_list = $this->products->get_products_list("","", $this->pagination->sql_offset, $this->pagination->items_per_page,substr($cur_category, 0, -1),substr($cur_size, 0, -1));
 		 
 		$this->view_products_list = $this->products->get_products_view();
@@ -111,6 +112,14 @@ class Products_Controller extends Layout_Controller
 		        $this->pro_max=$pro->max_deal;
 		        $this->pro_min=$pro->min_deal;
 		}
+		
+		
+		
+		//var_dump($this->all_products_list);
+		
+		
+		//$this->all_products_list = NULL;
+		
 		$this->template->title = $this->Lang["PRODUCTS"]." | ".SITENAME;
 		$this->title_display = $this->Lang["PRODUCTS"];
 		$this->color_list = $this->products->get_color_list();

@@ -603,13 +603,13 @@ ship_address2' => string 'test address2' (length=13)
   <tr>
     <td colspan="7"><div style="clear:both;"></div>
       <div style="width: 100%;  line-height: 2em; text-align:left; page-break-before: auto;">
-        <div style="float:left; width: 74%">&nbsp;</div>
-        <div style="float:left; width: 13%; text-align:right; color:#144F5D; font: bold 12px arial;">Order Total</div>
-        <div style="float:left; width: 13%; text-align:center; color:#666666; font: bold 12px arial;"><b><?php echo CURRENCY_SYMBOL.$val_tot; ?></b></div>
+        <div style="float:left; width: 48%">&nbsp;</div>
+        <div style="float:left; width: 26%; text-align:right; color:#144F5D; font: bold 12px arial; white-space:nowrap;">Order Total</div>
+        <div style="float:left; width: 26%; text-align:center; color:#666666; font: bold 12px arial; white-space:nowrap"><b style="white-space:nowrap"><?php echo CURRENCY_SYMBOL.$val_tot; ?></b></div>
         <div style="clear:both;"></div>
-        <div style="float:left; width: 72%">&nbsp;</div>
-        <div style="float:left; width: 15%; text-align:right; color:#144F5D; font: bold 12px arial;">Shipping</div>
-        <div style="float:left; width: 13%; text-align:center; color:#666666; font: bold 12px arial;"><b>
+        <div style="float:left; width: 48%">&nbsp;</div>
+        <div style="float:left; width: 26%; text-align:right; color:#144F5D; font: bold 12px arial; white-space:nowrap">Shipping</div>
+        <div style="float:left; width: 26%; text-align:center; color:#666666; font: bold 12px arial; white-space:nowrap;"><b style="white-space:nowrap">
           <?php if($tot_ship != 0 ) echo CURRENCY_SYMBOL.$tot_ship; else echo '-'; ?>
           </b></div>
       </div></td>
@@ -617,8 +617,8 @@ ship_address2' => string 'test address2' (length=13)
   <div style="clear:both;"></div>
   <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%; padding:20px;">
     <td  width="74%">&nbsp;</td>
-    <td width="13%" align="right" style="color:#144F5D; font: bold 12px arial; padding: 15px;"><?php if($p->type == 5 || $p->type == 6 ) { echo $this->Lang['AMO_TO_B_PAID']; } else { echo $this->Lang['AMTPAID']; } ?></td>
-    <td  width="13%" align="center" style="color:#666666; font: bold 12px arial; padding:15px"><?php echo CURRENCY_SYMBOL.$grand_tot; ?></td>
+    <td width="13%" align="right" style="color:#144F5D; font: bold 12px arial; padding: 15px; white-space:nowrap"><?php if($p->type == 5 || $p->type == 6 ) { echo $this->Lang['AMO_TO_B_PAID']; } else { echo $this->Lang['AMTPAID']; } ?></td>
+    <td  width="13%" align="center" style="color:#666666; font: bold 12px arial; padding:15px; white-space:nowrap"><?php echo CURRENCY_SYMBOL.$grand_tot; ?></td>
   </tr>
   <tr>
     <td colspan="7">&nbsp;</td>
@@ -636,7 +636,6 @@ ship_address2' => string 'test address2' (length=13)
 </table>
 </body>
 </html>
-
 
 
 

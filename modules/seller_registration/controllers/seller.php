@@ -120,14 +120,16 @@ class Seller_Controller extends Layout_Controller {
 	}
 
         public function merchant_completed(){
-                $this->template->title = "Merchant Sign Up Complere";
+                $this->template->title = "Merchant Sign Up Complete";
                 $this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_completed");
+				//common::message(1, "Signup complete. Thanks you!");
         }
 	/** SELLER  SIGNUP STEP 2 **/
 
 	public function seller_signup_step2()
 	{
 			if($_POST){ 
+			
 			$this->userPost = $this->input->post();
                         //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
@@ -148,6 +150,8 @@ class Seller_Controller extends Layout_Controller {
                                                 //var_dump($post->validate());die;
 					if($post->validate())
 					{
+						
+						
 					
 					        $free = "0";
                                                 if(isset($post->free)){
@@ -176,6 +180,7 @@ class Seller_Controller extends Layout_Controller {
                                                      "nuban_session" => $post->nuban,"free" => $free,"flat" => $flat, 
                                                      "product" => $product,'quantity' => $quantity, 'aramex' => $aramex,
                                                      "sector"=>$post->sector,"sub_sector"=>$post->subsector));
+													 
                                                  
 							common::message(1, $this->Lang['SUCC_COM_STEP2']);
                                                         //echo "Got here"; die;
@@ -183,6 +188,7 @@ class Seller_Controller extends Layout_Controller {
 							
 					} else {
 							$this->form_error = error::_error($post->errors());	
+							
 					}
 			}
 		        $this->all_setting_module = $this->seller->get_setting_module_list();
@@ -195,6 +201,9 @@ class Seller_Controller extends Layout_Controller {
                                 $this->per_quantity_setting = $setting->per_quantity;
                                 $this->aramex_setting = $setting->aramex;
 		        }
+				
+			
+						
 		$this->template->title = $this->Lang['MER_SIGN_2'];
 		$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_step2");
 		
@@ -210,6 +219,7 @@ class Seller_Controller extends Layout_Controller {
 							->add_rules('sector', 'required');
 							if($post->validate())
 					{
+						
 						$this->session->set(array("sector"=>$post->sector));
 							common::message(1, $this->Lang['SUCC_COM_STEP3']);
 							url::redirect(PATH."merchant-signup-step3.html");
@@ -222,6 +232,7 @@ class Seller_Controller extends Layout_Controller {
 		}
 		$this->sector_list=$this->seller->get_sector_list();
 		$this->template->title = $this->Lang['MER_SIGN_3'];
+		
 		$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_step4");
 		
 		
@@ -237,11 +248,18 @@ class Seller_Controller extends Layout_Controller {
 	
 	/** SELLER  SIGNUP STEP 4 **/
 
-	public function seller_signup_step3($seller_id = "")
+	public function seller_signup_step3($seller_id = "", $async = FALSE)
 	{
-	  
+		
+		
+	  		
+	  	 
 		if(($this->session->get('firstname') != "") && ($this->session->get('memail') != "") && ($this->session->get('nuban_session') != "") ){
-			if($_POST){    
+			
+				
+				if($_POST){ 
+				
+				
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST,$_FILES))
@@ -257,14 +275,26 @@ class Seller_Controller extends Layout_Controller {
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							//->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 							->add_rules('username', 'required');
-						if($post->validate())
-						{      
+							
+						if($post->validate()){    
+							
+							
+							
+							
 							$store_key = text::random($type = 'alnum', $length = 8);
 							$password = text::random($type = 'alnum', $length = 8);
 							$store_admin_password = text::random($type = 'alnum', $length = 10);
 							$storename = $this->input->post('storename');
-							 $status = $this->seller->add_merchant(arr::to_object($this->userPost),$store_key,$password,$store_admin_password); 
+							$status = $this->seller->add_merchant(arr::to_object($this->userPost),$store_key,$password,$store_admin_password); 
+							//DELETE
+							//$status = array("email"=>"livetest172@gmail.com", "image" =>"77_26");
+							
+			  
+							  
 								if($status){
+									
+									
+									 
 									$to=($status['email'])?$status['email']:CONTACT_EMAIL;
 										$from = CONTACT_EMAIL;
 										$this->country_list = $this->seller->getcountrylist();
@@ -418,6 +448,8 @@ $admin_message	= '
 </table';?>
 
 <?php
+
+								
 										 
 										
 
@@ -446,33 +478,59 @@ $admin_message	= '
 										$adminmessage = new View("themes/".THEME_NAME."/merchant_signup_admin_mail_template");
 										$merchantmessage = new View("themes/".THEME_NAME."/merchant_signup_mail_template");
 										
+										
+		
+										
+										
+										
                                                                                 //echo "admin subject: ".$subject." and merchant_subject:".$merchant_subject."<br />";
                                                                                 //echo "admin msg: ".$admin_message." and merchant_msg:".$merchant_message."<br />";
                                                                                 //die;
 										//echo $adminmessage; echo "<br> <br> <br>"; echo $merchantmessage; exit;
+										
+										
+										
+										/*try{
 										if($_FILES['image']['name']){
+											
+										
 											$filename = upload::save('image'); 						
-											$IMG_NAME = $status['image'].'.png';						
+											$IMG_NAME = $status['image'].'.png';	
 											common::image($filename, STORE_DETAIL_WIDTH, STORE_DETAIL_HEIGHT, DOCROOT.'images/merchant/600_370/'.$IMG_NAME);
 											common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
 											unlink($filename);
+											
+											
+											
 										}
+										
+										}catch(Exception $e){
+											
+										}
+										*/
+										
+										
+										
+										
 										
 										
 										if(EMAIL_TYPE==2){
-											
-												
-										
-										
 											email::smtp($from, $to, $subject , $adminmessage);
-											if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
-											email::add_account_to_sendinblue("merchant", $this->session->get('memail'));
+											/*if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
+												email::add_account_to_sendinblue("merchant", $this->session->get('memail'));*/
+												
+												email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage);
 											
 										}
 										else{
 											email::sendgrid($from, $to, $subject , $adminmessage);
 											email::sendgrid($from, $this->session->get('memail'), $merchant_subject , "<p>".SITENAME ." - ".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage);
 										}
+										
+										
+										
+										
+										
 										
 										$this->password = $store_admin_password;
 										$this->email = $_POST['store_email_id'];
@@ -487,7 +545,13 @@ $admin_message	= '
 											email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
 										}
 										
+										
+										
+										 
 										//  unset the merchant session for next merchant
+										
+										
+										
 										$this->session->delete('firstname');
 										$this->session->delete('lastname');
 										$this->session->delete('memail');
@@ -495,12 +559,13 @@ $admin_message	= '
 										$this->session->delete('mraddress2');
 										$this->session->delete('mphone_number');
 										$this->session->delete('payment_acc');
-                                                                                $this->session->delete('nuban');
+                                        $this->session->delete('nuban');
 										$this->session->delete('sector'); 
 										$this->session->delete('subsector'); 
-                                                                                $this->session->delete('nuban_session');
+                                        $this->session->delete('nuban_session');
 										$this->session->delete('merchant_reg_nuban');
-                                                                                
+										
+										                                  
                                                                                 
 						 /*$this->session->set(array("firstname" => $post->firstname,"lastname" => $post->lastname, 
                                                      'mraddress1' => $post->mr_address1, 'mraddress2' => $post->mr_address2, 
@@ -510,24 +575,56 @@ $admin_message	= '
                                                      "sector"=>$post->sector,"sub_sector"=>$post->subsector));*/
 											common::message(1, $this->Lang['SUCC_COM_FINAL']);
 											//url::redirect(PATH);
-                                                                                        url::redirect(PATH."merchant-signup-completed.html");
+											
+											
+										
+											
+											if($async){
+												echo 0;
+												exit;
+											}else{
+                                                url::redirect(PATH."merchant-signup-completed.html");
+											}
 								}
 								else{
 									common::message(-1, $this->Lang['PLZ_TRY_ONS']);
 									//url::redirect(PATH);
 								}
 						}else{
-								$this->form_error = error::_error($post->errors());	
+								if($async){
+										$this->form_error = error::_error($post->errors());
+										$errors = (array)($this->form_error);
+										$arr = array();
+										$i = 0;
+										foreach($errors as $key => $value){
+											$arr[$i] = $key;
+											$i++;
+											$arr[$i] = $value;
+											$i++;
+										}
+										
+										echo json_encode($arr);
+										exit;
+									}else{
+									$this->form_error = error::_error($post->errors());
+								}
+										
 						}
 				
 			}
+			
 			$this->country_list = $this->seller->getcountrylist();
-			$this->template->title = $this->Lang['MER_SIGN_4'];
+			$this->template->title = $this->Lang['MER_SIGN_3'];
 			$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_step3");
 		}
 		else{
 			 common::message(1, $this->Lang['PLZ_CORR_FILL']);
-			 url::redirect(PATH."merchant-signup-step2.html");
+			 if($async){
+				 	echo 1;
+					exit;
+				 }else{
+			 	url::redirect(PATH."merchant-signup-step2.html");
+			 }
 		}
 		
 	}
@@ -556,10 +653,19 @@ $admin_message	= '
 	
 	/** CHECK EMAIL EXIST **/
 	 
-	public function email_available($email= "")
+	public function email_available($email= "", $async = FALSE)
 	{
+	
 		$exist = $this->seller->exist_email($email);
+		if($async){
+			if($exist)
+				echo 1;
+			else
+				echo 0;
+			exit;
+		}
 		return ! $exist;
+		
 	}
         
         public function nuban_available($nuban = ""){
@@ -569,7 +675,16 @@ $admin_message	= '
             return true;
         }
         
-	public function check_store_exist(){
+	public function check_store_exist($store_name = "", $async = FALSE){
+		if($async){
+			 $exist = $this->seller->exist_name($store_name);
+			 if($exist == 0){
+				 echo 0;
+			 }else {
+				 echo 1;
+			 }
+			exit;
+		}
 	   
 	    $exist = $this->seller->exist_name($this->input->post("storename"));
 	    return ($exist == 0)?true:false; 

@@ -17,6 +17,18 @@ class Products_Model extends Model
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = 'and product.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition_arr = true:$this->club_condition_arr = false;
 		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = 'product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = 'product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
+		
+		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition = 'product.deal_prime_savings as deal_savings':$this->deal_saving_condition = 'product.deal_savings';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition_field = 'product.deal_prime_savings':$this->deal_saving_condition_field = 'product.deal_savings';
+		
+		
+		
 	
 		
 		
@@ -155,27 +167,27 @@ class Products_Model extends Model
 
 				$val = $discount1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_percentage $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_percentage_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($discount1); $i++){
 					$val = $discount1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .="and (product.deal_percentage between $arr[$val]";
+							$conditions .="and ($this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .="and (product.deal_percentage $arr[$val]";
+							$conditions .="and ($this->deal_percentage_condition_field $arr[$val]";
 						}
 					}else if($i == count($discount1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -191,27 +203,27 @@ class Products_Model extends Model
 
 				$val = $price1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_value $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_value_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($price1); $i++){
 					$val = $price1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .="and (product.deal_value between $arr[$val]";
+							$conditions .="and ($this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .="and (product.deal_value $arr[$val]";
+							$conditions .="and ($this->deal_value_condition_field $arr[$val]";
 						}
 					}else if($i == count($price1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -221,19 +233,19 @@ class Products_Model extends Model
 		if($price_text){
 			$price_text = str_replace(array(CURRENCY_SYMBOL," "),"",$price_text);
 			$price_array = explode("-", $price_text);
-			$conditions .=" and product.deal_value between $price_array[0] and $price_array[1]";
+			$conditions .=" and $this->deal_value_condition_field between $price_array[0] and $price_array[1]";
 		}
 
 		// filter end
 
 		if(CITY_SETTING){
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition, product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC limit $offset,$record";
 		$result = $this->db->query($query);
 
 
 		} else {
 
-			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.", product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC limit $offset,$record";
 			$result = $this->db->query($query);
 
 
@@ -405,27 +417,27 @@ class Products_Model extends Model
 
 				$val = $discount1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_percentage $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_percentage_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($discount1); $i++){
 					$val = $discount1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .=" and (product.deal_percentage between $arr[$val]";
+							$conditions .=" and ($this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" and (product.deal_percentage $arr[$val]";
+							$conditions .=" and ($this->deal_percentage_condition_field $arr[$val]";
 						}
 					}else if($i == count($discount1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -441,27 +453,27 @@ class Products_Model extends Model
 
 				$val = $price1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_value $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_value_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($price1); $i++){
 					$val = $price1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .=" and (product.deal_value between $arr[$val]";
+							$conditions .=" and ($this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" and (product.deal_value $arr[$val]";
+							$conditions .=" and ($this->deal_value_condition_field $arr[$val]";
 						}
 					}else if($i == count($price1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -471,7 +483,7 @@ class Products_Model extends Model
 		if($price_text){
 			$price_text = str_replace(array(CURRENCY_SYMBOL," "),"",$price_text);
 			$price_array = explode("-", $price_text);
-			$conditions .=" and product.deal_value between $price_array[0] and $price_array[1]";
+			$conditions .=" and $this->deal_value_condition_field between $price_array[0] and $price_array[1]";
 		}
 
 		$pagin = "";
@@ -480,18 +492,20 @@ class Products_Model extends Model
 		}
 
 		if(CITY_SETTING){
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC$pagin";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC$pagin";
 		$result = $this->db->query($query);
 
 
 		} else {
 
-			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC$pagin";
+			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC$pagin";
 			$result = $this->db->query($query);
 
 
 		}
 		//print_r($result);
+		
+		
 		return $result;
 	}
 
@@ -522,7 +536,7 @@ class Products_Model extends Model
 					$condition = array("url_title" => $url_title, "deal_key" => $deal_key,"deal_status" => 1, "for_store_cred" => 0, "category.category_status" => 1, "store_status" => 1);
 				
 			}
-	        $result = $this->db->select("*","stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")->from("product")
+	        $result = $this->db->select("*",$this->deal_saving_condition,$this->deal_value_condition, $this->deal_percentage_condition,"stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")->from("product")
                                 ->where($condition)
                                 ->join("stores","stores.store_id","product.shop_id")
                                 ->join("city","city.city_id","stores.city_id")
@@ -542,7 +556,7 @@ class Products_Model extends Model
 		if(CITY_SETTING){
 			$condition = "and stores.city_id = '$this->city_id' ";
 		}
-		$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_id <> '$deal_id' $condition  and product.sec_category_id =  '$category_id'   order by deal_id DESC ");
+		$result = $this->db->query("select *,$this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_id <> '$deal_id' $condition  and product.sec_category_id =  '$category_id'   order by deal_id DESC ");
 	        return $result;
 	}
 
@@ -566,7 +580,7 @@ class Products_Model extends Model
 		} else if($type==2) { 				// Normal Products
 			$condition = ' and product_duration = ""';
 		} 
-		$result = $this->db->query("select * from product join  stores on stores.store_id = product.shop_id $join where deal_id = $deal_id $condition");
+		$result = $this->db->query("select *, $this->deal_value_condition from product join  stores on stores.store_id = product.shop_id $join where deal_id = $deal_id $condition");
 		//$result = $this->db->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
 		return $result;
 	}
@@ -576,13 +590,13 @@ class Products_Model extends Model
 	public function get_products_view()
 	{
 	         if(CITY_SETTING){ 
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  and stores.city_id = '$this->city_id' order by product.view_count DESC limit 3";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  and stores.city_id = '$this->city_id' order by product.view_count DESC limit 3";
 		
 		$result = $this->db->query($query);
 	        
 		} else {
 		
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  order by product.view_count DESC limit 3";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  order by product.view_count DESC limit 3";
 		$result = $this->db->query($query);
                 }
 		return $result;
@@ -593,10 +607,10 @@ class Products_Model extends Model
 	public function  get_hot_products_view()
 	{
 	         if(CITY_SETTING){ 
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_feature = 1 and stores.city_id = '$this->city_id' ORDER BY RAND() limit 4";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_feature = 1 and stores.city_id = '$this->city_id' ORDER BY RAND() limit 4";
 		$result = $this->db->query($query);
 		} else {
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_feature = 1 ORDER BY RAND() limit 4";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_feature = 1 ORDER BY RAND() limit 4";
 		$result = $this->db->query($query);
 		}
 	        return $result;
@@ -751,27 +765,27 @@ class Products_Model extends Model
 
 				$val = $discount1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_percentage $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_percentage_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($discount1); $i++){
 					$val = $discount1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .=" and (product.deal_percentage between $arr[$val]";
+							$conditions .=" and ($this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" and (product.deal_percentage $arr[$val]";
+							$conditions .=" and ($this->deal_percentage_condition_field $arr[$val]";
 						}
 					}else if($i == count($discount1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -787,27 +801,27 @@ class Products_Model extends Model
 
 				$val = $price1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_value $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_value_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($discount1); $i++){
 					$val = $discount1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .=" and (product.deal_value between $arr[$val]";
+							$conditions .=" and ($this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" and (product.deal_value $arr[$val]";
+							$conditions .=" and ($this->deal_value_condition_field $arr[$val]";
 						}
 					}else if($i == count($discount1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -832,7 +846,7 @@ class Products_Model extends Model
 	 public function get_products_lists_byfilter($price_from,$price_to)
 	  {
 		if(CITY_SETTING){
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and product.deal_value between $price_from and $price_to   order by deal_id ASC ";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and $this->deal_value_condition_field between $price_from and $price_to   order by deal_id ASC ";
 				$result = $this->db->query($query);
 
 				return $result;
@@ -842,7 +856,7 @@ class Products_Model extends Model
 				{
 					$price_to = 100000;
 				}
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where  deal_status = 1  ".$this->club_condition."   and purchase_count < user_limit_quantity  and category.category_status = 1 and  store_status = 1  and product.deal_value between $price_from and $price_to   order by deal_id ASC ";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where  deal_status = 1  ".$this->club_condition."   and purchase_count < user_limit_quantity  and category.category_status = 1 and  store_status = 1  and $this->deal_value_condition_field between $price_from and $price_to   order by deal_id ASC ";
 				$result = $this->db->query($query);
 				return $result;
 		}
@@ -900,12 +914,12 @@ class Products_Model extends Model
 	 public function get_products_lists_bycolor($color="")
 	  {
 		if(CITY_SETTING){
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
 				$result = $this->db->query($query);
 				return $result;
 		}
 		else {
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color  order by product.deal_id ASC";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color  order by product.deal_id ASC";
 				$result = $this->db->query($query);
 				return $result;
 		}
@@ -915,12 +929,12 @@ class Products_Model extends Model
 	 public function get_products_lists_bycolor_count($color="")
 	  {
 		if(CITY_SETTING){
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
 				$result = $this->db->query($query);
 				return count($result);
 		}
 		else {
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color  order by product.deal_id ASC";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color  order by product.deal_id ASC";
 				$result = $this->db->query($query);
 		 		return count($result);
 
@@ -932,12 +946,12 @@ class Products_Model extends Model
 	 public function get_products_lists_bysize($size="")
 	  {
 		if(CITY_SETTING){
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
 				$result = $this->db->query($query);
 				return $result;
 		}
 		else {
-				$query = "select * from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size  order by product.deal_id ASC";
+				$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size  order by product.deal_id ASC";
 				$result = $this->db->query($query);
 				return $result;
 		}
@@ -986,17 +1000,17 @@ class Products_Model extends Model
 	//To get compared products list
 	public function get_productcompare($id="")
 	{
-		$n_condition = array("p.deal_status" => 1,"p.deal_id"=>$id);
+		$n_condition = array("product.deal_status" => 1,"product.deal_id"=>$id);
 		
 		if($this->club_condition_arr)
-			$n_condition = array("p.deal_status" => 1, "for_store_cred" => 0,"p.deal_id"=>$id);
+			$n_condition = array("product.deal_status" => 1, "for_store_cred" => 0,"product.deal_id"=>$id);
 			
-		$result = $this->db->select("p.deal_id","p.deal_title","p.url_title","p.deal_key", "p.deal_value","p.deal_price","p.deal_percentage","p.purchase_count", "p.user_limit_quantity","ps.size_name", "p.deal_description", "stores.store_url_title")
+		$result = $this->db->select("product.deal_id","product.deal_title","product.url_title","product.deal_key", "$this->deal_value_condition","product.deal_price","product.deal_percentage","product.purchase_count", "product.user_limit_quantity","ps.size_name", "product.deal_description", "stores.store_url_title")
 				->from("product as p")
-				->join("product_size as ps","ps.deal_id","p.deal_id","left")
-				->join("stores","stores.store_id","p.shop_id","left")
+				->join("product_size as ps","ps.deal_id","product.deal_id","left")
+				->join("stores","stores.store_id","product.shop_id","left")
 				->where($n_condition)
-				->groupby("p.deal_id")
+				->groupby("product.deal_id")
 				->get()->as_array(false);
 
 		return $result;
@@ -1131,7 +1145,7 @@ class Products_Model extends Model
 		$query = "select * from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = '$id'";
 		$result = $this->db->query($query);
 		} */
-		$query = "select * from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product.deal_id = '$id'";
+		$query = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product.deal_id = '$id'";
 		$result = $this->db->query($query);
 	        return $result;
 	        
@@ -1155,14 +1169,14 @@ class Products_Model extends Model
 	{
 	        if(CITY_SETTING){
 				
-				$query = "select * from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and stores.city_id = '$this->city_id' and  store_status = 1 and deal_id <> '$deal_id' and deal_feature = 1 ORDER BY RAND()";
+				$query = "select *,$this->deal_value_condition from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and stores.city_id = '$this->city_id' and  store_status = 1 and deal_id <> '$deal_id' and deal_feature = 1 ORDER BY RAND()";
 		$result = $this->db->query($query);
 		
 				return $result;
 		}
 		else {
 		
-		$query = "select * from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_id <> '$deal_id' and deal_feature = 1 ORDER BY RAND()";
+		$query = "select *,$this->deal_value_condition from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_id <> '$deal_id' and deal_feature = 1 ORDER BY RAND()";
 		$result = $this->db->query($query);
 	        return $result;
 	        }
@@ -1349,27 +1363,27 @@ public function get_store_id($storeurl="")
 
 				$val = $discount1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_percentage $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_percentage_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($discount1); $i++){
 					$val = $discount1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .="and (product.deal_percentage between $arr[$val]";
+							$conditions .="and ($this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .="and (product.deal_percentage $arr[$val]";
+							$conditions .="and ($this->deal_percentage_condition_field $arr[$val]";
 						}
 					}else if($i == count($discount1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -1385,27 +1399,27 @@ public function get_store_id($storeurl="")
 
 				$val = $price1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_value $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_value_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($price1); $i++){
 					$val = $price1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .="and (product.deal_value between $arr[$val]";
+							$conditions .="and ($this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .="and (product.deal_value $arr[$val]";
+							$conditions .="and ($this->deal_value_condition_field $arr[$val]";
 						}
 					}else if($i == count($price1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -1415,19 +1429,19 @@ public function get_store_id($storeurl="")
 		if($price_text){
 			$price_text = str_replace(array(CURRENCY_SYMBOL," "),"",$price_text);
 			$price_array = explode("-", $price_text);
-			$conditions .=" and product.deal_value between $price_array[0] and $price_array[1]";
+			$conditions .=" and $this->deal_value_condition_field between $price_array[0] and $price_array[1]";
 		}
 
 		// filter end
 
 		if(CITY_SETTING){
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_duration !='' and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_duration !='' and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC limit $offset,$record";
 		$result = $this->db->query($query);
 
 
 		} else {
 
-			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and product_duration !='' and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and product_duration !='' and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC limit $offset,$record";
 			$result = $this->db->query($query);
 
 
@@ -1439,13 +1453,13 @@ public function get_store_id($storeurl="")
 	public function get_storecredits_products_view()
 	{
 	         if(CITY_SETTING){ 
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_duration !='' and stores.city_id = '$this->city_id' order by product.view_count DESC limit 3";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_duration !='' and stores.city_id = '$this->city_id' order by product.view_count DESC limit 3";
 		
 		$result = $this->db->query($query);
 	        
 		} else {
 		
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_duration !='' order by product.view_count DESC limit 3";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_duration !='' order by product.view_count DESC limit 3";
 		$result = $this->db->query($query);
                 }
 		return $result;
@@ -1457,10 +1471,10 @@ public function get_store_id($storeurl="")
 	public function  get_hot_storecredits_products_view()
 	{
 	    if(CITY_SETTING){ 
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_feature = 1  and product_duration !='' and stores.city_id = '$this->city_id' ORDER BY RAND() limit 4";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and deal_feature = 1  and product_duration !='' and stores.city_id = '$this->city_id' ORDER BY RAND() limit 4";
 		$result = $this->db->query($query);
 		} else {
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1   ".$this->club_condition."  and category.category_status = 1 and  store_status = 1  and product_duration !='' and deal_feature = 1 ORDER BY RAND() limit 4";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1   ".$this->club_condition."  and category.category_status = 1 and  store_status = 1  and product_duration !='' and deal_feature = 1 ORDER BY RAND() limit 4";
 		$result = $this->db->query($query);
 		}
 	        return $result;
@@ -1521,27 +1535,27 @@ public function get_store_id($storeurl="")
 
 				$val = $discount1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_percentage $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_percentage_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($discount1); $i++){
 					$val = $discount1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .=" and (product.deal_percentage between $arr[$val]";
+							$conditions .=" and ($this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" and (product.deal_percentage $arr[$val]";
+							$conditions .=" and ($this->deal_percentage_condition_field $arr[$val]";
 						}
 					}else if($i == count($discount1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val])";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_percentage between $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_percentage $arr[$val]";
+							$conditions .=" or $this->deal_percentage_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -1557,27 +1571,27 @@ public function get_store_id($storeurl="")
 
 				$val = $price1[0];
 				$a = ($val ==1 || $val ==6)?"":"between";
-				$conditions .=" and (product.deal_value $a $arr[$val]) ";
+				$conditions .=" and ($this->deal_value_condition_field $a $arr[$val]) ";
 			}else{
 				for($i=0; $i<count($price1); $i++){
 					$val = $price1[$i];
 					if($i == 0){
 						if($val != 1 && $val != 6){
-							$conditions .=" and (product.deal_value between $arr[$val]";
+							$conditions .=" and ($this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" and (product.deal_value $arr[$val]";
+							$conditions .=" and ($this->deal_value_condition_field $arr[$val]";
 						}
 					}else if($i == count($price1)-1){
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val])";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val])";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val])";
 						}
 					}else{
 						if($val != 1 && $val != 6){
-							$conditions .=" or product.deal_value between $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field between $arr[$val]";
 						}else{
-							$conditions .=" or product.deal_value $arr[$val]";
+							$conditions .=" or $this->deal_value_condition_field $arr[$val]";
 						}
 					}
 				}
@@ -1587,7 +1601,7 @@ public function get_store_id($storeurl="")
 		if($price_text){
 			$price_text = str_replace(array(CURRENCY_SYMBOL," "),"",$price_text);
 			$price_array = explode("-", $price_text);
-			$conditions .=" and product.deal_value between $price_array[0] and $price_array[1]";
+			$conditions .=" and $this->deal_value_condition_field between $price_array[0] and $price_array[1]";
 		}
 
 		$pagin = "";
@@ -1596,13 +1610,13 @@ public function get_store_id($storeurl="")
 		}
 
 		if(CITY_SETTING){
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC$pagin";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC$pagin";
 		$result = $this->db->query($query);
 
 
 		} else {
 
-			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,product.deal_value,product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC$pagin";
+			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,".$this->deal_value_condition.",product.deal_price, category.category_url,deal_percentage from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC$pagin";
 			$result = $this->db->query($query);
 
 

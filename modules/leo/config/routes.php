@@ -9,12 +9,12 @@ $config['leo_logout.html'] = '/welcome/leo_logout';
 
  
 
-//Riverside-branch-C-Z start
-$config['Riverside-branch-C-Z'] ="/leo/stores_home_page/Riverside-branch-C-Z";
-$config['Riverside-branch-C-Z/products.html'] = "/leo/product_list/Riverside-branch-C-Z";
-$config['Riverside-branch-C-Z/today-deals.html'] = "/leo/deal_list/Riverside-branch-C-Z";
-$config['Riverside-branch-C-Z/auction.html'] = "/leo/auction_list/Riverside-branch-C-Z";
-$config['Riverside-branch-C-Z/products/c/(.*)/(.*).html'] = "/leo/product_list/Riverside-branch-C-Z";
-$config['Riverside-branch-C-Z/deal/c/(.*)/(.*).html'] = "/leo/deal_list/Riverside-branch-C-Z";
-$config['Riverside-branch-C-Z/auction/c/(.*)/(.*).html'] = "/leo/auction_list/Riverside-branch-C-Z/$1/$2";
-//Riverside-branch-C-Z end
+//Just-in-times start
+$config['Just-in-times'] ="/leo/stores_home_page/Just-in-times";
+$config['Just-in-times/products.html'] = "/leo/product_list/Just-in-times";
+$config['Just-in-times/today-deals.html'] = "/leo/deal_list/Just-in-times";
+$config['Just-in-times/auction.html'] = "/leo/auction_list/Just-in-times";
+$config['Just-in-times/products/c/(.*)/(.*).html'] = "/leo/product_list/Just-in-times";
+$config['Just-in-times/deal/c/(.*)/(.*).html'] = "/leo/deal_list/Just-in-times";
+$config['Just-in-times/auction/c/(.*)/(.*).html'] = "/leo/auction_list/Just-in-times/$1/$2";
+//Just-in-times end

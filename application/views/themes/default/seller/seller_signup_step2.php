@@ -311,6 +311,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             <p style=" font-weight: bold; color:#000000"><?php echo $this->Lang['FINISH']; ?></p>                            
                         </div>
                     </div>
+                    
+                   
                  <form action="" method="post" name="signup2" id="signup2"  onclick="return atleast_onecheckbox(event)" onsubmit="return checkCheckBoxes(this);" >
                     <div class="payouter_block pay_br">
 <!--                        <h3 class="paybr_title pay_titlebg"><?php //echo $this->Lang['CRTE_YR_STRE']; ?>: <?php //echo $this->Lang['SIGN_UP']; ?></h3>-->
@@ -322,10 +324,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
                                 <div class="">
                                     <span class="asterisks_input">  </span>
-									<input type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
-									<?php if($this->session->get('firstname')) { ?>
-                                                                        value="<?php  echo $this->session->get('firstname');} ?>"  /> 			
-									<em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
+                                   
+									<input maxlength="50" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+									<?php if(isset($this->userPost['firstname'])) { ?>
+                                                                        value="<?php  echo $this->userPost['firstname'];} ?>"  /> 			
+									<em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
 								</div>
                                     </li>
@@ -333,7 +336,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             
 								<div class="">
 								        <span>  </span>
-									<input type="text" name="lastname" class="swifta_input" id="lname" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
+									<input type="text" maxlength="50" name="lastname" class="swifta_input" id="lname" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
 									<?php if($this->session->get('lastname')) { ?>
 									value="<?php  echo $this->session->get('lastname'); ?>"  autofocus/> 			                <?php } else { ?>
 									value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>" placeholder= "<?php echo $this->Lang["LAST_NAME"]; ?>"  />
@@ -345,12 +348,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
-									<input type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
+									<input maxlength="50" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
 									<?php if($this->session->get('memail')) { ?>
 									value="<?php  echo $this->session->get('memail'); ?>" required autofocus /> 			                <?php } else { ?>
 									 value="<?php if(!isset($this->form_error['email']) && isset($this->userPost['email'])){echo $this->userPost['email'];}?>" placeholder= "<?php echo $this->Lang["EMAIL_F"]; ?>"  />
 									 <?php  } ?>
-									<em> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
+									<em id="id_err_memail"> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
 								</div>
                                     </li>
                                     <li style="display:none;">
@@ -376,7 +379,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
-									<input type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
+									<input maxlength="50" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
 									<?php if($this->session->get('mraddress1')) { ?>
 									value="<?php  echo $this->session->get('mraddress1'); ?>"  required autofocus/> 			 <?php } else { ?>
 									value="<?php if(isset($this->userPost['mr_address1'])){echo $this->userPost['mr_address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" />
@@ -388,7 +391,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <li>
                                     
                                  <div class="" style="">
-									<input type="text" name="mr_address2" class="swifta_input" 
+									<input maxlength="50" type="text" name="mr_address2" class="swifta_input" 
 									<?php if($this->session->get('mraddress2')) { ?>
                                                                                value="<?php echo $this->session->get('mraddress2');} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
 									
@@ -398,7 +401,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                    
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
-                                                                    <input type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+                                                                    <input  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
 									<?php if($this->session->get('mphone_number')) { ?>
 									value="<?php  echo $this->session->get('mphone_number'); ?>" required autofocus /> 			 <?php } else { ?>
 									value="<?php if(!isset($this->form_error['mr_mobile']) && isset($this->userPost['mr_mobile'])){echo $this->userPost['mr_mobile'];}?>" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>"  />
@@ -410,7 +413,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                  <li >
                                 
 				<div class="">
-                                <select name="sector" id="sector"  class="swifta_input"  onchange="changing_sectors(this.value)">
+                                <select name="sector" id="sector"   class="swifta_input"  onchange="changing_sectors(this.value)">
                                 <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
                                
                                 <?php foreach ($this->sector_list as $c) { ?>
@@ -439,7 +442,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 </select>
                                 <?php } ?>
                                 </div>
-                                <em><?php if (isset($this->form_error['subSector'])) {
+                                <em ><?php if (isset($this->form_error['subSector'])) {
                                 echo $this->form_error["subSector"];
                                 } ?></em>
 
@@ -460,7 +463,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                      <table style=""> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
-                                        <tr><td style="width:px;"><label><input type="checkbox" name="free" value="1" 
+                                        <tr><td style="width:px;"><label><input  type="checkbox" name="free" value="1" 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
                                                               checked <?php } } else { ?> checked <?php } ?>>Free Shipping
                                                     
@@ -721,7 +724,7 @@ In no event will Zenith Bank Plc be liable for any loss or damage including with
 </p>
 
 <h style="color:red;">Force majeure </h>
-<p style="color:black;">Notwithstanding anything to the contrary herein contained, neither Party shall be liable or responsible for failure to perform or delay in performance of any of its obligations under this Agreement if such failure or delay is due to or attributable to any act of God, war, warlike conditions, hostilities, riots, civil commotion, system downtime, glitches, malfunction, strikes or any other cause or circumstance of whatsoever nature beyond the reasonable control of either Party. Such Force Majeure situation shall be notified to the other Party within 15 business days from the occurrence of the same. If such situation continues for a period of 1 month the other party shall be entitled to terminate the Agreement on the expiry of the said period after duly intimating the same to the other Party;</p><br><br>
+<p style="color:black;">Notwithstanding anything to the contrary herein contained, neither Party shall be liable or responsible for failure to perform or delay in performance of any of its obligations under this Agreement if such failure or delay is due to or attributable to any act of God, war, warlike conditions, hostilities, riots, civil commotion, system downtime, glitches, malfunction, strikes or any other cause or circumstance of whatsoever nature beyond the reasonable control of either Party. Such Force Majeure situation shall be notified to the other Party within 15 business days from the occurrence of the same. If such situation continues for a period of 1 month the other party shall be entitled to terminate the Agreement on the expiry of the said period after duly intimating the same to the other Party;</p><br><br>
 
 <h style="color:red;">Severability<h>
 <p style="color:black;">If any provision of this Agreement is held by a court of law to be unlawful, void or unenforceable, such provision shall to the extent required be severed from this Agreement and rendered ineffective as far as possible without modifying the remaining provision of this Agreement and without having any effect whatsoever on the validity or enforceability of this Agreement. </p>  <br><br>
@@ -743,11 +746,11 @@ COMMENCEMENT AND TENURE This Agreement shall take effect from the date hereof an
 </p>
 <h style="color:red;">Nigerian law and general provisions</h>
 
-<p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
+<p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
 
 Zenith Bank PLC and The Merchant hereby expressly acknowledge and agree that regarding the relationship between the parties created by this Agreement:
 
-The parties are not, and shall not be deemed, joint ventures or partners;
+The parties are not, and shall not be deemed, joint ventures or partners;
 
 The Merchant is not, and shall not be deemed, an agent of Zenith Bank PLC.
 
@@ -831,8 +834,8 @@ Signature and Date:.......................................................<br></
         
         <div class='popup_block_theme'><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
     <!-- SELLER SIGNUP -->
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+ <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+ <!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
   
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
@@ -873,6 +876,7 @@ function previewTheme(s){
 
     $(document).ready(function(){
         $('.popup_block_theme').css({'display' : 'none'});
+		
          $("#signup2").validate({
 			 messages: {				 
 		   firstname: {
@@ -907,12 +911,14 @@ function previewTheme(s){
 				email:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                       
 			},
     },
- submitHandler: function(form) {
+ 	submitHandler: function(form) {
    // some other code
    // maybe disabling submit button
    // then:
 	// $('div#submit').hide();
-   form.submit();
+	if(is_email_valid && is_t_and_c_checked && is_sector_valid){
+   		form.submit();
+	}
  }
 });
 });
@@ -921,12 +927,13 @@ function previewTheme(s){
 
  function submit_form()
  {
-	document.signup2.submit();
+	//document.signup2.submit();
 	 
  }
  </script>
  
  <script> 
+ is_t_and_c_checked = false;
 function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
@@ -938,10 +945,12 @@ function atleast_onecheckbox(e) {
   function checkCheckBoxes(signup2) {
 	if (signup2.ch1.checked == false ) 
 	{
-		$('#tcerror').html("<?php echo "*You must agree to the terms and conditions"; ?>");
+		$('#tcerror').html("<?php echo "*You are required to agree to the terms and conditions"; ?>");
                 <?php // $tcmsg = "You must agree to terms and condition"; ?>
+				is_t_and_c_checked = false;
 		return false;
 	} else { 	
+		is_t_and_c_checked = true;
 		return true;
 	}
 }
@@ -962,8 +971,6 @@ function atleast_onecheckbox(e) {
 	</script>
         
         <script>
-            
-            
             (function (exports) {
     function valOrFunction(val, ctx, args) {
         if (typeof val == "function") {
@@ -974,6 +981,7 @@ function atleast_onecheckbox(e) {
     }
 
     function InvalidInputHelper(input, options) {
+		if(input)
         input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
 
         function changeOrInput() {
@@ -991,13 +999,21 @@ function atleast_onecheckbox(e) {
                input.setCustomValidity(valOrFunction(options.invalidText, window, [input]));
             }
         }
+		
+		if(input){
 
         input.addEventListener("change", changeOrInput);
         input.addEventListener("input", changeOrInput);
         input.addEventListener("invalid", invalid);
+		
+		}
     }
     exports.InvalidInputHelper = InvalidInputHelper;
 })(window);
+
+$(document).ready(function(e) {
+    
+
 
 InvalidInputHelper(document.getElementById("compname"), {
     defaultText: "Please enter your company!",
@@ -1057,9 +1073,7 @@ InvalidInputHelper(document.getElementById("email"), {
     }
     
     
-}
-
-);
+});
 
   
     InvalidInputHelper(document.getElementById("mob"), {
@@ -1070,9 +1084,9 @@ InvalidInputHelper(document.getElementById("email"), {
     }
     
     
-}
+});
 
-);
+});
 
  function isNumberKey(evt)
        {
@@ -1114,6 +1128,125 @@ InvalidInputHelper(document.getElementById("email"), {
           return true;
        }
        //-->
+	   
+	   
+var email_changed = true;
+var is_email_valid = false;
+
+$(document).ready(function(e) {
+    email_changed = true;
+	is_email_valid = false;
+	
+	 sector_changed = true;
+	 is_sector_valid = false;
+	
+	email = document.signup2.email.value;
+	sector = document.signup2.firstname.value;
+	
+	if(email)
+		$('#email').trigger('blur');
+	if(sector)
+		$('#fname').trigger('blur');
+	
+
+});
+	   
+function verify_memail(field){
+	if(!email_changed)
+		return false;
+	is_email_valid = false;
+	email = field.value;
+	email = email+"".trim();
+	if(!email)
+		return false;
+	if(!verify_memail_client_side(email)){
+		//alert("Invalid email");
+		$('#id_err_memail').text('Invalid email');
+		return false;
+	}
+	 
+		var url = "<?php echo PATH; ?>seller/email_available/"+email+"/TRUE";
+	$.post(url, {}, function success(response){
+			email_changed = false;
+			is_email_valid = false;
+			if(response == "0"){
+				//alert("Email unique");
+				$('#id_err_memail').text('');
+				email_changed = false;
+				is_email_valid = true;
+				return false;
+			}else if(response == "1"){
+				//alert("Email duplicate");
+				$('#id_err_memail').text("Already in use. Try with another email");
+				return false;
+			}else {
+				//alert("Unknown response from server");
+				$('#id_err_memail').text("Unknown response from server");
+			}
+		});
+	
+	
+	
+}
+
+
+
+function verify_memail_client_side(email){
+
+	var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email)
+}
+
+function set_email_changed(yes){
+	email_changed = yes;
+}
+
+function set_shop_changed(yes){
+	sector_changed = yes;
+}
+
+function check_email_valid(){
+	return is_email_valid;
+}
+
+function verify_shop_name(sector){
+	sector = sector.value;
+	sector = sector.trim();
+	
+	if(!sector_changed)
+		return false;
+	is_sector_valid = false;
+	
+	
+	if(!sector)
+	return false;
+	
+	var url = "<?php echo PATH; ?>seller/check_store_exist/"+sector+"/TRUE";
+	$.post(url, {}, function success(response){
+			
+			sector_changed = false;
+			is_sector_valid = false;
+			
+			if(response == "0"){
+				//alert("Email unique");
+				$('#id_err_fname').text('');
+				sector_changed = false;
+				is_sector_valid  = true;
+				return false;
+			}else if(response == "1"){
+				//alert("Email duplicate");
+				$('#id_err_fname').text("Already in use. Try a different name");
+				return false;
+			}else {
+				//alert("Unknown response from server");
+				$('#id_err_fname').text("Unknown response from server");
+			}
+		});
+	
+	
+	
+	
+}
        
   
 </script>
