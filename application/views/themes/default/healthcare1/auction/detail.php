@@ -113,10 +113,10 @@ foreach ($this->deals_deatils as $deals) {
     </script>
     <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js "></script>
 
-    </div> <!--for header -->
+   <!--for header -->
     </div>
     </div>
-    <div class="contianer_outer1">
+    <div class="contianer_outer1" style="background-color: #fff;">
         <div class="contianer_inner">
             <div class="contianer">
                 <div class="bread_crumb">
@@ -283,9 +283,9 @@ foreach ($this->deals_deatils as $deals) {
 
                                             <a class="buy_it auction_buy_it" id="auction"  href="javascript:show_auction('<?php if (isset($this->UserID)) {
                                     echo $this->UserID;
-                                } ?>','<?php echo $deals->deal_key; ?>','<?php echo $deals->url_title; ?>');"  title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a>
+                                } ?>','<?php echo $deals->deal_key; ?>','<?php echo $deals->url_title; ?>');" style="background-color: #30A6B1;"  title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a>
                                            
-                                            <a class="buy_it auction_buy_it"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
+                                            <a class="buy_it auction_buy_it" style="background-color: #30A6B1;"  id="sold" title="<?php echo $this->Lang['SOLD_OUT2']; ?>" style="cursor:default;"><?php echo $this->Lang['SOLD_OUT2']; ?></a>
                                     <?php } } ?>                                         
                                     </li>
                                      <?php if ($deals->winner != 0 && $deals->auction_status = 1) {
