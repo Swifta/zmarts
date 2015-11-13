@@ -18,3 +18,12 @@ $config['Musty-Electronics-Inc/products/c/(.*)/(.*).html'] = "/sasa/product_list
 $config['Musty-Electronics-Inc/deal/c/(.*)/(.*).html'] = "/sasa/deal_list/Musty-Electronics-Inc";
 $config['Musty-Electronics-Inc/auction/c/(.*)/(.*).html'] = "/sasa/auction_list/Musty-Electronics-Inc/$1/$2";
 //Musty-Electronics-Inc end
+//test-store start
+$config['test-store'] ="/sasa/stores_home_page/test-store";
+$config['test-store/products.html'] = "/sasa/product_list/test-store";
+$config['test-store/today-deals.html'] = "/sasa/deal_list/test-store";
+$config['test-store/auction.html'] = "/sasa/auction_list/test-store";
+$config['test-store/products/c/(.*)/(.*).html'] = "/sasa/product_list/test-store";
+$config['test-store/deal/c/(.*)/(.*).html'] = "/sasa/deal_list/test-store";
+$config['test-store/auction/c/(.*)/(.*).html'] = "/sasa/auction_list/test-store/$1/$2";
+//test-store end
