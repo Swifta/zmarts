@@ -717,7 +717,7 @@ $content_text = array(
 
 "BRANCHES" => "Branches",
 
-"VIEW_DETAILS" => "View Details",
+"VIEW_DETAILS" => "View Stores",
 
 "BID" => "Bid",
 
