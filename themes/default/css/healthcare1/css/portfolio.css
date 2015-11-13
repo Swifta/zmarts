@@ -2,8 +2,9 @@
 
 /**** Isotope Filtering ****/
 #portfoliocontainer { margin: 0 auto 20px; }
-.portfoliotital {font-size:18px; color:#F25C27; margin:5px 0 10px 0; display:block}
-.projecthighlight {font-size:18px; color:#F25C27; margin:5px 0 10px 0; display:block}
+a:focus {color:#000}
+.portfoliotital {font-size:18px; color:#03956D; margin:5px 0 10px 0; display:block}
+.projecthighlight {font-size:18px; color:#03956D; margin:5px 0 10px 0; display:block}
 .singleportfolioright ul {margin:0px;}
 .singleportfolioright ul li {margin:0 0 20px 0}
 .portfoliodetail {margin-top:20px; margin-bottom:50px; border-bottom:1px solid #ccc; padding-bottom:50px}
@@ -32,10 +33,10 @@
 #options li { float: left; margin-bottom: 0.2em; }
 #options li a { display: block; padding: 5px 10px; background-color: #efefef; color: #222;text-shadow: 0 1px hsla( 0, 0%, 100%, 0.5 ); text-decoration:none; font-size:14px; }
 
-#options li a:hover { background-color: #F25C27; color:#fff }
-#options li a:active { background-color: #F25C27; }
+#options li a:hover { background-color: #03956D; color:#fff }
+#options li a:active { background-color: #03956D; }
 #options li a { border-left:  1px solid hsla( 0, 0%, 100%, 0.3 ); border-right: 1px solid hsla( 0, 0%, 0%, 0.2 ); }
-#options li a.selected { background-color: #F25C27; text-shadow: none; color: white; }
+#options li a.selected { background-color: #03956D; text-shadow: none; color: white; }
 /* Combination filter options*/
 
 #options .option-combo { display: inline-block; float: left; margin-right: 10px; }

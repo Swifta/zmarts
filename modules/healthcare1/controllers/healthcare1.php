@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-class Healthcare1_Controller extends Bootstrap_Controller
+class Healthcare1_Controller extends Layout_Controller
 {
 	const ALLOW_PRODUCTION = FALSE;
 	public function __construct()
@@ -38,50 +38,51 @@ class Healthcare1_Controller extends Bootstrap_Controller
                  * */
 
 		$style_sheets = array();
-                $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
+               // $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style_1.css';
+                 $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
                 $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
-                
-                $style_sheets[2] = "http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic";
-                $style_sheets[3] = "http://fonts.googleapis.com/css?family=Crete+Round";
-                $style_sheets[4] = 'http://fonts.googleapis.com/css?family=Crete+Round';
-                $style_sheets[5] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/bootstrap.css';
-                $style_sheets[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/bootstrap-responsive.css';
-                
-                //i added this style by myself
-                $style_sheets[7] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/style.css';
-                $style_sheets[8] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/flexslider.css';
-                $style_sheets[9] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/jquery.fancybox.css';
-                $style_sheets[10] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/cloud-zoom.css';
-                $style_sheets[11] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/portfolio.css';
+//                
+//                $style_sheets[2] = "http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic";
+//                $style_sheets[3] = "http://fonts.googleapis.com/css?family=Crete+Round";
+//                $style_sheets[4] = 'http://fonts.googleapis.com/css?family=Crete+Round';
+//                $style_sheets[5] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/bootstrap.css';
+//                $style_sheets[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/bootstrap-responsive.css';
+//                
+//                //
+//                $style_sheets[7] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/style.css';
+//                $style_sheets[8] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/flexslider.css';
+//                $style_sheets[9] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/jquery.fancybox.css';
+//                $style_sheets[10] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/cloud-zoom.css';
+//                $style_sheets[11] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/css/portfolio.css';
                 
                 /// style 
                 $this->template->style = html::stylesheet($style_sheets);
                 $java_scripts = array();
+                
+//                $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
+//                $java_scripts[1] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
+//                $java_scripts[2] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/bootstrap.js';
+//                $java_scripts[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/respond.min.js';
+//                $java_scripts[4] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/application.js';
+//                $java_scripts[5] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/bootstrap-tooltip.js';
+//                $java_scripts[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.fancybox.js';
+//                $java_scripts[7] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.flexslider.js';
+//                $java_scripts[8] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.tweet.js';
+//                $java_scripts[9] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/cloud-zoom.1.0.2.js';
+//                $java_scripts[10] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.validate.js';
+//                $java_scripts[11] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.carouFredSel-6.1.0-packed.js';
+//                $java_scripts[12] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.mousewheel.min.js';
+//                $java_scripts[13] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.touchSwipe.min.js';
+//                $java_scripts[14] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.ba-throttle-debounce.min.js';
+//                $java_scripts[15] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.isotope.min.js';
+//                $java_scripts[16] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/custom.js';       
+//                        
+//                
                 $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
-                $java_scripts[1] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
-                
-                $java_scripts[2] = PATH.'js/jquery.js';
-                $java_scripts[3] = PATH.'js/bootstrap.js';
-                $java_scripts[4] = PATH.'js/respond.min.js';
-                $java_scripts[5] = PATH.'js/application.js';
-                $java_scripts[6] = PATH.'js/bootstrap-tooltip.js';
-                $java_scripts[7] = PATH.'js/jquery.fancybox.js';
-                $java_scripts[8] = PATH.'js/jquery.flexslider.js';
-                $java_scripts[9] = PATH.'js/jquery.tweet.js';
-                $java_scripts[10] = PATH.'js/cloud-zoom.1.0.2.js';
-                $java_scripts[11] = PATH.'js/jquery.validate.js';
-                $java_scripts[12] = PATH.'js/jquery.carouFredSel-6.1.0-packed.js';
-                $java_scripts[13] = PATH.'js/jquery.mousewheel.min.js';
-                $java_scripts[11] = PATH.'js/jquery.touchSwipe.min.js';
-                $java_scripts[12] = PATH.'js/jquery.ba-throttle-debounce.min.js';
-                $java_scripts[13] = PATH.'js/jquery.isotope.min.js';
-                $java_scripts[13] = PATH.'js/js/custom.js';       
-                        
-                
-                $java_scripts[4] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
-                $java_scripts[5] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
-                $java_scripts[6] = PATH.'bootstrap/themes/js/superfish.js';
-                
+             $java_scripts[1] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
+               $java_scripts[2] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
+               $java_scripts[3] = PATH.'bootstrap/themes/js/superfish.js';
+              $java_scripts[4] = PATH.'themes/'.THEME_NAME.'/js/jquery.js';
                 
                 $this->template->javascript = html::script($java_scripts);
 		$this->stores = new Healthcare1_Model();
@@ -167,6 +168,7 @@ class Healthcare1_Controller extends Bootstrap_Controller
 		}
 		
 		foreach($this->get_store_details as $store) {
+                    $this->storeid = $store->store_id;
                         $this->avg_rating =$this->stores->get_store_rating($store->store_id);
                         $this->get_sub_store_details = $this->stores->get_sub_store_detailspage($store->store_id);
                         $this->get_deals_categories = $this->stores->get_deals_categories($store->store_id,$search,1);
