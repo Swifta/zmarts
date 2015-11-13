@@ -270,6 +270,7 @@ class Payment_product_Controller extends Layout_Controller {
 
 	public function cart_checkout_item()
 	{
+		
 		if(!$this->UserID){
 			url::redirect(PATH."prodicts/cart.html");
 		}
@@ -281,17 +282,21 @@ class Payment_product_Controller extends Layout_Controller {
 		$duration_period = 0;
 		$installment_value = 0;
 		
+		
 		//var_dump($_SESSION); die;
 		foreach($_SESSION as $key=>$value) 
 		{
+			
                     if(is_string($value))
                     {
 			if(($key=='product_cart_id'.$value)){                   
 				$product_id = $_SESSION[$key];
 				$item_qty = $this->input->post($key);
 				foreach($_SESSION as $key=>$value) {
+					
 					if($key=='store_credit_id'.$product_id) {
 						$durationid = $value;	 
+						
 						$this->store_credits_products = $this->payment_products->get_store_credits_product($product_id,$durationid);
 						
 						foreach($this->store_credits_products as $UL){
@@ -362,6 +367,8 @@ class Payment_product_Controller extends Layout_Controller {
                                 $this->session->set('shipping_postal_code',$this->input->post('postal_code'));
                                 $this->session->set('shipping_phone',$this->input->post('phone'));
                                 $this->deals_payment_deatils = $this->payment_products->get_product_payment_details($deal_id);
+								
+								
 									
                                 foreach($_SESSION as $key=>$value) {
 									$product_color = 0;
@@ -461,6 +468,7 @@ class Payment_product_Controller extends Layout_Controller {
 								}
 								
                                 foreach($this->deals_payment_deatils as $UL){
+									
                                         if($UL->shipping == "5"){
                                         /* Aramex amount calculation start  */ 
                                         $countryurl = url::title($this->input->post('country'));
@@ -484,6 +492,8 @@ class Payment_product_Controller extends Layout_Controller {
                         }
                     }
                 }
+				
+				
 		
 		$this->get_cart_products_list = $this->payment_products->get_cart_products();
 		$this->shipping_address = $this->payment_products->get_user_data_list();
@@ -740,6 +750,8 @@ class Payment_product_Controller extends Layout_Controller {
         }
         
         public function pay_later_transaction(){
+			
+		
 
 	            foreach($_SESSION as $key=>$value)
                 {

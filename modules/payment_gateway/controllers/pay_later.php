@@ -228,6 +228,7 @@ class Pay_later_Controller extends Layout_Controller
 		$this->merchant_firstneme = $this->get_merchant_details->current()->firstname;
 		$this->merchant_lastname = $this->get_merchant_details->current()->lastname;
 		$this->merchant_email = $this->get_merchant_details->current()->email;
+		
 		$message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
 		
 		if(EMAIL_TYPE==2) {

@@ -1570,10 +1570,28 @@ class Merchant_Controller extends website_Controller
 	
 	/** CHECK DISCOUNT PRICE  LESS THAN ORGINAL PRICE **/
 
+	public function check_prime_price_lmi_prd()
+	{
+		if($this->input->post("prime_price")!='')
+		{
+		
+		
+		if($this->input->post("deal_value")<$this->input->post("prime_price"))
+		{
+		return 0;
+		}
+		}
+		return 1;
+	}
+	
+	
+	
 	public function check_price_lmi_prd()
 	{
 		if($this->input->post("price")!='')
 		{
+		
+		
 		if($this->input->post("deal_value")<$this->input->post("price"))
 		{
 		return 0;
@@ -1602,12 +1620,27 @@ class Merchant_Controller extends website_Controller
 							->add_rules('category', 'required')
 							->add_rules('sub_category', 'required')
 							->add_rules('sec_category', 'required')
-							//->add_rules('price', 'required', 'chars[0-9.]',array($this,'check_price_val_lmi'))
-							->add_rules('deal_value', 'required', array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+							->add_rules('deal_value', 'required',array($this, 'check_prime_price_lmi_prd'), array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
 							//->add_rules('size_tag[]', 'required')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							->add_rules('stores','required')
 							->add_rules('delivery_days','required');
+							
+							$price_s = $post->price;
+							if(isset($price_s)){
+								$price_s = trim($price_s);
+								if($price_s != "")
+								$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
+							}
+							
+							$prime_price_s = $post->prime_price;
+							if(isset($prime_price_s)){
+								$prime_price_s = trim($prime_price_s);
+								if($prime_price_s != "")
+								$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
+							}
+							
+							
 							
 							if($post->buy_bulk!="")
 							{
@@ -1852,7 +1885,8 @@ class Merchant_Controller extends website_Controller
 				        ->add_rules('sub_category', 'required')
 				        ->add_rules('sec_category', 'required')
 				       // ->add_rules('price', 'required', 'chars[0-9.]',array($this,'check_price_val_lmi'))
-				        ->add_rules('deal_value', 'required', array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+				       // ->add_rules('deal_value', 'required', array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+					   ->add_rules('deal_value', 'required',array($this, 'check_prime_price_lmi_prd'), array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
 				        ->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 				        ->add_rules('stores','required')
 				        ->add_rules('delivery_days','required');
@@ -1871,7 +1905,20 @@ class Merchant_Controller extends website_Controller
 							}
 						}*/
 				        
-				        
+				        $price_s = $post->price;
+						if(isset($price_s)){
+							$price_s = trim($price_s);
+							if($price_s != "")
+							$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
+						}
+							
+						$prime_price_s = $post->prime_price;
+						if(isset($prime_price_s)){
+							$prime_price_s = trim($prime_price_s);
+							if($prime_price_s != "")
+							$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
+						}
+						
 				        
 				        if($post->buy_bulk!="")
 							{

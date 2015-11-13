@@ -8,6 +8,12 @@ class Paypal_Model extends Model
 		$this->session = Session::instance();	
 		$this->UserID = $this->session->get("UserID");
 		$this->UserName = $this->session->get("UserName");
+		
+			(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+		
+		
+		
 	}
 	
 	/** GET DEALS PAYMENT DETAILS  **/

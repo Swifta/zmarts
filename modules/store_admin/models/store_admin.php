@@ -10,6 +10,12 @@ class Store_admin_Model extends Model
 		$this->user_id1 = $this->session->get("user_id1");
 		$this->store_id = $this->session->get("store_id");
 		$this->store_admin_id = $this->session->get("store_admin_id");
+		
+			(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+		
+		
+		
 	}
 
         /** MERCHANT DASHBORAD DATA **/

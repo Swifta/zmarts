@@ -8,6 +8,18 @@ class Payment_product_Model extends Model
 		$this->session = Session::instance(); 
 		$this->UserID = $this->session->get("UserID");
 		$this->UserName = $this->session->get("UserName");
+		
+				(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = 'product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = 'product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
+		
+		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition = 'product.deal_prime_savings as deal_savings':$this->deal_saving_condition = 'product.deal_savings';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition_field = 'product.deal_prime_savings':$this->deal_saving_condition_field = 'product.deal_savings';
+		
+		
 	}
 
 	/** GET USER LIMIT **/
@@ -22,6 +34,7 @@ class Payment_product_Model extends Model
 	
 	public function get_user_referral_balance_details()
 	{
+		
 		$result = $this->db->select("user_referral_balance")
                                         ->from("users")
                                         ->where(array("user_id" => $this->UserID))
@@ -36,7 +49,9 @@ class Payment_product_Model extends Model
 	
 	public function get_product_payment_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_type = 2  and deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_id = '$deal_id' ");
+		
+		$result = $this->db->query("select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_type = 2  and deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_id = '$deal_id' ");
+			
 	        return $result;
 	}
 	/** PRODUCTS BUY FOR FRIEND REFERRAL PAYMENT **/
@@ -97,8 +112,13 @@ class Payment_product_Model extends Model
 	}
 
 	public function get_cart_products($deal_id = "")
-	{                   
-		$result = $this->db->from("product")->where(array("deal_id" => $deal_id))->get();
+	{  
+	
+		
+		/*
+		$result = $this->db->select("*, $this->deal_value_condition")->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();*/
+		                
+		$result = $this->db->select("*, $this->deal_value_condition")->from("product")->where(array("deal_id" => $deal_id))->get();
 		return $result;
 	}
 	
@@ -124,6 +144,7 @@ class Payment_product_Model extends Model
 	/** TO GET THE DETAILS OF PRODUCT JUST ADDED TO CART**/
 	public function get_product_details_cart($deal_id="")
 	{
+		        
 		
 		$result=$this->db->select('stores.store_url_title','product.deal_key','product.url_title')->from("product")->join("stores","stores.merchant_id","product.merchant_id")->where(array("product.deal_id" => $deal_id))->get();
 		return $result;
@@ -156,7 +177,8 @@ class Payment_product_Model extends Model
 	
 	public function get_products_list($duration_id="",$productid="") 
 	{
-		$result = $this->db->query("select *,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = $duration_id and deal_id = $productid");
+		        
+		$result = $this->db->query("select *, $this->deal_value_condition,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = $duration_id and deal_id = $productid");
 		/*
 		$result = $this->db->query("select *,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.store_credit_period from shipping_info as s join store_credit_save as t on t.productid=s.transaction_id join product as d on d.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' $condition order by shipping_id DESC "); 
 		*/
@@ -182,8 +204,10 @@ class Payment_product_Model extends Model
 	}
 
 public function get_cart_products1($deal_id = "")
-	{                   
-		$result = $this->db->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
+	{              
+		
+		     
+		$result = $this->db->select("*, $this->deal_value_condition")->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
 		return $result;
 	}
 	/* CHECK STORE CREDITS PRODUCT ALREADY EXITS */

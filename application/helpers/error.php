@@ -75,7 +75,10 @@ class error {
 					 $my_error[$key] = $this->Lang["CHK_P"];
 					break;
 				case 'check_price_lmi_prd':
-					 $my_error[$key] = $this->Lang["CHK_PRD"];
+					 $my_error[$key] = 'Original Price should be greater or equal to Ordinary Discount Price';
+					break;
+				case 'check_prime_price_lmi_prd':
+					 $my_error[$key] = 'Original Price should be greater or equal to Prime Discount Price';
 					break;
 				case 'check_min_fund':
 					 $my_error[$key] = $this->Lang["MIN_F"];

@@ -88,7 +88,7 @@
         })
     });
     </script>
-    <SCRIPT language="Javascript"> 
+    <script  type="text/javascript"> 
           function isNumberKey(evt)
           {
              var charCode = (evt.which) ? evt.which : event.keyCode        
@@ -106,7 +106,7 @@
                 return false;
              return true;
           }
-    </SCRIPT>
+    </script>
      <style>
 #fade { background: #000; position: fixed; left: 0; top: 0; width: 100%; height: 100%; opacity: 0.5; z-index: 9999; }
 .popup{ float: left;position: fixed; width:40%;  z-index: 99999; background: white; border-color:red;clear:both;top:200px; left:580px;  padding: 0px; }
@@ -261,7 +261,8 @@
                         <em><?php if(isset($this->form_error["deal_value"])){ echo $this->form_error["deal_value"]; }?></em>
                     </td>
                 </tr>
-		<tr>
+                
+				 <!--<tr>
                     <td><label><?php echo $this->Lang["DEALVALUE"]; ?></label><span></span></td>
                     <td><label>:</label></td>
                     <td>
@@ -272,7 +273,54 @@
                        <input type="text" name="price" maxlength="8" value="" />
                        <?php } ?>
                      </td>
+                </tr>-->
+                 <!--<tr>
+                    <td><label>Discounted Price (Prime)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+						 <input type="text" name="prime_price" maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
+                        
+                    </td>
+                </tr>-->
+                
+                 <tr>
+                    <td><label>Discounted Price (Ordinary)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+                   	<?php if($u->deal_price!=0) { ?>
+                      <input type="text" name="price" maxlength="8" value="<?php echo $u->deal_value; ?>" />
+					
+					<?php }else{?>
+						 <input type="text" name="price" maxlength="8" value="" />
+					<?php }?>
+						 
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
+                        
+                    </td>
                 </tr>
+                
+               	 <tr>
+                    <td><label>Discounted Price (Prime)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+                   	<?php if($u->deal_price!=0) { ?>
+                      <input type="text" name="prime_price" maxlength="8" value="<?php echo $u->deal_prime_value; ?>" />
+					
+					<?php }else{?>
+						 <input type="text" name="price" maxlength="8" value="" />
+					<?php }?>
+						 
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
+                        
+                    </td>
+                </tr>
+                
+               	 
+                
                 <tr>
                 <td><label></label></td>
                 <td><label></label></td>
