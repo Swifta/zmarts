@@ -61,7 +61,7 @@ $this->language_List = str_replace(".php", "", $DL);
         <section class="h_top_part">
                 <div class="container">
                         <div class="row clearfix">
-                                <div class="col-lg-4 col-md-4 col-sm-5 t_xs_align_c">
+                                <div class="col-lg-3 col-md-3 col-sm-3 t_xs_align_c">
                                         <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
          <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
                         <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
@@ -83,13 +83,13 @@ $this->language_List = str_replace(".php", "", $DL);
                             </li>
                                         </ul>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
+                                <div class="col-lg-2 col-md-2 col-sm-2 t_align_c t_xs_align_c">
 							<?php if ($this->session->get('UserID')) { ?>                                                          
 		        <?php  if($this->session->get('user_auto_key')) { ?>
                                     <p> <b><a style="color:red" href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></b></p>
                                                         <?php } }?>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
+                                <div class="col-lg-7 col-md-7 col-sm-7 t_align_r t_xs_align_c">
                                         <ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
                         <li><a href="<?php echo PATH;?>">Home</a></li>
 							<?php if ($this->session->get('UserID')) { ?>
@@ -99,7 +99,7 @@ $this->language_List = str_replace(".php", "", $DL);
 						<?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
 								<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare) > 1 ){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
 
-								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li>
+								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>></li>
 
 						<?php } ?>
 						                <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
@@ -114,7 +114,7 @@ $this->language_List = str_replace(".php", "", $DL);
 							<?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
 								<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare) > 1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
 																
-								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li>
+								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>></li>
 								
 							<?php } ?>
                             

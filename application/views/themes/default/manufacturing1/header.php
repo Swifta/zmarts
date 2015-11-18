@@ -51,7 +51,7 @@ $this->language_List = str_replace(".php", "", $DL);
 <div class="header-bar">
     <div class="container">
         <div class="row">
-            <div class="span4">
+            <div class="span2">
                 <ul>
          <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
                         <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
@@ -74,7 +74,7 @@ $this->language_List = str_replace(".php", "", $DL);
                 </ul>
             </div>
 
-            <div class="span8 right">
+            <div class="span10 right">
                 <div class="social-strip">
                     <ul>  
                         <li><a href="<?php echo PATH;?>">Home</a></li>
