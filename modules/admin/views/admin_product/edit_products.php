@@ -258,7 +258,7 @@
                     </td>
                 </tr>
                 
-				<tr>
+				<!--<tr>
                     <td><label><?php echo $this->Lang["DEALVALUE"]; ?></label><span></span></td>
                     <td><label>:</label></td>
                     <td>
@@ -269,7 +269,41 @@
                        <input type="text" name="price" maxlength="8" value="" />
                        <?php } ?>
                     </td>
+                </tr>-->
+                 <tr>
+                    <td><label>Discounted Price (Ordinary)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+                   	<?php if($u->deal_price!=0) { ?>
+                      <input type="text" name="price" maxlength="8" value="<?php echo $u->deal_value; ?>" />
+					
+					<?php }else{?>
+						 <input type="text" name="price" maxlength="8" value="" />
+					<?php }?>
+						 
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
+                        
+                    </td>
                 </tr>
+                
+               	 <tr>
+                    <td><label>Discounted Price (<b>Prime Customers Only</b>)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+                   	<?php if($u->deal_price!=0) { ?>
+                      <input type="text" name="prime_price" maxlength="8" value="<?php echo $u->deal_prime_value; ?>" />
+					
+					<?php }else{?>
+						 <input type="text" name="price" maxlength="8" value="" />
+					<?php }?>
+						 
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
+                        
+                    </td>
+                </tr>
+                
                 <tr>
                 <td><label></label></td>
                 <td><label></label></td>

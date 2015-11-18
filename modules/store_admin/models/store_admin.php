@@ -824,6 +824,45 @@ class Store_admin_Model extends Model
 			        $inc_tax = "1";
 			 }
 		$savings=(($post->price)-($post->deal_value));
+		
+				 if($post->price!='') // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
+			{
+				$deal_price = $post->deal_value;
+				$deal_val = $post->price;
+				
+				$savings=($post->deal_value - $post->price);
+				$value=($savings/$post->deal_value)*100;
+				
+				$deal_prime_val = $deal_val;
+				$prime_savings = $savings;
+				$prime_value =$value;
+				
+			}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
+				$deal_val = $post->deal_value;
+				$savings=0;
+				$deal_price=0;
+				$value=0;
+				
+				$deal_prime_val = $deal_val;
+				$prime_savings = $savings;
+				$prime_value =$value;
+			}
+			
+			
+			
+			if($post->prime_price !=''){
+				
+				$deal_price = $post->deal_value;
+				$deal_prime_val = $post->prime_price;
+				$prime_savings=($post->deal_value - $post->prime_price);
+				$prime_value=($prime_savings/$post->deal_value)*100;
+				
+			}
+		
+		
+		
+		
+		
 		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
 	//	$sub_cat = implode(',',$sub_cat1);
 
@@ -856,7 +895,7 @@ class Store_admin_Model extends Model
 			$pro_status = 1;
 			if(isset($_POST['status']))
 				$pro_status = $_POST['status'];
-		$result = $this->db->insert("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period" => $post->delivery_days,"category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category,"deal_price" => $post->price,"deal_type"=> 2,"deal_value" => $post->deal_value,"deal_savings" => $savings,"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => ($savings/$post->price)*100,"merchant_id"=>$this->user_id,"shop_id"=>$this->store_id,"shipping"=>$post->shipping,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"deal_status" =>$pro_status,"attribute"=>$atr_option,"Including_tax" =>$inc_tax,"product_duration"=>$duration,"created_date" => time(), "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift));
+		$result = $this->db->insert("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period" => $post->delivery_days,"category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category,"deal_price" => $post->price,"deal_type"=> 2,"deal_value" => $post->deal_value, "deal_prime_value" =>$deal_prime_val, "deal_savings" => $savings,"deal_prime_savings" => $prime_savings, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => ($savings/$post->price)*100,"deal_prime_percentage" => $prime_value,"merchant_id"=>$this->user_id,"shop_id"=>$this->store_id,"shipping"=>$post->shipping,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"deal_status" =>$pro_status,"attribute"=>$atr_option,"Including_tax" =>$inc_tax,"product_duration"=>$duration,"created_date" => time(), "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift));
 
                 $product_id = $result->insert_id();
                 if(($post->color_val) == 1){
@@ -1160,8 +1199,45 @@ class Store_admin_Model extends Model
 			 if(isset($_POST['duration'])) {
 			        $duration = serialize($_POST['duration']);
 			 }
+			 
+			 
+			  if($post->price!='') // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
+			{
+				$deal_price = $post->deal_value;
+				$deal_val = $post->price;
+				
+				$savings=($post->deal_value - $post->price);
+				$value=($savings/$post->deal_value)*100;
+				
+				$deal_prime_val = $deal_val;
+				$prime_savings = $savings;
+				$prime_value =$value;
+				
+			}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
+				$deal_val = $post->deal_value;
+				$savings=0;
+				$deal_price=0;
+				$value=0;
+				
+				$deal_prime_val = $deal_val;
+				$prime_savings = $savings;
+				$prime_value =$value;
+			}
 			
-			$this->db->update("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period"=> $post->delivery_days, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category, "third_category_id" => $post->third_category,"deal_price" => $post->price,"deal_value" => $post->deal_value,"deal_savings" =>$savings,"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => ($savings/$post->price)*100, "merchant_id"=>$this->user_id,"shop_id"=>$this->store_id,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"shipping"=>$post->shipping,"attribute"=>$atr_option,"Including_tax" =>$inc_tax, "weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"product_duration" =>$duration, "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift), array("deal_id" => $deal_id, "deal_key" => $deal_key));
+			
+			
+			if($post->prime_price !=''){
+				
+				$deal_price = $post->deal_value;
+				$deal_prime_val = $post->prime_price;
+				$prime_savings=($post->deal_value - $post->prime_price);
+				$prime_value=($prime_savings/$post->deal_value)*100;
+				
+			}
+			
+			
+			
+			$this->db->update("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period"=> $post->delivery_days, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category, "third_category_id" => $post->third_category,"deal_price" => $post->price,"deal_value" => $post->deal_value,"deal_prime_value" => $deal_prime_val, "deal_savings" =>$savings,  "deal_prime_savings" =>$prime_savings, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => ($savings/$post->price)*100, "deal_prime_percentage" => $prime_value, "merchant_id"=>$this->user_id,"shop_id"=>$this->store_id,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"shipping"=>$post->shipping,"attribute"=>$atr_option,"Including_tax" =>$inc_tax, "weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"product_duration" =>$duration, "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift), array("deal_id" => $deal_id, "deal_key" => $deal_key));
 
 			if($preview_type=="preview")
 				$this->db->update("product",array("deal_status"=>2),array("deal_id" => $deal_id, "deal_key" => $deal_key));

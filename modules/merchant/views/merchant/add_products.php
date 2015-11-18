@@ -415,7 +415,7 @@ function validate() {
                 </tr>
                 
                 <tr>
-                    <td><label>Discounted Price (Prime)</label><span></span></td>
+                    <td><label>Discounted Price (<b>Prime Customers Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
 						 <input type="text" name="prime_price" maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />

@@ -901,8 +901,9 @@ function zoomTheme(img_index){
 	
 	
 	var img_path = $('#id_img_path_'+img_index).val();
+	//img_path = "<?php echo PATH;?>resize.php?src="+img_path+"&w=600&h=900";
 	//alert(img_path);
-	$('.preview_theme_selected').attr('src', img_path);
+	$('.preview_theme_selected').attr('src', "<?php echo PATH;?>resize.php?src="+img_path+"&w=600&h=550");
 	
 	$('#fade').css({'visibility' : 'visible'});
 	$('.popup_block_theme').css({'display' : 'block'});
