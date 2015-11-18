@@ -58,12 +58,13 @@ $(".slidetabs").tabs(".images > div", {
                         <section class="col-lg-12 col-md-12 col-sm-12">
                                 <hr class="m_bottom_10 divider_type_3">
                                 <!--products-->
-                                <section class="products_container category_grid clearfix m_bottom_15">
-                    <div class="productsss">
+                            <section class="products_container category_grid clearfix m_bottom_15">
+                    <!--<div class="productsss">-->
                             <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_product_list"); ?>
                             <span  id="product">
                             </span>
-                    </div>
+                    <!--</div>-->
+                            </section>
                     <?php if(($this->all_products_count > 12)) { ?>
                         <div id="loading">
                         <?php if (($this->pagination) != "") { ?>
@@ -77,8 +78,6 @@ $(".slidetabs").tabs(".images > div", {
                                 <?php } ?>
                         </div>
                     <?php } ?>
-                            </section>
-
                             <hr class="m_bottom_10 divider_type_3">
 
                     </section>
