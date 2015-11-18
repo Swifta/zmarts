@@ -35,150 +35,32 @@ $(".slidetabs").tabs(".images > div", {
         $('#messagedisplay1').hide();
     });
 </script>
-<div class="wrapper">
+
+<section class="breadcrumbs">
     <div class="container">
-        <div class="row ">
-            
-            <!-- SLIDER -->
-            <div class="span9 slider">
-                <div class="slider-slides">
-<?php
-$font_color = "";
-$bg_color ="";
-$font_size ="";
-
-    
-$banner_check ="";
-if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {  
-                $tabs=0;
-                for ($i = 1; $i <= 3; $i++) {
-                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
-                            $banner_link="";
-
-                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
-                                $banner_check = 1;
-                                if($i==1) { 
-                                    $banner_link = $m->banner_1_link; 
-                                } else if($i==2) { 
-                                    $banner_link = $m->banner_2_link; 
-                                } else if($i==3) { 
-                                    $banner_link = $m->banner_3_link; 
-                                }
-                                
-                            }
-?>
-<div class="slides">                                                                               
-    <a href="<?php echo $banner_link; ?>"  title="<?php echo $banner_link; ?>">
-        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" 
-             data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
-    </a>
-</div>
-<?php
-                    }
-                    else{
-                        //echo "No Image file";
-?>
-                <div class="slides">
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/<?php echo $i; ?>.jpg" alt="" />
-                </div>
-<?php
-                    }
-                }
-        }
-}
-else{?>
-
-    <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/1.jpg" alt="" />
+        <ul class="horizontal_list clearfix bc_list f_size_medium">
+            <li class="m_right_10"><a href="#" class="default_t_color">Home<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
+            <li><a href="#" class="default_t_color">Products</a></li>
+        </ul>
     </div>
-    <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/2.jpg" alt="" />
-    </div>
-    <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/3.jpg" alt="" />
-    </div>
+</section>
 
-<!-- display default banners-->
-<?php
-}
-?>
-    </div>
-    <a href="#" class="next"></a>
-    <a href="#" class="prev"></a>
-    <div class="slider-btn"></div>
-</div>
-<!-- SLIDER -->
 
-            <!-- SPECIAL-OFFER -->
-            <div class="span3">
-            <?php 
-            $ads_check = "";
-            if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {
-		 ?>        
-					<?php for ($i = 1; $i <= 2; $i++) { ?>
-										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
-											$ads_link="";
-											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
-											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
-                <div class="offers">
-                    <figure>
-                            <a class="img-caption" href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
-                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>
-                            </a>
-                    </figure>
-                </div>
-                    <?php }else{?>
-                <div class="offers">
-                    <figure>
-				<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/ads/<?php echo $i; ?>.jpg" alt="" />
-			</figure>
-                </div>
-                    <?php }}?> 
-            <?php  } } ?>
 
-            </div>
-            <!-- SPECIAL-OFFER -->
-            
-        </div>
-    </div>
-</div>
 
- <?php 
-    $font_color = "";
-    $bg_color ="";
-    $font_size ="";
 
-//    if(count($this->merchant_personalised_details)>0) { 
-//            foreach($this->merchant_personalised_details as $m) {  
-//                    $font_color = "color:".$m->font_color.";";
-//                    $bg_color ="background:".$m->bg_color.";";
-//                    $font_size = $m->font_size."px";
-//            } 
-//    }	 
-?>
-<!-- BAR -->
-<div class="bar-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="title-bar">
-                    <h1><?php echo $this->title_display; ?></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- BAR -->
-                
-<div class="product_wrap">
-    <div class="container">
-        <div class="row">
-            <div>
-                <div class=" clearfix">
+
+<!--content-->
+<div class="page_content_offset">
+        <div class="container">
+                <div class="row clearfix">
+                        <!--left content column-->
+                        <section class="col-lg-12 col-md-12 col-sm-12">
+                                <hr class="m_bottom_10 divider_type_3">
+                                <!--products-->
+                                <section class="products_container category_grid clearfix m_bottom_15">
                     <div class="productsss">
-                    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_product_list"); ?>
+                            <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_product_list"); ?>
                             <span  id="product">
                             </span>
                     </div>
@@ -195,11 +77,31 @@ else{?>
                                 <?php } ?>
                         </div>
                     <?php } ?>
-                </div>
+                            </section>
+
+                            <hr class="m_bottom_10 divider_type_3">
+
+                    </section>
+                    <!--right column-->
             </div>
-        </div>
     </div>
 </div>
+
+
+
+ <?php 
+    $font_color = "";
+    $bg_color ="";
+    $font_size ="";
+
+//    if(count($this->merchant_personalised_details)>0) { 
+//            foreach($this->merchant_personalised_details as $m) {  
+//                    $font_color = "color:".$m->font_color.";";
+//                    $bg_color ="background:".$m->bg_color.";";
+//                    $font_size = $m->font_size."px";
+//            } 
+//    }	 
+?>
             
             
 <section  id="messagedisplay1" style="display:none;">      

@@ -181,14 +181,14 @@ http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2
         </li>
  <?php } ?>
         <!--twitter feed-->
-        <li class="relative">
+        <!--<li class="relative">
                 <button class="sw_button t_align_c twitter"><i class="fa fa-twitter"></i></button>
                 <div class="sw_content">
                         <h3 class="color_dark m_bottom_20">Latest Tweets</h3>
                         <div class="twitterfeed m_bottom_25"></div>
                         <a role="button" class="button_type_4 d_inline_b r_corners tr_all_hover color_light tw_color" href="<?php echo TWITTER_PAGE; ?>">Follow on Twitter</a>
                 </div>	
-        </li>
+        </li>-->
         <!--contact form-->
         <!--<li class="relative">
                 <button class="sw_button t_align_c contact"><i class="fa fa-envelope-o"></i></button>

@@ -35,21 +35,20 @@ else{
     $image_src_realsize_instance = $image_src_instance;
 }
 ?>
-    <div class="span3 product">
+    
 
-        <div>
-            <figure>
-                <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
-                   <img src="<?php echo $image_src_instance; ?>" alt="<?php echo $products->deal_title; ?>">
+
+<!--product item-->
+<div class="product_item hit w_xs_full" style="border:1px solid blue;">
+        <figure class="r_corners photoframe type_2 t_align_c tr_all_hover shadow relative">
+                <!--product preview-->
+                <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>" class="d_block relative wrapper pp_wrap m_bottom_15">
+                    <img src="<?php echo $image_src_instance; ?>" alt="<?php echo $products->deal_title; ?>" class="tr_all_hover" alt="">
                 </a>
-                <div class="overlay">
-                    <a href="<?php echo $image_src_realsize_instance; ?>" class="zoom prettyPhoto"></a>
-                    <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" class="link"></a>
-                </div>
-            </figure>
-            <div class="detail">
-                <span><?php echo $symbol . " " . number_format($products->deal_value); ?></span>
-                <h4>
+                <!--description and price of product-->
+                <figcaption>
+                            <h5 class="m_bottom_10">
+                                <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>" class="color_dark">
                    <?php 
                    if(strlen($products->deal_title) > 18){
                        echo substr($products->deal_title, 0, 17)."..";
@@ -58,8 +57,9 @@ else{
                        echo $products->deal_title; 
                    }
                    ?>
-                </h4>
-                        <div class="ratings text-center">
+                        </a></h5>
+                        <!--rating-->
+                        <p class="clearfix">
         <?php 
         $avg_rating = $products->avg_rating;
         if($avg_rating!=''){
@@ -68,16 +68,23 @@ else{
         <?php } else { ?>
         <img style="margin:0px auto; text-align: center;" alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/gray.png"/>
         <?php } ?>
+                   
+                        </p>
+                        <p class="scheme_color f_size_large m_bottom_15"><?php echo $symbol . " " . number_format($products->deal_value); ?></p>	
+                        <button onclick="location.href='<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>';"href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"
+                           class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">Add to Cart</button>
+                        <div class="clearfix m_bottom_5 m_top_10">
+                                <ul class="horizontal_list d_inline_b l_width_divider">
+                                        <li class="m_right_15 f_md_none m_md_right_0">
+                                            <a href="#" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" class="color_dark">Add to Wishlist</a></li>
+                                        <li class="f_md_none">
+                                            <a href="#" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" class="color_dark">Add to Compare</a></li>
+                                </ul>
                         </div>
-                <div class="icon">
-                    <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" class="one tooltip" title="Add to cart"></a>
-                    <a href="#" onclick="addToWishList('<?php echo $products->deal_id; ?>','<?php echo addslashes($products->deal_title); ?>');" class="two tooltip " title="Add to wish list"></a>
-                    <a href="#" onclick="addToCompare('<?php echo $products->deal_id; ?>','','detail');" class="three tooltip" title="Add to compare"></a>
-                </div>
-            </div>
-        </div>
+                </figcaption>
+        </figure>
+</div>
 
-    </div>
 			<?php 
                         if($l == 4){
                             break;
