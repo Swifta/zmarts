@@ -575,3 +575,4 @@ $config['Riverside-branch-C-Z/products/c/(.*)/(.*).html'] = "/electronics3/produ
 $config['Riverside-branch-C-Z/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/Riverside-branch-C-Z/$1/$2";
 $config['Riverside-branch-C-Z/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/Riverside-branch-C-Z/$1/$2";
 // Riverside-branch-C-Z End
+

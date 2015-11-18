@@ -313,7 +313,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     </div>
                     
                    
-                 <form action="" method="post" name="signup2" id="signup2"  onclick="return atleast_onecheckbox(event)" onsubmit="return checkCheckBoxes(this);" >
+                 <form action="" method="post" name="signup2" id="signup2"    >
                     <div class="payouter_block pay_br">
 <!--                        <h3 class="paybr_title pay_titlebg"><?php //echo $this->Lang['CRTE_YR_STRE']; ?>: <?php //echo $this->Lang['SIGN_UP']; ?></h3>-->
                         <div class="p_inner_block clearfix">
@@ -325,9 +325,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <div class="">
                                     <span class="asterisks_input">  </span>
                                    
-									<input maxlength="50" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
-									<?php if(isset($this->userPost['firstname'])) { ?>
-                                                                        value="<?php  echo $this->userPost['firstname'];} ?>"  /> 			
+									<input maxlength="50" required="required" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+                                                                        value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
+										echo $this->session->get('firstname'); 
+										} else {
+											echo $this->userPost['firstname'];
+										}}?>"  /> 			
 									<em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
 								</div>
@@ -336,12 +339,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             
 								<div class="">
 								        <span>  </span>
-									<input type="text" maxlength="50" name="lastname" class="swifta_input" id="lname" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
-									<?php if($this->session->get('lastname')) { ?>
-									value="<?php  echo $this->session->get('lastname'); ?>"  autofocus/> 			                <?php } else { ?>
-									value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>" placeholder= "<?php echo $this->Lang["LAST_NAME"]; ?>"  />
-									<?php } ?>
-									<em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
+									<input type="text" maxlength="50" name="lastname" class="swifta_input" id="lname" required="required" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
+									
+									value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
+										echo $this->session->get('lastname'); 
+										} else {
+											echo $this->userPost['lastname'];
+										}}?>"  autofocus/> 	
+									<em ><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
 								</div>
                                     </li>
                                     <li>
@@ -349,10 +354,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
 									<input maxlength="50" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
-									<?php if($this->session->get('memail')) { ?>
-									value="<?php  echo $this->session->get('memail'); ?>" required autofocus /> 			                <?php } else { ?>
-									 value="<?php if(!isset($this->form_error['email']) && isset($this->userPost['email'])){echo $this->userPost['email'];}?>" placeholder= "<?php echo $this->Lang["EMAIL_F"]; ?>"  />
-									 <?php  } ?>
+									value="<?php if($this->session->get('memail') || isset($this->userPost['email'])) { if($this->session->get('memail')) {
+										echo $this->session->get('memail'); 
+										} else {
+											echo $this->userPost['email'];
+										}}?>" required autofocus /> 			      
 									<em id="id_err_memail"> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
 								</div>
                                     </li>
@@ -360,7 +366,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
                                 
-					<input type="hidden" name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
+											<input type="hidden" name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
 							
                               
                                     </li>
@@ -368,8 +374,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                     
                                 <li >
-                                        
-								
+                                
 									<input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
                                                                                value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
                                 
@@ -380,10 +385,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
 									<input maxlength="50" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
-									<?php if($this->session->get('mraddress1')) { ?>
-									value="<?php  echo $this->session->get('mraddress1'); ?>"  required autofocus/> 			 <?php } else { ?>
-									value="<?php if(isset($this->userPost['mr_address1'])){echo $this->userPost['mr_address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" />
-									<?php } ?>
+									
+									value="<?php if($this->session->get('mraddress1') || isset($this->userPost['mr_address1'])) { if($this->session->get('mraddress1')) {
+										echo $this->session->get('mraddress1'); 
+										} else {
+											echo $this->userPost['mr_address1'];
+										}}?>"  required autofocus/> 												
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
                                         </div>
                                     </li>
@@ -391,21 +398,26 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <li>
                                     
                                  <div class="" style="">
-									<input maxlength="50" type="text" name="mr_address2" class="swifta_input" 
-									<?php if($this->session->get('mraddress2')) { ?>
-                                                                               value="<?php echo $this->session->get('mraddress2');} ?>" placeholder= "<?php echo $this->Lang['ENTER_ADDR2']; ?>" /> 			
-									
+									<input maxlength="50" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter 2nd address (if any)"
+								                                             value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
+										echo $this->session->get('mraddress2'); 
+										} else {
+											echo $this->userPost['mr_address2'];
+										}}?>" /> 			
+									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                  </div>
                                 </li>
                                 <li class="frm_clr">
                                    
 								<div class="">
-                                                                    <span class="asterisks_input">  </span>
-                                                                    <input  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
-									<?php if($this->session->get('mphone_number')) { ?>
-									value="<?php  echo $this->session->get('mphone_number'); ?>" required autofocus /> 			 <?php } else { ?>
-									value="<?php if(!isset($this->form_error['mr_mobile']) && isset($this->userPost['mr_mobile'])){echo $this->userPost['mr_mobile'];}?>" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>"  />
-									<?php } ?>
+                                  <span class="asterisks_input">  </span>
+                                    <input  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+									<?php  ?>
+									value="<?php if($this->session->get('mphone_number') || isset($this->userPost['mr_mobile'])) { if($this->session->get('mphone_number')) {
+										echo $this->session->get('mphone_number'); 
+										} else {
+											echo $this->userPost['mr_mobile'];
+										}}?>" required autofocus /> 			
 									<em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
                                 </div>
                                 </li>
@@ -413,54 +425,88 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                  <li >
                                 
 				<div class="">
-                                <select name="sector" id="sector"   class="swifta_input"  onchange="changing_sectors(this.value)">
+              
+                                <select name="sector" id="sector"   class="swifta_input"  onchange="changing_sectors(this.value); get_themes(this.value);">
                                 <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
                                
                                 <?php foreach ($this->sector_list as $c) { ?>
-                                <option  <?php  if($this->session->get('sector')){ if ($c->sector_id ==$this->session->get('sector')) { ?> selected <?php } } ?> title="<?php echo $c->sector_name; ?>"value="<?php echo $c->sector_id; ?>" ><?php echo $c->sector_name; ?></option>
+                                <option   title="<?php echo $c->sector_name; ?>" value="<?php echo $c->sector_id; ?>" ><?php echo $c->sector_name; ?></option>
                                 <?php } ?>
-                                </select>									
-				<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
+                                </select>	
+                                								
+								<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
                                 </div>
                                 </li>
-                                <li class="subsector_list">
+                                <!--<li class="subsector_list">
                                 <label><?php echo $this->Lang['SUBSECTOR']; ?> <span style="color:red;">*</span>: </label>
                                 <div class="">
-				<?php if($this->session->get('sector')){ ?>
+								<?php if($this->session->get('sector')){ ?>
                                 <select name="subsector" id="subSector"  class="swifta_input" onchange="previewTheme(this.text);">
                                             
                                 <?php foreach ($this->sub_sector_list as $c) { ?>
                                 <?php if($this->session->get('sector')==$c->main_sector_id){?>
-                                <option  value="<?php echo $c->sector_id; ?>"<?php if($this->session->get('sub_sector')){ if ($this->session->get('sub_sector')==$c->sector_id ){ ?> selected <?php }}  ?> title="<?php echo $c->sector_name; ?>" ><?php echo $c->sector_name; ?></option>
+                                <option  value="<?php echo $c->sector_id; ?>"<?php if($this->session->get('sub_sector')){ if ($this->session->get('sub_sector')==$c->sector_id){ ?> selected="selected" <?php }}  ?> title="<?php echo $c->sector_name; ?>" ><?php echo $c->sector_name; ?></option>
                                 <?php }} ?>
                                 </select> 
                                 <?php }else{ ?>
-                                
                                 <select name="subsector" id="subSector" class="swifta_input" onchange="previewTheme(this.text);">
                                 <option value=""><?php echo $this->Lang['SELECT_SECTORS_FIRST']; ?></option>
                                
                                 </select>
                                 <?php } ?>
                                 </div>
-                                <em ><?php if (isset($this->form_error['subSector'])) {
-                                echo $this->form_error["subSector"];
+                                
+                                
+                                <em ><?php if (isset($this->form_error['subsector'])) {
+                                echo $this->form_error["subsector"];
                                 } ?></em>
 
-                                </li>
-
-
-                                
-                                <li class="fullname" style="margin-top: -10px;">
-                                    <label><?php echo $this->Lang["STORE_PREVIEW"]; ?> :</label>
-                                    <a href="javascript:openMainView();">
+                                </li>-->
+                                <li id="id_label_theme_preview" style="position:relative; margin-top: 15px;">
+                                    <label style=" color: #FFF;width: auto; position:absolute; padding: 10px; bottom: -10px; left: 0; display:inline-block; " class = "buy_it complete_order_button">Theme Preview(s)</label>
+                                    <!--<a href="javascript:openMainView();">
                                         <img src="" class="preview_theme_selected" style="width:150px;height:150px;"/>
-                                    </a>
+                                    </a>-->
+                                    
+                                    
                                 </li>
+                                
+                                <li>
+                                	
+                                     <div id="id_themes_container" style=" width:100%; height:auto;">
+                                      <ul id="brandcarousal" style="width:100%; background:#A61C00;">
+                                        <!--<li style="width: 250px; height:200px; background:#06F"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/><p><input name="theme" type="radio" /></p></li>-->
+                                        <!--<li  style=" position:relative; width: 250px; height:200px; background:#9C0;"><img src="<?php echo PATH?>themes/default/images/sasa/brand2.jpg" alt="" title=""/><p style="text-align:right; padding-right: 10px; position:absolute; bottom: -10px; right:0;"><span><span style="cursor:pointer">[-]</span><span style="cursor:pointer;"><input name="theme" type="radio" /></span></span></p>
+                                       <p style="text-align:left; padding-left: 0px; position:absolute; bottom: -10px; left:0;"> <span style="cursor:pointer; border-bottom: 1px solid #000; "><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 0 4px; opacity:0.4;">Name: </b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 0 4px; opacity:0.4;">Manufacturing</i></span> </p>
+                                        </li>-->
+                                        <!--<li  style="width: 250px; height:200px; background:#F3C;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>-->
+                                       <!-- <li  style="width: 250px; height:200px;""><img src="<?php echo PATH?>themes/default/images/sasa/brand4.jpg" alt="" title=""/></li>
+                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/></li>
+                                        <li  style="width: 250px; height:200px;""><img src="<?php echo PATH?>themes/default/images/sasa/brand2.jpg" alt="" title=""/></li>
+                                        <li style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>
+                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand4.jpg" alt="" title=""/></li>
+                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/></li>
+                                        <li  style="width: 250px; height:200px;""><img src="<?php echo PATH?>themes/default/images/sasa/brand2.jpg" alt="" title=""/></li>
+                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>
+                                        <li style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand4.jpg" alt="" title=""/></li>-->
+                                      </ul>
+                                      <div class="clearfix"></div>
+                                      <a id="prev" class="prev" href="#">&lt;</a>
+                                      <a id="next" class="next" href="#">&gt;</a>
+                                       <em ><?php if (isset($this->form_error['subsector'])) {
+                                			echo $this->form_error["subsector"];
+                                		}else{ echo '';} ?></em>
+                                      </div>
+                                      
+                                    
+                                </li>
+                                
+                                
                                 
                                 
                                 <li>
                                     <label>Shipping method <span style="color:red;">*</span>:</label>
-                     <table style=""> 
+                    			    <table style=""> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
                                         <tr><td style="width:px;"><label><input  type="checkbox" name="free" value="1" 
@@ -691,9 +737,7 @@ The Merchant shall establish an Account with Zenith Bank PLC for the Products. S
 </p>
 
 
-<h style="color:red;">Management of the platform </h>
-
-<p <p style="color:black;">Zenith Bank PLC shall appoint a team to handle the platform/Website Management and Quality Control. The team will have the responsibility of auditing and maintaining the Platform from time to time to ensure the Platform is being operated legally and that no offensive contents or images are posted on the Merchant's 
+<h style="color:red;">Management of the platform </h><p style="color:black;">Zenith Bank PLC shall appoint a team to handle the platform/Website Management and Quality Control. The team will have the responsibility of auditing and maintaining the Platform from time to time to ensure the Platform is being operated legally and that no offensive contents or images are posted on the Merchant's 
     Webpage.The Website Manager reserves the right upon giving prior notice to Zenith Bank PLC to suspend or delete the Webpage 
     of any Merchant who breaches any term of this Agreement.<br><br>
 
@@ -829,7 +873,7 @@ Signature and Date:.......................................................<br></
             </div>
         </div>
     </div>
-        </div>
+        
         
         
         <div class='popup_block_theme'><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
@@ -837,17 +881,29 @@ Signature and Date:.......................................................<br></
  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
  <!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
   
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="<?php echo PATH?>themes/default/js/sasa/bootstrap.js"></script>
 
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="<?php echo PATH?>themes/default/css/sasa/bootstrap.css" />
   
 
-  <link rel="stylesheet" href="style.css" />
+  <!--<link rel="stylesheet" href="<?php echo PATH?>themes/default/css/style.css" />-->
     
 <script src="script.js"></script>
  <script>
  
 function openMainView(){
+	
+	$('#fade').css({'visibility' : 'visible'});
+	$('.popup_block_theme').css({'display' : 'block'});
+}
+
+function zoomTheme(img_index){
+	
+	
+	var img_path = $('#id_img_path_'+img_index).val();
+	//alert(img_path);
+	$('.preview_theme_selected').attr('src', img_path);
+	
 	$('#fade').css({'visibility' : 'visible'});
 	$('.popup_block_theme').css({'display' : 'block'});
 }
@@ -874,54 +930,39 @@ function previewTheme(s){
     
 }
 
-    $(document).ready(function(){
-        $('.popup_block_theme').css({'display' : 'none'});
+$('#signup2').submit(function(e) {
+	checkCheckBoxes(this);
+	atleast_onecheckbox(e)
+	validate(this);
+	return false;
+	
+	
+});
+			
+ 	 function validate(form) {
+  		if(!is_email_valid){
+			
+			$('#email').focus();
+			return false;
+		}
 		
-         $("#signup2").validate({
-			 messages: {				 
-		   firstname: {
-			   required: "<?php echo $this->Lang['PLS_ENT_FNAM']; ?>"                         
-		   },
+		if(!is_sector_valid){
+			var val = $('#fname').val();
+			val = val.trim();
+			$('#fname').val(val);
+			$('#fname').focus();
+			return false;
+		}
+		//alert(is_email_valid);
+		//alert(is_t_and_c_checked);
+		//alert(is_sector_valid);
+		if(is_email_valid && is_t_and_c_checked && is_sector_valid){
+			
+			form.submit();
+		}
+ 	}
 
-		   lastname: {
-			   required: "<?php echo $this->Lang['PLS_ENT_LNAM']; ?>"                         
-		   },
 
-		   email: {
-				required:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
-				email:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                       
-			},
-		   
-		   mr_address1: {
-			   required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-		   },
-		     mr_address2: {
-			   required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-		   },
-		  mr_mobile : {
-			   required: "<?php echo $this->Lang['PLZ_ETR_PHO']; ?>",
-			   number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
-			},
-		  error_nuban : {
-			   required: "<?php echo $this->Lang['PLZ_ETR_NUBAN']; ?>",
-			   number: "<?php echo $this->Lang['PLS_ENT_NUBAN']; ?>"                             
-			},
-			payment_acc: {
-				required:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
-				email:"<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                       
-			},
-    },
- 	submitHandler: function(form) {
-   // some other code
-   // maybe disabling submit button
-   // then:
-	// $('div#submit').hide();
-	if(is_email_valid && is_t_and_c_checked && is_sector_valid){
-   		form.submit();
-	}
- }
-});
-});
    
 
 
@@ -981,10 +1022,12 @@ function atleast_onecheckbox(e) {
     }
 
     function InvalidInputHelper(input, options) {
-		if(input)
-        input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
-
+		
+		
         function changeOrInput() {
+			val = input.value;
+			val = val.trim();
+			$(input).val(val);
             if (input.value == "") {
                 input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
             } else {
@@ -993,6 +1036,10 @@ function atleast_onecheckbox(e) {
         }
 
         function invalid() {
+			val = input.value;
+			val = val.trim();
+			$(input).val(val);
+			
             if (input.value == "") {
                 input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
             } else {
@@ -1000,13 +1047,13 @@ function atleast_onecheckbox(e) {
             }
         }
 		
-		if(input){
+		
 
         input.addEventListener("change", changeOrInput);
         input.addEventListener("input", changeOrInput);
         input.addEventListener("invalid", invalid);
 		
-		}
+		
     }
     exports.InvalidInputHelper = InvalidInputHelper;
 })(window);
@@ -1015,42 +1062,51 @@ $(document).ready(function(e) {
     
 
 
-InvalidInputHelper(document.getElementById("compname"), {
-    defaultText: "Please enter your company!",
-    emptyText: "Please enter your company!",
+InvalidInputHelper(document.getElementById("fname"), {
+    defaultText: "Please enter your company name",
+    emptyText: "Please enter your company name",
     invalidText: function (input) {
-        return 'The company  "' + input.value + '" is invalid!';
+        return 'The company  "' + input.value + '" is invalid';
+    }
+    
+    
+}); 
+
+InvalidInputHelper(document.getElementById("lname"), {
+    defaultText: "Please enter your full name",
+    emptyText: "Please enter your full name!",
+    invalidText: function (input) {
+        return '"' + input.value + '" is invalid';
     }
     
     
 }
+);
 
-); 
 
 InvalidInputHelper(document.getElementById("email"), {
-    defaultText: "Please enter your email!",
-    emptyText: "Please enter your email!",
+    defaultText: "Please enter your email",
+    emptyText: "Please enter your email",
     invalidText: function (input) {
-        return 'The email  "' + input.value + '" is invalid!';
+        return 'The email  "' + input.value + '" is invalid';
+    }
+    
+    
+}); 
+    
+    
+InvalidInputHelper(document.getElementById("addrs1"), {
+    defaultText: "Please enter your address",
+    emptyText: "Please enter your address",
+    invalidText: function (input) {
+        return 'The address  "' + input.value + '" is invalid';
     }
     
     
 }
-
-); 
-    
-    
-    InvalidInputHelper(document.getElementById("adrs1"), {
-    defaultText: "Please enter your address!",
-    emptyText: "Please enter your address!",
-    invalidText: function (input) {
-        return 'The address  "' + input.value + '" is invalid!';
-    }
-    
-    
-}
-
 );
+
+
 
 //InvalidInputHelper(document.getElementById("email"), {
 //    defaultText: "Please enter your email!",
@@ -1065,25 +1121,14 @@ InvalidInputHelper(document.getElementById("email"), {
 //);
 
   
-    InvalidInputHelper(document.getElementById("adrs2"), {
-    defaultText: "Please enter your address!",
-    emptyText: "Please enter your address!",
-    invalidText: function (input) {
-        return 'The address  "' + input.value + '" is invalid!';
-    }
-    
-    
-});
+InvalidInputHelper(document.getElementById("mob"), {
+defaultText: "Please enter your phone number",
+emptyText: "Please enter your phone number",
+invalidText: function (input) {
+	return 'The phone number  "' + input.value + '" is invalid';
+}
 
-  
-    InvalidInputHelper(document.getElementById("mob"), {
-    defaultText: "Please enter your phone number!",
-    emptyText: "Please enter your phone number!",
-    invalidText: function (input) {
-        return 'The phone number  "' + input.value + '" is invalid!';
-    }
-    
-    
+
 });
 
 });
@@ -1212,14 +1257,20 @@ function check_email_valid(){
 function verify_shop_name(sector){
 	sector = sector.value;
 	sector = sector.trim();
+	if(!sector){
+		is_sector_valid = false;
+		return false;
+	}
 	
 	if(!sector_changed)
 		return false;
 	is_sector_valid = false;
 	
 	
-	if(!sector)
-	return false;
+	if(!sector){
+	
+		return false;
+	}
 	
 	var url = "<?php echo PATH; ?>seller/check_store_exist/"+sector+"/TRUE";
 	$.post(url, {}, function success(response){
@@ -1248,5 +1299,237 @@ function verify_shop_name(sector){
 	
 }
        
-  
+
+					 
 </script>
+
+<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.carouFredSel-6.1.0-packed.js"></script> 
+<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.mousewheel.min.js"></script> 
+<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.touchSwipe.min.js"></script> 
+
+<script type="text/javascript">
+// Themes Carousal
+$(window).load(function() {
+	
+	$('#brandcarousal').carouFredSel({
+						width: '100%',
+						scroll: 1,
+						auto: false,
+						prev: '#prev',
+						next: '#next',
+					    mousewheel: false,
+						
+						swipe: {
+							onMouse: true,
+							onTouch: true
+						}
+					});
+	$('#id_themes_container').css('display', 'block');
+					});
+	
+$(document).ready(function(e) {
+    $('#brandcarousal').click(function(e) {
+		/*
+	
+         $('#brandcarousal').append('<li  style="width: 250px; height:200px; background:#F3C;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>');
+		 $('#brandcarousal').carouFredSel({
+						width: '100%',
+						scroll: 1,
+						auto: false,
+						prev: '#prev',
+						next: '#next',
+					    mousewheel: false,
+						
+						swipe: {
+							onMouse: true,
+							onTouch: true
+						}
+					});
+		 alert(111111);
+  */
+  		
+  });
+});
+
+function select_theme(id){
+	return false;
+}
+
+function get_themes(sector){
+	if(sector == ""){ 
+		
+		$('#id_themes_container').css('display', 'none');
+		$('#id_label_theme_preview label').text("Theme Preview(NONE)");
+		return false;
+	 }
+	
+
+		if(sector){
+		var url = '<?php echo PATH?>/seller/get_themes/'+sector; }
+			$.post(url).done(function(check){
+				
+				   
+				// alert(check);
+				 //return false;
+				   
+				   var response = check;
+				   
+					  try{
+						  
+							response = $.parseJSON(response);
+							
+							$('#brandcarousal').html('');
+							$('#id_themes_container').css('display', 'block');
+							
+							for(i = 0; i < response.length;){
+						
+							
+							
+							
+							img_path_valid = response[i+2];
+							s_id = response[i];
+							
+							
+							
+							//var x = i+"";
+							
+						
+								var part1 = '<p style="text-align:right; padding-right: 10px; position:absolute; bottom: 0px; right:0;"><span><span style="cursor:pointer;"><input id = "id_opt_theme_'+s_id+'" value ="'+s_id+'" name="subsector" type="radio" /></span></span></p><p style="text-align:left; padding-left: 0px; position:absolute; bottom: 0px; left:0;"> <span style="cursor:pointer"><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">Name: </b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">'+response[i+1];
+								
+							var part2 = '</i></span> </p><input id="id_img_path_'+i+'" type="hidden" value = "'+img_path_valid+'" /></li>';
+							
+							var dimensions = '&w=250&h=200';
+							
+							
+							
+							var theme = '<li  style=" position:relative; width: 250px; height:200px;background:#9C0;"><img onclick="zoomTheme('+i+')" src="<?php echo PATH."resize.php?src=";?>'+img_path_valid+dimensions+'"alt="" title=""/>';
+							theme = theme+part1+part2;
+				
+        				    $('#brandcarousal').append(theme);
+								
+								i++;
+								i++;
+								i++;
+								
+								var sec_id = $('#id_selected_sector').val();
+								if(sec_id){
+								try{
+									sec_id = parseInt(sec_id);
+									sector = parseInt(sector);
+									if(sec_id == sector){
+										var subs = $('#id_selected_theme').val();
+										
+										try{
+											s_id = parseInt(s_id);
+											subs = parseInt(subs);
+											//alert(s_id+" : "+subs)
+											if(s_id ==  subs){
+												$('#id_opt_theme_'+subs).attr('checked','checked');
+												$('#id_opt_theme_'+subs).val(subs);
+											}
+										}catch(e){
+											
+										}
+										
+									}
+									
+								}catch(e){
+								}
+								
+							}
+								
+		 
+							}
+		 
+		 
+		 $('#brandcarousal').carouFredSel({
+						width: '100%',
+						scroll: 1,
+						auto: false,
+						prev: '#prev',
+						next: '#next',
+					    mousewheel: false,
+						
+						swipe: {
+							onMouse: true,
+							onTouch: true
+						}
+					});
+		// alert(111111);
+					try{
+						i = parseInt(i);
+						i = i/3;
+					}catch(e){
+					}
+  					$('#id_label_theme_preview label').text("Theme Preview("+i+")");
+							
+					   
+					   }catch(e){
+						   
+						   try{
+								response = parseInt(check);
+								if(response == 0){
+									
+									$('#id_themes_container').css('display', 'none');
+									$('#id_label_theme_preview label').text("Theme Preview(NONE)");
+									//No sector
+								}
+						   }catch(e){
+							   
+							   //Unknown server response
+						   }
+					 }
+				   
+				
+				}).fail(function(){
+					
+					alert('No category has been added under this top category.');
+				});
+				
+			
+}
+</script>
+
+<input id="id_selected_sector" type="hidden" value="<?php if(isset($this->userPost['sector'])){
+	 	echo $this->userPost['sector'];
+	 }else if($this->session->get('sector')){
+			  echo $this->session->get('sector');
+	}?>" />
+<input id="id_selected_theme" type="hidden" value="<?php if(isset($this->userPost['subsector'])){
+	 	echo $this->userPost['subsector'];
+	 }else if($this->session->get('sub_sector')){
+			  echo $this->session->get('sub_sector');
+	}?>" />
+
+
+
+<script type="text/javascript">
+									$(document).ready(function(e) {
+										
+										var sector_session = "<?php echo $this->session->get('sector');?>";
+										
+										var sector_post = "<?php if(isset($this->userPost['sector'])){ echo $this->userPost['sector'];}?>";
+										var sub_sec_session = "<?php echo $this->session->get('sub_sector'); ?>";
+										var sub_sec_post = "<?php if(isset($this->userPost['subsector'])){echo $this->userPost['subsector']; }?>";	
+										
+										$('#id_selected_sector').val();
+										
+										if(sector_session || sector_post){
+											var sec;
+											if(sector_session)
+												sec = sector_session;
+											else
+												sec = sector_post;
+												$('#id_selected_sector').val(sec);
+											$('#sector').val(sec);
+											$('#sector').trigger('change');
+											
+										}
+										
+										
+										
+										
+									});
+								
+								</script>
+

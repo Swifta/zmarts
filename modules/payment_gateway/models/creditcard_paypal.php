@@ -306,7 +306,7 @@ class Creditcard_paypal_Model extends Model
 		/**GET PRODUCT LIST FOR SHIPPING DELIVERY */
 	public function get_products_list($trans_id="",$type="") 
 	{
-			$condition = "AND t.type != 5";
+				$condition = "AND t.type != 5";
 				
 				if($type){
 					$condition = " AND t.type = 5 ";
