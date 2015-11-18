@@ -304,13 +304,35 @@ function toggle() {
                     </td>
                 </tr>
                 
-                <tr>
+                <!--<tr>
                     <td><label><?php echo $this->Lang["DEALVALUE"]; ?></label><span></span></td>
 		
                     <td><label>:</label></td>
                     <td>
                         <input type="text" name="price" maxlength="8" value="<?php if(!isset($this->form_error["price"])&&isset($this->userPost["price"])){ echo $this->userPost["price"]; }?>" />
                         <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                        
+                    </td>
+                </tr>-->
+                
+                <tr>
+                    <td><label>Discounted Price (Ordinary)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+						 <input type="text" name="price" maxlength="8" value="<?php if(!isset($this->form_error["price"])&&isset($this->userPost["price"])){ echo $this->userPost["price"]; }?>" />
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label>Discounted Price (<b>Prime Customers Only</b>)</label><span></span></td>
+                    <td><label>:</label></td>
+                    <td>
+						 <input type="text" name="prime_price" maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
+                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                       
                         
                     </td>
                 </tr>

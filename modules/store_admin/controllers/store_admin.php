@@ -819,11 +819,30 @@ class Store_admin_Controller extends website_Controller
 							->add_rules('sub_category', 'required')
 							->add_rules('sec_category', 'required')
 							->add_rules('price', 'required', 'chars[0-9.]',array($this,'check_price_val_lmi'))
-							->add_rules('deal_value', 'required', array($this, 'check_price_lmi'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+							//->add_rules('deal_value', 'required', array($this, 'check_price_lmi'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+							
+							->add_rules('deal_value', 'required',array($this, 'check_prime_price_lmi_prd'), array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+							
 							//->add_rules('size_tag[]', 'required')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							//->add_rules('stores','required')
 							->add_rules('delivery_days','required');
+							
+							
+							$price_s = $post->price;
+							if(isset($price_s)){
+								$price_s = trim($price_s);
+								if($price_s != "")
+								$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
+							}
+							
+							$prime_price_s = $post->prime_price;
+							if(isset($prime_price_s)){
+								$prime_price_s = trim($prime_price_s);
+								if($prime_price_s != "")
+								$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
+							}
+							
 							
 							if($post->buy_bulk!="")
 							{
@@ -928,6 +947,20 @@ class Store_admin_Controller extends website_Controller
 		$this->merchant_duration = $this->merchant->get_duration_values(); // store credits options
 	        $this->template->title = $this->Lang["ADD_PRODUCTS"];
 		$this->template->content = new View("store_admin/add_products");
+	}
+	
+	public function check_prime_price_lmi_prd()
+	{
+		if($this->input->post("prime_price")!='')
+		{
+		
+		
+		if($this->input->post("deal_value")<$this->input->post("prime_price"))
+		{
+		return 0;
+		}
+		}
+		return 1;
 	}
 
          public function confirm_product($product_id = "",$preview_type='')
@@ -1047,10 +1080,29 @@ class Store_admin_Controller extends website_Controller
 				        ->add_rules('sub_category', 'required')
 				        ->add_rules('sec_category', 'required')
 				        ->add_rules('price', 'required', 'chars[0-9.]',array($this,'check_price_val_lmi'))
-				        ->add_rules('deal_value', 'required', array($this, 'check_price_lmi'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+				        //->add_rules('deal_value', 'required', array($this, 'check_price_lmi'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
+						 ->add_rules('deal_value', 'required',array($this, 'check_prime_price_lmi_prd'), array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
 				        ->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 				        //->add_rules('stores','required')
 				        ->add_rules('delivery_days','required');
+						
+						
+						 $price_s = $post->price;
+						if(isset($price_s)){
+							$price_s = trim($price_s);
+							if($price_s != "")
+							$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
+						}
+							
+						$prime_price_s = $post->prime_price;
+						if(isset($prime_price_s)){
+							$prime_price_s = trim($prime_price_s);
+							if($prime_price_s != "")
+							$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
+						}
+						
+						
+						
 				        if($post->buy_bulk!="")
 							{
 							$post->add_rules('get_bulk','required');
@@ -1158,6 +1210,8 @@ class Store_admin_Controller extends website_Controller
 		$this->template->title = $this->Lang["EDIT_PRODUCT"];
 		$this->template->content = new View("store_admin/edit_products");
 	}
+	
+	
 
 	/** BLOCK UNBLOCK PRODUCTS **/
 
