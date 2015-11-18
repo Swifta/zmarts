@@ -690,7 +690,7 @@ $admin_message	= '
 	    return ($exist == 0)?true:false; 
 	}
 	
-	      public function change_sector($sector = "")
+	public function change_sector($sector = "")
 	{
 		if($sector == -1 || $sector == "" ){
 			//$list = '<td><label>'.$this->Lang["SEL_CITY"].'*</label></td><td><label>:</label></td><td><select name="city" class="CityPAY select required" >';
@@ -716,6 +716,64 @@ $admin_message	= '
 			                $list .='<option value="'.$s->sector_id.'">'.ucfirst($s->sector_name).'</option>';
 		                }
 		                echo $list .='</select>';
+		                exit;
+		          }
+		}
+	}
+	
+	
+	public function get_themes($sector = "")
+	{
+		if($sector == -1 || $sector == "" ){
+			//$list = '<td><label>'.$this->Lang["SEL_CITY"].'*</label></td><td><label>:</label></td><td><select name="city" class="CityPAY select required" >';
+			$list ='<option value="" >'.$this->Lang["SELECT_SECTORS_FIRST"].'</option>';
+			//echo $list .='</select></td>';
+			echo $list .='';
+		exit;
+		} else {
+		        $themes = $this->seller->get_sub_sectors($sector);
+		        if(count($themes) == 0){
+			        	echo 0;
+		                exit;
+		        } else {
+						$arr = array();
+						$i = 0;
+		               	foreach($themes as $theme){
+							
+							$arr[$i] = $theme->sector_id;
+							$i++;
+							$arr[$i] = $theme->sector_name;
+							$i++; 
+							$img_url = DOCROOT."custom/images/themes/".$theme->sector_name.".jpg"; 
+							$img_http_url = NULL;
+							$img_exists = FALSE;
+							if(file_exists($img_url)){
+									$img_exists = TRUE;
+									$img_http_url = PATH."custom/images/themes/".$theme->sector_name.".jpg";
+							}
+							
+							if(!$img_exists){
+								
+								$img_url = DOCROOT."custom/images/themes/".$theme->sector_name.".png"; 
+								$img_exists = FALSE;
+								
+								if(file_exists($img_url)){
+									$img_exists = TRUE;
+									$img_http_url = PATH."custom/images/themes/".$theme->sector_name.".png";
+								}
+							}
+							
+							if(!$img_exists){
+								$img_http_url = PATH."themes/default/images/noimage_products_details.png"; 
+								
+							}
+							
+								
+							 $arr[$i] = $img_http_url; 	
+							 $i++;
+						}
+						
+						echo json_encode($arr);
 		                exit;
 		          }
 		}

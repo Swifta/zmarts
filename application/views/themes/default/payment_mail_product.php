@@ -25,9 +25,9 @@ $this->UserName = $this->session->get("UserName");
 <?php foreach($this->products_list as $p ) { 
   		$p_m = "-";
   		if($p->type == 5)
-			$p_m = "Pay Later";
-		else if($p->type == 6)
 			$p_m = "Cash On Delivery";
+		else if($p->type == 6)
+			$p_m = "Pay Later";
 		else if($p->type == 7)
 			$p_m = "Interswitch";
 		

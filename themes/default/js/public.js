@@ -1376,6 +1376,58 @@ function changing_sectors(sector)
 		}
 	});
 }
+
+function get_themes(sector)
+{
+	if(sector == ''){ var sector = -1;  }
+	if(sector=='0')
+	{
+		$(".subsector_list").hide();
+	}else{
+		$(".subsector_list").show();
+	}
+
+	if(sector){var url = Path+'/seller/get_themes/'+sector; }
+	//$.post(url,function(check){ $("#CitySD").html(check); /*document.getElementById('CitySD').innerHTML = check; */});
+	$.ajax(
+	{
+		type:'POST',
+		url:url,
+		cache:false,
+		async:true,
+		global:false,
+		success:function(check)
+		{
+		   //$("#subSector").html(check);
+		   alert(check);
+		   
+		   var response = check;
+		   
+		   	  try{
+			  		response = $.parseJSON(response);
+					
+			   
+			   }catch(e){
+				   try{
+				   		response = parseInt(check);
+						if(response == 0){
+							//No sector
+						}
+				   }catch(e){
+					   
+					   //Unknown server response
+				   }
+			 }
+		   
+		},
+		error:function()
+		{
+			alert('No category has been added under this top category.');
+		}
+	});
+}
+
+
 function filtercategory_store(category_url,type,cat_type,store_url)
 {
     //alert(category_url+" "+type+" "+cat_type+" "+store_url);
