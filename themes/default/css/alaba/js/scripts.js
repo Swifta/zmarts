@@ -120,6 +120,20 @@
 			globalDelay : 400,
 			classN : "animate_vertical_finished"
 		});
+		$('.deals_carousel .photoframe.animate_ftb').waypointSynchronise({
+			container : '.deals_carousel',
+			delay : 200,
+			offset : 700,
+			globalDelay : 400,
+			classN : "animate_vertical_finished"
+		});
+		$('.auction_carousel .photoframe.animate_ftb').waypointSynchronise({
+			container : '.auction_carousel',
+			delay : 200,
+			offset : 700,
+			globalDelay : 400,
+			classN : "animate_vertical_finished"
+		});
 		$('.banner_type_2[class*="animate_ft"]').waypointSynchronise({
 			container : '.row',
 			delay : 200,
@@ -506,6 +520,29 @@ $('#shopping_button').on('mouseenter',function(){
 
 	})();
 
+	// bestsellers carousel
+
+	(function(){
+
+		var bsc = $('.deals_carousel');
+		if(bsc.length){
+			var bs = bsc.owlCarousel({
+		 		itemsCustom : [[1199,4],[992,4],[768,3],[590,2],[300,1]],
+		 		autoPlay : false,
+		 		slideSpeed : 1000,
+		 		autoHeight : true
+		 	});
+
+		 	$('.deals_prev').on('click',function(){
+		 		bs.trigger('owl.prev');
+		 	});
+
+		 	$('.deals_next').on('click',function(){
+		 		bs.trigger('owl.next');
+		 	});
+		}
+
+	})();
 	// our_recent_work_carousel
 
 	(function(){

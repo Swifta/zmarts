@@ -3852,7 +3852,8 @@ fieldset legend .close_fieldset{
 		margin-right:0 !important;
 	}
 	.products_container:not(.list_type) .product_item .photoframe,.nc_carousel .owl-item .photoframe,
-	.wfilter_carousel .photoframe,.bestsellers_carousel .photoframe{
+	.wfilter_carousel .photoframe,.bestsellers_carousel .photoframe,
+        .deals_carousel .photoframe, .auction_carousel .photoframe{
 		width:263px;
 		margin-left:auto;
 		margin-right:auto;

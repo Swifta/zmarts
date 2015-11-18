@@ -459,7 +459,7 @@ function validate() {
 				 <tr class="spe_show" >
                     <td><label><?php echo $this->Lang["ENTRY_ATTRIBUTE"]; ?></label></td>
                     <td></td>
-					<td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label>  </td>
+                    <td><label style="color:green">Click <a href="<?php echo PATH; ?>merchant/add-attribute.html" target="_blank">here</a> to add More Specifications<?php /*echo $this->Lang["TXT_LABEL"];*/ ?></label>  </td>
 			   </tr>
 					<tr class="atrmain spe_show"> 
 					<td></td>

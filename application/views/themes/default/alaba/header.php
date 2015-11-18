@@ -40,9 +40,9 @@ $this->language_List = str_replace(".php", "", $DL);
             background:#cc2828;
         }
         
-        .product .mediaholder img{
-            width:<?php echo PRODUCT_LIST_WIDTH; ?>px;
-            height: <?php echo PRODUCT_LIST_HEIGHT; ?>px;
+        .pp_wrap img{
+            width: 242px;
+            height: 242px;
         }
 </style>
 <?php if (($this->uri->last_segment() == "near-map.html") || ($this->uri->last_segment() == "nearmap.html")) { } else {} ?>
@@ -429,8 +429,82 @@ $srch = $this->Lang['SEARCH'];
                     <!--search form-->
                     <div class="searchform_wrap type_2 bg_tr tf_xs_none tr_all_hover w_inherit">
                             <div class="container vc_child h_inherit relative w_inherit">
-                                    <form role="search" class="d_inline_middle full_width">
-                                            <input type="text" name="search" placeholder="Type text and hit enter" class="f_size_large p_hr_0">
+<?php
+$ajax_type = 0;
+$srch = $this->Lang['SEARCH'];
+
+if (isset($this->is_product)) {
+$ajax_type = 1; // userd in auto suggestion search
+$srch = $this->Lang['SRCH_PRD'];
+?>
+<form id="myform" role="search" class="d_inline_middle full_width" action="<?php echo PATH.$this->storeurl; ?>/products.html">
+<?php
+}else if (isset($this->is_deals)) {
+$ajax_type = 2; // userd in auto suggestion search
+$srch = $this->Lang['SRCH_DEAL'];
+?>
+<form id="myform" role="search" class="d_inline_middle full_width" action="<?php echo PATH.$this->storeurl; ?>/today-deals.html">
+	<?php
+} else if (isset($this->is_auction)) {
+	$ajax_type = 3; // userd in auto suggestion search
+	$srch = $this->Lang['SRCH_AUC'];
+	?>
+	<form id="myform" role="search" class="d_inline_middle full_width" action="<?php echo PATH.$this->storeurl; ?>/auction.html">
+		<?php
+	} elseif (isset($this->is_store_details)) {
+$ajax_type = 5; // userd in auto suggestion search
+$srch = $this->Lang['SRCH_STR_DET'];
+?>
+<form id="myform" role="search" class="d_inline_middle full_width" action="<?php echo PATH.$this->storeurl; ?>/products.html">
+<?php
+} elseif (isset($this->is_store)) {
+$ajax_type = 4; // userd in auto suggestion search
+$srch = $this->Lang['SRCH_STR'];
+?>
+<form id="myform" role="search" class="d_inline_middle full_width" action="<?php echo PATH.$this->storeurl; ?>/products.html">
+<?php
+}  else {
+		$srch = $this->Lang['SRCH_PRD'];
+	?>
+<form id="myform" role="search" class="d_inline_middle full_width" action="<?php echo PATH.$this->storeurl; ?>/products.html">
+
+<?php } ?>  
+<div class="row">
+    <div class="cities" style="z-index: 999;float: left;" class="col-sm-6">
+		<ul>
+	        <li>
+                <?php
+                $catid = 0;
+                $cat_name = $this->Lang['AL_CAT'];
+                foreach ($this->category_list as $d) {
+                        if ($d->category_id == $this->input->get('d_id')) {
+                                $cat_name = $d->category_name;
+                                $catid = $d->category_id;
+                        }
+                }
+                ?>
+                <a data-caty="<?php echo $catid; ?>" id="search_cat" style="cursor:pointer;" title="<?php echo ucfirst($cat_name); ?>"><?php echo ucfirst($cat_name); ?></a>
+
+                <div class="drop_down">
+                <ul>
+                <?php
+                foreach ($this->category_list as $d) {
+                $cat = ($type == "products") ? 'product' : (($type == "auction") ? 'auction' : 'deal');
+                ?>
+                <li><a onclick="ChangeCategory('<?php echo $d->category_name; ?>', '<?php echo $d->category_id; ?>')" style="cursor:pointer;" title="<?php echo ucfirst($d->category_name); ?>" ><b><?php echo ucfirst($d->category_name); ?></b></a>
+                </li>
+                <?php } ?>
+                </ul>
+                </div>
+	        </li>
+        </ul>
+        <input type="hidden" name="d_id" id="cat" value="" />
+        </div>
+<?php $search = $this->input->get('q'); ?>
+    <div class="col-sm-6">
+<input type="text" name="search" name="q" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>
+           AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?> class="f_size_large p_hr_0">
+    </div></div>
                                     </form>
                                     <button class="close_search_form tr_all_hover d_xs_none color_dark">
                                             <i class="fa fa-times"></i>
@@ -438,87 +512,34 @@ $srch = $this->Lang['SEARCH'];
                             </div>
                     </div>
             </div>
+<?php if ($this->product_setting) { ?>
             <ul class="f_right horizontal_list d_sm_inline_b f_sm_none clearfix t_align_l site_settings">
                     <!--shopping cart-->
                     <li class="m_left_5 relative container3d" id="shopping_button">
-                            <a role="button" href="#" class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
+                            <a role="button" href="<?php echo PATH; ?>cart.html"title="<?php echo $this->Lang['CART']; ?>(<?php
+	        if ($this->session->get('count') != '') {
+		        echo $this->session->get('count');
+	        } else {
+		        echo '0';
+	        }
+                ?>)" class="button_type_3 color_light bg_scheme_color d_block r_corners tr_delay_hover box_s_none">
                                     <span class="d_inline_middle shop_icon">
                                             <i class="fa fa-shopping-cart"></i>
-                                            <span class="count tr_delay_hover type_2 circle t_align_c">3</span>
+                                            <span class="count tr_delay_hover type_2 circle t_align_c">
+                           <?php
+                                if ($this->session->get('count') != "") {
+                                        echo $this->session->get('count');
+                                } else {
+                                        echo "0";
+                                }
+		           ?>
+                                            </span>
                                     </span>
-                                    <b>$355</b>
+                                    <b></b>
                             </a>
-                            <div class="shopping_cart top_arrow tr_all_hover r_corners">
-                                    <div class="f_size_medium sc_header">Recently added item(s)</div>
-                                    <ul class="products_list">
-                                            <li>
-                                                    <div class="clearfix">
-                                                            <!--product image-->
-                                                            <img class="f_left m_right_10" src="images/shopping_c_img_1.jpg" alt="">
-                                                            <!--product description-->
-                                                            <div class="f_left product_description">
-                                                                    <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
-                                                                    <span class="f_size_medium">Product Code PS34</span>
-                                                            </div>
-                                                            <!--product price-->
-                                                            <div class="f_left f_size_medium">
-                                                                    <div class="clearfix">
-                                                                            1 x <b class="color_dark">$99.00</b>
-                                                                    </div>
-                                                                    <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i></button>
-                                                            </div>
-                                                    </div>
-                                            </li>
-                                            <li>
-                                                    <div class="clearfix">
-                                                            <!--product image-->
-                                                            <img class="f_left m_right_10" src="images/shopping_c_img_2.jpg" alt="">
-                                                            <!--product description-->
-                                                            <div class="f_left product_description">
-                                                                    <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
-                                                                    <span class="f_size_medium">Product Code PS34</span>
-                                                            </div>
-                                                            <!--product price-->
-                                                            <div class="f_left f_size_medium">
-                                                                    <div class="clearfix">
-                                                                            1 x <b class="color_dark">$99.00</b>
-                                                                    </div>
-                                                                    <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i></button>
-                                                            </div>
-                                                    </div>
-                                            </li>
-                                            <li>
-                                                    <div class="clearfix">
-                                                            <!--product image-->
-                                                            <img class="f_left m_right_10" src="images/shopping_c_img_3.jpg" alt="">
-                                                            <!--product description-->
-                                                            <div class="f_left product_description">
-                                                                    <a href="#" class="color_dark m_bottom_5 d_block">Cursus eleifend elit aenean auctor wisi et urna</a>
-                                                                    <span class="f_size_medium">Product Code PS34</span>
-                                                            </div>
-                                                            <!--product price-->
-                                                            <div class="f_left f_size_medium">
-                                                                    <div class="clearfix">
-                                                                            1 x <b class="color_dark">$99.00</b>
-                                                                    </div>
-                                                                    <button class="close_product color_dark tr_hover"><i class="fa fa-times"></i></button>
-                                                            </div>
-                                                    </div>
-                                            </li>
-                                    </ul>
-                                    <!--total price-->
-                                    <ul class="total_price bg_light_color_1 t_align_r color_dark">
-                                            <li class="m_bottom_10">Tax: <span class="f_size_large sc_price t_align_l d_inline_b m_left_15">$0.00</span></li>
-                                            <li class="m_bottom_10">Discount: <span class="f_size_large sc_price t_align_l d_inline_b m_left_15">$37.00</span></li>
-                                            <li>Total: <b class="f_size_large bold scheme_color sc_price t_align_l d_inline_b m_left_15">$999.00</b></li>
-                                    </ul>
-                                    <div class="sc_footer t_align_c">
-                                            <a href="#" role="button" class="button_type_4 d_inline_middle bg_light_color_2 r_corners color_dark t_align_c tr_all_hover m_mxs_bottom_5">View Cart</a>
-                                            <a href="#" role="button" class="button_type_4 bg_scheme_color d_inline_middle r_corners tr_all_hover color_light">Checkout</a>
-                                    </div>
-                            </div>
                     </li>
             </ul>
+<?php } ?>
     </div>
                                 </div>
                         </div>
