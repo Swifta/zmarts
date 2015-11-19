@@ -58,7 +58,7 @@ $(function() {
 					} 
 				}	?>           
           
-<div class="contianer_outer1" style="<?php echo $bg_color; ?>">
+<div class="contianer_outer1" style=" <?php echo $bg_color; ?>">
     <div class="contianer_inner">
         <div class="contianer">
             <?php /*<div class="bread_crumb">
