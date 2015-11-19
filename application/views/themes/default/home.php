@@ -366,8 +366,9 @@
                                         </div>
                                         <?php if($new_arrival->deal_percentage>0 && $new_arrival->deal_percentage!=''){?>
                                         <div class="hot_values">
-                                            <p><?php echo $this->Lang['OFF'];?></p>
+                                            
                                             <p><?php echo round($new_arrival->deal_percentage);?>%</p>
+                                            <p><?php echo $this->Lang['OFF'];?></p>
                                         </div>
                                         <?php }?>
                                     </div>
@@ -454,8 +455,9 @@
                                         </div>
                                         <?php if($best_sel->deal_percentage>0 && $best_sel->deal_percentage!=''){?>
                                         <div class="hot_values">
-                                            <p><?php echo $this->Lang['OFF'];?></p>
+                                            
                                             <p><?php echo round($best_sel->deal_percentage);?>%</p>
+                                            <p><?php echo $this->Lang['OFF'];?></p>
                                         </div>
                                         <?php }?>
                                     </div>
@@ -538,8 +540,9 @@
                                 </div>
                                         <?php if($new_arrival->deal_percentage>0 && $new_arrival->deal_percentage!=''){?>
                                         <div class="hot_values">
-                                            <p><?php echo $this->Lang['OFF'];?></p>
+                                            
                                             <p><?php echo round($new_arrival->deal_percentage);?>%</p>
+                                            <p><?php echo $this->Lang['OFF'];?></p>
                                         </div>
                                         <?php }?>
                                     </div>
@@ -738,8 +741,9 @@
                                         </div>
                                         <?php if($pro->deal_percentage>0 && $pro->deal_percentage!=''){?>
                                         <div class="hot_values">
-                                            <p><?php echo $this->Lang['OFF'];?></p>
+                                            
                                             <p><?php echo round($pro->deal_percentage);?>%</p>
+                                            <p><?php echo $this->Lang['OFF'];?></p>
                                         </div>
                                         <?php }?>
                                     </div>
