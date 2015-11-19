@@ -40,9 +40,10 @@ else{
 
 <!--product item-->
 <div class="product_item hit w_xs_full">
-        <figure class="r_corners photoframe type_2 t_align_c tr_all_hover shadow relative">
+        <figure class="r_corners photoframe tr_all_hover type_2 t_align_c shadow relative">
                 <!--product preview-->
-                <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>" class="d_block relative wrapper pp_wrap m_bottom_15">
+                <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>" 
+                   class="d_block relative wrapper pp_wrap m_bottom_15">
                     <img src="<?php echo $image_src_instance; ?>" alt="<?php echo $products->deal_title; ?>" class="tr_all_hover" alt="">
                 </a>
                 <!--description and price of product-->
@@ -59,7 +60,7 @@ else{
                    ?>
                         </a></h5>
                         <!--rating-->
-                        <p class="clearfix">
+                        <div class="clearfix">
         <?php 
         $avg_rating = $products->avg_rating;
         if($avg_rating!=''){
@@ -68,9 +69,9 @@ else{
         <?php } else { ?>
         <img style="margin:0px auto; text-align: center;" alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/gray.png"/>
         <?php } ?>
-                   
-                        </p>
-                        <p class="scheme_color f_size_large m_bottom_15"><?php echo $symbol . " " . number_format($products->deal_value); ?></p>	
+        <p class="scheme_color f_size_large m_bottom_15"><?php echo $symbol . " " . number_format($products->deal_value); ?></p>                   
+                        </div>
+
                         <button onclick="location.href='<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>';"href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"
                            class="button_type_4 bg_scheme_color r_corners tr_all_hover color_light mw_0 m_bottom_15">Add to Cart</button>
                         <div class="clearfix m_bottom_5 m_top_10">
