@@ -1395,7 +1395,7 @@ function get_themes(sector){
 							//var x = i+"";
 							
 						
-								var part1 = '<p style="text-align:right; padding-right: 10px; position:absolute; bottom: 0px; right:0;"><span><span style="cursor:pointer;"><input id = "id_opt_theme_'+s_id+'" value ="'+s_id+'" name="subsector" type="radio" /></span></span></p><p style="text-align:left; padding-left: 0px; position:absolute; bottom: 0px; left:0;"> <span style="cursor:pointer"><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">Name: </b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">'+response[i+1];
+								var part1 = '<p style="text-align:right; padding-right: 10px; position:absolute; bottom: 0px; right:0;"><span><span style="cursor:pointer;"><input id = "id_opt_theme_'+s_id+'" value ="'+s_id+'" name="subsector" type="radio" /></span></span></p><p style="text-align:left; padding-left: 0px; position:absolute; bottom: 0px; left:0;"> <span style="cursor:pointer"><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;"></b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">'+response[i+1];
 								
 							var part2 = '</i></span> </p><input id="id_img_path_'+i+'" type="hidden" value = "'+img_path_valid+'" /></li>';
 							

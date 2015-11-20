@@ -28,7 +28,7 @@
         <form method="post" class="admin_form" action = "" onclick="return atleast_onecheckbox(event)" name="edit_users" enctype="multipart/form-data">
                 <table>
                         <tr> 
-                                <td><label><?php echo $this->Lang["FIRST_NAME"]; ?><span>*</span></label></td>
+                                <td><label>Company Name<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="firstname" maxlength="32"  value="<?php echo $u->firstname;?>" autofocus />
                                 <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>

@@ -1475,7 +1475,7 @@ class Admin_merchant_Controller extends website_Controller {
 				<p style = \"text-decoration: none; color: #666;\"> To access your account, please  <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >  <form style=\"display:inline;\"><input type = \"button\" value = \" click this to login\" /></form>  </a></p>";
 				
 				
-				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;
+				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
 				$this->merchant_message = $merchant_message;
 				$merchantmessage = new View("themes/".THEME_NAME."/merchant_signup_mail_template");		
 				if(EMAIL_TYPE==2){				
@@ -1492,7 +1492,7 @@ class Admin_merchant_Controller extends website_Controller {
 				$subject = $this->Lang['MER_DIS_APP']." on ".SITENAME;
 				$merchant_message = "<p> <b>".$this->Lang['YOUR_DIS_APP_MER']." </b></p><p> ".$this->Lang['YOR_EMAIL']." : ".$details[0]->email."</p>";
 				
-				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;
+				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
 				$this->merchant_message = $merchant_message;
 				$merchantmessage = new View("themes/".THEME_NAME."/merchant_signup_mail_template");
 				
