@@ -67,7 +67,7 @@
 			        <?php }elseif(isset($this->moderator)){ ?>
 			        <?php echo $this->Lang['MER_MOD_REGISTRATION'];?>
 			        <?php }else if(isset($this->store_admin)){?>
-			        <?php echo $this->Lang['CRT_STORE_ADMIN_ACC'];?>
+			       		 Store Administrator Account created successfully.
 			        <?php }?>
                                 </td>
                                 </tr>
@@ -88,6 +88,10 @@
                                        <td>
               
                                         <?php if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) { ?>
+                                        
+                                         <?php if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) {
+											 
+										 }?>
                                         <?php echo $this->Lang['E_Y_PASS']; ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->password)) { echo $this->password; } ?></a>
                                            <?php } else { ?>
                                            
@@ -107,9 +111,9 @@
 				     <tr>
                                         <td>
                                         <?php if(isset($this->moderator) ||  isset($this->admin_signup)) { ?>
-					    Login URL: <a href="<?php  echo PATH.'../../modules/users/views/admin-login.html'; ?>"> <?php  echo PATH.'admin-login.html'; ?></a>
+					    Login URL: <a href="<?php  echo PATH.'admin-login.html'; ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
                                            <?php } else if(isset($this->store_admin)) { ?>
-                                           Login URL: <a href="<?php  echo PATH.'../../modules/users/views/store-admin-login.html'; ?>"> <?php  echo PATH.'store-admin-login.html'; ?></a>
+                                           <a href="<?php  echo PATH.'store-admin-login.html'; ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
                                            <?php } ?>
                                         </td>
                                     </tr>
@@ -132,7 +136,7 @@
                         
                         <tr>
                             <td align="left" style="font:normal 13px/19px arial;color:#666;">
-                               <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#666; text-decoration:none;"><?php echo PATH; ?></a> ,
+                               <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#666; text-decoration:none;"><?php echo SITENAME; ?></a> ,
                             </td> 
                         </tr>
                         <tr height="5">
