@@ -588,7 +588,8 @@ class Merchant_Model extends Model
 		$sector = isset($post->sector)?$post->sector:0;
 		$subsector = isset($post->subsector)?$post->subsector:0;
 			
-			$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->email,"password"=>md5($password),"user_type"=>9,"created_by"=>$this->user_id,"referred_user_id"=>$this->user_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector));
+			$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->email,"password"=>md5($password),"user_type"=>9,"created_by"=>$this->user_id,"referred_user_id"=>$this->user_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,
+                            "country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector,'nuban'=>$post->nuban));
 			
 			$stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'created_by'=>$this->user_id, 'store_type' => '2','merchant_id'=>$this->user_id,"created_date" => time(),"about_us"=>$post->about_us,"store_admin_id"=>$res->insert_id(),"store_sector_id"=>$sector,"store_subsector_id"=>$subsector));
 			 $result = $this->db->insert("merchant_attribute", array("merchant_id" => $this->user_id,"storeid" =>$stores_result->insert_id()));
@@ -4900,5 +4901,26 @@ class Merchant_Model extends Model
 		$result=$this->db->from("stores")->where(array("store_id" =>$store_id))->get();
         return $result;
 	}
+        
+        public function validate_account($nuban = ""){
+            try{
+              $arg = array();
+              $arg['userName'] = ZENITH_TEST_USER;
+              $arg['Pwd'] = ZENITH_TEST_PASS;
+              $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
+              $arg['account_number'] = $nuban;
+              $fun_resp = $soap->VerifyAccount($arg);
+              $response = (array)$fun_resp->VerifyAccountResult;
+              //var_dump($response);die;
+                if($response){
+                    if(!isset($response['errorMessage'])){
+                        return true;
+                    }
+                }
+            } catch(Exception $e){
+                return false;
+            }
+            return false;
+        }
 	
 }

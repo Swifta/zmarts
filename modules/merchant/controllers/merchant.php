@@ -791,7 +791,7 @@ class Merchant_Controller extends website_Controller
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					->add_rules('mobile', 'required', array($this, 'validphone'))
 					->add_rules('address1', 'required')
-					->add_rules('address2', 'required')
+					//->add_rules('address2', 'required')
 					->add_rules('country', 'required')
 					->add_rules('city', 'required')
 					->add_rules('storename', 'required',array($this,'check_store_exist'))
@@ -801,6 +801,7 @@ class Merchant_Controller extends website_Controller
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('sector', 'required')
+                                        ->add_rules('nuban', 'required',array($this,'validate_account'))
 					->add_rules('subsector', 'required')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 					->add_rules('email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
@@ -950,7 +951,12 @@ class Merchant_Controller extends website_Controller
 		$this->city_list = $this->merchant->get_city_lists();
 		$this->sector_list = $this->merchant->get_all_sector_data();
 		$this->sub_sector_list=$this->merchant->get_all_sub_sectors();
-                //var_dump($this->sub_sector_list); die;
+                $user_data = $this->merchant->get_users_data();
+                $this->main_store_account_number =  "";
+                foreach($user_data as $one){
+                    $this->main_store_account_number = $one->nuban;
+                }
+                //var_dump($this->main_store_account_number); die;
 		$this->template->title = $this->Lang["ADD_SHOPS"];
 		$this->template->content = new View("merchant/add_merchant_shop");
 	}
@@ -1029,7 +1035,7 @@ class Merchant_Controller extends website_Controller
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					->add_rules('mobile', 'required', array($this, 'validphone'))
 					->add_rules('address1', 'required')
-					->add_rules('address2', 'required')
+					//->add_rules('address2', 'required')
 					->add_rules('country', 'required')
 					->add_rules('city', 'required')
 					->add_rules('storename', 'required',array($this,'check_store_exist1'))
@@ -1247,6 +1253,11 @@ class Merchant_Controller extends website_Controller
 	    $exist = $this->merchant->exist_name($this->input->post("storename"));
 	    return ($exist == 0)?true:false; 
 	}
+        
+        public function validate_account(){
+            return !$this->merchant->validate_account($this->input->post("nuban"));
+        }
+        
 	public function check_store_exist1(){
 	    $exist = $this->merchant->exist_name($this->input->post("storename"),$this->input->post("storeid"));
 	    return ($exist == 0)?true:false; 
