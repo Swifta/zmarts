@@ -509,7 +509,7 @@ foreach ($this->product_deatils as $products) {
                       </div> */ ?>
                         
                         
-                        
+                       
                     <div class="deal_comment_block">
                         <div class="deal_address">
                             <h2 class="deal_sub_title"><?php echo $this->Lang['ADDRES']; ?></h2>

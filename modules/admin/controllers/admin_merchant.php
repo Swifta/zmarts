@@ -326,6 +326,7 @@ class Admin_merchant_Controller extends website_Controller {
 					exit;
 			}
 				$this->template->title = $this->Lang["MERCHANT_MANAGE"];
+                                //echo "here"; die;
                 $this->template->content = new View("admin_merchant/manage_merchant");
 	}
 
@@ -678,23 +679,30 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 	    $email = base64_decode($email);
 		$status = $this->merchant->blockunblockmerchant($type, $uid, $email);
-		if($status == 1){
-			if($type == 1){
-				common::message(1, $this->Lang["MERCHANT_UNB"]);
-			}
-			else{
-				common::message(1, $this->Lang["MERCHANT_B"]);
-			}
-		}
-		else{
-			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-		url::redirect(PATH.$lastsession);
-		} else {
-		url::redirect(PATH."admin/merchant.html");
-		}
+//		if($status == 1){
+//			if($type == 1){
+//				common::message(1, $this->Lang["MERCHANT_UNB"]);
+//			}
+//			else{
+//				common::message(1, $this->Lang["MERCHANT_B"]);
+//			}
+//		}
+//		else{
+//			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
+//		}
+                if($type == 1){
+                        common::message(1, $this->Lang["MERCHANT_UNB"]);
+                }
+                else{
+                        common::message(1, $this->Lang["MERCHANT_B"]);
+                }
+//		$lastsession = $this->session->get("lasturl");
+//		if($lastsession){
+//		url::redirect(PATH.$lastsession);
+//		} else {
+//		url::redirect(PATH."admin/merchant.html");
+//		}
+                url::redirect(PATH."admin/merchant.html");
 		
 	}
 	

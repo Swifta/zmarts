@@ -426,13 +426,15 @@ class Admin_merchant_Model extends Model
                 if($type == 1){
                     $status = 1;
                 }
+                
                 $result = $this->db->update("users", array("user_status" => $status), array("user_id" => $uid, "email" => $email));
                 $merchant_result = $this->db->update("stores", array("store_status" => $status), array("merchant_id" => $uid));
                 
                 $get_data = $this->db->from("stores")->join("users","stores.merchant_id","users.user_id")->where(array("merchant_id" => $uid))->get();
                 foreach($get_data as $c){
-					$result = $this->db->update("users", array("user_status" => $status), array("user_id" => $c->store_admin_id));
-				}
+                    $result = $this->db->update("users", array("user_status" => $status), array("user_id" => $c->store_admin_id));
+                }
+                //echo count($result); die;
                 return count($result);
         }
     
@@ -605,13 +607,14 @@ class Admin_merchant_Model extends Model
 		public function approvedisapprove_merchant($type="",$merchant_id=0, $password = "")
 		{
 			
-						$status = 0;
+			$status = 0;
                         if($type == 1){
                                 $status = 1;
                         }
 						
 			$p = md5($password);
-			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p, "user_status" => $status), array("user_id" =>$merchant_id));
+			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p, 
+                            "user_status" => 0), array("user_id" =>$merchant_id));
 			return count($result);
 		}
 		
