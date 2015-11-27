@@ -398,7 +398,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <li>
                                     
                                  <div class="" style="">
-									<input maxlength="50" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter 2nd address (if any)"
+									<input maxlength="50" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
 								                                             value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
 										echo $this->session->get('mraddress2'); 
 										} else {

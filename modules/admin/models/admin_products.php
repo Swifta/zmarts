@@ -648,7 +648,7 @@ class Admin_products_Model extends Model
 			
 			
 			
-			if($post->prime_price !=''){
+			if(isset($post->prime_price)){
 				
 				$deal_price = $post->deal_value;
 				$deal_prime_val = $post->prime_price;

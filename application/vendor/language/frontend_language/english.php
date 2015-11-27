@@ -1644,9 +1644,9 @@ $content_text = array(
 
 "ENTE_EMAIL_F" => "Enter a valid email address",
 
-"ENTER_ADDR1" => "Enter your address 1 here",
+"ENTER_ADDR1" => "Enter your address here",
 
-"ENTER_ADDR2" => "Enter your address 2 here",
+"ENTER_ADDR2" => "Enter address line 2 here",
     
 "ENTER_COMPANY_NAME" => "Enter company name",
     

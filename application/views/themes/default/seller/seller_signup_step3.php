@@ -401,7 +401,7 @@ input[type=text],input[type=password]
 <td>
     
       <div class="">		
-                                     <span class="asterisks_input">  </span>
+                                     <!--<span class="asterisks_input">  </span>-->
                             <input maxlength="50" type="text" name="address2" class="swifta_input" tabindex="5" id="address2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>"  autofocus />
                             
 								<em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
