@@ -71,8 +71,9 @@ foreach ($this->all_deals_list as $deals_categories) {
 			<?php }?>   
                 </div>
                     <div class="hot_label">
-                        <p>OFF</p>
+                        
                         <p><?php echo round($deals_categories->deal_percentage); ?>%</p>
+                        <p>OFF</p>
                     </div>
                 <div class="product_listing_detail">
                     <h2>

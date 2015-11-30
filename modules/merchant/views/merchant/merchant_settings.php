@@ -15,7 +15,7 @@
                 <tr>
                     <td><label><?php echo $this->Lang["MERCHANT_NAME"]; ?></label></td>
                     <td><label>:</label></td>
-                    <td><?php if($u->lastname){echo ucfirst(htmlspecialchars($u->firstname." ".$u->lastname));} else {echo ucfirst(htmlspecialchars($u->firstname));}?></td>
+                    <td><?php if($u->lastname){echo ucfirst(htmlspecialchars($u->lastname));} else {echo ucfirst(htmlspecialchars($u->firstname));}?></td>
                 </tr>
 
                 <tr>

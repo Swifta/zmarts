@@ -179,7 +179,7 @@
                                 </td>
                         </tr>
                         <tr>
-                                <td><label><?php echo $this->Lang["ADDR2"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["ADDR2"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="address2" maxlength="255" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>"/>
                                 <em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
@@ -287,7 +287,14 @@
 								</td>
 						</tr>
 		    
-                            
+                    <tr>
+                        <td><label>Shop Bank Account Number<span>*</span><br />(<em>Edit if it's a Unique Zenith Account</em> )</label></td>
+                            <td><label>:</label></td>
+                            <td><input type="text" name="nuban" maxlength="10" 
+                            value="<?php if(!isset($this->form_error['nuban']) && isset($this->userPost['nuban'])){echo $this->userPost['nuban'];}else{echo $this->main_store_account_number;}?>"/>
+                            <em><?php if(isset($this->form_error['nuban'])){ echo $this->form_error["nuban"]; }?></em>
+                            </td>
+                    </tr>                            
                       <tr>
                     <td><label><?php echo $this->Lang["STORES_IMG"]; ?></label></td>
                     <td><label>:</label></td>
@@ -296,7 +303,7 @@
                         <em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
                          <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
                     </td>       
-                </tr>                    
+                </tr>
                         
                         <tr>
                                 <td></td>

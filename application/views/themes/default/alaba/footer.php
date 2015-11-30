@@ -148,7 +148,9 @@ echo $stores->about_us;
 <!--
 http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fenvato&amp;width=235&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=438889712801266
 -->
-
+<?php
+if(isset($this->get_store_details)){
+?>
 <ul class="social_widgets d_xs_none">
  <?php foreach ($this->get_store_details as $store) { ?>   
         <!--facebook-->
@@ -180,29 +182,6 @@ http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2
                 </div>
         </li>
  <?php } ?>
-        <!--twitter feed-->
-        <li class="relative">
-                <button class="sw_button t_align_c twitter"><i class="fa fa-twitter"></i></button>
-                <div class="sw_content">
-                        <h3 class="color_dark m_bottom_20">Latest Tweets</h3>
-                        <div class="twitterfeed m_bottom_25"></div>
-                        <a role="button" class="button_type_4 d_inline_b r_corners tr_all_hover color_light tw_color" href="<?php echo TWITTER_PAGE; ?>">Follow on Twitter</a>
-                </div>	
-        </li>
-        <!--contact form-->
-        <!--<li class="relative">
-                <button class="sw_button t_align_c contact"><i class="fa fa-envelope-o"></i></button>
-                <div class="sw_content">
-                        <h3 class="color_dark m_bottom_20">Contact Us</h3>
-                        <p class="f_size_medium m_bottom_15">Lorem ipsum dolor sit amet, consectetuer adipis mauris</p>
-                        <form id="contactform" class="mini">
-                                <input class="f_size_medium m_bottom_10 r_corners full_width" type="text" name="cf_name" placeholder="Your name">
-                                <input class="f_size_medium m_bottom_10 r_corners full_width" type="email" name="cf_email" placeholder="Email">
-                                <textarea class="f_size_medium r_corners full_width m_bottom_20" placeholder="Message" name="cf_message"></textarea>
-                                <button type="submit" class="button_type_4 r_corners mw_0 tr_all_hover color_dark bg_light_color_2">Send</button>
-                        </form>
-                </div>	
-        </li>-->
         <!--contact info-->
         <li class="relative">
                 <button class="sw_button t_align_c googlemap"><i class="fa fa-map-marker"></i></button>
@@ -247,7 +226,83 @@ http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2
         </li>
 </ul>
 
+<?php
+}
+else if(isset($products)){
+?>
+<ul class="social_widgets d_xs_none">
+  
+        <!--facebook-->
+        <li class="relative">
+                <button class="sw_button t_align_c facebook"><i class="fa fa-facebook"></i></button>
+                <div class="sw_content">
+                    <figure>
+                    <div class="title_outer">
+                        <h2 class="title_inner2"><?php echo $this->Lang['COMM']; ?></h2>  
+                    </div>                    
+                        <div class="fbok_comment wloader_parent" style="min-height:220px;">
+                            <i class="wloader_img">&nbsp;</i>
+                            <div id="fb-root"></div>
+                            <script>
+                                (function(d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
 
+                                    js = d.createElement(s); js.id = id;
+                                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));														
+                            </script>
+                            <div width="100%" class="fb-comments" data-href="<?php echo PATH . $products->store_url_title.'/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" data-num-posts="10" ></div>
+                        </div> 
+                    </figure>
+                        <!--<h3 class="color_dark m_bottom_20">Join Us on Facebook</h3>
+                        <iframe src="" style="border:none; overflow:hidden; width:235px; height:258px;"></iframe>-->
+                </div>
+        </li>
+        <!--contact info-->
+        <li class="relative">
+                <button class="sw_button t_align_c googlemap"><i class="fa fa-map-marker"></i></button>
+                <div class="sw_content">
+                        <h3 class="color_dark m_bottom_20">Store Location</h3>
+
+                <div id="map_main" style="height:306px;"></div>
+                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                <script type="text/javascript">
+                    var latlng = new google.maps.LatLng(<?php echo $products->latitude; ?>,<?php echo $products->longitude; ?>);
+                    var myOptions = {
+                        zoom: 12,
+                        center: latlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        navigationControl: true,
+                        mapTypeControl: true,
+                        scaleControl: true
+                    };
+
+                    var map = new google.maps.Map(document.getElementById("map_main"), myOptions);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        animation: google.maps.Animation.BOUNCE
+                    });
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: '<b><?php echo preg_replace("/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s", '', $products->store_name); ?></b><p><?php echo preg_replace("/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s", '', $products->address1); ?></p><p><?php echo preg_replace("/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s", '', $products->address2); ?></p><p><?php echo $products->city_name; ?>,<?php echo $products->country_name; ?></p>'
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() { 
+                        infowindow.open(map, marker);
+                    });
+                    marker.setMap(map);
+
+                </script>
+
+                    </figure>
+                </div>	
+        </li>
+</ul>
+<?php
+}
+?>
 <button class="t_align_c r_corners type_2 tr_all_hover animate_ftl" id="go_to_top"><i class="fa fa-angle-up"></i></button>
 <!--scripts include-->
 <!--<script src="/js/jquery-2.1.0.min.js"></script>-->

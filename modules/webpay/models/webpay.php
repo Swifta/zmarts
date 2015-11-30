@@ -41,6 +41,7 @@ class Webpay_Model extends Model
                         ->join("product","product.deal_id","transaction.product_id")
                         ->join("users","users.user_id","transaction.user_id")
                         ->join("city","city.city_id","users.city_id")
+                        ->join("stores", "product.shop_id", "stores.store_id")
                         ->get();
             if(count($result) > 0){
                 $total_amount = 0;
@@ -55,9 +56,18 @@ class Webpay_Model extends Model
 
                     $item_id = $row->product_id;
                     $item_name = urlencode($row->deal_title." (".$row->quantity.")");
-                    //$acct_num = $row->nuban; //comment this out on production because merchants are supposed to have a
+                    $acct_num = "";
+                    /*
+                     * get this merchant/shop account number to settle
+                     */
+                    $qu = $this->db->from("users")
+                            ->where(array("user_id"=>$row->store_admin_id))->get();
+                    foreach($qu as $merch){
+                        $acct_num = $merch->nuban;
+                    }
+                    //$acct_num = $row->nuban;
+                    $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
-                    $acct_num = rand(1000000000, 9999999999);
                     $temp_item_amt = intval($row->amount * 100);
                     //if($total_amount > )
                     if(!$is_above_2k){

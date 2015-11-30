@@ -815,9 +815,9 @@ class Admin_products_Controller extends website_Controller
 					$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
 				}
 					
-				$prime_price_s = $post->prime_price;
-				if(isset($prime_price_s)){
-					$prime_price_s = trim($prime_price_s);
+				$prime_price_s = "";
+				if(isset($post->prime_price)){
+					$prime_price_s = trim($post->prime_price);
 					if($prime_price_s != "")
 					$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
 				}

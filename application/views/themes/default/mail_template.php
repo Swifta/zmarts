@@ -67,7 +67,7 @@
 			        <?php }elseif(isset($this->moderator)){ ?>
 			        <?php echo $this->Lang['MER_MOD_REGISTRATION'];?>
 			        <?php }else if(isset($this->store_admin)){?>
-			       		 Your tore administrator Account has been created successfully.
+			       		 Store Administrator Account created successfully.
 			        <?php }?>
                                 </td>
                                 </tr>
@@ -92,16 +92,10 @@
                                          <?php if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) {
 											 
 										 }?>
-                                         
-                                        <?php if(isset($_POST['store_email_id'])){?>
-										 <td style="text-align: left" colspan="2" > Please await approval email from merchant.
-										<?php } else {?>
                                         <?php echo $this->Lang['E_Y_PASS']; ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->password)) { echo $this->password; } ?></a>
-										<?php }?>
-                                        
-                                           <?php } ?>
+                                           <?php } else { ?>
                                            
-                                          
+                                           <?php } ?>
                                         </td>
                                     </tr>
                                     </table>
@@ -119,9 +113,7 @@
                                         <?php if(isset($this->moderator) ||  isset($this->admin_signup)) { ?>
 					    Login URL: <a href="<?php  echo PATH.'admin-login.html'; ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
                                            <?php } else if(isset($this->store_admin)) { ?>
-                                            <?php if(!isset($_POST['store_email_id'])){?>
                                            <a href="<?php  echo PATH.'store-admin-login.html'; ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
-                                           <?php }?>
                                            <?php } ?>
                                         </td>
                                     </tr>
@@ -174,4 +166,3 @@
         </table>
     </body>
 </html>
-

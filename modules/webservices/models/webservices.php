@@ -14,6 +14,7 @@ class Webservices_Model extends Model
             $product_breakdown = array();
             $merchant_breakdown = array();
             $result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
+            //var_dump($result);
             if(count($result) == 1){
 	         $result = $this->db->from("transaction")
                             ->where(array("transaction.transaction_id"=>$transaction_id))

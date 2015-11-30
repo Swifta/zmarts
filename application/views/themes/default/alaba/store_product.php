@@ -35,115 +35,140 @@ $(".slidetabs").tabs(".images > div", {
         $('#messagedisplay1').hide();
     });
 </script>
-<div class="wrapper">
+
+<section class="breadcrumbs">
     <div class="container">
-        <div class="row ">
-            
-            <!-- SLIDER -->
-            <div class="span9 slider">
-                <div class="slider-slides">
-<?php
-$font_color = "";
-$bg_color ="";
-$font_size ="";
+        <ul class="horizontal_list clearfix bc_list f_size_medium">
+            <li class="m_right_10"><a href="#" class="default_t_color">Home<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
+            <li><a href="#" class="default_t_color">Products</a></li>
+        </ul>
+    </div>
+</section>
 
-    
-$banner_check ="";
-if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {  
-                $tabs=0;
-                for ($i = 1; $i <= 3; $i++) {
-                    if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
-                            $banner_link="";
 
-                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
-                                $banner_check = 1;
-                                if($i==1) { 
-                                    $banner_link = $m->banner_1_link; 
-                                } else if($i==2) { 
-                                    $banner_link = $m->banner_2_link; 
-                                } else if($i==3) { 
-                                    $banner_link = $m->banner_3_link; 
-                                }
-                                
-                            }
-?>
-<div class="slides">                                                                               
-    <a href="<?php echo $banner_link; ?>"  title="<?php echo $banner_link; ?>">
-        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" 
-             data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
-    </a>
-</div>
-<?php
+
+
+
+
+<!--content-->
+<div class="page_content_offset">
+        <div class="container">
+                <div class="row clearfix">
+                        <!--left content column-->
+                        <section class="col-lg-9 col-md-9 col-sm-9">
+                            <h2 class="tt_uppercase color_dark m_bottom_25">Products</h2>
+                                <hr class="m_bottom_10 divider_type_3">
+                                <!--products-->
+                            <section class="products_container category_grid clearfix m_bottom_15">
+                    <!--<div class="productsss">-->
+                            <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_product_list"); ?>
+                            <span  id="product">
+                            </span>
+                    <!--</div>-->
+                            </section>
+                    <?php if(($this->all_products_count > 12)) { ?>
+                        <!--<div id="loading">
+                        <?php if (($this->pagination) != "") { ?>
+                                        <div class="feature_viewmore text-center">
+                                                <div class="fea_view_more text-center">                                                
+                                                        <a class="view_more view_more1 view_more_but" onclick="viewMore();">
+                                                                <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_PROD']; ?><span class="view_more_icon">- - -</span>
+                                                        </a> 
+                                                </div>
+                                        </div>
+                                <?php } ?>
+                        </div>-->
+                    <?php } ?>
+                         <hr class="m_bottom_10 divider_type_3">
+                        </section>
+                        
+                    <!--right column-->
+                    
+
+
+<aside class="col-lg-3 col-md-3 col-sm-3">
+        <!--widgets-->
+        <figure class="widget shadow r_corners wrapper m_bottom_30">
+                <figcaption>
+                        <h3 class="color_light">Categories</h3>
+                </figcaption>
+                <div class="widget_content">
+                        <!--Categories list-->
+                        <ul class="categories_list">
+                                <li class="active">
+                                                        
+                                <?php if ($this->product_setting) { ?>
+
+    <?php $pr = 0; $pro = 0; $val_pro ="";
+        foreach ($this->categeory_list_product as $d) {
+        //$check_sub_cat = common::get_subcat_count($d->category_id, 3, "main", $d->category_url); /*   COUNT OF SUBCATEGORY   */
+        //$val_pro .= $check_sub_cat.","; 
+        $check_sub_cat = $d->product_count;
+        if($check_sub_cat != 0){
+        $pro = $pr + 1;
+        $pr ++;
+        } }
+        $arr_product = explode(",", substr($val_pro,0,-1));
+    ?>
+
+        <?php if($this->categeory_list_product){  
+            $first = true;
+            foreach ($this->categeory_list_product as $d) {
+                $check_sub_cat = $d->product_count;
+                if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {
+        ?>
+    <a href="#" class="d_block f_size_large color_dark relative"><b>
+        <?php
+                    if(strlen($d->category_name) > 16){
+                        echo substr(ucfirst($d->category_name), 0, 16);
                     }
                     else{
-                        //echo "No Image file";
-?>
-                <div class="slides">
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/<?php echo $i; ?>.jpg" alt="" />
-                </div>
-<?php
+                        echo ucfirst($d->category_name);
                     }
-                }
-        }
-}
-else{?>
-
-    <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/1.jpg" alt="" />
-    </div>
-    <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/2.jpg" alt="" />
-    </div>
-    <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/3.jpg" alt="" />
-    </div>
-
-<!-- display default banners-->
+        ?>
+    </b><span class="bg_light_color_1 r_corners f_right color_dark talign_c">       
+    </span></a>  
+    <ul>
+    <?php if(count($this->subcategories_list)>0){
+        foreach($this->subcategories_list as $sub_cate){
+            if($sub_cate->main_category_id == $d->category_id){
+    ?>
+            <li><a href="<?php echo PATH.$this->storeurl.'/products/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>"
+              title="<?php echo ucfirst($sub_cate->category_name);?>" class="color_dark d_block">
 <?php
-}
+                if(strlen($sub_cate->category_name) > 14){
+                    echo substr(ucfirst($sub_cate->category_name), 0, 14)."..";
+                }
+                else{
+                    echo ucfirst($sub_cate->category_name);
+                }  
 ?>
-    </div>
-    <a href="#" class="next"></a>
-    <a href="#" class="prev"></a>
-    <div class="slider-btn"></div>
+                </a></li>
+    <?php 
+            }
+        }
+
+    }
+    ?>
+    </ul>
+                <?php }}} ?>
+<?php } ?>
+
+        </li>
+
+        </ul>
 </div>
-<!-- SLIDER -->
+    </figure>
 
-            <!-- SPECIAL-OFFER -->
-            <div class="span3">
-            <?php 
-            $ads_check = "";
-            if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {
-		 ?>        
-					<?php for ($i = 1; $i <= 2; $i++) { ?>
-										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
-											$ads_link="";
-											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
-											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
-                <div class="offers">
-                    <figure>
-                            <a class="img-caption" href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
-                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>
-                            </a>
-                    </figure>
-                </div>
-                    <?php }else{?>
-                <div class="offers">
-                    <figure>
-				<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/ads/<?php echo $i; ?>.jpg" alt="" />
-			</figure>
-                </div>
-                    <?php }}?> 
-            <?php  } } ?>
-
+ 
+                    </aside>
+                    
+                    
             </div>
-            <!-- SPECIAL-OFFER -->
-            
-        </div>
     </div>
 </div>
+
+
 
  <?php 
     $font_color = "";
@@ -158,48 +183,6 @@ else{?>
 //            } 
 //    }	 
 ?>
-<!-- BAR -->
-<div class="bar-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="title-bar">
-                    <h1><?php echo $this->title_display; ?></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- BAR -->
-                
-<div class="product_wrap">
-    <div class="container">
-        <div class="row">
-            <div>
-                <div class=" clearfix">
-                    <div class="productsss">
-                    <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_product_list"); ?>
-                            <span  id="product">
-                            </span>
-                    </div>
-                    <?php if(($this->all_products_count > 12)) { ?>
-                        <div id="loading">
-                        <?php if (($this->pagination) != "") { ?>
-                                        <div class="feature_viewmore text-center">
-                                                <div class="fea_view_more text-center">                                                
-                                                        <a class="view_more view_more1 view_more_but" onclick="viewMore();">
-                                                                <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_PROD']; ?><span class="view_more_icon">- - -</span>
-                                                        </a> 
-                                                </div>
-                                        </div>
-                                <?php } ?>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
             
             
 <section  id="messagedisplay1" style="display:none;">      

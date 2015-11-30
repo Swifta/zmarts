@@ -326,6 +326,7 @@ class Admin_merchant_Controller extends website_Controller {
 					exit;
 			}
 				$this->template->title = $this->Lang["MERCHANT_MANAGE"];
+                                //echo "here"; die;
                 $this->template->content = new View("admin_merchant/manage_merchant");
 	}
 
@@ -678,23 +679,30 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 	    $email = base64_decode($email);
 		$status = $this->merchant->blockunblockmerchant($type, $uid, $email);
-		if($status == 1){
-			if($type == 1){
-				common::message(1, $this->Lang["MERCHANT_UNB"]);
-			}
-			else{
-				common::message(1, $this->Lang["MERCHANT_B"]);
-			}
-		}
-		else{
-			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-		url::redirect(PATH.$lastsession);
-		} else {
-		url::redirect(PATH."admin/merchant.html");
-		}
+//		if($status == 1){
+//			if($type == 1){
+//				common::message(1, $this->Lang["MERCHANT_UNB"]);
+//			}
+//			else{
+//				common::message(1, $this->Lang["MERCHANT_B"]);
+//			}
+//		}
+//		else{
+//			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
+//		}
+                if($type == 1){
+                        common::message(1, $this->Lang["MERCHANT_UNB"]);
+                }
+                else{
+                        common::message(1, $this->Lang["MERCHANT_B"]);
+                }
+//		$lastsession = $this->session->get("lasturl");
+//		if($lastsession){
+//		url::redirect(PATH.$lastsession);
+//		} else {
+//		url::redirect(PATH."admin/merchant.html");
+//		}
+                url::redirect(PATH."admin/merchant.html");
 		
 	}
 	
@@ -1475,7 +1483,7 @@ class Admin_merchant_Controller extends website_Controller {
 				<p style = \"text-decoration: none; color: #666;\"> To access your account, please  <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >  <form style=\"display:inline;\"><input type = \"button\" value = \" click this to login\" /></form>  </a></p>";
 				
 				
-				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;
+				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
 				$this->merchant_message = $merchant_message;
 				$merchantmessage = new View("themes/".THEME_NAME."/merchant_signup_mail_template");		
 				if(EMAIL_TYPE==2){				
@@ -1492,7 +1500,7 @@ class Admin_merchant_Controller extends website_Controller {
 				$subject = $this->Lang['MER_DIS_APP']." on ".SITENAME;
 				$merchant_message = "<p> <b>".$this->Lang['YOUR_DIS_APP_MER']." </b></p><p> ".$this->Lang['YOR_EMAIL']." : ".$details[0]->email."</p>";
 				
-				$this->name = ucfirst($details[0]->firstname)." ".$details[0]->lastname;
+				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
 				$this->merchant_message = $merchant_message;
 				$merchantmessage = new View("themes/".THEME_NAME."/merchant_signup_mail_template");
 				

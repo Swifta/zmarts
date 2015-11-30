@@ -8,14 +8,14 @@
         <form method="post" class="admin_form" name="edit_users" >
                 <table>
                         <tr> 
-                                <td><label><?php echo $this->Lang["FIRST_NAME"]; ?></label><span>*</span></td>
+                                <td><label>Company Name</label><span>*</span></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="firstname" maxlength="32" value="<?php echo $u->firstname;?>" autofocus />
                                 <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
                                 </td>
                         </tr>
                         <tr> 
-                                <td><label><?php echo $this->Lang["LAST_NAME"]; ?></label><span>*</span></td>
+                                <td><label>Merchant Name</label><span>*</span></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="lastname" maxlength="32" value="<?php echo $u->lastname;?>"/>
                                 <em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>

@@ -413,6 +413,7 @@ class Products_Controller extends Layout_Controller
 		        common::message(-1, $this->Lang["PAGE_NOT"]);
 		        url::redirect(PATH);
 		}
+                
 		$this->home = new Home_Model();
 		$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
 		$this->stores = new Stores_Model();
@@ -474,7 +475,7 @@ class Products_Controller extends Layout_Controller
 			$this->sector ="";
 		}
 		
-		
+		//var_dump($this->footer_merchant_details); die;
 		if($this->theme_name) { 
 			
 			//$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));

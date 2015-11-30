@@ -294,8 +294,8 @@
 													   </div>
 														<?php }?>   
 														 <div class="hot_label">
-															<p>OFF</p>
-															<p><?php echo round($deals_categories->deal_percentage); ?>%</p>
+															
+															<p><?php echo round($deals_categories->deal_percentage); ?>% </p><p>OFF</p>
 														</div>
                                                     </div>
                                                     <div class="product_listing_detail">

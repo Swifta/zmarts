@@ -2017,7 +2017,7 @@ $pdf->Output('voucher.pdf', 'I');
 				  $r = $this->users->check_zenith_account_used($nuban);
 				  if(isset($r) && $r == "1"){
 					   $fun_resp = null;
-						try{
+					try{
 						
 						  $arg = array();
 						  $arg['userName'] = ZENITH_TEST_USER;

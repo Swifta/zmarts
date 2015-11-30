@@ -717,7 +717,7 @@ $content_text = array(
 
 "BRANCHES" => "Branches",
 
-"VIEW_DETAILS" => "View Stores",
+"VIEW_DETAILS" => "View Store",
 
 "BID" => "Bid",
 
@@ -1644,9 +1644,9 @@ $content_text = array(
 
 "ENTE_EMAIL_F" => "Enter a valid email address",
 
-"ENTER_ADDR1" => "Enter your address 1 here",
+"ENTER_ADDR1" => "Enter your address here",
 
-"ENTER_ADDR2" => "Enter your address 2 here",
+"ENTER_ADDR2" => "Enter address line 2 here",
     
 "ENTER_COMPANY_NAME" => "Enter company name",
     
@@ -1656,7 +1656,7 @@ $content_text = array(
 
 "ENTER_ZIP_CODE" => "Enter your zipcode here",
 
-"STORE_WEBSITE" => "Enter an existing website if any e.g www.example.com",
+"STORE_WEBSITE" => "Enter an existing website (if any) e.g www.example.com",
 
 "HELP_TOKNOW" => "Help your customers know more about you ",
 
