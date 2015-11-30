@@ -394,6 +394,10 @@ class Auction_Controller extends Layout_Controller
 		
 		$this->store_id = $Deal->shop_id;
 		$this->merchant_id = $Deal->merchant_id;
+		
+		$this->categeory_list_product = $this->deals->get_category_list_product_count($this->store_id);
+		$this->categeory_list_deal = $this->deals->get_category_list_deal_count($this->store_id);
+		$this->categeory_list_auction =$this->deals->get_category_list_auction_count($this->store_id);
 				
 		$this->get_theme_name = common::get_theme($storeurl);
 		$this->theme_name = $this->deals->get_theme_name($Deal->shop_id);

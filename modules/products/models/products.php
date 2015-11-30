@@ -1005,8 +1005,8 @@ class Products_Model extends Model
 		if($this->club_condition_arr)
 			$n_condition = array("product.deal_status" => 1, "for_store_cred" => 0,"product.deal_id"=>$id);
 			
-		$result = $this->db->select("product.deal_id","product.deal_title","product.url_title","product.deal_key", "$this->deal_value_condition","product.deal_price","product.deal_percentage","product.purchase_count", "product.user_limit_quantity","ps.size_name", "product.deal_description", "stores.store_url_title")
-				->from("product as p")
+		$result = $this->db->select("product.deal_id","product.deal_title","product.url_title","product.deal_key", "$this->deal_value_condition","product.deal_price","$this->deal_percentage_condition","product.purchase_count", "product.user_limit_quantity","ps.size_name", "product.deal_description", "stores.store_url_title")
+				->from("product")
 				->join("product_size as ps","ps.deal_id","product.deal_id","left")
 				->join("stores","stores.store_id","product.shop_id","left")
 				->where($n_condition)
@@ -1695,5 +1695,45 @@ public function get_store_id($storeurl="")
 		$result = $this->db->select("*")->from("users")->join("city","city.city_id","users.city_id","left")->join("country","country.country_id","users.country_id","left")->where("user_id",$merchant_id)->get();
 		return $result;
 	}
+	
+	
+	
+	public function get_category_list_product_count($store_id='')
+	{ 
+		
+		$con = " and stores.store_id = $store_id ";
+		if(CITY_SETTING){ 
+			$con .= "and stores.city_id = '$this->city_id'";
+		}	
+		$result = $this->db->query("select category_url, category.category_id, category_name , product , count(product.deal_id) as product_count from category join product on product.category_id = category.category_id join stores on stores.store_id=product.shop_id where category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1 $con group by category.category_id  order by category_name ASC"); 
+		return $result;
+	}
+	
+	
+	
+	
+	
+	public function get_category_list_deal_count($store_id='')
+	{ 
+		$con = " and stores.store_id = $store_id ";
+		if(CITY_SETTING){ 
+			$con .= "and stores.city_id = '$this->city_id'";
+		} 
+		$result = $this->db->query("select category_url, category.category_id, category_name , deal , count(deals.deal_id) as deal_count from category join deals on deals.category_id = category.category_id join stores on stores.store_id=deals.shop_id where category_status = 1 AND main_category_id = 0 AND deal = 1 AND enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 and  store_status = 1 $con group by category.category_id  order by category_name ASC"); 
+		return $result;
+	}
+	
+	
+	
+	public function get_category_list_auction_count($store_id='')
+	{ 
+		$con = " and stores.store_id = $store_id ";
+		if(CITY_SETTING){ 
+			$con .= "and stores.city_id = '$this->city_id'";
+		} 
+		$result = $this->db->query("select category_url, category.category_id, category_name , auction , count(auction.deal_id) as auction_count from category join auction on auction.category_id = category.category_id join stores on stores.store_id=auction.shop_id where category_status = 1 AND main_category_id = 0 AND auction = 1 AND enddate > ".time()."  AND deal_status = 1 and  store_status = 1 $con group by category.category_id  order by category_name ASC"); 
+		return $result;
+	}
+	
 
 }

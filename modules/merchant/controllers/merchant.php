@@ -4212,24 +4212,49 @@ class Merchant_Controller extends website_Controller
 	public function update_delivery_status($email_id="",$name="",$type="",$shippingid="",$mod_type="")
 	{
 		
+		
 		$this->shipping_id=$shippingid;
 		$this->shipping_list = $this->merchant->get_shipping_list1();
 		$this->product_size = $this->merchant->get_shipping_product_size();
 		$this->product_color = $this->merchant->get_shipping_product_color();
+		
+		$this->shipping_list_single = $this->merchant->get_shipping_list1_single($shippingid);
+		
+		
 		$status = $this->merchant->update_shipping_status($shippingid,$type);
+		
+		
                 if($type==4) {
-	                $message = "Thank You For Your Purchase";
+					
+					if(count($this->shipping_list_single) == 1){
+							$list = $this->shipping_list_single->current();
+							
+							if(isset($list->firstname)){
+								$name = trim($list->firstname);
+					 			$this->name = $name;
+							}else{
+								$this->name = "Customer";
+							}
+						}
+					
+	                $message = "Your order of details below  has been delivered. Thank you for shopping at <a href=\"".PATH."\">".SITENAME."</a>, we look forward to your next visit";
 	                $message.= new View("admin_product/shipping_mail_template");
 	                 $this->email_id = $email_id;
-                        $this->name = $this->Lang["CUST"];
+					 
+					
+					 	
+						
+						
+					
+                        //$this->name = $this->shipping_list->current()->firstname;
                         $this->message = $message;
                         $fromEmail = NOREPLY_EMAIL;
                         $message = new View("themes/".THEME_NAME."/admin_mail_template");
 	                $fromEmail = NOREPLY_EMAIL;
 	                if(EMAIL_TYPE==2){
-		                email::smtp($fromEmail,$email_id, SITENAME, $message);
+		                email::smtp($fromEmail,$email_id, "Order Delivered!", $message);
 	                }else{
-		                email::sendgrid($fromEmail,$email_id, SITENAME, $message);
+		                email::sendgrid($fromEmail,$email_id, "Order Delivered!", $message);
 	                }
 	                common::message(1, $this->Lang["MAIL_SENDED"]);
                 }
@@ -4756,6 +4781,15 @@ class Merchant_Controller extends website_Controller
 	                $this->ads_width ="370";
 	                $this->ads_height ="260";
 	        }
+			
+			 if($this->sectorname =="Gaming"){
+	                $this->banner_width ="1168";
+	                $this->banner_height ="523"; 
+	                $this->ads_width ="287";
+	                $this->ads_height ="246";
+	        }
+			
+			
 	        if($_POST){
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);

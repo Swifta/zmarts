@@ -196,7 +196,7 @@
 <script defer src="<?php echo $this->js_base_url;?>/custom.js"></script>
 
 
- <script type="text/javascript">
+<script type="text/javascript">
  	
  	function show_login(){
 		
@@ -210,7 +210,12 @@
 			$('#id_parent_assets').append(cssLink);
 			$('#id_parent_assets').append(jsScript);
 	        $('#fade').css({'visibility' : 'visible', 'z-index':9999});
-	       	$('.popup_block').css({'display' : 'block', 'z-index':99999});
+	       	$('.popup_block').css({'display' : 'block'});
+			$('.popup_block').css({'z-index':99999});
+			$('.popup_block1').css({'z-index':99999});
+			$('.popup_block2').css({'z-index':99999});
+			$('.popup_block3_0').css({'z-index':99999});
+			$('.popup_block3_1').css({'z-index':99999});
 			
 	}
 	
@@ -221,7 +226,12 @@
 			$('#id_parent_assets').append(cssLink);
 			$('#id_parent_assets').append(jsScript);
 	        $('#fade').css({'visibility' : 'visible', 'z-index':9999});
-	       $('.popup_block1').css({'display' : 'block', 'z-index':99999});
+	      	$('.popup_block1').css({'display' : 'block'});
+		    $('.popup_block').css({'z-index':99999});
+			$('.popup_block1').css({'z-index':99999});
+			$('.popup_block2').css({'z-index':99999});
+			$('.popup_block3_0').css({'z-index':99999});
+			$('.popup_block3_1').css({'z-index':99999});
 			
 	}
 	
@@ -232,7 +242,12 @@
 			$('#id_parent_assets').append(cssLink);
 			$('#id_parent_assets').append(jsScript);
 	        $('#fade').css({'visibility' : 'visible', 'z-index':9999});
-	        $('.popup_block2').css({'display' : 'block', 'z-index':99999});
+	        $('.popup_block2').css({'display' : 'block'});
+			$('.popup_block').css({'z-index':99999});
+			$('.popup_block1').css({'z-index':99999});
+			$('.popup_block2').css({'z-index':99999});
+			$('.popup_block3_0').css({'z-index':99999});
+			$('.popup_block3_1').css({'z-index':99999});
 			
 	}
 	
@@ -242,7 +257,12 @@
 			$('#id_parent_assets').append(cssLink);
 			$('#id_parent_assets').append(jsScript);
 	        $('#fade').css({'visibility' : 'visible', 'z-index':9999});
-	        $('.popup_block4').css({'display' : 'block', 'z-index':99999});
+	        $('.popup_block4').css({'display' : 'block'});
+			$('.popup_block').css({'z-index':99999});
+			$('.popup_block1').css({'z-index':99999});
+			$('.popup_block2').css({'z-index':99999});
+			$('.popup_block3_0').css({'z-index':99999});
+			$('.popup_block3_1').css({'z-index':99999});
 	}
 	
 	function load_club(){
@@ -265,7 +285,11 @@
 	$('#id_parent_assets').append(cssLink);
 	$('#id_parent_assets').append(jsScript);
 
-
+	$('.popup_block').css({'z-index':99999});
+	$('.popup_block1').css({'z-index':99999});
+	$('.popup_block2').css({'z-index':99999});
+	$('.popup_block3_0').css({'z-index':99999});
+	$('.popup_block3_1').css({'z-index':99999});
 	 
 	  <?php 
 	 if(isset($_SESSION['UserID'])){
@@ -290,13 +314,10 @@
 	<?php }?>
 	
 
-	 
-}
+	 }
 	
 	
  </script>
- 
- 
 <script type="text/javascript">
 $(document).ready(function(){
 	

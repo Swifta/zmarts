@@ -1,91 +1,12 @@
-
+<script type="text/javascript">
+	$(document).ready(function(e) {
+		$('.megamenu > li').removeClass('active');
+        $('#id_leo_product').addClass('active');
+    });
+</script>
 
 <?php 
-
-	if(!isset($this->get_product_categories)){
-		
-		$this->stores = new Leo_Model();
-		
-		$store_url_title = $this->storeurl;
-		$this->is_store_details = 1;
-		$store_url_title;
-		$search="";
-		
-		$this->type = "products";
-		$storeurl = $this->storeurl;
-		
-		if(count($this->product_deatils)==0){
-		        common::message(-1, $this->Lang["PAGE_NOT"]);
-		        url::redirect(PATH);
-		}
-		$this->home = new Home_Model();
-		$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
-		$this->stores = new Stores_Model();
-		$this->admin_details = $this->stores->get_admin_details();
-		
-		$this->product = null;
-		
-		
-		
-		foreach($this->product_deatils as $Deal){
-						$this->product = $Deal;
-                        $this->avg_rating =$this->products->get_product_rating($Deal->deal_id);
-                        $this->sum_rating =$this->products->get_product_rating_sum($Deal->deal_id);
-                        $this->delivery_details =$this->products->get_product_delivery($Deal->deal_id);
-                        $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
-                        $this->products_list_name = $this->Lang['REL_PRODUCT'];
-                        if(count($this->all_products_list) < 3){        
-                        $this->all_products_list = $this->products->get_hot_all_products_view($Deal->deal_id);
-                         $this->products_list_name = $this->Lang['HOT_PRODUCT'];
-                                 if(count($this->all_products_list) < 3){ 
-                                        $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
-                                         $this->products_list_name = $this->Lang['REL_PRODUCT'];
-                                  }
-                        }
-						
-						
-						$this->get_product_categories = $this->all_products_list;
-						
-                        $userflat_deatils = $this->products->get_userflat_amount($Deal->merchant_id);
-                        $this->userflat_amount = $userflat_deatils->flat_amount;
-                        $this->color_deatils = $this->products->get_color_data($Deal->deal_id);
-                        $this->size_deatils = $this->products->get_size_data($Deal->deal_id);
-                        $this->product_size = $this->products->get_product_one_size($Deal->deal_id);
-                        $this->product_color = $this->products->get_product_color($Deal ->deal_id);
-                        $this->merchant_cms = $this->products->get_merchant_cms($Deal ->merchant_id);
-			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
-			if($Deal->meta_description){
-				$this->template->description = $Deal->meta_description;
-			}
-			if($Deal->meta_keywords){
-				$this->template->keywords = $Deal->meta_keywords;
-			}
-			if($Deal->deal_key){
-				$this->template->metaimage = PATH.'images/products/1000_800/'.$Deal->deal_key.'_1.png';
-			}
-			
-			$this->theme_name = $this->products->get_theme_name($Deal->shop_id);
-			$this->footer_merchant_details = $this->products->get_merchant_details($Deal->merchant_id);
-		}
-		$this->storeid = $this->products->get_store_id($storeurl);
-		
-		$this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
-		$this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
-		$this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
-		
-		
-		
-		
-		$this->get_theme_name = common::get_theme($storeurl);
-		if(count($this->get_theme_name)>0) { 
-			$this->sector = $this->get_theme_name->current()->sector_name;
-		} else {
-			$this->sector ="";
-		}
-		
-		}
-		
-		
+$this->load_map = false;
 ?>
 
 <link href="<?php echo PATH.'themes/'.THEME_NAME.'/font-awesome-4.4.0/css/font-awesome.min.css'?>" rel="stylesheet" type="text/css" />
@@ -93,10 +14,6 @@
 
 <div class="mens">
   <div class="main">
-  
-  
-  
-  
   
     <div class="wrap">
       <ul class="breadcrumb breadcrumb__t">
@@ -406,6 +323,7 @@
         
         <div class="clear"></div>
         <div class="clients">
+          <?php  $this->get_product_categories = $this->all_products_list; ?>
           <?php if (count($this->get_product_categories) > 0) { ?>
           <h3 class="m_3">
             <?php  echo count($this->get_product_categories); ?>
@@ -422,7 +340,7 @@
 								 continue; 
 					 }
 						 ?>
-            <li><a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+            <li><a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
               <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
               <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
@@ -448,7 +366,7 @@
               
               </a>
               <p style="white-space:nowrap"><?php echo common::truncate_item_name($products->deal_title); ?></p>
-              <p><?php echo $symbol . " " . number_format($products->deal_value); ?></p>
+              <p> <?php if($products->deal_price > $products->deal_value){?> <span class="reducedfrom"><?php echo $symbol . " " . number_format($products->deal_price); ?></span><?php }?> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </p>
             </li>
             <!-- </div>-->
             

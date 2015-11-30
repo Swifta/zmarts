@@ -532,7 +532,8 @@ $admin_message	= '
 										
 										
 										
-										$this->password = $store_admin_password;
+									$this->password = $store_admin_password;
+									if(isset($_POST['store_email_id'])){
 										$this->email = $_POST['store_email_id'];
 										$from = CONTACT_EMAIL;
 										$this->name = $_POST['username'];
@@ -545,7 +546,7 @@ $admin_message	= '
 											email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
 										}
 										
-										
+									}
 										
 										 
 										//  unset the merchant session for next merchant

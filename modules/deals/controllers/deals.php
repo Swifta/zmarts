@@ -333,6 +333,7 @@ class Deals_Controller extends Layout_Controller
 				$this->footer_merchant_details = $this->deals->get_merchant_details($Deal->merchant_id);
 		   }
 		   $this->storeid = $this->deals->get_store_id($storeurl);
+		   
 		   $this->get_theme_name = common::get_theme($storeurl);
 			if(count($this->get_theme_name)>0) { 
 				$this->sector = $this->get_theme_name->current()->sector_name;
@@ -342,6 +343,10 @@ class Deals_Controller extends Layout_Controller
 			
 			$this->store_id = $Deal->shop_id;
 			$this->merchant_id = $Deal->merchant_id;
+			
+			$this->categeory_list_product = $this->deals->get_category_list_product_count($this->store_id);
+			$this->categeory_list_deal = $this->deals->get_category_list_deal_count($this->store_id);
+			$this->categeory_list_auction =$this->deals->get_category_list_auction_count($this->store_id);
 		
 		
 			

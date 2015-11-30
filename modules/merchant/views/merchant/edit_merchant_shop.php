@@ -1,6 +1,4 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
-
-<head>
+<?php defined('SYSPATH') OR die('No direct access allowed.'); ?><head>
 	<!-- Dependencies: JQuery and GMaps API should be loaded first -->
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<!-- CSS and JS for our code -->
@@ -30,6 +28,8 @@
 </script>
 
 </head>
+
+
 
 <div class="bread_crumb"><a href="<?php echo PATH."merchant.html"; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang["HOME"]; ?> <span class="fwn">&#155;&#155;</span></a><p><?php echo $this->template->title; ?></p></div>
 <div class="cont_container mt15 mt10">

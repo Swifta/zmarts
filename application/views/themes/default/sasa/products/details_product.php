@@ -307,7 +307,7 @@
                   </li>-->
                 </ul>
                 <div class="tab-content">
-                  <div class="tab-pane active" id="description" class="swifta" style="overflow:scroll; max-height:300px;">
+                  <div class="tab-pane active swifta" id="description" style="overflow:scroll; max-height:300px;">
                     <!--<h2>h2 tag will be appear</h2>-->
                     <?php echo $this->product->deal_description;?>
                     <br>
@@ -484,18 +484,20 @@
           </div>
         </li>
       </ul>-->
+      
       <ul class="thumbnails swifta">
-    
+     
       <?php if (count($this->get_product_categories) > 0) { $k = 1;?>
       <?php foreach ($this->get_product_categories as $products) { if($k >=5)continue;?>
       
       <?php $symbol = CURRENCY_SYMBOL;?>
       
        <li class="col-lg-3  col-sm-6">
-       <a title="<?php echo $products->deal_title;?>" class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"><?php echo common::truncate_item_name($products->deal_title, 25); ?></a>
+       <!--<a class="prdocutname" href="product.html" title="<?php echo $products->deal_title;?>"><?php echo common::truncate_item_name($products->deal_title, 20); ?></a>-->
+       <a class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title;?>"><?php echo common::truncate_item_name($products->deal_title, 20); ?></a>
         <div class="thumbnail">
         <span class="new tooltip-test" ></span>
-        <a title="<?php echo $products->deal_title;?>" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
+        <a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
        
        <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) {?>
 		   <?php  $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';?>
@@ -520,13 +522,18 @@
                 
         <?php } ?>
         </a>
-        <div class="shortlinks">
-              <a title="<?php echo $products->deal_title;?>" class="details" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
+        <!--<div class="shortlinks">
+              <a class="details thumb-icon" style="background-image:none; padding-left: -1px;" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"> <i class="icon-th-list"></i>&nbsp DETAILS</a>
+              <a class="wishlist thumb-icon" style="background-image: none;padding-left: -1px;" href="#"><i class="icon-heart"></i>&nbsp WISHLIST</a>
+              <a class="compare thumb-icon" style="background:none; padding-left: -1px;" href="javascript:add_to_compare('<?php echo $products->deal_id; ?>','','detail');"><i class="icon-bar-chart <?php echo $products->deal_id;?>-to-compare"></i>&nbsp;COMPARE</a>
+            </div>-->
+            <div class="shortlinks">
+              <a class="details thumb-icon" style="background-image:none; padding-left: -1px;" href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"> <i class="icon-th-list"></i>&nbsp DETAILS</a>
+              <a class="wishlist thumb-icon <?php echo $products->deal_id;?>-to-wish-link" style="background-image: none;padding-left: -1px;" href="javascript:add_to_wishlist('<?php echo $products->deal_id; ?>','','detail', 1);"><i class="icon-heart <?php echo $products->deal_id;?>-to-wish"></i>&nbsp WISHLIST</a>
+              <a class="compare thumb-icon <?php echo $products->deal_id;?>-to-compare-link" style="background:none; padding-left: -1px;" href="javascript:add_to_compare('<?php echo $products->deal_id; ?>','','detail', 1);"><i class="icon-bar-chart <?php echo $products->deal_id;?>-to-compare"></i>&nbsp;COMPARE</a>
             </div>
         <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+              <span class="spiral"></span><a href="<?php echo PATH . $products->store_url_title . '/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title;?>" class="productcart">ADD TO CART</a>
               <div class="price">
                 <div class="pricenew"><?php echo $symbol . " " . number_format($products->deal_value); ?></div>
                 <?php if($products->deal_value < $products->deal_price){?>
@@ -541,10 +548,20 @@
           <!-- Ending 1st foreach -->
            <?php }else {?>
 			     <!-- Ending 1st if, beginning else -->
+                 <!--<li class="col-lg-3  col-sm-6">
+      			  <a class="prdocutname" href="#" title="No Product yet.">No Product</a>
+                  <div class="thumbnail">
+       			  
+       			  <a href="#">
+                  <img title="no product found" src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH."themes/default/images/leo/";?>no_prod.png&w=287&h=246" alt=""/>
+                  </a></div><br /><br /></li>-->
+                  <li class="col-lg-3  col-sm-6" style="width:100%; backgroundx: #F00; text-align:center;">
+      			  <a class="prdocutname" href="#" title="No Product yet."><b>No product</b></a>
+                  <br /><br /></li>
            <?php } ?>
           <!-- Ending else of 1st if -->
           </ul>
-          
+      
           <!-- 
           Pagination required here as well (Fetch is not limited)
           Need more study though :)
@@ -932,4 +949,24 @@
 		$('.sasa-products').addClass('active');
     });
  </script>
+ 
+ <script type="text/javascript">
+$(document).ready(function(e) {
+    $('.thumb-icon').css('padding-left', 0);
+	 $('.thumb-icon').focus(function(e) {
+		 
+		  $('.thumb-icon').css('text-decoration', 'none');
+        
+    });
+	
+	
+	
+	 $('.thumb-icon').hover(function (e){
+		  $('.thumb-icon').css('text-decoration', 'none');
+		 }, function (e){
+			  $('.thumb-icon').css('text-decoration', 'none');
+	});
+	
+});
+</script>
 

@@ -1,18 +1,18 @@
 <?php 
-
 	$this->load_map = FALSE;
-
 ?>
+
+
 <script type="text/javascript">
 $(document).ready(function(e) {
 	
     $('.kkcountdown').kkcountdown({
 		
-        addClass: 'swifta',
-		daysText:'Day(s)',
-		hoursText: 'hour(s)',
-		minutesText: 'min(s)',
-		secondsText: 'sec(s)'});
+        addClass: 'swifta little-space',
+		daysText:'D',
+		hoursText: 'H',
+		minutesText: 'm',
+		secondsText: 's'});
 		
 });
 </script>
@@ -329,7 +329,7 @@ $(document).ready(function(e) {
               </ul>
               
               <!-- Timer -->
-              <div class="timer-container deal"><span class="kkcountdown" data-time="<?php echo $this->product->enddate?>"> </span></div>
+              <div class="timer-container deal"><span class="kkcountdown_full" data-time="<?php echo $this->product->enddate?>"> </span></div>
               
               
               
@@ -347,7 +347,7 @@ $(document).ready(function(e) {
                   </li>-->
                 </ul>
                 <div class="tab-content">
-                  <div class="tab-pane active" id="description" class="swifta" style="overflow:scroll; max-height:300px;">
+                  <div class="tab-pane active swifta" id="description" style="overflow:scroll; max-height:300px;">
                     <!--<h2>h2 tag will be appear</h2>-->
                     <?php echo $this->product->deal_description;?>
                     <br>
@@ -472,103 +472,27 @@ $(document).ready(function(e) {
   
   
   <!--  Related Products-->
-   <?php 
+   <?php
 		  $this->get_product_categories = $this->all_deals_list;
-		  $k = count($this->get_product_categories);
+		  $k= count($this->get_product_categories);
 		  if($k > 0){
 	 ?>
   <section id="related" class="row">
     <div class="container">
     
       <h1 class="heading1"><span class="maintext">Related Products</span><span class="subtext"> <?php echo $k;?> item(s) related to this item.</span></h1>
-      <!--<ul class="thumbnails">
-        <li class="col-lg-3 col-sm-3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <span class="sale tooltip-test">Sale</span>
-            <a href="#"><img alt="" src="img/product1.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-3 col-sm-3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <a href="#"><img alt="" src="img/product2.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-3 col-sm-3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <span class="offer tooltip-test" >Offer</span>
-            <a href="#"><img alt="" src="img/product1.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="col-lg-3 col-sm-3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <a href="#"><img alt="" src="img/product2.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>-->
-      <ul class="thumbnails swifta">
-    
-      <?php if (count($this->get_product_categories) > 0) { $k = 1;?>
-      <?php foreach ($this->get_product_categories as $products) { if($k >=5)continue;?>
+  
+       
+       <ul class="thumbnails swifta">
+      <?php foreach ($this->get_product_categories as $products) {?>
       
       <?php $symbol = CURRENCY_SYMBOL;?>
       
        <li class="col-lg-3  col-sm-6">
-       <a title="<?php echo $products->deal_title; ?>" class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/deal/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"><?php echo common::truncate_item_name($products->deal_title, 25); ?></a>
+       <a title="<?php echo $products->deal_title;?>" class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/deals/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"><?php echo common::truncate_item_name($products->deal_title, 20); ?></a>
         <div class="thumbnail">
-        <span class="new tooltip-test" ></span>
-        <a title="<?php echo $products->deal_title; ?>" href="<?php echo PATH . $products->store_url_title . '/deal/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
+        <span class="tooltip-test" ></span>
+        <a title="<?php echo $products->deal_title;?>" href="<?php echo PATH . $products->store_url_title . '/deals/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
        
        <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) {?>
 		   <?php  $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';?>
@@ -593,13 +517,14 @@ $(document).ready(function(e) {
                 
         <?php } ?>
         </a>
-        <div class="shortlinks">
-              <a class="details" href="<?php echo PATH . $products->store_url_title . '/deal/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
+        <div class="shortlinks little-space">
+          <!--    <a class="details" href="<?php echo PATH . $products->store_url_title . '/deals/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
+              <a class="wishlist" href="#"></a>
+              <a class="compare" href="#">COMPARE</a>-->
+            <div style="display:inline;" class="timer-container little-space deal"><span class="kkcountdown" data-time="<?php echo $products->enddate?>"> </span></div>
             </div>
         <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+              <span class="spiral"></span><a href="<?php echo PATH . $products->store_url_title . '/deals/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title;?>" class="productcart deal" style="background-image:none;">BUY NOW</a>
               <div class="price">
                 <div class="pricenew"><?php echo $symbol . " " . number_format($products->deal_value); ?></div>
                 <?php if($products->deal_value < $products->deal_price){?>
@@ -610,11 +535,9 @@ $(document).ready(function(e) {
        </div>
       </li>
       
-      <?php $k++;} ?>
+      <?php } ?>
           <!-- Ending 1st foreach -->
-           <?php }else {?>
-			     <!-- Ending 1st if, beginning else -->
-           <?php } ?>
+           <?php ?>
           <!-- Ending else of 1st if -->
           </ul>
           

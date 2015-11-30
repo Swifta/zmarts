@@ -26,8 +26,14 @@
 		<td colspan="3" style="padding-top:15px; padding-bottom:15px;">
 			<table  cellspacing="0" cellpadding="0" width="661">
 				<tr>
-					<td width="160" style="font-family:arial; font-size:25px; font-weight:normal; color:#444444; letter-spacing:-0.05em;"><?php echo $this->Lang['PRODUCT4']; ?></td>
+					<!--<td width="160" style="font-family:arial; font-size:25px; font-weight:normal; color:#444444; letter-spacing:-0.05em;"><?php echo $this->Lang['PRODUCT4']; ?></td>-->
+                    
 				</tr>
+                
+                <tr>
+					<td style="font-family:arial; font-size:15px; font-weight:bold; color:#444444; vertical-align:text-top; padding-left:10px; padding-top:10px; letter-spacing:-0.02em;"><?php echo $this->Lang['ADDRES']; ?>:&nbsp;<span style="font-family:arial; font-size:12px; color:#444444;font-weight:normal"><?php echo $d->adderss1 ?><?php if(isset($d->address2)){?><?php ", ".$d->address2;?><?php }; ?>,<?php echo $d->city_name; ?>,<?php echo $d->country; ?> - <?php echo $d->postal_code; ?></span></td>
+				</tr>
+                
 			</table>
 		
 		
@@ -43,6 +49,7 @@
 		<td width="661" style="background:#fff; border:#e3e3e3 solid 1px;" colspan="3">
 		
 			<table  cellspacing="0" cellpadding="0" width="661">
+            
 				<tr>
 					<td style="font-family:arial; font-size:18px; font-weight:bold; color:#444444; vertical-align:text-top; padding-left:10px; padding-top:10px; letter-spacing:-0.02em;"><?php echo ucfirst($d->deal_title); ?></td>
 				</tr>
@@ -65,10 +72,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="padding-top:10px;">
-						<table  cellspacing="0" cellpadding="0">
+					<td style="padding-top:10px; text-align:center; backgroundx:#F00;" align="center">
+						<table  cellspacing="0" cellpadding="0" align="center" style ="backgroundx: #dfdfdf; color:#E3E3E3" border="1px" bordercolor="#ECE9E4" c>
 							<tr>
-								<td style="border-right:#ece9e4 solid 1px; padding-top:5px; padding-left:20px; padding-right:20px;">
+								<td bordercolor="#fff" style="border-right:#ece9e4 solid 1px; padding-top:5px; padding-left:20px; padding-right:20px;">
 									<table  cellspacing="0" cellpadding="0">
 										<tr>
 											<td style="font-family:arial; font-size:12px; color:#444444; text-align:center;"><?php echo $this->Lang['PRI']; ?></td>
@@ -101,8 +108,7 @@
 									</table>
 								
 								</td>
-
-								<td style="border-right:#ece9e4 solid 1px; padding-top:5px; padding-left:20px; padding-right:20px;">
+								<td style="padding-top:5px; padding-left:20px; padding-right:20px;">
 									<table  cellspacing="0" cellpadding="0">
 										<tr>
 											<td style="font-family:arial; font-size:12px; color:#444444; text-align:center;"><?php echo $this->Lang['TRANS_DATE']; ?></td>
@@ -153,9 +159,7 @@
 						</table>
 					</td>
 				</tr>
-		 		<tr>
-					<td style="font-family:arial; font-size:15px; font-weight:bold; color:#444444; vertical-align:text-top; padding-left:10px; padding-top:10px; letter-spacing:-0.02em;"><?php echo $this->Lang['ADDRES']; ?>:&nbsp;<span style="font-family:arial; font-size:12px; color:#444444;font-weight:normal"><?php echo $d->adderss1.",".$d->address2; ?>,<?php echo $d->city_name; ?>,<?php echo $d->country; ?> - <?php echo $d->postal_code; ?></span></td>
-				</tr>
+		 		
 				<tr>
 					<td height="23">&nbsp;</td>
 				</tr>
@@ -187,3 +191,5 @@
 
 </body>
 </html>
+
+

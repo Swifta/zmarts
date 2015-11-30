@@ -8,13 +8,27 @@
 <script type="text/javascript">
 $(document).ready(function(e) {
 	
-    $('.kkcountdown').kkcountdown({
+    $('.kkcountdown_full').kkcountdown({
 		
         addClass: 'swifta',
 		daysText:'Day(s)',
 		hoursText: 'hour(s)',
 		minutesText: 'min(s)',
 		secondsText: 'sec(s)'});
+		
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+	
+    $('.kkcountdown').kkcountdown({
+		
+        addClass: 'swifta little-space',
+		daysText:'D',
+		hoursText: 'H',
+		minutesText: 'm',
+		secondsText: 's'});
 		
 });
 </script>
@@ -352,7 +366,7 @@ $(document).ready(function(e) {
           	  <!-- Auction timer -->
               
           
-              <div class="timer-container"><span class="kkcountdown" data-time="<?php echo $deals->enddate?>"> </span></div>
+              <div class="timer-container"><span class="kkcountdown_full" data-time="<?php echo $deals->enddate?>"> </span></div>
 			  
          
           
@@ -633,6 +647,8 @@ $(document).ready(function(e) {
           </div>
         </li>
       </ul>-->
+      
+      
       <ul class="thumbnails swifta">
     
       <?php if (count($this->get_product_categories) > 0) { $k = 1;?>
@@ -641,23 +657,23 @@ $(document).ready(function(e) {
       <?php $symbol = CURRENCY_SYMBOL;?>
       
        <li class="col-lg-3  col-sm-6">
-       <a title ="<?php echo $products->deal_title; ?>" class="prdocutname" href="<?php echo PATH . $products->store_url_title . '/auction/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>"><?php echo common::truncate_item_name($products->deal_title, 25); ?></a>
+       <a class="prdocutname" title="<?php echo $products->deal_title; ?>" href="<?php echo PATH . $products->store_url_title . '/auction/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" ><?php echo common::truncate_item_name($products->deal_title, 20); ?></a>
         <div class="thumbnail">
-        <span class="new tooltip-test" ></span>
-        <a title ="<?php echo $products->deal_title; ?>" href="<?php echo PATH . $products->store_url_title . '/auction/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
+        <span class="tooltip-test" ></span>
+        <a title="<?php echo $products->deal_title; ?>" href = "<?php echo PATH . $products->store_url_title . '/auction/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">
        
-       <?php if (file_exists(DOCROOT . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png')) {?>
-		   <?php  $image_url = PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png';?>
+       <?php if (file_exists(DOCROOT . 'images/auction/1000_800/' . $products->deal_key . '_1' . '.png')) {?>
+		   <?php  $image_url = PATH . 'images/auction/1000_800/' . $products->deal_key . '_1' . '.png';?>
 		   <?php $size = getimagesize($image_url); ?>
 			<?php if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
                      
               <!-- VALID IMAGE SIZE, DON'T SCALE -->
-              <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=270&h=200" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+              <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=270&h=200" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
                                   
              <?php }else{ ?>
              
              <!-- INVALID IMAGE SIZE, SCALE -->
-             <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/products/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=270&h=200" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
+             <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/auction/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=270&h=200" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
              
              
              <?php } ?>
@@ -669,13 +685,15 @@ $(document).ready(function(e) {
                 
         <?php } ?>
         </a>
-        <div class="shortlinks">
-              <a class="details" href="<?php echo PATH . $products->store_url_title . '/auction/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-        <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+        
+         <div class="shortlinks little-space">
+          <!--    <a class="details" href="<?php echo PATH . $products->store_url_title . '/deals/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>">DETAILS</a>
+              <a class="wishlist" href="#"></a>
+              <a class="compare" href="#">COMPARE</a>-->
+            <div style="display:inline;" class="timer-container little-space deal"><span class="kkcountdown" data-time="<?php echo $products->enddate?>"> </span></div>
+            </div>  
+         <div class="pricetag">
+              <span class="spiral"></span><a href="<?php echo PATH . $products->store_url_title . '/auction/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title;?>" class="productcart deal" style="background-image:none;">BID NOW</a>
               <div class="price">
                 <div class="pricenew"><?php echo $symbol . " " . number_format($products->deal_value); ?></div>
                 <?php if($products->deal_value < $products->deal_price){?>
@@ -683,6 +701,7 @@ $(document).ready(function(e) {
                 <?php } ?>
               </div>
             </div>
+            
        </div>
       </li>
       

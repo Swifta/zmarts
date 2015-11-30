@@ -1,99 +1,25 @@
+<script type="text/javascript">
+	$(document).ready(function(e) {
+		$('.megamenu > li').removeClass('active');
+        $('#id_leo_deal').addClass('active');
+    });
+</script>
+<script >
+$(document).ready(function(e) {
+	
+    $('.kkcountdown').kkcountdown({
+		
+        addClass: 'swifta little-space',
+		daysText:'Day(s) - ',
+		hoursText: 'h : ',
+		minutesText: 'm : ',
+		secondsText: 's'});
+		
+});
+</script>
 <?php 
-
-
-		if(!isset($this->product)){
-			
-			
-		
-		$storeurl = $this->storeurl;
-		
-		$this->is_todaydeals = 1;
-                $this->is_details = 1;
-		$deal_key = $this->deal_key;
-        $url_title = $this->url_title;
-		
-		$type = $this->type;
-		
-		$this->type = "today-deals";
-		
-		$this->deals = new Deals_Model();
-		
-		$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
-		if(count($this->deals_deatils) == 0){
-			common::message(-1, $this->Lang["PAGE_NOT"]);
-			url::redirect(PATH);
-		}
-		
-		$this->product = null;
-		foreach($this->deals_deatils as $Deal){
-			
-			$this->product = $Deal;
-			$this->all_deals_list = $this->deals->get_related_category_deals_list($Deal->deal_id, $Deal->sec_category_id);
-			$this->products_list_name = $this->Lang['REL_DEAL'];
-			if(count($this->all_deals_list) < 3){     
-			        $this->all_deals_list= $this->deals->get_hot_all_deals_view($Deal->deal_id);
-			        $this->products_list_name = $this->Lang['HOT_DEAL'];
-			         if(count($this->all_deals_list) < 3){     
-			                $this->all_deals_list = $this->deals->get_related_category_deals_list($Deal->deal_id, $Deal->sec_category_id);
-			                $this->products_list_name = $this->Lang['REL_DEAL'];
-			         }
-			}
-			
-			$this->get_related_categories = $this->all_deals_list;
-			
- 			$this->avg_rating =$this->deals->get_deal_rating($Deal->deal_id);
- 			$this->sum_rating =$this->deals->get_deal_rating_sum($Deal->deal_id);
-			$this->comments_deatils = $this->deals->get_comments_data($Deal->deal_id,1);
-			$this->like_details = $this->deals->get_like_data($Deal->deal_id,1);
-			$this->unlike_details = $this->deals->get_unlike_data($Deal->deal_id,1);
-			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
-				if($Deal->meta_description){
-					$this->template->description = $Deal->meta_description;
-				}
-				if($Deal->meta_keywords){
-					$this->template->keywords = $Deal->meta_keywords;
-				}
-				if($Deal->deal_key){
-				        $this->template->metaimage = PATH.'images/deals/1000_800/'.$Deal->deal_key.'_1.png';
-			    }
-			    /* Merchant Cms footer starts */
-				$this->home = new Home_Model();
-				$this->merchant_cms = $this->home->get_merchant_cms_data($storeurl);
-				$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
-				$this->stores = new Stores_Model();
-				$this->admin_details = $this->stores->get_admin_details();
-				/* Merchant Cms footer ends */
-				$this->theme_name = $this->deals->get_theme_name($Deal->shop_id);
-				$this->footer_merchant_details = $this->deals->get_merchant_details($Deal->merchant_id);
-		   }
-		   $this->storeid = $this->deals->get_store_id($storeurl);
-		   
-		   $this->categeory_list_product = $this->stores->get_category_list_product_count($this->storeid);
-		   $this->categeory_list_deal = $this->stores->get_category_list_deal_count($this->storeid);
-		   $this->categeory_list_auction = $this->stores->get_category_list_auction_count($this->storeid);
-		
-		   $this->get_theme_name = common::get_theme($storeurl);
-			if(count($this->get_theme_name)>0) { 
-				$this->sector = $this->get_theme_name->current()->sector_name;
-			} else {
-				$this->sector ="";
-			}
-			
-			
-		}
-			
-	
-		
-	
-
-
+	$this->load_map = false;
 ?>
-
-
-
-
-
-
 
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
 <script type="text/javascript">
@@ -384,7 +310,7 @@ color: #888;" class="success_deal_on">This deal is still on &nbsp;<img src="<?ph
           			   
         </div>
         <div class="clear"></div>
-        <?php $this->get_product_categories = $this->get_related_categories;?>
+        <?php $this->get_product_categories = $this->all_deals_list;?>
         <div class="clients">
           <?php if (count($this->get_product_categories) > 0) { ?>
           <h3 class="m_3">
@@ -402,7 +328,7 @@ color: #888;" class="success_deal_on">This deal is still on &nbsp;<img src="<?ph
 								 continue; 
 					 }
 						 ?>
-            <li><a href="<?php echo PATH . $products->store_url_title . '/store-product-item-details/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
+            <li><a href="<?php echo PATH . $products->store_url_title . '/deals/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>">
               <?php if (file_exists(DOCROOT . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png')) { $image_url = PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png';
 												$size = getimagesize($image_url); if(($size[0] > PRODUCT_LIST_WIDTH) && ($size[1] > PRODUCT_LIST_HEIGHT)) { ?>
               <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/deals/1000_800/' . $products->deal_key . '_1' . '.png' ?>&w=<?php echo PRODUCT_LIST_WIDTH; ?>&h=<?php echo PRODUCT_LIST_HEIGHT; ?>" alt="<?php echo $products->deal_title; ?>" title="<?php echo $products->deal_title; ?>" />
@@ -427,8 +353,9 @@ color: #888;" class="success_deal_on">This deal is still on &nbsp;<img src="<?ph
               <!--</div>--> 
               
               </a>
+              <p style="font: 12px/15px arial; color: #888;width:101%; display:inline-block; text-align:center;"><i class="fa fa-clock-o">&nbsp;</i><span class="kkcountdown" data-time="<?php echo $products->enddate?>"> </span></p>
               <p style="white-space:nowrap"><?php echo common::truncate_item_name($products->deal_title); ?></p>
-              <p><?php echo $symbol . " " . number_format($products->deal_value); ?></p>
+              <p> <?php if($products->deal_price > $products->deal_value){?> <span class="reducedfrom"><?php echo $symbol . " " . number_format($products->deal_price); ?></span><?php }?> <span class="actual"><?php echo $symbol . " " . number_format($products->deal_value); ?></span> </p>
             </li>
             <!-- </div>-->
             

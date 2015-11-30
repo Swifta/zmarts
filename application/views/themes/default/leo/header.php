@@ -1,4 +1,4 @@
-
+<script src="<?php echo PATH; ?>js/coffee.js" type="text/javascript"></script>
 <?php if(!isset($this->get_product_categories)){ ?>
 
 
@@ -52,7 +52,33 @@
 
 			});
 		</script>
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" type="text/css" /> 
 <script type="text/javascript" src="<?php echo PATH."themes/default/js/leo/"?>jquery.flexisel.js"></script>
+
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
+<script>
+                                    function logout_click(){
+                                        //alert("here");
+                                        //<?php echo PATH; ?>logout.html
+                                        swal({   
+                                            title: "Are you sure?",   
+                                            text: "Cart has items in. If you logout now, your cart will be emptied. Log out now?",   
+                                            type: "warning",   
+                                            showCancelButton: true,   
+                                            confirmButtonColor: "#DD6B55",   
+                                            confirmButtonText: "Yes, Logout!",   
+                                            cancelButtonText: "No, Cancel!",   
+                                            closeOnConfirm: false,   
+                                            closeOnCancel: true 
+                                        }, function(isConfirm){   
+                                            if (isConfirm) {     
+                                                location.href = "<?php echo PATH; ?>logout.html"; 
+                                            } else {     
+                                                return false;
+                                            } 
+                                        });
+                                    }
+                                    </script>
 
 
 
@@ -143,7 +169,7 @@
                    
                     
                     <?php if ($this->session->get('UserID')) { ?>
-                      <li><a href="<?php echo PATH."users/my-account.html"; ?>">Hi <?php echo $this->session->get('UserName')?>
+                      <li><a title="Hi <?php echo $this->session->get('UserName');?>, click to go to your account." href="<?php echo PATH."users/my-account.html"; ?>">Hi <?php echo common::truncate_item_name($this->session->get('UserName'), 7)?>
                       
                       <?php if($this->session->get('user_auto_key')) {?>
                       <b>
@@ -152,18 +178,26 @@
                       </b><?php } ?>
                       
                       </a></li> |
-                      <li class="active"><a href="<?php echo PATH."users/my-account.html"; ?>">Account</a></li> |
-                      <li><a href="<?php echo PATH; ?>cart.html">Checkout</a></li> |
-                      <li><a href="<?php echo PATH;?>leo_zenith.html" >Zenith Offers</a></li> |
-                   	  <li><a href="<?php echo PATH;?>leo_logout.html">Logout</a></li>
+                      <!--<li class="active"><a href="<?php echo PATH."users/my-account.html"; ?>">Account</a></li> |-->
+                      <li><a title="go to <?php echo SITENAME;?> home" href="<?php echo PATH; ?>"><?php echo SITENAME;?></a></li> |
+                      <li><a title="subscribe for extreme offers" href="javascript:load_club();" >Zenith Offers</a></li> |
+                   	  <li><a title="log out" href="
+                      <?php $cart_count = $this->session->get('count');
+					  		if(isset($cart_count) && $cart_count > 0){?>
+								 javascript:logout_click();"
+							<?php }else {?>
+                             <?php echo PATH;?>
+                      leo_logout.html"
+							<?php } ?>
+					  >Logout</a></li>
                     
 					 
                     <?php }else{ ?>
                     
-                    <li><a href="<?php echo PATH; ?>cart.html">Checkout</a></li> |
-                    <li><a href="<?php echo PATH;?>leo_zenith.html" >Zenith Offers</a></li> |
-                    <li><a href="<?php echo PATH;?>leo_login.html">Log In</a></li> |
-                    <li><a href="<?php echo PATH;?>leo_sign.html">Sign Up</a></li>
+                    <li><a title="go to <?php echo SITENAME;?> home" href="<?php echo PATH; ?>"><?php echo SITENAME;?></a></li> |
+                    <li><a href="javascript:load_club();" >Zenith Offers</a></li> |
+                    <li><a href="javascript:show_login();">Login</a></li> |
+                    <li><a href="javascript:show_register();">Signup</a></li>
                    
                     <?php } ?>
 				</ul>
@@ -173,8 +207,16 @@
 	</div>
 <div class="header-bottom" id = "id_dummy_leo_add_to_cart">
 	    <div class="wrap">
-			<div class="header-bottom-left swifta">
-				<div class="logo">
+        <div style=" width: 100%; margin: 0 auto;">
+        	<div class="header-bottom-left swifta">
+            
+         	</div>
+          
+				
+		</div>
+        	<div class="clear"></div>
+        	<div class="header-bottom-right">
+            <div class="logo">
                 <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
  <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
 	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
@@ -184,10 +226,11 @@
 					
                     
 				</div>
-				<div class="menu swifta">
+            <div class="menu swifta">
 	            <ul class="megamenu skyblue">
-			<li class="active grid"><a href="<?php echo PATH.$stores->store_url_title; ?>">Home</a></li>
-			<!-- <li><a class="color4" href="#">Products</a>
+			<li id="id_leo_home" ><a title="store home" href="<?php echo PATH.$stores->store_url_title; ?>">Home</a></li>
+            
+				<!--<li><a class="color4" href="#">Products</a>
 				<div class="megapanel">
 					<div class="row">
 						<div class="col1">
@@ -230,7 +273,7 @@
            	 
                 
                  <!-- PRODUCTS START HERE -->
-                 <li><a class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/products.html">Products</a>
+                 <li id="id_leo_product" ><a title="products" class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/products.html">Products</a>
                 <div class="megapanel">
                 <?php 
 				
@@ -287,9 +330,9 @@
                 <?php }else{ ?> <!-- (Ending 1st if) Products custom menu ending here -->
                 		<div class="col1">
 							<div class="h_nav">
-								<h4>NO DEALS</h4>
+								<h4>NO Products</h4>
 								<ul>
-									<li><a href="#">Sorry, No products in this store yet.</a></li>
+									<li><a title="no products yet" href="#">Sorry, No products in this store yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
@@ -303,7 +346,7 @@
                 <!-- PRODUCTS END HERE -->
                 
                 <!-- DEALS START HERE -->
-           		 <li><a class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/today-deals.html">Deals</a>
+           		 <li id="id_leo_deal"><a title="deals" class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/today-deals.html">Deals</a>
                 <div class="megapanel">
                
                
@@ -349,7 +392,7 @@
 							<div class="h_nav">
 								<h4>NO DEALS</h4>
 								<ul>
-									<li><a href="#">Sorry, No Deals in this store yet.</a></li>
+									<li><a title="no deals yet" href="#">Sorry, No Deals in this store yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
@@ -363,7 +406,7 @@
                 <!-- DEALS END HERE -->
                 
                  <!-- AUCTIONS START HERE -->
-                 <li><a class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/auction.html">Auctions</a>
+                 <li id="id_leo_auction"><a title="auctions" class="color5" href="<?php echo PATH.$stores->store_url_title; ?>/auction.html">Auctions</a>
                 <div class="megapanel">
                
                
@@ -409,7 +452,7 @@
 							<div class="h_nav">
 								<h4>NO AUCTIONS</h4>
 								<ul>
-									<li><a href="#">Sorry, No Auctions in this store yet.</a></li>
+									<li><a title="no auctions yet" href="#">Sorry, No Auctions in this store yet.</a></li>
 									<!--<li><a href="mens.html">Aspheric</a></li>
 									<li><a href="mens.html">Bifocal</a></li>
 									<li><a href="mens.html">Hi-index</a></li>
@@ -421,19 +464,96 @@
                 </div>
                  </li>
                 <!-- AUCTIONS END HERE -->
+                <li><a title="sold out items" class="color5" href="<?php echo PATH?>soldout.html">Soldout</a>
+                </li>
+                <li><a title="other stores" class="color5" href="<?php echo PATH?>stores.html">Stores</a>
+                </li>
+                
+                <li><a title="items that may be near you" class="color5" href="<?php echo PATH?>near-map.html">Near Map</a>
+                </li>
+                
+                <li><a title="<?php echo SITENAME;?> blog" class="color5" href="<?php echo PATH?>blog">Blog</a>
+                </li>
 				
 			</ul>
-			</div>
-		</div>
-	   <div class="header-bottom-right">
-         <div class="search">	  
+				</div>
+            
+            
+            <div class="search header_item_offset" style="border-right:none;">	  
+         		<!--<div class="box swifta">
+                
+   				        <select tabindex="4" class="dropdown">
+							<option value="" class="label" >Merch... | Prod...</option>
+							<option value="1">Register</option>
+							<option value="2">Login</option>
+						</select>
+   				    </div>-->
+                    <ul  id="id_swifta_select" style="position:relative;">
+                    <li class="main"><a href="#"><span id="id_selected_category">ALL</span></a><i class="fa fa-caret-down"></i></li>
+                    <li class="sub_main">
+                    <ul style="position:absolute; display:none; z-index: 999;">
+                    
+                    <?php if(count($this->categeory_list_product)>0){?>
+                 			 <li style="text-align:center;"><a title="products" class="item-type">--- Products ---</a></li>
+                    <?php  foreach ($this->categeory_list_product as $d) {?>
+                                <?php $check_sub_cat = $d->product_count;?>
+                                
+                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
+                                            <li><a title="Products | <?php echo $d->category_name;?>" href="javascript:select_category(1, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');"><?php echo ucfirst(common::truncate_item_name($d->category_name, 17))?></a> </li>
+                                
+                                <?php } ?>
+                         <?php } ?>
+                         
+                         <?php } ?>
+                    
+                    <?php if(count($this->categeory_list_deal)>0){?>
+                 			 <li style="text-align:center;"><a title="deals" class="item-type">--- Deals ---</a></li>
+                    <?php  foreach ($this->categeory_list_deal as $d) {?>
+                                <?php $check_sub_cat = $d->deal_count;?>
+                                
+                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
+                                            
+                                            <li><a title="Deals | <?php echo $d->category_name;?>" href="javascript:select_category(2, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');"><?php echo ucfirst(common::truncate_item_name($d->category_name, 17))?></a> </li>
+                                
+                                <?php } ?>
+                         <?php } ?>
+                         
+                         <?php } ?>
+                         
+                    <?php if(count($this->categeory_list_auction)>0){?>
+                 			 <li style="text-align:center;"><a title="auctions" class="item-type">--- Auctions ---</a></li>
+                    <?php  foreach ($this->categeory_list_auction as $d) {?>
+                                <?php $check_sub_cat = $d->auction_count;?>
+                                
+                                <?php if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) {?>
+                                            <li><a title="Auctions | <?php echo $d->category_name;?>" href="javascript:select_category(3, '<?php echo $d->category_url; ?>', '<?php echo $d->category_name; ?>');"><?php echo ucfirst(common::truncate_item_name($d->category_name, 17))?></a> </li>
+                                
+                                <?php } ?>
+                         <?php } ?>
+                         
+                         <?php } ?>
+                           
+                    
+                   
+                    </ul>
+                    </li>
+                    </ul>
+                
+		 </div>
+         	<div class="search header_item_offset">	  
          		<form  onsubmit="validate();return false;">
-				<input type="text" id = "s_q"  name="q" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-				<input  type="submit" value="Subscribe" id="submit" style="display:inline">
+                <!--<input type="text" class="input-medium search-query" id="s_q" placeholder="Search">-->
+                <input type="hidden" value="0" id="id_sasa_item_type" />
+                <input type="hidden" value="0" id="id_sasa_category_type" />
+                            
+				<input type="text" id = "s_q"  name="q" class="input-medium search-query" placeholder="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+				<!--<input  type="submit" value="Subscribe" id="submit" style="display:inline">-->
+                <a onclick="validate_search();" href="#"><i class="fa fa-search" style="padding: 7px;"></i></a>
                 </form>
 				<div id="response"> </div>
 		 </div>
-	  <div class="tag-list">
+         	
+            <div class="tag-list  cart">
        <!--<ul class="icon1 sub-icon1 profile_img">
 			<li><a class="active-icon c1" href="#"> </a>
 				<ul class="sub-icon1 list">
@@ -446,7 +566,7 @@
         <?php 
 		if($this->session->get('UserID')){?>
 	    <ul class="icon1 sub-icon1 profile_img">
-			<li><a class="active-icon"  href="<?php echo PATH;?>wishlist.html"><i class="fa fa-heart fa-lg" title="go to wishlist"></i> </a>
+			<li><a class="active-icon"  href="<?php echo PATH;?>wishlist.html"><i class="fa fa-heart" title="go to wishlist"></i> </a>
 				<!--<ul class="sub-icon1 list">
 					<li><h3>sed diam nonummy</h3><a href=""></a></li>
 					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
@@ -455,7 +575,7 @@
 		</ul>
        <?php }?>
         <ul class="icon1 sub-icon1 profile_img">
-        <li><a class="active-icon" href="#"><i class="fa fa-balance-scale fa-lg" title="comparison list"></i> </a>
+        <li><a class="active-icon" href="#"><i class="fa fa-balance-scale" title="comparison list"></i> </a>
         <ul class="sub-icon1 list">
         <?php 
 			
@@ -467,8 +587,6 @@
                 <?php if($total_prods >1){?>
                 <li><p><a href="<?php echo PATH; ?>product-compare.html" title="go to comparison page">Compare now</a></p></li>
                 <?php } ?>
-				
-				
 				<?php foreach($comp_list as $p_comp_id){
 					
 					$cate_detail = $this->p_comp->get_category_details($p_comp_id);
@@ -501,7 +619,7 @@
 		</ul>
         
         <!--<ul class="icon1 sub-icon1 profile_img">
-			<li><a class="active-icon" href="#"><i class="fa fa-shopping-cart fa-lg" title="add to favorite"></i> </a>
+			<li><a class="active-icon" href="#"><i class="fa fa-caret-down" title="add to favorite"></i> </a>
 				<ul class="sub-icon1 list">
 					<li><h3>sed diam nonummy</h3><a href=""></a></li>
 					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
@@ -544,8 +662,6 @@
                     
                     <?php }?>
                     
-                  
-                    
                     <?php if($item_count == 0){?>
 							<li><a href="#"><h3>No Items</h3></a></li>
 							<li><p>Your cart has no items for checkout just yet. <a href="#id_dummy_leo_add_to_cart" target="_self"> continue shopping!</a></p></li>
@@ -561,10 +677,136 @@
         <input type="hidden" id="id_cart_add_last_state" value="0" />
         <input type="hidden" id="id_cart_remove_last_state" value="0" />
 	  </div>
-    </div>
-     <div class="clear"></div>
+	  		
+   		    </div>
+    	<div class="clear"></div>
+     
      </div>
 	</div>
+    
+    <script type="text/javascript">
+		$('#id_swifta_select ul li a').click(function(e) {
+            $('#id_swifta_select li.sub_main ul').css('display', 'none');
+        });
+		$('#id_swifta_select').hover(function(e){
+			$('#id_swifta_select li.sub_main ul').css('display', 'inline-block');
+			}, function(e){
+				
+				$('#id_swifta_select li.sub_main ul').css('display', 'none');
+				
+			});
+			
+			$('#id_swifta_select li.sub_main ul').hover(function(e){}, function(e){
+				
+			});
+	</script>
+    
+    
+    <script type="text/javascript">
+	function select_category(type_id, category_url, category_name){
+		
+		$('#id_selected_category').attr('title', category_name);
+		type_id = parseInt(type_id);
+		switch(type_id){
+			case 1:{
+				$('#id_sasa_category_type').val(category_url);
+				$('#id_sasa_item_type').val("products");
+				
+				category = "Products <span style='color: #ccc;' title = '"+category_name+"'>|</span> "+truncate_item_name(category_name, 7);
+				
+				break;
+			}
+			
+			case 2:{
+				$('#id_sasa_category_type').val(category_url);
+				$('#id_sasa_item_type').val("today-deals");
+				
+				category = "Deals <span style='color: #ccc;' title = '"+category_name+"'>|</span> "+truncate_item_name(category_name, 7);
+				
+				break;
+			}
+			
+			case 3:{
+				$('#id_sasa_category_type').val(category_url);
+				$('#id_sasa_item_type').val("auction");
+				
+				
+				
+				category = "Auctions <span style='color: #ccc;' title = '"+category_name+"'>|</span> "+truncate_item_name(category_name, 7);
+				
+				break;
+			}
+			default:{
+				$('#id_sasa_category_type').val("");
+				$('#id_sasa_item_type').val("");
+				category = "<span style='color: #ccc;' title = 'ALL'>ALL</span> "
+				break;
+			}
+		}
+		
+		$('#id_selected_category').html(category);
+		$('#s_q').trigger('focus');
+		$('ul.category').trigger('mouseout');
+		
+		
+		
+	
+	}
+	
+    function validate_search(){
+			
+			
+			$('#s_q').css('border-color', '#FFF');
+			
+			$('#s_q').attr('title', 'Search');
+				
+			q = $('#s_q').val();
+			
+			
+			if(!q || q == 'Search'){
+				
+				$('#s_q').css('border-color', '#F00');
+				$('#s_q').attr('title', 'Value required for search');
+				return false;
+			}
+			
+			
+			var category = $('#id_sasa_category_type').val();
+			var item_type = $('#id_sasa_item_type').val();
+			
+			
+			url = "<?php echo PATH;?>";
+			if(category && category != "0" && item_type && item_type != "0"){
+				url = url+"<?php echo $this->storeurl?>/"+item_type+".html/?q="+q+"&c="+category;
+			}else{
+			
+					<?php if(isset($this->type)){?>
+						url = url+"<?php echo $this->storeurl."/".$this->type;?>.html/?q="+q;
+					<?php }else{?>
+						url = url+"<?php echo $this->storeurl;?>/?q="+q;
+					<?php }?>
+			}
+			/*alert(url);
+			return false;*/
+			/*window.location.href = "<?php echo PATH.$this->storeurl?>/products.html?q="+q;*/
+			window.location.href = url;
+			
+			
+			
+		}
+		
+		
+		
+		function truncate_item_name(name, length){
+			lenght = parseInt(length);
+			
+			if(name.length <= length)
+			return name;
+			
+			name = name.substr(0, length);
+			return name+"...";
+		}
+ </script>
     
    
     

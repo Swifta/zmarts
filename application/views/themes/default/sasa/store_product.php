@@ -5,9 +5,10 @@
   <!-- Slider Start-->
   <section class="slider">
     <div class="container">
-      <div class="flexslider" id="mainslider">
-        <ul class="slides">
-         <?php  if (count($this->banner_details) > 0) {?>
+      <div class="flexslider" id="mainslider" style="padding: 10px; background:#720808;">
+        <ul class="slides" >
+        
+        <!-- <?php  if (count($this->banner_details) > 0) {?>
          	<?php if(count($this->banner_details) != 1) {   ?>   
             	<?php foreach ($this->banner_details as $banner) { ?>
                  <li>
@@ -24,21 +25,50 @@
                                    </a></li>
                                           
                                  <?php } ?>        
-                        <?php } 
-}  ?>
-         
-          <!--<li>
-            <img src="<?php echo $this->img_assets_base_url;?>/banner1.jpg" alt="" />
-          </li>-->
-          <!--<li>
-            <img src="<?php echo $this->img_assets_base_url;?>/banner2.jpg" alt="" />
-          </li>-->
-          <!--<li>
-            <img src="<?php echo $this->img_assets_base_url;?>/banner1.jpg" alt="" />
-          </li>-->
-          <!--<li>
-            <img src="<?php echo $this->img_assets_base_url;?>/banner2.jpg" alt="" />
-          </li>-->
+                        <?php } }  ?>-->
+        
+       
+       	 <?php $has_personalized = false;
+		 		$has_banners = false;
+		 ?>
+         <?php  if (count($this->merchant_personalised_details) > 0) {?>
+         <?php $has_personalized = TRUE;
+		 ?>
+		 <?php foreach ($this->merchant_personalised_details as $m) { ?>
+                <?php for($i = 0; $i< 4; $i++){?>
+                
+                <?php 
+					$banner_link = "#";
+					
+					if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) {?>
+						
+					<?php $has_banners = TRUE;
+						if($i == 0)
+							$banner_link = $m->banner_1_link;
+						else if($i == 1)
+							$banner_link = $m->banner_2_link;
+						else
+							$banner_link = $m->banner_3_link;
+						?>
+						<li> 
+                       <a  href="<?php echo $banner_link;?>"  title = "store banner" target="_blank"> <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>&w=1168&h=523" alt="store banner" title="store banner" /> </a>
+                         </li>
+						<?php
+					}
+				?>
+                                  <?php } ?>
+                                          
+                                 <?php } ?>        
+ 		 <?php }?> 
+         <?php if(!$has_personalized || !$has_banners ){?>
+			 <li> 
+                <a  href="<?php echo $banner_link;?>"  title = "store banner" target="_blank"> <img src="<?php echo PATH . 'bootstrap/themes/images/gaming/banners/0_gaming_1_banner.jpg'; ?>" alt="store banner" title="store banner" /> </a>
+             </li>
+             <li> 
+                <a  href="<?php echo $banner_link;?>"  title = "store banner" target="_blank"> <img src="<?php echo PATH . 'bootstrap/themes/images/gaming/banners/0_gaming_2_banner.jpg'; ?>" alt="store banner" title="store banner" /> </a>
+             </li>
+		 <?php }?> 
+        
         </ul>
       </div>
     </div>
@@ -76,8 +106,6 @@
     <div class="container">
     
      <?php 
-	 
-	
 		  $this->get_product_categories =  $this->best_seller;
 		  $k_p = count( $this->get_product_categories);
 		?>
@@ -393,7 +421,50 @@
     <h1 class="heading1"><span class="maintext">Popular Offers</span></h1>
     <div class="brandcarousalrelative">
        <ul id="brandcarousal" >
-       <?php if (count($this->ads_details) > 0) { ?>   
+       
+        <?php $has_personalized = false;
+		 		$has_ads = false;
+		 ?>
+         <?php  if (count($this->merchant_personalised_details) > 0) {?>
+         <?php $has_personalized = TRUE;
+		 ?>
+		 <?php foreach ($this->merchant_personalised_details as $m) { ?>
+                <?php for($i = 1; $i< 4; $i++){?>
+                
+                <?php 
+					$ads_link = "#";
+					
+					if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {?>
+						
+					<?php $has_ads = TRUE;
+						if($i == 0)
+							$ads_link = $m->ads_1_link;
+						else if($i == 1)
+							$ads_link = $m->ads_2_link;
+						else
+							$ads_link = $m->ads_3_link;
+						?>
+						<li> 
+                       <a  href="<?php echo $ads_link;?>"  title = "store banner" target="_blank"> <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>&w=287&h=246" alt="store banner" title="store banner" /> </a>
+                         </li>
+						<?php
+					}
+				?>
+                                  <?php } ?>
+                                          
+                                 <?php } ?>        
+ 		 <?php }?> 
+         
+         
+         
+         
+         
+         
+         
+         <?php if(!$has_personalized || !$has_ads ){?>
+			
+      
+     <?php if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    
             
             					    
@@ -416,7 +487,7 @@
     <?php } else {?>
 			<li><div style="width: 100%;text-align:center; vertical-align:middle"><a href="#"><b>NO ADS</b></a></div></li>
 	<?php }?>
-      
+      <?php } ?>
       </ul>
       <div class="clearfix"></div>
      

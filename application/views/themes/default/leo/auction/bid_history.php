@@ -9,9 +9,9 @@
             <?php if($i == 10){ break; }?>
             
             <?php if($i%2 ==1){?>
-            <tr class="gray"><td class="label"><?php echo $tran->firstname; ?> <?php echo $tran->lastname; ?><i><?php echo date("d-m-Y h:i:s A", $tran->transaction_date); ?></i></td><td class="value"><?php echo CURRENCY_SYMBOL . " " . $tran->bid_amount; ?></td></tr>
+            <tr class="gray"><td class="label"><?php echo $tran->firstname; ?> <?php echo $tran->lastname; ?><br /><i><?php echo date("d-m-Y h:i:s A", $tran->transaction_date); ?></i></td><td class="value"><?php echo CURRENCY_SYMBOL . " " . $tran->bid_amount; ?></td></tr>
 			<?php } else {?>
-			 <tr class="normal"><td class="label"><?php echo $tran->firstname; ?> <?php echo $tran->lastname; ?> <i><?php echo date("d-m-Y h:i:s A", $tran->transaction_date); ?></i></td><td class="value"><?php echo CURRENCY_SYMBOL . " " . $tran->bid_amount; ?></td></tr>
+			 <tr class="normal"><td class="label"><?php echo $tran->firstname; ?> <?php echo $tran->lastname; ?> <br /><i><?php echo date("d-m-Y h:i:s A", $tran->transaction_date); ?></i></td><td class="value"><?php echo CURRENCY_SYMBOL . " " . $tran->bid_amount; ?></td></tr>
 			<?php } ?>
              
              <?php $i++; } ?>

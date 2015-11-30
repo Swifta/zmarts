@@ -314,7 +314,7 @@ exit;
 			    if($store->merchant_id){ 
 				    $this->template->metaimage = PATH.'images/merchant/600_370/'.$store->merchant_id.'_'.$store->store_id.'.png';
 			    }
-			    $this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id); // get the merchant personalised settings
+			    $this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id);
 			    $this->best_seller = $this->stores->get_best_seller_details($store->store_id,$store->merchant_id, 6); // get the best selling products of this store
 			     $this->footer_merchant_details = $this->stores->get_merchant_details($store->merchant_id);
 		}
@@ -663,9 +663,9 @@ exit;
 			common::message(-1, $this->Lang["NO_DATA_APP"]);
 			url::redirect(PATH);
 		}
-		foreach($this->get_store_details as $store) {
+		/*foreach($this->get_store_details as $store) {
 			$this->merchant_personalised_details = $this->stores->get_merchant_personalised_details($store ->merchant_id,$store->store_id);
-		}
+		}*/
 		
 		$this->all_products_list = $this->stores->get_products_list($this->storeid,$cat_type,$category, $offset, $record,$search_key,$search_cate_id);
 		/*echo $this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/store_product_list");*/

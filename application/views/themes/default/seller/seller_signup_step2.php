@@ -1026,9 +1026,9 @@ function atleast_onecheckbox(e) {
 		
 		
         function changeOrInput() {
-			val = input.value;
-			val = val.trim();
-			$(input).val(val);
+			//val = input.value;
+			//val = val.trim();
+			//$(input).val(val);
             if (input.value == "") {
                 input.setCustomValidity(valOrFunction(options.emptyText, window, [input]));
             } else {

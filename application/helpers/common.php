@@ -606,7 +606,7 @@ class common{
 		$last_word_len = $last_space_pos - $less_limit;
 		$about_last_word = substr($about, $less_limit, $last_word_len);
 		$about_more = substr($about, $last_space_pos);
-		$about = $about_part1.$about_last_word."<span class=\"more_control\">... <a title=\"more about us\" href=\"#\"> --more-- </a></span><span  class=\"more_content\" style=\"display:none;\">".$about_more."</span><a title=\"less about us\" href=\"#\"><span class=\"less_control\" style = \"display:none;\"><span>&nbsp;</span> --less--</span></a>";
+		$about = $about_part1.$about_last_word."<span class=\"more_control\">... <a id = \"id_swifta_less\" title=\"more about us\" href=\"#id_swifta_less\"> --more-- </a></span><span  class=\"more_content\" style=\"display:none;\">".$about_more."</span><a id =\"id_swifta_more\" title=\"less about us\" href=\"#id_swifta_more\"><span class=\"less_control\" style = \"display:none;\"><span>&nbsp;</span> --less--</span></a>";
 		return $about;
 	}
 	

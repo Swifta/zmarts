@@ -999,7 +999,12 @@ function last_email_check(){
 			$('#id_err_memail').text('store admin email required.');
 			return is_email_valid;
 		}
+	}else{
+		$('#have_store_admin').val('')
 	}
+	
+	//alert(1111);
+	
 		
 	
 	return true;

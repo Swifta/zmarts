@@ -41,17 +41,24 @@ class Store_admin_Controller extends website_Controller
 
 	public function login()
 	{
+		
+		
 		 if($this->user_id && $this->user_type == 9){
 			url::redirect(PATH."store-admin.html");
-		}
+		 }
 		if($_POST){
+			
+		
 			$email = $this->input->post("email");
 			$password = $this->input->post("password");
 			if($email){
+				
 				$status = $this->merchant->merchant_login($email, $password);
+				
 				if($status == 10){
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
 					url::redirect(PATH."store-admin.html");
+					
 				}
 				elseif($status == 11){
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );

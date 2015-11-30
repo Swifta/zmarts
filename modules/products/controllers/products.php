@@ -462,6 +462,10 @@ class Products_Controller extends Layout_Controller
 		$this->store_id = $this->storeid;
 		$this->merchant_id = $Deal->merchant_id;
 		
+		$this->categeory_list_product = $this->products->get_category_list_product_count($this->storeid);
+		$this->categeory_list_deal = $this->products->get_category_list_deal_count($this->storeid);
+		$this->categeory_list_auction =$this->products->get_category_list_auction_count($this->storeid);
+		
 		
 		$this->get_theme_name = common::get_theme($storeurl);
 		if(count($this->get_theme_name)>0) { 

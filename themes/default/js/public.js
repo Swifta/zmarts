@@ -1695,10 +1695,12 @@ function login_after_zenith_offer_click(email, password, z_offer){
 		        dataType:"html",
 		        success:function(response){
 					
-					if(response == 1)
+					if(response == 1){
 						showmembershipsignup(response);
-					else
-						window.location.href = document.referrer;
+					}else{
+						alert("You are already a club member. Enjoy the offers!");
+						window.location.reload();
+					}
 					
 					return true;
 				

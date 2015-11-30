@@ -8,6 +8,7 @@
 @import url('etalage.css');
 @import url('default.css');
 @import url('http://fonts.googleapis.com/css?family=Exo+2');
+@import url('../../font-awesome-4.4.0/css/font-awesome.min.css');
 
 @charset "utf-8";
 /*
@@ -27,9 +28,6 @@
 .store_credit {background: #AE0700;border-radius: 10px;margin: 3px 0 0 2%;}
 .store_credit a {font:13px arial;color:#fff;padding: 4px 10px;}
 
-.menu.swifta {
-	margin-top: 3%;
-}
 
 p.title.swifta {
 	white-space: normal;
@@ -651,6 +649,210 @@ p.item_axillary {
 	 margin-right: 0px;
  }
  
+ .header-bottom-right {
+	 width: 100%;
+ }
+ 
+ .header-bottom-left {
+	 
+	  width: 100%;
+ }
+ 
+ .menu.swifta {
+    margin-top: 1.5%;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+.megamenu > li.active > a {
+	background: #4CB1CA;
+	color: #FFF;
+}
+ 
+#fwslider img {
+	
+	border-top: 4px solid  #4CB1CA;
+	border-bottom: 4px solid  #4CB1CA;
+}
+
+.header-bottom-right .header_item_offset{
+	 margin-top: 20px;
+ }
+ 
+ .header-bottom {
+	 padding: 0;
+ }
+ 
+ .logo {
+	 
+	 margin-right: 0; 
+ }
+ 
+ .search {
+	 float: left;
+	 margin-right: 0;
+	 margin-left: 0;
+ }
+ 
+ .cart {
+	 float: right;
+	 margin-top: 12px;
+	 margin-bottom: 12px;
+	 
+ }
+
+
+.search input[type="text"] {
+	width: 60px;
+}
+
+.search input[type="text"]:focus {
+    width: 61px;
+}
+
+.recent-tweet-info {
+    width: 84.5%;
+}
+
+.social-media li:nth-child(1) a {
+	background:none;
+}
+
+.social-media li:nth-child(2) a {
+	background:none;
+}
+
+.social-media li:nth-child(3) a {
+	background:none;
+}
+
+.social-media li:nth-child(4) a {
+	background:none;
+}
+
+.search .box.swifta {
+	
+	background: #4CB1CA;
+	padding-left: 5px;
+	padding-right: 5px;
+	
+}
+
+.search span.selected {
+	margin-left: 5px !important;
+	background: #F00;
+}
+
+#id_swifta_select li.main {
+	border: medium none;
+	outline: medium none;
+	background: transparent none repeat scroll 0% 0%;
+	font-size: 0.85em;
+	font-family: "Exo 2",sans-serif;
+	color: #777;
+	width: 130px;
+	margin: 0px;
+	transition: all 0.5s ease-out 0s;
+	padding: 7px;
+	
+	position:relative;
+	
+}
+
+ul#id_swifta_select {
+	width: 144px;
+	margin-right: 2px;
+}
+
+#id_swifta_select li.main i {
+	position:absolute;
+	right: 0;
+	margin-right: 7px;
+	
+}
+
+ul#id_swifta_select ul {
+	background: #4CB1CA; 
+	width: 100%;
+	border: 1px solid #DDD;
+	left:  -1px;
+	padding-right: 3px;
+}
+
+ul#id_swifta_select ul li {
+	width: 92%;
+	height: 34px;
+}
+
+ul#id_swifta_select ul li a {
+	padding: 8px;
+	border-bottom: 1px solid #39A0B9;
+	font-size: 0.85em;
+	overflow: hidden;
+	white-space: nowrap;
+	color: #C0F3FF;
+	display:inline-block;
+	background: #4CB1CA; 
+	
+}
+
+ul#id_swifta_select ul li a {
+	color: #C0F3FF;
+	width: 99%;
+	
+	
+}
+
+ul#id_swifta_select ul li a:hover {
+	background: #39A0B9;
+	color: #FFF;
+	
+}
+
+ul#id_swifta_select ul li a.item-type{
+	color: #FFF;
+}
+
+ul#id_swifta_select ul li a.item-type:hover {
+	color: #FFF;
+	background: #4CB1CA; 
+	
+}
+
+ul#id_swifta_select a:visited {
+	color: #777;
+}
+
+ul#id_swifta_select a:active {
+	color: #777;
+}
+
+ul#id_swifta_select a {
+	color: #777;
+}
+
+.cart-right {
+	background:none;
+}
+
+.span_1_of_3:hover .cart-right {
+	background:none;
+}
+
+.cart-right a {
+	color: #000;
+}
+
+.cart-right a:hover {
+	color: #FFF;
+}
+
+
+
+
+
+
  
 
  
