@@ -169,7 +169,7 @@ $(document).ready(function(e) {
                    </div>
                  </a>
 				</div>--> 
-         <!-- <div class="col_1_of_3 span_1_of_3">
+        <!-- <div class="col_1_of_3 span_1_of_3">
 			   	 <a href="single.html">
 					<div class="inner_content clearfix">
 					<div class="product_image">
@@ -605,10 +605,69 @@ $(document).ready(function(e) {
         <?php   } ?>
         
         
+  <div class="clients">
+  <?php $k = count($this->get_sub_store_details);?>
+    <h2 class="heading1 m3"><span class="subtext"> <?php if( $k == 0 ){?> No store branch(es) yet.<?php }else{?>  Our other branch(es). Feel free to drop by sometime.<?php } ?></span></h2>
+  
+     <ul id="flexiselDemo3">
+       
+       <?php if ($k > 0) { ?> 
+		
+	
+     <?php foreach ($this->get_sub_store_details as $stores) {
+		 
+		  ?>
+    									
+								<li>
+                                           
+                                                        <?php if (file_exists(DOCROOT . 'images/merchant/290_215/' . $stores->merchant_id . '_' . $stores->store_id . '.png')) { ?>
+                                                            <a href="<?php echo PATH . $stores->store_url_title . '/'; ?>" title="<?php echo $stores->store_name; ?>">
+                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH . 'images/merchant/290_215/' . $stores->merchant_id . '_' . $stores->store_id . '.png' ?>&w=150&h=130" alt="<?php echo $stores->store_name; ?>" title="<?php echo $stores->store_name; ?>" /></a>
+            <?php } else { ?>
+                                                            <a href="<?php echo PATH . $stores->store_url_title.'/'; ?>" title="<?php echo $stores->store_name; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_stores_list.png&w=150&h=130"   alt="<?php echo $stores->store_name; ?>" title="<?php echo $stores->store_name; ?>" ></a>
+        <?php } ?>                                                   
+                                                   		<div class="branch_details">
+                                                        Name: <a style="font:bold 11px arial;" href="<?php echo PATH . $stores->store_url_title . '/'; ?>" title="<?php echo $stores->store_name; ?>"><?php echo common::truncate_item_name($stores->store_name, 12); ?></a>
+                                                        <br />
+                                                        <a  href="<?php echo PATH . $stores->store_url_title.'/'; ?>" title="visit branch">Visit</a>
+                                                        <p style="font:11px/15px arial;color:#666;"><?php common::truncate_about_us($stores->about_us,80); ?></p>                                         
+                                                         
+                                                        
+                                                    </div>                                                                                                                        
+                                               
+                                            
+                                <?php   ?>
+            </li>
+								<?php } ?>
+                             <?php } else { ?>
+								 <li><a href="#" title="No other branches yet">
+                                                                <img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH;?>themes/default/images/sasa/no_branch.png&w=150&h=130" alt="No other branch." title="No other branch" /> 
+                                                                <div class="branch_details" style="text-align:left; margin-left:30px">
+                                                        <p><b>No branch yet</b></p>  
+                                </div>
+                                                                </a></li>
+                                 
+								  
+								 
+							<?php }?> 
+                                
+      
+      
+      
+     
+    
+    
+   
+    </ul>
+  </div>
         
         
+        
+      
         
       </div>
+      
+     
       </div>
       </div>
       
@@ -763,3 +822,51 @@ $(document).ready(function(e) {
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+		$(window).load(function() {
+			$("#flexiselDemo1").flexisel();
+			$("#flexiselDemo2").flexisel({
+				enableResponsiveBreakpoints: true,
+		    	responsiveBreakpoints: { 
+		    		portrait: { 
+		    			changePoint:480,
+		    			visibleItems: 1
+		    		}, 
+		    		landscape: { 
+		    			changePoint:640,
+		    			visibleItems: 2
+		    		},
+		    		tablet: { 
+		    			changePoint:768,
+		    			visibleItems: 3
+		    		}
+		    	}
+		    });
+		
+			$("#flexiselDemo3").flexisel({
+				visibleItems: 4,
+				animationSpeed: 1000,
+				autoPlay: false,
+				autoPlaySpeed: 3000,    		
+				pauseOnHover: true,
+				enableResponsiveBreakpoints: true,
+		    	responsiveBreakpoints: { 
+		    		portrait: { 
+		    			changePoint:480,
+		    			visibleItems: 1
+		    		}, 
+		    		landscape: { 
+		    			changePoint:640,
+		    			visibleItems: 2
+		    		},
+		    		tablet: { 
+		    			changePoint:768,
+		    			visibleItems: 3
+		    		}
+		    	}
+		    });
+		    
+		});
+	</script>
