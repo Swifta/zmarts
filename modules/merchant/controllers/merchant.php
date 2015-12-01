@@ -5893,12 +5893,10 @@ class Merchant_Controller extends website_Controller
 
 									if($status == 1){
 										common::message(1, $this->Lang['SIZE_EDIT_SUCC']);
-										$lastsession = $this->session->get("lasturl");
-                                                                                if($lastsession){
-                                                                                url::redirect(PATH.$lastsession);
-                                                                                } else {
-                                                                                url::redirect(PATH."merchant/manage-sizes.html");
-                                                                                }
+										var_dump(PATH);
+										                                   
+                                          url::redirect(PATH."merchant/manage-sizes.html");
+                                                                                
 									}
 									else{
 										common::message(-1, $this->Lang['SIZE_AL_EX']);
