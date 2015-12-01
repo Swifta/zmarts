@@ -165,12 +165,9 @@ class Admin_Controller extends website_Controller
 				$status = $this->admin->edit_country(arr::to_object($this->userPost),$country);
 				if($status == 1){
 					common::message(1, $this->Lang["COUNTRY_EDIT_SUC"]);
-					$lastsession = $this->session->get("lasturl");
-					 if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                        } else {
+					
                                         url::redirect(PATH."admin/manage-country.html");
-                                        }
+                                        
 				}
 				else{
 					$this->form_error["country"] = $this->Lang["COUNTRY_EXISTS"];
@@ -183,12 +180,9 @@ class Admin_Controller extends website_Controller
 		$this->countryData = $this->admin->getcountryData($country);
 		if(count($this->countryData) == 0){
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-			$lastsession = $this->session->get("lasturl");
-			if($lastsession){
-                        url::redirect(PATH.$lastsession);
-                        } else {
+			
                         url::redirect(PATH."admin/manage-country.html");
-                        }
+                        
 		}
 		$this->template->title = $this->Lang["EDIT_COUNTRY"];
 		$this->template->content = new View("admin/edit_country");
@@ -214,12 +208,10 @@ class Admin_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
+                
                 url::redirect(PATH."admin/manage-country.html");
-                }
+                
 	}
 
 	/** BLOCK UNBLOCK COUNTRY **/
@@ -243,12 +235,9 @@ class Admin_Controller extends website_Controller
 		else{
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
                 url::redirect(PATH."admin/manage-country.html");
-                }
+                
 	}
 
 
@@ -341,12 +330,9 @@ class Admin_Controller extends website_Controller
 				if($status == 1){
 
 					common::message(1, $this->Lang["CITY_EDIT_SUC"]);
-					$lastsession = $this->session->get("lasturl");					
-					if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                        } else {
+					
                                         url::redirect(PATH."admin/manage-city.html");
-                                        }
+                                        
 				}
 				else{
 					$this->form_error["city"] = $this->Lang["CITY_EXISTS"];
@@ -360,12 +346,9 @@ class Admin_Controller extends website_Controller
 		$this->cityData = $this->admin->getCityData($country,$city);
 		if(count($this->cityData) == 0){
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-		                        $lastsession = $this->session->get("lasturl");					
-					if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                        } else {
+		                       
                                         url::redirect(PATH."admin/manage-city.html");
-                                        }
+                                        
 		}
 		$this->template->title = $this->Lang["EDIT_CITY"];
 		$this->template->content = new View("admin/edit_city");
@@ -389,12 +372,9 @@ class Admin_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");					
-					if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                        } else {
+		
                                         url::redirect(PATH."admin/manage-city.html");
-                                        }
+                                        
 	}
 
 	/** BLOCK OR UNBLOCK CITY **/
@@ -418,12 +398,9 @@ class Admin_Controller extends website_Controller
 		else{
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");					
-					if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                        } else {
+		
                                         url::redirect(PATH."admin/manage-city.html");
-                                        }
+                                        
 	}
 
 	/** ADD CATEGORY  **/
@@ -1366,12 +1343,9 @@ class Admin_Controller extends website_Controller
 		else{
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-		url::redirect(PATH.$lastsession);
-		} else {
+		
 		url::redirect(PATH."admin/manage-email-subscriber.html");
-		}
+		
 	}
 
 	/** DELETE USERCOMMENTS **/
@@ -1388,12 +1362,9 @@ class Admin_Controller extends website_Controller
 				common::message(1, $this->Lang["SUCC_DEL1"]);
 				}
 
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-		url::redirect(PATH.$lastsession);
-		} else {
+		
 		url::redirect(PATH."admin/manage-email-subscriber.html");
-		}
+		
 	}
 
 	/** MANAGE EMAIL REFERRAL USERS **/
@@ -1491,12 +1462,9 @@ class Admin_Controller extends website_Controller
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
 				common::message(1,$this->Lang["MAIL_SENDED"]);
-				$lastsession = $this->session->get("lasturl");
-                                if($lastsession){
-                                url::redirect(PATH.$lastsession);
-                                } else {
+				
                                 url::redirect(PATH."admin/manage-contacts.html");
-                                }
+                                
 
 			}
 			else{
@@ -1568,12 +1536,9 @@ class Admin_Controller extends website_Controller
 		else{
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
                 url::redirect(PATH."admin/manage-contacts.html");
-                }
+                
 	}
 
 	/** DELETE USER COMMENTS **/
@@ -1591,12 +1556,9 @@ class Admin_Controller extends website_Controller
 				common::message(1, $this->Lang["SUCC_DEL2"]);
 				}
 
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		 
                 url::redirect(PATH."admin/manage-contacts.html");
-                }
+                
 	}
 
 	/** ADD COLOR  **/
@@ -1660,12 +1622,10 @@ class Admin_Controller extends website_Controller
 			if($_POST){
 				$status = $this->admin->edit_color($color_id,$_POST['color_code'],$_POST['color_name']);
 				($status == 1)?common::message(1, $this->Lang['CO_EDIT_SUCC']):common::message(-1, $this->Lang['CO_AL']);
-				$lastsession = $this->session->get("lasturl");
-                                if($lastsession){
-                                url::redirect(PATH.$lastsession);
-                                } else {
-                                url::redirect(PATH."admin/manage-colors.html");
-                                }
+				
+                               
+                   url::redirect(PATH."admin/manage-colors.html");
+                                
 			}
 
 		$this->colorData = $this->admin->getcolorData($color_id);
@@ -1691,12 +1651,9 @@ class Admin_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
-                url::redirect(PATH."admin/manage-colors.html");
-                }
+		
+             url::redirect(PATH."admin/manage-colors.html");
+                
 	}
 
 
@@ -1816,12 +1773,9 @@ class Admin_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
                 url::redirect(PATH."admin/manage-sizes.html");
-                }
+                
 	}
 
 	/** CURL GET AND POST**/
@@ -1988,12 +1942,9 @@ class Admin_Controller extends website_Controller
                                 $status = $this->admin->edit_sector($sector_id,arr::to_object($this->userPost));
                                 if($status == 1){
                                         common::message(1, $this->Lang['SECTOR_UPDATE']);
-                                        $lastsession = $this->session->get("lasturl");
-                                        if($lastsession){
-                                                url::redirect(PATH.$lastsession);
-                                        } else {
+                                        
                                                 url::redirect(PATH."admin/manage-sector.html");
-                                        }
+                                        
                                 } else {
                                         $this->attr_group_exist= $this->Lang['SECTOR_EXIST'];
                                         //url::redirect(PATH."admin/edit-attribute-group/".base64_encode($attribute_id).".html");
@@ -2030,12 +1981,9 @@ class Admin_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
                 url::redirect(PATH."admin/manage-sector.html");
-                }
+                
 	}
 	
 	/** BLOCK AND UNBLOCK SELECT **/
@@ -2059,12 +2007,9 @@ class Admin_Controller extends website_Controller
 		else{
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
                 url::redirect(PATH."admin/manage-sector.html");
-                }
+                
 	}
 
 
