@@ -27,12 +27,3 @@ $config['test-store/products/c/(.*)/(.*).html'] = "/agriculture2/product_list/te
 $config['test-store/deal/c/(.*)/(.*).html'] = "/agriculture2/deal_list/test-store";
 $config['test-store/auction/c/(.*)/(.*).html'] = "/agriculture2/auction_list/test-store/$1/$2";
 //test-store end
-//ABC-Pvt-Ltd start
-$config['ABC-Pvt-Ltd'] ="/agriculture2/stores_home_page/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products.html'] = "/agriculture2/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/today-deals.html'] = "/agriculture2/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction.html'] = "/agriculture2/auction_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/agriculture2/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/agriculture2/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/agriculture2/auction_list/ABC-Pvt-Ltd/$1/$2";
-//ABC-Pvt-Ltd end
