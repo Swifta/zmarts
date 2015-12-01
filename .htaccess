@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Installation directory
-RewriteBase /zmarts/
+RewriteBase /zmartsnew/zmarts
 
 # Protect hidden files from being viewed
 <Files .*>
