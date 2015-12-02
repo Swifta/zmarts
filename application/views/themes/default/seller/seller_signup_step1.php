@@ -916,6 +916,7 @@ $('#submit_accxm').click(function() {
 			$('#z_acc_error').html('');
 			
 			var nuban = $('#acctnum').val();
+                        //alert(nuban);
 			if(nuban == ''){
 				alert("Empty field");
 				return false;
@@ -942,6 +943,7 @@ $('#submit_accxm').click(function() {
 			is_z_verify_account_api_running = true;
 			
 			var url = Path+'users/club_registration_logged_in_users/'; 
+                        //alert(url);
 			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
 			
 
@@ -990,6 +992,7 @@ function show_gif(obj){
 	
 			//is_z_verify_account_api_running = true;
 			var url = Path+'users/merchant_registration_validation/'; 
+                        //alert(url);
 			sub_btn_parent.html("<img src = \"<?php //echo PATH."image/anim/6.gif";?>\" /><p>.</p>");
 			
 			$.ajax(
@@ -1004,6 +1007,8 @@ function show_gif(obj){
 		        success:function(check)
 		        {
                             //alert(check);
+                            if(check == 1){
+
 swal({   
 title: "Account verification successful",  
 text: "Proceed to Merchant Registration.",
@@ -1023,6 +1028,13 @@ function(isConfirm){
         swal("Cancelled", "Please, come back and complete your merchant sign up", "warning");
     }
 });
+                            }
+                            else{
+					sub_btn_parent.html(sub_btn_parent_bak);
+					is_z_verify_account_api_running = false;
+                                        alert("Your account cannot be validated. Please try again");
+					//$('#z_acc_error').html("<?php echo ""; ?>");
+                            }
                             //swal("");
                             //location.href ="<?php echo PATH; ?>merchant-signup-step2.html";
                             return false;
