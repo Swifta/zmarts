@@ -457,12 +457,9 @@ class Merchant_Controller extends website_Controller
 		$this->transaction_list= $this->merchant->get_transaction_data($deal_id);
 			if(count($this->deal_deatils) == 0){
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-				$lastsession = $this->session->get("lasturl");
-		                if($lastsession){
-		                url::redirect(PATH.$lastsession);
-		                } else {
+				
 		                url::redirect(PATH."merchant/manage-deals.html");
-		                }
+		                
 			}
 			$search=$this->input->get("id");
 
@@ -570,21 +567,15 @@ class Merchant_Controller extends website_Controller
 			                }
 
 					common::message(1, $this->Lang["DEAL_EDIT_SUC"]);
-					$lastsession = $this->session->get("lasturl");
-	                                if($lastsession){
-	                                url::redirect(PATH.$lastsession);
-	                                } else {
+					
 	                                url::redirect(PATH."merchant/manage-deals.html");
-	                                }
+	                                
 					}
 					elseif($status == 8){
 						common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-						$lastsession = $this->session->get("lasturl");
-		                                if($lastsession){
-		                                url::redirect(PATH.$lastsession);
-		                                } else {
+						
 		                                url::redirect(PATH."merchant/manage-deals.html");
-		                                }
+		                                
 					}
 				$this->form_error["title"] = $this->Lang["DEAL_EXIST"];
 			}
@@ -601,12 +592,9 @@ class Merchant_Controller extends website_Controller
 		$this->deal = $this->merchant->get_edit_deal($deal_id,$deal_key);
 		if(($this->deal->current()->enddate) <  time() ){
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-				$lastsession = $this->session->get("lasturl");
-                                if($lastsession){
-                                url::redirect(PATH.$lastsession);
-                                } else {
-                                url::redirect(PATH."merchant/manage-deals.html");
-                                }
+				
+                url::redirect(PATH."merchant/manage-deals.html");
+                                
 	        }
 		$this->template->title = $this->Lang["EDIT_DEAL"];
 		$this->template->content = new View("merchant/edit_deal");
@@ -633,12 +621,9 @@ class Merchant_Controller extends website_Controller
 	        	else{
 		        	common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 	        	}
-	        	$lastsession = $this->session->get("lasturl");
-		        if($lastsession){
-		        url::redirect(PATH.$lastsession);
-		        } else {
+	        	
 		        url::redirect(PATH."merchant/manage-deals.html");
-		        }
+		        
 			
         }
 
@@ -716,12 +701,9 @@ class Merchant_Controller extends website_Controller
 			$this->deal_deatils = $this->merchant->get_dealsmail_data($deal_key, $deal_id);
 			if(count($this->deal_deatils) == 0){
 		        common::message(-1, $this->Lang["DEAL_BLOCKED"]);		
-		        $lastsession = $this->session->get("lasturl");
-		        if($lastsession){
-		        url::redirect(PATH.$lastsession);
-		        } else {
+		        
 		        url::redirect(PATH."merchant/manage-deals.html");
-		        }
+		        
 		        }
 				if($_POST){
 						$this->deal_deatils = $this->merchant->get_deals_data($deal_key, $deal_id);
@@ -758,12 +740,9 @@ class Merchant_Controller extends website_Controller
 										common::message(1, $this->Lang["MAIL_SENDED"]);
 
 								}
-								$lastsession = $this->session->get("lasturl");
-		                                                if($lastsession){
-		                                                url::redirect(PATH.$lastsession);
-		                                                } else {
+								
 		                                                url::redirect(PATH."merchant/manage-deals.html");
-		                                                }
+		                                                
 							}
 							else{
 								$this->form_error = error::_error($post->errors());
@@ -1217,14 +1196,10 @@ class Merchant_Controller extends website_Controller
 					}
 						
 						common::message(1, $this->Lang["STORES_SET_SUC"]);
-						$lastsession = $this->session->get("lasturl");
-                                        //var_dump($lastsession); die;
-		                                if($lastsession){
-		                                //url::redirect($lastsession);
-                                                    url::redirect(PATH."merchant/manage-shop.html");
-		                                } else {
+						
+                                        
 		                                url::redirect(PATH."merchant/manage-shop.html");
-		                                }
+		                                
 				}
 				else{
 						$this->form_error = error::_error($post->errors());
@@ -1239,12 +1214,10 @@ class Merchant_Controller extends website_Controller
 				
 		if(count($this->user_data) == 0){
 			common::message(-1, $this->Lang["STORE_CANT_EDIT"]);
-			$lastsession = $this->session->get("lasturl");
-                        if($lastsession){
-                        url::redirect(PATH.$lastsession);
-                        } else {
+			
+                       
                         url::redirect(PATH."merchant/manage-shop.html");
-                        }
+                        
 		}
 		$this->template->title = $this->Lang["EDIT_SHOP"];
 		$this->template->content = new View("merchant/edit_merchant_shop");
@@ -1284,12 +1257,10 @@ class Merchant_Controller extends website_Controller
 			else if($status == -1){
 				common::message(-1, $this->Lang["MERCHANT_BLOCKED"]);
 			}
-			$lastsession = $this->session->get("lasturl");
-		        if($lastsession){
-		        url::redirect(PATH.$lastsession);
-		        } else {
+			
+		        
 		        url::redirect(PATH."merchant/manage-shop.html");
-		        }
+		        
 		
 	}
 
@@ -1431,24 +1402,18 @@ class Merchant_Controller extends website_Controller
 					 	$status = $this->merchant->edit_fund_request($fundid,$amount,$useramount);
 					 	if($status){
 								common::message(1, $this->Lang["WITHDRAW_FUND_ADD_SUC"]);
-								$lastsession = $this->session->get("lasturl");
-		                                                if($lastsession){
-		                                                url::redirect(PATH.$lastsession);
-		                                                } else {
+								
 								url::redirect(PATH."merchant/manage_fund_request");
-								}
+								
 						}
 					}
 		}
 			$this->fund_request_data = $this->merchant->get_fund_request_data($fundid);
 			if(count($this->fund_request_data) == 0){
 				        common::message(1, $this->Lang["YOUR_REQ_COMPLETED"]);
-                                        $lastsession = $this->session->get("lasturl");
-                                        if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                        } else {
+                                       
                                         url::redirect(PATH."merchant/manage_fund_request");
-                                        }
+                                        
 			}
 		$this->template->title = $this->Lang["WITHDRAW_FUND"];
 		$this->template->content = new View("merchant/edit_fund_request");
@@ -1501,12 +1466,9 @@ class Merchant_Controller extends website_Controller
 					common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 				}
 			}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
 		url::redirect(PATH."merchant/manage_fund_request");
-		}
+		
 	}
 
         /** CHECK PASSWORD EXIST **/
@@ -1996,22 +1958,13 @@ class Merchant_Controller extends website_Controller
 						url::redirect(PATH."merchant/manage-products.html");
 					  }
 					 
-                                        /*common::message(1, $this->Lang["PRODUCT_EDIT_SUC"]);
-                                        $lastsession = $this->session->get("lasturl");
-                                        if($lastsession){
-                                                url::redirect(PATH.$lastsession);
-                                        } else {
-                                                url::redirect(PATH."merchant/manage-products.html");
-                                        }*/
+                                      
 				}
 				elseif($status == 8){
                                         common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-                                        $lastsession = $this->session->get("lasturl");
-	                                if($lastsession){
-	                                        url::redirect(PATH.$lastsession);
-	                                } else {
+                                        
 	                                        url::redirect(PATH."merchant/manage-products.html");
-	                                }
+	                                
 				}
 				$this->form_error["title"] = $this->Lang["PRODUCT_EXIST"];
 			}
@@ -2042,12 +1995,10 @@ class Merchant_Controller extends website_Controller
 		$this->gift_list=$this->merchant->get_gift_list1();
 		if(($this->product->current()->purchase_count) >= ($this->product->current()->user_limit_quantity) ){
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-			$lastsession = $this->session->get("lasturl");
-                        if($lastsession){
-                                url::redirect(PATH.$lastsession);
-                        } else {
+			
+                        
                                 url::redirect(PATH."merchant/manage-products.html");
-                        }
+                        
 		}
 		$this->template->title = $this->Lang["EDIT_PRODUCT"];
 		$this->template->content = new View("merchant/edit_products");
@@ -2074,12 +2025,9 @@ class Merchant_Controller extends website_Controller
 	        else{
 		        common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 	        }
-                $lastsession = $this->session->get("lasturl");
-	        if($lastsession){
-	        url::redirect(PATH.$lastsession);
-	        } else {
+             
 	        url::redirect(PATH."merchant/manage-products.html");
-	        }
+	        
 	        
         }
 
@@ -2098,12 +2046,9 @@ class Merchant_Controller extends website_Controller
 		$this->product_deatils = $this->merchant->get_products_data($deal_key, $deal_id);
 			if(count($this->product_deatils) == 0){
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-				 $lastsession = $this->session->get("lasturl");
-	                        if($lastsession){
-	                        url::redirect(PATH.$lastsession);
-	                        } else {
+				
 	                        url::redirect(PATH."merchant/manage-products.html");
-	                        }
+	                        
 			}
 		$this->category_list = $this->merchant->all_category_list();
 		$this->selectproduct_policy = $this->merchant->get_product_policy($deal_id);
@@ -2226,12 +2171,9 @@ class Merchant_Controller extends website_Controller
 			common::message(1, $this->Lang["MAIL_SENDED"]);
 			$status = $this->merchant->update_shipping_status($this->input->post('id'));
 			if($status){
-			        $lastsession = $this->session->get("lasturl");
-                                if($lastsession){
-                                url::redirect(PATH.$lastsession);
-                                } else {
+			        
 				url::redirect(PATH."merchant/shipping-delivery.html");
-				}
+				
 			}
 		}
 
@@ -2286,12 +2228,9 @@ class Merchant_Controller extends website_Controller
 		$this->product_deatils = $this->merchant->get_productsmail_data($deal_key, $deal_id);
 		if(count($this->product_deatils) == 0){
 		common::message(-1, $this->Lang["PRODUCT_BLOCKED"]);		
-		 $lastsession = $this->session->get("lasturl");
-	        if($lastsession){
-	        url::redirect(PATH.$lastsession);
-	        } else {
+		 
 	        url::redirect(PATH."merchant/manage-products.html");
-	        }
+	        
 		}
 
 		if($_POST){
@@ -2326,12 +2265,9 @@ class Merchant_Controller extends website_Controller
 							}
 							common::message(1, "Mail Send Successfully");
 					}
-					 $lastsession = $this->session->get("lasturl");
-	                                if($lastsession){
-	                                url::redirect(PATH.$lastsession);
-	                                } else {
+					
 	                                url::redirect(PATH."merchant/manage-products.html");
-	                                }
+	                                
 				}
 				else{
 					$this->form_error = error::_error($post->errors());
@@ -2460,12 +2396,9 @@ class Merchant_Controller extends website_Controller
 					common::message(1, $this->Lang["MAIL_SENDED"]);
 					$status = $this->merchant->update_shipping_status($this->input->post('id'));
 						if($status){
-						        $lastsession = $this->session->get("lasturl");
-                                                        if($lastsession){
-                                                        url::redirect(PATH.$lastsession);
-                                                        } else {
+						        
 							url::redirect(PATH."merchant/cash-delivery.html");
-							}
+							
 						}
 
 
@@ -2701,12 +2634,9 @@ class Merchant_Controller extends website_Controller
                 $this->deal_deatils = $this->merchant->get_auction_data($deal_key, $deal_id);
 		if(count($this->deal_deatils) == 0){
 			common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-			$lastsession = $this->session->get("lasturl");
-		        if($lastsession){
-		        url::redirect(PATH.$lastsession);
-		        } else {
+			
 		        url::redirect(PATH."merchant/manage-auction.html");
-		        }
+		        
 		}
 		$this->category_list = $this->merchant->all_category_list();
 		$this->transaction_auction_list = $this->merchant->get_auction_transaction_data($deal_id);
@@ -2826,21 +2756,15 @@ class Merchant_Controller extends website_Controller
 			                  }
 			         }
 					common::message(1, $this->Lang["AUCTION_EDIT_SUC"]);
-					$lastsession = $this->session->get("lasturl");
-		                        if($lastsession){
-		                        url::redirect(PATH.$lastsession);
-		                        } else {
+					
 		                        url::redirect(PATH."merchant/manage-auction.html");
-		                        }
+		                        
 				}
 				elseif($status == 8){
 					common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-					$lastsession = $this->session->get("lasturl");
-		                        if($lastsession){
-		                        url::redirect(PATH.$lastsession);
-		                        } else {
+					
 		                        url::redirect(PATH."merchant/manage-auction.html");
-		                        }
+		                        
 				}
 			}
 			else{
@@ -2856,12 +2780,9 @@ class Merchant_Controller extends website_Controller
         $this->deal = $this->merchant->get_edit_auction($deal_id,$deal_key);
         if(($this->deal->current()->enddate) <  time() ){
 		common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+		
                 url::redirect(PATH."merchant/manage-auction.html");
-                }
+                
 	}
         $this->template->title = $this->Lang["EDIT_AUCTION"];
         $this->template->content = new View("merchant/edit_auction");
@@ -2888,12 +2809,9 @@ class Merchant_Controller extends website_Controller
 		else{
 		        common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-	        if($lastsession){
-	        url::redirect(PATH.$lastsession);
-	        } else {
+		
 	        url::redirect(PATH."merchant/manage-auction.html");
-	        }
+	        
 	}
 
 	/** SELECT SUB CATEGORY AND UNDER CATEGORY USER **/
@@ -3021,12 +2939,9 @@ class Merchant_Controller extends website_Controller
 		$this->deatils = $this->merchant->get_auctionmail_data($deal_key, $deal_id);
 		if(count($this->deatils) == 0){
 		        common::message(-1, $this->Lang["AUCTION_BLOCKED"]);		
-		        $lastsession = $this->session->get("lasturl");
-	                if($lastsession){
-	                url::redirect(PATH.$lastsession);
-	                } else {
+		        
 	                url::redirect(PATH."merchant/manage-auction.html");
-	                }
+	                
 		}
                 if($_POST){
 	  		$this->userPost = $this->deal_deatils = $this->input->post();
@@ -3060,12 +2975,9 @@ class Merchant_Controller extends website_Controller
 					}
 					common::message(1, $this->Lang["MAIL_SENDED"]);
 					}
-		               		$lastsession = $this->session->get("lasturl");
-		                        if($lastsession){
-		                        url::redirect(PATH.$lastsession);
-		                        } else {
+		               		
 		                        url::redirect(PATH."merchant/manage-auction.html");
-		                        }
+		                        
 		        }
 		        else{
 		            $this->form_error = error::_error($post->errors());
@@ -3565,12 +3477,9 @@ class Merchant_Controller extends website_Controller
 			email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 			}
 			common::message(1, $this->Lang["MAIL_SENDED"]);
-                        $lastsession = $this->session->get("lasturl");
-                        if($lastsession){
-                        url::redirect(PATH.$lastsession);
-                        } else {
+                       
 			url::redirect(PATH."merchant-auction/winner-list.html");
-			}
+			
 		}
 		$this->search_key = arr::to_object($this->input->get());
 		$count = $this->merchant->get_winner_count($this->input->get('name'));
@@ -4271,12 +4180,9 @@ class Merchant_Controller extends website_Controller
                 }
                 if($status){
 	                common::message(1, "Status updated successfully!");
-	                $lastsession = $this->session->get("lasturl");
-                        if($lastsession){
-                        url::redirect(PATH.$lastsession);
-                        } else {
+	                
 	                url::redirect(PATH."merchant/shipping-delivery.html");
-	                }
+	                
                 }
 	}
 
@@ -4306,12 +4212,9 @@ class Merchant_Controller extends website_Controller
                         }
                         if($status){
                         common::message(1, "Status updated successfully!");
-                        $lastsession = $this->session->get("lasturl");
-                        if($lastsession){
-                        url::redirect(PATH.$lastsession);
-                        } else {
+                        
                         url::redirect(PATH."merchant/cash-delivery.html");
-                        }
+                        
                         }
 	}
 
@@ -4339,12 +4242,9 @@ class Merchant_Controller extends website_Controller
                 }
                 if($status){
 	                common::message(1, $this->Lang['STA_UPD']);
-	                $lastsession = $this->session->get("lasturl");
-                        if($lastsession){
-                        url::redirect(PATH.$lastsession);
-                        } else {
+	                
 	                url::redirect(PATH."merchant-auction/shipping-delivery.html");
-	                }
+	                
                 }
 	}
 
@@ -4372,12 +4272,9 @@ class Merchant_Controller extends website_Controller
                 }
                 if($status){
                 common::message(1, $this->Lang['STA_UPD']);
-                $lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+                
                 url::redirect(PATH."merchant-auction/cod-delivery.html");
-                }
+                
                 }
 	}
 	
@@ -5441,12 +5338,9 @@ class Merchant_Controller extends website_Controller
 				$status = $this->merchant->edit_duration(arr::to_object($this->userPost),$durationid);
 				if($status == 1){
 					common::message(1, $this->Lang["DUR_EDIT_SUC"]);
-					$lastsession = $this->session->get("lasturl");
-					 if($lastsession){
-						url::redirect(PATH.$lastsession);
-						} else {
+					
 						url::redirect(PATH."merchant/manage-duration.html");
-						}
+						
 				}
 			}
 			else{
@@ -5806,12 +5700,9 @@ class Merchant_Controller extends website_Controller
 			if($_POST){
 				$status = $this->merchant->edit_color($color_id,$_POST['color_code'],$_POST['color_name']);
 				($status == 1)?common::message(1, $this->Lang['CO_EDIT_SUCC']):common::message(-1, $this->Lang['CO_AL']);
-				$lastsession = $this->session->get("lasturl");
-                                if($lastsession){
-                                        url::redirect(PATH.$lastsession);
-                                } else {
+				
                                         url::redirect(PATH."merchant/manage-colors.html");
-                                }
+                                
 			}
 		$this->colorData = $this->merchant->getcolorData($color_id);
 		$this->template->title = $this->Lang['EDIT_CO'];
@@ -5851,12 +5742,17 @@ class Merchant_Controller extends website_Controller
 
 	public function manage_sizes($page = "")
 	{
+		
 		if(PRIVILEGES_ATTRIBUTES!= 1){
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."merchant.html");	        
 		}
 		$this->color_settings = 1;
 		$this->mer_settings_act="1";
+		
+		//$this->mer_settings_act="1";
+		//$this->size_settings = 1;
+		
 		$count = $this->merchant->get_sizes_count();
 				$this->pagination = new Pagination(array(
 				'base_url'       => 'merchant/manage-sizes.html/page/'.$page."/",
@@ -5868,7 +5764,13 @@ class Merchant_Controller extends website_Controller
 				));
 		$this->sizeDataList = $this->merchant->get_sizes_list($this->pagination->sql_offset, $this->pagination->items_per_page);
 		$this->template->title = $this->Lang['MANA_SIZE'];
+		
+		
+		
+		
 		$this->template->content = new View("merchant/manage_size");
+		
+		
 	}
 
 	/** EDIT SIZE **/
@@ -5893,12 +5795,9 @@ class Merchant_Controller extends website_Controller
 
 									if($status == 1){
 										common::message(1, $this->Lang['SIZE_EDIT_SUCC']);
-										$lastsession = $this->session->get("lasturl");
-                                                                                if($lastsession){
-                                                                                url::redirect(PATH.$lastsession);
-                                                                                } else {
-                                                                                url::redirect(PATH."merchant/manage-sizes.html");
-                                                                                }
+										                        
+                                          url::redirect(PATH."merchant/manage-sizes.html");
+                                                                                
 									}
 									else{
 										common::message(-1, $this->Lang['SIZE_AL_EX']);
@@ -6004,12 +5903,9 @@ class Merchant_Controller extends website_Controller
 		
 					if($status == 1){
 						common::message(1, $this->Lang['ATTR_UPDATE']);
-						$lastsession = $this->session->get("lasturl");
-                                                if($lastsession){
-                                                url::redirect(PATH.$lastsession);
-                                                } else {
-                                                url::redirect(PATH."merchant/manage-attribute.html");
-                                                }
+						
+                        url::redirect(PATH."merchant/manage-attribute.html");
+                                                
 					}
 					else{
 						$this->attr_exist= $this->Lang['ATTR_ADD_ATTRGROUP'];
@@ -6108,12 +6004,9 @@ class Merchant_Controller extends website_Controller
 	
 					if($status == 1){
 						common::message(1, $this->Lang['ATTR_GROUP_UPDATE']);
-						$lastsession = $this->session->get("lasturl");
-                                                if($lastsession){
-                                                url::redirect(PATH.$lastsession);
-                                                } else {
+						
                                                 url::redirect(PATH."merchant/manage-attribute-group.html");
-                                                }
+                                                
 					}else{
 						$this->attr_group_exist= $this->Lang['ATTR_GROUP_EXIST'];
 					//url::redirect(PATH."admin/edit-attribute-group/".base64_encode($attribute_id).".html");
@@ -7133,12 +7026,9 @@ class Merchant_Controller extends website_Controller
 				common::message(1, $this->Lang["TEMPLATE_BLOCK_SUC"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-			url::redirect(PATH.$lastsession);
-		} else {
+		
 			url::redirect(PATH."merchant/manage-template.html");
-		}
+		
 	}
 	
 	public function delete_template($newsletter_id = "")
@@ -7159,12 +7049,9 @@ class Merchant_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-			url::redirect(PATH.$lastsession);
-		} else {
+		
 			url::redirect(PATH."merchant/manage-template.html");
-		}
+		
 	}
 	public function check_store_admin_with_supplier()
 	{
