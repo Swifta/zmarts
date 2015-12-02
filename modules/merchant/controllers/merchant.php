@@ -5742,12 +5742,17 @@ class Merchant_Controller extends website_Controller
 
 	public function manage_sizes($page = "")
 	{
+		
 		if(PRIVILEGES_ATTRIBUTES!= 1){
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."merchant.html");	        
 		}
 		$this->color_settings = 1;
 		$this->mer_settings_act="1";
+		
+		//$this->mer_settings_act="1";
+		//$this->size_settings = 1;
+		
 		$count = $this->merchant->get_sizes_count();
 				$this->pagination = new Pagination(array(
 				'base_url'       => 'merchant/manage-sizes.html/page/'.$page."/",
@@ -5759,7 +5764,13 @@ class Merchant_Controller extends website_Controller
 				));
 		$this->sizeDataList = $this->merchant->get_sizes_list($this->pagination->sql_offset, $this->pagination->items_per_page);
 		$this->template->title = $this->Lang['MANA_SIZE'];
+		
+		
+		
+		
 		$this->template->content = new View("merchant/manage_size");
+		
+		
 	}
 
 	/** EDIT SIZE **/
