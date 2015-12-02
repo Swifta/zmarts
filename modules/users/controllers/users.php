@@ -2038,6 +2038,7 @@ $pdf->Output('voucher.pdf', 'I');
 						  $nuban_response = (isset($response['errorMessage']))?-1:1;
 						  if($nuban_response == 1){
 							 $this->session->set("merchant_reg_nuban", $nuban);
+                                                         $this->session->set("firstname", $response['accountName']);
                                                          echo 1;
                                                          exit;
 						  }
