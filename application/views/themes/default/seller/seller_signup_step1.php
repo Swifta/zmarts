@@ -416,7 +416,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <input type="checkbox" name="priorityLow" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
  
 
-
+                               <div style="margin-top: 15px; text-align: center;">
+                                   <h3>Already a merchant ?</h3>
+                                   <p>Login : <a style="color:red" href="<?php echo PATH . 'merchant-login.html'; ?>">here</a></p>
+                               </div>
 <br>
 <!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a>-->
 <div id="autoUpdate" class="autoUpdate" style="display:none">
@@ -477,9 +480,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
  
   
 </div>
-  <div>
-          
-    </div>
 
 <div id="" class="red box"><a href="<?php echo PATH; ?>merchant-signup-account-opening.html"></a></div>
    

@@ -96,10 +96,7 @@ $this->language_List = str_replace(".php", "", $DL);
 								
 							<?php } ?>
                             
-	<li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
-	<li class="mnav_dnone">|</li>
-	
-	<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live
@@ -281,12 +278,12 @@ $this->language_List = str_replace(".php", "", $DL);
                         </div>
                         </div>
                         <div class="merchant_log">
-							<p><?php echo $this->Lang['MERCHANT_ACC']; ?></p>
-							<ul>
-								<li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
-								<li>|</li>
-								<li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
-							</ul>
+						<p>Customer</p>
+			<ul>
+				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+			</ul>
                         
                         </div>
                         <?php if ($this->product_setting) { ?>
@@ -606,10 +603,7 @@ if ($lan != LANGUAGE) {
 
 	
 
-	<li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
-	<li class="mnav_dnone">|</li>
-	
-	<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live
@@ -781,11 +775,11 @@ $srch = $this->Lang['SRCH_DEAL'];
         </div>
         </div>
          <div class="merchant_log">
-			<p><?php echo $this->Lang['MERCHANT_ACC']; ?></p>
+			<p>Customer</p>
 			<ul>
-				<li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
+				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
 			</ul>
 		
 		</div>
