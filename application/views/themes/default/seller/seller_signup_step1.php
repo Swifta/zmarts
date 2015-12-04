@@ -415,8 +415,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <input type="checkbox" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" /><label for="priorityHigh" >Yes</label>
 <input type="checkbox" name="priorityLow" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
  
-
-
 <br>
 <!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a>-->
 <div id="autoUpdate" class="autoUpdate" style="display:none">
@@ -477,19 +475,24 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
  
   
 </div>
-  <div>
-          
-    </div>
 
 <div id="" class="red box"><a href="<?php echo PATH; ?>merchant-signup-account-opening.html"></a></div>
    
                            </form>
                             </p>
                         </div>
-                    </div>                    
+                    
+                               <div style="margin-top: 15px; text-align: center;">
+                                   <h3>Already a merchant ?</h3>
+                                   <p>Login : <a style="color:red" href="<?php echo PATH . 'merchant-login.html'; ?>">here</a></p>
+                               </div>
+                                            
+                    </div>   
+                    
                     <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
                         <!--<a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>-->
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -916,6 +919,7 @@ $('#submit_accxm').click(function() {
 			$('#z_acc_error').html('');
 			
 			var nuban = $('#acctnum').val();
+                        //alert(nuban);
 			if(nuban == ''){
 				alert("Empty field");
 				return false;
@@ -942,6 +946,7 @@ $('#submit_accxm').click(function() {
 			is_z_verify_account_api_running = true;
 			
 			var url = Path+'users/club_registration_logged_in_users/'; 
+                        //alert(url);
 			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
 			
 
@@ -990,6 +995,7 @@ function show_gif(obj){
 	
 			//is_z_verify_account_api_running = true;
 			var url = Path+'users/merchant_registration_validation/'; 
+                        //alert(url);
 			sub_btn_parent.html("<img src = \"<?php //echo PATH."image/anim/6.gif";?>\" /><p>.</p>");
 			
 			$.ajax(
@@ -1004,6 +1010,8 @@ function show_gif(obj){
 		        success:function(check)
 		        {
                             //alert(check);
+                            if(check == 1){
+
 swal({   
 title: "Account verification successful",  
 text: "Proceed to Merchant Registration.",
@@ -1023,6 +1031,13 @@ function(isConfirm){
         swal("Cancelled", "Please, come back and complete your merchant sign up", "warning");
     }
 });
+                            }
+                            else{
+					sub_btn_parent.html(sub_btn_parent_bak);
+					is_z_verify_account_api_running = false;
+                                        alert("Your account cannot be validated. Please try again");
+					//$('#z_acc_error').html("<?php echo ""; ?>");
+                            }
                             //swal("");
                             //location.href ="<?php echo PATH; ?>merchant-signup-step2.html";
                             return false;

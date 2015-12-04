@@ -228,7 +228,7 @@ $config['merchant/edit-color/(.*).html'] = "/merchant/edit_color/$1";
 
 $config['merchant/add-size.html'] = "/merchant/add_size";
 $config['merchant/manage-sizes.html'] = "/merchant/manage_sizes";
-$config['admin/manage-sizes.html/page/(.*)'] = "/merchant/manage_sizes/$1";
+$config['merchant/manage-sizes.html/page/(.*)'] = "/merchant/manage_sizes/$1";
 $config['merchant/edit-size/(.*).html'] = "/merchant/edit_size/$1";
 
 

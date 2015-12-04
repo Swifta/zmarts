@@ -26,3 +26,12 @@ $config['Slot-Systems-Limited/products/c/(.*)/(.*).html'] = "/hospitality2/produ
 $config['Slot-Systems-Limited/deal/c/(.*)/(.*).html'] = "/hospitality2/deal_list/Slot-Systems-Limited/$1/$2";
 $config['Slot-Systems-Limited/auction/c/(.*)/(.*).html'] = "/hospitality2/auction_list/Slot-Systems-Limited/$1/$2";
 // Slot-Systems-Limited End
+// ABC-Pvt-Ltd Start
+$config['ABC-Pvt-Ltd'] ="hospitality2/stores_home_page/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products.html'] = "/hospitality2/product_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/today-deals.html'] = "/hospitality2/deal_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/auction.html'] = "/hospitality2/auction_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/hospitality2/product_list/ABC-Pvt-Ltd/$1/$2";
+$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/hospitality2/deal_list/ABC-Pvt-Ltd/$1/$2";
+$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/hospitality2/auction_list/ABC-Pvt-Ltd/$1/$2";
+// ABC-Pvt-Ltd End
