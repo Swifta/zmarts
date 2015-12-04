@@ -415,11 +415,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <input type="checkbox" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" /><label for="priorityHigh" >Yes</label>
 <input type="checkbox" name="priorityLow" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
  
-
-                               <div style="margin-top: 15px; text-align: center;">
-                                   <h3>Already a merchant ?</h3>
-                                   <p>Login : <a style="color:red" href="<?php echo PATH . 'merchant-login.html'; ?>">here</a></p>
-                               </div>
 <br>
 <!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a>-->
 <div id="autoUpdate" class="autoUpdate" style="display:none">
@@ -486,10 +481,18 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                            </form>
                             </p>
                         </div>
-                    </div>                    
+                    
+                               <div style="margin-top: 15px; text-align: center;">
+                                   <h3>Already a merchant ?</h3>
+                                   <p>Login : <a style="color:red" href="<?php echo PATH . 'merchant-login.html'; ?>">here</a></p>
+                               </div>
+                                            
+                    </div>   
+                    
                     <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
                         <!--<a href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>-->
                     </div>
+                    
                 </div>
             </div>
         </div>
