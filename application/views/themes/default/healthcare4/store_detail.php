@@ -77,7 +77,7 @@ if(count($this->merchant_personalised_details)>0) {
                         //echo "No Image file";
 ?>
                 <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/healthcare4/banner-<?php echo $i; ?>.jpg" alt="" />
                 </li>
 <?php
                     }
@@ -87,10 +87,10 @@ if(count($this->merchant_personalised_details)>0) {
 else{?>
 
     <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-1.jpg" alt="" />
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/healthcare4/banner-1.jpg" alt="" />
     </li>
     <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-2.jpg" alt="" />
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/healthcare4/banner-2.jpg" alt="" />
             <div class="intro">
                     <h1>Mid season sale</h1>
                     <p><span>Up to 50% Off</span></p>
@@ -98,7 +98,7 @@ else{?>
             </div>
     </li>
     <li>
-            <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
+            <img src="<?php echo PATH; ?>bootstrap/themes/images/healthcare4/banner-3.jpg" alt="" />
     </li>
 
 <!-- display default banners-->
