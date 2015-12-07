@@ -50,12 +50,12 @@ $this->language_List = str_replace(".php", "", $DL);
 								if (PHONE1) { 	echo PHONE1;	} else { }?></li>
 						</ul>
 					</div>
-					<div class="header_top_middle">
+					<!--<div class="header_top_middle">
 						<div class="refer_friend">
 							<a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
 								<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
 						</div>
-					</div>
+					</div>-->
 				
 					
                                     
