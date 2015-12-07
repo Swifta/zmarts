@@ -444,9 +444,9 @@ input[type=text],input[type=password]
                                         <br/>
                                         
                                         <div class="">
-                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
+                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>"   value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
                                       
-                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
+                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>"  value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
                                           <em id="id_err_latitude"><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
                                         <em id="id_err_longitude"><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
                                         </div>

@@ -10,5 +10,6 @@ $config['merchant-signup-completed.html'] = "/seller/merchant_completed";
 
 
 $config['merchant-signup-account-opening.html'] = "/seller/seller_signup_zenith";
+$config['merchant-account-open-complete.html'] = "/seller/merchant_account_open_complete";
 
 

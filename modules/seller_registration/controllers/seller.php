@@ -33,6 +33,11 @@ class Seller_Controller extends Layout_Controller {
 	}
 	
         
+        public function merchant_account_open_complete(){
+            $this->template->title = "Merchant Account Opening Completed";
+            $this->template->content = new View("themes/".THEME_NAME."/seller/seller_account_open_completed");   
+        }
+        
 	public function seller_signup_zenith()
 	{
 
@@ -60,18 +65,18 @@ class Seller_Controller extends Layout_Controller {
                 $arg['ClassCode'] = $class_code;
                 //var_dump($arg);
                 $fun_resp = $soap->CreateAccount($arg);
-                if($fun_resp->CreateAccountResult->errorMessage == ""){
+                if(!isset($fun_resp->CreateAccountResult->errorMessage)){
                     $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:green'>"
-                            . "Your bank account as been opened. Wait for bank to get intouch !</p>");
+                            . "Your bank account creation has been initiated. Contact your chosen branch to complete the process!</p>");
                     common::message(1, "Your bank account as been opened. Wait for bank to get intouch !");
-                    url::redirect(PATH."merchant-signup-step1.html");                    
+                    url::redirect(PATH."merchant-account-open-complete.html");                    
                 }
                 else{
                     //error occured
                     $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:red'>"
-                            . "Something went wrong when trying to complete your request. Please try again !</p>");
+                            . "Account opening failed. Please, choose a different account class and try again !</p>");
                     common::message(-1, "Something went wrong when trying to complete your request. Please try again.");
-                    //url::redirect(PATH."merchant-signup-step2.html");
+                    url::redirect(PATH."merchant-signup-account-opening.html");  
                 }
                 //var_dump($fun_resp);
             }
@@ -86,7 +91,7 @@ class Seller_Controller extends Layout_Controller {
                     $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:red'>"
                             . "Something went wrong when trying to load this service. Please try again.</p>");
                     common::message(-1, "Something went wrong when trying to load this service. Please try again.");
-                    url::redirect(PATH."merchant-signup-step2.html");                    
+                    //url::redirect(PATH."merchant-account-open-complete.html");                    
                 }
                 foreach($fun_resp_branch->getBranchListResult->Branches as $value){
                     $this->branch_options.= '<option value="'.@$value->BranchNo.'">'.@$value->BranchName.'</option>';
@@ -99,7 +104,7 @@ class Seller_Controller extends Layout_Controller {
                 $this->session->set("alert_msg", "<p style='text-align:center;clear:both; width:100%;margin:8px auto;color:red'>"
                         . "Something went wrong when trying to load this service. Please try again.</p>");
 		common::message(-1, "Something went wrong when trying to load this service. Please try again.");
-		url::redirect(PATH."merchant-signup-step2.html");
+		//url::redirect(PATH."merchant-signup-step2.html");
               }
 
 		$this->template->title = $this->Lang['MER_SIGN_1'];

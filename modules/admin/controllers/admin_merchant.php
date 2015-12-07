@@ -971,7 +971,7 @@ class Admin_merchant_Controller extends website_Controller {
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('mobile', 'required', array($this, 'validphone'))
 						->add_rules('address1', 'required')
-						->add_rules('address2', 'required')
+						//->add_rules('address2', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required')
 						->add_rules('storename', 'required',array($this,'check_store_exist1'))
@@ -980,7 +980,7 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('latitude', 'required','chars[0-9.-]')
 						->add_rules('longitude', 'required','chars[0-9.-]')
 						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('store_email', 'required',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier1'))
+						->add_rules('store_email', 'required',array($this,'check_store_admin1'))
 						->add_rules('sector', 'required')
 						->add_rules('subsector', 'required')
 						->add_rules('username', 'required');
@@ -990,8 +990,8 @@ class Admin_merchant_Controller extends website_Controller {
 							$post->add_rules('subsector', 'required');
 						}
 
-
 			if($post->validate()){
+                            
 					$storename = $this->input->post("storename");
 					$store_details = $this->merchant->get_store_name($storeid,$merchantid);
 					$old_store_name = $store_details[0]->store_url_title;

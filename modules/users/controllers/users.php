@@ -2011,7 +2011,8 @@ $pdf->Output('voucher.pdf', 'I');
   public function merchant_registration_validation(){
 		  if($_POST){
 			  $nuban = $this->input->post('nuban');
-                          $this->session->set("merchant_reg_nuban", $nuban);
+                          //echo $nuban;
+                          //$this->session->set("merchant_reg_nuban", $nuban);
                           if(true){
 				 
 				  $r = $this->users->check_zenith_account_used($nuban);
@@ -2037,16 +2038,20 @@ $pdf->Output('voucher.pdf', 'I');
 						  $nuban_response = (isset($response['errorMessage']))?-1:1;
 						  if($nuban_response == 1){
 							 $this->session->set("merchant_reg_nuban", $nuban);
-							  
+                                                         $this->session->set("firstname", $response['accountName']);
+                                                         echo 1;
+                                                         exit;
 						  }
 					  }
                                     }
-						  echo -1;
+                                    
+						  echo -9;
 						  exit;
 				 
 			  }
 			  
-			 }      
+			 }
+                         echo -8;exit;
   }
   
    /*

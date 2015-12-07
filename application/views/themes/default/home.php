@@ -843,7 +843,7 @@
                     }?>
                   </ul>
             </div>
-            
+            <!--
             <div class="new_home_blog">
                 <div class="new_home_blog_title">
                     <h2><?php echo $this->Lang['FROM_THE_BLOG'];?></h2>
@@ -897,6 +897,7 @@
                     </ul>
                 </div>
             </div>
+            -->
             <div class="new_advertice_part">
                 <div class="new_advertice_part_inner">
 					<?php if (count($this->ads_details) > 0) {

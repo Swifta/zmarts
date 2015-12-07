@@ -1228,7 +1228,7 @@ class Merchant_Controller extends website_Controller
 	}
         
         public function validate_account(){
-            return !$this->merchant->validate_account($this->input->post("nuban"));
+            return $this->merchant->validate_account($this->input->post("nuban"));
         }
         
 	public function check_store_exist1(){
