@@ -173,7 +173,7 @@
            <!-- <p class="new_footer_copyright">Copyright  &copy;2015 emarketplace.com All rights reserved</p>-->
            	<p class="new_footer_copyright"><?php echo $this->Lang['FOOTER_COPYRIGHT']." ";?> <a href="<?php echo PATH; ?>"><?php echo SITENAME;?></a> All rights reserved</p>
             <div class="payment_img">
-                <!--<img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/new_foot_pay_img.png"/> -->
+                <img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/new_foot_pay_img.png"/>
             </div>
         </div>
     </div>
