@@ -492,7 +492,7 @@ $this->language_List = str_replace(".php", "", $DL);
 		</li>
 	<?php } ?>
 
-	<?php if ($this->blog_setting) { ?>
+	<?php /*if ($this->blog_setting) { ?>
 		<li class="green_bg blog_menu" <?php
 			if (isset($this->is_blog)) {
 				echo "class='active'";
@@ -503,7 +503,7 @@ $this->language_List = str_replace(".php", "", $DL);
 				<?php echo $this->Lang['BLOG']; ?>
 			</a>
 		</li>
-<?php } ?>
+<?php } */?>
 </ul>
                                         </div>
                                         </div>
@@ -530,10 +530,10 @@ $this->language_List = str_replace(".php", "", $DL);
 </ul>
 </div>
 <div class="header_top_middle">
-<div class="refer_friend">
+<!--<div class="refer_friend">
 <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
 	<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-</div>
+</div>-->
 </div>          
 <?php  if($this->session->get('user_auto_key')) { ?>
     <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div>
@@ -1076,7 +1076,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 	        </li>
         <?php } ?>
 
-        <?php if ($this->blog_setting) { ?>
+        <?php /*if ($this->blog_setting) { ?>
         <li class="green_bg blog_menu" <?php
 	        if (isset($this->is_blog)) {
 		        echo "class='active'";
@@ -1088,7 +1088,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 		        <?php echo $this->Lang['BLOG']; ?>
 	        </a>
         </li>
-        <?php } ?>
+        <?php } */?>
         </ul>
         </div>
         </div>
