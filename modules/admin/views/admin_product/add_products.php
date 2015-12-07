@@ -9,7 +9,7 @@
                 $('.spe_show').hide();
          	//$('.attribute').hide(); // for attribute
                  	$("#check2").click(function(){ 	
-
+						
                         var textVal = $(".txtChar").val();
                         if(textVal == "") {
                             alert('<?php echo $this->Lang["QTY"]; ?>');
@@ -39,6 +39,9 @@
                                 return false;
                         } 
                         
+						
+					
+						
          if ((document.getElementById('perquantity').checked)) {         
          if ((document.getElementById('Wholesale').value == '') ||  (document.getElementById('Wholesale').value == '0')) { 
                 document.getElementById("Wholesale").focus();
@@ -46,6 +49,9 @@
                       return false; 
         } 
         }
+		
+		
+			
         
         if ((document.getElementById('perproduct').checked)) {
         if ((document.getElementById('Wholesale').value == '') ||  (document.getElementById('Wholesale').value == '0')) { 
@@ -54,14 +60,28 @@
                       return false; 
         }
         } 
+		
+		
+		
+		if($("input[name=color_val]:checked").val() == 1){
+						
+		                var c = $("input[name='color[]']:checked").length>0; 
+						
+		                if(!c){
+			                alert('<?php echo $this->Lang["PLS_COL"]; ?>');
+			                return false;
+		                } 
+	                }
         
-        if ((document.getElementById('productaramex').checked)) {
+        /*if ((document.getElementById('productaramex').checked)) {
         if ((document.getElementById('weightaramex').value == '') ||  (document.getElementById('weightaramex').value == '0')) { 
                 document.getElementById("weightaramex").focus();
                       alert("Please enter product weight");
                       return false; 
         } 
         }
+		
+		
         
         if ((document.getElementById('productaramex').checked)) {
         if ((document.getElementById('lengtharamex').value == '') ||  (document.getElementById('lengtharamex').value == '0')) { 
@@ -86,16 +106,12 @@
                       return false; 
         }
         }
+		*/
+		
         
 
-                        
-	                if($("input[name=color_val]:checked").val() == 1){
-		                var c = $("input[name='color[]']:checked").length>0; 
-		                if(!c){
-			                alert('<?php echo $this->Lang["PLS_COL"]; ?>');
-			                return false;
-		                } 
-	                }
+                     
+	                
 	                $('#status').val(1);
 	                
                     })
@@ -471,7 +487,7 @@ function toggle() {
                                 
                     <td>
                         
-                        <select name="city_tag[]" id="toggleText" >
+                        <select name="color[]" id="toggleText" >
 			              <option value=""><?php echo $this->Lang['SELECT_C']; ?></option>
 			            <?php foreach($this->color_code as $CityL){
 			            ?>

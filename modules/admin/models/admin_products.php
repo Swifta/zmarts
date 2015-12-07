@@ -485,7 +485,7 @@ class Admin_products_Model extends Model
 	
 	public function get_product_size()
 	{
-		$query = "SELECT * FROM size where size_id!=1 ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
+		$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
 	        $result = $this->db->query($query);
 		return $result;
 	}
@@ -516,6 +516,7 @@ class Admin_products_Model extends Model
 	
 	public function store_size_data($city_id = "",$deal_id = "")
 	{
+		
 	    $dealdata = $this->db->select("product_size_id")->from("product_size")->where(array("deal_id" => $deal_id,"size_id" => $city_id))->get();
 	    if(count($dealdata) == 1){	    
 	        return 0;
@@ -523,6 +524,7 @@ class Admin_products_Model extends Model
 	    
 	    $result_id = $this->db->select("size_name")->from("size")->where(array("size_id" => $city_id))->get();
 		$result = $this->db->insert("product_size", array("deal_id" => $deal_id,"size_id" => $city_id,"size_name" => $result_id->current()->size_name));
+		
 		
 		return 1;
 		}

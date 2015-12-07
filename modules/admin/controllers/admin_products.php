@@ -56,6 +56,8 @@ class Admin_products_Controller extends website_Controller
 								if($prime_price_s != "")
 								$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
 							}
+							
+						
 
 	                        if($post->validate()){
                                 $deal_key = text::random($type = 'alnum', $length = 8);
@@ -821,6 +823,8 @@ class Admin_products_Controller extends website_Controller
 					if($prime_price_s != "")
 					$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
 				}
+				
+				
 						
 				if($post->validate()){
 				    $size_quantity = $this->input->post("size_quantity");
