@@ -136,7 +136,7 @@
                     
                    <?php if($this->load_map){?> 
                     <h3 id="id_zmart_address">On Map</h3>
-        		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
  				<script type="text/javascript">
  <?php if($this->load_map){ ?>
  $(document).ready(function(e) {
@@ -233,7 +233,7 @@
 					   <div class="social-media">
 						     <ul>
 						        <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="Facebook"><a href="https://www.facebook.com/Zenithbank" target="_blank"><i class="fa fa-facebook fa-2x" style="color:#FFF; margin-right: 10px;"></i> </a></span></li>
-						        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Twitter"><a href="http://twitter.com/Zenithbank" target="_blank"><i class="fa fa-twitter fa-2x" style="color:#FFF; margin-right: 10px;"></i> </a> </span></li>
+						        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Twitter"><a href="https://twitter.com/Zenithbank" target="_blank"><i class="fa fa-twitter fa-2x" style="color:#FFF; margin-right: 10px;"></i> </a> </span></li>
 						        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Google+"><a href="https://plus.google.com/110325758209488608823" target="_blank"><i class="fa fa-google-plus fa-2x" style="color:#FFF; margin-right: 10px;"></i> </a></span></li>
 						        <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Youtube"><a href="https://www.youtube.com/user/ZenithDirect" target="_blank"><i class="fa fa-youtube fa-2x" style="color:#FFF; margin-right: 10px;"></i> </a></span></li>
 						    </ul>

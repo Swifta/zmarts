@@ -8,7 +8,7 @@
   
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   
 <style>
     /*test style*/
@@ -260,7 +260,7 @@ input[type=text],input[type=password]
 </style>
 
 <!-- Dependencies: JQuery and GMaps API should be loaded first -->
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<!-- CSS and JS for our code -->
 	<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>css/map/jquery-gmaps-latlon-picker.css"/>
 	<script src="<?php echo PATH; ?>js/map/jquery-gmaps-latlon-picker.js"></script>
