@@ -2657,7 +2657,7 @@ class Merchant_Model extends Model
 
 	public function get_product_size()
 	{
-		$query = "SELECT * FROM size where size_id!=1 ORDER BY CAST(size_name as SIGNED INTEGER)  ASC";
+		$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER)  ASC";
 	        $result = $this->db->query($query);
 		return $result;
 	}
