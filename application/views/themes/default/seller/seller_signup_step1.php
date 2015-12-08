@@ -427,7 +427,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <!--   <input type="submit"  name="submit" value="proceed" class="swifta_button " onclick="validateForm();">-->
 <em id="z_acc_error"></em>
  <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
-                      <input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">  
+                      <!--<input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">-->  
      <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
                     </div>
     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
@@ -518,9 +518,9 @@ $('#autoUpdate').fadeOut('slow');
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
 <!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
   
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   
   <link rel="stylesheet" href="style.css" />
     
@@ -582,7 +582,77 @@ $('#autoUpdate').hide('slow') //&& $('#g').fadeIn('slow') ;
        } else 
             $('#autoUpdate').hide('slow');
     });
+	
+	 $('#priorityLow').change(function () {
+        if (this.checked) 
+        //  ^
+            
+         {    swal({   
+       title: "Do you want to open a new account?",  
+text: "",  
+imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
+//imageSize: '100x180',
+showCancelButton: true,
+confirmButtonColor: "#DD6B55",   
+confirmButtonText: "Yes, Proceed!",   
+cancelButtonText: "No, Later!",   
+closeOnConfirm: false,   
+closeOnCancel: false}, 
+function(isConfirm){ 
+    if (isConfirm) {     
+        location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html"  
+    } else {     
+      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
+        location.href ="<?php echo PATH; ?>"
+   }
+
+     
+ 
+//   if(cancelButtonText = 'ok')
+//{
+//    //alert("try");
+//    location.href ="<?php echo PATH; ?>"  
+//} 
+
+
+    });
+      
+   
+
+$('#autoUpdate').hide('slow') //&& $('#g').fadeIn('slow') ; 
+            //$('#g').hide('slow');
+       } else 
+            $('#autoUpdate').hide('slow');
+    });
 });
+
+
+function validation_failed(){
+	
+	
+        swal({   
+        title: "Verification failed. Please try again.",  
+		text: "",  
+		imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
+		//imageSize: '100x180',
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "Try again",   
+		cancelButtonText: "Cancel",   
+		closeOnConfirm: true,   
+		closeOnCancel: true,
+		}, 
+		function(isConfirm){ 
+			if (isConfirm) {     
+				
+			} else {     
+			  location.href ="<?php echo PATH;?>";
+		   }
+
+   
+
+    });
+}
 
 
 
@@ -626,7 +696,7 @@ $(document).ready(function(){
     }
 
     function InvalidInputHelper(input, options) {
-        input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+       // input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
 
         function changeOrInput() {
             if (input.value == "") {
@@ -996,7 +1066,7 @@ function show_gif(obj){
 			//is_z_verify_account_api_running = true;
 			var url = Path+'users/merchant_registration_validation/'; 
                         //alert(url);
-			sub_btn_parent.html("<img src = \"<?php //echo PATH."image/anim/6.gif";?>\" /><p>.</p>");
+			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
 			
 			$.ajax(
 	            {
@@ -1035,8 +1105,9 @@ function(isConfirm){
                             else{
 					sub_btn_parent.html(sub_btn_parent_bak);
 					is_z_verify_account_api_running = false;
-                                        alert("Your account cannot be validated. Please try again");
+                                        //alert("Your account cannot be validated. Please try again");
 					//$('#z_acc_error').html("<?php echo ""; ?>");
+							validation_failed();
                             }
                             //swal("");
                             //location.href ="<?php echo PATH; ?>merchant-signup-step2.html";
