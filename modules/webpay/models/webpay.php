@@ -24,6 +24,27 @@ class Webpay_Model extends Model
             //return json_encode($ret);
         }
         
+        public function getTotalAmountOnTransaction($transaction_id=""){
+            $total = 0;
+            $result = $this->db->from("transaction")
+                        ->where(array("transaction_id"=>$transaction_id))->get();
+                //var_dump(count($result));
+            if(count($result) > 0){
+                foreach($result as $row){
+                    $total+=$row->amount;
+                }
+            }
+            return intval($total*100);
+        }
+        
+        public function updateTransaction($transaction_id="", $status="", $ResponseCode="", 
+                $ResponseDescription="", $PaymentReference="", $CardNumber=""){
+            $this->db->update("transaction", array("payment_status" => $status, "reason_code" => $ResponseCode, 
+                "pending_reason" => $ResponseDescription, "captured_transaction_id" => $PaymentReference, 
+                "captured_ack" => $CardNumber, "type" => 7), 
+                    array("transaction_id" => $transaction_id));
+        }
+
         public function get_split_marchant_xml($transaction_id, $total_amount_shopped){
             $ret = "";
             $is_above_2k = false;
