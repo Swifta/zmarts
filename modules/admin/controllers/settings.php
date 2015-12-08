@@ -130,8 +130,8 @@ const ALLOW_PRODUCTION = FALSE;
 			$post = Validation::factory($_POST)
 						->add_rules('smtp_host', 'required')
 						->add_rules('smtp_port', 'required')
-						->add_rules('smtp_username', 'required')
-						->add_rules('smtp_password', 'required');
+						->add_rules('smtp_username', 'required');
+						//->add_rules('smtp_password', 'required');
 
 			
 			if($post->validate()){
@@ -155,8 +155,8 @@ const ALLOW_PRODUCTION = FALSE;
 			$post = Validation::factory($_POST)
 						->add_rules('host', 'required')
 						->add_rules('port', 'required')
-						->add_rules('username', 'required')
-						->add_rules('password', 'required');
+						->add_rules('username', 'required');
+						//->add_rules('password', 'required');
 
 			
 			if($post->validate()){
