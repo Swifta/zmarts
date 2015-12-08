@@ -135,9 +135,10 @@ $this->language_List = str_replace(".php", "", $DL);
 
         <?php } ?>
 
-                <li><a style="font-size: 12px;" class="myaccount" id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
-<!--                <li class="mnav_dnone"></li>-->
-                <li style=" margin-left: ;"><a style="font-size: 12px;" class="myaccount" href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+<!--                <li><a style="font-size: 12px;" class="myaccount" id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
+                <li class="mnav_dnone"></li>
+                <li style=" margin-left: ;"><a style="font-size: 12px;" class="myaccount" href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
+               <li><a id="" class="myaccount" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
                 <li  class="head_fb"><a class="myaccount" style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
         
                     <?php } ?>
@@ -257,10 +258,10 @@ $srch = $this->Lang['SRCH_STR'];
                 <div class="merchant_log text-center pull-left" style="margin:1px auto;">
              <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
             <ul>
-                <li><p><?php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
-                    <li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
-                    <li>|</li>
-                    <li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
+                <li><p>Customer</p></li>
+                    <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
             </ul>
 	</div>
                  <ul class="nav topcart pull-right">

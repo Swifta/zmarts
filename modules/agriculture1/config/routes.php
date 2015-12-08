@@ -26,3 +26,12 @@ $config['Slot-Systems-Limited/products/c/(.*)/(.*).html'] = "/agriculture1/produ
 $config['Slot-Systems-Limited/deal/c/(.*)/(.*).html'] = "/agriculture1/deal_list/Slot-Systems-Limited/$1/$2";
 $config['Slot-Systems-Limited/auction/c/(.*)/(.*).html'] = "/agriculture1/auction_list/Slot-Systems-Limited/$1/$2";
 // Slot-Systems-Limited End
+// good-store Start
+$config['good-store'] ="agriculture1/stores_home_page/good-store";
+$config['good-store/products.html'] = "/agriculture1/product_list/good-store";
+$config['good-store/today-deals.html'] = "/agriculture1/deal_list/good-store";
+$config['good-store/auction.html'] = "/agriculture1/auction_list/good-store";
+$config['good-store/products/c/(.*)/(.*).html'] = "/agriculture1/product_list/good-store/$1/$2";
+$config['good-store/deal/c/(.*)/(.*).html'] = "/agriculture1/deal_list/good-store/$1/$2";
+$config['good-store/auction/c/(.*)/(.*).html'] = "/agriculture1/auction_list/good-store/$1/$2";
+// good-store End

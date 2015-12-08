@@ -26,15 +26,6 @@ $config['Neocourts-Hotel/products/c/(.*)/(.*).html'] = "/manufacturing2/product_
 $config['Neocourts-Hotel/deal/c/(.*)/(.*).html'] = "/manufacturing2/deal_list/Neocourts-Hotel/$1/$2";
 $config['Neocourts-Hotel/auction/c/(.*)/(.*).html'] = "/manufacturing2/auction_list/Neocourts-Hotel/$1/$2";
 // Neocourts-Hotel End
-// good-store Start
-$config['good-store'] ="manufacturing2/stores_home_page/good-store";
-$config['good-store/products.html'] = "/manufacturing2/product_list/good-store";
-$config['good-store/today-deals.html'] = "/manufacturing2/deal_list/good-store";
-$config['good-store/auction.html'] = "/manufacturing2/auction_list/good-store";
-$config['good-store/products/c/(.*)/(.*).html'] = "/manufacturing2/product_list/good-store/$1/$2";
-$config['good-store/deal/c/(.*)/(.*).html'] = "/manufacturing2/deal_list/good-store/$1/$2";
-$config['good-store/auction/c/(.*)/(.*).html'] = "/manufacturing2/auction_list/good-store/$1/$2";
-// good-store End
 // Scanfrost Start
 $config['Scanfrost'] ="manufacturing2/stores_home_page/Scanfrost";
 $config['Scanfrost/products.html'] = "/manufacturing2/product_list/Scanfrost";

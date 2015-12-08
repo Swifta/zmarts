@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-class Electronics3_Model extends Model
+class Food1_Model extends Model
 {
 	public function __construct()
 	{

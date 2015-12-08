@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-class Electronics3_Controller extends Layout_Controller
+class Food1_Controller extends Layout_Controller
 {
 	const ALLOW_PRODUCTION = FALSE;
 	public function __construct()
@@ -36,7 +36,7 @@ class Electronics3_Controller extends Layout_Controller
 			$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css',PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css'));
 		}
 		
-		$this->stores = new Electronics3_Model();
+		$this->stores = new Food1_Model();
 
 		$this->is_store = 1;
 		if(!$this->store_setting){

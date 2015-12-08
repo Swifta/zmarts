@@ -106,11 +106,12 @@ $this->language_List = str_replace(".php", "", $DL);
 								<li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>></li>
 								
 							<?php } ?>
-                            
-	<li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
+        <li> <a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+                   
+<!--	<li><a id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
 
 	
-	<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+	<li><a href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live
@@ -235,10 +236,15 @@ $srch = $this->Lang['SRCH_STR'];
                 <div class="merchant_log text-center" style="margin:1px auto;">
                     <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
                    <ul>
-                       <li><p><?php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
-                           <li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
+                       <li><p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
+                       <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+
+<!--                           <li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
                            <li>|</li>
                            <li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
+                   -->
                    </ul>
                </div>
             </div>

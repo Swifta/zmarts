@@ -142,10 +142,10 @@ if ($lan != LANGUAGE) {
 	if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 	
 <?php } ?>
-
-	<li><a id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a><li>
+<!--	<li><a id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
 	<li class="mnav_dnone">|</li>
-	<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+	<li><a href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
         <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
 <?php } ?>
 <?php if (FB_PAGE) { ?>
@@ -306,12 +306,15 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
-			<p><?php echo $this->Lang['MERCHANT_ACC']; ?></p>
+			<p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p>
 			<ul>
-				<li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
+                            <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
-			</ul>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+<!--				<li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
+				<li>|</li>
+				<li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>
+			--></ul>
 		
 		</div>
         <?php if ($this->product_setting) { ?>
