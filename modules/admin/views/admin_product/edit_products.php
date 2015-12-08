@@ -86,11 +86,11 @@
 			
                        var c = $("input[name='color[]']:checked").length>0; 
                                if(!c){
-								   	//if($('#SizeText').val()){
-										//alert(111);
+								   	
+									
                                        alert("<?php echo $this->Lang["PLS_COL"]; ?>");
                                        return false;
-									//}
+									
                                } 
                }    
                 

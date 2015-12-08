@@ -373,7 +373,7 @@ foreach ($this->all_payment_list as $payment) {
         <?php foreach ($this->get_store_details as $store) { ?>
 
                 <div id="map_main" style="height:306px;"></div>
-                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
                 <script type="text/javascript">
                     var latlng = new google.maps.LatLng(<?php echo $store->latitude; ?>,<?php echo $store->longitude; ?>);
                     var myOptions = {

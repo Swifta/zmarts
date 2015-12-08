@@ -72,7 +72,7 @@
   
     ?>
 </div> 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 <script>
 
 function show_map_popup(store_id,type,str_name)

@@ -345,7 +345,7 @@
                             <div class="deal_map_sec wloader_parent">
                                 <i class="wloader_img">&nbsp;</i>
                                 <div id="map_main" style="height:250px;"></div>
-                                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                                <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
                                 <script type="text/javascript">
                                     var latlng = new google.maps.LatLng(<?php echo $deals->latitude; ?>,<?php echo $deals->longitude; ?>);
                                     var myOptions = {

@@ -151,9 +151,12 @@
             
                    <div class="box swifta">
    				        <select tabindex="4" class="dropdown">
-							<option value="" class="label" >Merchants</option>
-							<option value="1">Register</option>
-							<option value="2">Login</option>
+							<option value="" class="label" >Customer</option>
+							<option value="1"><a  href="javascript:show_register();" title="Customer Signup">Register</a></option>
+							<option value="2"><a  href="javascript:show_login();" title="Customer Login">Login</a></option>
+                                                        <li></li>
+				
+
 						</select>
    				    </div>
                    
@@ -196,8 +199,9 @@
                     
                     <li><a title="go to <?php echo SITENAME;?> home" href="<?php echo PATH; ?>"><?php echo SITENAME;?></a></li> |
                     <li><a href="javascript:load_club();" >Zenith Offers</a></li> |
-                    <li><a href="javascript:show_login();">Login</a></li> |
-                    <li><a href="javascript:show_register();">Signup</a></li>
+                    <a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart" style="color:#fff;">Sell on Zmart</a>
+<!--                    <li><a href="javascript:show_login();">Login</a></li> |-->
+<!--                    <li><a href="javascript:show_register();">Signup</a></li>-->
                    
                     <?php } ?>
 				</ul>

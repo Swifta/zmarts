@@ -40,6 +40,11 @@ class Entertainment1_Controller extends Layout_Controller
 		$style_sheets = array();
                 $style_sheets[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/style.css';
                 $style_sheets[1] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/multi_style.css';
+                $java_scripts[2] = 'http://code.jquery.com/jquery-1.11.0.min.js';
+                $java_scripts[3] = 'http://code.jquery.com/jquery-migrate-1.2.1.min.js';
+                $java_scripts[4] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';
+                $java_scripts[5] = PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js';
+                
 //                
 //                $style_sheets[2] = "http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic";
 //                $style_sheets[3] = "http://fonts.googleapis.com/css?family=Crete+Round";
