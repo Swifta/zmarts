@@ -273,7 +273,7 @@ $srch = $this->Lang['SRCH_STR'];
          <div class="merchant_log text-center" style="margin:1px auto;">
              <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
             <ul>
-                <li><p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
+                <li><p>Customer </p></li>
                 <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>

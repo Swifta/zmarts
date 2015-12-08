@@ -280,7 +280,7 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
-			<p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p>
+			<p>Customer </p>
 			<ul>
                             <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
