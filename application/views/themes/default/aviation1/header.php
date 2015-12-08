@@ -1,3 +1,19 @@
+<?php 
+	$this->img_assets_base_url = PATH."themes/".THEME_NAME."/images/sasa";
+	$this->js_base_url = PATH."themes/".THEME_NAME."/js/sasa";
+		$this->UserID = $this->session->get('UserID');
+	$this->auto_key = $this->session->get('user_auto_key');
+	$this->user_name = $this->session->get('UserName');
+	$this->cart_item_count = $this->session->get('count');
+        
+        
+?>
+<?php $this->p_comp = new Products_Model();
+			$this->total_comp_count = 0;
+			$comp_list = $this->session->get("product_compare");
+                        if($comp_list && count($comp_list) > 0){}
+				$total_prods = count($comp_list);
+				$this->total_comp_count = $total_prods; ?>
 <?php
 if (isset($this->is_product)) {
     $type = "products";
@@ -73,16 +89,18 @@ $this->language_List = str_replace(".php", "", $DL);
                                 <ul class="nav" >
                                     <?php  //if($this->session->get('user_auto_key')) { ?>
                                     <?php //if(isset($this->auto_key)){?>
+                                       <li><a class="home active" href="<?php echo PATH;?>">Home</a></li>
+<!--                                      <li><a class="myaccount" href="<?php //echo PATH;?>">store Credit</a></li>-->
                                     <?php  if($this->session->get('user_auto_key')) { ?>
-        <li  class="myaccount" style="margin-left: -12px;" > <a href="<?php echo PATH; ?>storecredits-products.html" style=" font-size: 12px;"><?php echo $this->Lang["STR_CRDS"]; ?></a></li>
+        <li  class="myaccount" style="margin-left: px;" > <a href="<?php echo PATH; ?>storecredits-products.html" style=" font-size: 12px;"><?php //echo $this->Lang["STR_CRDS"]; ?></a></li>
 <!--        <li  class="store_credit"> <a href="<?php //echo PATH; ?>storecredits-products.html"> <?php //echo $this->Lang["STR_CRDS"]; ?></a></li>-->
         <?php } ?>
-                                    <li><a class="home active" href="<?php echo PATH;?>">Home</a></li>
+<!--                                    <li><a class="home active" href="<?php //echo PATH;?>">Home</a></li>-->
 <!--                                    <li class="mnav_dnone"></li>-->
         <?php if ($this->session->get('UserID')) { ?>
-                <li style="margin-left: -12px;" class="wel_txt"><span style="color:#ffffff; "><?php echo $this->Lang['WELCOME']; ?> </span> <a style="font-size: 12px;" class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+<!--                <li style="margin-left: -12px;" class="wel_txt"><span style="color:#ffffff; "><?php //echo $this->Lang['WELCOME']; ?> </span> <a style="font-size: 12px;" class="myaccount" href="<?php //echo PATH; ?>users/my-account.html" title="<?php //echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { //echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php //echo $this->session->get('UserName');  //if($this->session->get('user_auto_key')) { //echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                -->
 <!--                <li class="mnav_dnone"></li>-->
-                <li style=" margin-left: -12px;"><a style="font-size: 12px;" class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
+                <li style=" margin-left: px;"><a style="font-size: 12px;" class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
 <!--                <li class="mnav_dnone"></li>-->
                  <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
 
@@ -99,34 +117,35 @@ $this->language_List = str_replace(".php", "", $DL);
 
 
         <?php } ?>   
-                <li style=" margin-left: -12px;"><a style="font-size: 12px;" class="myaccount" href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
+<!--                <li style=" margin-left: px;"><a style="font-size: 12px;" class="myaccount" href="<?php //echo PATH; ?>wishlist.html" title="<?php //echo $this->Lang['MY_WISH']; ?>"><?php //echo $this->Lang['MY_WISH']; ?></a> </li>-->
 <!--                <li class="mnav_dnone"></li>-->
-                <li style=" margin-left: -12px;"><a style="font-size: 12px;" class="checkout" href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
+                <li style=" margin-left: px;"><a style="font-size: 12px;" class="checkout" href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
         <?php } else { ?>
               <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
                 <?php /*<li  <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="compare_show" <?php } else { ?> class="compare_add" <?php } ?>>  <a href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a></li>
 
                 <li <?php $compare = $this->session->get("product_compare"); if(is_array($compare) && count($compare)>1){  ?> class="mnav_dnone compare_show" <?php } else { ?> class="mnav_dnone compare_add" <?php } ?>>|</li> */ ?>
 
-                <li style="margin-left: -12px;"  class="addcomper" >
+                <li style="margin-left: px;"  class="addcomper" >
                 <?php $compare = $this->session->get("product_compare"); 
                 if(is_array($compare) && count($compare)>1){  ?>
                 <a style="font-size: 12px;" href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
-                <li style="margin-left: -12px;" class="mnav_dnone"> <?php $compare = $this->session->get("product_compare"); 
+                <li style="margin-left: ;" class="mnav_dnone"> <?php $compare = $this->session->get("product_compare"); 
                 if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 
         <?php } ?>
 
-                <li><a style="font-size: 12px;" class="myaccount" id="login" href="javascript:showlogin();" title="<?php echo $this->Lang['LOGIN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a></li>
-<!--                <li class="mnav_dnone"></li>-->
-                <li style=" margin-left: -12px;"><a style="font-size: 12px;" class="myaccount" href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>
+<!--                <li><a style="font-size: 12px;" class="myaccount" id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
+                <li class="mnav_dnone"></li>
+                <li style=" margin-left: ;"><a style="font-size: 12px;" class="myaccount" href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
+               <li><a id="" class="myaccount" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
                 <li  class="head_fb"><a class="myaccount" style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
         
                     <?php } ?>
                 
               
                 
-                <li class="" style="margin-left: -12px;">
+                <li class="" style="margin-left: ;">
         <a class="myaccount" style="font-size: 12px;" href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
                     <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
             </li>
@@ -227,7 +246,7 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         <div class="pull-right" style="padding-top:8px;">
 <?php $search = $this->input->get('q'); ?>
-     <input type="text" class="input-medium search-query  input-medium search-query" size="35" style="border:1px solid #9D4F8E;; width:220px;height:40px; border-radius:5px;" name="q" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>  AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?>  placeholder="Search Hereâ€¦"/>
+     <input type="text" class="input-medium search-query  input-medium search-query" size="35" style="border:1px solid #9D4F8E;; width:220px;height:40px; border-radius:0px;" name="q" onkeyup="lookup(this.value);" <?php if (isset($search) && ($search != '')) { ?> value="<?php echo $search; ?>" <?php } else { ?>  AUTOCOMPLETE="OFF" placeholder="<?php echo $srch; ?> ..." <?php } ?>  placeholder="Search Hereâ€¦"/>
                             
    <div id="suggestions" class="search_suggestions"></div>		
 </div>
@@ -239,10 +258,10 @@ $srch = $this->Lang['SRCH_STR'];
                 <div class="merchant_log text-center pull-left" style="margin:1px auto;">
              <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
             <ul>
-                <li><p><?php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
-                    <li><a  href="<?php echo PATH . 'merchant-login.html'; ?>" title="<?php  echo $this->Lang['MER_LOIN']; ?>"><?php echo $this->Lang['MER_LOIN']; ?></a></li>
-                    <li>|</li>
-                    <li><a  href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?php  echo $this->Lang['MER_REGI']; ?>"><?php echo $this->Lang['MER_REGI']; ?></a></li>
+                <li><p>Customer</p></li>
+                    <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
             </ul>
 	</div>
                  <ul class="nav topcart pull-right">
@@ -523,6 +542,37 @@ $srch = $this->Lang['SRCH_STR'];
                         </div>-->
                     </li>
                      <?php } ?>
+                     <?php if ($this->session->get('UserID')) { ?>
+                
+<li>
+                     <?php if(!empty($this->UserID)){?>
+                    <a class="sasa-account" href="#"><span style="color:#000; font-size:10px;">Hi, <b><?php echo common::truncate_item_name($this->user_name, 7);?></b><?php if(isset($this->auto_key) && !empty($this->auto_key)){?> <span> (</span><span style="color:#F25C27;"><?php echo $this->auto_key;?></span><span>) </span><?php }?></span></a>
+                    <?php } else {?>
+                    	<a class="sasa-account" href="#" title="manage account.">Account</a>
+					<?php }?>
+                        <div>
+                            <ul>
+                            <?php if(!empty($this->UserID)){?>
+                                <li><a href="<?php echo PATH;?>users/my-account.html">My Account</a> </li>
+                            <?php }?>
+                            <?php if(empty($this->UserID)){?>
+                                <li><a href="javascript:show_register();">Register</a> </li>
+                                <li><a href="javascript:show_login();">Login</a> </li>
+                            <?php } ?>
+                            <?php if(!empty($this->UserID)){?>
+                                <li><a href="javascript:showforgotpassword();">Forgot password</a> </li>
+                                <li><a href="<?php echo PATH;?>wishlist.html">Wishlist  <span class="label label-success">(<span id="id_sasa_wish"><?php echo common::get_wishlist_count(); ?></span> )</span></a> </li>
+                             <?php } ?>
+                                <li><a href="<?php echo PATH;?>product-compare.html">Compare <span class="label label-info">(<span id="id_sasa_compare"><?php echo $this->total_comp_count; ?></span> )</span></a> </li>
+                              <?php if(!empty($this->UserID)){?>
+                                <li><a href="<?php if(empty($this->cart_item_count) || $this->cart_item_count == 0 ){?> <?php echo PATH; ?>logout.html<?php } else{?>javascript:logout_click();<?php } ?>">Logout</a> </li>
+                              <?php } ?>
+                               
+                            </ul
+                        ></div>
+                    </li>
+                    
+          <?php }?>
                 </ul>
             </nav>
         </div>

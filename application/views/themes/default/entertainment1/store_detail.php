@@ -9,7 +9,6 @@
         });
     });
 </script>
-
 <script type="text/javascript">
     $(document).ready(function(){
         $("body").kkCountDown({
@@ -25,33 +24,22 @@
                                .submit();                                               
                 });
         });
-$(function() {
-$(".slidetabs").tabs(".images > div", {
-	effect: 'fade',
-	fadeOutSpeed: "medium",
-	rotate: true
-}).slideshow();
-});
+//$(function() {
+//$(".slidetabs").tabs(".images > div", {
+//	effect: 'fade',
+//	fadeOutSpeed: "medium",
+//	rotate: true
+//}).slideshow();
+//});
 </script>
-
 <script type="text/javascript">
     $(document).ready(function(){
         $('#messagedisplay1').hide();
     });
 </script>
 
-<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.jcarousel.min.js "></script>
-<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("body").kkCountDowndetail({
-            colorText: '#7b7b7b',
-            addClass: 'shadow'
-        });
-    });
-</script>
-
-<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
+<!--<script type="text/javascript" src="<?php //echo PATH; ?>themes/<?php //echo THEME_NAME; ?>/js/jquery.jcarousel.min.js "></script>
+<script type="text/javascript" src="<?php //echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>-->
 
 <div id="maincontainer" src="..\zmarttt\zmarts_new\images\zmarts.jpg">
   <div class="container">
@@ -268,9 +256,9 @@ $avg_rating = round($avg_rating); ?>
 <?php } ?>
                 </div>
             </div>
-               <div class="auction_timer">                                                                                                                                           
+                                                                                                                                                       
                       <span time="<?php echo $deals1->enddate; ?>" class="kkcount-down"></span>                                                                
-                </div>
+               
 
 
 <div class="product-list-desc">                                                              
@@ -293,13 +281,9 @@ foreach ($this->all_payment_list as $payment) {
     <i><?php echo $symbol . " " . number_format($deals1->deal_price); ?></i>                                                                  	
 <?php } ?> 
 
-<span time="<?php echo $deals1->enddate; ?>" class="kkcount-down" style="background-color:#000000;" ></span>
- kept 
-              <div class="btn_form deal_details " style="backgroundx:#000000;">
-          <span time="<?php echo $deals1->enddate; ?>" class="kkcount-down-detail" ></span>
-          <!--<div class="close_time"><b>Auction Close Time: </b><i>29-10-2015 07:30:00 PM</i></div>-->
-          
-          </div>
+<span time="<?php echo $deals1->enddate; ?>" class="kkcount-down" ></span>
+
+              
 </div>
 </a>
 <!--                <div class="shortlinks" style="margin-top: -20px; background-color: #3a3c3c; color: white;">
@@ -330,18 +314,19 @@ foreach ($this->all_payment_list as $payment) {
                     }
                     ?>
 <?php if ($q == 1) { ?>
-                    <p style="font:12px arial;color:#111; font-weight: bold;"><?php echo $this->Lang['LAST_BID']; ?> : <span><?php echo substr(ucfirst($firstname), 0, 10) . '..'; ?></span></p>
-                    <p style="font:12px arial;color:#111;font-weight: bold;"><?php echo $this->Lang['BID']; ?> : <span><?php echo $symbol . " " . $deals1->deal_value; ?></span></p>                                                                    
+<!--                    <p style="font:12px arial;color:#111; font-weight: bold;"><?php echo $this->Lang['LAST_BID']; ?> : <span><?php echo substr(ucfirst($firstname), 0, 10) . '..'; ?></span></p>
+                    <p style="font:12px arial;color:#111;font-weight: bold;"><?php echo $this->Lang['BID']; ?> : <span><?php echo $symbol . " " . $deals1->deal_value; ?></span></p>                                                                    -->
 
 
 <?php } ?>
 <?php if ($q == 0) { ?>
-                    <p style="font:12px arial;color:#111;font-weight: bold;"><?php echo $this->Lang['LAST_BID']; ?> : <span><?php echo $this->Lang['NOT_YET_BID']; ?></span></p>
-                    <p style="font:12px arial;color:#111;font-weight: bold;"><?php echo $this->Lang['CLOSE_T']; ?> : <span><?php echo $symbol . " " . $deals1->deal_price; ?></span></p>                                                                    	
+<!--                    <p style="font:12px arial;color:#111;font-weight: bold;"><?php echo $this->Lang['LAST_BID']; ?> : <span><?php echo $this->Lang['NOT_YET_BID']; ?></span></p>
+                    <p style="font:12px arial;color:#111;font-weight: bold;"><?php echo $this->Lang['CLOSE_T']; ?> : <span><?php echo $symbol . " " . $deals1->deal_price; ?></span></p>                                                                    	-->
 <?php } ?>     
                     <br />
                     <?php /*<a class="buy_it list_buy_it bid_it" href="<?php echo PATH .$deals1->store_url_title. '/auction/' . $deals1->deal_key . '/' . $deals1->url_title . '.html'; ?>" title="<?php echo $this->Lang['BID_NOW1']; ?>"><?php echo $this->Lang['BID_NOW1']; ?></a> */ ?>                                                                   
                 </div>
+<span time="<?php echo $deals1->enddate; ?>" class="kkcount-down" ></span>
               </div>
                   
             </li>
@@ -367,6 +352,7 @@ foreach ($this->all_payment_list as $payment) {
           </div>
    
         </section>
+        
         <div class="row feature_box">
     <div class="span4">
         <?php foreach ($this->get_store_details as $store) { ?>
@@ -777,7 +763,7 @@ function check_color(){
 }
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 $(document).ready(function(){
 jQuery.noConflict();
 jQuery("body").kkCountDown({
@@ -788,4 +774,4 @@ jQuery("body").kkCountDown({
     daysText:"<?php echo $this->Lang['DAYS_TEXT']; ?>"
 });
 });
-</script>
+</script>-->
