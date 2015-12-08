@@ -404,7 +404,7 @@ class Admin_merchant_Model extends Model
 		
 			$sector = isset($post->sector)?$post->sector:0;
 			$subsector = isset($post->subsector)?$post->subsector:0;
-
+                        //var_dump($post->store_admin_id); die;
 			if($post->store_admin_id!=''){
 				$this->db->update("users",array("firstname"=>$post->username,"email"=>$post->store_email,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector),array("user_id" => $post->store_admin_id));
 				$store_admin_id = $post->store_admin_id;

@@ -8,7 +8,7 @@
   
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   
 <style>
     /*test style*/
@@ -260,7 +260,7 @@ input[type=text],input[type=password]
 </style>
 
 <!-- Dependencies: JQuery and GMaps API should be loaded first -->
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<!-- CSS and JS for our code -->
 	<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>css/map/jquery-gmaps-latlon-picker.css"/>
 	<script src="<?php echo PATH; ?>js/map/jquery-gmaps-latlon-picker.js"></script>
@@ -444,9 +444,9 @@ input[type=text],input[type=password]
                                         <br/>
                                         
                                         <div class="">
-                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
+                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>"   value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
                                       
-                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>"  readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
+                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>"  value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
                                           <em id="id_err_latitude"><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
                                         <em id="id_err_longitude"><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
                                         </div>

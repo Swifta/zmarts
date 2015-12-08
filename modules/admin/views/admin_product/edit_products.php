@@ -33,7 +33,7 @@
                 return false;
         } 
         
-        if ((document.getElementById('productaramex').checked)) {
+        /*if ((document.getElementById('productaramex').checked)) {
         if ((document.getElementById('weightaramex').value == '') ||  (document.getElementById('weightaramex').value == '0')) { 
                 document.getElementById("weightaramex").focus();
                       alert("Please enter product weight");
@@ -79,13 +79,18 @@
                       alert("Please enter your shipping amount");
                       return false; 
         }
-        } 
+        } */
  	
         if($("input[name=color_val]:checked").val() == 1){
+			
+			
                        var c = $("input[name='color[]']:checked").length>0; 
                                if(!c){
+								   	
+									
                                        alert("<?php echo $this->Lang["PLS_COL"]; ?>");
                                        return false;
+									
                                } 
                }    
                 
@@ -691,6 +696,9 @@
                 </tr>
                 
                 <input type="hidden" onchange="return checkedsizeadd(this)" name="size_val" value="1" >
+                
+               <?php //var_dump(count($this->product_size));
+			   		  //var_dump($this->selectproduct_size);?>
                 <?php if(count($this->product_size)>0) { ?>
                         <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span>*</span></td>
                         <td><label>:</label></td>
@@ -767,6 +775,8 @@
                             var count=$(this).val();
                             $.post("<?php echo PATH;?>admin_products/editmore_size?count="+count+"&deal="+<?php echo $u->deal_id; ?>,{
                             }, function(response){ 
+							//alert(response);
+							
 								var check = 1;
 									$("#size_display input:checked").each(function() {
 											if(count == this.value){
@@ -786,8 +796,8 @@
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td class="overlay"> 
-                        <input type="radio" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if($u->color==0){ ?> checked <?php } ?>><?php echo $this->Lang['NO']; ?>
-                        <input type="radio" onchange="return checkedcoloradd(this)" id="color_val_co1" name="color_val" value="1" <?php if($u->color==1){ ?> checked <?php } ?>><?php echo $this->Lang['YES']; ?>
+                        <input type="radio" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if(count($this->product_color)== 0) { ?> checked <?php } ?>><?php echo $this->Lang['NO']; ?>
+                        <input type="radio" onchange="return checkedcoloradd(this)" id="color_val_co1" name="color_val" value="1" <?php if(count($this->product_color)>0) { ?> checked <?php } ?>><?php echo $this->Lang['YES']; ?>
                     </td>
                  </tr>
                 
@@ -1266,6 +1276,7 @@ function check_validation(){
 	$('#status').val(2);
 	var checked = $(".select_size_pro input:checked").length > 0;
 	if (!checked){
+		alert(1212);
 		alert("<?php echo $this->Lang["PLS_CHK"]; ?>");
 		return false;
 	} 

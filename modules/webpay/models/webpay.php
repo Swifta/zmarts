@@ -96,6 +96,12 @@ class Webpay_Model extends Model
             }
             return $ret;
         }
+//        
+//        public function reduceProductQty($deal_id, $referral_amount, $item_qty, 5, 
+//                $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,
+//                $product_size,$product_color,$tax_amount){
+//            
+//        }
         
 	/** INSERT TRANSACTION DETAILS TO TRANSACTION TABLE **/
 
@@ -164,13 +170,17 @@ class Webpay_Model extends Model
                  //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
 
                 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");	     
-                if($qty == ""){
+                /*
+                 commended this out. and make it available on successful payments onlu
+                 if($qty == ""){
                     $qty = 1;
                 }
 		$purchase_count_total = $purchase_qty + $qty;
                 //echo $qty; die;
 	    $result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
 		 $this->db->query("update product_size set quantity = quantity - $qty where deal_id = $deal_id and size_id = $product_size");
+                 * 
+                 */
 		return $trans_ID;
 
 	}

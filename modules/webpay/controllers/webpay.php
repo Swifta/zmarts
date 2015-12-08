@@ -91,6 +91,10 @@ class Webpay_Controller extends Layout_Controller
                     $this->PaymentReference = $interswitch->PaymentReference;
                     $this->CardNumber = $interswitch->CardNumber;
                     if($interswitch->Amount > 0){
+                        //successful payment.
+                        //then let me reduce the products respectively as its suppose to be
+                        
+                        //end of products reduction
                         $this->success = true;
                         $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
