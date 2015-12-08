@@ -87,7 +87,7 @@
                   </tr>
 
                    <tr>
-                    <td><label><?php echo $this->Lang['SMTP_PASS']; ?></label><span>*</span></td>
+                    <td><label><?php echo $this->Lang['SMTP_PASS']; ?></label></td>
                     <td><label>:</label></td>
                     <td><input type="password" name="password"   value="<?php echo PASSWORD;?>" maxlength="50" />
                     <em><?php if(isset($this->form_error["password"])){ echo $this->form_error["password"]; }?></em></td>
