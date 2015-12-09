@@ -62,10 +62,10 @@ $this->language_List = str_replace(".php", "", $DL);
                           <?php } } ?>	
 </div>
 <div class="header_top_middle">
-    <div class="refer_friend">
+    <!--<div class="refer_friend">
     <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
             <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-    </div>
+    </div>-->
 </div>
 
 <?php  if($this->session->get('user_auto_key')) { ?>
@@ -280,7 +280,7 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
-			<p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p>
+			<p>Customer </p>
 			<ul>
 <!--				<li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
 				<li>|</li>

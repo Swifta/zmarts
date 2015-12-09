@@ -105,7 +105,7 @@ $this->language_List = str_replace(".php", "", $DL);
                 
 		<div class="ten columns float-rt" id="merchant_login">
 			<ul class="top-bar-menu text-right"  style="float:right;">
-                            <li><strong>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?> ::</strong></li>
+                            <li><strong>Customer  ::</strong></li>
 <!--                    <li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
                     <li>|</li>
                     <li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>-->
