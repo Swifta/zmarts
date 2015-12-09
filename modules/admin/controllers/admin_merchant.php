@@ -89,8 +89,17 @@ class Admin_merchant_Controller extends website_Controller {
                                 				/* $message = "<b> ".$this->Lang['DEAR']." :".ucfirst($post->firstname)." ".$post->lastname.",</b>";
 				$message .= "<p>".$this->Lang['MERCHANT_ADD_SUC']."  </p><p> ".$this->Lang['YOR_EMAIL']." : ".$post->email."</p> <p>".$this->Lang['YOUR_PASS'].": ".$password."</p> <p>".$this->Lang['UR_DEAL_COMM']."  : ".$post->commission." % <p/> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><br /> <a href='".PATH."merchant-login.html' >".$this->Lang['LOGIN_URL']."</a><br/><p>".$this->Lang['THANK'].",</p>"; */ 
 				
-								$message = new View("themes/".THEME_NAME."/merchant_signin_mail_template");
+								//$message = new View("themes/".THEME_NAME."/merchant_signin_mail_template");
+								
 				                               	// echo $message;  exit;
+												
+								$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been successfully created.</p>
+				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
+				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$password."</p> 
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p></div>";
+				
+				
 									if($_FILES['image']['name'])
 									{
 										$filename =$_FILES["image"]["name"];
@@ -171,8 +180,11 @@ class Admin_merchant_Controller extends website_Controller {
 									}
 									
 									if(EMAIL_TYPE==2){				
-										if(email::smtp($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message))
-										email::add_account_to_sendinblue("merchant", $post->email);
+										/*if(email::smtp($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message))
+										email::add_account_to_sendinblue("merchant", $post->email);*/
+										
+										email::smtp($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message);
+										
 									}
 									else{
 										email::sendgrid($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message);
@@ -1476,11 +1488,11 @@ class Admin_merchant_Controller extends website_Controller {
 				$from = CONTACT_EMAIL;
 				$subject = $this->Lang['MER_APP']. " on ".SITENAME;
 				
-				$merchant_message = "<p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
-				<p style = \"text-decoration: none; color: #666;\"> ".$this->Lang['YOUR_APP_MER']."</p>
+				$merchant_message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been approved.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
-				<p style = \"text-decoration: none; color: #666;\"> The password is : ".$password."</p> 
-				<p style = \"text-decoration: none; color: #666;\"> To access your account, please  <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >  <form style=\"display:inline;\"><input type = \"button\" value = \" click this to login\" /></form>  </a></p>";
+				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$password."</p> 
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p></div>";
 				
 				
 				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
