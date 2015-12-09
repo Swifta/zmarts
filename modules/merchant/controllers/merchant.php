@@ -16,7 +16,9 @@ class Merchant_Controller extends website_Controller
                 }
                 else
                 {
-		        if((!$this->user_id && ( $this->user_type != 3||$this->user_type != 8)) && $this->uri->last_segment() != "merchant-login.html" && $this->uri->last_segment() != "forgot-password.html"){
+				
+				
+		        if((!$this->user_id && ( $this->user_type != 3||$this->user_type != 8)) && $this->uri->last_segment() != "merchant-login.html" && $this->uri->last_segment() != "forgot-password.html" && $this->uri->last_segment() != "reset-password.html"){
 			        url::redirect(PATH."/merchant-login.html");
 		        }
 		        if($this->user_type==1||$this->user_type==7)
@@ -41,6 +43,8 @@ class Merchant_Controller extends website_Controller
 
 	public function login()
 	{
+		
+		
 		 if($this->user_id && ($this->user_type == 3 || $this->user_type != 8)){
 			url::redirect(PATH."merchant.html");
 		}
@@ -49,6 +53,23 @@ class Merchant_Controller extends website_Controller
 			$password = $this->input->post("password");
 			if($email){
 				$status = $this->merchant->merchant_login($email, $password);
+				
+				
+				if($status == 10 || $status == 11){
+					
+					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
+					$status = $this->merchant->get_last_login($email);
+					
+					if($status == "0"){
+						$this->session->delete('user_id');
+						$this->session->delete('user_id1');
+						url::redirect(PATH."merchant/reset-password.html");
+					
+						
+					}
+					
+				}
+				
 				if($status == 10){
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
 					url::redirect(PATH."merchant.html");
@@ -84,6 +105,7 @@ class Merchant_Controller extends website_Controller
 
 	public function index()
 	{
+		
 		$this->merchant_dashboard_data = $this->merchant->get_merchant_dashboard_data();
 		$this->balance = $this->merchant->get_merchant_balance1();
 		$this->balance_list_fund = $this->merchant->get_merchant_balance_fund();
@@ -3825,6 +3847,55 @@ class Merchant_Controller extends website_Controller
 	}
 
 
+	/** RESET PASSWORD **/
+	public function reset_password()
+	{
+		
+		if($_POST){
+			
+			$this->userPost = $this->input->post();
+			$post = new Validation($_POST);
+			$post = Validation::factory($_POST)
+				->add_rules('pass1', 'required')
+				->add_rules('pass2', 'required', array($this, 'comfirm_pass'), array($this, 'unique_pass'));
+			if($post->validate()){
+				
+				$email = $this->session->get("user_email");
+				
+				
+				
+				    $password = $_POST['pass1'];
+					$status = $this->merchant->reset_password($email,$password);
+					
+						if($status == 1){
+								$status = $this->merchant->merchant_login($email, $password);
+								
+								if($status == 10 || $status == 11){
+										common::message(1, "Congratulations! You have successfully reset your password." );
+										url::redirect(PATH."merchant.html");
+								}else{
+									common::message(-1,$this->Lang["CANT_LOGIN"]);
+									url::redirect(PATH."/merchant-login.html");
+								}
+							}
+						
+				
+				
+
+			}
+			else{
+				
+				$this->form_error = error::_error($post->errors());
+				//var_dump($this->form_error);
+				
+			}
+		}
+		
+		$this->template->content=new View("merchant/reset_password");
+	}
+	
+	
+	
 	/** FORGOT PASSWORD **/
 
 	public function forgot_password()
@@ -3840,8 +3911,8 @@ class Merchant_Controller extends website_Controller
 				$email = $this->input->post("email");
 				if(Captcha::valid($this->input->post('captcha'))){
 				        $password = text::random($type = 'alnum', $length = 10);
+						
 					$status = $this->merchant->forgot_password($email,$password);
-					
 						if($status == 1){				
 						        
 					        $users = $this->merchant->get_user_details_list($email);
@@ -7138,5 +7209,35 @@ class Merchant_Controller extends website_Controller
         $l = strlen($str) - $i;
         $ext = substr($str,$i+1,$l);
         return $ext;
+	}
+	
+	
+	function comfirm_pass(){
+		if($_POST['pass1'] == $_POST['pass2']){
+			return 1;
+		}
+		return 0;
+	}
+	
+	function unique_pass(){
+		
+		$email = $this->session->get('user_email');
+		if(!$email){
+			return 0;
+		}
+		
+		$pass_hash = $this->merchant->get_current_password($email);
+		if(!$pass_hash){
+			return 0;
+		}
+		
+		$pass_new_hash = md5($_POST['pass2']);
+		if($pass_hash != $pass_new_hash){
+			return 1;
+		}
+		
+		return 0;
+		
+		
 	}
 }

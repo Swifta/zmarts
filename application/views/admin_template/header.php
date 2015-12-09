@@ -12,7 +12,7 @@
 						<?php }else{ ?><a href="<?php echo PATH;?>merchant.html" title="<?php echo SITENAME; ?>" class="fl logo"><img alt="<?php echo SITENAME; ?>" src="<?php echo PATH.'resize.php';?>?src=<?php echo THEME; ?>/images/logo.png&w=<?php echo LOGO_WIDTH; ?>&h=<?php echo LOGO_HEIGHT; ?>"/></a> 
 					<?php  }?>
                    
-			   <?php if($this->user_id && $this->uri->last_segment() != "admin-login.html" && $this->uri->last_segment() != "merchant-login.html" && $this->uri->last_segment() != "forgot-password.html"){?>
+			   <?php if($this->user_id && $this->uri->last_segment() != "admin-login.html" && $this->uri->last_segment() != "merchant-login.html" && $this->uri->last_segment() != "forgot-password.html" && $this->uri->last_segment() != "reset-password.html"){?>
                     <div class="fr head_rgt">
                     
                        <?php if($this->session->get("user_type") == 1){ 
@@ -39,7 +39,7 @@
 </div>
 
 <?php  if(isset($this->merchant_panel)){ ?> 
-<?php  if(($this->uri=="merchant-login.html")||($this->uri=="admin-login.html")||($this->uri=="merchant/forgot-password.html")){  }else { ?>
+<?php  if(($this->uri=="merchant-login.html")||($this->uri=="admin-login.html")||($this->uri=="merchant/forgot-password.html") ||($this->uri=="merchant/reset-password.html")){  }else { ?>
 <div class="dash_main_menu"> 
 <ul>
 <li > <a <?php  if($this->uri=="merchant.html"){ ?> class="active" <?php } ?> href="<?php echo PATH?>merchant.html"><?php echo $this->Lang['DASH']; ?> </a>  </li>
@@ -99,7 +99,7 @@ if(PRIVILEGES_FUNDREQUEST==1){ ?>
 </ul>
 </div>
 <?php } }else{ ?>
-<?php  if(($this->uri=="merchant-login.html")||($this->uri=="admin-login.html")||($this->uri=="merchant/forgot-password.html")){  }else { ?>
+<?php  if(($this->uri=="merchant-login.html")||($this->uri=="admin-login.html")||($this->uri=="merchant/forgot-password.html") ||($this->uri=="merchant/reset-password.html")){  }else { ?>
 <div class="dash_main_menu"> 
 <ul>
 <li > <a <?php  if($this->uri=="admin.html"){ ?> class="active" <?php } ?> href="<?php echo PATH?>admin.html"><?php echo $this->Lang['DASH']; ?> </a>  </li>

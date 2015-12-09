@@ -40,7 +40,7 @@ echo $this->template->javascript;
 		</div>
          
        <?php 
-		if($this->uri->last_segment() == "admin-login.html" || $this->uri->last_segment() == "merchant-login.html" || $this->uri->last_segment() == "forgot-password.html"|| $this->uri->last_segment() == "admin.html" || $this->uri->last_segment() == "merchant.html" && $this->uri!= "admin/merchant.html" || $this->uri->last_segment() == "store-admin-login.html" || $this->uri->last_segment() == "store-admin.html"){      
+		if($this->uri->last_segment() == "admin-login.html" || $this->uri->last_segment() == "merchant-login.html" || $this->uri->last_segment() == "forgot-password.html"|| $this->uri->last_segment() == "reset-password.html"|| $this->uri->last_segment() == "admin.html" || $this->uri->last_segment() == "merchant.html" && $this->uri!= "admin/merchant.html" || $this->uri->last_segment() == "store-admin-login.html" || $this->uri->last_segment() == "store-admin.html"){      
 			echo $this->template->content; 
 		} 
 
