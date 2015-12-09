@@ -3216,7 +3216,7 @@ class Merchant_Model extends Model
 	}
 	
 	public function get_merchant_attribute_data_list($store_id=""){
-		  $result = $this->db->select("merchant_attribute.*","sector.sector_name")->from("merchant_attribute")->join("stores","stores.store_id","merchant_attribute.storeid")->join("sector","sector.sector_id","stores.store_sector_id")->where(array("merchant_attribute.storeid"=>$store_id))->get();
+		  $result = $this->db->select("merchant_attribute.*","sector.sector_name")->from("merchant_attribute")->join("stores","stores.store_id","merchant_attribute.storeid")->join("sector","sector.sector_id","stores.store_sector_id")->where(array("merchant_attribute.storeid"=>$store_id))->limit(1)->get();
 		 return $result;
 	}
 	

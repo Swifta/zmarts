@@ -4953,7 +4953,7 @@ class Merchant_Controller extends website_Controller
 	        
 	        $this->data = $this->merchant->get_merchant_attribute_data_list($store_id);
 	        $this->template->title = $this->Lang["STORE_PERSONALIZED"];
-		$this->template->content = new View("merchant/store_attributes");
+			$this->template->content = new View("merchant/store_attributes");
 	}
 	
 	/** MERCHANT MODERATOR DASHBOARD **/	
