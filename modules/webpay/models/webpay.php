@@ -49,6 +49,7 @@ class Webpay_Model extends Model
             $ret = "";
             $is_above_2k = false;
             $tmp_2k = 0.015 * $total_amount_shopped;
+            //echo $total_amount_shopped." against ".$tmp_2k;die;
             if($tmp_2k > 2000){
                 $is_above_2k = true;
 //                if(is_float($tmp_2k)){
@@ -98,7 +99,7 @@ class Webpay_Model extends Model
                     }
                     else{
                         $weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
-                        $transaction_fee = $weight_fraction_of_sales * 2000; //from 2,000naira. whats my transaction fee here           
+                        $transaction_fee = $weight_fraction_of_sales * (2000*100); //from 2,000naira. whats my transaction fee here           
                     }
                     if(strpos($transaction_fee, ".")){
                         $op = explode(".", $transaction_fee);
