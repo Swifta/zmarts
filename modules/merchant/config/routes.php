@@ -155,6 +155,7 @@ $config['merchant/hold-transaction/page/(.*)'] = "/merchant/admin_transaction/Pe
 $config['merchant/couopn_code.html'] = "/merchant/couopn_code";
 $config['merchant/close-deals/(.*)/(.*)/(.*)/(.*).html'] = "/merchant/close_deals/0/$1/$2/$3/$4";
 $config['merchant/forgot-password.html'] = "/merchant/forgot_password";
+$config['merchant/reset-password.html'] = "/merchant/reset_password";
 $config['facebookpost.php'] = "/merchant/facebook_auto_post";
 
 $config['merchant/terms-and-conditions.html'] = '/merchant/terms_and_conditions';

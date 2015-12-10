@@ -1701,7 +1701,7 @@ $content_text = array(
 
 "PRD_MSG" => "Please Wait for approval from Merchant to buy this store credit product",
 
-"MER_PRD_MSG" => "Please approve for the confirmation for the store credit product",
+"MER_PRD_MSG" => "Please approve  the store credit product",
 
 "THANKS_CHOOS" => "Store Credit Request  ",
 

@@ -360,7 +360,7 @@ $this->UserName = $this->session->get("UserName");
     <td colspan="7" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear <?php echo ucfirst($this->merchant_firstneme); ?> <?php echo ucfirst($this->merchant_lastname);?>,</strong></td>
   </tr>
   <tr style="text-align:left; margin:0 0 20px; background:#e2e2e2;" >
-    <td colspan="7"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> You have receive payment on <a style="text-decoration:none" href="<?php echo PATH; ?>"><?php echo SITENAME; ?></a> from customer with details below: </td>
+    <td colspan="7"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> You have receive installmental payment on <a style="text-decoration:none" href="<?php echo PATH; ?>"><?php echo SITENAME; ?></a> from customer with details below: </td>
   </tr>
   <tr>
     <td colspan="7">&nbsp;</td>

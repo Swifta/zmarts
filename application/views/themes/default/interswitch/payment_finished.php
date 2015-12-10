@@ -71,7 +71,7 @@
 												<?php } if(isset($R->ACK)){ ?>
 												<li><label><?php echo $this->Lang["TRAN_STATUS"]; ?> </label><span>:</span><p><?php echo $R->ACK; ?></p></li>
 												<?php } if(isset($R->AMT)){ ?>
-                                                                                                <li><label><?php echo $this->Lang["TRAN_AMOUNT"]; ?> </label><span>:</span><p><?php echo number_format($R->AMT); ?></p></li>
+												<li><label><?php echo $this->Lang["TRAN_AMOUNT"]; ?> </label><span>:</span><p><?php echo $R->AMT; ?></p></li>
 												<?php } if(isset($R->CURRENCYCODE)){ ?>
 												<li><label><?php echo $this->Lang["CURR_CODE"]; ?>  </label><span>:</span><p><?php echo $R->CURRENCYCODE; ?></p></li>
 												<?php } ?>

@@ -80,6 +80,15 @@ class error {
 				case 'check_prime_price_lmi_prd':
 					 $my_error[$key] = 'Original Price should be greater or equal to Prime Discount Price';
 					break;
+					
+				case 'comfirm_pass':
+					 $my_error[$key] = 'Passwords do not match.';
+					break;
+					
+				case 'unique_pass':
+					 $my_error[$key] = 'Provide new password other than the previous one.';
+					break;
+					
 				case 'check_min_fund':
 					 $my_error[$key] = $this->Lang["MIN_F"];
 					 break;
