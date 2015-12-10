@@ -176,6 +176,36 @@ class Webpay_Controller extends Layout_Controller
                         $this->success = true;
                         $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
+                        //on successful transaction. empty the cart
+                        unset($_SESSION['count']);
+                        //var_dump($_SESSION);
+                        foreach($_SESSION as $key=>$value){
+                            if(true){
+                                
+                            $deal_id = $_SESSION[$key];
+                            //unset($_SESSION[$key]);
+                             $item_qty = $this->session->get('product_cart_qty'.$deal_id);
+                             unset($_SESSION['product_cart_qty'.$deal_id]);
+                             $product_size = "1";
+                               foreach($_SESSION as $key=>$value) {
+                                    if(($key=='product_size_qty'.$deal_id)){
+                                        unset($_SESSION[$key]);
+                                    }
+                                    if(($key=='product_quantity_qty'.$deal_id)){
+                                       unset($_SESSION[$key]);
+                                    }
+                                    if(($key=='store_credit_id'.$deal_id)){
+                                        $this->session->delete('product_size_qty'.$deal_id);
+                                        $this->session->delete('product_quantity_qty'.$deal_id);
+                                        $this->session->delete('product_color_qty'.$deal_id);
+                                        $this->session->delete('store_credit_period'.$deal_id);
+                                        $this->session->delete('product_cart_qty'.$deal_id);
+                                        $this->session->delete('product_cart_id'.$deal_id);
+                                        unset($_SESSION[$key]);
+                                    }
+                                }
+                            }
+                        }                      
                     }
                 }
                 curl_close($ch);
@@ -199,32 +229,32 @@ class Webpay_Controller extends Layout_Controller
         public function pay(){
             //var_dump($_SESSION);die;
 	    foreach($_SESSION as $key=>$value){
-            if($value && (is_string($value)) && ($key=='product_cart_id'.$value)){
-           
-            $deal_id = $_SESSION[$key];
-             $item_qty = $this->session->get('product_cart_qty'.$deal_id);
-             $product_size = "1";
-               foreach($_SESSION as $key=>$value) {
-                    if(($key=='product_size_qty'.$deal_id)){
-                        $product_size = $value;
+                if($value && (is_string($value)) && ($key=='product_cart_id'.$value)){
+
+                $deal_id = $_SESSION[$key];
+                 $item_qty = $this->session->get('product_cart_qty'.$deal_id);
+                 $product_size = "1";
+                   foreach($_SESSION as $key=>$value) {
+                        if(($key=='product_size_qty'.$deal_id)){
+                            $product_size = $value;
+                        }
+                        if(($key=='product_quantity_qty'.$deal_id)){
+                            $product_quantity = $value;
+                        }
+
                     }
-                    if(($key=='product_quantity_qty'.$deal_id)){
-                        $product_quantity = $value;
+
+                    $this->product_size_details = $this->webpay->product_size_details($deal_id, $product_size);
+
+                   $dbquantity=$this->product_size_details->current()->quantity;
+
+                    if($dbquantity < $item_qty){
+                        $this->session->set('product_quantity_qty'.$deal_id,$dbquantity);
+                        common::message(-1, $this->Lang['CHE_PRO_QTY']);
+                        url::redirect(PATH."cart.html");
                     }
-
-                }
-
-                $this->product_size_details = $this->webpay->product_size_details($deal_id, $product_size);
-
-               $dbquantity=$this->product_size_details->current()->quantity;
-
-                if($dbquantity < $item_qty){
-                    $this->session->set('product_quantity_qty'.$deal_id,$dbquantity);
-                    common::message(-1, $this->Lang['CHE_PRO_QTY']);
-                    url::redirect(PATH."cart.html");
                 }
             }
-        }
 
         
 /////
