@@ -35,6 +35,28 @@ class Webpay_Controller extends Layout_Controller
 		}
         }
         
+        //webpay transaction response for ID
+        //Dear Name
+        
+        public function ajax_more_details(){
+            if(isset($_POST['transaction_id'])){
+                $paint_red = "red";
+                $details = json_decode($this->webpay->getTransactionDetails($_POST['transaction_id']));
+                if($details->status == "Success"){
+                    $paint_red = "green";
+                }
+                echo "<div style='width:100%;'>";
+                echo "<div style='width:49%;float:left'>Transacton Status :</div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->status."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:left'>Reason :</div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->reason."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:left'>Transaction Type :</div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->type."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "</div>";
+            }
+            die;
+        }
+        
         public function ajax_confirm(){
             //$transaction_id = "jTnUlW1RGrVUALj";
             if(isset($_POST['transaction_id'])){
@@ -67,7 +89,7 @@ class Webpay_Controller extends Layout_Controller
                 }
                 else{
                     //var_dump(json_decode($response)); die;
-                    $transaction_status = "FAULTY TRANSACTION";
+                    $transaction_status = "FAILED TRANSACTION";
                     $status = "Failed";
                     $interswitch = json_decode($response);
                     //echo $url_call."<br />";
@@ -76,8 +98,10 @@ class Webpay_Controller extends Layout_Controller
                     $this->response_discription = $interswitch->ResponseDescription;
                     $this->PaymentReference = $interswitch->PaymentReference;
                     $this->CardNumber = $interswitch->CardNumber;
+                    $paint_red = "red";
                     if($interswitch->Amount > 0){
                         $status = "Success";
+                        $paint_red = "green";
                         $transaction_status = "SUCCESSFUL TRANSACTION";
                     }
                     $this->webpay->updateTransaction($transaction_id, $status, $interswitch->ResponseCode,
@@ -85,17 +109,17 @@ class Webpay_Controller extends Layout_Controller
                             $interswitch->CardNumber);
                     echo "<div style='width:100%;'>";
                     echo "<div style='width:49%;float:left'>Transacton Status :</div>";
-                    echo "<div style='width:49%;float:right;color:green;font-weight:bold'>".$transaction_status."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$transaction_status."</div><div style='clear:both;width:100%'><hr /></div>";
                     echo "<div style='width:49%;float:left'>Response Code :</div>";
-                    echo "<div style='width:49%;float:right;color:green;font-weight:bold'>".$interswitch->ResponseCode."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseCode."</div><div style='clear:both;width:100%'><hr /></div>";
                     echo "<div style='width:49%;float:left'>Description :</div>";
-                    echo "<div style='width:49%;float:right;color:green;font-weight:bold'>".$interswitch->ResponseDescription."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseDescription."</div><div style='clear:both;width:100%'><hr /></div>";
                     echo "<div style='width:49%;float:left'>Payment Reference :</div>";
-                    echo "<div style='width:49%;float:right;color:green;font-weight:bold'>".$interswitch->PaymentReference."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->PaymentReference."</div><div style='clear:both;width:100%'><hr /></div>";
                     echo "<div style='width:49%;float:left'>Card Number :</div>";
-                    echo "<div style='width:49%;float:right;color:green;font-weight:bold'>".$interswitch->CardNumber."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->CardNumber."</div><div style='clear:both;width:100%'><hr /></div>";
                     echo "<div style='width:49%;float:left'>Retrieval Ref Number :</div>";
-                    echo "<div style='width:49%;float:right;color:green;font-weight:bold'>".$interswitch->RetrievalReferenceNumber."</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->RetrievalReferenceNumber."</div>";
                     echo "</div>";
 
 //                    if($interswitch->Amount > 0){
@@ -168,6 +192,9 @@ class Webpay_Controller extends Layout_Controller
                     $this->response_discription = $interswitch->ResponseDescription;
                     $this->PaymentReference = $interswitch->PaymentReference;
                     $this->CardNumber = $interswitch->CardNumber;
+                    if(isset($_SESSION['count'])){
+                        $this->sendInterswitchEmail($txnref, $interswitch);
+                    }
                     if($interswitch->Amount > 0){
                         //successful payment.
                         //then let me reduce the products respectively as its suppose to be
@@ -405,6 +432,19 @@ class Webpay_Controller extends Layout_Controller
  
         }
         
+        public function sendInterswitchEmail($tranx_id, $response){
+            $from = CONTACT_EMAIL;
+            $message = new View("themes/".THEME_NAME."/payment_mail_interswitch");
+            $message->interswitch = $response;
+            $user_details = $this->webpay->get_purchased_user_details();
+            foreach($user_details as $U){
+                if(EMAIL_TYPE==2) {
+                    email::smtp($from,$U->email, "Webpay transaction response for ID ".$tranx_id ,$message);
+                }else{
+                    email::sendgrid($from,$U->email, "Webpay transaction response for ID ".$tranx_id ,$message);
+                }           
+            }
+        }
         
 	/** DOCAPTURED PAYMENT, UPDATED AMOUNT TO REFERED USERS, POST PURCHASE DEALS TO FACEBOOK WALL and SEND MAIL **/
 
@@ -486,11 +526,11 @@ class Webpay_Controller extends Layout_Controller
                 $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
                  if(EMAIL_TYPE==2) {
-			//email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			//email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			//email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
 
             } else {
@@ -505,11 +545,11 @@ class Webpay_Controller extends Layout_Controller
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
 
                 if(EMAIL_TYPE==2) {
-			//email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			//email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
+			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
+			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
             }
          }

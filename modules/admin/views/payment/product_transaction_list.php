@@ -92,15 +92,18 @@
                         //my code snippet to manage interswitch transactions and patches
                         $interswitch_tranx_ref = "-";
                         $requery_btn = "";
+                        $more_details_btn = "";
                         $tranx_id = $u->transaction_id;
 
                         if($u->type=="7"){
                             $interswitch_tranx_ref = $u->captured_transaction_id;
-                            if($u->payment_status=="Success"){
+                            //if($u->payment_status=="Success"){
                                 $clickfunction = 'reQueryEvent("'.$tranx_id.'")';
-                                $requery_btn = "<a href='javascript:".$clickfunction."'>ReQuery</a>";
-                            }
+                                $requery_btn = "<a style='color:blue' href='javascript:".$clickfunction."'>ReQuery</a>";
+                            //}
                         }
+                        $clickfunctionM = 'moreDetailsEvent("'.$tranx_id.'")';
+                        $more_details_btn = "<a href='javascript:".$clickfunctionM."'>MoreDetails</a>";
                     
                     ?>	 
                     
@@ -131,14 +134,14 @@
 		    <?php if($u->payment_status=="Completed"){ echo '<span class="clor3">'. $this->Lang["COMPLETED"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Success"){ echo '<span class="clor">'. $this->Lang["SUCCESS"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Pending"){ echo '<span class="clor4">'.$this->Lang["PENDING"].'</span>'; } ?>
-		    
-		    </span></td>
+		    <?php if($u->payment_status=="Failed"){ echo '<span class="clor4">Failed</span>'; } ?>
+		    </span><br /><?php echo $more_details_btn; ?></td>
 		    <?php } ?>	
 
 			
                     <td align="left"><?php echo date('d-M-Y h:i:s',$u->transaction_date); ?></td>
                     
-                    <td ><span class="align">
+                    <td><span class="align">
 		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PAYPAL_CREDIT"] .'</span>'; } ?>
 		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PAYPAL"] .'</span>'; } ?>
 		    <?php if($u->type=="3"){ echo '<span class="clor2">'. $this->Lang["REF_PAYMENT"] .'</span>'; } ?>
@@ -147,6 +150,7 @@
 		    <?php if($u->type=="6"){ echo '<span class="clor2">'. $this->Lang["PAY_LATER"] .'</span>'; } ?>
 		    <?php if($u->type=="7"){ echo '<span class="clor2">'. $u->transaction_type .
                             '</span><br /><span style="font-size:89%; color:blue;">'.$requery_btn.'<span>'; } ?>
+                            
 		    </span></td>
 		    
                 </tr>
@@ -189,10 +193,7 @@
     $( "#dialog" ).dialog({
         width: 500,
       autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 1000
-      },
+
       hide: {
         effect: "explode",
         duration: 1000
@@ -200,10 +201,23 @@
     });
   });
   
-  function reQueryEvent(tranx_id){
-      $( "#dialog" ).dialog( "open" );
+  function moreDetailsEvent(tranx_id){
+      transact_id = tranx_id;
+      $('#dialog').dialog('option', 'title', 'More Details for Transaction ID : '+tranx_id);
       $("#dialog_content").html("Please wait .......");
-      
+      $( "#dialog" ).dialog( "open" );
+      setTimeout(loadMoreDetails, 1000);
+  }
+  var transact_id = "";
+  function reQueryEvent(tranx_id){
+      transact_id = tranx_id;
+      $('#dialog').dialog('option', 'title', 'ReQuery / ReConfirm Transaction ID : '+tranx_id);
+      $("#dialog_content").html("Please wait .......");
+      $( "#dialog" ).dialog( "open" );
+      setTimeout(loadConfirm, 1000);
+  }
+  
+  function loadConfirm(){
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -212,14 +226,31 @@
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
     //alert("here");
-    var params = "transaction_id="+tranx_id;
+    var params = "transaction_id="+transact_id;
     xmlhttp.open("POST","<?php echo PATH; ?>/webpay/ajax_confirm.html",false);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.setRequestHeader("Content-length", params.length);
     xmlhttp.setRequestHeader("Connection", "close");
     xmlhttp.send(params);
-    $("#dialog_content").html(xmlhttp.responseText);
-
+    $("#dialog_content").html(xmlhttp.responseText); 
+  }
+  
+  function loadMoreDetails(){
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else { 
+        // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    //alert("here");
+    var params = "transaction_id="+transact_id;
+    xmlhttp.open("POST","<?php echo PATH; ?>/webpay/ajax_more_details.html",false);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.setRequestHeader("Content-length", params.length);
+    xmlhttp.setRequestHeader("Connection", "close");
+    xmlhttp.send(params);
+    $("#dialog_content").html(xmlhttp.responseText);       
   }
 
   </script>
