@@ -518,17 +518,7 @@ foreach ($this->all_payment_list as $payment) {
          
                           <?php }?> 
                               
-               <?php if ($this->blog_setting) { ?>
-                        <li <?php
-	        if (isset($this->is_blog)) {
-		        echo "class='active'";
-	        }
-	        ?>
-                            accesskey=""><a href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>">
-		        <?php echo $this->Lang['BLOG']; ?>
-                            </a></li>
-
-                     <?php } ?>            
+                        
               
           </ul>
         </div>           

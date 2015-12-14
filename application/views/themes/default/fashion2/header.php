@@ -1,4 +1,4 @@
-<!-- <title> <?php echo SITENAME; ?> </title> -->
+<title> <?php //echo SITENAME; ?> </title>
 <?php
 if (isset($this->is_product)) {
     $type = "products";
@@ -77,10 +77,10 @@ $this->language_List = str_replace(".php", "", $DL);
                           <?php } }} ?>  
 </div>
 <div class="header_top_middle">
-    <div class="refer_friend">
-    <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-            <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-    </div>
+   <!--  <div class="refer_friend">
+   <a  href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+            <?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+    </div>-->
 </div>
 
 
@@ -103,6 +103,8 @@ if ($lan != LANGUAGE) {
 </li> */ ?>
 <li><a href="<?php echo PATH;?>">Home</a></li>
 <li class="mnav_dnone">|</li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a><li>
+    <li class="mnav_dnone">|</li>
 <?php if ($this->session->get('UserID')) { ?>
 	<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 	<li class="mnav_dnone">|</li>
@@ -142,7 +144,7 @@ if ($lan != LANGUAGE) {
 	if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 	
 <?php } ?>
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a><li>
+<!--<li><a id="" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a><li>-->
 <!--	<li><a id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
 	<li class="mnav_dnone">|</li>
 	<li><a href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->

@@ -49,6 +49,28 @@ $(".slidetabs").tabs(".images > div", {
         $('#messagedisplay1').hide();
     });
 </script>
+<!--<style>
+#cycler{position:relative;}
+#cycler img{position:absolute;z-index:1}
+#cycler img.active{z-index:3}
+</style>-->
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!--<script>
+function cycleImages(){
+      var $active = $('#cycler .active');
+      var $next = ($active.next().length > 0) ? $active.next() : $('#cycler img:first');
+      $next.css('z-index',2);//move the next image up the pile
+      $active.fadeOut(1500,function(){//fade out the top image
+	  $active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
+          $next.css('z-index',3).addClass('active');//make the next image the top one
+      });
+    }
+
+$(document).ready(function(){
+// run every 7s
+setInterval('cycleImages()', 7000);
+})
+</script>-->
 <section class="container">
      <?php
 $font_color = "";
@@ -85,16 +107,17 @@ if(count($this->merchant_personalised_details)>0) {
 //                                }
                                 
                             }
-?>
+                            ?>
+                                                          
 								<li >
                                                                     
-									<img  src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="images/slide_01.jpg">
+									<img src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="images/slide_01.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
-										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
+										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
-										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
+										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b><br></b></div>
 										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover">Buy Now</a>
+<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
 								</li>
 								<?php
@@ -106,11 +129,11 @@ if(count($this->merchant_personalised_details)>0) {
                                                                     
 									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-<?php echo $i; ?>.jpg" alt="" />
 								<section class="slide_caption t_align_c d_xs_none">
-										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
+										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
-										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
-										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover">Buy Now</a>
+										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b></b></div>
+										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20"><b></b></div>
+<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
                                                                 </li>
 								 <?php
@@ -123,46 +146,47 @@ if(count($this->merchant_personalised_details)>0) {
                                                                     
 									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-1.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-1.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
-										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
+										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
-										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
+										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b><br></b></div>
 										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover">Buy Now</a>
+<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
 								</li>
                                                                 <li>
                                                                     
 									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-2.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-2.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
-										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
+										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
-										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
-										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover">Buy Now</a>
+										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b><br></b></div>
+										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20"><b></b></div>
+<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
 								</li>
                                                                 <li>
                                                                     
 									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-3.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-3.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
-										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
+										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
-										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
+										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b><br></b></div>
 										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover">Buy Now</a>
+<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
 								</li>
                                                                  <li>
                                                                     
 									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-4.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-4.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
-										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
+										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
-										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>Attractive &amp; Elegant<br>HTML Theme</b></div>
-										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover">Buy Now</a>
+										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>br></b></div>
+										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20"><b></b></div>
+<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
 								</li>
+                                                               
                                                                 <?php
 }
 ?>
@@ -186,7 +210,7 @@ if(count($this->merchant_personalised_details)>0) {
 							<img src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>" alt="">
 						</a>-->
 						<a   href="<?php echo $ads_link; ?>" class="d_block d_xs_inline_b m_xs_left_5 animate_ftr m_mxs_left_0 animate_horizontal_finished">
-							 <img height="160px" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>" alt="">
+							 <img  src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>" alt="">
 						</a>
 					</div>
                                          <?php }else{?>
@@ -195,7 +219,7 @@ if(count($this->merchant_personalised_details)>0) {
 							<img src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>" alt="">
 						</a>-->
 						<a href="<?php //echo $ads_link; ?>" class="d_block d_xs_inline_b m_xs_left_5 animate_ftr m_mxs_left_0 animate_horizontal_finished">
-							<img height="160px" src="<?php echo PATH; ?>bootstrap/themes/images/electronics/ads/<?php echo ($i+2); ?>.jpg" alt="">
+							<img  src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/ads/<?php echo ($i+2); ?>.jpg" alt="">
 						</a>
 
 					</div>
@@ -206,63 +230,7 @@ if(count($this->merchant_personalised_details)>0) {
 			<div class="page_content_offset">
 				<div class="container">
 					<!--banners-->
-					<section class="row clearfix">
-                                            <?php 
-        $ads_check = "";
-        if(count($this->merchant_personalised_details)>0) { 
-    foreach($this->merchant_personalised_details as $m) {
-        ?>
-	<?php for ($i = 1; $i <= 2; $i++) { ?>
-            <?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
-                    $ads_link="";
-                    if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
-                    if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
-						<div class="col-lg-6 col-md-6 col-sm-6 m_bottom_50 m_sm_bottom_35">
-							<a href="<?php echo $ads_link; ?>" class="d_block banner animate_ftr wrapper r_corners relative m_xs_bottom_30 animate_horizontal_finished">
-							
-                                                            <img height="160px" width="600px" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>" alt="">
-								<span class="banner_caption d_block vc_child t_align_c w_sm_auto">
-									<span class="d_inline_middle">
-										<span class="d_block color_dark tt_uppercase m_bottom_5 let_s">New Collection!</span>
-										<span class="d_block divider_type_2 centered_db m_bottom_5"></span>
-										<span class="d_block color_light tt_uppercase m_bottom_25 m_xs_bottom_10 banner_title"><b>Colored Fashion</b></span>
-										<span class="button_type_6 bg_scheme_color tt_uppercase r_corners color_light d_inline_b tr_all_hover box_s_none f_size_ex_large">Shop Now!</span>
-									</span>
-								</span>
-							</a>
-						</div>
-                                            <?php }else{?>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 m_bottom_50 m_sm_bottom_35">
-                                              
-							<a href="<?php //echo $ads_link; ?>" class="d_block banner animate_ftr wrapper r_corners relative m_xs_bottom_30 animate_horizontal_finished">
-							
-                                                            <img height="50px" width="50px" src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/ads/<?php echo ($i+2); ?>.jpg" alt="">
-								<span class="banner_caption d_block vc_child t_align_c w_sm_auto">
-									<span class="d_inline_middle">
-										<span class="d_block color_dark tt_uppercase m_bottom_5 let_s">New Collection!</span>
-										<span class="d_block divider_type_2 centered_db m_bottom_5"></span>
-										<span class="d_block color_light tt_uppercase m_bottom_25 m_xs_bottom_10 banner_title"><b>Colored Fashion</b></span>
-										<span class="button_type_6 bg_scheme_color tt_uppercase r_corners color_light d_inline_b tr_all_hover box_s_none f_size_ex_large">Shop Now!</span>
-									</span>
-								</span>
-							</a>
-						</div>
-                                            <?php }}?> 
-            <?php  } } ?>
-<!--						<div class="col-lg-6 col-md-6 col-sm-6 m_bottom_50 m_sm_bottom_35">
-							<a href="#" class="d_block banner animate_ftr wrapper r_corners type_2 relative animate_horizontal_finished">
-								<img src="images/banner_img_2.png" alt="">
-								<span class="banner_caption d_block vc_child t_align_c w_sm_auto">
-									<span class="d_inline_middle">
-										<span class="d_block scheme_color banner_title type_2 m_bottom_5 m_mxs_bottom_5"><b>-50%</b></span>
-										<span class="d_block divider_type_2 centered_db m_bottom_5 d_sm_none"></span>
-										<span class="d_block color_light tt_uppercase m_bottom_15 banner_title_3 m_md_bottom_5 d_mxs_none">On All<br><b>Sunglasses</b></span>
-										<span class="button_type_6 bg_dark_color tt_uppercase r_corners color_light d_inline_b tr_all_hover box_s_none f_size_ex_large">Shop Now!</span>
-									</span>
-								</span>
-							</a>
-						</div>-->
-					</section>
+					
 					<div class="row clearfix">
 						<aside class="col-lg-3 col-md-3 col-sm-3 m_xs_bottom_30">
 							<!--widgets-->

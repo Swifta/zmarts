@@ -19,7 +19,7 @@ $(document).ready(function(e) {
   <section class="slider">
     <div class="container">
    
-      <div class="flexslider" id="mainslider" style="padding: 10px; background:#720808;">
+      <div class="flexslider" id="mainslider" style="padding: 2px; background:#cccccc;">
         <ul class="slides" >
         
         <!-- <?php  if (count($this->banner_details) > 0) {?>

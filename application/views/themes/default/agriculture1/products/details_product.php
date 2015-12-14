@@ -78,8 +78,8 @@ foreach ($this->product_deatils as $products) {
 </section>
 
 
-    <div class="container">
-        <div class="sixteen columns">
+    <div class="container" style="background-color:#fff; margin-top: -36px;">
+        <div class="sixteen columns" >
             <div >
 
                 <div  id="messagedisplay1" style="display:none;">

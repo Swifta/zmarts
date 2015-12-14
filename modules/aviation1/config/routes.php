@@ -28,3 +28,12 @@ $config['Neocourts-Hotel/products/c/(.*)/(.*).html'] = "/aviation1/product_list/
 $config['Neocourts-Hotel/deal/c/(.*)/(.*).html'] = "/aviation1/deal_list/Neocourts-Hotel/$1/$2";
 $config['Neocourts-Hotel/auction/c/(.*)/(.*).html'] = "/aviation1/auction_list/Neocourts-Hotel/$1/$2";
 // Neocourts-Hotel End
+// Yudala Start
+$config['Yudala'] ="aviation1/stores_home_page/Yudala";
+$config['Yudala/products.html'] = "/aviation1/product_list/Yudala";
+$config['Yudala/today-deals.html'] = "/aviation1/deal_list/Yudala";
+$config['Yudala/auction.html'] = "/aviation1/auction_list/Yudala";
+$config['Yudala/products/c/(.*)/(.*).html'] = "/aviation1/product_list/Yudala/$1/$2";
+$config['Yudala/deal/c/(.*)/(.*).html'] = "/aviation1/deal_list/Yudala/$1/$2";
+$config['Yudala/auction/c/(.*)/(.*).html'] = "/aviation1/auction_list/Yudala/$1/$2";
+// Yudala End

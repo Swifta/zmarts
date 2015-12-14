@@ -90,9 +90,10 @@ $this->language_List = str_replace(".php", "", $DL);
                                     <?php  //if($this->session->get('user_auto_key')) { ?>
                                     <?php //if(isset($this->auto_key)){?>
                                        <li><a class="home active" href="<?php echo PATH;?>">Home</a></li>
+                                        <li><a id="" class="myaccount" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
 <!--                                      <li><a class="myaccount" href="<?php //echo PATH;?>">store Credit</a></li>-->
                                     <?php  if($this->session->get('user_auto_key')) { ?>
-        <li  class="myaccount" style="margin-left: px;" > <a href="<?php echo PATH; ?>storecredits-products.html" style=" font-size: 12px;"><?php //echo $this->Lang["STR_CRDS"]; ?></a></li>
+        <li  class="myaccount"> <a href="<?php echo PATH; ?>storecredits-products.html" style=" font-size: 12px;"><?php echo $this->Lang["STR_CRDS"]; ?></a></li>
 <!--        <li  class="store_credit"> <a href="<?php //echo PATH; ?>storecredits-products.html"> <?php //echo $this->Lang["STR_CRDS"]; ?></a></li>-->
         <?php } ?>
 <!--                                    <li><a class="home active" href="<?php //echo PATH;?>">Home</a></li>-->
@@ -138,17 +139,17 @@ $this->language_List = str_replace(".php", "", $DL);
 <!--                <li><a style="font-size: 12px;" class="myaccount" id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
                 <li class="mnav_dnone"></li>
                 <li style=" margin-left: ;"><a style="font-size: 12px;" class="myaccount" href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
-               <li><a id="" class="myaccount" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+<!--               <li><a id="" class="myaccount" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>-->
                 <li  class="head_fb"><a class="myaccount" style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
         
                     <?php } ?>
                 
               
                 
-                <li class="" style="margin-left: ;">
-        <a class="myaccount" style="font-size: 12px;" href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-                    <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-            </li>
+<!--                <li class="">
+        <a class="myaccount" style="font-size: 12px;" href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+                    <?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+            </li>-->
                         
                                  
                        
@@ -525,23 +526,8 @@ $srch = $this->Lang['SRCH_STR'];
                     <?php } ?>
                    
                    
-                    <?php if ($this->blog_setting) { ?>
-                        <li <?php
-	        if (isset($this->is_blog)) {
-		        echo "class='active'";
-	        }
-	        ?>
-                            accesskey=""><a href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>">
-		        <?php echo $this->Lang['BLOG']; ?>
-	        </a>
-<!--                        <div>
-                            <ul>
-                                <li><a href="portfolio.html">Portfolio</a> </li>
-                                <li><a href="portfoliolist.html">Portfolio List</a> </li>
-                            </ul>
-                        </div>-->
-                    </li>
-                     <?php } ?>
+                   
+                    
                      <?php if ($this->session->get('UserID')) { ?>
                 
 <li>

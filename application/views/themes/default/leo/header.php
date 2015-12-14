@@ -136,11 +136,12 @@
                     
    				   <div class="cssmenu">
 				<ul>
-					<li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li> |
+					<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart" style="color:#fff;">Sell on Zmart</a></li>
+                                    <li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li> |
 					<li><a href="#"><?php echo $this->Lang['CUSS_SUPP']; ?> <?php
 								if (PHONE1) { 	echo PHONE1;	} else { }?></a></li> |
-					<li><a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-								<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a></li>
+<!--					<li><a  href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+								<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a></li>-->
 								<?php  if($this->session->get('user_auto_key')) { ?> |
 					<li  ><div class="store_credit"><a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div></li>  <?php } ?>
 					
@@ -184,22 +185,17 @@
                       <!--<li class="active"><a href="<?php echo PATH."users/my-account.html"; ?>">Account</a></li> |-->
                       <li><a title="go to <?php echo SITENAME;?> home" href="<?php echo PATH; ?>"><?php echo SITENAME;?></a></li> |
                       <li><a title="subscribe for extreme offers" href="javascript:load_club();" >Zenith Offers</a></li> |
-                   	  <li><a title="log out" href="
-                      <?php $cart_count = $this->session->get('count');
-					  		if(isset($cart_count) && $cart_count > 0){?>
-								 javascript:logout_click();"
-							<?php }else {?>
-                             <?php echo PATH;?>
-                      leo_logout.html"
-							<?php } ?>
-					  >Logout</a></li>
+                   	  <li><a title="log out" href="<?php $cart_count = $this->session->get('count');if(isset($cart_count) && $cart_count > 0){?> javascript:logout_click();"
+							<?php }else {?><?php echo PATH;?>leo_logout.html"<?php } ?> >Logout</a></li>
+
                     
 					 
                     <?php }else{ ?>
                     
                     <li><a title="go to <?php echo SITENAME;?> home" href="<?php echo PATH; ?>"><?php echo SITENAME;?></a></li> |
                     <li><a href="javascript:load_club();" >Zenith Offers</a></li> |
-                    <a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart" style="color:#fff;">Sell on Zmart</a>
+                      
+<!--                    <a id="" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart" style="color:#fff;">Sell on Zmart</a>-->
 <!--                    <li><a href="javascript:show_login();">Login</a></li> |-->
 <!--                    <li><a href="javascript:show_register();">Signup</a></li>-->
                    
@@ -476,8 +472,7 @@
                 <li><a title="items that may be near you" class="color5" href="<?php echo PATH?>near-map.html">Near Map</a>
                 </li>
                 
-                <li><a title="<?php echo SITENAME;?> blog" class="color5" href="<?php echo PATH?>blog">Blog</a>
-                </li>
+              
 				
 			</ul>
 				</div>

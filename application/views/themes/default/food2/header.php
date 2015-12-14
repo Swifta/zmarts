@@ -67,10 +67,10 @@ $this->language_List = str_replace(".php", "", $DL);
       
                         <?php } ?>                                          
             <?php } }} ?>
-                            <li>
-        <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-                    <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-                            </li>
+<!--                            <li>
+        <a href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+                    <?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+                            </li>-->
                 </ul>
             </div>
 
@@ -78,6 +78,7 @@ $this->language_List = str_replace(".php", "", $DL);
                 <div class="social-strip">
                     <ul>  
                         <li><a href="<?php echo PATH;?>">Home</a></li>
+                         <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
 							<?php if ($this->session->get('UserID')) { ?>
 								<li> &nbsp;&nbsp;<strong><?php echo $this->Lang['WELCOME']; ?> </strong> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 		        <?php  if($this->session->get('user_auto_key')) { ?>
@@ -109,7 +110,7 @@ $this->language_List = str_replace(".php", "", $DL);
                             
 <!--	<li><a id="login" href="javascript:showlogin();" title="<?php //echo $this->Lang['LOGIN']; ?>"><?php //echo $this->Lang['LOGIN']; ?></a></li>-->
 
-	<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+<!--	<li><a id="" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>-->
 <!--	<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
     <!-- 
     	Adding Zenith Offer Label to the header.
@@ -493,17 +494,7 @@ $srch = $this->Lang['SRCH_STR'];
 	        </li>
         <?php } ?>
 
-        <?php if ($this->blog_setting) { ?>
-        <li>
-	        <a <?php
-	        if (isset($this->is_blog)) {
-		        echo "class=''";
-	        }
-	        ?> href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>">
-		        <?php echo $this->Lang['BLOG']; ?>
-	        </a>
-        </li>
-        <?php } ?>
+       
                     </ul>
                 </nav>
 
