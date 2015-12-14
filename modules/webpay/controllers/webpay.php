@@ -193,7 +193,7 @@ class Webpay_Controller extends Layout_Controller
                     $this->PaymentReference = $interswitch->PaymentReference;
                     $this->CardNumber = $interswitch->CardNumber;
                     if(isset($_SESSION['count'])){
-                        $this->sendInterswitchEmail($txnref, $interswitch);
+                        $this->sendInterswitchEmail($txnref, $interswitch->Amount, $interswitch);
                     }
                     if($interswitch->Amount > 0){
                         //successful payment.
