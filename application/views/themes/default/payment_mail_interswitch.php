@@ -36,7 +36,7 @@ $this->UserName = $this->session->get("UserName");
   <td colspan="8" width="100%" align="left">Transaction Reference: <?php echo $interswitch->PaymentReference; ?></td>
 </tr>
 </tr>
-<td colspan="8" width="100%" align="left">Amount: &#8358; <?php echo number_format($amount); ?></td>
+<td colspan="8" width="100%" align="left">Amount: &#8358; <?php echo number_format($amount/100); ?></td>
 </tr>
 </tr>
   <td colspan="8" width="100%" align="left"></td>
