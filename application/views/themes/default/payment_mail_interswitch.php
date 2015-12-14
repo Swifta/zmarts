@@ -21,19 +21,25 @@ $this->UserName = $this->session->get("UserName");
 </tr>
 
 </tr>
-  <td colspan="8" width="100%" align="center">Find below your completed transaction summary:</td>
+  <td colspan="8" width="100%" align="left">Find below your completed transaction details:</td>
 </tr>
 </tr>
-  <td colspan="8" width="100%" align="center">Response Code: <?php echo $interswitch->ResponseCode; ?></td>
+  <td colspan="8" width="100%" align="left">Transaction ID: <?php echo $id; ?></td>
 </tr>
 </tr>
-  <td colspan="8" width="100%" align="center">Transaction Description: <?php echo $interswitch->ResponseDescription; ?></td>
+  <td colspan="8" width="100%" align="left">Status: <?php if($amount > 0){echo "Successful";}else{echo "Failed";}  ?></td>
 </tr>
 </tr>
-  <td colspan="8" width="100%" align="center">Transaction Reference: <?php echo $interswitch->PaymentReference; ?></td>
+  <td colspan="8" width="100%" align="left">Transaction Description: <?php echo $interswitch->ResponseDescription; ?></td>
 </tr>
 </tr>
-  <td colspan="8" width="100%" align="center"></td>
+  <td colspan="8" width="100%" align="left">Transaction Reference: <?php echo $interswitch->PaymentReference; ?></td>
+</tr>
+</tr>
+<td colspan="8" width="100%" align="left">Amount: &#8358; <?php echo number_format($amount); ?></td>
+</tr>
+</tr>
+  <td colspan="8" width="100%" align="left"></td>
 </tr>
 
   <tr>
