@@ -417,7 +417,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->template->title = "Interswitch Payment System";
                 $this->template->content = new View("themes/".THEME_NAME."/interswitch/payment_process");                     
                     //echo $this->txn_ref; die;
-	            $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+	            //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
 				
 
 	               // url::redirect(PATH.'transaction.html');
