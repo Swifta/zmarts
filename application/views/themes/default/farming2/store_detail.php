@@ -79,92 +79,24 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="<?php echo PATH.$this->storeurl;?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>" <?php if (isset($this->is_product)) echo "active"; ?> >
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											<?php echo $this->Lang['PRODUCTS']; ?>
+											Sportswear
 										</a>
 									</h4>
-                                                                    <?php $pr = 0; $pro = 0; $val_pro ="";
-        foreach ($this->categeory_list_product as $d) {
-		        //$check_sub_cat = common::get_subcat_count($d->category_id, 3, "main", $d->category_url); /*   COUNT OF SUBCATEGORY   */
-		        //$val_pro .= $check_sub_cat.","; 
-		        $check_sub_cat = $d->product_count;
-		        if($check_sub_cat != 0){
-		        $pro = $pr + 1;
-		        $pr ++;
-		        } }
-		        $arr_product = explode(",", substr($val_pro,0,-1));
-        ?>    
 								</div>
 								<div id="sportswear" class="panel-collapse collapse">
 									<div class="panel-body">
-                                                                            
 										<ul>
-                                                                                    <?php if($this->categeory_list_product){  
-					foreach ($this->categeory_list_product as $d) {
-						$check_sub_cat = $d->product_count;
-						if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
-											<li><a href="#">Nike </a>
-                                                                                        
-                                                                                        
-                                                                                        
-                                                                                       </li>
-											
-										<?php }}}?>  </ul>
+											<li><a href="#">Nike </a></li>
+											<li><a href="#">Under Armour </a></li>
+											<li><a href="#">Adidas </a></li>
+											<li><a href="#">Puma</a></li>
+											<li><a href="#">ASICS </a></li>
+										</ul>
 									</div>
 								</div>
 							</div>
-							<li class="active" >
-                                                                                    
-											<a  href="<?php echo PATH.$this->storeurl;?>/products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>" class="f_size_large scheme_color d_block relative"  >
-												<b <?php if (isset($this->is_product)) echo "active"; ?>><?php echo $this->Lang['PRODUCTS']; ?></b>
-												<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-											</a>
-											<!--second level-->
-                                                                                    <?php $pr = 0; $pro = 0; $val_pro ="";
-        foreach ($this->categeory_list_product as $d) {
-		        //$check_sub_cat = common::get_subcat_count($d->category_id, 3, "main", $d->category_url); /*   COUNT OF SUBCATEGORY   */
-		        //$val_pro .= $check_sub_cat.","; 
-		        $check_sub_cat = $d->product_count;
-		        if($check_sub_cat != 0){
-		        $pro = $pr + 1;
-		        $pr ++;
-		        } }
-		        $arr_product = explode(",", substr($val_pro,0,-1));
-        ?>    
-											<ul>
-                                                                                            <?php if($this->categeory_list_product){  
-					foreach ($this->categeory_list_product as $d) {
-						$check_sub_cat = $d->product_count;
-						if(($check_sub_cat !=-1 )&&($check_sub_cat !=0)) { ?>
-												<li class="active">
-													<a href="#" class="d_block f_size_large color_dark relative">
-														<?php echo ucfirst($d->category_name); ?><span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
-													</a>
-													<!--third level-->
-                                                                                                        <?php if(count($this->subcategories_list)>0){
-										$hdn_second_cnt = 1; ?>
-										
-													<ul>
-                                                                            <?php    foreach($this->subcategories_list as $sub_cate){
-											if($sub_cate->main_category_id == $d->category_id){
-												if($hdn_second_cnt<5){?>
-														<li><a href="<?php echo PATH.$this->storeurl.'/products/c/'.base64_encode("sub").'/'.$sub_cate->category_url.'.html'; ?>" title="<?php echo ucfirst($sub_cate->category_name);?>" class="color_dark d_block"><?php echo ucfirst($sub_cate->category_name);?></a></li>
-												
-                                                                                                                                                   <?php $hdn_second_cnt++;}
-									if($hdn_second_cnt==5){?>
-                                                                                                        <?php  break;}
-									}
-									
-									} ?>
-									
-													</ul>
-                                                                <?php     } ?>
-												</li>												
-											  <?php }}}?>  </ul>
-                                                                                    
-										</li>
-										 
 							
 							
 							
@@ -172,6 +104,11 @@
 							
 							
 							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#">Bags</a></h4>
+								</div>
+							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title"><a href="#">Shoes</a></h4>
