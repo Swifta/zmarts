@@ -377,7 +377,7 @@ class Webpay_Controller extends Layout_Controller
                                 }
                         }
                         
-                        $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
+                        $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 7, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
                         //var_dump($transaction);
                         $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
                         //echo "here"; die;
@@ -432,16 +432,18 @@ class Webpay_Controller extends Layout_Controller
  
         }
         
-        public function sendInterswitchEmail($tranx_id, $response){
+        public function sendInterswitchEmail($tranx_id, $amount, $response){
             $from = CONTACT_EMAIL;
             $message = new View("themes/".THEME_NAME."/payment_mail_interswitch");
             $message->interswitch = $response;
+            $message->id = $tranx_id;
+            $message->amount = $amount;
             $user_details = $this->webpay->get_purchased_user_details();
             foreach($user_details as $U){
                 if(EMAIL_TYPE==2) {
-                    email::smtp($from,$U->email, "Webpay transaction response for ID ".$tranx_id ,$message);
+                    email::smtp($from,$U->email, "[Zmart] Payment Notification" ,$message);
                 }else{
-                    email::sendgrid($from,$U->email, "Webpay transaction response for ID ".$tranx_id ,$message);
+                    email::sendgrid($from,$U->email, "[Zmart] Payment Notification" ,$message);
                 }           
             }
         }
@@ -471,13 +473,13 @@ class Webpay_Controller extends Layout_Controller
 		if(EMAIL_TYPE==2) {
 			
 			
-				email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+				//email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 				
 				
 		}else{
 			
 						
-		                email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+		                //email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
 		$user_details = $this->webpay->get_purchased_user_details();
