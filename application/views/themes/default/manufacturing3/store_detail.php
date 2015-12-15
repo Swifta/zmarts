@@ -104,7 +104,7 @@ if(count($this->merchant_personalised_details)>0) {
 ?>
                                                                 <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-<?php echo $i; ?>.jpg" alt="" />
+									<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/banners/banner-<?php echo $i; ?>.jpg" alt="" />
 								<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
@@ -121,7 +121,7 @@ if(count($this->merchant_personalised_details)>0) {
                                                                 
                                                                 <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-1.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-1.jpg">
+									<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/banners/banner-1.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-1.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
@@ -132,7 +132,7 @@ if(count($this->merchant_personalised_details)>0) {
 								</li>
                                                                 <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-2.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-2.jpg">
+									<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/banners/banner-2.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-2.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
@@ -143,7 +143,7 @@ if(count($this->merchant_personalised_details)>0) {
 								</li>
                                                                 <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-3.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-3.jpg">
+									<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/banners/banner-3.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-3.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
@@ -154,7 +154,7 @@ if(count($this->merchant_personalised_details)>0) {
 								</li>
                                                                  <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-4.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-4.jpg">
+									<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/banners/banner-4.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-4.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10">Meet New Theme</div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
@@ -195,7 +195,7 @@ if(count($this->merchant_personalised_details)>0) {
 							<img src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>" alt="">
 						</a>-->
 						<a href="<?php //echo $ads_link; ?>" class="d_block d_xs_inline_b m_xs_left_5 animate_ftr m_mxs_left_0 animate_horizontal_finished">
-							<img height="160px" src="<?php echo PATH; ?>bootstrap/themes/images/electronics/ads/<?php echo ($i+2); ?>.jpg" alt="">
+							<img height="160px" src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/ads/<?php echo ($i+2); ?>.png" alt="">
 						</a>
 
 					</div>
@@ -236,7 +236,7 @@ if(count($this->merchant_personalised_details)>0) {
                                               
 							<a href="<?php //echo $ads_link; ?>" class="d_block banner animate_ftr wrapper r_corners relative m_xs_bottom_30 animate_horizontal_finished">
 							
-                                                            <img height="50px" width="50px" src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/ads/<?php echo ($i+2); ?>.jpg" alt="">
+                                                            <img height="50px" width="50px" src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing3/ads/<?php echo ($i+2); ?>.png" alt="">
 								<span class="banner_caption d_block vc_child t_align_c w_sm_auto">
 									<span class="d_inline_middle">
 										<span class="d_block color_dark tt_uppercase m_bottom_5 let_s">New Collection!</span>

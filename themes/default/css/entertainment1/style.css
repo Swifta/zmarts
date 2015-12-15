@@ -36,7 +36,7 @@
 .header_top_right ul li a:hover{color:#AC0800;}
 .header_top_right ul li.head_fb{margin: 0;}
 .middle_header{float:left;width:100%;}
-.logo{float: left;width:210px;margin:16px 30px 16px 0;}
+.logo{float: left;width:210px;margin:0px 30px 16px 0;}
 .logo h1{float: left;padding: 0;margin: 0;width: 100%;}
 .logo h1 a{float: left;width: 100%;text-align:center;}
 .logo img{/*float: left;*/max-width: 100%;vertical-align:middle;}

@@ -62,10 +62,10 @@ $this->language_List = str_replace(".php", "", $DL);
                           <?php } } ?>	
 </div>
 <div class="header_top_middle">
-    <div class="refer_friend">
-    <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-            <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-    </div>
+<!--    <div class="refer_friend">
+    <a  href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+            <?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+    </div>-->
 </div>
 <?php /*
 <div class="google_languages">
@@ -102,6 +102,8 @@ if ($lan != LANGUAGE) {
  </ul>
 </li> */ ?>
 <li><a href="<?php echo PATH;?>">Home</a></li>
+<li class="mnav_dnone">|</li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
 <li class="mnav_dnone">|</li>
 <?php if ($this->session->get('UserID')) { ?>
 	<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
@@ -142,11 +144,11 @@ if ($lan != LANGUAGE) {
 	if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 	
 <?php } ?>
- <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+<!-- <li><a id="" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>-->
 <!--	<li><a id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
 	<li class="mnav_dnone">|</li>
 	<li><a href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
- <li class="mnav_dnone">|</li>
+<!-- <li class="mnav_dnone">|</li>-->
         <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
 <?php } ?>
 <?php if (FB_PAGE) { ?>
@@ -307,17 +309,23 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
-			<p>Customer </p>
+             <?php if(empty($this->UserID)){?>
+			<p>Customer</p>
 			<ul>
-<!--				<li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
-				<li>|</li>
-				<li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>
-			-->
+
                         <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
                         </ul>
-		
+		<?php  }else {?>
+                       
+			<ul style="display: none;">
+
+                        <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+                        </ul>
+                           <?php  } ?>
 		</div>
         <?php if ($this->product_setting) { ?>
         <div class="add_cart">

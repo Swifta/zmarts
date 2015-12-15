@@ -35,15 +35,6 @@ $config['Scanfrost/products/c/(.*)/(.*).html'] = "/manufacturing2/product_list/S
 $config['Scanfrost/deal/c/(.*)/(.*).html'] = "/manufacturing2/deal_list/Scanfrost/$1/$2";
 $config['Scanfrost/auction/c/(.*)/(.*).html'] = "/manufacturing2/auction_list/Scanfrost/$1/$2";
 // Scanfrost End
-// Yudala Start
-$config['Yudala'] ="manufacturing2/stores_home_page/Yudala";
-$config['Yudala/products.html'] = "/manufacturing2/product_list/Yudala";
-$config['Yudala/today-deals.html'] = "/manufacturing2/deal_list/Yudala";
-$config['Yudala/auction.html'] = "/manufacturing2/auction_list/Yudala";
-$config['Yudala/products/c/(.*)/(.*).html'] = "/manufacturing2/product_list/Yudala/$1/$2";
-$config['Yudala/deal/c/(.*)/(.*).html'] = "/manufacturing2/deal_list/Yudala/$1/$2";
-$config['Yudala/auction/c/(.*)/(.*).html'] = "/manufacturing2/auction_list/Yudala/$1/$2";
-// Yudala End
 // BMPRO Start
 $config['BMPRO'] ="manufacturing2/stores_home_page/BMPRO";
 $config['BMPRO/products.html'] = "/manufacturing2/product_list/BMPRO";

@@ -374,6 +374,11 @@ padding: 0 5px 0 0;
 input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px thin #ccc;}
 
 </style>
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
  <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
         <div class="contianer_inner">
@@ -408,8 +413,45 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             <br><input type="checkbox" id="toggle" checked/> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             -->
                             <img style="width:100%" src="<?php echo PATH; ?>custom/images/WelcomeToZmart.png"></img>
+                            
 <!--                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>-->
-                            <p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
+                        
+                            
+                            
+                            
+                            
+                           
+                            
+                           
+
+
+
+
+
+
+
+
+                            
+                            
+                  <div class="container-fluid text-center">
+  <h1 style="color:#A61C00 ; font-family:'Actor', sans-serif;">Why you should sell on Zmart!</h1>
+  
+  <div class="row">
+      <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">Sell More Earn More</h4><img src="<?php echo PATH; ?>custom/images/p.png" class="img-circle" alt="Cinque Terre"> <p>Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
+    <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif;">  <h4 style="color:#60532f;">Contacting buyers is a breeze</h4><img src="<?php echo PATH; ?>custom/images/p.png" class="img-circle" alt="Cinque Terre"><p>Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">Low, low transaction fees</h4>
+<img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre"><p>Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
+  </div>
+  
+   <div class="row">
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">Dedicated Support 24/7</h4>
+<img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre" > <p>Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">You decide everything</h4><img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre" ><p>Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">It’s bank-secure</h4><img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre" > <p>Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and <br> we have put in place stringent measures to ensure our community is safe and secure.</p></div>
+  </div>
+</div>          
+                            
+<p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
                           
                            <form name="formName" method="post"><p style="font-size:20px; margin-left:5px;margin-top: 10px; font-family: sans-serif;">Do you have a Zenith Bank account ? </p><p style="margin-left:10px;">
 <input type="checkbox" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" /><label for="priorityHigh" >Yes</label>

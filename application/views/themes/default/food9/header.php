@@ -91,10 +91,10 @@ $this->language_List = str_replace(".php", "", $DL);
       
                         <?php } ?>                                          
             <?php } }} ?>
-                            <li>
-        <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-                    <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-                            </li>
+<!--                            <li>
+        <a href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+                    <?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
+                            </li>-->
         <?php  if($this->session->get('user_auto_key')) { ?>
         <li  class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html"> <?php echo $this->Lang["STR_CRDS"]; ?></a></li>
         <?php } ?>
@@ -147,7 +147,7 @@ $this->language_List = str_replace(".php", "", $DL);
 		<div id="additional-menu">
 			<ul>
        <li><a href="<?php echo PATH;?>">Home</a></li>
-
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
         <?php if ($this->session->get('UserID')) { ?>
                 <li class=""><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 
@@ -187,7 +187,7 @@ $this->language_List = str_replace(".php", "", $DL);
                 if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 
         <?php } ?>
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+<!--<li><a id="" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>-->
 
 <!--                <li><a id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
 
@@ -533,17 +533,7 @@ $srch = $this->Lang['SRCH_STR'];
 	        </li>
         <?php } ?>
 
-        <?php if ($this->blog_setting) { ?>
-        <li>
-	        <a <?php
-	        if (isset($this->is_blog)) {
-		        echo "class=''";
-	        }
-	        ?> href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>">
-		        <?php echo $this->Lang['BLOG']; ?>
-	        </a>
-        </li>
-        <?php } ?>
+       
 
 			</ul>
 		</nav>

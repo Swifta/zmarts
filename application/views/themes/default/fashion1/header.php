@@ -175,7 +175,7 @@ $this->language_List = str_replace(".php", "", $DL);
                                                                         <?php } ?>
                                                                      <?php if ($this->session->get('UserID')) { ?>
                                                                      <li class="default_t_color"><span style="color:#000000;"><?php echo $this->Lang['WELCOME']; ?> </span> <a class="myaccount" href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
-                
+                                                                    
 									<li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>" class="default_t_color"><?php echo $this->Lang['MY_ACC']; ?></a></li>
 									 <?php if(isset($this->is_home) || isset($this->is_product) ) { ?>
                                                                         
@@ -206,7 +206,10 @@ $this->language_List = str_replace(".php", "", $DL);
 							<div class="col-lg-4 col-md-4 col-sm-3 t_align_r t_xs_align_c">
 								<ul class="horizontal_list clearfix d_inline_b t_align_l f_size_small site_settings type_2">
 									<li class="container3d relative">
-										<a role="button" href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>" class="color_dark" id="lang_button"><img class="d_inline_middle m_right_10" alt="">Refer Friends. Get N 2000*</a>
+                                                                             <?php if ($this->session->get('UserID')) { ?>
+                                                                             <a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a>
+                                                                             <?php } ?>
+<!--										<a role="button" href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>" class="color_dark" id="lang_button"><img class="d_inline_middle m_right_10" alt="">Refer Friends. Get N 2000*</a>-->
 <!--										<ul class="dropdown_list type_2 top_arrow color_light">
 											<li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_en.jpg" alt="">English</a></li>
 											<li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_fr.jpg" alt="">French</a></li>
@@ -600,17 +603,7 @@ $srch = $this->Lang['SRCH_STR'];
 		        }
 		        ?>
                                                                     class="relative f_xs_none m_xs_bottom_5" style ="margin-left:-20px;"><a  href="<?php echo PATH; ?>near-map.html" title="<?php echo $this->Lang['NEAR_MAP']; ?>" class="tr_delay_hover color_light tt_uppercase"><b> <?php echo $this->Lang['NEAR_MAP']; ?></b></a></li>
-							<?php if ($this->blog_setting) { ?>
-								<li 
-                         <?php
-	        if (isset($this->is_blog)) {
-		        echo "class='active'";
-	        }
-	        ?>
-                                                                    accesskey=""class="relative f_xs_none m_xs_bottom_5" style ="margin-left:-20px;"><a href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG']; ?>" class="tr_delay_hover color_light tt_uppercase"><b><?php echo $this->Lang['BLOG']; ?></b></a>
-									
-								</li>
-                                                                 <?php } ?>
+							
 								</ul>
 						</nav>
 						<ul class="f_right horizontal_list clearfix t_align_l t_xs_align_c site_settings d_xs_inline_b f_xs_none">
