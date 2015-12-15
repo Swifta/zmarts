@@ -309,14 +309,23 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
+             <?php if(empty($this->UserID)){?>
 			<p>Customer</p>
 			<ul>
 
                         <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
                         </ul>
-		
+		<?php  }else {?>
+                       
+			<ul style="display: none;">
+
+                        <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+                        </ul>
+                           <?php  } ?>
 		</div>
         <?php if ($this->product_setting) { ?>
         <div class="add_cart">

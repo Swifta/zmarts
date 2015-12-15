@@ -37,3 +37,12 @@ $config['Yudala/products/c/(.*)/(.*).html'] = "/aviation1/product_list/Yudala/$1
 $config['Yudala/deal/c/(.*)/(.*).html'] = "/aviation1/deal_list/Yudala/$1/$2";
 $config['Yudala/auction/c/(.*)/(.*).html'] = "/aviation1/auction_list/Yudala/$1/$2";
 // Yudala End
+// ABC-Pvt-Ltd Start
+$config['ABC-Pvt-Ltd'] ="aviation1/stores_home_page/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products.html'] = "/aviation1/product_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/today-deals.html'] = "/aviation1/deal_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/auction.html'] = "/aviation1/auction_list/ABC-Pvt-Ltd";
+$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/aviation1/product_list/ABC-Pvt-Ltd/$1/$2";
+$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/aviation1/deal_list/ABC-Pvt-Ltd/$1/$2";
+$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/aviation1/auction_list/ABC-Pvt-Ltd/$1/$2";
+// ABC-Pvt-Ltd End

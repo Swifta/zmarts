@@ -35,12 +35,3 @@ $config['Slot-Systems-Limited/products/c/(.*)/(.*).html'] = "/farming2/product_l
 $config['Slot-Systems-Limited/deal/c/(.*)/(.*).html'] = "/farming2/deal_list/Slot-Systems-Limited/$1/$2";
 $config['Slot-Systems-Limited/auction/c/(.*)/(.*).html'] = "/farming2/auction_list/Slot-Systems-Limited/$1/$2";
 // Slot-Systems-Limited End
-// ABC-Pvt-Ltd Start
-$config['ABC-Pvt-Ltd'] ="farming2/stores_home_page/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products.html'] = "/farming2/product_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/today-deals.html'] = "/farming2/deal_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/auction.html'] = "/farming2/auction_list/ABC-Pvt-Ltd";
-$config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/farming2/product_list/ABC-Pvt-Ltd/$1/$2";
-$config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/farming2/deal_list/ABC-Pvt-Ltd/$1/$2";
-$config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/farming2/auction_list/ABC-Pvt-Ltd/$1/$2";
-// ABC-Pvt-Ltd End

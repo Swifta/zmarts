@@ -104,7 +104,9 @@ $this->language_List = str_replace(".php", "", $DL);
 		</div>
                 
 		<div class="ten columns float-rt" id="merchant_login">
-			<ul class="top-bar-menu text-right"  style="float:right;">
+                     <?php if(empty($this->UserID)){?>
+                      <?php //if (!empty($this->session->get('UserID'))) { ?>
+			<ul class="top-bar-menu text-right"  style="float:right; ">
                                <p>Customer</p>
                    <ul>
 				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
@@ -112,6 +114,16 @@ $this->language_List = str_replace(".php", "", $DL);
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
 			</ul>
 </ul>
+                      <?php  }else {?>
+                    <ul class="top-bar-menu text-right"  style="float:right; display: none;">
+                               <p>Customer</p>
+                   <ul>
+				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+			</ul>
+</ul>
+                <?php  } ?>
 		</div>
 
 	</div>
