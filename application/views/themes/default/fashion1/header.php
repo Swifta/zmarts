@@ -241,7 +241,7 @@ $this->language_List = str_replace(".php", "", $DL);
 							<?php ?></a>
                                                       <div class="col-lg-3 col-md-3 col-sm-3 t_align_r t_xs_align_c m_xs_bottom_15 pull-right" style="margin-top:30px;">
 									<div class="merchant_log">
-			<p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p>
+			<p>Customer </p>
 			<ul>
                              <ul>
 				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>

@@ -10,6 +10,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->mac_key = "E187B1191265B18338B5DEBAF9F38FEC37B170FF582D4666DAB1F098304D5EE7F3BE15540461FE92F1D40332FDBBA34579034EE2AC78B1A1B8D9A321974025C4";
                 $this->product_id = 6204;
                 $this->currency = 566;
+                $this->staging_url = "https://stageserv.interswitchng.com/test_paydirect/api/v1/";
                 $this->payment_params = "payment_split";
                 $this->site_redirect_url = PATH."webpay/confirmed.html";
                 $this->site_name = "www.abc.com";
@@ -32,6 +33,108 @@ class Webpay_Controller extends Layout_Controller
 		else{
 			$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
 		}
+        }
+        
+        //webpay transaction response for ID
+        //Dear Name
+        
+        public function ajax_more_details(){
+            if(isset($_POST['transaction_id'])){
+                $paint_red = "red";
+                $details = json_decode($this->webpay->getTransactionDetails($_POST['transaction_id']));
+                if($details->status == "Success"){
+                    $paint_red = "green";
+                }
+                echo "<div style='width:100%;'>";
+                echo "<div style='width:49%;float:left'>Transacton Status :</div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->status."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:left'>Reason :</div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->reason."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:left'>Transaction Type :</div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->type."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "</div>";
+            }
+            die;
+        }
+        
+        public function ajax_confirm(){
+            //$transaction_id = "jTnUlW1RGrVUALj";
+            if(isset($_POST['transaction_id'])){
+                $transaction_id = $_POST['transaction_id'];
+                $transaction_total = $this->webpay->getTotalAmountOnTransaction($transaction_id);
+                $txnref = $transaction_id;
+                $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
+                $url_call = $this->staging_url."gettransaction.json?productid=".$this->product_id."&transactionreference=".$txnref.
+                        "&amount=".$transaction_total;
+                $headers = array(
+                    'Hash: '.$hash, 
+                    'UserAgent: Mozilla/4.0 (compatible; MSIE 6.0; MS Web Services Client Protocol 4.0.30319.239)'
+                );
+                //var_dump($url_call); die;
+                $ch = curl_init();
+                // Set query data here with the URL
+                curl_setopt($ch, CURLOPT_URL, $url_call); 
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                //curl_setopt($ch, CURLOPT_USERAGENT, 'eMarketplace');
+                
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                $response = curl_exec($ch);
+
+                if($response == false)
+                {
+                    //var_dump(curl_error($ch));
+                    echo curl_error($ch);
+                }
+                else{
+                    //var_dump(json_decode($response)); die;
+                    $transaction_status = "FAILED TRANSACTION";
+                    $status = "Failed";
+                    $interswitch = json_decode($response);
+                    //echo $url_call."<br />";
+                    //echo $hash;
+                    $this->response_code = $interswitch->ResponseCode;
+                    $this->response_discription = $interswitch->ResponseDescription;
+                    $this->PaymentReference = $interswitch->PaymentReference;
+                    $this->CardNumber = $interswitch->CardNumber;
+                    $paint_red = "red";
+                    if($interswitch->Amount > 0){
+                        $status = "Success";
+                        $paint_red = "green";
+                        $transaction_status = "SUCCESSFUL TRANSACTION";
+                    }
+                    $this->webpay->updateTransaction($transaction_id, $status, $interswitch->ResponseCode,
+                            $interswitch->ResponseDescription,$interswitch->PaymentReference,
+                            $interswitch->CardNumber);
+                    echo "<div style='width:100%;'>";
+                    echo "<div style='width:49%;float:left'>Transacton Status :</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$transaction_status."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:left'>Response Code :</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseCode."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:left'>Description :</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseDescription."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:left'>Payment Reference :</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->PaymentReference."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:left'>Card Number :</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->CardNumber."</div><div style='clear:both;width:100%'><hr /></div>";
+                    echo "<div style='width:49%;float:left'>Retrieval Ref Number :</div>";
+                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->RetrievalReferenceNumber."</div>";
+                    echo "</div>";
+
+//                    if($interswitch->Amount > 0){
+//                        //successful payment.
+//                        //then let me reduce the products respectively as its suppose to be
+//                        
+//                        //end of products reduction
+//                        $this->success = true;
+//                        $ack = "SUCCESSFUL TRANSACTION";
+//                        $this->paid_amount = intval($interswitch->Amount/100);
+//                    }
+                }
+                curl_close($ch);
+            }
+            die;
         }
         
         public function confirm(){
@@ -59,8 +162,7 @@ class Webpay_Controller extends Layout_Controller
                 $apprAmt = $_REQUEST['apprAmt'];
                 //echo "Gotten from WebPaypay: ".$txnref.", ".$payRef.", ".$retRef.", ".$cardNum.", ".$apprAmt;
                 $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
-                $url_call = "https://stageserv.interswitchng.com/test_paydirect/api/v1/".
-                    "gettransaction.json?productid=".$this->product_id."&transactionreference=".$txnref.
+                $url_call = $this->staging_url."gettransaction.json?productid=".$this->product_id."&transactionreference=".$txnref.
                         "&amount=".$this->session->get('webpay_total');
                 $headers = array(
                     'Hash: '.$hash, 
@@ -90,6 +192,9 @@ class Webpay_Controller extends Layout_Controller
                     $this->response_discription = $interswitch->ResponseDescription;
                     $this->PaymentReference = $interswitch->PaymentReference;
                     $this->CardNumber = $interswitch->CardNumber;
+                    if(isset($_SESSION['count'])){
+                        $this->sendInterswitchEmail($txnref, $interswitch->Amount, $interswitch);
+                    }
                     if($interswitch->Amount > 0){
                         //successful payment.
                         //then let me reduce the products respectively as its suppose to be
@@ -98,6 +203,36 @@ class Webpay_Controller extends Layout_Controller
                         $this->success = true;
                         $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
+                        //on successful transaction. empty the cart
+                        unset($_SESSION['count']);
+                        //var_dump($_SESSION);
+                        foreach($_SESSION as $key=>$value){
+                            if(true){
+                                
+                            $deal_id = $_SESSION[$key];
+                            //unset($_SESSION[$key]);
+                             $item_qty = $this->session->get('product_cart_qty'.$deal_id);
+                             unset($_SESSION['product_cart_qty'.$deal_id]);
+                             $product_size = "1";
+                               foreach($_SESSION as $key=>$value) {
+                                    if(($key=='product_size_qty'.$deal_id)){
+                                        unset($_SESSION[$key]);
+                                    }
+                                    if(($key=='product_quantity_qty'.$deal_id)){
+                                       unset($_SESSION[$key]);
+                                    }
+                                    if(($key=='store_credit_id'.$deal_id)){
+                                        $this->session->delete('product_size_qty'.$deal_id);
+                                        $this->session->delete('product_quantity_qty'.$deal_id);
+                                        $this->session->delete('product_color_qty'.$deal_id);
+                                        $this->session->delete('store_credit_period'.$deal_id);
+                                        $this->session->delete('product_cart_qty'.$deal_id);
+                                        $this->session->delete('product_cart_id'.$deal_id);
+                                        unset($_SESSION[$key]);
+                                    }
+                                }
+                            }
+                        }                      
                     }
                 }
                 curl_close($ch);
@@ -121,32 +256,32 @@ class Webpay_Controller extends Layout_Controller
         public function pay(){
             //var_dump($_SESSION);die;
 	    foreach($_SESSION as $key=>$value){
-            if($value && (is_string($value)) && ($key=='product_cart_id'.$value)){
-           
-            $deal_id = $_SESSION[$key];
-             $item_qty = $this->session->get('product_cart_qty'.$deal_id);
-             $product_size = "1";
-               foreach($_SESSION as $key=>$value) {
-                    if(($key=='product_size_qty'.$deal_id)){
-                        $product_size = $value;
+                if($value && (is_string($value)) && ($key=='product_cart_id'.$value)){
+
+                $deal_id = $_SESSION[$key];
+                 $item_qty = $this->session->get('product_cart_qty'.$deal_id);
+                 $product_size = "1";
+                   foreach($_SESSION as $key=>$value) {
+                        if(($key=='product_size_qty'.$deal_id)){
+                            $product_size = $value;
+                        }
+                        if(($key=='product_quantity_qty'.$deal_id)){
+                            $product_quantity = $value;
+                        }
+
                     }
-                    if(($key=='product_quantity_qty'.$deal_id)){
-                        $product_quantity = $value;
+
+                    $this->product_size_details = $this->webpay->product_size_details($deal_id, $product_size);
+
+                   $dbquantity=$this->product_size_details->current()->quantity;
+
+                    if($dbquantity < $item_qty){
+                        $this->session->set('product_quantity_qty'.$deal_id,$dbquantity);
+                        common::message(-1, $this->Lang['CHE_PRO_QTY']);
+                        url::redirect(PATH."cart.html");
                     }
-
-                }
-
-                $this->product_size_details = $this->webpay->product_size_details($deal_id, $product_size);
-
-               $dbquantity=$this->product_size_details->current()->quantity;
-
-                if($dbquantity < $item_qty){
-                    $this->session->set('product_quantity_qty'.$deal_id,$dbquantity);
-                    common::message(-1, $this->Lang['CHE_PRO_QTY']);
-                    url::redirect(PATH."cart.html");
                 }
             }
-        }
 
         
 /////
@@ -242,7 +377,7 @@ class Webpay_Controller extends Layout_Controller
                                 }
                         }
                         
-                        $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
+                        $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 7, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
                         //var_dump($transaction);
                         $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
                         //echo "here"; die;
@@ -282,7 +417,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->template->title = "Interswitch Payment System";
                 $this->template->content = new View("themes/".THEME_NAME."/interswitch/payment_process");                     
                     //echo $this->txn_ref; die;
-	            $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+	            //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
 				
 
 	               // url::redirect(PATH.'transaction.html');
@@ -297,6 +432,21 @@ class Webpay_Controller extends Layout_Controller
  
         }
         
+        public function sendInterswitchEmail($tranx_id, $amount, $response){
+            $from = CONTACT_EMAIL;
+            $message = new View("themes/".THEME_NAME."/payment_mail_interswitch");
+            $message->interswitch = $response;
+            $message->id = $tranx_id;
+            $message->amount = $amount;
+            $user_details = $this->webpay->get_purchased_user_details();
+            foreach($user_details as $U){
+                if(EMAIL_TYPE==2) {
+                    email::smtp($from,$U->email, "[Zmart] Payment Notification" ,$message);
+                }else{
+                    email::sendgrid($from,$U->email, "[Zmart] Payment Notification" ,$message);
+                }           
+            }
+        }
         
 	/** DOCAPTURED PAYMENT, UPDATED AMOUNT TO REFERED USERS, POST PURCHASE DEALS TO FACEBOOK WALL and SEND MAIL **/
 
@@ -323,13 +473,13 @@ class Webpay_Controller extends Layout_Controller
 		if(EMAIL_TYPE==2) {
 			
 			
-				email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+				//email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 				
 				
 		}else{
 			
 						
-		                email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+		                //email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
 		$user_details = $this->webpay->get_purchased_user_details();
@@ -378,11 +528,11 @@ class Webpay_Controller extends Layout_Controller
                 $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
                  if(EMAIL_TYPE==2) {
-			//email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			//email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			//email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
 
             } else {
@@ -397,11 +547,11 @@ class Webpay_Controller extends Layout_Controller
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
 
                 if(EMAIL_TYPE==2) {
-			//email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			//email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
+			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
+			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
             }
          }

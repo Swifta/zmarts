@@ -24,10 +24,47 @@ class Webpay_Model extends Model
             //return json_encode($ret);
         }
         
+        public function getTotalAmountOnTransaction($transaction_id=""){
+            $total = 0;
+            $result = $this->db->from("transaction")
+                        ->where(array("transaction_id"=>$transaction_id))->get();
+                //var_dump(count($result));
+            if(count($result) > 0){
+                foreach($result as $row){
+                    $total+=$row->amount;
+                }
+            }
+            return intval($total*100);
+        }
+        
+        public function getTransactionDetails($transaction_id=""){
+            $ret = array();
+            $result = $this->db->from("transaction")
+                        ->where(array("transaction_id"=>$transaction_id))->get();
+                //var_dump(count($result));
+            if(count($result) > 0){
+                foreach($result as $row){
+                    $ret['status'] = $row->payment_status;
+                    $ret['reason'] = $row->pending_reason;
+                    $ret['type'] = $row->transaction_type;
+                }
+            }
+            return json_encode($ret);
+        }
+        
+        public function updateTransaction($transaction_id="", $status="", $ResponseCode="", 
+                $ResponseDescription="", $PaymentReference="", $CardNumber=""){
+            $this->db->update("transaction", array("payment_status" => $status, "reason_code" => $ResponseCode, 
+                "pending_reason" => $ResponseDescription, "captured_transaction_id" => $PaymentReference, 
+                "captured_ack" => $CardNumber, "type" => 7), 
+                    array("transaction_id" => $transaction_id));
+        }
+
         public function get_split_marchant_xml($transaction_id, $total_amount_shopped){
             $ret = "";
             $is_above_2k = false;
             $tmp_2k = 0.015 * $total_amount_shopped;
+            //echo $total_amount_shopped." against ".$tmp_2k;die;
             if($tmp_2k > 2000){
                 $is_above_2k = true;
 //                if(is_float($tmp_2k)){
@@ -76,8 +113,9 @@ class Webpay_Model extends Model
                         //$item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
                     }
                     else{
-                        $weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
-                        $transaction_fee = $weight_fraction_of_sales * 2000; //from 2,000naira. whats my transaction fee here           
+                        //$weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
+                        $weight_fraction_of_sales = ($temp_item_amt / ($total_amount_shopped*100));
+                        $transaction_fee = round($weight_fraction_of_sales * (2000*100), 2); //from 2,000naira. whats my transaction fee here           
                     }
                     if(strpos($transaction_fee, ".")){
                         $op = explode(".", $transaction_fee);

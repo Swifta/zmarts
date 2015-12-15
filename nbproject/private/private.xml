@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/alaba/store_detail.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/modules/seller_registration/controllers/seller.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/seller/seller_signup_step3.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/modules/alaba/controllers/alaba.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/alaba/header.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/seller/seller_signup_step4.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/manufacturing1/store_detail.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/merchant_signin_mail_template.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/vendor/language/frontend_language/english.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

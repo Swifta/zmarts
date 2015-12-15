@@ -47,7 +47,7 @@
         </div>
         <div class="col-lg-3 contact col-sm-6">
         <?php if($this->load_map){?> 
-        		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
  				<script type="text/javascript">
  <?php if($this->load_map){ ?>
  $(document).ready(function(e) {

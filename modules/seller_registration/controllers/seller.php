@@ -468,9 +468,9 @@ $admin_message	= '
 										
 										/*$merchant_message = "<p><b>".$this->Lang['MERCHANT_ADD_SUC']." </b> </p><p></p><p> ".$this->Lang['YOR_EMAIL']." : ".$this->session->get('memail')."</p> <p>".$this->Lang['YOUR_PASS'].": ".$password."</p> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['CITY']."   : ".$city_name." <p/><p>".$this->Lang['COUNTRY']."   : ".$country_name." <p/><p>".$this->Lang['ZIP_CODE']."   : ".$post->zipcode." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><p>".$this->Lang['STORE_URL']." : <a href=".PATH.url::title($post->storename)."/>".PATH.url::title($post->storename)."/ </p>";*/
 										
-										$merchant_message = "<p><b> Congratulations! </b> </p><p> Your Merchant account on <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a> has been successfully created!</p><p> Please await approval which will contain your login and setup details.</p><p></p>";
+										$merchant_message = "<p><b> Congratulations! </b> </p><p> Your Merchant account on <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a> has been successfully created!</p><p> Please await approval which will contain your login and setup details.</p><p></p><a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a>";
 										
-										$merchant_message = "<p><b> Congratulations! </b> </p><p>Your merchant account has been created successfully! Please await approval from the team at <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a>. The approval will also contain your merchant account access information on the platform.</p>
+										$merchant_message = "<p><b> Congratulations! </b> </p><p>You have successfully registered your merchant account.You will receive an email shortly containing approval of your registration as well as your access details on the platform.</p>
 										<p  >Merchant Account Email: <a style=\"color: #666; text-decoration: none;\">".$this->session->get('memail')."</a></p>";
 
 										

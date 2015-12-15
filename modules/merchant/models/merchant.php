@@ -4,10 +4,17 @@ class Merchant_Model extends Model
 	public function __construct()
 	{
 		parent::__construct();
+		
 		$this->db = new Database();
+		
+		
 		$this->session = Session::instance();
 		$this->user_id = $this->session->get("user_id");
 		$this->user_id1 = $this->session->get("user_id1");
+		
+		
+		
+		
 	}
 
         /** MERCHANT DASHBORAD DATA **/
@@ -2575,11 +2582,62 @@ class Merchant_Model extends Model
 			$userid = $result->current()->user_id;
 			$name = $result->current()->firstname;
 			$email = $result->current()->email;
-			$this->db->update("users",array("password" => md5($password) ), array("user_id" => $userid));
+			$this->db->update("users",array("password" => md5($password), "last_login" => 0 ), array("user_id" => $userid));
 			return 1;
 		}
 		else{
 			return 0;
+		}
+	}
+	
+	public function reset_password($email = "", $password = "")
+	{
+		$time = time();
+		$email = trim($email);
+		$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 3,"user_status" => 1))->limit(1)->get();
+		if(count($result) > 0){
+			
+			$userid = $result->current()->user_id;
+			$name = $result->current()->firstname;
+			$email = $result->current()->email;
+			$this->db->update("users",array("password" => md5($password) , "last_login" => $time), array("user_id" => $userid));
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	public function get_current_password($email){
+		
+		$email = trim($email);
+		$result = $this->db->query("select password from users where email='$email' and user_status=1 and user_type = 3");
+		if(count($result) > 0){
+			return $result->current()->password;
+		}else{
+			return NULL;
+		}
+		
+		
+	}
+	
+	public function get_last_login($email = "")
+	{
+
+		$email = trim($email);
+		$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
+		if(count($result) > 0){
+			
+			$last_login = $result->current()->last_login;
+			if($last_login == "0"){
+				return 0;
+			}else{
+				return 1;
+			}
+			
+		}
+		else{
+			return -1;
 		}
 	}
 	
@@ -3158,7 +3216,7 @@ class Merchant_Model extends Model
 	}
 	
 	public function get_merchant_attribute_data_list($store_id=""){
-		  $result = $this->db->select("merchant_attribute.*","sector.sector_name")->from("merchant_attribute")->join("stores","stores.store_id","merchant_attribute.storeid")->join("sector","sector.sector_id","stores.store_sector_id")->where(array("merchant_attribute.storeid"=>$store_id))->get();
+		  $result = $this->db->select("merchant_attribute.*","sector.sector_name")->from("merchant_attribute")->join("stores","stores.store_id","merchant_attribute.storeid")->join("sector","sector.sector_id","stores.store_sector_id")->where(array("merchant_attribute.storeid"=>$store_id))->limit(1)->get();
 		 return $result;
 	}
 	

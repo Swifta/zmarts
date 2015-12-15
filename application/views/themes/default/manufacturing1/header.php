@@ -237,7 +237,7 @@ $srch = $this->Lang['SRCH_STR'];
                 <div class="merchant_log text-center" style="margin:1px auto;">
                     <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
                    <ul>
-                       <li><p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p></li>
+                       <li><p>Customer </p></li>
 <!--                           <li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
                            <li>|</li>
                            <li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>-->

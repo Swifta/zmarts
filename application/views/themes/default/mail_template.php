@@ -56,18 +56,21 @@
                                
                                
                                 <?php if(isset($this->signup)) { ?>
-			        <?php echo $this->Lang['YOUR']; ?> <?php echo SITENAME; ?> <?php echo $this->Lang['REG_COMP_SUCCESS']; 
-					?><p><?php echo $this->Lang['SIGN_CRED'].": "; ?></p>
+			        <!--<?php echo $this->Lang['YOUR']; ?> <?php echo SITENAME; ?> <?php echo $this->Lang['REG_COMP_SUCCESS']; 
+					?>-->
+                    <p>You have successfully registered on <?php echo SITENAME; ?>.</p>
+                    <p>Please find your login details below: </p>
 			        <?php } elseif(isset($this->admin_signup)) { ?>
 			        <?php echo $this->Lang['REG_ADMIN']; ?>
 			        <?php } elseif(isset($this->forgot)) { ?>
-			        <?php echo $this->Lang['YOUR_PASS_RE_SUCC']; ?>
+			        <!--<?php echo $this->Lang['YOUR_PASS_RE_SUCC']; ?>-->
+                    Your password has been successfully reset.
 			        <?php } elseif(isset($this->subscribe_city)) { ?>
 			        <?php echo $this->Lang['SUCC_SUB']; ?> <?php echo SITENAME; ?>
 			        <?php }elseif(isset($this->moderator)){ ?>
 			        <?php echo $this->Lang['MER_MOD_REGISTRATION'];?>
 			        <?php }else if(isset($this->store_admin)){?>
-			       		 Store Administrator Account created successfully.
+			       		 You have successfully created a new Store Admin Account.
 			        <?php }?>
                                 </td>
                                 </tr>
@@ -92,7 +95,7 @@
                                          <?php if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) {
 											 
 										 }?>
-                                        <?php echo $this->Lang['E_Y_PASS']; ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->password)) { echo $this->password; } ?></a>
+                                        <?php if(isset($this->forgot)){echo "Your new password";}else{echo $this->Lang['E_Y_PASS'];};  ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->password)) { echo $this->password; echo "<p>You can change this password to something more memorable in the Settings area of your account.</p>"; } ?></a>
                                            <?php } else { ?>
                                            
                                            <?php } ?>
@@ -166,3 +169,4 @@
         </table>
     </body>
 </html>
+

@@ -17,7 +17,7 @@ $this->UserName = $this->session->get("UserName");
   <td colspan="8" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear <?php echo trim($this->UserName);?>,</strong></td>
 </tr>
 <tr style="text-align:left; margin:0 0 10px; background:#e2e2e2;" >
-  <td colspan="8"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> Thanks for your order on <a style="text-decoration:none" href="<?php echo PATH; ?>"><?php echo SITENAME; ?></a>. This email is confirmation that we have received your order of the details below. Kindly await shipping updates. </td>
+  <td colspan="8"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> Thank you for buying on <a style="text-decoration:none" href="<?php echo PATH; ?>"><?php echo SITENAME; ?></a>. This transaction alert has been sent to your merchant with the details of your order. Kindly confirm that your shipping address listed below is accurate. </td>
 </tr>
 <tr>
   <td>&nbsp;</td>
@@ -46,7 +46,7 @@ $this->UserName = $this->session->get("UserName");
 <td colspan="8">
   <table width="100%" cellpadding="0" align="center" cellspacing="0" border="0" bgcolor="#ffffff">
     <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-      <td colspan="8" width="800" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Transaction Details</span></td
+      <td colspan="8" width="800" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Shipping Details</span></td
               >
     </tr>
     <tr>
@@ -76,7 +76,7 @@ $this->UserName = $this->session->get("UserName");
 </tr>
 
 <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-          <td colspan="8" width="800" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Ordered Item(s) Details</span></td
+          <td colspan="8" width="800" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">This shipment contains the following item(s)</span></td
               >
         </tr>
        
@@ -319,5 +319,5 @@ $this->UserName = $this->session->get("UserName");
 </body>
 </html>
 
-<?php //exit; ?>
+
 

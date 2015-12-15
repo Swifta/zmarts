@@ -6,7 +6,7 @@
 
 	<!-- Dependencies: JQuery and GMaps API should be loaded first -->
 	
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 	<!-- CSS and JS for our code -->
 	<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>css/map/jquery-gmaps-latlon-picker.css"/>

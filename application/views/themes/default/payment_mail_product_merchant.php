@@ -273,4 +273,3 @@ $this->UserName = $this->session->get("UserName");
 </body>
 </html>
 
-<?php //exit; ?>

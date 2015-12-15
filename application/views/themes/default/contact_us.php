@@ -87,7 +87,7 @@ $(document).ready(function(){
                                         <div class="contactus_map wloader_parent" id="map_main" style="width:318px; height:210px;">
                                             <i class="wloader_img">&nbsp;</i>
                                         </div>
-                                        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                                        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
                                             <script type="text/javascript">
                                                     var latlng = new google.maps.LatLng(<?php echo LATITUDE;?>,<?php echo LONGITUDE;?>);
                                                     var myOptions = {

@@ -603,7 +603,7 @@ In no event will Zenith Bank Plc be liable for any loss or damage including with
 </p>
 
 <h style="color:red;">Force majeure </h>
-<p style="color:black;">Notwithstanding anything to the contrary herein contained, neither Party shall be liable or responsible for failure to perform or delay in performance of any of its obligations under this Agreement if such failure or delay is due to or attributable to any act of God, war, warlike conditions, hostilities, riots, civil commotion, system downtime, glitches, malfunction, strikes or any other cause or circumstance of whatsoever nature beyond the reasonable control of either Party. Such Force Majeure situation shall be notified to the other Party within 15 business days from the occurrence of the same. If such situation continues for a period of 1 month the other party shall be entitled to terminate the Agreement on the expiry of the said period after duly intimating the same to the other Party;</p><br><br>
+<p style="color:black;">Notwithstanding anything to the contrary herein contained, neither Party shall be liable or responsible for failure to perform or delay in performance of any of its obligations under this Agreement if such failure or delay is due to or attributable to any act of God, war, warlike conditions, hostilities, riots, civil commotion, system downtime, glitches, malfunction, strikes or any other cause or circumstance of whatsoever nature beyond the reasonable control of either Party. Such Force Majeure situation shall be notified to the other Party within 15 business days from the occurrence of the same. If such situation continues for a period of 1 month the other party shall be entitled to terminate the Agreement on the expiry of the said period after duly intimating the same to the other Party;</p><br><br>
 
 <h style="color:red;">Severability<h>
 <p style="color:black;">If any provision of this Agreement is held by a court of law to be unlawful, void or unenforceable, such provision shall to the extent required be severed from this Agreement and rendered ineffective as far as possible without modifying the remaining provision of this Agreement and without having any effect whatsoever on the validity or enforceability of this Agreement. </p>  <br><br>
@@ -625,11 +625,11 @@ COMMENCEMENT AND TENURE This Agreement shall take effect from the date hereof an
 </p>
 <h style="red;">Nigerian law and general provisions</h>
 
-<p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
+<p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
 
 Zenith Bank PLC and The Merchant hereby expressly acknowledge and agree that regarding the relationship between the parties created by this Agreement:
 
-The parties are not, and shall not be deemed, joint ventures or partners;
+The parties are not, and shall not be deemed, joint ventures or partners;
 
 The Merchant is not, and shall not be deemed, an agent of Zenith Bank PLC.
 
@@ -861,7 +861,7 @@ function atleast_onecheckbox(e) {
     }
 
     function InvalidInputHelper(input, options) {
-        input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
+        //input.setCustomValidity(valOrFunction(options.defaultText, window, [input]));
 
         function changeOrInput() {
             if (input.value == "") {

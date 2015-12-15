@@ -13,7 +13,8 @@
   <td colspan="8" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear <?php echo $this->merchant_name; ?>, </strong></td>
 </tr>
 <tr style="text-align:left; margin:0 0 20px; background:#e2e2e2;" >
-  <td colspan="8"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> You have received a store credit request on <a style="text-decoration:none; color:666" href="<?php echo PATH; ?>"><?php echo SITENAME; ?></a>. Kindly review and take the necessary steps to approve/disapprove.. </td>
+  <td colspan="8"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> You have received a request for a credit purchase.</a>. Kindly review and approve or deny the request.
+ </td>
 </tr>
 <tr>
   <td>&nbsp;</td>

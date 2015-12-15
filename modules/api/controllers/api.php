@@ -3736,7 +3736,7 @@ class Api_Controller extends Layout_Controller
 	{
 			if($this->product_setting){
 			  
-			  $url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&sensor=false";
+			  $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&sensor=false";
 			    $data = file_get_contents($url); 
 			        $address = json_decode($data);
 			        $addr = "";
@@ -3807,7 +3807,7 @@ class Api_Controller extends Layout_Controller
 	public function geo_deals($lang = "", $latitude = "",$longitude = "")
 	{
 			if($this->deal_setting){
-				$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&sensor=false";
+				$url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&sensor=false";
 			    $data = file_get_contents($url); 
 			        $address = json_decode($data); 
 			        $addr = "";
@@ -3880,7 +3880,7 @@ class Api_Controller extends Layout_Controller
 	public function geo_auctions($lang = "",$latitude = "",$longitude = "")
 	{
 			if($this->auction_setting) {
-			    $data = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$latitude.",".$longitude."&sensor=false"); 
+			    $data = file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latitude.",".$longitude."&sensor=false"); 
 			              
 			        $address = json_decode($data);
 			        $addr = "";
