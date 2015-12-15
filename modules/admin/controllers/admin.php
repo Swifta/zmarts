@@ -54,7 +54,7 @@ class Admin_Controller extends website_Controller
 		}
 
 		if($_POST){
-			$email = $this->input->post("email");
+			$email = trim($this->input->post("email"));
 			$password = $this->input->post("password");
 			if($email){
 				$status = $this->admin->admin_login($email, $password);

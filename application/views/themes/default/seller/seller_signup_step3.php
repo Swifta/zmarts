@@ -444,9 +444,9 @@ input[type=text],input[type=password]
                                         <br/>
                                         
                                         <div class="">
-                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>" disabled="disabled" required="required"  value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
+                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>" required="required"  value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>" readonly/>
                                       
-                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>" disabled="disabled"  value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" />
+                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>" value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" readonly/>
                                           <em id="id_err_latitude"><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
                                         <em id="id_err_longitude"><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
                                         </div>
@@ -480,7 +480,7 @@ input[type=text],input[type=password]
                              <br/>
                             
                                  <div class="">
-                                     <input style="margin-top:20px;" type="file" name="image" id="image" class="required" tabindex="12" required />
+                                     <input style="margin-top:20px;" type="file" name="image" id="image" class="required" tabindex="12" />
 								
 									<em id="id_err_image"><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
                                  <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>

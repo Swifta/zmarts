@@ -1782,7 +1782,7 @@ class Admin_merchant_Controller extends website_Controller {
 	
 	public function check_store_admin_with_supplier()
 	{
-		if(($this->input->post("store_email"))!= $this->input->post("email")){
+		if(($this->input->post("store_email"))!= trim($this->input->post("email"))){
 			return 1;
 		}
 		return 0;
@@ -1814,7 +1814,7 @@ class Admin_merchant_Controller extends website_Controller {
 		
 		foreach($merchant_email as $e)
 		{
-		if(($this->input->post("email"))!= $e->email){
+		if((trim($this->input->post("email")))!= $e->email){
 			return 1;
 		}
 		return 0;

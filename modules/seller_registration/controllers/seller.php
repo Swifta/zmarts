@@ -495,24 +495,14 @@ $admin_message	= '
 										
 										
 										
-										/*try{
 										if($_FILES['image']['name']){
-											
-										
 											$filename = upload::save('image'); 						
 											$IMG_NAME = $status['image'].'.png';	
 											common::image($filename, STORE_DETAIL_WIDTH, STORE_DETAIL_HEIGHT, DOCROOT.'images/merchant/600_370/'.$IMG_NAME);
 											common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
 											unlink($filename);
-											
-											
-											
 										}
-										
-										}catch(Exception $e){
-											
-										}
-										*/
+
 										
 										
 										

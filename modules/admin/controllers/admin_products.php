@@ -708,7 +708,7 @@ class Admin_products_Controller extends website_Controller
   		$this->userPost = $this->input->post();
 		$users = $this->input->post("users");
 		$fname = $this->input->post("firstname");
-		$email = $this->input->post("email");
+		$email = trim($this->input->post("email"));
 		$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('users', 'required')
 						->add_rules('email','required')

@@ -86,7 +86,7 @@ class Payment_product_Controller extends Layout_Controller {
 		}
 		else{
 			if($_POST){
-				$email = $this->input->post("email");
+				$email = trim($this->input->post("email"));
 				$password = $this->input->post("password");
 				if(!$email || !$password){
 					 common::message(-1, $this->Lang["EMAIL_REQUIRED"]);

@@ -1666,7 +1666,7 @@ class Api_Controller extends Layout_Controller
 						->add_rules('city_id','required');
 			if($post->validate()){
                               
-				if(!valid::email($this->input->post("email"))){
+				if(!valid::email(trim($this->input->post("email")))){
 				        if($lang == "ar"){
 					$response = array("response" => array("httpCode" => 401 , "Message" => "البريد الإلكتروني غير صالحة" ));
 					} else {
