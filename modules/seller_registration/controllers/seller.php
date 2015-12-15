@@ -277,7 +277,7 @@ class Seller_Controller extends Layout_Controller {
 							//->add_rules('website','required'/*,'valid::url'*/)
 							->add_rules('latitude', 'required','chars[0-9.-]')
 							->add_rules('longitude', 'required','chars[0-9.-]')
-							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+							->add_rules('image', 'required', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							//->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 							->add_rules('username', 'required');
 							
