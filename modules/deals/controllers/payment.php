@@ -101,7 +101,7 @@ class Payment_Controller extends Layout_Controller {
 
 				$url_title = $this->input->post("url");
 				$deal_key = $this->input->post("dealid");
-				$email = $this->input->post("email");
+				$email = trim($this->input->post("email"));
 				$password = $this->input->post("password");
 				if(!$email || !$password){
 					 common::message(-1,$this->Lang["EMAIL_REQUIRED"]);

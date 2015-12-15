@@ -49,7 +49,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			
 		
-			$email = $this->input->post("email");
+			$email = trim($this->input->post("email"));
 			$password = $this->input->post("password");
 			if($email){
 				
@@ -636,7 +636,7 @@ class Store_admin_Controller extends website_Controller
 						$this->userPost = $this->input->post();
 						$users = $this->input->post("users");
 						$fname = $this->input->post("firstname");
-						$email = $this->input->post("email");
+						$email = trim($this->input->post("email"));
 						$post = Validation::factory(array_merge($_POST,$_FILES))
 										->add_rules('users', 'required')
 										->add_rules('email','required')
@@ -1466,7 +1466,7 @@ class Store_admin_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$users = $this->input->post("users");
 			$fname = $this->input->post("firstname");
-			$email = $this->input->post("email");
+			$email = trim($this->input->post("email"));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -2132,7 +2132,7 @@ class Store_admin_Controller extends website_Controller
 	  		$this->userPost = $this->deal_deatils = $this->input->post();
 			$users = $this->input->post("users");
 			$fname = $this->input->post("firstname");
-			$email = $this->input->post("email");
+			$email = trim($this->input->post("email"));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -3028,7 +3028,7 @@ class Store_admin_Controller extends website_Controller
 				->add_rules('email', 'required','valid::email')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
-				$email = $this->input->post("email");
+				$email = trim($this->input->post("email"));
 				if(Captcha::valid($this->input->post('captcha'))){
 				        $password = text::random($type = 'alnum', $length = 10);
 					$status = $this->merchant->forgot_password($email,$password);
@@ -4439,12 +4439,12 @@ class Store_admin_Controller extends website_Controller
 	}
 	
 	public function check_store_admin(){
-		$exist = $this->merchant->exist_store_admin($this->input->post("email"));
+		$exist = $this->merchant->exist_store_admin(trim($this->input->post("email")));
 	    return ($exist == 0)?true:false;
 	}
 	
 	public function check_store_admin1(){
-		$exist = $this->merchant->exist_store_admin($this->input->post("email"),$this->input->post("store_admin_id"));
+		$exist = $this->merchant->exist_store_admin(trim($this->input->post("email")),$this->input->post("store_admin_id"));
 	    return ($exist == 0)?true:false;
 	}
 	

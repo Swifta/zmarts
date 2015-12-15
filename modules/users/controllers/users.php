@@ -547,7 +547,7 @@ class Users_Controller extends Layout_Controller {
 			$post = Validation::factory($_POST)
 					->add_rules('email', 'required','valid::email');
 			                        if($post->validate()){
-						$email = $this->input->post("email");
+						$email = trim($this->input->post("email"));
 						$status = $this->users->forgot_password($email);
 						if($status){
 						if($status == -2){

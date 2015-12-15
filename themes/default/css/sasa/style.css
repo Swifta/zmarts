@@ -110,12 +110,10 @@
 
 .thumbnails.swifta img {
 	
-/*	border: 4px solid #6E0505;
+	border: 4px solid #6E0505;
 	border-bottom: 51px solid #6E0505;
-	padding: 5px;*/
-        border: 2px solid #cccccc;
-	border-bottom: 26px solid #cccccc;
-	padding: 5px;*
+	padding: 5px;
+
 }
 
 ul.swifta.override.branch {
