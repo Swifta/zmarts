@@ -259,21 +259,13 @@ $srch = $this->Lang['SRCH_STR'];
 <div class="pull-right span4">
                 <div class="merchant_log text-center pull-left" style="margin:1px auto;">
              <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
-                    <?php if(empty($this->UserID)){?>
+                    
             <ul>
                 <li><p>Customer</p></li>
                     <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
             </ul>
-                    <?php  }else {?>
-                    <ul>
-                <li><p>Customer</p></li>
-                    <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
-				<li>|</li>
-				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
-            </ul>
-                   <?php }>
 	</div>
                  <ul class="nav topcart pull-right">
                     <li class="dropdown hover carticon "> <a href="<?php echo PATH; ?>cart.html"  title="<?php echo $this->Lang['CART']; ?>(<?php
