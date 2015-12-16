@@ -283,7 +283,7 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
-			<p>Customer<?//php echo $this->Lang['MERCHANT_ACC']; ?></p>
+			<p>Customer</p>
 			<ul>
 <!--				<li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
 				<li>|</li>
