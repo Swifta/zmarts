@@ -35,9 +35,9 @@ document.head.appendChild(imported);
 
 
 
-/*<script type="text/javascript" src="http://localhost/zmarts/themes/default/leo/js/megamenu.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/leo/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/leo/css3-mediaqueries.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/leo/js/fwslider.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/leo/js/jquery.easydropdown.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/toastr/jquery.jnotify.js"></script>*/
+/*<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/megamenu.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/fwslider.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/leo/js/jquery.easydropdown.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/toastr/jquery.jnotify.js"></script>*/
