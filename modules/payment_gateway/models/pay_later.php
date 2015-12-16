@@ -274,7 +274,7 @@ class Pay_later_Model extends Model
 			$imageDir1 = "images/user/barcode/";
 			$imagePath1 = $imageDir1.$coupon_code.".png";
                         //echo $url1; die;
-			$image11 = file_get_contents($url1);
+			$image11 = @file_get_contents($url1);
 			file_put_contents(DOCROOT.$imagePath1, $image11);
 		}
 		$amount=$amount+$ref_amount; // for rerfferal amount add
