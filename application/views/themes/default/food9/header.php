@@ -228,7 +228,7 @@ $this->language_List = str_replace(".php", "", $DL);
 			           echo "0";
 		           }
 		           ?>
-                            </span><?php echo $this->Lang['CART']; ?>(s)</a>
+                            </span><?php echo $this->Lang['CART']; ?></a>
 			</div>
                         <div class="cart_window_products1" ></div>
 

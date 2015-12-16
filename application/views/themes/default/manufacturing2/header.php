@@ -260,7 +260,7 @@ $srch = $this->Lang['SRCH_STR'];
 		           } else {
 			           echo "0";
 		           }
-		           ?></strong> <?php echo $this->Lang['CART']; ?>(s)</li>
+		           ?></strong> <?php echo $this->Lang['CART']; ?></li>
                     </ul>
                 </div>
             </div>

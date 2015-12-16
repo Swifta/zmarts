@@ -3905,7 +3905,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-				->add_rules('email', 'required','valid::email')
+				->add_rules('email', 'required')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
 				$email = $this->input->post("email");
