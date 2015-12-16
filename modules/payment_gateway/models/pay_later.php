@@ -273,6 +273,7 @@ class Pay_later_Model extends Model
 			$url1= PATH."modules/barcode_generator/barcode_generator.php?ccode=".$coupon_code;
 			$imageDir1 = "images/user/barcode/";
 			$imagePath1 = $imageDir1.$coupon_code.".png";
+                        //echo $url1; die;
 			$image11 = file_get_contents($url1);
 			file_put_contents(DOCROOT.$imagePath1, $image11);
 		}

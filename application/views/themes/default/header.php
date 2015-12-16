@@ -301,7 +301,7 @@ $this->language_List = str_replace(".php", "", $DL);
 		           } else {
 			           echo "0";
 		           }
-		           ?></span><?php echo $this->Lang['CART']; ?>(s)</a>
+		           ?></span><?php echo $this->Lang['CART']; ?></a>
                                             <div class="cart_window_products1" ></div>
 		                        </div>
 	                        </div>
@@ -798,7 +798,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 		           } else {
 			           echo "0";
 		           }
-		           ?></span><?php echo $this->Lang['CART']; ?>(s)</a>
+		           ?></span><?php echo $this->Lang['CART']; ?></a>
             <div class="cart_window_products1" ></div>
         </div>
         </div>

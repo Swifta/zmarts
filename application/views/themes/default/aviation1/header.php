@@ -280,7 +280,7 @@ $srch = $this->Lang['SRCH_STR'];
 		           } else {
 			           echo "0";
 		           }
-		           ?></span><?php echo $this->Lang['CART']; ?>(s)</a>
+		           ?></span><?php echo $this->Lang['CART']; ?></a>
 <!--                        <ul class="dropdown-menu topcartopen ">
                             the cart
                         </ul>-->

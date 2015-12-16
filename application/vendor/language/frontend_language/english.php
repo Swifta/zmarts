@@ -1842,7 +1842,7 @@ $content_text = array(
     
 "PROCEED_GLOBAL_PAY" => "Proceed to Payment via Interswitch Gateway", 
 
-"PAY_NOW" => "Pay Now",
+"PAY_NOW" => "Pay Online",
     
 "DIRECT_DEBIT" =>"Direct Debit",
     
