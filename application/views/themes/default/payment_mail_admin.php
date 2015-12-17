@@ -104,21 +104,21 @@ $R = $this->result_mail;
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP']; ?>  :  <?php echo $R->ip; ?></td>
+                                        <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP']; ?>  :  <?php if(isset($R->ip)){echo $R->ip;} ?></td>
                                     </tr>
-                                    <?php if($R->ip_city_name != ""){ ?>
+                                    <?php if(isset($R->ip_city_name)){ ?>
                                      <tr height="10">
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_CITY']; ?>  :   <?php echo $R->ip_city_name; ?></td>
+                                        <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_CITY']; ?>  :   <?php if(isset($R->ip_city_name)){echo $R->ip_city_name;} ?></td>
                                     </tr>
                                     <?php } ?>
                                      <tr height="10">
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_COUNTRY']; ?>  :   <?php echo $R->ip_country_name; ?></td>
+                                        <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_COUNTRY']; ?>  :   <?php if(isset($R->ip_country_name)){echo $R->ip_country_name;} ?></td>
                                     </tr>                               
                                     <tr height="25">
                                         <td></td>
