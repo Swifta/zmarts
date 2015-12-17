@@ -277,15 +277,25 @@ $this->language_List = str_replace(".php", "", $DL);
                         </form>
                         </div>
                         </div>
-                        <div class="merchant_log">
-						<p>Customer</p>
+                         <div class="merchant_log">
+             <?php if(empty($this->UserID)){?>
+			<p>Customer</p>
 			<ul>
-				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+
+                        <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
-			</ul>
-                        
-                        </div>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+                        </ul>
+		<?php  }else {?>
+                       
+			<ul style="display: none;">
+
+                        <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+                        </ul>
+                           <?php  } ?>
+		</div>
                         <?php if ($this->product_setting) { ?>
 	                        <div class="add_cart">
 		                        <div class="cart_mid" id="cart_window1">
@@ -775,13 +785,23 @@ $srch = $this->Lang['SRCH_DEAL'];
         </div>
         </div>
          <div class="merchant_log">
+             <?php if(empty($this->UserID)){?>
 			<p>Customer</p>
 			<ul>
-				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+
+                        <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
-			</ul>
-		
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+                        </ul>
+		<?php  }else {?>
+                       
+			<ul style="display: none;">
+
+                        <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+			<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+                        </ul>
+                           <?php  } ?>
 		</div>
         <?php if ($this->product_setting) { ?>
         <div class="add_cart">

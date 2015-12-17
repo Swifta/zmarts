@@ -241,6 +241,7 @@ $this->language_List = str_replace(".php", "", $DL);
 							<?php ?></a>
                                                       <div class="col-lg-3 col-md-3 col-sm-3 t_align_r t_xs_align_c m_xs_bottom_15 pull-right" style="margin-top:30px;">
 									<div class="merchant_log">
+                                                                             <?php if(empty($this->UserID)){?>
 			<p>Customer </p>
 			<ul>
                              <ul>
@@ -248,6 +249,9 @@ $this->language_List = str_replace(".php", "", $DL);
 				<li>|</li>
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
 			</ul>
+                            <?php  }else {?>
+                        
+                         <?php  } ?>
 <!--			<li><a   href="<?//php echo PATH . 'merchant-signup-login.html'; ?>"Zenith Offer><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
 				
                            

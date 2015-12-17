@@ -104,6 +104,7 @@ $this->language_List = str_replace(".php", "", $DL);
 		</div>
                 
 		<div class="ten columns float-rt" id="merchant_login">
+                       <?php if(empty($this->UserID)){?>
 			<ul class="top-bar-menu text-right"  style="float:right;">
                             <li><strong>Customer  ::</strong></li>
 <!--                    <li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
@@ -114,6 +115,9 @@ $this->language_List = str_replace(".php", "", $DL);
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
 			
                         </ul>
+                    <?php  }else {?>
+                        
+                         <?php  } ?>
 		</div>
 
 	</div>

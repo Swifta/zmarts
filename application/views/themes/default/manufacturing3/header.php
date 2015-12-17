@@ -206,8 +206,10 @@ $this->language_List = str_replace(".php", "", $DL);
 							<div class="col-lg-4 col-md-4 col-sm-3 t_align_r t_xs_align_c">
 								<ul class="horizontal_list clearfix d_inline_b t_align_l f_size_small site_settings type_2">
 									<li class="container3d relative">
-										<a role="button" href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>" class="color_dark" id="lang_button"><img class="d_inline_middle m_right_10" alt="">Refer Friends. Get N 2000*</a>
-<!--										<ul class="dropdown_list type_2 top_arrow color_light">
+                                                                           <a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a>
+<!--										
+<a role="button" href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>" class="color_dark" id="lang_button"><img class="d_inline_middle m_right_10" alt="">Refer Friends. Get N 2000*</a>
+										<ul class="dropdown_list type_2 top_arrow color_light">
 											<li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_en.jpg" alt="">English</a></li>
 											<li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_fr.jpg" alt="">French</a></li>
 											<li><a href="#" class="tr_delay_hover color_light"><img class="d_inline_middle" src="images/flag_g.jpg" alt="">German</a></li>
@@ -238,7 +240,8 @@ $this->language_List = str_replace(".php", "", $DL);
 							<?php ?></a>
                                                       <div class="col-lg-3 col-md-3 col-sm-3 t_align_r t_xs_align_c m_xs_bottom_15 pull-right" style="margin-top:30px;">
 									<div class="merchant_log">
-			<p>Customer </p>
+			 <?php if(empty($this->UserID)){?>
+                                                                            <p>Customer </p>
 			<ul>
                              <ul>
 				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
@@ -251,7 +254,8 @@ $this->language_List = str_replace(".php", "", $DL);
 				<li>|</li>
 				<li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>
 			--></ul>
-		
+		<?php  }else {?>
+                                                                            <?php  } ?>
 		</div>	
 								</div>
                                                     

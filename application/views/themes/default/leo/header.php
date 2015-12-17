@@ -151,6 +151,7 @@
 			</div>
             
                    <div class="box swifta">
+                         <?php if(empty($this->UserID)){?>
    				        <select tabindex="4" class="dropdown">
 							<option value="" class="label" >Customer</option>
 							<option value="1"><a  href="javascript:show_register();" title="Customer Signup">Register</a></option>
@@ -159,6 +160,8 @@
 				
 
 						</select>
+                       <?php  }else {}?>
+                       
    				    </div>
                    
                     
@@ -219,7 +222,7 @@
             <div class="logo">
                 <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
  <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
-	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+	     <?php if(file_exists(PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png')){?> 	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>      <?php }else{ ?>         <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/>      <?php } ?>
 	
 <?php /* <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/> */ ?></a>
 <?php } } ?>

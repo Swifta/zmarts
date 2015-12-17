@@ -165,7 +165,7 @@ if ($lan != LANGUAGE) {
 <h1>
 	<?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
  <a href="<?php echo PATH.$stores->store_url_title.'/';?>"  title = "<?php echo $stores->store_name; ?>">
-	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+	     <?php if(file_exists(PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png')){?> 	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>      <?php }else{ ?>         <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/>      <?php } ?>
 
 <?php /* <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/> */ ?></a>
   <?php } } ?>
@@ -294,17 +294,25 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
+                                                                             <?php if(empty($this->UserID)){?>
 			<p>Customer </p>
 			<ul>
-                            <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
-			    <li>|</li>
-			    <li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
-<!--				<li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
+                             <ul>
+				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
-				<li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>-->
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
 			</ul>
+                            <?php  }else {?>
+                        
+                         <?php  } ?>
+<!--			<li><a   href="<?//php echo PATH . 'merchant-signup-login.html'; ?>"Zenith Offer><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
+				
+                           
+				<li>|</li>
+				<li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>
+			--></ul>
 		
-		</div>
+		</div>	
         <?php if ($this->product_setting) { ?>
         <div class="add_cart">
         <div class="cart_mid" id="cart_window">

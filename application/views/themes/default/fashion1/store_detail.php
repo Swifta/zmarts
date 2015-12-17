@@ -93,7 +93,7 @@ if(count($this->merchant_personalised_details)>0) {
                     if (file_exists(DOCROOT . 'images/merchant/banner/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png')) { 
                             $banner_link="";
 
-                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="" || $m->banner_4_link !="") { 
+                            if($m->banner_1_link !="" || $m->banner_2_link !="" || $m->banner_3_link !="") { 
                                 $banner_check = 1;
                                 if($i==1) { 
                                     $banner_link = $m->banner_1_link; 
@@ -164,29 +164,29 @@ if(count($this->merchant_personalised_details)>0) {
 <!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
 									</section>
 								</li>
-                                                                <li>
+<!--                                                                <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-3.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-3.jpg">
+									<img src="<?php //echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-3.jpg" alt="<?php //echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php //echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-3.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
 										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b><br></b></div>
 										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20">$<b>15.00</b></div>
-<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
+										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>
 									</section>
-								</li>
-                                                                 <li>
+								</li>-->
+<!--                                                                 <li>
                                                                     
-									<img src="<?php echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-4.jpg" alt="<?php echo $this->Lang['LOGO']; ?>" title = "<?php echo $banner_link; ?>" data-custom-thumb="<?php echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-4.jpg">
+									<img src="<?php //echo PATH; ?>bootstrap/themes/images/fashion1/banners/banner-4.jpg" alt="<?php //echo $this->Lang['LOGO']; ?>" title = "<?php //echo $banner_link; ?>" data-custom-thumb="<?php //echo PATH; ?>bootstrap/themes/images/healthcare2/banners/banner-4.jpg">
 									<section class="slide_caption t_align_c d_xs_none">
 										<div class="f_size_large color_light tt_uppercase slider_title_3 m_bottom_10"></div>
 										<hr class="slider_divider d_inline_b m_bottom_10">
 										<div class="color_light slider_title_4 tt_uppercase t_align_c m_bottom_45 m_md_bottom_20"><b>br></b></div>
 										<div class="color_light slider_title_2 m_bottom_45 m_sm_bottom_20"><b></b></div>
-<!--										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>-->
+										<a href="#" role="button" class="d_sm_inline_b button_type_4 bg_scheme_color color_light r_corners tt_uppercase tr_all_hover"></a>
 									</section>
 								</li>
-                                                               
+                                                               -->
                                                                 <?php
 }
 ?>
