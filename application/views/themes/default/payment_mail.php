@@ -78,7 +78,9 @@ $R = $this->result_mail;
                                         <td></td>
                                     </tr>
                                     <tr>
+                                        <?php if(isset($R->ip_country_name)){ ?>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_COUNTRY']; ?>  :   <?php echo $R->ip_country_name; ?></td>
+                                        <?php } ?>
                                     </tr>
                                         
                                     <tr <?php if(isset($this->set_pay_later) && $this->set_pay_later==1){?> height="10" <?php }else{?> height="25" <?php }?>>
