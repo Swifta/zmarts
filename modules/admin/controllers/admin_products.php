@@ -41,7 +41,8 @@ class Admin_products_Controller extends website_Controller
 							->add_rules('stores','required')
 							->add_rules('color_val','required')
 							->add_rules('users', 'required')
-							->add_rules('delivery_days','required');
+							->add_rules('delivery_days','required')
+							->add_rules('Delivery_value', array($this, 'check_return_policy'));
 							
 							$price_s = $post->price;
 							if(isset($price_s)){
@@ -807,7 +808,10 @@ class Admin_products_Controller extends website_Controller
 				->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 				->add_rules('users', 'required')
 				->add_rules('stores','required')
-				->add_rules('delivery_days','required');
+				->add_rules('delivery_days','required')
+				->add_rules('Delivery_value', array($this, 'check_return_policy'));
+				
+				
 				
 				
 				$price_s = $post->price;
@@ -1969,6 +1973,20 @@ class Admin_products_Controller extends website_Controller
 		$this->template->title = $this->Lang["STR_CRD_ORD"];
 		$this->template->content = new View("admin_product/storecredit_delivery");
 		
+	}
+	
+	
+	function check_return_policy(){
+		
+		if(count($_POST['Delivery_value']) > 0){
+			$policy = $_POST['Delivery_value'];
+			if(!$policy[0]){
+				return 0;
+			}
+			return 1;
+		}
+		return 0;
+				
 	}
         
 }

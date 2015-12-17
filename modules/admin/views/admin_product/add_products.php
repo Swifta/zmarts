@@ -534,9 +534,11 @@ function toggle() {
                 </tr>
                 
                 <tr class="policymain">
-                 <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label></td>
+                 <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td> <input type="text" name="Delivery_value[]" value="">   </td>
+                    <td> <input type="text" name="Delivery_value[]" value="" > 
+                    <em><?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?></em>  
+                    </td>
 		    </tr>                 
                  <tr>
                  

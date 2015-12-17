@@ -521,6 +521,7 @@
                     </td>
                 </tr>
                 
+               
                 <!-- policy start --> 
 					<?php
 					$atr_option =$u->attribute;
@@ -529,10 +530,11 @@
 						foreach($this->selectproduct_policy as $sel_policy){ 
 						?> 
 					<tr class="policymain" id="row-<?php echo $policymain;?>"> 
-					<td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label></td>
+					<td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label><span>*</span></td>
                     <td><label>:</label></td>
 					<td>
-                        <input type="text" name="Delivery_value[]" value="<?php echo $sel_policy->text;?>"> 
+                        <input type="text" name="Delivery_value[]"  value="<?php echo $sel_policy->text;?>"> 
+                        <em><?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?></em>
                     
 					<?php if($policymain!=1){?>
 					 <input type="button" name="remove" onclick="RemoveAttribute(<?php echo $policymain;?>)" class="btn_remove" value="Remove">   </td>

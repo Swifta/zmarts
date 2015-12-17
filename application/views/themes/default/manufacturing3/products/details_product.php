@@ -570,9 +570,9 @@ foreach ($this->product_deatils as $products) {
                         </li>
                     </div>
                     <?php } ?>
-							<p class="d_inline_middle">Share this:</p>
+<!--							<p class="d_inline_middle">Share this:</p>
 							<div class="d_inline_middle m_left_5 addthis_widget_container">
-								<!-- AddThis Button BEGIN -->
+								 AddThis Button BEGIN 
 								<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 								<a class="addthis_button_preferred_1"></a>
 								<a class="addthis_button_preferred_2"></a>
@@ -581,8 +581,8 @@ foreach ($this->product_deatils as $products) {
 								<a class="addthis_button_compact"></a>
 								<a class="addthis_counter addthis_bubble_style"></a>
 								</div>
-								<!-- AddThis Button END -->
-							</div>
+								 AddThis Button END 
+							</div>-->
 						</div>
 					</div>
 					<!--tabs-->
@@ -1250,18 +1250,18 @@ foreach ($this->product_deatils as $products) {
                                                            
 							</figure>
 							<!--compare products-->
-							<figure class="widget shadow r_corners wrapper m_bottom_30">
+<!--							<figure class="widget shadow r_corners wrapper m_bottom_30">
 								<figcaption>
 									<h3 class="color_light">Compare Products</h3>
 								</figcaption>
 								<div class="widget_content">
 									You have no product to compare.
 								</div>
-							</figure>
+							</figure>-->
 							<!--banner-->
-							<a href="#" class="d_block r_corners m_bottom_30">
+<!--							<a href="#" class="d_block r_corners m_bottom_30">
 								<img src="images/banner_img_6.jpg" alt="">
-							</a>
+							</a>-->
 							<!--Bestsellers-->
 <!--							<figure class="widget shadow r_corners wrapper m_bottom_30">
 								<figcaption>
@@ -1303,7 +1303,7 @@ foreach ($this->product_deatils as $products) {
 							</figure>-->
 							<!--tags-->
 							
-                                                        <figure class="widget shadow r_corners wrapper m_bottom_30">
+<!--                                                        <figure class="widget shadow r_corners wrapper m_bottom_30">
 								<figcaption>
 									<h3 class="color_light">Tags</h3>
 								</figcaption>
@@ -1323,7 +1323,7 @@ foreach ($this->product_deatils as $products) {
 										<a href="#" class="color_dark d_inline_b f_size_big v_align_b">women</a>
 									</div>
 								</div>
-							</figure>
+							</figure>-->
 						</aside>
 					</div>
 				</div>

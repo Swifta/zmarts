@@ -75,10 +75,12 @@
                             <div class="navbar-inner">
                                 <ul class="nav" >
                                     <li><a class="home" title="go to <?php echo SITENAME;?> home page" href="<?php echo PATH;?>"><i class="icon-home icon-large"></i><?php echo SITENAME;?></a> </li>
+                                    
 <!--                                    <li><a class="myaccount" href="<?php //echo PATH ?>refer-friends.html" title="<?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT; ?>"><i class="icon-user icon-large"></i><?php //echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?> </a> </li>-->
                                     <li><a class="shoppingcart" href="javascript:load_club();" title="Enjoy amazing discounts with offers from Zenith Bank"><i class="icon-briefcase icon-large"></i>Zenith Offers</a> </li>
                                
                                     <li><a class="checkout" title="get help" href="<?php echo PATH; ?>help.php"><i class="icon-question icon-large"></i><?php echo $this->Lang['HELP']; ?></a> </li>
+                                     <li><a id="" class="myaccount" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -465,9 +467,9 @@
                     <li><a href="<?php echo PATH?>soldout.html">Soldout</a> </li>
                     <li><a href="<?php echo PATH?>stores.html">Stores</a> </li>
                     <li><a href="<?php echo PATH?>near-map.html">Near Me Map</a> </li>
-                    <li><a href="<?php echo PATH?>blog">Blog</a></li>
-                    
+                  
                     <li><a href="myaccount.html">Customer</a>
+                        <?php if(empty($this->UserID)){?>
                         <div>
                             <ul>
                                 <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
@@ -478,7 +480,12 @@
                                 
                             </ul>
                         </div>
+                         <?php  }else {?>
+                        
+                         <?php  } ?>
                     </li>
+                   
+                       
                   
                     <li>
                      <?php if(!empty($this->UserID)){?>

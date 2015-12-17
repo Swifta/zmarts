@@ -17,3 +17,12 @@ $config['Musty-Electronics-XYZT/products/c/(.*)/(.*).html'] = "/leo/product_list
 $config['Musty-Electronics-XYZT/deal/c/(.*)/(.*).html'] = "/leo/deal_list/Musty-Electronics-XYZT";
 $config['Musty-Electronics-XYZT/auction/c/(.*)/(.*).html'] = "/leo/auction_list/Musty-Electronics-XYZT/$1/$2";
 //Musty-Electronics-XYZT end
+//CC-Collections start
+$config['CC-Collections'] ="/leo/stores_home_page/CC-Collections";
+$config['CC-Collections/products.html'] = "/leo/product_list/CC-Collections";
+$config['CC-Collections/today-deals.html'] = "/leo/deal_list/CC-Collections";
+$config['CC-Collections/auction.html'] = "/leo/auction_list/CC-Collections";
+$config['CC-Collections/products/c/(.*)/(.*).html'] = "/leo/product_list/CC-Collections";
+$config['CC-Collections/deal/c/(.*)/(.*).html'] = "/leo/deal_list/CC-Collections";
+$config['CC-Collections/auction/c/(.*)/(.*).html'] = "/leo/auction_list/CC-Collections/$1/$2";
+//CC-Collections end
