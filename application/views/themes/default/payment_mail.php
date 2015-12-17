@@ -61,12 +61,12 @@ $R = $this->result_mail;
                                      <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <?php if($R->ip != ""){ ?>
+                                    <?php if(isset($R->ip)){ ?>
                                     <tr>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP']; ?>  :  <?php echo $R->ip; ?></td>
                                     </tr>
                                     <?php } ?>
-                                    <?php if($R->ip_city_name != ""){ ?>
+                                    <?php if(isset($R->ip_city_name)){ ?>
                                      <tr height="10">
                                         <td></td>
                                     </tr>
