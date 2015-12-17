@@ -403,7 +403,9 @@ class Pay_later_Controller extends Layout_Controller
 				foreach($transaction_coupon_details as $coupon_details){
 					$coupon_array[] = $coupon_details->coupon_code;
 				}
+                                //var_dump($coupon_array); die;
 				pdf::pdf_created($coupon_array);
+
 				$file=array();
 				for($i=0; $i < count($coupon_array); $i++){
 					array_push($file, "images/pdf/Voucher".$i.".pdf");

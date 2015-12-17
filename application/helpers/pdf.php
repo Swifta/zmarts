@@ -97,10 +97,10 @@ class Pdf{
                         $voucher_image3 ='<img src="'.PATH.'themes/'.THEME_NAME.'/images/new/hw_2.png" width="25" height="25"  />';
                         $voucher_image4 ='<img src="'.PATH.'themes/'.THEME_NAME.'/images/new/hw_3.png" width="25" height="25"  />';
                         $voucher_image5 ='<img src="'.PATH.'themes/'.THEME_NAME.'/images/new/hw_4.png" width="25" height="25"  />';
-
+                        
                         if(file_exists(DOCROOT.'images/deals/1000_800/'.$u->deal_key.'_1.png'))       
                         {
-                        $deal_image ='<img src="'.PATH.'images/deals/1000_800/'.$u->deal_key.'_1.png" width="354" height="220"  />';
+                        $deal_image ='<img src="'.PATH.'images/deals/1000_800/'.$u->deal_key.'_1.png" width="354" height="220"  />';                        
                         }
                         else
                         {
@@ -109,12 +109,12 @@ class Pdf{
 
                         $qrcode = "";
                         if(file_exists(DOCROOT.'images/user/qrcode/'.$u->coupon_code.'.png'))        
-                        { 
+                        {                          
                         $qrcode ='<img src="'.PATH.'images/user/qrcode/'.$u->coupon_code.'.png"  />';
                         }
                         $barcode = "";
                         if(file_exists(DOCROOT.'images/user/barcode/'.$u->coupon_code.'.png'))        
-                        { 
+                        {                          
                         $barcode ='<img src="'.PATH.'images/user/barcode/'.$u->coupon_code.'.png" width="189" height="38" />';
                         }
 
@@ -340,7 +340,7 @@ $html = <<<EOF
 EOF;
 
 // output the HTML content
-$pdf->writeHTML($html, true, false, true, false, '');
+ $pdf->writeHTML($html, true, false, true, false, '');
                         // reset pointer to the last page
                         $pdf->lastPage();
                         // Close and output PDF document
