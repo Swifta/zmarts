@@ -493,7 +493,7 @@ $admin_message	= '
                                                                                 //die;
 										//echo $adminmessage; echo "<br> <br> <br>"; echo $merchantmessage; exit;
 										
-										
+										/*
 										
 										if($_FILES['image']['name']){
 											$filename = upload::save('image'); 						
@@ -503,8 +503,85 @@ $admin_message	= '
 											unlink($filename);
 										}
 
-										
-										
+										*/
+						if($_FILES['image']['name'])
+						{
+							$filename =$_FILES["image"]["name"];
+							$uploadedfile = $_FILES['image']['tmp_name'];
+							
+							$extension = $this->getExtension($filename);
+							$extension = strtolower($extension);
+							
+							if (!(($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif"))){
+								if($extension=="jpg" || $extension=="jpeg" ){
+									$uploadedfile = $_FILES["image"]['tmp_name'];
+									$src = $this->LoadJpeg($uploadedfile);
+								}else if($extension=="png"){
+									$uploadedfile = $_FILES["image"]['tmp_name'];
+									$src = $this->LoadPNG($uploadedfile);
+								}else{
+									$src = $this->LoadGif($uploadedfile);
+								}
+								
+								list($width,$height)=getimagesize($uploadedfile);
+								
+								$max_width0=244;
+								$max_height0=150;
+								
+								$width0 = $width;
+								$height0 = $height;				
+								if ($height0 > $max_height0) {
+									$width0 = ($max_height0 / $height0) * $width0;
+									$height0 = $max_height0;
+								}
+								if ($width0 > $max_width0) {
+									$height0 = ($max_width0 / $width0) * $height0;
+									$width0 = $max_width0;
+								}
+								$tmp0=imagecreatetruecolor($width0,$height0);
+								
+								$white = imagecolorallocate($tmp0, 255, 255, 255);
+								imagefill($tmp0, 0, 0, $white);
+								
+								$max_width1=210;
+								$max_height1=75;
+								
+								$width1 = $width;
+								$height1 = $height;				
+								if ($height1 > $max_height1) {
+									$width1 = ($max_height1 / $height1) * $width1;
+									$height1 = $max_height1;
+								}
+								if ($width1 > $max_width1) {
+									$height1 = ($max_width1 / $width1) * $height1;
+									$width1 = $max_width1;
+								}
+								$IMG_NAME = $merchantid."_".$storeid.'.png';
+								$tmp1=imagecreatetruecolor($width1,$height1);
+								
+								$white = imagecolorallocate($tmp1, 255, 255, 255);
+								imagefill($tmp1, 0, 0, $white);
+								
+								imagecopyresampled($tmp0,$src,0,0,0,0,$width0,$height0,$width,$height);
+								imagecopyresampled($tmp1,$src,0,0,0,0,$width1,$height1,$width,$height);
+
+								$filename0 = DOCROOT."images/merchant/600_370/". $IMG_NAME;
+								$filename1 = DOCROOT."images/merchant/290_215/". $IMG_NAME;
+
+								imagejpeg($tmp0,$filename0,100,777);
+								imagejpeg($tmp1,$filename1,100,777);
+
+								imagedestroy($src);
+								imagedestroy($tmp0);
+								imagedestroy($tmp1);
+							}
+							
+							/*$filename = upload::save('image'); 						
+							$IMG_NAME = $merchantid."_".$storeid.'.png';
+							common::image($filename, STORE_DETAIL_WIDTH, STORE_DETAIL_HEIGHT, DOCROOT.'images/merchant/600_370/'.$IMG_NAME);
+						    common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
+							unlink($filename);*/
+						}										
 										
 										
 										
