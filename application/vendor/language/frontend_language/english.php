@@ -1111,7 +1111,7 @@ $content_text = array(
 
 "ENTER_ADD"=>"Enter your address here",
 
-"ENTER_PHONE"=>"Enter your phone number here",
+"ENTER_PHONE"=>"e.g. 080..., 070...",
 
 "ENTER_POSTAL_CODE"=>"Enter your postal code here",
 
@@ -1422,7 +1422,7 @@ $content_text = array(
 
 "YOU_HAVE_RECEIVED"  => "You have received a inquired for the",
 
-"INV_PH" => "Invalid Phone Number",
+"INV_PH" => "Invalid phone. Only digits, starting with 0.",
 
 "EMAIL_AL_E" => "Email Already Exist",
 
@@ -1842,7 +1842,7 @@ $content_text = array(
     
 "PROCEED_GLOBAL_PAY" => "Proceed to Payment via Interswitch Gateway", 
 
-"PAY_NOW" => "Pay Online",
+"PAY_NOW" => "Pay Now",
     
 "DIRECT_DEBIT" =>"Direct Debit",
     

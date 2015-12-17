@@ -170,14 +170,17 @@ class Merchant_Controller extends website_Controller
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
 							->add_rules('email','required','valid::email')
-							->add_rules('payment','required','valid::email')
+							//->add_rules('payment','required','valid::email')
 							->add_rules('mobile','required',array($this, 'validphone'))
 							->add_rules('address1','required')
-							->add_rules('address2','required')
+							//->add_rules('address2','required')
 							->add_rules('city','required');
+							
+							
+							
 
 				if($post->validate()){
-
+					
 					$status = $this->merchant->edit_merchant($userid, arr::to_object($this->userpost));
 						if($status){
 
@@ -187,6 +190,7 @@ class Merchant_Controller extends website_Controller
 				}
 				else{
 					$this->form_error = error::_error($post->errors());
+					
 				}
 			}
 
@@ -3905,7 +3909,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-				->add_rules('email', 'required')
+				->add_rules('email', 'required','valid::email')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
 				$email = $this->input->post("email");

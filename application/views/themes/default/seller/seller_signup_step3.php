@@ -677,8 +677,8 @@ InvalidInputHelper(document.getElementById("store_email_id"), {
 ); 
 
 InvalidInputHelper(document.getElementById("mobile"), {
-    defaultText: "Please enter your phone!",
-    emptyText: "Please enter your phone!",
+    defaultText: "e.g. 080..., 070...",
+    emptyText: "e.g. 080..., 070...",
     invalidText: function (input) {
         return 'The phone  "' + input.value + '" is invalid!';
     }
