@@ -68,7 +68,14 @@
     <div class="headerstrip">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12"> <a href="<?php echo PATH.$this->storeurl; ?>" class="logo pull-left"><img src="<?php echo PATH .'images/merchant/290_215/'.$this->merchant_id.'_'.$this->store_id.'.png'?>" alt="<?php echo $this->storeurl ?>" title="<?php echo $this->storeurl ?>"></a> 
+                <div class="col-lg-12"> <a href="<?php echo PATH.$this->storeurl; ?>" class="logo pull-left">
+     <?php if(file_exists(DOCROOT .'images/merchant/290_215/'.$this->merchant_id.'_'.$this->store_id.'.png')){?>
+	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$this->merchant_id.'_'.$this->store_id.'.png'?>"/>
+     <?php }else{ ?>
+        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/>
+     <?php } ?>
+
+                    </a> 
                     <!-- Top Nav Start -->
                     <div class="pull-left">
                         <div class="navbar" id="topnav">

@@ -236,7 +236,11 @@ $this->language_List = str_replace(".php", "", $DL);
 						<?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
 						<div class="col-lg-6 col-md-6 col-sm-2 t_xs_align_c" style="margin-top:-30px;">
 							<a href="<?php echo PATH.$stores->store_url_title.'/';?>" class="logo m_xs_bottom_15 d_xs_inline_b">
-								<img src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"  alt="<?php echo $this->Lang['LOGO']; ?>"  title="<?php echo $stores->store_name; ?>">
+     <?php if(file_exists(DOCROOT .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png')){?>
+	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+     <?php }else{ ?>
+        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/>
+     <?php } ?>
 							<?php ?></a>
                                                       <div class="col-lg-3 col-md-3 col-sm-3 t_align_r t_xs_align_c m_xs_bottom_15 pull-right" style="margin-top:30px;">
 									<div class="merchant_log">

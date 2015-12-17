@@ -77,8 +77,13 @@ $this->language_List = str_replace(".php", "", $DL);
             <div class="row">
                 <div class="span12"> 
                     <?php if(count($this->about_us_footer)>0) { foreach($this->about_us_footer as $stores) { ?>
-                    <a href=href="<?php echo PATH.$stores->store_url_title.'/';?>"  class="logo pull-left" ><img src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>" 
-                      alt="<?php echo $this->Lang['LOGO']; ?>"  title="<?php echo $stores->store_name; ?>"></a> 
+                    <a href=href="<?php echo PATH.$stores->store_url_title.'/';?>"  class="logo pull-left" >
+     <?php if(file_exists(DOCROOT .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png')){?>
+	<img alt="<?php echo $this->Lang['LOGO']; ?>" 	src="<?php echo PATH .'images/merchant/290_215/'.$stores->merchant_id.'_'.$stores->store_id.'.png'?>"/>
+     <?php }else{ ?>
+        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/>
+     <?php } ?>
+                    </a> 
                     <!-- Top Nav Start -->
                    
       <?php } } ?>
