@@ -35,3 +35,12 @@ $config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/hospitality2/product_list/A
 $config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/hospitality2/deal_list/ABC-Pvt-Ltd/$1/$2";
 $config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/hospitality2/auction_list/ABC-Pvt-Ltd/$1/$2";
 // ABC-Pvt-Ltd End
+// Scanfrost Start
+$config['Scanfrost'] ="hospitality2/stores_home_page/Scanfrost";
+$config['Scanfrost/products.html'] = "/hospitality2/product_list/Scanfrost";
+$config['Scanfrost/today-deals.html'] = "/hospitality2/deal_list/Scanfrost";
+$config['Scanfrost/auction.html'] = "/hospitality2/auction_list/Scanfrost";
+$config['Scanfrost/products/c/(.*)/(.*).html'] = "/hospitality2/product_list/Scanfrost/$1/$2";
+$config['Scanfrost/deal/c/(.*)/(.*).html'] = "/hospitality2/deal_list/Scanfrost/$1/$2";
+$config['Scanfrost/auction/c/(.*)/(.*).html'] = "/hospitality2/auction_list/Scanfrost/$1/$2";
+// Scanfrost End

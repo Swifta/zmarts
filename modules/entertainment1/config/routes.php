@@ -17,15 +17,6 @@ $config['fdgh/products/c/(.*)/(.*).html'] = "/entertainment1/product_list/fdgh/$
 $config['fdgh/deal/c/(.*)/(.*).html'] = "/entertainment1/deal_list/fdgh/$1/$2";
 $config['fdgh/auction/c/(.*)/(.*).html'] = "/entertainment1/auction_list/fdgh/$1/$2";
 // fdgh End
-// CC-Collections Start
-$config['CC-Collections'] ="entertainment1/stores_home_page/CC-Collections";
-$config['CC-Collections/products.html'] = "/entertainment1/product_list/CC-Collections";
-$config['CC-Collections/today-deals.html'] = "/entertainment1/deal_list/CC-Collections";
-$config['CC-Collections/auction.html'] = "/entertainment1/auction_list/CC-Collections";
-$config['CC-Collections/products/c/(.*)/(.*).html'] = "/entertainment1/product_list/CC-Collections/$1/$2";
-$config['CC-Collections/deal/c/(.*)/(.*).html'] = "/entertainment1/deal_list/CC-Collections/$1/$2";
-$config['CC-Collections/auction/c/(.*)/(.*).html'] = "/entertainment1/auction_list/CC-Collections/$1/$2";
-// CC-Collections End
 // Slot-Systems-Limited Start
 $config['Slot-Systems-Limited'] ="entertainment1/stores_home_page/Slot-Systems-Limited";
 $config['Slot-Systems-Limited/products.html'] = "/entertainment1/product_list/Slot-Systems-Limited";

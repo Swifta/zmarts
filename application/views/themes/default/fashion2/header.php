@@ -308,17 +308,25 @@ $srch = $this->Lang['SRCH_STR'];
         </div>
         </div>
          <div class="merchant_log">
+                                                                             <?php if(empty($this->UserID)){?>
 			<p>Customer </p>
 			<ul>
-                            <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+                             <ul>
+				<li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
-<!--				<li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
+			</ul>
+                            <?php  }else {?>
+                        
+                         <?php  } ?>
+<!--			<li><a   href="<?//php echo PATH . 'merchant-signup-login.html'; ?>"Zenith Offer><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
+				
+                           
 				<li>|</li>
 				<li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>
 			--></ul>
 		
-		</div>
+		</div>	
         <?php if ($this->product_setting) { ?>
         <div class="add_cart">
         <div class="cart_mid" id="cart_window">

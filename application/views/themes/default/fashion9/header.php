@@ -100,6 +100,7 @@ $this->language_List = str_replace(".php", "", $DL);
         <?php } ?>
         
         <li><a href="<?php echo PATH;?>">Home</a></li>
+        <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
         <?php if ($this->session->get('UserID')) { ?>
                 <li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 
@@ -138,7 +139,7 @@ $this->language_List = str_replace(".php", "", $DL);
                 if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 
         <?php } ?>
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+<!--<li><a id="" href="<?php //echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>-->
 <!--                <li><a id="login" href="javascript:showlogin();" title="<?//php echo $this->Lang['LOGIN']; ?>"><?//php echo $this->Lang['LOGIN']; ?></a></li>
                 <li><a href="javascript:showsignup();" title="<?//php echo $this->Lang['SIGN_UP']; ?>"><?//php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
                 <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>	
@@ -268,17 +269,29 @@ $srch = $this->Lang['SRCH_STR'];
 </div>
 <div class="msearch_cart_block span4">
 
-         <div class="merchant_log text-center" style="margin:1px auto;">
-             <!--<p class="text-center"><?php //echo $this->Lang['MERCHANT_ACC']; ?></p>-->
-            <ul>
-                <li><p> Customer </p></li>
-                <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+        <div class="merchant_log text-center pull-left" style="margin:1px auto;">
+             <!--<p class="text-center"><?php echo $this->Lang['MERCHANT_ACC']; ?></p>-->
+            <?php if(empty($this->UserID)){?>
+<!--			<p>Customer</p>-->
+			<ul>
+
+                          <li><p>Customer</p></li>
+                    <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
 				<li>|</li>
 				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
-<!--                    <li><a  href="<?//php echo PATH . 'merchant-login.html'; ?>" title="<?//php  echo $this->Lang['MER_LOIN']; ?>"><?//php echo $this->Lang['MER_LOIN']; ?></a></li>
-                    <li>|</li>
-                    <li><a  href="<?//php echo PATH . 'merchant-signup-step1.html'; ?>" title="<?//php  echo $this->Lang['MER_REGI']; ?>"><?//php echo $this->Lang['MER_REGI']; ?></a></li>-->
             </ul>
+                        
+		<?php  }else {?>
+                       
+			<ul style="display: none;">
+
+                          <li><p>Customer</p></li>
+                    <li><a  href="javascript:showlogin();" title="Customer Login">Login</a></li>
+				<li>|</li>
+				<li><a  href="javascript:showsignup();" title="Customer Signup">Register</a></li>
+            </ul>
+                       
+                           <?php  } ?>    
 	</div>
         <?php if ($this->product_setting) { ?>
         <div class="add_cart">

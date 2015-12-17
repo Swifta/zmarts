@@ -383,7 +383,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
     <div class="contianer_outer">
         <div class="contianer_inner">
             <div class="contianer">
-                <h2 class="seller_sign_title" style="text-align: center; font-size:30px;"><?php echo $this->Lang['WEL_SEL_SIGN']; ?></h2>
+                <h2 class="seller_sign_title" style="text-align: center; font-size:30px;"><?php //echo $this->Lang['WEL_SEL_SIGN']; ?></h2>
                 <p class="seller_sign_info"><?php echo $this->Lang['YOU_GUIDED_CRTE_STRE']; ?></p>
                 <div class="seller_signup clearfix">
                     <div class="seller_signup_menu">
@@ -417,37 +417,22 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <!--                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>-->
                         
                             
-                            
-                            
-                            
-                           
-                            
-                           
-
-
-
-
-
-
-
-
-                            
-                            
-                  <div class="container-fluid text-center">
+           
+                 <div class="container-fluid text-center">
   <h1 style="color:#A61C00 ; font-family:'Actor', sans-serif;">Why you should sell on Zmart!</h1>
   
   <div class="row">
-      <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">Sell More Earn More</h4><img src="<?php echo PATH; ?>custom/images/p.png" class="img-circle" alt="Cinque Terre"> <p>Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
-    <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif;">  <h4 style="color:#60532f;">Contacting buyers is a breeze</h4><img src="<?php echo PATH; ?>custom/images/p.png" class="img-circle" alt="Cinque Terre"><p>Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">Low, low transaction fees</h4>
-<img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre"><p>Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
+      <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif; "><h4 style="color:#60532f;font-family: 'Actor', sans-serif; font-weight:  bold; ">Sell More Earn More</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/pla.png" class="img-circle" alt="Cinque Terre"> <p style="text-align:  justify;  margin-top:10px;">Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
+    <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif; ">  <h4 style="color:#60532f;font-weight:  bold; ">Contacting buyers is a breeze</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/breeze.png" class="img-circle" alt="Cinque Terre"><p style="text-align:  justify; margin-top:10px;">Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">Low transaction fees</h4>
+<img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/lowtrans.png" class="img-circle" alt="Cinque Terre"><p style="text-align:  justify;margin-top:10px;">Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
   </div>
   
    <div class="row">
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">Dedicated Support 24/7</h4>
-<img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre" > <p>Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">You decide everything</h4><img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre" ><p>Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;">It’s bank-secure</h4><img src="<?php echo PATH; ?>custom/images/placeholder.png" class="img-circle" alt="Cinque Terre" > <p>Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and <br> we have put in place stringent measures to ensure our community is safe and secure.</p></div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">Dedicated Support 24/7</h4>
+    <img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/supports.png" class="img-circle" alt="Cinque Terre" > <p style="text-align:  justify;margin-top:10px;">Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">You decide everything</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/whyusezmart-01n.png" class="img-circle" alt="Cinque Terre" ><p style="text-align:justify;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
+    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/secure.png" class="img-circle" alt="Cinque Terre" > <p style=" text-align:  justify;margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
   </div>
 </div>          
                             
@@ -524,9 +509,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             </p>
                         </div>
                     
-                               <div style="margin-top: 15px; text-align: center;">
-                                   <h3>Already a merchant ?</h3>
-                                   <p>Login : <a style="color:red" href="<?php echo PATH . 'merchant-login.html'; ?>">here</a></p>
+                               <div style="margin-top: 15px; text-align: center; height: 80px;">
+                                   <h3 style="font-size: larger; font-style: italic;">If you have already registered as a merchant, <a style="color:blue;" href="<?php echo PATH . 'merchant-login.html'; ?>">click here</a> to login.</h3>
+                                   
                                </div>
                                             
                     </div>   

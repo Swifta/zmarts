@@ -151,6 +151,7 @@
 			</div>
             
                    <div class="box swifta">
+                         <?php if(empty($this->UserID)){?>
    				        <select tabindex="4" class="dropdown">
 							<option value="" class="label" >Customer</option>
 							<option value="1"><a  href="javascript:show_register();" title="Customer Signup">Register</a></option>
@@ -159,6 +160,8 @@
 				
 
 						</select>
+                       <?php  }else {}?>
+                       
    				    </div>
                    
                     
