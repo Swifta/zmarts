@@ -4,25 +4,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 
-<script type="text/javascript" src="http://localhost/zmarts/js/jquery.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/js/public.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/js/public.js"></script>
 
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/electronics3/style.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/electronics3/multi_style.css" /
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/electronics3/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/electronics3/multi_style.css" /
 </head>
 
 <body>
 <div class="deal_rating">
 
-                                        <link href="http://localhost/zmarts/themes/default/css/jRating.jquery.css" rel="stylesheet" type="text/css">
-                                        <script type="text/javascript" src="http://localhost/zmarts/themes/default/js/jRating.jquery.js"></script>
+                                        <link href="<?php echo PATH; ?>themes/default/css/jRating.jquery.css" rel="stylesheet" type="text/css">
+                                        <script type="text/javascript" src="<?php echo PATH; ?>themes/default/js/jRating.jquery.js"></script>
 
                                         <script type="text/javascript">
                                             $(document).ready(function(){
                                                 $(".basic28").jRating({
-                                                    bigStarsPath : 'http://localhost/zmarts/images/star_03.png', // path of the icon stars.png
-                                                    smallStarsPath : 'http://localhost/zmarts/images/small.png', // path of the icon small.png
-                                                    phpPath : 'http://localhost/zmarts/product-rating.html', // path of the php file jRating.php
+                                                    bigStarsPath : '<?php echo PATH; ?>images/star_03.png', // path of the icon stars.png
+                                                    smallStarsPath : '<?php echo PATH; ?>images/small.png', // path of the icon small.png
+                                                    phpPath : '<?php echo PATH; ?>product-rating.html', // path of the php file jRating.php
                                                     length : 5,
                                                     rateMax : 5,
                                                     step:true,
@@ -44,7 +44,7 @@
                                             <!--
                                                     Check the images folder for 'black_star.png' and 'white_star.png'
                                             -->
-                                        <div style="width: 0px;" class="jRatingColor"></div><div style="width: 0px; top: -15px;" class="jRatingAverage"></div><div style="width: 70px; height: 15px; top: -30px; background: transparent url(&quot;http://localhost/zmarts//images/star_03.png&quot;) repeat-x scroll 0% 0%;" class="jStar"></div></label>
+                                        <div style="width: 0px;" class="jRatingColor"></div><div style="width: 0px; top: -15px;" class="jRatingAverage"></div><div style="width: 70px; height: 15px; top: -30px; background: transparent url(&quot;<?php echo PATH; ?>/images/star_03.png&quot;) repeat-x scroll 0% 0%;" class="jStar"></div></label>
                                         <span>0 Ratings</span>
 
 

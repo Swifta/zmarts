@@ -480,7 +480,7 @@ input[type=text],input[type=password]
                              <br/>
                             
                                  <div class="">
-                                     <input style="margin-top:20px;" type="file" name="image" id="image" class="required" tabindex="12" required/>
+                                     <input style="margin-top:20px;" type="file" name="image" id="image" tabindex="12"/>
 								
 									<em id="id_err_image"><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
                                  <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
@@ -677,8 +677,8 @@ InvalidInputHelper(document.getElementById("store_email_id"), {
 ); 
 
 InvalidInputHelper(document.getElementById("mobile"), {
-    defaultText: "Please enter your phone!",
-    emptyText: "Please enter your phone!",
+    defaultText: "e.g. 080..., 070...",
+    emptyText: "e.g. 080..., 070...",
     invalidText: function (input) {
         return 'The phone  "' + input.value + '" is invalid!';
     }

@@ -200,7 +200,14 @@ class valid_Core {
 		$number = preg_replace('/\D+/', '', $number);
 
 		// Check if the number is within range
-		return in_array(strlen($number), $lengths);
+		$in_range = in_array(strlen($number), $lengths);
+		
+		//If in range, check if starts with zero
+		if($in_range){
+			$zero_position = strpos($number, "0");
+			return $zero_position === 0;
+		}
+		return $in_range;
 	}
 
 	/**

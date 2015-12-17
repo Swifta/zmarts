@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <meta property="og:image"  content="http://localhost/zmarts/themes/default/images/logo.png"/>
+        <meta property="og:image"  content="<?php echo PATH; ?>themes/default/images/logo.png"/>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -14,24 +14,24 @@
         <title> Products | E-Marketplace </title>
         <meta name="description" content="sell services using multiple ways like group deals, coupons, and social media." />
         <meta name="keywords" content="deals, daily deals, group deals," />
-        <link rel="shortcut icon" href="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/favicon.png&w=15&h=15" type="image/x-icon" />		
+        <link rel="shortcut icon" href="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/favicon.png&w=15&h=15" type="image/x-icon" />		
        
-                            <link rel="alternate" type="application/atom+xml" title="Califorina deals" href="http://localhost/zmarts/deals/rss/1/califorina"  />
-                            <link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/style.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/multi_style.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/bootstrap/css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/themes/css/bootstrappage.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/themes/css/flexslider.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/zmarts/themes/default/css/fashion9/themes/css/main.css" />
+                            <link rel="alternate" type="application/atom+xml" title="Califorina deals" href="<?php echo PATH; ?>deals/rss/1/califorina"  />
+                            <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/multi_style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/bootstrap/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/themes/css/bootstrappage.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/themes/css/flexslider.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/themes/css/main.css" />
 
-<script type="text/javascript" src="http://localhost/zmarts/bootstrap/themes/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/themes/default/js/public.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/bootstrap/themes/js/jquery.scrolltotop.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/js/timer/kk_countdown_1_2_jquery_min.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
-<script type="text/javascript" src="http://localhost/zmarts/bootstrap/themes/js/superfish.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>bootstrap/themes/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/default/js/public.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>bootstrap/themes/js/jquery.scrolltotop.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>bootstrap/themes/js/superfish.js"></script>
 
                                       </head>             
         <body>
@@ -51,8 +51,8 @@
         });
     });
 </script>
-<script src="http://localhost/zmarts/bootstrap/themes/js/common.js"></script>
-<script src="http://localhost/zmarts/bootstrap/themes/js/jquery.flexslider-min.js"></script>
+<script src="<?php echo PATH; ?>bootstrap/themes/js/common.js"></script>
+<script src="<?php echo PATH; ?>bootstrap/themes/js/jquery.flexslider-min.js"></script>
 <script type="text/javascript">
         $(document).ready(function() {
                 $('.flexslider').flexslider({
@@ -78,7 +78,7 @@
         </div>-->
         <!--<div class="header_top_left">
             <div class="refer_friend">
-            <a  href="http://localhost/zmarts/refer-friends.html" title="Refer Friends. Get &#8358;2000*">
+            <a  href="<?php echo PATH; ?>refer-friends.html" title="Refer Friends. Get &#8358;2000*">
                     Refer Friends. Get &#8358; 2000*</a>
             </div>
         </div>
@@ -87,7 +87,7 @@
                 <div class="account pull-right">
             <!--<a class="toggleMenu htop_navicon" href="javascript:;" title="Menu">&nbsp;</a>-->
         <ul class="user-menu">
-                <li><a href="http://localhost/zmarts/">Home</a></li>
+                <li><a href="<?php echo PATH; ?>">Home</a></li>
         <li class="mnav_dnone">|</li>
         
                         
@@ -99,7 +99,7 @@
                 <li><a id="login" href="javascript:showlogin();" title="Sign In">Sign In</a></li>
                 <li class="mnav_dnone">|</li>
                 <li><a href="javascript:showsignup();" title="Sign Up">Sign Up</a> </li>
-                <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="Facebook connect"><img src="http://localhost/zmarts/themes/default/images/new/f_connect.png" alt="f_connect"/></a></li>	
+                <li class="head_fb"><a style="cursor:pointer;" onclick="facebookconnect();" title="Facebook connect"><img src="<?php echo PATH; ?>themes/default/images/new/f_connect.png" alt="f_connect"/></a></li>	
                         <!-- <li><a class="faceb" href="https://www.facebook.com/pages/Swifta-Systems-and-Services/697969463605870" target="blank" title="Facebook">&nbsp;</a></li>-->
                 <!-- <li><a class="twitt" href="http://twitter.com/SwiftaSystems" target="blank" title="Twitter">&nbsp;</a></li>-->
                 <!--  <li><a class="linked" href="http://www.linkedin.com/company/269461" target="blank" title="LinkedIn">&nbsp;</a></li>-->
@@ -116,8 +116,8 @@
 <div class="span2">
     <div class="logo">
     <h1>
-                 <a href="http://localhost/zmarts/ABC-Pvt-Ltd/"  title = "ABC Pvt Ltd">
-            <img alt="Logo" 	src="http://localhost/zmarts/images/merchant/290_215/15_1.png"/>
+                 <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/"  title = "ABC Pvt Ltd">
+            <img alt="Logo" 	src="<?php echo PATH; ?>images/merchant/290_215/15_1.png"/>
 
     </a>
           </h1>
@@ -125,7 +125,7 @@
 </div>
 
 <div class="span5">
-<form id="myform" action="http://localhost/zmarts/ABC-Pvt-Ltd/products.html">
+<form id="myform" action="<?php echo PATH; ?>ABC-Pvt-Ltd/products.html">
     <div class="cities" style="float:left;margin-left:10px;z-index: 2299;">
 		<ul>
 	        <li>
@@ -181,14 +181,14 @@
              <!--<p class="text-center">Merchant</p>-->
             <ul>
                 <li><p>Merchant</p></li>
-                    <li><a  href="http://localhost/zmarts/merchant-login.html" title="Log In ">Log In </a></li>
+                    <li><a  href="<?php echo PATH; ?>merchant-login.html" title="Log In ">Log In </a></li>
                     <li>|</li>
-                    <li><a  href="http://localhost/zmarts/merchant-signup-step1.html" title="Register">Register</a></li>
+                    <li><a  href="<?php echo PATH; ?>merchant-signup-step1.html" title="Register">Register</a></li>
             </ul>
 	</div>
                 <div class="add_cart">
         <div class="cart_mid" id="cart_window">
-	        <a href="http://localhost/zmarts/cart.html"  title="Cart(0)"> <span>0</span>Cart(s)</a>
+	        <a href="<?php echo PATH; ?>cart.html"  title="Cart(0)"> <span>0</span>Cart(s)</a>
             <div class="cart_window_products1" style="display:none"></div>
         </div>
         </div>
@@ -211,12 +211,12 @@
 		                                    
 			        <li >
 
-				        <a href="http://localhost/zmarts/ABC-Pvt-Ltd" title="Home">Home				        </a>
+				        <a href="<?php echo PATH; ?>ABC-Pvt-Ltd" title="Home">Home				        </a>
 			        </li>
 
         
         <li class="active"> 
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/products.html" title="Products">
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/products.html" title="Products">
                 Products            </a>
             <ul>
         				                <!--<li><a>Baby & Kids</a></li>-->
@@ -272,7 +272,7 @@
 
 
         
-                <li class=" "><a href="http://localhost/zmarts/ABC-Pvt-Ltd/today-deals.html" title="Deals">
+                <li class=" "><a href="<?php echo PATH; ?>ABC-Pvt-Ltd/today-deals.html" title="Deals">
 	        Deals        </a>
                     <ul>
 												<!--<h2>Personal Care & Health</h2>-->
@@ -296,7 +296,7 @@
 
 
         
-                <li class=""><a href="http://localhost/zmarts/ABC-Pvt-Ltd/auction.html" title="Auction">
+                <li class=""><a href="<?php echo PATH; ?>ABC-Pvt-Ltd/auction.html" title="Auction">
         Auction
         </a>
                     <ul>
@@ -319,20 +319,20 @@
         
         
 	        <li >
-		        <a  href="http://localhost/zmarts/ABC-Pvt-Ltd/soldout.html" title=" Sold out">
+		        <a  href="<?php echo PATH; ?>ABC-Pvt-Ltd/soldout.html" title=" Sold out">
 			        Sold out		        </a>
 	        </li>
         
         	        <li class='active'>
-		        <a href="http://localhost/zmarts/stores.html" title="Stores">
+		        <a href="<?php echo PATH; ?>stores.html" title="Stores">
 			        Stores		        </a></li>
                 	        <li >
-		        <a href="http://localhost/zmarts/near-map.html" title="Near me map">
+		        <a href="<?php echo PATH; ?>near-map.html" title="Near me map">
 			        Near me map		        </a>
 	        </li>
         
                 <li >
-	        <a href="http://localhost/zmarts/blog" title="Blog">
+	        <a href="<?php echo PATH; ?>blog" title="Blog">
 		        Blog	        </a>
         </li>
                 
@@ -357,13 +357,13 @@
 	<div class="shadow_bg"></div>
         <div class="sign_up_outer">  
             <div class="sign_up_logo">
-                <a href="http://localhost/zmarts/"><img alt="Logo" src="http://localhost/zmarts/themes/default/images/logo.png"/></a>        	
+                <a href="<?php echo PATH; ?>"><img alt="Logo" src="<?php echo PATH; ?>themes/default/images/logo.png"/></a>        	
                 <a class="close2" title="Close" id="close">&nbsp;</a>                
             </div>
             <div class="signup_content clearfix">
               <div class="signup_form_block">
                   <h2 class="signup_title">Sign In</h2>
-                  <form id="login" name="login" method="post" action="http://localhost/zmarts/users/login" onsubmit="return validateForms();"  autocomplete="off">
+                  <form id="login" name="login" method="post" action="<?php echo PATH; ?>users/login" onsubmit="return validateForms();"  autocomplete="off">
                       <ul>
                           <li>
                               <label>Email:<span class="form_star">*</span> </label>                        
@@ -420,7 +420,7 @@
 <script type="text/javascript">
     
     function connectTwitter(){
-        var url = "http://localhost/zmarts/twitter-connect.php"
+        var url = "<?php echo PATH; ?>twitter-connect.php"
         //window.open(url, '_blank', 'width=900, height=500');
         location.href = url;
         return false;
@@ -486,7 +486,7 @@ return {
                         //alert(fName);
                         //alert(email);
                         disconnectUser();
-                        location.href='http://localhost/zmarts/google-connect.php?full_name='+fName+'&email='+email
+                        location.href='<?php echo PATH; ?>google-connect.php?full_name='+fName+'&email='+email
                         //$("#inputFullname").val(fName);
 //                        /$("#inputEmail").val(email);
                         
@@ -706,13 +706,13 @@ var email = document.login.email.value;
 <div class="shadow_bg"></div>
             <div class="sign_up_outer">  	                        
                     <div class="sign_up_logo">
-                        <a href="http://localhost/zmarts/"><img alt="Logo" src="http://localhost/zmarts/themes/default/images/logo.png"/></a>
+                        <a href="<?php echo PATH; ?>"><img alt="Logo" src="<?php echo PATH; ?>themes/default/images/logo.png"/></a>
                         <a class="close2" title="Close" id="close1"></a>
                     </div>				
                 <div class="signup_content new_user_signup clearfix">
                     <div class="signup_form_block">
                         <h2 class="signup_title">User sign up</h2>
-                        <form name="signup" method="post"  onsubmit="return validatesignup();" action="http://localhost/zmarts/users/signup">
+                        <form name="signup" method="post"  onsubmit="return validatesignup();" action="<?php echo PATH; ?>users/signup">
                             <ul>                               
                             <li>
                                 <label>Name:<span class="form_star">*</span></label>
@@ -802,7 +802,7 @@ var email = document.login.email.value;
                             </li>-->
                            <li class="check_box">
                                 <p><input type="checkbox" name="terms" id="termsquantity" value="terms">By clicking Sign Up you agree to E-Marketplace 									
-                                <a class="forget_link" target="_blank" title="Terms and conditions" href="http://localhost/zmarts/terms-and-conditions.php">Terms and conditions</a>									
+                                <a class="forget_link" target="_blank" title="Terms and conditions" href="<?php echo PATH; ?>terms-and-conditions.php">Terms and conditions</a>									
                                 </p>
                                 <em id="terms_error"></em>
                             </li>
@@ -846,7 +846,7 @@ var email = document.login.email.value;
 <script type="text/javascript">
     
     function connectTwitter(){
-        var url = "http://localhost/zmarts/twitter-connect.php"
+        var url = "<?php echo PATH; ?>twitter-connect.php"
         //window.open(url, '_blank', 'width=900, height=500');
         location.href = url;
         return false;
@@ -907,7 +907,7 @@ return {
                         //alert(fName);
                         //alert(email);
                         disconnectUser();
-                        location.href='http://localhost/zmarts/google-connect.php?full_name='+fName+'&email='+email
+                        location.href='<?php echo PATH; ?>google-connect.php?full_name='+fName+'&email='+email
                         //$("#inputFullname").val(fName);
 //                        /$("#inputEmail").val(email);
                         
@@ -1252,13 +1252,13 @@ function validatesignup()
 <div class='popup_block2'><div class="shadow_bg"></div>
 <div class="sign_up_outer">  	                        
     <div class="sign_up_logo">
-        <a href="http://localhost/zmarts/"><img alt="Logo" src="http://localhost/zmarts/themes/default/images/logo.png"/></a>
+        <a href="<?php echo PATH; ?>"><img alt="Logo" src="<?php echo PATH; ?>themes/default/images/logo.png"/></a>
         <a class="close2" title="close" onclick="hide_forgot_popup()" >&nbsp;</a>
     </div>	    
     <div class="signup_content clearfix">
         <div class="signup_form_block">
             <h2 class="signup_title">Forgot password?</h2>
-            <form name="forget_password" method="post" action="http://localhost/zmarts/users/forgot" onsubmit="return validate_forget_password();">
+            <form name="forget_password" method="post" action="<?php echo PATH; ?>users/forgot" onsubmit="return validate_forget_password();">
                 <ul>
                     <li>                
                         <label>Email:<span class="form_star"> * </span></label>
@@ -1365,7 +1365,7 @@ function validatesignup()
         if (input_string.length == 0) {
             $('#suggestions').fadeOut(); // Hide the suggestions box
         } else {
-            $.post("http://localhost/zmarts/welcome/ajax_search/" + input_string + "/" + '1'+ ' / 1', function(data) { // Do an AJAX call
+            $.post("<?php echo PATH; ?>welcome/ajax_search/" + input_string + "/" + '1'+ ' / 1', function(data) { // Do an AJAX call
                 $('#suggestions').fadeIn(); // Show the suggestions box
                 $('#suggestions').html(data); // Fill the suggestions box
             });
@@ -1380,7 +1380,7 @@ function validatesignup()
         if (input_string.length == 0) {
             $('#suggestions').fadeOut(); // Hide the suggestions box
         } else {
-            $.post("http://localhost/zmarts/welcome/ajax_search/" + input_string + "/" + '1'+ ' / 1', function(data) { // Do an AJAX call
+            $.post("<?php echo PATH; ?>welcome/ajax_search/" + input_string + "/" + '1'+ ' / 1', function(data) { // Do an AJAX call
                 $('#suggestions').fadeIn(); // Show the suggestions box
                 $('#suggestions').html(data); // Fill the suggestions box
             });
@@ -1393,7 +1393,7 @@ function validatesignup()
         if (lang != "" && lang != "undefined") {
 
             var dataString = "language=" + lang;
-            var url = 'http://localhost/zmarts/welcome/setlanguage';
+            var url = '<?php echo PATH; ?>welcome/setlanguage';
             $.ajax(
                     {
                         type: 'POST',
@@ -1524,7 +1524,7 @@ $("#cart_window").mouseout(function(){
             <!--
             <span id="success_message"></span>
             -->
-<script src="http://localhost/zmarts/themes/default/toastr/jquery.jnotify.js"></script>
+<script src="<?php echo PATH; ?>themes/default/toastr/jquery.jnotify.js"></script>
 
 <script type="text/javascript">
     				$(window).load(function() {
@@ -1579,16 +1579,16 @@ $(".slidetabs").tabs(".images > div", {
 
 <li>                                                                                
     <a href="http://www.google.com"  title = "http://www.google.com">
-        <img alt="Logo" src="http://localhost/zmarts/images/merchant/banner/1_fashion_1_banner.png"/>
+        <img alt="Logo" src="<?php echo PATH; ?>images/merchant/banner/1_fashion_1_banner.png"/>
     </a>
 </li>
 <li>                                                                                
     <a href="http://www.google.com"  title = "http://www.google.com">
-        <img alt="Logo" src="http://localhost/zmarts/images/merchant/banner/1_fashion_2_banner.png"/>
+        <img alt="Logo" src="<?php echo PATH; ?>images/merchant/banner/1_fashion_2_banner.png"/>
     </a>
 </li>
                 <li>
-                        <img src="http://localhost/zmarts/bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-3.jpg" alt="" />
                 </li>
             </ul>
     </div>
@@ -1617,25 +1617,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
             <i class="wloader_img">&nbsp;</i>
-                                <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/rZ6OhnTp/tesssssssssssssssssss.html" title="tesssssssssssssssssss"><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="tesssssssssssssssssss" title="tesssssssssssssssssss"></a>
+                                <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/rZ6OhnTp/tesssssssssssssssssss.html" title="tesssssssssssssssssss"><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="tesssssssssssssssssss" title="tesssssssssssssssssss"></a>
                 
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 90</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/rZ6OhnTp/tesssssssssssssssssss.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/rZ6OhnTp/tesssssssssssssssssss.html" 
                title="tesssssssssssssssssss" style="font-size:12px arial; color:#000000;"> tesssssssssssssssssss</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('33','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/rZ6OhnTp/tesssssssssssssssssss.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/rZ6OhnTp/tesssssssssssssssssss.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('33','tesssssssssssssssssss');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1648,25 +1648,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
             <i class="wloader_img">&nbsp;</i>
-                                <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/dX5eHtZQ/tessssssssssss.html" title="tessssssssssss"><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="tessssssssssss" title="tessssssssssss"></a>
+                                <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/dX5eHtZQ/tessssssssssss.html" title="tessssssssssss"><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="tessssssssssss" title="tessssssssssss"></a>
                 
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 90</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/dX5eHtZQ/tessssssssssss.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/dX5eHtZQ/tessssssssssss.html" 
                title="tessssssssssss" style="font-size:12px arial; color:#000000;"> tessssssssssss</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('32','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/dX5eHtZQ/tessssssssssss.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/dX5eHtZQ/tessssssssssss.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('32','tessssssssssss');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1679,25 +1679,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
             <i class="wloader_img">&nbsp;</i>
-                                <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/Wc6aa2Rd/testssssssssssssssssssss.html" title="testssssssssssssssssssss"><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="testssssssssssssssssssss" title="testssssssssssssssssssss"></a>
+                                <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/Wc6aa2Rd/testssssssssssssssssssss.html" title="testssssssssssssssssssss"><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="testssssssssssssssssssss" title="testssssssssssssssssssss"></a>
                 
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 100</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/Wc6aa2Rd/testssssssssssssssssssss.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/Wc6aa2Rd/testssssssssssssssssssss.html" 
                title="testssssssssssssssssssss" style="font-size:12px arial; color:#000000;"> testssssssssssssssssssss</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('30','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/Wc6aa2Rd/testssssssssssssssssssss.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/Wc6aa2Rd/testssssssssssssssssssss.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('30','testssssssssssssssssssss');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1710,25 +1710,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
             <i class="wloader_img">&nbsp;</i>
-                                <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/SQfnks7g/tets-sports.html" title="tets sports "><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="tets sports " title="tets sports "></a>
+                                <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/SQfnks7g/tets-sports.html" title="tets sports "><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="tets sports " title="tets sports "></a>
                 
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 30</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/SQfnks7g/tets-sports.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/SQfnks7g/tets-sports.html" 
                title="tets sports " style="font-size:12px arial; color:#000000;"> tets sports </a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('24','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/SQfnks7g/tets-sports.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/SQfnks7g/tets-sports.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('24','tets sports ');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1751,25 +1751,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
                 <i class="wloader_img">&nbsp;</i>
-                                        <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/yEd3F8e1/test-test-sports.html" title="test test sports"><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="test test sports" title="test test sports"></a>
+                                        <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/yEd3F8e1/test-test-sports.html" title="test test sports"><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="test test sports" title="test test sports"></a>
                     
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 5</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/yEd3F8e1/test-test-sports.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/yEd3F8e1/test-test-sports.html" 
                title="test test sports" style="font-size:12px arial; color:#000000;"> test test sports</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('23','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/yEd3F8e1/test-test-sports.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/yEd3F8e1/test-test-sports.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('23','test test sports');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1783,25 +1783,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
                 <i class="wloader_img">&nbsp;</i>
-                                        <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/i90IFkVF/test-add-product.html" title="test add product"><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="test add product" title="test add product"></a>
+                                        <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/i90IFkVF/test-add-product.html" title="test add product"><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="test add product" title="test add product"></a>
                     
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 10</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/i90IFkVF/test-add-product.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/i90IFkVF/test-add-product.html" 
                title="test add product" style="font-size:12px arial; color:#000000;"> test add product</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('20','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/i90IFkVF/test-add-product.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/i90IFkVF/test-add-product.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('20','test add product');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1815,25 +1815,25 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
                 <i class="wloader_img">&nbsp;</i>
-                                        <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/GRmcQ7wI/Zaveri-Pearls-Golden-Boutique-Necklace-Alloy-Jewel-SetPink-White-Blue.html" title="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)"><img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/themes/default/images/noimage_products_list.png&w=171&h=132"  alt="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)" title="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)"></a>
+                                        <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/GRmcQ7wI/Zaveri-Pearls-Golden-Boutique-Necklace-Alloy-Jewel-SetPink-White-Blue.html" title="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)"><img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>themes/default/images/noimage_products_list.png&w=171&h=132"  alt="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)" title="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)"></a>
                     
                                                                 
             </p>
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/star_5.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/star_5.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 1500</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/GRmcQ7wI/Zaveri-Pearls-Golden-Boutique-Necklace-Alloy-Jewel-SetPink-White-Blue.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/GRmcQ7wI/Zaveri-Pearls-Golden-Boutique-Necklace-Alloy-Jewel-SetPink-White-Blue.html" 
                title="Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)" style="font-size:12px arial; color:#000000;"> Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('17','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/GRmcQ7wI/Zaveri-Pearls-Golden-Boutique-Necklace-Alloy-Jewel-SetPink-White-Blue.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/GRmcQ7wI/Zaveri-Pearls-Golden-Boutique-Necklace-Alloy-Jewel-SetPink-White-Blue.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('17','Zaveri Pearls Golden Boutique Necklace Alloy Jewel Set(Pink, White, Blue)');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -1847,8 +1847,8 @@ $(".slidetabs").tabs(".images > div", {
             <span class="sale_tag"></span>
             <p>
                 <i class="wloader_img">&nbsp;</i>
-                                        <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/SFrwp5CQ/hometown-Iris-Solid-Wood-Dining-Set.html" title="hometown Iris Solid Wood Dining Set">
-                                                        <img src="http://localhost/zmarts/resize.php?src=http://localhost/zmarts/images/products/1000_800/SFrwp5CQ_1.png&w=171&h=132" alt="hometown Iris Solid Wood Dining Set" title="hometown Iris Solid Wood Dining Set" />
+                                        <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/SFrwp5CQ/hometown-Iris-Solid-Wood-Dining-Set.html" title="hometown Iris Solid Wood Dining Set">
+                                                        <img src="<?php echo PATH; ?>resize.php?src=<?php echo PATH; ?>images/products/1000_800/SFrwp5CQ_1.png&w=171&h=132" alt="hometown Iris Solid Wood Dining Set" title="hometown Iris Solid Wood Dining Set" />
                                  </a>
                     
                                                                 
@@ -1856,18 +1856,18 @@ $(".slidetabs").tabs(".images > div", {
             <div class="seller_listing_content">
                 
                 <div class="ratings">
-<img alt="" src="http://localhost/zmarts/themes/default/images/new/gray.png"/>
+<img alt="" src="<?php echo PATH; ?>themes/default/images/new/gray.png"/>
                 </div>
                 <!--<p style="font:18px arial;color: #000;">&#8358; 3800</p>-->
             </div>
             
-            <a class="pro_tit" href="http://localhost/zmarts/ABC-Pvt-Ltd/product/SFrwp5CQ/hometown-Iris-Solid-Wood-Dining-Set.html" 
+            <a class="pro_tit" href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/SFrwp5CQ/hometown-Iris-Solid-Wood-Dining-Set.html" 
                title="hometown Iris Solid Wood Dining Set" style="font-size:12px arial; color:#000000;"> hometown Iris Solid Wood Dining Set</a>
             <br/>
             <div class="cmpr">
             <a onclick="addToCompare('15','','detail');" title="Add to compare">&nbsp;</a>
             </div>
-            <a href="http://localhost/zmarts/ABC-Pvt-Ltd/product/SFrwp5CQ/hometown-Iris-Solid-Wood-Dining-Set.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
+            <a href="<?php echo PATH; ?>ABC-Pvt-Ltd/product/SFrwp5CQ/hometown-Iris-Solid-Wood-Dining-Set.html" title="Add to cart" class="category btn btn-success">Add to cart</a>
              <div class="wish">
             <a onclick="addToWishList('15','hometown Iris Solid Wood Dining Set');" title="Add to wishlist">&nbsp;</a>
             </div>
@@ -2003,7 +2003,7 @@ function viewMore(){
 		var record = document.getElementById('record').value;
 		var record1 = document.getElementById('record1').value;
                 
-		var url = 'http://localhost/zmarts/' + 'fashion9/all_product_list/ABC-Pvt-Ltd/'+ offset + '/' + record+'/'+''+'/'+''+'/'+'' + '/' + '';
+		var url = '<?php echo PATH; ?>' + 'fashion9/all_product_list/ABC-Pvt-Ltd/'+ offset + '/' + record+'/'+''+'/'+''+'/'+'' + '/' + '';
 		$.post(url, function(check) {
                     
 			if (check) {
@@ -2033,8 +2033,8 @@ $(document).ready(function() {
         <div class="row">
                 <div class="span5">
                     <p class="logo">
-<a href="http://localhost/zmarts/ABC-Pvt-Ltd/"  title = "ABC Pvt Ltd">
-    <img alt="Logo" src="http://localhost/zmarts/images/merchant/290_215/15_1.png"/>
+<a href="<?php echo PATH; ?>ABC-Pvt-Ltd/"  title = "ABC Pvt Ltd">
+    <img alt="Logo" src="<?php echo PATH; ?>images/merchant/290_215/15_1.png"/>
 </a>
                     </p>
                         <p>For 30 years, we've helped millions of women look as great as they feel. Our chic prints, artisan jackets, and wrinkle-free Travelers collection have built quite a following at our boutiques—but we hear it's our combination of great style, one-of-a-kind details, and warm, personal service that has captured the hearts of women nationwide. </p>
@@ -2042,7 +2042,7 @@ $(document).ready(function() {
                 <div class="span4">
                         <h4>Shopping Guide</h4>
                     <ul>
-                        <li><a href="http://localhost/zmarts/" title="Home">Home</a></li>
+                        <li><a href="<?php echo PATH; ?>" title="Home">Home</a></li>
                                              </ul>
                 </div>
                 <div class="span3">

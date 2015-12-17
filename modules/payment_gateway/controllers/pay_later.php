@@ -384,10 +384,10 @@ class Pay_later_Controller extends Layout_Controller
 					$nvpStr = "&AUTHORIZATIONID=".$C->transaction_id."&AMT=".$C->amount."&COMPLETETYPE=Complete";
 					$result = arr::to_object($this->hash_call("DoCapture", $nvpStr));
 					if($result->ACK = "Success" ){
-							$status = $this->pay_later->update_captured_transaction($result, $C->id);
+							//$status = $this->pay_later->update_captured_transaction($result, $C->id);
 					}
 				} else {
-						$status = $this->pay_later->update_captured_transaction_success($C->id);
+						//$status = $this->pay_later->update_captured_transaction_success($C->id);
 				}
 			}
 			$captured_mail_list = $this->pay_later->payment_authorization_mail_list($deal_id);

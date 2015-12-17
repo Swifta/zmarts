@@ -77,7 +77,8 @@ final class BarcodeQR {
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 		$img = curl_exec($ch); 
 		curl_close($ch);
-
+                //var_dump(self::API_CHART_URL);
+                //var_dump($img);var_dump($filename);die;
 		if($img) {
 			if($filename) {
 				if(!preg_match("#\.png$#i", $filename)) {

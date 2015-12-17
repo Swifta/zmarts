@@ -1123,8 +1123,8 @@ InvalidInputHelper(document.getElementById("addrs1"), {
 
   
 InvalidInputHelper(document.getElementById("mob"), {
-defaultText: "Please enter your phone number",
-emptyText: "Please enter your phone number",
+defaultText: "e.g. 080..., 070...",
+emptyText: "e.g. 080..., 070...",
 invalidText: function (input) {
 	return 'The phone number  "' + input.value + '" is invalid';
 }

@@ -394,7 +394,7 @@ ship_address2' => string 'test address2' (length=13)
                                           ?>
 <table width="700" cellpadding="0" align="center" cellspacing="0" border="0" bgcolor="#ffffff">
   <tr height="63">
-    <td colspan="7" valign="middle" align="left"><div style="margin:0 auto;width:50px;"> <a style="text-decoration:none" href="http://localhost/zmarts/" title="<?php echo SITENAME;?>"> <img src="<?php echo THEME; ?>images/logo.png"  alt="<?php echo SITENAME; ?>" /> </a> </div></td>
+    <td colspan="7" valign="middle" align="left"><div style="margin:0 auto;width:50px;"> <a style="text-decoration:none" href="<?php echo PATH; ?>" title="<?php echo SITENAME;?>"> <img src="<?php echo THEME; ?>images/logo.png"  alt="<?php echo SITENAME; ?>" /> </a> </div></td>
   </tr>
   <tr  style="text-align:left;  padding:20px 15px 15px 15px; ;margin:0 0 20px; background:#e2e2e2;" >
     <td colspan="7" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear Admin,</strong></td>
