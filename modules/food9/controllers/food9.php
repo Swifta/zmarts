@@ -50,8 +50,8 @@ class Food9_Controller extends Layout_Controller
                 $java_scripts = array();
                 //$java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
                 
-                $java_scripts[0] = 'http://code.jquery.com/jquery-1.11.0.min.js';
-                $java_scripts[1] = 'http://code.jquery.com/jquery-migrate-1.2.1.min.js';
+                $java_scripts[0] = 'https://code.jquery.com/jquery-1.11.0.min.js';
+                $java_scripts[1] = 'https://code.jquery.com/jquery-migrate-1.2.1.min.js';
                 $java_scripts[2] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
                 $java_scripts[3] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.jpanelmenu.js';
                 $java_scripts[4] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/scripts/jquery.themepunch.plugins.min.js';
