@@ -92,6 +92,10 @@ class error {
 				case 'check_min_fund':
 					 $my_error[$key] = $this->Lang["MIN_F"];
 					 break;
+				case 'check_return_policy':
+					 $my_error[$key] ='* Required';
+					 break;
+					 
 				case 'check_desc_empty':
 					$my_error[$key] = $this->Lang["REQQ"];
 					break;

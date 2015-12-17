@@ -1623,7 +1623,8 @@ class Merchant_Controller extends website_Controller
 							//->add_rules('size_tag[]', 'required')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							->add_rules('stores','required')
-							->add_rules('delivery_days','required');
+							->add_rules('delivery_days','required')
+							->add_rules('Delivery_value', array($this, 'check_return_policy'));
 							
 							$price_s = $post->price;
 							if(isset($price_s)){
@@ -1888,7 +1889,8 @@ class Merchant_Controller extends website_Controller
 					   ->add_rules('deal_value', 'required',array($this, 'check_prime_price_lmi_prd'), array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
 				        ->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 				        ->add_rules('stores','required')
-				        ->add_rules('delivery_days','required');
+				        ->add_rules('delivery_days','required')
+						->add_rules('Delivery_value', array($this, 'check_return_policy'));
 				        
 				       /* if(isset($this->userPost['offer'])){
 							if($this->userPost['offer']==1){
@@ -7243,5 +7245,18 @@ class Merchant_Controller extends website_Controller
 		return 0;
 		
 		
+	}
+	
+	function check_return_policy(){
+		
+		if(count($_POST['Delivery_value']) > 0){
+			$policy = $_POST['Delivery_value'];
+			if(!$policy[0]){
+				return 0;
+			}
+			return 1;
+		}
+		return 0;
+				
 	}
 }
