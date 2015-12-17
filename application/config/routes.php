@@ -4,6 +4,7 @@
 
 $config['/'] = '/welcome/path_url';
 $config['_default'] = '/welcome';
+$config['/not_found'] = '/welcome/not_found';
 $config['/page/(.*)'] = '/welcome/index/-1/$1';
 $config['changecity/(.*)/(.*).html'] = "/welcome/changecity/$1/$2";
 $config['/deals/rss/(.*)/(.*)'] = "/welcome/rss/$1/$2";

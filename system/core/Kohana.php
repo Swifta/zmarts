@@ -838,6 +838,8 @@ final class Kohana {
 	 */
 	public static function show_404($page = FALSE, $template = FALSE)
 	{
+            //echo "was here";
+            //die;
 		throw new Kohana_404_Exception($page, $template);
 	}
 
@@ -1157,7 +1159,8 @@ final class Kohana {
 			{
 				// Directory i18n key
 				$directory = 'core.'.inflector::singular($directory);
-
+                                url::redirect(PATH."not_found");
+                                die;
 				// If the file is required, throw an exception
 				throw new Kohana_Exception('core.resource_not_found', self::lang($directory), $filename);
 			}
@@ -1768,7 +1771,7 @@ class Kohana_404_Exception extends Kohana_Exception {
 			// Construct the page URI using Router properties
 			$page = Router::$current_uri.Router::$url_suffix.Router::$query_string;
 		}
-
+                
 		Exception::__construct(Kohana::lang('core.page_not_found', $page));
 
 		$this->template = $template;
@@ -1781,6 +1784,7 @@ class Kohana_404_Exception extends Kohana_Exception {
 	 */
 	public function sendHeaders()
 	{
+            echo "here"; die;
 		// Send the 404 header
 		header('HTTP/1.1 404 File Not Found');
 	}

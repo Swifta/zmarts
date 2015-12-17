@@ -47,6 +47,13 @@ class Welcome_Controller extends Layout_Controller
 		$this->Api_Subject = $this->AUTH_token = $this->AUTH_signature = $this->AUTH_timestamp = '';
 		$this->template->javascript .= html::script(array(PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'));
 	}
+        
+        
+        /** PAGE NOT FOUND **/
+        public function not_found(){
+		$this->template->title = "PAGE NOT FOUND | ".SITENAME; 
+		$this->template->content = new View("themes/".THEME_NAME."/404_page");
+        }
 
 	/** HOME PAGE **/
 	
