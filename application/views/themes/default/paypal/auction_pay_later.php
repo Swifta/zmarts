@@ -146,7 +146,7 @@
 											
 										<li>
 												<label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
-												<div class="fullname"><input tabindex="9" id="ship_phone_pay1" name="phone" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" type="text" value="" class="required number" maxlength="18"/></div>
+												<div class="fullname"><input tabindex="9" id="ship_phone_pay1" name="phone" size="40" AUTOCOMPLETE="OFF"  placeholder="e.g. 080..., 070..." type="text" value="" class="required number" maxlength="18"/></div>
 										</li>
 
                                     </ul>

@@ -100,7 +100,7 @@
                 <tr>
                     <td><label><?php echo $this->Lang["I_PAG_LINK"]; ?></label></td>
                     <td><label>:</label></td>
-                    <td><input type="text" name="iphone" value="<?php echo IPHONE_PAGE;?>" maxlength="256" />
+                    <td><input type="text" name="iphone" placeholder="e.g. 080..., 070..." value="<?php echo IPHONE_PAGE;?>" maxlength="256" />
                     <em><?php if(isset($this->form_error["iphone"])){ echo $this->form_error["iphone"]; }?></em></td>
                 </tr>
 		 <tr>

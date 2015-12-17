@@ -728,7 +728,7 @@ $content_text = array(
 
 			"CITY_AL_E" => "City Local Links Already Exist",
 
-			"INV_PH" => "Please Enter valid Phone number",
+			"INV_PH" => "Invalid phone. Only digits, starting with 0.",
 			
 			"INV_NUM" => "Please Enter valid number",
 
@@ -1910,7 +1910,7 @@ $content_text = array(
 
 			"CAT_BLOG_CANT_AD" => "Category Is Blocked, You Can't able to Add a Category",
 
-			"PH_NUM" => "Phone number",
+			"PH_NUM" => "Phone number, e.g. 080..., 070...",
 
 			"SEND_MAIL" => "Send Mail",
 
