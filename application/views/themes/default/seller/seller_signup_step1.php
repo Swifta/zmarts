@@ -375,9 +375,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 </style>
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
  <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
@@ -542,8 +542,8 @@ $('#autoUpdate').fadeOut('slow');
     </script>  -->
     <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!-- <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>-->
   
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   
@@ -765,7 +765,7 @@ InvalidInputHelper(document.getElementById("acctnum"), {
             //alert("First name must be filled out");
             //return false;
          // return  'localhost/zmartst/merchant-signup-step2.html';
-         window.location.assign("http://localhost/zmartst/merchant-signup-step2.html")
+         window.location.assign("<?php echo PATH; ?>/merchant-signup-step2.html")
         }
         if (x < 11 || x == "" ) {
            // alert("First name must be filled out");

@@ -93,7 +93,7 @@
 
                         </div>
                     </div>
-                    <div class="qty_footer_list">
+<!--                    <div class="qty_footer_list">
                         <ul>
                             <li><?php echo $this->Lang['ALTER_INFO_WIN']; ?></li>
                             <li><?php echo $this->Lang['YOUR_CREDIT_C_NOT']; ?></li>
@@ -104,7 +104,7 @@
                         </ul>  
 
                     </div>
-                
+                -->
         <!--QTY CONTENT ends-->
 </div>
 

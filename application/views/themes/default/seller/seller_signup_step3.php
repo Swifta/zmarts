@@ -4,9 +4,9 @@
 </style>
 
 
-<!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
   
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   

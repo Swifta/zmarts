@@ -350,7 +350,8 @@ class Pay_later_Controller extends Layout_Controller
 				url::redirect(PATH);
 			}
 
-			if(($this->get_user_limit_details + $item_qty) > $max_user_limit){
+			if((($this->get_user_limit_details + $item_qty) > $max_user_limit)
+                                || (($purchase_qty + $item_qty) >= $min_deals_limit)){
 				common::message(-1, $this->Lang["MAX_PURCH_LIMIT"]);
 				url::redirect(PATH);
 			}
@@ -359,6 +360,7 @@ class Pay_later_Controller extends Layout_Controller
 			} else {
 				$captured = 1;
 			}
+         //               $captured = 0;
 			$paymentType = "Pay Later";
 			$TRANSACTIONID = text::random($type = 'alnum', $length = 16);
 			$transaction = $this->pay_later->insert_deal_pay_later_transaction_details($deal_id,arr::to_object($_POST), $referral_amount,$amount, $item_qty, 6, $captured, $purchase_qty,$merchant_id,$TRANSACTIONID);
