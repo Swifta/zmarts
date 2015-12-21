@@ -125,8 +125,8 @@ class Leo_Model extends Model
 		$order1="";
 		$order="";
 		  if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($type=='1')
 		{
@@ -179,8 +179,8 @@ class Leo_Model extends Model
 		$order=" product.deal_id DESC";
 		$conditions = "purchase_count < user_limit_quantity  and category.category_status = 1 and  store_status = 1  and shop_id = $store_id";
 		if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($type=="2")
 		{
@@ -207,8 +207,8 @@ class Leo_Model extends Model
 		$order1="";
 		$order="";
 		  if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($type=='1')
 		{
@@ -255,7 +255,7 @@ class Leo_Model extends Model
 	{
 	        $conditions = "";
 		if($search){
-			 $conditions .= "and store_name like '%".mysql_real_escape_string($search)."%'";
+			 $conditions .= "and store_name like '%".strip_tags($search)."%'";
 		}
 		if(CITY_SETTING){
 		
@@ -288,7 +288,7 @@ class Leo_Model extends Model
 	{
 	        $conditions = " ";
 		if($search){
-			 $conditions .= " and store_name like '%".mysql_real_escape_string($search)."%'";
+			 $conditions .= " and store_name like '%".strip_tags($search)."%'";
 		}
 		if(CITY_SETTING){
 		$query = "select * from stores  join users on users.user_id=stores.merchant_id  where store_status = 1 and users.user_type=3 and users.user_status=1 and stores.city_id = '$this->city_id'  $conditions order by store_id DESC limit $offset,$record";
@@ -527,13 +527,13 @@ class Leo_Model extends Model
 		}
 		
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		
 		if($search_key!=''){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search_key)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
 			$conditions .= " and product.category_id = $search_cate_id ";
@@ -575,13 +575,13 @@ class Leo_Model extends Model
 		}
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 		if($search_key!=''){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search_key)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
 			$conditions .= " and product.category_id = $search_cate_id ";
@@ -627,8 +627,8 @@ class Leo_Model extends Model
 		}
 		
 		if($search_key!=''){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search_key)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
 			$conditions .= " and deals.category_id = $search_cate_id ";
@@ -663,7 +663,7 @@ class Leo_Model extends Model
 		
 		if($search_key!=''){
 			$search_url = url::title($search_key);
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
+			$conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
@@ -703,7 +703,7 @@ class Leo_Model extends Model
 		
 		if($search_key!=''){
 			$search_url = url::title($search_key);
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
+			$conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
@@ -735,7 +735,7 @@ class Leo_Model extends Model
 		}
 		if($search_key!=''){
 			$search_url = url::title($search_key);
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
+			$conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
@@ -790,8 +790,8 @@ class Leo_Model extends Model
 		}
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if(CITY_SETTING){
 		$query = "select product.deal_id, deal_key, url_title, deal_title, deal_description, $this->deal_value_condition,category_url,stores.store_url_title from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where  stores.store_id = ".$store_id." and purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC";
@@ -884,8 +884,8 @@ class Leo_Model extends Model
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
 
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 		// filter start

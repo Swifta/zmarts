@@ -63,7 +63,7 @@ class Admin_blog_Model extends Model
 		$conditions = 'blog.publish_status ='.$type;
 		if($_GET){			
 			if($title){
-				$conditions .= ' and blog_title like "%'.mysql_real_escape_string($title).'%"';
+				$conditions .= ' and blog_title like "%'.strip_tags($title).'%"';
 			}									
 			if($category){
 				$conditions .= ' and blog.category_id = '.$category;
@@ -88,7 +88,7 @@ class Admin_blog_Model extends Model
 		$conditions = 'blog.publish_status ='.$type;
 		if($_GET){			
 			if($title){
-				$conditions .= ' and blog_title like "%'.mysql_real_escape_string($title).'%"';
+				$conditions .= ' and blog_title like "%'.strip_tags($title).'%"';
 			}									
 			if($category){
 				$conditions .= ' and blog.category_id = '.$category;

@@ -148,11 +148,11 @@ class Admin_merchant_Model extends Model
                         }
 
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
                         if($today == 1)
                         {
@@ -215,11 +215,11 @@ class Admin_merchant_Model extends Model
                         }
 
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
                         if($today == 1)
                         {
@@ -281,7 +281,7 @@ class Admin_merchant_Model extends Model
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.mysql_real_escape_string($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
                         }
                         $result = $this->db->query("select * from stores where $contitions ORDER BY stores.store_id limit $offset, $record");
                         count($result);
@@ -309,7 +309,7 @@ class Admin_merchant_Model extends Model
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.mysql_real_escape_string($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
                         }
                         $result = $this->db->query("select stores.store_id from stores where $contitions ORDER BY stores.store_id");
                         count($result);
@@ -512,9 +512,9 @@ class Admin_merchant_Model extends Model
 
                 $contitions = "";
                         if($firstname){
-                        $contitions .= 'where users.firstname like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR stores.store_name like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.mysql_real_escape_string($firstname).'%"';
+                        $contitions .= 'where users.firstname like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR stores.store_name like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC limit $offset, $record");
               
@@ -527,9 +527,9 @@ class Admin_merchant_Model extends Model
         {
                $contitions = "";
                         if($firstname){
-                        $contitions .= 'where users.firstname like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR stores.store_name like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.mysql_real_escape_string($firstname).'%"';
+                        $contitions .= 'where users.firstname like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR stores.store_name like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC ");
               

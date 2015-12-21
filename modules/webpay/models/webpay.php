@@ -1,4 +1,4 @@
-t/<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') or die('No direct script access.');
 class Webpay_Model extends Model
 {
 	public function __construct()

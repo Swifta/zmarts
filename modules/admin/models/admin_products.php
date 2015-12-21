@@ -251,8 +251,8 @@ class Admin_products_Model extends Model
 			        $conditions .= " and city.city_id = ".$city;
 			}
 			if($name){
-			        $conditions .= " and (deal_title like '%".mysql_real_escape_string($name)."%'";
-			        $conditions .= " or store_name like '%".mysql_real_escape_string($name)."%')";
+			        $conditions .= " and (deal_title like '%".strip_tags($name)."%'";
+			        $conditions .= " or store_name like '%".strip_tags($name)."%')";
 			}
                         if($today == 1)
                         {
@@ -336,7 +336,7 @@ class Admin_products_Model extends Model
                                 $conditions .= " and city.city_id = ".$city;
                         }
                         if($name){
-                                $conditions .= " and deal_title like '%".mysql_real_escape_string($name)."%'";
+                                $conditions .= " and deal_title like '%".strip_tags($name)."%'";
                         }
                         if($today == 1)
                         {
@@ -861,9 +861,9 @@ class Admin_products_Model extends Model
         {
                 $contitions = "discussion.type = $deal_type ";
                         if($firstname){
-                        $contitions .= ' AND (users.firstname like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR product.deal_title like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.mysql_real_escape_string($firstname).'%")';
+                        $contitions .= ' AND (users.firstname like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR product.deal_title like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%")';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
                 return $result;
@@ -875,9 +875,9 @@ class Admin_products_Model extends Model
         {
                $contitions = "discussion.type = $deal_type ";
                         if($firstname){
-                        $contitions .= ' AND (users.firstname like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR product.deal_title like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.mysql_real_escape_string($firstname).'%")';
+                        $contitions .= ' AND (users.firstname like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR product.deal_title like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%")';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC");
                 return count($result);
@@ -935,9 +935,9 @@ class Admin_products_Model extends Model
 					
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= 'OR u.email like "%'.mysql_real_escape_string($name).'%"';
-            		$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= 'OR u.email like "%'.strip_tags($name).'%"';
+            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
                    $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
 				}
 				else {
@@ -958,9 +958,9 @@ class Admin_products_Model extends Model
 					$condition = " AND t.type = 5 ";
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= ' OR u.email like "%'.mysql_real_escape_string($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
                    
                    $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC "); 
 		}

@@ -101,10 +101,10 @@ class Admin_moderator_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
@@ -154,10 +154,10 @@ class Admin_moderator_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
 
 						$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");

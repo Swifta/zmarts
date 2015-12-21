@@ -31,7 +31,7 @@ class Blog_Model extends Model
 		$conditions = 'blog.publish_status = 1 and blog.blog_status = 1';
 		if($_GET){
 			if($search_cat){
-				$conditions .= ' and blog.blog_title like "%'.mysql_real_escape_string($search_cat).'%"';	
+				$conditions .= ' and blog.blog_title like "%'.strip_tags($search_cat).'%"';	
 			}
 		}
 		if($type != 1){  
@@ -55,7 +55,7 @@ class Blog_Model extends Model
 		$conditions = 'blog.publish_status = 1 and blog.blog_status = 1';
 		if($_GET){
 			if($search_cat){
-				$conditions .= ' and blog.blog_title like "%'.mysql_real_escape_string($search_cat).'%" ';	
+				$conditions .= ' and blog.blog_title like "%'.strip_tags($search_cat).'%" ';	
 			}
 		}
 		if($type != 1){  

@@ -711,7 +711,7 @@ class Admin_Model extends Model
 	                $time=time();
 			$conditions="";
               		if($code || $code=='0'){
-                                $conditions= "transaction_mapping.coupon_code ='".mysql_real_escape_string($code)."'";
+                                $conditions= "transaction_mapping.coupon_code ='".strip_tags($code)."'";
                          }
                         $query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id where $conditions and expirydate > $time limit 1 ";
                         $result = $this->db->query($query);
@@ -908,8 +908,8 @@ class Admin_Model extends Model
 
                 	$contitions = "where status=1";
                         if($name){
-						$contitions .= ' AND name like "%'.mysql_real_escape_string($name).'%"';
-                        $contitions .= ' OR email like "%'.mysql_real_escape_string($name).'%"';
+						$contitions .= ' AND name like "%'.strip_tags($name).'%"';
+                        $contitions .= ' OR email like "%'.strip_tags($name).'%"';
                         }
                        $result = $this->db->query("select * from contact $contitions order by contact_id DESC $limit1 ");
                 return $result;
@@ -923,8 +923,8 @@ class Admin_Model extends Model
                		$contitions = "where status=1";
                         if($name){
 
-		        $contitions .= ' AND name like "%'.mysql_real_escape_string($name).'%"';
-                        $contitions .= ' OR email like "%'.mysql_real_escape_string($name).'%"';
+		        $contitions .= ' AND name like "%'.strip_tags($name).'%"';
+                        $contitions .= ' OR email like "%'.strip_tags($name).'%"';
                         }
                        $result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
                 return count($result);
@@ -947,12 +947,12 @@ class Admin_Model extends Model
 	{
 		$contitions = "u2.user_status = 1";
                         if($name){
-                                $contitions .= ' AND u2.firstname like "%'.mysql_real_escape_string($name).'%" OR u1.firstname like "%'.mysql_real_escape_string($name).'%" ';
+                                $contitions .= ' AND u2.firstname like "%'.strip_tags($name).'%" OR u1.firstname like "%'.strip_tags($name).'%" ';
                         }
 
                         if($email){
-		       // $contitions .= ' AND city.city_name like "%'.mysql_real_escape_string($city).'%"';
-                        $contitions .= ' AND u2.email like "%'.mysql_real_escape_string($email).'%"';
+		       // $contitions .= ' AND city.city_name like "%'.strip_tags($city).'%"';
+                        $contitions .= ' AND u2.email like "%'.strip_tags($email).'%"';
 
                         }
                        $result = $this->db->query("select u1.firstname as refered_name,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC ");
@@ -968,13 +968,13 @@ class Admin_Model extends Model
 
 		$contitions = "u2.user_status = 1";
                         if($name){
-                                $contitions .= ' AND u2.firstname like "%'.mysql_real_escape_string($name).'%" OR u1.firstname like "%'.mysql_real_escape_string($name).'%"';
+                                $contitions .= ' AND u2.firstname like "%'.strip_tags($name).'%" OR u1.firstname like "%'.strip_tags($name).'%"';
                         }
 
                         if($email){
 
-		       // $contitions .= ' AND city.city_name like "%'.mysql_real_escape_string($city).'%"';
-                        $contitions .= ' AND u2.email like "%'.mysql_real_escape_string($email).'%"';
+		       // $contitions .= ' AND city.city_name like "%'.strip_tags($city).'%"';
+                        $contitions .= ' AND u2.email like "%'.strip_tags($email).'%"';
                         }
                        $result = $this->db->query("select u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC $limit1 ");
                 return $result;

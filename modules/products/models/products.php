@@ -74,8 +74,8 @@ class Products_Model extends Model
 		}
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if(CITY_SETTING){
 		$query = "select product.deal_id from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC";
@@ -125,8 +125,8 @@ class Products_Model extends Model
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
 
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 		// filter start
@@ -1270,8 +1270,8 @@ public function get_store_id($storeurl="")
 		}
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if(CITY_SETTING){
 		$query = "select product.deal_id from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by product.deal_id order by product.deal_id DESC";
@@ -1321,8 +1321,8 @@ public function get_store_id($storeurl="")
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
 
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 		// filter start

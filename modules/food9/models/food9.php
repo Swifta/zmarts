@@ -106,8 +106,8 @@ class Food9_Model extends Model
 		$order1="";
 		$order="";
 		  if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($type=='1')
 		{
@@ -160,8 +160,8 @@ class Food9_Model extends Model
 		$order=" product.deal_id DESC";
 		$conditions = "purchase_count < user_limit_quantity  and category.category_status = 1 and  store_status = 1  and shop_id = $store_id";
 		if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($type=="2")
 		{
@@ -188,8 +188,8 @@ class Food9_Model extends Model
 		$order1="";
 		$order="";
 		  if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($type=='1')
 		{
@@ -236,7 +236,7 @@ class Food9_Model extends Model
 	{
 	        $conditions = "";
 		if($search){
-			 $conditions .= "and store_name like '%".mysql_real_escape_string($search)."%'";
+			 $conditions .= "and store_name like '%".strip_tags($search)."%'";
 		}
 		if(CITY_SETTING){
 		
@@ -269,7 +269,7 @@ class Food9_Model extends Model
 	{
 	        $conditions = " ";
 		if($search){
-			 $conditions .= " and store_name like '%".mysql_real_escape_string($search)."%'";
+			 $conditions .= " and store_name like '%".strip_tags($search)."%'";
 		}
 		if(CITY_SETTING){
 		$query = "select * from stores  join users on users.user_id=stores.merchant_id  where store_status = 1 and users.user_type=3 and users.user_status=1 and stores.city_id = '$this->city_id'  $conditions order by store_id DESC limit $offset,$record";
@@ -507,13 +507,13 @@ class Food9_Model extends Model
 		}
 		
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		
 		if($search_key!=''){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search_key)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
 			$conditions .= " and product.category_id = $search_cate_id ";
@@ -555,13 +555,13 @@ class Food9_Model extends Model
 		}
 
 		if($search!='main' && $search!='sub' && $search!='sec' && $search!='third' && $search!=""){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 		if($search_key!=''){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search_key)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
 			$conditions .= " and product.category_id = $search_cate_id ";
@@ -607,8 +607,8 @@ class Food9_Model extends Model
 		}
 		
 		if($search_key!=''){
-			 $conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
-			 $conditions .= " or deal_description like '%".mysql_real_escape_string($search_key)."%')";
+			 $conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
+			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
 			$conditions .= " and deals.category_id = $search_cate_id ";
@@ -643,7 +643,7 @@ class Food9_Model extends Model
 		
 		if($search_key!=''){
 			$search_url = url::title($search_key);
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
+			$conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
@@ -683,7 +683,7 @@ class Food9_Model extends Model
 		
 		if($search_key!=''){
 			$search_url = url::title($search_key);
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
+			$conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
@@ -715,7 +715,7 @@ class Food9_Model extends Model
 		}
 		if($search_key!=''){
 			$search_url = url::title($search_key);
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search_key)."%'";
+			$conditions .= " and (deal_title like '%".strip_tags($search_key)."%'";
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){

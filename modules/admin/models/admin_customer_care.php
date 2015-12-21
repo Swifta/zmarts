@@ -104,10 +104,10 @@ class Admin_customer_care_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
                         if($today == 1)
                         {
@@ -169,10 +169,10 @@ class Admin_customer_care_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.mysql_real_escape_string($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.mysql_real_escape_string($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
                         }
                         if($today == 1)
                         {

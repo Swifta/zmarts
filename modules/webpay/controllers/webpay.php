@@ -545,7 +545,6 @@ class Webpay_Controller extends Layout_Controller
                 $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
 
                 if(EMAIL_TYPE==2) {
-		}else{
 			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);

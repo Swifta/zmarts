@@ -141,8 +141,8 @@ class Admin_auction_Model extends Model
 			$conditions .= " and city.city_id = ".$city;
 			}
 			if($name){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($name)."%'";
-			$conditions .= " or store_name like '%".mysql_real_escape_string($name)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($name)."%'";
+			$conditions .= " or store_name like '%".strip_tags($name)."%')";
 			}
 			if($today == 1)
                         {
@@ -211,8 +211,8 @@ class Admin_auction_Model extends Model
                         }
 
                         if($name){
-                                $conditions .= " and (deal_title like '%".mysql_real_escape_string($name)."%'";
-			        $conditions .= " or store_name like '%".mysql_real_escape_string($name)."%')";
+                                $conditions .= " and (deal_title like '%".strip_tags($name)."%'";
+			        $conditions .= " or store_name like '%".strip_tags($name)."%')";
                         }
 			if($today == 1)
                         {
@@ -457,9 +457,9 @@ class Admin_auction_Model extends Model
 					
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= ' OR u.email like "%'.mysql_real_escape_string($name).'%")';
-            		//$contitions .= ' OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%")';
+            		//$contitions .= ' OR tm.coupon_code like "%'.strip_tags($name).'%")';
                    $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
 				}
 				else {
@@ -481,9 +481,9 @@ class Admin_auction_Model extends Model
 					
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.mysql_real_escape_string($name).'%"';
-                    $contitions .= ' OR u.email like "%'.mysql_real_escape_string($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.mysql_real_escape_string($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
                    
                    $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC "); 
 		}
@@ -511,8 +511,8 @@ class Admin_auction_Model extends Model
 		
 		$contitions = "auction.winner != 0 and  bidding.winning_status!=0";
 		if($_GET){
-		        	   $contitions .= ' and (users.firstname like "%'.mysql_real_escape_string($name).'%"';
-                       $contitions .= ' OR auction.deal_title like "%'.mysql_real_escape_string($name).'%")';
+		        	   $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
+                       $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
                       
 		}
 		 $result = $this->db->query("SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions order by auction.deal_id DESC $limit1 ");
@@ -528,8 +528,8 @@ class Admin_auction_Model extends Model
 		$contitions = "auction.winner != 0 and bidding.winning_status!=0 ";
 		if($_GET){
 
-						$contitions .= ' and (users.firstname like "%'.mysql_real_escape_string($name).'%"';
-                        $contitions .= ' OR auction.deal_title like "%'.mysql_real_escape_string($name).'%")';
+						$contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
                        
                       
 		}
@@ -548,9 +548,9 @@ class Admin_auction_Model extends Model
 
                 $contitions = "discussion.type = $deal_type ";
                         if($firstname){
-                        $contitions .= ' AND users.firstname like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR auction.deal_title like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.mysql_real_escape_string($firstname).'%"';
+                        $contitions .= ' AND users.firstname like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR auction.deal_title like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join auction on auction.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
               
@@ -563,9 +563,9 @@ class Admin_auction_Model extends Model
         {
                $contitions = "discussion.type = $deal_type ";
                         if($firstname){
-                        $contitions .= ' AND users.firstname like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR auction.deal_title like "%'.mysql_real_escape_string($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.mysql_real_escape_string($firstname).'%"';
+                        $contitions .= ' AND users.firstname like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR auction.deal_title like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join auction on auction.deal_id=discussion.deal_id where $contitions  order by discussion_id DESC");
                 return count($result);

@@ -60,8 +60,8 @@ class Auction_Model extends Model
 			}
 			if($search){
 
-		        $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+		        $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 			}
 			$query="select auction.deal_id from(auction) join category on category.category_id=auction.category_id join stores on stores.store_id=auction.shop_id where $conditions $sort_con";
 			$result = $this->db->query($query);
@@ -223,8 +223,8 @@ class Auction_Model extends Model
                         }
 	                if($search){
 
-                        $conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-	                $conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+                        $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+	                $conditions .= " or deal_description like '%".strip_tags($search)."%')";
 	                }
 
 	                $query="select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from(auction) join category on category.category_id=auction.category_id join stores on stores.store_id=auction.shop_id where $conditions $sort_con limit $offset,$record ";
@@ -349,8 +349,8 @@ class Auction_Model extends Model
 		}
 
 		if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 		$query = "select deal_id from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id where  $conditions order by deal_id DESC";
@@ -373,8 +373,8 @@ class Auction_Model extends Model
 		}
 
 		if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 
 

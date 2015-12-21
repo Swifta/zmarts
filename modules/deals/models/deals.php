@@ -237,8 +237,8 @@ class Deals_Model extends Model
 			$conditions .= " and stores.city_id = '$this->city_id' ";
 		}
 		if($search){
-			$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-			$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 		}
 		if($maincatid!= 0) {
 
@@ -258,8 +258,8 @@ class Deals_Model extends Model
 				$conditions .= " and stores.city_id = '$this->city_id' ";
 			}
 			if($search){
-				$conditions .= " and (deal_title like '%".mysql_real_escape_string($search)."%'";
-				$conditions .= " or deal_description like '%".mysql_real_escape_string($search)."%')";
+				$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
+				$conditions .= " or deal_description like '%".strip_tags($search)."%')";
 			}
 			if($maincatid!= 0) {
 
