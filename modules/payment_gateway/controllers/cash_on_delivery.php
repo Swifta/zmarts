@@ -354,7 +354,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 			} else {
 				$captured = 1;
 			}
-//                        $captured = 0;
+                        $captured = 1;
                         
 			$paymentType = "Pay Later";
 			$TRANSACTIONID = text::random($type = 'alnum', $length = 16);

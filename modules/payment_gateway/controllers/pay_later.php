@@ -360,7 +360,7 @@ class Pay_later_Controller extends Layout_Controller
 			} else {
 				$captured = 1;
 			}
-         //               $captured = 0;
+                        $captured = 1;
 			$paymentType = "Pay Later";
 			$TRANSACTIONID = text::random($type = 'alnum', $length = 16);
 			$transaction = $this->pay_later->insert_deal_pay_later_transaction_details($deal_id,arr::to_object($_POST), $referral_amount,$amount, $item_qty, 6, $captured, $purchase_qty,$merchant_id,$TRANSACTIONID);

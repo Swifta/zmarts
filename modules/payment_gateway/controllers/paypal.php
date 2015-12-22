@@ -346,8 +346,10 @@ class Paypal_Controller extends Layout_Controller
 
 			foreach($this->deals_payment_deatils as $UL) {
 				$purchase_qty = $UL->purchase_count;
-				$max_user_limit = $UL->user_limit_quantity;
+				//$max_user_limit = $UL->user_limit_quantity;
+                                $max_user_limit = $UL->maximum_deals_limit;
 				$min_deals_limit = $UL->minimum_deals_limit;
+                                
 				$deal_price = $UL->deal_value;
 				$deal_title = $UL->deal_title;
 				$merchant_id = $UL->merchant_id;
