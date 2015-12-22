@@ -44,8 +44,8 @@ $this->language_List = str_replace(".php", "", $DL);
 					<div class="header_top_left">
                                             <a class="toggleMenu1 htop_navicon1" href="#" title="Menu">&nbsp;</a>
 						<ul class="htop_nav1">
-							<li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li>
-                                                        <li class="empty_div">|</li>
+							<!--<li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li>
+                                                        <li class="empty_div">|</li>-->
 							<li><?php echo $this->Lang['CUSS_SUPP']; ?> <?php
 								if (PHONE1) { 	echo PHONE1;	} else { }?></li>
 						</ul>
@@ -529,8 +529,8 @@ $this->language_List = str_replace(".php", "", $DL);
 <div class="header_top_left">
 <a class="toggleMenu1 htop_navicon1" href="#" title="Menu">&nbsp;</a>
 <ul class="htop_nav1">
-<li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li>
-<li class="empty_div">|</li>
+<!--<li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li>
+<li class="empty_div">|</li>-->
 <li><?php echo $this->Lang['CUSS_SUPP']; ?> <?php
 	if (PHONE1) {
 		echo PHONE1;

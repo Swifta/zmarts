@@ -345,7 +345,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 			}
 
 			if((($this->get_user_limit_details + $item_qty) > $max_user_limit)
-                                || (($purchase_qty + $item_qty) >= $min_deals_limit)){
+                                || ($item_qty >= $min_deals_limit)){
 				common::message(-1, $this->Lang["MAX_PURCH_LIMIT"]);
 				url::redirect(PATH);
 			}
