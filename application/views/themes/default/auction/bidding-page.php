@@ -111,15 +111,15 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div class="qty_box_notes">
+                                    <!--<div class="qty_box_notes">
                                         <h4>Good News !</h4>
                                         <p>A product of Telekonnectors Ltd. selling speciality mobile phones for 
 elderly and physically information to Indians living in Australia. </p>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>                    
-                    <div class="qty_footer_list">
+                    <!--<div class="qty_footer_list">
                         <ul>
                              <li><?php echo $this->Lang['ALTER_INFO_WIN']; ?></li>
                             <li><?php echo $this->Lang['YOUR_CREDIT_C_NOT']; ?></li>
@@ -128,7 +128,7 @@ elderly and physically information to Indians living in Australia. </p>
                             <li><?php echo $this->Lang['AP_SALES_TAX']; ?>  <?php echo $this->Lang['TENN_O']; ?> </li>
                             <li><?php echo $this->Lang['BY_BID_AG']; ?> <?php echo $this->Lang['BID_RULE']; ?></li>
                         </ul>  
-                    </div>                            
+                    </div>-->                            
         </div>
 	</form>
 <!--QTY CONTENT ends-->
