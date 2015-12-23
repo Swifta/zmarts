@@ -505,6 +505,7 @@ $admin_message	= '
 
 										*/
                                                                                 
+                                                                                
 						if($_FILES['image']['name']){
 							$filename =$_FILES["image"]["name"];
 							$uploadedfile = $_FILES['image']['tmp_name'];
@@ -556,7 +557,8 @@ $admin_message	= '
 									$height1 = ($max_width1 / $width1) * $height1;
 									$width1 = $max_width1;
 								}
-								$IMG_NAME = $merchantid."_".$storeid.'.png';
+								//$IMG_NAME = $merchantid."_".$storeid.'.png';
+                                                                $IMG_NAME = $status['image'].'.png';
 								$tmp1=imagecreatetruecolor($width1,$height1);
 								
 								$white = imagecolorallocate($tmp1, 255, 255, 255);
