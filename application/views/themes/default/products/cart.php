@@ -779,7 +779,7 @@
                 </div>
                              <?php if ($total_amount != 0) { ?>  
                              
-<form name="payment" method="POST"  id="cashFormx" enctype="multipart/form-data" action="<?php echo PATH; ?>cart_checkout.html" > 
+<form name="payment" method="POST"  id="cashForm" enctype="multipart/form-data" action="<?php echo PATH; ?>cart_checkout.html" > 
                         
     <div class="storecredit_document"   <?php  if(!$this->session->get('user_auto_key')) {  ?>  style="display:none;" <?php } ?> >
     <?php  if($this->session->get('user_auto_key')) {  ?> 
