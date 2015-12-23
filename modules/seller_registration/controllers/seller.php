@@ -504,8 +504,8 @@ $admin_message	= '
 										}
 
 										*/
-						if($_FILES['image']['name'])
-						{
+                                                                                
+						if($_FILES['image']['name']){
 							$filename =$_FILES["image"]["name"];
 							$uploadedfile = $_FILES['image']['tmp_name'];
 							

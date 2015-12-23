@@ -142,10 +142,10 @@ $this->language_List = str_replace(".php", "", $DL);
                 
                 
                 
-                <li class="">
+<!--                <li class="">
         <a href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
                     <?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
-            </li>
+            </li>-->
                 
                 
                 

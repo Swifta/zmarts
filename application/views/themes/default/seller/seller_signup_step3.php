@@ -1024,8 +1024,8 @@ function save_last_step(){
 		$('#merchant_step3').val('Processing... Please wait.').attr('disabled','disabled');
 		
 		var url = "<?php echo PATH; ?>seller/seller_signup_step3/0/TRUE";
-	$.post(url, data,  function success(status){
-			
+                $.post(url, data,  function success(status){
+            		
 			response = status;
 			try{
 			status = parseInt(status);

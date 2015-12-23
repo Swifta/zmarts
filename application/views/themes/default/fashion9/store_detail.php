@@ -68,7 +68,7 @@ if(count($this->merchant_personalised_details)>0) {
 ?>
 <li>                                                                                
     <a href="<?php echo $banner_link; ?>"  title = "<?php echo $banner_link; ?>">
-        <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
+        <img style="width:1280px;height:425px" alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>"/>
     </a>
 </li>
 <?php
@@ -77,7 +77,7 @@ if(count($this->merchant_personalised_details)>0) {
                         //echo "No Image file";
 ?>
                 <li>
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
+                        <img style="width:1280px;height:425px" src="<?php echo PATH; ?>bootstrap/themes/images/carousel/banner-<?php echo $i; ?>.jpg" alt="" />
                 </li>
 <?php
                     }

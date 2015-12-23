@@ -111,8 +111,8 @@
 					<li><a  title="<?php echo $this->Lang['HELP']; ?>" href="<?php echo PATH; ?>Help.php"><?php echo $this->Lang['HELP']; ?></a></li> |
 					<li><a href="#"><?php echo $this->Lang['CUSS_SUPP']; ?> <?php
 								if (PHONE1) { 	echo PHONE1;	} else { }?></a></li> |
-					<li><a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
-								<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a></li>
+<!--					<li><a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
+								<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a></li>-->
 								<?php  if($this->session->get('user_auto_key')) { ?> |
 					<li  ><div class="store_credit"><a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div></li>  <?php } ?>
 					
