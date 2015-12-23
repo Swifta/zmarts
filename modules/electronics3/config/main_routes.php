@@ -1,3 +1,4 @@
+<?php defined('SYSPATH') OR die('No direct access allowed.');
 // CHANGE Start
 $config['CHANGE'] ="electronics3/stores_home_page/CHANGE";
 $config['CHANGE/products.html'] = "/electronics3/product_list/CHANGE";

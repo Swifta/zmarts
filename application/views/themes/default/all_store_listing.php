@@ -11,7 +11,7 @@
 
           <?php } else { ?>
           <a href="<?php echo PATH.$stores->store_url_title.'/';?>" >
-<img src="<?php echo PATH.'resize.php';?>?src=<?php echo PATH;?>themes/<?php echo THEME_NAME; ?>/images/noimage_stores_list.png&w=<?php echo STORE_LIST_WIDTH; ?>&h=<?php echo STORE_LIST_HEIGHT; ?>" alt="<?php echo $stores->store_name; ?>" title="<?php echo $stores->store_name; ?>" />
+<img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png" alt="<?php echo $stores->store_name; ?>" title="<?php echo $stores->store_name; ?>" />
 <?php /* <img src="<?php echo PATH;?>themes/<?php echo THEME_NAME; ?>/images/noimage_stores_list.png"   alt="<?php echo $stores->store_name; ?>" title="<?php echo $stores->store_name; ?>"  >*/ ?></a>
 
           <?php }?>                                                 

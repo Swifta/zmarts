@@ -94,33 +94,40 @@ class Webpay_Controller extends Layout_Controller
                     $interswitch = json_decode($response);
                     //echo $url_call."<br />";
                     //echo $hash;
-                    $this->response_code = $interswitch->ResponseCode;
-                    $this->response_discription = $interswitch->ResponseDescription;
-                    $this->PaymentReference = $interswitch->PaymentReference;
-                    $this->CardNumber = $interswitch->CardNumber;
-                    $paint_red = "red";
-                    if($interswitch->Amount > 0){
-                        $status = "Success";
-                        $paint_red = "green";
-                        $transaction_status = "SUCCESSFUL TRANSACTION";
+                    if($interswitch){
+                        $this->response_code = $interswitch->ResponseCode;
+                        $this->response_discription = $interswitch->ResponseDescription;
+                        $this->PaymentReference = $interswitch->PaymentReference;
+                        $this->CardNumber = $interswitch->CardNumber;
+                        $paint_red = "red";
+                        if($interswitch->Amount > 0){
+                            $status = "Success";
+                            $paint_red = "green";
+                            $transaction_status = "SUCCESSFUL TRANSACTION";
+                        }
+                        $this->webpay->updateTransaction($transaction_id, $status, $interswitch->ResponseCode,
+                                $interswitch->ResponseDescription,$interswitch->PaymentReference,
+                                $interswitch->CardNumber);
+                        echo "<div style='width:100%;'>";
+                        echo "<div style='width:49%;float:left'>Transacton Status :</div>";
+                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$transaction_status."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:left'>Response Code :</div>";
+                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseCode."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:left'>Description :</div>";
+                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseDescription."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:left'>Payment Reference :</div>";
+                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->PaymentReference."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:left'>Card Number :</div>";
+                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->CardNumber."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:left'>Retrieval Ref Number :</div>";
+                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->RetrievalReferenceNumber."</div>";
+                        echo "</div>";
                     }
-                    $this->webpay->updateTransaction($transaction_id, $status, $interswitch->ResponseCode,
-                            $interswitch->ResponseDescription,$interswitch->PaymentReference,
-                            $interswitch->CardNumber);
-                    echo "<div style='width:100%;'>";
-                    echo "<div style='width:49%;float:left'>Transacton Status :</div>";
-                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$transaction_status."</div><div style='clear:both;width:100%'><hr /></div>";
-                    echo "<div style='width:49%;float:left'>Response Code :</div>";
-                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseCode."</div><div style='clear:both;width:100%'><hr /></div>";
-                    echo "<div style='width:49%;float:left'>Description :</div>";
-                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseDescription."</div><div style='clear:both;width:100%'><hr /></div>";
-                    echo "<div style='width:49%;float:left'>Payment Reference :</div>";
-                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->PaymentReference."</div><div style='clear:both;width:100%'><hr /></div>";
-                    echo "<div style='width:49%;float:left'>Card Number :</div>";
-                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->CardNumber."</div><div style='clear:both;width:100%'><hr /></div>";
-                    echo "<div style='width:49%;float:left'>Retrieval Ref Number :</div>";
-                    echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->RetrievalReferenceNumber."</div>";
-                    echo "</div>";
+                    else{
+                        echo "<div style='width:100%;text-align:center;color:red'>";
+                        echo "<h1 style='font-size:300%;'>Service Currently Unavailable</h1>";
+                        echo "</div>";
+                    }
 
 //                    if($interswitch->Amount > 0){
 //                        //successful payment.
