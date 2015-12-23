@@ -1013,23 +1013,20 @@ function last_email_check(){
 }
 
 function save_last_step(){
-	
+	return true;
 	if(!last_email_check())
 		return false;
 		
 		
-		//data = $(document.signup4).serialize();
-		data = new FormData('form');
-		alert(data);
-		return false;
+		data = $(document.signup4).serialize();
+		//alert(data);
 		
-		//$('#id_step3_back').hide();
-		//$('#merchant_step3').val('Processing... Please wait.').attr('disabled','disabled');
+		$('#id_step3_back').hide();
+		$('#merchant_step3').val('Processing... Please wait.').attr('disabled','disabled');
 		
 		var url = "<?php echo PATH; ?>seller/seller_signup_step3/0/TRUE";
 	$.post(url, data,  function success(status){
-			alert(status);
-			return false;
+			
 			response = status;
 			try{
 			status = parseInt(status);
