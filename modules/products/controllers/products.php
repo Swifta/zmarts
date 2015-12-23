@@ -1267,4 +1267,23 @@ class Products_Controller extends Layout_Controller
 		}
 		
 	}
+	
+	
+	public function validphone()
+	{
+		if($_POST){
+			$phone = $_POST['phone'];
+			if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+				echo 1;
+				
+			}else{
+			
+				echo 0;
+			}
+			
+			
+		}
+		
+		exit;
+	}
 }

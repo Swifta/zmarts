@@ -1,5 +1,22 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <script>
+	function is_valid_phone(form){
+		var url = "<?php echo PATH?>products/validphone";
+		var phone = $('#ship_phone_p1').val();
+		$.post(url, {"phone":phone}, function success(status){
+			$('#id_err_phone').text('');
+			if(status == "0"){
+				$('#id_err_phone').text('Invalid Phone Number. Enter your phone number (e.g. 070...,080...)');
+				return false;
+			}else{
+				
+				 form.submit();
+				
+			}
+			});
+		
+	}
+	
     $(document).ready(function(){
          $(".CityPAY_new").hide();
         
@@ -35,7 +52,9 @@
             },
             submitHandler: function(form) {
                 $('div#submit').hide();
-                form.submit();
+				is_valid_phone(form);
+				
+               
             }
         });
         $("#shipping_address1").change(function() { 
@@ -143,6 +162,7 @@
                     <li>
                         <label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname"><input id="ship_phone_p1" name="phone" tabindex="9" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" type="text" value="<?php if($this->session->get('shipping_phone')){ echo $this->session->get('shipping_phone'); } ?>" class="required number" maxlength="16"/></div>
+                        <em id="id_err_phone"></em>
                     </li>
                 </ul>
                 <?php foreach ($this->get_cart_products as $payment) { ?>
