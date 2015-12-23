@@ -330,7 +330,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 										echo $this->session->get('firstname'); 
 										} else {
 											echo $this->userPost['firstname'];
-										}}?>"  /> 			
+										}}?>"  readonly/> 			
 									<em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
 								</div>
