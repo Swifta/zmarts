@@ -1107,11 +1107,11 @@ $content_text = array(
 
 "PLS_ENT_STATE1" => "Please enter a state here ",
 
-"PLZ_ETR_PHO" => "Please enter your phone number here",
+"PLZ_ETR_PHO" => "Your Phone Number (e.g. 070..,080..)",
 
 "ENTER_ADD"=>"Enter your address here",
 
-"ENTER_PHONE"=>"e.g. 080..., 070...",
+"ENTER_PHONE"=>"Your Phone Number (e.g. 070..,080..)",
 
 "ENTER_POSTAL_CODE"=>"Enter your postal code here",
 
@@ -1422,7 +1422,7 @@ $content_text = array(
 
 "YOU_HAVE_RECEIVED"  => "You have received a inquired for the",
 
-"INV_PH" => "Invalid phone. Only digits, starting with 0.",
+"INV_PH" => "Invalid Phone Number. Enter your phone number (e.g. 070...,080...)",
 
 "EMAIL_AL_E" => "Email Already Exist",
 

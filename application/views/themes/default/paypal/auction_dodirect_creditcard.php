@@ -271,7 +271,7 @@ $("#shipping_address").change(function() {
                                         </li>	
 										<li>
 												<label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
-												<div class="fullname"><input tabindex="18" id="ship_phone1" name="shipping_phone" size="40" AUTOCOMPLETE="OFF"  placeholder="e.g. 080..., 070..." type="text" value="" class="required number" maxlength="18"/></div>
+												<div class="fullname"><input tabindex="18" id="ship_phone1" name="shipping_phone" size="40" AUTOCOMPLETE="OFF"  placeholder="Your Phone Number (e.g. 070..,080..)" type="text" value="" class="required number" maxlength="18"/></div>
 										</li>
 
                                     </ul>

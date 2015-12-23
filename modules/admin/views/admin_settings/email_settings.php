@@ -106,7 +106,7 @@
 		 <tr>
                     <td><label><?php echo $this->Lang["CONTACT_PH1"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td><input type="text" placeholder="e.g. 080..., 070..." name="phone1" value="<?php echo PHONE1;?>" maxlength="20" />
+                    <td><input type="text" placeholder="Your Phone Number (e.g. 070..,080..)" name="phone1" value="<?php echo PHONE1;?>" maxlength="20" />
                     <em><?php if(isset($this->form_error["phone1"])){ echo $this->form_error["phone1"]; }?></em></td>
                  </tr>
 
@@ -114,7 +114,7 @@
 				<tr>
                     <td><label><?php echo $this->Lang["CONTACT_PH2"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td><input type="text" name="phone2" placeholder="e.g. 080..., 070..." value="<?php echo PHONE2;?>" maxlength="20" />
+                    <td><input type="text" name="phone2" placeholder="Your Phone Number (e.g. 070..,080..)" value="<?php echo PHONE2;?>" maxlength="20" />
                     <em><?php if(isset($this->form_error["phone2"])){ echo $this->form_error["phone2"]; }?></em></td>
                  </tr>
 

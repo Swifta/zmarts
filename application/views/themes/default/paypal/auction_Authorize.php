@@ -210,7 +210,7 @@ $(".CityPAY_new").hide();
 										</li>
 										<li>
 											<label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
-											<div class="fullname"><input name="phone"  tabindex="11" size="40" AUTOCOMPLETE="OFF"   type="text" value="" class="required number" maxlength="18" placeholder="e.g. 080..., 070..."/></div>
+											<div class="fullname"><input name="phone"  tabindex="11" size="40" AUTOCOMPLETE="OFF"   type="text" value="" class="required number" maxlength="18" placeholder="Your Phone Number (e.g. 070..,080..)"/></div>
 										</li>
                                     </ul>
                                 </div>
@@ -277,7 +277,7 @@ $(".CityPAY_new").hide();
 
                                         <li>
                                                        <label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
-                                                       <div class="fullname"><input name="shipping_phone"  id="ship_phone_auth1" tabindex="20" size="40" AUTOCOMPLETE="OFF"  placeholder="e.g. 080..., 070..." type="text" value="" class="required number" maxlength="18"/></div>
+                                                       <div class="fullname"><input name="shipping_phone"  id="ship_phone_auth1" tabindex="20" size="40" AUTOCOMPLETE="OFF"  placeholder="Your Phone Number (e.g. 070..,080..)" type="text" value="" class="required number" maxlength="18"/></div>
                                        </li>
 
                                 

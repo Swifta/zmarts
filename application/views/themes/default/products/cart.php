@@ -65,10 +65,13 @@
 	{
 		$("form#submit_changes").validate({
 			submitHandler: function(form) {  // How to repace this? 
+			
                                 if (document.getElementById('CitySD').value == ' ') { 
                                          $('#city_validation').html('This Field Is Required.');
                                         return false; 
                                 }
+								
+								
 				$.post('<?php echo PATH;?>products/update_shipping_address/', $("form#submit_changes").serialize(), function(data) { 
 					$('#new_shipping_address').html(data);
 					$('#city_validation').html('');
@@ -776,7 +779,7 @@
                 </div>
                              <?php if ($total_amount != 0) { ?>  
                              
-<form name="payment" method="POST"  id="cashForm" enctype="multipart/form-data" action="<?php echo PATH; ?>cart_checkout.html" > 
+<form name="payment" method="POST"  id="cashFormx" enctype="multipart/form-data" action="<?php echo PATH; ?>cart_checkout.html" > 
                         
     <div class="storecredit_document"   <?php  if(!$this->session->get('user_auto_key')) {  ?>  style="display:none;" <?php } ?> >
     <?php  if($this->session->get('user_auto_key')) {  ?> 

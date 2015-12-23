@@ -1910,7 +1910,7 @@ $content_text = array(
 
 			"CAT_BLOG_CANT_AD" => "Category Is Blocked, You Can't able to Add a Category",
 
-			"PH_NUM" => "Phone number, e.g. 080..., 070...",
+			"PH_NUM" => "Your Phone Number (e.g. 070..,080..)",
 
 			"SEND_MAIL" => "Send Mail",
 
