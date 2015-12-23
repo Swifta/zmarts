@@ -1840,7 +1840,7 @@ $content_text = array(
 
 "STORE_CRED" => "For Store Credit",
  
-"GLOBAL_PAY" => "Interswitch WebPay",    
+"GLOBAL_PAY" => "Pay Online",    
     
 "PROCEED_GLOBAL_PAY" => "Proceed to Payment via Interswitch Gateway", 
 

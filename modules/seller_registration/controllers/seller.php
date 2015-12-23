@@ -504,8 +504,9 @@ $admin_message	= '
 										}
 
 										*/
-						if($_FILES['image']['name'])
-						{
+                                                                                
+                                                                                
+						if($_FILES['image']['name']){
 							$filename =$_FILES["image"]["name"];
 							$uploadedfile = $_FILES['image']['tmp_name'];
 							
@@ -556,7 +557,8 @@ $admin_message	= '
 									$height1 = ($max_width1 / $width1) * $height1;
 									$width1 = $max_width1;
 								}
-								$IMG_NAME = $merchantid."_".$storeid.'.png';
+								//$IMG_NAME = $merchantid."_".$storeid.'.png';
+                                                                $IMG_NAME = $status['image'].'.png';
 								$tmp1=imagecreatetruecolor($width1,$height1);
 								
 								$white = imagecolorallocate($tmp1, 255, 255, 255);
@@ -864,6 +866,83 @@ $admin_message	= '
 		}
 		return 0;
 		
+	}
+        
+	public function getExtension($str)
+	{
+		// $i = strrpos($str,".");
+		$i = strrpos($str,".");
+        if (!$i) { return ""; }
+        $l = strlen($str) - $i;
+        $ext = substr($str,$i+1,$l);
+        return $ext;
+	}
+	
+	public function LoadPNG($imgname)
+	{
+		/* Attempt to open */
+		$im = @imagecreatefrompng($imgname);
+		
+		/* See if it failed */
+		if(!$im)
+		{
+		/* Create a blank image */
+		$im  = imagecreatetruecolor(150, 30);
+		$bgc = imagecolorallocate($im, 255, 255, 255);
+		$tc  = imagecolorallocate($im, 0, 0, 0);
+		
+		imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
+		
+		/* Output an error message */
+		imagestring($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
+		}
+		
+		return $im;
+	}
+
+
+	public function LoadJpeg($imgname)
+	{
+		/* Attempt to open */
+		$im = @imagecreatefromjpeg($imgname);
+		
+		/* See if it failed */
+		if(!$im)
+		{
+		/* Create a black image */
+		$im  = imagecreatetruecolor(150, 30);
+		$bgc = imagecolorallocate($im, 255, 255, 255);
+		$tc  = imagecolorallocate($im, 0, 0, 0);
+		
+		imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
+		
+		/* Output an error message */
+		imagestring($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
+		}
+		
+		return $im;
+	}
+	
+	public function LoadGif($imgname)
+	{
+		/* Attempt to open */
+		$im = @imagecreatefromgif($imgname);
+		
+		/* See if it failed */
+		if(!$im)
+		{
+		/* Create a blank image */
+		$im = imagecreatetruecolor (150, 30);
+		$bgc = imagecolorallocate ($im, 255, 255, 255);
+		$tc = imagecolorallocate ($im, 0, 0, 0);
+		
+		imagefilledrectangle ($im, 0, 0, 150, 30, $bgc);
+		
+		/* Output an error message */
+		imagestring ($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
+		}
+		
+		return $im;
 	}
 
 }
