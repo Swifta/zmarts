@@ -403,7 +403,7 @@ $admin_message	= '
 
 <table>										 
   <tr>
-    <td colspan="2" style="font-family: Arial, Helvetica, sans-serif bold 12px;color:#666;">A new merchant just registered on <a style = "text-decoration: none; color: #666;" title = "SITE" href="<?php echo PATH ?>"> '.SITENAME.'</a> and awaiting aproval.</td>
+    <td colspan="2" style="font-family: Arial, Helvetica, sans-serif bold 12px;color:#666;">A new merchant just registered on <a style = "text-decoration: none; color: #666;" title = "SITE" href="<?php echo PATH ?>"> '.SITENAME.'</a> and awaiting approval.</td>
   </tr>
   <tr>
     <td colspan="2" style="font-family: Arial, Helvetica, sans-serif normal 12px ;color:#666;">Below are the details: </td>
