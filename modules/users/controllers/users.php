@@ -1843,7 +1843,7 @@ $pdf->Output('voucher.pdf', 'I');
   //need to check if user already created an account with this platform before
   
   /*
-  Below code prunned for controller
+  Below code prunned from controller
   @Live
   */
   
@@ -1873,26 +1873,7 @@ $pdf->Output('voucher.pdf', 'I');
 		url::redirect(PATH);
   
   }elseif($status){
-	  
-	 
-  
-	  /* 
-	  TODO
-	  *	Faking account creation due to a down API endpoint
-	  *
-	  *	@Live
-	  */
-	  
-	  
-	  
-	  $account_number = "7767565657";
-	  $account_name 	= "DUMMY NAME";
-	  $account_class  = "57";
-	  
-	  $params = array('account_number'=>$account_number, 'account_name'=>$account_name, 'account_class'=>$account_class,);
-	  $update_status = $this->users->update_user_to_club_membership(TRUE, $params);	
-	  //common::message(1, '(MOCK NOTIFICATION) Your Bank Account has been created successfully.Thanks for choosing Zenith bank.');
-	  common::message(-1, $status);
+	  common::message(-1, "Unknown response. Please try again.");
 	  url::redirect(PATH);
   
   }
@@ -1913,8 +1894,6 @@ $pdf->Output('voucher.pdf', 'I');
   			 ->add_rules('branch_no', 'required', array($this, 'no_minus_99'))
  		     ->add_rules('class_code', 'required', array($this, 'no_minus_99'));
 			
-  
-  
   
   if($testPost->validate()){
   		
@@ -1947,6 +1926,13 @@ $pdf->Output('voucher.pdf', 'I');
 			exit;
 			
 		}
+		
+		if(!isset($response['accountNumber'])){
+			echo "Invalid response. Please try again.";
+			exit;
+		}
+			
+		
 		
 		$nuban = $response['accountNumber'];
 		$r = $this->users->update_user_to_club_membership(TRUE, $nuban);
@@ -2107,7 +2093,7 @@ $pdf->Output('voucher.pdf', 'I');
 						  if($nuban_response == 1){
 							 
 							   $r = $this->users->update_user_to_club_membership(FALSE, $nuban);
-								common::message(1, "Thank you for signup! You can now enjoy club membership offers.");
+								common::message(1, "Thank you for Zenith membership signup! You can now enjoy club membership offers.");
 								if($r == 1){
 									 $urlreferer = (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:PATH;
 									 echo $urlreferer;

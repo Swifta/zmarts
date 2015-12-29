@@ -40,12 +40,34 @@ class Seller_Controller extends Layout_Controller {
         
 	public function seller_signup_zenith()
 	{
+			
+		  
 
-          $arg = array();
-          $arg['userName'] = ZENITH_TEST_USER;
-          $arg['Pwd'] = ZENITH_TEST_PASS;
-          $soap = new SoapClient(ZENITH_TEST_ENDPOINT, array('trace' => 1));            
+                     
             if($_POST){
+				
+          		
+				$userPost = $this->input->post();
+		 			 $testPost = Validation::factory($userPost)
+					 ->add_rules('f_name', 'required')
+					 ->add_rules('l_name', 'required')
+					 ->add_rules('email', 'required','valid::email')
+					 ->add_rules('phone', 'required', array($this, 'validphone'), 'chars[0-9-+().]')
+					 ->add_rules('addr', 'required')
+					 ->add_rules('gender', 'required',  array($this, 'no_minus_99'))
+					 ->add_rules('branch_no', 'required', array($this, 'no_minus_99'))
+					 ->add_rules('class_code', 'required', array($this, 'no_minus_99'));
+					
+		  
+		  if($testPost->validate()){
+			   $arg = array();
+         	   $arg['userName'] = ZENITH_TEST_USER;
+         	   $arg['Pwd'] = ZENITH_TEST_PASS;
+			   $soap = new SoapClient(ZENITH_TEST_ENDPOINT, array('trace' => 1));
+			  
+		 
+				
+				
                 $f_name = strip_tags(addslashes($_REQUEST['f_name']));
                 $l_name = strip_tags(addslashes($_REQUEST['l_name']));
                 $email = strip_tags(addslashes($_REQUEST['email']));
@@ -79,12 +101,27 @@ class Seller_Controller extends Layout_Controller {
                     url::redirect(PATH."merchant-signup-account-opening.html");  
                 }
                 //var_dump($fun_resp);
-            }
+            
+			
+			
+			
+			 
+			
+			}else{
+				$this->form_error = error::_error($testPost->errors());	
+			}
+			
+			}
             $this->branch_options= "";
             $this->class_code_options= "";
+			
+			/*
+				Disabled the code below to decouple branch and class loading from page loading
+				for better error api call management.
+				@Live
+			*/
 
-
-              try{
+              /*try{
                 $fun_resp_branch = @$soap->getBranchList($arg);
                 $fun_resp_class = @$soap->getAccountClass($arg);
                 if($fun_resp_branch == ""|| $fun_resp_class == ""){
@@ -105,7 +142,7 @@ class Seller_Controller extends Layout_Controller {
                         . "Something went wrong when trying to load this service. Please try again.</p>");
 		common::message(-1, "Something went wrong when trying to load this service. Please try again.");
 		//url::redirect(PATH."merchant-signup-step2.html");
-              }
+              }*/
 
 		$this->template->title = $this->Lang['MER_SIGN_1'];
 		
@@ -944,5 +981,26 @@ $admin_message	= '
 		
 		return $im;
 	}
+	
+	
+	 public function no_minus_99($sel_option = ""){
+		 
+		  
+		  if(!$sel_option){
+			  return 0;
+		  }
+		  
+		  $sel_option = trim($sel_option);
+		  
+		  if($sel_option == "" || $sel_option == "0" || $sel_option == "-99" ){
+			  return 0;
+		  }
+		  
+		  return 1;
+		  
+	  }
+	
+	
+	
 
 }

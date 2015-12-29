@@ -1562,7 +1562,11 @@ function get_zenith_class(sel_class){
 		        },
 		       	 error:function(){
 					is_class_api_running = false;
-			        alert('No data found.');
+					var no = -99;
+					var name = "Error!";
+					sel_class_c +="<option value ="+no+">"+name+"</option>";
+					sel_class.html(sel_class_c);
+			        //alert('No data found.');
 		        }
 
 	          });	  
@@ -1621,7 +1625,12 @@ function get_zenith_branches(sel_branch){
 		        },
 		       	 error:function(){
 					 is_branch_api_running = false;
-			         alert('No data found.');
+					 
+					 var no = -99;
+					var name = "Error!";
+					sel_branch_c +="<option value ="+no+">"+name+"</option>";
+					sel_branch.html(sel_class_c);
+			         //alert('No data found.');
 		        }
 
 	          });

@@ -1793,7 +1793,7 @@ $content_text = array(
  "PRD_CURR_NT_AVAIL" => "Products are currently not available for this store.",
  "ZENITH_OFFER" => "Zenith Offer",
  
- "ZENITH_ACCOUNT_OPEN" => "Open A Zenith Bank A/C",
+ "ZENITH_ACCOUNT_OPEN" => "Open New Zenith Bank A/C",
  
  "SEL_GENDER" => "Select gender",
 
@@ -1820,7 +1820,7 @@ $content_text = array(
     
 "ZENITH_ACCOUNT_NUMBER" => "Zenith Account Number",
     
-"ZENITH_ACCOUNT_OPEN" => "Open A Zenith Bank A/C",
+"ZENITH_ACCOUNT_OPEN" => "Open New Zenith Bank A/C",
 
 "ZENITH_ALREADY_HAVE_ACCOUNT" => "Club Membership Subscription",
     

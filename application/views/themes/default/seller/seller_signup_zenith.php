@@ -1,6 +1,42 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'; ?>" type="text/javascript"></script>
+<script type="text/javascript">
+
+function load_branches(sel) {
+	
+	if(is_branch_api_running){
+	   return false;
+   }
+   is_branch_api_running = true;
+   var sel_branch = $(sel);
+   var sel_opt_label = sel_branch.children('option').first();
+   sel_opt_label.text("Loading branches...");
+   sel_branch.css({'color':'#384'});
+  
+   javascript:get_zenith_branches(sel_branch);
+   return;
+   
+	}
+	
+  function load_classes(sel) {
+			
+			if(is_class_api_running){
+			   return false;
+		   }
+		
+		   is_class_api_running = true;
+		   var sel_class = $(sel);
+		   var sel_opt_label = sel_class.children('option').first();
+		   sel_opt_label.text("Loading classes...");
+		   sel_class.css({'color':'#384'});
+		  
+		   javascript:get_zenith_class(sel_class);
+		   return;
+		   
+		}
+
+</script>
 <style>
 .error{float: left;width: 50%; } 
 </style>
@@ -90,17 +126,15 @@
 
 .swifta_input  {
 
- margin: 5px 0px;
- 
-  width: 500px;
-
-  display: block;
+  margin: 5px 0px;
 
   border: none;
 
   padding: 10px 0;
   
   outline:none;
+  
+  width: 40%;
 
   
 /*  border-bottom: solid 1px #A61C00;*/
@@ -232,21 +266,49 @@
 content:"*"; 
 color: #e32;
 position: absolute; 
-margin: 10px 0px 0px -57px; 
+margin: 10px 0px 0px 0px; 
 font-size: small; 
 padding: 0 5px 0 0;
 
  }
  .asterisks_input:after
 {
-content:"*"; 
-color: #e32;
-position: absolute; 
-margin: -5px 0px 0px 492px; 
-font-size: small; 
-padding: 0 5px 0 0;
+	content:"*"; 
+	color: #e32;
+	position: absolute; 
+	margin: -5px 0px 0px 438px; 
+	font-size: small; 
+	padding: 0 5px 0 0;
 
  }
+ 
+ .payment_shipping_form ul li {
+	 float:none;
+	 width: 100%;
+ }
+ 
+ 
+ 
+ .payment_form ul li {
+	 float:none;
+ }
+ 
+ .payment_form ul {
+	 float:none;
+ }
+ 
+ ul li em {
+	 padding-left: 30%;
+	 text-align: left;
+	
+ }
+ 
+  ul li div.swifta_controls {
+	   padding-left: 41%;
+	   text-align: left;
+  }
+ 
+ 
 input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px solid #ccc;}
 /*test style closed*/
 /*.fullname input[type=text],.fullname input[type=password],.fullname textarea{border: 1px solid #d9d9d9;font:normal 12px arial;  width:220px;color:#000;  padding: 7px;
@@ -281,126 +343,99 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         </div>
                     </div>
                     <div class="payment_form payment_shipping_form ">
-         <form id="zenith_account_open" name="zenith_offer" method="POST"  autocomplete="off">
+         <!--<form id="zenith_account_open" name="zenith_offer" method="POST"  autocomplete="off">
                     <div class="payouter_block pay_br">
                         <h3 class="paybr_title pay_titlebg">Merchant bank account opening : </h3>
                         <div class="p_inner_block clearfix">
-                            <div class="payment_form_sections">
-                                <div class="payment_forms">
+                            
+                             <div class="payment_forms" style="margin: 0; float:none; height:auto;">
                               
                               <ul>                               
                             <li>
+                            <?php //var_dump($this->form_error);?>
                               
                                 <div class="">
                                      <span class="asterisks_input">  </span>
-                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" autofocus required/>
-                                   <em id="f_name_err"></em>
+                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo $_POST['f_name'];}?>" autofocus  />
+                                   <em id="f_name_err"><?php if(isset($this->form_error['f_name'])){echo $this->form_error['f_name'];}?></em>
                                 </div> 
-                            </li><br><br><br><br>
+                            </li>
                              <li>
                              
                                 
-                                <div class="" style="margin-top:-30px;">
+                                <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="l_name" class="swifta_input" type="text" tabindex="7" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="" required/>
-                                   <em id="l_name_err"></em>
+                                   <input name="l_name" class="swifta_input" type="text" tabindex="2" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="<?php if(isset($_POST['l_name'])){echo $_POST['l_name'];}?>" required/>
+                                   <em id="l_name_err"><?php if(isset($this->form_error['l_name'])){echo $this->form_error['l_name'];}?></em>
                                 </div>  
                                 
                                 
-                            </li><br><br><br><br>
+                            </li>
                             <li>
                                 
-                                <div class="" style="margin-top:-55px;">
+                                <div >
                                      <span class="asterisks_input">  </span>
-                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="2" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" required/>
-                                  <em id="email_err"></em>
+                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="<?php if(isset($_POST['email'])){echo $_POST['email'];}?>" required/>
+                                  <em id="email_err"><?php if(isset($this->form_error['email'])){echo $this->form_error['email'];}?></em>
                                 </div>     
-                            </li><br><br><br><br>
+                            </li>
                              <li>
                                 
-                                <div class="" style="margin-top:-75px;">
+                                <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="8" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value=""  required/>
-                                   <em id="phone_err"></em>
+                                   <input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="4" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value="<?php if(isset($_POST['phone'])){echo $_POST['phone'];}?>"  required/>
+                                   <em id="phone_err"><?php if(isset($this->form_error['phone'])){echo $this->form_error['phone'];}?></em>
                                 </div>  
-                            </li><br><br><br><br><br>
+                            </li>
                             <li>
                                 
                                 
                                 
-                                <div class="" style="margin-top:-120px;">
+                                <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="addr" class="swifta_input" type="text"  tabindex="3" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="" required />
-                                   <em id="addr_err"></em>
+                                   <input name="addr" class="swifta_input" type="text"  tabindex="5" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if(isset($_POST['addr'])){echo $_POST['addr'];}?>" required />
+                                   <em id="addr_err"><?php if(isset($this->form_error['addr'])){echo $this->form_error['addr'];}?></em>
                                 </div>   
                                 
                                   <div class="" style="margin-top:15px;">
-                                    <select name="gender" class="swifta_input" tabindex="4" required>
+                                    <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo $_POST['gender'];}?>">
                                             <option value="-99"><?php echo $this->Lang['SEL_GENDER']; ?></option>
                                            
                                              <option  title="<?php echo $this->Lang['MALE']; ?>" value="M" ><?php echo $this->Lang['MALE']; ?></option>
                                              <option  title="<?php echo $this->Lang['FEMALE']; ?>" value="F" ><?php echo $this->Lang['FEMALE']; ?></option>
    
                                     </select>
-                                     <em id="gender_err"></em>
+                                     <em id="gender_err"><?php if(isset($this->form_error['gender'])){echo $this->form_error['gender'];}?></em>
                                 </div>  
                                 
-                                 <div class="" style="margin-top:15px;" >
+                                 <div class="" >
                                         <div id="CitySD_log">
-                                      <select name="branch_no" id="id_z_branch" tabindex="5"  class="swifta_input" required>
+                                      <select name="branch_no" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo $_POST['branch_no'];}?>" tabindex="6"  class="swifta_input" required="required">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_BRANCH']; ?></option>
                                             <?php
-                                            echo $this->branch_options;
+                                            //echo $this->branch_options;
                                             ?>
                                     </select>
                                     </div>
-                                     <em id="branch_no_err"></em>
+                                     <em id="branch_no_err"><?php if(isset($this->form_error['branch_no'])){echo $this->form_error['branch_no'];}?></em>
                                 </div>
                                 
-                                 <div class="" style="margin-top:15px;">
+                                 <div class="">
                                         <div id="CitySD_log">
-                                      <select name="class_code" id = "id_z_class" class="swifta_input" tabindex="6" required>
+                                      <select name="class_code" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo $_POST['class_code'];}?>">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_CLASS']; ?></option>
                                             <?php
-                                            echo $this->class_code_options;
+                                            //echo $this->class_code_options;
                                             ?>
                                     </select>
+                                    <em id="class_code_err"><?php if(isset($this->form_error['class_code'])){echo $this->form_error['class_code'];}?></em>
                                     </div>
-                                     <em id="class_code_err"></em>
+                                     
                                 </div>
                             </li>
-                          </ul>  
-                            
-                            <div>
-                            <li>
-                               
-                               
-                            </li>
-
-                            <br />
-                            <li>
                             
                             
-                               
-                               
-                                
-                            </li>
-                            <br />
-                            <li>
-                            
-                            
-                              
-                               
-                                
-                           </li>
-                            <br />
-			    <!--<li>
-                                <label><?php echo $this->Lang['UNIQ_IDEN'];?>:<span class="form_star"></span></label>
-                                <div class="fullname">
-                                    <input name="unique_identifier" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_UNIQ_IDEN']; ?>" type="text" value="" />
-                                </div>   
-                                <label></label>
-                            </li>-->
+                         
                            <li class="check_box">
                                   <p><input type="checkbox" name="terms" id="id_terms" class="" value="0" required><?php echo $this->Lang['Z_BY_CLICKING_SUBMIT']; ?> 									
                                 <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" data-toggle="modal" data-target="#confirm-delete" href="<?php //echo PATH; ?>"><?php echo $this->Lang['TEMRS']; ?></a>
@@ -408,8 +443,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 </p>
                                 <em id="terms_err"></em>
                             </li>
-                            <br />
-                            <div class="buy_it complete_order_button">                                  
+                            
+                            </ul>
+                           	  <div class="buy_it complete_order_button">                                  
                                  <input class="sign_submit" type="submit" value="Open Account" title="Open Account">
                                  
                             </div>
@@ -417,11 +453,82 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             &nbsp;&nbsp;&nbsp; <a href="<?php echo PATH."merchant-signup-step1.html"; ?>" class="sign_cancel">Go Back</a>
                             </div>
                             
-                                </div>
-                                </div>
-                            </div>
+                            
                         </div>
-                                                             <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
+                    </div>
+                   
+          </form>-->
+          <form style="text-align:center" id="zenith_account_open" name="zenith_offer" method="POST"  autocomplete="off">
+          <div style="backgroundx: #f00;  margin: 10px 0px 0px; border: 1px solid #D3D2D1; ">
+          <h3 class="paybr_title pay_titlebg" style=" text-align:left;">Merchant bank account opening : </h3>
+          <ul>
+          <li><div>
+                                     <span class="asterisks_input">  </span>
+                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo $_POST['f_name'];}?>" autofocus required="required"  />
+                                   <em id="f_name_err"><?php if(isset($this->form_error['f_name'])){echo $this->form_error['f_name'];}?></em>
+                                </div></li>
+          <li><div>
+                                     <span class="asterisks_input">  </span>
+                                   <input name="l_name" class="swifta_input" type="text" tabindex="2" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="<?php if(isset($_POST['l_name'])){echo $_POST['l_name'];}?>" required/>
+                                   <em id="l_name_err"><?php if(isset($this->form_error['l_name'])){echo $this->form_error['l_name'];}?></em>
+                                </div></li>
+          <li><div> <span class="asterisks_input">  </span>
+                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="<?php if(isset($_POST['email'])){echo $_POST['email'];}?>" required/>
+                                  <em id="email_err"><?php if(isset($this->form_error['email'])){echo $this->form_error['email'];}?></em>
+                                </div></li>
+          <li><div><span class="asterisks_input"></span><input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="4" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value="<?php if(isset($_POST['phone'])){echo $_POST['phone'];}?>"  required/><em id="phone_err"><?php if(isset($this->form_error['phone'])){echo $this->form_error['phone'];}?></em></div></li>
+		  <li><div class=""><span class="asterisks_input"></span>
+          <input name="addr" class="swifta_input" type="text"  tabindex="5" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if(isset($_POST['addr'])){echo $_POST['addr'];}?>" required />
+          <em id="addr_err"><?php if(isset($this->form_error['addr'])){echo $this->form_error['addr'];}?></em>
+          </div></li>
+          <li><div class="" style="margin-top:15px;"><span class="asterisks_input">  </span>
+                                    <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo $_POST['gender'];}?>">
+                                            <option value="-99"><?php echo $this->Lang['SEL_GENDER']; ?></option>
+                                           
+                                             <option  title="<?php echo $this->Lang['MALE']; ?>" value="M" ><?php echo $this->Lang['MALE']; ?></option>
+                                             <option  title="<?php echo $this->Lang['FEMALE']; ?>" value="F" ><?php echo $this->Lang['FEMALE']; ?></option>
+   
+                                    </select>
+                                    <em id="gender_err"><?php if(isset($this->form_error['gender'])){echo $this->form_error['gender'];}?></em>
+                                </div></li>                     
+          <li><div id="CitySD_log"><span class="asterisks_input">  </span><select name="branch_no" onfocus="load_branches(this)" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo $_POST['branch_no'];}?>" tabindex="6"  class="swifta_input" required="required">
+                                            <option value="-99"><?php echo $this->Lang['ZENITH_SEL_BRANCH']; ?></option>
+                                            <?php
+                                            //echo $this->branch_options;
+                                            ?>
+                                    </select>
+                                   <em id="branch_no_err"><?php if(isset($this->form_error['branch_no'])){echo $this->form_error['branch_no'];}?></em></div></li>                        
+          <li><div id="CitySD_log"><span class="asterisks_input">  </span><span class="asterisks_input">  </span>
+                                      <select name="class_code" onfocus="load_classes(this)" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo $_POST['class_code'];}?>">
+                                            <option value="-99"><?php echo $this->Lang['ZENITH_SEL_CLASS']; ?></option>
+                                            <?php
+                                            //echo $this->class_code_options;
+                                            ?>
+                                    </select>
+                                      <em id="class_code_err"><?php if(isset($this->form_error['class_code'])){echo $this->form_error['class_code'];}?></em></div></li>
+          <li class="check_box"><p><input type="checkbox" name="terms" id="id_terms" class="" value="0" required><i>&nbsp;</i><?php echo $this->Lang['Z_BY_CLICKING_SUBMIT']; ?> 									
+                                <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" data-toggle="modal" data-target="#confirm-delete" href="<?php //echo PATH; ?>"><?php echo $this->Lang['TEMRS']; ?></a>
+                         	<p id="id_terms" style="color:red;"></p>
+                                </p>
+                                <em id="terms_err"></em>
+          </li>  
+          
+          <li><div class="swifta_controls">
+          			<div class="buy_it complete_order_button">                                  
+                                 <input class="sign_submit" type="submit" value="Open Account" title="Open Account" >
+                                 
+                            </div>                                
+                                 <!--<input class="sign_submit" type="submit" value="Open Account"  title="Open Account" />-->
+                                 <a href="<?php echo PATH."merchant-signup-step1.html"; ?>" style=" text-decoration:none; margin-left: 50px;">Go Back</a>
+                                 
+                            </div></li> 
+                            
+                              
+                  
+          </ul>
+          </div>
+          </form>
+ 		 <div class="modal fade" style="display:none" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
   
       <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 30px;  width: 85%;">
           
@@ -572,7 +679,7 @@ The Merchant shall establish an Account with Zenith Bank PLC for the Products. S
 
 <h style="color:red;">Management of the platform </h>
 
-<p <p style="color:black;">Zenith Bank PLC shall appoint a team to handle the platform/Website Management and Quality Control. The team will have the responsibility of auditing and maintaining the Platform from time to time to ensure the Platform is being operated legally and that no offensive contents or images are posted on the Merchant's 
+<p style="color:black;">Zenith Bank PLC shall appoint a team to handle the platform/Website Management and Quality Control. The team will have the responsibility of auditing and maintaining the Platform from time to time to ensure the Platform is being operated legally and that no offensive contents or images are posted on the Merchant's 
     Webpage.The Website Manager reserves the right upon giving prior notice to Zenith Bank PLC to suspend or delete the Webpage 
     of any Merchant who breaches any term of this Agreement.<br><br>
 
@@ -623,7 +730,7 @@ Disclaimer: This absolves Zenith Bank PLC of transactions done between the merch
 “Website Manager” means a designated web manager appointed by Zenith Bank PLC to audit or carry out other services on the Platform on a periodic basis or as directed by Zenith Bank PLC from time to time.<br>
 COMMENCEMENT AND TENURE This Agreement shall take effect from the date hereof and shall continue and be in force until terminated in line with the provisions of this Agreement.<br><br>
 </p>
-<h style="red;">Nigerian law and general provisions</h>
+<h>Nigerian law and general provisions</h>
 
 <p style="color:black;">This Agreement shall be governed by the laws of the Federal Republic of Nigeria and any disputes arising therefrom shall be subject to the Nigerian Courts.;
 
@@ -699,11 +806,12 @@ Signature and Date:.......................................................<br></
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
        
      
-            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+            //$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
         });
     
 </script>
                         </form>
+                       
                     </div>
                 </div>
             </div>
@@ -717,7 +825,7 @@ Signature and Date:.......................................................<br></
   
         
         
-        <div class='popup_block_theme'><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
+        <div class='popup_block_theme' style="display:none;"><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
     <!-- SELLER SIGNUP -->
     
  <script>
@@ -746,11 +854,13 @@ function previewTheme(s){
     $(".preview_theme_selected").attr("src", image_path);
     //document.getElementById("preview_theme_selected").src= image_path;
     //alert(image_path);
+	
+	
+
     
 }
 
     $(document).ready(function(){
-        $('.popup_block_theme').css({'display' : 'none'});
          $("#signup2").validate({
 			 messages: {				 
 		   firstname: {
@@ -841,7 +951,7 @@ function atleast_onecheckbox(e) {
         function checkCheckBoxes(zenith_account_open) {
 	if (signup2.ch1.checked == false ) 
 	{
-		$('#id_terms').html("<?php echo "* You must agree to terms and condition"; ?>");
+		$('#id_terms').html("<?php echo "* You are required to agree to the terms and conditions here"; ?>");
                 <?php // $tcmsg = "You must agree to terms and condition"; ?>
 		return false;
 	} else { 	
@@ -949,6 +1059,8 @@ InvalidInputHelper(document.getElementById("email"), {
 }
 
 );
+
     
 
 </script>
+

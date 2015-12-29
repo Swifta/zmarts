@@ -1020,8 +1020,10 @@ class Users_Model extends Model
 				*/
 				
 				
+				$user_auto_key = text::random($type = 'alnum', $length = 4);
+				
 				$u_tb_name = 'users';
-				$u_columns = array('nuban'=>$account_number, 'club_member'=>1);
+				$u_columns = array('nuban'=>$account_number, 'club_member'=>1, 'user_auto_key'=>$user_auto_key);
 				$u_where = array('user_id'=>$this->UserID);
 				$results = $this->db->update($u_tb_name, $u_columns, $u_where);
 				
