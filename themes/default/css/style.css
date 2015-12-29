@@ -14,7 +14,7 @@ a{text-decoration: none;}
 .header_top_right ul li a img{ margin: 3px 0 0 7px; float: left;}
 .header_bottom{float: left;width: 100%;clear: both;padding:5px 0 0 0;}
 
-.cities{float: left;width: 123px;position: relative;background: #fff;padding: 0;}
+.cities{float: left;width: 123px;position: relative;background: #fff;padding: 0; height:44px}
 .cities ul li{float: left; list-style: none;padding: 0px;width:100%;}
 .cities ul li a{display:block;font:normal 14px/18px arial;color:#868686;background: url(../images/new/city_arr.png) 110px 19px no-repeat;padding:13px 10px;}
 .cities ul li div.drop_down{display: none;}
@@ -2467,5 +2467,7 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 #id_themes_container ul li {
 	padding: 0;
 }
+
+
 
 

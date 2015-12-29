@@ -3401,9 +3401,9 @@ $content_text = array(
 
 						"ABOUT_US_PAGE" => "About Us",
 
-						"STORE_PERSONALIZED" => "Personalized Store",
+						"STORE_PERSONALIZED" => "Personalize Store",
 
-						"PERSONALIZED" => "Personalized",
+						"PERSONALIZED" => "Personalize",
 
 						"TAC_UPDATE" => "Terms And Conditions updated successfully",
 
@@ -3411,7 +3411,7 @@ $content_text = array(
 
 						"ABOUT_US_PAGE_UPDATE" => "About Us updated successfully",
 
-						"STORE_PERSONALIZED_UPDATE" => "Store Personalized updated successfully",
+						"STORE_PERSONALIZED_UPDATE" => "Store personalized successfully",
 
 						"BG_COLOR" => "Background Color",
 
@@ -3554,11 +3554,11 @@ $content_text = array(
 			
 			"ABOUT_US_PAGE" => "About Us",
 			
-			"STORE_PERSONALIZED" => "Personalized Store",
+			"STORE_PERSONALIZED" => "Personalize Store",
 			
-			"PERSONALIZED" => "Personalized",
+			"PERSONALIZED" => "Personalize",
 			
-			"EDIT_PERSONALIZED" => "Edit Personalized",
+			"EDIT_PERSONALIZED" => "Personalize",
 			
 			"TAC_UPDATE" => "Terms And Conditions updated successfully",
 			

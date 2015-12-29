@@ -181,7 +181,7 @@ $this->language_List = str_replace(".php", "", $DL);
 					</div>
                         
                         <div class="msearch_cart_block">
-                        <div class="search_new_common">
+                        <div class="search_new_common" style="box-sizing:unset">
                         <div class="common_search">
                         <?php
                         $ajax_type = 0;

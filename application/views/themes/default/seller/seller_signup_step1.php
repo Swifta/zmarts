@@ -1,4 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+
+<link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
+<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
+<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />
   <script>
      
      
@@ -33,6 +37,8 @@
 <style>
     
     .merchant_intro{font:normal 16px/21px arial;color:#666666;}
+	
+	
 </style>
 
 
@@ -375,10 +381,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 </style>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>-->
  <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
         <div class="contianer_inner">
@@ -418,7 +424,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         
                             
            
-                 <div class="container-fluid text-center">
+                 <div class="container-fluid text-center custorm">
   <h1 style="color:#A61C00 ; font-family:'Actor', sans-serif;">Why you should sell on Zmart!</h1>
   
   <div class="row">
@@ -541,19 +547,11 @@ $('#autoUpdate').fadeOut('slow');
     
     </script>  -->
     <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
-<!-- <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>-->
-  
-  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-  
-  <link rel="stylesheet" href="style.css" />
+    <!--<script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>-->
+
+
     
-<script src="script.js"></script>
-
-
+<script src="<?php echo PATH;?>js/script.js"></script>
 <script type="text/javascript">
     
     
@@ -1158,3 +1156,11 @@ closeOnCancel: false},
 }
 
 </script>
+
+<script src="<?php echo PATH;?>js/netdna-bootstrap.js"></script>
+
+<link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
+<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
+<!--<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />-->
+  
+

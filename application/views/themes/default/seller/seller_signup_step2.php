@@ -881,14 +881,20 @@ Signature and Date:.......................................................<br></
  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
  <!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
   
-  <script src="<?php echo PATH?>themes/default/js/sasa/bootstrap.js"></script>
-
-  <link rel="stylesheet" href="<?php echo PATH?>themes/default/css/sasa/bootstrap.css" />
+ 	<script src="<?php echo PATH?>themes/default/js/sasa/bootstrap.js"></script>
+  <!-- <link rel="stylesheet" href="<?php echo PATH?>themes/default/css/sasa/bootstrap.css" />
+  <link rel="stylesheet" href="<?php echo PATH?>themes/default/style.css" />-->
+  
+  
+  <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
+  <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
+  
+  
   
 
   <!--<link rel="stylesheet" href="<?php echo PATH?>themes/default/css/style.css" />-->
     
-<script src="script.js"></script>
+<script src="<?php echo PATH;?>js/script.js"></script>
  <script>
  
 function openMainView(){
