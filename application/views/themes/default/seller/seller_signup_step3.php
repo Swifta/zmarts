@@ -305,7 +305,7 @@ input[type=text],input[type=password]
     <td>
                                        <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" maxlength="50" onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
+                                 <input type="text" maxlength="50" required="required" onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" autofocus="autofocus" tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
 				<em id="id_err_storename"><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
@@ -314,7 +314,7 @@ input[type=text],input[type=password]
                                  
                                         <span class="asterisks_input">  </span>
                                         
-                                    <select name="country" id="country" tabindex="7"  onchange="return city_change_payment_step(this.value);" class="swifta_input" required>
+                                    <select name="country" id="country" tabindex=""  onchange="return city_change_payment_step(this.value);" class="swifta_input" required>
                                     <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option> 
                                     <?php foreach ($this->country_list as $c) { ?>
                                     <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
@@ -330,7 +330,7 @@ input[type=text],input[type=password]
     <td> 
                                          
                                      <span class="asterisks_input">  </span>
-                                 <input maxlength="50" type="text" name="username" id="username" tabindex="2" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
+                                 <input tabindex="3" maxlength="50" type="text" name="username" id="username" tabindex="2" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
 				<em id="id_err_username"><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
 <!--                                     <span class="asterisk_input">  </span>-->
                                 
@@ -339,7 +339,7 @@ input[type=text],input[type=password]
                                 <div class="">
                                     <span class="asterisks_input">  </span>
                                     
-                                <select name="city" id="CitySD"  tabindex="8" class="swifta_input" required>
+                                <select tabindex="" name="city" id="CitySD"  class="swifta_input" required>
                                 <option value=""><?php echo $this->Lang["COUNTRY_FIRST"]; ?></option>
                                 <?php foreach ($this->all_city_list as $c) { ?>
                                 <option  <?php  if(isset($this->userPost['city'])){ if ($c->city_id == $this->userPost['city']) { ?> selected <?php } } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
@@ -472,7 +472,7 @@ input[type=text],input[type=password]
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
                                  <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input maxlength="150" type="text" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
+                                 <input maxlength="150" type="text" tabindex="" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
                                  </div>
                                  <em id="id_err_memail"></em>

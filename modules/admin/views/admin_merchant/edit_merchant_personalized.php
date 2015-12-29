@@ -3,6 +3,7 @@
 <div class="cont_container mt15 mt10">
     <div class="content_top"><div class="top_left"></div><div class="top_center"></div><div class="top_rgt"></div></div>
     <div class="content_middle">
+    
         <?php foreach($this->data as $d){ ?>
         <form action="" method="post" class="admin_form"  enctype="multipart/form-data">
             <table>
@@ -13,6 +14,8 @@
                     <td><label><?php echo $this->Lang["SECTOR"]; ?></label></td>
                     <td>
                         <select autofocus name="sector" class="required" onchange="return change_sector_admin(this.value);">
+                        
+                        
 			    
                         <?php if($uu->store_sector_id != ''){ ?>
                         

@@ -1109,7 +1109,7 @@ function show_gif(obj){
                             //alert(check);
                             if(check == 1){
 
-swal({   
+				swal({   
 title: "Account verification successful",  
 text: "Proceed to Merchant Registration.",
 //type: "success",  
@@ -1121,15 +1121,14 @@ confirmButtonText: "Yes, Proceed!",
 cancelButtonText: "No, Later!",   
 closeOnConfirm: false,   
 closeOnCancel: false}, 
-function(isConfirm){   
-    if (isConfirm) {     
-        location.href ="<?php echo PATH; ?>merchant-signup-step2.html";   
-    } else {     
-        swal("Cancelled", "Please, come back and complete your merchant sign up", "warning");
-    }
-});
-                            }
-                            else{
+				function(isConfirm){   
+					if (isConfirm) {     
+						location.href ="<?php echo PATH; ?>merchant-signup-step2.html";   
+					} else {     
+						swal("Cancelled", "Please, come back and complete your merchant sign up", "warning");
+					}
+				});
+                 }else{
 					sub_btn_parent.html(sub_btn_parent_bak);
 					is_z_verify_account_api_running = false;
                                         //alert("Your account cannot be validated. Please try again");

@@ -621,6 +621,8 @@ class Admin_merchant_Model extends Model
 		/**  GET SECTOR DATA **/
 	        public function get_all_sector_data()
 	        {
+				$result = $this->db->getwhere('sector',array('sector_status' => 1 ,"type" =>1));
+				
 		        return $this->db->getwhere('sector',array('sector_status' => 1 ,"type" =>1));
 	        }
 	        
@@ -646,7 +648,7 @@ class Admin_merchant_Model extends Model
 	}
 	
 	public function get_merchant_attribute_data_list($store_id = ""){
-		 $result = $this->db->select("merchant_attribute.*","sector.sector_name")->from("merchant_attribute")->join("stores","stores.store_id","merchant_attribute.storeid")->join("sector","sector.sector_id","stores.store_sector_id")->where(array("merchant_attribute.storeid"=>$store_id))->get();
+		 $result = $this->db->select("merchant_attribute.*","sector.sector_name")->from("merchant_attribute")->join("stores","stores.store_id","merchant_attribute.storeid")->join("sector","sector.sector_id","stores.store_sector_id")->where(array("merchant_attribute.storeid"=>$store_id))->limit(1)->get();
 		 return $result;
 	}
 	

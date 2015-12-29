@@ -171,7 +171,7 @@ class Seller_Controller extends Layout_Controller {
 	public function seller_signup_step2()
 	{
 			if($_POST){ 
-			
+			//$_POST['nuban'] ='9999999999';
 			$this->userPost = $this->input->post();
                         //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
@@ -189,13 +189,15 @@ class Seller_Controller extends Layout_Controller {
 						{
 							$post->add_rules('subsector', 'required');
 						}
-                                                //var_dump($post->validate());die;
+						
+						
+                                   
 					if($post->validate())
 					{
 						
 						
 					
-					        $free = "0";
+					        					$free = "0";
                                                 if(isset($post->free)){
                                                 $free = $post->free;
                                                 }
@@ -294,8 +296,7 @@ class Seller_Controller extends Layout_Controller {
 	{
 		
 		
-	  		
-	  	 
+	  	//$this->session->set('nuban_session', '9999999999');
 		if(($this->session->get('firstname') != "") && ($this->session->get('memail') != "") && ($this->session->get('nuban_session') != "") ){
 			
 				
@@ -317,6 +318,9 @@ class Seller_Controller extends Layout_Controller {
 							//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							//->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 							->add_rules('username', 'required');
+							
+							if(isset($_FILES['image']))
+								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 							
 						if($post->validate()){    
 							

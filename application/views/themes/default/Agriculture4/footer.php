@@ -138,7 +138,7 @@
     <div class="container">
       <div class="info">
         <ul>
-          <li><a href="<?php echo PATH."disclaimer.php";?>">Disclainer</a>
+          <li><a href="<?php echo PATH."disclaimer.php";?>">Disclaimer</a>
           </li>
           <li><a href="<?php echo PATH."terms-and-conditions.php";?>">Terms &amp; Conditions</a>
           </li>

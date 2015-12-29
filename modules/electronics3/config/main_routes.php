@@ -8,3 +8,4 @@ $config['CHANGE/products/c/(.*)/(.*).html'] = "/electronics3/product_list/CHANGE
 $config['CHANGE/deal/c/(.*)/(.*).html'] = "/electronics3/deal_list/CHANGE/$1/$2";
 $config['CHANGE/auction/c/(.*)/(.*).html'] = "/electronics3/auction_list/CHANGE/$1/$2";
 // CHANGE End
+?>

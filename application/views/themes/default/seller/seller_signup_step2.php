@@ -325,12 +325,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <div class="">
                                     <span class="asterisks_input">  </span>
                                    
-									<input maxlength="50" required="required" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+									<input maxlength="50" required="required" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus="autofocus" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
                                                                         value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
 										echo $this->session->get('firstname'); 
 										} else {
 											echo $this->userPost['firstname'];
-										}}?>"  readonly/> 			
+										}}?>" /> 			
 									<em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
 								</div>
@@ -339,7 +339,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             
 								<div class="">
 								        <span>  </span>
-									<input type="text" maxlength="50" name="lastname" class="swifta_input" id="lname" required="required" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
+									<input type="text" tabindex="2" maxlength="50" name="lastname" class="swifta_input" id="lname" required="required" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
 									
 									value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
 										echo $this->session->get('lastname'); 
@@ -353,7 +353,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
-									<input maxlength="50" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
+									<input maxlength="50" tabindex="3" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
 									value="<?php if($this->session->get('memail') || isset($this->userPost['email'])) { if($this->session->get('memail')) {
 										echo $this->session->get('memail'); 
 										} else {
@@ -366,7 +366,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
                                 
-											<input type="hidden" name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
+											<input type="hidden"  name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
 							
                               
                                     </li>
@@ -384,7 +384,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
-									<input maxlength="50" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
+									<input maxlength="50" tabindex="4" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
 									
 									value="<?php if($this->session->get('mraddress1') || isset($this->userPost['mr_address1'])) { if($this->session->get('mraddress1')) {
 										echo $this->session->get('mraddress1'); 
@@ -398,7 +398,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <li>
                                     
                                  <div class="" style="">
-									<input maxlength="50" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
+									<input maxlength="50" tabindex="5" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
 								                                             value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
 										echo $this->session->get('mraddress2'); 
 										} else {
@@ -411,7 +411,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                    
 								<div class="">
                                   <span class="asterisks_input">  </span>
-                                    <input  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+                                    <input tabindex="6"  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
 									<?php  ?>
 									value="<?php if($this->session->get('mphone_number') || isset($this->userPost['mr_mobile'])) { if($this->session->get('mphone_number')) {
 										echo $this->session->get('mphone_number'); 
@@ -426,7 +426,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
 				<div class="">
               
-                                <select name="sector" id="sector"   class="swifta_input"  onchange="changing_sectors(this.value); get_themes(this.value);">
+                                <select name="sector" tabindex="7" id="sector"   class="swifta_input"  onchange="changing_sectors(this.value); get_themes(this.value);">
                                 <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
                                
                                 <?php foreach ($this->sector_list as $c) { ?>
@@ -509,7 +509,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     			    <table style=""> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
-                                        <tr><td style="width:px;"><label><input  type="checkbox" name="free" value="1" 
+                                        <tr><td style="width:px;"><label><input tabindex="8"  type="checkbox" name="free" value="1" 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
                                                               checked <?php } } else { ?> checked <?php } ?>>Free Shipping
                                                     
@@ -524,7 +524,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                     
                                                     </a></td>
                                         <?php } else { ?>
-                                        <input type="hidden" name="free" value="0" >
+                                        <input tabindex="2" type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
                                        <td style="width:px;"><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping 
@@ -580,12 +580,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             <p class="merchant_intro">
                                
                             <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a data-toggle="modal" data-target="#confirm-delete" href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
-                            <br><input type="checkbox" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
+                            <br><input tabindex="10" type="checkbox" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             <p id="tcerror" style="color:red;"></p>
                             </p>
                         </div>       
                     <div class="buy_it complete_order_button" style="margin-left:300px;">
-                        <input type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
+                        <input tabindex="11"type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
                     </div>
                             
                                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
@@ -1395,7 +1395,7 @@ function get_themes(sector){
 							//var x = i+"";
 							
 						
-								var part1 = '<p style="text-align:right; padding-right: 10px; position:absolute; bottom: 0px; right:0;"><span><span style="cursor:pointer;"><input id = "id_opt_theme_'+s_id+'" value ="'+s_id+'" name="subsector" type="radio" /></span></span></p><p style="text-align:left; padding-left: 0px; position:absolute; bottom: 0px; left:0;"> <span style="cursor:pointer"><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;"></b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">'+response[i+1];
+								var part1 = '<p title = "choose theme" style="text-align:right; padding-right: 10px; position:absolute; bottom: 0px; right:0;"><span><span style="cursor:pointer;background: #A61C00; padding: 6px 6px 3px;border: 3px solid #000;border-radius: 9px;"><input id = "id_opt_theme_'+s_id+'" value ="'+s_id+'" name="subsector" type="radio" /></span></span></p><p style="text-align:left; padding-left: 0px; position:absolute; bottom: 0px; left:0;"> <span style="cursor:pointer"><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;"></b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 4px 4px; opacity:0.9;">'+response[i+1];
 								
 							var part2 = '</i></span> </p><input id="id_img_path_'+i+'" type="hidden" value = "'+img_path_valid+'" /></li>';
 							
@@ -1426,6 +1426,7 @@ function get_themes(sector){
 											//alert(s_id+" : "+subs)
 											if(s_id ==  subs){
 												$('#id_opt_theme_'+subs).attr('checked','checked');
+												$('#id_opt_theme_'+subs).attr('title','selected');
 												$('#id_opt_theme_'+subs).val(subs);
 											}
 										}catch(e){
