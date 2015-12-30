@@ -148,7 +148,7 @@
 					if(!opts.canRateAgain || parseInt(nbOfRates) <= 0) $(this).unbind().css('cursor','default').addClass('jDisabled');
 					
 					if (opts.showRateInfo) $("p.jRatingInfos").fadeOut('fast',function(){$(this).remove();});
-					e.defaultPrevented();
+					e.preventDefault();
 					var rate = getNote(newWidth);
 					average.width(newWidth);
 					
