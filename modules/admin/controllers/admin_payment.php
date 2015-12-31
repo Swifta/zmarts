@@ -443,6 +443,7 @@ class Admin_payment_Controller extends website_Controller
 					 if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
 					 if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
 					 if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
+                                         if($u->type=="5"){ $tran_type1 = "(".$u->transaction_type.")"; }
 
 					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.($u->deal_value *($u->deal_merchant_commission/100))*$u->quantity.'","'.$u->shippingamount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 					$i++;

@@ -1501,7 +1501,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 
 			$result = $this->db->query('select * from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where '.$conditions.' and auction.merchant_id ='.$this->user_id.' and users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%"');
@@ -1517,7 +1517,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 
 
@@ -1531,7 +1531,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 
 		           $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by auction.deal_title $sort_type","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by auction.shipping_fee $sort");
@@ -1572,7 +1572,7 @@ class Merchant_Model extends Model
 				$conditions .= " AND transaction.type = 5 ";
 			}
 			else{
-				$conditions .= " AND transaction.type != 5 ";
+				//$conditions .= " AND transaction.type != 5 ";
 			}
 
 			if($today == 1)
@@ -1620,7 +1620,7 @@ class Merchant_Model extends Model
 				$conditions .= " AND transaction.type = 5 ";
 			}
 			else{
-				$conditions .= " AND transaction.type != 5 ";
+				//$conditions .= " AND transaction.type != 5 ";
 			}
 		       }
 		      else {
@@ -1663,7 +1663,7 @@ class Merchant_Model extends Model
 				$conditions .= " AND transaction.type = 5 ";
 			}
 			else{
-				$conditions .= " AND transaction.type != 5 ";
+				//$conditions .= " AND transaction.type != 5 ";
 			}
 		        if($today == 1)
                         {
@@ -1707,7 +1707,7 @@ class Merchant_Model extends Model
 				$conditions .= " AND transaction.type = 5 ";
 			}
 			else{
-				$conditions .= " AND transaction.type != 5 ";
+				//$conditions .= " AND transaction.type != 5 ";
 			}
 		       }
 		      else {
@@ -1866,7 +1866,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 
 			$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions and auction.merchant_id = $this->user_id and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%' ) limit $offset,$record");
@@ -1879,7 +1879,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by auction.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by auction.shipping_fee $sort");
@@ -1894,7 +1894,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 
 

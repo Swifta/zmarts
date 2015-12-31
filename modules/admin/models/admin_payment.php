@@ -225,7 +225,7 @@ class Admin_payment_Model extends Model
 			$conditions .= " AND transaction.type = 5 ";
 		}
 		else{
-			$conditions .= " AND transaction.type != 5 ";
+			//$conditions .= " AND transaction.type != 5 ";
 		}
 		       	
 		 if($_GET){
@@ -274,7 +274,7 @@ class Admin_payment_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 					else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 		       }
 		      else {
@@ -372,7 +372,7 @@ class Admin_payment_Model extends Model
 					
 				}
 				else{
-					$conditions .= " AND transaction.type != 5 ";
+					//$conditions .= " AND transaction.type != 5 ";
 				}
 		       }
 		      else {
@@ -412,7 +412,7 @@ class Admin_payment_Model extends Model
 				$conditions .= " AND transaction.type = 5 ";
 			}
 			else{
-				$conditions .= " AND transaction.type != 5 ";
+				//$conditions .= " AND transaction.type != 5 ";
 			}
 			if($today == 1)
                         {
@@ -453,7 +453,7 @@ class Admin_payment_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 					else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 		       }
 		      else {
@@ -464,7 +464,7 @@ class Admin_payment_Model extends Model
 					$conditions .= " AND transaction.type = 5 ";
 				}
 				else{
-					$conditions .= " AND transaction.type != 5 ";
+					//$conditions .= " AND transaction.type != 5 ";
 				}
 				
 		             }
@@ -496,7 +496,7 @@ class Admin_payment_Model extends Model
 					$conditions .= " AND transaction.type = 5 ";
 				}
 				else{
-					$conditions .= " AND transaction.type != 5 ";
+					//$conditions .= " AND transaction.type != 5 ";
 				}
 				
 		if($_GET){ 
@@ -548,7 +548,7 @@ class Admin_payment_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 					else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 		       }
 		      else {
@@ -641,7 +641,7 @@ class Admin_payment_Model extends Model
 					
 				}
 				else{
-					$conditions .= " AND transaction.type != 5 ";
+					////$conditions .= " AND transaction.type != 5 ";
 				}
 		       }
 		      else {
@@ -651,9 +651,11 @@ class Admin_payment_Model extends Model
 			if(isset($sort_arr[$param])){
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by transaction.id DESC'; }
-	        	
+	        	//echo "select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ";
 			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
-		} 
+		
+                        //die;
+                        } 
 		return $result;
 	}
 /** GET DEAL TRANSACTION LIST **/
@@ -679,7 +681,7 @@ class Admin_payment_Model extends Model
 					$conditions .= " AND transaction.type = 5 ";
 				}
 				else{
-					$conditions .= " AND transaction.type != 5 ";
+					//$conditions .= " AND transaction.type != 5 ";
 				}
 				 if($today == 1)
                         {
@@ -724,7 +726,7 @@ class Admin_payment_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 					}
 					else{
-						$conditions .= " AND transaction.type != 5 ";
+						//$conditions .= " AND transaction.type != 5 ";
 					}
 		       }
 		      else {
@@ -734,7 +736,7 @@ class Admin_payment_Model extends Model
 						$conditions .= " AND transaction.type = 5 ";
 						}
 						else{
-							$conditions .= " AND transaction.type != 5 ";
+							//$conditions .= " AND transaction.type != 5 ";
 						}
 				
 		             }
