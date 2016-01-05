@@ -18,7 +18,7 @@
                 <tr>
                     <td align="left"><?php echo $i ; $i++; ?></td>
                     <td align="left"><?php echo ucfirst($c->category_name) ; ?></td>
-                  <? /*  <td align="left"><?php echo ucfirst($c->country_name); ?></td> */ ?>
+                  <?php /*  <td align="left"><?php echo ucfirst($c->country_name); ?></td> */ ?>
                     <td align="left"><input type="checkbox" value="<?php echo $c->category_id.'__'.$c->category_name; ?>" name="citydata[]"></td>
                 </tr>
             <?php } } else echo $this->Lang['PLZ_ADD_TOP_CAT'];?>

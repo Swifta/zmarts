@@ -1661,12 +1661,12 @@ class Admin_products_Controller extends website_Controller
 
 					if($status){
 						common::message(1, $this->Lang['STA_UPD']);
-						$lastsession = $this->session->get("lasturl");
-		                                if($lastsession){
-		                                url::redirect(PATH.$lastsession);
-		                                } else {
+						//$lastsession = $this->session->get("lasturl");
+		                                //if($lastsession){
+		                                //url::redirect(PATH.$lastsession);
+		                                //} else {
 		                                url::redirect(PATH."admin/cash-delivery.html");
-		                                }
+		                                //}
 						
 					}
 
