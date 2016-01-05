@@ -757,9 +757,9 @@
                                                                         </div>
                                                                 </li>                                                                       
                                                                 <li class="frm_clr">
-                                                                        <label><?php echo $this->Lang['POSTAL_CODE']; ?> <span> * </span></label>
+                                                                        <label><?php echo $this->Lang['POSTAL_CODE']; ?></label>
                                                                         <div class="fullname">
-                                                                        <input  name="zip_code" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" class="required number" maxlength="8" value="<?php echo $s->ship_zipcode; ?>"/>
+                                                                        <input  name="zip_code" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" class="number" maxlength="8" value="<?php echo $s->ship_zipcode; ?>"/>
                                                                         </div>
                                                                 </li>
                                                                 <li>
