@@ -75,7 +75,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 			$prime_customer = $this->input->post("prime_customer");
 		    $this->userPost = $this->input->post();
 			$product_color="";
-			$paymentType = "Pay Later";
+			$paymentType = "COD";
 			$captured = 0;
 			$total_amount="";
 			$total_qty="";
@@ -182,13 +182,13 @@ class Cash_on_delivery_Controller extends Layout_Controller
 												}
 													
 													$this->free_gift=isset($this->free_gift[0]->gift_offer)?$this->free_gift[0]->gift_offer:0;
-					$transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 6, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$prime_customer,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
+					$transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$prime_customer,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
 
 					$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
 				//}
 			}else{
 				$this->free_gift="";
-				$transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 6, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
+				$transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
 
 					$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
 			}
