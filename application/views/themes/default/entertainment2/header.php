@@ -376,7 +376,11 @@ $srch = $this->Lang['SRCH_STR'];
         <li>
 <a class="<?php if (isset($this->is_todaydeals)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>">
 <?php echo $this->Lang['DEALS']; ?></a>
-<ul class="clearfix sub-menu menu-four">
+
+<?php
+if(sizeof($this->categeory_list_deal) > 0){
+?>
+            <ul class="clearfix sub-menu menu-four">
     <li class="clearfix">
         <?php $de = 0; $dea = 0;  $val_de ="";
         foreach ($this->categeory_list_deal as $d) {
@@ -422,6 +426,10 @@ $srch = $this->Lang['SRCH_STR'];
 
     </li>
 </ul>
+<?php
+}
+?>
+            
          </li>
         <?php 
         }
@@ -432,7 +440,11 @@ $srch = $this->Lang['SRCH_STR'];
 
         <li>
 <a class="<?php if (isset($this->is_auction)){ echo "";} ?>" href="<?php echo PATH.$this->storeurl; ?>/auction.html" title="<?php echo $this->Lang['AUCTION']; ?>">
-<?php echo $this->Lang['AUCTION']; ?></a>
+<?php echo $this->Lang['AUCTION']; ?>S</a>
+            
+<?php
+if(sizeof($this->categeory_list_auction) > 0){
+?>            
 <ul class="clearfix sub-menu menu-four">
     <li class="clearfix">
         <?php $au = 0; $aut = 0; $val = "";
@@ -480,6 +492,9 @@ $srch = $this->Lang['SRCH_STR'];
 
     </li>
 </ul>
+<?php
+}
+?>
          </li>
         <?php 
         }

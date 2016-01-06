@@ -86,7 +86,7 @@ echo $stores->about_us;
 			<li><?php echo PHONE1;?>,<?php echo PHONE2;?></li>
 			<li><a class="foot_mail_icon" href="mailto:<?php echo CONTACT_EMAIL; ?>" title="<?php echo CONTACT_EMAIL; ?>"><?php echo  CONTACT_EMAIL; ?></a></li>
 			</ul>
-            <?php } } ?>
+            <?php break;} } ?>
                     </div>
                 </div>
 
