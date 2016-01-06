@@ -82,7 +82,7 @@ if(count($this->merchant_personalised_details)>0) {
                         //echo "No Image file";
 ?>
                 <div class="slides">
-                        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/<?php echo $i; ?>.jpg" alt="" />
+                        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/<?php echo $i; ?>.jpg" alt="" />
                 </div>
 <?php
                     }
@@ -92,13 +92,13 @@ if(count($this->merchant_personalised_details)>0) {
 else{?>
 
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/banners/1.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/1.jpg" alt="" />
     </div>
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/2.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/2.jpg" alt="" />
     </div>
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/food/manufacturing/3.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/3.jpg" alt="" />
     </div>
 
 <!-- display default banners-->
@@ -134,7 +134,7 @@ else{?>
                     <?php }else{?>
                 <div class="offers">
                     <figure>
-				<img src="<?php echo PATH; ?>bootstrap/themes/images/manufacturing/ads/<?php echo $i; ?>.jpg" alt="" />
+				<img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/ads/<?php echo $i; ?>.jpg" alt="" />
 			</figure>
                 </div>
                     <?php }}?> 

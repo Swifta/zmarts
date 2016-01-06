@@ -528,6 +528,7 @@ class Products_Controller extends Layout_Controller
 	public function product_rating(){
 		
 		$aResponse['error'] = false;
+                $aResponse['success'] = false;
 		if($this->UserID == "") $aResponse['error'] = true;
 		$aResponse['message'] = '';
 		$aResponse['server'] = '';
@@ -547,11 +548,13 @@ class Products_Controller extends Layout_Controller
 								$aResponse['server'] .= '<strong>Rate received :</strong> '.$rate.'<br />';
 								$aResponse['server'] .= '<strong>Deal ID :</strong> '.$deal_id.'<br />';
 								$aResponse['server'] .= '<strong>ID to update :</strong> '.$id;
+                                                                $aResponse['success'] = true;
 								$this->userPost = $this->input->post();
 								$this->product_rate = $this->products->save_product_rating(arr::to_object($this->userPost));
 								$ch="auction_sess_".$_POST['deal_id'];
 								$sta= $this->session->set($ch,$_POST['rate']);
 								echo json_encode($aResponse);
+                                                                exit;
 						}
 				}
 		}

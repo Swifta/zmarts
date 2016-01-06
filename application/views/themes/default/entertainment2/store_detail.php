@@ -93,13 +93,13 @@ if(count($this->merchant_personalised_details)>0) {
 else{?>
 
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/1.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/1.jpg" alt="" />
     </div>
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/2.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/2.jpg" alt="" />
     </div>
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/3.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/3.jpg" alt="" />
     </div>
 
 <!-- display default banners-->

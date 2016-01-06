@@ -139,7 +139,7 @@ $this->language_List = str_replace(".php", "", $DL);
 
 <div class="header-top">
     <div class="container">
-        <div class="row">
+        <div class="row" style="float:left;">
 
             <div class="span2">
                 <div class="logo">

@@ -199,14 +199,16 @@ foreach ($this->product_deatils as $products) {
                                                     showRateInfo: false,
                                                     canRateAgain : true,
                                                     nbRates : 10,
+                                                    onSuccess : function(){
+                                                        location.reload();
+                                                    },
                                                     onError : function(){
                                                         //$('.jStar').css({backgroundColor: 'white'});
                                                         showlogin();
-                                                    },
-                                                    onSuccess : function(){
-                                                        location.reload();
                                                     }
+         
                                                 });
+                                                
                                             });
                                         </script>
 
