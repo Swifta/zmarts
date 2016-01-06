@@ -213,7 +213,7 @@
                             <h2 class="deal_title"><?php echo ucfirst($deals->deal_title); ?></h2>
                             <div class="deal_buy_detail clearfix">
                                 <div class="deal_rating">
-                                    <a class="basic<?php echo $deals->deal_id; ?>" id="<?php echo $this->avg_rating; ?>" title="<?php echo $this->avg_rating; ?> / 5" >
+                                    <a class="basic<?php echo $deals->deal_id; ?>" id="<?php echo $this->avg_rating; ?>" title="<?php echo round($this->avg_rating); ?> / 5" >
                                         <link href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/jRating.jquery.css" rel="stylesheet" type="text/css"/>
                                         <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jRating.jquery.js"></script>
                                         <script type="text/javascript">
@@ -232,12 +232,16 @@
                                                     onError : function(){
                                                         //$('.jStar').css({backgroundColor: 'white'});
                                                         showlogin();
+                                                    },
+                                                    onSuccess : function(){
+                                                        location.reload();
                                                     }
+
                                                 });
                                             });
                                         </script>
                                     </a>
-                                   <span><?php echo $this->sum_rating; ?> <?php echo $this->Lang['RATINGS']; ?></span>
+                                    <span><strong> AVERAGE RATING : <?php echo round($this->avg_rating); ?> / 5</strong><!--<?php echo $this->sum_rating; ?> <?php echo $this->Lang['RATINGS']; ?>--></span> 
                                 </div>
                                     <?php if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) || ($deals->enddate < time())) {
                                     } else { ?>

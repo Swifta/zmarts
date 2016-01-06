@@ -202,6 +202,9 @@ foreach ($this->product_deatils as $products) {
                                                     onError : function(){
                                                         //$('.jStar').css({backgroundColor: 'white'});
                                                         showlogin();
+                                                    },
+                                                    onSuccess : function(){
+                                                        location.reload();
                                                     }
                                                 });
                                             });
@@ -213,7 +216,7 @@ foreach ($this->product_deatils as $products) {
                                                     Check the images folder for 'black_star.png' and 'white_star.png'
                                             -->
                                         </label>
-                                        <span><?php echo $this->sum_rating; ?> <?php echo $this->Lang['RATINGS']; ?></span>
+                                        <span><strong> AVERAGE RATING : <?php echo round($this->avg_rating); ?> / 5</strong><!--<?php echo $this->sum_rating; ?> <?php echo $this->Lang['RATINGS']; ?>--></span> 
 
 
                                     </div>

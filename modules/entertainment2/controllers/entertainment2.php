@@ -50,7 +50,7 @@ class Entertainment2_Controller extends Layout_Controller
                 $java_scripts = array();
                 $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
                 
-                //$java_scripts[0] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-1.9.1.min.js';
+                //$java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.9.1.min.js';
                 $java_scripts[1] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
                 
                 $java_scripts[2] = PATH.'js/timer/kk_countdown_1_2_jquery_min.js';

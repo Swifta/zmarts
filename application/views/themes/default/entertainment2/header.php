@@ -53,6 +53,7 @@ $this->language_List = str_replace(".php", "", $DL);
         <div class="row">
             <div class="span3">
                 <ul>
+                    <li style="padding-top:5px;"><a href="<?php echo PATH; ?>"><img src="<?php echo PATH; ?>custom/images/zmartLogo40pxheight.png" alt="zmart icon"/></a></li>
          <?php if(isset($this->merchant_cms)){if(count($this->merchant_cms)>0) {  if(($this->merchant_cms->current()->warranty_status ==1) || ($this->merchant_cms->current()->return_policy_status ==1) || ($this->merchant_cms->current()->terms_conditions_status ==1)) { ?>
                         <?php if($this->merchant_cms->current()->warranty_status ==1) { ?>
                         <li><a href="<?php echo PATH.$this->storeurl.'/merchant-cms/'.base64_encode($this->merchant_cms->current()->merchant_id).'/warranty.html'; ?>"><?php echo $this->Lang["WARRANTY"]; ?></a></li>

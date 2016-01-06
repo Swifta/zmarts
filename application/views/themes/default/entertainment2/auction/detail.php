@@ -340,10 +340,13 @@ foreach ($this->deals_deatils as $deals) {
                                         showRateInfo: false,
                                         canRateAgain : true,
                                         nbRates : 10,
-                                        onError : function(){
-                                        //$('.jStar').css({backgroundColor: 'white'});
-                                        showlogin();
-                                        }
+                                            onError : function(){
+                                            //$('.jStar').css({backgroundColor: 'white'});
+                                                showlogin();
+                                            },
+                                           onSuccess : function(){
+                                                location.reload();
+                                            }
                                         });
                                         });
                                         </script>

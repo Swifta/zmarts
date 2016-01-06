@@ -3,9 +3,9 @@
 	Author URI: http://www.pixelartinc.com/
 */
 
-
-$(document).ready(function(e) {
-
+//$(document).ready(function(e) {
+//$(document).ready(function() {
+//alert("here");
     $ = jQuery;
     
     $("nav ul li").hover(function(){
@@ -22,6 +22,7 @@ $(document).ready(function(e) {
         prev: '.prev',
         next: '.next'
     });
+    
    
     
     $(".offers figure").hover(function(){
@@ -212,4 +213,4 @@ $(document).ready(function(e) {
          + $( "#slider-range" ).slider( "values", 1 ) );
 
 
-});
+//});

@@ -140,7 +140,9 @@ echo $stores->about_us;
 }
 ?>
 <!-- FOOTER -->
-<script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-1.9.1.min.js'; ?>"></script>
+<?php if(false){ ?>
+<script src="<?php echo PATH.'bootstrap/themes/js/jquery-2.1.4.min.js'; ?>"></script>
+<?php } ?>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery-ui.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.cycle.all.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/modernizr.custom.17475.js'; ?>"></script>
@@ -150,7 +152,9 @@ echo $stores->about_us;
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.tooltipster.min.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.prettyPhoto.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/custom.js'; ?>"></script>
-
+<?php if(false){ ?>
+<script src="<?php echo PATH.'bootstrap/themes/js/jquery-1.7.2.min.js'; ?>"></script>
+<?php } ?>
 <script>
 function store_subscriber_validate1(store_url)
 {
