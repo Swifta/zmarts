@@ -136,6 +136,7 @@ echo $stores->about_us;
 </div>
 
 <?php
+break;
     }
 }
 ?>
