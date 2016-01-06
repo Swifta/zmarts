@@ -81,7 +81,7 @@ a.tooltips span
     width: 100%;
     /*float: left;*/
     margin-left: -240px;
-     height: 750px;
+     height: 545px;
 }
 
 .payment_forms{
@@ -286,14 +286,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <?php $tcmsg = ""; ?>
 
 
-                   <div class="contianer_outer">
+	<div class="contianer_outer">
         <div class="contianer_inner">
             <div class="contianer seller_t">                
                 <h2 class="seller_sign_title"><?php echo $this->Lang['WEL_SEL_SIGN']; ?></h2>
                 <p class="seller_sign_info"><?php echo $this->Lang['YOU_GUIDED_CRTE_STRE']; ?></p>
                 <div class="seller_signup clearfix">
                     <div class="seller_signup_menu">
-                       <div class="seller_signup_introduction">
+                       	<div class="seller_signup_introduction">
                             <span>01</span>
                             <p style=" font-weight: bold; color:#000000"><a href = "<?php echo PATH; ?>merchant-signup-step1.html"><?php echo $this->Lang['INTRO']; ?></a></p>
                         </div>
@@ -313,7 +313,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     </div>
                     
                    
-                 <form action="" method="post" name="signup2" id="signup2"    >
+                 <form action="" method="post" name="signup2" id="signup2">
                     <div class="payouter_block pay_br">
 <!--                        <h3 class="paybr_title pay_titlebg"><?php //echo $this->Lang['CRTE_YR_STRE']; ?>: <?php //echo $this->Lang['SIGN_UP']; ?></h3>-->
                         <div class="p_inner_block clearfix">
@@ -325,7 +325,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <div class="">
                                     <span class="asterisks_input">  </span>
                                    
-									<input maxlength="50" required="required" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus="autofocus" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+									<input maxlength="50" required tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
                                                                         value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
 										echo $this->session->get('firstname'); 
 										} else {
@@ -335,11 +335,11 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 									
 								</div>
                                     </li>
-					<li>			
+									<li>			
                                             
 								<div class="">
 								        <span>  </span>
-									<input type="text" tabindex="2" maxlength="50" name="lastname" class="swifta_input" id="lname" required="required" placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
+									<input type="text" tabindex="2" maxlength="50" name="lastname" class="swifta_input" id="lname" required placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
 									
 									value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
 										echo $this->session->get('lastname'); 
@@ -370,17 +370,15 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 							
                               
                                     </li>
+                               		<li >
                                     
-                                    
-                                    
-                                <li >
+                                    <?php //echo $this->session->get('merchant_reg_nuban'); ?>
                                 
 									<input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
                                                                                value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
                                 
                                 </li>
-                                
-					<li class="frm_clr">			
+									<li class="frm_clr">			
                                             
 								<div class="">
                                                                     <span class="asterisks_input">  </span>
@@ -394,35 +392,38 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
                                         </div>
                                     </li>
-                                    
-                                <li>
-                                    
-                                 <div class="" style="">
-									<input maxlength="50" tabindex="5" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
-								                                             value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
-										echo $this->session->get('mraddress2'); 
-										} else {
-											echo $this->userPost['mr_address2'];
-										}}?>" /> 			
-									<em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
-                                 </div>
-                                </li>
-                                <li class="frm_clr">
-                                   
-								<div class="">
-                                  <span class="asterisks_input">  </span>
-                                    <input tabindex="6"  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
-									<?php  ?>
-									value="<?php if($this->session->get('mphone_number') || isset($this->userPost['mr_mobile'])) { if($this->session->get('mphone_number')) {
-										echo $this->session->get('mphone_number'); 
-										} else {
-											echo $this->userPost['mr_mobile'];
-										}}?>" required autofocus /> 			
-									<em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
-                                </div>
-                                </li>
+                                    <li>
+                                        
+                                     <div class="" style="">
+                                        <input maxlength="50" tabindex="5" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
+                                                                                 value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
+                                            echo $this->session->get('mraddress2'); 
+                                            } else {
+                                                echo $this->userPost['mr_address2'];
+                                            }}?>" /> 			
+                                        <em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
+                                     </div>
+                                    </li>
+                                    <li class="frm_clr">
+                                       
+                                    <div class="">
+                                      <span class="asterisks_input">  </span>
+                                        <input tabindex="6"  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+                                        <?php  ?>
+                                        value="<?php if($this->session->get('mphone_number') || isset($this->userPost['mr_mobile'])) { if($this->session->get('mphone_number')) {
+                                            echo $this->session->get('mphone_number'); 
+                                            } else {
+                                                echo $this->userPost['mr_mobile'];
+                                            }}?>" required autofocus /> 			
+                                        <em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
+                                    </div>
+                                    </li>
 
-                                 <li >
+								<!-- 
+                                	Sector code for theme preview with the relevant JS
+                                    @Live
+                                -->
+                                <!--<li >
                                 
 				<div class="">
               
@@ -436,8 +437,29 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 								
 								<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
                                 </div>
+                                </li>-->
+                                
+                                	<li >
+                                
+				<div class="">
+              
+                                <select name="sectorx" tabindex="7" id="sector"   class="swifta_input"  onchange="">
+                                <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
+                               
+                                <?php foreach ($this->sector_list as $c) { ?>
+                                <option   title="<?php echo $c->sector_name; ?>" value="<?php echo $c->sector_id; ?>" ><?php echo $c->sector_name; ?></option>
+                                <?php } ?>
+                                </select>	
+                                								
+								<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
+                                </div>
                                 </li>
-                                <!--<li class="subsector_list">
+                                
+                                
+                                
+                                
+                                
+                               <!-- <li class="subsector_list">
                                 <label><?php echo $this->Lang['SUBSECTOR']; ?> <span style="color:red;">*</span>: </label>
                                 <div class="">
 								<?php if($this->session->get('sector')){ ?>
@@ -462,33 +484,25 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 } ?></em>
 
                                 </li>-->
-                                <li id="id_label_theme_preview" style="position:relative; margin-top: 15px;">
+                                <!--<li id="id_label_theme_preview" style="position:relative; margin-top: 15px;">
                                     <label style=" color: #FFF;width: auto; position:absolute; padding: 10px; bottom: -10px; left: 0; display:inline-block; " class = "buy_it complete_order_button">Theme Preview(s)</label>
-                                    <!--<a href="javascript:openMainView();">
+                                    <<a href="javascript:openMainView();">
                                         <img src="" class="preview_theme_selected" style="width:150px;height:150px;"/>
-                                    </a>-->
+                                    </a>
                                     
                                     
-                                </li>
+                                </li>-->
                                 
+                                <!-- 
+                                    	Theme preview content code.
+                                        @Live
+                                    -->
+                                <!--
                                 <li>
                                 	
                                      <div id="id_themes_container" style=" width:100%; height:auto;">
                                       <ul id="brandcarousal" style="width:100%; background:#A61C00;">
-                                        <!--<li style="width: 250px; height:200px; background:#06F"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/><p><input name="theme" type="radio" /></p></li>-->
-                                        <!--<li  style=" position:relative; width: 250px; height:200px; background:#9C0;"><img src="<?php echo PATH?>themes/default/images/sasa/brand2.jpg" alt="" title=""/><p style="text-align:right; padding-right: 10px; position:absolute; bottom: -10px; right:0;"><span><span style="cursor:pointer">[-]</span><span style="cursor:pointer;"><input name="theme" type="radio" /></span></span></p>
-                                       <p style="text-align:left; padding-left: 0px; position:absolute; bottom: -10px; left:0;"> <span style="cursor:pointer; border-bottom: 1px solid #000; "><b style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 0 4px; opacity:0.4;">Name: </b><i style="background:#000; font-size:12px; color:#FFF; padding: 4px 4px 0 4px; opacity:0.4;">Manufacturing</i></span> </p>
-                                        </li>-->
-                                        <!--<li  style="width: 250px; height:200px; background:#F3C;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>-->
-                                       <!-- <li  style="width: 250px; height:200px;""><img src="<?php echo PATH?>themes/default/images/sasa/brand4.jpg" alt="" title=""/></li>
-                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/></li>
-                                        <li  style="width: 250px; height:200px;""><img src="<?php echo PATH?>themes/default/images/sasa/brand2.jpg" alt="" title=""/></li>
-                                        <li style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>
-                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand4.jpg" alt="" title=""/></li>
-                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/></li>
-                                        <li  style="width: 250px; height:200px;""><img src="<?php echo PATH?>themes/default/images/sasa/brand2.jpg" alt="" title=""/></li>
-                                        <li  style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand3.jpg" alt="" title=""/></li>
-                                        <li style="width: 250px; height:200px;"><img src="<?php echo PATH?>themes/default/images/sasa/brand4.jpg" alt="" title=""/></li>-->
+                                        <li style="width: 250px; height:200px; background:#06F"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/><p><input name="theme" type="radio" /></p></li>
                                       </ul>
                                       <div class="clearfix"></div>
                                       <a id="prev" class="prev" href="#">&lt;</a>
@@ -500,6 +514,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                       
                                     
                                 </li>
+                                
+                                -->
                                 
                                 
                                 
@@ -526,7 +542,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <?php } else { ?>
                                         <input tabindex="2" type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
-                                       <td style="width:px;"><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
+                                       <td ><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping 
                                               </label></td><td> <a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
@@ -571,8 +587,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 
                                     </ul>
-                                    <div>
-                            </div>
+                                    
                         </div>
                     </div>
                             
@@ -857,6 +872,10 @@ Signature and Date:.......................................................<br></
  
  </div>
     </div>
+    </div>
+    <input type="hidden" name="sector" value="33" />
+    <input type="hidden" name="subsector" value="34" />
+    
 
 <script>
         $('#confirm-delete').on('show.bs.modal', function(e)
@@ -877,6 +896,8 @@ Signature and Date:.......................................................<br></
         
         
         <div class='popup_block_theme'><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
+        
+    
     <!-- SELLER SIGNUP -->
  <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
  <!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
@@ -1491,7 +1512,8 @@ function get_themes(sector){
 				
 				}).fail(function(){
 					
-					alert('No category has been added under this top category.');
+					//alert('No category has been added under this top category.');
+					$('#id_label_theme_preview label').text("Theme Preview(Error!)");
 				});
 				
 			
