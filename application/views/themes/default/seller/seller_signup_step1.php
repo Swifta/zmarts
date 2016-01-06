@@ -445,7 +445,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
                           
                            <form name="formName" method="post"><p style="font-size:20px; margin-left:5px;margin-top: 10px; font-family: sans-serif;">Do you have a Zenith Bank account ? </p><p style="margin-left:10px;">
-<input type="checkbox" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" /><label for="priorityHigh" >Yes</label>
+<input type="checkbox" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" />&nbsp;<label for="priorityHigh" >Yes</label>
 <input type="checkbox" name="priorityLow" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
  
 <br>
@@ -455,10 +455,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 <!-- Account validation div starts here-->
     <div style="margin-top: 20px;">  
         <input type = "textbox" name="acctnum" id="acctnum" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="swifta_input2" autofocus required/>
+        
         <input type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button2" onclick="show_gif(this);">
+        
     </div>
+    
+    
 <!--   <input type="submit"  name="submit" value="proceed" class="swifta_button " onclick="validateForm();">-->
-<em id="z_acc_error"></em>
+
  <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
                       <!--<input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">-->  
      <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
@@ -491,9 +495,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
   
                 <div class="modal-footer">
     
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"> No</button>
    
-                 <a class="btn btn-danger btn-ok" href="<?php echo PATH; ?>merchant-signup-step3.html">Yes</a>
+                 <a class="btn btn-danger btn-ok" href="<?php echo PATH; ?>merchant-signup-step3.html"> Yes</a>
                 </div>
             </div>
       
@@ -509,6 +513,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
   
 </div>
 
+<em id="z_acc_error"></em>
 <div id="" class="red box"><a href="<?php echo PATH; ?>merchant-signup-account-opening.html"></a></div>
    
                            </form>
@@ -663,7 +668,7 @@ function validation_failed(){
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "Try again",   
-		cancelButtonText: "Cancel",   
+		cancelButtonText: "Open A New Account",   
 		closeOnConfirm: true,   
 		closeOnCancel: true,
 		}, 
@@ -671,7 +676,7 @@ function validation_failed(){
 			if (isConfirm) {     
 				
 			} else {     
-			  location.href ="<?php echo PATH;?>";
+			  location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
 		   }
 
    
@@ -1062,6 +1067,7 @@ function show_gif(obj){
 			var sub_btn_parent = sub_btn.parent();
 			var sub_btn_parent_bak = sub_btn_parent.html();
 			
+			
 			$('#z_acc_error').html('');
 			
 			var nuban = $('#acctnum').val();
@@ -1104,8 +1110,10 @@ function show_gif(obj){
 		        dataType:"html",
 		        success:function(check)
 		        {
-                            //alert(check);
+					
+                           
                             if(check == 1){
+								
 
 				swal({   
 title: "Account verification successful",  
@@ -1127,14 +1135,14 @@ closeOnCancel: false},
 					}
 				});
                  }else{
+					 
+					
 					sub_btn_parent.html(sub_btn_parent_bak);
 					is_z_verify_account_api_running = false;
                                         //alert("Your account cannot be validated. Please try again");
 					//$('#z_acc_error').html("<?php echo ""; ?>");
 							validation_failed();
                             }
-                            //swal("");
-                            //location.href ="<?php echo PATH; ?>merchant-signup-step2.html";
                             return false;
 						
 			
@@ -1145,12 +1153,13 @@ closeOnCancel: false},
 		        {
 					sub_btn_parent.html(sub_btn_parent_bak);
 					is_z_verify_account_api_running = false;
-					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
+					$('#z_acc_error').text("<?php echo "Something went wrong. Please contact site admin."; ?>");
 					return false;
 		        }
 
 	         });
-			 
+			 //alert(11112222);
+			$('#z_acc_error').html("Something went wrong. Please contact site admin.");
 			return false;
 	
 }

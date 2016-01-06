@@ -294,6 +294,8 @@ input[type=text],input[type=password]
                         
                     </div>
                <form action="" method="post" onsubmit="return save_last_step();" name="signup4"  id="signup4" enctype="multipart/form-data" >
+               
+              
 		<div class="payouter_block pay_br">
 <!--                   <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['FINISH']; ?></h3>-->
                         <div class="p_inner_block clearfix">
@@ -307,7 +309,7 @@ input[type=text],input[type=password]
     <td>
                                        <div class="">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" maxlength="50" required="required" onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" autofocus="autofocus" tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
+                                 <input type="text" maxlength="50" required onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" autofocus tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
 				<em id="id_err_storename"><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
                                  </div>
@@ -322,7 +324,7 @@ input[type=text],input[type=password]
                                     <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
                                     <?php } ?>
                                     </select> 
-                                    </div>
+                                    
                                     <em id="id_err_country"><?php if (isset($this->form_error['country'])) {
                                     echo $this->form_error["country"];
                                     } ?></em>
@@ -437,7 +439,7 @@ input[type=text],input[type=password]
                                         <div class="fullname map_loc_section map_re_w">
                                         <div class="gllpLatlonPicker">
                                         <div class="top_popup_select2">        
-                                            <input type="text" maxlength="50" class="gllpSearchField required" tabindex="6" required="required"  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
+                                            <input type="text" maxlength="50" class="gllpSearchField required" tabindex="6" required  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
                                         <input type="button" class="gllpSearchButton sign_submit"  value="<?php echo $this->Lang['SEARCH']; ?>">
                                         </div>
                                         <br/>
@@ -446,9 +448,9 @@ input[type=text],input[type=password]
                                         <br/>
                                         
                                         <div class="">
-                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>" required="required"  value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>" readonly/>
+                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>" required  value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>" readonly/>
                                       
-                                        <input type="text" name="longitude" class="gllpLongitude required" required="required" placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>" value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" readonly/>
+                                        <input type="text" name="longitude" class="gllpLongitude required" required placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>" value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" readonly/>
                                           <em id="id_err_latitude"><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
                                         <em id="id_err_longitude"><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
                                         </div>

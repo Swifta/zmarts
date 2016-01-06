@@ -2002,7 +2002,7 @@ $pdf->Output('voucher.pdf', 'I');
 			  $nuban = $this->input->post('nuban');
                           //echo $nuban;
                           //$this->session->set("merchant_reg_nuban", $nuban);
-                          if(true){
+                         
 				 
 				  $r = $this->users->check_zenith_account_used($nuban);
 				  if(isset($r) && $r == "1"){
@@ -2030,17 +2030,27 @@ $pdf->Output('voucher.pdf', 'I');
                                                          $this->session->set("firstname", $response['accountName']);
                                                          echo 1;
                                                          exit;
+						  } else{
+							  echo -1;
+							  exit;
+							  //Error verifying
 						  }
-					  }
-                                    }
-                                    
-						  echo -9;
+					  }else{
+						  echo -1;
 						  exit;
+						  //Null response
+					  }
+                                    }else { 
+									
+								  echo -1; //nuban used already
+								  exit;
+					}
 				 
-			  }
+			  
 			  
 			 }
-                         echo -8;exit;
+                         echo -1;
+						 exit;
   }
   
    /*
