@@ -320,9 +320,9 @@ $this->language_List = str_replace(".php", "", $DL);
                                     </div>
 												</div>
 												</div>
-<div class="bottom_header near_map_hdr">
+<div class="bottom_header near_map_hdr" style="margin-bottom: 15px">
     <div class="header_inner">
-<ul class="head_menu head_menu1 bold">                                                                                                                                    
+<ul class="head_menu head_menu1 bold"  style="margin-left:-27px;">                                                                                                                                    
     <li class="orange_bg" <?php
 		if (isset($this->is_home)) {
 			echo "class='active'";
