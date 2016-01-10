@@ -743,19 +743,31 @@ class Admin_merchant_Controller extends website_Controller {
 		        $post = Validation::factory(array_merge($_POST,$_FILES))
 					        ->add_rules('mobile', 'required', array($this, 'validphone'))
 					        ->add_rules('address1', 'required')
-					        ->add_rules('address2', 'required')
+					        //->add_rules('address2', 'required')
 					        ->add_rules('country', 'required')
 					        ->add_rules('city', 'required')
 					        ->add_rules('storename', 'required',array($this,'check_store_exist'))
-					        ->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
-					        ->add_rules('website', 'required'/*,'valid::url'*/)
+					        //->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
+					       // ->add_rules('website', 'required'/*,'valid::url'*/)
 					        ->add_rules('latitude', 'required','chars[0-9.-]')
 					        ->add_rules('longitude', 'required','chars[0-9.-]')
 							->add_rules('sector', 'required')
 							->add_rules('subsector', 'required')
-					        ->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+					        //->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 					        ->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'))
 							->add_rules('username', 'required');
+							
+							if(isset($_FILE['image'])){
+								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
+							}
+							
+							if(isset($_POST['website'])){
+								$post->add_rules('website', 'required','valid::url');
+							}
+							
+							if(isset($_POST['zipcode'])){
+								$post->add_rules('zipcode', 'chars[a-zA-Z0-9.]');
+							}
 
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
