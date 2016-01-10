@@ -34,25 +34,29 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('email', 'required','valid::email',array($this, 'email_available'))
 						->add_rules('mobile', 'required', array($this, 'validphone'))
 						->add_rules('address1', 'required')
-						->add_rules('address2', 'required')
+						//->add_rules('address2', 'required')
 						->add_rules('mr_mobile', 'required', array($this, 'validphone'))
 						->add_rules('mr_address1', 'required')
-						->add_rules('mr_address2', 'required')
+						//->add_rules('mr_address2', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required')
 						->add_rules('sector', 'required')
 						->add_rules('subsector', 'required')
-						->add_rules('payment_acc', 'required','valid::email')
+						->add_rules('payment_acc', 'required','chars[0-9.-]', array($this,'check_zenith_account_used'))
 						->add_rules('storename', 'required',array($this,'check_store_exist'))
 						->add_rules('about_us', 'required')
-						->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
-						->add_rules('website', 'required'/*,'valid::url'*/)
+						//->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
+						//->add_rules('website', 'required'/*,'valid::url'*/)
 						->add_rules('latitude', 'required','chars[0-9.-]')
 						->add_rules('longitude', 'required','chars[0-9.-]')
 						->add_rules('commission','required',array($this, 'valid_commision'),'chars[0-9]')
 						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
+						//->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 						->add_rules('username', 'required');
+						
+						if(isset($_POST['store_email'])){
+							$post->add_rules('store_email', array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
+						}
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
 							$post->add_rules('subsector', 'required');
@@ -95,7 +99,7 @@ class Admin_merchant_Controller extends website_Controller {
 												
 								$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been successfully created.</p>
-				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
+				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['email']."</a></p> 
 				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$password."</p> 
 				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p></div>";
 				
@@ -247,6 +251,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->template->content = new View("admin_merchant/add_merchant");
 	}
 	
+	
+	
+	
 	/** MANAGE MERCHANT **/
 	
 	public function manage_merchant($page = "")
@@ -361,11 +368,11 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('email', 'required','valid::email',array($this,'check_store_admin_with_supplier33'))
 						->add_rules('mer_mobile', 'required', array($this, 'validphone'))
 						->add_rules('mer_address1', 'required')
-						->add_rules('mer_address2', 'required')
+						//->add_rules('mer_address2', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required')
-						->add_rules('commission','required', array($this, 'valid_commision'),'chars[0-9]')
-						->add_rules('payment_acc', 'required','valid::email');
+						->add_rules('commission','required', array($this, 'valid_commision'),'chars[0-9]');
+						//->add_rules('payment_acc', 'required','valid::email');
 
 				if($post->validate())
 				{
@@ -1895,6 +1902,13 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 		
 		return $im;
+	}
+	
+	
+	public function check_zenith_account_used(){
+		$nuban = $_POST['payment_acc'];
+		
+		return $this->merchant->check_zenith_account_used($nuban);
 	}
 
 }

@@ -351,57 +351,78 @@
                 
                             <div class="pay_br payright_block">
 			
-				<div class="payment-faq-container">
-					<h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_MEN']; ?></h3>				
-			<div class="faq-content2">
-						<div class="faq-content-heading br_nn" onclick="return WhatHappens();">
-													
-							<div class="faq-content-heading-left active_arrw cursor" id="right1">
-							<a><?php echo $this->Lang['WAT_HAPP']; ?></a>
-							</div>
-							<div class="faq-content-heading-left cursor" id="down1">
-							<a><?php echo $this->Lang['WAT_HAPP']; ?></a>
-							</div>
-						</div>
-					     <div class="what_happens">
-						<div class="faq-content-text">
-						    
-							<p><?php echo $this->Lang['WHILE_BUY_A_PRODUCT']; ?></p>
-						</div>
-						</div>
-					</div>
-					<div class="faq-content2">
-						<div class="faq-content-heading" onclick="return Whatbuygift();">
-							
-							<div class="faq-content-heading-left active_arrw cursor" id="right2">
-							<a><?php echo $this->Lang['DO_I_NEED']; ?></a>
-							</div>
-							<div class="faq-content-heading-left cursor" id="down2">
-							<a><?php echo $this->Lang['DO_I_NEED']; ?></a>
-							</div>
-						</div>
-						  <div class="what_buygift">  
-						<div class="faq-content-text">
-							<p><?php echo $this->Lang['ITS_QUITE_OPTIONAL']; ?></p>
-						</div>
-						</div>
-					</div>
-					<div class="faq-content2">
-						<div class="faq-content-heading" onclick="return CanChange();">
-							<div class="faq-content-heading-left active_arrw cursor" id="right3">
-							<a><?php echo $this->Lang['MAY_I_USE']; ?></a>
-							</div>
-							<div class="faq-content-heading-left cursor" id="down3">
-							<a><?php echo $this->Lang['MAY_I_USE']; ?></a>
-							</div>
-						</div>
-						<div class="can_change">
-						<div class="faq-content-text">
-							<p><?php echo $this->Lang['OBVIOUSLY_YES']; ?></p>
-						</div>
-						</div>
-					</div>
-				</div>
+							<div class="payment-faq-container">
+                        <!--<h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_MEN']; ?></h3>-->
+                        <h3 class="paybr_title pay_titlebg"><?php echo "Add to cart FAQ"; ?></h3>
+						<div class="faq-content2 br_nn">
+                            <div class="faq-content-heading" onclick="return WhatHappens();">
+
+                                <div class="faq-content-heading-left active_arrw" id="right1">
+                                    <a>What happens after I add a product to cart?
+</a>
+                                </div>
+                                <div class="faq-content-heading-left" id="down1">
+                                    <a>What happens after I add a product to cart?
+</a>
+                                </div>
+                            </div>
+                            <div class="what_happens">
+                                <div class="faq-content-text">
+
+                                    <p>When you add a product to cart, you will have to provide the exact address to which the product is to be shipped.Once, you checkout successfully, you will thereafter receive the ordered item.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="faq-content2 br_nn">
+                            <div class="faq-content-heading" onclick="return WhatHappens();">
+
+                                <div class="faq-content-heading-left active_arrw" id="right1">
+                                    <a><?php echo $this->Lang['WAT_HAPP']; ?></a>
+                                </div>
+                                <div class="faq-content-heading-left" id="down1">
+                                    <a><?php echo $this->Lang['WAT_HAPP']; ?></a>
+                                </div>
+                            </div>
+                            <div class="what_happens">
+                                <div class="faq-content-text">
+
+                                    <p><?php echo $this->Lang['WHILE_BUY_A_PRODUCT']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-content2">
+                            <div class="faq-content-heading" onclick="return Whatbuygift();">
+
+                                <div class="faq-content-heading-left active_arrw" id="right2">
+                                    <a><?php echo $this->Lang['DO_I_NEED']; ?></a>
+                                </div>
+                                <div class="faq-content-heading-left" id="down2">
+                                    <a><?php echo $this->Lang['DO_I_NEED']; ?></a>
+                                </div>
+                            </div>
+                            <div class="what_buygift">  
+                                <div class="faq-content-text">
+                                    <p><?php echo $this->Lang['ITS_QUITE_OPTIONAL']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-content2">
+                            <div class="faq-content-heading" onclick="return CanChange();">
+                                <div class="faq-content-heading-left active_arrw" id="right3">
+                                    <a><?php echo $this->Lang['MAY_I_USE']; ?></a>
+                                </div>
+                                <div class="faq-content-heading-left" id="down3">
+                                    <a><?php echo $this->Lang['MAY_I_USE']; ?></a>
+                                </div>
+                            </div>
+                            <div class="can_change">
+
+                                <div class="faq-content-text">
+                                    <p><?php echo $this->Lang['OBVIOUSLY_YES']; ?></p>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
 			</div>
                         </div>
                     

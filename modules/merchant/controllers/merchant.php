@@ -2348,7 +2348,7 @@ class Merchant_Controller extends website_Controller
 		$this->get_city_data = $this->merchant->get_size_data($city_id);
 		$list = "";
 		foreach($this->get_city_data as $c){
-			$list .="<p style='float:left;'><span style='width:3px;padding:3px;'> Select Size ".ucfirst($c->size_name)." <input type='checkbox' name='size[]' checked='checked' value='".$c->size_id."'></span><br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]'  maxlength='8' value='1' class='txtChar' onkeypress='return isNumberKey(event)'></span></p>";
+			$list .="<p style='float:left;'><span style='width:3px;padding:3px;'> Select Size ".ucfirst($c->size_name)." <input type='checkbox' name='size[]' checked='checked' onchange='toggle_size_display(this)' value='".$c->size_id."'></span><br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]'  maxlength='8' value='1' class='txtChar' onkeypress='return isNumberKey(event)'></span></p>";
 		 }
 		echo $list;
 		exit;
@@ -2361,12 +2361,12 @@ class Merchant_Controller extends website_Controller
 		    $deal_id = $this->input->get('deal');
 		    $list = "";
 		    $store_data = $this->merchant->store_size_data($city_id,$deal_id);
-		    if($store_data == 1){
+		    
 		    $this->get_city_data = $this->merchant->get_size_data($city_id);
 		    foreach($this->get_city_data as $c){
-			   $list .="<p style='float:left;'><span style='width:3px;padding:3px;'>Select size = ".ucfirst($c->size_name)."<input type='checkbox' name='size[]' checked='checked' value='".$c->size_id."'></span> <br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]'  maxlength='8'  value='1' class='txtChar' onkeypress='return isNumberKey(event)'></span> </p> ";
+			   $list .="<p style='float:left;'><span style='width:3px;padding:3px;'>Select size = ".ucfirst($c->size_name)."<input type='checkbox' name='size[]' checked='checked' onchange='toggle_size_display(this)' value='".$c->size_id."'></span> <br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]'  maxlength='8'  value='1' class='txtChar' onkeypress='return isNumberKey(event)'></span> </p> ";
 		     }
-		     }
+		     
 		     echo $list;
 		    exit;
 

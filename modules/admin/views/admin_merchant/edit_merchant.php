@@ -54,7 +54,7 @@
                          <tr>
                                 <td><label><?php echo $this->Lang["M_ACC_NO"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="payment_acc" maxlength="255" value="<?php echo $u->payment_account_id;?>"/>
+                                <td><input readonly="readonly" type="text" name="payment_acc" maxlength="255" value="<?php echo $u->payment_account_id;?>"/>
                                 <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
                                 </td>
                         </tr>

@@ -167,7 +167,7 @@ function toggle() {
                var count=$(this).val();
               //$(".quantity_size").val(0);
                $(".size_check").attr("checked",false);
-                $(".size_quantity").hide();
+               $(".size_quantity").hide();
                
                $.post("<?php echo PATH;?>merchant/addmore_size?count="+count,{
                        }, function(response){
@@ -180,6 +180,7 @@ function toggle() {
 										}	
 								});
 								if(check == 1){
+									
                                     $("#size_display").append(response);
                                  }else{
 									alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
@@ -187,6 +188,19 @@ function toggle() {
                        });
                });
           });
+		  
+		  
+	function toggle_size_display(size_checkbox){
+			
+		$(size_checkbox).parent().parent().remove();
+		var size = $("#size_display p").size();
+		$('#SizeText').val("");
+		if(size == 1){
+			$("#size_display p:first").css('display', 'block');
+			
+		}
+		
+	}
 </script>
 
 <script type="text/javascript">

@@ -1,7 +1,4 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
-
-
- <head>
+<?php defined('SYSPATH') OR die('No direct access allowed.'); ?><head>
 	<!-- Dependencies: JQuery and GMaps API should be loaded first -->
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<!-- CSS and JS for our code -->
@@ -27,7 +24,10 @@
           }
 }
 	</script>
-<div class="bread_crumb"><a href="<?php echo PATH.'admin.html'; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang["HOME"]; ?> <span class="fwn">&#155;&#155;</span></a><p><?php echo $this->template->title; ?></p></div>
+
+
+
+ <div class="bread_crumb"><a href="<?php echo PATH.'admin.html'; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang["HOME"]; ?> <span class="fwn">&#155;&#155;</span></a><p><?php echo $this->template->title; ?></p></div>
 <div class="cont_container mt15 mt10">
     <div class="content_top"><div class="top_left"></div><div class="top_center"></div><div class="top_rgt"></div></div>
     <div class="content_middle">
@@ -86,7 +86,7 @@
                                 </td>
                         </tr>
                         <tr>
-                                <td><label><?php echo $this->Lang["ADDR2"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["ADDR2"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="mr_address2" maxlength="100" value="<?php if(isset($this->userPost['mr_address2'])){echo $this->userPost['mr_address2'];}?>"/>
                                 <em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
@@ -243,7 +243,7 @@
                                 </td>
                         </tr>
                         <tr>
-                                <td><label><?php echo $this->Lang["ADDR2"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["ADDR2"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="address2" maxlength="255" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>"/>
                                 <em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
@@ -285,7 +285,7 @@
                         </tr> 
                         
                         <tr>
-                                <td><label><?php echo $this->Lang["ZIP_CODE"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["ZIP_CODE"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="zipcode" maxlength="10" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>"/>
                                 <em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
@@ -323,7 +323,7 @@
                         </tr>
                         
                          <tr>
-                                <td><label><?php echo $this->Lang["WEBSITE"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["WEBSITE"]; ?></label></td>
                                 <td><label>:http://</label></td>
                                 <td><input type="text" name="website" maxlength="100" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"/>
                                 <em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
