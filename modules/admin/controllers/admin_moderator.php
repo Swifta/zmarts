@@ -44,6 +44,7 @@ class Admin_moderator_Controller extends website_Controller {
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
@@ -219,6 +220,7 @@ class Admin_moderator_Controller extends website_Controller {
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);			
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						//->add_rules('email', 'required','valid::email',array($this,'email_available'))
