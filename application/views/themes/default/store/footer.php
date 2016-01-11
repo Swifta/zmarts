@@ -2,7 +2,7 @@
 <style>
     .cb{
         
-        background-color: #fff380;
+       /* background-color: #144f5d;*/
     }
     </style>
 <?php if(count($this->about_us_footer)>0) { 
@@ -99,7 +99,7 @@ echo $stores->about_us;
                         </ul>
             <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
                 <input class="newsletter" type="text" name="store_subscriber" id="store_subscriber1"  placeholder="Enter Email Address" onkeypress="return check_color();"/>
-                <button class="newsletter-btn btn btn-success cb"  type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');">Join</button>
+                <button class="btn btn-success cb"  type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');">Join</button>
                     </div>
                 </div>
 
