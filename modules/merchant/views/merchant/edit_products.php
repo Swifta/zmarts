@@ -646,7 +646,7 @@
 	 		              
               <option  value="<?php echo $CityL->size_id; ?>"><?php echo ucfirst($CityL->size_name); ?> </option>
               <?php  } ?>
-            </select></td>
+            </select><p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p></td>
         </tr>
         <?php 
                     } else {?>
@@ -658,14 +658,15 @@
               <?php foreach($this->selectproduct_size as $CityL){ ?>
               <option value="<?php echo $CityL->size_id; ?>"><?php echo ucfirst($CityL->size_name); ?></option>
               <?php } ?>
-            </select></td>
+            </select>
+            <p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p></td>
         </tr>
         <?php } ?>
         <tr>
           <td ></td>
           <td></td>
           <td><label><?php echo $this->Lang['MORE_CUS_SIZE']; ?> <a href="<?php echo PATH; ?>merchant/manage-sizes.html"> <?php echo $this->Lang['ADD']; ?></a></label>
-            <p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p></td>
+            </td>
         </tr>
         <tr>
           <td><label><?php echo $this->Lang['YOUR_SELE_S_QU']; ?></label>

@@ -708,6 +708,7 @@ function validate() {
 			            </select>
 			            
 			            <!--<em><?php if(isset($this->form_error["size_tag[]"])){ echo $this->form_error["size_tag[]"]; }?></em>-->
+                        <p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p>
                     </td>
                 </tr>
                 <tr>
@@ -715,7 +716,7 @@ function validate() {
                     <td></td>
                     <td>
                                 <label><?php echo $this->Lang['MORE_CUS_SIZE']; ?>  <a href="<?php echo PATH; ?>merchant/manage-sizes.html"> <?php echo $this->Lang['ADD']; ?></a></label>
-                                <p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p>
+                                
                     </td>
                 </tr>    
                 
