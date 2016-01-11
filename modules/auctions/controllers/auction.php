@@ -440,8 +440,8 @@ class Auction_Controller extends Layout_Controller
 			
 			$this->template->content = new View("themes/".THEME_NAME."/".$this->theme_name."/auction/detail");
 		} else {
-			
-			$this->template->content = new View("themes/".THEME_NAME."/auction/detail");
+			$this->template->style = html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/alt_style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
+			//$this->template->content = new View("themes/".THEME_NAME."/auction/detail");
 		}
 		/*
 			if($this->sector =="Electronics") { 

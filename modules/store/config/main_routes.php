@@ -1,0 +1,9 @@
+// CHANGE Start
+$config['CHANGE'] = "store/stores_home_page/CHANGE";
+$config['CHANGE/products.html'] = "/store/product_list/CHANGE";
+$config['CHANGE/today-deals.html'] = "/store/deal_list/CHANGE";
+$config['CHANGE/auction.html'] = "/store/auction_list/CHANGE";
+$config['CHANGE/products/c/(.*)/(.*).html'] = "/store/product_list/CHANGE/$1/$2";
+$config['CHANGE/deal/c/(.*)/(.*).html'] = "/store/deal_list/CHANGE/$1/$2";
+$config['CHANGE/auction/c/(.*)/(.*).html'] = "/store/auction_list/CHANGE/$1/$2";
+// CHANGE End
