@@ -282,7 +282,7 @@ class Newsletter_Controller extends website_Controller {
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-					->pre_filter('trim')
+					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
 					->add_rules('template_image','required','upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
@@ -349,7 +349,7 @@ class Newsletter_Controller extends website_Controller {
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-					->pre_filter('trim')
+					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
 					->add_rules('template_image','required','upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');

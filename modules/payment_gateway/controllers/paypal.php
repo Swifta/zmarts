@@ -223,7 +223,7 @@ class Paypal_Controller extends Layout_Controller
 			$friend_gift_status = $this->input->post("friend_gift");
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('friend_name','required')
 						->add_rules('friend_email','required')
 						->add_rules('friend_gift','required');

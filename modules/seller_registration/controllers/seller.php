@@ -176,7 +176,7 @@ class Seller_Controller extends Layout_Controller {
                         //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('firstname', 'required')
 						->add_rules('mr_mobile', 'required',array($this, 'validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mr_address1', 'required')
@@ -265,7 +265,7 @@ class Seller_Controller extends Layout_Controller {
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('sector', 'required');
 							if($post->validate())
 					{
@@ -312,7 +312,7 @@ class Seller_Controller extends Layout_Controller {
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('city', 'required')
 							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')

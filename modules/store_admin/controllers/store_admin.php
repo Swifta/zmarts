@@ -124,7 +124,7 @@ class Store_admin_Controller extends website_Controller
 				$this->userpost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
 							->add_rules('email','required','valid::email')
@@ -171,7 +171,7 @@ class Store_admin_Controller extends website_Controller
 				$this->userpost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('oldpassword','required',array($this, 'check_password'))
 							->add_rules('password','length[5,32]','required')
 							->add_rules('cpassword','required','matches[password]');
@@ -208,7 +208,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-					->pre_filter('trim')
+					
 			        ->add_rules('title', 'required')
 			        ->add_rules('description', array($this,'check_required'),'required')
 			        ->add_rules('category', 'required')
@@ -436,7 +436,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -642,7 +642,7 @@ class Store_admin_Controller extends website_Controller
 						$fname = $this->input->post("firstname");
 						$email = trim($this->input->post("email"));
 						$post = Validation::factory(array_merge($_POST,$_FILES))
-										->pre_filter('trim')
+										
 										->add_rules('users', 'required')
 										->add_rules('email','required')
 										->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -825,7 +825,7 @@ class Store_admin_Controller extends website_Controller
 			if($_POST){
 				$this->userPost = $this->input->post();
 				$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -1087,7 +1087,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 				        ->add_rules('title', 'required')
 				        ->add_rules('description','required',array($this,'check_required'))
 				        ->add_rules('category', 'required')
@@ -1475,7 +1475,7 @@ class Store_admin_Controller extends website_Controller
 			$fname = $this->input->post("firstname");
 			$email = trim($this->input->post("email"));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
 							->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -1640,7 +1640,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -1889,7 +1889,7 @@ class Store_admin_Controller extends website_Controller
 	        if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-					->pre_filter('trim')
+					
 					->add_rules('title', 'required')
 					->add_rules('description', 'required',array($this,'check_required'))
 					->add_rules('category', 'required')
@@ -2144,7 +2144,7 @@ class Store_admin_Controller extends website_Controller
 			$fname = $this->input->post("firstname");
 			$email = trim($this->input->post("email"));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
 							->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -2940,7 +2940,7 @@ class Store_admin_Controller extends website_Controller
 				$code= $this->input->post('code');
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST))
-							 ->pre_filter('trim')
+							 
 							 ->add_rules('code', 'required');
 					if($post->validate()){
 						$this->deal_list=$this->merchant->coupon_code_validate($code);
@@ -3037,7 +3037,7 @@ class Store_admin_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-				->pre_filter('trim')
+				
 				->add_rules('email', 'required','valid::email')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
@@ -3771,7 +3771,7 @@ class Store_admin_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('terms_conditions','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -3801,7 +3801,7 @@ class Store_admin_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('return_policy','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -3831,7 +3831,7 @@ class Store_admin_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('about_us','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -3888,7 +3888,7 @@ class Store_admin_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
 						->add_rules('font_size','required')
@@ -4088,7 +4088,7 @@ class Store_admin_Controller extends website_Controller
 
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required');
@@ -4183,7 +4183,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-			                        ->pre_filter('trim')
+			                        
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
 						->add_rules('description', 'required')
@@ -4285,7 +4285,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
 						->add_rules('description', 'required')

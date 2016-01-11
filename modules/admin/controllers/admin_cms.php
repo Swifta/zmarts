@@ -26,7 +26,7 @@ class Admin_cms_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory($_POST)
-				->pre_filter('trim')
+				
 				->add_rules('title','required', 'chars[a-zA-Z0-9 \,.&_-]',array($this, 'cms_exist'));
 				
 				if($_POST['cms_type'] == 1 ){
@@ -99,7 +99,7 @@ class Admin_cms_Controller extends website_Controller
 
 			$this->userPost = $this->input->post();
 			$post = Validation::factory($_POST)
-				->pre_filter('trim')
+				
 				->add_rules('title','required','chars[a-zA-Z0-9 \,.&_-]');
 				//->add_rules('desc',array($this,'check_desc_empty'));
 				if($_POST['cms_type'] == 1 ){
@@ -193,7 +193,7 @@ class Admin_cms_Controller extends website_Controller
 		}
 		if($_POST) {  
 				$post = Validation::factory($_POST)
-				->pre_filter('trim') 
+				 
 				->add_rules('data','required',array($this,'check_desc_empty'));
 				if($post->validate()){
 				$status = $this->cms->about_us($_POST['data']);

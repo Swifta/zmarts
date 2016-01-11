@@ -27,7 +27,7 @@ const ALLOW_PRODUCTION = FALSE;
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('name', 'required', 'chars[a-zA-Z0-9_ -.,@%\']')
 							->add_rules('title', 'required','chars[a-zA-Z0-9_ -.,@%|\']')
 							->add_rules('keywords', 'required', 'chars[a-zA-Z0-9_ -.,@%\']')
@@ -128,7 +128,7 @@ const ALLOW_PRODUCTION = FALSE;
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('smtp_host', 'required')
 						->add_rules('smtp_port', 'required')
 						->add_rules('smtp_username', 'required');
@@ -154,7 +154,7 @@ const ALLOW_PRODUCTION = FALSE;
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('host', 'required')
 						->add_rules('port', 'required')
 						->add_rules('username', 'required');
@@ -179,7 +179,7 @@ const ALLOW_PRODUCTION = FALSE;
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('api', 'required')
 						->add_rules('listid', 'required')
 						->add_rules('replay', 'required')
@@ -216,7 +216,7 @@ const ALLOW_PRODUCTION = FALSE;
 			$this->userPost = $this->input->post();
 			 
 			$post = Validation::factory($_POST)                        
-							->pre_filter('trim')
+							
 							->add_rules('minfund','required',array($this, 'check_min_fund'),array($this, 'check_minfund_val_lmi'),'chars[.0-9]')
 							->add_rules('maxfund','required','chars[.0-9]')
 							->add_rules('auction_extend_day','required','chars[.0-9]',array($this,'check_day'))
@@ -279,7 +279,7 @@ const ALLOW_PRODUCTION = FALSE;
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
 						->add_rules('AccountNumber', 'required')
@@ -520,7 +520,7 @@ const ALLOW_PRODUCTION = FALSE;
 	   	$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('facebook_app_id', 'required', 'chars[a-zA-Z0-9]')
 						->add_rules('facebook_secret_key', 'required', 'chars[a-zA-Z0-9_ -.,@%]')
 						->add_rules('facebook', 'required', 'valid::url')
@@ -647,7 +647,7 @@ const ALLOW_PRODUCTION = FALSE;
 			
 			 
 			$post = Validation::factory($_POST)                        
-							->pre_filter('trim')
+							
 							->add_rules('logo_width','required',array($this,'check_value'),'chars[0-9]')
 							->add_rules('logo_height','required',array($this,'check_value'),'chars[0-9]')
 							->add_rules('favicon_width','required',array($this,'check_value'),'chars[0-9]')
@@ -723,7 +723,7 @@ const ALLOW_PRODUCTION = FALSE;
 				$this->userPost = $this->input->post();
                
 				$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							//->add_rules('position', 'required','chars[0-9]',array($this,'validposition')) 
 							->add_rules('title', 'required')
 							->add_rules('redirect_url','required', 'valid::url')
@@ -801,7 +801,7 @@ const ALLOW_PRODUCTION = FALSE;
 		if($_POST){ 
 				$this->userPost = $this->input->post();
 				$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('title', 'required')
 							->add_rules('redirect_url','required', 'valid::url')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');

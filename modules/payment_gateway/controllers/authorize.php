@@ -482,7 +482,7 @@ class Authorize_Controller extends Layout_Controller
 			}
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 				            ->add_rules('firstName','required','chars[a-zA-Z_ -.,%\']')
 				            ->add_rules('address1','required')
 				            ->add_rules('creditCardNumber','required')

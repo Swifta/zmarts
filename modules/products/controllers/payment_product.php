@@ -44,7 +44,7 @@ class Payment_product_Controller extends Layout_Controller {
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('f_name', 'required', 'chars[a-zA-Z_ -.,%\']')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
 						->add_rules('password', 'required','length[5,32]')

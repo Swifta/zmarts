@@ -956,7 +956,7 @@ class Api_Controller extends Layout_Controller
 			 
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 			                ->add_rules('firstName','required')
 			                ->add_rules('address1','required')
 			                ->add_rules('creditCardNumber','required')
@@ -1118,7 +1118,7 @@ class Api_Controller extends Layout_Controller
 			
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 				            ->add_rules('firstName','required','chars[a-zA-Z_ -.,%\']')
 				            ->add_rules('address1','required')
 				            ->add_rules('creditCardNumber','required')
@@ -1662,7 +1662,7 @@ class Api_Controller extends Layout_Controller
 			$post = new Validation($_POST);
 			$lang = $this->input->post('lang');
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('firstname','required')
 						->add_rules('email','required')
 						//->add_rules('password','required')
@@ -1800,7 +1800,7 @@ class Api_Controller extends Layout_Controller
 			$lang = $this->input->post('lang');
 			if($userid){
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 			            ->add_rules('userid','required')
 				    ->add_rules('city_id','required');
 			if($post->validate()){
@@ -1906,7 +1906,7 @@ class Api_Controller extends Layout_Controller
 			$post = new Validation($_POST);
 			$lang = $this->input->post('lang');
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('user_id','required')
 						->add_rules('old_password','required') ;
 						//->add_rules('new_password','required');
@@ -2005,7 +2005,7 @@ class Api_Controller extends Layout_Controller
 			
 			
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 			            ->add_rules('userid','required')
 			            ->add_rules('lang','required')
 			            ->add_rules('ship_name','required')

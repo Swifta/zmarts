@@ -28,7 +28,7 @@ class Admin_products_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim')
+							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -716,7 +716,7 @@ class Admin_products_Controller extends website_Controller
 		$fname = $this->input->post("firstname");
 		$email = trim($this->input->post("email"));
 		$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('users', 'required')
 						->add_rules('email','required')
 						->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -802,7 +802,7 @@ class Admin_products_Controller extends website_Controller
 	        if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-				->pre_filter('trim')
+				
 				->add_rules('title', 'required')
 				->add_rules('description','required',array($this,'check_required'))
 				->add_rules('category', 'required')
@@ -1007,7 +1007,7 @@ class Admin_products_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('comments', 'required');
                         if($post->validate()){
                                 $status = $this->products->edit_users_comments($commentsid, arr::to_object($this->userpost));

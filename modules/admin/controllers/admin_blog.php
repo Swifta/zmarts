@@ -33,7 +33,7 @@ class Admin_blog_Controller extends website_Controller
 			$this->userPost = $this->input->post();		
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('title', 'required', 'length[5,200]', array($this, 'blogtitle_available'))
 						->add_rules('description', 'required')
 						->add_rules('category', 'required')						
@@ -119,7 +119,7 @@ class Admin_blog_Controller extends website_Controller
 			$this->userPost = $this->input->post();		
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('title', 'required','length[5,200]')
 						->add_rules('description', 'required')
 						->add_rules('category', 'required')						

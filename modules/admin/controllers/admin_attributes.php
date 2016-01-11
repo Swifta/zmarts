@@ -31,7 +31,7 @@ class Admin_attributes_Controller extends website_Controller
 			
 			$this->userPost = $this->input->post();
 		$post = Validation::factory($_POST)
-					->pre_filter('trim')
+					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
 					->add_rules('sort_order', 'chars[0-9]');
@@ -96,7 +96,7 @@ class Admin_attributes_Controller extends website_Controller
 					
 					$this->userPost = $this->input->post();
 		$post = Validation::factory($_POST)
-					->pre_filter('trim')
+					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
 					->add_rules('sort_order', 'chars[0-9]');
@@ -170,7 +170,7 @@ class Admin_attributes_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 		$post = Validation::factory($_POST)
-					->pre_filter('trim')
+					
 					->add_rules('groupname', 'required',array($this,'check_attrgroup_exist'))
 					->add_rules('sort_order', 'chars[0-9]');
 			if($post->validate()){ 
@@ -228,7 +228,7 @@ class Admin_attributes_Controller extends website_Controller
 				if($_POST){
 					$this->userPost = $this->input->post();
 					$post = Validation::factory($_POST)
-					->pre_filter('trim')
+					
 					->add_rules('groupname', 'required')
 					->add_rules('sort_order', 'chars[0-9]');
 			if($post->validate()){

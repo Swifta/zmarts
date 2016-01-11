@@ -382,7 +382,7 @@ class Users_Controller extends Layout_Controller {
 			$post = new Validation($_POST);
 			
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('firstname','required','chars[a-zA-Z_ -.,%\']')
 						->add_rules('lastname', 'chars[a-zA-Z_ -.,]')
 						->add_rules('email','required','valid::email')
@@ -462,7 +462,7 @@ class Users_Controller extends Layout_Controller {
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('oldpassword','required',array($this, 'check_password'))
 						->add_rules('password','required')
 						->add_rules('cpassword','required','matches[password]');						
@@ -1590,7 +1590,7 @@ $pdf->Output('voucher.pdf', 'I');
 					$this->userPost = $this->input->post();
 					$post = new Validation($_POST);
 					$post = Validation::factory(array_merge($_POST,$_FILES))
-						->pre_filter('trim')
+						
 						->add_rules('firstname','required','chars[a-zA-Z_ -.,%\']')
 						->add_rules('address1','required')
 						->add_rules('address2','required')

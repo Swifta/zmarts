@@ -86,7 +86,7 @@ class Blog_Controller extends Layout_Controller
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('sender_name', 'required')
 							->add_rules('email', 'valid::email', 'required')
 							->add_rules('comments', 'required');
