@@ -176,6 +176,7 @@ class Seller_Controller extends Layout_Controller {
                         //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+						->pre_filter('trim')
 						->add_rules('firstname', 'required')
 						->add_rules('mr_mobile', 'required',array($this, 'validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mr_address1', 'required')
@@ -188,6 +189,10 @@ class Seller_Controller extends Layout_Controller {
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
 							$post->add_rules('subsector', 'required');
+						}
+						
+						if(isset($_FILES['image'])){
+							$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 						}
 						
 						
@@ -260,6 +265,7 @@ class Seller_Controller extends Layout_Controller {
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('sector', 'required');
 							if($post->validate())
 					{
@@ -306,6 +312,7 @@ class Seller_Controller extends Layout_Controller {
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('city', 'required')
 							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
@@ -321,7 +328,22 @@ class Seller_Controller extends Layout_Controller {
 							
 							if(isset($_FILES['image']))
 								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
+								
+							if(isset($_POST['store_email_id'])){
+								$post->add_rules('store_email_id',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
+							}
 							
+							if(isset($_POST['website'])){
+								$post->add_rules('website','valid::url');
+							}
+							
+							if(isset($_POST['zipcode'])){
+			
+								$post->add_rules('zipcode', 'chars[0-9.]');
+							}
+							
+							if(isset($_POST[''])){
+							}
 						if($post->validate()){    
 							
 							

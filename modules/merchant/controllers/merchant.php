@@ -167,6 +167,7 @@ class Merchant_Controller extends website_Controller
 				$this->userpost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
+							->pre_filter('trim')
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
 							->add_rules('email','required','valid::email')
@@ -218,6 +219,7 @@ class Merchant_Controller extends website_Controller
 				$this->userpost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
+							->pre_filter('trim')
 							->add_rules('oldpassword','required',array($this, 'check_password'))
 							->add_rules('password','length[5,32]','required')
 							->add_rules('cpassword','required','matches[password]');
@@ -286,6 +288,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
 						->add_rules('AccountNumber', 'required')
@@ -322,6 +325,7 @@ class Merchant_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+					->pre_filter('trim')
 			        ->add_rules('title', 'required')
 			        ->add_rules('description', array($this,'check_required'),'required')
 			        ->add_rules('category', 'required')
@@ -547,6 +551,7 @@ class Merchant_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -557,7 +562,7 @@ class Merchant_Controller extends website_Controller
 							->add_rules('start_date', 'required')
 							->add_rules('end_date', 'required', array($this, 'check_end_date'))
 							->add_rules('expiry_date', 'required', array($this, 'check_expiry_date'))
-						        ->add_rules('minlimit', 'required', array($this,'check_min_lmi'),'chars[0-9]')
+						    ->add_rules('minlimit', 'required', array($this,'check_min_lmi'),'chars[0-9]')
 							->add_rules('maxlimit', 'required','chars[0-9]',array($this,'check_maxlimit_lmi'))
 							->add_rules('quantity', 'required', array($this,'check_purchace_lmi'),'chars[0-9]')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
@@ -738,6 +743,7 @@ class Merchant_Controller extends website_Controller
 						$fname = $this->input->post("firstname");
 						$email = $this->input->post("email");
 						$post = Validation::factory(array_merge($_POST,$_FILES))
+										->pre_filter('trim')
 										->add_rules('users', 'required')
 										->add_rules('email','required')
 										->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -794,6 +800,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+					->pre_filter('trim')
 					->add_rules('mobile', 'required', array($this, 'validphone'))
 					->add_rules('address1', 'required')
 					//->add_rules('address2', 'required')
@@ -801,21 +808,24 @@ class Merchant_Controller extends website_Controller
 					->add_rules('city', 'required')
 					->add_rules('storename', 'required',array($this,'check_store_exist'))
 					->add_rules('about_us', 'required')
-					->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
-					->add_rules('website', 'required'/*,'valid::url'*/)
+					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
+					->add_rules('website', 'valid::url')
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('sector', 'required')
-                                        ->add_rules('nuban', 'required',array($this,'validate_account'))
+                    ->add_rules('nuban', 'required',array($this,'validate_account'))
 					->add_rules('subsector', 'required')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					->add_rules('email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
+					->add_rules('email',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 					->add_rules('username', 'required');
 
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
 							$post->add_rules('subsector', 'required');
 						}
+						
+						
+						
 
 
 			if($post->validate())
@@ -1038,6 +1048,7 @@ class Merchant_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+					->pre_filter('trim')
 					->add_rules('mobile', 'required', array($this, 'validphone'))
 					->add_rules('address1', 'required')
 					//->add_rules('address2', 'required')
@@ -1045,12 +1056,12 @@ class Merchant_Controller extends website_Controller
 					->add_rules('city', 'required')
 					->add_rules('storename', 'required',array($this,'check_store_exist1'))
 					->add_rules('about_us', 'required')
-					->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
-					->add_rules('website', 'required'/*,'valid::url'*/)
+					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
+					->add_rules('website', 'valid::url')
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					->add_rules('email', 'required'/*,array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier')*/)
+					->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
 					->add_rules('sector', 'required')
 					->add_rules('subsector', 'required')
 					->add_rules('username', 'required');
@@ -1614,6 +1625,7 @@ class Merchant_Controller extends website_Controller
 			if($_POST){
 				$this->userPost = $this->input->post();
 				$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -1879,6 +1891,7 @@ class Merchant_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+						->pre_filter('trim')
 				        ->add_rules('title', 'required')
 				        ->add_rules('description','required',array($this,'check_required'))
 				        ->add_rules('category', 'required')
@@ -2268,6 +2281,7 @@ class Merchant_Controller extends website_Controller
 			$fname = $this->input->post("firstname");
 			$email = $this->input->post("email");
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('users', 'required')
 							->add_rules('email','required')
 							->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -2491,6 +2505,7 @@ class Merchant_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')
@@ -2737,6 +2752,7 @@ class Merchant_Controller extends website_Controller
 	        if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+					->pre_filter('trim')
 					->add_rules('title', 'required')
 					->add_rules('description', 'required',array($this,'check_required'))
 					->add_rules('category', 'required')
@@ -2977,6 +2993,7 @@ class Merchant_Controller extends website_Controller
 			$fname = $this->input->post("firstname");
 			$email = $this->input->post("email");
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('users', 'required')
 							->add_rules('email','required')
 							->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -3766,6 +3783,7 @@ class Merchant_Controller extends website_Controller
 				$code= $this->input->post('code');
 				$post = new Validation($_POST);
 				$post = Validation::factory(array_merge($_POST))
+							 ->pre_filter('trim')
 							 ->add_rules('code', 'required');
 					if($post->validate()){
 						$this->deal_list=$this->merchant->coupon_code_validate($code);
@@ -3862,6 +3880,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+				->pre_filter('trim')
 				->add_rules('pass1', 'required')
 				->add_rules('pass2', 'required', array($this, 'comfirm_pass'), array($this, 'unique_pass'));
 			if($post->validate()){
@@ -3911,6 +3930,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+				->pre_filter('trim')
 				->add_rules('email', 'required')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
@@ -4373,6 +4393,7 @@ class Merchant_Controller extends website_Controller
 		if($_FILES){ 
 		
 				$post = Validation::factory($_FILES)
+							
 							->add_rules('im_product','upload::required',array($this,'check_file_type'));
 		 	if($post->validate()){
 				$row = 1;
@@ -4657,6 +4678,7 @@ class Merchant_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('terms_conditions','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -4686,6 +4708,7 @@ class Merchant_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('return_policy','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -4779,6 +4802,7 @@ class Merchant_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+						->pre_filter('trim')
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
 						->add_rules('sector','required')
@@ -5004,6 +5028,7 @@ class Merchant_Controller extends website_Controller
 			$this->userPost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
@@ -5168,6 +5193,7 @@ class Merchant_Controller extends website_Controller
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);			
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						//->add_rules('email', 'required','valid::email',array($this,'email_available'))
@@ -6665,6 +6691,7 @@ class Merchant_Controller extends website_Controller
 
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
 									
@@ -6767,6 +6794,7 @@ class Merchant_Controller extends website_Controller
 
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
+							->pre_filter('trim')
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
 				if(!isset($post->users) && !isset($post->all_users))

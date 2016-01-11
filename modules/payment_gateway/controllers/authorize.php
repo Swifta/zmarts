@@ -482,18 +482,24 @@ class Authorize_Controller extends Layout_Controller
 			}
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
+							->pre_filter('trim')
 				            ->add_rules('firstName','required','chars[a-zA-Z_ -.,%\']')
 				            ->add_rules('address1','required')
 				            ->add_rules('creditCardNumber','required')
 				            ->add_rules('city','required')
 				            ->add_rules('state','required')
 				            ->add_rules('country','required')
-				            ->add_rules('zip','required')
+				            //->add_rules('zip','required')
 				            ->add_rules('cvv2Number','required')
 				            ->add_rules('deal_value','required')
 				            ->add_rules('amount','required')
 				            ->add_rules('friend_name','required')
 				            ->add_rules('friend_email','required');
+							
+							if(isset($_POST['zip'])){
+			
+								$post->add_rules('zip', 'chars[0-9.]');
+							}
 			if($post->validate()){
 				$post = arr::to_object($this->input->post());
                 $sale = new AuthorizeNetAIM;

@@ -165,6 +165,7 @@ class Ads_Controller extends website_Controller
 					$redirect_url = '#" onclick="javascript:load_club();return false;';
 				
 				$post = Validation::factory(array_merge($_POST,$_FILES))
+						->pre_filter('trim')
 						->add_rules('ads_position', 'required')
 						->add_rules('pages','required')
 						->add_rules('ad_title', 'required','chars[a-zA-Z0-9 \,.&_-]')

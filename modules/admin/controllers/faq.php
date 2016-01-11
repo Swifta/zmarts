@@ -27,6 +27,7 @@ class Faq_Controller extends website_Controller
 		{
 			$this->userPost = $this->input->post();
 			$post = Validation::factory($_POST)
+				->pre_filter('trim')
 				->add_rules('add_qus', 'required')
 				->add_rules('answer', 'required');
 				if($post->validate())
@@ -80,6 +81,7 @@ class Faq_Controller extends website_Controller
 			$question = $this->input->post('question');
 			$answer = $this->input->post('answer');
 			$post = Validation::factory($_POST)
+						->pre_filter('trim')
 				        ->add_rules('question', 'required')
 				        ->add_rules('answer', 'required');
 			if($post->validate()){
