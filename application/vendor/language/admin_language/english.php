@@ -3848,13 +3848,13 @@ $content_text = array(
 			
 			"SELECT_PAGE_POSITION_FIRST" => "Select Page Position first",
 			
-			"MENTION_SIZE" => "Select the sizes available for your product ,if you have more and update quantity for each size",
+			"MENTION_SIZE" => "Select the available sizes for your product, ensuring that you update the quantity of items for each size",
 			
-			"MENTION_SPECIFICATION" => "If your product have more specifications to mention , check 'yes'",
+			"MENTION_SPECIFICATION" => 'Choose "Yes" to select the available specifications for your product.',
 			
-			"MENTION_SHIPPING" => "Select the shipping facility you wish to provide for your product. ",
+			"MENTION_SHIPPING" => 'Choose the shipping method available for your product',
 			
-			"MENTION_COLOR" => "Check 'yes' to mention the colours available for your product",
+			"MENTION_COLOR" => 'Choose "Yes" to select the available colours for your product',
 			
 			"STORE_ADMIN_LOGIN" => "Store Admin Login",
 			
