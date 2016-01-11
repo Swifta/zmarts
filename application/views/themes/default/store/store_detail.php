@@ -120,7 +120,7 @@ else{?>
             if(count($this->merchant_personalised_details)>0) { 
 	foreach($this->merchant_personalised_details as $m) {
 		 ?>        
-					<?php for ($i = 1; $i <= 2; $i++) { ?>
+		<?php for ($i = 1; $i <= 1; $i++) { ?>
 										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
 											$ads_link="";
 											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
@@ -139,6 +139,13 @@ else{?>
 			</figure>
                 </div>
                     <?php }}?> 
+ <?php if (count($this->ads_details) > 0) { ?>   
+                                    <?php foreach ($this->ads_details as $ads) { ?>    
+            <?php if ($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
+    <figure>
+        <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+    </figure>
+ <?php }}} ?>
             <?php  } } ?>
 
             </div>
