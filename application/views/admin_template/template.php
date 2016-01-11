@@ -26,7 +26,7 @@ echo $this->template->javascript;
                 	<span><?php echo $this->Lang["SUCCESS"]; ?>!&nbsp;</span><span class="align_c" ><?php echo $this->response; ?></span>
                 </p>
             </div>
-            <?php } ?>
+            <?php }else ?>
             <?php  if(!empty($this->error_response)){ ?>
             <div class="status error" id="error_messagedisplay" >
             	<p class="closestatus cursur" ><a  title="<?php echo $this->Lang['CLOSE']; ?>"  onclick="return closeerr('err');" >x</a></p>

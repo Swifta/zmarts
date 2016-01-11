@@ -15,7 +15,7 @@ class Admin_merchant_Model extends Model
         {
                
                  
-            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission));
+            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission, 'nuban' => $post->payment_acc));
             	
                 $merchant_id = $result->insert_id();                 
                 echo $this->session->set("id",$merchant_id);
@@ -330,7 +330,7 @@ class Admin_merchant_Model extends Model
 	public function get_merchant_data($userid = "")
 	{
 		
-		$result = $this->db->select("*","users.address1 as user_address1","users.address2 as user_address2","users.phone_number as user_phone_number","users.city_id as user_city_id","users.country_id as user_country_id")->from("users")->join("stores","stores.merchant_id","users.user_id")->where(array("user_id" => $userid,"stores.store_type"=>1))->limit(1)->get();
+		$result = $this->db->select("*","users.address1 as user_address1", "users.nuban as payment_account_id", "users.address2 as user_address2","users.phone_number as user_phone_number","users.city_id as user_city_id","users.country_id as user_country_id")->from("users")->join("stores","stores.merchant_id","users.user_id")->where(array("user_id" => $userid,"stores.store_type"=>1))->limit(1)->get();
 
 		return $result;
              
@@ -368,7 +368,7 @@ class Admin_merchant_Model extends Model
         {
                 $result_emailid = $this->db->count_records("users", array("email" => $post->email,"user_id !=" => $id));
                         if($result_emailid == 0){
-                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email,'address1' => $post->mer_address1, 'address2' => $post->mer_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mer_mobile, 'payment_account_id'=> $post->payment_acc,'merchant_commission' => $post->commission), array('user_id' => $id));
+                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email,'address1' => $post->mer_address1, 'address2' => $post->mer_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mer_mobile,'merchant_commission' => $post->commission), array('user_id' => $id));
                                 
                                 $free = "0";
                                 if(isset($post->free)){
@@ -925,6 +925,29 @@ class Admin_merchant_Model extends Model
 		$result=$this->db->select("email")->from("users")->where(array("users.created_by"=>$merchant_id))->get();
 		return $result;
 	}
+	
+	
+	/*
+		Check whether zenith account number already used before.
+		@Live
+	*/
+	public function check_zenith_account_used($nuban = ""){
+		if(!isset($nuban))
+			return -1;
+			
+		$nuban = trim($nuban);
+		if($nuban == "")
+			return -1;
+		
+		$r = $this->db->from("users")
+						  ->where(array("nuban" => $nuban))
+						  ->get();
+		if(count($r)== 0)
+			return 1;
+		return 0;
+		
+	}
+	
 	
 	public function get_merchnat_id($store_id="")
 	{

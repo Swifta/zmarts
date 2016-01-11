@@ -41,6 +41,9 @@ class error {
 				case 'available':
 				    $my_error[$key] = $this->Lang["EMAIL_AL_E"];
 				    break;
+				case 'check_zenith_account_used':
+				    $my_error[$key] = "Account already in use on the system.";
+				    break;
 				case 'title_available':
 				    $my_error[$key] = $this->Lang["TITLE_AL_E"];
 				    break;

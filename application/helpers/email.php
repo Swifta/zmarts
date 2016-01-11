@@ -86,9 +86,6 @@ class Email{
         $mail = new PHPMailer(TRUE);
         $mail->IsSMTP();
 		
-		
-		
-		
         try {
             
             $mail->SMTPDebug  = 2;
@@ -103,8 +100,6 @@ class Email{
             $mail->SetFrom($from);
             $mail->Subject = $subject;
             $mail->MsgHTML($message);
-			
-			
 
             if($file != "")
 			{

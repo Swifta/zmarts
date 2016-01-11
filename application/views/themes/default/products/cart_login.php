@@ -431,9 +431,28 @@
                 <?php } ?>
                 <div class="pay_br payright_block">
                     <div class="payment-faq-container">
-                        <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_MEN']; ?></h3>
+                        <!--<h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_MEN']; ?></h3>-->
+                        <h3 class="paybr_title pay_titlebg"><?php echo "Add to cart FAQ"; ?></h3>
+						<div class="faq-content2 br_nn">
+                            <div class="faq-content-heading" onclick="return WhatHappens();">
 
-                        <div class="faq-content2 br_nn">
+                                <div class="faq-content-heading-left active_arrw" id="right1">
+                                    <a>What happens after I add a product to cart?
+</a>
+                                </div>
+                                <div class="faq-content-heading-left" id="down1">
+                                    <a>What happens after I add a product to cart?
+</a>
+                                </div>
+                            </div>
+                            <div class="what_happens">
+                                <div class="faq-content-text">
+
+                                    <p>When you add a product to cart, you will have to provide the exact address to which the product is to be shipped.Once, you checkout successfully, you will thereafter receive the ordered item.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="faq-content2 br_nn">
                             <div class="faq-content-heading" onclick="return WhatHappens();">
 
                                 <div class="faq-content-heading-left active_arrw" id="right1">
@@ -481,7 +500,7 @@
                                     <p><?php echo $this->Lang['OBVIOUSLY_YES']; ?></p>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
         </div>
