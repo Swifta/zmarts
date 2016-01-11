@@ -29,7 +29,7 @@
         	   <tr>     
         	        
         	        <th valign="top" align="left" width="20%"><?php echo $this->Lang["MERCHANT_PAY_EMAIL"]; ?>  :</th><td align="left">
-        	        <?php echo $user_fund->payment_account_id; ?></td>   
+        	        <?php echo $user_fund->nuban; ?></td>   
         	   </tr> 
         	   
         	   <tr>     

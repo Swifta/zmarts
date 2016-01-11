@@ -15,7 +15,7 @@ class Admin_merchant_Model extends Model
         {
                // $password = text::random($type = 'alnum', $length = 8);
                  
-            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission));
+            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc, 'nuban'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission));
             	
                 $merchant_id = $result->insert_id();                 
                 echo $this->session->set("id",$merchant_id);
@@ -368,7 +368,7 @@ class Admin_merchant_Model extends Model
         {
                 $result_emailid = $this->db->count_records("users", array("email" => $post->email,"user_id !=" => $id));
                         if($result_emailid == 0){
-                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email,'address1' => $post->mer_address1, 'address2' => $post->mer_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mer_mobile, 'payment_account_id'=> $post->payment_acc,'merchant_commission' => $post->commission), array('user_id' => $id));
+                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email,'address1' => $post->mer_address1, 'address2' => $post->mer_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mer_mobile, 'merchant_commission' => $post->commission), array('user_id' => $id));
                                 
                                 $free = "0";
                                 if(isset($post->free)){

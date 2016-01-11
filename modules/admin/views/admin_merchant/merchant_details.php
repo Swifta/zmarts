@@ -45,7 +45,7 @@
       <tr>
         <th align="left"><?php echo $this->Lang["PAYMENT_ACC"]; ?></th>
         <th>:</th>
-        <td align="left"><?php echo $d->payment_account_id; ?></td>
+        <td align="left"><?php echo $d->nuban; ?></td>
       </tr>
 	 <tr>
         <th align="left"><?php echo $this->Lang['COMMISION']; ?></th>

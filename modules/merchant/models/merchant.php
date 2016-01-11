@@ -144,7 +144,7 @@ class Merchant_Model extends Model
 
         public function edit_merchant($id = "" ,$post = "")
 	{
-                $result = $this->db->update("users", array('firstname' => $post->firstname, 'lastname' => $post->lastname,'email' => $post->email,'phone_number' => $post->mobile, 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'payment_account_id' => $post->payment), array('user_id' => $id));
+                $result = $this->db->update("users", array('firstname' => $post->firstname, 'lastname' => $post->lastname,'email' => $post->email,'phone_number' => $post->mobile, 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city), array('user_id' => $id));
                 return $result;
         }
 

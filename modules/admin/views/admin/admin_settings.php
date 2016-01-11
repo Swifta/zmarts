@@ -55,7 +55,7 @@
 		   <tr>
                     <td><label><?php echo $this->Lang["PAYMENT_ACC"]; ?></label></td>
                     <td><label>:</label></td>
-                    <td><?php echo $u->payment_account_id;?></td>
+                    <td><?php echo $u->nuban;?></td>
                 </tr>
             </table>
         </form>
