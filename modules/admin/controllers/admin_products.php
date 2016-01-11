@@ -28,7 +28,7 @@ class Admin_products_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-							->pre_filter('trim', 'title')
+							->pre_filter('trim')
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
 							->add_rules('category', 'required')

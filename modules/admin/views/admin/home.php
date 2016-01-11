@@ -294,13 +294,13 @@
                                           
                       <div class="dash_act_img">
                     
-                     <a href="<?php echo PATH?>admin/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo $this->Lang['SHIP_DEL']; ?>"/>
+                     <a href="<?php echo PATH?>admin/shipping-delivery.html" title="<?php echo "Product ".$this->Lang['SHIP_DEL']; ?>">
+                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo "Product ".$this->Lang['SHIP_DEL']; ?>"/>
                       </a>
                        </div>
                        
-                       <a href="<?php echo PATH?>admin/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                       <?php echo $this->Lang['SHIP_DEL']; ?>
+                       <a href="<?php echo PATH?>admin/shipping-delivery.html" title="<?php echo "Product ".$this->Lang['SHIP_DEL']; ?>">
+                       <?php echo "Product ".$this->Lang['SHIP_DEL']; ?>
                        <span>(<?php echo $c["products_shipping"]?>)</span>
                        </a> 
                       
@@ -328,7 +328,7 @@
                        </li>  
                        <?php }?>
                        <?php if(ADMIN_PRIVILEGES_COUNTRY){?>
-			<li>
+					   <li>
                      <div class="dash_active_left"> </div> 
                      <div class="dash_active_mid">
                                           
@@ -349,7 +349,7 @@
                        </li>  		    
 				<?php }?>
 				<?php if(ADMIN_PRIVILEGES_CITY){?>
-			<li>
+					  <li>
                      <div class="dash_active_left"> </div> 
                      <div class="dash_active_mid">
                                           
@@ -460,13 +460,13 @@
                                           
                       <div class="dash_act_img">
                     
-                     <a href="<?php echo PATH?>admin-auction/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo $this->Lang['SHIP_DEL']; ?>"/>
+                     <a href="<?php echo PATH?>admin-auction/shipping-delivery.html" title="<?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>">
+                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>"/>
                       </a>
                        </div>
                        
-                       <a href="<?php echo PATH?>admin-auction/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                       <?php echo $this->Lang['SHIP_DEL']; ?>
+                       <a href="<?php echo PATH?>admin-auction/shipping-delivery.html" title="<?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>">
+                       <?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>
                        <span>(<?php echo $c["auction_shipping"]?>)</span>
                        </a> 
                       
