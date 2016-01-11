@@ -146,6 +146,16 @@ function toggle() {
 					});
 			   });
           });
+		  
+		  function toggle_color(color){
+			  $(color).remove();
+			  var len = $('#city_display span').size();
+			  if(len == 0){
+				  $('#id_rm_color').trigger('click');
+				  $('#toggleText').val("");
+				  
+			  }
+		  }
 </script>
 
 <script language="javascript"> 
@@ -740,7 +750,7 @@ function validate() {
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="radio" onchange="return checkedcolorremove(this)" name="color_val" value="0" checked><?php echo $this->Lang['NO']; ?>
+                        <input type="radio" id="id_rm_color" onchange="return checkedcolorremove(this)" name="color_val" value="0" checked><?php echo $this->Lang['NO']; ?>
                         <input type="radio" onchange="return checkedcoloradd(this)" name="color_val" value="1"><?php echo $this->Lang['YES']; ?>
                         
 						<p class="guide"><?php echo $this->Lang['MENTION_COLOR'];?></p>

@@ -482,10 +482,10 @@
           <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label>
             <span>*</span></td>
           <td><label>:</label></td>
-          <td><input type="text" name="Delivery_value[]" value="<?php echo $sel_policy->text;?>">
-            <em>
+          <td><input type="text" name="Delivery_value[]" value="<?php echo $sel_policy->text;?>"><em>
             <?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?>
             </em>
+            
             <?php if($policymain!=1){?>
             <input type="button" name="remove" onclick="RemoveAttribute(<?php echo $policymain;?>)" class="btn_remove" value="Remove"></td>
           <?php  } ?>
@@ -498,7 +498,9 @@
         <tr class="policymain">
           <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label></td>
           <td><label>:</label></td>
-          <td><input type="text" name="Delivery_value[]" value=""></td>
+          <td><input type="text" name="Delivery_value[]" value=""><em>
+            <?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?>
+            </em></td>
         </tr>
         <tr>
           <?php				
@@ -751,17 +753,47 @@
 		}
 		
 	}
+					
+					function toggle_color(color){
+					  $(color).remove();
+					  var color_c = $('#id_color_count');
+					  var c = parseInt(color_c.val())-1;
+					  color_c.val(c);
+					  
+					  var len = $('#city_display span').size();
+					  if(len == 0){
+						  $('#id_rm_color').trigger('click');
+						  $('#toggleText').val("");
+						  
+					  }
+		  }
+		  
+		  
+		  $('document').ready(function(e) {
+			  
+			  <?php if(isset($this->form_error["city_tag[]"])){ ?>
+			  	$('#id_rm_color').trigger('click');
+				$('#id_add_color').trigger('click');
+			  <?php }?>
+				
+				
+				
+				
+			
+        });
                     </script>
         <tr>
-          <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label>
+          <td></label>
             <span>*</span></td>
           <td><label>:</label></td>
-          <td class="overlay"><input readonly="readonly" type="radio" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if($u->color==0){ ?> checked <?php } ?>>
+          <td class="overlay"><input id="id_rm_color" readonly="readonly" type="radio" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if($u->color==0){ ?> checked <?php } ?>>
             <?php echo $this->Lang['NO']; ?>
-            <input type="radio" onchange="return checkedcoloradd(this)" id="color_val_co1" name="color_val" value="1" <?php if($u->color==1){ ?> checked <?php } ?>>
+            <input type="radio" id="id_add_color" onchange="return checkedcoloradd(this)" id="color_val_co1" name="color_val" value="1" <?php if($u->color==1){ ?> checked <?php } ?>>
             <?php echo $this->Lang['YES']; ?>
             <p class="guide"><?php echo $this->Lang['MENTION_COLOR'];?></p></td>
         </tr>
+        
+        <input type="hidden" id="id_color_count" name="color_count" readonly="readonly" value="<?php echo count($this->product_color); ?>" />
         <?php if(count($this->product_color)>0) { ?>
         <tr>
           <td><label><?php echo $this->Lang['PRODUC_COLOR']; ?></label></td>
@@ -778,13 +810,17 @@
 			            
 			            foreach($this->color_code as $CityL){
 			            	
-	 		              if(!in_array($CityL->id, $city_Tags)){
+	 		              
 			            	
 			            ?>
               <option  value="<?php echo $CityL->color_code; ?>" style='color:#<?php echo $CityL->color_code; ?>';><?php echo ucfirst($CityL->color_name); ?> </option>
-              <?php  }
+              <?php  
 			            } ?>
-            </select></td>
+            </select><em>
+            <?php if(isset($this->form_error["city_tag[]"])){ echo $this->form_error["city_tag[]"]; }?>
+            </em>
+            
+            </td>
         </tr>
         <?php 
                     } else {?>
@@ -798,7 +834,9 @@
               <option value="<?php echo $CityL->color_code; ?>" style='color:#<?php echo $CityL->color_code; ?>' ><?php echo ucfirst($CityL->color_name); ?></option>
               <?php 
 			            } ?>
-            </select></td>
+            </select><em>
+            <?php if(isset($this->form_error["city_tag[]"])){ echo $this->form_error["city_tag[]"]; }?>
+            </em></td>
         </tr>
         <?php } ?>
         <tr >
@@ -810,11 +848,11 @@
         <tr class="select_color_pro">
           <td><label><?php echo $this->Lang['Y_S_CO']; ?></label></td>
           <td><label>:</label></td>
-          <td><span id="city_display"> </span>
+          <td><span id="city_display"> 
             <?php 
                             foreach($this->product_color as $color){
-                            echo "<span style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$color->color_name;'><input type='checkbox' name='color[]' checked='checked' value='".$color->color_name."'>".ucfirst($color->color_code_name)."</span> ";
-                        } ?></td>
+                            echo "<span onchange = 'toggle_color(this)' style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$color->color_name;'><input type='checkbox' name='color[]' checked='checked' value='".$color->color_name."'>".ucfirst($color->color_code_name)."</span> ";
+                        } ?></span></td>
         </tr>
         <?php } else{ ?>
         <tr class="addcolor">
@@ -850,6 +888,11 @@
 									});
 									if(check1 == 1){ 
 										$("#city_display").append(response);
+										
+										var color_c = $('#id_color_count');
+										var c = parseInt(color_c.val())+1;
+										color_c.val(c);
+										
 									}else{
 										alert('<?php echo $this->Lang['CO_ALREADY_SELE']; ?>');
 									}

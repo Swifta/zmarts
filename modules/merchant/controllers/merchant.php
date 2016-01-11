@@ -1904,6 +1904,8 @@ class Merchant_Controller extends website_Controller
 				        ->add_rules('stores','required')
 				        ->add_rules('delivery_days','required')
 						->add_rules('Delivery_value', array($this, 'check_return_policy'));
+						
+						
 				        
 				       /* if(isset($this->userPost['offer'])){
 							if($this->userPost['offer']==1){
@@ -1918,6 +1920,21 @@ class Merchant_Controller extends website_Controller
 								
 							}
 						}*/
+						
+						
+						
+						if(isset($_POST['color_val'])){
+							if($_POST['color_val'] == '1'){
+								if($_POST['color_count'] < '1'){
+										$post->add_rules('city_tag[]', 'required');
+										
+								}
+								//exit;
+								
+							}
+						}
+						
+						
 				        
 				        $price_s = $post->price;
 						if(isset($price_s)){
@@ -2328,7 +2345,7 @@ class Merchant_Controller extends website_Controller
 		$this->get_city_data = $this->merchant->get_color_data($city_id);
 		$list = "";
 		foreach($this->get_city_data as $c){
-			$list .="<span style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$c->color_code;'><input type='checkbox' name='color[]' checked='checked' value='".$c->color_code."'>".ucfirst($c->color_name)."</span>  ";
+			$list .="<span onchange = 'toggle_color(this)' style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$c->color_code;'><input type='checkbox' name='color[]' checked='checked' value='".$c->color_code."'>".ucfirst($c->color_name)."</span>  ";
 		 }
 		echo $list;
 		exit;
@@ -2342,12 +2359,12 @@ class Merchant_Controller extends website_Controller
 		$deal_id = $this->input->get('deal');
 		    $list = "";
 		    $store_data = $this->merchant->store_color_data($city_id,$deal_id);
-		    if($store_data == 1){
+		   
 		    $this->get_city_data = $this->merchant->get_color_data($city_id);
 		    foreach($this->get_city_data as $c){
-			    $list .="<span style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$c->color_code;'><input type='checkbox' name='color[]' checked='checked' value='".$c->color_code."'>".ucfirst($c->color_name)."</span>  ";
+			    $list .="<span onchange = 'toggle_color(this)' style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$c->color_code;'><input type='checkbox' name='color[]' checked='checked' value='".$c->color_code."'>".ucfirst($c->color_name)."</span>  ";
 		     }
-		     }
+		     
 		     echo $list;
 		    exit;
 
