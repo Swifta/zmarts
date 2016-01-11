@@ -754,7 +754,7 @@ class Admin_merchant_Controller extends website_Controller {
 							->add_rules('sector', 'required')
 							->add_rules('subsector', 'required')
 					        //->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					        ->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'))
+					        //->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'))
 							->add_rules('username', 'required');
 							
 							if(isset($_FILE['image'])){
@@ -768,6 +768,12 @@ class Admin_merchant_Controller extends website_Controller {
 							if(isset($_POST['zipcode'])){
 								$post->add_rules('zipcode', 'chars[a-zA-Z0-9.]');
 							}
+							
+							if(isset($_POST['store_email'])){
+								$post->add_rules('store_email',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'));
+							}
+							
+							
 
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
@@ -1005,15 +1011,32 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('country', 'required')
 						->add_rules('city', 'required')
 						->add_rules('storename', 'required',array($this,'check_store_exist1'))
-						->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
-						->add_rules('website', 'required'/*,'valid::url'*/)
+						//->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
+						//->add_rules('website', 'required'/*,'valid::url'*/)
 						->add_rules('latitude', 'required','chars[0-9.-]')
 						->add_rules('longitude', 'required','chars[0-9.-]')
-						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('store_email', 'required',array($this,'check_store_admin1'))
+						//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+						//->add_rules('store_email', 'required',array($this,'check_store_admin1'))
 						->add_rules('sector', 'required')
 						->add_rules('subsector', 'required')
 						->add_rules('username', 'required');
+						
+						
+						if(isset($_FILE['image'])){
+								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
+							}
+							
+							if(isset($_POST['website'])){
+								$post->add_rules('website', 'required','valid::url');
+							}
+							
+							if(isset($_POST['zipcode'])){
+								$post->add_rules('zipcode', 'chars[a-zA-Z0-9.]');
+							}
+							
+							if(isset($_POST['store_email'])){
+								$post->add_rules('store_email',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'));
+							}
 
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{

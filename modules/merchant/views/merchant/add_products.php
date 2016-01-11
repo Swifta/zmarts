@@ -699,9 +699,11 @@ function validate() {
                         <select name="size_tag[]" id="SizeText" class="selectsize">
 			              <option value=""><?php echo $this->Lang['SELE__S']; ?>  [Optional]</option>
 			            <?php foreach($this->product_size as $size){
+							
+							if($size->size_id != 1){
 			            ?>
-			            <option value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
-			            <?php 
+			           	 <option value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
+			            <?php }
 			            } ?>
 			            </select>
 			            

@@ -702,7 +702,7 @@
                <?php //var_dump(count($this->product_size));
 			   		  //var_dump($this->selectproduct_size);?>
                 <?php if(count($this->product_size)>0) { ?>
-                        <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span>*</span></td>
+                        <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span></span></td>
                         <td><label>:</label></td>
                         <td >
                         <?php $user_city=""; foreach($this->selectproduct_size as $city1){
@@ -711,13 +711,14 @@
 			            $city_Tags=explode(",", substr($user_city, 0, -1));
 			            ?>
                         <select name="Size_tag[]" id="SizeText">			  
-			            <option value=""><?php echo $this->Lang['SELE__S']; ?></option>
+			            <option value=""><?php echo $this->Lang['SELE__S']; ?> [Optional]</option>
 			            <?php $i=1;
 			            foreach($this->product_size as $CityL){
-	 		              if(!in_array($CityL->size_id, $city_Tags)){
+	 		             // if(!in_array($CityL->size_id, $city_Tags)){
+							 //if($CityL->size_id != 1){
 			            ?>
 			            <option  value="<?php echo $CityL->size_id; ?>"><?php echo ucfirst($CityL->size_name); ?> </option> 
-			            <?php  }
+			            <?php  //}
 			            } ?>
 			            </select>
 			            </td>
@@ -729,7 +730,7 @@
                     <td><label>:</label></td>
                     <td>
                         <select name="city_size[]" id="SizeText" >
-			            <option value=""><?php echo $this->Lang['SELE__S']; ?></option>
+			            <option value=""><?php echo $this->Lang['SELE__S']; ?> [Optional]</option>
 			            <?php foreach($this->selectproduct_size as $CityL){ ?>
 			            <option value="<?php echo $CityL->size_id; ?>"><?php echo ucfirst($CityL->size_name); ?></option>
 			            <?php } ?>
@@ -749,11 +750,17 @@
                     <td><label>:</label></td>
                     <td class='select_size_pro'>
                     <?php if(count($this->selectproduct_size)>0) { ?>
-                         <span id="size_display"> </span>
+                         <span id="size_display"> 
                         <?php 
                             foreach($this->selectproduct_size as $c){
-                            echo "<p style='float:left;'><span style='width:3px;padding:3px;'> " .$this->Lang['SELE__S']." = ".ucfirst($c->size_name)." <input type='checkbox'  name='size[]' checked='checked' value='".$c->size_id."'></span> <br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]' maxlength='8'   value='".$c->quantity."' class='txtChar' onkeypress='return isNumberKey(event)'></span> </p> ";
-                        } } else { ?>
+								
+								if($c->size_id == 1){
+									echo "<p id = 'id_none' style='float:left;'><span style='width:3px;padding:3px;'> " .$this->Lang['SELE__S']." = ".ucfirst($c->size_name)." <input type='checkbox'  name='size[]' checked='checked'  onchange='toggle_size_display(this)' value='".$c->size_id."'></span> <br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]' maxlength='8'   value='".$c->quantity."' class='txtChar' onkeypress='return isNumberKey(event)'></span> </p> ";
+									
+									}else{
+                            echo "<p style='float:left;'><span style='width:3px;padding:3px;'> " .$this->Lang['SELE__S']." = ".ucfirst($c->size_name)." <input type='checkbox'  name='size[]' checked='checked'  onchange='toggle_size_display(this)' value='".$c->size_id."'></span> <br> <span style='width:3px;padding:3px;'><input style='width:auto;' type='text' name='size_quantity[]' maxlength='8'   value='".$c->quantity."' class='txtChar' onkeypress='return isNumberKey(event)'></span> </p> ";
+								}
+                        } ?> </span> <?php } else { ?>
                         <span id="size_display" > </span>
                         <?php }?>
                     </td>
@@ -774,7 +781,21 @@
 
                     $(document).ready(function() {
                         $('#SizeText').change(function() {
+                            var none = $('#id_none');
+							if(none){
+								none.remove();
+							}
+								
                             var count=$(this).val();
+							if(count == 1){
+								$('#size_display p').remove();
+								var no_size = '<p id="id_none" style="float:left;"><span style="width:3px;padding:3px;">  Select size = None <input name="size[]" checked="checked" onchange="toggle_size_display(this)" value="1" type="checkbox"></span> <br> <span style="width:3px;padding:3px;"><input style="width:auto;" name="size_quantity[]" maxlength="8" value="1" class="txtChar" onkeypress="return isNumberKey(event)" type="text"></span> </p>'
+								$("#size_display").append(no_size);
+								
+								return false;
+								
+							}
+							
                             $.post("<?php echo PATH;?>admin_products/editmore_size?count="+count+"&deal="+<?php echo $u->deal_id; ?>,{
                             }, function(response){ 
 							//alert(response);
@@ -788,11 +809,27 @@
 									if(check == 1){
 										$("#size_display").append(response);
 									 }else{
-										alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
+										
+											alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
+										
 									 }
                             });
                         });
                     });
+					
+					
+					function toggle_size_display(size_checkbox){
+			
+		$(size_checkbox).parent().parent().remove();
+		var size = $("#size_display p").size();
+		$('#SizeText').val("");
+		if(size == 0){
+			var no_size = '<p id="id_none" style="float:left;"><span style="width:3px;padding:3px;">  Select size = None <input name="size[]" checked="checked" onchange="toggle_size_display(this)" value="1" type="checkbox"></span> <br> <span style="width:3px;padding:3px;"><input style="width:auto;" name="size_quantity[]" maxlength="8" value="1" class="txtChar" onkeypress="return isNumberKey(event)" type="text"></span> </p>'
+			$("#size_display").append(no_size);
+			
+		}
+		
+	}
                     </script>
                   <tr>
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>

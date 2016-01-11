@@ -168,6 +168,7 @@ function toggle() {
         $(document).ready(function() {
 	        $('#SizeText').change(function() { 
                var count=$(this).val();
+			   
                $.post("<?php echo PATH;?>admin_products/addmore_size?count="+count,{
                        }, function(response){
                        // $(".display_div").show();
@@ -188,6 +189,18 @@ function toggle() {
                        });
                });
           });
+		  
+		  function toggle_size_display(size_checkbox){
+			
+		$(size_checkbox).parent().parent().remove();
+		var size = $("#size_display p").size();
+		$('#SizeText').val("");
+		if(size == 1){
+			$("#size_display p:first").css('display', 'block');
+			
+		}
+		
+	}
 </script>
 <SCRIPT language="Javascript">
       
@@ -437,16 +450,18 @@ function toggle() {
                 <tr>
                 
                  <tr>
-                    <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span>*</span></td>
+                    <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label></td>
                     <td><label>:</label></td>
                                 
                     <td>
  
                          <select name="size_tag[]" id="SizeText" class="selectsize">
-			              <option value=""><?php echo $this->Lang['SELE__S']; ?></option>
+			              <option value=""><?php echo $this->Lang['SELE__S']; ?>  [Optional]</option>
 			            <?php foreach($this->product_size as $size){
 			            ?>
-			            <option value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
+                        <?php if($size->size_id != 1){?>
+			            	<option value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
+                        <?php } ?>
 			            <?php 
 			            } ?>
 			            </select>
