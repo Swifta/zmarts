@@ -720,6 +720,8 @@
 								return false;
 								
 							}
+							
+							
                             $.post("<?php echo PATH;?>merchant/editmore_size?count="+count+"&deal="+<?php echo $u->deal_id; ?>,{
                             }, function(response){ 
 								
@@ -731,9 +733,12 @@
 									});
 									if(check == 1){
 										$("#size_display").append(response);
+										$('#SizeText').val("");
+										
 									 }else{
 										
 											alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
+											$('#SizeText').val("");
 										 
 									 }
                             });
@@ -759,7 +764,7 @@
 					  var color_c = $('#id_color_count');
 					  var c = parseInt(color_c.val())-1;
 					  color_c.val(c);
-					  
+					  $('#toggleText').val("");
 					  var len = $('#city_display span').size();
 					  if(len == 0){
 						  $('#id_rm_color').trigger('click');
@@ -769,22 +774,10 @@
 		  }
 		  
 		  
-		  $('document').ready(function(e) {
-			  
-			  <?php if(isset($this->form_error["city_tag[]"])){ ?>
-			  	$('#id_rm_color').trigger('click');
-				$('#id_add_color').trigger('click');
-			  <?php }?>
-				
-				
-				
-				
-			
-        });
+		 
                     </script>
         <tr>
-          <td></label>
-            <span>*</span></td>
+          <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
           <td><label>:</label></td>
           <td class="overlay"><input id="id_rm_color" readonly="readonly" type="radio" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if($u->color==0){ ?> checked <?php } ?>>
             <?php echo $this->Lang['NO']; ?>
@@ -795,7 +788,7 @@
         
         <input type="hidden" id="id_color_count" name="color_count" readonly="readonly" value="<?php echo count($this->product_color); ?>" />
         <?php if(count($this->product_color)>0) { ?>
-        <tr>
+        <tr class="addcolor">
           <td><label><?php echo $this->Lang['PRODUC_COLOR']; ?></label></td>
           <td><label>:</label></td>
           <td ><?php $user_city=""; foreach($this->product_color as $city1){
@@ -845,7 +838,7 @@
           <td><label><?php echo $this->Lang['MORE_CUS_COLOR']; ?> <a href="<?php echo PATH; ?>admin/manage-colors.html"> <?php echo $this->Lang['ADD']; ?></a></label></td>
         </tr>
         <?php if(count($this->product_color)>0) { ?>
-        <tr class="select_color_pro">
+        <tr class="addcolor">
           <td><label><?php echo $this->Lang['Y_S_CO']; ?></label></td>
           <td><label>:</label></td>
           <td><span id="city_display"> 
@@ -889,12 +882,16 @@
 									if(check1 == 1){ 
 										$("#city_display").append(response);
 										
+										
 										var color_c = $('#id_color_count');
 										var c = parseInt(color_c.val())+1;
 										color_c.val(c);
 										
+										$('#toggleText').val("");
+										
 									}else{
 										alert('<?php echo $this->Lang['CO_ALREADY_SELE']; ?>');
+										 $('#toggleText').val("");
 									}
 							});
 					});
@@ -1397,6 +1394,36 @@ function check_validation(){
 	}
 	$('#yourFormId').submit();  
 }
+
+
+ $('document').ready(function(e) {
+			  
+			  <?php if(isset($this->form_error["city_tag[]"])){ ?>
+			  
+			  			
+						$('#id_rm_color').trigger('click');
+						$('#id_add_color').trigger('click');
+						//$('#id_add_color').attr("checked", "checked");
+						
+			  <?php }else{ ?>
+			  			if($('#id_color_count').val() == "0"){
+						
+				  		$('#id_add_color').trigger('click');
+						$('#id_rm_color').trigger('click');
+						$('#id_rm_color').attr("checked", "checked");
+						
+						}else{
+							$('#id_rm_color').trigger('click');
+							$('#id_add_color').trigger('click');
+							$('#id_add_color').attr("checked", "checked");
+						}
+			  <?php }?>
+				
+				
+				
+				
+			
+        });
 </script>
 <?php /*if(isset($this->userPost['offer'])){
 	if($this->userPost['offer'] == 1){ ?>

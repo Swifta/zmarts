@@ -1594,6 +1594,20 @@ class Merchant_Controller extends website_Controller
 		return 1;
 	}
 	
+	public function check_deal_price_lmi_prd()
+	{
+		if($this->input->post("prime_price")!='')
+		{
+		
+		
+		if($this->input->post("prime_price")<$this->input->post("price"))
+		{
+		return 0;
+		}
+		}
+		return 1;
+	}
+	
 	
 	
 	public function check_price_lmi_prd()
@@ -1631,12 +1645,25 @@ class Merchant_Controller extends website_Controller
 							->add_rules('category', 'required')
 							->add_rules('sub_category', 'required')
 							->add_rules('sec_category', 'required')
+							->add_rules('price', 'chars[0-9.]')
+							->add_rules('prime_price', 'chars[0-9.]')
 							->add_rules('deal_value', 'required',array($this, 'check_prime_price_lmi_prd'), array($this, 'check_price_lmi_prd'),'chars[0-9.]',array($this,'check_deal_value_lmi'))
 							//->add_rules('size_tag[]', 'required')
 							->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							->add_rules('stores','required')
 							->add_rules('delivery_days','required')
 							->add_rules('Delivery_value', array($this, 'check_return_policy'));
+							
+							if(isset($_POST['color_val'])){
+							if($_POST['color_val'] == '1'){
+								if($_POST['color_count'] < '1'){
+										$post->add_rules('city_tag[]', 'required');
+										
+								}
+								
+								
+							}
+						}
 							
 							$price_s = $post->price;
 							if(isset($price_s)){
@@ -1929,7 +1956,7 @@ class Merchant_Controller extends website_Controller
 										$post->add_rules('city_tag[]', 'required');
 										
 								}
-								//exit;
+								
 								
 							}
 						}
