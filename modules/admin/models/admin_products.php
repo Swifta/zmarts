@@ -162,8 +162,9 @@ class Admin_products_Model extends Model
 	    if(($post->color_val) == 1){
 	        foreach($post->color as $c){
 	            $result_count = $this->db->from("color")->where(array("deal_id" => $product_id, "color_name" => $c))->get();
-	            if(count($result_count)==0){	      
-	            $result_id = $this->db->from("color_code")->where(array("color_code" => $c))->get();      
+	            if(count($result_count)==0  && $c != ''){	      
+	            $result_id = $this->db->from("color_code")->where(array("color_code" => $c))->get(); 
+				    
 	            $result_color = $this->db->insert("color", array("deal_id" => $product_id, "color_name" => $c, "color_code_id" => $result_id->current()->id,"color_code_name" => $result_id->current()->color_name));
 	            }
 	        } 

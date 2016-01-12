@@ -523,7 +523,7 @@ function toggle() {
                     <td><label>:</label></td>
                                 
                     <td>
-                        
+                       
                         <select name="color[]" id="toggleText" >
 			              <option value=""><?php echo $this->Lang['SELECT_C']; ?></option>
 			            <?php foreach($this->color_code as $CityL){

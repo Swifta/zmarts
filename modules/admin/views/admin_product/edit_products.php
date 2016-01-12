@@ -813,6 +813,8 @@
 											alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
 										
 									 }
+									 
+									 $('#SizeText').val("");
                             });
                         });
                     });
@@ -835,15 +837,15 @@
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td class="overlay"> 
-                        <input type="radio" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if(count($this->product_color)== 0) { ?> checked <?php } ?>><?php echo $this->Lang['NO']; ?>
-                        <input type="radio" onchange="return checkedcoloradd(this)" id="color_val_co1" name="color_val" value="1" <?php if(count($this->product_color)>0) { ?> checked <?php } ?>><?php echo $this->Lang['YES']; ?>
+                        <input type="radio" id="id_rm_color" onchange="return checkedcolorremove(this)" id="color_val_co" name="color_val" value="0" <?php if(count($this->product_color)== 0) { ?> checked <?php } ?>><?php echo $this->Lang['NO']; ?>
+                        <input type="radio" id="id_add_color" onchange="return checkedcoloradd(this)" id="color_val_co1" name="color_val" value="1" <?php if(count($this->product_color)>0) { ?> checked <?php } ?>><?php echo $this->Lang['YES']; ?>
                     </td>
                  </tr>
                 
-    
+    <input type="hidden" id="id_color_count" name="color_count" readonly="readonly" value="<?php echo count($this->product_color); ?>" />
                  <?php if(count($this->product_color)>0) { ?>
                     
-                    <tr>
+                    <tr class="addcolor">
                         <td><label><?php echo $this->Lang['PRODUC_COLOR']; ?></label></td>
                         <td><label>:</label></td>
                         <td >
@@ -901,7 +903,7 @@
                 </tr>
                 
                 <?php if(count($this->product_color)>0) { ?>
-                <tr class="select_color_pro">
+                <tr class="addcolor">
                     <td><label><?php echo $this->Lang['Y_S_CO']; ?></label></td>
                     <td><label>:</label></td>
                     <td class="product_color_selection">
@@ -909,7 +911,7 @@
                          <span id="city_display"> </span>
                         <?php 
                             foreach($this->product_color as $color){
-                            echo "<span style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$color->color_name;'><input type='checkbox' name='color[]' checked='checked' value='".$color->color_name."'>".ucfirst($color->color_code_name)."</span> ";
+                            echo "<span onchange ='toggle_color(this)' style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$color->color_name;'><input type='checkbox' name='color[]' checked='checked' value='".$color->color_name."'>".ucfirst($color->color_code_name)."</span> ";
                         } ?>
                     </td>
                     
@@ -953,13 +955,34 @@
 											}	
 									});
 									if(check1 == 1){ 
+									
 										$("#city_display").append(response);
+										var color_c = $('#id_color_count');
+										var c = parseInt(color_c.val())+1;
+										color_c.val(c);
+										
 									}else{
 										alert('<?php echo $this->Lang['CO_ALREADY_SELE']; ?>');
 									}
+									
+									$('#toggleText').val("");
 							});
 					});
                 });
+				
+				function toggle_color(color){
+					  $(color).remove();
+					  var color_c = $('#id_color_count');
+					  var c = parseInt(color_c.val())-1;
+					  color_c.val(c);
+					  $('#toggleText').val("");
+					  var len = $('#city_display span').size();
+					  if(len == 0){
+						  $('#id_rm_color').trigger('click');
+						  $('#toggleText').val("");
+						  
+					  }
+		  }
                 </script>
                 
 
@@ -1381,4 +1404,33 @@ function check_validation(){
 	}
 	$('#yourFormId').submit();    
 }
+
+$('document').ready(function(e) {
+			  
+			  <?php if(isset($this->form_error["city_tag[]"])){ ?>
+			  
+			  			
+						$('#id_rm_color').trigger('click');
+						$('#id_add_color').trigger('click');
+						//$('#id_add_color').attr("checked", "checked");
+						
+			  <?php }else{ ?>
+			  			if($('#id_color_count').val() == "0"){
+						
+				  		$('#id_add_color').trigger('click');
+						$('#id_rm_color').trigger('click');
+						$('#id_rm_color').attr("checked", "checked");
+						
+						}else{
+							$('#id_rm_color').trigger('click');
+							$('#id_add_color').trigger('click');
+							$('#id_add_color').attr("checked", "checked");
+						}
+			  <?php }?>
+				
+				
+				
+				
+			
+        });
  </script>
