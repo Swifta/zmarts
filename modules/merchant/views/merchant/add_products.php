@@ -140,12 +140,35 @@ function toggle() {
 								});
 								if(check1 == 1){ 
 									$("#city_display").append(response);
+									var color_c = $('#id_color_count');
+									var c = parseInt(color_c.val())+1;
+									color_c.val(c);
+									
 								}else{
 									alert('<?php echo $this->Lang['CO_ALREADY_SELE']; ?>');
 								}
+								
+								 $('#toggleText').val("");
 					});
 			   });
           });
+		  
+		  function toggle_color(color){
+			  $(color).remove();
+			  var color_c = $('#id_color_count');
+			  var c = parseInt(color_c.val())-1;
+			  color_c.val(c);
+			  
+			  var len = $('#city_display span').size();
+			  if(len == 0){
+				  $('#id_rm_color').trigger('click');
+				  $('#toggleText').val("");
+				  
+			  }
+		  }
+		  
+		    
+		
 </script>
 
 <script language="javascript"> 
@@ -185,6 +208,8 @@ function toggle() {
                                  }else{
 									alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
 								 }
+								 
+								  $('#SizeText').val("");
                        });
                });
           });
@@ -309,7 +334,7 @@ function validate() {
 		   
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" name="title" maxlength="255" value="<?php if(!isset($this->form_error["title"])&&isset($this->userPost["title"])){ echo $this->userPost["title"]; }?>" autofocus />
+                    	<input type="text" name="title" tabindex="1" autofocus="autofocus" maxlength="255" value="<?php if(!isset($this->form_error["title"])&&isset($this->userPost["title"])){ echo $this->userPost["title"]; }?>" autofocus />
                       	<em><?php if(isset($this->form_error["title"])){ echo $this->form_error["title"]; }?></em>
                    	</td>
                 </tr>
@@ -433,7 +458,7 @@ function validate() {
                     <td><label>:</label></td>
                     <td>
 						 <input type="text" name="prime_price" maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
-                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
+                         <!--<em><?php if(isset($this->form_error["price_price"])){ echo $this->form_error["price_prime"]; }?></em>-->
                        
                         
                     </td>
@@ -735,13 +760,13 @@ function validate() {
                     
                 </tr>     
                 
-                
+                <input type="hidden" id="id_color_count" name="color_count" readonly="readonly" value="0" />
                 <tr>
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="radio" onchange="return checkedcolorremove(this)" name="color_val" value="0" checked><?php echo $this->Lang['NO']; ?>
-                        <input type="radio" onchange="return checkedcoloradd(this)" name="color_val" value="1"><?php echo $this->Lang['YES']; ?>
+                        <input type="radio" id="id_rm_color" onchange="return checkedcolorremove(this)" name="color_val" value="0" checked><?php echo $this->Lang['NO']; ?>
+                        <input type="radio" id="id_add_color" onchange="return checkedcoloradd(this)" name="color_val" value="1"><?php echo $this->Lang['YES']; ?>
                         
 						<p class="guide"><?php echo $this->Lang['MENTION_COLOR'];?></p>
                     </td>
@@ -760,7 +785,9 @@ function validate() {
 			            <option value="<?php echo $CityL->color_code; ?>" style='color:#<?php echo $CityL->color_code; ?>'; ><?php echo $CityL->color_name; ?></option>
 			            <?php 
 			            } ?>
-			            </select>
+			            </select><em>
+            <?php if(isset($this->form_error["city_tag[]"])){ echo $this->form_error["city_tag[]"]; }?>
+            </em>
 			            
                     </td>
                 </tr>
@@ -1287,4 +1314,24 @@ function gift()
         $('#status').val(2);
 		$('#addFormId').submit();
 	}
+	
+	  $('document').ready(function(e) {
+			  
+			  <?php if(isset($this->form_error["city_tag[]"])){ ?>
+			  
+						$('#id_rm_color').trigger('click');
+						$('#id_add_color').trigger('click');
+						$('#id_add_color').attr("checked", "checked");
+						
+			  <?php }else{ ?>
+				  		$('#id_add_color').trigger('click');
+						$('#id_rm_color').trigger('click');
+						$('#id_rm_color').attr("checked", "checked");
+			  <?php }?>
+				
+				
+				
+				
+			
+        });
 </script>

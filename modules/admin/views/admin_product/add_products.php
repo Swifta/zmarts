@@ -142,9 +142,16 @@
 						        });
 						        if(check1 == 1){ 
 							        $("#city_display").append(response);
+									
+									var color_c = $('#id_color_count');
+									var c = parseInt(color_c.val())+1;
+									color_c.val(c);
+									
 						        }else{
 							        alert('<?php echo $this->Lang['CO_ALREADY_SELE']; ?>');
 						        }
+								
+								$('#toggleText').val("");
 			        });
 			
 	           });
@@ -186,6 +193,8 @@ function toggle() {
                                 }else{
                                 alert('<?php echo $this->Lang['SIZE_ALREADY_SELE']; ?>');
                                 }
+								
+								$('#SizeText').val("");
                        });
                });
           });
@@ -201,6 +210,19 @@ function toggle() {
 		}
 		
 	}
+		  function toggle_color(color){
+			  $(color).remove();
+			  var color_c = $('#id_color_count');
+			  var c = parseInt(color_c.val())-1;
+			  color_c.val(c);
+			  
+			  var len = $('#city_display span').size();
+			  if(len == 0){
+				  $('#id_rm_color').trigger('click');
+				  $('#toggleText').val("");
+				  
+			  }
+		  }
 </script>
 <SCRIPT language="Javascript">
       
@@ -485,13 +507,13 @@ function toggle() {
                     </td>
                     
                 </tr>     
-                
+                <input type="hidden" id="id_color_count" name="color_count" readonly="readonly" value="0" />
                  <tr>
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="radio" onchange="return checkedcolorremove(this)" name="color_val" checked value="0" checked><?php echo $this->Lang['NO']; ?>
-                        <input type="radio" onchange="return checkedcoloradd(this)" name="color_val" value="1" ><?php echo $this->Lang['YES']; ?>
+                        <input type="radio" id="id_rm_color" onchange="return checkedcolorremove(this)" name="color_val" checked value="0" checked><?php echo $this->Lang['NO']; ?>
+                        <input type="radio" id="id_add_color" onchange="return checkedcoloradd(this)" name="color_val" value="1" ><?php echo $this->Lang['YES']; ?>
 
                     </td>
                  </tr>
@@ -987,5 +1009,25 @@ function check_validation(){
 	}
 	$('#status').val(2);
 	$('#addFormId').submit();
+	
+	$('document').ready(function(e) {
+			  
+			  <?php if(isset($this->form_error["city_tag[]"])){ ?>
+			  
+						$('#id_rm_color').trigger('click');
+						$('#id_add_color').trigger('click');
+						$('#id_add_color').attr("checked", "checked");
+						
+			  <?php }else{ ?>
+				  		$('#id_add_color').trigger('click');
+						$('#id_rm_color').trigger('click');
+						$('#id_rm_color').attr("checked", "checked");
+			  <?php }?>
+				
+				
+				
+				
+			
+        });
 }
 </script>

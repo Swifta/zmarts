@@ -44,6 +44,18 @@ class Admin_products_Controller extends website_Controller
 							->add_rules('delivery_days','required')
 							->add_rules('Delivery_value', array($this, 'check_return_policy'));
 							
+							
+							if(isset($_POST['color_val'])){
+							if($_POST['color_val'] == '1'){
+								if($_POST['color_count'] < '1'){
+										$post->add_rules('color[]', 'required');
+										
+								}
+								
+								
+							}
+						}
+							
 							$price_s = $post->price;
 							if(isset($price_s)){
 								$price_s = trim($price_s);
@@ -164,7 +176,7 @@ class Admin_products_Controller extends website_Controller
 		$this->get_city_data = $this->products->get_color_data($city_id);
 		$list = "";
 		foreach($this->get_city_data as $c){
-			$list .="<span style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$c->color_code;'><input type='checkbox' name='color[]' checked='checked' value='".$c->color_code."'>".ucfirst($c->color_name)."</span>  ";
+			$list .="<span onchange = 'toggle_color(this)' style='padding:3px;margin:2px;width:auto;height:20px;vetical-align:top;display:inline-block;border:3px solid #$c->color_code;'><input type='checkbox'  name='color[]' checked='checked' value='".$c->color_code."'>".ucfirst($c->color_name)."</span>  ";
 		}
 		echo $list;
 		exit;

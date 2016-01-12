@@ -105,7 +105,7 @@ class Admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 		$post = Validation::factory($_POST)
-					->pre_filter('trim')
+					
 					->add_rules('country', 'required','chars[a-zA-Z _-]')
 					->add_rules('country_code','required','chars[A-Z]')
 					->add_rules('currency_symbol','required')
@@ -156,7 +156,7 @@ class Admin_Controller extends website_Controller
 
 		$this->userPost = $this->input->post();
 		$post = Validation::factory($_POST)
-						->pre_filter('trim')
+						
 						->add_rules('country','required','chars[a-zA-Z _-]')
 						->add_rules('country_code','required','chars[A-Z]')
 						->add_rules('currency_symbol','required')
@@ -255,7 +255,7 @@ class Admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('country', 'required')
 							->add_rules('city', 'required','chars[a-zA-Z _-]')
 							->add_rules('latitude', 'required','chars[0-9.-]')
@@ -317,7 +317,7 @@ class Admin_Controller extends website_Controller
 		$this->city = "1";
 		if($_POST){
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('city', 'required', 'chars[a-zA-Z _-]')
 							->add_rules('country', 'required')
 							->add_rules('latitude', 'required','chars[0-9.-]')
@@ -415,7 +415,7 @@ class Admin_Controller extends website_Controller
 		$this->category = "1";
 		if($_POST){
 			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('category', 'required', 'chars[a-zA-Z0-9 _&-]')
 						->add_rules('list_icon', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
@@ -462,7 +462,7 @@ class Admin_Controller extends website_Controller
 		}
 		$this->category = "1";
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]')
 						->add_rules('list_icon', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 
@@ -593,7 +593,7 @@ class Admin_Controller extends website_Controller
 		}
 		$this->category = "1";
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]');
 
 
@@ -657,7 +657,7 @@ class Admin_Controller extends website_Controller
 	        $main_cat_id = $status_main->current()->main_category_id;
 		$this->category = "1";
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]');
 			if($post->validate()){
 				$category = $this->input->post("category");
@@ -729,7 +729,7 @@ class Admin_Controller extends website_Controller
 		$this->category = "1";
 		if($_POST){
 
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 				->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]');
 
 			if($post->validate()){
@@ -798,7 +798,7 @@ class Admin_Controller extends website_Controller
 	        $main_category_url = $main_status->current()->category_url;
 		$this->category = "1";
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]');
 
 
@@ -902,7 +902,7 @@ class Admin_Controller extends website_Controller
 		$this->category = "1";
 		if($_POST){
 
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 				->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]');
 
 			if($post->validate()){
@@ -977,7 +977,7 @@ class Admin_Controller extends website_Controller
 	        $main_category_url = $main_status->current()->category_url;
 		$this->category = "1";
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 
 						->add_rules('category', 'required','chars[a-zA-Z0-9 _&-]');
 
@@ -1438,7 +1438,7 @@ class Admin_Controller extends website_Controller
 			
 			
 			
-				$post = Validation::factory($_POST)->pre_filter('trim')->add_rules('message', 'required','chars[a-zA-Z0-9 _-]');
+				$post = Validation::factory($_POST)->add_rules('message', 'required','chars[a-zA-Z0-9 _-]');
 			if($post->validate()){
 
 				$email_id = $this->input->post('email');
@@ -1671,7 +1671,7 @@ class Admin_Controller extends website_Controller
 		if($_POST){
 
 			$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('size', 'required','chars[a-zA-Z0-9.]');
 			if($post->validate()){
 				$status = $this->admin->add_size($_POST['size']);
@@ -1729,7 +1729,7 @@ class Admin_Controller extends website_Controller
 			if($_POST){
 
 				$post = Validation::factory($_POST)
-							->pre_filter('trim')
+							
 							->add_rules('size', 'required','chars[a-zA-Z0-9.]');
 					if($post->validate()){
 							$status = $this->admin->edit_size($size_id,$_POST['size']);
@@ -1872,7 +1872,7 @@ class Admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = $this->input->post();
 		        $post = Validation::factory($_POST)
-					->pre_filter('trim')
+					
 					->add_rules('sector', 'required',array($this,'check_sector_exist'));
 
 
@@ -1935,7 +1935,7 @@ class Admin_Controller extends website_Controller
                 if($_POST){
                         $this->userPost = $this->input->post();
                         $post = Validation::factory($_POST)
-                                        ->pre_filter('trim')
+                                        
                                      //   ->add_rules('category', 'required')
                                         ->add_rules('sector', 'required');
                         if($post->validate()){
@@ -2028,7 +2028,7 @@ class Admin_Controller extends website_Controller
 		}
 		$this->sector_settings = 1;
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('zip_file', 'upload::valid', 'upload::type[zip]', 'upload::size[1M]')
 						->add_rules('subsector', 'required','chars[a-zA-Z0-9]');
 
@@ -2292,7 +2292,7 @@ class Admin_Controller extends website_Controller
 	        $main_cat_id = $status_main->current()->main_sector_id;
 		$this->category = "1";
 		if($_POST){
-			$post = Validation::factory(array_merge($_POST,$_FILES))->pre_filter('trim')
+			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('subsector', 'required','chars[a-zA-Z0-9]');
 			if($post->validate()){
 				$category = $this->input->post("subsector");

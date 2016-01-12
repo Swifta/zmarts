@@ -493,13 +493,13 @@ foreach($this->store_details as $deta){
                                           
                       <div class="dash_act_img">
                     
-                     <a class="dash_icons" href="<?php echo PATH?>merchant/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo $this->Lang['SHIP_DEL']; ?>"/>
+                     <a class="dash_icons" href="<?php echo PATH?>merchant/shipping-delivery.html" title="<?php echo "Product ".$this->Lang['SHIP_DEL']; ?>">
+                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo "Product ".$this->Lang['SHIP_DEL']; ?>"/>
                       </a>
                        </div>
                        
-                       <a href="<?php echo PATH?>merchant/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                      <?php echo $this->Lang['SHIP_DEL']; ?>
+                       <a href="<?php echo PATH?>merchant/shipping-delivery.html" title="<?php echo "Product ".$this->Lang['SHIP_DEL']; ?>">
+                      <?php echo "Product ".$this->Lang['SHIP_DEL']; ?>
                        <span>(<?php echo $c["products_shipping"]?>)</span>
                        </a> 
                       
@@ -568,13 +568,13 @@ foreach($this->store_details as $deta){
                                           
                       <div class="dash_act_img">
                     
-                     <a class="dash_icons" href="<?php echo PATH?>merchant-auction/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo $this->Lang['SHIP_DEL']; ?>"/>
+                     <a class="dash_icons" href="<?php echo PATH?>merchant-auction/shipping-delivery.html" title="<?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>">
+                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>"/>
                       </a>
                        </div>
                        
-                       <a href="<?php echo PATH?>merchant-auction/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                       <?php echo $this->Lang['SHIP_DEL']; ?>
+                       <a href="<?php echo PATH?>merchant-auction/shipping-delivery.html" title="<?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>">
+                       <?php echo "Auction ".$this->Lang['SHIP_DEL']; ?>
                        <span>(<?php echo $c["auction_shipping"]?>)</span>
                        </a> 
                       

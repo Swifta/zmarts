@@ -80,6 +80,10 @@ class error {
 				case 'check_price_lmi_prd':
 					 $my_error[$key] = 'Original Price should be greater or equal to Ordinary Discount Price';
 					break;
+				case 'check_deal_price_lmi_prd':
+					 $my_error[$key] = 'Prime Discount Price should be less than or equal to Ordinary discount';
+					break;
+					
 				case 'check_prime_price_lmi_prd':
 					 $my_error[$key] = 'Original Price should be greater or equal to Prime Discount Price';
 					break;
