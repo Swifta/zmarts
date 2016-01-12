@@ -560,7 +560,25 @@ $this->language_List = str_replace(".php", "", $DL);
 <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
 	<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
 </div>-->
-</div>          
+</div>
+
+ <div class="google_languages">
+	<div id="artitleTranslate"></div>
+	<select id="customTranslate">
+		<option value="English">English</option>
+		<option value="Hausa">Hausa</option>
+		<option value="Igbo">Igbo</option>                
+		<option value="Yoruba">Yoruba</option>
+	</select>
+	<script>
+	function googleTranslateElementInit() {
+		   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ha,ig,yo', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'artitleTranslate');googObj.translator.init();
+	}
+	
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</div>
+    
 <?php  if($this->session->get('user_auto_key')) { ?>
     <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div>
 <?php } ?>
