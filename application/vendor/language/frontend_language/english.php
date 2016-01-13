@@ -1711,7 +1711,29 @@ $content_text = array(
 
 "STR_CRD_APPR" => "NOTE: Stored credit transaction is awaiting for merchant approval ",
 
-
+// for chat begins here    
+"ONLINE_CHAT" => "Online Chat",
+ 
+ "CHAT_HIS" => "Chat history",
+ 
+ "SUBJECT" => "Subject",
+ 
+ "ENT_SUBJECT" => "Enter Subject here",
+ 
+ "PLS_ENT_SUB_HERE" => "Please Enter the Subject here",
+ 
+ "OFF_LINE" => "Offline",
+ 
+ "ON_LINE" => "Online",
+ 
+ "MER_ONL_STS" =>"Chat",
+ 
+ "OFF_LINE_MSG" =>"Offline Message",
+ 
+ "ENT_DET_CHAT" => "Enter the details below to chat",
+ 
+ "SUCC_REGIS_CHAT" =>"Successfully registered ! Now you can continue chatting.",
+//ends here
  "CART_PRODUCT_SUCCESS" => "Product added to cart successfully",
  
  "CHECKOUT_NOW" => "Go To Cart",
