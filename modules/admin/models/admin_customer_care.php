@@ -6,6 +6,7 @@ class Admin_customer_care_Model extends Model
 		parent::__construct();
 		$this->db=new Database();
 		$this->session = Session::instance();	
+		$this->user_id = $this->session->get("user_id");
 	}
 	
 	/** ADD USER'S LIST **/
@@ -19,7 +20,7 @@ class Admin_customer_care_Model extends Model
 				$user_auto_key ="";
 			}
                	$news_city = $post->city.",";
-                $result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2', "joined_date" => time(),/*"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,*/"user_auto_key"=>$user_auto_key,"user_type" =>7));
+                $result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname,"nickname" => $post->nickname,"nickname_url" => url::title($post->nickname), "email" => $post->email, 'password' => md5($password), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2', "joined_date" => time(),/*"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,*/"user_auto_key"=>$user_auto_key,"user_type" =>7));
                 
                 $result_city = $this->db->select("city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 
@@ -243,7 +244,7 @@ class Admin_customer_care_Model extends Model
         {
                 $result_emailid = $this->db->count_records("users", array("email" => $post->email,"user_id !=" => $id));
                         if($result_emailid == 0){
-                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile/*,"gender" =>$post->gender,"age_range"=>$post->age_range*/), array('user_id' => $id));
+                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname,"nickname" => $post->nickname,"nickname_url" => url::title($post->nickname), "email" => $post->email, 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile/*,"gender" =>$post->gender,"age_range"=>$post->age_range*/), array('user_id' => $id));
                                 return 1;
                         }
                 return 2;
@@ -333,6 +334,26 @@ class Admin_customer_care_Model extends Model
                 $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 7 ");
                 return $result;
 	}
+	/** CHECK NICKNAME EXIST **/ 
 	
+	public function exist_nickname($name = "")
+	{
+		$result = $this->db->count_records('users', array('firstname' => $name));
+		if($result==0) {
+			$result1 = $this->db->count_records('users', array('nickname' => $name));
+			return (bool) $result1;
+		}
+		return (bool) $result;
+	}
+	/** CHECK NICKNAME EXIST **/ 
 	
+	public function exist_nickname1($name = "")
+	{
+		$result = $this->db->count_records('users', array('firstname' => $name));
+		if($result==0) {
+			$result1 = $this->db->count_records('users', array('nickname' => $name));
+			return (bool) $result1;
+		}
+		return (bool) $result;
+	}
 }

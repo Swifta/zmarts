@@ -24,6 +24,13 @@
                         </tr>
                         
                         <tr>
+                                <td><label><?php echo $this->Lang["NICK_NAM"]; ?></label><span>*</span></td>
+                                <td><label>:</label></td>
+                                <td><input type="text" name="nickname" maxlength="32" readonly value="<?php echo $u->nickname;?>"/>
+                                <em><?php if(isset($this->form_error['nickname'])){ echo $this->form_error["nickname"]; }?></em>
+                                </td>
+                        </tr>
+                        <tr>
                                 <td><label><?php echo $this->Lang["EMAIL_F"]; ?></label><span>*</span></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="email" maxlength="255" value="<?php echo $u->email;?>"/>

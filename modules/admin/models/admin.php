@@ -125,6 +125,17 @@ class Admin_Model extends Model
 							"fb_access_token" =>  $result->current()->fb_session_key,
 							"fb_user_id" =>  $result->current()->fb_user_id
 						));
+						if($result->current()->user_type==7) {
+							$this->session->set("chatuserid",$result->current()->user_id);
+							$this->session->set("nickname",$result->current()->nickname_url);
+							$this->session->set("chat_type",1);
+						//	$this->session->set("chatusername",$result->current()->firstname);
+						//	$this->session->set("chatuseremail",$result->current()->email);
+							setcookie("chat_type", 1);
+							setcookie("username", $result->current()->nickname_url);
+							setcookie("sel_id", $result->current()->user_id);
+							$this->db->update("users", array("online_status" => 1), array("user_id" => $result->current()->user_id));
+						}
 						return 10;
 			}
 			return 9;
