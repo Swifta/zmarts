@@ -393,5 +393,17 @@ class Admin_customer_care_Controller extends website_Controller {
 		$this->template->content = new View("admin_customer_care/dashboard_customer_care");
 		$this->template->title = $this->Lang['CUSTM_DASH'];
 	}	
+	/** CHECK NICKNAME EXIST **/
+	public function nickname_available($name="")
+	{
+		$exist = $this->users->exist_nickname($name);
+		return ! $exist;
+	}
 	
+	/** CHECK NICKNAME EXIST **/
+	public function nickname_available1($name="")
+	{
+		$exist = $this->users->exist_nickname1($name);
+		return ! $exist;
+	}
 }
