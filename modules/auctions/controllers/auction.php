@@ -553,10 +553,11 @@ class Auction_Controller extends Layout_Controller
 		$check_already_buy = $this->deals->check_already_buy($this->bid_id,$this->auction_user);
 
 		if($check_already_buy){
-
-			$this->deals_payment_deatils = $this->deals->get_payment_auction_details(base64_decode($deal_id));
+                    $this->get_cart_products = $this->deals->get_payment_auction_details(base64_decode($deal_id));
+			$this->deals_payment_deatils = $this->get_cart_products;
 			if(count($this->deals_payment_deatils)){
 				$this->shipping_address = $this->deals->get_user_data_list();
+                                //var_dump($this->get_cart_products );die;
 				$this->template->content = new View("themes/".THEME_NAME."/auction/auction_payment1");
 			}
 			else{

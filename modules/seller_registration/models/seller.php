@@ -114,10 +114,14 @@ class Seller_Model extends Model
                                 $result = $this->db->insert("merchant_attribute", array("merchant_id" => $merchant_id,"storeid" =>$store_result->insert_id()));
 				$admin = $this->db->select('email')->from('users')->where(array('user_type' =>1))->limit(1)->get();
 
-				$email=(count($admin))?$email = $admin[0]->email:"";
-				
+				//$email=(count($admin))?$email = $admin[0]->email:"";
+				$email = array();
 				$return_result['image']=$merchant_id.'_'.$store_result->insert_id();
-
+                                $loop=0;
+                                foreach($admin as $admin_emails){
+                                    $email[$loop] = $admin_emails->email;
+                                    $loop++;
+                                }
 				$return_result['email']=$email;
 				
 				

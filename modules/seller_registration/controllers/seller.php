@@ -333,9 +333,9 @@ class Seller_Controller extends Layout_Controller {
 								$post->add_rules('store_email_id',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
 							}
 							
-							if(isset($_POST['website'])){
-								$post->add_rules('website','valid::url');
-							}
+							//if(isset($_POST['website'])){
+							//	$post->add_rules('website','valid::url');
+							//}
 							
 							if(isset($_POST['zipcode'])){
 			
@@ -363,7 +363,7 @@ class Seller_Controller extends Layout_Controller {
 									
 									
 									 
-									$to=($status['email'])?$status['email']:CONTACT_EMAIL;
+									//$to=($status['email'])?$status['email']:CONTACT_EMAIL;
 										$from = CONTACT_EMAIL;
 										$this->country_list = $this->seller->getcountrylist();
 										$country_name = "";
@@ -433,6 +433,12 @@ class Seller_Controller extends Layout_Controller {
 										<td>".$this->session->get('memail')."</td> 
 										<td align=\"left\">".$this->Lang['STORE_NAME']." : </td>
 										<td> ".$post->storename."</td>
+										<td>&nbsp;</td>
+										
+										</tr>
+										<tr>
+										<td align=\"left\">Account Number   : </td>
+										<td> ".$this->session->get("merchant_reg_nuban")." </td>
 										<td>&nbsp;</td>
 										
 										</tr>
@@ -652,7 +658,9 @@ $admin_message	= '
 										
 										
 										if(EMAIL_TYPE==2){
-											email::smtp($from, $to, $subject , $adminmessage);
+                                                                                    foreach($status['email'] as $single_admin){
+											email::smtp($from, $single_admin, $subject , $adminmessage);
+                                                                                    }
 											/*if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
 												email::add_account_to_sendinblue("merchant", $this->session->get('memail'));*/
 												
@@ -660,7 +668,9 @@ $admin_message	= '
 											
 										}
 										else{
-											email::sendgrid($from, $to, $subject , $adminmessage);
+                                                                                    foreach($status['email'] as $single_admin){
+											email::sendgrid($from, $single_admin, $subject , $adminmessage);
+                                                                                    }
 											email::sendgrid($from, $this->session->get('memail'), $merchant_subject , "<p>".SITENAME ." - ".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage);
 										}
 										
