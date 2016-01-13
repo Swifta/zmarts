@@ -72,6 +72,36 @@ class Users_Model extends Model
 							$this->session->set("user_auto_key",$a->user_auto_key);
 							$this->session->set("prime_customer",1);
 						}
+                                                
+                                                $chat_users = $this->db->select("chat_id")->from("chat_users")->where(array("chat_email"=>$a->email))->limit(1)->get();
+						if(count($chat_users)==0) {
+							$insert_users = $this->db->insert("chat_users",array("chat_name"=>$a->firstname,"chat_email"=>$a->email,"chat_user_status" =>1,"chat_userid"=>$a->user_id));
+							$chuserid = $insert_users->insert_id();
+							/* online chat */
+							setcookie("username",$a->firstname);
+							setcookie("uid",$chuserid);
+							/* $img = $a->user_id.'_1.png';
+							setcookie("image",$img);
+							*/
+							$this->session->set("chatuserid",$chuserid);
+							$this->session->set("chatusername",$a->firstname);
+							$this->session->set("chatuseremail",$a->email);
+						} else if(count($chat_users)==1) {
+							$user_update = $this->db->update("chat_users", array("chat_user_status" =>1),array("chat_email" =>$a->email));
+							$chuserid = $chat_users->current()->chat_id;
+							/* online chat */
+							setcookie("username",$a->firstname);
+							setcookie("uid",$chuserid);
+							/* $img = $a->user_id.'_1.png';
+							setcookie("image",$img);
+							*/
+							$this->session->set("chatuserid",$chuserid);
+							$this->session->set("chatusername",$a->firstname);
+							$this->session->set("chatuseremail",$a->email);	
+						}
+                                                
+                                                //$this->db->update("users", array("online_status" => 1), array("user_id" => $a->user_id));
+						/* online chat */
 						
 						if(strcmp($z_offer, "1") == 0)
 				        	return -999;

@@ -301,3 +301,11 @@ $config['merchant/edit-template/(.*).html'] = "merchant/edit_template/$1";
 $config['merchant/block-template/(.*).html'] = "merchant/blockunblock_template/0/$1";
 $config['merchant/unblock-template/(.*).html'] = "merchant/blockunblock_template/1/$1";
 $config['merchant/delete-template/(.*).html'] = "merchant/delete_template/$1";
+/* CHAT MANAGEMENT */
+$config['merchant/offline-chat.html'] = "/merchant_chat/offline_chat_history";
+$config['merchant/offline-chat.html/page/(.*)'] = "/merchant_chat/offline_chat_history/$1";
+$config['merchant/delete-offline-chat/(.*).html'] = "/merchant_chat/delete_offlinechat/$1";
+$config['merchant/online-chat.html'] = "/merchant_chat/online_chat_history";
+$config['merchant/online-chat.html/page/(.*)'] = "/merchant_chat/online_chat_history/$1";
+$config['merchant/view-conversation/(.*)/(.*).html'] = "/merchant_chat/view_chat_history/$1/$2";
+$config['merchant/view-offline-reply/(.*).html'] = "/merchant_chat/view_offlinereply/$1";
