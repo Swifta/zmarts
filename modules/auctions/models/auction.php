@@ -444,9 +444,9 @@ class Auction_Model extends Model
 	/* GET AUCTION PAYMENT DETAILS */
 
 	public function get_payment_auction_details($deal_id = "")
-	{
+	{	$n_condition = array("deal_id" => $deal_id);
 		if($this->auction_club_condition_arr)
-		$n_condition = array("deal_id <>" => $deal_id);
+			$n_condition = array("deal_id" => $deal_id, "for_store_cred" => 0);
 		$result = $this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->where($n_condition)->get();
 		return $result;
 	}
