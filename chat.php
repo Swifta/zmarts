@@ -27,8 +27,8 @@ define ('DBNAME','Emarketplace');
 */
 define ('DBPATH','localhost');
 define ('DBUSER','root');
-define ('DBPASS','ndot');
-define ('DBNAME','Emarketplace');
+define ('DBPASS','mysql');
+define ('DBNAME','chatapp');
 
 ?>
 
