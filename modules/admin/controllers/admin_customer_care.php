@@ -32,6 +32,7 @@ class Admin_customer_care_Controller extends website_Controller {
 							
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
+							->add_rules('nickname', 'required', 'chars[a-zA-Z0-9 _-]',array($this,'nickname_available'))
 							->add_rules('email', 'required','valid::email', array($this, 'email_available'))
 							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
