@@ -3998,7 +3998,32 @@ $content_text = array(
 			"R_INQUIRY" => "Response from $THIS_SITENAME",
 			
 			"INSTALL_PAY" => "Installment Payment ",
+                           
+                        "CHAT_MNG" => "Chat Management",
 			
+			"OFF_LINE_CHT" => "Offline Chat History ",
 			
-
+			"ON_LINE_CHT" => "Online Chat History ",
+			
+			"SUCC_OFF_DEL" => "Message deleted successfully.",
+			
+			"CHT" => "Chat",
+			
+			"CONV" => "Conversation",
+			
+			"VIEW_HIST" =>"View Chat Conversation",
+			
+			"OFF_LINE" => "Offline",
+ 
+			"ON_LINE" => "Online",
+			
+			"VIEW_RPLY" =>"View Offline Conversation",
+			
+			"DAT_TIM" => " Date && Time",
+			
+			"NICK_NAM" =>"Nickname",
+			
+			"NICK_AL_E" => "Nickname already exist",
+			
+    
 			);
