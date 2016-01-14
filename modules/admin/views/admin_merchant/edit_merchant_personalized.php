@@ -52,16 +52,16 @@
 					    
 						$theme_check = true;
 						$theme_name = strtolower($p->sector_name);
-						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/controllers/'.$theme_name.'.php'))
-							$theme_check = false;
-						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/models/'.$theme_name.'.php'))
-							$theme_check = false;
-						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/config/routes.php'))
-							$theme_check = false;
-						if(!is_dir(DOCROOT.'themes/'.THEME_NAME.'/css/'.$theme_name))
-							$theme_check = false;
-						if(!is_dir(DOCROOT.'application/views/themes/'.THEME_NAME.'/'.$theme_name))
-							$theme_check = false;
+//						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/controllers/'.$theme_name.'.php'))
+//							$theme_check = false;
+//						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/models/'.$theme_name.'.php'))
+//							$theme_check = false;
+//						if(!file_exists(DOCROOT.'modules/'.$theme_name.'/config/routes.php'))
+//							$theme_check = false;
+//						if(!is_dir(DOCROOT.'themes/'.THEME_NAME.'/css/'.$theme_name))
+//							$theme_check = false;
+//						if(!is_dir(DOCROOT.'application/views/themes/'.THEME_NAME.'/'.$theme_name))
+//							$theme_check = false;
 						if($theme_check==true){?>
 			                <option value="<?php echo $p->sector_id; ?>" <?php if($uu->store_subsector_id==$p->sector_id){ ?> selected <?php }  ?> > <?php echo $p->sector_name; ?></option>
 				<?php }} }  ?>
