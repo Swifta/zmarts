@@ -683,11 +683,9 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 			
 	        $this->user_details = $this->merchant->get_merchant_balance($store_id);
-                var_dump($this->user_details);
 	        $this->sector_list = $this->merchant->get_all_sector_data();
 	        $this->data = $this->merchant->get_merchant_attribute_data_list($store_id);
 	        $this->sub_sector_list=$this->merchant->get_all_sub_sectors();
-                var_dump($this->sub_sector_list);
 		$this->template->title = $this->Lang["EDIT_PERSONALIZED"];
 		$this->template->content = new View("admin_merchant/edit_merchant_personalized");
 	}
