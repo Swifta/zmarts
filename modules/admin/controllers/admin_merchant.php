@@ -1670,10 +1670,11 @@ class Admin_merchant_Controller extends website_Controller {
 							$theme_check = false;
 						if($theme_check==true)
 							$list .='<option value="'.$s->sector_id.'">'.ucfirst($s->sector_name).'</option>';
+                                                print_r($list);
+                                        var_dump($list);
 					}
 					echo $list .='</select></td>';
-                                        print_r($list);
-                                        var_dump($list);
+                                        
 				}
 				else {
 					$list = '<td><label>'.$this->Lang['SUBSECTOR'].'</label></td><td><select name="sub_category">';
