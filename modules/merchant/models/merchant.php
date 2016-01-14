@@ -70,8 +70,14 @@ class Merchant_Model extends Model
 					$this->merchant_id=$result->current()->merchantid;
 					$this->merchant_id1=$result->current()->user_id;
 				} else {
+					$this->session->set("chatuserid",$result->current()->user_id);
+					$this->session->set("chat_type",2);
+					setcookie("chat_type", 2);
 					$this->merchant_id=$result->current()->user_id;
 					$this->merchant_id1=$result->current()->user_id;
+					setcookie("username", $result->current()->firstname);
+					setcookie("sel_id", $result->current()->user_id);
+					$this->db->update("users", array("online_status" => 1), array("user_id" => $result->current()->user_id));
 				}
 		                        $this->session->set(array(
 						                "user_id" => $this->merchant_id,

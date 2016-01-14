@@ -368,6 +368,17 @@ foreach ($this->product_deatils as $products) {
                                     </ul>
                                 </div>
                             </div>
+                             <?php /* Chat starts here */ ?>
+                              <div class="chat_opt">
+                                <p><?php echo $this->Lang['MER_ONL_STS']; ?>: 
+                                <?php if($products->online_status==1) { ?>
+									<a class="online_txt" <?php   if($this->session->get("chatuserid")) {  ?> href="javascript:chatWith('<?php echo $products->firstname; ?>','<?php echo $products->user_id; ?>',2);" <?php } else { ?> href="javascript:chat_detail_popup('<?php echo $products->firstname; ?>','<?php echo $products->user_id; ?>');" <?php } ?> title="<?php echo $this->Lang["ON_LINE"]; ?>"><?php echo $this->Lang["ON_LINE"]; ?></a>
+                                <?php } else { ?>
+									<a class="offline_txt" href="javascript:chat_offline(<?php echo $products->user_id; ?>,2);" title="<?php echo $this->Lang["OFF_LINE"]; ?>"><?php echo $this->Lang["OFF_LINE"]; ?></a>
+								<?php } ?>	
+                                </p>
+                                 </div>
+                                <?php /* Chat ends here */ ?>
                         </div>
                     </div>
                      <?php if(count($this->merchant_cms)>0) { ?>
