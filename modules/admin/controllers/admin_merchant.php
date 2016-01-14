@@ -429,7 +429,6 @@ class Admin_merchant_Controller extends website_Controller {
 		$merchant=$this->merchant->get_merchnat_id($store_id);
 		$merchant_store_name=$this->merchant->get_merchant_store_name($store_id);
 		$sector_data = $this->merchant->get_merchant_sector_data_list($store_id);
-                var_dump($sector_data);
 		if(count($sector_data)>0){
 		    $this->sector_name = $sector_data->current()->sector_name;
 		    $sector=$this->merchant->get_sector_data($sector_data->current()->main_sector_id);
@@ -684,9 +683,11 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 			
 	        $this->user_details = $this->merchant->get_merchant_balance($store_id);
+                var_dump($this->user_details);
 	        $this->sector_list = $this->merchant->get_all_sector_data();
 	        $this->data = $this->merchant->get_merchant_attribute_data_list($store_id);
 	        $this->sub_sector_list=$this->merchant->get_all_sub_sectors();
+                var_dump($this->sub_sector_list);
 		$this->template->title = $this->Lang["EDIT_PERSONALIZED"];
 		$this->template->content = new View("admin_merchant/edit_merchant_personalized");
 	}
