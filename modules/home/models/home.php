@@ -1402,4 +1402,23 @@ class Home_Model extends Model
 		$result = $this->db->query("select category_name,category_id,(select count(deal_id) from product join stores on stores.store_id=product.shop_id  join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where product.category_id=category.category_id and purchase_count < user_limit_quantity and deal_status = 1  ".$this->product_club_condition."  and  store_status = 1 and users.user_status=1 and city.city_status=1 group by category_id) as product_count from category where $condition order by product_count DESC limit $limit");
 		return $result;
 	}
+        
+        public function update_login_status()
+	{
+		$userid=0;
+		if($this->session->get("user_id")) {
+			$userid = $this->session->get("user_id");
+		} else if($this->session->get("UserID")) {
+			$userid = $this->session->get("UserID");
+		}
+		$result = $this->db->update("users", array("online_status" => 0), array("user_id" => $userid));
+		$result = $this->db->update("chat_users", array("chat_user_status" => 0), array("chat_userid" => $userid));
+		unset($_COOKIE['image']);
+		unset($_COOKIE['chat_type']);
+		unset($_COOKIE['username']);
+		unset($_COOKIE['sel_id']);
+		unset($_COOKIE['uid']);
+		return 1;
+		
+	}
 }
