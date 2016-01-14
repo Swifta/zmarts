@@ -432,6 +432,7 @@ class Admin_merchant_Controller extends website_Controller {
 		if(count($sector_data)>0){
 		    $this->sector_name = $sector_data->current()->sector_name;
 		    $sector=$this->merchant->get_sector_data($sector_data->current()->main_sector_id);
+                    var_dump($sector);
 		    $this->sectorname=$sector->current()->sector_name;
 		}else{
 		    $this->sector_name ="Default";
