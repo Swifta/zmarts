@@ -5,22 +5,24 @@ class Webpay_Controller extends Layout_Controller
 	public function __construct()
 	{
 		parent::__construct();
+                
 		$this->webpay = new Webpay_Model;
+                $this->paypal = new Auction_Paypal_Model;
                 //interswitch constants.
-                $this->mac_key = "E187B1191265B18338B5DEBAF9F38FEC37B170FF582D4666DAB1F098304D5EE7F3BE15540461FE92F1D40332FDBBA34579034EE2AC78B1A1B8D9A321974025C4";
-                $this->product_id = 6204;
+                $this->mac_key = WEBPAY_MAC_KEY;
+                $this->product_id = intval(WEBPAY_PRODUCT_ID);
                 $this->currency = 566;
-                $this->staging_url = "https://stageserv.interswitchng.com/test_paydirect/api/v1/";
+                $this->staging_url = WEBPAY_STAGING_URL."api/v1/";
                 $this->payment_params = "payment_split";
                 $this->site_redirect_url = PATH."webpay/confirmed.html";
-                $this->site_name = "www.abc.com";
+                $this->site_name = WEBPAY_SITE_NAME;
                 $this->cust_id = $this->session->get('UserEmail'); //$this->session->get('UserID');
                 $this->cust_id_desc = $this->session->get('UserID');
                 $this->cust_name = $this->session->get('UserName');
                 $this->cust_name_desc = "";
                 $this->txn_ref = "";
-                $this->pay_item_id = 101;
-                $this->pay_item_name = "Payment Name";
+                $this->pay_item_id = WEBPAY_PAY_ITEM_ID;
+                $this->pay_item_name = WEBPAY_PAY_ITEM_NAME;
                 $this->xml_data = "";
                 $this->hash = "";
                 $this->xml_data = "";
@@ -438,6 +440,73 @@ class Webpay_Controller extends Layout_Controller
  
         }
         
+        
+        public function pay_auction(){
+            //var_dump($_SESSION);die;
+		if($_POST){  
+                    $deal_id = $this->input->post("deal_id");
+                    $merchant_id = $this->input->post("merchant_id"); 
+                    $bid_id = $this->input->post("bid_id"); 
+                    $deal_key = $this->input->post("deal_key"); 
+                    $url_title = $this->input->post("url_title");   
+                    $referral_amount = 0;
+                    $item_qty = $this->input->post("P_QTY");
+                    $amount = $this->input->post("amount");			
+                    $deal_value = $this->input->post("deal_value");
+                    $shipping_amount = $this->input->post("shipping_amount");
+                    $tax_amount = 0;
+
+                    $pay_amount1 = $tot_amount1 = $amount+$shipping_amount+$tax_amount;
+                    $TRANSACTIONID = text::random($type = 'alnum', $length = 15);
+                    
+                    $post = arr::to_object($this->input->post());
+                            $captured = 0;
+
+                    $transaction = $this->paypal->insert_webpay_transaction_details($TRANSACTIONID, $deal_id,$referral_amount, $item_qty, 7, $captured, $item_qty, $post,$merchant_id,$tax_amount,$shipping_amount,$amount,$bid_id);
+
+                    //$this->product_id = $transaction;
+                    $this->session->set('webpay_total', intval($pay_amount1*100));
+                    //then run a code to get the splitting xml file and co
+                    
+                    $this->xml_data = '<payment_item_detail>'. 
+                        '<item_details detail_ref="'.$TRANSACTIONID.'" institution="ZMART" sub_location="Lagos" location="Lagos">';
+                    $this->xml_data .= $this->webpay->get_split_marchant_xml_auction($TRANSACTIONID, $pay_amount1);//pass in the transaction ID
+                    //and the total amount to be paid here
+                        //'<item_detail item_id="1" item_name="Butter" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4356789876" />'.
+                        //    '<item_detail item_id="2" item_name="Grape" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4351189876" />'. 
+                    $this->xml_data .= '</item_details></payment_item_detail>';
+                    //var_dump($this->xml_data);die;
+                    //var_dump($this->xml_data); die;
+                    $combination = $TRANSACTIONID.$this->product_id.$this->pay_item_id.  intval($pay_amount1*100).
+                            $this->site_redirect_url.$this->mac_key;
+                    //echo $TRANSACTIONID.$this->product_id.$this->pay_item_id.intval($pay_amount1*100).
+                            //$this->site_redirect_url; die;
+                    $this->hash = hash("sha512", $combination);
+                    //die;
+                    //var_dump($_SESSION);
+                    //die;
+               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+                $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
+                $this->result_transaction = arr::to_object($this->transaction_result);
+                //dont need the line of code below
+                //$this->session->set('payment_result', $this->result_transaction);
+                $this->txn_ref = $TRANSACTIONID;
+                $this->total_amount_to_pay = $pay_amount1;
+                $this->template->title = "Interswitch Payment System";
+                $this->template->content = new View("themes/".THEME_NAME."/interswitch/payment_process");  
+                    //$status = $this->payment_mail_function($deal_id,$transaction);
+                    //$this->results = arr::to_object(array('TIMESTAMP'=> date('d/m/Y h:i:s A', time()),'ACK'=>$this->Lang['SUCCESS'],'AMT'=>$tot_amount1,'CURRENCYCODE'=>CURRENCY_CODE));
+                    //        $this->session->set('payment_result', $this->results);
+                    //        url::redirect(PATH.'transaction.html');
+
+                } else {
+
+                        common::message(-1, $this->Lang["PAGE_NOT"]);  
+                        url::redirect(PATH."auction.html");	
+                }
+ 
+        }
+        
         public function sendInterswitchEmail($tranx_id, $amount, $response){
             $from = CONTACT_EMAIL;
             $message = new View("themes/".THEME_NAME."/payment_mail_interswitch");
@@ -563,5 +632,113 @@ class Webpay_Controller extends Layout_Controller
             }
          }
 		return;
+	}
+        
+        
+        
+	private function payment_mail_function($deal_id = "", $transaction_id = "")
+	{
+		$this->auction_details = $this->paypal->get_auction_mail_data($deal_id,$transaction_id);
+
+		 $message = new View("themes/".THEME_NAME."/auction/auction_payment_mail"); 
+
+		foreach ($this->auction_details as $row) {
+
+			if($row->facebook_update == 1){
+				
+					$dealURL = PATH."auction/".$row->deal_key.'/'.$row->url_title.".html";
+					$message1 = $this->Lang['ACT_PURCASH'].$row->deal_title." ".$dealURL;
+					$post_arg = array("access_token" => $row->fb_session_key, "message" => $message1, "id" => $row->fb_user_id, "method" => "post");
+					common::fb_curl_function("https://graph.facebook.com/feed", "POST", $post_arg );
+				
+			}
+
+			$from = CONTACT_EMAIL;
+			$subject = $this->Lang['THANKS_BUY'];
+				if(EMAIL_TYPE==2){
+                    email::smtp($from,$row->email, $subject, $message);
+			    }
+			    else{
+			      email::sendgrid($from,$row->email, $subject, $message);
+			    }
+
+ 		}
+		
+
+		/*$from = NOREPLY_EMAIL;
+	 	
+		$transaction_details = $this->paypal->get_all_deal_captured_transaction($deal_id, $transaction_id, $captured);	
+		foreach($transaction_details as $TD){	
+		
+		        $friend_details = $this->paypal->get_friend_transaction_details($deal_id, $TD->id);			        
+                $friend_email = $friend_details->current()->friend_email;
+                $friend_name = $friend_details->current()->friend_name;        
+			    $this->result_mail = arr::to_object(array("deal_title" => $TD->deal_title, "shipping_amount" => $shipping_amount ,"total" => $TD->amount ,"ref_amount"=> $TD->referral_amount, "amount"=> $amount ,"friend_name" => $friend_name,"value" =>$TD->amount));
+			    $subject = "Thanks for buying from ". SITENAME;		
+			        if($friend_email != "xxxyyy@zzz.com"){
+			                $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");
+			        } else {
+			                $message = new View("themes/".THEME_NAME."/auction/auction_payment_mail");
+			        }
+			        if($friend_email != "xxxyyy@zzz.com"){
+				    if(EMAIL_TYPE==2){
+		                    email::smtp($from, $friend_email, "You Got Coupon Gift from your Friend" ,$friend_message);
+				}else{
+				   email::sendgrid($from, $friend_email, "You Got Coupon Gift from your Friend" ,$friend_message);
+				}
+		            } else {
+				    if(EMAIL_TYPE==2){			        
+		                    email::smtp($from,$TD->email, $subject, $message);
+				    }
+				    else{
+				      email::sendgrid($from,$TD->email, $subject, $message);
+				    }
+		            }
+			
+		}	*/	
+		return;
+	}
+ 
+
+	private function hash_call($methodName, $nvpStr)
+	{
+	        
+		$nvpheader = $this->nvpHeader();
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $this->API_Endpoint);
+		curl_setopt($ch, CURLOPT_VERBOSE, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, TRUE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+
+		if($this->AUTH_token && $this->AUTH_signature && $this->AUTH_timestamp){
+			$headers_array[] = "X-PP-AUTHORIZATION: ".$nvpheader;
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers_array);
+			curl_setopt($ch, CURLOPT_HEADER, false);
+		}
+		else {
+			$nvpStr = $nvpheader.$nvpStr;
+		}
+		
+		if(strlen(str_replace('VERSION=', '', strtoupper($nvpStr))) == strlen($nvpStr)) {
+			$nvpStr = "&VERSION=" . $this->Api_Version . $nvpStr;	
+		}
+               
+
+		$nvpreq = "METHOD=".urlencode($methodName).$nvpStr;
+				
+
+		curl_setopt($ch,CURLOPT_POSTFIELDS,$nvpreq);
+		$response = curl_exec($ch);
+		$nvpResArray = $this->deformatNVP($response);
+		if(curl_errno($ch)) { 
+			$_SESSION['curl_error_no']=curl_errno($ch) ;
+			$_SESSION['curl_error_msg']=curl_error($ch);
+		} else {
+			curl_close($ch);
+		}
+
+		return $nvpResArray;
 	}
 }

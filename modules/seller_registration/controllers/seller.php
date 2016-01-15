@@ -487,6 +487,13 @@ $admin_message	= '
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'. $post->storename.'</td>
     
   </tr>
+  
+    </tr>
+    <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ; color:#666;">Account Number   : </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; "> '.$this->session->get("merchant_reg_nuban").' </td>
+    </tr>
+    
   <tr>
     <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;" >Addres 1: </td>
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; " >'.$post->address1.'</td>

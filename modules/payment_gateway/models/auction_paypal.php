@@ -224,6 +224,70 @@ class Auction_Paypal_Model extends Model
 		return $trans_ID;
 	}
 	
+        
+	public function insert_webpay_transaction_details($t_id, $deal_id = "", $ref_amount = 0, $qty = 1, $type = 5, $captured = 0, $purchase_qty = "" ,$post = "",$merchant_id = "",$tax_amount = "",$shipping_amount = "", $deal_amount = "",$bid_id = 0)
+	{
+	
+	    $merchant_commission = $this->db->select("merchant_commission")->from("users")->where(array("user_id" => $merchant_id))->get();
+		$commission_amount=$merchant_commission->current()->merchant_commission;
+		
+		$ip=$_SERVER['REMOTE_ADDR'];
+	        //$ip = "41.184.34.101"; //Nigeria
+	        $ip_country_code="";
+	        $ip_country_name="";
+	        $ip_city_name="";		
+		$url = "http://api.ipinfodb.com/v3/ip-city/?key=8042c4ccb295723ec0791f306df5f9e92632e9b1ba0beda3e1ff399f207d2767&ip=$ip";
+		try{
+                    $data = @file_get_contents($url);
+                    if(strlen($data)>1){
+                        $dat = explode(";",$data);
+                        if($dat[3] != "-"){
+                                $ip_country_code=$dat[3];
+                                $ip_country_name=$dat[4];
+                                $ip_city_name=$dat[5];
+                        } else {
+                                $geodata = Kogeoip::getRecord($ip);
+                                if(isset($geodata->country_code)){
+                                        $ip_country_code=$geodata->country_code;
+                                        $ip_country_name=$geodata->country_name;
+                                        $ip_city_name="";
+                                } else {
+                                        $ip_country_code = "Other";
+                                        $ip_country_name="Other";
+                                        $ip_city_name="Other";
+                                }
+                        }
+                    }
+                }
+                catch(Exception $e){
+                    $ip_country_code = "Other";
+                    $ip_country_name="Other";
+                    $ip_city_name="Other";
+                }
+		$result = $this->db->insert("transaction",array("transaction_id"=>$t_id, "user_id" => $this->UserID , "auction_id" => $deal_id, "country_code" => COUNTRY_CODE, "currency_code" => CURRENCY_CODE, "transaction_date" => time(), "acknowledgement" => "Success",  "firstname" => $this->UserName, "lastname" => $this->UserName,"order_date" => time(), "amount" => $deal_amount ,"bid_amount" => $deal_amount , "referral_amount" => $ref_amount, "transaction_type" => "INTERSWITCH","payment_status" => 'Pending', "pending_reason" => 'INTERSWITCH', "quantity" => $qty, "type" => $type, "captured" => $captured,'deal_merchant_commission' => $commission_amount,"shipping_amount"=>$shipping_amount, "tax_amount"=>$tax_amount,"ip"=>$ip,"ip_country_code" => $ip_country_code, "ip_country_name" => $ip_country_name, "ip_city_name"=>$ip_city_name));
+		
+		$trans_ID = $result->insert_id();
+
+		for($q=1; $q <= $qty; $q++){
+			$coupon_code = text::random($type = 'alnum', $length = 8);
+			$this->db->insert("transaction_mapping", array("auction_id" => $deal_id , "user_id" => $this->UserID, "transaction_id" => $trans_ID , "coupon_code" => $coupon_code , "coupon_code_status" => 1,"transaction_date"=>time(),"friend_name" =>'xxxyyy', "friend_email" => 'xxxyyy@zzz.com'));
+		}
+		
+		$this->db->insert("shipping_info", array("transaction_id" => $trans_ID , "user_id" => $this->UserID, "adderss1" => $post->adderss1 , "address2" => $post->address2, "city" => $post->city ,"state" => $post->state ,"country" => $post->country,"name" => $post->shipping_name ,"postal_code" => $post->postal_code ,"phone" => $post->phone,"shipping_type" =>2,"shipping_date" => time()));
+		
+		 /*$total_pay_amount = ($deal_amount + $shipping_amount + $tax_amount); 
+		 $commission=(($deal_amount)*($commission_amount/100));
+         $merchantcommission = $total_pay_amount - $commission ; 
+         $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id "); */
+
+	     //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $deal_amount where user_type = 1");
+	
+		 $this->db->update("bidding",array("winning_status" => 2),array("bid_id" =>$bid_id,"user_id" =>$this->UserID,"auction_id" =>$deal_id));
+		 $this->db->update("auction",array("auction_status" => 2),array("deal_id" =>$deal_id)); // for check the auction is bought	
+
+		return $trans_ID;
+	}
+        
 	/** UPDATE AMOUNT TO REFERED USER **/
 
 	public function update_referral_amount($ref_user_id = "")

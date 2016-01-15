@@ -112,7 +112,7 @@ class Seller_Model extends Model
                                     'store_type' => '1','merchant_id'=>$merchant_id,"store_status" => '0',"created_date" => time(),'created_by'=>$merchant_id,'about_us'=>$post->data,"store_admin_id"=>$m_id,"store_sector_id" =>$this->session->get('sector'),"store_subsector_id" =>$this->session->get("sub_sector")));
 						
                                 $result = $this->db->insert("merchant_attribute", array("merchant_id" => $merchant_id,"storeid" =>$store_result->insert_id()));
-				$admin = $this->db->select('email')->from('users')->where(array('user_type' =>1))->limit(1)->get();
+				$admin = $this->db->select('email')->from('users')->where(array('user_type' =>1))->get();
 
 				//$email=(count($admin))?$email = $admin[0]->email:"";
 				$email = array();

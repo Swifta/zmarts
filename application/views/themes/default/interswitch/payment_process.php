@@ -13,7 +13,7 @@
                 <div class="content_abou_common">                            
                     <h2 class="inner_commen_title"><?php echo $this->Lang["PROCEED_GLOBAL_PAY"]; ?></h2>                            
                     <div style="text-align: center; padding-top:25px;">
-                        <form role="form" method="post" action="https://stageserv.interswitchng.com/test_paydirect/pay">
+                        <form role="form" method="post" action="<?php echo WEBPAY_STAGING_URL; ?>pay">
                         <ul>
                            <li>
                                     <label>Customer Name :</label>

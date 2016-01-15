@@ -1,4 +1,4 @@
-  <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
+<?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <script>
   $(document).ready(function(){
         $(".CityPAY_new").hide();
@@ -40,34 +40,35 @@
 		   form.submit();
 		 }
 	});
-	 $("#shipping_address2").change(function() {
+
+	 $("#shipping_address13").change(function() {       
 	        $(".CityPAY").show();
 	        $(".CityPAY_new").hide();
 		if($(this).is(':checked')) { 
-			 $("#ship_nam_cod1").val($("#ship_nam").val());
-			 $("#ship_addr_cod2").val($("#ship_address2").val());
-			 $("#ship_postal_code_cod1").val($("#ship_zipcode").val());
-			 $("#ship_addr_cod1").val($("#ship_address1").val());
-			 $("#ship_citycod1").val($("#ship_city").val());
-			 $("#ship_countrycod1").val($("#ship_country").val());
-			 $("#ship_state_cod1").val($("#ship_state").val());
-			 $("#ship_phone_cod1").val($("#ship_phone").val());
+			 $("#ship_nam_cod13").val($("#ship_nam").val());
+			 $("#ship_addr_cod23").val($("#ship_address2").val());
+			 $("#ship_postal_code_cod13").val($("#ship_zipcode").val());
+			 $("#ship_addr_cod13").val($("#ship_address1").val());
+			 $("#ship_citycod13").val($("#ship_city").val());
+			 $("#ship_countrycod13").val($("#ship_country").val());
+			 $("#ship_state_cod13").val($("#ship_state").val());
+			 $("#ship_phone_cod13").val($("#ship_phone").val());
 			
 		} else { 
-			 $("#ship_nam_cod1").val('');
-			 $("#ship_addr_cod2").val('');
-			 $("#ship_postal_code_cod1").val('');
-			 $("#ship_addr_cod1").val('');
-			 $("#ship_state_cod1").val('');
-			  $("#ship_citycod1").val('');
-			 $("#ship_countrycod1").val('');
-			 $("#ship_phone_cod1").val('');		
+			 $("#ship_nam_cod13").val('');
+			 $("#ship_addr_cod23").val('');
+			 $("#ship_postal_code_cod13").val('');
+			 $("#ship_addr_cod13").val('');
+			 $("#ship_state_cod13").val('');
+			  $("#ship_citycod13").val('');
+			 $("#ship_countrycod13").val('');
+			 $("#ship_phone_cod13").val('');		
 	        }
 	});
 });
       
 </script>
-<form name="payment" method="POST" id="commentForm" action="<?php echo PATH;?>webpay/pay_now.html">  
+<form name="payment" method="POST" id="commentForm" action="<?php echo PATH;?>webpay/pay_auction">  
 <?php  foreach($this->deals_payment_deatils as $payment) {  ?>
 
 	<input name="P_QTY" id="PC_QTY_VAL" value="1" type="hidden" >
@@ -86,7 +87,7 @@
                                 <div class="p_inner_block">
                        <div class="payment_form_block clearfix">                                                                                    							
                             <div class="shipping_copy_address">
-                                <input type="checkbox" id="shipping_address2" tabindex="1" />
+                                <input type="checkbox" id="shipping_address13" tabindex="1" />
                                 <label><?php echo $this->Lang['COPY_SHIP_ADDR']; ?></label>                                                                                                                                             					                                             
                             </div>
                             <div class="payment_form_section">
@@ -94,22 +95,22 @@
                                     <ul>
                                         <li>
                                             <label> <?php echo $this->Lang['NAME']; ?>  :<span class="form_star">*</span></label>
-                                            <div class="fullname"><input autofocus tabindex="2" id="ship_nam_cod1" name="shipping_name" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" value="" class="required" maxlength="35"/>
+                                            <div class="fullname"><input autofocus tabindex="2" id="ship_nam_cod13" name="shipping_name" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" value="" class="required" maxlength="35"/>
                                             </div>
                                         </li>
                                         <li>
                                             <label><?php echo $this->Lang['ADDR1']; ?> :<span class="form_star">*</span></label>
-                                            <div class="fullname"><input tabindex="3" id="ship_addr_cod1" name="adderss1" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="" class="required" maxlength="100"/></div>                                           
+                                            <div class="fullname"><input tabindex="3" id="ship_addr_cod13" name="adderss1" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="" class="required" maxlength="100"/></div>                                           
                                         </li>
                                         <li class="frm_clr">
                                             <label> <?php echo $this->Lang['ADDR2']; ?>  :</label>
-                                            <div class="fullname"><input tabindex="4" id="ship_addr_cod2" name="address2" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="" size="40"  maxlength="100"/>
+                                            <div class="fullname"><input tabindex="4" id="ship_addr_cod23" name="address2" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="" size="40"  maxlength="100"/>
                                             </div>
                                         </li>
                                        <li>
                                             <label><?php echo $this->Lang['COUNTRY']; ?> :<span class="form_star">*</span></label>
                                             <div class="fullname">
-                                            <select name="country" id="ship_countrycod1" tabindex="5"  onchange="return city_change_payment(this.value);">
+                                            <select name="country" id="ship_countrycod13" tabindex="5"  onchange="return city_change_payment(this.value);">
                                             <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
                                             <?php foreach($this->all_country_list as $countryL){ ?>
                                            <option  value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
@@ -120,7 +121,7 @@
                                         <li class="frm_clr">
                                             <label><?php echo $this->Lang['SEL_CITY']; ?> :<span class="form_star">*</span></label>
                                             <div class="fullname">
-                                            <select name="city"  id="ship_citycod1"  tabindex="6" class="CityPAY required">
+                                            <select name="city"  id="ship_citycod13"  tabindex="6" class="CityPAY required">
                                             <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                             <?php 
                                             foreach($this->all_city_list as $CityL){ ?>
@@ -133,16 +134,16 @@
                                         </li>
                                         <li>
                                             <label><?php echo $this->Lang['STATE']; ?> :<span class="form_star">*</span> </label>
-												<div class="fullname"><input tabindex="7" id="ship_state_cod1" name="state" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>" type="text" value="" size="40" class="required" maxlength="50"/></div>
+												<div class="fullname"><input tabindex="7" id="ship_state_cod13" name="state" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>" type="text" value="" size="40" class="required" maxlength="50"/></div>
                                         </li>                                         
 										<li class="frm_clr">
                                             <label><?php echo $this->Lang['POSTAL_CODE']; ?> :<span class="form_star">*</span></label>
-												<div class="fullname"><input tabindex="8" id="ship_postal_code_cod1" name="postal_code" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" value="" class="required number" maxlength="8"/></div>
+												<div class="fullname"><input tabindex="8" id="ship_postal_code_cod13" name="postal_code" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" value="" class="required number" maxlength="8"/></div>
                                         </li>	
 											
 										<li>
 												<label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
-												<div class="fullname"><input tabindex="9" id="ship_phone_cod1" name="phone" size="40" AUTOCOMPLETE="OFF"  placeholder="Your Phone Number (e.g. 070..,080..)" type="text" value="" class="required number" maxlength="18"/></div>
+												<div class="fullname"><input tabindex="9" id="ship_phone_cod13" name="phone" size="40" AUTOCOMPLETE="OFF"  placeholder="Your Phone Number (e.g. 070..,080..)" type="text" value="" class="required number" maxlength="18"/></div>
 										</li>
 
                                     </ul>

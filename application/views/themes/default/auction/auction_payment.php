@@ -92,7 +92,7 @@ $(document).ready(function(){
                 $('.pay_later').hide();
                 $('.cancel_login').hide();
                 $('.AuthorizeNet_pay').hide();
-                $('.cod').hide();
+                $('.cod_pay').hide();
         }
 </script>
 <SCRIPT language=Javascript>
