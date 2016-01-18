@@ -102,10 +102,11 @@ class Webpay_Model extends Model
                     foreach($qu as $merch){
                         $acct_num = $merch->nuban;
                     }
-                    $acct_num = $row->nuban;
+                    //$acct_num = $row->nuban;
                     //$acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
-                    $temp_item_amt = intval($row->amount * 100);
+                    //$temp_item_amt = intval($row->amount * 100);
+                    $temp_item_amt = intval($total_amount_shopped * 100);
                     //if($total_amount > )
                     if(!$is_above_2k){
                         //if not above 2k cap
@@ -177,7 +178,7 @@ class Webpay_Model extends Model
                     foreach($qu as $merch){
                         $acct_num = $merch->nuban;
                     }
-                    $acct_num = $row->nuban;
+                    //$acct_num = $row->nuban;
                     //$acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
                     $temp_item_amt = intval($row->amount * 100);
