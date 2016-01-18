@@ -82,7 +82,7 @@ class Admin_users_Controller extends website_Controller {
                                                                 }
 			
 							common::message(1, $this->Lang["USER_ADD_SUC"]);
-							url::redirect(PATH."admin/manage-user.html");
+							url::redirect(PATH."admin_user/manage-user.html");
 						}
 				}
 				else{
