@@ -102,8 +102,83 @@ class Webpay_Model extends Model
                     foreach($qu as $merch){
                         $acct_num = $merch->nuban;
                     }
-                    //$acct_num = $row->nuban;
-                    $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
+                    $acct_num = $row->nuban;
+                    //$acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
+                    //nuban number set in there profile
+                    $temp_item_amt = intval($row->amount * 100);
+                    //if($total_amount > )
+                    if(!$is_above_2k){
+                        //if not above 2k cap
+                        $transaction_fee = 0.015 * $temp_item_amt;
+                        //$item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
+                    }
+                    else{
+                        //$weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
+                        $weight_fraction_of_sales = ($temp_item_amt / ($total_amount_shopped*100));
+                        $transaction_fee = round($weight_fraction_of_sales * (2000*100), 2); //from 2,000naira. whats my transaction fee here           
+                    }
+                    if(strpos($transaction_fee, ".")){
+                        $op = explode(".", $transaction_fee);
+                        $real_num = intval($op[0]); //convert to kobo
+                        $decimal_part = intval($op[1]);
+                        $transaction_fee = $real_num + $decimal_part;
+                    }
+                    $item_amt = $temp_item_amt - $transaction_fee;
+                    //echo $item_amt; die;
+                    $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
+                            $item_amt.'" bank_id="117" acct_num="'.$acct_num.'" />';
+                    $ret.=$xml;
+                    //$product['quantity'] = $row->quantity;
+
+                }
+            }
+            return $ret;
+        }
+        
+        public function get_split_marchant_xml_auction($transaction_id, $total_amount_shopped){
+            $ret = "";
+            $is_above_2k = false;
+            $tmp_2k = 0.015 * $total_amount_shopped;
+            //echo $total_amount_shopped." against ".$tmp_2k;die;
+            if($tmp_2k > 2000){
+                $is_above_2k = true;
+//                if(is_float($tmp_2k)){
+//                    $op = explode(".", $tmp_2k);
+//                    $real_num = $op[0];
+//                }
+            }
+              
+            $result = $this->db->from("transaction")
+                        ->where(array("transaction.transaction_id"=>$transaction_id))
+                        ->join("auction","auction.deal_id","transaction.auction_id")
+                        ->join("users","users.user_id","transaction.user_id")
+                        ->join("city","city.city_id","users.city_id")
+                        ->join("stores", "auction.shop_id", "stores.store_id")
+                        ->get();
+            if(count($result) > 0){
+                $total_amount = 0;
+                $loop = 0;
+                foreach($result as $row){
+//                        if($row->approve_status != 1){
+//                            $ret['success'] = false;
+//                            $ret['msg'] = "User Account Blocked or Suspended";
+//                            break;
+//                        }
+//<item_detail item_id="2" item_name="Grape" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4351189876" />
+
+                    $item_id = $row->product_id;
+                    $item_name = urlencode($row->deal_title." (".$row->quantity.")");
+                    $acct_num = "";
+                    /*
+                     * get this merchant/shop account number to settle
+                     */
+                    $qu = $this->db->from("users")
+                            ->where(array("user_id"=>$row->store_admin_id))->get();
+                    foreach($qu as $merch){
+                        $acct_num = $merch->nuban;
+                    }
+                    $acct_num = $row->nuban;
+                    //$acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
                     $temp_item_amt = intval($row->amount * 100);
                     //if($total_amount > )

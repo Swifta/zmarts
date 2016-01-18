@@ -355,7 +355,7 @@ $content_text = array(
 
 "CASH_ON_DEL" => "Cash On Delivery",
 
-"SORRY_NOT_BUY_AUC" => "Sorry you are not a correct user for buy this auction ",
+"SORRY_NOT_BUY_AUC" => "Sorry you are not a val user to buy this auction ",
 
 "CLK_IT" => "Click It",
 

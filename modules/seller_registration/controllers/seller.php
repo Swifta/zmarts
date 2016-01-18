@@ -333,9 +333,9 @@ class Seller_Controller extends Layout_Controller {
 								$post->add_rules('store_email_id',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
 							}
 							
-							if(isset($_POST['website'])){
-								$post->add_rules('website','valid::url');
-							}
+							//if(isset($_POST['website'])){
+							//	$post->add_rules('website','valid::url');
+							//}
 							
 							if(isset($_POST['zipcode'])){
 			
@@ -363,7 +363,7 @@ class Seller_Controller extends Layout_Controller {
 									
 									
 									 
-									$to=($status['email'])?$status['email']:CONTACT_EMAIL;
+									//$to=($status['email'])?$status['email']:CONTACT_EMAIL;
 										$from = CONTACT_EMAIL;
 										$this->country_list = $this->seller->getcountrylist();
 										$country_name = "";
@@ -436,6 +436,12 @@ class Seller_Controller extends Layout_Controller {
 										<td>&nbsp;</td>
 										
 										</tr>
+										<tr>
+										<td align=\"left\">Account Number   : </td>
+										<td> ".$this->session->get("merchant_reg_nuban")." </td>
+										<td>&nbsp;</td>
+										
+										</tr>
 										
 										<tr>
 										<td align=\"left\">".$this->Lang['SHOP_ADDR']."   : </td>
@@ -481,6 +487,13 @@ $admin_message	= '
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'. $post->storename.'</td>
     
   </tr>
+  
+    </tr>
+    <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ; color:#666;">Account Number   : </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; "> '.$this->session->get("merchant_reg_nuban").' </td>
+    </tr>
+    
   <tr>
     <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;" >Addres 1: </td>
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; " >'.$post->address1.'</td>
@@ -652,7 +665,9 @@ $admin_message	= '
 										
 										
 										if(EMAIL_TYPE==2){
-											email::smtp($from, $to, $subject , $adminmessage);
+                                                                                    foreach($status['email'] as $single_admin){
+											email::smtp($from, $single_admin, $subject , $adminmessage);
+                                                                                    }
 											/*if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
 												email::add_account_to_sendinblue("merchant", $this->session->get('memail'));*/
 												
@@ -660,7 +675,9 @@ $admin_message	= '
 											
 										}
 										else{
-											email::sendgrid($from, $to, $subject , $adminmessage);
+                                                                                    foreach($status['email'] as $single_admin){
+											email::sendgrid($from, $single_admin, $subject , $adminmessage);
+                                                                                    }
 											email::sendgrid($from, $this->session->get('memail'), $merchant_subject , "<p>".SITENAME ." - ".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage);
 										}
 										
