@@ -1284,7 +1284,7 @@ class Products_Controller extends Layout_Controller
 	{
 		if($_POST){
 			$phone = $_POST['phone'];
-			if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+			if(valid::phone($phone,array(7,10,11)) == TRUE){
 				if(valid::z_phone($phone))
 					echo 1;
 				else
