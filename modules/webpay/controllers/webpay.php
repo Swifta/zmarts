@@ -354,6 +354,10 @@ class Webpay_Controller extends Layout_Controller
                                 $url_title = $UL->url_title;
                                 $deal_value = $UL->deal_value;
                                 $product_amount = $UL->deal_value*$item_qty;
+                                if($this->session->get('user_auto_key')) {
+                                    $product_amount = $UL->deal_prime_value*$item_qty;
+                                    $deal_value = $UL->deal_prime_value;
+                                }
                                 $merchant_id = $UL->merchant_id;
                                 $product_shipping = $UL->shipping_amount;
                                 $shipping_methods = $UL->shipping;
@@ -388,7 +392,7 @@ class Webpay_Controller extends Layout_Controller
                         
                         $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 7, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
                         //var_dump($transaction);
-                        $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
+                        //$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
                         //echo "here"; die;
                         //break;
                        }
@@ -416,7 +420,7 @@ class Webpay_Controller extends Layout_Controller
                     //die;
                     //var_dump($_SESSION);
                     //die;
-               $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
                 $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
                 $this->result_transaction = arr::to_object($this->transaction_result);
                 //dont need the line of code below
@@ -548,12 +552,12 @@ class Webpay_Controller extends Layout_Controller
 		if(EMAIL_TYPE==2) {
 			
 			
-				//email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+				email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 				
 		}else{
 			
 						
-		                //email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+		                email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
 		$user_details = $this->webpay->get_purchased_user_details();
