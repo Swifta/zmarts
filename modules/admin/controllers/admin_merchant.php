@@ -33,10 +33,10 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email',array($this, 'email_available'))
-						->add_rules('mobile', 'required', array($this, 'validphone'))
+						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9 +()-]')
 						->add_rules('address1', 'required')
 						//->add_rules('address2', 'required')
-						->add_rules('mr_mobile', 'required', array($this, 'validphone'))
+						->add_rules('mr_mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mr_address1', 'required')
 						//->add_rules('mr_address2', 'required')
 						->add_rules('country', 'required')
@@ -368,7 +368,7 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email',array($this,'check_store_admin_with_supplier33'))
-						->add_rules('mer_mobile', 'required', array($this, 'validphone'))
+						->add_rules('mer_mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mer_address1', 'required')
 						//->add_rules('mer_address2', 'required')
 						->add_rules('country', 'required')
@@ -745,7 +745,7 @@ class Admin_merchant_Controller extends website_Controller {
 		        $post = new Validation($_POST);
 		        $post = Validation::factory(array_merge($_POST,$_FILES))
 							
-					        ->add_rules('mobile', 'required', array($this, 'validphone'))
+					        ->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					        ->add_rules('address1', 'required')
 					        //->add_rules('address2', 'required')
 					        ->add_rules('country', 'required')
@@ -1009,7 +1009,7 @@ class Admin_merchant_Controller extends website_Controller {
 			$this->userpost = $this->input->post();
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
-						->add_rules('mobile', 'required', array($this, 'validphone'))
+						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('address1', 'required')
 						//->add_rules('address2', 'required')
 						->add_rules('country', 'required')
@@ -1401,6 +1401,14 @@ class Admin_merchant_Controller extends website_Controller {
 		        if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
 			        return 1;
 		        }
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
 		}
 		return 0;
 	}

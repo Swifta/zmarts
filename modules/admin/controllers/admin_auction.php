@@ -454,6 +454,14 @@ class Admin_auction_Controller extends website_Controller
 		return 0;
 	}
 	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
+	
 	/** CHECK ENDDATE GREATER STARTDATE **/
 	
 	public function check_end_date($end_date = "")

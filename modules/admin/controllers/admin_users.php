@@ -57,7 +57,7 @@ class Admin_users_Controller extends website_Controller {
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('email', 'required','valid::email', array($this, 'email_available'))
-							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
 							->add_rules('gender', 'required')
 							->add_rules('age_range', 'required')
@@ -213,7 +213,7 @@ class Admin_users_Controller extends website_Controller {
 						->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						->add_rules('email', 'required','valid::email')
-						->add_rules('mobile', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('gender', 'required')
 						->add_rules('age_range', 'required')
 						->add_rules('country', 'required')
@@ -319,6 +319,15 @@ class Admin_users_Controller extends website_Controller {
 	{
 		$exist = $this->users->exist_email($email);
 		return ! $exist;
+	}
+	
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
 	}
 	
 	/** CHECK VALID PHONE OR NOT **/

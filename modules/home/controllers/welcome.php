@@ -401,6 +401,14 @@ class Welcome_Controller extends Layout_Controller
 		 echo new View('themes/'.THEME_NAME.'/deals/map');
 			 exit;
 	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
 
 	/** CHECK VALID PHONE OR NOT **/
 

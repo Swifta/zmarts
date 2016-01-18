@@ -52,7 +52,7 @@ class Seller_Controller extends Layout_Controller {
 					 ->add_rules('f_name', 'required')
 					 ->add_rules('l_name', 'required')
 					 ->add_rules('email', 'required','valid::email')
-					 ->add_rules('phone', 'required', array($this, 'validphone'), 'chars[0-9-+().]')
+					 ->add_rules('phone', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					 ->add_rules('addr', 'required')
 					 ->add_rules('gender', 'required',  array($this, 'no_minus_99'))
 					 ->add_rules('branch_no', 'required', array($this, 'no_minus_99'))
@@ -178,7 +178,7 @@ class Seller_Controller extends Layout_Controller {
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 						
 						->add_rules('firstname', 'required')
-						->add_rules('mr_mobile', 'required',array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mr_mobile', 'required',array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mr_address1', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('nuban', 'required')
@@ -314,7 +314,7 @@ class Seller_Controller extends Layout_Controller {
 				$post = Validation::factory(array_merge($_POST,$_FILES))
 							
 							->add_rules('city', 'required')
-							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
 							//->add_rules('address2', 'required')
 							->add_rules('storename', 'required',array($this,'check_store_exist'))
@@ -774,6 +774,14 @@ $admin_message	= '
 	public function validphone($phone = "")
 	{
 		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
 			return 1;
 		}
 		return 0;

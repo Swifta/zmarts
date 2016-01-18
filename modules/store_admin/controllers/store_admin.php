@@ -128,7 +128,7 @@ class Store_admin_Controller extends website_Controller
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
 							->add_rules('email','required','valid::email')
-							->add_rules('mobile','required',array($this, 'validphone'))
+							->add_rules('mobile','required',array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1','required')
 							->add_rules('address2','required')
 							->add_rules('city','required');
@@ -796,6 +796,14 @@ class Store_admin_Controller extends website_Controller
 		        if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
 			        return 1;
 		        }
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
 		}
 		return 0;
 	}

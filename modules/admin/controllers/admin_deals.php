@@ -621,6 +621,15 @@ class Admin_deals_Controller extends website_Controller
 		}
 		return 0;
 	}
+	
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
 
 	/** CHECK ENDDATE GREATER STARTDATE **/
 

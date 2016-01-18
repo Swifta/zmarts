@@ -89,10 +89,10 @@ const ALLOW_PRODUCTION = FALSE;
 						->add_rules('contact_email', 'required','valid::email')
 						->add_rules('webmaster_email', 'required', 'valid::email')
 						->add_rules('noreply_email', 'required', 'valid::email')
-						->add_rules('phone1', 'required', array($this, 'validphone'))
+						->add_rules('phone1', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('latitude', 'required','chars[0-9.-]')
 						->add_rules('longitude', 'required','chars[0-9.-]')
-						->add_rules('phone2', 'required', array($this, 'validphone'));
+						->add_rules('phone2', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]');
 
 			
 			if($post->validate()){
@@ -921,6 +921,14 @@ const ALLOW_PRODUCTION = FALSE;
 		$status = $this->settings->update_banner_rating($banner_id,$rate);
 		echo $status;
 		exit;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
 	}
 
 	/** CHECK VALID PHONE OR NOT **/

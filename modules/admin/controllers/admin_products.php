@@ -1111,6 +1111,14 @@ class Admin_products_Controller extends website_Controller
 		return 1;
 		
 	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
 
 	/** CHECK VALID PHONE OR NOT **/
 

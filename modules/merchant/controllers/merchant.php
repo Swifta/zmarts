@@ -43,7 +43,9 @@ class Merchant_Controller extends website_Controller
 
 	public function login()
 	{
-		
+		if(isset($_SESSION['pass_reset_timeout'])){
+			$this->session->delete('pass_reset_timeout');
+		}
 		
 		 if($this->user_id && ($this->user_type == 3 || $this->user_type != 8)){
 			url::redirect(PATH."merchant.html");
@@ -63,6 +65,8 @@ class Merchant_Controller extends website_Controller
 					if($status == "0"){
 						$this->session->delete('user_id');
 						$this->session->delete('user_id1');
+						$reset_timeout = time()+(60);
+						$this->session->set("pass_reset_timeout", $reset_timeout);
 						url::redirect(PATH."merchant/reset-password.html");
 					
 						
@@ -172,7 +176,7 @@ class Merchant_Controller extends website_Controller
 							->add_rules('lastname','required')
 							->add_rules('email','required','valid::email')
 							//->add_rules('payment','required','valid::email')
-							->add_rules('mobile','required',array($this, 'validphone'))
+							->add_rules('mobile','required',array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1','required')
 							//->add_rules('address2','required')
 							->add_rules('city','required');
@@ -801,7 +805,7 @@ class Merchant_Controller extends website_Controller
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
-					->add_rules('mobile', 'required', array($this, 'validphone'))
+					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
 					//->add_rules('address2', 'required')
 					->add_rules('country', 'required')
@@ -1049,7 +1053,7 @@ class Merchant_Controller extends website_Controller
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
-					->add_rules('mobile', 'required', array($this, 'validphone'))
+					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
 					//->add_rules('address2', 'required')
 					->add_rules('country', 'required')
@@ -1551,6 +1555,14 @@ class Merchant_Controller extends website_Controller
 	public function check_purchace_lmi()
 	{
 		if(($this->input->post("maxlimit"))>=$this->input->post("quantity")){
+			return 1;
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
 			return 1;
 		}
 		return 0;
@@ -3918,7 +3930,17 @@ class Merchant_Controller extends website_Controller
 	/** RESET PASSWORD **/
 	public function reset_password()
 	{
-		
+		if(isset($_SESSION['pass_reset_timeout'])){
+				$time = time();
+				if($time > $_SESSION['pass_reset_timeout'] ){
+					$this->session->delete('pass_reset_timeout');
+					common::message(-1,"Password reset time window is expired. Please login again.");
+					url::redirect(PATH."/merchant-login.html");
+				}
+			}else{
+				url::redirect(PATH."/merchant-login.html");
+			}
+			
 		if($_POST){
 			
 			$this->userPost = $this->input->post();
@@ -3941,7 +3963,9 @@ class Merchant_Controller extends website_Controller
 								
 								if($status == 10 || $status == 11){
 										common::message(1, "Congratulations! You have successfully reset your password." );
+										$this->session->delete('pass_reset_timeout');
 										url::redirect(PATH."merchant.html");
+										
 								}else{
 									common::message(-1,$this->Lang["CANT_LOGIN"]);
 									url::redirect(PATH."/merchant-login.html");
@@ -5076,7 +5100,7 @@ class Merchant_Controller extends website_Controller
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
-						->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('address1', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
@@ -5241,7 +5265,7 @@ class Merchant_Controller extends website_Controller
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						//->add_rules('email', 'required','valid::email',array($this,'email_available'))
-						->add_rules('mobile', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
 			if($post->validate()){			

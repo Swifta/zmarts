@@ -8,7 +8,10 @@
 			if(status == "0"){
 				$('#id_err_phone').text('Invalid Phone Number. Enter your phone number (e.g. 070...,080...)');
 				return false;
-			}else{
+			}else if(status == "-1"){
+				$('#id_err_phone').text('Invalid initial digits. Begin with 07, or 08.');
+				return false;
+			} else{
 				
 				 form.submit();
 				

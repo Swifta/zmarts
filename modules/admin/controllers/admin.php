@@ -1115,7 +1115,7 @@ class Admin_Controller extends website_Controller
 			$post = Validation::factory($_POST)
 						->add_rules('name','required','chars[a-zA-Z_ -.,%\']')
 						->add_rules('email','required','valid::email')
-						->add_rules('mobile',array($this,'validphone'),'chars[0-9 +()-]')
+						->add_rules('mobile',array($this,'validphone'), array($this,'z_validphone'), 'chars[0-9 +()-]')
 						->add_rules('city','required');
 
 			if($post->validate()){
@@ -1257,6 +1257,14 @@ class Admin_Controller extends website_Controller
 	public function validphone($phone = "")
 	{
 		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
 			return 1;
 		}
 		return 0;
