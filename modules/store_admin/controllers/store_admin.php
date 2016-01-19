@@ -793,7 +793,7 @@ class Store_admin_Controller extends website_Controller
 	public function validphone($phone = "")
 	{
 		if(valid::numeric($phone)){
-		        if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		        if(valid::phone($phone,array(7,10,11)) == TRUE){
 			        return 1;
 		        }
 		}

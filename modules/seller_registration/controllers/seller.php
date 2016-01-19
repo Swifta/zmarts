@@ -790,7 +790,7 @@ $admin_message	= '
 	
 	public function validphone($phone = "")
 	{
-		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($phone,array(7,10,11)) == TRUE){
 			return 1;
 		}
 		return 0;
@@ -808,7 +808,7 @@ $admin_message	= '
 	
 	public function validnuban($nuban = "")
 	{
-		if(valid::phone($nuban,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($nuban,array(7,10,11)) == TRUE){
 			return 1;
 		}
 		return 0;
