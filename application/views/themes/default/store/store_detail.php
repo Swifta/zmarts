@@ -117,8 +117,8 @@ else{?>
             <div class="span2">
             <?php 
             $ads_check = "";
-            if(count($this->merchant_personalised_details)>0) { 
-	foreach($this->merchant_personalised_details as $m) {
+        //    if(count($this->merchant_personalised_details)>0) { 
+	//foreach($this->merchant_personalised_details as $m) {
 		/*  ?>        
 		<?php for ($i = 1; $i <= 1; $i++) { ?>
 		<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
@@ -168,7 +168,7 @@ else{?>
                 
                 
                 
-            <?php  } } ?>
+            <?php // } } ?>
 
             </div>
             <!-- SPECIAL-OFFER -->
