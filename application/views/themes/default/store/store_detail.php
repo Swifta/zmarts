@@ -43,7 +43,7 @@ $(".slidetabs").tabs(".images > div", {
         <div class="row ">
 
             <!-- SLIDER -->
-            <div class="span9 slider">
+            <div class="span10 slider">
                 <div class="slider-slides">
 <?php
 $font_color = "";
@@ -96,10 +96,10 @@ else{?>
         <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/1.jpg" alt="" />
     </div>
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/2.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/2.jpg" alt="" />
     </div>
     <div class="slides">
-        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/3.jpg" alt="" />
+        <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/3.jpg" alt="" />
     </div>
 
 <!-- display default banners-->
@@ -114,14 +114,14 @@ else{?>
 <!-- SLIDER -->
 
             <!-- SPECIAL-OFFER -->
-            <div class="span3">
+            <div class="span2">
             <?php 
             $ads_check = "";
             if(count($this->merchant_personalised_details)>0) { 
 	foreach($this->merchant_personalised_details as $m) {
-		 ?>        
+		/*  ?>        
 		<?php for ($i = 1; $i <= 1; $i++) { ?>
-										<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
+		<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
 											$ads_link="";
 											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
 											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
@@ -138,14 +138,36 @@ else{?>
 				<img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/ads/<?php echo $i; ?>.jpg" alt="" />
 			</figure>
                 </div>
-                    <?php }}?> 
+                    <?php }} */?> 
  <?php if (count($this->ads_details) > 0) { ?>   
+        <?php foreach ($this->ads_details as $ads) { ?>    
+    <?php if ($ads->ads_position == "hr1" && $ads->page_position==1) {  ?>                     
+      <div class="banner_right_add wloader_parent">
+          <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
+                                                     <a   href="<?php echo $ads->redirect_url; ?>" target="_blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                                    <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
+      </div>
+ <?php } } }?>
+                <div class='clearfix' ></div>
+ <?php if (count($this->ads_details) > 0) { ?>   
+    <?php foreach ($this->ads_details as $ads) {
+          if($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
+ <div class="banner_right_add2 wloader_parent" style='margin-top: 36px'>
+              <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
+                                                         <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                                        <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
+          </div>
+ <?php } } } ?>                
+ <?php /* if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    
             <?php if ($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
     <figure>
         <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
     </figure>
- <?php }}} ?>
+ <?php }}} */ ?>
+                
+                
+                
             <?php  } } ?>
 
             </div>
@@ -164,6 +186,7 @@ else{?>
             </div>
         </div>
         <div class="row">
+            <div class="span10">
 <?php 
 if((count($this->best_seller)>0) || (count($this->get_product_categories)>0)) { 
     
@@ -235,7 +258,7 @@ else{
 
     </div>
 <?php
-     if($displayed >= 8){
+     if($displayed >= 9){
          break;
      }
      $displayed++;
@@ -244,8 +267,53 @@ else{
     }
 }
  ?>
-
         </div>
+            <div class="span2">
+                    <?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hs1" && $ads->page_position==1) {  ?>
+							<div class="new_list_rgt">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+                    <?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hs2" && $ads->page_position==1) {  ?>
+                <div class="new_list_rgt" style="margin-top:10px;">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+                    <?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hs7" && $ads->page_position==1) {  ?>
+							<div class="new_list_rgt" style="margin-top:10px;">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+            </div>
+            <div class="span12">
+                <div class="new_advertice_part">
+                   <div class="new_advertice_part_inner"  style="margin: 5px auto; text-align: center;">
+                       <?php if (count($this->ads_details) > 0) {
+                           foreach ($this->ads_details as $ads) {
+                                   if ($ads->ads_position == "hc1" && $ads->page_position==1) {  ?>
+                                   <div class="new_advertice_lft">
+                                           <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                   </div>
+                       <?php }}}?>
+                       <?php if (count($this->ads_details) > 0) {
+                           foreach ($this->ads_details as $ads) {
+                                   if ($ads->ads_position == "hc2" && $ads->page_position==1) {  ?>
+                                   <div class="new_advertice_lft">
+                                           <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                   </div>
+                       <?php }}}?>
+                   </div>
+               </div>
+            </div>
+            
+        </div>
+        
     </div>
 </div>
 <!-- PRODUCT-OFFER -->
@@ -261,7 +329,7 @@ else{
             </div>
         </div>
         <div class="row">
-            
+            <div class="span10">
             
                     
 <?php 
@@ -341,7 +409,7 @@ $avg_rating = round($avg_rating); ?>
     </div>
 
 <?php
-     if($displayed >= 4){
+     if($displayed >= 3){
          break;
      }
      $displayed++;
@@ -351,7 +419,33 @@ $avg_rating = round($avg_rating); ?>
     
 }
  ?>
-
+        </div>
+            <div class="span2">
+                     <?php 
+                     $ads_position = "hs3";
+                     if (count($this->ads_details) > 0) {
+                            foreach ($this->ads_details as $ads) {
+                                    if ($ads->ads_position == $ads_position && $ads->page_position==1) {  ?>
+                                    <div class="new_list_rgt">
+                                            <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                    </div>
+                    <?php }}}?>
+            </div>
+            
+            
+            
+            <div class="new_advertice_part" style="margin:8px auto;">
+                <div class="new_advertice_part_inner">
+					<?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hb1" && $ads->page_position==1) {  ?>
+							<div class="new_advertice_full_width">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>
