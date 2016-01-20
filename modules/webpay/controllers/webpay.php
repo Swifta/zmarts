@@ -243,6 +243,9 @@ class Webpay_Controller extends Layout_Controller
                             }
                         }                      
                     }
+                    else{
+                        $this->webpay->addStockBack($txnref); //add items back to stock
+                    }
                 }
                 curl_close($ch);
             }

@@ -152,7 +152,7 @@ else{?>
  <?php if (count($this->ads_details) > 0) { ?>   
     <?php foreach ($this->ads_details as $ads) {
           if($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
- <div class="banner_right_add2 wloader_parent" style='margin-top: 36px'>
+ <div class="banner_right_add2 wloader_parent" style='margin-top: 25px'>
               <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
                                                          <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
                                                         <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
@@ -293,19 +293,20 @@ else{
             </div>
             <div class="span12">
                 <div class="new_advertice_part">
-                   <div class="new_advertice_part_inner"  style="margin: 5px auto; text-align: center;">
+                   <div class="new_advertice_part_inner"  style="margin: 5px 0px;">
                        <?php if (count($this->ads_details) > 0) {
                            foreach ($this->ads_details as $ads) {
                                    if ($ads->ads_position == "hc1" && $ads->page_position==1) {  ?>
-                                   <div class="new_advertice_lft">
-                                           <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                   <div class="new_advertice_lft" style="padding:0px;">
+                                           <a style="float:left;" href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>">
+                                               <img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
                                    </div>
                        <?php }}}?>
                        <?php if (count($this->ads_details) > 0) {
                            foreach ($this->ads_details as $ads) {
                                    if ($ads->ads_position == "hc2" && $ads->page_position==1) {  ?>
-                                   <div class="new_advertice_lft">
-                                           <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                       <div class="new_advertice_lft" style="padding:0px;">
+                                           <a style="float:right;" href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
                                    </div>
                        <?php }}}?>
                    </div>
