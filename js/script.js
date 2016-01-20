@@ -1423,6 +1423,18 @@ function product_cod_delivery(emailid,name,ship_id,type,tran_id,pro_id,mer_id,ac
 		window.location.href = SrcPath+"/admin/cod-delivery_status/"+emailid+"/"+name+"/"+type+"/"+ship_id+"/"+tran_id+"/"+pro_id+"/"+mer_id+".html";
 	}
 	
+}
+function product_change_status(emailid,name,type,tran_id,pro_id,mer_id,acc_type)
+{ 
+	if((acc_type==1) && emailid && name && tran_id && pro_id && type)
+	{ 
+		window.location.href = SrcPath+"/merchant/product_change_status/"+emailid+"/"+name+"/"+type+"/0/"+tran_id+"/"+pro_id+"/"+mer_id+".html";
+	}
+	else if((acc_type==0) && emailid && name && tran_id && pro_id && type)
+	{ 
+		window.location.href = SrcPath+"/admin/product_change_status/"+emailid+"/"+name+"/"+type+"/0/"+tran_id+"/"+pro_id+"/"+mer_id+".html";
+	}
+	
   }
   
 /** AUCTION SHIPPING DELIVERY **/

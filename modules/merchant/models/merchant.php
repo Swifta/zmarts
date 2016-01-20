@@ -2840,6 +2840,49 @@ class Merchant_Model extends Model
 		}
 		return 0;
 	}
+        
+        
+        /**  UPDATE THE STATUS FOR OTHER PRODUCT SALES **/
+	public function update_product_update_status($id = "",$type="",$trans_id=0,$product_id=0,$merchant_id=0)
+	{
+			///$check = $this->db->count_records('shipping_info',array('shipping_id' =>$id,'delivery_status'=>0));
+            $check = true;
+            $trans_id = $product_id;
+            if($check){
+			$get_detail = $this->db->select("deal_merchant_commission","shipping_amount","tax_amount","amount","product_size","product_id","quantity")->from('transaction')->where(array("transaction_id" =>$trans_id))->get();
+			//var_dump($get_detail); echo $type; die;
+                        if(count($get_detail)){
+                            $product_id = $get_detail[0]->product_id;
+				if($type=="Completed"){ // for completed transaction update the merchant balance
+				$product_amount=$get_detail[0]->amount;
+				 $total_pay_amount = ($product_amount + $get_detail[0]->shipping_amount + $get_detail[0]->tax_amount);
+				 $commission=(($product_amount)*($get_detail[0]->deal_merchant_commission/100));
+				 $merchantcommission = $total_pay_amount - $commission ;
+				 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+
+				$tt = $this->db->update('transaction',array('captured' => 1,'captured_date' =>time(),'payment_status' => 'Completed','pending_reason' =>'Merchant Confirmed'),array('transaction_id' => $trans_id));
+//var_dump($tt); die;
+				$this->db->update('transaction_mapping',array('coupon_code_status' => 0),array("transaction_id" => $trans_id));
+
+				}
+				else if($type=="Failed"){  // for failed transcation reset the quantity for that size
+						$quantity=$get_detail[0]->quantity;
+						$size_id = $get_detail[0]->product_size;
+					$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+
+					$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+
+					$this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('transaction_id' => $trans_id));
+
+				}
+			}
+
+		//$result = $this->db->update('shipping_info',array('delivery_status' => $type),array('shipping_id' => $id ,'shipping_type' => 1));
+
+		//return count($result);
+		}
+		return 1;
+	}
 
 	public function get_auction_mail_data($deal_id = "",$transaction_id = "",$shipping_id="")
 	{

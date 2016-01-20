@@ -4382,6 +4382,35 @@ class Merchant_Controller extends website_Controller
                         
                         }
 	}
+        
+        public function update_product_change_status($email_id="",$name="",$type="",$trans_id=0,$pro_id=0,$merchant_id=0){
+		$this->shipping_id=0;
+		$this->shipping_list = $this->merchant->get_shipping_list1();
+		$this->product_size = $this->merchant->get_shipping_product_size();
+		$this->product_color = $this->merchant->get_shipping_product_color();
+		$status = $this->merchant->update_product_update_status("",$type,$trans_id,$pro_id,$merchant_id);
+                if($type=="Completed") {
+                    $message = "Thank You For Your Purchase";
+                    $message.= new View("admin_product/shipping_mail_template");
+                    $this->email_id = $email_id;
+                    $this->name = $this->Lang["CUST"];
+                    $this->message = $message;
+                    $fromEmail = NOREPLY_EMAIL;
+                    $message = new View("themes/".THEME_NAME."/admin_mail_template");
+                    $fromEmail = NOREPLY_EMAIL;
+                    if(EMAIL_TYPE==2){
+                        email::smtp($fromEmail,$email_id, SITENAME, $message);
+                    }else{
+                        email::sendgrid($fromEmail,$email_id, SITENAME, $message);
+                    }
+                    common::message(1, $this->Lang["MAIL_SENDED"]);
+                }
+                if($status){
+                    common::message(1, "Status updated successfully!");
+
+                    url::redirect(PATH."merchant-product/all-transaction.html");
+                } 
+        }
 
 	/* UPDATE STATUS DELIVERY FOR AUCTION */
 	public function auction_update_delivery_status($email_id="",$name="",$type="",$shippingid="",$auction_id="",$trans_id="")

@@ -10,6 +10,21 @@ class Webpay_Model extends Model
 		$this->UserName = $this->session->get("UserName");
 	}
         
+        public function addStockBack($transaction_id){
+            $get_detail = $this->db->select("deal_merchant_commission","shipping_amount","tax_amount","amount","product_size","product_id","deal_id","auction_id","quantity")->
+                    from('transaction')->where(array("transaction_id" =>$transaction_id))->get();
+            if(count($get_detail)){
+                $product_id = $get_detail[0]->product_id;
+                $quantity=$get_detail[0]->quantity;
+                $size_id = $get_detail[0]->product_size;
+                $this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+
+                $this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+
+                $this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('transaction_id' => $transaction_id));
+            }
+        }
+        
         public function payUpdate($tranx_id, $response_code, $response_discription, $PaymentReference, $CardNumber, $status){
             //$ret = array();
             $payment_status = "Pending";
