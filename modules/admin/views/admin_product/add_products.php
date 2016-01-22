@@ -10,35 +10,23 @@
          	//$('.attribute').hide(); // for attribute
                  	$("#check2").click(function(){ 	
 						
-                       /* var textVal = $(".txtChar").val();
-                        if(textVal == "") {
-                            alert('<?php echo $this->Lang["QTY"]; ?>');
-                            return false;
-                        }*/
+                    
 						
-                        if(textVal == 0) {
-                          alert('<?php echo $this->Lang["QTY"]; ?>');
-                            return false;
-                        }
-                        /*var selectsize = $(".selectsize").val();
-                        if(selectsize == "") {
-                           alert('<?php echo $this->Lang["PLS_FILL"]; ?>');
-                            return false;
-                        }*/
-                        if($('input[type=checkbox]:checked').length == 0){
-                            alert('<?php echo $this->Lang["PLS_CHK"]; ?>');
-                            return false;
-                        }
-                         var a = 0, rdbtn=document.getElementsByName("shipping")
+						 var a = 0, rdbtn=document.getElementsByName("shipping")
                         for(i=0;i<rdbtn.length;i++) {
                                 if(rdbtn.item(i).checked == false) {
                                         a++;
                                 }
                         }
-                        if(a == rdbtn.length) {
-                                alert("No way you submit it without choose shipping method");
+						
+						if(a == rdbtn.length) {
+                                alert("Please select a shipping method.");
                                 return false;
                         } 
+						
+                        
+                        
+                        
                         
 						
 					
@@ -508,8 +496,6 @@ function toggle() {
                                             
                                         </td>
                                      </tr>
-                        
-     
    
    <?php if(isset($this->form_error["size"])){?><tr class="size_show"><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["size"]; ?></em></td></tr><?php }?>
     <tr class="display_div">
@@ -527,16 +513,16 @@ function toggle() {
                                         
                                     </tr>
      
-    <tr class="size_show" >
+    <!--<tr class="size_show" >
                     <td><label>&nbsp;</label></td>
                     <td></td>
-					<!--<td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label>   ( <label><?php echo $this->Lang['MORE_CUS_SPECIFI']; ?>  <a href="<?php echo PATH; ?>admin/manage-attribute.html"> <?php echo $this->Lang['ADD']; ?></a></label> )</td>-->
+					
                      <td>
                                 <label><?php echo $this->Lang['MORE_CUS_SIZE']; ?>  <a href="<?php echo PATH; ?>admin/manage-sizes.html"> <?php echo $this->Lang['ADD']; ?></a></label>
                     </td>
-			   </tr>
+			   </tr>-->
 	<tr class="size_main size_show"> 
-					<td><label><?php echo "Select Size"; ?><span>*</span></label></td>
+					<td><label><?php echo "Select Size & Quantity"; ?><span>*</span></label></td>
 					<td><label>:</label></td>
                     <td>
                     	<?php $append_select_size = '<option value="">Select size</option>';?>
@@ -1030,24 +1016,24 @@ $(document).ready(function() {
     $('form:first *:input[type!=hidden]:first').focus();
 });
 function check_validation(){
-	var textVal = $(".txtChar").val();
-	if(textVal == "") {
-		alert('<?php echo $this->Lang["QTY"]; ?>');
-		return false;
-	}
-	if(textVal == 0) {
-	  alert('<?php echo $this->Lang["QTY"]; ?>');
-		return false;
-	}
-	/*var selectsize = $(".selectsize").val();
-	if(selectsize == "") {
-	   alert('<?php echo $this->Lang["PLS_FILL"]; ?>');
-		return false;
-	}*/
-	if($('input[type=checkbox]:checked').length == 0){
-		alert('<?php echo $this->Lang["PLS_CHK"]; ?>');
-		return false;
-	}
+	
+	 var value = $('input:radio[name=size_val]:checked').val();
+	 var has_size = false;
+	 if(value == 1){
+		 var checked = $(".size_show select");
+			for(var i = 0; i <checked.length; i++){
+				if($(checked[i]).val()){
+					has_size = true;
+					break;
+				};
+			}
+			
+			if(!has_size){
+				alert("<?php echo $this->Lang["PLS_CHK"]; ?>");
+				return false;
+			}
+	 }
+	
 	var a = 0, rdbtn=document.getElementsByName("shipping")
 	for(i=0;i<rdbtn.length;i++) {
 		if(rdbtn.item(i).checked == false) {
@@ -1055,7 +1041,7 @@ function check_validation(){
 		}
 	}
 	if(a == rdbtn.length) {
-		alert("No way you submit it without choose shipping method");
+		alert("Please select a shipping method.");
 		return false;
 	} 
 					
@@ -1194,7 +1180,7 @@ function check_dup(sel){
 	$(sel).addClass('sel_size_class');
 }
 
-function addSize(size_id = null, q = null) {
+function addSize(size_id, q) {
 		
 		
 		var sel_s= '<?php echo $append_select_size;?>';
@@ -1237,7 +1223,7 @@ $(document).ready(function(e) {
 				$('#id_sel_size').trigger('click');
 				$('#id_no_size').trigger('click');
 				shosize();
-				alert(111);
+				
 			<?php }?>
 			
 	<?php }?>

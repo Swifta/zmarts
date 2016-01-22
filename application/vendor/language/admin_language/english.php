@@ -2948,7 +2948,7 @@ $content_text = array(
 
 			"PLS_FILL" => "Please fill all mandatory fields",
 
-			"PLS_CHK" => "Please select minimum one size checkbox",
+			"PLS_CHK" => "Please select at least one size",
 
 			"PLS_COL" => "Please select any one color",
 

@@ -52,7 +52,7 @@
                 }
         }
         if(a == rdbtn.length) {
-                alert("No way you submit it without choose shipping method");
+                alert("Please choose a shipping method.");
                 return false;
         } 
 
@@ -782,6 +782,11 @@ function validate() {
                          	<td>&nbsp;</td>
                             <td>&nbsp;</td>
                        </tr>
+                       	<tr><td><label>&nbsp;</label></td>
+                         	<td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                       </tr>
+                       
                        
                        <?php if(isset($this->form_error["size"])){?><tr><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["size"]; ?></em></td></tr><?php }?>
                         <tr class="display_div">
@@ -798,16 +803,16 @@ function validate() {
                                         </td>
                                         
                                     </tr>
-                        <tr class="size_show" >
+                        <!-- <tr class="size_show" >
                                         <td><label>&nbsp;</label></td>
                                         <td></td>
-                                        <!--<td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label>   ( <label><?php echo $this->Lang['MORE_CUS_SPECIFI']; ?>  <a href="<?php echo PATH; ?>admin/manage-attribute.html"> <?php echo $this->Lang['ADD']; ?></a></label> )</td>-->
+                                        <td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label>   ( <label><?php echo $this->Lang['MORE_CUS_SPECIFI']; ?>  <a href="<?php echo PATH; ?>admin/manage-attribute.html"> <?php echo $this->Lang['ADD']; ?></a></label> )</td>
                                          <td>
                                                     <label><?php echo $this->Lang['MORE_CUS_SIZE']; ?>  <a href="<?php echo PATH; ?>merchant/add-size.html"> <?php echo $this->Lang['ADD']; ?></a></label>
                                         </td>
-                                   </tr>
+                                   </tr>-->
                         <tr class="size_main size_show"> 
-                                        <td><label><?php echo "Select Size"; ?><span>*</span></label></td>
+                                        <td><label><?php echo "Select Size & Quantity"; ?><span>*</span></label></td>
                                         <td><label>:</label></td>
                                         <td>
                                             <?php $append_select_size = '<option value="">Select size</option>';?>
@@ -1309,15 +1314,22 @@ function gift()
  </script>
 <script>
 	function check_validation(){
-		var textVal = $(".txtChar").val();
-        if(textVal == "") {
-            alert('Quantity is required');
-            return false;
-        }
-        if(textVal == 0) {
-            alert('The Quantity should not be zero');
-            return false;
-        }
+	 var value = $('input:radio[name=size_val]:checked').val();
+	 var has_size = false;
+	 if(value == 1){
+		 var checked = $(".size_show select");
+			for(var i = 0; i <checked.length; i++){
+				if($(checked[i]).val()){
+					has_size = true;
+					break;
+				};
+			}
+			
+			if(!has_size){
+				alert("<?php echo $this->Lang["PLS_CHK"]; ?>");
+				return false;
+			}
+	 }
 
         var a = 0, rdbtn=document.getElementsByName("shipping")
         for(i=0;i<rdbtn.length;i++) {
@@ -1326,7 +1338,7 @@ function gift()
 			}
         }
         if(a == rdbtn.length) {
-			alert("No way you submit it without choose shipping method");
+			alert("Please choose a shipping method.");
 			return false;
         } 
 
@@ -1462,7 +1474,7 @@ function check_dup(sel){
 	$(sel).addClass('sel_size_class');
 }
 
-function addSize(size_id = null, q = null) {
+function addSize(size_id, q) {
 		
 		
 		var sel_s= '<?php echo $append_select_size;?>';
