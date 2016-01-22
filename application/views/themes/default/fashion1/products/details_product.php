@@ -1,4 +1,7 @@
-
+<?php 
+$nosize = "";
+$c = 0; $i = 0; 
+?>
 
 	<head>
            <script type="text/javascript">

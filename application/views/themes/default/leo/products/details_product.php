@@ -1,3 +1,6 @@
+<?php $nosize = "";
+ $c = 0; $i = 0; ?>
+
 <script type="text/javascript">
 	$(document).ready(function(e) {
 		$('.megamenu > li').removeClass('active');
@@ -151,11 +154,11 @@ $this->load_map = false;
          
          
           
-          
+          <?php $nosize = "";
+					   $c = 0; $i = 0; ?>
           
            <?php if(isset($this->product_size) && count($this->product_size) > 0){?>
-           		<?php $nosize = "";
-					   $c = 0; $i = 0; ?>
+           		
            		<?php foreach($this->product_size as $size){?>
                 		
                			 <?php if($size->size_name == "None"){
