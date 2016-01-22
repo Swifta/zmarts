@@ -3848,7 +3848,8 @@ $content_text = array(
 			
 			"SELECT_PAGE_POSITION_FIRST" => "Select Page Position first",
 			
-			"MENTION_SIZE" => "Select the available sizes for your product, ensuring that you update the quantity of items for each size",
+			"MENTION_SIZE" => "Choose none, or specify sizes for your product, ensuring that you update the quantity of items for each size",
+			"MENTION_SIZE_ENTER_Q" => "Enter quantity here",
 			
 			"MENTION_SPECIFICATION" => 'Choose "Yes" to select the available specifications for your product.',
 			

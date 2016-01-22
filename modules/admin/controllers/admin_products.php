@@ -56,6 +56,18 @@ class Admin_products_Controller extends website_Controller
 							}
 						}
 						
+						if($_POST['size_val'] == '1'){
+								
+								$post->add_rules('size', array($this, 'validate_size_quantity'));
+								
+							}else{
+									$s = $this->input->post("size_quantity");
+									if($s[0] === '')
+										$post->add_rules('size_quantity[0]','required');
+							
+							
+						}
+						
 						
 						
 							
@@ -76,13 +88,27 @@ class Admin_products_Controller extends website_Controller
 						
 
 	                        if($post->validate()){
+								
                                 $deal_key = text::random($type = 'alnum', $length = 8);
                                 $size_quantity = $this->input->post("size_quantity");
-								if(count($size_quantity)>1)
+								
+								
+								
+								
+								
+								if(count($size_quantity)>1 && $_POST['size_val'] == '1')
 								{
 								unset($size_quantity[0]);
+								unset($this->userPost['size'][0]);
 								$size_quantity=array_values($size_quantity);
+								}else{
+									$s = $size_quantity[0];
+									$size_quantity = array();
+									$size_quantity[0] = $s;
 								}
+								
+								
+								
                                 $status = $this->products->add_product(arr::to_object($this->userPost),$deal_key,$adminid,$size_quantity);
 								
 								
@@ -143,6 +169,8 @@ class Admin_products_Controller extends website_Controller
 		$this->shop_list = $this->products->get_shop_list();
 		$this->color_code = $this->products->get_shipping_product_color();
 		$this->product_size = $this->products->get_product_size();
+		
+		
 		
 	        $this->template->title = $this->Lang["ADD_PRODUCTS"];
 		$this->template->content = new View("admin_product/add_products");
@@ -845,6 +873,18 @@ class Admin_products_Controller extends website_Controller
 								
 							}
 						}
+						
+						
+				if($_POST['size_val'] == '1'){
+								
+								$post->add_rules('size', array($this, 'validate_size_quantity'));
+								
+							}else{
+									$s = $this->input->post("size_quantity");
+									if($s[0] === '')
+										$post->add_rules('size_quantity[0]','required');
+							
+						}
 				
 				$price_s = $post->price;
 				if(isset($price_s)){
@@ -864,6 +904,17 @@ class Admin_products_Controller extends website_Controller
 						
 				if($post->validate()){
 				    $size_quantity = $this->input->post("size_quantity");
+					
+					if(count($size_quantity)>1 && $_POST['size_val'] == '1')
+								{
+									unset($size_quantity[0]);
+									unset($this->userPost['size'][0]);
+									$size_quantity=array_values($size_quantity);
+								}else{
+									$s = $size_quantity[0];
+									$size_quantity = array();
+									$size_quantity[0] = $s;
+								}
 					$status = $this->products->edit_product($deal_id, $deal_key, arr::to_object($this->userPost), $size_quantity,$this->preview_type);
 					  if($status == 1 && $deal_key){
 							if($_FILES['image']['name'] != "" )
@@ -956,6 +1007,7 @@ class Admin_products_Controller extends website_Controller
 		$this->color_code = $this->products->get_shipping_product_color();
 		$this->product_size = $this->products->get_product_size();
 		$this->product = $this->products->get_edit_product($deal_id,$deal_key);
+		
 		
 		if(($this->product->current()->purchase_count) >= ($this->product->current()->user_limit_quantity) ){
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
@@ -2028,6 +2080,29 @@ class Admin_products_Controller extends website_Controller
 		}
 		return 0;
 				
+	}
+	
+	
+	function validate_size_quantity(){
+		$size_q = $_POST['size_quantity'];
+		$sizes = $_POST['size'];
+		
+		$this->size_arr = $sizes;
+		$this->size_q_arr = $size_q;
+		
+		unset($sizes[0]);
+		unset($size_q[0]);
+		
+		foreach($sizes as $size){
+			if($size == '')
+				return 0;
+		}
+		
+		foreach($size_q as $q){
+			if($q == '')
+				return 0;
+		}
+		return 1;
 	}
         
 }

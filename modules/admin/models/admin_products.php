@@ -86,6 +86,8 @@ class Admin_products_Model extends Model
 	    foreach($size_quantity as $sq){
 	      $quantity += $sq;
 	    }
+		
+		
 	                $inc_tax = "0";
 			 if(isset($_POST['Including_tax'])) {
 			        $inc_tax = "1";
@@ -157,6 +159,8 @@ class Admin_products_Model extends Model
 		$atr_option = isset($post->attr_option)?$post->attr_option:0;  // for attribute is present or not
 				
 		$result = $this->db->insert("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period" => $post->delivery_days,"category_id" => $post->category,"sub_category_id" =>  $post->sub_category,"sec_category_id" =>  $post->sec_category,"third_category_id" => $post->third_category, "deal_type"=> $post->deal_type,"deal_price" => $deal_price,"deal_value" => $deal_val,  "deal_prime_value" =>$deal_prime_val, "deal_savings" => $savings, "deal_prime_savings" => $prime_savings, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => $value, "deal_prime_percentage" => $prime_value, "merchant_id"=>$post->users,"shop_id"=>$post->stores,"created_date" => time(),"created_by"=>$adminid,"color" => $post->color_val,"size" => $post->size_val,"user_limit_quantity"=>$quantity,"deal_status" =>$pro_status,"shipping_amount"=>$shipping_amount,"shipping"=>$post->shipping,"attribute"=>$atr_option,"Including_tax" =>$inc_tax,"weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"product_duration"=>$duration, "for_store_cred" => $post->store_cred));
+		
+		
 	
 	    $product_id = $result->insert_id();
 	    if(($post->color_val) == 1){
@@ -171,6 +175,8 @@ class Admin_products_Model extends Model
 	    }   
 	    
 	    if(($post->size_val) == 1){
+			
+			
 	        $i= 0;
 	        foreach($post->size as $s){
 	            $result_count = $this->db->from("product_size")->where(array("deal_id" => $product_id, "size_id" => $s))->get();
