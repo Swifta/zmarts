@@ -1,5 +1,7 @@
 <?php defined('SYSPATH') OR die("No direct access allowed."); ?>
-<?php  if(($this->uri->segment(2)=='view-products')){	
+<?php  
+$tranx_id = ""; //empty transaction id.
+if(($this->uri->segment(2)=='view-products')){	
 								
 		 if(count($this->product_transaction_list) > 0){ ?>
 
@@ -81,14 +83,21 @@
 		    <?php $tot_quan +=$u->quantity; ?>
 		    
 		    <?php if($this->uri->segment(2) == "view-user"){  ?>
-		    <td align="center"><span class="align"><?php echo ($u->deal_value*$u->quantity); ?></span></td>
-		    <?php $tot_amount +=$u->deal_value*$u->quantity; ?>
+		    <td align="center"><span class="align"><?php 
+                    //echo ($u->deal_value*$u->quantity); 
+                    echo ($u->amount*$u->quantity);
+                    ?></span></td>
+		    <?php 
+                    //$tot_amount +=$u->deal_value*$u->quantity; 
+                    $tot_amount +=$u->amount*$u->quantity; 
+                    ?>
 		    <?php } ?>
 		    
 		    <?php if($this->uri->segment(2) != "view-user"){  ?>
 		     <?php $commission_val=$u->deal_merchant_commission; ?> 
 		    <?php  
-		        $commission=$u->deal_value *($commission_val/100);
+		        //$commission=$u->deal_value *($commission_val/100);
+                        $commission=$u->amount *($commission_val/100);
 		    ?>	  
                     
                     <?php
@@ -110,8 +119,14 @@
                     
                     ?>	 
                     
-		    <td align="center"><span class="align"><?php echo ($u->deal_value-$commission)*$u->quantity; ?></span></td>
-		    <?php $tot_amount +=($u->deal_value)*$u->quantity; ?>
+		    <td align="center"><span class="align"><?php 
+                    //echo ($u->deal_value-$commission)*$u->quantity; 
+                    echo ($u->amount)*$u->quantity;
+                    ?></span></td>
+		    <?php 
+                    //$tot_amount +=($u->deal_value)*$u->quantity; 
+                    $tot_amount +=($u->amount)*$u->quantity;
+                    ?>
 		    
 		    <?php } ?> 	
 		   		    

@@ -46,7 +46,7 @@ class Webpay_Model extends Model
                 //var_dump(count($result));
             if(count($result) > 0){
                 foreach($result as $row){
-                    $total+=$row->amount;
+                    $total+=($row->amount + $row->shipping_amount);
                 }
             }
             return intval($total*100);
