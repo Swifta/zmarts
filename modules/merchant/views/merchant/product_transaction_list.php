@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die("No direct access allowed."); ?>
 <?php 
 $tranx_id = ""; //empty transaction id.
+$interswitch_tranx_ref = "";
 
 if(($this->uri->segment(2)=='view-products')){	
 								
