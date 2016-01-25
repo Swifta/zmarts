@@ -2,6 +2,8 @@
 <?php 
 $tranx_id = ""; //empty transaction id.
 $interswitch_tranx_ref = "";
+$more_details_btn = "";
+$requery_btn = "";
 
 if(($this->uri->segment(2)=='view-products')){	
 								
