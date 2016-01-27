@@ -122,7 +122,7 @@ class Webpay_Model extends Model
                     //$acct_num = $row->nuban;
                     $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
-                    $temp_item_amt = intval($row->amount * 100);
+                    $temp_item_amt = intval((($row->amount*$row->quantity)+$row->shipping_amount) * 100);
                     //$temp_item_amt = ceil($total_amount_shopped / 10) * 10 * 100;
                     //if($total_amount > )
                     if(!$is_above_2k){
