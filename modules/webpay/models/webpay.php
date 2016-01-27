@@ -76,8 +76,10 @@ class Webpay_Model extends Model
         }
 
         public function get_split_marchant_xml($transaction_id, $total_amount_shopped){
+            //ceil($input / 10) * 10;
             $ret = "";
             $is_above_2k = false;
+            //$tmp_2k = 0.015 * ceil($total_amount_shopped / 10) * 10;
             $tmp_2k = 0.015 * $total_amount_shopped;
             //echo $total_amount_shopped." against ".$tmp_2k;die;
             if($tmp_2k > 2000){
@@ -118,10 +120,10 @@ class Webpay_Model extends Model
                         $acct_num = $merch->nuban;
                     }
                     //$acct_num = $row->nuban;
-                    //$acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
+                    $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
-                    //$temp_item_amt = intval($row->amount * 100);
-                    $temp_item_amt = intval($total_amount_shopped * 100);
+                    $temp_item_amt = intval($row->amount * 100);
+                    //$temp_item_amt = ceil($total_amount_shopped / 10) * 10 * 100;
                     //if($total_amount > )
                     if(!$is_above_2k){
                         //if not above 2k cap
@@ -129,16 +131,16 @@ class Webpay_Model extends Model
                         //$item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
                     }
                     else{
-                        //$weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
-                        $weight_fraction_of_sales = ($temp_item_amt / ($total_amount_shopped*100));
-                        $transaction_fee = round($weight_fraction_of_sales * (2000*100), 2); //from 2,000naira. whats my transaction fee here           
+                        $weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
+                        //$weight_fraction_of_sales = ($temp_item_amt / (ceil($total_amount_shopped / 10) * 10 *100));
+                        $transaction_fee = $weight_fraction_of_sales * (2000*100); //from 2,000naira. whats my transaction fee here           
                     }
-                    if(strpos($transaction_fee, ".")){
-                        $op = explode(".", $transaction_fee);
-                        $real_num = intval($op[0]); //convert to kobo
-                        $decimal_part = intval($op[1]);
-                        $transaction_fee = $real_num + $decimal_part;
-                    }
+//                    if(strpos($transaction_fee, ".")){
+//                        $op = explode(".", $transaction_fee);
+//                        $real_num = intval($op[0]); //convert to kobo
+//                        $decimal_part = intval($op[1]);
+//                        $transaction_fee = $real_num + $decimal_part;
+//                    }
                     $item_amt = $temp_item_amt - $transaction_fee;
                     //echo $item_amt; die;
                     $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
@@ -274,7 +276,8 @@ class Webpay_Model extends Model
                         }
 		}
                 
-		$result = $this->db->insert("transaction",array("user_id" => $this->UserID , "product_id" => $deal_id, "firstname" => $this->UserName, "lastname" => $this->UserName, "order_date" => time(), "amount" => $product_amount, "payment_status" => 'Pending', 
+		$result = $this->db->insert("transaction",array("user_id" => $this->UserID , "product_id" => $deal_id, "firstname" => $this->UserName, 
+                    "lastname" => $this->UserName, "order_date" => time(), "amount" => $product_amount, "payment_status" => 'Pending', 
                     "pending_reason" => 'INTERSWITCH', "country_code" => COUNTRY_CODE, "currency_code" => CURRENCY_CODE,
                     "transaction_id" => $TRANSACTIONID,"referral_amount" => $referral_amount,"transaction_type" => $paymentType,
                     "quantity" => $qty, "type" => $type, "captured" => $captured,"transaction_date" =>time(),
