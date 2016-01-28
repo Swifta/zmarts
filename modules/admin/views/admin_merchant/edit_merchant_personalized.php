@@ -13,7 +13,7 @@
 			<tr>
                     <td><label><?php echo $this->Lang["SECTOR"]; ?></label></td>
                     <td>
-                        <select autofocus name="sector" class="required" onchange="return change_sector_admin(this.value);">
+                        <select autofocus name="sector" class="required" onchange="return change_sector_admin(this.value);" readonly>
                         
                         
 			    
@@ -46,7 +46,7 @@
                     
                     	
 				 
-                        <select name="subsector" class="required">
+                        <select name="subsector" class="required" readonly>
 			<?php  foreach($this->sub_sector_list as $p){ if($uu->store_sector_id == $p->main_sector_id) { 
 						
 					    

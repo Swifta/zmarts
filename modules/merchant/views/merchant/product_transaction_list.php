@@ -1,5 +1,11 @@
 <?php defined('SYSPATH') OR die("No direct access allowed."); ?>
-<?php  if(($this->uri->segment(2)=='view-products')){	
+<?php 
+$tranx_id = ""; //empty transaction id.
+$interswitch_tranx_ref = "";
+$more_details_btn = "";
+$requery_btn = "";
+
+if(($this->uri->segment(2)=='view-products')){	
 								
 		 if(count($this->product_transaction_list) > 0){ ?>
 
@@ -86,8 +92,14 @@
 		        $commission=0; //$u->deal_value *($commission_val/100);
 		    ?>	   
 		     
-		    <td align="center"><span class="align"><?php echo ($u->deal_value-$commission)*$u->quantity; ?></span></td>
-		    <?php $tot_amount +=($u->deal_value)*$u->quantity; ?>
+		    <td align="center"><span class="align"><?php 
+                    //echo ($u->deal_value-$commission)*$u->quantity; 
+                    echo ($u->amount-$commission)*$u->quantity; 
+                    ?></span></td>
+		    <?php 
+                    //$tot_amount +=($u->deal_value)*$u->quantity; 
+                    $tot_amount +=($u->amount)*$u->quantity; 
+                    ?>
                     
                         
                         
@@ -128,7 +140,8 @@
                     <td style="text-align: center;">
                         
                     <?php if($u->payment_status=="Completed") {
-                        $tot_amount_success +=($u->deal_value)*$u->quantity;
+                        //$tot_amount_success +=($u->deal_value)*$u->quantity;
+                        $tot_amount_success +=($u->amount)*$u->quantity;
                                 echo "<span style='color:green'>".$this->Lang['COMPLETED']."</span>";
                             ?>
 

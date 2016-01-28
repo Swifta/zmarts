@@ -213,8 +213,9 @@ class Webpay_Controller extends Layout_Controller
                         $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
                         //on successful transaction. empty the cart
-                        unset($_SESSION['count']);
+                        //unset($_SESSION['count']);
                         //var_dump($_SESSION);
+                        /*
                         foreach($_SESSION as $key=>$value){
                             if(true){
                                 
@@ -240,8 +241,67 @@ class Webpay_Controller extends Layout_Controller
                                         unset($_SESSION[$key]);
                                     }
                                 }
+                                
                             }
-                        }                      
+                        }  
+                        */
+				 foreach($_SESSION as $key=>$value)
+					{
+						//if(!is_object($value) && !is_array($value)) {
+								if((is_string($value)) && ($key=='product_cart_id'.$value)){
+								$qty = $this->session->get('product_cart_qty'.$value);
+								$deal_id = $_SESSION[$key];
+								foreach($_SESSION as $key=>$value)
+								{
+								if(($key=='product_size_qty'.$deal_id)){
+								   unset($_SESSION[$key]);
+								}
+								if(($key=='product_quantity_qty'.$deal_id)){
+								   unset($_SESSION[$key]);
+								}
+								if(($key=='product_color_qty'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+								if(($key=='store_credit_id'.$deal_id)){
+									  
+									unset($_SESSION[$key]);
+								}
+								if(($key=='store_credit_period'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+								if(($key=='main_storecreditid'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+								if(($key=='product_cart_qty'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+
+								}
+							 }
+						//}
+				   }
+
+				foreach($_SESSION as $key=>$value)
+				{
+						if(((is_string($value)) && ($key=='product_cart_id'.$value))){
+								unset($_SESSION[$key]);
+						}
+				}
+                $this->session->delete("count");
+                $this->session->delete('shipping_name');
+                $this->session->delete('shipping_address1');
+                $this->session->delete('shipping_address2');
+                $this->session->delete('shipping_checkbox');
+                $this->session->delete('shipping_country');
+                $this->session->delete('shipping_state');
+                $this->session->delete('shipping_city');
+                $this->session->delete('shipping_postal_code');
+                $this->session->delete('shipping_phone');
+                $this->session->delete('aramex_currencycode');
+                $this->session->delete('aramex_value');
+                $this->session->delete('payment_result');
+                
+                
                     }
                     else{
                         $this->webpay->addStockBack($txnref); //add items back to stock
@@ -357,6 +417,7 @@ class Webpay_Controller extends Layout_Controller
                                 $url_title = $UL->url_title;
                                 $deal_value = $UL->deal_value;
                                 $product_amount = $UL->deal_value*$item_qty;
+                                //echo $this->session->get('user_auto_key'); die;
                                 if($this->session->get('user_auto_key')) {
                                     $product_amount = $UL->deal_prime_value*$item_qty;
                                     $deal_value = $UL->deal_prime_value;
