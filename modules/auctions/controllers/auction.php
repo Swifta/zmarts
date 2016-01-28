@@ -561,12 +561,12 @@ class Auction_Controller extends Layout_Controller
 				$this->template->content = new View("themes/".THEME_NAME."/auction/auction_payment1");
 			}
 			else{
-				common::message(-1,"Sorry! this auction has been re-initiated");
+				common::message(-1,"Sorry! This auction has been re-initiated");
 				url::redirect(PATH.'auction.html');
 			}
 		}
 		else {
-			common::message(-1,"Sorry! You are already buy this Auction");
+			common::message(-1,"Sorry! You already bought this Auction");
 		  url::redirect(PATH.'auction.html');
 		}
 
