@@ -198,7 +198,8 @@ class Webpay_Model extends Model
                     //$acct_num = $row->nuban;
                     //$acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     //nuban number set in there profile
-                    $temp_item_amt = intval($row->amount * 100);
+                    //$temp_item_amt = intval($row->amount * 100);
+                    $temp_item_amt = intval((($row->amount*$row->quantity)+$row->shipping_amount) * 100);
                     //if($total_amount > )
                     if(!$is_above_2k){
                         //if not above 2k cap
@@ -210,12 +211,12 @@ class Webpay_Model extends Model
                         $weight_fraction_of_sales = ($temp_item_amt / ($total_amount_shopped*100));
                         $transaction_fee = round($weight_fraction_of_sales * (2000*100), 2); //from 2,000naira. whats my transaction fee here           
                     }
-                    if(strpos($transaction_fee, ".")){
-                        $op = explode(".", $transaction_fee);
-                        $real_num = intval($op[0]); //convert to kobo
-                        $decimal_part = intval($op[1]);
-                        $transaction_fee = $real_num + $decimal_part;
-                    }
+//                    if(strpos($transaction_fee, ".")){
+//                        $op = explode(".", $transaction_fee);
+//                        $real_num = intval($op[0]); //convert to kobo
+//                        $decimal_part = intval($op[1]);
+//                        $transaction_fee = $real_num + $decimal_part;
+//                    }
                     $item_amt = $temp_item_amt - $transaction_fee;
                     //echo $item_amt; die;
                     $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
