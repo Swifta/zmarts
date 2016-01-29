@@ -138,7 +138,7 @@ class Admin_users_Controller extends website_Controller {
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Your Email was Successfully Sent");
 				url::redirect(PATH."admin/manage-user.html");
 			}
 			else{	

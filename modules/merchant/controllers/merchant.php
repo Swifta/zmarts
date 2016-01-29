@@ -5274,7 +5274,7 @@ class Merchant_Controller extends website_Controller
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Your Email was Successfully Sent");
 				url::redirect(PATH."merchant/manage-moderator.html");
 			}
 			else{	

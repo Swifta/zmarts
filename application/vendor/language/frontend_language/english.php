@@ -375,9 +375,9 @@ $content_text = array(
 
 "INTO_INVEN" => "into inventory",
 
-"NON_PAY_AUC" => "Non-payment of auctions you have won on",
+"NON_PAY_AUC" => "Non-payment of auctions you have won on ",
 
-"CANCEL_CURR_BID" => "also cancels out any other current bids you may have placed",
+"CANCEL_CURR_BID" => "also cancels out any other current bids you may have placed.",
 
 "AUC_DETS" => "Auction details",
 
@@ -385,9 +385,9 @@ $content_text = array(
 
 "AUC_CLOSE" => "Auction Close",
 
-"won_auc_comm_win_bid_amo" => "You have won this auction and committed to pay the winning bid amount. Once payment is received, your product will be shipped and you receive a shipping confirmation email.",
+"won_auc_comm_win_bid_amo" => "You have won this auction and are now committed to pay the winning bid amount. Once payment is received, your product will be shipped and you will receive a shipping confirmation email.",
 
-"REVIEW_SHIPP" => "To review your shipping information, log into your",
+"REVIEW_SHIPP" => "To review your shipping information, log into your  account and go to the 'My Account' page",
 
 "RECE_MSG_ADD" => "You are receiving this message because you signed up with the email address",
 
@@ -1032,7 +1032,7 @@ $content_text = array(
 
 "YOUR_PAYMENT_SUCCESS" => "Your payment has been completed successfully",
     
-"YOUR_PAYMENT_PENDING" => "Your order has been sent, Payment is Pending by you.\nYou need to PAY LATER at"
+"YOUR_PAYMENT_PENDING" => "Your order has been sent, Payment is Pending.\nYou need to PAY LATER at"
     . " any of the channels in the Image",
     
 "YOUR_PAYMENT_PENDING_COD" => "Your order has been sent, Payment is Pending by you.\nYou need to PAY ON DELIVERY",

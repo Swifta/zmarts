@@ -280,7 +280,7 @@
                         </tr>
 						<tr>
 							<td style=" vertical-align: top; background: #E2E2E2; padding: 10px;border: 1px solid #ECE9E4; border-top: none;">
-								<p  style="width:589px; margin:0px 0 0 33px; padding: 7px 0 13px 0px; font: normal 12px arial; color:#777; text-align:center;"><?php echo $this->Lang["IN_STORE"]; ?> - <?php echo $this->Lang["BUY_CLOSE_EMAIL"]; ?> <a href="<?php echo PATH;?>users/my-coupons.html" style="color:#ff9b02;"><?php echo $this->Lang["MY_BUYS"]; ?></a><?php echo $this->Lang["TICKET_PRINTED"]; ?>
+								<p  style="width:589px; margin:0px 0 0 33px; padding: 7px 0 13px 0px; font: normal 12px arial; color:#777; text-align:center;"><?php echo $this->Lang["IN_STORE"]; ?> - <?php echo $this->Lang["BUY_CLOSE_EMAIL"]; ?> <a href="<?php echo PATH;?>users/my-account.html" style="color:#ff9b02;"><?php echo $this->Lang["MY_BUYS"]; ?></a><?php echo $this->Lang["TICKET_PRINTED"]; ?>
 								</p>
 							</td>
 						</tr>
