@@ -17,7 +17,7 @@ $this->UserName = $this->session->get("UserName");
   </tr>
   <tr>
     <td><div style="width:636px;margin:0 auto;">
-        <div style="text-align:center;margin:0 0 20px;padding:30px 0;background:#e2e2e2"> <strong style="font-size:20px;font-weight:bold;font-family:Arial;margin-left:20px;color:#666"><?php echo $this->Lang['DEAR']; ?> ,</strong><br>
+        <div style="text-align:center;margin:0 0 20px;padding:30px 0;background:#e2e2e2"> <strong style="font-size:20px;font-weight:bold;font-family:Arial;margin-left:20px;color:#666"><?php echo $this->Lang['DEAR']; ?> <?php echo $this->merchant_lastname; ?>,</strong><br>
           <strong style="font-size:16px;font-weight:bold;font-family:Arial;margin-left:20px;color:#666"><?php echo $this->Lang['GREE_THE_DAY']; ?></strong><br>
           <b style="font-size:12px;margin-left:20px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $this->Lang['THANKYOU_SAVING_PURCH']; ?></b><br>
           <b style="font-size:12px;margin-left:20px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $this->Lang['THANKYOU_DELIVERY_ADDRESS']; ?></b><br>
@@ -27,13 +27,13 @@ $this->UserName = $this->session->get("UserName");
         <table cellpadding="0" cellspacing="0" width="100%">
           <tbody>
             <?php
-						$this->creditcard_paypal_pay = new Creditcard_paypal_Model;
-						if($p->type == 5) {
-							$this->product_list1 = $this->creditcard_paypal_pay->get_products_merchant_list($p->transactionid, $this->merchant_id,"COD");
-						} else {
-						//	$this->creditcard_paypal_pay = new Creditcard_paypal_Model;
-							$this->product_list1 = $this->creditcard_paypal_pay->get_products_merchant_list($p->transactionid, $this->merchant_id);
-						}
+//						$this->creditcard_paypal_pay = new Creditcard_paypal_Model;
+//						if($p->type == 5) {
+//							$this->product_list1 = $this->creditcard_paypal_pay->get_products_merchant_list($p->transactionid, $this->merchant_id,"COD");
+//						} else {
+//						//	$this->creditcard_paypal_pay = new Creditcard_paypal_Model;
+//							$this->product_list1 = $this->creditcard_paypal_pay->get_products_merchant_list($p->transactionid, $this->merchant_id);
+//						}
                      
 					$j=1;
 					
