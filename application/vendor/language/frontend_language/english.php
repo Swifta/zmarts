@@ -1006,7 +1006,7 @@ $content_text = array(
 
 "USER_EXIST" =>"User already exist",
 
-"EMAIL_EXIST" =>"Email Id already exists",
+"EMAIL_EXIST" =>"You are already subscribed",
 
 "EMAIL_ADDRESS"=>"Email address ",
 

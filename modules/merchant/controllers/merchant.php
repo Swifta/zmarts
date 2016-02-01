@@ -1061,7 +1061,7 @@ class Merchant_Controller extends website_Controller
 					->add_rules('storename', 'required',array($this,'check_store_exist1'))
 					->add_rules('about_us', 'required')
 					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
-					->add_rules('website', 'valid::url')
+					//->add_rules('website', 'valid::url')
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
