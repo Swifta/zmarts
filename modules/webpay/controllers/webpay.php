@@ -505,7 +505,7 @@ class Webpay_Controller extends Layout_Controller
                     //var_dump($_SESSION);
                     //die;
                     //remove comment below
-               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+               $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
                 $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
                 $this->result_transaction = arr::to_object($this->transaction_result);
                 //dont need the line of code below
