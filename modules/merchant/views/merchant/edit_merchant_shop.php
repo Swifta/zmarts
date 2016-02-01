@@ -132,7 +132,7 @@
                          <tr>
                                 <td><label><?php echo $this->Lang["STORE_NAME"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="storename" maxlength="255" value="<?php echo $u->store_name;?>" autofocus />
+                                <td><input type="text" name="storename" maxlength="255" value="<?php echo $u->store_name;?>" readonly="readonly" />
                                 <em><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
                                 </td>
                         </tr>
@@ -140,7 +140,7 @@
                         <tr>
                                 <td><label><?php echo $this->Lang["USER_NAME"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="username" maxlength="255" value="<?php echo $u->firstname;?>" />
+                                <td><input type="text" name="username" maxlength="255" value="<?php echo $u->firstname;?>" readonly="readonly"/>
                                 <em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
                                 </td>
                         </tr>
@@ -296,7 +296,7 @@
                                 </td>
                         </tr>
                         <tr>
-                                <td><label><?php echo $this->Lang["WEBSITE"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["WEBSITE"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="website" maxlength="100" value="<?php echo $u->website;?>"/>
                                 <em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
