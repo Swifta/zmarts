@@ -690,15 +690,15 @@ class Webpay_Controller extends Layout_Controller
 		$this->products_list = $this->webpay->get_products_coupons_list($transaction,$deal_id);
 				$this->product_size = $this->webpay->get_shipping_product_size();
 				$this->product_color = $this->webpay->get_shipping_product_color();
-                $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");
-                $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
-                 if(EMAIL_TYPE==2) {
-			email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
-		}else{
-			email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
-		}
+//                $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");
+//                $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
+//                 if(EMAIL_TYPE==2) {
+//			email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+//			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+//		}else{
+//			email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+//			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+//		}
 
             } else {
                 $from = CONTACT_EMAIL;
