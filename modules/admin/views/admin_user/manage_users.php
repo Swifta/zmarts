@@ -274,7 +274,8 @@
                      <?php } ?>
                      </td>
                       <td align="center">
-						<?php if($u->unique_identifier !="" && $u->user_auto_key !="") { echo $this->Lang["PRIM_CUST"]; } else { echo $this->Lang["NOR_USER"]; } ?>
+						<?php if($u->nuban !="") { echo $this->Lang["PRIM_CUST"]; } else { echo $this->Lang["NOR_USER"]; } ?>
+						<?php /*if($u->unique_identifier !="" && $u->user_auto_key !="") { echo $this->Lang["PRIM_CUST"]; } else { echo $this->Lang["NOR_USER"]; } */?>
 					</td>
                 </tr>
             <?php $i++;} ?>   
