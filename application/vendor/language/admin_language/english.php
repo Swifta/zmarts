@@ -1045,7 +1045,7 @@ $content_text = array(
 			"BLO_STORES" => "Block store",
 
     "BLO_DURATION" => "Block Duration",
-    "UNBLO_DURATION" => "Block Duration",
+    "UNBLO_DURATION" => "UnBlock Duration",
     "EDIT_DURATION" => "Edit Duration",
     
 			"EDIT_STORES" => "Edit store",

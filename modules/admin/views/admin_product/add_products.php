@@ -654,7 +654,10 @@ function toggle() {
                 <tr class="policymain">
                  <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td> <input type="text" name="Delivery_value[]" value="" > 
+                    <td>
+                        <!--<input type="text" name="Delivery_value[]" value=""> -->
+                    
+                        <textarea name="Delivery_value[]" rows="4"></textarea>
                     <em><?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?></em>  
                     </td>
 		    </tr>                 
@@ -663,7 +666,7 @@ function toggle() {
                  <tr  id="Delivery" >
                  <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td> <input id="Delivery_add" type="button" name="addmore" value="<?php echo $this->Lang['ADDMORE'];?>" onclick="addDelivery()">   </td>
+                    <!--<td> <input id="Delivery_add" type="button" name="addmore" value="<?php echo $this->Lang['ADDMORE'];?>" onclick="addDelivery()">   </td>-->
 		    </tr>                 
                  <tr>
                  
