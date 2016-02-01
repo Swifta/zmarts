@@ -2029,7 +2029,8 @@ $pdf->Output('voucher.pdf', 'I');
 						  $arg['Pwd'] = ZENITH_TEST_PASS;
 						  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 						  $arg['account_number'] = $nuban;
-						  $fun_resp = $soap->VerifyAccount($arg);
+						  //$fun_resp = $soap->VerifyAccount($arg);
+                                                  $fun_resp = $soap->VerifyMerchantAccount($arg);
 							
 					  } catch(Exception $e){
 						  echo -1;
