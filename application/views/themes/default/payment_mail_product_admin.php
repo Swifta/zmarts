@@ -17,7 +17,7 @@ $this->UserName = $this->session->get("UserName");
   </tr>
   <tr>
     <td><div style="width:636px;margin:0 auto;">
-        <div style="text-align:center;margin:0 0 20px;padding:30px 0;background:#e2e2e2"> <strong style="font-size:20px;font-weight:bold;font-family:Arial;margin-left:20px;color:#666"><?php echo $this->Lang['DEAR']; ?> <?php echo $this->merchant_lastname; ?>,</strong><br>
+        <div style="text-align:center;margin:0 0 20px;padding:30px 0;background:#e2e2e2"> <strong style="font-size:20px;font-weight:bold;font-family:Arial;margin-left:20px;color:#666"><?php echo $this->Lang['DEAR']; ?> ,</strong><br>
           <strong style="font-size:16px;font-weight:bold;font-family:Arial;margin-left:20px;color:#666"><?php echo $this->Lang['GREE_THE_DAY']; ?></strong><br>
           <b style="font-size:12px;margin-left:20px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $this->Lang['THANKYOU_SAVING_PURCH']; ?></b><br>
           <b style="font-size:12px;margin-left:20px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $this->Lang['THANKYOU_DELIVERY_ADDRESS']; ?></b><br>
