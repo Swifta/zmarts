@@ -138,7 +138,7 @@
                         </tr>
                         
                         <tr>
-                                <td><label><?php echo $this->Lang["USER_NAME"]; ?><span>*</span></label></td>
+                                <td><label>Company name<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="username" maxlength="255" value="<?php echo $u->firstname;?>" readonly="readonly"/>
                                 <em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
