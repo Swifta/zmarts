@@ -663,7 +663,7 @@ ship_address2' => string 'test address2' (length=13)
 </body>
 </html>
 
-<!--<?php echo "admin_mail_product_admin"; ?>-->
+
 
 
 
@@ -971,4 +971,6 @@ $this->UserName = $this->session->get("UserName");
         <?php } ?>
     </table>
 </body>
-</html>
+</html>-->
+
+<!--<?php echo "admin_mail_product_admin"; ?>-->
