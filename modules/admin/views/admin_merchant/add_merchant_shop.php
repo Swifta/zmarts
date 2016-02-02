@@ -241,7 +241,7 @@
                         </tr>
                         
                          <tr>
-                                <td><label><?php echo $this->Lang["WEBSITE"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["WEBSITE"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="website" maxlength="100" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"/>
                                 <em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>

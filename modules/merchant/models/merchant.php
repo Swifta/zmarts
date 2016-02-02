@@ -3725,7 +3725,9 @@ class Merchant_Model extends Model
 	/* GET DURATION PERIOD ACCORDING TO MERCHANT */
 	public function get_duration_values()
 	{
-		$result = $this->db->from("duration")->where(array("duration_merchantid"=>$this->user_id))->orderby("duration_period","ASC")->get();
+		$result = $this->db->from("duration")
+                        ->where(array("duration_merchantid"=>$this->user_id, "duration_status"=>1))
+                        ->orderby("duration_period","ASC")->get();
 		return $result;
 	}
 	

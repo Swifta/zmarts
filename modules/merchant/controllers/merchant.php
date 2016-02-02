@@ -1050,8 +1050,8 @@ class Merchant_Controller extends website_Controller
 	    $this->manage_merchant_shop ="1";
 		if($_POST){
 			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			//$post = new Validation($_POST);
+			$post = Validation::factory(array_merge($this->userpost,$_FILES))
 					
 					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
@@ -1061,11 +1061,12 @@ class Merchant_Controller extends website_Controller
 					->add_rules('storename', 'required',array($this,'check_store_exist1'))
 					->add_rules('about_us', 'required')
 					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
-					->add_rules('website', 'valid::url')
+					//->add_rules('website', 'valid::url')
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
+					->add_rules('email',array($this,'check_store_admin1'))
+                                //->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
 					->add_rules('sector', 'required')
 					->add_rules('subsector', 'required')
 					->add_rules('username', 'required');
@@ -1074,7 +1075,8 @@ class Merchant_Controller extends website_Controller
 					{
 						$post->add_rules('subsector', 'required');
 					}
-
+                                        //var_dump($post->validate());
+//echo "was here ".$post->validate()." here"; die;
 				if($post->validate()){
                                     
 					$storename = $this->input->post("storename");

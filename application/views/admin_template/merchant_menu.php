@@ -81,14 +81,14 @@ function toggle(ids){
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/sold-products.html" title="<?php echo $this->Lang["ARCHIVE_PRODUCTS"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ARCHIVE_PRODUCTS"]; ?></span></a></li>
         <li <?php if(isset($this->import_product)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/product-import.html" title="<?php echo $this->Lang["PRODUCT_IMPORT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["PRODUCT_IMPORT"]; ?></span></a></li>
-        <?php if(PRIVILEGES_GIFT==1){?>
+        <!-- <?php if(PRIVILEGES_GIFT==1){?>
         <?php if(PRIVILEGES_GIFT_ADD==1){?>
         <li <?php if(isset($this->add_free_gift)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add-free-gift.html" title="<?php echo $this->Lang["ADD_FREE_GIFT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ADD_FREE_GIFT"]; ?></span></a></li>
         <?php } ?>
         <li <?php if(isset($this->manage_free_gift)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/manage-free-gift.html" title="<?php echo $this->Lang["MANAGE_FREE_GIFT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["MANAGE_FREE_GIFT"]; ?></span></a></li>
-        <?php } ?>
+        <?php } ?> -->
        <li <?php if(isset($this->shipping_delivery)){ ?> class="menu_active"  <?php } ?> >
         <a href="<?php echo PATH; ?>merchant/shipping-delivery.html" class="menu_rgt" title="<?php echo $this->Lang['SHIP_DEL']; ?>"><span class="customer_comments"><?php echo $this->Lang['SHIP_DEL']; ?></span></a></li>
         
@@ -156,10 +156,10 @@ function toggle(ids){
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add-shop.html" title="<?php echo $this->Lang['ADD_SHOPS']; ?>"><span class="fund_management fl"><?php echo $this->Lang['ADD_SHOPS']; ?></span></a></li>
         <?php } ?>
        
-        <?php if(PRIVILEGES_RETURN_POLICY_EDIT==1){?>
+        <?php /* if(PRIVILEGES_RETURN_POLICY_EDIT==1){?>
         <li <?php if(isset($this->return_policy)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/return-policy.html" title="<?php echo $this->Lang['RET_POL']; ?>"><span class="fund_management fl"><?php echo $this->Lang['RET_POL']; ?></span></a></li>
-        <?php } ?>
+        <?php } */?>
         <?php if(PRIVILEGES_ABOUT_US_EDIT==1){?>
         <li <?php if(isset($this->about_us)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/warranty.html" title="<?php echo $this->Lang['WARRANTY']; ?>"><span class="fund_management fl"><?php echo $this->Lang['WARRANTY']; ?></span></a></li>

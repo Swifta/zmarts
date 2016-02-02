@@ -1003,6 +1003,7 @@ class Admin_merchant_Controller extends website_Controller {
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."admin.html");
 		}
+                $this->m_id=$merchantid;
 		$this->manage_merchant = "1";
 		$this->mer_id=$merchantid;
 		if($_POST){
@@ -1039,7 +1040,7 @@ class Admin_merchant_Controller extends website_Controller {
 							}
 							
 							if(isset($_POST['store_email'])){
-								$post->add_rules('store_email',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'));
+								//$post->add_rules('store_email',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'));
 							}
 
 						if(isset($_POST['sector']) && $post->sector!=0)

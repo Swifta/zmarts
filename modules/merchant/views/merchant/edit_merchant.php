@@ -10,7 +10,7 @@
                         <tr> 
                                 <td><label>Company Name</label><span>*</span></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="firstname" maxlength="32" value="<?php echo $u->firstname;?>" autofocus />
+                                <td><input type="text" name="firstname" maxlength="32" value="<?php echo $u->firstname;?>" readonly="readonly" />
                                 <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
                                 </td>
                         </tr>
