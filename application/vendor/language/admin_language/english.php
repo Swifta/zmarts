@@ -3566,7 +3566,7 @@ $content_text = array(
 			
 			"ABOUT_US_PAGE_UPDATE" => "About Us updated successfully",
 			
-			"STORE_PERSONALIZED_UPDATE" => "Store Personalized updated successfully",
+			"STORE_PERSONALIZED_UPDATE" => "Store has been updated",
 			
 			"BG_COLOR" => "Background Color",
 			

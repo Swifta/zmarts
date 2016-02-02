@@ -1420,7 +1420,7 @@ $content_text = array(
 
 "USER_CREDIT_CHARGED"=>"Credit card will be charged",
 
-"YOU_HAVE_RECEIVED"  => "You have received a inquired for the",
+"YOU_HAVE_RECEIVED"  => "You have received an inquiry from",
 
 "INV_PH" => "Invalid Phone Number. Enter your phone number (e.g. 070...,080...)",
 
@@ -1851,4 +1851,6 @@ $content_text = array(
 "WEBPAY_RESPONSE" => "Webpay Transaction Response",
 
 "INSTALL_PAY" => "Installment Payment ",
+
+"TO_SHIP" => "Please be informed that your ordered item(s) will be delivered by the Merchant(s)",
 			);

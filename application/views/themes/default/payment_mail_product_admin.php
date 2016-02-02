@@ -558,13 +558,31 @@ ship_address2' => string 'test address2' (length=13)
         <?php if($u->shipping_methods == 5){ 
                                                                 $ship_dispay = $this->Lang['ARAMEX_SHIPP_PROD'];
                                                                 } ?>
+        <!-- shipping Amount -->                                                
         <tr height="30"  valign="middle" style=" background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-          <td width="40%" colspan="4" align="center" style=" padding:10px; border-right:#000  dotted 1px" ><?php echo $ship_dispay; ?>
+          <td colspan="7" width="100%" align="center" style=" padding:10px; border-right:#000  dotted 1px" ><?php echo $ship_dispay; ?>
             <?php if(($u->shipping_methods != 1) && ($u->shipping_methods != 5) ){ ?>
             ( <?php echo CURRENCY_SYMBOL.$u->shipping; ?> )
             <?php } ?></td>
-          <td width="40%" colspan="3" style=" padding:10px;" align="left">Store: <a style="text-decoration:none" href="<?php echo PATH.$u->store_url_title;?>"><?php echo $u->store_name; ?></a></td>
+          
         </tr>
+        
+        <?php $store_payment_details = common::get_payment_store_details($u->shop_id); ?>
+        <tr><td colspan="7" height="1px">&nbsp;</td></tr>
+        <tr height="10"  valign="middle" style=" background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+          
+          <td  colspan="7" width="100%" style=" font-size: 11px;text-align:center; padding:10px; padding-bottom:0" p align="left">--- Store Details---</td>
+          </tr> 
+        <tr height="30"  valign="middle" style=" background: #eaeaea;font-size: 11px; font-weight:bold; font-family: Arial;color:#666;">
+          <td  colspan="2" style=" border-top: 1px solid #000; padding:10px;" align="left">Name: <a style="text-decoration:none" href="<?php echo PATH.$u->store_url_title;?>"><?php echo $u->store_name; ?></a></td>
+          
+          <td  colspan="3" style="border-top: 1px solid #000; padding:10px;" align="left">Address: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->address1.", ".$store_payment_details->city.", ".$store_payment_details->country; ?></a></td>
+          
+          <td  colspan="2" style="border-top: 1px solid #000; padding:10px;" align="left">Phone: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->phone; ?></a></td>
+          
+        </tr>
+        
+        
         <?php if($u->bulk_discount!=0 && $p->prime_customer!=0 && $u->total_discount!=0){?>
         <tr  height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
           <td  colspan="7"width="80%" align="center"><?php echo "Offer : ".$this->Lang['BUY_ONE']. "  ".$u->bulk_discount_buy."  ".$this->Lang['GET']."  ".$u->bulk_discount_get?>(<?php echo $this->Lang['CUSTOMER'];?> <?php echo $u->total_discount+$u->quantity;?><?php echo " ".$this->Lang['PRODUCTS'];?>)</td>
@@ -612,13 +630,21 @@ ship_address2' => string 'test address2' (length=13)
         <div style="float:left; width: 26%; text-align:center; color:#666666; font: bold 12px arial; white-space:nowrap;"><b style="white-space:nowrap">
           <?php if($tot_ship != 0 ) echo CURRENCY_SYMBOL.$tot_ship; else echo '-'; ?>
           </b></div>
-      </div></td>
+            <!--- Aliginment of Total Amount Payable -->
+        <div style="clear:both;"></div>
+        <div style="float:left; width: 48%">&nbsp;</div>
+        
+        <div style="float:left; width: 26%; text-align:right; color:#144F5D; font: bold 12px arial; white-space:nowrap"><?php if($p->type == 5 || $p->type == 6 ) { echo $this->Lang['AMO_TO_B_PAID']; } else { echo $this->Lang['AMTPAID']; } ?></div>
+        <div style="float:left; width: 26%; text-align:center; color:#666666; font: bold 12px arial; white-space:nowrap"><b style="white-space:nowrap">
+         <?php echo CURRENCY_SYMBOL.$grand_tot; ?>
+          </b></div>
+      </div>
+      </td>
   </tr>
   <div style="clear:both;"></div>
+  <!--- Last gray row -->
   <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%; padding:20px;">
-    <td  width="74%">&nbsp;</td>
-    <td width="13%" align="right" style="color:#144F5D; font: bold 12px arial; padding: 15px; white-space:nowrap"><?php if($p->type == 5 || $p->type == 6 ) { echo $this->Lang['AMO_TO_B_PAID']; } else { echo $this->Lang['AMTPAID']; } ?></td>
-    <td  width="13%" align="center" style="color:#666666; font: bold 12px arial; padding:15px; white-space:nowrap"><?php echo CURRENCY_SYMBOL.$grand_tot; ?></td>
+    <td colspan="7" style="text-align:center"  width="100%"><?php echo $this->Lang['TO_SHIP'];?></td>
   </tr>
   <tr>
     <td colspan="7">&nbsp;</td>
@@ -636,6 +662,8 @@ ship_address2' => string 'test address2' (length=13)
 </table>
 </body>
 </html>
+
+<!--<?php echo "admin_mail_product_admin"; ?>-->
 
 
 

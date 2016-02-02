@@ -157,3 +157,5 @@ $R = $this->result_mail;
         </table>
     </body>
 </html>
+
+<?php echo "payment_mail"; exit;?>
