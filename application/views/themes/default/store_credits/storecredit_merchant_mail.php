@@ -175,4 +175,4 @@
 </table>
 </body>
 </html>
-<?php echo "storecredit_merchant_mail"; exit;?>
+<!--<?php echo "storecredit_merchant_mail"; ?>-->

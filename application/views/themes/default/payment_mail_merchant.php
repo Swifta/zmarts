@@ -165,4 +165,4 @@ $R = $this->result_mail;
     </body>
 </html>
 
-<?php echo "payment_mail_merchant"; exit;?>
+<!--<?php echo "payment_mail_merchant"; ?>-->

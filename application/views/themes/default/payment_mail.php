@@ -158,4 +158,4 @@ $R = $this->result_mail;
     </body>
 </html>
 
-<?php echo "payment_mail"; exit;?>
+<!--<?php echo "payment_mail"; ?>-->

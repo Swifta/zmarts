@@ -390,4 +390,4 @@ $this->UserName = $this->session->get("UserName");
 </table>
 </body>
 </html>
-<?php echo "store credit approval mail(Customer checkout)"; exit;?>
+<!--<?php echo "store credit approval mail(Customer checkout)"; ?>-->
