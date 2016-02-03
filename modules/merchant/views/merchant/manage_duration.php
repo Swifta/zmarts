@@ -45,9 +45,9 @@
                         </td>
                         <td>
                     	<?php if($u->duration_status == 1){?>
-                    	<a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','block');" class="unblockicon" title="<?php echo $this->Lang['UNBLO_DURATION']; ?>"></a>
+                    	<a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','block');" class="blockicon" title="<?php echo $this->Lang['BLO_DURATION']; ?>"></a>
                         <?php } else{  ?>
-                        <a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','unblock');" class="blockicon" title="<?php echo $this->Lang['BLO_DURATION']; ?>"></a>
+                        <a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','unblock');" class="unblockicon" title="<?php echo $this->Lang['UNBLO_DURATION']; ?>"></a>
                         <?php } ?>
                     </td>
                                        
