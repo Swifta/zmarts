@@ -482,7 +482,12 @@
           <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label>
             <span>*</span></td>
           <td><label>:</label></td>
-          <td><input type="text" name="Delivery_value[]" value="<?php echo $sel_policy->text;?>"><em>
+          <td>
+             <!--< <input type="text" name="Delivery_value[]" value="<?php echo $sel_policy->text;?>">
+                        input type="text" name="Delivery_value[]" value=""> -->
+                    
+                        <textarea name="Delivery_value[]" rows="4"><?php echo $sel_policy->text;?></textarea>
+              <em>
             <?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?>
             </em>
             
@@ -498,7 +503,11 @@
         <tr class="policymain">
           <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label></td>
           <td><label>:</label></td>
-          <td><input type="text" name="Delivery_value[]" value=""><em>
+          <td>
+                        <!--<input type="text" name="Delivery_value[]" value=""> -->
+                    
+                        <textarea name="Delivery_value[]" rows="4"></textarea>
+              <em>
             <?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?>
             </em></td>
         </tr>

@@ -26,17 +26,17 @@ $content_text = array(
 
 			"COUNTRY_BLOCK_SUC" => "Country blocked successfully !",
 
-			"CITY_ADD_SUC" => "City added successfully!",
+			"CITY_ADD_SUC" => "State added successfully!",//"City added successfully!",
 
-			"CITY_EDIT_SUC" => "City details updated successfully !",
+			"CITY_EDIT_SUC" => "State details updated successfully !",//"City details updated successfully !",
 
-			"CITY_DEL_SUC" => "City deleted successfully !",
+			"CITY_DEL_SUC" => "State deleted successfully !",//"City deleted successfully !",
 
-			"CITY_UNBLOCK_SUC" => "City unblocked successfully",
+			"CITY_UNBLOCK_SUC" => "State unblocked successfully",//"City unblocked successfully",
 
-			"CITY_BLOCK_SUC" => "City blocked successfully !",
+			"CITY_BLOCK_SUC" => "State blocked successfully !",//"City blocked successfully !",
 
-			"CITY_MAP_SUC" => "City mapped successfully !",
+			"CITY_MAP_SUC" => "State mapped successfully !",//"City mapped successfully !",
 
 			"CAT_ADD_SUC" => "Category added successfully!",
 
@@ -90,9 +90,9 @@ $content_text = array(
 
 			"DEAL_FILTER" => "Deal filter successfully updated!",
 
-			"CITY_ERR" => "City Already added",
+			"CITY_ERR" => "State Already added",//"City Already added",
 
-			"CITY_EXISTS" => "CITY Already Exist",
+			"CITY_EXISTS" => "State Already Exist",//"CITY Already Exist",
 
 			"CATEGORY_EXISTS" => "Category Already Exist",
 
@@ -216,9 +216,9 @@ $content_text = array(
 
 			"PASSWORD" => "Password",
 
-			"SEL_CITY" => "Select City",
+			"SEL_CITY" => "Select State",//"Select City",
 
-			"CITY_NAME"=>"City Name",
+			"CITY_NAME"=>"State Name",//"City Name",
 
 			"SEARCH_DEALS"=>"Search Deals",
 
@@ -244,7 +244,7 @@ $content_text = array(
 
 			"USERS" => "Customers",
 
-			"CITY" => "City",
+			"CITY" => "State",//"City",
 
 			"COUNTRY" => "Country",
 
@@ -262,7 +262,7 @@ $content_text = array(
 
 			"DEAL_DESCC" => "Deal Description",
 
-			"CITY_NAME" => "City Name",
+			"CITY_NAME" => "State Name",//"City Name",
 
 			"NAME" => "Name",
 
@@ -276,9 +276,9 @@ $content_text = array(
 
 			"MANAGE_USER" => "Manage Customers",
 
-			"MANAGE_CITY" => "Manage Cities",
+			"MANAGE_CITY" => "Manage States",//"Manage Cities",
 
-			"EDIT_CITY" => "Edit City",
+			"EDIT_CITY" => "Edit State",//"Edit City",
 
 			"MAP_CITY" => "Map City",
 
@@ -352,11 +352,11 @@ $content_text = array(
 
 			"DEL_CAT" => "Delete Category",
 
-			"BLO_CITY" => "Block City",
+			"BLO_CITY" => "Block State",//"Block City",
 
-			"UNBLO_CITY" => "Unblock City",
+			"UNBLO_CITY" => "Unblock State",//"Unblock City",
 
-			"DEL_CITY" => "Delete City",
+			"DEL_CITY" => "Delete State",//"Delete City",
 
 			"BLO_COUNT" => "Block Country",
 
@@ -378,7 +378,7 @@ $content_text = array(
 
 			"ADDR_1" => "Address Line1",
 
-			"ADDR_2" => "Address Line2",
+			"ADDR_2" => "City", //"Address Line2",
 
 			"ADDRES" => "Address",
 
@@ -412,13 +412,13 @@ $content_text = array(
 
 			"ADDR1" => "Address1",
 
-			"ADDR2" => "Address2",
+			"ADDR2" => "City",//"Address2",
 
 			"ADD_COUNTRY" => "Add Country",
 
 			"COUNTRY_NAME" => "Country Name",
 
-			"ADD_CITY" => "Add City",
+			"ADD_CITY" => "Add State",//"Add City",
 
 			"ADD_CATEGORY" => "Add Category",
 
@@ -636,7 +636,7 @@ $content_text = array(
 
 			"COUNTRY_MANAGE" => "Countries Management",
 
-			"CITY_MANAGE" => "Cities Management",
+			"CITY_MANAGE" => "States Management",// "Cities Management",
 
 			"CATEGORY_MANAGE" => "Categories Management",
 
@@ -654,7 +654,7 @@ $content_text = array(
 
 			"ADD_PAG" => "Add Page",
 
-			"INV_CITY" => "Invalid city",
+			"INV_CITY" => "Invalid state",//"Invalid city",
 
 			"ALREADY_E" => "This email is already subscribed",
 
@@ -726,7 +726,7 @@ $content_text = array(
 
 			"SITE_NA_E" => "Site Name Already Exist",
 
-			"CITY_AL_E" => "City Local Links Already Exist",
+			"CITY_AL_E" => "State Local Links Already Exist",//"City Local Links Already Exist",
 
 			"INV_PH" => "Invalid phone. Only digits, starting with 0.",
 			
@@ -842,7 +842,7 @@ $content_text = array(
 
 			"UNBLOCK" => "Unblock",
 
-			"SELECT UR CITY HERE" => "Select your city here",
+			"SELECT UR CITY HERE" => "Select your state here",//"Select your city here",
 
 			"SUB_NOW" => "submit now",
 
@@ -864,7 +864,7 @@ $content_text = array(
 
 			"EXPIRE_SOON" => "Expiring Soon",
 
-			"CITY_SUB" => "City Subscriptions",
+			"CITY_SUB" => "State Subscriptions",//"City Subscriptions",
 
 			"CAT_PREF" => "Category Preferences",
 
@@ -892,7 +892,7 @@ $content_text = array(
 
 			"PROFILE"  =>  "Profile",
 
-			"CITY_SUB" =>  "City Subscriptions",
+			"CITY_SUB" =>  "State Subscriptions",//"City Subscriptions",
 
 			"CATE_PREF"  => "Category Preferences",
 
@@ -902,7 +902,7 @@ $content_text = array(
 
 			"ALL" => "All",
 
-			"DE_CI_UP" => "Default city has been updated successfully",
+			"DE_CI_UP" => "Default state has been updated successfully",//"Default city has been updated successfully",
 
 			//**Payment settings**//
 
@@ -1145,7 +1145,7 @@ $content_text = array(
 
 			"SHOP_ADDR1" => "Shop Address1",
 
-			"SHOP_ADDR2" => "Shop Address2",
+			"SHOP_ADDR2" => "Shop City",//"Shop Address2",
 
 			"SHOP_LATI" => "Shop Latitude",
 
@@ -2299,7 +2299,7 @@ $content_text = array(
 
 			"SOME_OF_OT_IT" => "SOME OF OTHER ITEMS",
 
-			"CITY2" => "city",
+			"CITY2" => "state",//"city",
 
 			"ALERT_SAVING" => "alerts and never miss out on the saving !",
 
@@ -2405,7 +2405,7 @@ $content_text = array(
 
 			"TOT_AMOUNT" => "Total Amount",
 
-			"SELECT_Y_CITY" => "Select your city",
+			"SELECT_Y_CITY" => "Select your state",//"Select your city",
 
 			"EMAIL_ADD" => "Your Email Address",
 
@@ -2620,7 +2620,7 @@ $content_text = array(
 
 			"SORT_DEALS" => "Sort By Deals Name",
 
-			"SORT_BY_CITY" => "Sort By City",
+			"SORT_BY_CITY" => "Sort By State",//"Sort By City",
 
 			"SORT_BY_STORE" => "Sort By Store Name",
 
@@ -2784,9 +2784,9 @@ $content_text = array(
 
 			"PER_ITEM_SH" => "Per Item Shipping",
 
-			"WITH_C" => "With City",
+			"WITH_C" => "With State",//"With City",
 
-			"WITH_O_C" => "Without City",
+			"WITH_O_C" => "Without State",//"Without City",
 
 			"TAX_PERS" => "Tax Percentage",
 
@@ -3018,7 +3018,7 @@ $content_text = array(
 			
 			"CRT_NEWSHOP_ACC" => "Created New Shop Account",
 
-			"NO_CITY" => "No city under this country ",
+			"NO_CITY" => "No state under this country ",//"No city under this country ",
 
 			"THNK_YOU" => "Thanking You",
 
@@ -3600,7 +3600,7 @@ $content_text = array(
 			
 			"IP" => "IP",
 			
-			"IP_CITY" => "IP City",
+			"IP_CITY" => "IP State",//"IP City",
 			
 			"IP_COUNTRY" => "IP Country",
 			

@@ -171,7 +171,7 @@ class Seller_Controller extends Layout_Controller {
 	public function seller_signup_step2()
 	{
 			if($_POST){ 
-			//$_POST['nuban'] ='9999999999';
+			$_POST['nuban'] ='9999999999';
 			$this->userPost = $this->input->post();
                         //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
@@ -251,7 +251,7 @@ class Seller_Controller extends Layout_Controller {
                                 $this->aramex_setting = $setting->aramex;
 		        }
 				
-			
+                        //var_dump($this->sub_sector_list); die;	
 						
 		$this->template->title = $this->Lang['MER_SIGN_2'];
 		$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_step2");
@@ -320,12 +320,12 @@ class Seller_Controller extends Layout_Controller {
 							->add_rules('storename', 'required',array($this,'check_store_exist'))
 							//->add_rules('zipcode', 'required', 'chars[0-9.]')
 							//->add_rules('website','required'/*,'valid::url'*/)
-							->add_rules('latitude', 'required','chars[0-9.-]')
-							->add_rules('longitude', 'required','chars[0-9.-]')
+							//->add_rules('latitude', 'required','chars[0-9.-]')
+							//->add_rules('longitude', 'required','chars[0-9.-]')
 							//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							//->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
-							->add_rules('username', 'required');
-							
+							//->add_rules('username', 'required');
+							;
 							if(isset($_FILES['image']))
 								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 								
@@ -690,7 +690,7 @@ $admin_message	= '
 									if(isset($_POST['store_email_id'])){
 										$this->email = $_POST['store_email_id'];
 										$from = CONTACT_EMAIL;
-										$this->name = $_POST['username'];
+										$this->name = @$_POST['username'];
 										$this->store_admin = 1;
 										$message = new View("themes/".THEME_NAME."/mail_template");
 										if(EMAIL_TYPE==2){				
