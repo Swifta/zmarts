@@ -1646,7 +1646,7 @@ $content_text = array(
 
 "ENTER_ADDR1" => "Enter your address here",
 
-"ENTER_ADDR2" => "Enter address line 2 here",
+"ENTER_ADDR2" => "Enter City", //"Enter address line 2 here",
     
 "ENTER_COMPANY_NAME" => "Enter company name",
     

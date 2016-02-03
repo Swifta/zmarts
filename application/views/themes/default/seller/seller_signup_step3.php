@@ -331,14 +331,19 @@ input[type=text],input[type=password]
                                 </td>
   </tr>
   <tr>
-    <td> 
+    <!--<td> 
                                          
                                      <span class="asterisks_input">  </span>
                                  <input tabindex="3" maxlength="50" type="text" name="username" id="username" tabindex="2" class="swifta_input"  placeholder="<?php echo $this->Lang["ENTER_STORE_USER_NAME"]; ?>"  value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" autofocus required/>
 				<em id="id_err_username"><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
-<!--                                     <span class="asterisk_input">  </span>-->
+                                    <span class="asterisk_input">  </span>
                                 
-                             </td>
+    </td>-->
+<td>
+                                        <div class="">
+				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus  />
+                                 </div>
+ </td>
     <td>
                                 <div class="">
                                     <span class="asterisks_input">  </span>
@@ -355,7 +360,8 @@ input[type=text],input[type=password]
                                 } ?></em>
 
 
-                                </td>
+    </td>
+
   </tr>
 <tr>
 <td>
@@ -365,11 +371,21 @@ input[type=text],input[type=password]
                                      <em id="id_err_mobile"><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
                                  </div>
                                 </td>
+
 <td>
-                                        <div class="">
-				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus  />
+
+ 
+                                 <div class="" style='margin-top:-1px;'>
+                                    
+                                     <input type="text" maxlength="50" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
+									
+									<em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
+                                 
+                                 
                                  </div>
-                                        </td>
+                                 
+
+</td>
 
 
 </tr>
@@ -386,18 +402,15 @@ input[type=text],input[type=password]
                                      </td>
 
 <td>
+  <div class="">
+                                            <span class="asterisks_input">  </span>
+                                            <textarea required name="data" tabindex="11" class="swifta_input" id="data" placeholder="Enter your business description" maxlength="1000"><?php if(!isset($this->form_error['data']) && isset($this->userPost['data'])){echo $this->userPost['data'];}?></textarea>
+
+					<em id="id_err_data"><?php if(isset($this->form_error['data'])){ echo $this->form_error["data"]; }?></em>
+<!--					   <span class="asterisk_input">  </span>-->
+                                        </div>
 
  
-                                 <div class="" style='margin-top:-1px;'>
-                                    
-                                     <input type="text" maxlength="50" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
-									
-									<em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
-                                 
-                                 
-                                 </div>
-                                 
-
 </td>
 
 </tr>
@@ -418,28 +431,37 @@ input[type=text],input[type=password]
 </td>
 
 <td>
-  <div class="">
-                                            <span class="asterisks_input">  </span>
-                                            <textarea required name="data" tabindex="11" class="swifta_input" id="data" placeholder="<?php echo $this->Lang['HELP_TOKNOW'];?>" maxlength="1000"><?php if(!isset($this->form_error['data']) && isset($this->userPost['data'])){echo $this->userPost['data'];}?></textarea>
 
-					<em id="id_err_data"><?php if(isset($this->form_error['data'])){ echo $this->form_error["data"]; }?></em>
-<!--					   <span class="asterisk_input">  </span>-->
-                                        </div>
+<label style="color:blue;">Have a store admin representative ? 
+                                      
+                                      <em style="font-size:90%"><input type="checkbox" id="have_store_admin" style="margin-top:px;" />Check this box if you want to register someone to manage this store for you. </em>
+                                     
+                                  </label>
+                              
+                           
+                             
+                              <li id="store_admin_email_li" style="display: none;">
+<!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
+                                 <div class="">
+                                     <span class="asterisks_input">  </span>
+                                 <input maxlength="150" type="text" tabindex="" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
+<!--                                   <span class="asterisk_input">  </span>-->
+                                 </div>
+                                 <em id="id_err_memail"></em>
+                             </li>
 
- 
 </td>
-
 
 </tr>
 
 <tr>
-<th>
+<td>
 				<li class="frm_clr">
-                                        <label style="width:480px"><?php echo $this->Lang["SEARCH_LOCATION"]; ?> <span style="color:red">*</span>:</label>
+                                        <label style="width:480px"><?php echo $this->Lang["SEARCH_LOCATION"]; ?> <!--<span style="color:red">*</span>:</label>-->
                                         <div class="fullname map_loc_section map_re_w">
                                         <div class="gllpLatlonPicker">
                                         <div class="top_popup_select2">        
-                                            <input type="text" maxlength="50" class="gllpSearchField required" tabindex="6" required  id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
+                                            <input type="text" maxlength="50" class="gllpSearchField " tabindex="6" id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
                                         <input type="button" class="gllpSearchButton sign_submit"  value="<?php echo $this->Lang['SEARCH']; ?>">
                                         </div>
                                         <br/>
@@ -460,41 +482,17 @@ input[type=text],input[type=password]
                                         </div>
                                 </li>
 				   
-</th>
-
+</td>
 <td>
-
-<label style="color:blue;">Have a store admin representative ? 
-                                      
-                                      <em style="font-size:90%"><input type="checkbox" id="have_store_admin" style="margin-top:px;" />Check this box if you want to register someone to manage this store for you. </em>
-                                     
-                                  </label>
-                              
-                           
-                             
-                              <li id="store_admin_email_li" style="display: none;">
-<!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
-                                 <div class="">
-                                     <span class="asterisks_input">  </span>
-                                 <input maxlength="150" type="text" tabindex="" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
-<!--                                   <span class="asterisk_input">  </span>-->
-                                 </div>
-                                 <em id="id_err_memail"></em>
-                             </li>
-                             <br/>
                             
                                  <div class="">
                                      <input style="margin-top:20px;" type="file" name="image" id="image" tabindex="12"/>
 								
 									<em id="id_err_image"><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
-                                 <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
+                                 <label>Upload logo: Size <?php /*echo $this->Lang['IM_UP_S'];*/ ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
                                  </div>
-
-                                  
-                               
-
-
-</td></tr>
+</td>
+</tr>
 
 <tr>
 <td>
