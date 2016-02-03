@@ -140,7 +140,7 @@
                                                         <label>State<span>*</span></label>
                                                         <div class="fullname">
                                                             <select name="city" id="CitySD">
-                                                                <option value="">Select a City First</option>
+                                                                <option value="">Select a Country First</option>
     <?php foreach ($this->all_city_list as $c) { ?>
                 <?php if ($c->country_id == $u->ship_country) { ?>
                                                                     <option  <?php if ($c->city_id == $u->ship_city) { ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
