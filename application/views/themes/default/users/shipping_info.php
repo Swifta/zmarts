@@ -137,7 +137,7 @@
 
                                                     </li>
                                                     <li class="frm_clr">
-                                                        <label><?php echo $this->Lang['CITY']; ?><span>*</span></label>
+                                                        <label>State<span>*</span></label>
                                                         <div class="fullname">
                                                             <select name="city" id="CitySD">
                                                                 <option value="">Select a City First</option>
@@ -155,7 +155,7 @@
 
 
                                                     <li>
-                                                        <label><?php echo $this->Lang['STATE']; ?><span>*</span></label>
+                                                        <label>City<span>*</span></label>
                                                         <div class="fullname">
                                                             <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>"/>
                                                         </div>

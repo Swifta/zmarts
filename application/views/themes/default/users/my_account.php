@@ -750,7 +750,7 @@
                                             <div class="mc_mid">
                                                 <ul>
                                                     <li>
-                                                        <h4><?php echo $this->Lang['CITY']; ?></h4>
+                                                        <h4>State</h4>
                                                         <div class="pi_detail">
                                                             <div class="pi_detail_info" id="city_user">
                                                                 <p id="show4" style="color: #231F20;font: bold 19px arial;"><?php echo $u->city_name; ?></p>
