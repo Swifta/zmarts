@@ -736,8 +736,14 @@
                                                                 </div>
                                                                 </li>    
                                                                 <li class="frm_clr">
-                                                                        <label><?php echo $this->Lang['SEL_CITY']; ?>  <span> * </span></label>                                        
-                                                                        <div class="clearfix fullname">
+                                                                        <label>Enter City <span> * </span></label>                                        
+                                                                        <div class="fullname">
+                                                                        <input name="state" AUTOCOMPLETE="OFF"  placeholder="Enter City" type="text" size="40" class="required" maxlength="35" value="<?php echo $s->ship_state; ?>" />
+                                                                        </div> 
+                                                                </li> 
+                                                                <li>
+                                                                        <label><?php echo $this->Lang['STATE']; ?><span> * </span></label>
+                                                                <div class="clearfix fullname">
                                                                         <div class="select_box_outer country_select_box">
                                                                         <select name="city" class="select required" id="CitySD">
                                                                         <?php foreach ($this->all_city_list as $CityL) { ?>
@@ -748,13 +754,8 @@
                                                                         </select>  
                                                                         <div id="city_validation"> </div>                          
                                                                         </div>
-                                                                </div>  
-                                                                </li> 
-                                                                <li>
-                                                                        <label><?php echo $this->Lang['STATE']; ?><span> * </span></label>
-                                                                        <div class="fullname">
-                                                                        <input name="state" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>" type="text" size="40" class="required" maxlength="35" value="<?php echo $s->ship_state; ?>" />
-                                                                        </div>
+                                                                </div> 
+
                                                                 </li>                                                                       
                                                                 <li class="frm_clr">
                                                                         <label><?php echo $this->Lang['POSTAL_CODE']; ?></label>
