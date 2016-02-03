@@ -171,7 +171,7 @@ class Seller_Controller extends Layout_Controller {
 	public function seller_signup_step2()
 	{
 			if($_POST){ 
-			$_POST['nuban'] ='9999999999';
+			//$_POST['nuban'] ='9999999999';
 			$this->userPost = $this->input->post();
                         //var_dump($this->userPost); die;
 			$post = new Validation($_POST);
