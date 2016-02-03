@@ -157,7 +157,7 @@
                                                     <li>
                                                         <label>City<span>*</span></label>
                                                         <div class="fullname">
-                                                            <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>"/>
+                                                            <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="Enter your state here"/>
                                                         </div>
                                                         <em><?php if (isset($this->form_error['state'])) {
         echo $this->form_error["state"];
