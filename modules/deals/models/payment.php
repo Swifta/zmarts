@@ -14,15 +14,16 @@ class Payment_Model extends Model
 	
 	public function get_deals_payment_details($deal_key = "", $url_title = "")
 	{
-//		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id 
-//                    where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.url_title = '$url_title' and enddate > 'time()'and purchase_count < maximum_deals_limit");
-//	        return $result;
-                  $result =  $this->db->select()->from("deals")
-                        ->join("stores", "stores.store_id", "deals.shop_id")
-                        ->join("category", "category.category_id", "deals.category_id")
-                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.url_title" => $url_title, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"))
-                        ->get();
-                return $result;
+		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id 
+                    where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '".strip_tags(addslashes($deal_key)).
+                        "'  and deals.url_title = '".strip_tags(addslashes($url_title))."' and enddate > 'time()'and purchase_count < maximum_deals_limit");
+	        return $result;
+//                  $result =  $this->db->select()->from("deals")
+//                        ->join("stores", "stores.store_id", "deals.shop_id")
+//                        ->join("category", "category.category_id", "deals.category_id")
+//                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.url_title" => $url_title, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"))
+//                        ->get();
+//                return $result;
 	}
 	
 	/** GET USER LIMIT **/
