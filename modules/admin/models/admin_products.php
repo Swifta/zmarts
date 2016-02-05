@@ -558,7 +558,7 @@ class Admin_products_Model extends Model
 				$quantity +=$size_quantity[$i];
 			}
 		 }
-		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal          
+		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal          
 		//$sub_cat = implode(',',$sub_cat1);
 		$dealdata = $this->db->select("deal_title","url_title","user_limit_quantity","purchase_count")->from("product")->where(array("deal_id" => $deal_id, "deal_key" => $deal_key))->get();
 		
@@ -594,24 +594,24 @@ class Admin_products_Model extends Model
 			$savings=($post->price-$post->deal_value);
 			  $shipping_amount = "0";
 			 if(isset($_POST['shipping_amount'])) {
-			        $shipping_amount = $_POST['shipping_amount'];
+			        $shipping_amount = strip_tags(addslashes($_POST['shipping_amount']));
 			 }
 			 
 			 $weight = "0";
 			 if(isset($_POST['weight'])) {
-			        $weight = $_POST['weight'];
+			        $weight = strip_tags(addslashes($_POST['weight']));
 			 }
 			 $height = "0";
 			 if(isset($_POST['height'])) {
-			        $height = $_POST['height'];
+			        $height = strip_tags(addslashes($_POST['height']));
 			 }
 			 $length = "0";
 			 if(isset($_POST['length'])) {
-			        $length = $_POST['length'];
+			        $length = strip_tags(addslashes($_POST['length']));
 			 }
 			 $width = "0";
 			 if(isset($_POST['width'])) {
-			        $width = $_POST['width'];
+			        $width = strip_tags(addslashes($_POST['width']));
 			 }
 			 $duration = "";
 			 if(isset($_POST['duration'])) {
@@ -868,9 +868,9 @@ class Admin_products_Model extends Model
         {
                 $contitions = "discussion.type = $deal_type ";
                         if($firstname){
-                        $contitions .= ' AND (users.firstname like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR product.deal_title like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%")';
+                        $contitions .= ' AND (users.firstname like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR product.deal_title like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%")';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
                 return $result;
@@ -882,9 +882,9 @@ class Admin_products_Model extends Model
         {
                $contitions = "discussion.type = $deal_type ";
                         if($firstname){
-                        $contitions .= ' AND (users.firstname like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR product.deal_title like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%")';
+                        $contitions .= ' AND (users.firstname like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR product.deal_title like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%")';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC");
                 return count($result);
@@ -942,9 +942,9 @@ class Admin_products_Model extends Model
 					
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
-                    $contitions .= 'OR u.email like "%'.strip_tags($name).'%"';
-            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                    $contitions .= 'OR u.email like "%'.strip_tags(addslashes($name)).'%"';
+            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
                    $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
 				}
 				else {
@@ -965,9 +965,9 @@ class Admin_products_Model extends Model
 					$condition = " AND t.type = 5 ";
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
-                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags(addslashes($name)).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
                    
                    $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC "); 
 		}
@@ -1001,7 +1001,9 @@ class Admin_products_Model extends Model
 	{ 
 		$result =  $this->db->count_records("transaction_mapping", array("coupon_code" => $coupon,"transaction_id" => $trans_id,"coupon_code_status" =>1)); 
 			if($result > 0){
-				$this->db->query("update users set merchant_account_balance = merchant_account_balance + $product_amount where user_type = 1");
+				//$this->db->query("update users set merchant_account_balance = merchant_account_balance + $product_amount where user_type = 1");
+                                $this->db->update("users", array("merchant_account_balance"=>new Database_Expression('merchant_account_balance + '.$product_amount)), 
+                                        array("user_type" => 1));
 				$this->db->update('transaction',array('captured' => 1,'captured_date' =>time(),'payment_status' => 'Success','pending_reason' =>'None'),array('id' => $trans_id));
 
 				$this->db->update('transaction_mapping',array('coupon_code_status' => 0),array("transaction_id" => $trans_id));
@@ -1034,7 +1036,8 @@ class Admin_products_Model extends Model
 						$quantity=$get_detail[0]->quantity;
 						$size_id = $get_detail[0]->product_size;
 					$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
-
+                                        $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
+                                                    array("deal_id" => $product_id, "size_id" => $size_id));
 					$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
 					
 					$this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('id' => $trans_id)); 	
@@ -1068,8 +1071,10 @@ class Admin_products_Model extends Model
 	
 	public function change_commission_data($commission = "" , $product_id = "")
 	{
-	        $result = $this->db->query("update product set commission_status = $commission where deal_id = '$product_id'");
-	        return $result;
+	        //$result = $this->db->query("update product set commission_status = $commission where deal_id = '$product_id'");
+	        $result = $this->db->update("product", array("commission_status"=>$commission), 
+                        array("deal_id" => $product_id));
+                return $result;
 	}
 	
 	/*	GET HOT PRODUCT LIST */
@@ -1141,7 +1146,8 @@ class Admin_products_Model extends Model
 	/* Shipping information */
 	public function get_shipping_info($id = "")
 	{
-		$result = $this->db->query("SELECT *,transaction.currency_code as curren_code FROM (`shipping_info`)  LEFT JOIN transaction ON transaction.id = shipping_info.transaction_id WHERE `shipping_id` = $id");
+		$result = $this->db->query("SELECT *,transaction.currency_code as curren_code FROM (`shipping_info`)  LEFT JOIN transaction ON transaction.id = shipping_info.transaction_id WHERE `shipping_id` = ".
+                strip_tags(addslashes($id)));
 		return $result;
 	}
 	
@@ -1216,9 +1222,12 @@ class Admin_products_Model extends Model
 	
         public function get_merchant_details($merchant_name="",$shop_name="",$merchant_email ="")
         {
-	         $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
-	         $result = $this->db->query($query);  
-	         //print_r($result); exit;                   
+	         //$query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
+	         //$result = $this->db->query($query);  
+	         //print_r($result); exit;   
+                 $result = $this->db->select()->from("users")
+                         ->join("stores", "users.user_id", "stores.merchant_id", "LEFT")
+                         ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email));
 	         return $result;
         }
 
@@ -1240,8 +1249,11 @@ class Admin_products_Model extends Model
 	
 	public function get_merchant_and_shop_status($merchant_name="",$shop_name="",$merchant_email ="")
 	{
-		 $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
-		$result_1 = $this->db->query($query);  
+		// $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
+		//$result_1 = $this->db->query($query);
+                $result_1 = $this->db->select()->from("users")
+                        ->join("stores", "users.user_id", "stores.merchant_id", "LEFT")
+                        ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email));
 		$result = count($result_1);
 		if($result == 1)
 		{

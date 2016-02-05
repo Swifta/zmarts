@@ -144,15 +144,15 @@ class Admin_merchant_Model extends Model
                 if($_GET){
 
                         if($city){
-                        $contitions .= ' and users.city_id = '.$city;
+                        $contitions .= ' and users.city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
                         if($today == 1)
                         {
@@ -211,15 +211,15 @@ class Admin_merchant_Model extends Model
                 $contitions = "user_type = 3 and stores.store_type = 1";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and stores.city_id = '.$city;
+                        $contitions .= ' and stores.city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
                         if($today == 1)
                         {
@@ -277,11 +277,11 @@ class Admin_merchant_Model extends Model
                 if($_GET){
                         if($city){
 							
-				$contitions .= ' and city_id = '.$city;
+				$contitions .= ' and city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         $result = $this->db->query("select * from stores where $contitions ORDER BY stores.store_id limit $offset, $record");
                         count($result);
@@ -305,11 +305,11 @@ class Admin_merchant_Model extends Model
                 if($_GET){
                         if($city){
 							
-				$contitions .= ' and city_id = '.$city;
+				$contitions .= ' and city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         $result = $this->db->query("select stores.store_id from stores where $contitions ORDER BY stores.store_id");
                         count($result);
