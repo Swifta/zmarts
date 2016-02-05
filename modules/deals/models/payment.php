@@ -20,7 +20,8 @@ class Payment_Model extends Model
                   $result =  $this->db->select()->from("deals")
                         ->join("stores", "stores.store_id", "deals.shop_id")
                         ->join("category", "category.category_id", "deals.category_id")
-                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.url_title" => $url_title, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"));
+                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.url_title" => $url_title, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"))
+                        ->get();
                 return $result;
 	}
 	
@@ -105,7 +106,8 @@ class Payment_Model extends Model
                  $result =  $this->db->select()->from("deals")
                         ->join("stores", "stores.store_id", "deals.shop_id")
                         ->join("category", "category.category_id", "deals.category_id")
-                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.deal_id" => $deal_id, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"));
+                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.deal_id" => $deal_id, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"))
+                        ->get();
                 return $result;
                 
 	}
