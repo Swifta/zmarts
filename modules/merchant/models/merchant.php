@@ -1151,6 +1151,7 @@ class Merchant_Model extends Model
 
 	public function edit_product($deal_id = "", $deal_key = "", $post = "",$size_quantity = "",$preview_type="")
 	{
+		
 
 		 $quantity = 0;
 
@@ -1288,7 +1289,22 @@ class Merchant_Model extends Model
 			    }
 	        }
 
-	        if(($post->size_val) == 1){
+	        
+			if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$deal_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($post->size_val) == 1){
 				$i= 0;
 				foreach($post->size as $s){
 					$result_count = $this->db->from("product_size")->where(array("deal_id" => $deal_id, "size_id" => $s))->get();
@@ -1304,6 +1320,8 @@ class Merchant_Model extends Model
 					$i++; }
 				}
 			}
+			
+			
 
 				//Attribute start
 		$attr_result = $this->db->delete('product_attribute', array('product_id' => $deal_id));
@@ -2773,7 +2791,7 @@ class Merchant_Model extends Model
 	public function get_product_one_size($deal_id = "")
 	{
 		$result = $this->db->from("product_size")
-				->where(array("deal_id" => $deal_id))
+				->where(array("deal_id" => $deal_id, "size_id !="=>1))
 		     		->get();
 		return $result;
 	}
@@ -3195,8 +3213,25 @@ class Merchant_Model extends Model
                                         $color_name = $color_detail[2];
                                         $result_color = $this->db->insert("color", array("deal_id" => $product_id, "color_name" => $color_code, "color_code_id" => $color_id,"color_code_name" => $color_name));
                                 } 
-                        } 
-                        if(($size_val) == 1){
+                        }
+						
+						
+						 
+                        if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$product_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($size_val) == 1){
                                 foreach ($size as $sizes) {
                                         $size_detail = explode("_",$sizes);
                                         $size_id =$size_detail[0];

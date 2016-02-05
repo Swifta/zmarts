@@ -1541,9 +1541,6 @@ function set_selected_size(){
 	<?php
 	
 	if(isset($_POST['size'])){?>
-	
-			
-			
 			<?php $sizes =  $_POST['size'];
 			$size_q = $_POST['size_quantity'];
 	 for($i = 2; $i < count($_POST['size']); $i++){
@@ -1564,6 +1561,7 @@ function set_selected_size(){
 			<?php }?>
 			
 	<?php }else{?>
+		
 		
 		<?php if(count($this->selectproduct_size) > 0) { ?>
                         <?php 
@@ -1647,4 +1645,7 @@ function RemoveSize(val) {
         $("#row_s-"+val).remove();
 }
 
+
+
 </script>
+
