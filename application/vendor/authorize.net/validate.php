@@ -19,7 +19,8 @@ if($_POST){
         $USERID = $userid = $_SESSION['userid'];
 	if($_POST['ref_amt2'] > 0) { 
 
-                $user = "SELECT * FROM coupons_users where userid='$USERID'";
+     $user = "SELECT * FROM coupons_users where userid='$USERID'";
+                
                 $userSet = mysql_query($user);
                 while($r = mysql_fetch_array($userSet)) 
                 {
@@ -94,6 +95,7 @@ if($_POST){
 			}
 	
                         $user = "SELECT * FROM coupons_users where userid='$USERID'";
+                        
                         $userSet = mysql_query($user);
                         while($r = mysql_fetch_array($userSet)) 
                         {

@@ -508,15 +508,25 @@ class Admin_merchant_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{               
-                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
-                return $result;
+//                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
+//                return $result;
+                $result = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                  
+						   
+		return $result;
 	}
 	
 	/** GET MERCHANT DETAILS */
 	public function get_admin_details_data()
 	{
-	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
-	    return $result;
+//	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
+//	    return $result;
+            $result = $this->db->from("users")
+		  ->where(array("user_status" => 1 , "user_type" => 1));
+		                  
+						   
+		return $result;
 	}
 
 		/** GET STORE COMMENTS LIST  **/
@@ -726,12 +736,18 @@ class Admin_merchant_Model extends Model
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+                                $news = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                  
+						   
+		return news;
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
-				
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+				 $news = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
 			}
 			$user_array1=array();
 			if(count($news) > 0){
@@ -873,8 +889,11 @@ class Admin_merchant_Model extends Model
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			
-			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
-			return $news;
+//			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+//			return $news;
+                         $news = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+                         return $news;
 		}
 		
 		
@@ -890,8 +909,11 @@ class Admin_merchant_Model extends Model
 
 	public function get_subsector_name($sector_id ='')
 	{
-		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
-		return $sector_query;
+//		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
+//		return $sector_query;
+                 $sector_query = $this->db->from("sector")
+		 ->where(array("sector_id" => $sector_id));
+                 return $sector_query;
 	}	
 	
 	/** ADMIN TO USERS MAIL COMMUNICATION **/

@@ -29,10 +29,17 @@ class Store_admin_Model extends Model
 		$result_archive_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate <" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1","stores.store_id" => $this->store_id))->get();
 		$result["archive_deals"]=count($result_archive_deals);
 
-		$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id." and product.shop_id = ".$this->store_id." ");
+//		$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id." and product.shop_id = ".$this->store_id." ");
+//                
+//		$result["active_products"]=count($result_active_products);
 
+                 $result_active_products =$this->db->from("product")
+                 ->join("stores","stores.store_id","product.shop_id")        
+                 ->where(array("purchase_count <" => "user_limit_quantity","deal_status"=> 1,"stores.store_status"=>1,"product.merchant_id"=> $this->user_id ,"product.shop_id"=> $this->store_id));
+                        
+						   
 		$result["active_products"]=count($result_active_products);
-
+      
 		$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id." and product.shop_id = ".$this->store_id." ");
 
 		$result["sold_products"]=count($result_sold_products);
