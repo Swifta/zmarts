@@ -670,7 +670,7 @@ class Store_Model extends Model
 	{
 		
 		$store_id = strip_tags(addslashes($store_id));
-		$search = strip_tags(addslashes($search));
+		//$search = strip_tags(addslashes($search));
 		$category = strip_tags(addslashes($category));
 		$offset = strip_tags(addslashes($offset));
 		$record = strip_tags(addslashes($record));
