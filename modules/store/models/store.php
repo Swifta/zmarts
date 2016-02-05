@@ -73,7 +73,7 @@ class Store_Model extends Model
 			return $result;
 		} else { */
 			$result = $this->db->from("stores")
-                                ->where(array("store_key" =>$storekey,"store_url_title" => $store_url_title, "store_status" => '1',"approve_status" =>1))
+                                ->where(array("store_key" =>$storekey,"store_url_title" => $store_url_title, "store_status" => 1,"approve_status" =>1))
                                 ->join("city","city.city_id","stores.city_id")
 				->join("users","users.user_id","stores.merchant_id")
                                 ->join("country","country.country_id","stores.country_id")
@@ -109,8 +109,8 @@ class Store_Model extends Model
 		$order1="";
 		$order="";
 		  if($search){
-			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
-			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags(addslashes($search))."%'";
+			$conditions .= " or deal_description like '%".strip_tags(addslashes($search))."%')";
 		}
 		if($type=='1')
 		{
@@ -286,7 +286,7 @@ class Store_Model extends Model
 	{
 	        $conditions = " ";
 		if($search){
-			 $conditions .= " and store_name like '%".strip_tags($search)."%'";
+			 $conditions .= " and store_name like '%".strip_tags(addslashes($search))."%'";
 		}
 		if(CITY_SETTING){
 		$query = "select * from stores  join users on users.user_id=stores.merchant_id  where store_status = 1 and users.user_type=3 and users.user_status=1 and stores.city_id = '$this->city_id'  $conditions order by store_id DESC limit $offset,$record";
@@ -395,7 +395,7 @@ class Store_Model extends Model
 		$result= $this->db->from("rating")->where(array("type_id" => $store_id))->get();
 		if(count($result)>0)
 		{
-			$store_id = strip_tags(add_slashes($store_id));
+			$store_id = strip_tags(addslashes($store_id));
 			$get_rate = count($result);
 			$sum= $this->db->query("select sum(rating) as sum from rating where type_id='$store_id' AND module_id = 4");
 			$get_sum=$sum->current()->sum;

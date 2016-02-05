@@ -275,7 +275,7 @@ class Database_Mysql_Driver extends Database_Driver {
 
 		is_resource($this->link) or $this->connect();
 
-		return mysql_real_escape_string($str, $this->link);
+		return strip_tags($str, $this->link);
 	}
 
 	public function list_tables()

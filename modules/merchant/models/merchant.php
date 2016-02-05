@@ -41,6 +41,9 @@ class Merchant_Model extends Model
                         ->where(array("purchase_count" => "user_limit_quantity", "deal_status"=>1, "stores.store_status" => 1,
                             "product.merchant_id" => $this->user_id))->get();
                 $result["sold_products"]=count($result_sold_products);
+
+                
+		$result_active_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id))->get();
 				
 				
 
@@ -61,6 +64,7 @@ class Merchant_Model extends Model
 			
 			
 		}
+
 		$result["active_auction"]=count($result_active_auction);
 		
 		

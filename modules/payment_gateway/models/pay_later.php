@@ -126,7 +126,8 @@ class Pay_later_Model extends Model
 		$result = $this->db->select()->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->join("category", "category.category_id", "product.category_id")
-                        ->where(array("deal_status"=>1, "category.category_status"=>1, "store_status"=> 1, "product.deal_id"=>$deal_id));
+                        ->where(array("deal_status"=>1, "category.category_status"=>1, "store_status"=> 1, "product.deal_id"=>$deal_id))
+                        ->get();
                 return $result;
 	}
 	
@@ -439,7 +440,7 @@ class Pay_later_Model extends Model
                 ->join("free_gift", "free_gift.merchant_id", "product.merchant_id")
                 ->where(array("gift_Amount <= "=>$gift_amount, "free_gift.merchant_id"=>$merchant_id,
                     "gift_status"=>1, "product.deal_id"=>$deal_id))
-                ->orderby("gift_Amount", "DESC")->limit(1);
+                ->orderby("gift_Amount", "DESC")->limit(1)->get();
 		return $result;
 	}
 	
