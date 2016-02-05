@@ -180,7 +180,7 @@ class Admin_products_Model extends Model
 		   foreach($size_c as $s_id){
 			   	if($s_id){
 					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
-					if(count($r)>0){
+					if($s_id && $s_id == "1"){
 						$r = $r->current();
 						$this->db->insert("product_size", array("deal_id"=>$product_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
 					}
@@ -717,7 +717,7 @@ class Admin_products_Model extends Model
 				
 		   $size_c = (array)$post->size;
 		   foreach($size_c as $s_id){
-			   	if($s_id){
+			   	if($s_id && $s_id == "1"){
 					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
 					if(count($r)>0){
 						$r = $r->current();

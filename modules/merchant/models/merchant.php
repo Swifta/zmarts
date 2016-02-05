@@ -951,7 +951,21 @@ class Merchant_Model extends Model
                     }
                 }
                 
-	    if(($post->size_val) == 1){
+	    if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id && $s_id == "1"){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$product_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($post->size_val) == 1){
 	        $i= 0;
             if(isset($post->size)){
 	        foreach($post->size as $s){
@@ -1297,6 +1311,8 @@ class Merchant_Model extends Model
 			
 			
 			
+			
+			
 			 
 			$this->db->update("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period"=> $post->delivery_days, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category, "third_category_id" => $post->third_category,"deal_price" => $deal_price,"deal_value" => $deal_val, "deal_prime_value" => $deal_prime_val, "deal_savings" =>$savings, "deal_prime_savings" =>$prime_savings, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => $value, "deal_prime_percentage" => $prime_value, "merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"shipping"=>$post->shipping,"attribute"=>$atr_option,"Including_tax" =>$inc_tax, "weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"product_duration" =>$duration, "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift), array("deal_id" => $deal_id, "deal_key" => $deal_key));
 
@@ -1306,19 +1322,27 @@ class Merchant_Model extends Model
 			if(isset($_POST['status']) && $_POST['status']==1)
 				$this->db->update("product",array("deal_status"=>1),array("deal_id" => $deal_id, "deal_key" => $deal_key,"deal_status"=>2));
 				
+				
+			$result = $this->db->delete('color', array('deal_id' => $deal_id));
+			$result = $this->db->delete('product_size', array('deal_id' => $deal_id));
+			
+			
+				
 			 if(($post->color_val) == 1){
 				foreach($post->color as $c){
 					 $result_id = $this->db->from("color_code")->where(array("color_code" => $c))->get();
 			        $result_color = $this->db->insert("color", array("deal_id" => $deal_id, "color_name" => $c, "color_code_id" => $result_id->current()->id,"color_code_name" => $result_id->current()->color_name));
 			    }
 	        }
-
+			
+			
+			
 	        
 			if($post->size_val == "0"){
 				
 		   $size_c = (array)$post->size;
 		   foreach($size_c as $s_id){
-			   	if($s_id){
+			   	if($s_id && $s_id == "1"){
 					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
 					if(count($r)>0){
 						$r = $r->current();
@@ -1375,6 +1399,22 @@ class Merchant_Model extends Model
 		}
 		return 8;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
  	/** EDIT PRODUCTS DATA **/
 
 	public function get_edit_product($deal_id = "",$deal_key = "")
@@ -2814,9 +2854,11 @@ class Merchant_Model extends Model
 
 	public function get_product_one_size($deal_id = "")
 	{
+		
 		$result = $this->db->from("product_size")
 				->where(array("deal_id" => $deal_id, "size_id !="=>1))
 		     		->get();
+					
 		return $result;
 	}
 
@@ -3241,11 +3283,13 @@ class Merchant_Model extends Model
 						
 						
 						 
-                        if($post->size_val == "0"){
+                  if($post->size_val == "0"){
 				
 		   $size_c = (array)$post->size;
+		   
+		  
 		   foreach($size_c as $s_id){
-			   	if($s_id){
+			   	if($s_id == "1"){
 					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
 					if(count($r)>0){
 						$r = $r->current();
