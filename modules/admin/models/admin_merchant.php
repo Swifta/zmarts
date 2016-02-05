@@ -186,7 +186,7 @@ class Admin_merchant_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","store"=>" order by stores.store_name $sort");
 
 			if(isset($sort_arr[$param])){
-				 $contitions .= $sort_arr[$param];
+				 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 			}
 
                         $result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
@@ -253,7 +253,7 @@ class Admin_merchant_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","store"=>" order by stores.store_name $sort");
 
 			if(isset($sort_arr[$param])){
-	       		 $contitions .= $sort_arr[$param];
+	       		 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
 				$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions");
@@ -536,9 +536,9 @@ class Admin_merchant_Model extends Model
 
                 $contitions = "";
                         if($firstname){
-                        $contitions .= 'where users.firstname like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR stores.store_name like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'where users.firstname like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR stores.store_name like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC limit $offset, $record");
               
@@ -551,9 +551,9 @@ class Admin_merchant_Model extends Model
         {
                $contitions = "";
                         if($firstname){
-                        $contitions .= 'where users.firstname like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR stores.store_name like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'where users.firstname like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR stores.store_name like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC ");
               
@@ -872,16 +872,16 @@ class Admin_merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".$city." and user_type=3 ";
+				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=3 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=3 ";
+					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=3 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=3 ";
+				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=3 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");

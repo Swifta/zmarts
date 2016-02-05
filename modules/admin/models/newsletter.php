@@ -177,8 +177,9 @@ class Newsletter_Model extends Model
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select *,email_id as email from email_subscribe where  suscribe_status=1 and is_deleted= 0");
-				
+				//$news=$this->db->query("select *,email_id as email from email_subscribe where  suscribe_status=1 and is_deleted= 0");
+				 $news =  $this->db->select("*,email_id as email")->from("email_subscribe")
+                                ->where(array("suscribe_status" => 1, "is_deleted" => 0));
 			}
 			
 			if(count($news) > 0){
@@ -413,16 +414,16 @@ class Newsletter_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".$city." and user_type=4 ";
+				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=4 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=4 ";
+					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=4 ";
+				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
