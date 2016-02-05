@@ -1,7 +1,9 @@
 <?php 
-$nosize = "";
-$c = 0; $i = 0; 
-?>
+	if(count($this->product_size) == 0){
+		$nosize = 1;
+	}else{
+		$nosize = 0;
+	}?>
 
 	<head>
            <script type="text/javascript">

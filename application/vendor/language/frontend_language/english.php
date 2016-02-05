@@ -737,13 +737,13 @@ $content_text = array(
 
 "SUBS_NW" => "Subscribe now",
 
-"ALREADY_ACCESS2" => "Already have an access? Log in here",
+"ALREADY_ACCESS2" => "Already have access? Log in here",
 
 "APP_BUSS" => "We appreciate your business and we will never share your email address with third parties.",
 
 "SORRY_CATE" => "Sorry, there are no",
 
-"THANK_CT" => "Thank you for contact us",
+"THANK_CT" => "Thank you for contacting us",
 
 "PLS_ENT_NO" => "Please enter a valid number.",
 
