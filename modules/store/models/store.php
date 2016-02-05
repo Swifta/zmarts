@@ -86,6 +86,7 @@ class Store_Model extends Model
        
         public function get_sub_store_detailspage($store_id= "")
         {
+			$store_id = strip_tags(addslashes($store_id));
                 $result_values = $this->db->from("stores")
                                         ->where(array("store_id" => $store_id, "store_status" => '1'))
                                         ->get();
@@ -101,8 +102,10 @@ class Store_Model extends Model
 	
 	public function get_deals_categories($store_id = "",$search="",$type="")
 	{
+		$store_id = strip_tags(addslashes($store_id));
+		$search = strip_tags(addslashes($search));
 		
-		$conditions = "deals.shop_id = $store_id and deals.deal_status = 1 and enddate > ".time()."";
+		$conditions = "deals.shop_id = '$store_id' and deals.deal_status = 1 and enddate > ".time()."";
 		$order1="";
 		$order="";
 		  if($search){
@@ -157,11 +160,16 @@ class Store_Model extends Model
 	
 	public function get_product_categories($store_id = "",$search="",$type="")
 	{
+		$store_id = strip_tags(addslashes($store_id));
+		$search = strip_tags(addslashes($search));
+		
+		
+		try{
 		$order=" product.deal_id DESC";
-		$conditions = "purchase_count < user_limit_quantity  and category.category_status = 1 and  store_status = 1  and shop_id = $store_id";
+		$conditions = "purchase_count < user_limit_quantity  and category.category_status = 1 and shop_id = '$store_id'and  store_status = '1' ";
 		if($search){
-			$conditions .= " and (deal_title like '%".strip_tags($search)."%'";
-			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
+			$conditions .= " and (deal_title like '%".$search."%'";
+			$conditions .= " or deal_description like '%".$search."%')";
 		}
 		if($type=="2")
 		{
@@ -171,11 +179,17 @@ class Store_Model extends Model
 		{
 			$order=" product.purchase_count DESC"; 
 		}
-		if(CITY_SETTING){ 
-			$conditions .= " and stores.city_id = $this->city_id ";
+		if(0){ 
+			$conditions .= " and stores.city_id = '$this->city_id' ";
 		}
 		$query = "select deal_id, deal_key, url_title, deal_title, deal_description, deal_value,category_url,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where $conditions and product.deal_status = 1 group by product.deal_id order by product.deal_id DESC"; 
+		
+		
 		$result = $this->db->query($query);
+		}catch(Exceptio $e){
+			var_dump($e);
+			exit;
+		}
 	       
 	        return $result;
 	}
@@ -184,7 +198,10 @@ class Store_Model extends Model
 	
 	public function get_auction_categories($store_id = "",$search="",$type="")
 	{
-		$conditions = "auction.shop_id = $store_id and auction.deal_status = 1 and enddate > ".time()."";
+		$store_id = strip_tags(addslashes($store_id));
+		$search = strip_tags(addslashes($search));
+		
+		$conditions = "auction.shop_id = '$store_id' and auction.deal_status = 1 and enddate > ".time()."";
 		$order1="";
 		$order="";
 		  if($search){
@@ -378,8 +395,9 @@ class Store_Model extends Model
 		$result= $this->db->from("rating")->where(array("type_id" => $store_id))->get();
 		if(count($result)>0)
 		{
+			$store_id = strip_tags(add_slashes($store_id));
 			$get_rate = count($result);
-			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=$store_id AND module_id = 4");
+			$sum= $this->db->query("select sum(rating) as sum from rating where type_id='$store_id' AND module_id = 4");
 			$get_sum=$sum->current()->sum;
 			$average= $get_sum/$get_rate;
 			return $average;
@@ -451,7 +469,9 @@ class Store_Model extends Model
 		
 	public function get_category_list_product_count($store_id='')
 	{ 
-		$con = " and stores.store_id = $store_id ";
+		$store_id = strip_tags(addslashes($store_id));
+		
+		$con = " and stores.store_id = '$store_id' ";
 		if(CITY_SETTING){ 
 			$con .= "and stores.city_id = '$this->city_id'";
 		}	
@@ -461,7 +481,8 @@ class Store_Model extends Model
 
 	public function get_category_list_deal_count($store_id='')
 	{ 
-		$con = " and stores.store_id = $store_id ";
+		$store_id = strip_tags(addslashes($store_id));
+		$con = " and stores.store_id = '$store_id' ";
 		if(CITY_SETTING){ 
 			$con .= "and stores.city_id = '$this->city_id'";
 		} 
@@ -471,7 +492,9 @@ class Store_Model extends Model
 
 	public function get_category_list_auction_count($store_id='')
 	{ 
-		$con = " and stores.store_id = $store_id ";
+		$store_id = strip_tags(addslashes($store_id));
+		
+		$con = " and stores.store_id = '$store_id' ";
 		if(CITY_SETTING){ 
 			$con .= "and stores.city_id = '$this->city_id'";
 		} 
@@ -487,6 +510,12 @@ class Store_Model extends Model
 	
 	public function get_products_count($store_id="",$search = "",$category = "",$search_key='',$search_cate_id='')
 	{
+		$store_id = strip_tags(addslashes($store_id));
+		$search = strip_tags(addslashes($search));
+		$search_key =  strip_tags(addslashes($search_key));
+		$category =  strip_tags(addslashes($category));
+		$search_cate_id =  strip_tags(addslashes($search_cate_id));
+		
         $conditions = " ";
 			$join ="join category on category.category_id=product.category_id";
 		
@@ -516,15 +545,15 @@ class Store_Model extends Model
 			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
-			$conditions .= " and product.category_id = $search_cate_id ";
+			$conditions .= " and product.category_id = '$search_cate_id' ";
 		}
 	
 		if(CITY_SETTING){
-		$query = "select product.deal_id from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and stores.store_id = $store_id $conditions group by product.deal_id order by product.deal_id DESC";
+		$query = "select product.deal_id from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and stores.store_id = '$store_id' $conditions group by product.deal_id order by product.deal_id DESC";
 		$result = $this->db->query($query);
 
 		} else {
-			$query = "select product.deal_id from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.store_id = $store_id $conditions group by product.deal_id order by product.deal_id DESC";
+			$query = "select product.deal_id from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.store_id = '$store_id' $conditions group by product.deal_id order by product.deal_id DESC";
 			$result = $this->db->query($query);
 
 		}
@@ -535,6 +564,15 @@ class Store_Model extends Model
 
 	public function  get_products_list($store_id="",$search = "", $category = "", $offset = "", $record = "",$search_key='',$search_cate_id='')
 	{
+		$store_id = strip_tags(addslashes($store_id));
+		$search = strip_tags(addslashes($search));
+		$category = strip_tags(addslashes($category));
+		$offset = strip_tags(addslashes($offset));
+		$record = strip_tags(addslashes($record));
+		$search_key = strip_tags(addslashes($search_key));
+		$search_cate_id = strip_tags(addslashes($search_cate_id));
+		
+		
 		$conditions = " ";
 		$join ="join category on category.category_id=product.category_id";
 		
@@ -564,18 +602,18 @@ class Store_Model extends Model
 			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
-			$conditions .= " and product.category_id = $search_cate_id ";
+			$conditions .= " and product.category_id = '$search_cate_id' ";
 		}
 	
 	
 		if(CITY_SETTING){
-		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,deal_description,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and stores.store_id = $store_id  $conditions group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+		$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,deal_description,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and stores.store_id = '$store_id'  $conditions group by product.deal_id order by product.deal_id DESC limit '$offset','$record'";
 		$result = $this->db->query($query);
 
 
 		} else {
 
-			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,deal_description,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1  and stores.store_id = $store_id $conditions  group by product.deal_id order by product.deal_id DESC limit $offset,$record";
+			$query = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,deal_percentage,stores.store_url_title,deal_description,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id $join join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1  and stores.store_id = '$store_id' $conditions  group by product.deal_id order by product.deal_id DESC limit '$offset','$record'";
 			$result = $this->db->query($query);
 
 
@@ -584,11 +622,21 @@ class Store_Model extends Model
 	}
 	
 	public function get_deals_count($store_id='',$cat_type,$category = "",$search_key='',$search_cate_id=''){
-		$conditions = "deal_status = 1 AND enddate > ".time()." AND startdate < ".time()." AND purchase_count < maximum_deals_limit  AND category.category_status = 1 AND store_status = 1  and stores.store_id = $store_id " ;
+		
+		$store_id = strip_tags(addslashes($store_id));
+		$category = strip_tags(addslashes($category));
+		$cat_type = strip_tags(addslashes($offset));
+		$search_key = strip_tags(addslashes($search_key));
+		$search_cate_id = strip_tags(addslashes($search_cate_id));
+		
+		
+		
+		$conditions = "deal_status = 1 AND enddate > ".time()." AND startdate < ".time()." AND purchase_count < maximum_deals_limit  AND category.category_status = 1 AND store_status = 1  and stores.store_id = '$store_id' " ;
 		$join = "deals.category_id";
+		
 
 		if(CITY_SETTING){
-				$conditions .= " AND stores.city_id = $this->city_id ";
+				$conditions .= " AND stores.city_id = '$this->city_id' ";
 		}
 		if($category && $cat_type=='main'){
 			$conditions .= " AND category.category_url =  '$category' ";
@@ -611,7 +659,7 @@ class Store_Model extends Model
 			 $conditions .= " or deal_description like '%".strip_tags($search_key)."%')";
 		}
 		if($search_cate_id!=''){
-			$conditions .= " and deals.category_id = $search_cate_id ";
+			$conditions .= " and deals.category_id = '$search_cate_id'";
 		}
 		
 		$result = $this->db->query("select deals.deal_id from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id = $join where $conditions group by deal_id order by deal_id DESC ");
@@ -620,10 +668,21 @@ class Store_Model extends Model
 	
 	public function get_deals_list($store_id='',$cat_type,$category = "", $offset = "", $record = "",$search_key='',$search_cate_id='')
 	{
-		 $conditions = " deal_status = 1 AND enddate > ".time()." AND startdate < ".time()." AND purchase_count < maximum_deals_limit AND category.category_status = 1 AND store_status = 1 and stores.store_id = $store_id " ;
+		
+		$store_id = strip_tags(addslashes($store_id));
+		$search = strip_tags(addslashes($search));
+		$category = strip_tags(addslashes($category));
+		$offset = strip_tags(addslashes($offset));
+		$record = strip_tags(addslashes($record));
+		$search_key = strip_tags(addslashes($search_key));
+		$search_cate_id = strip_tags(addslashes($search_cate_id));
+		
+		
+		
+		 $conditions = " deal_status = 1 AND enddate > ".time()." AND startdate < ".time()." AND purchase_count < maximum_deals_limit AND category.category_status = 1 AND store_status = 1 and stores.store_id = '$store_id' " ;
 		$join = "deals.category_id";
 		if(CITY_SETTING){
-				$conditions .= " AND stores.city_id = $this->city_id ";
+				$conditions .= " AND stores.city_id = '$this->city_id' ";
 		}
 		if($category && $cat_type=='main'){
 			$conditions .= " AND category.category_url =  '$category' ";
@@ -647,17 +706,21 @@ class Store_Model extends Model
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
-			$conditions .= " and deals.category_id = $search_cate_id ";
+			$conditions .= " and deals.category_id = '$search_cate_id' ";
 		}
 		
-		$result = $this->db->query("select deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating  from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id = $join where $conditions group by deal_id order by deal_id DESC limit $offset,$record ");
+		$result = $this->db->query("select deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating  from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id = $join where $conditions group by deal_id order by deal_id DESC limit '$offset','$record' ");
 		
 		return $result;
 	}
 	
 	public function get_auction_count($store_id='',$cat_type ="",$category = "",$search_key='',$search_cate_id='')
 	{
-		$conditions = "deal_status = 1 AND enddate > ".time()." AND category.category_status = 1 AND  store_status = 1 and auction_status = 0 and stores.store_id=$store_id";
+		$store_id = strip_tags(addslashes($store_id));
+		$category = strip_tags(addslashes($category));
+		$search_cate_id = strip_tags(addslashes($search_cate_id));
+		
+		$conditions = "deal_status = 1 AND enddate > ".time()." AND category.category_status = 1 AND  store_status = 1 and auction_status = 0 and stores.store_id='$store_id'";
 		$join = "auction.category_id";
 		if(CITY_SETTING){
 			$conditions .= " AND stores.city_id = $this->city_id ";
@@ -687,7 +750,7 @@ class Store_Model extends Model
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
-			$conditions .= " and auction.category_id = $search_cate_id ";
+			$conditions .= " and auction.category_id = '$search_cate_id'";
 		}
 		
 		$result = $this->db->query( "select auction.deal_id from auction join category ON category.category_id = $join join stores ON stores.store_id = auction.shop_id  where $conditions  group by deal_id order by deal_id DESC ");
@@ -696,10 +759,17 @@ class Store_Model extends Model
 	
 	public function get_auction_list($store_id='',$cat_type ="",$category = "", $offset = "", $record = "",$search_key='',$search_cate_id='')
 	{
-		$conditions = "deal_status = 1 AND enddate > ".time()." AND category.category_status = 1 AND  store_status = 1 and auction_status = 0 and stores.store_id = $store_id ";
+		$store_id = strip_tags(addslashes($store_id));
+		$category = strip_tags(addslashes($category));
+		$search_cate_id = strip_tags(addslashes($search_cate_id));
+		$offset = strip_tags(addslashes($offset));
+		$record = strip_tags(addslashes($record));
+		
+		
+		$conditions = "deal_status = 1 AND enddate > ".time()." AND category.category_status = 1 AND  store_status = 1 and auction_status = 0 and stores.store_id = '$store_id' ";
 		$join = "auction.category_id";
 		if(CITY_SETTING){
-			$conditions .= " AND stores.city_id = $this->city_id ";
+			$conditions .= " AND stores.city_id = '$this->city_id' ";
 		}
 		if($category && $cat_type=='main'){
 			$conditions .= " AND category.category_url = '$category' ";
@@ -719,10 +789,10 @@ class Store_Model extends Model
 			$conditions .= " or url_title = '$search_url' )";
 		}
 		if($search_cate_id!=''){
-			$conditions .= " and auction.category_id = $search_cate_id ";
+			$conditions .= " and auction.category_id = '$search_cate_id' ";
 		}
 		
-		$result = $this->db->query( "select auction.deal_id,auction.deal_key,product_value,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating  from auction join category ON category.category_id = $join join stores ON stores.store_id = auction.shop_id  where $conditions  group by deal_id order by deal_id DESC limit $offset,$record ");
+		$result = $this->db->query( "select auction.deal_id,auction.deal_key,product_value,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating  from auction join category ON category.category_id = $join join stores ON stores.store_id = auction.shop_id  where $conditions  group by deal_id order by deal_id DESC limit '$offset','$record' ");
 		return $result;
 	}
 	
@@ -733,6 +803,7 @@ class Store_Model extends Model
 	}
 	
 	public function get_merchant_details($merchant_id=''){
+		
 		$result = $this->db->select("*")->from("users")->join("city","city.city_id","users.city_id","left")->join("country","country.country_id","users.country_id","left")->where("user_id",$merchant_id)->get();
 		return $result;
 	}
