@@ -800,7 +800,7 @@ function validate() {
                                             <input type='checkbox' name='size[]' checked='checked' value='1' onclick="return false;" class="sizequantity" style="display:none;">
                                              
                                              
-                                              <input style='width:auto;' type='text' placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" name='size_quantity[]' class="quantity_size txtChar" maxlength='8' value='<?php if(isset($this->form_error['size_quantity[0]'])){ echo '';}else if(isset($_POST['size_quantity'][0])){ echo $_POST['size_quantity'][0]; }?>' onkeypress='return isNumberKey(event)'>
+                                            <input style='width:auto;' type='text' placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" name='size_quantity[]' class="quantity_size txtChar" maxlength='8' value='<?php if(isset($this->form_error['size_quantity[0]'])){ echo '';}else if(isset($_POST['size_quantity'][0])){ echo htmlentities($_POST['size_quantity'][0],  ENT_QUOTES,  "utf-8"); }?>' onkeypress='return isNumberKey(event)'>
                       <?php if(isset($this->form_error['size_quantity[0]'])){?><em> <?php echo $this->form_error['size_quantity[0]']; ?></em><?php }?>  
                                             
                                         </td>
@@ -831,7 +831,7 @@ function validate() {
                                             <?php 
                                             } ?>
                                             </select> 
-                                          <i> &nbsp;</i> <input type="text" name="size_quantity[]" placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" onkeypress='return isNumberKey(event)' value="<?php if(isset($_POST['size_quantity'][1])){echo $_POST['size_quantity'][1];}?>">
+                                            <i> &nbsp;</i> <input type="text" name="size_quantity[]" placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" onkeypress='return isNumberKey(event)' value="<?php if(isset($_POST['size_quantity'][1])){echo htmlentities($_POST['size_quantity'][1],  ENT_QUOTES,  "utf-8");}?>">
                                           
                                            
                                         </td>

@@ -33,7 +33,7 @@ class Merchant_Model extends Model
                 $result["active_products"]=count($result_active_products);
 
 		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result_sold_products = $this->select()->from("product")
+		$result_sold_products = $this->db->select()->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("purchase_count" => "user_limit_quantity", "deal_status"=>1, "stores.store_status" => 1,
                             "product.merchant_id" => $this->user_id));
@@ -70,8 +70,9 @@ class Merchant_Model extends Model
 	public function merchant_login($email = "", $password = "")
 	{
                $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
-                       "' AND password ='".md5(strip_tags(addslashes($password)))."' AND user_type IN(3,8)");
-                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type","in" =>(3,8))->limit(1)->get();
+                       "' AND password ='".md5($password)."' AND user_type IN (3,8)");
+               //echo count($result); die;
+                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type in" =>(3,8)))->limit(1)->get();
 		     if(count($result)>0){
                         if(count($result) == 1){
 	                        if($result->current()->user_status == 1){
@@ -2654,7 +2655,7 @@ class Merchant_Model extends Model
 		$email = trim($email);
 		//$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
 		$result = $this->db->select("last_login")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))->get();
                 if(count($result) > 0){
 			
 			$last_login = $result->current()->last_login;
