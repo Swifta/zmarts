@@ -122,8 +122,8 @@
                         </form>
                     </div>
                     <div class="signup_social_block">                        
-                        <p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>
-                        <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>
+                        <!--<p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>-->
+                        <!--<a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>-->
 <br />
     <button class="g-signin g_connect" 
             data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"
