@@ -89,7 +89,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label><?php echo $this->Lang['SEL_CITY'];?>:<span class="form_star">*</span></label>
+                                <label>Select State:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                         <div id="CitySD_log">
                                       <select name="city" >
@@ -109,7 +109,7 @@
                             </li>-->
                            <li class="check_box">
                                 <p><input type="checkbox" name="terms" id="termsquantity" value="terms"><?php echo $this->Lang['BY_CLICKING_SUBMIT']; ?> 									
-                                <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>Terms-and-Conditions.php"><?php echo $this->Lang['TEMRS']; ?></a>									
+                                <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>Disclaimer.php"><?php echo $this->Lang['TEMRS']; ?></a>									
                                 </p>
                                 <em id="terms_error"></em>
                             </li>
@@ -122,8 +122,8 @@
                         </form>
                     </div>
                     <div class="signup_social_block">                        
-                        <p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>
-                        <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>
+                        <!--<p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>-->
+                        <!--<a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>-->
 <br />
     <button class="g-signin g_connect" 
             data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"

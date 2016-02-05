@@ -609,7 +609,7 @@ class Webpay_Controller extends Layout_Controller
                 if(EMAIL_TYPE==2) {
                     email::smtp($from,$U->email, "[Zmart] Payment Notification" ,$message);
                 }else{
-                    email::sendgrid($from,$U->email, "[Zmart] Payment Notification" ,$message);
+                    //email::sendgrid($from,$U->email, "[Zmart] Payment Notification" ,$message);
                 }           
             }
         }
@@ -644,7 +644,7 @@ class Webpay_Controller extends Layout_Controller
 		}else{
 			
 						
-		                email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+		                //email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
 		$user_details = $this->webpay->get_purchased_user_details();
@@ -694,9 +694,9 @@ class Webpay_Controller extends Layout_Controller
                 //$message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
                  if(EMAIL_TYPE==2) {
 			email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			//email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+		//	email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+			//email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
 
@@ -715,9 +715,9 @@ class Webpay_Controller extends Layout_Controller
 			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			//email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+		//	email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
+			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
             }
