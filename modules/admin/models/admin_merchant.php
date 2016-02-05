@@ -511,7 +511,7 @@ class Admin_merchant_Model extends Model
 //                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
 //                return $result;
                 $result = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
 		                  
 						   
 		return $result;
@@ -523,7 +523,7 @@ class Admin_merchant_Model extends Model
 //	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
 //	    return $result;
             $result = $this->db->select()->from("users")
-		  ->where(array("user_status" => 1 , "user_type" => 1));
+		  ->where(array("user_status" => 1 , "user_type" => 1))->get();
 		                  
 						   
 		return $result;
@@ -738,7 +738,7 @@ class Admin_merchant_Model extends Model
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
                                 $news = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
 		                  
 						   
 		return news;
@@ -747,7 +747,7 @@ class Admin_merchant_Model extends Model
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
 				 $news = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
 			}
 			$user_array1=array();
 			if(count($news) > 0){
@@ -892,7 +892,7 @@ class Admin_merchant_Model extends Model
 //			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
 //			return $news;
                          $news = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
                          return $news;
 		}
 		

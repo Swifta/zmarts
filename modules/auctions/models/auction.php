@@ -536,7 +536,7 @@ class Auction_Model extends Model
                     ->join("country", "country.country_id", "users.country_id")
                     ->where(array("transaction.deal_id" => $deal_id))
                     ->orderby("bid_amount", "DESC")
-                    ->limit(1);
+                    ->limit(1)->get();
 	            if(count($result_high)>0){
 	                    $bid_amount_high= $result_high->current()->bid_amount;
 	                    //$query_count = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id and bid_amount = $bid_amount_high";

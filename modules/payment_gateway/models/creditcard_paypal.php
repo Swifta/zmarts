@@ -241,7 +241,7 @@ class Creditcard_paypal_Model extends Model
 //		$result = $this->db->query("select *, $this->deal_value_condition from product  join category on category.category_id=product.category_id  where deal_status = 1 and category.category_status = 1 and deal_id = '$deal_id'");
 //	        return $result;
 //                
-                $result =$this->db->select("*",deal_value_condition)->from("product")
+                $result =$this->db->select("*",$this->deal_value_condition)->from("product")
                 ->join("category","category.category_id","product.category_id")
                 ->where(array("deal_status" =>1,"category.category_status" =>1,"deal_id"=>$deal_id));
                 return $result;

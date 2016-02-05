@@ -334,7 +334,7 @@ class Admin_users_Model extends Model
 //                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
 //                return $result;
                 $result = $this->db->from("users")
-                ->where(array("user_status"=>1,"user_type !=" => 1));
+                ->where(array("user_status"=>1,"user_type !=" => 1))->get();
                        
 
 		return $result;

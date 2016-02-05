@@ -1227,7 +1227,7 @@ class Admin_products_Model extends Model
 	         //print_r($result); exit;   
                  $result = $this->db->select()->from("users")
                          ->join("stores", "users.user_id", "stores.merchant_id", "LEFT")
-                         ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email));
+                         ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email))->get();
 	         return $result;
         }
 

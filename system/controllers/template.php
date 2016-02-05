@@ -148,12 +148,12 @@ abstract class Template_Controller extends Controller {
                                 
                                 
 //                                
-//				define('WEBPAY_MAC_KEY', $s->webpay_mac_key);
-//				define('WEBPAY_PRODUCT_ID', $s->webpay_product_id);
-//				define('WEBPAY_STAGING_URL', $s->webpay_staging_url);
-//				define('WEBPAY_SITE_NAME', $s->webpay_site_name);
-//				define('WEBPAY_PAY_ITEM_ID', $s->webpay_pay_item_id);
-//				define('WEBPAY_PAY_ITEM_NAME', $s->webpay_pay_item_name);
+				define('WEBPAY_MAC_KEY', $s->webpay_mac_key);
+				define('WEBPAY_PRODUCT_ID', $s->webpay_product_id);
+				define('WEBPAY_STAGING_URL', $s->webpay_staging_url);
+				define('WEBPAY_SITE_NAME', $s->webpay_site_name);
+				define('WEBPAY_PAY_ITEM_ID', $s->webpay_pay_item_id);
+				define('WEBPAY_PAY_ITEM_NAME', $s->webpay_pay_item_name);
 //				
 				
 				
