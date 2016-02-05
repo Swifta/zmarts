@@ -2636,7 +2636,7 @@ class Merchant_Model extends Model
 		$email = trim($email);
 		//$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
 		$result = $this->db->select("last_login")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))->get();
                 if(count($result) > 0){
 			
 			$last_login = $result->current()->last_login;
