@@ -625,7 +625,7 @@ class Store_Model extends Model
 		
 		$store_id = strip_tags(addslashes($store_id));
 		$category = strip_tags(addslashes($category));
-		$cat_type = strip_tags(addslashes($offset));
+		$cat_type = strip_tags(addslashes(@$offset));
 		$search_key = strip_tags(addslashes($search_key));
 		$search_cate_id = strip_tags(addslashes($search_cate_id));
 		
@@ -762,8 +762,8 @@ class Store_Model extends Model
 		$store_id = strip_tags(addslashes($store_id));
 		$category = strip_tags(addslashes($category));
 		$search_cate_id = strip_tags(addslashes($search_cate_id));
-		$offset = strip_tags(addslashes($offset));
-		$record = strip_tags(addslashes($record));
+		$offset = strip_tags($offset);
+		$record = strip_tags($record);
 		
 		
 		$conditions = "deal_status = 1 AND enddate > ".time()." AND category.category_status = 1 AND  store_status = 1 and auction_status = 0 and stores.store_id = '$store_id' ";
