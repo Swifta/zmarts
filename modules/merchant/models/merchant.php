@@ -20,28 +20,51 @@ class Merchant_Model extends Model
 	public function get_merchant_dashboard_data()
 	{
 		$result_active_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate >" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1"))->get();
+		
 		$result["active_deals"]=count($result_active_deals);
 
 		$result_archive_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate <" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1"))->get();
 		$result["archive_deals"]=count($result_archive_deals);
+		
+		
 
 		//$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result_active_products = $this->db->select()->from("product")
+		$result_active_products = $this->db->select("*")->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status"=>1, 
-                            "stores.store_status" => 1, "product.merchant_id" => $this->user_id));
+                            "stores.store_status" => 1, "product.merchant_id" => $this->user_id))->get();
                 $result["active_products"]=count($result_active_products);
 
 		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result_sold_products = $this->db->select()->from("product")
+		$result_sold_products = $this->db->select("*")->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("purchase_count" => "user_limit_quantity", "deal_status"=>1, "stores.store_status" => 1,
-                            "product.merchant_id" => $this->user_id));
+                            "product.merchant_id" => $this->user_id))->get();
                 $result["sold_products"]=count($result_sold_products);
+				
+				
 
-		$result_active_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id))->get();
+		try{
+		$result_active_auction = $this->db->select("*")->from("auction")
+		->join("stores","stores.store_id","auction.shop_id")
+		->join("city","city.city_id","stores.city_id")
+		->join("country","country.country_id","city.country_id")
+		->join("category","category.category_id","auction.category_id")
+		->where(array(
+		"enddate >" => time(),
+		"deal_status"=>"1",
+		"stores.store_status" => 1,
+		"city_status" => 1,
+		"country_status"=>1,
+		"auction.merchant_id" => $this->user_id))->get();
+		}catch(Exception $e){
+			
+			
+		}
 		$result["active_auction"]=count($result_active_auction);
-
+		
+		
+				
 		$result_archive_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id))->get();
 		$result["archive_auction"]=count($result_archive_auction);
 
@@ -2693,10 +2716,10 @@ class Merchant_Model extends Model
 	public function get_products_chart_list()
 	{
 	    //$result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
-            $result_active_products = $this->select()->from("product")
+            $result_active_products = $this->db->select("*")->from("product")
                     ->join("stores", "stores.store_id", "product.shop_id")
                     ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
-                        "product.merchant_id" => $this->user_id));
+                        "product.merchant_id" => $this->user_id))->get();
             $result["active_products"]=count($result_active_products);
 
 		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
