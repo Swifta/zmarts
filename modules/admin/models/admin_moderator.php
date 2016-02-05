@@ -10,8 +10,13 @@ class Admin_moderator_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-		$result = $this->db->query("SELECT user_type,joined_date,login_type FROM users WHERE  user_status = 1  and user_type = 2 ");
-		return $result;
+//		$result = $this->db->query("SELECT user_type,joined_date,login_type FROM users WHERE  user_status = 1  and user_type = 2 ");
+//		return $result;
+                
+                 $result =  $this->db->select("user_type,joined_date,login_type")->from("users")
+                  ->where(array("user_status" =>1 , "user_type" => 2));
+                     
+                 return $result;
 	}
 	/** GET COUNTRY LIST **/
     
@@ -263,8 +268,13 @@ class Admin_moderator_Model extends Model
         /** GET CITY LIST **/
 	public function getCityId_name($city_id)
         {
-		$result = $this->db->query("SELECT city_id,city_name FROM city WHERE  city_status=1 and city_id='$city_id'");
-                return $result;
+//		$result = $this->db->query("SELECT city_id,city_name FROM city WHERE  city_status=1 and city_id='$city_id'");
+//                return $result;
+                
+                 $result =  $this->db->select("city_id,city_name")->from("city")
+                       ->where(array("city_status" => 1, "city_id" => $city_id));
+                       
+                 return $result;
         }	
 }
 

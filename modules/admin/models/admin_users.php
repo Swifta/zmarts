@@ -330,8 +330,13 @@ class Admin_users_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
-                return $result;
+//                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
+//                return $result;
+                $result = $this->db->from("users")
+                ->where(array("user_status"=>1,"user_type !=" => 1));
+                       
+
+		return $result;
 	}
 	public function getUSERList()
 	{
@@ -371,11 +376,22 @@ class Admin_users_Model extends Model
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+//				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                               
+                                $news =$this->db->select()->from("users")
+                       
+                               ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                                return $news;
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                                $news =$this->db->select()->from("users")
+                       
+                               ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                                return $news;
 				
 			}
 			
@@ -515,8 +531,13 @@ class Admin_users_Model extends Model
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			
-			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
-			return $news;
+//			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+//			return $news;
+                        $news =$this->db->select()->from("users")
+                       
+                        ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                         return $news;
 		}
 		
 		
