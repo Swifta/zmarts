@@ -141,7 +141,7 @@ class Admin_users_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
                         
 		        if(isset($sort_arr[$param])){
-			        $contitions .= $sort_arr[$param];
+			        $contitions .= strip_tags(addslashes($sort_arr[$param]));
 			        $joinorder = "";
 			} else {
 				$contitions .= '';
@@ -205,7 +205,8 @@ class Admin_users_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
 			if(isset($sort_arr[$param])){
-	       		 $contitions .= $sort_arr[$param];
+	       		 //$contitions .= $sort_arr[$param];
+                            $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");

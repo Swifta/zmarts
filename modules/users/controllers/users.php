@@ -2037,7 +2037,7 @@ $pdf->Output('voucher.pdf', 'I');
 						  exit;
 					  }
 				  
-				  $response = (array)$fun_resp->VerifyAccountResult;
+				  $response = (array)$fun_resp->VerifyMerchantAccountResult;
 				  
 					  if($response){
 						  $nuban_response = (isset($response['errorMessage']))?-1:1;

@@ -8,7 +8,7 @@ require_once 'AuthorizeNet.php';
 	
 	//authorize
 	require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/dboperations.php"); 
-	$invoiceID = strip_slash(addslashes($_REQUEST['invoiceid']));
+	$invoiceID = strip_tags(addslashes($_REQUEST['invoiceid']));
 	
 	$query = "select id,TRANSACTIONID,AMT from transaction_details where id='$invoiceID' and CAPTURED<>1 limit 0,1";
         $resultset = mysql_query($query);

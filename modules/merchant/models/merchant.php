@@ -25,11 +25,19 @@ class Merchant_Model extends Model
 		$result_archive_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate <" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1"))->get();
 		$result["archive_deals"]=count($result_archive_deals);
 
-		$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result["active_products"]=count($result_active_products);
+		//$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
+		$result_active_products = $this->db->select()->from("product")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status"=>1, 
+                            "stores.store_status" => 1, "product.merchant_id" => $this->user_id));
+                $result["active_products"]=count($result_active_products);
 
-		$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result["sold_products"]=count($result_sold_products);
+		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
+		$result_sold_products = $this->select()->from("product")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->where(array("purchase_count" => "user_limit_quantity", "deal_status"=>1, "stores.store_status" => 1,
+                            "product.merchant_id" => $this->user_id));
+                $result["sold_products"]=count($result_sold_products);
 
 		$result_active_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id))->get();
 		$result["active_auction"]=count($result_active_auction);
@@ -61,7 +69,8 @@ class Merchant_Model extends Model
 
 	public function merchant_login($email = "", $password = "")
 	{
-               $result=$this->db->query("SELECT * FROM users WHERE email = '$email' AND password ='".md5($password)."' AND user_type IN(3,8)");
+               $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
+                       "' AND password ='".md5(strip_tags(addslashes($password)))."' AND user_type IN(3,8)");
                 //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type","in" =>(3,8))->limit(1)->get();
 		     if(count($result)>0){
                         if(count($result) == 1){
@@ -206,7 +215,7 @@ class Merchant_Model extends Model
 	{
 
 		$savings=($post->price-$post->deal_value);
-		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
+		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal
 
 		//$sub_cat = implode(',',$sub_cat1);
 		$result = $this->db->insert("deals", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category, "deal_price" => $post->price,"deal_value" => $post->deal_value,"deal_savings" => $savings,"startdate" => strtotime($post->start_date), "enddate" => strtotime($post->end_date), "expirydate" => strtotime($post->expiry_date),"created_date" => time(),"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => ($savings/$post->price)*100,"minimum_deals_limit" =>  $post->minlimit,"maximum_deals_limit" => $post->maxlimit , "user_limit_quantity" =>  $post->quantity,"merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"created_date" => time(),"created_by"=>$this->user_id,"deal_status" => 1, "for_store_cred" => $post->store_cred));
@@ -307,8 +316,8 @@ class Merchant_Model extends Model
                                 $conditions .= " and city.city_id = ".$city;
                         }
                         if($name){
-                                $conditions .= " and (deals.deal_title like '%".strip_tags($name)."%'";
-                                $conditions .= " or stores.store_name like '%".strip_tags($name)."%')";
+                                $conditions .= " and (deals.deal_title like '%".strip_tags(addslashes($name))."%'";
+                                $conditions .= " or stores.store_name like '%".strip_tags(addslashes($name))."%')";
                         }
                         if($today == 1)
                         {
@@ -381,8 +390,8 @@ class Merchant_Model extends Model
                                 $conditions .= " and city.city_id = ".$city;
                         }
                         if($name){
-                                $conditions .= " and (deals.deal_title like '%".strip_tags($name)."%'";
-                                $conditions .= " or stores.store_name like '%".strip_tags($name)."%')";
+                                $conditions .= " and (deals.deal_title like '%".strip_tags(addslashes($name))."%'";
+                                $conditions .= " or stores.store_name like '%".strip_tags(addslashes($name))."%')";
                         }
                         
                         if($today == 1)
@@ -504,7 +513,7 @@ class Merchant_Model extends Model
 				}
 			}
 			$savings=($post->price-$post->deal_value);
-			$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
+			$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal
 		//$sub_cat = implode(',',$sub_cat1);
 			$this->db->update("deals", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category, "deal_type"=> $post->deal_type, "deal_price" => $post->price,"deal_value" => $post->deal_value,"deal_savings" =>$savings,"startdate" => strtotime($post->start_date), "enddate" => strtotime($post->end_date), "expirydate" => strtotime($post->expiry_date),"created_date" => time(),"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => ($savings/$post->price)*100,"minimum_deals_limit" =>  $post->minlimit,"maximum_deals_limit" => $post->maxlimit , "user_limit_quantity" =>  $post->quantity,"merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"created_by"=>$this->user_id), array("deal_id" => $deal_id, "deal_key" => $deal_key,"merchant_id" => $this->user_id));
 
@@ -535,11 +544,11 @@ class Merchant_Model extends Model
 		if($_GET){
 
 		        if($name){
-				        $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
-                        $contitions .= ' OR deals.deal_title like "%'.strip_tags($name).'%")';
+				        $contitions .= ' and (users.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                        $contitions .= ' OR deals.deal_title like "%'.strip_tags(addslashes($name)).'%")';
 					}
                     if($code){
-						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags($code).'%"';
+						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags(addslashes($code)).'%"';
 					}
 
                        $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions");
@@ -560,11 +569,11 @@ class Merchant_Model extends Model
 		$contitions = "transaction_mapping.coupon_code_status=0 AND deals.merchant_id = $this->user_id";
 		if($_GET){
 					if($name){
-				        $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
-                        $contitions .= ' OR deals.deal_title like "%'.strip_tags($name).'%")';
+				        $contitions .= ' and (users.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                        $contitions .= ' OR deals.deal_title like "%'.strip_tags(addslashes($name)).'%")';
 					}
                     if($code){
-						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags($code).'%"';
+						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags(addslashes($code)).'%"';
 					}
                        $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ");
 		}
@@ -616,7 +625,7 @@ class Merchant_Model extends Model
                         }
 
                         if($name){
-			        $contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+			        $contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                          $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ORDER BY stores.store_id $limit1");
 
@@ -640,7 +649,7 @@ class Merchant_Model extends Model
                         }
 
                         if($name){
-			        $contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+			        $contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                          $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ");
 
@@ -831,29 +840,29 @@ class Merchant_Model extends Model
 			        $inc_tax = "1";
 			 }
 		$savings=(($post->price)-($post->deal_value));
-		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
+		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal
 	//	$sub_cat = implode(',',$sub_cat1);
 
                 $shipping_amount = "0";
 		 if(isset($_POST['shipping_amount'])) {
-		        $shipping_amount = $_POST['shipping_amount'];
+		        $shipping_amount = strip_tags(addslashes($_POST['shipping_amount']));
 		 }
 		 
 		        $weight = "0";
 			 if(isset($_POST['weight'])) {
-			        $weight = $_POST['weight'];
+			        $weight = strip_tags(addslashes($_POST['weight']));
 			 }
 			 $height = "0";
 			 if(isset($_POST['height'])) {
-			        $height = $_POST['height'];
+			        $height = strip_tags(addslashes($_POST['height']));
 			 }
 			 $length = "0";
 			 if(isset($_POST['length'])) {
-			        $length = $_POST['length'];
+			        $length = strip_tags(addslashes($_POST['length']));
 			 }
 			 $width = "0";
 			 if(isset($_POST['width'])) {
-			        $width = $_POST['width'];
+			        $width = strip_tags(addslashes($_POST['width']));
 			 }
 			 $duration = "";
 			 if(isset($_POST['duration'])) {
@@ -978,16 +987,16 @@ class Merchant_Model extends Model
 
 			if($type != "1")
 		        {
-		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }else {
-		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }
 			if($city){
 				$conditions .= " and city.city_id = ".$city;
 			}
 
 			if($name){
-				$conditions .= " and deal_title like '%".strip_tags($name)."%'";
+				$conditions .= " and deal_title like '%".strip_tags(addslashes($name))."%'";
 			}
 			if($today == 1)
                         {
@@ -1035,9 +1044,9 @@ class Merchant_Model extends Model
 
 			if($type != "1")
 		        {
-		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }else {
-		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }
 
 			$sort_arr = array("name"=>" order by product.deal_title $sort","city"=>" order by city.city_name $sort","store"=>" order by stores.store_name $sort","price"=>" order by product.deal_price $sort","value"=>" order by product.deal_value $sort","savings"=>" order by product.deal_savings $sort");
@@ -1065,17 +1074,17 @@ class Merchant_Model extends Model
                 if($_GET){
 		         if($type != "1")
 		        {
-		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }else {
-		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }
 
 			if($city){
 			        $conditions .= " and city.city_id = ".$city;
 			}
 			if($name){
-			        $conditions .= " and (deal_title like '%".strip_tags($name)."%'";
-			        $conditions .= " or store_name like '%".strip_tags($name)."%')";
+			        $conditions .= " and (deal_title like '%".strip_tags(addslashes($name))."%'";
+			        $conditions .= " or store_name like '%".strip_tags(addslashes($name))."%')";
 			}
 			if($today == 1)
                         {
@@ -1122,9 +1131,9 @@ class Merchant_Model extends Model
 	        else{
 	                 if($type != "1")
 		        {
-		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count < user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }else {
-		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".$this->user_id." and stores.store_status = 1 and deal_status!=2 ";
+		                $conditions = "purchase_count = user_limit_quantity and product.merchant_id = ".strip_tags(addslashes($this->user_id))." and stores.store_status = 1 and deal_status!=2 ";
 		        }
 
 			$sort_arr = array("name"=>" order by product.deal_title $sort","city"=>" order by city.city_name $sort","store"=>" order by stores.store_name $sort","price"=>" order by product.deal_price $sort","value"=>" order by product.deal_value $sort","savings"=>" order by product.deal_savings $sort");
@@ -1152,7 +1161,7 @@ class Merchant_Model extends Model
 
 		 }
 		
-		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
+		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal
 		// $sub_cat = implode(',',$sub_cat1);
 
 		$dealdata = $this->db->select("deal_title","url_title","user_limit_quantity","purchase_count")->from("product")->where(array("deal_id" => $deal_id, "deal_key" => $deal_key,"merchant_id" => $this->user_id))->get();
@@ -1189,24 +1198,24 @@ class Merchant_Model extends Model
 
                          $shipping_amount = "0";
 		         if(isset($_POST['shipping_amount'])) {
-		                $shipping_amount = $_POST['shipping_amount'];
+		                $shipping_amount = strip_tags(addslashes($_POST['shipping_amount']));
 		         }
 		         
 		         $weight = "0";
 			 if(isset($_POST['weight'])) {
-			        $weight = $_POST['weight'];
+			        $weight = strip_tags(addslashes($_POST['weight']));
 			 }
 			 $height = "0";
 			 if(isset($_POST['height'])) {
-			        $height = $_POST['height'];
+			        $height = strip_tags(addslashes($_POST['height']));
 			 }
 			 $length = "0";
 			 if(isset($_POST['length'])) {
-			        $length = $_POST['length'];
+			        $length = strip_tags(addslashes($_POST['length']));
 			 }
 			 $width = "0";
 			 if(isset($_POST['width'])) {
-			        $width = $_POST['width'];
+			        $width = strip_tags(addslashes($_POST['width']));
 			 }
 			 $duration = "";
 			 if(isset($_POST['duration'])) {
@@ -1389,9 +1398,9 @@ class Merchant_Model extends Model
 
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
-                    $contitions .= 'OR u.email like "%'.strip_tags($name).'%"';
-            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                    $contitions .= 'OR u.email like "%'.strip_tags(addslashes($name)).'%"';
+            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
 
 					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ");
 
@@ -1416,9 +1425,9 @@ class Merchant_Model extends Model
 
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
-                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags(addslashes($name)).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
 
                   $result = $this->db->query("select s.shipping_id  from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ");
 		}
@@ -1462,7 +1471,7 @@ class Merchant_Model extends Model
 			}
 			$conditions = "";
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions .= "transaction.id > 0";
 		          }else {
@@ -1562,7 +1571,7 @@ class Merchant_Model extends Model
 			}
 			
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0 ";
 		          }else {
@@ -1732,7 +1741,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -1827,7 +1836,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -1925,7 +1934,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
 		          }else {
@@ -2017,7 +2026,7 @@ class Merchant_Model extends Model
 	                $time=time();
 			$conditions="";
               		if($code || $code=='0'){
-                                $conditions= "transaction_mapping.coupon_code ='".strip_tags($code)."'";
+                                $conditions= "transaction_mapping.coupon_code ='".strip_tags(addslashes($code))."'";
                          }
                         $query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id and transaction_mapping.deal_id=transaction.deal_id where $conditions and deals.expirydate > $time and merchant_id = '$this->user_id' limit 1 ";
                         $result = $this->db->query($query);
@@ -2162,7 +2171,7 @@ class Merchant_Model extends Model
 	public function add_auction_products($post = "", $deal_key = "")
 	{
 		$savings = $post->product_price-$post->deal_value;
-		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
+		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal
 		//$sub_cat = implode(',',$sub_cat1);
 
 	    $result = $this->db->insert("auction", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category,"product_value" => $post->product_price,"deal_value" => $post->deal_value,"deal_price" => $post->deal_value,"deal_savings"=> $savings,"startdate" => strtotime($post->start_date), "enddate" => strtotime($post->end_date), "created_date" => time(),"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description, "merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"created_by"=>$this->user_id,"bid_increment"=>$post->bid_increment,"shipping_fee"=>$post->shipping_fee ,"shipping_info"=>$post->shipping_info,"deal_status" => 1, "for_store_cred" => $post->store_cred));
@@ -2177,7 +2186,7 @@ class Merchant_Model extends Model
 
 	public function edit_auction($deal_id = "", $deal_key = "", $post = "")
 	{
-		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal
+		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal
 		//$sub_cat = implode(',',$sub_cat1);
 
 		$dealdata = $this->db->select("deal_title","url_title","bid_count")->from("auction")->where(array("deal_id" => $deal_id, "deal_key" => $deal_key,"merchant_id" => $this->user_id))->get();
@@ -2230,8 +2239,8 @@ class Merchant_Model extends Model
 			$conditions .= " and city.city_id = ".$city;
 			}
 			if($name){
-			$conditions .= " and (deal_title like '%".strip_tags($name)."%'";
-			$conditions .= " or store_name like '%".strip_tags($name)."%')";
+			$conditions .= " and (deal_title like '%".strip_tags(addslashes($name))."%'";
+			$conditions .= " or store_name like '%".strip_tags(addslashes($name))."%')";
 			}
 			if($today == 1)
                         {
@@ -2305,8 +2314,8 @@ class Merchant_Model extends Model
                         }
 
                         if($name){
-                                $conditions .= " and (deal_title like '%".strip_tags($name)."%'";
-			        $conditions .= " or store_name like '%".strip_tags($name)."%')";
+                                $conditions .= " and (deal_title like '%".strip_tags(addslashes($name))."%'";
+			        $conditions .= " or store_name like '%".strip_tags(addslashes($name))."%')";
                         }
 
                         if($today == 1)
@@ -2435,9 +2444,9 @@ class Merchant_Model extends Model
 					$condition = " AND t.type = 5 AND d.merchant_id = $this->user_id ";
 				}
         		if($_GET){
-	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
-                    $contitions .= 'OR u.email like "%'.strip_tags($name).'%"';
-            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
+	        		$contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                    $contitions .= 'OR u.email like "%'.strip_tags(addslashes($name)).'%"';
+            		$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
 
                    $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC  $limit1 ");
 				}
@@ -2459,9 +2468,9 @@ class Merchant_Model extends Model
 
 				}
            		if($_GET){
-			        $contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
-                    $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
-					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
+			        $contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                    $contitions .= ' OR u.email like "%'.strip_tags(addslashes($name)).'%"';
+					$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
 
                    $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC ");
 		}
@@ -2482,8 +2491,8 @@ class Merchant_Model extends Model
 
 		if($_GET){
 
-		        	   $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
-                       $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
+		        	   $contitions .= ' and (users.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                       $contitions .= ' OR auction.deal_title like "%'.strip_tags(addslashes($name)).'%")';
 
 		}
 
@@ -2502,8 +2511,8 @@ class Merchant_Model extends Model
 		$contitions = "auction.winner != 0 and auction.merchant_id = $this->user_id and bidding.winning_status!=0 ";
 
 		if($_GET){
-		        	   $contitions .= ' and (users.firstname like "%'.strip_tags($name).'%"';
-                       $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
+		        	   $contitions .= ' and (users.firstname like "%'.strip_tags(addslashes($name)).'%"';
+                       $contitions .= ' OR auction.deal_title like "%'.strip_tags(addslashes($name)).'%")';
                        $result = $this->db->query("SELECT count(bidding.bid_id) as count FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions ");
 			}
 
@@ -2608,9 +2617,11 @@ class Merchant_Model extends Model
 	
 	public function get_current_password($email){
 		
-		$email = trim($email);
-		$result = $this->db->query("select password from users where email='$email' and user_status=1 and user_type = 3");
-		if(count($result) > 0){
+		$email = trim(strip_tags(addslashes($email)));
+		//$result = $this->db->query("select password from users where email='$email' and user_status=1 and user_type = 3");
+		$result = $this->select("password")->from("users")
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+                if(count($result) > 0){
 			return $result->current()->password;
 		}else{
 			return NULL;
@@ -2623,8 +2634,10 @@ class Merchant_Model extends Model
 	{
 
 		$email = trim($email);
-		$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
-		if(count($result) > 0){
+		//$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
+		$result = $this->db->select("last_login")->from("users")
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+                if(count($result) > 0){
 			
 			$last_login = $result->current()->last_login;
 			if($last_login == "0"){
@@ -2641,7 +2654,7 @@ class Merchant_Model extends Model
 	
 	public function get_user_details_list($email)
 	{
-		$email = trim($email);
+		$email = strip_tags(addslashes(trim($email)));
 		/*$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 3,"user_status" => 1))->limit(1)->get();*/
 		$result=$this->db->query("select * from users where email='$email' and user_status=1 and user_type IN(3,8)");
 		return $result;
@@ -2660,11 +2673,19 @@ class Merchant_Model extends Model
 	/* GET PRODUCT CHART LIST */
 	public function get_products_chart_list()
 	{
-	    $result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
-		$result["active_products"]=count($result_active_products);
+	    //$result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
+            $result_active_products = $this->select()->from("product")
+                    ->join("stores", "stores.store_id", "product.shop_id")
+                    ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
+                        "product.merchant_id" => $this->user_id));
+            $result["active_products"]=count($result_active_products);
 
-		$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
-		$result["archive_products"]=count($result_sold_products);
+		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
+		$result_sold_products = $this->db->select()->from("product")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->where(array("purchase_count" => "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
+                            "product.merchant_id" => $this->user_id));
+                $result["archive_products"]=count($result_sold_products);
 		return $result;
 	}
 
@@ -2825,10 +2846,12 @@ class Merchant_Model extends Model
 				else if($type==5){  // for failed transcation reset the quantity for that size
 						$quantity=$get_detail[0]->quantity;
 						$size_id = $get_detail[0]->product_size;
-					$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
-
-					$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
-
+					//$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+                                        $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
+                                                array("deal_id" => $product_id, "size_id" => $size_id));
+					//$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+                                        $this->update("product", array("user_limit_quantity"=>new Database_Expression('user_limit_quantity + '.$quantity)),
+                                                array("deal_id" => $product_id));
 					$this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('id' => $trans_id));
 
 				}
@@ -2868,10 +2891,12 @@ class Merchant_Model extends Model
 				else if($type=="Failed"){  // for failed transcation reset the quantity for that size
 						$quantity=$get_detail[0]->quantity;
 						$size_id = $get_detail[0]->product_size;
-					$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
-
-					$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
-
+					//$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+                                        $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
+                                                array("deal_id" => $product_id, "size_id" =>$size_id));
+					//$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+                                        $this->db->update("product", array("user_limit_quantity"=>new Database_Expression('user_limit_quantity + '.$quantity)), 
+                                                array("deal_id" =>$product_id));
 					$this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('transaction_id' => $trans_id));
 
 				}
@@ -2914,9 +2939,11 @@ class Merchant_Model extends Model
 				}
 				else if($type==5){  // for failed transcation reset the quantity for that size
 
-						$time=time()+(AUCTION_EXTEND_DAY*24*60*60);
-						$result = $this->db->query("UPDATE auction SET enddate = $time,winner = 0,auction_status = 0 WHERE deal_id = $auction_id");
-						$this->db->delete("bidding",array("auction_id" => $auction_id));
+                                        $time=time()+(AUCTION_EXTEND_DAY*24*60*60);
+                                        //$result = $this->db->query("UPDATE auction SET enddate = $time,winner = 0,auction_status = 0 WHERE deal_id = $auction_id");
+                                        $result = $this->db->update("auction", array("enddate" => $time,"winner" => 0,"auction_status" => 0), 
+                                                array("deal_id" => $auction_id));
+                                        $this->db->delete("bidding",array("auction_id" => $auction_id));
 
 					$this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('id' => $trans_id));
 
@@ -3087,8 +3114,10 @@ class Merchant_Model extends Model
         public function get_merchant_and_shop_status($shop_name="")
 	{
                 $merchant_id = $this->user_id;
-                $query = "select * from stores where store_name='$shop_name' AND merchant_id='$merchant_id'";
-                $result_1 = $this->db->query($query);  
+                //$query = "select * from stores where store_name='$shop_name' AND merchant_id='$merchant_id'";
+                //$result_1 = $this->db->query($query);
+                $result_1 = $this->db->select()->from("stores")
+                        ->where(array("store_name"=>$shop_name, "merchant_id"=>$merchant_id));
                 $result = count($result_1);
                 if($result == 1)
                 {
@@ -3329,10 +3358,10 @@ class Merchant_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
@@ -3384,10 +3413,10 @@ class Merchant_Model extends Model
                         $contitions .= ' and login_type = '.$logintype;
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
 
 						$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
@@ -3475,8 +3504,10 @@ class Merchant_Model extends Model
 		/** GET USER LIST **/
 	public function get_user_list()
 	{
-		$result = $this->db->query("SELECT user_type,joined_date,login_type FROM users WHERE  user_status = 1  and user_type = 8 ");
-		return $result;
+		//$result = $this->db->query("SELECT user_type,joined_date,login_type FROM users WHERE  user_status = 1  and user_type = 8 ");
+		$result = $this->db->select("user_type,joined_date,login_type")->from("users")
+                        ->where(array("user_status" => 1, "user_type" => 8));
+                return $result;
 	}
 	/** CHECK EMAIL EXIST **/ 
 	
@@ -3572,12 +3603,15 @@ class Merchant_Model extends Model
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                                $news = $this->db->select()->from("users")
+                                        ->where(array("user_status"=>1, "user_type"=>4));
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from email_subscribe where  suscribe_status=1 and is_deleted= 0");
-				
+				//$news=$this->db->query("select * from email_subscribe where  suscribe_status=1 and is_deleted= 0");
+				$news = $this->db->select()->from("email_subscribe")
+                                        ->where(array("suscribe_status"=>1, "is_deleted"=> 0));
 			}
 			
 			if(count($news) > 0){
@@ -3676,7 +3710,7 @@ class Merchant_Model extends Model
 		$contitions = ' duration_merchantid = '.$this->user_id;
 		if($_GET){
 			if($name){
-				$contitions .= ' and duration_period like "%'.strip_tags($name).'%"';
+				$contitions .= ' and duration_period like "%'.strip_tags(addslashes($name)).'%"';
 			}
 		}
 		$result = $this->db->query("select duration_id from duration where $contitions order by duration_period ASC ");
@@ -3688,7 +3722,7 @@ class Merchant_Model extends Model
 		$contitions = ' duration_merchantid = '.$this->user_id;
 		if($_GET){
 			if($name){
-				$contitions .= ' and duration_period like "%'.strip_tags($name).'%"';
+				$contitions .= ' and duration_period like "%'.strip_tags(addslashes($name)).'%"';
 			}
 			$result = $this->db->query("select * from duration where $contitions order by duration_period ASC limit $offset,$record");
         } else{
@@ -3820,7 +3854,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "storecredit_transaction.id > 0";
 		          }else {
@@ -3916,7 +3950,7 @@ class Merchant_Model extends Model
 				$sort = "DESC";
 			}
 		 if($_GET){
-			 $search_key = strip_tags($search_key);
+			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "storecredit_transaction.id > 0";
 		          }else {
@@ -4514,15 +4548,20 @@ class Merchant_Model extends Model
 					$conditions.=" and age_range=".$post->age_range;
 				}
 				
+                                //$news = $this->db->select()->from("users")
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=8");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=8");
+                                $news = $this->db->select()->from("users")
+                                        ->where(array("user_status"=>1,"user_type"=>8));
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=8");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=8");
+                                $news = $this->db->select()->from("users")
+                                        ->where(array("user_status"=>1,"user_type"=>8));
 				
 			}
 			$user_array1=array();
@@ -4658,7 +4697,9 @@ class Merchant_Model extends Model
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			
-			$news=$this->db->query("select * from  users where user_status=1 and user_type=8");
+			//$news=$this->db->query("select * from  users where user_status=1 and user_type=8");
+                        $news = $this->db->select()->from("users")
+                                        ->where(array("user_status"=>1,"user_type"=>8));
 			return $news;
 		}
 		
@@ -4693,7 +4734,9 @@ class Merchant_Model extends Model
 				}
 				
 				$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where user_status=1 and product.merchant_id=$this->user_id1 $conditions group by transaction.user_id");
-				
+//				$news = $this->select()->from("users")
+//                                        ->join("transaction","transaction.user_id","users.user_id")
+//                                        ->join("product", "product.deal_id", "transaction.product_id");
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
 				$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on  product.deal_id=transaction.product_id where user_status=1 and product.merchant_id=$this->user_id1 and user_type=4 groupby transaction.user_id");
