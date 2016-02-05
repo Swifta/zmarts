@@ -2705,8 +2705,9 @@ class Merchant_Model extends Model
 		
 		$email = trim(strip_tags(addslashes($email)));
 		//$result = $this->db->query("select password from users where email='$email' and user_status=1 and user_type = 3");
-		$result = $this->select("password")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+		$result = $this->db->select("password")->from("users")
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))
+                        ->get();
                 if(count($result) > 0){
 			return $result->current()->password;
 		}else{
