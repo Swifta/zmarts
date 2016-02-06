@@ -170,12 +170,16 @@ class Newsletter_Model extends Model
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                                $news =  $this->db->select()->from("users")
+                                ->where(array("user_status" => 1, "user_type" => 4));
+                
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select *,email_id as email from email_subscribe where  suscribe_status=1 and is_deleted= 0");
-				
+				//$news=$this->db->query("select *,email_id as email from email_subscribe where  suscribe_status=1 and is_deleted= 0");
+				 $news =  $this->db->select("*,email_id as email")->from("email_subscribe")
+                                ->where(array("suscribe_status" => 1, "is_deleted" => 0));
 			}
 			
 			if(count($news) > 0){
@@ -290,24 +294,53 @@ class Newsletter_Model extends Model
 	
 	public function get_city_daily_deals_list($category_id = 0)
 	{
-		$result = $this->db->query("select * from deals  left join stores on stores.store_id=deals.shop_id  left join city on city.city_id= stores.city_id left join  category on  category.category_id=deals.category_id  where deals.category_id = $category_id and deal_status = 1  and  stores.store_status = 1  and  category.category_status =1  and enddate >".time()." order by deals.deal_id DESC limit 5");
-        return $result;
-	}
+//		$result = $this->db->query("select * from deals  left join stores on stores.store_id=deals.shop_id  left join city on city.city_id= stores.city_id left join  category on  category.category_id=deals.category_id  
+//                    where deals.category_id = $category_id and deal_status = 1  and  stores.store_status = 1  and  category.category_status =1  and enddate >".time()." order by deals.deal_id DESC limit 5");
+//        return $result;
+	
+         $result =  $this->db->select()->from("deals")
+                        ->join("stores", "stores.store_id", "deals.shop_id","LEFT")
+                        ->join("city", "city.city_id", "stores.city_id","LEFT")
+                        ->join("category","category.category_id","deals.category_id","LEFT")
+                        ->where(array("deals.category_id" => $category_id, "deal_status" => 1, "stores.store_status" => 1, "category.category_status" => 1, "enddate >" => time()))
+                        ->orderby("deals.deal_id","DESC")->limit(5);
+                 return $result;
+        
+        }
 
 	/** GET CITY DAILY DEALS LIST  **/
 	
 	public function get_city_daily_products_list($category_id = 0)
 	{
-		$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id  join city on city.city_id= stores.city_id join  category on  category.category_id=product.category_id  where product.category_id = $category_id  and deal_status = 1  and  stores.store_status = 1   and  category.category_status =1 and purchase_count < user_limit_quantity order by product.deal_id DESC limit 5");
-	        return $result;
+//		$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id  join city on city.city_id= stores.city_id join  category on  category.category_id=product.category_id 
+//                    where product.category_id = $category_id  and deal_status = 1  and  stores.store_status = 1   and  category.category_status =1 and purchase_count < user_limit_quantity order by product.deal_id DESC limit 5");
+//	        return $result;
+                
+                 $result =$this->db->select()->from("product")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->join("city", "city.city_id", "stores.city_id")
+                        ->join("category","category.category_id","product.category_id")
+                        ->where(array("product.category_id" => $category_id, "deal_status" => 1, "stores.store_status" => 1, "category.category_status" => 1, "purchase_count <" => "user_limit_quantity" ))
+                        ->orderby("product.deal_id","DESC")->limit(5);
+                 return $result;
 	}
 
 	/** GET CITY DAILY DEALS LIST  **/
 	
 	public function get_city_daily_auction_list($category_id = 0)
 	{
-		$result = $this->db->query("select * from(auction)  join stores on stores.store_id=auction.shop_id  join city on city.city_id= stores.city_id join  category on  category.category_id=auction.category_id  where auction.category_id = $category_id and deal_status = 1 and enddate >".time()."  and  stores.store_status = 1   and  category.category_status =1  order by auction.deal_id DESC limit 5");
-        return $result;
+//		$result = $this->db->query("select * from(auction)  join stores on stores.store_id=auction.shop_id  join city on city.city_id= stores.city_id join  category on  category.category_id=auction.category_id
+//                    where auction.category_id = $category_id and deal_status = 1 and enddate >".time()."  and  stores.store_status = 1   and  category.category_status =1  order by auction.deal_id DESC limit 5");
+//        return $result;
+        
+         $result =$this->db->select()->from("auction")
+                        ->join("stores", "stores.store_id", "auction.shop_id")
+                        ->join("city", "city.city_id", "stores.city_id")
+                        ->join("category","category.category_id","auction.category_id")
+                        ->where(array("auction.category_id" => $category_id, "deal_status" => 1, "enddate >" => time(), "stores.store_status" => 1, "category.category_status " =>1 ))
+                        ->orderby("auction.deal_id","DESC")->limit(5);
+                 return $result;
+        
 	}
 
 	
@@ -343,6 +376,8 @@ class Newsletter_Model extends Model
 		$result = $this->db->query("SELECT city.city_name FROM city WHERE FIND_IN_SET(city.city_id,'$cityid')");
 		
 		return $result;
+               
+                
 	}
 	
 	/* GET MODULE SETTING LIST */
@@ -379,25 +414,31 @@ class Newsletter_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".$city." and user_type=4 ";
+				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=4 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=4 ";
+					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=4 ";
+				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
 			return $news;
+                         
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			
-			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
-			return $news;
+//			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+//			return $news;
+                        $result =$this->db->select()->from("users")
+                       
+                        ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                         return $result;
 		}
 		
 		

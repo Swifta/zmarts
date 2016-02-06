@@ -10,8 +10,13 @@ class Admin_moderator_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-		$result = $this->db->query("SELECT user_type,joined_date,login_type FROM users WHERE  user_status = 1  and user_type = 2 ");
-		return $result;
+//		$result = $this->db->query("SELECT user_type,joined_date,login_type FROM users WHERE  user_status = 1  and user_type = 2 ");
+//		return $result;
+                
+                 $result =  $this->db->select("user_type,joined_date,login_type")->from("users")
+                  ->where(array("user_status" =>1 , "user_type" => 2));
+                     
+                 return $result;
 	}
 	/** GET COUNTRY LIST **/
     
@@ -95,21 +100,21 @@ class Admin_moderator_Model extends Model
                 $contitions = "user_type = 2";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and users.city_id = '.$city;
+                        $contitions .= ' and users.city_id = '.strip_tags(addslashes($city));
                         }
                         if($logintype){
-                        $contitions .= ' and login_type = '.$logintype;
+                        $contitions .= ' and login_type = '.strip_tags(addslashes($logintype));
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
 			if(isset($sort_arr[$param])){
-	       		 $contitions .= $sort_arr[$param];
+	       		 $contitions .=strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
@@ -148,22 +153,22 @@ class Admin_moderator_Model extends Model
                 $contitions = "user_type = 2";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and users.city_id = '.$city;
+                        $contitions .= ' and users.city_id = '.strip_tags(addslashes($city));
                         }
                         if($logintype){
-                        $contitions .= ' and login_type = '.$logintype;
+                        $contitions .= ' and login_type = '.strip_tags(addslashes($logintype));
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
 
 						$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
 						if(isset($sort_arr[$param])){
-							 $contitions .= $sort_arr[$param];
+							 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 							}else{  $contitions .= ' order by users.user_id DESC'; }
                 }
                         $result = $this->db->query("select user_id,firstname,lastname,phone_number,email,city.city_id,joined_date,address1,address2,country_name,city_name,user_status from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $limit1 ");
@@ -263,8 +268,13 @@ class Admin_moderator_Model extends Model
         /** GET CITY LIST **/
 	public function getCityId_name($city_id)
         {
-		$result = $this->db->query("SELECT city_id,city_name FROM city WHERE  city_status=1 and city_id='$city_id'");
-                return $result;
+//		$result = $this->db->query("SELECT city_id,city_name FROM city WHERE  city_status=1 and city_id='$city_id'");
+//                return $result;
+                
+                 $result =  $this->db->select("city_id,city_name")->from("city")
+                       ->where(array("city_status" => 1, "city_id" => $city_id));
+                       
+                 return $result;
         }	
 }
 

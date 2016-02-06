@@ -366,6 +366,7 @@ $('#details-cancel<?php echo $u->shipping_id; ?>').click(function(){
 							<option value="0" <?php if($u->delivery_status==0){ ?> selected <?php } ?>><?php echo $this->Lang['PENDING']; ?></option>
 								<option value="4" <?php if($u->delivery_status==4){ ?> selected <?php } ?>><?php echo $this->Lang['COMPLETED']; ?></option>
 								<option value="5" <?php if($u->delivery_status==5){ ?> selected <?php } ?>><?php echo $this->Lang['FAILED']; ?></option>
+                                                        </select>
 							<?php } ?>
                     </td>
                     

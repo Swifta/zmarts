@@ -52,7 +52,7 @@ class Seller_Controller extends Layout_Controller {
 					 ->add_rules('f_name', 'required')
 					 ->add_rules('l_name', 'required')
 					 ->add_rules('email', 'required','valid::email')
-					 ->add_rules('phone', 'required', array($this, 'validphone'), 'chars[0-9-+().]')
+					 ->add_rules('phone', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					 ->add_rules('addr', 'required')
 					 ->add_rules('gender', 'required',  array($this, 'no_minus_99'))
 					 ->add_rules('branch_no', 'required', array($this, 'no_minus_99'))
@@ -178,7 +178,7 @@ class Seller_Controller extends Layout_Controller {
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 						
 						->add_rules('firstname', 'required')
-						->add_rules('mr_mobile', 'required',array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mr_mobile', 'required',array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mr_address1', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('nuban', 'required')
@@ -251,7 +251,7 @@ class Seller_Controller extends Layout_Controller {
                                 $this->aramex_setting = $setting->aramex;
 		        }
 				
-			
+                        //var_dump($this->sub_sector_list); die;	
 						
 		$this->template->title = $this->Lang['MER_SIGN_2'];
 		$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_step2");
@@ -314,18 +314,18 @@ class Seller_Controller extends Layout_Controller {
 				$post = Validation::factory(array_merge($_POST,$_FILES))
 							
 							->add_rules('city', 'required')
-							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
 							//->add_rules('address2', 'required')
 							->add_rules('storename', 'required',array($this,'check_store_exist'))
 							//->add_rules('zipcode', 'required', 'chars[0-9.]')
 							//->add_rules('website','required'/*,'valid::url'*/)
-							->add_rules('latitude', 'required','chars[0-9.-]')
-							->add_rules('longitude', 'required','chars[0-9.-]')
+							//->add_rules('latitude', 'required','chars[0-9.-]')
+							//->add_rules('longitude', 'required','chars[0-9.-]')
 							//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							//->add_rules('store_email_id', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
-							->add_rules('username', 'required');
-							
+							//->add_rules('username', 'required');
+							;
 							if(isset($_FILES['image']))
 								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 								
@@ -333,9 +333,9 @@ class Seller_Controller extends Layout_Controller {
 								$post->add_rules('store_email_id',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
 							}
 							
-							if(isset($_POST['website'])){
-								$post->add_rules('website','valid::url');
-							}
+							//if(isset($_POST['website'])){
+							//	$post->add_rules('website','valid::url');
+							//}
 							
 							if(isset($_POST['zipcode'])){
 			
@@ -363,7 +363,7 @@ class Seller_Controller extends Layout_Controller {
 									
 									
 									 
-									$to=($status['email'])?$status['email']:CONTACT_EMAIL;
+									//$to=($status['email'])?$status['email']:CONTACT_EMAIL;
 										$from = CONTACT_EMAIL;
 										$this->country_list = $this->seller->getcountrylist();
 										$country_name = "";
@@ -436,6 +436,12 @@ class Seller_Controller extends Layout_Controller {
 										<td>&nbsp;</td>
 										
 										</tr>
+										<tr>
+										<td align=\"left\">Account Number   : </td>
+										<td> ".$this->session->get("merchant_reg_nuban")." </td>
+										<td>&nbsp;</td>
+										
+										</tr>
 										
 										<tr>
 										<td align=\"left\">".$this->Lang['SHOP_ADDR']."   : </td>
@@ -481,6 +487,13 @@ $admin_message	= '
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'. $post->storename.'</td>
     
   </tr>
+  
+    </tr>
+    <tr>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ; color:#666;">Account Number   : </td>
+    <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; "> '.$this->session->get("merchant_reg_nuban").' </td>
+    </tr>
+    
   <tr>
     <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;" >Addres 1: </td>
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; " >'.$post->address1.'</td>
@@ -652,7 +665,9 @@ $admin_message	= '
 										
 										
 										if(EMAIL_TYPE==2){
-											email::smtp($from, $to, $subject , $adminmessage);
+                                                                                    foreach($status['email'] as $single_admin){
+											email::smtp($from, $single_admin, $subject , $adminmessage);
+                                                                                    }
 											/*if(email::smtp($from, $this->session->get('memail'), $merchant_subject , "<p>".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage))
 												email::add_account_to_sendinblue("merchant", $this->session->get('memail'));*/
 												
@@ -660,7 +675,9 @@ $admin_message	= '
 											
 										}
 										else{
-											email::sendgrid($from, $to, $subject , $adminmessage);
+                                                                                    foreach($status['email'] as $single_admin){
+											email::sendgrid($from, $single_admin, $subject , $adminmessage);
+                                                                                    }
 											email::sendgrid($from, $this->session->get('memail'), $merchant_subject , "<p>".SITENAME ." - ".$this->Lang['CRT_MER_ACC']."</p>".$merchantmessage);
 										}
 										
@@ -673,7 +690,7 @@ $admin_message	= '
 									if(isset($_POST['store_email_id'])){
 										$this->email = $_POST['store_email_id'];
 										$from = CONTACT_EMAIL;
-										$this->name = $_POST['username'];
+										$this->name = @$_POST['username'];
 										$this->store_admin = 1;
 										$message = new View("themes/".THEME_NAME."/mail_template");
 										if(EMAIL_TYPE==2){				
@@ -773,7 +790,15 @@ $admin_message	= '
 	
 	public function validphone($phone = "")
 	{
-		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($phone,array(7,10,11)) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
 			return 1;
 		}
 		return 0;
@@ -783,7 +808,7 @@ $admin_message	= '
 	
 	public function validnuban($nuban = "")
 	{
-		if(valid::phone($nuban,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($nuban,array(7,10,11)) == TRUE){
 			return 1;
 		}
 		return 0;

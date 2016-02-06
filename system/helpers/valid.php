@@ -202,12 +202,25 @@ class valid_Core {
 		// Check if the number is within range
 		$in_range = in_array(strlen($number), $lengths);
 		
-		//If in range, check if starts with zero
-		if($in_range){
-			$zero_position = strpos($number, "0");
-			return $zero_position === 0;
-		}
+		
 		return $in_range;
+	}
+	
+	public static function z_phone($number){
+		if(!$number)
+		 return FALSE;
+		$zero_position = strpos($number, "0");
+		$seven_position = strpos($number, "7");
+		$eight_position = strpos($number, "8");
+		
+		if(($zero_position === 0) && ($seven_position === 1))
+			return TRUE;
+		if(($zero_position === 0) && ($eight_position === 1))
+			return TRUE;
+			
+		return FALSE;
+		
+		
 	}
 
 	/**

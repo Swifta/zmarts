@@ -1,3 +1,9 @@
+<?php 
+	if(count($this->product_size) == 0){
+		$nosize = 1;
+	}else{
+		$nosize = 0;
+	}?>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#messagedisplay1').hide();
@@ -286,6 +292,7 @@ foreach ($this->product_deatils as $products) {
 									 <?php }
 									 } ?>
                                 <div class="clearfix">
+                               	
                                             <?php if (count($this->product_size) > 0) { ?>
                                                 <?php
                                                 $c = 0;
@@ -303,7 +310,7 @@ foreach ($this->product_deatils as $products) {
                                                 <h3 class="select_color_title"><?php echo $this->Lang['CHOO_Y_SIZE']; ?></h3>
 
                                                 <ul>
-            <?php $nosize = "";
+            <?php 
             foreach ($this->product_size as $size) { ?>
                               <?php if ($size->quantity != 0) { ?><li  class="size_<?php echo $size->size_id; ?> <?php if ($size->quantity != 0) {
                                             if ($this->session->get('product_size_qty' . $products->deal_id) == $size->size_id) { ?> act <?php }
@@ -522,7 +529,7 @@ foreach ($this->product_deatils as $products) {
                                 <i class="wloader_img">&nbsp;</i>
                                 <div id="map_main" style="height:250px;">                                    
                                 </div>
-                                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+                                <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
                                 <script type="text/javascript">
                                     var latlng = new google.maps.LatLng(<?php echo $products->latitude; ?>,<?php echo $products->longitude; ?>);
                                     var myOptions = {

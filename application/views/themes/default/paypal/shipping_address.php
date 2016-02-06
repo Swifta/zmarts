@@ -8,7 +8,10 @@
 			if(status == "0"){
 				$('#id_err_phone').text('Invalid Phone Number. Enter your phone number (e.g. 070...,080...)');
 				return false;
-			}else{
+			}else if(status == "-1"){
+				$('#id_err_phone').text('Invalid initial digits. Begin with 07, or 08.');
+				return false;
+			} else{
 				
 				 form.submit();
 				
@@ -129,7 +132,12 @@
                         </div>
                     </li>                    
                     <li class="frm_clr">
-                        <label><?php echo $this->Lang['SEL_CITY']; ?> :<span class="form_star">*</span></label>
+                        <label>City :<span class="form_star">*</span></label>
+<div class="fullname"><input id="ship_state_p1"  name="state" tabindex="7" AUTOCOMPLETE="OFF"  placeholder="Enter your city name here" type="text" value="<?php if($this->session->get('shipping_state')){ echo $this->session->get('shipping_state'); } ?>" size="40" class="required" maxlength="100"/></div>
+
+                    </li>
+                    <li>
+                        <label><?php echo $this->Lang['STATE']; ?> :<span class="form_star">*</span> </label>
                         <div class="fullname">
                             <select name="city"  id="ship_city_p1" tabindex="6" class="CityPAY required">
                             <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
@@ -149,14 +157,10 @@
                                 <?php } ?>
                             </select>
                             
-                        </div>
-                    </li>
-                    <li>
-                        <label><?php echo $this->Lang['STATE']; ?> :<span class="form_star">*</span> </label>
-                        <div class="fullname"><input id="ship_state_p1"  name="state" tabindex="7" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>" type="text" value="<?php if($this->session->get('shipping_state')){ echo $this->session->get('shipping_state'); } ?>" size="40" class="required" maxlength="100"/></div>
+                        </div>                        
                     </li>
                     <li class="frm_clr">
-                        <label><?php echo $this->Lang['POSTAL_CODE']; ?> :<span class="form_star">*</span></label>
+                        <label><?php echo $this->Lang['POSTAL_CODE']; ?> :</label>
                         <div class="fullname"><input id="ship_postal_code_p1" name="postal_code" tabindex="8" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" value="<?php if($this->session->get('shipping_postal_code')){ echo $this->session->get('shipping_postal_code'); } ?>" class="required number" maxlength="8"/></div>
                     </li>
                     <li>

@@ -12,7 +12,16 @@ class Api_Model extends Model
 	public function get_deals_payment_details($deal_id = "", $deal_key = "")
 	{
 		
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id'");
+	/*	$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id'");*/
+	
+		
+		$result = $this->db
+					   ->select("*")
+					   ->from("deals")
+					   ->join("stores", "deals.shop_id", "stores.store_id")
+					   ->join("category", "deals.category_id", "category.category_id")
+					   ->where(array("deal_status"=>1, "category.category_status"=>1, "store_status"=>1, "deal_key" => "$deal_key", "deals.deal_id" => $deal_id))
+					   ->get();
 		
 	        return $result;
 	}
@@ -58,13 +67,47 @@ class Api_Model extends Model
                 $total_pay_amount = ($deal_amount + $shipping_amount + $tax_amount); 
                 $commission=(($deal_amount)*($commission_amount/100));
                 $merchantcommission = $total_pay_amount - $commission ; 
-                $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+				
+				
+             /*   $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");*/
+				
+			
+				
+				
+				$m_balance = $this->db->select("merchant_account_balance")->from("users")->where(array("user_id"=>$merchant_id))->get()->current()->merchant_account_balance;
+				
+				$m_balance +=$merchantcommission;
+				
+				$this->db->update("users", array("merchant_account_balance"=>$m_balance), array("user_id"=>$merchant_id, "user_type"=>3));
+				
+				
 
                 $purchase_count_total = $purchase_qty + $qty;
                 $result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-                $this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");	     
-                $this->db->query("update product_size set quantity = quantity - $qty where deal_id = $deal_id and size_id = $product_size");		
-
+				
+				
+				
+              /*  $this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");
+				*/
+				
+				/* $this->db->query("update product_size set quantity = quantity - $qty where deal_id = $deal_id and size_id = $product_size");	*/
+				
+				
+				$admin_m_balance = $this->db->select("merchant_account_balance")->from("users")->where(array("user_type"=>1))->get()->current()->merchant_account_balance;
+				
+				$total_pay_amount += $admin_m_balance;
+				
+				$this->db->update("users", array("merchant_account_balance"=>$total_pay_amount), array("user_type"=>1));
+				
+				
+				
+				$q = $this->db->select("quantity")->from("product_size")->where(array("deal_id"=>$deal_id, "size_id"=>$product_size))->get()->current()->quantity;
+				
+				$q -=$qty;
+				
+				$this->db->update("product_size", array("quantity"=>$q), array("deal_id"=>$deal_id, "size_id"=>$product_size));
+				
+					
 		 return $trans_ID;
 	}
 
@@ -87,7 +130,15 @@ class Api_Model extends Model
 
                 $purchase_count_total = $purchase_qty + $qty;
                 $result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-                $this->db->query("update product_size set quantity = quantity - $qty where deal_id = $deal_id and size_id = $product_size");
+				
+				
+				$q = $this->db->select("quantity")->from("product_size")->where(array("deal_id"=>$deal_id,"size_id"=>$product_size))->get()->current()->quantity;
+				
+				$q +=$qty;
+				
+				$this->db->update("product_size", array("quantity"=>$q), array("deal_id"=>$deal_id, "size_id"=>$product_size));
+				
+               /* $this->db->query("update product_size set quantity = quantity - $qty where deal_id = $deal_id and size_id = $product_size");*/
                 return $trans_ID;
  
 	}
@@ -118,12 +169,24 @@ class Api_Model extends Model
          $total_pay_amount = ($pay_amount + $shipping_amount + $tax_amount); 
 		 $commission=(($pay_amount)*($commission_amount/100));
          $merchantcommission = $total_pay_amount - $commission ; 
-         $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+		 
+       /*  $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");*/
+		 
+		 
+		
+		$this->db->update("users", array("merchant_account_balance" => new Database_Expression("merchant_account_balance+$merchantcommission")), array("user_type"=>3, "user_id"=>$merchant_id));
          
 		$purchase_count_total = $purchase_qty + $qty;
 	    $result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		$this->db->query("update users set merchant_account_balance = merchant_account_balance + '$total_pay_amount' where user_type = 1");
-		$this->db->query("update product_size set quantity = quantity - '$qty' where deal_id = '$deal_id' and size_id = '$product_size'");
+		/*$this->db->query("update users set merchant_account_balance = merchant_account_balance + '$total_pay_amount' where user_type = 1");*/
+		
+		$this->db->update("users", array("merchant_account_balance" =>new Database_Expression("merchant_account_balance+$total_pay_amount")), array("user_type"=>1));
+		
+		
+		/*$this->db->query("update product_size set quantity = quantity - '$qty' where deal_id = '$deal_id' and size_id = '$product_size'");*/
+		
+		$this->db->update("product_size", array("quantity" =>new Database_Expression("quantity-$qty")), array("deal_id"=>$deal_id, "size_id"=>$product_size));
+		
                 
 		return $trans_ID;
 	}
@@ -154,8 +217,15 @@ class Api_Model extends Model
 		 $purchase_count_total = $purchase_qty + $qty;
 		 
 		  $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		 $this->db->query("update users set user_referral_balance = user_referral_balance - '$ref_amount', deal_bought_count = deal_bought_count + '$qty' where user_id = '$userid'");    
-		 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount1 where user_type = 1");
+		  
+		/* $this->db->query("update users set user_referral_balance = user_referral_balance - '$ref_amount', deal_bought_count = deal_bought_count + '$qty' where user_id = '$userid'");*/  
+		 
+		 	$this->db->update("users", array("user_referral_balance" =>new Database_Expression("user_referral_balance+$ref_amount"), "deal_bought_count"=>new Database_Expression("deal_bought_count+$qty")), array("user_id"=>$userid));
+			
+			  
+		 /*$this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount1 where user_type = 1");*/
+		 
+		 $this->db->update("users", array("merchant_account_balance" =>new Database_Expression("merchant_account_balance+$amount1")), array("user_type"=>1));
 
 		 
 	        
@@ -186,8 +256,17 @@ class Api_Model extends Model
 
 		 $purchase_count_total = $purchase_qty + $qty;   
 	     $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		 $this->db->query("update users set user_referral_balance = user_referral_balance - '$ref_amount', deal_bought_count = deal_bought_count + '$qty' where user_id = '$userid'");
-		 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $pay_amount where user_type = 1");
+		/* $this->db->query("update users set user_referral_balance = user_referral_balance - '$ref_amount', deal_bought_count = deal_bought_count + '$qty' where user_id = '$userid'");*/
+		 
+		 /*$this->db->query("update users set merchant_account_balance = merchant_account_balance + $pay_amount where user_type = 1");*/
+		 
+		
+		 
+		 	$this->db->update("users", array("user_referral_balance" =>new Database_Expression("user_referral_balance+$ref_amount"), "deal_bought_count"=>new Database_Expression("deal_bought_count+$qty")), array("user_id"=>$userid));
+			
+	
+		 
+		 $this->db->update("users", array("merchant_account_balance" =>new Database_Expression("merchant_account_balance+$pay_amount")), array("user_type"=>1));
 		  
 		 return $trans_ID;
 	}
@@ -305,8 +384,13 @@ class Api_Model extends Model
 	public function update_referral_amount($ref_user_id = "")
 	{
 		$referral_amount = REFERRAL_AMOUNT;
+		$r_amount = $this->db->select("user_referral_balance")->from("users")->where(array("user_id" => $ref_user_id))->get()->current()->user_referral_balance;
+		$referral_amount +=$r_amount;
+
+		/*$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");*/
 		
-		$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+		$r = $this->db->update("users", array("user_referral_balance"=>"$referral_amount"), array("user_id"=>"$ref_user_id"));
+	
 		return;
 	}
 	
@@ -314,14 +398,40 @@ class Api_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deals.deal_id = '$deal_id'");
+		/*$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deals.deal_id = '$deal_id'");*/
+		
+		
+		
+		$result = $this->db
+					   ->select("*")
+					   ->from("deals")
+					   ->join("stores", "deals.shop_id", "stores.store_id")
+					   ->join("category", "deals.category_id", "category.category_id")
+					   ->where(array("deal_status"=>1, "category.category_status"=>1, "store_status"=>1,"deals.deal_id" => $deal_id))
+					   ->get();
+					   
+					   
 	        return $result;
 	}
 	/** *GET DEALS DETAILS */
 
 	public function get_product_details_share($deal_id = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where  deal_status = 1 and category.category_status = 1 and  store_status = 1 and deals.deal_id = '$deal_id'");
+		/*$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where  deal_status = 1 and category.category_status = 1 and  store_status = 1 and deals.deal_id = '$deal_id'");
+		*/
+			
+		
+		
+		$result = $this->db
+					   ->select("*")
+					   ->from("deals")
+					   ->join("stores", "deals.shop_id", "stores.store_id")
+					   ->join("category", "deals.category_id", "category.category_id")
+					   ->where(array("deal_status"=>1, "category.category_status"=>1, "store_status"=>1,"deals.deal_id" => $deal_id))
+					   ->get();
+					   
+		
+		
 	        return $result;
 	}
 
@@ -427,7 +537,6 @@ class Api_Model extends Model
 	
 	
 	/** FORGOT PASSWORD **/
-
 	public function forgot_password($emailid,$lang)
 	{
 		$result = $this->db->count_records('users', array('email' => $emailid));
@@ -536,15 +645,24 @@ class Api_Model extends Model
 	public function get_category_list($type = "")
 	{
 		$cont = "";
+		$c = array();
 		if($type == "deal"){
 			$cont = " AND deal = 1";
+			$c["deal"] = 1;
 		}else if($type == "product"){
 			$cont = " AND product = 1";
+			$c["product"] = 1;
 		}else if($type == "auction"){
 			$cont = " AND auction = 1";
+			$c["auction"] = 1;
 		}
 		
-		$result = $this->db->query(" select * from category where category_status = 1 AND main_category_id = 0 $cont order by category_name ASC");
+		$c["category_status"] = 1;
+		$c["main_category_id"] = 0;
+		
+		/*$result = $this->db->query(" select * from category where category_status = 1 AND main_category_id = 0 $cont order by category_name ASC");*/
+		
+		$result = $this->db->select("*")->from("category")->where($c)->orderby(array("category_name"=>"ASC"))->get();
 		return $result;
 	}
 	
@@ -580,27 +698,74 @@ class Api_Model extends Model
 	        
 		$conditions = " enddate >".time()."  and   purchase_count < maximum_deals_limit and deal_status = 1 and category.category_status = 1 and  store_status = 1 and city_status = 1  and  users.user_status = 1";
 		
+		$c = array();
+		$c["enddate >"] = time();
+		$c["purchase_count <"] = "maximum_deals_limit";
+		$c["deal_status"] = 1;
+		$c["category.category_status"] = 1;
+		$c["store_status"] = 1;
+		$c["city_status"] = 1;
+		$c["users.user_status"] = 1;
+		
+		
+		$c_like = array();
+		$c_orlike = array();
+		
+		
+		
+		
 	   
 			if($search){
-				$conditions .= " and (deal_title like '%".mysql_escape_string($search)."%'";
-				$conditions .= " or deal_title like '%".mysql_escape_string($search)."%')";
+				//$conditions .= " and (deal_title like '%".mysql_escape_string($search)."%'";
+				//$conditions .= " or deal_title like '%".mysql_escape_string($search)."%')";
+				
+				$conditions .= " and (deal_title like '%".$search."%'";
+				$conditions .= " or deal_title like '%".$search."%')";
+				
+				$c_like["deal_title"] = $search;
+				$c_orlike["deal_title"] =$search;
+				
 			}
-			
+			$s_s = FALSE;
 			if(CITY_SETTING){ 
 				if($city_id){
 					$conditions .= " and stores.city_id = '$city_id' ";
+					$c["stores.city_id"] = $city_id;
 				}
-				$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions AND city.city_status = 1 order by deal_id DESC ";
+				
+				$c["city.city_status"] = 1;
+				
+				/*$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions AND city.city_status = 1 order by deal_id DESC ";*/
+				
+				$results = $this->db->select("*")->from("deals")->join("stores", "stores.store_id", "deals.shop_id")
+				->join("category", "category.category_id","deals.category_id")
+				->join("users","users.user_id","deals.merchant_id")
+				->join("city", "city.city_id", "stores.city_id")
+				->where($c)
+				->like($c_like)
+				///->orlike($c_orlike)
+				->orderby(array("deal_id"=>"DESC"))
+				->get();
 			}
 			else{
-					$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions order by deal_id DESC ";
+					/*$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions order by deal_id DESC ";*/
+				
+				$results = $this->db->select("*")->from("deals")->join("stores", "stores.store_id", "deals.shop_id")
+				->join("category", "category.category_id","deals.category_id")
+				->join("users","users.user_id","deals.merchant_id")
+				->join("city", "city.city_id", "stores.city_id")
+				->where($c)
+				->like($c_like)
+				->orderby(array("deal_id"=>"DESC"))
+				->get();
+				
 			}
 		
 			
 		
 		
-		$result = $this->db->query($query);
-		return $result;
+		//$result = $this->db->query($query);
+		return $results;
 	}
 	
 	/** HOT DEALS LIST **/
@@ -608,20 +773,56 @@ class Api_Model extends Model
 	public function get_hot_today_deals($city_id)
 	{
 		$conditions = " enddate >".time()."  and   purchase_count < maximum_deals_limit and deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_feature = 1 and city_status = 1  and  users.user_status = 1";
+		
+		$c = array();
+		$c["enddate >"] = time();
+		$c["purchase_count <"] = "maximum_deals_limit";
+		$c["deal_status"] = 1;
+		$c["category.category_status"] = 1;
+		$c["store_status"] = 1;
+		$c["deal_feature"] = 1;
+		$c["city_status"] = 1;
+		$c["users.user_status"] = 1;
+		
+		
 			
 			if(CITY_SETTING){ 
 				if($city_id){
 					$conditions .= " and stores.city_id = '$city_id' ";
+					$c["stores.city_id"] = $city_id;
 				}
-				$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions AND city.city_status = 1 order by deal_id DESC ";
+				
+				$c["city.city_status"] = 1;
+				
+				/*$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions AND city.city_status = 1 order by deal_id DESC ";*/
+				
+				$results = $this->db->select("*")
+				->from("deals")
+				->join("stores", "stores.store_id","deals.shop_id")
+				->join("category", "category.category_id","deals.category_id")
+				->join("users", "users.user_id","deals.merchant_id")
+				->join("city", "city.city_id","stores.city_id")
+				->where($c)
+				->orderby(array("deal_id"=>"DESC"))
+				->get();
 			}
 			else{
-					$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id  join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions order by deal_id DESC ";
+					/*$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id  join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions order by deal_id DESC ";*/
+					
+				$results = $this->db->select("*")
+				->from("deals")
+				->join("stores", "stores.store_id","deals.shop_id")
+				->join("category", "category.category_id","deals.category_id")
+				->join("users", "users.user_id","deals.merchant_id")
+				->join("city", "city.city_id","stores.city_id")
+				->where($c)
+				->orderby(array("deal_id"=>"DESC"))
+				->get();
 			}
 		
-		$result = $this->db->query($query);
+		/*$results = $this->db->query($query);*/
 		
-		return $result;
+		return $results;
 	}
 	
 	
@@ -630,20 +831,54 @@ class Api_Model extends Model
 	public function get_mostview_today_deals($city_id)
 	{
 		$conditions = " enddate >".time()." and   purchase_count < maximum_deals_limit and deal_status = 1 and category.category_status = 1 and  store_status = 1  and view_count != 0 and city_status = 1  and  users.user_status = 1";
+		
+		$c = array();
+		$c["enddate >"] = time();
+		$c["purchase_count <"] = "maximum_deals_limit";
+		$c["deal_status"] = 1;
+		$c["category.category_status"] = 1;
+		$c["store_status"] = 1;
+		$c["view_count !="] = 0;
+		$c["city_status"] = 1;
+		$c["users.user_status"] = 1;
 			
 			if(CITY_SETTING){ 
 				if($city_id){
 					$conditions .= " and stores.city_id = '$city_id' ";
+					$c["stores.city_id"] = $city_id;
 				}
-				$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions AND city.city_status = 1 order by deals.view_count DESC ";
+				$c["city.city_status"] = 1;
+				
+				/*$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions AND city.city_status = 1 order by deals.view_count DESC ";*/
+				
+				$results = $this->db->select("*")
+				->from("deals")
+				->join("stores", "stores.store_id","deals.shop_id")
+				->join("category", "category.category_id","deals.category_id")
+				->join("users", "users.user_id","deals.merchant_id")
+				->join("city", "city.city_id","stores.city_id")
+				->where($c)
+				->orderby(array("deals.view_count"=>"DESC"))
+				->get();
+				
 			}
 			else{
-					$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions order by deals.view_count DESC ";
+					/*$query = "select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id join city on city.city_id=stores.city_id where $conditions order by deals.view_count DESC ";*/
+					
+				$results = $this->db->select("*")
+				->from("deals")
+				->join("stores", "stores.store_id","deals.shop_id")
+				->join("category", "category.category_id","deals.category_id")
+				->join("users", "users.user_id","deals.merchant_id")
+				->join("city", "city.city_id","stores.city_id")
+				->where($c)
+				->orderby(array("deals.view_count"=>"DESC"))
+				->get();
 			}
 		
-		$result = $this->db->query($query);
+		/*$results = $this->db->query($query);*/
 		
-		return $result;
+		return $results;
 	}
 	
 	public function get_user_bought($uid = "")
@@ -657,47 +892,118 @@ class Api_Model extends Model
 	public function get_category_deals($type = "", $category = "",$city_id = "")
 	{
 		
+					$q_build = $this->db->select("*")->from("deals");
+					$c = array();
 	                if($type =="1"){
 	                        $cat_type = "deals.category_id = $category ";
+							$c["deals.category_id"] = $category;
 	                        $join = "join category ON category.category_id = deals.category_id";
+							$q_build->join("category", "category.category_id", "deals.category_id");
 	                }
 	                if($type =="2"){
 	                        $cat_type = "deals.sub_category_id = $category ";
+							$c["deals.sub_category_id"] = $category;
 	                       $join = "join category ON category.category_id = deals.sub_category_id";
+						   $q_build->join("category", "category.category_id", "deals.sub_category_id");
 	                }
 	                if($type =="3"){
 	                        $cat_type = "deals.sec_category_id = $category ";
+							$c["deals.sec_category_id"] = $category;
 	                        $join = "join category ON category.category_id = deals.sec_category_id";
+							
+							$q_build->join("category", "category.category_id", "deals.sec_category_id");
+							
 	                }
 	                if($type =="4"){
 	                        $cat_type = "deals.third_category_id = $category ";
+							$c["deals.third_category_id"] = $category;
+							
 	                        $join = "join category ON category.category_id = deals.third_category_id";
+							
+							$q_build->join("category", "category.category_id", "deals.third_category_id");
 	                }
-	                 if($type =="5"){
+	                if($type =="5"){
 	                
 	                $cat_type = "deals.third_category_id = 0 ";
+					$c["deals.third_category_id"] = 0;
 	                $join = "";
-	                if(CITY_SETTING){ 
+	                if(1){ 
 			$conditions = "deal_status = 1 AND enddate >".time()."  AND store_status = 1 AND city.city_status = 1 AND $cat_type  AND  purchase_count < maximum_deals_limit  and  users.user_status = 1 and stores.city_id = $city_id ";
+			
+			$c["deal_status"] = 1;
+			$c["enddate >"] = time();
+			$c["store_status"] = 1;
+			$c["city.city_status"] = 1;
+			$c["purchase_count <"] = "maximum_deals_limit";
+			$c["users.user_status"] = 1;
+			if($city_id)
+				$c["stores.city_id"] = $city_id;
+			
+			
 			} else {
 			$conditions = "deal_status = 1 AND enddate >".time()."   AND store_status = 1 AND city.city_status = 1 AND $cat_type  AND  purchase_count < maximum_deals_limit  and  users.user_status = 1";
+			
+			$c["deal_status"] = 1;
+			$c["enddate >"] = time();
+			$c["store_status"] = 1;
+			$c["city.city_status"] = 1;
+			$c["purchase_count <"] = "maximum_deals_limit";
+			$c["users.user_status"] = 1;
+			//$c["stores.city_id"] = $city_id;
 			}
 			
 			} else {
 			
 			
-			 if(CITY_SETTING){ 
+			 if(1){ 
 			$conditions = "deal_status = 1 AND enddate >".time()." AND category.category_status = 1 AND store_status = 1 AND city.city_status = 1 AND $cat_type  AND  purchase_count < maximum_deals_limit  and  users.user_status = 1 and stores.city_id = $city_id ";
+			
+			$c["deal_status"] = 1;
+			$c["enddate >"] = time();
+			$c["store_status"] = 1;
+			$c["city.city_status"] = 1;
+			$c["purchase_count <"] = "maximum_deals_limit";
+			$c["users.user_status"] = 1;
+			$c["stores.city_id"] = $city_id;
+			
+			
 			} else {
 			$conditions = "deal_status = 1 AND enddate >".time()."  AND category.category_status = 1 AND store_status = 1 AND city.city_status = 1 AND $cat_type  AND  purchase_count < maximum_deals_limit  and  users.user_status = 1";
-			}
+			
+			$c["deal_status"] = 1;
+			$c["enddate >"] = time();
+			$c["category.category_status"] = 1;
+			$c["store_status"] = 1;
+			$c["city.city_status"] = 1;
+			$c["purchase_count <"] = "maximum_deals_limit";
+			$c["users.user_status"] = 1;
+			//$c["stores.city_id"] = $city_id;
+			
+			
+			
 			
 			}
 			
-		        $result = $this->db->query(" select * from deals   $join join stores ON stores.store_id = deals.shop_id  join users on users.user_id=deals.merchant_id join city ON city.city_id = stores.city_id where($conditions) group by deal_id order by deal_id DESC ");
+			}
+			
+			try{
+		      /*  $result = $this->db->query(" select * from deals   $join join stores ON stores.store_id = deals.shop_id  join users on users.user_id=deals.merchant_id join city ON city.city_id = stores.city_id where($conditions) group by deal_id order by deal_id DESC ");*/
+				
+				$results = $q_build->join("stores", "stores.store_id","deals.shop_id")
+						->join("users", "users.user_id","deals.merchant_id")
+						->join("city", "city.city_id","stores.city_id")
+						->where($c)
+						->groupby(array("deal_id"))
+						->orderby(array("deal_id"=>"DESC"))
+						->get();
+			}catch(Exception $e){
+				var_dump($e->xdebug_message);
+				exit;
+			}
+						
 		                        
 		   
-		return $result;
+		return $results;
 	}
 	
 	/** TODAY DEAL **/
@@ -732,7 +1038,9 @@ class Api_Model extends Model
 			        $count_view = $this->db->from("view_count_location")->where(array("deal_key" => $deal_key,"ip" =>$ip))->get();
 			        if(count($count_view) == 0){
 			                $this->db->insert("view_count_location", array("deal_key" => $deal_key,"ip" =>$ip,"city" => $city,"country" => $country,"date" => time()));
-			                $this->db->query("update deals set view_count = view_count + 1 where deal_key = '$deal_key'");
+			                /*$this->db->query("update deals set view_count = view_count + 1 where deal_key = '$deal_key'");*/
+							$this->db->update("deals", array("deal_price"=>new Database_Expression("view_count+1")), array("deal_key" =>$deal_key));
+							
 			       }
 			       
 		$result = $this->db->select("*", "stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")
@@ -1143,7 +1451,8 @@ class Api_Model extends Model
 			        $count_view = $this->db->from("view_count_location")->where(array("product_key" => $deal_key,"ip" =>$ip))->get();
 			        if(count($count_view) == 0){
 			                $this->db->insert("view_count_location", array("product_key" => $deal_key,"ip" =>$ip,"city" => $city,"country" => $country,"date" => time()));
-			                $this->db->query("update product set view_count = view_count + 1 where deal_key = '$deal_key'");
+			                /*$this->db->query("update product set view_count = view_count + 1 where deal_key = '$deal_key'");*/
+							$this->db->update("product", array("deal_price"=>new Database_Expression("view_count+1")), array("deal_key" =>$deal_key));
 			       }
 			       
 			       
@@ -1398,7 +1707,10 @@ class Api_Model extends Model
 	        $count_view = $this->db->from("view_count_location")->where(array("auction_key" => $deal_key,"ip" =>$ip))->get();
 	        if(count($count_view) == 0){
 	                $this->db->insert("view_count_location", array("auction_key" => $deal_key,"ip" =>$ip,"city" => $city,"country" => $country,"date" => time()));
-	                $this->db->query("update auction set view_count = view_count + 1 where deal_key = '$deal_key'");
+	                /*$this->db->query("update auction set view_count = view_count + 1 where deal_key = '$deal_key'");
+					*/
+					$this->db->update("auction", array("deal_price"=>new Database_Expression("view_count+1")), array("deal_key" =>$deal_key));
+			
 	       }
 			       
 		$result = $this->db->select("*", "stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")
@@ -1458,7 +1770,11 @@ class Api_Model extends Model
 			$result1 = $this->db->from("bidding")->where(array("auction_id" => $deal_id,"bid_amount" => $current_bid_value,"shipping_amount" => $shipping_amount))->get();
 			if(count($result1)==0){
 			$result = $this->db->insert("bidding",array("auction_id" => $deal_id,"user_id" => $userid,"bid_amount" => $current_bid_value,"shipping_amount" => $shipping_amount,"bidding_time" => time(),"end_time" => $end_time ));
-			$this->db->query("update auction set deal_price = bid_increment + deal_price,bid_count = bid_count + 1 where deal_id = $deal_id ");
+			
+			/*$this->db->query("update auction set deal_price = bid_increment + deal_price,bid_count = bid_count + 1 where deal_id = $deal_id ");*/
+			
+			$this->db->update("auction", array("deal_price"=>new Database_Expression("deal_price+bid_increment"), "bid_count"=>new Database_Expression("bid_count+1")), array("deal_id" =>$deal_id));
+			
 			return count($result); 
 			}
 			return 0; 
@@ -1616,6 +1932,14 @@ class Api_Model extends Model
 		        $query = "select * from product  join stores on stores.store_id=product.shop_id $join  join users on users.user_id=product.merchant_id join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and  users.user_status = 1 and  users.user_status = 1 and stores.city_id = $city_id  $conditions group by product.deal_id order by product.deal_id DESC";
 		} else {
 			$query = "select * from product  join stores on stores.store_id=product.shop_id $join join users on users.user_id=product.merchant_id join product_size on product_size.deal_id=product.deal_id where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and users.user_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC";
+			
+			/*$result = $this->db->select("*")
+							   ->from("product")
+							   ->join("stores", "stores.store_id", "product.shop_id" )
+							   ->join("users", "users.user_id", "product.merchant_id")
+							   ->join("product_size", "product_size.deal_id", "product.deal_id")
+							   ->where(array("purchase_count < "=>"user_limit_quantity", "deal_status"=>1, "category.category_status"=>1, "users.user_status"=>1, "store_status"=>1))
+							   ->get();*/
 		}
 		$result = $this->db->query($query);
 		return $result;   
@@ -1634,7 +1958,8 @@ class Api_Model extends Model
 	
 	public function get_size_list()
 	{
-	        $query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
+	        /*$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";*/
+			$this->db->select("*")->from("size")->orderby(array("size_name" =>"ASC"))->get();
 	        $result = $this->db->query($query);
 		return $result;
 	}
@@ -1694,4 +2019,47 @@ class Api_Model extends Model
 		$result = $this->db->from("users")->where(array("user_id" => $merchant))->get();
 		return $result;
 	}
+	
+	
+	public function test_bulk(){
+		$total_pay_amount = 100;
+		$product_size = 1;
+		$qty = 1;
+		$deal_id = 1;
+		$merchant_id = 128;
+		$merchantcommission = 0;
+		
+		$m_balance = 0;
+		
+		
+						$admin_m_balance = $this->db->select("merchant_account_balance")->from("users")->where(array("user_type"=>1))->get()->current()->merchant_account_balance;
+				
+				$total_pay_amount += $admin_m_balance;
+				
+			$m_balance = $this->db->select("merchant_account_balance")->from("users")->where(array("user_id"=>$merchant_id))->get()->current()->merchant_account_balance;
+				
+				$m_balance +=$merchantcommission;
+				
+				$this->db->update("users", array("merchant_account_balance"=>$m_balance), array("user_id"=>$merchant_id, "user_type"=>3));
+				
+				
+				
+				$this->db->update("users", array("merchant_account_balance"=>$total_pay_amount), array("user_type"=>1));
+				
+				
+				
+				$q = $this->db->select("quantity")->from("product_size")->where(array("deal_id"=>$deal_id, "size_id"=>$product_size))->get()->current()->quantity;
+				
+				$q -=$qty;
+				
+				$r = $this->db->update("product_size", array("quantity"=>$q), array("deal_id"=>$deal_id, "size_id"=>$product_size));
+				
+				$r = $this->db->select("*")->from("size")->orderby(array("size_name" =>"ASC"))->get();
+				
+					
+				var_dump($r);
+				exit;
+	}
 }	
+
+

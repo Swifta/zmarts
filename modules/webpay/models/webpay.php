@@ -10,6 +10,21 @@ class Webpay_Model extends Model
 		$this->UserName = $this->session->get("UserName");
 	}
         
+        public function addStockBack($transaction_id){
+            $get_detail = $this->db->select("deal_merchant_commission","shipping_amount","tax_amount","amount","product_size","product_id","deal_id","auction_id","quantity")->
+                    from('transaction')->where(array("transaction_id" =>$transaction_id))->get();
+            if(count($get_detail)){
+                $product_id = $get_detail[0]->product_id;
+                $quantity=$get_detail[0]->quantity;
+                $size_id = $get_detail[0]->product_size;
+                $this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+
+                $this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+
+                $this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('transaction_id' => $transaction_id));
+            }
+        }
+        
         public function payUpdate($tranx_id, $response_code, $response_discription, $PaymentReference, $CardNumber, $status){
             //$ret = array();
             $payment_status = "Pending";
@@ -31,7 +46,7 @@ class Webpay_Model extends Model
                 //var_dump(count($result));
             if(count($result) > 0){
                 foreach($result as $row){
-                    $total+=$row->amount;
+                    $total+=($row->amount + $row->shipping_amount);
                 }
             }
             return intval($total*100);
@@ -60,7 +75,159 @@ class Webpay_Model extends Model
                     array("transaction_id" => $transaction_id));
         }
 
-        public function get_split_marchant_xml($transaction_id, $total_amount_shopped){
+        public function get_split_marchant_xml($transaction_id, $total_amount_shopped, $last=false, $soFar=0, $totalCommission=0){
+            //ceil($input / 10) * 10;
+//            $total_item_in_cart = $this->session->get("count");
+//            $real_amount_to_be_charged_as_commission = 0;
+//            $tmp_webpay_loop = 1;
+//            if($this->session->get("tmp_webpay_loop")){
+//                
+//                $tmp_webpay_loop = intval($this->session->get("tmp_webpay_loop"))+1;
+//                $this->session->set("tmp_webpay_loop", $tmp_webpay_loop);
+//                //echo $tmp_webpay_loop." so "; die;
+//            }
+//            else{
+//                $this->session->set("tmp_webpay_loop", 1);
+//            }
+            $ret = ""; //array("xml"=>"", "commission"=>0);
+//            $is_above_2k = false;
+//            //$tmp_2k = 0.015 * ceil($total_amount_shopped / 10) * 10;
+//            $tmp_2k = 0.015 * ($total_amount_shopped*100);
+//            //echo ($total_amount_shopped*100)." against ".$tmp_2k;die;
+//            if($tmp_2k > 200000){
+//                $is_above_2k = true;
+//                //$real_amount_to_be_charged_as_commission = (2000*100);
+////                if(is_float($tmp_2k)){
+////                    $op = explode(".", $tmp_2k);
+////                    $real_num = $op[0];
+////                }
+//            }
+//            else{
+//                //$real_amount_to_be_charged_as_commission = (int)$tmp_2k;
+//            }
+//     
+        //$commission_webpay = 0;
+        $commission_webpay_summed = 0;
+        $loop = 0;
+        $total_item_in_cart = $this->session->get("count");
+        
+        $commission_webpay = round(0.015 * ($total_amount_shopped*100));
+        if($commission_webpay > 200000){
+            $commission_webpay = 200000;
+        }
+                
+            $result = $this->db->from("transaction")
+                        ->where(array("transaction.transaction_id"=>$transaction_id))
+                        ->join("product","product.deal_id","transaction.product_id")
+                        ->join("users","users.user_id","transaction.user_id")
+                        ->join("city","city.city_id","users.city_id")
+                        ->join("stores", "product.shop_id", "stores.store_id")
+                        ->get();
+            if(count($result) > 0){
+                foreach($result as $row){
+                    $loop++;
+                    $isLast = false;
+                    if($loop == $total_item_in_cart){
+                        $isLast = true;
+                        //echo $row->amount;die;
+                    }
+//                        if($row->approve_status != 1){
+//                            $ret['success'] = false;
+//                            $ret['msg'] = "User Account Blocked or Suspended";
+//                            break;
+//                        }
+//<item_detail item_id="2" item_name="Grape" item_amt="'.(($pay_amount1/2)*100).'" bank_id="117" acct_num="4351189876" />
+
+                    $item_id = $row->product_id;
+                    $item_name = urlencode($row->deal_title." (".$row->quantity.")");
+                    $acct_num = "";
+                    /*
+                     * get this merchant/shop account number to settle
+                     */
+                    $qu = $this->db->from("users")
+                            ->where(array("user_id"=>$row->store_admin_id))->get();
+                    foreach($qu as $merch){
+                        $acct_num = $merch->nuban;
+                    }
+                    //$acct_num = $row->nuban;
+                    if(strlen($acct_num) < 10){
+                        $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
+                    }
+                    //nuban number set in there profile
+                    $temp_item_amt = (($row->amount*$row->quantity)+$row->shipping_amount) * 100;
+                    //$temp_item_amt = ceil($total_amount_shopped / 10) * 10 * 100;
+                    //if($total_amount > )
+//                    if(!$is_above_2k){
+//                        //if not above 2k cap
+//                        $transaction_fee = floor(0.015 * $temp_item_amt);
+//                        //$this->session->delete("tmp_webpay_loop");
+////                        if($total_item_in_cart == $tmp_webpay_loop){
+////                            //this is the last item in the cart.
+////                            $transaction_fee = $real_amount_to_be_charged_as_commission -
+////                                     $this->session->get("tmp_webpay_commission_store");
+////                        }
+////                        else{
+////                            $store_back_commission= $this->session->get("tmp_webpay_commission_store")+$transaction_fee;
+////                            $this->session->get("tmp_webpay_commission_store", $store_back_commission);
+////                        }
+//                        //$item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
+//                    }
+//                    else{
+//
+//
+//                    }
+                    $weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
+                    //$weight_fraction_of_sales = ($temp_item_amt / (ceil($total_amount_shopped / 10) * 10 *100));
+                    $transaction_fee = (int)($weight_fraction_of_sales * $commission_webpay); //from 2,000naira. whats my transaction fee here  
+                    $commission_webpay_summed += $transaction_fee;
+                    if($isLast && ($total_item_in_cart > 1)){
+                        
+                        $transaction_fee += $commission_webpay - $commission_webpay_summed;
+                        //echo $transaction_fee." was here ".$commission_webpay." and ".$commission_webpay_summed; die;
+                    }
+                    //echo $tmp_webpay_loop." seen "; die;
+//                    if($tmp_webpay_loop >= ($total_item_in_cart-1)){
+//                        //this is the last item in the cart.
+//                        //echo "here 2 ".$this->session->get("tmp_webpay_commission_store"); die;
+//                        if($this->session->get("tmp_webpay_commission_store") != $real_amount_to_be_charged_as_commission){
+//                            $add_up = $real_amount_to_be_charged_as_commission -
+//                                 $this->session->get("tmp_webpay_commission_store"); 
+//                            echo " here ".$add_up;die;
+//                        }
+//                        //echo "here ".$transaction_fee." ".$real_amount_to_be_charged_as_commission." ".
+//                         //      $this->session->get("tmp_webpay_commission_store");
+//            $this->session->delete("tmp_webpay_loop");
+//            $this->session->delete("tmp_webpay_commission_store");
+//                        //die;
+//                    }
+//                    else{
+//                        $web_commision = 0;
+//                        if($this->session->get("tmp_webpay_commission_store")){
+//                            $web_commision = $this->session->get("tmp_webpay_commission_store");
+//                        }
+//                        $store_back_commission = $web_commision + $transaction_fee;
+//                        //echo "here ".$store_back_commission."\n";die;
+//                        $this->session->set("tmp_webpay_commission_store", $store_back_commission);
+//                    }
+//                    if(strpos($transaction_fee, ".")){
+//                        $op = explode(".", $transaction_fee);
+//                        $real_num = intval($op[0]); //convert to kobo
+//                        $decimal_part = intval($op[1]);
+//                        $transaction_fee = $real_num + $decimal_part;
+//                    }
+                    $item_amt = $temp_item_amt - $transaction_fee;
+                    //echo $item_amt; die;
+                    $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
+                            $item_amt.'" bank_id="117" acct_num="'.$acct_num.'" />';
+                    $ret .= $xml;
+                    //$product['quantity'] = $row->quantity;
+
+                }
+            }
+            return $ret;
+        }
+        
+        public function get_split_marchant_xml_auction($transaction_id, $total_amount_shopped){
             $ret = "";
             $is_above_2k = false;
             $tmp_2k = 0.015 * $total_amount_shopped;
@@ -75,10 +242,10 @@ class Webpay_Model extends Model
               
             $result = $this->db->from("transaction")
                         ->where(array("transaction.transaction_id"=>$transaction_id))
-                        ->join("product","product.deal_id","transaction.product_id")
+                        ->join("auction","auction.deal_id","transaction.auction_id")
                         ->join("users","users.user_id","transaction.user_id")
                         ->join("city","city.city_id","users.city_id")
-                        ->join("stores", "product.shop_id", "stores.store_id")
+                        ->join("stores", "auction.shop_id", "stores.store_id")
                         ->get();
             if(count($result) > 0){
                 $total_amount = 0;
@@ -103,27 +270,30 @@ class Webpay_Model extends Model
                         $acct_num = $merch->nuban;
                     }
                     //$acct_num = $row->nuban;
-                    $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
+                    if(strlen($acct_num) < 10){
+                        $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
+                    }
                     //nuban number set in there profile
-                    $temp_item_amt = intval($row->amount * 100);
+                    //$temp_item_amt = intval($row->amount * 100);
+                    $temp_item_amt = (int)((($row->amount*$row->quantity)+$row->shipping_amount) * 100);
                     //if($total_amount > )
                     if(!$is_above_2k){
                         //if not above 2k cap
-                        $transaction_fee = 0.015 * $temp_item_amt;
+                        $transaction_fee = round(0.015 * $temp_item_amt);
                         //$item_amt = $temp_item_amt - intval(0.015 * $temp_item_amt); //remove transaction fee
                     }
                     else{
                         //$weight_fraction_of_sales = $temp_item_amt / ($total_amount_shopped * 100);
                         $weight_fraction_of_sales = ($temp_item_amt / ($total_amount_shopped*100));
-                        $transaction_fee = round($weight_fraction_of_sales * (2000*100), 2); //from 2,000naira. whats my transaction fee here           
+                        $transaction_fee = round($weight_fraction_of_sales * (2000*100)); //from 2,000naira. whats my transaction fee here           
                     }
-                    if(strpos($transaction_fee, ".")){
-                        $op = explode(".", $transaction_fee);
-                        $real_num = intval($op[0]); //convert to kobo
-                        $decimal_part = intval($op[1]);
-                        $transaction_fee = $real_num + $decimal_part;
-                    }
-                    $item_amt = $temp_item_amt - $transaction_fee;
+//                    if(strpos($transaction_fee, ".")){
+//                        $op = explode(".", $transaction_fee);
+//                        $real_num = intval($op[0]); //convert to kobo
+//                        $decimal_part = intval($op[1]);
+//                        $transaction_fee = $real_num + $decimal_part;
+//                    }
+                    $item_amt = intval($temp_item_amt - $transaction_fee);
                     //echo $item_amt; die;
                     $xml = '<item_detail item_id="'.$item_id.'" item_name="'.$item_name.'" item_amt="'.
                             $item_amt.'" bank_id="117" acct_num="'.$acct_num.'" />';
@@ -183,7 +353,8 @@ class Webpay_Model extends Model
                         }
 		}
                 
-		$result = $this->db->insert("transaction",array("user_id" => $this->UserID , "product_id" => $deal_id, "firstname" => $this->UserName, "lastname" => $this->UserName, "order_date" => time(), "amount" => $product_amount, "payment_status" => 'Pending', 
+		$result = $this->db->insert("transaction",array("user_id" => $this->UserID , "product_id" => $deal_id, "firstname" => $this->UserName, 
+                    "lastname" => $this->UserName, "order_date" => time(), "amount" => $product_amount, "payment_status" => 'Pending', 
                     "pending_reason" => 'INTERSWITCH', "country_code" => COUNTRY_CODE, "currency_code" => CURRENCY_CODE,
                     "transaction_id" => $TRANSACTIONID,"referral_amount" => $referral_amount,"transaction_type" => $paymentType,
                     "quantity" => $qty, "type" => $type, "captured" => $captured,"transaction_date" =>time(),

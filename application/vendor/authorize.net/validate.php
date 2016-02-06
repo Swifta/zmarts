@@ -10,16 +10,17 @@ if($_POST){
         //check deal quantity availability
 	require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/transaction.php");
 
-        $USERID = $_SESSION['userid'];
+        $USERID = strip_tags(addslashes($_SESSION['userid']));
         //check whether deal is expired or closed
-        is_deal_expired($_POST['couponid']);
-	check_max_deal_purchase($_POST['couponid'],$_POST["friendname"],$_POST["friendemail"],$_POST['qty'],$USERID);
-	check_deal_quantity($_POST['couponid'],$_POST["friendname"],$_POST["friendemail"],$_POST['qty']);
+        is_deal_expired(strip_tags(addslashes($_POST['couponid'])));
+	check_max_deal_purchase(strip_tags(addslashes($_POST['couponid'])),strip_tags(addslashes($_POST["friendname"])),strip_tags(addslashes($_POST["friendemail"])),strip_tags(addslashes($_POST['qty'])),$USERID);
+	check_deal_quantity(strip_tags(addslashes($_POST['couponid'])),strip_tags(addslashes($_POST["friendname"])),strip_tags(addslashes($_POST["friendemail"])),strip_tags(addslashes($_POST['qty'])));
 
-        $USERID = $userid = $_SESSION['userid'];
+        $USERID = $userid = strip_tags(addslashes($_SESSION['userid']));
 	if($_POST['ref_amt2'] > 0) { 
 
-                $user = "SELECT * FROM coupons_users where userid='$USERID'";
+     $user = "SELECT * FROM coupons_users where userid='$USERID'";
+                
                 $userSet = mysql_query($user);
                 while($r = mysql_fetch_array($userSet)) 
                 {
@@ -33,7 +34,7 @@ if($_POST){
 			{
 
 				// Include language file
-				$lang = $_SESSION["site_language"];
+				$lang = strip_tags(addslashes($_SESSION["site_language"]));
 				if($lang)
 				{
 					include(DOCUMENT_ROOT."/system/language/".$lang.".php");
@@ -43,7 +44,7 @@ if($_POST){
 					include(DOCUMENT_ROOT."/system/language/en.php");
 				}
 				
-				$cid = $_POST['couponid'];
+				$cid = strip_tags(addslashes($_POST['couponid']));
 
 				if($_POST["friendname"]!='' && $_POST["friendemail"]!='')
 				{
@@ -65,10 +66,10 @@ if($_POST){
 
 	
 	// authorize
-	$qty = $_POST['qty'];	
-	$couponid = $_POST['couponid'];
-	$sale->cust_id = $_POST['user'];
-        $amount = $_POST['amount'];
+	$qty = strip_tags(addslashes($_POST['qty']));	
+	$couponid = strip_tags(addslashes($_POST['couponid']));
+	$sale->cust_id = strip_tags(addslashes($_POST['user']));
+        $amount = strip_tags(addslashes($_POST['amount']));
         //if payable amount is equal to zero then process the customer directly
 	if($_POST['amount'] == 0) 
         {
@@ -76,10 +77,10 @@ if($_POST){
 			require_once(DOCUMENT_ROOT."/system/includes/transaction.php");
 			$L_QTY0 = $qty;	
 			$COUPONID = $couponid;	
-			$USERID = $_SESSION['userid'];
-			check_max_deal_purchase($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0,$USERID);
-			check_deal_quantity($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0);
-                        $USERID = $_SESSION['userid'];
+			$USERID = strip_tags(addslashes($_SESSION['userid']));
+			check_max_deal_purchase($COUPONID,strip_tags(addslashes($_POST["friendname"])),strip_tags(addslashes($_POST["friendemail"])),$L_QTY0,$USERID);
+			check_deal_quantity($COUPONID,strip_tags(addslashes($_POST["friendname"])),strip_tags(addslashes($_POST["friendemail"])),$L_QTY0);
+                        $USERID = strip_tags(addslashes($_SESSION['userid']));
 
 			$_SESSION['pay_mod_id'] = $_POST['pay_mod_id'];
 			if(! isset($_SESSION['pay_mod_id'])) {
@@ -94,6 +95,7 @@ if($_POST){
 			}
 	
                         $user = "SELECT * FROM coupons_users where userid='$USERID'";
+                        
                         $userSet = mysql_query($user);
                         while($r = mysql_fetch_array($userSet)) 
                         {
@@ -106,10 +108,10 @@ if($_POST){
                         $CORRELATIONID = '';;
                         $PAYERSTATUS = '';
                         $COUNTRYCODE = '';			
-                        $USERID = $uid = $_SESSION['userid'];
-                        $TYPE = $_POST['pay_mod_id'];
+                        $USERID = $uid = strip_tags(addslashes($_SESSION['userid']));
+                        $TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
                         $_SESSION['COUPONID'] = $cid = $COUPONID;
-			$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
+			$REFERRAL_AMOUNT = strip_tags(addslashes($_SESSION['deductable_ref_amt']));
 					//get the coupon value of the coupon and verify the amount
 			
 			$coupon_details = mysql_query("select * from coupons_coupons where coupon_id='$COUPONID'");	

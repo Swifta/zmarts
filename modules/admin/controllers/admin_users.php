@@ -57,7 +57,7 @@ class Admin_users_Controller extends website_Controller {
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('email', 'required','valid::email', array($this, 'email_available'))
-							->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
 							->add_rules('gender', 'required')
 							->add_rules('age_range', 'required')
@@ -138,7 +138,7 @@ class Admin_users_Controller extends website_Controller {
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Your Email was Successfully Sent");
 				url::redirect(PATH."admin/manage-user.html");
 			}
 			else{	
@@ -213,7 +213,7 @@ class Admin_users_Controller extends website_Controller {
 						->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						->add_rules('email', 'required','valid::email')
-						->add_rules('mobile', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('gender', 'required')
 						->add_rules('age_range', 'required')
 						->add_rules('country', 'required')
@@ -321,11 +321,20 @@ class Admin_users_Controller extends website_Controller {
 		return ! $exist;
 	}
 	
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
+	
 	/** CHECK VALID PHONE OR NOT **/
 	
 	public function validphone($phone = "")
 	{
-		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($phone,array(7,10,11)) == TRUE){
 			return 1;
 		}
 		return 0;

@@ -1272,13 +1272,23 @@ class Products_Controller extends Layout_Controller
 		
 	}
 	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
 	
 	public function validphone()
 	{
 		if($_POST){
 			$phone = $_POST['phone'];
-			if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
-				echo 1;
+			if(valid::phone($phone,array(7,10,11)) == TRUE){
+				if(valid::z_phone($phone))
+					echo 1;
+				else
+					echo -1;
 				
 			}else{
 			

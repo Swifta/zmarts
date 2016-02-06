@@ -448,7 +448,15 @@ class Admin_auction_Controller extends website_Controller
 	
 	public function validphone($phone = "")
 	{
-		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($phone,array(7,10,11)) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
 			return 1;
 		}
 		return 0;

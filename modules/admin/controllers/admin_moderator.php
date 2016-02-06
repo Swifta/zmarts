@@ -48,7 +48,7 @@ class Admin_moderator_Controller extends website_Controller {
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
-						->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('address1', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
@@ -119,11 +119,19 @@ class Admin_moderator_Controller extends website_Controller {
 		$exist = $this->moderator->exist_email($email);
 		return !$exist;
 	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
 	/** CHECK VALID PHONE OR NOT **/
 	
 	public function validphone($phone = "")
 	{
-		if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		if(valid::phone($phone,array(7,10,11)) == TRUE){
 			return 1;
 		}
 		return 0;
@@ -224,7 +232,7 @@ class Admin_moderator_Controller extends website_Controller {
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						//->add_rules('email', 'required','valid::email',array($this,'email_available'))
-						->add_rules('mobile', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
 			if($post->validate()){			

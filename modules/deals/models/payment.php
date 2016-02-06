@@ -14,8 +14,14 @@ class Payment_Model extends Model
 	
 	public function get_deals_payment_details($deal_key = "", $url_title = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.url_title = '$url_title' and enddate > 'time()'and purchase_count < maximum_deals_limit");
-	        return $result;
+//		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id 
+//                    where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.url_title = '$url_title' and enddate > 'time()'and purchase_count < maximum_deals_limit");
+//	        return $result;
+                  $result =  $this->db->select()->from("deals")
+                        ->join("stores", "stores.store_id", "deals.shop_id")
+                        ->join("category", "category.category_id", "deals.category_id")
+                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.url_title" => $url_title, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"));
+                return $result;
 	}
 	
 	/** GET USER LIMIT **/
@@ -60,8 +66,14 @@ class Payment_Model extends Model
                  $current_coupon_array=explode(',', $current_coupon);
                  $purchase_count_total = $purchase_qty + $quantity;
 	             $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-         $this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount , deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");
-		return $current_coupon_array;
+        // $this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount , deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");
+		
+                
+                 $this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance - '.$referral_amount),"deal_bought_count"=>new Database_Expression('deal_bought_count + '.$quantity)),array("user_id"=>$this->UserID));
+		
+                return $current_coupon_array;
+                
+                
 	}
 		
 	/** GET USERS FULL DETAILS **/
@@ -77,7 +89,8 @@ class Payment_Model extends Model
 	public function update_referral_amount($ref_user_id = "")
 	{
 		$referral_amount = REFERRAL_AMOUNT;
-		$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+		//$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+                $this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance + '.$referral_amount)),array("user_id"=>$this->$ref_user_id));
 		return;
 	}
 	
@@ -85,8 +98,16 @@ class Payment_Model extends Model
 	
 	public function get_deals_payments_details($deal_id = "", $deal_key = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate > 'time()'and purchase_count < maximum_deals_limit");
-	        return $result;
+		//$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id 
+                //where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate > 'time()'and purchase_count < maximum_deals_limit");
+	       // return $result;
+                
+                 $result =  $this->db->select()->from("deals")
+                        ->join("stores", "stores.store_id", "deals.shop_id")
+                        ->join("category", "category.category_id", "deals.category_id")
+                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.deal_id" => $deal_id, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"));
+                return $result;
+                
 	}
 	
 }

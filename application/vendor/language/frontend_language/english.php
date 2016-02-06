@@ -355,7 +355,7 @@ $content_text = array(
 
 "CASH_ON_DEL" => "Cash On Delivery",
 
-"SORRY_NOT_BUY_AUC" => "Sorry you are not a correct user for buy this auction ",
+"SORRY_NOT_BUY_AUC" => "Sorry you are not a val user to buy this auction ",
 
 "CLK_IT" => "Click It",
 
@@ -375,9 +375,9 @@ $content_text = array(
 
 "INTO_INVEN" => "into inventory",
 
-"NON_PAY_AUC" => "Non-payment of auctions you have won on",
+"NON_PAY_AUC" => "Non-payment of auctions you have won on ",
 
-"CANCEL_CURR_BID" => "also cancels out any other current bids you may have placed",
+"CANCEL_CURR_BID" => "also cancels out any other current bids you may have placed.",
 
 "AUC_DETS" => "Auction details",
 
@@ -385,9 +385,9 @@ $content_text = array(
 
 "AUC_CLOSE" => "Auction Close",
 
-"won_auc_comm_win_bid_amo" => "You have won this auction and committed to pay the winning bid amount. Once payment is received, your product will be shipped and you receive a shipping confirmation email.",
+"won_auc_comm_win_bid_amo" => "You have won this auction and are now committed to pay the winning bid amount. Once payment is received, your product will be shipped and you will receive a shipping confirmation email.",
 
-"REVIEW_SHIPP" => "To review your shipping information, log into your",
+"REVIEW_SHIPP" => "To review your shipping information, log into your  account and go to the 'My Account' page",
 
 "RECE_MSG_ADD" => "You are receiving this message because you signed up with the email address",
 
@@ -737,13 +737,13 @@ $content_text = array(
 
 "SUBS_NW" => "Subscribe now",
 
-"ALREADY_ACCESS2" => "Already have an access? Log in here",
+"ALREADY_ACCESS2" => "Already have access? Log in here",
 
 "APP_BUSS" => "We appreciate your business and we will never share your email address with third parties.",
 
 "SORRY_CATE" => "Sorry, there are no",
 
-"THANK_CT" => "Thank you for contact us",
+"THANK_CT" => "Thank you for contacting us",
 
 "PLS_ENT_NO" => "Please enter a valid number.",
 
@@ -1006,7 +1006,7 @@ $content_text = array(
 
 "USER_EXIST" =>"User already exist",
 
-"EMAIL_EXIST" =>"Email Id already exists",
+"EMAIL_EXIST" =>"You are already subscribed",
 
 "EMAIL_ADDRESS"=>"Email address ",
 
@@ -1032,7 +1032,7 @@ $content_text = array(
 
 "YOUR_PAYMENT_SUCCESS" => "Your payment has been completed successfully",
     
-"YOUR_PAYMENT_PENDING" => "Your order has been sent, Payment is Pending by you.\nYou need to PAY LATER at"
+"YOUR_PAYMENT_PENDING" => "Your order has been sent, Payment is Pending.\nYou need to PAY LATER at"
     . " any of the channels in the Image",
     
 "YOUR_PAYMENT_PENDING_COD" => "Your order has been sent, Payment is Pending by you.\nYou need to PAY ON DELIVERY",
@@ -1420,7 +1420,7 @@ $content_text = array(
 
 "USER_CREDIT_CHARGED"=>"Credit card will be charged",
 
-"YOU_HAVE_RECEIVED"  => "You have received a inquired for the",
+"YOU_HAVE_RECEIVED"  => "You have received an inquiry from",
 
 "INV_PH" => "Invalid Phone Number. Enter your phone number (e.g. 070...,080...)",
 
@@ -1646,7 +1646,7 @@ $content_text = array(
 
 "ENTER_ADDR1" => "Enter your address here",
 
-"ENTER_ADDR2" => "Enter address line 2 here",
+"ENTER_ADDR2" => "Enter City", //"Enter address line 2 here",
     
 "ENTER_COMPANY_NAME" => "Enter company name",
     
@@ -1873,4 +1873,6 @@ $content_text = array(
 "WEBPAY_RESPONSE" => "Webpay Transaction Response",
 
 "INSTALL_PAY" => "Installment Payment ",
+
+"TO_SHIP" => "Please be informed that your ordered item(s) will be delivered by the Merchant(s)",
 			);

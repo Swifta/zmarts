@@ -16,6 +16,10 @@ class error {
 					$my_error[$key] = $this->Lang["REQQ"];
 					break;
 					
+				case 'validate_size_quantity':
+					$my_error[$key] = "Please specify a size and quantity for every field below or remove them.";
+					break;
+					
 				case 'check_required':
 					$my_error[$key] = $this->Lang["REQQ"];
 					break;
@@ -60,8 +64,12 @@ class error {
 				    $my_error[$key] = $this->Lang["CITY_AL_E"];
 				    break;
 				case 'validphone':
-					 $my_error[$key] = $this->Lang["INV_PH"];
+					 $my_error[$key] = "Invalid number of digits.";
 					break;
+				case 'z_validphone':
+					 $my_error[$key] = "Invalid initial digits. Begin with 07, or 08.";
+				break;
+					
 				case 'validnum':
 					 $my_error[$key] = $this->Lang["INV_NUM"];
 					break;	

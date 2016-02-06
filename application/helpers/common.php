@@ -658,6 +658,16 @@ function get_wishlist_count(){
 	return count($this->user_wishlist_count);
 }
 
+function get_payment_store_details($store_id = ""){
+	
+	
+	if(!$store_id)
+		return null;
+	$p = new Products_Model();
+	$r = $p->get_payment_store_details($store_id);
+	return $r->current();
+}
+
 
 
 }

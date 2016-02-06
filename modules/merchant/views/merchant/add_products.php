@@ -29,14 +29,16 @@
  	$("#check2").click(function(){ 	
         
         var textVal = $(".txtChar").val();
-        if(textVal == "") {
+		
+        /*if(textVal == "") {
             alert('Quantity is required');
             return false;
         }
         if(textVal == 0) {
             alert('The Quantity should not be zero');
             return false;
-        }
+        }*/
+		
        /* var selectsize = $(".selectsize").val();
         if(selectsize == "") {
             alert('Please fill all mandatory fields');
@@ -50,7 +52,7 @@
                 }
         }
         if(a == rdbtn.length) {
-                alert("No way you submit it without choose shipping method");
+                alert("Please choose a shipping method.");
                 return false;
         } 
 
@@ -334,7 +336,7 @@ function validate() {
 		   
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" name="title" tabindex="1" autofocus="autofocus" maxlength="255" value="<?php if(!isset($this->form_error["title"])&&isset($this->userPost["title"])){ echo $this->userPost["title"]; }?>" autofocus />
+                    	<input type="text" name="title" tabindex="1" autofocus maxlength="255" value="<?php if(!isset($this->form_error["title"])&&isset($this->userPost["title"])){ echo $this->userPost["title"]; }?>" autofocus />
                       	<em><?php if(isset($this->form_error["title"])){ echo $this->form_error["title"]; }?></em>
                    	</td>
                 </tr>
@@ -426,7 +428,7 @@ function validate() {
                     <td><label><?php echo $this->Lang["PRICE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="text" name="deal_value" maxlength="8" value="<?php if(!isset($this->form_error["deal_value"])&&isset($this->userPost["deal_value"])){ echo $this->userPost["deal_value"]; }?>" />
+                        <input type="text" name="deal_value" onkeypress="return isNumberKey(event)" maxlength="8" value="<?php if(!isset($this->form_error["deal_value"])&&isset($this->userPost["deal_value"])){ echo $this->userPost["deal_value"]; }?>" />
                         <em><?php if(isset($this->form_error["deal_value"])){ echo $this->form_error["deal_value"]; }?></em>
                     </td>
                 </tr>
@@ -446,7 +448,7 @@ function validate() {
                     <td><label>Discounted Price (Ordinary)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
-						 <input type="text" name="price" maxlength="8" value="<?php if(!isset($this->form_error["price"])&&isset($this->userPost["price"])){ echo $this->userPost["price"]; }?>" />
+						 <input type="text" name="price" maxlength="8" onkeypress="return isNumberKey(event)" value="<?php if(!isset($this->form_error["price"])&&isset($this->userPost["price"])){ echo $this->userPost["price"]; }?>" />
                         <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
                        
                         
@@ -457,7 +459,7 @@ function validate() {
                     <td><label>Discounted Price (<b>Prime Customers Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
-						 <input type="text" name="prime_price" maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
+						 <input type="text" name="prime_price" maxlength="8"  onkeypress="return isNumberKey(event)"value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
                          <!--<em><?php if(isset($this->form_error["price_price"])){ echo $this->form_error["price_prime"]; }?></em>-->
                        
                         
@@ -564,17 +566,20 @@ function validate() {
                 <tr class="policymain">
                  <td><label><?php echo $this->Lang['DEL_POLICY']; ?> </label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td> <input type="text" name="Delivery_value[]" value=""> 
+                    <td> 
+                        <!--<input type="text" name="Delivery_value[]" value=""> -->
+                    
+                        <textarea name="Delivery_value[]" rows="4"></textarea>
                     <em><?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?></em>
                       </td>
 		    </tr>                 
                  <tr>
                  
-                 <tr  id="Delivery" >
+                 <!--<tr  id="Delivery" >
                  <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td> <input class="search_submit" id="Delivery_add" type="button" name="addmore" value="<?php echo $this->Lang['ADDMORE'];?>" onclick="addDelivery()">   </td>
-		    </tr>  
+		    </tr>  -->
             
             <!--
                 	Add radios for store credit as per
@@ -704,7 +709,7 @@ function validate() {
                     </td>
                 </tr>
                 
-                <tr class="aramexshipping">
+               				<tr class="aramexshipping">
                     <td><label><?php echo $this->Lang["WID"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -713,9 +718,12 @@ function validate() {
                         <em><?php if(isset($this->form_error["width"])){ echo $this->form_error["width"]; }?></em>
                     </td>
                 </tr>
-                        <input type="hidden" onchange="return checkedsizeadd(this)" name="size_val" value="1">
+                
+                
+                
+                        <!--<input type="hidden" onchange="return checkedsizeadd(this)" name="size_val" value="1">-->
                         
-                        <tr>
+                        <!--<tr>
                     <td><label><?php echo $this->Lang['PRODU_SIZ']; ?></label><span> </span></td>
                     <td><label>:</label></td>
                                 
@@ -732,20 +740,19 @@ function validate() {
 			            } ?>
 			            </select>
 			            
-			            <!--<em><?php if(isset($this->form_error["size_tag[]"])){ echo $this->form_error["size_tag[]"]; }?></em>-->
+			            <em><?php if(isset($this->form_error["size_tag[]"])){ echo $this->form_error["size_tag[]"]; }?></em>
                         <p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p>
                     </td>
-                </tr>
-                <tr>
+                </tr>-->
+                		<!--<tr>
                     <td ></td>
                     <td></td>
                     <td>
                                 <label><?php echo $this->Lang['MORE_CUS_SIZE']; ?>  <a href="<?php echo PATH; ?>merchant/manage-sizes.html"> <?php echo $this->Lang['ADD']; ?></a></label>
                                 
                     </td>
-                </tr>    
-                
-                         <tr class="display_div">
+                </tr>-->    
+                        <!--<tr class="display_div">
                     <td><label><?php echo $this->Lang['QUAN']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -758,9 +765,85 @@ function validate() {
                     </td>
                     
                     
-                </tr>     
+                </tr>-->   
                 
-                <input type="hidden" id="id_color_count" name="color_count" readonly="readonly" value="0" />
+                
+                                     
+                        <tr>
+                                        <td><label><?php echo "Product Size"; ?></label><span>*</span></td>
+                                        <td><label>:</label></td>
+                                        <td>
+                                        	<p class="guide"><?php echo $this->Lang['MENTION_SIZE'];?></p>
+                                            <input type="radio" id="id_no_size" name="size_val" onclick="shosize()" checked value="0"> None
+                                            <input type="radio" id="id_sel_size" name="size_val" value="1"  onclick="shosize()"> Specify
+                                            
+                                            
+                                        </td>
+                                     </tr>
+                        
+                        <tr><td><label>&nbsp;</label></td>
+                         	<td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                       </tr>
+                       	<tr><td><label>&nbsp;</label></td>
+                         	<td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                       </tr>
+                       
+                       
+                       <?php if(isset($this->form_error["size"])){?><tr><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["size"]; ?></em></td></tr><?php }?>
+                        <tr class="display_div">
+                                        <td><label><?php echo $this->Lang['QUAN']; ?></label><span>*</span></td>
+                                        <td><label>:</label></td>
+                                        <td>
+                                            
+                                            <input type='checkbox' name='size[]' checked='checked' value='1' onclick="return false;" class="sizequantity" style="display:none;">
+                                             
+                                             
+                                              <input style='width:auto;' type='text' placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" name='size_quantity[]' class="quantity_size txtChar" maxlength='8' value='<?php if(isset($this->form_error['size_quantity[0]'])){ echo '';}else if(isset($_POST['size_quantity'][0])){ echo $_POST['size_quantity'][0]; }?>' onkeypress='return isNumberKey(event)'>
+                      <?php if(isset($this->form_error['size_quantity[0]'])){?><em> <?php echo $this->form_error['size_quantity[0]']; ?></em><?php }?>  
+                                            
+                                        </td>
+                                        
+                                    </tr>
+                        <!-- <tr class="size_show" >
+                                        <td><label>&nbsp;</label></td>
+                                        <td></td>
+                                        <td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label>   ( <label><?php echo $this->Lang['MORE_CUS_SPECIFI']; ?>  <a href="<?php echo PATH; ?>admin/manage-attribute.html"> <?php echo $this->Lang['ADD']; ?></a></label> )</td>
+                                         <td>
+                                                    <label><?php echo $this->Lang['MORE_CUS_SIZE']; ?>  <a href="<?php echo PATH; ?>merchant/add-size.html"> <?php echo $this->Lang['ADD']; ?></a></label>
+                                        </td>
+                                   </tr>-->
+                        <tr class="size_main size_show"> 
+                                        <td><label><?php echo "Select Size & Quantity"; ?><span>*</span></label></td>
+                                        <td><label>:</label></td>
+                                        <td>
+                                            <?php $append_select_size = '<option value="">Select size</option>';?>
+                                           <select name="size[]" id="id_size_default" class="sel_size_class" onChange="check_dup(this);">
+                                           <option value=""><?php echo "Select size"; ?></option>
+                                           <?php foreach($this->product_size as $size){
+                                            ?>
+                                            <?php if($size->size_id != 1){?>
+                                                
+                                                <option <?php if(isset($_POST['size'][1]) && $_POST['size'][1] == $size->size_id.''){ echo "selected";}?>  value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
+                                                <?php $append_select_size .= '<option value="'.$size->size_id.'">'.$size->size_name.'</option>';?>
+                                            <?php } ?>
+                                            <?php 
+                                            } ?>
+                                            </select> 
+                                          <i> &nbsp;</i> <input type="text" name="size_quantity[]" placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" onkeypress='return isNumberKey(event)' value="<?php if(isset($_POST['size_quantity'][1])){echo $_POST['size_quantity'][1];}?>">
+                                          
+                                           
+                                        </td>
+                                    </tr>
+                        <tr id="btns_s" class="size_show" >
+                                     <td>&nbsp;</td>
+                                     <td>&nbsp;</td>
+                                     <td> <input id="btn_add" type="button" name="addmore" value="<?php echo $this->Lang['ADDMORE'];?>" onclick="addSize()">  </td>
+                                    </tr>      
+                  
+                
+                <input type="hidden" id="id_color_count" name="color_count" readonly value="0" />
                 <tr>
                     <td><label><?php echo $this->Lang['AD_CO_FI']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
@@ -999,7 +1082,7 @@ function validate() {
                     <td><label><?php echo $this->Lang["START_DATE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" id="startdate" name="start_date" readonly="readonly"  value="<?php if(!isset($this->form_error["start_date"])&&isset($this->userPost["start_date"])){ echo $this->userPost["start_date"]; }?>" />
+                    	<input type="text" id="startdate" name="start_date" readonly  value="<?php if(!isset($this->form_error["start_date"])&&isset($this->userPost["start_date"])){ echo $this->userPost["start_date"]; }?>" />
                         <em><?php if(isset($this->form_error["start_date"])){ echo $this->form_error["start_date"]; }?></em>
                     </td>
                 </tr>
@@ -1008,7 +1091,7 @@ function validate() {
                     <td><label><?php echo $this->Lang["END_DATE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" name="end_date" id="enddate" readonly="readonly" value="<?php if(!isset($this->form_error["end_date"])&&isset($this->userPost["end_date"])){ echo $this->userPost["end_date"]; }?>" />
+                    	<input type="text" name="end_date" id="enddate" readonly value="<?php if(!isset($this->form_error["end_date"])&&isset($this->userPost["end_date"])){ echo $this->userPost["end_date"]; }?>" />
                     	<em><?php if(isset($this->form_error["end_date"])){ echo $this->form_error["end_date"]; }?></em>
                     </td>
                 </tr>
@@ -1234,15 +1317,22 @@ function gift()
  </script>
 <script>
 	function check_validation(){
-		var textVal = $(".txtChar").val();
-        if(textVal == "") {
-            alert('Quantity is required');
-            return false;
-        }
-        if(textVal == 0) {
-            alert('The Quantity should not be zero');
-            return false;
-        }
+	 var value = $('input:radio[name=size_val]:checked').val();
+	 var has_size = false;
+	 if(value == 1){
+		 var checked = $(".size_show select");
+			for(var i = 0; i <checked.length; i++){
+				if($(checked[i]).val()){
+					has_size = true;
+					break;
+				};
+			}
+			
+			if(!has_size){
+				alert("<?php echo $this->Lang["PLS_CHK"]; ?>");
+				return false;
+			}
+	 }
 
         var a = 0, rdbtn=document.getElementsByName("shipping")
         for(i=0;i<rdbtn.length;i++) {
@@ -1251,7 +1341,7 @@ function gift()
 			}
         }
         if(a == rdbtn.length) {
-			alert("No way you submit it without choose shipping method");
+			alert("Please choose a shipping method.");
 			return false;
         } 
 
@@ -1334,4 +1424,104 @@ function gift()
 				
 			
         });
+</script>
+
+<script type="application/javascript">
+
+
+
+function set_selected_size(){
+	
+	<?php
+	
+	if(isset($_POST['size'])){
+			$sizes =  $_POST['size'];
+			$size_q = $_POST['size_quantity'];
+	 for($i = 2; $i < count($_POST['size']); $i++){?>
+			addSize("<?php echo $sizes[$i]?>", "<?php echo $size_q[$i]?>");
+	<?php } }?>
+}
+
+
+function shosize() {
+    var value = $('input:radio[name=size_val]:checked').val();
+	 if(value==1) {
+	  $(".size_show").show();
+	   $(".display_div").hide();
+	   
+	 }else{
+	  $(".size_show").hide();
+	  $(".display_div").show();
+	  
+	 }
+	 
+}
+
+function check_dup(sel){
+	var sel = $(sel);
+	$(sel).removeClass('sel_size_class');
+	var sels = $('.sel_size_class');
+	
+	
+	for(var i = 0; i < sels.length; i++){
+		
+		if($(sels[i]).val() == $(sel).val()){
+			$(sel).val("");
+			alert("Duplicate size, select a unique size");
+			return false;
+		}
+		
+		
+	}
+	
+	$(sel).addClass('sel_size_class');
+}
+
+function addSize(size_id, q) {
+		
+		
+		var sel_s= '<?php echo $append_select_size;?>';
+		var addedrow = $('.size_main').length;
+
+		 html  = '<tr class="size_main size_show " id="row_s-'+addedrow+'"><td></td><td></td>  <td> ';
+		 html += '<select name="size[]" class = "sel_size_class" onchange ="check_dup(this);">';
+		 html += sel_s;
+		 html += '  </select>  ';
+		 html+= '<input type="text" name="size_quantity[]" placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" value="" onkeypress="return isNumberKey(event)">  ' ;
+		 html+= '<input type="button" name="remove" onclick="RemoveSize('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		 $('#btns_s').before(html);
+		 if(size_id)
+		 $('#row_s-'+addedrow+' select').val(size_id);
+		 
+		 if(q)
+		 $('#row_s-'+addedrow+' input:text').val(q);
+		 
+		
+		
+	  
+}
+
+function RemoveSize(val) {
+        $("#row_s-"+val).remove();
+}
+
+$(document).ready(function(e) {
+   $('#id_no_size').trigger('click');
+  <?php if(isset($_POST['size_val']) ){?>
+			set_selected_size();
+			
+			<?php if($_POST['size_val'] == '1'){?>
+					$('#id_no_size').trigger('click');
+					$('#id_sel_size').trigger('click');
+					shosize();
+				<?php }else{?>
+				
+					$('#id_sel_size').trigger('click');
+					$('#id_no_size').trigger('click');
+					shosize();
+				<?php }?>
+			
+	<?php }?>
+	
+});
 </script>

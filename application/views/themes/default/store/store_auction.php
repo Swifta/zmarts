@@ -74,14 +74,29 @@ $(".slidetabs").tabs(".images > div", {
     </div>
 </div>
 <!-- BAR -->
-
-<div class="container">
-	<!-- Products -->
-    <div class="products">
+<?php 
+				$font_color = "";
+				$bg_color ="";
+				$font_size ="";
+				
+//				if(count($this->merchant_personalised_details)>0) { 
+//					foreach($this->merchant_personalised_details as $m) {  
+//						$font_color = "color:".$m->font_color.";";
+//						$bg_color ="background:".$m->bg_color.";";
+//						$font_size = $m->font_size."px";
+//					} 
+//				}	 
+?>
+<div class="product_wrap">
+    <div class="container">
+        <div class="row">
+            <div class="span10">
+                <div class=" clearfix">
+                    <div class="productsss">
         <?php echo new View("themes/" . THEME_NAME . "/".$this->theme_name."/store_auction_list"); ?>
-        <span  id="product">
-        </span>
-    </div>
+                            <span  id="product">
+                            </span>
+                    </div>
     <?php if(($this->all_auction_count > 12)) { ?>
         <div id="loading">
         <?php if (($this->pagination) != "") { ?>
@@ -95,6 +110,52 @@ $(".slidetabs").tabs(".images > div", {
                 <?php } ?>
         </div>
     <?php } ?>
+                </div>
+            </div>
+            <div class="span2">
+ <?php if (count($this->ads_details) > 0) { ?>   
+        <?php foreach ($this->ads_details as $ads) { ?>    
+    <?php if ($ads->ads_position == "hr1" && $ads->page_position==1) {  ?>                     
+      <div class="banner_right_add wloader_parent">
+          <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
+                                                     <a   href="<?php echo $ads->redirect_url; ?>" target="_blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                                    <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
+      </div>
+ <?php } } }?>
+                <div class='clearfix' ></div>
+ <?php if (count($this->ads_details) > 0) { ?>   
+    <?php foreach ($this->ads_details as $ads) {
+          if($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
+ <div class="banner_right_add2 wloader_parent" style='margin-top: 10px; margin-bottom:10px;'>
+              <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
+                                                         <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                                        <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
+          </div>
+ <?php } } } ?>  
+                    <?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hs1" && $ads->page_position==1) {  ?>
+							<div class="new_list_rgt">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+                    <?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hs2" && $ads->page_position==1) {  ?>
+                <div class="new_list_rgt" style="margin-top:10px;">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+                    <?php if (count($this->ads_details) > 0 ) {
+						foreach ($this->ads_details as $ads) {
+							if ($ads->ads_position == "hs7" && $ads->page_position==1) {  ?>
+							<div class="new_list_rgt" style="margin-top:10px;">
+								<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+							</div>
+                    <?php }}}?>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="margin-top-15"></div>

@@ -43,7 +43,9 @@ class Merchant_Controller extends website_Controller
 
 	public function login()
 	{
-		
+		if(isset($_SESSION['pass_reset_timeout'])){
+			$this->session->delete('pass_reset_timeout');
+		}
 		
 		 if($this->user_id && ($this->user_type == 3 || $this->user_type != 8)){
 			url::redirect(PATH."merchant.html");
@@ -63,6 +65,8 @@ class Merchant_Controller extends website_Controller
 					if($status == "0"){
 						$this->session->delete('user_id');
 						$this->session->delete('user_id1');
+						$reset_timeout = time()+(60);
+						$this->session->set("pass_reset_timeout", $reset_timeout);
 						url::redirect(PATH."merchant/reset-password.html");
 					
 						
@@ -172,7 +176,7 @@ class Merchant_Controller extends website_Controller
 							->add_rules('lastname','required')
 							->add_rules('email','required','valid::email')
 							//->add_rules('payment','required','valid::email')
-							->add_rules('mobile','required',array($this, 'validphone'))
+							->add_rules('mobile','required',array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1','required')
 							//->add_rules('address2','required')
 							->add_rules('city','required');
@@ -801,7 +805,7 @@ class Merchant_Controller extends website_Controller
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
-					->add_rules('mobile', 'required', array($this, 'validphone'))
+					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
 					//->add_rules('address2', 'required')
 					->add_rules('country', 'required')
@@ -1046,10 +1050,10 @@ class Merchant_Controller extends website_Controller
 	    $this->manage_merchant_shop ="1";
 		if($_POST){
 			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			//$post = new Validation($_POST);
+			$post = Validation::factory(array_merge($this->userpost,$_FILES))
 					
-					->add_rules('mobile', 'required', array($this, 'validphone'))
+					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
 					//->add_rules('address2', 'required')
 					->add_rules('country', 'required')
@@ -1057,11 +1061,12 @@ class Merchant_Controller extends website_Controller
 					->add_rules('storename', 'required',array($this,'check_store_exist1'))
 					->add_rules('about_us', 'required')
 					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
-					->add_rules('website', 'valid::url')
+					//->add_rules('website', 'valid::url')
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
+					->add_rules('email',array($this,'check_store_admin1'))
+                                //->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
 					->add_rules('sector', 'required')
 					->add_rules('subsector', 'required')
 					->add_rules('username', 'required');
@@ -1070,7 +1075,8 @@ class Merchant_Controller extends website_Controller
 					{
 						$post->add_rules('subsector', 'required');
 					}
-
+                                        //var_dump($post->validate());
+//echo "was here ".$post->validate()." here"; die;
 				if($post->validate()){
                                     
 					$storename = $this->input->post("storename");
@@ -1555,13 +1561,21 @@ class Merchant_Controller extends website_Controller
 		}
 		return 0;
 	}
+	
+	public function z_validphone($phone = "")
+	{
+		if(valid::z_phone($phone) == TRUE){
+			return 1;
+		}
+		return 0;
+	}
 
 	/** CHECK VALID PHONE OR NOT **/
 
 	public function validphone($phone = "")
 	{
 		if(valid::numeric($phone)){
-		        if(valid::phone($phone,array(7,10,11,12,13,14)) == TRUE){
+		        if(valid::phone($phone,array(7,10,11)) == TRUE){
 			        return 1;
 		        }
 		}
@@ -1664,6 +1678,19 @@ class Merchant_Controller extends website_Controller
 								
 							}
 						}
+						
+						
+						if($_POST['size_val'] == '1'){
+								
+								$post->add_rules('size', array($this, 'validate_size_quantity'));
+								
+							}else{
+									$s = $this->input->post("size_quantity");
+									if($s[0] === '')
+										$post->add_rules('size_quantity[0]','required');
+							
+							
+						}
 							
 							$price_s = $post->price;
 							if(isset($price_s)){
@@ -1709,14 +1736,24 @@ class Merchant_Controller extends website_Controller
 								$post->add_rules('start_date','required');
 								$post->add_rules('end_date','required',array($this, 'check_end_date'));
 							}
+							
+							
 				 	if($post->validate()){
+						
+						
 						$deal_key = text::random($type = 'alnum', $length = 8);
 						$size_quantity = $this->input->post("size_quantity");
-						if(count($size_quantity)>1)
-						{
-						unset($size_quantity[0]);
-						$size_quantity=array_values($size_quantity);
-						}
+								if(count($size_quantity)>1 && $_POST['size_val'] == '1')
+								{
+								unset($size_quantity[0]);
+								unset($this->userPost['size'][0]);
+								$size_quantity=array_values($size_quantity);
+								}else{
+									$s = $size_quantity[0];
+									$size_quantity = array();
+									$size_quantity[0] = $s;
+								}
+								
 						$status = $this->merchant->add_products(arr::to_object($this->userPost),$deal_key,$size_quantity);
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
@@ -1780,7 +1817,10 @@ class Merchant_Controller extends website_Controller
 						$this->form_error["city"] = $this->Lang["PRODUCT_EXIST"];
 				}
 				else{
+					
 					$this->form_error = error::_error($post->errors());
+					
+					
 				}
 		}
 
@@ -1961,6 +2001,23 @@ class Merchant_Controller extends website_Controller
 							}
 						}
 						
+						if(isset($_POST['size_val'])){
+							
+							if($_POST['size_val'] == '1'){
+								
+								$post->add_rules('size', array($this, 'validate_size_quantity'));
+								
+							}else{
+									$s = $this->input->post("size_quantity");
+									if($s[0] === '')
+										$post->add_rules('size_quantity[0]','required');
+							
+							
+						}
+							
+							
+						}
+						
 						
 				        
 				        $price_s = $post->price;
@@ -2006,7 +2063,19 @@ class Merchant_Controller extends website_Controller
 								$post->add_rules('end_date','required',array($this, 'check_end_date'));
 							}
 			if($post->validate()){
+				
+				
 			    $size_quantity = $this->input->post("size_quantity");
+								if(count($size_quantity)>1 && $_POST['size_val'] == '1')
+								{
+								unset($size_quantity[0]);
+								unset($this->userPost['size'][0]);
+								$size_quantity=array_values($size_quantity);
+								}else{
+									$s = $size_quantity[0];
+									$size_quantity = array();
+									$size_quantity[0] = $s;
+								}
 				$status = $this->merchant->edit_product($deal_id, $deal_key, arr::to_object($this->userPost),$size_quantity,$this->preview_type);
 				if($status == 1 && $deal_key){
 					if($_FILES['image']['name'] != "" ){
@@ -3918,7 +3987,17 @@ class Merchant_Controller extends website_Controller
 	/** RESET PASSWORD **/
 	public function reset_password()
 	{
-		
+		if(isset($_SESSION['pass_reset_timeout'])){
+				$time = time();
+				if($time > $_SESSION['pass_reset_timeout'] ){
+					$this->session->delete('pass_reset_timeout');
+					common::message(-1,"Password reset time window is expired. Please login again.");
+					url::redirect(PATH."/merchant-login.html");
+				}
+			}else{
+				url::redirect(PATH."/merchant-login.html");
+			}
+			
 		if($_POST){
 			
 			$this->userPost = $this->input->post();
@@ -3941,7 +4020,9 @@ class Merchant_Controller extends website_Controller
 								
 								if($status == 10 || $status == 11){
 										common::message(1, "Congratulations! You have successfully reset your password." );
+										$this->session->delete('pass_reset_timeout');
 										url::redirect(PATH."merchant.html");
+										
 								}else{
 									common::message(-1,$this->Lang["CANT_LOGIN"]);
 									url::redirect(PATH."/merchant-login.html");
@@ -4358,6 +4439,35 @@ class Merchant_Controller extends website_Controller
                         
                         }
 	}
+        
+        public function update_product_change_status($email_id="",$name="",$type="",$trans_id=0,$pro_id=0,$merchant_id=0){
+		$this->shipping_id=0;
+		$this->shipping_list = $this->merchant->get_shipping_list1();
+		$this->product_size = $this->merchant->get_shipping_product_size();
+		$this->product_color = $this->merchant->get_shipping_product_color();
+		$status = $this->merchant->update_product_update_status("",$type,$trans_id,$pro_id,$merchant_id);
+                if($type=="Completed") {
+                    $message = "Thank You For Your Purchase";
+                    $message.= new View("admin_product/shipping_mail_template");
+                    $this->email_id = $email_id;
+                    $this->name = $this->Lang["CUST"];
+                    $this->message = $message;
+                    $fromEmail = NOREPLY_EMAIL;
+                    $message = new View("themes/".THEME_NAME."/admin_mail_template");
+                    $fromEmail = NOREPLY_EMAIL;
+                    if(EMAIL_TYPE==2){
+                        email::smtp($fromEmail,$email_id, SITENAME, $message);
+                    }else{
+                        email::sendgrid($fromEmail,$email_id, SITENAME, $message);
+                    }
+                    common::message(1, $this->Lang["MAIL_SENDED"]);
+                }
+                if($status){
+                    common::message(1, "Status updated successfully!");
+
+                    url::redirect(PATH."merchant-product/all-transaction.html");
+                } 
+        }
 
 	/* UPDATE STATUS DELIVERY FOR AUCTION */
 	public function auction_update_delivery_status($email_id="",$name="",$type="",$shippingid="",$auction_id="",$trans_id="")
@@ -5076,7 +5186,7 @@ class Merchant_Controller extends website_Controller
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
-						->add_rules('mobile', 'required', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('address1', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
@@ -5166,7 +5276,7 @@ class Merchant_Controller extends website_Controller
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Your Email was Successfully Sent");
 				url::redirect(PATH."merchant/manage-moderator.html");
 			}
 			else{	
@@ -5241,7 +5351,7 @@ class Merchant_Controller extends website_Controller
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
 						//->add_rules('email', 'required','valid::email',array($this,'email_available'))
-						->add_rules('mobile', array($this, 'validphone'), 'chars[0-9-+(). ]')
+						->add_rules('mobile', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
 			if($post->validate()){			
@@ -7331,4 +7441,28 @@ class Merchant_Controller extends website_Controller
 		return 0;
 				
 	}
+	
+	function validate_size_quantity(){
+		$size_q = $_POST['size_quantity'];
+		$sizes = $_POST['size'];
+		
+		$this->size_arr = $sizes;
+		$this->size_q_arr = $size_q;
+		
+		unset($sizes[0]);
+		unset($size_q[0]);
+		foreach($sizes as $size){
+			if($size == '')
+				return 0;
+		}
+		
+		foreach($size_q as $q){
+			if($q == '')
+				return 0;
+		}
+		return 1;
+	}
 }
+
+
+

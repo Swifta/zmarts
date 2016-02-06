@@ -144,15 +144,15 @@ class Admin_merchant_Model extends Model
                 if($_GET){
 
                         if($city){
-                        $contitions .= ' and users.city_id = '.$city;
+                        $contitions .= ' and users.city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
                         if($today == 1)
                         {
@@ -186,7 +186,7 @@ class Admin_merchant_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","store"=>" order by stores.store_name $sort");
 
 			if(isset($sort_arr[$param])){
-				 $contitions .= $sort_arr[$param];
+				 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 			}
 
                         $result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
@@ -211,15 +211,15 @@ class Admin_merchant_Model extends Model
                 $contitions = "user_type = 3 and stores.store_type = 1";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and stores.city_id = '.$city;
+                        $contitions .= ' and stores.city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
                         if($today == 1)
                         {
@@ -253,7 +253,7 @@ class Admin_merchant_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","store"=>" order by stores.store_name $sort");
 
 			if(isset($sort_arr[$param])){
-	       		 $contitions .= $sort_arr[$param];
+	       		 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
 				$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions");
@@ -277,11 +277,11 @@ class Admin_merchant_Model extends Model
                 if($_GET){
                         if($city){
 							
-				$contitions .= ' and city_id = '.$city;
+				$contitions .= ' and city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         $result = $this->db->query("select * from stores where $contitions ORDER BY stores.store_id limit $offset, $record");
                         count($result);
@@ -305,11 +305,11 @@ class Admin_merchant_Model extends Model
                 if($_GET){
                         if($city){
 							
-				$contitions .= ' and city_id = '.$city;
+				$contitions .= ' and city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         $result = $this->db->query("select stores.store_id from stores where $contitions ORDER BY stores.store_id");
                         count($result);
@@ -508,15 +508,25 @@ class Admin_merchant_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{               
-                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
-                return $result;
+//                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
+//                return $result;
+                $result = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                  
+						   
+		return $result;
 	}
 	
 	/** GET MERCHANT DETAILS */
 	public function get_admin_details_data()
 	{
-	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
-	    return $result;
+//	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
+//	    return $result;
+            $result = $this->db->from("users")
+		  ->where(array("user_status" => 1 , "user_type" => 1));
+		                  
+						   
+		return $result;
 	}
 
 		/** GET STORE COMMENTS LIST  **/
@@ -526,9 +536,9 @@ class Admin_merchant_Model extends Model
 
                 $contitions = "";
                         if($firstname){
-                        $contitions .= 'where users.firstname like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR stores.store_name like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'where users.firstname like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR stores.store_name like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC limit $offset, $record");
               
@@ -541,9 +551,9 @@ class Admin_merchant_Model extends Model
         {
                $contitions = "";
                         if($firstname){
-                        $contitions .= 'where users.firstname like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR stores.store_name like "%'.strip_tags($firstname).'%"';
-                        $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
+                        $contitions .= 'where users.firstname like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR stores.store_name like "%'.strip_tags(addslashes($firstname)).'%"';
+                        $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%"';
                         }
                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC ");
               
@@ -726,12 +736,18 @@ class Admin_merchant_Model extends Model
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+                                $news = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                  
+						   
+		return news;
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
-				
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+				 $news = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
 			}
 			$user_array1=array();
 			if(count($news) > 0){
@@ -856,16 +872,16 @@ class Admin_merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".$city." and user_type=3 ";
+				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=3 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=3 ";
+					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=3 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=3 ";
+				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=3 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -873,8 +889,11 @@ class Admin_merchant_Model extends Model
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			
-			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
-			return $news;
+//			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
+//			return $news;
+                         $news = $this->db->from("users")
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+                         return $news;
 		}
 		
 		
@@ -890,8 +909,11 @@ class Admin_merchant_Model extends Model
 
 	public function get_subsector_name($sector_id ='')
 	{
-		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
-		return $sector_query;
+//		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
+//		return $sector_query;
+                 $sector_query = $this->db->from("sector")
+		 ->where(array("sector_id" => $sector_id));
+                 return $sector_query;
 	}	
 	
 	/** ADMIN TO USERS MAIL COMMUNICATION **/

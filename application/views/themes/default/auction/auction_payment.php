@@ -14,13 +14,22 @@ $(document).ready(function(){
     
         <?php if ($this->paypal_setting) { ?> 
         $('.cancel_login').hide();
+        $('.inter_switch').hide();
         <?php } else { ?>
         $('.befor_login').hide();
         $('.cancel_login').show();
         <?php } ?>
-        $('.AuthorizeNet_pay').hide();
         $('.cod_pay').hide();
         $('.no_paypal').hide();
+        $('.cancel_login').hide();
+        $('.error').html('');
+        $('.cash_pay').hide();
+        $('.interswitch_pay').hide();
+        $('.befor_login').hide();
+        $('.pay_later').hide();
+        $('.cancel_login').hide();
+        $('.AuthorizeNet_pay').hide();
+        $('.cod').hide();
 });
 </script>
 <script type="text/javascript"> 
@@ -33,6 +42,7 @@ $(document).ready(function(){
         $('.cod_pay').hide();
         $('.hideerror').hide();
         $('.pay_later').hide();
+        $('.interswitch_pay').hide();
     }
     function SimilarProducts() {
 	$('.error').html('');
@@ -42,6 +52,7 @@ $(document).ready(function(){
         $('.cod_pay').hide();
         $('.hideerror').hide();
         $('.pay_later').hide();
+        $('.interswitch_pay').hide();
     }
     function Authorize() {
 	$('.error').html('');
@@ -51,6 +62,7 @@ $(document).ready(function(){
         $('.cod_pay').hide();
         $('.hideerror').hide();
         $('.pay_later').hide();
+        $('.interswitch_pay').hide();
     }
      function COD() {
 	$('.error').html('');
@@ -60,6 +72,7 @@ $(document).ready(function(){
         $('.cod_pay').show();
         $('.hideerror').hide();
         $('.pay_later').hide();
+        $('.interswitch_pay').hide();
     }
     function Pay_Later() {
 		$('.error').html('');
@@ -69,7 +82,18 @@ $(document).ready(function(){
         $('.cod_pay').hide();
         $('.hideerror').hide();
         $('.pay_later').show();
+        $('.interswitch_pay').hide();
     }
+        function InterswitchPay(){
+                $('.error').html('');
+                $('.cash_pay').hide();
+                $('.interswitch_pay').show();
+                $('.befor_login').hide();
+                $('.pay_later').hide();
+                $('.cancel_login').hide();
+                $('.AuthorizeNet_pay').hide();
+                $('.cod_pay').hide();
+        }
 </script>
 <SCRIPT language=Javascript>
     function isNumberKey(evt)
@@ -166,6 +190,13 @@ $(document).ready(function(){
                     <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['TYPE_PAY']; ?></h3>
                     <div class="p_inner_block">
                     <div class="payment_select"> 
+                                    <?php if ($this->interswitch) { ?>
+                                        <div class="payment_sel_lft">
+                                        <a onclick="return InterswitchPay();" id="InterswitchPay"  >
+                                        <input id="paypal_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['GLOBAL_PAY']; ?></p></div>
+                                    <?php
+                                    }
+                                    ?>
                         <?php if ($this->paypal_setting) { ?>
                             <div class="payment_sel_lft"><a onclick="return SimilarProducts();" id="SimilarProducts"  > <input id="paypal_radio" type="radio" name="name" checked /></a>  <p><?php echo $this->Lang['PAYPAL']; ?></p></div>
                         <?php } ?>
@@ -382,7 +413,9 @@ $(document).ready(function(){
                     <?php echo new View("themes/" . THEME_NAME . "/paypal/auction_pay_later"); ?>
 
                     </div>
-
+                    <div class="interswitch_pay">
+                    <?php echo new View("themes/" . THEME_NAME . "/interswitch/auction_pay"); ?>
+                    </div>
 
                     <script>
                         $(document).ready(function(){

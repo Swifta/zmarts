@@ -132,6 +132,7 @@ $config['merchant/send-product/(.*)/(.*).html'] ="/merchant/product_send_email/$
 $config['merchant/products-dashboard.html'] = "/merchant/dashboard_products";
 $config['merchant/delivery_status/(.*)/(.*)/(.*)/(.*).html']="/merchant/update_delivery_status/$1/$2/$3/$4";
 $config['merchant/cod-delivery_status/(.*)/(.*)/(.*)/(.*)/(.*).html']="/merchant/update_cod_delivery_status/$1/$2/$3/$4/$5/$6/$7";
+$config['merchant/product_change_status/(.*)/(.*)/(.*)/(.*).html']="/merchant/update_product_change_status/$1/$2/$3/$4/$5/$6";
 $config['merchant/confirm-product-status/(.*)/(.*).html'] = "/merchant/confirm_product/$1/$2";
 $config['merchant/edit-product-status/(.*).html'] = "/merchant/edi_confirm_product/$1";
 

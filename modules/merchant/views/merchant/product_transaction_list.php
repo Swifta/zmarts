@@ -1,5 +1,11 @@
 <?php defined('SYSPATH') OR die("No direct access allowed."); ?>
-<?php  if(($this->uri->segment(2)=='view-products')){	
+<?php 
+$tranx_id = ""; //empty transaction id.
+$interswitch_tranx_ref = "";
+$more_details_btn = "";
+$requery_btn = "";
+
+if(($this->uri->segment(2)=='view-products')){	
 								
 		 if(count($this->product_transaction_list) > 0){ ?>
 
@@ -58,8 +64,9 @@
                 
                 <?php $i = 0;  if(($this->uri->segment(2) == "view-deal") ||($this->uri->segment(2) == "view-products")) {  $first_item = 1; } else { $first_item = $this->pagination->current_first_item; }
                 
-                        $tot_quan = ""; 
-			$tot_amount = "";
+                        $tot_quan = 0; 
+			$tot_amount = 0;
+                        $tot_amount_success = 0;
 			$tot_commission = "";
 			$tot_reff = "";
 			$tot_shipping = "";
@@ -85,8 +92,14 @@
 		        $commission=0; //$u->deal_value *($commission_val/100);
 		    ?>	   
 		     
-		    <td align="center"><span class="align"><?php echo ($u->deal_value-$commission)*$u->quantity; ?></span></td>
-		    <?php $tot_amount +=($u->deal_value)*$u->quantity; ?>
+		    <td align="center"><span class="align"><?php 
+                    //echo ($u->deal_value-$commission)*$u->quantity; 
+                    echo ($u->amount-$commission)*$u->quantity; 
+                    ?></span></td>
+		    <?php 
+                    //$tot_amount +=($u->deal_value)*$u->quantity; 
+                    $tot_amount +=($u->amount)*$u->quantity; 
+                    ?>
                     
                         
                         
@@ -124,14 +137,35 @@
                     
                     
 		    <?php if(($this->uri->segment(2) == "view-deal")||($this->uri->segment(2) == "view-products")||($this->uri->last_segment() == "all-transaction.html")||($this->uri->segment(2) == "all-transaction")){  ?>
-		    <td ><span class="align">
+                    <td style="text-align: center;">
+                        
+                    <?php if($u->payment_status=="Completed") {
+                        //$tot_amount_success +=($u->deal_value)*$u->quantity;
+                        $tot_amount_success +=($u->amount)*$u->quantity;
+                                echo "<span style='color:green'>".$this->Lang['COMPLETED']."</span>";
+                            ?>
+
+                    <?php } elseif($u->payment_status=="Failed") {
+                                echo "<span style='color:red'>".$this->Lang['FAILED']."</span>";
+                            } else { ?>
+                            <select onchange="return product_change_status('<?php echo $u->email; ?>','<?php echo $u->firstname; ?>',this.value,'<?php echo $u->transaction_id; ?>','<?php echo $u->product_id; ?>','<?php echo $u->merchant_id; ?>','1')">
+                                <option value="Pending" <?php if($u->payment_status=="Pending"){ ?> selected <?php } ?>><?php echo $this->Lang['PENDING']; ?></option>
+                                    <option value="Completed" <?php if($u->payment_status=="Completed"){ ?> selected <?php } ?>><?php echo $this->Lang['COMPLETED']; ?></option>
+                                    <option value="Failed" <?php if($u->payment_status=="Failed"){ ?> selected <?php } ?>><?php echo $this->Lang['FAILED']; ?></option>
+                            </select>
+                            <?php } ?>                        
+                    <!--<span class="align">
 		    <?php if($u->payment_status=="SuccessWithWarning"){ echo '<span class="clor">'. $this->Lang["SUCCESS"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Completed"){ echo '<span class="clor3">'. $this->Lang["COMPLETED"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Success"){ echo '<span class="clor">'. $this->Lang["SUCCESS"] .'</span>'; } ?>
 		    <?php if($u->payment_status=="Pending"){ echo '<span class="clor4">'.$this->Lang["PENDING"].'</span>'; } ?>
                     <?php if($u->payment_status=="Pending"){ echo '<span class="clor4"></span>'; } ?>
 		    <?php if($u->payment_status=="Failed"){ echo '<span class="clor4">Failed</span>'; } ?>
-		    </span><br /><?php echo $more_details_btn; ?></td>
+		    </span>-->
+                        
+                        
+                        
+                        <br /><?php echo $more_details_btn; ?></td>
 		    <?php } ?>
 
 			
@@ -159,13 +193,13 @@
          <div class="value_total_in">
            
            <div class="value_amount"><p align="left"> <?php echo $this->Lang["TOT_PURC_QUAN"]; ?> </p> <b>:</b><span align="center"><?php echo $tot_quan; ?></span></div>
-            <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_PURC_AMOUNT"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.($tot_amount+$tot_shipping+$tot_tax); ?> </span></div>
+            <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_PURC_AMOUNT"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.number_format($tot_amount+$tot_shipping+$tot_tax); ?> </span></div>
             
            <!--<div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_ADM_COMM"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.$tot_commission; ?> </span></div>-->
            
-           <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_MER_AMOU"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.($tot_amount-$tot_commission); ?> </span></div>
+            <div class="value_amount"><p align="left"><?php echo $this->Lang["TOT_MER_AMOU"]; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.  number_format($tot_amount_success-$tot_commission); ?> </span></div>
            
-           <div class="value_amount"><p align="left"><?php echo $this->Lang['TOTA_SHIPP_AMOUNT']; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.$tot_shipping; ?> </span></div>
+           <div class="value_amount"><p align="left"><?php echo $this->Lang['TOTA_SHIPP_AMOUNT']; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.number_format($tot_shipping); ?> </span></div>
            
            <?php /**<div class="value_amount"><p align="left"><?php echo $this->Lang['TOT_TAX_AMOUN']; ?> </p><b>:</b><span align="center"> <?php echo CURRENCY_SYMBOL.($tot_tax); ?> </span></div> */ ?>
              </th>       

@@ -1,8 +1,0 @@
-products (ordinary & prime) offers
-
-1. ADD NECESSARY COLUMNS
-ALTER TABLE `product` ADD `deal_prime_value` DOUBLE NOT NULL AFTER `deal_price`, ADD `deal_prime_savings` DOUBLE NOT NULL AFTER `deal_prime_value`, ADD `deal_prime_percentage` FLOAT NOT NULL AFTER `deal_prime_savings`; 
-
-2. UPDATE PREVIOUS PRODUCT DETAILS
-
-UPDATE product SET deal_prime_value = deal_value, deal_prime_savings = deal_savings, deal_prime_percentage = deal_percentage WHERE deal_prime_value = 0
