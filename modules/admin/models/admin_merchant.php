@@ -912,7 +912,7 @@ class Admin_merchant_Model extends Model
 //		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
 //		return $sector_query;
                  $sector_query = $this->db->select()->from("sector")
-		 ->where(array("sector_id" => $sector_id));
+		 ->where(array("sector_id" => $sector_id))->get();
                  return $sector_query;
 	}	
 	
