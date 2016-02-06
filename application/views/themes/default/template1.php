@@ -20,7 +20,7 @@
 							<?php if(isset($this->message)){
                                  echo $this->message;}
                                  else{
-									 echo $_POST['message'];
+									 echo htmlentities($_POST['message'],  ENT_QUOTES,  "utf-8");
 									 }?>
                             </td></tr>
                         <tr style="height: 10px;"><td style="font-size: 0;line-height: 0;">&nbsp;</td></tr>

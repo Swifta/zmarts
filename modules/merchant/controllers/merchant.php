@@ -111,6 +111,7 @@ class Merchant_Controller extends website_Controller
 	{
 		
 		$this->merchant_dashboard_data = $this->merchant->get_merchant_dashboard_data();
+		
 		$this->balance = $this->merchant->get_merchant_balance1();
 		$this->balance_list_fund = $this->merchant->get_merchant_balance_fund();
 		$this->deals_transaction_list = $this->merchant->get_merchant_deal_transaction_chart_list();

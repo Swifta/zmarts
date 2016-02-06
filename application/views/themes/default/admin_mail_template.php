@@ -48,7 +48,7 @@
                               <?php if(isset($this->message)) { ?>
 			        <?php echo $this->message; ?>
 			        <?php } else { ?>
-			        <?php if(isset($_POST['message'])) { echo $_POST['message']; } ?>
+			        <?php if(isset($_POST['message'])) { echo htmlentities($_POST['message'],  ENT_QUOTES,  "utf-8"); } ?>
 			        <?php } ?>
                                 </td>
                                 </tr>

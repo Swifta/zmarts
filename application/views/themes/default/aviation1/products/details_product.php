@@ -1,9 +1,6 @@
 <?php 
-	if(count($this->product_size) == 0){
-		$nosize = 1;
-	}else{
-		$nosize = 0;
-	}?>
+	$nosize = "";
+?>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#messagedisplay1').hide();
