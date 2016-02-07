@@ -71,7 +71,7 @@ class Users_Controller extends Layout_Controller {
                 // We've got everything we need
                 $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
             // Let's request the access token
-                $access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']);
+                $access_token = $twitteroauth->getAccessToken(htmlentities($_GET['oauth_verifier'],  ENT_QUOTES,  "utf-8"));
             // Save it in a session var
                 $_SESSION['access_token'] = $access_token;
             // Let's get the user's info
