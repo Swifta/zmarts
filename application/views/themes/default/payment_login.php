@@ -197,7 +197,7 @@
                                                           <div class="fullname"> <input tabindex="10" name="email" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" type="text"  class="required"/></div>
                                                       </li>                                                    
                                                       <li>
-                                                          <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">*</span></label>
+                                                          <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
                                                           <div class="fullname"><input name="password" tabindex="11" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required" /></div>
                                                           <p><a class="forget_link" tabindex="14" onclick="showforgotpassword();" style="cursor:pointer;" title="<?php echo $this->Lang['FORGOT_PASS']; ?>"><?php echo $this->Lang['FORGOT_PASS']; ?></a></p>
                                                       </li>   
@@ -251,7 +251,7 @@
                                                               </em>
                                                           </li>
                                                           <li>
-                                                              <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">*</span></label>
+                                                              <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
                                                               <div class="fullname"><input name="password" maxlength="15" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required"  value="<?php if (!isset($this->form_error['password']) && isset($this->userPost['password'])) {
                                                                           echo $this->userPost['password'];
                                                                       } ?>" size="40"/></div>

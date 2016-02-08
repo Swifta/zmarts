@@ -2316,10 +2316,10 @@ class MCAPI {
      * @returnf string created_at The date the key was created
      * @returnf string expired_at The date the key was expired
      */
-    function apikeys($username, $password, $expired=false) {
+    function apikeys($username, $psd, $expired=false) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $password;
+        $params["password"] = $psd;
         $params["expired"] = $expired;
         return $this->callServer("apikeys", $params);
     }
@@ -2335,10 +2335,10 @@ class MCAPI {
      * @return string a new API Key that can be immediately used.
 
      */
-    function apikeyAdd($username, $password) {
+    function apikeyAdd($username, $psd) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $password;
+        $params["password"] = $psd;
         return $this->callServer("apikeyAdd", $params);
     }
 
@@ -2356,10 +2356,10 @@ class MCAPI {
      * @param string $password Your MailChimp password
      * @return boolean true if it worked, otherwise an error is thrown.
      */
-    function apikeyExpire($username, $password) {
+    function apikeyExpire($username, $psd) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $password;
+        $params["password"] = $psd;
         return $this->callServer("apikeyExpire", $params);
     }
 

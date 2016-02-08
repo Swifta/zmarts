@@ -55,7 +55,7 @@ $content_text = array(
 
 "EMAIL" => "Email",
 
-"PASSWORD" => "Password",
+"PSWD" => "Password",
 
 "CPASSWORD" => "Confirm Password",
 
@@ -1196,7 +1196,7 @@ $content_text = array(
 
 "SUCC_SUB" => "Your are successfully subscribed on",
 
-"YOUR_PASS" => "Your password",
+"YOUR_PSWD" => "Your password",
 
 "E_Y_PASS" => "Password",
 

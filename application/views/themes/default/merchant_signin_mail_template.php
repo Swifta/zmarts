@@ -50,7 +50,7 @@
                                     <tr style=" height:8"><td></td></tr>
                                     <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; margin:0; padding:0; color:#666;"><?php echo $this->Lang['YOUR_PASS']; ?> :  <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" > <?php if(isset($this->password)) { echo htmlentities($this->password,  ENT_QUOTES,  "utf-8"); }?></span></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; margin:0; padding:0; color:#666;"><?php echo $this->Lang['YOUR_PSWD']; ?> :  <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" > <?php if(isset($this->password)) { echo htmlentities($this->password,  ENT_QUOTES,  "utf-8"); }?></span></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                       <tr>                   
