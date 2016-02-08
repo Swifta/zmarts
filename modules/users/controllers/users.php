@@ -71,7 +71,7 @@ class Users_Controller extends Layout_Controller {
                 // We've got everything we need
                 $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
             // Let's request the access token
-                $access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']);
+                $access_token = $twitteroauth->getAccessToken(htmlentities($_GET['oauth_verifier'],  ENT_QUOTES,  "utf-8"));
             // Save it in a session var
                 $_SESSION['access_token'] = $access_token;
             // Let's get the user's info
@@ -189,9 +189,11 @@ class Users_Controller extends Layout_Controller {
                 $post = Validation::factory($_POST)
                                 ->add_rules('f_name', 'required')
                                 ->add_rules('email', 'required','valid::email', array($this, 'email_available'))
+                        ->add_rules('email_confirm', 'required','valid::email','matches[email]')
                                 ->add_rules('password', 'required','length[5,32]')
+                        ->add_rules('cpassword', 'required','valid::email','matches[password]')
                                 ->add_rules('gender', 'required')
-								->add_rules('age_range', 'required')
+				->add_rules('age_range', 'required')
                                  ->add_rules('country', 'required')
                                 ->add_rules('city', 'required');
 

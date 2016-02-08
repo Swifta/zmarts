@@ -92,7 +92,7 @@ class Admin_merchant_Controller extends website_Controller {
                                                                 }
                          
                                 				/* $message = "<b> ".$this->Lang['DEAR']." :".ucfirst($post->firstname)." ".$post->lastname.",</b>";
-				$message .= "<p>".$this->Lang['MERCHANT_ADD_SUC']."  </p><p> ".$this->Lang['YOR_EMAIL']." : ".$post->email."</p> <p>".$this->Lang['YOUR_PASS'].": ".$password."</p> <p>".$this->Lang['UR_DEAL_COMM']."  : ".$post->commission." % <p/> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><br /> <a href='".PATH."merchant-login.html' >".$this->Lang['LOGIN_URL']."</a><br/><p>".$this->Lang['THANK'].",</p>"; */ 
+				$message .= "<p>".$this->Lang['MERCHANT_ADD_SUC']."  </p><p> ".$this->Lang['YOR_EMAIL']." : ".$post->email."</p> <p>".$this->Lang['YOUR_PSWD'].": ".$password."</p> <p>".$this->Lang['UR_DEAL_COMM']."  : ".$post->commission." % <p/> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><br /> <a href='".PATH."merchant-login.html' >".$this->Lang['LOGIN_URL']."</a><br/><p>".$this->Lang['THANK'].",</p>"; */ 
 				
 								//$message = new View("themes/".THEME_NAME."/merchant_signin_mail_template");
 								
@@ -1752,12 +1752,16 @@ class Admin_merchant_Controller extends website_Controller {
 
 		             	if($status == 1){
 							//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-							unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    if($post->add_temp==1){
+					unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(1, $this->Lang['NEWS_SENT']);
 			        }
 			        else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+	                            if($post->add_temp==1){
+					unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 		       		 url::redirect(PATH."admin.html");

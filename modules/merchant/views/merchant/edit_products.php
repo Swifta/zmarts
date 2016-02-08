@@ -312,7 +312,7 @@
             <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?></td>
         </tr>
         <tr>
-          <td><label>Discounted Price (<b>Prime Customers Only</b>)</label>
+          <td><label>Discounted Price (<b>Club Members Only</b>)</label>
             <span></span></td>
           <td><label>:</label></td>
           <td><?php if($u->deal_price!=0) { ?>
@@ -669,7 +669,7 @@
                     <td><label>:</label></td>
                     <td>
                     	<input style='width:auto; display:none' type='text' name='size[]' class="quantity_size txtChar" maxlength='8' value='1' >
-                        <input style='width:auto;' type='text' placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" name='size_quantity[]' class="quantity_size txtChar" maxlength='8' value='<?php if(isset($this->form_error['size_quantity[0]'])){ echo '';}else if(isset($_POST['size_quantity'][0])){ echo $_POST['size_quantity'][0]; } else{	echo $this->product->current()->user_limit_quantity;}?>' onkeypress='return isNumberKey(event)'>
+                        <input style='width:auto;' type='text' placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" name='size_quantity[]' class="quantity_size txtChar" maxlength='8' value='<?php if(isset($this->form_error['size_quantity[0]'])){ echo '';}else if(isset($_POST['size_quantity'][0])){ echo htmlentities($_POST['size_quantity'][0],  ENT_QUOTES,  "utf-8"); } else{	echo $this->product->current()->user_limit_quantity;}?>' onkeypress='return isNumberKey(event)'>
                       <?php if(isset($this->form_error['size_quantity[0]'])){?><em> <?php echo $this->form_error['size_quantity[0]']; ?></em><?php }?>  
                     </td>
                     
@@ -710,7 +710,7 @@
 			            <?php 
 			            } ?>
 						</select> 
-                      <i> &nbsp;</i> <input type="text" name="size_quantity[]" placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" onkeypress='return isNumberKey(event)' value="<?php if(isset($_POST['size_quantity'][1])){echo $_POST['size_quantity'][1];}else if(isset($this->selectproduct_size[0])){echo $this->selectproduct_size[0]->quantity; }?>"> 
+                        <i> &nbsp;</i> <input type="text" name="size_quantity[]" placeholder="<?php echo $this->Lang['MENTION_SIZE_ENTER_Q'];?>" onkeypress='return isNumberKey(event)' value="<?php if(isset($_POST['size_quantity'][1])){echo htmlentities($_POST['size_quantity'][1],  ENT_QUOTES,  "utf-8");}else if(isset($this->selectproduct_size[0])){echo $this->selectproduct_size[0]->quantity; }?>"> 
                     </td>
                 </tr>
     <tr id="btns_s" class="size_show" >

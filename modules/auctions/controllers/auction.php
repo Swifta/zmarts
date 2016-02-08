@@ -319,7 +319,7 @@ class Auction_Controller extends Layout_Controller
 
 	public function details_auction($storeurl="",$deal_key = "", $url_title = "",$type = "")
 	{
-		
+			
 		
 		
 	        $this->is_auction = 1;
@@ -335,6 +335,8 @@ class Auction_Controller extends Layout_Controller
 		  
 			$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
                 $this->storeid = $this->deals->get_store_id($storeurl);
+				
+			
 		if(count($this->deals_deatils) == 0){
 			common::message(-1, $this->Lang["PAGE_NOT"]);
 			url::redirect(PATH);
@@ -359,6 +361,7 @@ class Auction_Controller extends Layout_Controller
                                         $this->products_list_name = $this->Lang['REL_AUCTION'];
                                 }
                         }
+			
 						
 			$this->get_related_categories = $this->all_deals_list;
 			$this->all_payment_list = $this->deals->payment_list();
@@ -367,6 +370,8 @@ class Auction_Controller extends Layout_Controller
 			$this->unlike_details = $this->deals->get_unlike_data($Deal->deal_id,3);
 			$this->transaction_details = $this->deals->get_auction_transaction_data($Deal->deal_id);
 			$this->winner_transaction_details = $this->deals->get_auction_winner_transaction_data($Deal->deal_id);
+			
+			
 
 			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
 			
@@ -383,10 +388,16 @@ class Auction_Controller extends Layout_Controller
 				$this->home = new Home_Model();
 				$this->merchant_cms = $this->home->get_merchant_cms_data($storeurl);
 				$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
+				
+				
 				$this->stores = new Stores_Model();
 				$this->admin_details = $this->stores->get_admin_details();
 				/* Merchant Cms footer ends */
+				
+				
 				$this->footer_merchant_details = $this->deals->get_merchant_details($Deal->merchant_id);
+				
+				
 				
 				
 		}

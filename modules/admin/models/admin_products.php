@@ -174,7 +174,21 @@ class Admin_products_Model extends Model
 	        } 
 	    }   
 	    
-	    if(($post->size_val) == 1){
+	    if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if($s_id && $s_id == "1"){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$product_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($post->size_val) == 1){
 			
 			
 	        $i= 0;
@@ -513,7 +527,7 @@ class Admin_products_Model extends Model
 	public function get_product_one_size($deal_id = "")
 	{
 		$result = $this->db->from("product_size")
-				->where(array("deal_id" => $deal_id))
+				->where(array("deal_id" => $deal_id, "size_id !=" => 1))
 		     		->get();
 		return $result;
 	}
@@ -551,13 +565,24 @@ class Admin_products_Model extends Model
 	
 	public function edit_product($deal_id = "", $deal_key = "", $post = "",$size_quantity = "",$preview_type="")
 	{ 
-	        
+	     
+		  
 	     $quantity = 0;
 	     for($i=0;$i<count($size_quantity); $i++){ 
 			if($size_quantity[$i]!=0){
 				$quantity +=$size_quantity[$i];
 			}
 		 }
+		 
+		 	
+		 
+		 	
+			
+			
+		 	
+		   
+		 
+		 
 		$sub_cat1 = strip_tags(addslashes($_POST['sub_category']));	 //Multiple stores have same deal          
 		//$sub_cat = implode(',',$sub_cat1);
 		$dealdata = $this->db->select("deal_title","url_title","user_limit_quantity","purchase_count")->from("product")->where(array("deal_id" => $deal_id, "deal_key" => $deal_key))->get();
@@ -591,6 +616,7 @@ class Admin_products_Model extends Model
 			 
 			$result = $this->db->delete('color', array('deal_id' => $deal_id));
 			$result = $this->db->delete('product_size', array('deal_id' => $deal_id));
+			
 			$savings=($post->price-$post->deal_value);
 			  $shipping_amount = "0";
 			 if(isset($_POST['shipping_amount'])) {
@@ -686,8 +712,22 @@ class Admin_products_Model extends Model
 	            $result_color = $this->db->insert("color", array("deal_id" => $deal_id, "color_name" => $c, "color_code_id" => $result_id->current()->id,"color_code_name" => $result_id->current()->color_name));
 	                }
 	        }
-	        
-	       if(($post->size_val) == 1){
+			
+			if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id && $s_id == "1"){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$deal_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($post->size_val) == 1){
 				$i= 0;
 				foreach($post->size as $s){
 					$result_count = $this->db->from("product_size")->where(array("deal_id" => $deal_id, "size_id" => $s))->get();
@@ -1227,7 +1267,7 @@ class Admin_products_Model extends Model
 	         //print_r($result); exit;   
                  $result = $this->db->select()->from("users")
                          ->join("stores", "users.user_id", "stores.merchant_id", "LEFT")
-                         ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email));
+                         ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email))->get();
 	         return $result;
         }
 

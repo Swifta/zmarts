@@ -618,22 +618,23 @@ $('#autoUpdate').hide('slow') //&& $('#g').fadeIn('slow') ;
         //  ^
             
          {    swal({   
-       title: "Do you want to open a new account?",  
-text: "",  
+       title: "PLEASE NOTE",  
+text: "YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON ZMART. "+
+        "KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES",  
 imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
 //imageSize: '100x180',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
-confirmButtonText: "Yes, Proceed!",   
-cancelButtonText: "No, Later!",   
+confirmButtonText: "VIEW A LIST OF BRANCHES",   
+cancelButtonText: "DOWNLOAD A/C OPENING FORM",   
 closeOnConfirm: false,   
 closeOnCancel: false}, 
 function(isConfirm){ 
     if (isConfirm) {     
-        location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html"  
+        location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1"  
     } else {     
       //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
-        location.href ="<?php echo PATH; ?>"
+        location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
    }
 
      

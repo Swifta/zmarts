@@ -20,28 +20,55 @@ class Merchant_Model extends Model
 	public function get_merchant_dashboard_data()
 	{
 		$result_active_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate >" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1"))->get();
+		
 		$result["active_deals"]=count($result_active_deals);
 
 		$result_archive_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate <" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1"))->get();
 		$result["archive_deals"]=count($result_archive_deals);
+		
+		
 
 		//$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result_active_products = $this->db->select()->from("product")
+		$result_active_products = $this->db->select("*")->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status"=>1, 
-                            "stores.store_status" => 1, "product.merchant_id" => $this->user_id));
+                            "stores.store_status" => 1, "product.merchant_id" => $this->user_id))->get();
                 $result["active_products"]=count($result_active_products);
 
 		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id."");
-		$result_sold_products = $this->select()->from("product")
+		$result_sold_products = $this->db->select("*")->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("purchase_count" => "user_limit_quantity", "deal_status"=>1, "stores.store_status" => 1,
-                            "product.merchant_id" => $this->user_id));
+                            "product.merchant_id" => $this->user_id))->get();
                 $result["sold_products"]=count($result_sold_products);
 
+                
 		$result_active_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id))->get();
-		$result["active_auction"]=count($result_active_auction);
+				
+				
 
+		try{
+		$result_active_auction = $this->db->select("*")->from("auction")
+		->join("stores","stores.store_id","auction.shop_id")
+		->join("city","city.city_id","stores.city_id")
+		->join("country","country.country_id","city.country_id")
+		->join("category","category.category_id","auction.category_id")
+		->where(array(
+		"enddate >" => time(),
+		"deal_status"=>"1",
+		"stores.store_status" => 1,
+		"city_status" => 1,
+		"country_status"=>1,
+		"auction.merchant_id" => $this->user_id))->get();
+		}catch(Exception $e){
+			
+			
+		}
+
+		$result["active_auction"]=count($result_active_auction);
+		
+		
+				
 		$result_archive_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id))->get();
 		$result["archive_auction"]=count($result_archive_auction);
 
@@ -70,8 +97,9 @@ class Merchant_Model extends Model
 	public function merchant_login($email = "", $password = "")
 	{
                $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
-                       "' AND password ='".md5(strip_tags(addslashes($password)))."' AND user_type IN(3,8)");
-                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type","in" =>(3,8))->limit(1)->get();
+                       "' AND password ='".md5($password)."' AND user_type IN (3,8)");
+               //echo count($result); die;
+                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type in" =>(3,8)))->limit(1)->get();
 		     if(count($result)>0){
                         if(count($result) == 1){
 	                        if($result->current()->user_status == 1){
@@ -927,7 +955,21 @@ class Merchant_Model extends Model
                     }
                 }
                 
-	    if(($post->size_val) == 1){
+	    if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id && $s_id == "1"){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$product_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($post->size_val) == 1){
 	        $i= 0;
             if(isset($post->size)){
 	        foreach($post->size as $s){
@@ -1151,6 +1193,7 @@ class Merchant_Model extends Model
 
 	public function edit_product($deal_id = "", $deal_key = "", $post = "",$size_quantity = "",$preview_type="")
 	{
+		
 
 		 $quantity = 0;
 
@@ -1272,6 +1315,8 @@ class Merchant_Model extends Model
 			
 			
 			
+			
+			
 			 
 			$this->db->update("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period"=> $post->delivery_days, "category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category, "third_category_id" => $post->third_category,"deal_price" => $deal_price,"deal_value" => $deal_val, "deal_prime_value" => $deal_prime_val, "deal_savings" =>$savings, "deal_prime_savings" =>$prime_savings, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => $value, "deal_prime_percentage" => $prime_value, "merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"shipping"=>$post->shipping,"attribute"=>$atr_option,"Including_tax" =>$inc_tax, "weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"product_duration" =>$duration, "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift), array("deal_id" => $deal_id, "deal_key" => $deal_key));
 
@@ -1281,14 +1326,37 @@ class Merchant_Model extends Model
 			if(isset($_POST['status']) && $_POST['status']==1)
 				$this->db->update("product",array("deal_status"=>1),array("deal_id" => $deal_id, "deal_key" => $deal_key,"deal_status"=>2));
 				
+				
+			$result = $this->db->delete('color', array('deal_id' => $deal_id));
+			$result = $this->db->delete('product_size', array('deal_id' => $deal_id));
+			
+			
+				
 			 if(($post->color_val) == 1){
 				foreach($post->color as $c){
 					 $result_id = $this->db->from("color_code")->where(array("color_code" => $c))->get();
 			        $result_color = $this->db->insert("color", array("deal_id" => $deal_id, "color_name" => $c, "color_code_id" => $result_id->current()->id,"color_code_name" => $result_id->current()->color_name));
 			    }
 	        }
-
-	        if(($post->size_val) == 1){
+			
+			
+			
+	        
+			if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   foreach($size_c as $s_id){
+			   	if($s_id && $s_id == "1"){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$deal_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($post->size_val) == 1){
 				$i= 0;
 				foreach($post->size as $s){
 					$result_count = $this->db->from("product_size")->where(array("deal_id" => $deal_id, "size_id" => $s))->get();
@@ -1304,6 +1372,8 @@ class Merchant_Model extends Model
 					$i++; }
 				}
 			}
+			
+			
 
 				//Attribute start
 		$attr_result = $this->db->delete('product_attribute', array('product_id' => $deal_id));
@@ -1333,6 +1403,22 @@ class Merchant_Model extends Model
 		}
 		return 8;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
  	/** EDIT PRODUCTS DATA **/
 
 	public function get_edit_product($deal_id = "",$deal_key = "")
@@ -2619,8 +2705,9 @@ class Merchant_Model extends Model
 		
 		$email = trim(strip_tags(addslashes($email)));
 		//$result = $this->db->query("select password from users where email='$email' and user_status=1 and user_type = 3");
-		$result = $this->select("password")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+		$result = $this->db->select("password")->from("users")
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))
+                        ->get();
                 if(count($result) > 0){
 			return $result->current()->password;
 		}else{
@@ -2636,7 +2723,7 @@ class Merchant_Model extends Model
 		$email = trim($email);
 		//$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
 		$result = $this->db->select("last_login")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3));
+                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))->get();
                 if(count($result) > 0){
 			
 			$last_login = $result->current()->last_login;
@@ -2674,10 +2761,10 @@ class Merchant_Model extends Model
 	public function get_products_chart_list()
 	{
 	    //$result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
-            $result_active_products = $this->select()->from("product")
+            $result_active_products = $this->db->select("*")->from("product")
                     ->join("stores", "stores.store_id", "product.shop_id")
                     ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
-                        "product.merchant_id" => $this->user_id));
+                        "product.merchant_id" => $this->user_id))->get();
             $result["active_products"]=count($result_active_products);
 
 		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
@@ -2772,9 +2859,11 @@ class Merchant_Model extends Model
 
 	public function get_product_one_size($deal_id = "")
 	{
+		
 		$result = $this->db->from("product_size")
-				->where(array("deal_id" => $deal_id))
+				->where(array("deal_id" => $deal_id, "size_id !="=>1))
 		     		->get();
+					
 		return $result;
 	}
 
@@ -3195,8 +3284,27 @@ class Merchant_Model extends Model
                                         $color_name = $color_detail[2];
                                         $result_color = $this->db->insert("color", array("deal_id" => $product_id, "color_name" => $color_code, "color_code_id" => $color_id,"color_code_name" => $color_name));
                                 } 
-                        } 
-                        if(($size_val) == 1){
+                        }
+						
+						
+						 
+                  if($post->size_val == "0"){
+				
+		   $size_c = (array)$post->size;
+		   
+		  
+		   foreach($size_c as $s_id){
+			   	if($s_id == "1"){
+					$r = $this->db->select("*")->from("size")->where(array("size_id" =>$s_id))->get();
+					if(count($r)>0){
+						$r = $r->current();
+						$this->db->insert("product_size", array("deal_id"=>$product_id, "size_id"=>$s_id, "size_name"=>$r->size_name, "quantity"=>$quantity));
+					}
+				}
+		   }
+		   
+			
+			}else if(($size_val) == 1){
                                 foreach ($size as $sizes) {
                                         $size_detail = explode("_",$sizes);
                                         $size_id =$size_detail[0];
