@@ -209,7 +209,7 @@ class Creditcard_paypal_Model extends Model
 
 	public function get_purchased_user_details()
 	{
-		$result = $this->db->from("users")->where(array("user_id" => $this->UserID))->get();
+		$result = $this->db->select()->from("users")->where(array("user_id" => $this->UserID))->get();
 		return $result;
 	}
 
@@ -217,7 +217,7 @@ class Creditcard_paypal_Model extends Model
 
 	public function payment_authorization_list( $deal_id = "")
 	{
-		$result = $this->db->from("transaction")->where(array("product_id" => $deal_id, "captured" => 1))->get();
+		$result = $this->db->select()->from("transaction")->where(array("product_id" => $deal_id, "captured" => 1))->get();
 		return $result;
 	}
 	
@@ -275,7 +275,7 @@ class Creditcard_paypal_Model extends Model
 	
 	public function get_user_details()
 	{
-		$result = $this->db->from("users")->where(array("user_id" => $this->UserID))->get();
+		$result = $this->db->select()->from("users")->where(array("user_id" => $this->UserID))->get();
 		return $result;
 	}
 	
@@ -294,7 +294,7 @@ class Creditcard_paypal_Model extends Model
 	
 	public function product_size_details($deal_id = "", $size_id = "")
 	{
-		$result = $this->db->from("product_size")
+		$result = $this->db->select()->from("product_size")
 				->where(array("deal_id" => $deal_id,"size_id" => $size_id))
 		     		->get();
 		return $result;
@@ -317,13 +317,13 @@ class Creditcard_paypal_Model extends Model
 
 	public function get_shipping_product_color()
 	{
-		$result = $this->db->from("color_code")->get();
+		$result = $this->db->select()->from("color_code")->get();
 		return $result;
 	}
 	
 	public function get_shipping_product_size()
 	{
-		$result = $this->db->from("size")->get();
+		$result = $this->db->select()->from("size")->get();
 		return $result;
 	}
 
@@ -373,14 +373,14 @@ class Creditcard_paypal_Model extends Model
 	
 	public function get_merchant_details($merchant = "")
 	{
-		$result = $this->db->from("users")->where(array("user_id" => $merchant))->get();
+		$result = $this->db->select()->from("users")->where(array("user_id" => $merchant))->get();
 		return $result;
 	}
 	
 	
 	public function get_admin_list()
 	{
-		$result = $this->db->from("users")->where(array("user_type" => "1"))->get();
+		$result = $this->db->select()->from("users")->where(array("user_type" => "1"))->get();
 		return $result;
 	}
 	

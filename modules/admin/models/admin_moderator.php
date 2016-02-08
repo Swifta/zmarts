@@ -120,7 +120,7 @@ class Admin_moderator_Model extends Model
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
                 }
                 else{
-                        $result = $this->db->from("users")
+                        $result = $this->db->select()->from("users")
                                     ->where(array("user_type" => 2))
 				    				->join("city","city.city_id","users.city_id")
 				    				->join("country","country.country_id","users.country_id")
@@ -178,7 +178,7 @@ class Admin_moderator_Model extends Model
         
         public function moderator_privileges($user_id)
 		{ 
-			$result = $this->db->from("admin_moderator_privileges_map")
+			$result = $this->db->select()->from("admin_moderator_privileges_map")
 							->where(array("moderator_id" => $user_id))
 							->get();
 
@@ -188,7 +188,7 @@ class Admin_moderator_Model extends Model
 	
 		public function get_moderator_data($userid = "")
 		{
-			$result = $this->db->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->limit(1)->get();
+			$result = $this->db->select()->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->limit(1)->get();
 			return $result;
 		}
 		/** UPDATE USER **/
@@ -250,14 +250,14 @@ class Admin_moderator_Model extends Model
 
 	public function get_user_view_data($userid = "")
 	{
-		$result = $this->db->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id")->limit(1)->get();
+		$result = $this->db->select()->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id")->limit(1)->get();
 		return $result;
 	}
 
 	/** GET STATE LIST **/
 	public function getStateList()
 	{
-		$result = $this->db->from("state")
+		$result = $this->db->select()->from("state")
 							->join("country","country.country_id","state.state_country_id")
 							->where(array("statestatus" => '1'))
 							->orderby("state.state_name", "ASC")			

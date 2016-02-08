@@ -10,7 +10,7 @@ if($_POST){
         //check deal quantity availability
 	require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/transaction.php");
 
-        $USERID = $_SESSION['userid'];
+        $USERID = strip_tags(addslashes($_SESSION['userid']));
         //check whether deal is expired or closed
         is_deal_expired($_POST['couponid']);
 	check_max_deal_purchase($_POST['couponid'],$_POST["friendname"],$_POST["friendemail"],$_POST['qty'],$USERID);
@@ -66,17 +66,17 @@ if($_POST){
 
 	
 	// authorize
-	$qty = $_POST['qty'];	
-	$couponid = $_POST['couponid'];
+	$qty =  strip_tags(addslashes( $_POST['qty']));	
+	$couponid =  strip_tags(addslashes($_POST['couponid'])) ;
 	$sale->cust_id = $_POST['user'];
-        $amount = $_POST['amount'];
+        $amount = strip_tags(addslashes($_POST['amount']));
         //if payable amount is equal to zero then process the customer directly
 	if($_POST['amount'] == 0) 
         {
                //check deal quantity availability
 			require_once(DOCUMENT_ROOT."/system/includes/transaction.php");
 			$L_QTY0 = $qty;	
-			$COUPONID = $couponid;	
+			$COUPONID = strip_tags(addslashes($couponid));	
 			$USERID = $_SESSION['userid'];
 			check_max_deal_purchase($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0,$USERID);
 			check_deal_quantity($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0);
@@ -200,7 +200,7 @@ if($_POST){
 		$transaction_id = $response->transaction_id;
 		$responseheader = array('Order Status'=>$response->response_reason_text,'Invoice Number'=>$response->invoice_number,'Authorization Code'=>$response->authorization_code,'Credit card'=>$response->card_type,'Billing Address'=>$response->address);
 
-		$TYPE = $_POST['pay_mod_id'];
+		$TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
 		$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
 		require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/dboperations.php"); 
 		$sql = "insert into transaction_details (PAYERID,COUPONID,TIMESTAMP,CORRELATIONID,ACK,FIRSTNAME,LASTNAME,TRANSACTIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,AMT,PAYMENTSTATUS,REASONCODE,L_QTY0,USERID,EMAIL,TYPE,CAPTURED,REFERRAL_AMOUNT) values ('$response->customer_id','$couponid',now(),'$response->authorization_code','$response->response_reason_text','$response->first_name','$response->last_name','$response->transaction_id','$response->transaction_type','$response->method',now(),'$response->amount','$response->response_reason_text','$response->response_reason_code','$qty','$userid','$response->email_address','$TYPE','0','$REFERRAL_AMOUNT')";

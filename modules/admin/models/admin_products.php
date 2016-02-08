@@ -1068,8 +1068,10 @@ class Admin_products_Model extends Model
 	
 	public function change_commission_data($commission = "" , $product_id = "")
 	{
-	        $result = $this->db->query("update product set commission_status = $commission where deal_id = '$product_id'");
-	        return $result;
+//	        $result = $this->db->query("update product set commission_status = $commission where deal_id = '$product_id'");
+//	        return $result;
+                $result= $this->db->update('product',array('commission_status' => $commission),array("deal_id" => $product_id));
+		return result;
 	}
 	
 	/*	GET HOT PRODUCT LIST */

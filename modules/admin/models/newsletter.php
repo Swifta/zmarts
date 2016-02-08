@@ -26,7 +26,7 @@ class Newsletter_Model extends Model
 	
 	public function subscriber_list_count()
 	{
-		$result = $this->db->from("email_subscribe")
+		$result = $this->db->select()->from("email_subscribe")
 		->get();
 
 		return count($result);
@@ -253,7 +253,7 @@ class Newsletter_Model extends Model
 	
 	public function getCityList()
 	{
-		$result = $this->db->from("city")
+		$result = $this->db->select()->from("city")
 			->join("country","country.country_id","city.country_id")
 			->orderby("city.city_name", "ASC")
 			->where(array("city_status" => 1,"country.country_status"=>1))
@@ -267,7 +267,7 @@ class Newsletter_Model extends Model
     
 	public function check_city_exist($country_id = "", $city_id = "")
 	{
-		$result = $this->db->from("city")
+		$result = $this->db->select()->from("city")
                             ->join("country","country.country_id","city.country_id")
 			    ->where(array("city_status" => 1,"city.country_id" => $country_id, "city_id" => $city_id))
                             ->get();
@@ -278,7 +278,7 @@ class Newsletter_Model extends Model
 	
 	public function get_category_list()
 	{
-		$result = $this->db->from("category")->where(array("category_status" => 1))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1))->orderby("category_name","ASC")->get();
 		return $result;
 	}
 
@@ -286,7 +286,7 @@ class Newsletter_Model extends Model
 	
 	public function get_top_category_list()
 	{
-		$result = $this->db->from("category")->where(array("category_status" => 1,"type" =>1))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1,"type" =>1))->orderby("category_name","ASC")->get();
 		return $result;
 	}
 	
@@ -348,7 +348,7 @@ class Newsletter_Model extends Model
 	
 	public function get_subscribed_user_list()
 	{
-		$result = $this->db->from("email_subscribe")
+		$result = $this->db->select()->from("email_subscribe")
 				->where(array("suscribe_city_status" => 1,"suscribe_status" => 1,"category_id !=" =>"" ,"category_id !=" =>"0" ))
 				//->join("email_subscribe","email_subscribe.user_id","users.user_id")
 				->get();
@@ -365,7 +365,7 @@ class Newsletter_Model extends Model
 
 	public function get_all_city_list()
 	{
-		$result = $this->db->from("city")->join("country","country.country_id","city.country_id")->where(array("city_status" => 1,"country_status" => 1))->orderby("city_name", "ASC")->get();
+		$result = $this->db->select()->from("city")->join("country","country.country_id","city.country_id")->where(array("city_status" => 1,"country_status" => 1))->orderby("city_name", "ASC")->get();
 		return $result;
 	}
 	
@@ -383,7 +383,7 @@ class Newsletter_Model extends Model
 	/* GET MODULE SETTING LIST */
 	public function get_setting_module_list()
 	{
-		$result = $this->db->from("module_settings")->get();
+		$result = $this->db->select()->from("module_settings")->get();
 		return $result;
 	}
 	
@@ -462,12 +462,12 @@ class Newsletter_Model extends Model
 	}
 	
 	public function get_template_count(){
-		$result = $this->db->from("newsletter")->orderby("newsletter.newsletter_id", "DESC")->get();
+		$result = $this->db->select()->from("newsletter")->orderby("newsletter.newsletter_id", "DESC")->get();
 		return count($result);
 	}
 	
 	public function get_template_list($offset='',$limit=''){
-		$result = $this->db->from("newsletter")->offset($offset)->limit($limit)->orderby("newsletter.newsletter_id", "DESC")->get();
+		$result = $this->db->select()->from("newsletter")->offset($offset)->limit($limit)->orderby("newsletter.newsletter_id", "DESC")->get();
 		return $result;
 	}
 	
@@ -481,7 +481,7 @@ class Newsletter_Model extends Model
 	}
 	
 	public function get_newsletter_details($newsletter_id=''){
-		$result = $this->db->from("newsletter")->where("newsletter_id",$newsletter_id)->get();
+		$result = $this->db->select()->from("newsletter")->where("newsletter_id",$newsletter_id)->get();
 		return $result;
 	}
 	
@@ -500,7 +500,7 @@ class Newsletter_Model extends Model
 	}
 	
 	public function get_newsletter_list(){
-		$result = $this->db->from("newsletter")->where("newsletter_status",1)->orderby("newsletter_id","ASC")->get();
+		$result = $this->db->select()->from("newsletter")->where("newsletter_status",1)->orderby("newsletter_id","ASC")->get();
 		return $result;
 	}
 }

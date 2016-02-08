@@ -104,8 +104,8 @@
 							 <?php } ?>
 							 <?php } else{
 								 $this->users = new Admin_users_Model();
-								 $this->user_per_filter=$this->users->get_user_list3(1,$_POST['city'],$_POST['gender'],$_POST['age_range']);
-								 
+								 //$this->user_per_filter=$this->users->get_user_list3(1,$_POST['city'],$_POST['gender'],$_POST['age_range']);
+								 $this->user_per_filter=$this->users->get_user_list3(1,  strip_tags(addslashes($_POST['city'])),stripslashes(addslashes($_POST['gender'])),  strip_tags(addslashes($_POST['age_range'])));
 								 ?>
 							 
 								<li><input type="checkbox" name="email" onclick="checkboxcheckAllUsers(&#39;settings_newsletter&#39;,&#39;email&#39;)" /><span>Select all</span></li>
