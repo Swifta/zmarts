@@ -288,7 +288,7 @@
                 </tr>
                 
                	 <tr>
-                    <td><label>Discounted Price (<b>Prime Customers Only</b>)</label><span></span></td>
+                    <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
                    	<?php if($u->deal_price!=0) { ?>

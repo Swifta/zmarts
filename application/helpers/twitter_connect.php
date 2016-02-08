@@ -37,7 +37,7 @@ $oauth_token = strip_tags(addslashes($_GET['oauth_token']));
 
 if(isset($_POST['submit']))
 	  {
-	  	$msg = $_REQUEST['tweet'];
+	  	$msg = htmlentities($_REQUEST['tweet'],  ENT_QUOTES,  "utf-8");
 		
 		$twitterObj->setToken($_SESSION['ot'], $_SESSION['ots']);
 		$update_status = $twitterObj->post_statusesUpdate(array('status' => $msg));

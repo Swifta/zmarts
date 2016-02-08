@@ -14,7 +14,7 @@ class Admin_moderator_Model extends Model
 //		return $result;
                 
                  $result =  $this->db->select("user_type,joined_date,login_type")->from("users")
-                  ->where(array("user_status" =>1 , "user_type" => 2));
+                  ->where(array("user_status" =>1 , "user_type" => 2))->get();
                      
                  return $result;
 	}

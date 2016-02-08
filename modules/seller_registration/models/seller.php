@@ -21,8 +21,8 @@ class Seller_Model extends Model
           $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
           $arg['account_number'] = $nuban;
           try{
-            $fun_resp = $soap->VerifyAccount($arg);
-            $response = (array)$fun_resp->VerifyAccountResult;
+            $fun_resp = $soap->VerifyMerchantAccount($arg);
+            $response = (array)$fun_resp->VerifyMerchantAccountResult;
           }
           catch(Exception $e){
               error_log($e->getMessage());

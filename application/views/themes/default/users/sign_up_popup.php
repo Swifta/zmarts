@@ -49,15 +49,11 @@
                                   <em id="emai_error"></em>
                                 </div>   
                             </li>
-                             <li>
-                                <label><?php echo $this->Lang['GENDER']; ?>:<span class="form_star">*</span></label>
+                            <li>
+                                <label>Confirm your email:<span class="form_star">*</span></label>
                                 <div class="fullname">
-									 <select name="gender">
-										<option value=""><?php echo $this->Lang["SEL_GEN"]; ?></option>
-										<option value="1"><?php echo $this->Lang["MALE"]; ?></option>
-										<option value="2"><?php echo $this->Lang["FEMALE"]; ?></option>
-									 </select>
-                                  <em id="gender_error"></em>
+                                  <input name="email_confirm" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
+                                  <em id="email_confirm_error"></em>
                                 </div>   
                             </li>
                             <li>
@@ -107,13 +103,23 @@
                                 </div>   
                                 <label></label>
                             </li>-->
+                             <li>
+                                <label><?php echo $this->Lang['GENDER']; ?>:<span class="form_star">*</span></label>
+                                <div class="fullname">
+									 <select name="gender">
+										<option value=""><?php echo $this->Lang["SEL_GEN"]; ?></option>
+										<option value="1"><?php echo $this->Lang["MALE"]; ?></option>
+										<option value="2"><?php echo $this->Lang["FEMALE"]; ?></option>
+									 </select>
+                                  <em id="gender_error"></em>
+                                </div>   
+                            </li>
                            <li class="check_box">
                                 <p><input type="checkbox" name="terms" id="termsquantity" value="terms"><?php echo $this->Lang['BY_CLICKING_SUBMIT']; ?> 									
                                 <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>Disclaimer.php"><?php echo $this->Lang['TEMRS']; ?></a>									
                                 </p>
                                 <em id="terms_error"></em>
                             </li>
-                            
                             <li>                                  
                                 <input class="sign_submit" type="submit" title="Sign Up" value="Sign Up" /> 
                                 <input id = "id_z_offer_click_status_signup" type="hidden" value="0"/>
@@ -122,8 +128,8 @@
                         </form>
                     </div>
                     <div class="signup_social_block">                        
-                        <p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>
-                        <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>
+                        <!--<p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>-->
+                        <!--<a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>-->
 <br />
     <button class="g-signin g_connect" 
             data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"
@@ -290,7 +296,8 @@ function validatesignup()
 	var terms = document.getElementById('termsquantity').checked;*/
 	
 	var fname = document.signup.f_name.value;	
-	var email = document.signup.email.value;	
+	var email = document.signup.email.value;
+        var email_confirm = document.signup.email_confirm.value;
 	var password = document.signup.password.value;
 	var cpassword = document.signup.cpassword.value;
 	var city = document.signup.city.value;
@@ -312,7 +319,10 @@ function validatesignup()
 	
 	
 	
-	if(fname == '' || email =='' || password == '' || cpassword == ''|| terms == 'false' || (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) || city == '-99'|| city == '')
+	if(fname == '' || email =='' || password == '' || cpassword == ''|| 
+                terms == 'false' || (atpos<1 || dotpos<atpos+2 || 
+                dotpos+2>=email.length) || city == '-99'|| city == ''
+                || email_confirm == '')
 	{
 		if(fname == ''){
 			$('#fname_error').html("<?php echo $this->Lang['PLS_ENT_NAM']; ?>");
@@ -333,6 +343,14 @@ function validatesignup()
 		}
 		else {
 			$('#cpass_error').html('');
+		}
+                
+		if(email_confirm == '')
+		{
+			$('#email_confirm_error').html("Please confirm your email");
+		}
+		else {
+			$('#email_confirm_error').html('');
 		}
 		
 		if(country == '-99'){
@@ -379,7 +397,21 @@ function validatesignup()
 		
 	}
 	else{
-		
+		if (email != email_confirm) {
+                        document.signup.email.value = "";
+                        document.signup.email_confirm.value = "";
+                        $('#country_error').html('');
+                        $('#emai_error').html('');
+                        $('#city_error').html('');
+                        $('#pass_error').html('');
+                        $('#fname_error').html('');
+                        $('#email_confirm_error').html("Email address does not Match");
+                        return false;
+                 }
+                else {
+                    $('#email_confirm_error').html('');                   
+                }
+                
 		if (password != cpassword) {
                         document.signup.password.value = "";
                         document.signup.cpassword.value = "";
@@ -395,6 +427,7 @@ function validatesignup()
                     $('#cpass_error').html('');
                     
                 }
+                
                 
                 if ( document.getElementById('termsquantity').checked == false )  {
 		        $('#terms_error').html("<?php echo $this->Lang['PLEASE_SELECT_TERMS']; ?>");
@@ -412,10 +445,11 @@ function validatesignup()
 				return false;
 			}
 			else if(check == -999){
+                            //email_confirm
 					javascript:signup_after_zenith_offer_click(fname, email, password,cpassword, gender, age_range, country, city, terms, z_offer, unique_identifier);
 					return false;
 					
-				}
+			}
 			
 			document.signup.submit();
 		});

@@ -1076,7 +1076,7 @@ class timthumb {
 	}
 	protected function param($property, $default = ''){
 		if (isset ($_GET[$property])) {
-			return $_GET[$property];
+			return htmlentities($_GET[$property],  ENT_QUOTES,  "utf-8");
 		} else {
 			return $default;
 		}

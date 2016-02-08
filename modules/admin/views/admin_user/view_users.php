@@ -61,7 +61,7 @@
                 
 		<tr>
                      <th valign="top" align="left" width="20%"><?php echo $this->Lang["LOGIN_TYPE"]; ?></th><th valign="top">:</th><td align="left">
-                     <?php if(strlen($d->nuban) != 10){ echo $this->Lang["NOR_USER"]; }else{ echo "Prime Customer"; }?>
+                     <?php if(strlen($d->nuban) != 10){ echo $this->Lang["NOR_USER"]; }else{ echo "Club Member"; }?>
 
                      </td>
                 </tr>

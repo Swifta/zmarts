@@ -123,7 +123,7 @@ $content_text = array(
 
 "PRIVACY"=>"Privacy Policy",
 
-"FOOTER_COPYRIGHT" => "Copyright © 2015",
+"FOOTER_COPYRIGHT" => "Copyright &copy;".date("Y"),
 
 "FOOTER_ALLRIGHT" => "All rights reserved",
 
@@ -737,13 +737,13 @@ $content_text = array(
 
 "SUBS_NW" => "Subscribe now",
 
-"ALREADY_ACCESS2" => "Already have an access? Log in here",
+"ALREADY_ACCESS2" => "Already have access? Log in here",
 
 "APP_BUSS" => "We appreciate your business and we will never share your email address with third parties.",
 
 "SORRY_CATE" => "Sorry, there are no",
 
-"THANK_CT" => "Thank you for contact us",
+"THANK_CT" => "Thank you for contacting us",
 
 "PLS_ENT_NO" => "Please enter a valid number.",
 
@@ -998,7 +998,7 @@ $content_text = array(
 
 "PLS_SEL_COUNTRY_FIR" => "Please select your country first",
 
-"PCPM" => "Password and Confirm Password Doesn't Match",
+"PCPM" => "Passwords do not Match",
 
 "BY_CLICKING_SUBMIT"=>"By clicking Sign Up you agree to $THIS_SITENAME",
 
@@ -1530,7 +1530,7 @@ $content_text = array(
 
 "USER_BLOCKED_ADMIN" => " Your Account has been blocked Please Contact Administrator",
 
-"PLEASE_SELECT_TERMS" => "Please select our terms",
+"PLEASE_SELECT_TERMS" => "Please accept our terms",
 
 "ADD" => "Add",
 

@@ -1,6 +1,5 @@
 <?php 
-$nosize = "";
-$c = 0; $i = 0; 
+	$nosize = "";
 ?>
 <script type="text/javascript">
     $(document).ready(function(){

@@ -305,11 +305,11 @@ class Admin_merchant_Model extends Model
                 if($_GET){
                         if($city){
 							
-				$contitions .= ' and city_id = '.$city;
+				$contitions .= ' and city_id = '.strip_tags(addslashes($city));
                         }
 
                         if($name){
-				$contitions .= ' and store_name like "%'.strip_tags($name).'%"';
+				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         $result = $this->db->query("select stores.store_id from stores where $contitions ORDER BY stores.store_id");
                         count($result);
@@ -511,7 +511,7 @@ class Admin_merchant_Model extends Model
 //                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
 //                return $result;
                 $result = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
 		                  
 						   
 		return $result;
@@ -523,7 +523,7 @@ class Admin_merchant_Model extends Model
 //	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
 //	    return $result;
             $result = $this->db->select()->from("users")
-		  ->where(array("user_status" => 1 , "user_type" => 1));
+		  ->where(array("user_status" => 1 , "user_type" => 1))->get();
 		                  
 						   
 		return $result;
@@ -742,7 +742,7 @@ class Admin_merchant_Model extends Model
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
                                 $news = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
 		                  
 						   
 		return news;
@@ -751,7 +751,7 @@ class Admin_merchant_Model extends Model
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
 				 $news = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
 			}
 			$user_array1=array();
 			if(count($news) > 0){
@@ -896,7 +896,7 @@ class Admin_merchant_Model extends Model
 //			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
 //			return $news;
                          $news = $this->db->select()->from("users")
-		                   ->where(array("user_status" => 1 , "user_type" => 3));
+		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
                          return $news;
 		}
 		
@@ -916,7 +916,7 @@ class Admin_merchant_Model extends Model
 //		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
 //		return $sector_query;
                  $sector_query = $this->db->select()->from("sector")
-		 ->where(array("sector_id" => $sector_id));
+		 ->where(array("sector_id" => $sector_id))->get();
                  return $sector_query;
 	}	
 	

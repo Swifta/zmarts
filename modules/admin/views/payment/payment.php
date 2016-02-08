@@ -99,7 +99,7 @@
         <?php if(count($this->fund_request_list)>0){
                 $parm="";
         if(isset($_GET['param'])){
-                $parm='&param='.$_GET['param'].'&sort='.$_GET['sort'];
+                $parm='&param='.htmlentities($_GET['param'],  ENT_QUOTES,  "utf-8").'&sort='.htmlentities($_GET['sort'],  ENT_QUOTES,  "utf-8");
         } ?>
 
         <?php if($this->pagination !=""){ ?>
