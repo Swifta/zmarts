@@ -102,9 +102,9 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
    * Set the password to authenticate with.
    * @param string $password
    */
-  public function setPassword($psd)
+  public function setPassword($password)
   {
-    $this->_password = $psd;
+    $this->_password = $password;
   }
   
   /**

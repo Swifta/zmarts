@@ -638,7 +638,7 @@
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <h4><?php echo $this->Lang['PSWD']; ?></h4>
+                                                    <h4><?php echo $this->Lang['PASSWORD']; ?></h4>
                                                     <div class="pi_detail">
                                                         <div class="pi_detail_info" id="password_user">
                                                             <p>*************</p>

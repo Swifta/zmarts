@@ -16,7 +16,7 @@ if(defined('API_USERNAME'))
 $API_UserName=API_USERNAME;
 
 if(defined('API_PASSWORD'))
-$API_Psd=API_PASSWORD;
+$API_Password=API_PASSWORD;
 
 if(defined('API_SIGNATURE'))
 $API_Signature=API_SIGNATURE;
@@ -42,7 +42,7 @@ $AUTH_timestamp=AUTH_TIMESTAMP;
 function nvpHeader()
 {
 
-global $API_Endpoint,$version,$API_UserName,$API_Psd,$API_Signature,$nvp_Header, $subject, $AUTH_token,$AUTH_signature,$AUTH_timestamp;
+global $API_Endpoint,$version,$API_UserName,$API_Password,$API_Signature,$nvp_Header, $subject, $AUTH_token,$AUTH_signature,$AUTH_timestamp;
 
 $nvpHeaderStr = "";
 
@@ -52,7 +52,7 @@ if(defined('API_USERNAME'))
 $API_UserName=API_USERNAME;
 
 if(defined('API_PASSWORD'))
-$API_Psd=API_PASSWORD;
+$API_Password=API_PASSWORD;
 
 if(defined('API_SIGNATURE'))
 $API_Signature=API_SIGNATURE;
@@ -68,11 +68,11 @@ if(defined('AUTH_MODE')) {
 else {
 
 	
-	if((!empty($API_UserName)) && (!empty($API_Psd)) && (!empty($API_Signature)) && (!empty($subject))) {
+	if((!empty($API_UserName)) && (!empty($API_Password)) && (!empty($API_Signature)) && (!empty($subject))) {
 		$AuthMode = "THIRDPARTY";
 	}
 	
-	else if((!empty($API_UserName)) && (!empty($API_Psd)) && (!empty($API_Signature))) {
+	else if((!empty($API_UserName)) && (!empty($API_Password)) && (!empty($API_Signature))) {
 		$AuthMode = "3TOKEN";
 	}
 	
@@ -90,13 +90,13 @@ else {
 switch($AuthMode) {
 	
 	case "3TOKEN" : 
-			$nvpHeaderStr = "&PWD=".urlencode($API_Psd)."&USER=".urlencode($API_UserName)."&SIGNATURE=".urlencode($API_Signature);
+			$nvpHeaderStr = "&PWD=".urlencode($API_Password)."&USER=".urlencode($API_UserName)."&SIGNATURE=".urlencode($API_Signature);
 			break;
 	case "FIRSTPARTY" :
 			$nvpHeaderStr = "&SUBJECT=".urlencode($subject);
 			break;
 	case "THIRDPARTY" :
-			$nvpHeaderStr = "&PWD=".urlencode($API_Psd)."&USER=".urlencode($API_UserName)."&SIGNATURE=".urlencode($API_Signature)."&SUBJECT=".urlencode($subject);
+			$nvpHeaderStr = "&PWD=".urlencode($API_Password)."&USER=".urlencode($API_UserName)."&SIGNATURE=".urlencode($API_Signature)."&SUBJECT=".urlencode($subject);
 			break;		
 	case "PERMISSION" :
 		    $nvpHeaderStr = formAutorization($AUTH_token,$AUTH_signature,$AUTH_timestamp);
@@ -117,7 +117,7 @@ function hash_call($methodName,$nvpStr)
 {
 
 	//declaring of global variables
-	global $API_Endpoint,$version,$API_UserName,$API_Psd,$API_Signature,$nvp_Header, $subject, $AUTH_token,$AUTH_signature,$AUTH_timestamp;
+	global $API_Endpoint,$version,$API_UserName,$API_Password,$API_Signature,$nvp_Header, $subject, $AUTH_token,$AUTH_signature,$AUTH_timestamp;
 	// form header string
 	echo $nvpheader = nvpHeader(); exit;
 

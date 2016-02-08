@@ -29,7 +29,7 @@
                               </div>   
                           </li>
                           <li>
-                              <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">* </span> </label>
+                              <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">* </span> </label>
                               <div class="fullname">
                                   <input type="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" value="" name="password" autocomplete="off">                         
                                   <em id="password_error"></em>                    
