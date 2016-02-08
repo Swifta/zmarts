@@ -1530,7 +1530,7 @@ $content_text = array(
 
 "USER_BLOCKED_ADMIN" => " Your Account has been blocked Please Contact Administrator",
 
-"PLEASE_SELECT_TERMS" => "Please select our terms",
+"PLEASE_SELECT_TERMS" => "Please accept our terms",
 
 "ADD" => "Add",
 

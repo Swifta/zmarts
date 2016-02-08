@@ -405,7 +405,7 @@ function validatesignup()
                         $('#city_error').html('');
                         $('#pass_error').html('');
                         $('#fname_error').html('');
-                        $('#email_confirm_error').html("Emails do not Match");
+                        $('#email_confirm_error').html("Email address does not Match");
                         return false;
                  }
                 else {
