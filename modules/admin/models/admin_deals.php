@@ -592,7 +592,8 @@ class Admin_deals_Model extends Model
 
 	public function change_commission_data($commission = "" , $deal_id = "")
 	{
-	        $result = $this->db->query("update deals set commission_status = $commission where deal_id = '$deal_id'");
+	      //  $result = $this->db->query("update deals set commission_status = $commission where deal_id = '$deal_id'");
+             $result = $this->db->update("deals", array("commission_status" => $commission), array("deal_id" => $deal_id));
 	        return $result;
 	}
 	

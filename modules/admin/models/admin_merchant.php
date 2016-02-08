@@ -511,7 +511,11 @@ class Admin_merchant_Model extends Model
 //                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 3 ");	        
 //                return $result;
                 $result = $this->db->select()->from("users")
+<<<<<<< HEAD
 		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
+=======
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+>>>>>>> tolulope
 		                  
 						   
 		return $result;
@@ -523,7 +527,11 @@ class Admin_merchant_Model extends Model
 //	    $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 1 ");
 //	    return $result;
             $result = $this->db->select()->from("users")
+<<<<<<< HEAD
 		  ->where(array("user_status" => 1 , "user_type" => 1))->get();
+=======
+		  ->where(array("user_status" => 1 , "user_type" => 1));
+>>>>>>> tolulope
 		                  
 						   
 		return $result;
@@ -720,16 +728,20 @@ class Admin_merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					//$conditions.="and city_id=".$post->city;
+                                    $conditions.="and city_id=".strip_tags(addslashes($post->city));
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						//$conditions.=" and gender=".$post->gender;
+                                    $conditions.=" and gender=".strip_tags(addslashes($post->gender));
+                                    
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					//$conditions.=" and age_range=".$post->age_range;
+                                    $conditions.=" and age_range=".strip_tags(addslashes($post->age_range));
 				}
 				
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -738,7 +750,11 @@ class Admin_merchant_Model extends Model
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
                                 $news = $this->db->select()->from("users")
+<<<<<<< HEAD
 		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
+=======
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+>>>>>>> tolulope
 		                  
 						   
 		return news;
@@ -747,7 +763,11 @@ class Admin_merchant_Model extends Model
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
 				 $news = $this->db->select()->from("users")
+<<<<<<< HEAD
 		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
+=======
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+>>>>>>> tolulope
 			}
 			$user_array1=array();
 			if(count($news) > 0){
@@ -892,7 +912,11 @@ class Admin_merchant_Model extends Model
 //			$news=$this->db->query("select * from  users where user_status=1 and user_type=3");
 //			return $news;
                          $news = $this->db->select()->from("users")
+<<<<<<< HEAD
 		                   ->where(array("user_status" => 1 , "user_type" => 3))->get();
+=======
+		                   ->where(array("user_status" => 1 , "user_type" => 3));
+>>>>>>> tolulope
                          return $news;
 		}
 		
@@ -912,7 +936,11 @@ class Admin_merchant_Model extends Model
 //		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
 //		return $sector_query;
                  $sector_query = $this->db->select()->from("sector")
+<<<<<<< HEAD
 		 ->where(array("sector_id" => $sector_id))->get();
+=======
+		 ->where(array("sector_id" => $sector_id));
+>>>>>>> tolulope
                  return $sector_query;
 	}	
 	

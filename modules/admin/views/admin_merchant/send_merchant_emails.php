@@ -104,7 +104,8 @@
 							 <?php } ?>
 							 <?php } else{
 								 $this->merchant = new Admin_merchant_Model();
-								 $this->user_per_filter=$this->merchant->get_user_list1(1,$_POST['city'],$_POST['gender'],$_POST['age_range']);
+								 //$this->user_per_filter=$this->merchant->get_user_list1(1,$_POST['city'],$_POST['gender'],$_POST['age_range']);
+                                                                 $this->user_per_filter=$this->merchant->get_user_list1(1,  strip_tags(addslashes($_POST['city'])),  strip_tags(addslashes($_POST['gender'])),  strip_tags(addslashes($_POST['age_range'])));
 								 
 								 ?>
 							 

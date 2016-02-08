@@ -9,7 +9,7 @@ include APPPATH."/vendor/twitter/EpiOAuth.php";
 include APPPATH."/vendor/twitter/EpiTwitter.php";
 include APPPATH."/vendor/twitter/secret.php";
 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-$oauth_token = $_GET['oauth_token'];
+$oauth_token = strip_tags(addslashes($_GET['oauth_token']));
         if($oauth_token == '')
   	  { 
 	  	$url = $twitterObj->getAuthorizationUrl();
@@ -19,7 +19,8 @@ $oauth_token = $_GET['oauth_token'];
           } 
 	else
 	  {
-		$twitterObj->setToken($_GET['oauth_token']);
+		//$twitterObj->setToken($_GET['oauth_token']);
+                $twitterObj->setToken(strip_tags(addslashes($_GET['oauth_token'])));
 		$token = $twitterObj->getAccessToken();
 		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);	  	
 		$_SESSION['ot'] = $token->oauth_token;

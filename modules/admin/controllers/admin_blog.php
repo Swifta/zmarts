@@ -30,7 +30,8 @@ class Admin_blog_Controller extends website_Controller
 		$this->add_blog="1";
 		if($_POST){ 
 
-			$this->userPost = $this->input->post();		
+			//$this->userPost = $this->input->post();	
+                        $this->userPost = strip_tags(addslashes($this->input->post()));		
 			$post = new Validation($_POST);
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 						
