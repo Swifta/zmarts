@@ -123,7 +123,7 @@ $content_text = array(
 
 "PRIVACY"=>"Privacy Policy",
 
-"FOOTER_COPYRIGHT" => "Copyright © 2015",
+"FOOTER_COPYRIGHT" => "Copyright &copy;".date("Y"),
 
 "FOOTER_ALLRIGHT" => "All rights reserved",
 
@@ -998,7 +998,7 @@ $content_text = array(
 
 "PLS_SEL_COUNTRY_FIR" => "Please select your country first",
 
-"PCPM" => "Password and Confirm Password Doesn't Match",
+"PCPM" => "Passwords do not Match",
 
 "BY_CLICKING_SUBMIT"=>"By clicking Sign Up you agree to $THIS_SITENAME",
 

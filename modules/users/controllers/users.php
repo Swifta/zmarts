@@ -189,9 +189,11 @@ class Users_Controller extends Layout_Controller {
                 $post = Validation::factory($_POST)
                                 ->add_rules('f_name', 'required')
                                 ->add_rules('email', 'required','valid::email', array($this, 'email_available'))
+                        ->add_rules('email_confirm', 'required','valid::email','matches[email]')
                                 ->add_rules('password', 'required','length[5,32]')
+                        ->add_rules('cpassword', 'required','valid::email','matches[password]')
                                 ->add_rules('gender', 'required')
-								->add_rules('age_range', 'required')
+				->add_rules('age_range', 'required')
                                  ->add_rules('country', 'required')
                                 ->add_rules('city', 'required');
 

@@ -554,7 +554,7 @@ $content_text = array(
 
 			"NO_MATCH_DEALS" => "No matching deals.",
 
-			"CITIES" => "Cities",
+			"CITIES" => "States",
 
 			"LINKS" => "Links",
 
@@ -3671,7 +3671,7 @@ $content_text = array(
 
 			"USER_TYP" =>"User Type",
 
-			"PRIM_CUST" =>"Prime Customer",
+			"PRIM_CUST" =>"Club Member",
 			
 			"LOCATION" => "Location",
 			

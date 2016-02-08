@@ -1752,12 +1752,16 @@ class Admin_merchant_Controller extends website_Controller {
 
 		             	if($status == 1){
 							//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-							unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    if($post->add_temp==1){
+					unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(1, $this->Lang['NEWS_SENT']);
 			        }
 			        else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+	                            if($post->add_temp==1){
+					unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 		       		 url::redirect(PATH."admin.html");
