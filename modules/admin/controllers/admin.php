@@ -54,8 +54,12 @@ class Admin_Controller extends website_Controller
 		}
 
 		if($_POST){
-			$email = trim($this->input->post("email"));
-			$password = $this->input->post("password");
+			  
+                          $email = strip_tags(addslashestrim(($this->input->post("email"))));
+			  $password = strip_tags(addslashes($this->input->post("password")));
+                          
+//                          $email = trim($this->input->post("email"));
+//			  $password = $this->input->post("password");
 			if($email){
 				$status = $this->admin->admin_login($email, $password);
 				if($status == 10){
@@ -2042,8 +2046,8 @@ class Admin_Controller extends website_Controller
 
 
 			if($post->validate()){
-				$subsector = $this->input->post("subsector");
- 				$cat_status = $this->input->post("status");
+				$subsector = htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8');
+ 				$cat_status = htmlspecialchars($this->input->post("status"),ENT_QUOTES,'UTF-8');;
  				//$cat_type = "2";
  				$type = "2";
 				$status = $this->admin->check_sub_sector($subsector, $cat_status, $cat_id,$type);

@@ -359,9 +359,9 @@ class Admin_products_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 	        if($_POST){
-	        $commission = $this->input->post('commission_status');
-	        $deal_key = $this->input->post('commission_deal_key');
-	        $deal_id = $this->input->post('commission_deal_id');
+	        $commission = strip_tags(addslashes($this->input->post('commission_status')));
+	        $deal_key = strip_tags(addslashes($this->input->post('commission_deal_key')));
+	        $deal_id = strip_tags(addslashes($this->input->post('commission_deal_id')));
 	                if($commission != ""){
 	                        $commission_deatils = $this->products->change_commission_data($commission, $deal_id);
 	                }

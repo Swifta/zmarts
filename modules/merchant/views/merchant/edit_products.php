@@ -312,7 +312,7 @@
             <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?></td>
         </tr>
         <tr>
-          <td><label>Discounted Price (<b>Prime Customers Only</b>)</label>
+          <td><label>Discounted Price (<b>Club Members Only</b>)</label>
             <span></span></td>
           <td><label>:</label></td>
           <td><?php if($u->deal_price!=0) { ?>

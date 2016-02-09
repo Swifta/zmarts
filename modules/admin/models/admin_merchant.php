@@ -720,16 +720,20 @@ class Admin_merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					//$conditions.="and city_id=".$post->city;
+                                    $conditions.="and city_id=".strip_tags(addslashes($post->city));
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						//$conditions.=" and gender=".$post->gender;
+                                    $conditions.=" and gender=".strip_tags(addslashes($post->gender));
+                                    
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					//$conditions.=" and age_range=".$post->age_range;
+                                    $conditions.=" and age_range=".strip_tags(addslashes($post->age_range));
 				}
 				
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");

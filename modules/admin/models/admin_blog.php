@@ -46,7 +46,9 @@ class Admin_blog_Model extends Model
 		                                }
 		                                else
 		                                {                                                 
-		                                        $this->db->query("UPDATE tags set tags_count=tags_count+1 where tags_name='$tags_name'");
+		                                        //$this->db->query("UPDATE tags set tags_count=tags_count+1 where tags_name='$tags_name'");
+                                                         $this->db->update("tags", array("tags_count" =>new Database_Expression('tags_count + 1')), array("tags_name" => $tags_name));
+                                                          
 		                                }
 		                        }     
 			}	

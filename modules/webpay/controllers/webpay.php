@@ -58,7 +58,7 @@ class Webpay_Controller extends Layout_Controller
             }
             die;
         }
-        
+             
         public function ajax_confirm(){
             //$transaction_id = "jTnUlW1RGrVUALj";
             if(isset($_POST['transaction_id'])){
