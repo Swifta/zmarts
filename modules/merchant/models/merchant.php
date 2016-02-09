@@ -5076,6 +5076,8 @@ class Merchant_Model extends Model
 
 	public function get_subsector_name($sector_id ='')
 	{
+		
+		$sector_id = addslashes($sector_id);
 		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
 		return $sector_query;
 	}

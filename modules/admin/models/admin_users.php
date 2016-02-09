@@ -331,9 +331,12 @@ class Admin_users_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-//                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
-//                return $result;
+//              $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
+//              return $result;
                 $result = $this->db->from("users")
                 ->where(array("user_status"=>1,"user_type !=" => 1))->get();
-                $result = $this->db->select()->from("users")
-                ->where(array("user_status"=>1,"user_type !=" => 1));
+				
+              /*  $result = $this->db->select()->from("users")
+                ->where(array("user_status"=>1,"user_type !=" => 1));*/
+	}
+}
