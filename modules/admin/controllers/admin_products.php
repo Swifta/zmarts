@@ -757,9 +757,9 @@ class Admin_products_Controller extends website_Controller
 	if($_POST){
                 $this->product_deatils = $this->products->get_product_data_mail($deal_key, $deal_id);
   		$this->userPost = $this->input->post();
-		$users = $this->input->post("users");
-		$fname = $this->input->post("firstname");
-		$email = trim($this->input->post("email"));
+		$users = strip_tags(addslashes($this->input->post("users")));
+		$fname = strip_tags(addslashes($this->input->post("firstname")));
+		$email = trim(strip_tags(addslashes($this->input->post("email"))));
 		$post = Validation::factory(array_merge($_POST,$_FILES))
 						
 						->add_rules('users', 'required')
