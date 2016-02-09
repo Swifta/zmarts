@@ -247,7 +247,7 @@
                 
                
                 <?php for($i=1; $i<=5; $i++){ ?>
-                <td style="float:left;>
+                <td style="float:left;">
 					<div class="merchant_store_img_edit">
 							<div class="popup">
 							<div class = "inputs">

@@ -92,7 +92,7 @@
 	<?php if(count($this->product_transaction_list)>0){
                 $parm="";
                 if(isset($_GET['param'])){
-                        $parm='&param='.$_GET['param'].'&sort='.$_GET['sort'];
+                        $parm='&param='.htmlspecialchars($_GET['param'], ENT_QUOTES,"UTF-8").'&sort='.htmlspecialchars($_GET['sort'], ENT_QUOTES,"UTF-8");
                 } ?>
 
                 <?php if($this->pagination !=""){ ?>
