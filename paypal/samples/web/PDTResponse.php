@@ -58,11 +58,11 @@ $httpParsedResponseAr = $ppResponseAr["httpParsedResponseAr"];
 
 		    <tr>
 			<td align="left">Transaction ID:</td>
-			<td align="left"><?php echo htmlspecialchars($_GET["tx"]) ?></td>
+			<td align="left"><?php echo htmlspecialchars($_GET["tx"]); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Currency Code: </td>
-			<td align="left"><?php echo urldecode(htmlspecialchars($_GET["cc"])) ?></td>
+			<td align="left"><?php echo urldecode(htmlspecialchars($_GET['cc'])); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Status:</td>

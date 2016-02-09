@@ -58,9 +58,9 @@ class Payment_Controller extends Layout_Controller {
 			        $referral_id = text::random($type = 'alnum', $length = 8);
 			        $this->signup=1;
 				        $from = CONTACT_EMAIL;
-				        $this->name=$_POST['f_name'];
-				        $this->email =$_POST['email'];
-				        $this->password =$_POST['password'];  
+				        $this->name = strip_tags(addslashes($_POST['f_name']));
+				        $this->email = strip_tags(addslashes($_POST['email']));
+				        $this->password = strip_tags(addslashes($_POST['password']));  
 				        $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
 				        $message = new View("themes/".THEME_NAME."/mail_template");
 				        if(EMAIL_TYPE==2){
