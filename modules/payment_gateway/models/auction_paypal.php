@@ -157,9 +157,13 @@ class Auction_Paypal_Model extends Model
 		 $total_pay_amount = ($deal_amount + $shipping_amount + $tax_amount); 
 		 $commission=(($deal_amount)*($commission_amount/100));
          $merchantcommission = $total_pay_amount - $commission ; 
-         $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+         /*$this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");*/
+		 
+		 $this->db->update("users", array("merchant_account_balance"=>new Database_Expression("merchant_account_balance + $merchantcommission")), array("user_type"=>3, "user_id"=>$merchant_id));
 
-	     $this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");
+	    /* $this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");*/
+		 
+		 $this->db->update("users", array("merchant_account_balance"=>new Database_Expression("merchant_account_balance + $total_pay_amount")), array("user_type"=>1));
 	
 		 $this->db->update("bidding",array("winning_status" => 2),array("bid_id" =>$bid_id,"user_id" =>$this->UserID,"auction_id" =>$deal_id));
 		 $this->db->update("auction",array("auction_status" => 2),array("deal_id" =>$deal_id)); // for check the auction is bought	
