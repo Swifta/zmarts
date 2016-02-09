@@ -495,6 +495,7 @@ class Admin_products_Controller extends website_Controller
 					/** PHPExcel_IOFactory */
 					include DOCROOT.'PHPExcel/Classes/PHPExcel/IOFactory.php';
 					$inputFileName = $path.$excel_name;
+					$inputFileName = realpath($inputFileName);
 					//echo 'Loading file ',pathinfo($inputFileName,PATHINFO_BASENAME),' using IOFactory to identify the format<br />';
 					$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
 					$data1 = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
