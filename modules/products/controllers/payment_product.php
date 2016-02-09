@@ -88,14 +88,14 @@ class Payment_product_Controller extends Layout_Controller {
 		else{
 			if($_POST){
 				$email = trim($this->input->post("email"));
-				$password = $this->input->post("password");
-				if(!$email || !$password){
+				$pswd = $this->input->post("password");
+				if(!$email || !$pswd){
 					 common::message(-1, $this->Lang["EMAIL_REQUIRED"]);
 				}
 				elseif(!valid::email($email)){
 					 common::message(-1, $this->Lang["INVAL_EMAIL"]);
 				} else {
-					$status = $this->users->login_users($email,$password);
+					$status = $this->users->login_users($email,$pswd);
 					if($status == 1){
 					    common::message(1, $this->Lang["SUCC_LOGIN"]);
 					    url::redirect(PATH.'cart.html');

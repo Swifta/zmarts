@@ -85,10 +85,10 @@ class Store_admin_Model extends Model
 
 	/** MERCHANT LOGIN **/
 
-	public function merchant_login($email = "", $password = "")
+	public function merchant_login($email = "", $pswd = "")
 	{
-		//$result=$this->db->query("SELECT * FROM users WHERE email = '$email' AND password ='".md5($password)."' AND user_type =9 ");
-                $result =$this->db->select()->from("users")->where(array("email" => $email, "password" => md5($password), "user_type"=> 9));
+		//$result=$this->db->query("SELECT * FROM users WHERE email = '$email' AND password ='".md5($pswd)."' AND user_type =9 ");
+                $result =$this->db->select()->from("users")->where(array("email" => $email, "password" => md5($pswd), "user_type"=> 9));
         if(count($result)>0){
 			if($result->current()->user_status == 1){
 				$store_admin_id = $result[0]->user_id;
@@ -607,11 +607,11 @@ class Store_admin_Model extends Model
 
 	/** ADD MERCHANT SHOP ACCOUNT **/
 
-	public function add_merchant_shop($post = "",$store_key = "",$password="")
+	public function add_merchant_shop($post = "",$store_key = "",$pswd="")
 	{
 			$website="http://".$post->website;
 			
-			$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->email,"password"=>md5($password),"user_type"=>9,"created_by"=>$this->user_id,"referred_user_id"=>$this->user_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile));
+			$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->email,"password"=>md5($pswd),"user_type"=>9,"created_by"=>$this->user_id,"referred_user_id"=>$this->user_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile));
 			
 			$stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'created_by'=>$this->user_id, 'store_type' => '2','merchant_id'=>$this->user_id,"created_date" => time(),"about_us"=>$post->about_us,"store_admin_id"=>$res->insert_id()));
 			$merchant_id = $stores_result->insert_id();
@@ -2575,7 +2575,7 @@ class Store_admin_Model extends Model
 
 	/** FORGOT PASSWORD **/
 
-	public function forgot_password($email = "", $password = "")
+	public function forgot_password($email = "", $pswd = "")
 	{
 
 		$email = trim($email);
@@ -2585,7 +2585,7 @@ class Store_admin_Model extends Model
 			$userid = $result->current()->user_id;
 			$name = $result->current()->firstname;
 			$email = $result->current()->email;
-			$this->db->update("users",array("password" => md5($password) ), array("user_id" => $userid));
+			$this->db->update("users",array("password" => md5($pswd) ), array("user_id" => $userid));
 			return 1;
 		}
 		else{
@@ -3223,10 +3223,10 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	/** ADD MODERATOR'S LIST **/
 	
-	public function add_moderator($post = "",$referral_id = "", $password = "")
+	public function add_moderator($post = "",$referral_id = "", $pswd = "")
 	{
 			$news_city = $post->city.",";
-			$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2','user_type'=>'8', "joined_date" => time(),"merchantid" =>$post->merchant_id));
+			$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2','user_type'=>'8', "joined_date" => time(),"merchantid" =>$post->merchant_id));
 			
 			$result_city = $this->db->select("city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 

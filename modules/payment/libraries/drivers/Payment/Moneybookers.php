@@ -94,7 +94,7 @@ class Payment_Moneybookers_Driver implements Payment_Driver
 		          ? $this->fields['test_pay_to_email'] // Test mode email
 		          : $this->fields['pay_to_email']; // Live email
 		          
-		$password = ($this->test_mode)
+		$pswd = ($this->test_mode)
 		          ? $this->fields['test_password'] // Test mode password
 		          : $this->fields['password']; // Live password
 
@@ -105,13 +105,13 @@ class Payment_Moneybookers_Driver implements Payment_Driver
 		if($this->fields['script'] == $config['refund_script'] && $this->fields['action'] == "prepare")
 		{
 			$this->fields['postdata']['email'] = $pay_to_email;
-			$this->fields['postdata']['password'] = md5($password);
+			$this->fields['postdata']['password'] = md5($pswd);
 			$this->fields['postdata']['trn_id'] = $this->fields['trn_id'];
 		}
 		elseif($this->fields['action'] == "prepare")
 		{
 			$this->fields['postdata']['email'] = $pay_to_email;
-			$this->fields['postdata']['password'] = md5($password);
+			$this->fields['postdata']['password'] = md5($pswd);
 			$this->fields['postdata']['amount'] = $this->fields['amount'];
 			$this->fields['postdata']['currency'] = $this->fields['currency'];
 			$this->fields['postdata']['frn_trn_id'] = $this->fields['trn_id'];
@@ -128,13 +128,13 @@ class Payment_Moneybookers_Driver implements Payment_Driver
 		elseif($this->fields['action'] == "status_od")
 		{
 			$this->fields['postdata']['email'] = $pay_to_email;
-			$this->fields['postdata']['password'] = md5($password);
+			$this->fields['postdata']['password'] = md5($pswd);
 			$this->fields['postdata']['trn_id'] = $this->fields['trn_id'];
 		}
 		elseif($this->fields['action'] == "status_trn")
 		{
 			$this->fields['postdata']['email'] = $pay_to_email;
-			$this->fields['postdata']['password'] = md5($password);
+			$this->fields['postdata']['password'] = md5($pswd);
 			$this->fields['postdata']['mb_trn_id'] = $this->fields['trn_id'];
 		}
 

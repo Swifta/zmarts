@@ -60,7 +60,7 @@ class email_Core {
 
 				// Do authentication, if part of the DSN
 				empty($config['options']['username']) or $connection->setUsername($config['options']['username']);
-				empty($config['options']['password']) or $connection->setPassword($config['options']['password']);
+				empty($config['options']['password']) or $connection->setPswd($config['options']['password']);
 
 				if ( ! empty($config['options']['auth']))
 				{

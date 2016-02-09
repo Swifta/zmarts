@@ -128,10 +128,10 @@ class TwitterOAuth {
    *                "screen_name" => "abraham",
    *                "x_auth_expires" => "0")
    */  
-  function getXAuthToken($username, $password) {
+  function getXAuthToken($username, $pswd) {
     $parameters = array();
     $parameters['x_auth_username'] = $username;
-    $parameters['x_auth_password'] = $password;
+    $parameters['x_auth_password'] = $pswd;
     $parameters['x_auth_mode'] = 'client_auth';
     $request = $this->oAuthRequest($this->accessTokenURL(), 'POST', $parameters);
     $token = OAuthUtil::parse_parameters($request);

@@ -11,7 +11,7 @@ class Admin_users_Model extends Model
 	
 	/** ADD USER'S LIST **/
 	
-        public function add_user($post = "",$referral_id = "", $password = "")
+        public function add_user($post = "",$referral_id = "", $pswd = "")
         {
 			if($post->unique_identifier !=""){ 
 				$user_auto_key = text::random($type = 'alnum', $length = 4);
@@ -19,7 +19,7 @@ class Admin_users_Model extends Model
 				$user_auto_key ="";
 			}
                	$news_city = $post->city.",";
-                $result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2', "joined_date" => time(),"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key));
+                $result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2', "joined_date" => time(),"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key));
                 
                 $result_city = $this->db->select("city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 

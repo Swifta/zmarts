@@ -106,15 +106,15 @@ class Payment_Controller extends Layout_Controller {
 				$url_title = $this->input->post("url");
 				$deal_key = $this->input->post("dealid");
 				$email = trim($this->input->post("email"));
-				$password = $this->input->post("password");
-				if(!$email || !$password){
+				$pswd = $this->input->post("password");
+				if(!$email || !$pswd){
 					 common::message(-1,$this->Lang["EMAIL_REQUIRED"]);
 				}
 				elseif(!valid::email($email)){
 					common::message(-1, $this->Lang["INVAL_EMAIL"]);
 				}
 				else{
-					$status = $this->users->login_users($email,$password);
+					$status = $this->users->login_users($email,$pswd);
 			
 					if($status == 1){
 					    url::redirect(PATH.'deal/payment_details/'.$deal_key.'/'.$url_title.'.html');

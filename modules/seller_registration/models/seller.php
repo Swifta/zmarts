@@ -66,7 +66,7 @@ class Seller_Model extends Model
 	    
 	    /** ADD MERCHANT ACCOUNT **/
 	
-	public function add_merchant($post = "",$store_key = "",$password="",$store_admin_password='')
+	public function add_merchant($post = "",$store_key = "",$pswd="",$store_admin_password='')
 	{ 
 	
 				try {
@@ -75,9 +75,9 @@ class Seller_Model extends Model
 		$result_country1 = $this->db->select("country_id")->from("city")->where(array("city_id" => $post->city ))->limit(1)->get(); 
 		// for store country value
 			$country_value1 = $result_country1->current()->country_id;
-			//$password = text::random($type = 'alnum', $length = 8);
+			//$pswd = text::random($type = 'alnum', $length = 8);
 
-			$result = $this->db->insert("users", array("firstname" => $this->session->get('firstname'),"lastname" => $this->session->get('lastname'), "email" =>$this->session->get('memail'),'password' => md5($password),"payment_account_id" =>$this->session->get("merchant_reg_nuban"),
+			$result = $this->db->insert("users", array("firstname" => $this->session->get('firstname'),"lastname" => $this->session->get('lastname'), "email" =>$this->session->get('memail'),'password' => md5($pswd),"payment_account_id" =>$this->session->get("merchant_reg_nuban"),
                             'address1' => $this->session->get('mraddress1'), 'address2' => $this->session->get('mraddress2'), 'city_id' =>$post->city, 'country_id' => $country_value1, 
                             'phone_number' => $this->session->get('mphone_number'), 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),"user_status" =>0,"approve_status" => 0,"user_sector_id" =>$this->session->get('sector'),
                             "user_sub_sector_id" =>$this->session->get("sub_sector"), "nuban"=>  $this->session->get("merchant_reg_nuban")));

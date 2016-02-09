@@ -56,12 +56,12 @@ class Admin_Controller extends website_Controller
 		if($_POST){
 			  
                           $email = strip_tags(addslashestrim(($this->input->post("email"))));
-			  $password = strip_tags(addslashes($this->input->post("password")));
+			  $pswd = strip_tags(addslashes($this->input->post("password")));
                           
 //                          $email = trim($this->input->post("email"));
-//			  $password = $this->input->post("password");
+//			  $pswd = $this->input->post("password");
 			if($email){
-				$status = $this->admin->admin_login($email, $password);
+				$status = $this->admin->admin_login($email, $pswd);
 				if($status == 10){
 				    common::message(1, $this->Lang["LOGIN_SUCCESS"] );
 					url::redirect(PATH."admin.html");
@@ -1241,9 +1241,9 @@ class Admin_Controller extends website_Controller
 
     /** CHECK PASSWORD EXIST **/
 
-	public function check_password($password = "")
+	public function check_password($pswd = "")
 	{
-		$exist = $this->admin->exist_password($password, $this->user_id);
+		$exist = $this->admin->exist_password($pswd, $this->user_id);
 		return $exist;
 	}
 

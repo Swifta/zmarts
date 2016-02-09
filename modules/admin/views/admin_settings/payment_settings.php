@@ -162,7 +162,7 @@
                     <td style="width: 200px;"><label><?php echo $this->Lang['PAL_API_PSWD']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td><input type="text" name="Paypal_API_Password" maxlength="32"   value="<?php echo $general->paypal_api_password; ?>"/>
-                    <em><?php if(isset($this->form_error["Paypal_API_Password"])){ echo $this->form_error["Paypal_API_Password"]; }?></em></td>
+                    <em><?php if(isset($this->form_error["Paypal_API_Pswd"])){ echo $this->form_error["Paypal_API_Pswd"]; }?></em></td>
                 </tr>
                 
 		        <tr>

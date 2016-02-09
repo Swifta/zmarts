@@ -39,7 +39,7 @@ class Email{
 
 					$transport = Swift_SmtpTransport::newInstance('smtp.sendgrid.net', 587);
 					$transport ->setUsername("ndot");
-					$transport ->setPassword("whiter34");
+					$transport ->setPswd("whiter34");
 
 					$swift = Swift_Mailer::newInstance($transport);
 					$message = new Swift_Message($subject);
@@ -346,7 +346,7 @@ class Email{
 
 		$transport ->setUsername(SMTP_USERNAME);
 
-		$transport ->setPassword(SMTP_PASSWORD);
+		$transport ->setPswd(SMTP_PASSWORD);
 		$swift = Swift_Mailer::newInstance($transport);
 
 		$message = new Swift_Message($subject);
@@ -446,7 +446,7 @@ public function sendgrid_attach1($receiver= "", $subject = "", $message = "", $f
 
 		$transport ->setUsername(SMTP_USERNAME);
 
-		$transport ->setPassword(SMTP_PASSWORD);
+		$transport ->setPswd(SMTP_PASSWORD);
 		$swift = Swift_Mailer::newInstance($transport);
 
 		$message = new Swift_Message($subject);
@@ -509,7 +509,7 @@ public function sendgrid_attach1($receiver= "", $subject = "", $message = "", $f
 
 		$transport = Swift_SmtpTransport::newInstance(SMTP_HOST, SMTP_PORT);
 		$transport ->setUsername(SMTP_USERNAME);
-		$transport ->setPassword(SMTP_PASSWORD);
+		$transport ->setPswd(SMTP_PASSWORD);
 		$swift = Swift_Mailer::newInstance($transport);
 
 		$message = new Swift_Message($subject);
