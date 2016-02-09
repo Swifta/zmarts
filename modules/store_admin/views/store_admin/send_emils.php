@@ -102,8 +102,11 @@
 							 <li><input type="checkbox" name="email[]" class="case" value="<?php echo $users->email.'__'.$users->firstname;?>" <?php if(!isset($this->form_error['email']) && isset($_POST['email'])){  if($_POST['email'] == $users->email){ ?>checked<?php } } ?> /><span><?php echo $users->email;?></span></li>
 							 <?php } ?>
 							 <?php } else{
-								// $this->user_per_filter=$this->merchant->get_user_list1(1,$_POST['city'],$_POST['gender'],$_POST['age_range']);
-								  $this->user_per_filter=$this->merchant->get_user_list1(1,  strip_tags(addslashes($_POST['city'])),  strip_tags(addslashes($_POST['gender'])),  strip_tags(addslashes($_POST['age_range'])));
+								 $city = $this->input->post('city');
+								 $gender = $this->input->post('gender');
+								 $age_range = $this->input->post('age_range');
+								 $this->user_per_filter=$this->merchant->get_user_list1(1, $city,$gender, $age_range);
+								 
 								 ?>
 							 
 								<li><input type="checkbox" name="email" onclick="checkboxcheckAllUsers(&#39;settings_newsletter&#39;,&#39;email&#39;)" /><span>Select all</span></li>

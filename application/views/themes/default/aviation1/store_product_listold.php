@@ -2,7 +2,6 @@
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>js/timer/kk_countdown_1_2_jquery_min_detail.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<<<<<<< HEAD
 <style>
 .center {
      float: none;
@@ -155,10 +154,7 @@
         <!-- Category-->
         <?php
 $font_color = "#000000";
-=======
-<?php
 $font_color = "";
->>>>>>> branch 'test' of https://github.com/Swifta/zmarts
 $bg_color ="";
 $font_size ="";
 if(count($this->merchant_personalised_details)>0) { 

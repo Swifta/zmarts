@@ -518,15 +518,15 @@ class Auction_Controller extends Layout_Controller
 	{
 		//$this->template->javascript .= html::script(array(PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js'));
 		if($_POST){
-				$this->current_bid_value = $this->input->post('bid_value');
-				$this->deal_value = $this->input->post('bid_deal_value');
-				$this->deal_id = $this->input->post('bid_deal_id');
-				$this->deal_key = $this->input->post('bid_deal_key');
-				$this->bid_title = $this->input->post('bid_title');
-				$this->url_title = $this->input->post('bid_url_title');
-				$this->end_time = $this->input->post('end_time');
-				$this->shipping_amount = $this->input->post('shipping_amount');
-				$this->store_url = $this->input->post('store_url');
+				$this->current_bid_value = strip_tags(addslashes($this->input->post('bid_value')));
+				$this->deal_value = strip_tags(addslashes($this->input->post('bid_deal_value')));
+				$this->deal_id = strip_tags(addslashes($this->input->post('bid_deal_id')));
+				$this->deal_key = strip_tags(addslashes($this->input->post('bid_deal_key')));
+				$this->bid_title = strip_tags(addslashes($this->input->post('bid_title')));
+				$this->url_title = strip_tags(addslashes($this->input->post('bid_url_title')));
+				$this->end_time = strip_tags(addslashes($this->input->post('end_time')));
+				$this->shipping_amount = strip_tags(addslashes($this->input->post('shipping_amount')));
+				$this->store_url = strip_tags(addslashes($this->input->post('store_url')));
 				if($this->end_time > time()){
 
 				$status = $this->deals->insert_bidding(arr::to_object($_POST)); //insert the bidding details
@@ -650,11 +650,13 @@ class Auction_Controller extends Layout_Controller
 		$aResponse['server'] = '';
 			if(isset($_POST['action']) && $this->UserID)
 			{
+                            //htmlspecialchars($result_set, ENT_QUOTES, “UTF-8”));
 				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
 				{
 						$id = intval($_POST['idBox']);
 						$rate = floatval($_POST['rate']);
-						$deal_id=$_POST['deal_id'];
+						//$deal_id=$_POST['deal_id'];
+                                                $deal_id= htmlspecialchars($_POST['deal_id'], ENT_QUOTES, "UTF-8");
 						$success = true;
 						if($success)
 						{

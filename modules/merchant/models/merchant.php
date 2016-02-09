@@ -96,6 +96,7 @@ class Merchant_Model extends Model
 
 	public function merchant_login($email = "", $password = "")
 	{
+			   $password = addslashes($email);
                $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)");
                //echo count($result); die;
@@ -3136,7 +3137,7 @@ class Merchant_Model extends Model
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "AccountNumber" => $post->AccountNumber, "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
 		return 1;
 	}
 	
@@ -3628,6 +3629,12 @@ class Merchant_Model extends Model
 	
 	public function get_user_list1($all_users="",$city="",$gender="",$age_range="")
 	{
+		
+			$city = addslashes($post->city);
+			$gender = addslashes($post->gender);
+			$age_range = addslashes($post->age_range);
+			
+			
 		if($city==0)
 		{
 			$city="";
@@ -3658,12 +3665,12 @@ class Merchant_Model extends Model
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=4 ";
+					$conditions.=" and gender='".$gender."' and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=4 ";
+				$conditions.=" and age_range='".$age_range."' and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where user_status=1 $conditions group by transaction.user_id");
@@ -3683,6 +3690,10 @@ class Merchant_Model extends Model
 
 	public function send_newsletter($post="",$file="",$logo='')
 	{
+			$city = addslashes($post->city);
+			$gender = addslashes($post->gender);
+			$age_range = addslashes($post->age_range);
+			
 		$conditions="";
 		
 		if(!isset($post->email)){
@@ -3695,16 +3706,16 @@ class Merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					$conditions.="and city_id='".$city."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						$conditions.=" and gender='".$gender."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					$conditions.=" and age_range='".$age_range."'";
 				}
 				
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -4632,6 +4643,11 @@ class Merchant_Model extends Model
 
 	public function send_moderator_newsletter($post="",$file="",$type="")
 	{
+	
+		$city = addslashes($post->city);
+		$gender = addslashes($post->gender);
+		$age_range = addslashes($post->age_range);
+		
 		$conditions="";
 		
 		if(!isset($post->email)){
@@ -4644,16 +4660,16 @@ class Merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					$conditions.="and city_id='".$city."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						$conditions.=" and gender='".$gender."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					$conditions.=" and age_range='".$age_range."'";
 				}
 				
                                 //$news = $this->db->select()->from("users")
@@ -4763,6 +4779,13 @@ class Merchant_Model extends Model
 	}
 	public function get_mercahnt_list1($all_users="",$city="",$gender="",$age_range="")
 	{
+		
+		$city = addslashes($city);
+		$gender = addslashes($gender);
+		$age_range = addslashes($age_range);
+		$all_users = addslashes($all_users);
+		
+		
 		if($city==0)
 		{
 			$city="";
@@ -4788,16 +4811,16 @@ class Merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".$city." and user_type=8 ";
+				$conditions.="and city_id='".$city."' and user_type=8 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=8 ";
+					$conditions.=" and gender='".$gender."' and user_type=8 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=8 ";
+				$conditions.=" and age_range='".$age_range."' and user_type=8 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -4816,7 +4839,12 @@ class Merchant_Model extends Model
 	/** NEWSLETTER SEND **/
 
 	public function send_merchant_newsletter($post="",$file="",$type='')
+	
 	{
+		$city = addslashes($post->city);
+		$gender = addslashes($post->gender);
+		$age_range = addslashes($post->age_range);
+		
 		$conditions="";
 		
 		if(!isset($post->email)){
@@ -4829,16 +4857,16 @@ class Merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					$conditions.="and city_id='".$city."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						$conditions.=" and gender='".$gender."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					$conditions.=" and age_range='".$age_range."'";
 				}
 				
 				$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where user_status=1 and product.merchant_id=$this->user_id1 $conditions group by transaction.user_id");
@@ -4851,7 +4879,7 @@ class Merchant_Model extends Model
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where user_status=1 and product.merchant_id=$this->user_id1 and user_type=4 group by transaction.user_id");
+				$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where user_status=1 and product.merchant_id='$this->user_id1' and user_type=4 group by transaction.user_id");
 				
 			}
 			$user_array1=array();
@@ -4945,6 +4973,12 @@ class Merchant_Model extends Model
 	
 	public function get_mercahnt_user_list1($all_users="",$city="",$gender="",$age_range="")
 	{
+		$city = addslashes($city);
+		$gender = addslashes($gender);
+		$age_range = addslashes($age_range);
+		$all_users = addslashes($all_users);
+		
+		
 		if($city==0)
 		{
 			$city="";
@@ -4971,16 +5005,16 @@ class Merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and users.city_id=".$city." and users.user_type=4 ";
+				$conditions.="and users.city_id='".$city."' and users.user_type=4 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and users.gender=".$gender." and users.user_type=4 ";
+					$conditions.=" and users.gender='".$gender."' and users.user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and users.age_range=".$age_range." and users.user_type=4 ";
+				$conditions.=" and users.age_range='".$age_range."' and users.user_type=4 ";
 			}
 			
 			$news=$this->db->query("select users.email,users.firstname,users.user_id from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where users.user_status=1 and product.merchant_id =$this->user_id1 $conditions group by transaction.user_id");

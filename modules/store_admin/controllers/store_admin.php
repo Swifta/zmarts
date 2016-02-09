@@ -49,8 +49,11 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			
 		
-			$email = trim($this->input->post("email"));
-			$password = $this->input->post("password");
+//			$email = trim($this->input->post("email"));
+//			$password = $this->input->post("password");
+//                        
+                       $email =  strip_tags(addslashes(trim($this->input->post("email"))));
+			$password = strip_tags(addslashes($this->input->post("password")));
 			if($email){
 				
 				$status = $this->merchant->merchant_login($email, $password);
@@ -3042,14 +3045,14 @@ class Store_admin_Controller extends website_Controller
 	{
 		$this->captcha = new Captcha;
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
 				
 				->add_rules('email', 'required','valid::email')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
-				$email = trim($this->input->post("email"));
+				$email = strip_tags(addslashes(trim($this->input->post("email"))));
 				if(Captcha::valid($this->input->post('captcha'))){
 				        $password = text::random($type = 'alnum', $length = 10);
 					$status = $this->merchant->forgot_password($email,$password);

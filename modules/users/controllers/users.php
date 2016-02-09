@@ -264,9 +264,9 @@ class Users_Controller extends Layout_Controller {
 					@Live
 				  */
 				  if($_POST){
-				  $email = $this->input->post('email');
-				  $password = $this->input->post('password');
-				  $url_redirect = $this->input->post('url');
+				  $email = htmlspecialchars($this->input->post('email'), ENT_QUOTES,'UTF-8');
+                                  $password = htmlspecialchars($this->input->post('password'), ENT_QUOTES,'UTF-8');
+				  $url_redirect = htmlspecialchars($this->input->post('url'), ENT_QUOTES,'UTF-8');
 				  
 				 
 				  

@@ -2046,8 +2046,8 @@ class Admin_Controller extends website_Controller
 
 
 			if($post->validate()){
-				$subsector = $this->input->post("subsector");
- 				$cat_status = $this->input->post("status");
+				$subsector = htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8');
+ 				$cat_status = htmlspecialchars($this->input->post("status"),ENT_QUOTES,'UTF-8');;
  				//$cat_type = "2";
  				$type = "2";
 				$status = $this->admin->check_sub_sector($subsector, $cat_status, $cat_id,$type);

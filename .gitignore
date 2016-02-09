@@ -24,4 +24,4 @@ application/logs/*
 !bootstrap/themes/images/**
 !custom/images/**
 !themes/default/**
-/nbproject/private/
+/images/

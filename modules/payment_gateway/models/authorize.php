@@ -117,8 +117,11 @@ class Authorize_Model extends Model
 			
 		 $purchase_count_total = $purchase_qty + $qty;
 	     $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		 $this->db->query("update users set user_referral_balance = user_referral_balance - $ref_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");
-		 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1");
+		/* $this->db->query("update users set user_referral_balance = user_referral_balance - $ref_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");*/
+		 
+		 $this->db->update("users", array("user_referral_balance"=>new Database_Expression("user_referral_balance - $ref_amount"), "deal_bought_count"=>new Database_Expression("deal_bought_count + $qty")), array("user_id"=>$this->UserID));
+		/* $this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1");*/
+		 $this->db->update("users", array("merchant_account_balance" =>new Database_Expression("merchant_account_balance + $amount")), array("user_type"=>$amount));
 
 		return $trans_ID;
 	}
@@ -239,7 +242,9 @@ class Authorize_Model extends Model
 	 $total_pay_amount = ($pay_amount + $shipping_amount + $tax_amount); 
 	 $commission=(($pay_amount)*($commission_amount/100));
          $merchantcommission = $total_pay_amount - $commission ; 
-         $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+        /* $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");*/
+		 
+		 $this->db->update("users", array("merchant_account_balance"=>new Database_Expression("merchant_account_balance + $merchantcommission")), array("user_type"=>3, "user_id" => $merchant_id));
 
 		// $purchase_count_total = $purchase_qty + $qty;     
 
@@ -247,7 +252,9 @@ class Authorize_Model extends Model
 
 		//$purchase_count_total = $purchase_qty + $qty;
 	   // $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");
+		/*$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");*/
+		
+		$this->db->update("users",array("merchant_account_balance"=>new Database_Expression("merchant_account_balance+$total_pay_amount")),array("user_type"=>1));
 
 		 $this->db->update("bidding",array("winning_status" => 2),array("bid_id" =>$bid_id,"user_id" =>$this->UserID,"auction_id" =>$deal_id));
 		 $this->db->update("auction",array("auction_status" => 2),array("deal_id" =>$deal_id));  // for check the auction is bought

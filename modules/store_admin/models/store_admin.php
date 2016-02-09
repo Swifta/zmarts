@@ -3471,12 +3471,12 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=4 ";
+					$conditions.=" and gender='".strip_tags(addslashes($gender))."' and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=4 ";
+				$conditions.=" and age_range='".strip_tags(addslashes($age_range))."' and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
