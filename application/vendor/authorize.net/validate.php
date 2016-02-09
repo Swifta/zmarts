@@ -21,7 +21,7 @@ if($_POST){
         $USERID = $userid = $_SESSION['userid'];
 	if($_POST['ref_amt2'] > 0) { 
 
-     $user = "SELECT * FROM coupons_users where userid='$USERID'";
+     $user = "SELECT * FROM coupons_users where userid='".intval($USERID)."'";
                 
                 $userSet = mysql_query($user);
                 while($r = mysql_fetch_array($userSet)) 
@@ -96,7 +96,7 @@ if($_POST){
 				}
 			}
 	
-                        $user = "SELECT * FROM coupons_users where userid='$USERID'";
+                        $user = "SELECT * FROM coupons_users where userid='".intval($USERID)."'";
                         
                         $userSet = mysql_query($user);
                         while($r = mysql_fetch_array($userSet)) 
@@ -116,7 +116,8 @@ if($_POST){
 			$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
 					//get the coupon value of the coupon and verify the amount
 			
-			$coupon_details = mysql_query("select * from coupons_coupons where coupon_id='$COUPONID'");	
+			$coupon_details = mysql_query("select * from coupons_coupons where coupon_id='".
+                        strip_tags(addslashes($COUPONID))."'");	
 			if(mysql_num_rows($coupon_details) > 0)
 			{
 			        while($coupon_info = mysql_fetch_array($coupon_details))
@@ -129,7 +130,12 @@ if($_POST){
 			
 			
 			
-		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('$PAYERID','$PAYERSTATUS','Success', '$COUNTRYCODE', '$COUPONID', '$FIRSTNAME', '$LASTNAME', '$TRANSACTIONID', '$L_QTY0', '$USERID', '$EMAIL','0','$CORRELATIONID','auth_only','cc',now(),'','Success','1','0','$REFERRAL_AMOUNT')";
+		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('".
+                       strip_tags(addslashes($PAYERID))."','".strip_tags(addslashes($PAYERSTATUS))."','Success', '".strip_tags(addslashes($COUNTRYCODE)).
+                               "', '".strip_tags(addslashes($COUPONID))."', '".strip_tags(addslashes($FIRSTNAME))."', '".strip_tags(addslashes($LASTNAME)).
+                               "', '".strip_tags(addslashes($TRANSACTIONID))."', '".strip_tags(addslashes($L_QTY0))."', '".strip_tags(addslashes($USERID)).
+                               "', '".strip_tags(addslashes($EMAIL))."','0','".strip_tags(addslashes($CORRELATIONID))."','auth_only','cc',now(),'','Success','1','0','".
+                               strip_tags(addslashes($REFERRAL_AMOUNT))."')";
 			require_once(DOCUMENT_ROOT."/system/includes/dboperations.php");	
 			$resultSet = mysql_query($queryString);
 			$_SESSION['txn_id'] = $txnid = mysql_insert_id();
@@ -366,7 +372,11 @@ if($_POST){
 			
 			
 			
-		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('$PAYERID','$PAYERSTATUS','Success', '$COUNTRYCODE', '$COUPONID', '$FIRSTNAME', '$LASTNAME', '$TRANSACTIONID', '$L_QTY0', '$USERID', '$EMAIL','0','$CORRELATIONID','auth_only','cc',now(),'','Success','1','0','$REFERRAL_AMOUNT')";
+		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('".
+                       strip_tags(addslashes($PAYERID))."','".strip_tags(addslashes($PAYERSTATUS))."','Success', '".strip_tags(addslashes($COUNTRYCODE))."', '".
+                               strip_tags(addslashes($COUPONID))."', '".strip_tags(addslashes($FIRSTNAME))."', '".strip_tags(addslashes($LASTNAME))."', '".strip_tags(addslashes($TRANSACTIONID)).
+                               "', '".strip_tags(addslashes($L_QTY0))."', '".strip_tags(addslashes($USERID))."', '".strip_tags(addslashes($EMAIL))."','0','".strip_tags(addslashes($CORRELATIONID)).
+                               "','auth_only','cc',now(),'','Success','1','0','".strip_tags(addslashes($REFERRAL_AMOUNT))."')";
 			require_once(DOCUMENT_ROOT."/system/includes/dboperations.php");	
 			$resultSet = mysql_query($queryString);
 			$_SESSION['txn_id'] = $txnid = mysql_insert_id();
