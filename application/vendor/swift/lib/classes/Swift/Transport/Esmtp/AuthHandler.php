@@ -37,7 +37,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
    * @var string
    * @access private
    */
-  private $_password;
+  private $_pswd;
   
   /**
    * The auth mode for authentication.
@@ -100,11 +100,11 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   
   /**
    * Set the password to authenticate with.
-   * @param string $password
+   * @param string $pswd
    */
-  public function setPassword($password)
+  public function setPswd($pswd)
   {
-    $this->_password = $password;
+    $this->_pswd = $pswd;
   }
   
   /**
@@ -113,7 +113,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
    */
   public function getPassword()
   {
-    return $this->_password;
+    return $this->_pswd;
   }
   
   /**
@@ -167,7 +167,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
           array_map('strtolower', $this->_esmtpParams)))
         {
           $count++;
-          if ($authenticator->authenticate($agent, $this->_username, $this->_password))
+          if ($authenticator->authenticate($agent, $this->_username, $this->_pswd))
           {
             return;
           }
@@ -221,7 +221,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
    */
   public function exposeMixinMethods()
   {
-    return array('setUsername', 'getUsername', 'setPassword', 'getPassword', 'setAuthMode', 'getAuthMode');
+    return array('setUsername', 'getUsername', 'setPswd', 'getPassword', 'setAuthMode', 'getAuthMode');
   }
   
   /**

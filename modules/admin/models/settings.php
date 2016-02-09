@@ -58,14 +58,14 @@ class Settings_Model extends Model
 	
 	public function sendgrid_mailer_settings($post = "")
 	{ 	 	 	
-		$result = $this->db->update("email_settings",array("sendgrid_host" => $post->smtp_host, "sendgrid_port" => $post->smtp_port, "sendgrid_username" => $post->smtp_username, "sendgrid_password" => $post->smtp_password), array("status" => 1));
+		$result = $this->db->update("email_settings",array("sendgrid_host" => $post->smtp_host, "sendgrid_port" => $post->smtp_port, "sendgrid_username" => $post->smtp_username, "sendgrid_password" => $post->smtp_pswd), array("status" => 1));
 		return 1;
 	}
 	/** UPDATE SMTP EMAIL SETTING **/
 	
 	public function smtp_mailer_settings($post = "")
 	{ 	 	 	
-		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_password" => $post->password), array("status" => 1));
+		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_pswd" => $post->password), array("status" => 1));
 		return 1;
 	}
 	/** UPDATE SMTP EMAIL SETTING **/

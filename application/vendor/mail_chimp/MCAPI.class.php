@@ -2309,17 +2309,17 @@ class MCAPI {
      * @example mcapi_apikeyAdd.php
      * 
      * @param string $username Your MailChimp user name
-     * @param string $password Your MailChimp password
+     * @param string $pswd Your MailChimp password
      * @param boolean $expired optional - whether or not to include expired keys, defaults to false
      * @return array an array of API keys including:
      * @returnf string apikey The api key that can be used
      * @returnf string created_at The date the key was created
      * @returnf string expired_at The date the key was expired
      */
-    function apikeys($username, $password, $expired=false) {
+    function apikeys($username, $pswd, $expired=false) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $password;
+        $params["password"] = $pswd;
         $params["expired"] = $expired;
         return $this->callServer("apikeys", $params);
     }
@@ -2331,14 +2331,14 @@ class MCAPI {
      * @example xml-rpc_apikeyAdd.php
      *
      * @param string $username Your MailChimp user name
-     * @param string $password Your MailChimp password
+     * @param string $pswd Your MailChimp password
      * @return string a new API Key that can be immediately used.
 
      */
-    function apikeyAdd($username, $password) {
+    function apikeyAdd($username, $pswd) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $password;
+        $params["password"] = $pswd;
         return $this->callServer("apikeyAdd", $params);
     }
 
@@ -2353,13 +2353,13 @@ class MCAPI {
      * @example xml-rpc_apikeyExpire.php
      *
      * @param string $username Your MailChimp user name
-     * @param string $password Your MailChimp password
+     * @param string $pswd Your MailChimp password
      * @return boolean true if it worked, otherwise an error is thrown.
      */
-    function apikeyExpire($username, $password) {
+    function apikeyExpire($username, $pswd) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $password;
+        $params["password"] = $pswd;
         return $this->callServer("apikeyExpire", $params);
     }
 

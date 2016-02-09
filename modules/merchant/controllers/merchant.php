@@ -52,9 +52,9 @@ class Merchant_Controller extends website_Controller
 		}
 		if($_POST){
 			$email = $this->input->post("email");
-			$password = $this->input->post("password");
+			$pswd = $this->input->post("password");
 			if($email){
-				$status = $this->merchant->merchant_login($email, $password);
+				$status = $this->merchant->merchant_login($email, $pswd);
 				
 				
 				if($status == 10 || $status == 11){
@@ -836,11 +836,11 @@ class Merchant_Controller extends website_Controller
 			if($post->validate())
 			{
 				$store_key = text::random($type = 'alnum', $length = 8);
-				$password = text::random($type = 'alnum', $length = 10);
+				$pswd = text::random($type = 'alnum', $length = 10);
 				$storename = $this->input->post("storename");
-				$status = $this->merchant->add_merchant_shop(arr::to_object($this->userPost),$store_key,$password);
+				$status = $this->merchant->add_merchant_shop(arr::to_object($this->userPost),$store_key,$pswd);
 				if($status){
-					$this->password = $password;
+					$this->password = $pswd;
 					$this->email = $_POST['email'];
 					$from = CONTACT_EMAIL;
 					$this->name = $_POST['username'];
@@ -1517,9 +1517,9 @@ class Merchant_Controller extends website_Controller
 
         /** CHECK PASSWORD EXIST **/
 
-	public function check_password($password = "")
+	public function check_password($pswd = "")
 	{
-		$exist = $this->merchant->exist_password($password, $this->user_id);
+		$exist = $this->merchant->exist_password($pswd, $this->user_id);
 		return $exist;
 	}
 
@@ -4016,11 +4016,11 @@ class Merchant_Controller extends website_Controller
 				
 				
 				
-				    $password = $_POST['pass1'];
-					$status = $this->merchant->reset_password($email,$password);
+				    $pswd = $_POST['pass1'];
+					$status = $this->merchant->reset_password($email,$pswd);
 					
 						if($status == 1){
-								$status = $this->merchant->merchant_login($email, $password);
+								$status = $this->merchant->merchant_login($email, $pswd);
 								
 								if($status == 10 || $status == 11){
 										common::message(1, "Congratulations! You have successfully reset your password." );
@@ -4065,9 +4065,9 @@ class Merchant_Controller extends website_Controller
 			if($post->validate()){
 				$email = $this->input->post("email");
 				if(Captcha::valid($this->input->post('captcha'))){
-				        $password = text::random($type = 'alnum', $length = 10);
+				        $pswd = text::random($type = 'alnum', $length = 10);
 						
-					$status = $this->merchant->forgot_password($email,$password);
+					$status = $this->merchant->forgot_password($email,$pswd);
 						if($status == 1){				
 						        
 					        $users = $this->merchant->get_user_details_list($email);
@@ -4079,7 +4079,7 @@ class Merchant_Controller extends website_Controller
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->password = $password;
+						$this->password = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 
@@ -5196,13 +5196,13 @@ class Merchant_Controller extends website_Controller
 						->add_rules('city', 'required');
 			if($post->validate()){
 				$referral_id = text::random($type = 'alnum', $length = 8);
-				$password = text::random($type = 'alnum', $length = 8);
-				$status = $this->merchant->add_moderator(arr::to_object($this->userPost),$referral_id,$password);
+				$pswd = text::random($type = 'alnum', $length = 8);
+				$status = $this->merchant->add_moderator(arr::to_object($this->userPost),$referral_id,$pswd);
 				if($status == 1){
 					$from = CONTACT_EMAIL;    						
 					$this->admin_signup_moderator = "1";
 					$this->email = $post->email;
-					$this->password = $password;
+					$this->password = $pswd;
 					$this->name =$post->firstname;
 					$this->moderator = "1";
                       $data = array(

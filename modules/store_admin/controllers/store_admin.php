@@ -50,13 +50,13 @@ class Store_admin_Controller extends website_Controller
 			
 		
 //			$email = trim($this->input->post("email"));
-//			$password = $this->input->post("password");
+//			$pswd = $this->input->post("password");
 //                        
                        $email =  strip_tags(addslashes(trim($this->input->post("email"))));
-			$password = strip_tags(addslashes($this->input->post("password")));
+			$pswd = strip_tags(addslashes($this->input->post("password")));
 			if($email){
 				
-				$status = $this->merchant->merchant_login($email, $password);
+				$status = $this->merchant->merchant_login($email, $pswd);
 				
 				if($status == 10){
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
@@ -745,9 +745,9 @@ class Store_admin_Controller extends website_Controller
 	
         /** CHECK PASSWORD EXIST **/
 
-	public function check_password($password = "")
+	public function check_password($pswd = "")
 	{
-		$exist = $this->merchant->exist_password($password, $this->store_admin_id);
+		$exist = $this->merchant->exist_password($pswd, $this->store_admin_id);
 		return $exist;
 	}
 
@@ -3054,8 +3054,8 @@ class Store_admin_Controller extends website_Controller
 			if($post->validate()){
 				$email = strip_tags(addslashes(trim($this->input->post("email"))));
 				if(Captcha::valid($this->input->post('captcha'))){
-				        $password = text::random($type = 'alnum', $length = 10);
-					$status = $this->merchant->forgot_password($email,$password);
+				        $pswd = text::random($type = 'alnum', $length = 10);
+					$status = $this->merchant->forgot_password($email,$pswd);
 						if($status == 1){				
 						        
 					        $users = $this->merchant->get_user_details_list($email);
@@ -3067,7 +3067,7 @@ class Store_admin_Controller extends website_Controller
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->password = $password;
+						$this->password = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 
