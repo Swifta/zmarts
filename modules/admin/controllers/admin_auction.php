@@ -246,8 +246,8 @@ class Admin_auction_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($d->payment_status=="Failed"){ $status=$this->Lang["FAILED"]; }
 						
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }

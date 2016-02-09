@@ -186,7 +186,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                    <div class="">
                     <div class="">
                     <div class="">
-<!--                        <h1><?php echo $this->Lang['FORGOT_PASS']; ?></h1>-->
+<!--                        <h1><?php echo $this->Lang['FORGOT_PSWD']; ?></h1>-->
                         <div class="">
                         <form action="<?php echo PATH;?>merchant/forgot-password.html" method="post" class="swifta_form" style="background:#fff">
                              <h1 class="swifta_h1">Forgot Password?</h1>

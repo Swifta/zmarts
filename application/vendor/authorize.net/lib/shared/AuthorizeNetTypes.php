@@ -103,7 +103,7 @@ class AuthorizeNetTransaction
     public $customerShippingAddressId;
     public $creditCardNumberMasked;
     public $bankRoutingNumberMasked;
-    public $bankAccountNumberMasked;
+    public $bankLang['ACCTNUMBER']Masked;
     public $order;
     public $taxExempt;
     public $recurringBilling;
@@ -179,7 +179,7 @@ class AuthorizeNetBankAccount
 {
     public $accountType;
     public $routingNumber;
-    public $accountNumber;
+    public $Lang['ACCTNUMBER'];
     public $nameOnAccount;
     public $echeckType;
     public $bankName;
@@ -207,7 +207,7 @@ class AuthorizeNet_Subscription
     public $creditCardCardCode;
     public $bankAccountAccountType;
     public $bankAccountRoutingNumber;
-    public $bankAccountAccountNumber;
+    public $bankAccountLang['ACCTNUMBER'];
     public $bankAccountNameOnAccount;
     public $bankAccountEcheckType;
     public $bankAccountBankName;
@@ -258,7 +258,7 @@ class AuthorizeNet_Subscription
         <bankAccount>
             <accountType>{$this->bankAccountAccountType}</accountType>
             <routingNumber>{$this->bankAccountRoutingNumber}</routingNumber>
-            <accountNumber>{$this->bankAccountAccountNumber}</accountNumber>
+            <Lang['ACCTNUMBER']>{$this->bankAccountLang['ACCTNUMBER']}</Lang['ACCTNUMBER']>
             <nameOnAccount>{$this->bankAccountNameOnAccount}</nameOnAccount>
             <echeckType>{$this->bankAccountEcheckType}</echeckType>
             <bankName>{$this->bankAccountBankName}</bankName>

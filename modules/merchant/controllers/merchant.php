@@ -296,7 +296,7 @@ class Merchant_Controller extends website_Controller
 						
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
-						->add_rules('AccountNumber', 'required')
+						->add_rules('Lang['ACCTNUMBER']', 'required')
 						->add_rules('AccountPin', 'required')
 						->add_rules('UserName', 'required')
 						->add_rules('Password', 'required');
@@ -509,8 +509,8 @@ class Merchant_Controller extends website_Controller
 					elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 					elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 
-					if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-					elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+					if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+					elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 					elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 					elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 					elseif($d->type=="5"){ $transaction_type="Cash On Delivery"; }
@@ -2225,8 +2225,8 @@ class Merchant_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -2252,8 +2252,8 @@ class Merchant_Controller extends website_Controller
 						elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -2824,8 +2824,8 @@ class Merchant_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($d->payment_status=="Failed"){ $status=$this->Lang["FAILED"]; }
 
-                                                if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-                                                elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+                                                if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+                                                elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
                                                 elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
                                                 elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
                                                 elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -3403,8 +3403,8 @@ class Merchant_Controller extends website_Controller
                                         if($u->payment_status=="Completed"){ $tran_type = $this->Lang["COMPLETED"]; }
                                         if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
                                         if($u->type>4){ $tran_type1 = "(".$u->transaction_type.")"; }
@@ -3502,8 +3502,8 @@ class Merchant_Controller extends website_Controller
                                         if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                         if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
                                         if($u->type > "4"){ $tran_type1 = "(".$u->transaction_type.")"; }
@@ -3770,8 +3770,8 @@ class Merchant_Controller extends website_Controller
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                         if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
                                         if($u->type > 4){ $tran_type1 = "(".$u->transaction_type.")"; }

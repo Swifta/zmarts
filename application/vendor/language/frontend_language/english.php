@@ -19,9 +19,9 @@ $content_text = array(
 
 "TYPE_PAY"=>"Type of payment",
 
-"PAYPAL" => "Paypal",
+"PPAL" => "Paypal",
 
-"PAYPAL_CREDIT" => "Credit card using paypal",
+"PPAL_CRDT" => "Credit card using paypal",
 
 "STORE_EMAIL_ID" => "Please enter store email",
     
@@ -55,9 +55,9 @@ $content_text = array(
 
 "EMAIL" => "Email",
 
-"PASSWORD" => "Password",
+"PSWD" => "Password",
 
-"CPASSWORD" => "Confirm Password",
+"CPSWD" => "Confirm Password",
 
 "ENTER_EMAIL"=>"Enter your email here",
 
@@ -1212,7 +1212,7 @@ $content_text = array(
 
 "REF_AMM" =>"Referral Amount",
 
-"CREDIT_CHARGED"=>"You will be charged",
+"CRDT_CHARGED"=>"You will be charged",
 
 "BUY_CLOSE_EMAIL1" => "You can download your ticket from your ",
 
@@ -1834,7 +1834,7 @@ $content_text = array(
 
 "Z_ACC_OPEN" => "Click to open up a Zenith Bank Account",
 	
-"ACCOUNT_NUMBER" => "NUBAN Account Number",
+"ACCT_NUMBER" => "NUBAN Account Number",
     
 "ENTER_ACCOUNT_NUMBER" => "ENTER YOUR NUBAN A/C NUMBER",
 

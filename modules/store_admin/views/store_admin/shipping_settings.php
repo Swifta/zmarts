@@ -11,7 +11,7 @@
                             	<legend><?php echo $this->Lang["ARAMAX_ACC"]; ?></legend>   
 			                        <table>
 		                                <tr>
-                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCOUNTCOUNTRYCODE']; ?></label></td>
+                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCTCOUNTRYCODE']; ?></label></td>
                                             <td><label>:</label></td>
                                             <td><input type="text" name="AccountCountryCode" maxlength="3"   value="<?php echo $general->AccountCountryCode; ?>" autofocus/>
                                             <em><?php if(isset($this->form_error["AccountCountryCode"])){ echo $this->form_error["AccountCountryCode"]; }?></em>
@@ -19,7 +19,7 @@
                                         </tr>
                                         
 		                                <tr>
-                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCOUNTENTITY']; ?></label></td>
+                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCTENTITY']; ?></label></td>
                                             <td><label>:</label></td>
                                             <td><input type="text" name="AccountEntity" maxlength="8"   value="<?php echo $general->AccountEntity; ?>"/>
                                             <em><?php if(isset($this->form_error["AccountEntity"])){ echo $this->form_error["AccountEntity"]; }?></em>
@@ -27,15 +27,15 @@
                                         </tr>
                                         
 		                                <tr>
-                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCOUNTNUMBER']; ?></label></td>
+                                            <td style="width: 200px;"><label><?php echo $this->Lang['Lang['ACCTNUMBER']']; ?></label></td>
                                             <td><label>:</label></td>
-                                            <td><input type="text" name="AccountNumber" maxlength="32"   value="<?php echo $general->AccountNumber; ?>"/>
-                                            <em><?php if(isset($this->form_error["AccountNumber"])){ echo $this->form_error["AccountNumber"]; }?>
+                                            <td><input type="text" name="Lang['ACCTNUMBER']" maxlength="32"   value="<?php echo $general->Lang['ACCTNUMBER']; ?>"/>
+                                            <em><?php if(isset($this->form_error["Lang['ACCTNUMBER']"])){ echo $this->form_error["Lang['ACCTNUMBER']"]; }?>
                                             </em></td>
                                         </tr>
                                         
                                         <tr>
-                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCOUNTPIN']; ?></label></td>
+                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCTPIN']; ?></label></td>
                                             <td><label>:</label></td>
                                             <td><input type="text" name="AccountPin" maxlength="32"   value="<?php echo $general->AccountPin; ?>"/>
                                             <em><?php if(isset($this->form_error["AccountPin"])){ echo $this->form_error["AccountPin"]; }?></em></td>
@@ -49,7 +49,7 @@
                                         </tr>
                                         
                                         <tr>
-                                            <td style="width: 200px;"><label><?php echo $this->Lang['PASSWORD']; ?></label></td>
+                                            <td style="width: 200px;"><label><?php echo $this->Lang['PSWD']; ?></label></td>
                                             <td><label>:</label></td>
                                             <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPassword; ?>"/>
                                             <em><?php if(isset($this->form_error["Password"])){ echo $this->form_error["Password"]; }?></em></td>

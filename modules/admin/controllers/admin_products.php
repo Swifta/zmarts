@@ -402,8 +402,8 @@ class Admin_products_Controller extends website_Controller
 						elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -427,8 +427,8 @@ class Admin_products_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -1804,7 +1804,7 @@ class Admin_products_Controller extends website_Controller
                                 'Shipment' => array(
                                         'Shipper'	=> array(
                                                 'Reference1' 	                => 'Ref1'.$ship->shipping_id,
-                                                'AccountNumber'               => '4004234',
+                                                'Lang['ACCTNUMBER']'               => '4004234',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> '15 ABC St',
                                                         'Line2' 				=> '',
@@ -1832,7 +1832,7 @@ class Admin_products_Controller extends website_Controller
 
                                         'Consignee'	=> array(
                                                 'Reference1'	                        => 'Ref1'.$ship->shipping_id,
-                                                'AccountNumber'                       => '',
+                                                'Lang['ACCTNUMBER']'                       => '',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> "Deal & More s.a.r.l, Bassam Arnaout",
                                                         'Line2'				=> "Jisr Al Basha  Al-Basha Center.",
@@ -1863,7 +1863,7 @@ class Admin_products_Controller extends website_Controller
                                         'ThirdParty' => array(
                                                 'Reference1' 	                        => '',
                                                 'Reference2' 	                        => '',
-                                                'AccountNumber'                       => '',
+                                                'Lang['ACCTNUMBER']'                       => '',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> '',
                                                         'Line2'				=> '',
@@ -1961,7 +1961,7 @@ class Admin_products_Controller extends website_Controller
                         'ClientInfo'  			=> array(
                         'AccountCountryCode'	=> 'SA',
                         'AccountEntity'		 	=> 'RUH',
-                        'AccountNumber'		=> '4004234',
+                        'Lang['ACCTNUMBER']'		=> '4004234',
                         'AccountPin'		 	=> '543543',
                         'UserName'			=> 'marketty.net@gmail.com',
                         'Password'			=> '1016842823As',

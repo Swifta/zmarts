@@ -145,10 +145,10 @@ $this->session = Session::instance();
                    <?php
 			$friend_buy=0;
 			 if($this->paypal_setting) { ?>
-                    <div class="payment_sel_lft"><a onclick="return SimilarProducts();" id="SimilarProducts"  > <input value="1" class="pay_option" id="paypal_radio" type="radio" name="name"/></a> <p><?php echo $this->Lang['PAYPAL']; ?></p></div>
+                    <div class="payment_sel_lft"><a onclick="return SimilarProducts();" id="SimilarProducts"  > <input value="1" class="pay_option" id="paypal_radio" type="radio" name="name"/></a> <p><?php echo $this->Lang["PPAL"]; ?></p></div>
                    <?php } ?>
                    <?php if($this->credit_card_setting) { ?>
-                   <div class="payment_sel_lft"><a onclick="return SimilarDeals();" id="SimilarDeals"  >    <input class="pay_option" value="2" type="radio" name="name"  <?php if($this->paypal_setting) { } else { ?> checked <?php } ?> /></a> <p><?php echo $this->Lang['PAYPAL_CREDIT']; ?></p></div>
+                   <div class="payment_sel_lft"><a onclick="return SimilarDeals();" id="SimilarDeals"  >    <input class="pay_option" value="2" type="radio" name="name"  <?php if($this->paypal_setting) { } else { ?> checked <?php } ?> /></a> <p><?php echo $this->Lang['PPAL_CRDT']; ?></p></div>
                    <?php } ?>
                    <?php if($this->authorize_setting) { ?>
                   <div class="payment_sel_lft"><a onclick="return Authorize();" id="Authorize"  >       <input type="radio" value="3" class="pay_option" name="name"  /></a> <p><?php echo $this->Lang['AUTHORIZE']; ?></p></div>

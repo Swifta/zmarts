@@ -6,7 +6,7 @@
     </div>	    
     <div class="signup_content clearfix">
         <div class="signup_form_block">
-            <h2 class="signup_title"><?php echo $this->Lang['FORGOT_PASS']; ?></h2>
+            <h2 class="signup_title"><?php echo $this->Lang['FORGOT_PSWD']; ?></h2>
             <form name="forget_password" method="post" action="<?php echo PATH; ?>users/forgot" onsubmit="return validate_forget_password();">
                 <ul>
                     <li>                

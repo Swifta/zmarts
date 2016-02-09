@@ -282,7 +282,7 @@ const ALLOW_PRODUCTION = FALSE;
 						
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
-						->add_rules('AccountNumber', 'required')
+						->add_rules('Lang['ACCTNUMBER']', 'required')
 						->add_rules('AccountPin', 'required')
 						->add_rules('UserName', 'required')
 						->add_rules('Password', 'required');

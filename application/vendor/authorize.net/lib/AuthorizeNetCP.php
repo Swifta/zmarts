@@ -133,7 +133,7 @@ class AuthorizeNetCP_Response extends AuthorizeNetResponse
                 $this->transaction_id       = (string)$this->xml->TransID;
                 $this->md5_hash             = (string)$this->xml->TransHash;
                 $this->user_ref             = (string)$this->xml->UserRef;
-                $this->card_num             = (string)$this->xml->AccountNumber;
+                $this->card_num             = (string)$this->xml->Lang['ACCTNUMBER'];
                 $this->card_type            = (string)$this->xml->AccountType;
                 $this->test_mode            = (string)$this->xml->TestMode;
                 $this->ref_trans_id         = (string)$this->xml->RefTransID;
