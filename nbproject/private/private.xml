@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
-=======
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Musty/Sites/zmarts/modules/merchant/views/merchant/add_products.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/store/header.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/modules/admin/views/admin_user/view_users.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/modules/merchant/views/merchant/edit_products.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/modules/store_admin/views/store_admin/add_products.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/application/views/themes/default/users/sign_up_popup.php</file>
-            <file>file:/Users/Musty/Sites/zmarts/modules/store_admin/views/store_admin/edit_products.php</file>
+            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/users/store_detail_2yy.php</file>
+            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/store_detail_1.php</file>
+            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/header_1.php</file>
+            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/alt_style.css</file>
+            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/css/test.css</file>
+            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/css/responsive.css</file>
+            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/store_detail.php</file>
+            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/css/bootstrap.css</file>
+            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/header.php</file>
+            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/footer.php</file>
         </group>
     </open-files>
->>>>>>> 183335d81e52ce1ac36eafe0b30ffaef3f7505a2
 </project-private>

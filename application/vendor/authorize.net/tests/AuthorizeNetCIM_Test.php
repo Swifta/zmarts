@@ -74,7 +74,7 @@ class AuthorizeNetCIM_Test extends PHPUnit_Framework_TestCase
     $paymentProfile2->customerType = "business";
     $paymentProfile2->payment->bankAccount->accountType = "businessChecking";
     $paymentProfile2->payment->bankAccount->routingNumber = "121042882";
-    $paymentProfile2->payment->bankAccount->accountNumber = "123456789123";
+    $paymentProfile2->payment->bankAccount->Lang['ACCTNUMBER'] = "123456789123";
     $paymentProfile2->payment->bankAccount->nameOnAccount = "Jane Doe";
     $paymentProfile2->payment->bankAccount->echeckType = "WEB";
     $paymentProfile2->payment->bankAccount->bankName = "Pandora Bank";

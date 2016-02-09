@@ -249,9 +249,9 @@
                                             <div class="fullname"><input tabindex="10" name="email" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" type="text"  class="required " /></div>
                                         </li>                                           
                                         <li>
-                                            <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">*</span></label>
+                                            <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
                                             <div class="fullname"><input tabindex="11" name="password"  maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required"/></div>
-                                            <p><a class="forget_link" tabindex="14" onclick="showforgotpassword();" style="cursor:pointer;" title="<?php echo $this->Lang['FORGOT_PASS']; ?>"><?php echo $this->Lang['FORGOT_PASS']; ?></a></p>
+                                            <p><a class="forget_link" tabindex="14" onclick="showforgotpassword();" style="cursor:pointer;" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>"><?php echo $this->Lang['FORGOT_PSWD']; ?></a></p>
                                         </li>                                                                                   
                                         <li>  
                                             <label>&nbsp;</label>
@@ -294,7 +294,7 @@
                                                         } ?> </em></div>
                                             </li>
                                             <li>
-                                                              <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">*</span></label>
+                                                              <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
                                                               <div class="fullname"><input name="password"  tabindex="3" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required"  value="<?php if (!isset($this->form_error['password']) && isset($this->userPost['cpassword'])) {
                                                                           echo $this->userPost['password'];
 
@@ -306,7 +306,7 @@
                                                               </em>
                                                           </li>
                                            <li>
-                                                              <label><?php echo $this->Lang['CPASSWORD']; ?>:<span class="form_star">*</span></label>
+                                                              <label><?php echo $this->Lang['CPSWD']; ?>:<span class="form_star">*</span></label>
                                                               <div class="fullname"><input name="cpassword"  tabindex="4" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" class="required"  value="<?php if (!isset($this->form_error['cpassword']) && isset($this->userPost['cpassword'])) {
                                                                           echo $this->userPost['cpassword'];
                                                                       } ?>" size="40"/></div>

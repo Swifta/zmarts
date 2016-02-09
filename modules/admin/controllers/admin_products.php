@@ -402,8 +402,8 @@ class Admin_products_Controller extends website_Controller
 						elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -427,8 +427,8 @@ class Admin_products_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -757,9 +757,9 @@ class Admin_products_Controller extends website_Controller
 	if($_POST){
                 $this->product_deatils = $this->products->get_product_data_mail($deal_key, $deal_id);
   		$this->userPost = $this->input->post();
-		$users = $this->input->post("users");
-		$fname = $this->input->post("firstname");
-		$email = trim($this->input->post("email"));
+		$users = strip_tags(addslashes($this->input->post("users")));
+		$fname = strip_tags(addslashes($this->input->post("firstname")));
+		$email = trim(strip_tags(addslashes($this->input->post("email"))));
 		$post = Validation::factory(array_merge($_POST,$_FILES))
 						
 						->add_rules('users', 'required')

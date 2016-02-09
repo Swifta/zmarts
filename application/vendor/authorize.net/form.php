@@ -270,7 +270,7 @@ $(document).ready(function(){
 
 		<?php } ?>
 
-		<td><h5 style="font:normal 12px arial!important;color:#666;!important">=</h5></td>
+		<td><h5 style="font:normal 12px arial!important;color:#666!important;">=</h5></td>
 		<td>
 		<h5><?php echo CURRENCY; ?><span id="total_credit_amt2"><?php echo $total_payable_amount; ?></h5>
 		

@@ -57,14 +57,14 @@
                                 </div>   
                             </li>
                             <li>
-                                <label><?php echo $this->Lang['PASSWORD'];?>:<span class="form_star">*</span></label>
+                                <label><?php echo $this->Lang['PSWD'];?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                     <input name="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" value="" />
                                     <em id="pass_error"></em>
                                 </div>   
                             </li>
                             <li>
-                                <label><?php echo $this->Lang['CPASSWORD'];?>:<span class="form_star">*</span></label>
+                                <label><?php echo $this->Lang['CPSWD'];?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                     <input name="cpassword" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" value="" />
                                     <em id="cpass_error"></em>

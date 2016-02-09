@@ -44,25 +44,25 @@ class Users_Controller extends Layout_Controller {
 
         public function twitter(){
 
-            require_once 'twitteroauth.php';
-            $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET);
-            // Requesting authentication tokens, the parameter is the URL we will be redirected to
-            $request_token = $twitteroauth->getRequestToken(PATH.'twitter-connected.php');
-
-            // Saving them into the session
-
-            $_SESSION['oauth_token'] = $request_token['oauth_token'];
-            $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
-
-            // If everything goes well..
-            if ($twitteroauth->http_code == 200) {
-                // Let's generate the URL and redirect
-                $url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
-                header('Location: ' . $url);
-            } else {
-                // It's a bad idea to kill the script, but we've got to know when there's an error.
-                die('Something wrong happened.');
-            }
+//            require_once 'twitteroauth.php';
+//            $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET);
+//            // Requesting authentication tokens, the parameter is the URL we will be redirected to
+//            $request_token = $twitteroauth->getRequestToken(PATH.'twitter-connected.php');
+//
+//            // Saving them into the session
+//
+//            $_SESSION['oauth_token'] = $request_token['oauth_token'];
+//            $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+//
+//            // If everything goes well..
+//            if ($twitteroauth->http_code == 200) {
+//                // Let's generate the URL and redirect
+//                $url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
+//                header('Location: ' . $url);
+//            } else {
+//                // It's a bad idea to kill the script, but we've got to know when there's an error.
+//                die('Something wrong happened.');
+//            }
         }
         
         public function twitter_login(){
@@ -264,9 +264,9 @@ class Users_Controller extends Layout_Controller {
 					@Live
 				  */
 				  if($_POST){
-				  $email = $this->input->post('email');
-				  $password = $this->input->post('password');
-				  $url_redirect = $this->input->post('url');
+				  $email = htmlspecialchars($this->input->post('email'), ENT_QUOTES,'UTF-8');
+                                  $password = htmlspecialchars($this->input->post('password'), ENT_QUOTES,'UTF-8');
+				  $url_redirect = htmlspecialchars($this->input->post('url'), ENT_QUOTES,'UTF-8');
 				  
 				 
 				  

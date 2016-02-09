@@ -502,7 +502,7 @@ smaller than 568
 #slideshow-carousel li .new_prdt_listing{width:230px;}
 #slideshow-carousel.deallist_slider_center ul li{width:235px;}
 .seller_listing {width: 250px;}
-.seller_listing_content a{height32px;overflow:hidden;}
+.seller_listing_content a{height:32px;overflow:hidden;}
 .store_product_list, .green_store_deal_list {width: 245px;margin:5px 19px 5px 0;}
 .empty_branches ul li, .empty_branches ul li:first-child {margin: 5px 1%;}
 .store_pro_list li{width:272px;}

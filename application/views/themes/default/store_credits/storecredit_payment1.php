@@ -29,14 +29,14 @@
                                             </div>
                                     </li>                                    
                                     <li>
-                                            <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star"></span> </label>
+                                            <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star"></span> </label>
                                             <div class="fullname">
                                                 <input type="password" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" value="" name="password" autocomplete="off">
                                                 <em id="password_error1"></em>
                                             </div>
                                     </li>
                                     <?php /*<li>
-                                            <label ><a class="forgot" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PASS']; ?>?"><?php echo $this->Lang['FORGOT_PASS']; ?>?</a></label>
+                                            <label ><a class="forgot" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>?"><?php echo $this->Lang['FORGOT_PSWD']; ?>?</a></label>
                                     </li> */ ?>
                                     <li>
                                         <input class="sign_submit" type="submit" value="<?php echo $this->Lang['LOGIN2']; ?>" >

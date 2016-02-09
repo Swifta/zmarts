@@ -99,7 +99,8 @@ class Newsletter_Controller extends website_Controller {
 		$this->newsletter_act = "1";
 	    if($_POST){
 			$img_check = 0;
-			$this->userPost = $this->input->post();
+			//$this->userPost = $this->input->post();
+                        $this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
@@ -211,7 +212,8 @@ class Newsletter_Controller extends website_Controller {
 			url::redirect(PATH."admin.html");
 		}
 		if($_POST){
-		$this->city_list = $this->input->post("citydata");
+		//$this->city_list = $this->input->post("citydata");
+                    $this->city_list = $this->input->post("citydata");
 		
 		$this->newsletter_user_list = $this->news->get_subscribed_user_list();
 

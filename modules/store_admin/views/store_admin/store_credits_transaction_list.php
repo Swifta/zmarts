@@ -108,8 +108,8 @@
                   
                   <?php if(($this->uri->segment(2) == "view-deal")||($this->uri->segment(2) == "view-products")) { ?>  
                     <td><span class="align">
-		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PAYPAL_CREDIT"] .'</span>'; } ?>
-		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PAYPAL"] .'</span>'; } ?>
+		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PPAL_CRDT"] .'</span>'; } ?>
+		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PPAL"] .'</span>'; } ?>
 		    <?php if($u->type=="3"){ echo '<span class="clor2">'. $this->Lang["REF_PAYMENT"] .'</span>'; } ?>
 		    <?php if($u->type=="4"){ echo '<span class="clor2">'. "Authorize.net(".$u->transaction_type.")" .'</span>'; } ?>
 		    <?php if($u->type=="5"){ echo '<span class="clor2">'.$u->transaction_type.'</span>'; } ?>

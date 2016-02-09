@@ -202,7 +202,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                       <input class="swifta_input" name="password" placeholder="Password" type="password" required>
                       
             <?php if(isset($this->is_merchat) || isset($this->is_store_admin) ){?> <span style="cursor:pointer; color:black; margin-left: 25px;" >
-        <a <?php if(isset($this->is_merchat)){?> onclick="window.location.href='<?php echo PATH; ?>merchant/forgot-password.html'" <?php }else{?> onclick="window.location.href='<?php echo PATH; ?>store-admin/forgot-password.html'"<?php }?> title="<?php echo $this->Lang['FORGOT_PASS']; ?>"> <?php echo $this->Lang['FORGOT_PASS']; ?></a> </span><?php }else { ?> <?php }?>   
+        <a <?php if(isset($this->is_merchat)){?> onclick="window.location.href='<?php echo PATH; ?>merchant/forgot-password.html'" <?php }else{?> onclick="window.location.href='<?php echo PATH; ?>store-admin/forgot-password.html'"<?php }?> title="<?php echo $this->Lang['FORGOT_PSWD']; ?>"> <?php echo $this->Lang['FORGOT_PSWD']; ?></a> </span><?php }else { ?> <?php }?>   
 <!--                       <button class="swifta_button" title="<?php //echo $this->Lang['LOGIN']; ?>">Submit</button>-->
                        <input type="submit" class="swifta_button" value="LOGIN"  title="<?php echo $this->Lang['LOGIN']; ?>" />
 
