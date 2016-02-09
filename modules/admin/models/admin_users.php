@@ -141,7 +141,7 @@ class Admin_users_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
                         
 		        if(isset($sort_arr[$param])){
-			        $contitions .= $sort_arr[$param];
+			        $contitions .= strip_tags(addslashes($sort_arr[$param]));
 			        $joinorder = "";
 			} else {
 				$contitions .= '';
@@ -205,7 +205,8 @@ class Admin_users_Model extends Model
 			$sort_arr = array("name"=>" order by users.firstname $sort","city"=>" order by city.city_name $sort","email"=>" order by users.email $sort","date"=>" order by users.joined_date $sort");
 
 			if(isset($sort_arr[$param])){
-	       		 $contitions .= $sort_arr[$param];
+	       		 //$contitions .= $sort_arr[$param];
+                            $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
@@ -330,8 +331,13 @@ class Admin_users_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
-                return $result;
+//                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
+//                return $result;
+                $result = $this->db->from("users")
+                ->where(array("user_status"=>1,"user_type !=" => 1))->get();
+                       
+
+		return $result;
 	}
 	public function getUSERList()
 	{
@@ -371,11 +377,22 @@ class Admin_users_Model extends Model
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+//				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                               
+                                $news =$this->db->select()->from("users")
+                       
+                               ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                                return $news;
 			}
 			if(isset($post->users)&& $post->users!=""){
 				
-				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                                $news =$this->db->select()->from("users")
+                       
+                               ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                                return $news;
 				
 			}
 			
@@ -515,8 +532,13 @@ class Admin_users_Model extends Model
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			
-			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
-			return $news;
+//			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+//			return $news;
+                        $news =$this->db->select()->from("users")
+                       
+                        ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                         return $news;
 		}
 		
 		

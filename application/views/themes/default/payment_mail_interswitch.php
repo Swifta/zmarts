@@ -56,5 +56,7 @@ $this->UserName = $this->session->get("UserName");
 </body>
 </html>
 
+<!--<?php echo "payment_mail_interswitch"; ?>-->
+
 
 

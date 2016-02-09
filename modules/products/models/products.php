@@ -1735,5 +1735,26 @@ public function get_store_id($storeurl="")
 		return $result;
 	}
 	
+	
+	
+	public function get_payment_store_details($store_id){
+		if(!$store_id)
+		return false;
+		
+		$condition = array("stores.store_id"=>$store_id);
+		
+		/*$result = $this->db->select("stores.store_name as store_name, store.phone_number as phone, store.address1 as address1, city.city_name as city, country.country_name as country")->from("stores")->where($condition)->join("city", "store.store_id", "city.city_id")->join("country", "stores.country_id", "country.country_id")->get();
+		*/
+		$result = null;
+		try{
+		$result = $this->db->select("stores.store_name as store_name, stores.phone_number as phone, stores.address1 as address1, city.city_name as city, country.country_name as country")->from("stores")->where($condition)->join("city", "stores.city_id", "city.city_id")->join("country", "stores.country_id", "country.country_id")->get();
+		}catch(Exception $e){
+			var_dump($e);
+		}
+		
+		return $result;
+		
+	}
+	
 
 }

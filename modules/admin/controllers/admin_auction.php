@@ -195,9 +195,13 @@ class Admin_auction_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 	      if($_POST){ 
-	        $commission = $this->input->post('commission_status');
-	        $deal_key = $this->input->post('commission_deal_key');
-	        $deal_id = $this->input->post('commission_deal_id');        
+//	        $commission = $this->input->post('commission_status');
+//	        $deal_key = $this->input->post('commission_deal_key');
+//	        $deal_id = $this->input->post('commission_deal_id'); 
+                  
+                  $commission = stripslashes(addslashes($this->input->post('commission_status')));
+                  $deal_key = strip_tags(addslashes($this->input->post('commission_deal_key')));
+	          $deal_id = strip_tags(addslashes($this->input->post('commission_deal_id'))); 
 	                if($commission != ""){
 	                        $commission_deatils = $this->auction->change_commission_data($commission, $deal_id);
 	                }
@@ -242,12 +246,12 @@ class Admin_auction_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($d->payment_status=="Failed"){ $status=$this->Lang["FAILED"]; }
 						
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
-						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
-						elseif($d->type=="6"){ $transaction_type=$this->Lang["PAY_LATER"]; }
+						elseif($d->type > 4){ $transaction_type=$d->transaction_type; }
+						//elseif($d->type=="6"){ $transaction_type=$this->Lang["PAY_LATER"]; }
 					
 					
 	 					$out .= $i + $first_item.',"'.$d->firstname.'","'.$d->deal_title.'","'.$d->bid_amount.'","'.$d->shipping_amount.'","'.$d->amount.'","'.$status.'","'.date('d-M-Y h:i:s',$d->transaction_date).'","'.$transaction_type.'"'."\r\n";

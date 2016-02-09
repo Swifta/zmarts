@@ -137,10 +137,10 @@
 
                                                     </li>
                                                     <li class="frm_clr">
-                                                        <label><?php echo $this->Lang['CITY']; ?><span>*</span></label>
+                                                        <label>State<span>*</span></label>
                                                         <div class="fullname">
                                                             <select name="city" id="CitySD">
-                                                                <option value="">Select a City First</option>
+                                                                <option value="">Select a Country First</option>
     <?php foreach ($this->all_city_list as $c) { ?>
                 <?php if ($c->country_id == $u->ship_country) { ?>
                                                                     <option  <?php if ($c->city_id == $u->ship_city) { ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
@@ -155,9 +155,9 @@
 
 
                                                     <li>
-                                                        <label><?php echo $this->Lang['STATE']; ?><span>*</span></label>
+                                                        <label>City<span>*</span></label>
                                                         <div class="fullname">
-                                                            <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>"/>
+                                                            <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="Enter your city here"/>
                                                         </div>
                                                         <em><?php if (isset($this->form_error['state'])) {
         echo $this->form_error["state"];

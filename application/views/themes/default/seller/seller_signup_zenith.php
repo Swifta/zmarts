@@ -356,7 +356,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                               
                                 <div class="">
                                      <span class="asterisks_input">  </span>
-                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo $_POST['f_name'];}?>" autofocus  />
+                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo htmlentities($_POST['f_name'],  ENT_QUOTES,  "utf-8");}?>" autofocus  />
                                    <em id="f_name_err"><?php if(isset($this->form_error['f_name'])){echo $this->form_error['f_name'];}?></em>
                                 </div> 
                             </li>
@@ -365,7 +365,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="l_name" class="swifta_input" type="text" tabindex="2" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="<?php if(isset($_POST['l_name'])){echo $_POST['l_name'];}?>" required/>
+                                   <input name="l_name" class="swifta_input" type="text" tabindex="2" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="<?php if(isset($_POST['l_name'])){echo htmlentities($_POST['l_name'],  ENT_QUOTES,  "utf-8");}?>" required/>
                                    <em id="l_name_err"><?php if(isset($this->form_error['l_name'])){echo $this->form_error['l_name'];}?></em>
                                 </div>  
                                 
@@ -375,7 +375,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <div >
                                      <span class="asterisks_input">  </span>
-                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="<?php if(isset($_POST['email'])){echo $_POST['email'];}?>" required/>
+                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="<?php if(isset($_POST['email'])){echo htmlentities($_POST['email'],  ENT_QUOTES,  "utf-8");}?>" required/>
                                   <em id="email_err"><?php if(isset($this->form_error['email'])){echo $this->form_error['email'];}?></em>
                                 </div>     
                             </li>
@@ -383,7 +383,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="4" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value="<?php if(isset($_POST['phone'])){echo $_POST['phone'];}?>"  required/>
+                                   <input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="4" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value="<?php if(isset($_POST['phone'])){echo htmlentities($_POST['phone'],  ENT_QUOTES,  "utf-8");}?>"  required/>
                                    <em id="phone_err"><?php if(isset($this->form_error['phone'])){echo $this->form_error['phone'];}?></em>
                                 </div>  
                             </li>
@@ -393,12 +393,12 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <div class="">
                                      <span class="asterisks_input">  </span>
-                                   <input name="addr" class="swifta_input" type="text"  tabindex="5" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if(isset($_POST['addr'])){echo $_POST['addr'];}?>" required />
+                                   <input name="addr" class="swifta_input" type="text"  tabindex="5" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if(isset($_POST['addr'])){echo htmlentities($_POST['addr'],  ENT_QUOTES,  "utf-8");}?>" required />
                                    <em id="addr_err"><?php if(isset($this->form_error['addr'])){echo $this->form_error['addr'];}?></em>
                                 </div>   
                                 
                                   <div class="" style="margin-top:15px;">
-                                    <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo $_POST['gender'];}?>">
+                                                   <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo htmlentities($_POST['gender'],  ENT_QUOTES,  "utf-8");}?>">
                                             <option value="-99"><?php echo $this->Lang['SEL_GENDER']; ?></option>
                                            
                                              <option  title="<?php echo $this->Lang['MALE']; ?>" value="M" ><?php echo $this->Lang['MALE']; ?></option>
@@ -410,7 +410,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                  <div class="" >
                                         <div id="CitySD_log">
-                                      <select name="branch_no" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo $_POST['branch_no'];}?>" tabindex="6"  class="swifta_input" required="required">
+                                      <select name="branch_no" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo htmlentities($_POST['branch_no'],  ENT_QUOTES,  "utf-8");}?>" tabindex="6"  class="swifta_input" required="required">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_BRANCH']; ?></option>
                                             <?php
                                             //echo $this->branch_options;
@@ -422,7 +422,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                  <div class="">
                                         <div id="CitySD_log">
-                                      <select name="class_code" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo $_POST['class_code'];}?>">
+                                      <select name="class_code" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo htmlentities($_POST['class_code'],  ENT_QUOTES,  "utf-8");}?>">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_CLASS']; ?></option>
                                             <?php
                                             //echo $this->class_code_options;
@@ -464,25 +464,25 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
           <ul>
           <li><div>
                                      <span class="asterisks_input">  </span>
-                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo $_POST['f_name'];}?>" autofocus required="required"  />
+                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo htmlentities($_POST['f_name'],  ENT_QUOTES,  "utf-8");}?>" autofocus required="required"  />
                                    <em id="f_name_err"><?php if(isset($this->form_error['f_name'])){echo $this->form_error['f_name'];}?></em>
                                 </div></li>
           <li><div>
                                      <span class="asterisks_input">  </span>
-                                   <input name="l_name" class="swifta_input" type="text" tabindex="2" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="<?php if(isset($_POST['l_name'])){echo $_POST['l_name'];}?>" required/>
+                                   <input name="l_name" class="swifta_input" type="text" tabindex="2" id="lname"   placeholder="<?php echo $this->Lang['ENTER_LAST_NAME']; ?>" value="<?php if(isset($_POST['l_name'])){echo htmlentities($_POST['l_name'],  ENT_QUOTES,  "utf-8");}?>" required/>
                                    <em id="l_name_err"><?php if(isset($this->form_error['l_name'])){echo $this->form_error['l_name'];}?></em>
                                 </div></li>
           <li><div> <span class="asterisks_input">  </span>
-                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="<?php if(isset($_POST['email'])){echo $_POST['email'];}?>" required/>
+                                  <input name="email" class="swifta_input" type="text" maxlength="64" id="email" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="<?php if(isset($_POST['email'])){echo htmlentities($_POST['email'],  ENT_QUOTES,  "utf-8");}?>" required/>
                                   <em id="email_err"><?php if(isset($this->form_error['email'])){echo $this->form_error['email'];}?></em>
                                 </div></li>
-          <li><div><span class="asterisks_input"></span><input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="4" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value="<?php if(isset($_POST['phone'])){echo $_POST['phone'];}?>"  required/><em id="phone_err"><?php if(isset($this->form_error['phone'])){echo $this->form_error['phone'];}?></em></div></li>
+          <li><div><span class="asterisks_input"></span><input name="phone" class="swifta_input" type="text" maxlength="11" tabindex="4" id="mob"  onkeypress="return isNumberKey(event)" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" value="<?php if(isset($_POST['phone'])){echo htmlentities($_POST['phone'],  ENT_QUOTES,  "utf-8");}?>"  required/><em id="phone_err"><?php if(isset($this->form_error['phone'])){echo $this->form_error['phone'];}?></em></div></li>
 		  <li><div class=""><span class="asterisks_input"></span>
-          <input name="addr" class="swifta_input" type="text"  tabindex="5" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if(isset($_POST['addr'])){echo $_POST['addr'];}?>" required />
+          <input name="addr" class="swifta_input" type="text"  tabindex="5" id="addrss"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if(isset($_POST['addr'])){echo htmlentities($_POST['addr'],  ENT_QUOTES,  "utf-8");}?>" required />
           <em id="addr_err"><?php if(isset($this->form_error['addr'])){echo $this->form_error['addr'];}?></em>
           </div></li>
           <li><div class="" style="margin-top:15px;"><span class="asterisks_input">  </span>
-                                    <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo $_POST['gender'];}?>">
+                                    <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo htmlentities($_POST['gender'],  ENT_QUOTES,  "utf-8");}?>">
                                             <option value="-99"><?php echo $this->Lang['SEL_GENDER']; ?></option>
                                            
                                              <option  title="<?php echo $this->Lang['MALE']; ?>" value="M" ><?php echo $this->Lang['MALE']; ?></option>
@@ -491,7 +491,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     </select>
                                     <em id="gender_err"><?php if(isset($this->form_error['gender'])){echo $this->form_error['gender'];}?></em>
                                 </div></li>                     
-          <li><div id="CitySD_log"><span class="asterisks_input">  </span><select name="branch_no" onfocus="load_branches(this)" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo $_POST['branch_no'];}?>" tabindex="6"  class="swifta_input" required="required">
+          <li><div id="CitySD_log"><span class="asterisks_input">  </span><select name="branch_no" onfocus="load_branches(this)" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo htmlentities($_POST['branch_no'],  ENT_QUOTES,  "utf-8");}?>" tabindex="6"  class="swifta_input" required="required">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_BRANCH']; ?></option>
                                             <?php
                                             //echo $this->branch_options;
@@ -499,7 +499,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     </select>
                                    <em id="branch_no_err"><?php if(isset($this->form_error['branch_no'])){echo $this->form_error['branch_no'];}?></em></div></li>                        
           <li><div id="CitySD_log"><span class="asterisks_input">  </span><span class="asterisks_input">  </span>
-                                      <select name="class_code" onfocus="load_classes(this)" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo $_POST['class_code'];}?>">
+                                      <select name="class_code" onfocus="load_classes(this)" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo htmlentities($_POST['class_code'],  ENT_QUOTES,  "utf-8");}?>">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_CLASS']; ?></option>
                                             <?php
                                             //echo $this->class_code_options;

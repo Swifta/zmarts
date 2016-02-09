@@ -866,7 +866,7 @@ function check_validation(deal_id)
 	var color_sel = $("#sel_color").val();
 	var size_sel = $("#sel_size").val();
 	var quan_sel = $("#sel_quant").val();
-
+	
 	if(color_count == 1){
 		if(quan_sel != "" && color_sel != "" && nosize != 1){
 			window.location.href=Path+"payment_product/cart_items?deal_id="+deal_id;

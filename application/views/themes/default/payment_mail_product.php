@@ -169,13 +169,41 @@ $this->UserName = $this->session->get("UserName");
 																
                                                                 } ?>
         
-              <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+              <!--<tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
                 <td width="40%" colspan="4" align="center" style="border-right:#000  dotted 1px;"><?php echo $ship_dispay; ?>
                   <?php if(($u->shipping_methods != 1) && ($u->shipping_methods != 5) ){ ?>
                   ( <?php echo CURRENCY_SYMBOL.$u->shipping; ?> )
                   <?php } ?></td>
                 <td width="40%" colspan="4"  style=" padding:10px;" align="left">Store: <a style="text-decoration:none" href="<?php echo PATH.$u->store_url_title;?>"><?php echo $u->store_name; ?></a></td>
-              </tr>
+              </tr>-->
+              
+               <!-- shipping Amount -->                                                
+        <tr height="30"  valign="middle" style=" background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+          <td colspan="7" width="100%" align="center" style=" padding:10px; border-right:#000  dotted 1px" ><?php echo $ship_dispay; ?>
+            <?php if(($u->shipping_methods != 1) && ($u->shipping_methods != 5) ){ ?>
+            ( <?php echo CURRENCY_SYMBOL.$u->shipping; ?> )
+            <?php } ?></td>
+          
+        </tr>
+        
+        <?php $store_payment_details = common::get_payment_store_details($u->shop_id); ?>
+        <tr><td colspan="7" height="1px">&nbsp;</td></tr>
+        <tr height="10"  valign="middle" style=" background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+          
+          <td  colspan="7" width="100%" style=" font-size: 11px;text-align:center; padding:10px; padding-bottom:0" p align="left">--- Store Details---</td>
+          </tr> 
+        <tr height="30"  valign="middle" style=" background: #eaeaea;font-size: 11px; font-weight:bold; font-family: Arial;color:#666;">
+          <td  colspan="2" style=" border-top: 1px solid #000; padding:10px;" align="left">Name: <a style="text-decoration:none" href="<?php echo PATH.$u->store_url_title;?>"><?php echo $u->store_name; ?></a></td>
+          
+          <td  colspan="3" style="border-top: 1px solid #000; padding:10px;" align="left">Address: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->address1.", ".$store_payment_details->city.", ".$store_payment_details->country; ?></a></td>
+          
+          <td  colspan="2" style="border-top: 1px solid #000; padding:10px;" align="left">Phone: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->phone; ?></a></td>
+          
+        </tr>
+              
+              
+              
+              
               <?php if($u->bulk_discount!=0 && $p->prime_customer!=0 && $u->total_discount!=0){?>
               <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
                 <td width="80%" colspan="8" align="center"><?php echo "Offer : ".$this->Lang['BUY_ONE']. "  ".$u->bulk_discount_buy."  ".$this->Lang['GET']."  ".$u->bulk_discount_get;?>(<?php echo $this->Lang['YOU_GOT_DISCOUNT'];?> <?php echo $u->total_discount+$u->quantity;?><?php echo " ".$this->Lang['PRODUCTS'];?>)</td>
@@ -247,17 +275,33 @@ $this->UserName = $this->session->get("UserName");
       </b></div>
   </div>
   <div style="clear:both;"></div>
+  
+  <!--- Aliginment of Total Amount Payable -->
+        <div style="clear:both;"></div>
+        <div style="float:left; width: 48%">&nbsp;</div>
+        
+        <div style="float:left; width: 26%; text-align:right; color:#144F5D; font: bold 12px arial; white-space:nowrap"><?php if($p->type == 5 || $p->type == 6 ) { echo $this->Lang['AMO_TO_B_PAID']; } else { echo $this->Lang['AMTPAID']; } ?></div>
+        <div style="float:left; width: 26%; text-align:center; color:#666666; font: bold 12px arial; white-space:nowrap"><b style="white-space:nowrap">
+         <?php echo CURRENCY_SYMBOL.$grand_tot; ?>
+          </b></div>
  </td> </tr>
+ 
+ <!--- Last gray row -->
+  <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%; padding:20px;">
+    <td colspan="7" style="text-align:center"  width="100%"><?php echo $this->Lang['TO_SHIP'];?></td>
+  </tr>
+  
+  
   <?php /*<div style="float:left; width: 72%">&nbsp;</div>
                             <div style="float:left; width: 15%; text-align:right; color:#144F5D; font: bold 12px arial;"><?php echo $this->Lang['TAX']; ?></div>
                             <div style="float:left; width: 13%; text-align:center; color:#666666; font: bold 12px arial;"><b><?php if($tax_tot != 0 ) echo CURRENCY_SYMBOL.$tax_tot; else echo '-'; ?> </b></div>
   
                           <div style="clear:both;"></div> */ ?>
-    <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%;">
+    <!--<tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%;">
       <td colspan="4">&nbsp;</td>
       <td colspan="2"  align="right" style=" padding:15px; color:#144F5D; font: bold 12px arial; white-space:nowrap" ><?php if($p->type == 5 || $p->type == 6 ) { echo $this->Lang['AMO_TO_B_PAID']; } else { echo $this->Lang['AMTPAID']; } ?></td>
       <td colspan="2" align="center" style=" padding:15px; color:#666666; font: bold 12px arial; white-space:nowrap"><?php echo CURRENCY_SYMBOL.$grand_tot; ?></td>
-    </tr>
+    </tr>-->
  
   
   <tr>
@@ -286,7 +330,7 @@ $this->UserName = $this->session->get("UserName");
          <!-- <strong style="font-size: 20px;font-family: arial;font-weight: bold;color: #666; text-align: center;display:block;"><?php echo $this->Lang['SHIP_ADDR']; ?></strong> <strong style="display:block;padding:15px 0 0 0;font-size: 14px;font-family: arial;font-weight: bold;color: #666;"><?php echo ucfirst($p->name); ?> </strong>--> 
         <!--<div style="float:left;"> <span style="font-size: 12px;font-family: arial;color: #666;float:left;"> <b style="padding-top:5px;display:block;"> <?php echo $p->saddr1; ?>,</b> <b style="padding-top:5px;display:block;"><?php echo $p->saddr2; ?>,</b> <b style="padding-top:5px;display:block;"><?php echo $p->city_name." - ".$p->postal_code; ?></b> <b style="padding-top:5px;display:block;"> <?php echo $p->state; ?> , <?php echo $p->country; ?>.</b> <b style="padding-top:5px;display:block;"> <?php echo $p->phone; ?>.</b> </span> </div>
         </div>-->
-        <?php if(isset($this->set_pay_later) && $this->set_pay_later==1 && $p->type == 5){?>
+        <?php if(isset($this->set_pay_later) && $this->set_pay_later==1 && $p->type == 6){?>
         <div style="float:left; font-size:12px; text-align: center;margin-left:25px;"> <strong style="font-size: 20px;font-family: arial;font-weight: bold;color: #666; text-align: center;display:block;"><?php echo "Methods for ".$this->Lang['PAY_LATER']; ?></strong>
           <div style="float:left;"> <span style="font-size: 12px;font-family: arial;color: #666;float:left;"> <b style="padding-top:5px;display:block;"> <?php echo PAY_LATER; ?></b> </span> </div>
         </div>
@@ -318,3 +362,5 @@ $this->UserName = $this->session->get("UserName");
 </table>
 </body>
 </html>
+
+<!--<?php echo "payment_mail_product"; ?>-->

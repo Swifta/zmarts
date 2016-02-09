@@ -319,7 +319,7 @@ class Auction_Controller extends Layout_Controller
 
 	public function details_auction($storeurl="",$deal_key = "", $url_title = "",$type = "")
 	{
-		
+			
 		
 		
 	        $this->is_auction = 1;
@@ -335,6 +335,8 @@ class Auction_Controller extends Layout_Controller
 		  
 			$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
                 $this->storeid = $this->deals->get_store_id($storeurl);
+				
+			
 		if(count($this->deals_deatils) == 0){
 			common::message(-1, $this->Lang["PAGE_NOT"]);
 			url::redirect(PATH);
@@ -359,6 +361,7 @@ class Auction_Controller extends Layout_Controller
                                         $this->products_list_name = $this->Lang['REL_AUCTION'];
                                 }
                         }
+			
 						
 			$this->get_related_categories = $this->all_deals_list;
 			$this->all_payment_list = $this->deals->payment_list();
@@ -367,6 +370,8 @@ class Auction_Controller extends Layout_Controller
 			$this->unlike_details = $this->deals->get_unlike_data($Deal->deal_id,3);
 			$this->transaction_details = $this->deals->get_auction_transaction_data($Deal->deal_id);
 			$this->winner_transaction_details = $this->deals->get_auction_winner_transaction_data($Deal->deal_id);
+			
+			
 
 			$this->template->title = $Deal->deal_title."/".$Deal->category_name."/".CURRENCY_SYMBOL.$Deal->deal_value." | ".SITENAME;
 			
@@ -383,10 +388,16 @@ class Auction_Controller extends Layout_Controller
 				$this->home = new Home_Model();
 				$this->merchant_cms = $this->home->get_merchant_cms_data($storeurl);
 				$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
+				
+				
 				$this->stores = new Stores_Model();
 				$this->admin_details = $this->stores->get_admin_details();
 				/* Merchant Cms footer ends */
+				
+				
 				$this->footer_merchant_details = $this->deals->get_merchant_details($Deal->merchant_id);
+				
+				
 				
 				
 		}
@@ -507,15 +518,15 @@ class Auction_Controller extends Layout_Controller
 	{
 		//$this->template->javascript .= html::script(array(PATH.'js/timer/kk_countdown_1_2_jquery_min_detail.js'));
 		if($_POST){
-				$this->current_bid_value = $this->input->post('bid_value');
-				$this->deal_value = $this->input->post('bid_deal_value');
-				$this->deal_id = $this->input->post('bid_deal_id');
-				$this->deal_key = $this->input->post('bid_deal_key');
-				$this->bid_title = $this->input->post('bid_title');
-				$this->url_title = $this->input->post('bid_url_title');
-				$this->end_time = $this->input->post('end_time');
-				$this->shipping_amount = $this->input->post('shipping_amount');
-				$this->store_url = $this->input->post('store_url');
+				$this->current_bid_value = strip_tags(addslashes($this->input->post('bid_value')));
+				$this->deal_value = strip_tags(addslashes($this->input->post('bid_deal_value')));
+				$this->deal_id = strip_tags(addslashes($this->input->post('bid_deal_id')));
+				$this->deal_key = strip_tags(addslashes($this->input->post('bid_deal_key')));
+				$this->bid_title = strip_tags(addslashes($this->input->post('bid_title')));
+				$this->url_title = strip_tags(addslashes($this->input->post('bid_url_title')));
+				$this->end_time = strip_tags(addslashes($this->input->post('end_time')));
+				$this->shipping_amount = strip_tags(addslashes($this->input->post('shipping_amount')));
+				$this->store_url = strip_tags(addslashes($this->input->post('store_url')));
 				if($this->end_time > time()){
 
 				$status = $this->deals->insert_bidding(arr::to_object($_POST)); //insert the bidding details
@@ -561,12 +572,12 @@ class Auction_Controller extends Layout_Controller
 				$this->template->content = new View("themes/".THEME_NAME."/auction/auction_payment1");
 			}
 			else{
-				common::message(-1,"Sorry! this auction has been re-initiated");
+				common::message(-1,"Sorry! This auction has been re-initiated");
 				url::redirect(PATH.'auction.html');
 			}
 		}
 		else {
-			common::message(-1,"Sorry! You are already buy this Auction");
+			common::message(-1,"Sorry! You already bought this Auction");
 		  url::redirect(PATH.'auction.html');
 		}
 
@@ -639,11 +650,13 @@ class Auction_Controller extends Layout_Controller
 		$aResponse['server'] = '';
 			if(isset($_POST['action']) && $this->UserID)
 			{
+                            //htmlspecialchars($result_set, ENT_QUOTES, “UTF-8”));
 				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
 				{
 						$id = intval($_POST['idBox']);
 						$rate = floatval($_POST['rate']);
-						$deal_id=$_POST['deal_id'];
+						//$deal_id=$_POST['deal_id'];
+                                                $deal_id= htmlspecialchars($_POST['deal_id'], ENT_QUOTES, "UTF-8");
 						$success = true;
 						if($success)
 						{

@@ -198,11 +198,11 @@ $(document).ready(function(){
                                     }
                                     ?>
                         <?php if ($this->paypal_setting) { ?>
-                            <div class="payment_sel_lft"><a onclick="return SimilarProducts();" id="SimilarProducts"  > <input id="paypal_radio" type="radio" name="name" checked /></a>  <p><?php echo $this->Lang['PAYPAL']; ?></p></div>
+                            <div class="payment_sel_lft"><a onclick="return SimilarProducts();" id="SimilarProducts"  > <input id="paypal_radio" type="radio" name="name" checked /></a>  <p><?php echo $this->Lang["PPAL"]; ?></p></div>
                         <?php } ?>
                         <?php if ($this->credit_card_setting) { ?>
                             <div class="payment_sel_lft"><a onclick="return SimilarDeals();" id="SimilarDeals"  > <input type="radio" name="name"  <?php if ($this->paypal_setting) {
-                        } else { ?> checked <?php } ?> /></a> <p><?php echo $this->Lang['PAYPAL_CREDIT']; ?></p></div>
+                        } else { ?> checked <?php } ?> /></a> <p><?php echo $this->Lang['PPAL_CRDT']; ?></p></div>
                         <?php } ?>
                         <?php if ($this->authorize_setting) { ?>
                             <div class="payment_sel_lft"> <a onclick="return Authorize();" id="Authorize"  > <input type="radio" name="name"  /></a> <p><?php echo $this->Lang['AUTHORIZE']; ?></p></div>

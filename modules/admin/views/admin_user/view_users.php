@@ -55,9 +55,17 @@
                         <th align="left" ><?php echo $this->Lang["REFERAL_LINK"]; ?></th><th>:</th><td align="left"><?php echo PATH;?>referral/<?php echo $d->referral_id;?></td>
                 </tr>
                  <tr>
-                         <th valign="top" align="left" width="20%"><?php echo $this->Lang["UNIQ_IDEN"]; ?></th><th valign="top">:</th><td align="left"><?php if($d->unique_identifier !="") {echo $d->unique_identifier; } else { echo "-"; }  ?></td>
+                         <th valign="top" align="left" width="20%">Account Number</th><th valign="top">:</th><td align="left"><?php if($d->nuban !="") {echo $d->nuban; } else { echo "-"; }  ?></td>
                 </tr>
+
                 
+		<tr>
+                     <th valign="top" align="left" width="20%"><?php echo $this->Lang["LOGIN_TYPE"]; ?></th><th valign="top">:</th><td align="left">
+                     <?php if(strlen($d->nuban) != 10){ echo $this->Lang["NOR_USER"]; }else{ echo "Club Member"; }?>
+
+                     </td>
+                </tr>
+                <!--
 		<tr>
                      <th valign="top" align="left" width="20%"><?php echo $this->Lang["LOGIN_TYPE"]; ?></th><th valign="top">:</th><td align="left">
                      <?php if($d->login_type=='1'){ ?><?php echo $this->Lang["NOR_USER"]; ?>
@@ -71,7 +79,7 @@
                      <?php } ?>
                      </td>
                 </tr>
-                
+                -->
                 <tr>
                          <th valign="top" align="left" width="20%"><?php echo $this->Lang["JOIN_DATE"]; ?></th><th valign="top">:</th><td align="left"><?php echo date('d-M-Y H:m:s', $d->joined_date); ?></td>
                 </tr>

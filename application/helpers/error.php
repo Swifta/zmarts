@@ -16,6 +16,10 @@ class error {
 					$my_error[$key] = $this->Lang["REQQ"];
 					break;
 					
+				case 'validate_size_quantity':
+					$my_error[$key] = "Please specify a size and quantity for every field below or remove them.";
+					break;
+					
 				case 'check_required':
 					$my_error[$key] = $this->Lang["REQQ"];
 					break;

@@ -19,9 +19,9 @@ $content_text = array(
 
 "TYPE_PAY"=>"Type of payment",
 
-"PAYPAL" => "Paypal",
+"PPAL" => "Paypal",
 
-"PAYPAL_CREDIT" => "Credit card using paypal",
+"PPAL_CRDT" => "Credit card using paypal",
 
 "STORE_EMAIL_ID" => "Please enter store email",
     
@@ -55,9 +55,9 @@ $content_text = array(
 
 "EMAIL" => "Email",
 
-"PASSWORD" => "Password",
+"PSWD" => "Password",
 
-"CPASSWORD" => "Confirm Password",
+"CPSWD" => "Confirm Password",
 
 "ENTER_EMAIL"=>"Enter your email here",
 
@@ -123,7 +123,7 @@ $content_text = array(
 
 "PRIVACY"=>"Privacy Policy",
 
-"FOOTER_COPYRIGHT" => "Copyright © 2015",
+"FOOTER_COPYRIGHT" => "Copyright &copy;".date("Y"),
 
 "FOOTER_ALLRIGHT" => "All rights reserved",
 
@@ -165,7 +165,7 @@ $content_text = array(
 
 "SUBMIT" => "Submit",
 
-"FORGOT_PASS" => "Forgot password?",
+"FORGOT_PSWD" => "Forgot password?",
 
 "CANCEL" => "Cancel",
 
@@ -375,9 +375,9 @@ $content_text = array(
 
 "INTO_INVEN" => "into inventory",
 
-"NON_PAY_AUC" => "Non-payment of auctions you have won on",
+"NON_PAY_AUC" => "Non-payment of auctions you have won on ",
 
-"CANCEL_CURR_BID" => "also cancels out any other current bids you may have placed",
+"CANCEL_CURR_BID" => "also cancels out any other current bids you may have placed.",
 
 "AUC_DETS" => "Auction details",
 
@@ -385,9 +385,9 @@ $content_text = array(
 
 "AUC_CLOSE" => "Auction Close",
 
-"won_auc_comm_win_bid_amo" => "You have won this auction and committed to pay the winning bid amount. Once payment is received, your product will be shipped and you receive a shipping confirmation email.",
+"won_auc_comm_win_bid_amo" => "You have won this auction and are now committed to pay the winning bid amount. Once payment is received, your product will be shipped and you will receive a shipping confirmation email.",
 
-"REVIEW_SHIPP" => "To review your shipping information, log into your",
+"REVIEW_SHIPP" => "To review your shipping information, log into your  account and go to the 'My Account' page",
 
 "RECE_MSG_ADD" => "You are receiving this message because you signed up with the email address",
 
@@ -737,13 +737,13 @@ $content_text = array(
 
 "SUBS_NW" => "Subscribe now",
 
-"ALREADY_ACCESS2" => "Already have an access? Log in here",
+"ALREADY_ACCESS2" => "Already have access? Log in here",
 
 "APP_BUSS" => "We appreciate your business and we will never share your email address with third parties.",
 
 "SORRY_CATE" => "Sorry, there are no",
 
-"THANK_CT" => "Thank you for contact us",
+"THANK_CT" => "Thank you for contacting us",
 
 "PLS_ENT_NO" => "Please enter a valid number.",
 
@@ -998,7 +998,7 @@ $content_text = array(
 
 "PLS_SEL_COUNTRY_FIR" => "Please select your country first",
 
-"PCPM" => "Password and Confirm Password Doesn't Match",
+"PCPM" => "Passwords do not Match",
 
 "BY_CLICKING_SUBMIT"=>"By clicking Sign Up you agree to $THIS_SITENAME",
 
@@ -1006,7 +1006,7 @@ $content_text = array(
 
 "USER_EXIST" =>"User already exist",
 
-"EMAIL_EXIST" =>"Email Id already exists",
+"EMAIL_EXIST" =>"You are already subscribed",
 
 "EMAIL_ADDRESS"=>"Email address ",
 
@@ -1032,7 +1032,7 @@ $content_text = array(
 
 "YOUR_PAYMENT_SUCCESS" => "Your payment has been completed successfully",
     
-"YOUR_PAYMENT_PENDING" => "Your order has been sent, Payment is Pending by you.\nYou need to PAY LATER at"
+"YOUR_PAYMENT_PENDING" => "Your order has been sent, Payment is Pending.\nYou need to PAY LATER at"
     . " any of the channels in the Image",
     
 "YOUR_PAYMENT_PENDING_COD" => "Your order has been sent, Payment is Pending by you.\nYou need to PAY ON DELIVERY",
@@ -1212,7 +1212,7 @@ $content_text = array(
 
 "REF_AMM" =>"Referral Amount",
 
-"CREDIT_CHARGED"=>"You will be charged",
+"CRDT_CHARGED"=>"You will be charged",
 
 "BUY_CLOSE_EMAIL1" => "You can download your ticket from your ",
 
@@ -1420,7 +1420,7 @@ $content_text = array(
 
 "USER_CREDIT_CHARGED"=>"Credit card will be charged",
 
-"YOU_HAVE_RECEIVED"  => "You have received a inquired for the",
+"YOU_HAVE_RECEIVED"  => "You have received an inquiry from",
 
 "INV_PH" => "Invalid Phone Number. Enter your phone number (e.g. 070...,080...)",
 
@@ -1530,7 +1530,7 @@ $content_text = array(
 
 "USER_BLOCKED_ADMIN" => " Your Account has been blocked Please Contact Administrator",
 
-"PLEASE_SELECT_TERMS" => "Please select our terms",
+"PLEASE_SELECT_TERMS" => "Please accept our terms",
 
 "ADD" => "Add",
 
@@ -1646,7 +1646,7 @@ $content_text = array(
 
 "ENTER_ADDR1" => "Enter your address here",
 
-"ENTER_ADDR2" => "Enter address line 2 here",
+"ENTER_ADDR2" => "Enter City", //"Enter address line 2 here",
     
 "ENTER_COMPANY_NAME" => "Enter company name",
     
@@ -1834,7 +1834,7 @@ $content_text = array(
 
 "Z_ACC_OPEN" => "Click to open up a Zenith Bank Account",
 	
-"ACCOUNT_NUMBER" => "NUBAN Account Number",
+"ACCT_NUMBER" => "NUBAN Account Number",
     
 "ENTER_ACCOUNT_NUMBER" => "ENTER YOUR NUBAN A/C NUMBER",
 
@@ -1851,4 +1851,6 @@ $content_text = array(
 "WEBPAY_RESPONSE" => "Webpay Transaction Response",
 
 "INSTALL_PAY" => "Installment Payment ",
+
+"TO_SHIP" => "Please be informed that your ordered item(s) will be delivered by the Merchant(s)",
 			);

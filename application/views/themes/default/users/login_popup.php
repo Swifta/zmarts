@@ -29,7 +29,7 @@
                               </div>   
                           </li>
                           <li>
-                              <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">* </span> </label>
+                              <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">* </span> </label>
                               <div class="fullname">
                                   <input type="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" value="" name="password" autocomplete="off">                         
                                   <em id="password_error"></em>                    
@@ -41,7 +41,7 @@
                             $scriptname = end(explode('index.php/',$val));
                             ?>
                                    <input type="hidden" placeholder="Enter your password here" value="<?php echo $scriptname;?>" name="url" autocomplete="off" class="fancy_input_bx" />
-                          <a class="forget_link" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PASS']; ?>?"><?php echo $this->Lang['FORGOT_PASS']; ?>?</a>
+                          <a class="forget_link" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>?"><?php echo $this->Lang['FORGOT_PSWD']; ?>?</a>
                           </li>
                           <li>
                               <input class="sign_submit" type="submit" value="<?php echo $this->Lang['SIGN_IN']; ?>" title="<?php echo $this->Lang['SIGN_IN']; ?>" onclick="return validateForms();">
@@ -51,8 +51,8 @@
                   </form>
               </div>
               <div class="signup_social_block">                
-                      <p><?php echo $this->Lang['SIGN_IN_WITH']; ?></p>
-                      <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['SIGN_UP_WITH']; ?>">&nbsp;</a>
+                      <!--<p><?php echo $this->Lang['SIGN_IN_WITH']; ?></p>-->
+                      <!--<a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['SIGN_UP_WITH']; ?>">&nbsp;</a>-->
 <br />
     <button class="g-signin g_connect" 
             data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"

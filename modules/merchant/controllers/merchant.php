@@ -111,6 +111,7 @@ class Merchant_Controller extends website_Controller
 	{
 		
 		$this->merchant_dashboard_data = $this->merchant->get_merchant_dashboard_data();
+		
 		$this->balance = $this->merchant->get_merchant_balance1();
 		$this->balance_list_fund = $this->merchant->get_merchant_balance_fund();
 		$this->deals_transaction_list = $this->merchant->get_merchant_deal_transaction_chart_list();
@@ -508,8 +509,8 @@ class Merchant_Controller extends website_Controller
 					elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 					elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 
-					if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-					elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+					if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+					elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 					elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 					elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 					elseif($d->type=="5"){ $transaction_type="Cash On Delivery"; }
@@ -1050,8 +1051,8 @@ class Merchant_Controller extends website_Controller
 	    $this->manage_merchant_shop ="1";
 		if($_POST){
 			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			//$post = new Validation($_POST);
+			$post = Validation::factory(array_merge($this->userpost,$_FILES))
 					
 					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
@@ -1061,11 +1062,12 @@ class Merchant_Controller extends website_Controller
 					->add_rules('storename', 'required',array($this,'check_store_exist1'))
 					->add_rules('about_us', 'required')
 					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
-					->add_rules('website', 'valid::url')
+					//->add_rules('website', 'valid::url')
 					->add_rules('latitude', 'required','chars[0-9.-]')
 					->add_rules('longitude', 'required','chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-					->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
+					->add_rules('email',array($this,'check_store_admin1'))
+                                //->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
 					->add_rules('sector', 'required')
 					->add_rules('subsector', 'required')
 					->add_rules('username', 'required');
@@ -1074,7 +1076,8 @@ class Merchant_Controller extends website_Controller
 					{
 						$post->add_rules('subsector', 'required');
 					}
-
+                                        //var_dump($post->validate());
+//echo "was here ".$post->validate()." here"; die;
 				if($post->validate()){
                                     
 					$storename = $this->input->post("storename");
@@ -1676,6 +1679,19 @@ class Merchant_Controller extends website_Controller
 								
 							}
 						}
+						
+						
+						if($_POST['size_val'] == '1'){
+								
+								$post->add_rules('size', array($this, 'validate_size_quantity'));
+								
+							}else{
+									$s = $this->input->post("size_quantity");
+									if($s[0] === '')
+										$post->add_rules('size_quantity[0]','required');
+							
+							
+						}
 							
 							$price_s = $post->price;
 							if(isset($price_s)){
@@ -1721,14 +1737,24 @@ class Merchant_Controller extends website_Controller
 								$post->add_rules('start_date','required');
 								$post->add_rules('end_date','required',array($this, 'check_end_date'));
 							}
+							
+							
 				 	if($post->validate()){
+						
+						
 						$deal_key = text::random($type = 'alnum', $length = 8);
 						$size_quantity = $this->input->post("size_quantity");
-						if(count($size_quantity)>1)
-						{
-						unset($size_quantity[0]);
-						$size_quantity=array_values($size_quantity);
-						}
+								if(count($size_quantity)>1 && $_POST['size_val'] == '1')
+								{
+								unset($size_quantity[0]);
+								unset($this->userPost['size'][0]);
+								$size_quantity=array_values($size_quantity);
+								}else{
+									$s = $size_quantity[0];
+									$size_quantity = array();
+									$size_quantity[0] = $s;
+								}
+								
 						$status = $this->merchant->add_products(arr::to_object($this->userPost),$deal_key,$size_quantity);
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
@@ -1792,7 +1818,10 @@ class Merchant_Controller extends website_Controller
 						$this->form_error["city"] = $this->Lang["PRODUCT_EXIST"];
 				}
 				else{
+					
 					$this->form_error = error::_error($post->errors());
+					
+					
 				}
 		}
 
@@ -1973,6 +2002,23 @@ class Merchant_Controller extends website_Controller
 							}
 						}
 						
+						if(isset($_POST['size_val'])){
+							
+							if($_POST['size_val'] == '1'){
+								
+								$post->add_rules('size', array($this, 'validate_size_quantity'));
+								
+							}else{
+									$s = $this->input->post("size_quantity");
+									if($s[0] === '')
+										$post->add_rules('size_quantity[0]','required');
+							
+							
+						}
+							
+							
+						}
+						
 						
 				        
 				        $price_s = $post->price;
@@ -2018,7 +2064,19 @@ class Merchant_Controller extends website_Controller
 								$post->add_rules('end_date','required',array($this, 'check_end_date'));
 							}
 			if($post->validate()){
+				
+				
 			    $size_quantity = $this->input->post("size_quantity");
+								if(count($size_quantity)>1 && $_POST['size_val'] == '1')
+								{
+								unset($size_quantity[0]);
+								unset($this->userPost['size'][0]);
+								$size_quantity=array_values($size_quantity);
+								}else{
+									$s = $size_quantity[0];
+									$size_quantity = array();
+									$size_quantity[0] = $s;
+								}
 				$status = $this->merchant->edit_product($deal_id, $deal_key, arr::to_object($this->userPost),$size_quantity,$this->preview_type);
 				if($status == 1 && $deal_key){
 					if($_FILES['image']['name'] != "" ){
@@ -2167,8 +2225,8 @@ class Merchant_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -2194,8 +2252,8 @@ class Merchant_Controller extends website_Controller
 						elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -2766,8 +2824,8 @@ class Merchant_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($d->payment_status=="Failed"){ $status=$this->Lang["FAILED"]; }
 
-                                                if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-                                                elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+                                                if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+                                                elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
                                                 elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
                                                 elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
                                                 elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -3335,7 +3393,7 @@ class Merchant_Controller extends website_Controller
 		}
 		$this->commission_list = $this->merchant->get_merchant_balance();
 		if($search){ // Export in CSV format
-				$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+				$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
 				$i=0;
 				$first_item = $this->pagination->current_first_item;
 				foreach($this->transaction_list as $u)
@@ -3345,12 +3403,13 @@ class Merchant_Controller extends website_Controller
                                         if($u->payment_status=="Completed"){ $tran_type = $this->Lang["COMPLETED"]; }
                                         if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
+                                        if($u->type>4){ $tran_type1 = "(".$u->transaction_type.")"; }
 
-					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.($u->deal_value *($u->deal_merchant_commission/100))*$u->quantity.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.$u->deal_value*$u->quantity.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 					$i++;
 				}
 					header('Content-Description: File Transfer');
@@ -3433,7 +3492,7 @@ class Merchant_Controller extends website_Controller
                 }
 
 			if($search){ // Export all in CSV format
-				$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Shipping Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+				$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Shipping Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
 				$i=0;
 				$first_item = $this->pagination->current_first_item;
 				foreach($this->product_transaction_list as $u)
@@ -3443,12 +3502,13 @@ class Merchant_Controller extends website_Controller
                                         if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                         if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
-
-					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.($u->deal_value *($u->deal_merchant_commission/100))*$u->quantity.'","'.$u->shippingamount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+                                        if($u->type > "4"){ $tran_type1 = "(".$u->transaction_type.")"; }
+                                        
+					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.$u->deal_value * $u->quantity.'","'.$u->shippingamount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 					$i++;
 
 				}
@@ -3698,7 +3758,7 @@ class Merchant_Controller extends website_Controller
 			$this->transaction_auction_list = $this->merchant->get_transaction_list($type, $this->search_key,$this->pagination->sql_offset, $this->pagination->items_per_page,$this->type,$this->sort,"",1,$this->today,$this->startdate,$this->enddate);
 		}
 		if($search){ // Export in CSV format
-				$out = '"S.No","Name","Auction Title","Bidding Price('.CURRENCY_SYMBOL.')","Shipping Fee('.CURRENCY_SYMBOL.')","Pay Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+				$out = '"S.No","Name","Auction Title","Bidding Price('.CURRENCY_SYMBOL.')","Shipping Fee('.CURRENCY_SYMBOL.')","Pay Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
 				$i=0;
 				$first_item = $this->pagination->current_first_item;
 				foreach($this->transaction_auction_list as $u)
@@ -3710,11 +3770,12 @@ class Merchant_Controller extends website_Controller
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                         if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
-					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->bid_amount.'","'.$u->shipping_amount.'","'.$u->amount.'","'.($u->bid_amount *($u->deal_merchant_commission/100)).'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+                                        if($u->type > 4){ $tran_type1 = "(".$u->transaction_type.")"; }
+					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->bid_amount.'","'.$u->shipping_amount.'","'.$u->amount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 					$i++;
 
 				}
@@ -5219,7 +5280,7 @@ class Merchant_Controller extends website_Controller
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Your Email was Successfully Sent");
 				url::redirect(PATH."merchant/manage-moderator.html");
 			}
 			else{	
@@ -7384,4 +7445,28 @@ class Merchant_Controller extends website_Controller
 		return 0;
 				
 	}
+	
+	function validate_size_quantity(){
+		$size_q = $_POST['size_quantity'];
+		$sizes = $_POST['size'];
+		
+		$this->size_arr = $sizes;
+		$this->size_q_arr = $size_q;
+		
+		unset($sizes[0]);
+		unset($size_q[0]);
+		foreach($sizes as $size){
+			if($size == '')
+				return 0;
+		}
+		
+		foreach($size_q as $q){
+			if($q == '')
+				return 0;
+		}
+		return 1;
+	}
 }
+
+
+

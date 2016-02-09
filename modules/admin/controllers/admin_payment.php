@@ -230,7 +230,7 @@ class Admin_payment_Controller extends website_Controller
 				$this->transaction_list = $this->payment->get_transaction_deal_list($type, $this->search_key, $this->pagination->sql_offset, $this->pagination->items_per_page,$this->type,$this->sort,'',1,$this->today,$this->startdate,$this->enddate);
 		}
 		if($search){  // Export in CSV format
-			$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Referral Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+			$out = '"S.No","Name","Deal Title","Quantity","Referral Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
 			$i=0;
 			$first_item = $this->pagination->current_first_item;
 			foreach($this->transaction_list as $u)
@@ -241,12 +241,14 @@ class Admin_payment_Controller extends website_Controller
                                 if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                 if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                 if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
-                                if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                 if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                 if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
+                                if($u->type > "4"){ $tran_type1 = "(".$u->transaction_type.")"; }
 
-				$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.$u->referral_amount.'","'.($u->deal_value *($u->deal_merchant_commission/100))*$u->quantity.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+				//$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.$u->shippingamount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+				$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.$u->referral_amount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 				$i++;
 
 				}
@@ -427,7 +429,8 @@ class Admin_payment_Controller extends website_Controller
 				$this->product_transaction_list = $this->payment->get_transaction_list($type, $this->search_key, $this->pagination->sql_offset, $this->pagination->items_per_page,2,$this->type,$this->sort,"",1,$this->today,$this->startdate,$this->enddate);
 			}
 			if($search){ // Export in CSV format
-				$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Shipping Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+//				$out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Shipping Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+                            $out = '"S.No","Name","Deal Title","Quantity","Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
 				$i=0;
 				$first_item = $this->pagination->current_first_item;
 				foreach($this->product_transaction_list as $u)
@@ -439,13 +442,13 @@ class Admin_payment_Controller extends website_Controller
 				     if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
 				     if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-					 if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-					 if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+					 if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+					 if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
 					 if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
 					 if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
-                                         if($u->type=="5"){ $tran_type1 = "(".$u->transaction_type.")"; }
+                                         if($u->type > "4"){ $tran_type1 = "(".$u->transaction_type.")"; }
 
-					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.($u->deal_value *($u->deal_merchant_commission/100))*$u->quantity.'","'.$u->shippingamount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->quantity.'","'.($u->deal_value-($u->deal_value *($u->deal_merchant_commission/100)))*$u->quantity.'","'.$u->shippingamount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 					$i++;
 
 				}
@@ -620,8 +623,8 @@ class Admin_payment_Controller extends website_Controller
 			$this->transaction_auction_list = $this->payment->get_auction_transaction_list($type, $this->search_key, $this->pagination->sql_offset, $this->pagination->items_per_page,3,$this->type,$this->sort,"",1,$this->today,$this->startdate,$this->enddate);
 		}
 		if($search){ // Export in CSV format
-				$out = '"S.No","Name","Auction Title","Bidding Price('.CURRENCY_SYMBOL.')","Shipping Fee('.CURRENCY_SYMBOL.')","Pay Amount('.CURRENCY_SYMBOL.')","Admin Commission('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
-				$i=0;
+				$out = '"S.No","Name","Auction Title","Bidding Price('.CURRENCY_SYMBOL.')","Shipping Fee('.CURRENCY_SYMBOL.')","Pay Amount('.CURRENCY_SYMBOL.')","Status","Transaction Date & Time","Transaction Type"'."\r\n";
+				$i=1;
 				$first_item = $this->pagination->current_first_item;
 				foreach($this->transaction_auction_list as $u)
 				{
@@ -632,12 +635,13 @@ class Admin_payment_Controller extends website_Controller
 				     if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
 				     if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-					 if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-					 if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+					 if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+					 if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
 					 if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
 					 if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
-
-					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->bid_amount.'","'.$u->shipping_amount.'","'.$u->amount.'","'.($u->bid_amount *($u->deal_merchant_commission/100)).'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
+                                         if($u->type > "4"){ $tran_type1 = "(".$u->transaction_type.")"; }
+                                         
+					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->bid_amount.'","'.$u->shipping_amount.'","'.$u->amount.'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
 					$i++;
 
 				}

@@ -131,7 +131,7 @@ $R = $this->result_mail;
                                                     </tr>
                                                     <tr height="10"><td></td></tr>
                                                     <tr>
-                                                        <td colspan="4" align="right"><?php echo $this->Lang["CREDIT_CHARGED"]; ?></td>
+                                                        <td colspan="4" align="right"><?php echo $this->Lang["CRDT_CHARGED"]; ?></td>
                                                         <td align="center" style="font-size: 13px; color:#666;">=</td>
                                                         <td align="right" style="color:#144F5D;"><?php echo CURRENCY_SYMBOL.$R->amount; ?></td>
                                                     </tr>
@@ -157,3 +157,5 @@ $R = $this->result_mail;
         </table>
     </body>
 </html>
+
+<!--<?php echo "payment_mail"; ?>-->

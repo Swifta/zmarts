@@ -30,7 +30,7 @@
                                     <tr>
                                         <td width="12px"></td>
                                         <td style="  font:bold 18px arial; color:#144F5D;">			
-                                            <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo ucfirst($_POST['firstname']); } ?> <?php if(isset($_POST['lastname'])) { /*echo ucfirst($_POST['lastname']); */} ?> 
+                                            <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo ucfirst(htmlentities($_POST['firstname'],  ENT_QUOTES,  "utf-8")); } ?> <?php if(isset($_POST['lastname'])) { /*echo ucfirst($_POST['lastname']); */} ?> 
                                         </td>
                                     </tr>
                                     <tr style="height:7px;"><td></td></tr>
@@ -45,17 +45,17 @@
                                     <tr style="height:10"><td></td></tr>
                                      <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['YOR_EMAIL']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['email'])) { echo $_POST['email']; } ?></span></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['YOR_EMAIL']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['email'])) { echo htmlentities($_POST['email'],  ENT_QUOTES,  "utf-8"); } ?></span></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                     <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; margin:0; padding:0; color:#666;"><?php echo $this->Lang['YOUR_PASS']; ?> :  <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" > <?php if(isset($this->password)) { echo $this->password; }?></span></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; margin:0; padding:0; color:#666;"><?php echo $this->Lang['YOUR_PASS']; ?> :  <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" > <?php if(isset($this->password)) { echo htmlentities($this->password,  ENT_QUOTES,  "utf-8"); }?></span></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                       <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['UR_DEAL_COMM']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['commission'])) { echo $_POST['commission']; } ?> %</span></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['UR_DEAL_COMM']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['commission'])) { echo htmlentities($_POST['commission'],  ENT_QUOTES,  "utf-8"); } ?> %</span></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                     <tr>                   
@@ -67,7 +67,7 @@
                                      <tr style=" height:8"><td></td></tr>
                                     <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['SHOP_ADDR']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['address1'])) { echo $_POST['address1']; } ?> , <?php if(isset($_POST['address2'])) { echo $_POST['address2']; } ?></span></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['SHOP_ADDR']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['address1'])) { echo htmlentities($_POST['address1'],  ENT_QUOTES,  "utf-8"); } ?> , <?php if(isset($_POST['address2'])) { echo htmlentities($_POST['address2'],  ENT_QUOTES,  "utf-8"); } ?></span></p></td>
                                     </tr>
                                      <tr style=" height:8"><td></td></tr>
                                      

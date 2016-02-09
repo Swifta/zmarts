@@ -70,7 +70,13 @@ class Payment_product_Model extends Model
 		 
                  $purchase_count_total = $purchase_qty + $quantity;
 	         $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-                 $this->db->query("update users set deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");
+                /* $this->db->query("update users set deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");*/
+				
+			/*	$this->db->query("update users set deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");*/
+				
+				$this->db->update("users", array("deal_bought_count" => "deal_bought_count+$quantity"), array("user_id"=>$this->UserID));
+				
+				
                  
 		 return $result_deal; exit;
 	}
@@ -80,7 +86,9 @@ class Payment_product_Model extends Model
 	public function products_referral_amount_payment_deatils($referral_amount="")
 	{
 	        if($referral_amount){
-		$this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount  where user_id = $this->UserID");
+                    $this->db->update("users", array("user_referral_balance"=> new Database_Expression('user_referral_balance - '.$referral_amount), 
+                        array("user_id"=>$this->UserID)));
+                    //$this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount  where user_id = $this->UserID");
 		} 
 	}
 	
@@ -107,7 +115,9 @@ class Payment_product_Model extends Model
 	public function update_referral_amount($ref_user_id = "")
 	{
 		$referral_amount = REFERRAL_AMOUNT;
-		$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+                $this->db->update("users", array("user_referral_balance"=> new Database_Expression('user_referral_balance + $referral_amount'), 
+                        array("user_id"=>$ref_user_id)));
+		//$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
 		return;
 	}
 
@@ -153,17 +163,17 @@ class Payment_product_Model extends Model
 	public function get_store_credits_product($productid="",$durationid="")
 	{
 		$result = $this->db->from("product")
-							->join("duration","duration.duration_merchantid","product.merchant_id")
-							->join("stores","stores.store_id","product.shop_id")
-							->where(array("duration_id"=>$durationid,"deal_id"=>$productid,"store_status" => 1))
-							->get();
+                            ->join("duration","duration.duration_merchantid","product.merchant_id")
+                            ->join("stores","stores.store_id","product.shop_id")
+                            ->where(array("duration_id"=>$durationid,"deal_id"=>$productid,"store_status" => 1))
+                            ->get();
 		return $result;
 	}
 	/* INSERT STORE CREDIT PRODUCTS */
 	public function insert_storecredit_products($deal_id="",$deal_value="",$product_qty="",$merchant_id="",$shipping_amount="",$shipping_methods="",$durationid="",$duration_period="",$product_size="",$product_color="",$installment_value="")
 	{
-		
-		$this->db->query("update users set monthly_installment_amt = monthly_installment_amt + $installment_value where user_id = $this->UserID");
+		$this->db->update("users", array("monthly_installment_amt"=>new Database_Expression('monthly_installment_amt + '.$installment_value)), array("user_id "=> $this->UserID));
+		//$this->db->query("update users set monthly_installment_amt = monthly_installment_amt + $installment_value where user_id = $this->UserID");
 		$result = $this->db->insert("store_credit_save",array("productid"=>$deal_id,"product_value"=>$deal_value,"product_quantity"=>$product_qty,"sizeid"=>$product_size,"colorid"=>$product_color,"durationid"=>$durationid,"duration_period"=>$duration_period,"shipping_method"=>$shipping_methods,"shipping_amount"=>$shipping_amount,"merchantid"=>$merchant_id,"userid"=>$this->UserID,"credit_status"=>1,"document_no"=>$this->UserID));
 		$storecredit_ID = $result->insert_id();
 		return $storecredit_ID;
@@ -177,9 +187,9 @@ class Payment_product_Model extends Model
 	
 	public function get_products_list($duration_id="",$productid="") 
 	{
-		        
-		$result = $this->db->query("select *, $this->deal_value_condition,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = $duration_id and deal_id = $productid");
-		/*
+		$result = $this->db->query("select *, $this->deal_value_condition,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = '".
+                strip_tags(addslashes($duration_id))."' and deal_id = '".strip_tags(addslashes($productid))."'");
+                /*
 		$result = $this->db->query("select *,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.store_credit_period from shipping_info as s join store_credit_save as t on t.productid=s.transaction_id join product as d on d.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' $condition order by shipping_id DESC "); 
 		*/
 		return $result;
@@ -226,7 +236,9 @@ public function get_cart_products1($deal_id = "")
 	/* check user limit installment */
 	public function check_user_instalment_limit($installment_value="")
 	{
-		$result = $this->db->query("select monthly_installment_amt from users where user_id = $this->UserID");
+            $result = $this->db->select("monthly_installment_amt")->from("users")
+                    ->where(array("user_id"=>$this->UserID));
+		//$result = $this->db->query("select monthly_installment_amt from users where user_id = $this->UserID");
 		if(isset($result)) {
 			$balance_instalment_amt = MONTHLY_INSTALLMENT_LIMIT - $result->current()->monthly_installment_amt;
 			if($balance_instalment_amt > 0) { 				//100 - 80 = 20

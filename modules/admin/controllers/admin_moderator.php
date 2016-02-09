@@ -41,7 +41,8 @@ class Admin_moderator_Controller extends website_Controller {
 		$this->add_moderator = "1";
 		if($_POST){
 			$from = CONTACT_EMAIL;    	
-			$this->userPost = $this->input->post();
+			//$this->userPost = $this->input->post();
+                        $this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
 						

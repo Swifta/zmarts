@@ -60,11 +60,11 @@ class Auction_Model extends Model
 			}
 			if($search){
 
-		        $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
-			$conditions .= " or deal_description like '%".strip_tags($search)."%')";
+		        $conditions .= " and (deal_title like '%".strip_tags(addslashes($search))."%'";
+			$conditions .= " or deal_description like '%".strip_tags(addslashes($search))."%')";
 			}
 			$query="select auction.deal_id from(auction) join category on category.category_id=auction.category_id join stores on stores.store_id=auction.shop_id where $conditions $sort_con";
-			$result = $this->db->query($query);
+                        $result = $this->db->query($query);
 		        } else {
 
 			$query="select auction.deal_id from(auction) join category on category.category_id=auction.category_id join stores on stores.store_id=auction.shop_id where $conditions order by deal_id DESC";
@@ -223,8 +223,8 @@ class Auction_Model extends Model
                         }
 	                if($search){
 
-                        $conditions .= " and (deal_title like '%".strip_tags($search)."%'";
-	                $conditions .= " or deal_description like '%".strip_tags($search)."%')";
+                        $conditions .= " and (deal_title like '%".strip_tags(addslashes($search))."%'";
+	                $conditions .= " or deal_description like '%".strip_tags(addslashes($search))."%')";
 	                }
 
 	                $query="select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from(auction) join category on category.category_id=auction.category_id join stores on stores.store_id=auction.shop_id where $conditions $sort_con limit $offset,$record ";
@@ -250,20 +250,20 @@ class Auction_Model extends Model
 			$conditions .= " AND stores.city_id = $this->city_id ";
 		}
 		if($category && $cat_type=='main'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 		}
 		else if($category && $cat_type=='sub'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 			$join = "auction.sub_category_id";
 
 		}
 		else if($category && $cat_type=='sec'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 			$join = "auction.sec_category_id";
 
 		}
 		else if($category && $cat_type=='third'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 			$join = "auction.third_category_id";
 
 		}
@@ -282,20 +282,20 @@ class Auction_Model extends Model
 			$conditions .= " AND stores.city_id = $this->city_id ";
 		}
 				if($category && $cat_type=='main'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 		}
 		else if($category && $cat_type=='sub'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 			$join = "auction.sub_category_id";
 
 		}
 		else if($category && $cat_type=='sec'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 			$join = "auction.sec_category_id";
 
 		}
 		else if($category && $cat_type=='third'){
-			$conditions .= " AND category.category_url = '$category' ";
+			$conditions .= " AND category.category_url = '".strip_tags(addslashes($category))."' ";
 			$join = "auction.third_category_id";
 
 		}
@@ -415,7 +415,9 @@ class Auction_Model extends Model
 			        $count_view = $this->db->from("view_count_location")->where(array("deal_key" => $deal_key,"ip" =>$ip))->get();
 			        if(count($count_view) == 0){
 			                $this->db->insert("view_count_location", array("deal_key" => $deal_key,"ip" =>$ip,"city" => $city,"country" => $country,"date" => time()));
-			                $this->db->query("update auction set view_count = view_count + 1 where deal_key = '$deal_key'");
+			                //$this->db->query("update auction set view_count = view_count + 1 where deal_key = '$deal_key'");
+                                        $this->db->update("auction", array("view_count"=>new Database_Expression('view_count + 1')), 
+                                                array("deal_key" => $deal_key));
 			       }
 			       $condition = array("url_title" => $url_title, "deal_key" => $deal_key, "auction.deal_status" => 1, "category.category_status" => 1, "store_status" => 1,"auction.deal_status" => 1);
 			}
@@ -436,8 +438,10 @@ class Auction_Model extends Model
 		$result1 = $this->db->from("bidding")->where(array("auction_id" => $post->bid_deal_id,"bid_amount" => $post->bid_value,"shipping_amount" => $post->shipping_amount))->get();
 		if(count($result1)==0){
 		$result = $this->db->insert("bidding",array("auction_id" => $post->bid_deal_id,"auction_title" =>$post->bid_title,"user_id" => $this->UserID,"bid_amount" => $post->bid_value,"shipping_amount" => $post->shipping_amount,"bidding_time" => time(),"end_time" => $post->end_time ));
-		$this->db->query("update auction set deal_price = bid_increment + deal_price,bid_count = bid_count + 1 where deal_id = $post->bid_deal_id ");
-		return count($result);
+		//$this->db->query("update auction set deal_price = bid_increment + deal_price,bid_count = bid_count + 1 where deal_id = $post->bid_deal_id ");
+		$this->db->update("auction", array("deal_price"=>new Database_Expression('bid_increment + deal_price'),
+                    "bid_count"=>new Database_Expression('bid_count + 1')), array("deal_id" => $post->bid_deal_id));
+                return count($result);
 		}
 		return 0;
 	}
@@ -524,12 +528,26 @@ class Auction_Model extends Model
 
 	public function get_auction_winner_transaction_data($deal_id = "")
 	{
-	    $query = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id ORDER BY bid_amount DESC LIMIT 1";
-	        $result_high = $this->db->query($query);
+	    //$query = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id ORDER BY bid_amount DESC LIMIT 1";
+	    //    $result_high = $this->db->query($query);
+            $result_high = $this->db->select("*")->from("transaction")
+                    ->join("users", "users.user_id", "transaction.user_id")
+                    ->join("city", "city.city_id", "users.city_id")
+                    ->join("country", "country.country_id", "users.country_id")
+                    ->where(array("transaction.deal_id" => $deal_id))
+                    ->orderby("bid_amount", "DESC")
+                    ->limit(1)->get();
 	            if(count($result_high)>0){
 	                    $bid_amount_high= $result_high->current()->bid_amount;
-	                    $query_count = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id and bid_amount = $bid_amount_high";
-	                    $result = $this->db->query($query_count);
+	                    //$query_count = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id and bid_amount = $bid_amount_high";
+	                    //$result = $this->db->query($query_count);
+                            $result = $this->db->select("*")->from("transaction")
+                                    ->join("users", "users.user_id", "transaction.user_id")
+                                    ->join("city", "city.city_id", "users.city_id")
+                                    ->join("country", "country.country_id", "users.country_id")
+                                    ->where(array("transaction.deal_id" => $deal_id, "bid_amount" => $bid_amount_high))
+									->get();
+                            
 	                    return $result;
 	            }
 	return $result_high;
@@ -650,7 +668,7 @@ class Auction_Model extends Model
 		if(count($result)>0)
 		{
 			$get_rate = count($result);
-			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=$aucton_id AND module_id = 3");
+			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=".strip_tags(addslashes($aucton_id))." AND module_id = 3");
 			$get_sum=$sum->current()->sum;
 			$average= $get_sum/$get_rate;
 			return $average;
@@ -669,7 +687,7 @@ class Auction_Model extends Model
 		if(count($result)>0)
 		{
 			$get_rate = count($result);
-			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=$deal_id AND module_id = 3");
+			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=".strip_tags(addslashes($deal_id))." AND module_id = 3");
 			$get_sum=$sum->current()->sum;
 			return $get_sum;
 		}
@@ -777,18 +795,18 @@ class Auction_Model extends Model
 		$conditions = "";
 
 		if($main_cat){
-			 $conditions .= " and category.category_url='$main_cat'";
+			 $conditions .= " and category.category_url='".strip_tags(addslashes($main_cat))."'";
 		}
 		if($sub_cat){
-			$conditions .= " and category.category_url='$sub_cat'";
+			$conditions .= " and category.category_url='".strip_tags(addslashes($sub_cat))."'";
 			$join ="join category on category.category_id=auction.sub_category_id";
 		}
 		if($sec_cat){
-			$conditions .= " and category.category_url='$sec_cat'";
+			$conditions .= " and category.category_url='".strip_tags(addslashes($sec_cat))."'";
 			$join ="join category on category.category_id=auction.sec_category_id";
 		}
 		if($third_cat){
-			$conditions .= " and category.category_url='$third_cat'";
+			$conditions .= " and category.category_url='".strip_tags(addslashes($third_cat))."'";
 			$join ="join category on category.category_id=auction.third_category_id";
 		}
 
@@ -936,7 +954,17 @@ class Auction_Model extends Model
 	}
 	
 	public function get_merchant_details($merchant_id=''){
-		$result = $this->db->select("*")->from("users")->join("city","city.city_id","users.city_id","left")->join("country","country.country_id","users.country_id","left")->where("user_id",$merchant_id)->get();
+		
+		try{
+		$result = $this->db->select("*")->from("users")
+										->join("city","city.city_id","users.city_id","left")
+										->join("country","country.country_id","users.country_id","left")
+										->where(array("user_id"=>$merchant_id))
+										->get();
+		}catch(Exception $e){
+			var_dump($e);
+			
+		}
 		return $result;
 	}
 	

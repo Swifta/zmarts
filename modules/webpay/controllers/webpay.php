@@ -58,11 +58,11 @@ class Webpay_Controller extends Layout_Controller
             }
             die;
         }
-        
+             
         public function ajax_confirm(){
             //$transaction_id = "jTnUlW1RGrVUALj";
             if(isset($_POST['transaction_id'])){
-                $transaction_id = $_POST['transaction_id'];
+                $transaction_id = strip_tags(addslashes($_POST['transaction_id']));
                 $transaction_total = $this->webpay->getTotalAmountOnTransaction($transaction_id);
                 $txnref = $transaction_id;
                 $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
@@ -164,11 +164,11 @@ class Webpay_Controller extends Layout_Controller
                 //echo "Response Details <br />";
                 //echo $_REQUEST['resp']."<br />";
                 //echo $_REQUEST['desc']."<br />";
-                $txnref = $_REQUEST['txnref'];
-                $payRef = $_REQUEST['payRef'];
-                $retRef = $_REQUEST['retRef'];
-                $cardNum = $_REQUEST['cardNum'];
-                $apprAmt = $_REQUEST['apprAmt'];
+                $txnref = strip_tags(addslashes($_REQUEST['txnref']));
+                $payRef = strip_tags(addslashes($_REQUEST['payRef']));
+                $retRef = strip_tags(addslashes($_REQUEST['retRef']));
+                $cardNum = strip_tags(addslashes($_REQUEST['cardNum']));
+                $apprAmt = strip_tags(addslashes($_REQUEST['apprAmt']));
                 //echo "Gotten from WebPaypay: ".$txnref.", ".$payRef.", ".$retRef.", ".$cardNum.", ".$apprAmt;
                 $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
                 $url_call = $this->staging_url."gettransaction.json?productid=".$this->product_id."&transactionreference=".$txnref.
@@ -213,8 +213,9 @@ class Webpay_Controller extends Layout_Controller
                         $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
                         //on successful transaction. empty the cart
-                        unset($_SESSION['count']);
+                        //unset($_SESSION['count']);
                         //var_dump($_SESSION);
+                        /*
                         foreach($_SESSION as $key=>$value){
                             if(true){
                                 
@@ -240,8 +241,67 @@ class Webpay_Controller extends Layout_Controller
                                         unset($_SESSION[$key]);
                                     }
                                 }
+                                
                             }
-                        }                      
+                        }  
+                        */
+				 foreach($_SESSION as $key=>$value)
+					{
+						//if(!is_object($value) && !is_array($value)) {
+								if((is_string($value)) && ($key=='product_cart_id'.$value)){
+								$qty = $this->session->get('product_cart_qty'.$value);
+								$deal_id = $_SESSION[$key];
+								foreach($_SESSION as $key=>$value)
+								{
+								if(($key=='product_size_qty'.$deal_id)){
+								   unset($_SESSION[$key]);
+								}
+								if(($key=='product_quantity_qty'.$deal_id)){
+								   unset($_SESSION[$key]);
+								}
+								if(($key=='product_color_qty'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+								if(($key=='store_credit_id'.$deal_id)){
+									  
+									unset($_SESSION[$key]);
+								}
+								if(($key=='store_credit_period'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+								if(($key=='main_storecreditid'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+								if(($key=='product_cart_qty'.$deal_id)){
+									unset($_SESSION[$key]);
+								}
+
+								}
+							 }
+						//}
+				   }
+
+				foreach($_SESSION as $key=>$value)
+				{
+						if(((is_string($value)) && ($key=='product_cart_id'.$value))){
+								unset($_SESSION[$key]);
+						}
+				}
+                $this->session->delete("count");
+                $this->session->delete('shipping_name');
+                $this->session->delete('shipping_address1');
+                $this->session->delete('shipping_address2');
+                $this->session->delete('shipping_checkbox');
+                $this->session->delete('shipping_country');
+                $this->session->delete('shipping_state');
+                $this->session->delete('shipping_city');
+                $this->session->delete('shipping_postal_code');
+                $this->session->delete('shipping_phone');
+                $this->session->delete('aramex_currencycode');
+                $this->session->delete('aramex_value');
+                $this->session->delete('payment_result');
+                
+                
                     }
                     else{
                         $this->webpay->addStockBack($txnref); //add items back to stock
@@ -267,6 +327,11 @@ class Webpay_Controller extends Layout_Controller
 
         public function pay(){
             //var_dump($_SESSION);die;
+        $commission_webpay = 0;
+        $commission_webpay_summed = 0;
+        $loop = 0;
+        $total_item_in_cart = $this->session->get("count");
+        
 	    foreach($_SESSION as $key=>$value){
                 if($value && (is_string($value)) && ($key=='product_cart_id'.$value)){
 
@@ -297,11 +362,11 @@ class Webpay_Controller extends Layout_Controller
 
         
 /////
-        
+
 		if($_POST){
 
-			$referral_amount = $this->input->post("p_referral_amount");
-		        $this->userPost = $this->input->post();
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+		        $this->userPost = strip_tags(addslashes($this->input->post()));
 			$product_color="";
 			$paymentType = "INTERSWITCH";
 			$captured = 0;
@@ -357,6 +422,7 @@ class Webpay_Controller extends Layout_Controller
                                 $url_title = $UL->url_title;
                                 $deal_value = $UL->deal_value;
                                 $product_amount = $UL->deal_value*$item_qty;
+                                //echo $this->session->get('user_auto_key'); die;
                                 if($this->session->get('user_auto_key')) {
                                     $product_amount = $UL->deal_prime_value*$item_qty;
                                     $deal_value = $UL->deal_prime_value;
@@ -402,10 +468,24 @@ class Webpay_Controller extends Layout_Controller
                         //$loop++;
                 }
 	            }
+                    
+                    
+                $commission_webpay = (int)(0.015 * ($pay_amount1*100));
+                if($commission_webpay > 200000){
+                    $commission_webpay = 200000;
+                }
                     //$this->product_id = $transaction;
                     $this->session->set('webpay_total', intval($pay_amount1*100));
                     //then run a code to get the splitting xml file and co
-                    
+
+//                    $loop++;
+//                    $isLast = false;
+//                    if($loop == $total_item_in_cart){
+//                        $isLast = true;
+//                    }
+                    //$split_info = $this->webpay->get_split_marchant_xml($TRANSACTIONID, $pay_amount1, 
+                    //        $isLast, $commission_webpay_summed, $commission_webpay);
+                    //$commission_webpay_summed += $split_info['commission'];
                     $this->xml_data = '<payment_item_detail>'. 
                         '<item_details detail_ref="'.$TRANSACTIONID.'" institution="Store" sub_location="Lagos" location="Lagos">';
                     $this->xml_data .= $this->webpay->get_split_marchant_xml($TRANSACTIONID, $pay_amount1);//pass in the transaction ID
@@ -420,10 +500,12 @@ class Webpay_Controller extends Layout_Controller
                     //echo $TRANSACTIONID.$this->product_id.$this->pay_item_id.intval($pay_amount1*100).
                             //$this->site_redirect_url; die;
                     $this->hash = hash("sha512", $combination);
+                    
                     //die;
                     //var_dump($_SESSION);
                     //die;
-               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+                    //remove comment below
+               $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
                 $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
                 $this->result_transaction = arr::to_object($this->transaction_result);
                 //dont need the line of code below
@@ -438,6 +520,8 @@ class Webpay_Controller extends Layout_Controller
 	               // url::redirect(PATH.'transaction.html');
 
             }
+            $this->session->delete("tmp_webpay_loop");
+            $this->session->delete("tmp_webpay_commission_store");
             //exit;
            // $this->session->set('p_payment_type', 'INTERSWITCH');
                     //url::redirect(PATH."payment_product/cart_order_complete.html");
@@ -451,16 +535,16 @@ class Webpay_Controller extends Layout_Controller
         public function pay_auction(){
             //var_dump($_SESSION);die;
 		if($_POST){  
-                    $deal_id = $this->input->post("deal_id");
-                    $merchant_id = $this->input->post("merchant_id"); 
-                    $bid_id = $this->input->post("bid_id"); 
-                    $deal_key = $this->input->post("deal_key"); 
-                    $url_title = $this->input->post("url_title");   
+                    $deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+                    $merchant_id = strip_tags(addslashes($this->input->post("merchant_id"))); 
+                    $bid_id = strip_tags(addslashes($this->input->post("bid_id"))); 
+                    $deal_key = strip_tags(addslashes($this->input->post("deal_key"))); 
+                    $url_title = strip_tags(addslashes($this->input->post("url_title")));   
                     $referral_amount = 0;
-                    $item_qty = $this->input->post("P_QTY");
-                    $amount = $this->input->post("amount");			
-                    $deal_value = $this->input->post("deal_value");
-                    $shipping_amount = $this->input->post("shipping_amount");
+                    $item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+                    $amount = strip_tags(addslashes($this->input->post("amount")));			
+                    $deal_value = strip_tags(addslashes($this->input->post("deal_value")));
+                    $shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
                     $tax_amount = 0;
 
                     $pay_amount1 = $tot_amount1 = $amount+$shipping_amount+$tax_amount;
@@ -525,7 +609,7 @@ class Webpay_Controller extends Layout_Controller
                 if(EMAIL_TYPE==2) {
                     email::smtp($from,$U->email, "[Zmart] Payment Notification" ,$message);
                 }else{
-                    email::sendgrid($from,$U->email, "[Zmart] Payment Notification" ,$message);
+                    //email::sendgrid($from,$U->email, "[Zmart] Payment Notification" ,$message);
                 }           
             }
         }
@@ -560,7 +644,7 @@ class Webpay_Controller extends Layout_Controller
 		}else{
 			
 						
-		                email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
+		                //email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
 		$user_details = $this->webpay->get_purchased_user_details();
@@ -607,13 +691,13 @@ class Webpay_Controller extends Layout_Controller
 				$this->product_size = $this->webpay->get_shipping_product_size();
 				$this->product_color = $this->webpay->get_shipping_product_color();
                 $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");
-                $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
+                //$message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
                  if(EMAIL_TYPE==2) {
 			email::smtp($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+		//	email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
-			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			//email::sendgrid($from,$friend_email, $this->Lang['PRO_GIFT']. SITENAME ,$friend_message);
+			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
 
             } else {
@@ -625,16 +709,16 @@ class Webpay_Controller extends Layout_Controller
 				$this->admin_list = $this->webpay->get_admin_list();
 				$this->admin_email = $this->admin_list->current()->email;
                 $message = new View("themes/".THEME_NAME."/payment_mail_product");
-                $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
+                //$message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
 
                 if(EMAIL_TYPE==2) {
 			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+		//	email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
-			email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-			email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
+			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}
             }
          }

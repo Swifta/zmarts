@@ -42,7 +42,7 @@
                                             <?php } ?>
                                             
                                             <?php if(isset($this->admin_signup)) { ?>
-                                           <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo strtoupper(($_POST['firstname'])); } ?>,
+                                           <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo strtoupper((htmlentities($_POST['firstname'],  ENT_QUOTES,  "utf-8"))); } ?>,
                                           
 											<?php } ?>
                                             

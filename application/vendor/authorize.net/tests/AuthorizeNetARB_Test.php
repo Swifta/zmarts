@@ -73,7 +73,7 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->creditCardCardCode = "123";
         $subscription->bankAccountAccountType = "";
         $subscription->bankAccountRoutingNumber = "";
-        $subscription->bankAccountAccountNumber = "";
+        $subscription->bankAccountLang['ACCTNUMBER'] = "";
         $subscription->bankAccountNameOnAccount = "";
         $subscription->bankAccountEcheckType = "";
         $subscription->bankAccountBankName = "";
@@ -142,7 +142,7 @@ class AuthorizeNetARB_Test extends PHPUnit_Framework_TestCase
         $subscription->trialAmount = "";
         $subscription->bankAccountAccountType = "checking";
         $subscription->bankAccountRoutingNumber = "121000248";
-        $subscription->bankAccountAccountNumber = "12345678";
+        $subscription->bankAccountLang['ACCTNUMBER'] = "12345678";
         $subscription->bankAccountNameOnAccount = "John Doe";
         $subscription->bankAccountEcheckType = "WEB";
         $subscription->bankAccountBankName = "Bank of Earth";

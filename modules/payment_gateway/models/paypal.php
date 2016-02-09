@@ -20,7 +20,21 @@ class Paypal_Model extends Model
 	
 	public function get_deals_payment_details($deal_id = "", $deal_key = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = $deal_id and enddate >".time()."");
+            $result = $this->db->select("*")->from("deals")
+                    ->join("stores", "stores.store_id", "deals.shop_id")
+                    ->join("category", "category.category_id", "deals.category_id")
+                    ->where(
+					array("deal_status" => 1,
+					 "category.category_status" => 1, 
+                     "store_status" => 1,
+					 "deal_key" => $deal_key,
+					 "deals.deal_id" => $deal_id,
+                     "enddate >"=>time())
+					 )->get();
+						
+						
+           /* $result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '".
+            strip_tags(addslashes($deal_key))."'  and deals.deal_id = '".strip_tags(addslashes($deal_id))."' and enddate >".time()."");*/
 	        return $result;
 	}
 	
@@ -28,8 +42,12 @@ class Paypal_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deals.deal_id = '$deal_id'");
-	        return $result;
+		//$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deals.deal_id = '$deal_id'");
+	        $result = $this->db->select("*")->from("deals")
+                        ->join("stores", "stores.store_id", "deals.shop_id")
+                        ->join("category", "category.category_id", "deals.category_id")
+                        ->where(array("deals.deal_id" => $deal_id))->get();
+                return $result;
 	}
 	
 	/** GET USER LIMIT **/
@@ -114,8 +132,13 @@ class Paypal_Model extends Model
 
 		 $purchase_count_total = $purchase_qty + $qty;
 	         $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		 $this->db->query("update users set user_referral_balance = user_referral_balance - $ref_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");
-		 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1");
+                 $this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance - '.$ref_amount),
+                     "deal_bought_count"=>new Database_Expression('deal_bought_count + '.$qty)),
+                         array("user_id"=>$this->UserID));
+		 //$this->db->query("update users set user_referral_balance = user_referral_balance - $ref_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");
+		 $this->db->update("users", array("merchant_account_balance"=>new Database_Expression('merchant_account_balance + '.$amount)), 
+                         array('user_type'=>1));
+                 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1");
 
 		return $trans_ID;
 	}
@@ -178,9 +201,12 @@ class Paypal_Model extends Model
              
                 $purchase_count_total = $purchase_qty + $qty;
                 $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		$this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");
-		$this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1");
-
+		//$this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");
+		$this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance - '.$referral_amount),
+                    "deal_bought_count"=>new Database_Expression('deal_bought_count + '.$qty)), array("user_id"=>$this->UserID));
+                $this->db->update("users", array("merchant_account_balance"=>new Database_Expression('merchant_account_balance + '.$amount)),
+                        array("user_type"=> 1));
+                //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1");
 		return $trans_ID;
 
 	}
@@ -247,10 +273,12 @@ class Paypal_Model extends Model
 		 $purchase_count_total = $purchase_qty + $qty;
 		 $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id));
 		 
-		 $this->db->query("update users set user_referral_balance = user_referral_balance - $ref_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");  // count user buyed deal
-		 
-		 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1"); // for admin balance
-
+		 //$this->db->query("update users set user_referral_balance = user_referral_balance - $ref_amount, deal_bought_count = deal_bought_count + $qty where user_id = $this->UserID");  // count user buyed deal
+		 $this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance - '.$ref_amount),
+                     "deal_bought_count"=>new Database_Expression('deal_bought_count + '.$qty)), array("user_id" => $this->UserID));
+                 $this->db->update("users", array("merchant_account_balance"=>new Database_Expression('merchant_account_balance + '.$amount)),
+                         array("user_type" => 1));
+		 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $amount where user_type = 1"); // for admin balance
 		return $trans_ID;
 	}
 	
@@ -260,8 +288,9 @@ class Paypal_Model extends Model
 	public function update_referral_amount($ref_user_id = "")
 	{
 		$referral_amount = REFERRAL_AMOUNT;
-		
-		$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+		$this->db->update("users", array("user_referral_balance"=>new Database_Expression_Core('user_referral_balance+'.$referral_amount)),
+                        array("user_id"=>$ref_user_id));
+		//$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
 		return;
 	}
 
@@ -416,11 +445,13 @@ class Paypal_Model extends Model
 			$purchase_count_total = $purchase_qty + $quantity;
 			
 		     $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		     
-         $this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount , deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");
+	$this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance - '.$referral_amount),
+            "deal_bought_count"=>new Database_Expression_Core('deal_bought_count + '.$quantity)), array("user_id"=>$this->UserID));
+         //$this->db->query("update users set user_referral_balance = user_referral_balance - $referral_amount , deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");
          
-         $this->db->query("update users set merchant_account_balance = merchant_account_balance + $referral_amount where user_type = 1");
-         
+         //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $referral_amount where user_type = 1");
+         $this->db->update("users", array("merchant_account_balance"=>new Database_Expression_Core('merchant_account_balance + '.$referral_amount)),
+                 array("user_type"=>1));
 		return $trans_ID;
 	}
 	

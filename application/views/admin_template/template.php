@@ -23,7 +23,7 @@ echo $this->template->javascript;
             	<p class="closestatus cursur" ><a title="<?php echo $this->Lang['CLOSE']; ?>" onclick="return closeerr();" >x</a></p>
             	<p>
                 	<img src="<?php echo PATH; ?>images/icon_success.png" alt="<?php echo $this->Lang['SUCCESS']; ?>" />
-                	<span><?php echo $this->Lang["SUCCESS"]; ?>!&nbsp;</span><span class="align_c" ><?php echo $this->response; ?></span>
+                	<span></span><span class="align_c" ><?php echo $this->response; ?></span>
                 </p>
             </div>
             <?php }else ?>
@@ -32,7 +32,7 @@ echo $this->template->javascript;
             	<p class="closestatus cursur" ><a  title="<?php echo $this->Lang['CLOSE']; ?>"  onclick="return closeerr('err');" >x</a></p>
             	<p>
                 	<img src="<?php echo PATH; ?>images/icon_error.png" alt="<?php echo $this->Lang['ERROR']; ?>" />
-                	<span><?php echo $this->Lang["ERROR"]; ?>!&nbsp;</span> <?php echo $this->error_response; ?>
+                	<span></span> <?php echo $this->error_response; ?>
                 </p>
             </div>
             <?php } ?>

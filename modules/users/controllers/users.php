@@ -44,25 +44,25 @@ class Users_Controller extends Layout_Controller {
 
         public function twitter(){
 
-            require_once 'twitteroauth.php';
-            $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET);
-            // Requesting authentication tokens, the parameter is the URL we will be redirected to
-            $request_token = $twitteroauth->getRequestToken(PATH.'twitter-connected.php');
-
-            // Saving them into the session
-
-            $_SESSION['oauth_token'] = $request_token['oauth_token'];
-            $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
-
-            // If everything goes well..
-            if ($twitteroauth->http_code == 200) {
-                // Let's generate the URL and redirect
-                $url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
-                header('Location: ' . $url);
-            } else {
-                // It's a bad idea to kill the script, but we've got to know when there's an error.
-                die('Something wrong happened.');
-            }
+//            require_once 'twitteroauth.php';
+//            $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET);
+//            // Requesting authentication tokens, the parameter is the URL we will be redirected to
+//            $request_token = $twitteroauth->getRequestToken(PATH.'twitter-connected.php');
+//
+//            // Saving them into the session
+//
+//            $_SESSION['oauth_token'] = $request_token['oauth_token'];
+//            $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+//
+//            // If everything goes well..
+//            if ($twitteroauth->http_code == 200) {
+//                // Let's generate the URL and redirect
+//                $url = $twitteroauth->getAuthorizeURL($request_token['oauth_token']);
+//                header('Location: ' . $url);
+//            } else {
+//                // It's a bad idea to kill the script, but we've got to know when there's an error.
+//                die('Something wrong happened.');
+//            }
         }
         
         public function twitter_login(){
@@ -71,7 +71,7 @@ class Users_Controller extends Layout_Controller {
                 // We've got everything we need
                 $twitteroauth = new TwitterOAuth(YOUR_CONSUMER_KEY, YOUR_CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
             // Let's request the access token
-                $access_token = $twitteroauth->getAccessToken($_GET['oauth_verifier']);
+                $access_token = $twitteroauth->getAccessToken(htmlentities($_GET['oauth_verifier'],  ENT_QUOTES,  "utf-8"));
             // Save it in a session var
                 $_SESSION['access_token'] = $access_token;
             // Let's get the user's info
@@ -189,9 +189,11 @@ class Users_Controller extends Layout_Controller {
                 $post = Validation::factory($_POST)
                                 ->add_rules('f_name', 'required')
                                 ->add_rules('email', 'required','valid::email', array($this, 'email_available'))
+                        ->add_rules('email_confirm', 'required','valid::email','matches[email]')
                                 ->add_rules('password', 'required','length[5,32]')
+                        ->add_rules('cpassword', 'required','valid::email','matches[password]')
                                 ->add_rules('gender', 'required')
-								->add_rules('age_range', 'required')
+				->add_rules('age_range', 'required')
                                  ->add_rules('country', 'required')
                                 ->add_rules('city', 'required');
 
@@ -2029,14 +2031,15 @@ $pdf->Output('voucher.pdf', 'I');
 						  $arg['Pwd'] = ZENITH_TEST_PASS;
 						  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 						  $arg['account_number'] = $nuban;
-						  $fun_resp = $soap->VerifyAccount($arg);
+						  //$fun_resp = $soap->VerifyAccount($arg);
+                                                  $fun_resp = $soap->VerifyMerchantAccount($arg);
 							
 					  } catch(Exception $e){
 						  echo -1;
 						  exit;
 					  }
 				  
-				  $response = (array)$fun_resp->VerifyAccountResult;
+				  $response = (array)$fun_resp->VerifyMerchantAccountResult;
 				  
 					  if($response){
 						  $nuban_response = (isset($response['errorMessage']))?-1:1;

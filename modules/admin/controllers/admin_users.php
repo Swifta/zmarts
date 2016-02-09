@@ -50,7 +50,8 @@ class Admin_users_Controller extends website_Controller {
 		$this->add_users = "1";
         
 			if($_POST){
-				$this->userPost = $this->input->post();
+				//$this->userPost = $this->input->post();
+                            $this->userPost = strip_tags(addslashes($this->input->post()));
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
 							
@@ -138,7 +139,7 @@ class Admin_users_Controller extends website_Controller {
 			   	else{
 				email::sendgrid($fromEmail,$email_id, SITENAME, $message);
 				}
-				common::message(1, "Mail Successfully Sended");
+				common::message(1, "Your Email was Successfully Sent");
 				url::redirect(PATH."admin/manage-user.html");
 			}
 			else{	
@@ -206,7 +207,8 @@ class Admin_users_Controller extends website_Controller {
 		}
 		$this->manage_users = "1";
 		if($_POST){
-			$this->userpost = $this->input->post();
+			//$this->userpost = $this->input->post();
+                        $this->userpost = strip_tags(addslashes($this->input->post()));
 			$post = new Validation($_POST);			
 			$post = Validation::factory($_POST)
 						
@@ -441,7 +443,8 @@ class Admin_users_Controller extends website_Controller {
 		$this->user_news_letter = "1";
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
+			//$this->userPost =  $this->input->post();
+                        $this->userPost = strip_tags(addslashes($this->input->post())) ;
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							
 							->add_rules('subject', 'required')
@@ -492,12 +495,16 @@ class Admin_users_Controller extends website_Controller {
 					}
 		             	if($status == 1){
 							//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
+                                    if($post->add_temp==1){
 							unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(1, $this->Lang['NEWS_SENT']);
 			        }
 			        else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
+                                    if($post->add_temp==1){
 						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 		       		 url::redirect(PATH."admin.html");

@@ -177,7 +177,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                    <div class="">
                     <div class="">
                     <div class="">
-<!--                        <h1><?php echo $this->Lang['FORGOT_PASS']; ?></h1>-->
+<!--                        <h1><?php echo $this->Lang['FORGOT_PSWD']; ?></h1>-->
                         <div class="">
                         <form action="<?php echo PATH;?>merchant/reset-password.html" method="post" class="swifta_form" style="background:#fff">
                              <p class="swifta_h1">Welcome! The security of your account is important. <br />  Kindly change your password to continue.</p>
@@ -189,14 +189,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <div class="">
                                     
                                     
-                                    <input type="text" name="email" value="<?php if(isset($_POST['email'])){ echo $_POST['email'];}?>" class="swifta_input" placeholder="Enter new password" maxlength="256" style="margin-top:40px" required />
+                                   <input type="text" name="email" value="<?php if(isset($_POST['email'])){ echo htmlentities($_POST['email'],  ENT_QUOTES,  "utf-8");}?>" class="swifta_input" placeholder="Enter new password" maxlength="256" style="margin-top:40px" required />
                                     <em style=" margin-left:20px; padding-left: 0;"><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></em></div>
                                     
                                     
                                 </li>-->
                                 
                                <li>
-                                    <div  class="" style="margin-top:40px;"><input style="margin-top: 10px; margin-bottom: 10px;" type="password" name="pass1" value="<?php if(isset($_POST['pass1'])){ echo $_POST['pass1'];}?>" class="swifta_input" placeholder="Enter new password" maxlength="256"  required />
+                                   <div  class="" style="margin-top:40px;"><input style="margin-top: 10px; margin-bottom: 10px;" type="password" name="pass1" value="<?php if(isset($_POST['pass1'])){ echo htmlentities($_POST['pass1'],  ENT_QUOTES,  "utf-8");}?>" class="swifta_input" placeholder="Enter new password" maxlength="256"  required />
                                    <em style=" margin-left:20px; padding-left: 0;"><?php if(isset($this->form_error['pass1'])){ echo $this->form_error["pass1"]; }?></em></div>
                                     
                                     
@@ -204,7 +204,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 
                                 <li>
-                                    <div  class=""><input style="margin-top: 10px; margin-bottom: 10px;" type="password" name="pass2" value="<?php if(isset($_POST['pass2'])){ echo $_POST['pass2'];}?>" class="swifta_input" placeholder="Re-enter new password" maxlength="256"  required />
+                                    <div  class=""><input style="margin-top: 10px; margin-bottom: 10px;" type="password" name="pass2" value="<?php if(isset($_POST['pass2'])){ echo htmlentities($_POST['pass2'],  ENT_QUOTES,  "utf-8");}?>" class="swifta_input" placeholder="Re-enter new password" maxlength="256"  required />
                                    <em style=" margin-left:20px; padding-left: 0;"><?php if(isset($this->form_error['pass2'])){ echo $this->form_error["pass2"]; }?></em></div>
                                     
                                     

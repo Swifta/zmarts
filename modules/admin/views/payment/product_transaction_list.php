@@ -1,5 +1,10 @@
 <?php defined('SYSPATH') OR die("No direct access allowed."); ?>
-<?php  if(($this->uri->segment(2)=='view-products')){	
+<?php  
+$tranx_id = ""; //empty transaction id.
+$interswitch_tranx_ref = "";
+$more_details_btn = "";
+$requery_btn = "";
+if(($this->uri->segment(2)=='view-products')){	
 								
 		 if(count($this->product_transaction_list) > 0){ ?>
 
@@ -81,14 +86,21 @@
 		    <?php $tot_quan +=$u->quantity; ?>
 		    
 		    <?php if($this->uri->segment(2) == "view-user"){  ?>
-		    <td align="center"><span class="align"><?php echo ($u->deal_value*$u->quantity); ?></span></td>
-		    <?php $tot_amount +=$u->deal_value*$u->quantity; ?>
+		    <td align="center"><span class="align"><?php 
+                    //echo ($u->deal_value*$u->quantity); 
+                    echo ($u->amount*$u->quantity);
+                    ?></span></td>
+		    <?php 
+                    //$tot_amount +=$u->deal_value*$u->quantity; 
+                    $tot_amount +=$u->amount*$u->quantity; 
+                    ?>
 		    <?php } ?>
 		    
 		    <?php if($this->uri->segment(2) != "view-user"){  ?>
 		     <?php $commission_val=$u->deal_merchant_commission; ?> 
 		    <?php  
-		        $commission=$u->deal_value *($commission_val/100);
+		        //$commission=$u->deal_value *($commission_val/100);
+                        $commission=$u->amount *($commission_val/100);
 		    ?>	  
                     
                     <?php
@@ -110,8 +122,14 @@
                     
                     ?>	 
                     
-		    <td align="center"><span class="align"><?php echo ($u->deal_value-$commission)*$u->quantity; ?></span></td>
-		    <?php $tot_amount +=($u->deal_value)*$u->quantity; ?>
+		    <td align="center"><span class="align"><?php 
+                    //echo ($u->deal_value-$commission)*$u->quantity; 
+                    echo ($u->amount)*$u->quantity;
+                    ?></span></td>
+		    <?php 
+                    //$tot_amount +=($u->deal_value)*$u->quantity; 
+                    $tot_amount +=($u->amount)*$u->quantity;
+                    ?>
 		    
 		    <?php } ?> 	
 		   		    
@@ -145,8 +163,8 @@
                     <td align="left"><?php echo date('d-M-Y h:i:s',$u->transaction_date); ?></td>
                     
                     <td><span class="align">
-		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PAYPAL_CREDIT"] .'</span>'; } ?>
-		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PAYPAL"] .'</span>'; } ?>
+		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PPAL_CRDT"] .'</span>'; } ?>
+		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PPAL"] .'</span>'; } ?>
 		    <?php if($u->type=="3"){ echo '<span class="clor2">'. $this->Lang["REF_PAYMENT"] .'</span>'; } ?>
 		    <?php if($u->type=="4"){ echo '<span class="clor2">'. "Authorize.net(".$u->transaction_type.")" .'</span>'; } ?>
 		    <?php if($u->type=="5"){ echo '<span class="clor2">'.$u->transaction_type.'</span>'; } ?>

@@ -41,13 +41,13 @@
                         <td align="left"><?php echo $i+$first_item; ?></td>
                         <td align="left" ><?php echo ucfirst(htmlspecialchars($u->duration_period)); ?></td>
                         <td align="left">
-                    	<a href="<?php echo PATH.'merchant/edit-duration/'.$u->duration_id;?>.html" class="editicon" title="<?php echo $this->Lang['EDIT_STORES']; ?>"></a>
+                    	<a href="<?php echo PATH.'merchant/edit-duration/'.$u->duration_id;?>.html" class="editicon" title="<?php echo $this->Lang['EDIT_DURATION']; ?>"></a>
                         </td>
                         <td>
                     	<?php if($u->duration_status == 1){?>
-                    	<a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','block');" class="blockicon" title="<?php echo $this->Lang['BLO_STORES']; ?>"></a>
+                    	<a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','block');" class="blockicon" title="<?php echo $this->Lang['BLO_DURATION']; ?>"></a>
                         <?php } else{  ?>
-                        <a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','unblock');" class="unblockicon" title="<?php echo $this->Lang['UNBLO_STORES']; ?>"></a>
+                        <a onclick="return blockunblockduration('<?php echo base64_encode($u->duration_id); ?>','unblock');" class="unblockicon" title="<?php echo $this->Lang['UNBLO_DURATION']; ?>"></a>
                         <?php } ?>
                     </td>
                                        
