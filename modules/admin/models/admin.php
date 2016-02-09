@@ -708,6 +708,7 @@ class Admin_Model extends Model
 
 	public function coupon_code_validate($code="")
 	{
+		$code = addslashes($code);
 	                $time=time();
 			$conditions="";
               		if($code || $code=='0'){

@@ -17,9 +17,13 @@ class Webpay_Model extends Model
                 $product_id = $get_detail[0]->product_id;
                 $quantity=$get_detail[0]->quantity;
                 $size_id = $get_detail[0]->product_size;
-                $this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
-
-                $this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+                $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
+                        array("deal_id" => $product_id, "size_id" =>$size_id));
+                //$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+                
+                $this->db->update("product", array("user_limit_quantity"=>new Database_Expression('user_limit_quantity + '.$quantity)),
+                        array("deal_id" => $product_id));
+                //$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
 
                 $this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('transaction_id' => $transaction_id));
             }

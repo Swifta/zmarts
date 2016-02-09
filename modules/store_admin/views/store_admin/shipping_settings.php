@@ -27,10 +27,10 @@
                                         </tr>
                                         
 		                                <tr>
-                                            <td style="width: 200px;"><label><?php echo $this->Lang['Lang['ACCTNUMBER']']; ?></label></td>
+                                            <td style="width: 200px;"><label><?php echo $this->Lang['ACCTNUMBER']; ?></label></td>
                                             <td><label>:</label></td>
-                                            <td><input type="text" name="Lang['ACCTNUMBER']" maxlength="32"   value="<?php echo $general->Lang['ACCTNUMBER']; ?>"/>
-                                            <em><?php if(isset($this->form_error["Lang['ACCTNUMBER']"])){ echo $this->form_error["Lang['ACCTNUMBER']"]; }?>
+                                            <td><input type="text" name="AccountNumber" maxlength="32"   value="<?php echo $general->Lang['ACCTNUMBER']; ?>"/>
+                                            <em><?php if(isset($this->form_error["AccountNumber"])){ echo $this->form_error["AccountNumber"]; }?>
                                             </em></td>
                                         </tr>
                                         

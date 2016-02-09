@@ -14,6 +14,10 @@ class Authorize_Model extends Model
 
 	public function get_deals_payment_details($deal_id = "", $deal_key = "")
 	{
+		
+		$deal_id = addslashes($deal_id);
+		$deal_key = addslashes($deal_key);
+		
 		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate > 'time()'");
 	        return $result;
 	}

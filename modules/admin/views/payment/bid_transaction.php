@@ -42,7 +42,7 @@ function today_transaction(val)
 		<?php if(count($this->transaction_auction_list)>0){
                 $parm="";
         if(isset($_GET['param'])){
-                $parm='&param='.htmlentities($_GET['param'],  ENT_QUOTES,  "utf-8").'&sort='.htmlentities($_GET['sort'],  ENT_QUOTES,  "utf-8");
+                $parm='&param='.htmlspecialchars($_GET['param'], ENT_QUOTES,"UTF-8").'&sort='.htmlspecialchars($_GET['sort'], ENT_QUOTES,"UTF-8");
         } ?>
         <?php if($this->pagination !=""){  ?>
                 <a class="fr frm_export" href="<?php echo PATH.$this->base.'?id='.$this->Lang['SEARCH'].'&name='.$this->input->get('name').$parm.'&today='.$this->input->get('today').'&startdate='.$this->input->get('startdate').'&enddate='.$this->input->get('enddate'); ?>" title="<?php echo $this->Lang['EXP_DL']; ?>"><?php echo $this->Lang['EXP_PAGE']; ?></a>

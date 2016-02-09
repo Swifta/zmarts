@@ -455,7 +455,7 @@ class common{
         foreach($shipping_details as $shipping){
                         $AccountCountryCode = $shipping->AccountCountryCode;
                         $AccountEntity = $shipping->AccountEntity;
-                        $Lang['ACCTNUMBER'] = $shipping->Lang['ACCTNUMBER'];
+                        $AccountNumber = $shipping->AccountNumber;
                         $AccountPin = $shipping->AccountPin;
                         $UserName = $shipping->UserName;
                         $Password = $shipping->ShippingPassword;
@@ -464,7 +464,7 @@ class common{
 		       'ClientInfo'  			=> array(
 									        'AccountCountryCode'	=> $AccountCountryCode,
 									        'AccountEntity'		 	=> $AccountEntity,
-									        'Lang['ACCTNUMBER']'		=> $Lang['ACCTNUMBER'],
+									        'AccountNumber'		=> $AccountNumber,
 									        'AccountPin'		 	=> $AccountPin,
 									        'UserName'			=> $UserName,
 									        'Password'			=> $Password,
@@ -513,7 +513,7 @@ class common{
 	                'ClientInfo'  			=> array(
 								                'AccountCountryCode'	=> 'JO',
 								                'AccountEntity'		 	=> 'AMM',
-								                'Lang['ACCTNUMBER']'		=> '20016',
+								                'AccountNumber'		=> '20016',
 								                'AccountPin'		 	=> '331421',
 								                'UserName'			=> 'testingapi@aramex.com',
 								                'Password'		 	=> 'R123456789$r',

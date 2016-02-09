@@ -100,7 +100,7 @@ class Newsletter_Controller extends website_Controller {
 	    if($_POST){
 			$img_check = 0;
 			//$this->userPost = $this->input->post();
-                        $this->userPost = strip_tags(addslashes($this->input->post()));
+                        $this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')

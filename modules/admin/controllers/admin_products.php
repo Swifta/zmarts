@@ -495,6 +495,7 @@ class Admin_products_Controller extends website_Controller
 					/** PHPExcel_IOFactory */
 					include DOCROOT.'PHPExcel/Classes/PHPExcel/IOFactory.php';
 					$inputFileName = $path.$excel_name;
+					$inputFileName = realpath($inputFileName);
 					//echo 'Loading file ',pathinfo($inputFileName,PATHINFO_BASENAME),' using IOFactory to identify the format<br />';
 					$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
 					$data1 = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
@@ -757,9 +758,9 @@ class Admin_products_Controller extends website_Controller
 	if($_POST){
                 $this->product_deatils = $this->products->get_product_data_mail($deal_key, $deal_id);
   		$this->userPost = $this->input->post();
-		$users = $this->input->post("users");
-		$fname = $this->input->post("firstname");
-		$email = trim($this->input->post("email"));
+		$users = strip_tags(addslashes($this->input->post("users")));
+		$fname = strip_tags(addslashes($this->input->post("firstname")));
+		$email = trim(strip_tags(addslashes($this->input->post("email"))));
 		$post = Validation::factory(array_merge($_POST,$_FILES))
 						
 						->add_rules('users', 'required')
@@ -1804,7 +1805,7 @@ class Admin_products_Controller extends website_Controller
                                 'Shipment' => array(
                                         'Shipper'	=> array(
                                                 'Reference1' 	                => 'Ref1'.$ship->shipping_id,
-                                                'Lang['ACCTNUMBER']'               => '4004234',
+                                                'AccountNumber'               => '4004234',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> '15 ABC St',
                                                         'Line2' 				=> '',
@@ -1832,7 +1833,7 @@ class Admin_products_Controller extends website_Controller
 
                                         'Consignee'	=> array(
                                                 'Reference1'	                        => 'Ref1'.$ship->shipping_id,
-                                                'Lang['ACCTNUMBER']'                       => '',
+                                                'AccountNumber'                       => '',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> "Deal & More s.a.r.l, Bassam Arnaout",
                                                         'Line2'				=> "Jisr Al Basha  Al-Basha Center.",
@@ -1863,7 +1864,7 @@ class Admin_products_Controller extends website_Controller
                                         'ThirdParty' => array(
                                                 'Reference1' 	                        => '',
                                                 'Reference2' 	                        => '',
-                                                'Lang['ACCTNUMBER']'                       => '',
+                                                'AccountNumber'                       => '',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> '',
                                                         'Line2'				=> '',
@@ -1961,7 +1962,7 @@ class Admin_products_Controller extends website_Controller
                         'ClientInfo'  			=> array(
                         'AccountCountryCode'	=> 'SA',
                         'AccountEntity'		 	=> 'RUH',
-                        'Lang['ACCTNUMBER']'		=> '4004234',
+                        'AccountNumber'		=> '4004234',
                         'AccountPin'		 	=> '543543',
                         'UserName'			=> 'marketty.net@gmail.com',
                         'Password'			=> '1016842823As',
