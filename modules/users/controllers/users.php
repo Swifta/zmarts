@@ -1944,14 +1944,14 @@ $pdf->Output('voucher.pdf', 'I');
 			
 		}
 		
-		if(!isset($response['Lang['ACCTNUMBER']'])){
+		if(!isset($response['accountNumber'])){
 			echo "Invalid response. Please try again.";
 			exit;
 		}
 			
 		
 		
-		$nuban = $response['Lang['ACCTNUMBER']'];
+		$nuban = $response['accountNumber'];
 		$r = $this->users->update_user_to_club_membership(TRUE, $nuban);
 		if($r == 1){
 			echo $r;

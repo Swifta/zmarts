@@ -1804,7 +1804,7 @@ class Admin_products_Controller extends website_Controller
                                 'Shipment' => array(
                                         'Shipper'	=> array(
                                                 'Reference1' 	                => 'Ref1'.$ship->shipping_id,
-                                                'Lang['ACCTNUMBER']'               => '4004234',
+                                                'AccountNumber'               => '4004234',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> '15 ABC St',
                                                         'Line2' 				=> '',
@@ -1832,7 +1832,7 @@ class Admin_products_Controller extends website_Controller
 
                                         'Consignee'	=> array(
                                                 'Reference1'	                        => 'Ref1'.$ship->shipping_id,
-                                                'Lang['ACCTNUMBER']'                       => '',
+                                                'AccountNumber'                       => '',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> "Deal & More s.a.r.l, Bassam Arnaout",
                                                         'Line2'				=> "Jisr Al Basha  Al-Basha Center.",
@@ -1863,7 +1863,7 @@ class Admin_products_Controller extends website_Controller
                                         'ThirdParty' => array(
                                                 'Reference1' 	                        => '',
                                                 'Reference2' 	                        => '',
-                                                'Lang['ACCTNUMBER']'                       => '',
+                                                'AccountNumber'                       => '',
                                                 'PartyAddress'	=> array(
                                                         'Line1'				=> '',
                                                         'Line2'				=> '',
@@ -1961,7 +1961,7 @@ class Admin_products_Controller extends website_Controller
                         'ClientInfo'  			=> array(
                         'AccountCountryCode'	=> 'SA',
                         'AccountEntity'		 	=> 'RUH',
-                        'Lang['ACCTNUMBER']'		=> '4004234',
+                        'AccountNumber'		=> '4004234',
                         'AccountPin'		 	=> '543543',
                         'UserName'			=> 'marketty.net@gmail.com',
                         'Password'			=> '1016842823As',
