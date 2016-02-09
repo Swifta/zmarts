@@ -727,7 +727,7 @@ function validate() {
 							
 							if($size->size_id != 1){
 			            ?>
-			           	 <option value="<?php echo $size->size_id; ?>" ><?php echo $size->size_name; ?></option>
+			           	 <option value="<?php echo htmlspecialchars($size->size_id,ENT_QUOTES,'UTF-8'); ?>" ><?php echo htmlspecialchars($size->size_name,ENT_QUOTES,'UTF-8'); ?></option>
 			            <?php }
 			            } ?>
 			            </select>

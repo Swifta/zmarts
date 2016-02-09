@@ -35,7 +35,7 @@
         });	
 	function today_transaction(val)
 	{
-		window.location='<?php $current_url = explode('?', $_SERVER["REQUEST_URI"]); echo $current_url[0]; ?>?today='+val;
+		window.location='<?php $current_url = explode('?', $_SERVER["REQUEST_URI"]); echo htmlspecialchars($current_url[0],ENT_QUOTES,"UTF-8"); ?>?today='+val;
 	}
 	function validate()
 	{	

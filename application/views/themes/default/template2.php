@@ -20,7 +20,7 @@
                         <tr><td width="100%" align="center" style="font:normal 13px/19px arial;color:#555;padding:0 15px;"><?php if(isset($this->message)){
                                  echo $this->message;}
                                  else{
-									 echo $_POST['message'];
+									 echo htmlspecialchars( $_POST['message'], ENT_QUOTES,"UTF-8");
 									 }?></td></tr>
                         <tr style="height: 30px;"><td style="font-size: 0;line-height: 0;">&nbsp;</td></tr> 
                         <tr style="height: 20px;"><td style="font-size: 0;line-height: 0;border-bottom: 1px solid #000;">&nbsp;</td></tr>
