@@ -3654,16 +3654,19 @@ class Merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".$city." and user_type=4 ";
+				//$conditions.="and city_id=".$city." and user_type=4 ";
+                            $conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=4 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".$gender." and user_type=4 ";
+					//$conditions.=" and gender=".$gender." and user_type=4 ";
+                            $conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".$age_range." and user_type=4 ";
+				//$conditions.=" and age_range=".$age_range." and user_type=4 ";
+                            $conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users join transaction on transaction.user_id=users.user_id join product on product.deal_id=transaction.product_id where user_status=1 $conditions group by transaction.user_id");
