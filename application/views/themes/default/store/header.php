@@ -105,10 +105,10 @@ $this->language_List = str_replace(".php", "", $DL);
     	Adding Zenith Offer Label to the header.
     	@Live
     -->
-    <li class="mnav_dnone">|</li>
-	<li style="color:green;font-weight: bold;"><a href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
+    <!--<li class="mnav_dnone">|</li>
+	<li style="color:green;font-weight: bold;"><a href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li> -->
 								<!--<li><a href="javascript:showsignup();" title="<?php echo $this->Lang['SIGN_UP']; ?>"><?php echo $this->Lang['SIGN_UP']; ?></a> </li>-->
-								<li><a  style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>
+								<!--<li><a  style="cursor:pointer;" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>"><img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/f_connect.png" alt="f_connect"/></a></li>-->
 							<?php } ?>
 						</ul>
                                         </div>
@@ -590,14 +590,10 @@ if ($lan != LANGUAGE) {
 	
 <?php } ?>
         <li><a href="<?php echo PATH; ?>wishlist.html" title="<?php echo $this->Lang['MY_WISH']; ?>"><?php echo $this->Lang['MY_WISH']; ?></a> </li>
-	<li class="mnav_dnone">|</li>
-    
-   		<!-- 
-    		Adding Zenith Offer Label to the header.
-    		@Live
-   		-->
+	<!--<li class="mnav_dnone">|</li>
+
    
-	<li style="color:green;font-weight: bold;"><a href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>
+	<li style="color:green;font-weight: bold;"><a href="javascript:load_club();" title="<?php echo $this->Lang['ZENITH_OFFER']; ?>"><?php echo $this->Lang['ZENITH_OFFER']; ?></a></li>-->
      <li class="mnav_dnone">|</li>
 	<li><a href="<?php if($this->session->get("count") > 0){ echo 'javascript:logout_click();'; }else{ echo PATH."logout.html"; } ?>" title="<?php echo $this->Lang['LOGOUT']; ?>"><?php echo $this->Lang['LOGOUT']; ?></a> </li>
    

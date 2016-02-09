@@ -74,8 +74,8 @@ font: normal 13px arial;
          	        <td align="left"><?php echo $u->deal_savings; ?></td>
 		        <td align="left"><?php echo $u->coupon_code; ?></td>
 		        <td align="left">
-					<?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PAYPAL_CREDIT"] .'</span>'; } ?>
-					<?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PAYPAL"] .'</span>'; } ?>
+					<?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PPAL_CRDT"] .'</span>'; } ?>
+					<?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PPAL"] .'</span>'; } ?>
 					<?php if($u->type=="3"){ echo '<span class="clor2">'. $this->Lang["REF_PAYMENT"] .'</span>'; } ?>
 					<?php if($u->type=="4"){ echo '<span class="clor2">'. $this->Lang["AUTHORIZE"].'</span>';  } ?>
 					<?php if($u->type =="5"){ echo '<span class="clor2">'. $this->Lang["CASH_ON_DEL"] .'</span>'; } ?>

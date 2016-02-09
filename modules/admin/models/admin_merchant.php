@@ -720,16 +720,20 @@ class Admin_merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					//$conditions.="and city_id=".$post->city;
+                                    $conditions.="and city_id=".strip_tags(addslashes($post->city));
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						//$conditions.=" and gender=".$post->gender;
+                                    $conditions.=" and gender=".strip_tags(addslashes($post->gender));
+                                    
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					//$conditions.=" and age_range=".$post->age_range;
+                                    $conditions.=" and age_range=".strip_tags(addslashes($post->age_range));
 				}
 				
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -872,16 +876,16 @@ class Admin_merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=3 ";
+				$conditions.="and city_id='".strip_tags(addslashes($city))."' and user_type=3 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=3 ";
+					$conditions.=" and gender='".strip_tags(addslashes($gender))."' and user_type=3 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=3 ";
+				$conditions.=" and age_range='".strip_tags(addslashes($age_range))."' and user_type=3 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -912,7 +916,7 @@ class Admin_merchant_Model extends Model
 //		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
 //		return $sector_query;
                  $sector_query = $this->db->select()->from("sector")
-		 ->where(array("sector_id" => $sector_id));
+		 ->where(array("sector_id" => $sector_id))->get();
                  return $sector_query;
 	}	
 	

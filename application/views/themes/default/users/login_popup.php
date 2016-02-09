@@ -29,18 +29,19 @@
                               </div>   
                           </li>
                           <li>
-                              <label><?php echo $this->Lang['PASSWORD']; ?>:<span class="form_star">* </span> </label>
+                              <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">* </span> </label>
                               <div class="fullname">
                                   <input type="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" value="" name="password" autocomplete="off">                         
                                   <em id="password_error"></em>                    
                               </div>
                           </li>                    
                           <li>                        
-                            <?php  $val = $_SERVER['PHP_SELF'];
-                                              $scriptname=end(explode('index.php/',$val));
-                                      ?>
+                            <?php  
+                            $val =  $_SERVER['PHP_SELF']; //htmlspecialchars(, ENT_QUOTES,'UTF-8’);
+                            $scriptname = end(explode('index.php/',$val));
+                            ?>
                                    <input type="hidden" placeholder="Enter your password here" value="<?php echo $scriptname;?>" name="url" autocomplete="off" class="fancy_input_bx" />
-                          <a class="forget_link" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PASS']; ?>?"><?php echo $this->Lang['FORGOT_PASS']; ?>?</a>
+                          <a class="forget_link" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>?"><?php echo $this->Lang['FORGOT_PSWD']; ?>?</a>
                           </li>
                           <li>
                               <input class="sign_submit" type="submit" value="<?php echo $this->Lang['SIGN_IN']; ?>" title="<?php echo $this->Lang['SIGN_IN']; ?>" onclick="return validateForms();">

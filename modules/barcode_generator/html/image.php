@@ -7,14 +7,14 @@ if(isset($_GET['code'], $_GET['t'], $_GET['r'], $_GET['rot'], $_GET['text'], $_G
 	require_once($class_dir . '/BCGFontFile.php');
 	if(include_once($class_dir . '/BCG' . $_GET['code'] . '.barcode.php')) {
 		if($_GET['f1'] !== '0' && $_GET['f1'] !== '-1' && intval($_GET['f2']) >= 1) {
-			$font = new BCGFontFile($class_dir . '/font/' . $_GET['f1'], intval($_GET['f2']));
+			$font = new BCGFontFile($class_dir . '/font/' . htmlentities($_GET['f1'],  ENT_QUOTES,  "utf-8"), intval(htmlentities($_GET['f2'],  ENT_QUOTES,  "utf-8")));
 		} else {
 			$font = 0;
 		}
 
 		$color_black = new BCGColor(0, 0, 0);
 		$color_white = new BCGColor(255, 255, 255);
-		$codebar = 'BCG' . $_GET['code'];
+		$codebar = 'BCG' . htmlentities($_GET['code'],  ENT_QUOTES,  "utf-8");
 
 		$drawException = null;
 		try {
@@ -23,10 +23,10 @@ if(isset($_GET['code'], $_GET['t'], $_GET['r'], $_GET['rot'], $_GET['text'], $_G
 				$code_generated->setChecksum(true);
 			}
 			if(isset($_GET['a2']) && !empty($_GET['a2'])) {
-				$code_generated->setStart($_GET['a2'] === 'NULL' ? null : $_GET['a2']);
+				$code_generated->setStart($_GET['a2'] === 'NULL' ? null : htmlentities($_GET['a2'],  ENT_QUOTES,  "utf-8"));
 			}
 			if(isset($_GET['a3']) && !empty($_GET['a3'])) {
-				$code_generated->setLabel($_GET['a3'] === 'NULL' ? null : $_GET['a3']);
+				$code_generated->setLabel($_GET['a3'] === 'NULL' ? null : htmlentities($_GET['a3'],  ENT_QUOTES,  "utf-8"));
 			}
 			$code_generated->setThickness($_GET['t']);
 			$code_generated->setScale($_GET['r']);
@@ -34,7 +34,7 @@ if(isset($_GET['code'], $_GET['t'], $_GET['r'], $_GET['rot'], $_GET['text'], $_G
 			$code_generated->setForegroundColor($color_black);
 			$code_generated->setFont($font);
 
-			$code_generated->parse($_GET['text']);
+			$code_generated->parse(htmlentities($_GET['text'],  ENT_QUOTES,  "utf-8"));
 		} catch(Exception $exception) {
 			$drawException = $exception;
 		}
@@ -44,7 +44,7 @@ if(isset($_GET['code'], $_GET['t'], $_GET['r'], $_GET['rot'], $_GET['text'], $_G
 			$drawing->drawException($drawException);
 		} else {
 			$drawing->setBarcode($code_generated);
-			$drawing->setRotationAngle($_GET['rot']);
+			$drawing->setRotationAngle(htmlentities($_GET['rot'],  ENT_QUOTES,  "utf-8"));
 			$drawing->setDPI($_GET['dpi'] == 'null' ? null : (int)$_GET['dpi']);
 			$drawing->draw();
 		}

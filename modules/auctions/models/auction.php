@@ -530,7 +530,7 @@ class Auction_Model extends Model
 	{
 	    //$query = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id ORDER BY bid_amount DESC LIMIT 1";
 	    //    $result_high = $this->db->query($query);
-            $result_high = $this->db->select()->from("transaction")
+            $result_high = $this->db->select("*")->from("transaction")
                     ->join("users", "users.user_id", "transaction.user_id")
                     ->join("city", "city.city_id", "users.city_id")
                     ->join("country", "country.country_id", "users.country_id")
@@ -541,11 +541,12 @@ class Auction_Model extends Model
 	                    $bid_amount_high= $result_high->current()->bid_amount;
 	                    //$query_count = " SELECT * FROM transaction join users on users.user_id=transaction.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where transaction.deal_id = $deal_id and bid_amount = $bid_amount_high";
 	                    //$result = $this->db->query($query_count);
-                            $result = $this->db->select()->from("transaction")
+                            $result = $this->db->select("*")->from("transaction")
                                     ->join("users", "users.user_id", "transaction.user_id")
                                     ->join("city", "city.city_id", "users.city_id")
                                     ->join("country", "country.country_id", "users.country_id")
-                                    ->where(array("transaction.deal_id" => $deal_id, "bid_amount" => $bid_amount_high));
+                                    ->where(array("transaction.deal_id" => $deal_id, "bid_amount" => $bid_amount_high))
+									->get();
                             
 	                    return $result;
 	            }
@@ -953,7 +954,17 @@ class Auction_Model extends Model
 	}
 	
 	public function get_merchant_details($merchant_id=''){
-		$result = $this->db->select("*")->from("users")->join("city","city.city_id","users.city_id","left")->join("country","country.country_id","users.country_id","left")->where("user_id",$merchant_id)->get();
+		
+		try{
+		$result = $this->db->select("*")->from("users")
+										->join("city","city.city_id","users.city_id","left")
+										->join("country","country.country_id","users.country_id","left")
+										->where(array("user_id"=>$merchant_id))
+										->get();
+		}catch(Exception $e){
+			var_dump($e);
+			
+		}
 		return $result;
 	}
 	

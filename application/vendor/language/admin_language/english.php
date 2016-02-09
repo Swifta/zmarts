@@ -76,7 +76,7 @@ $content_text = array(
 
 			"EMAIL_SUC" => "Email successfully updated!",
 
-			"FORGOT_PASS" => "Forgot Password",
+			"FORGOT_PSWD" => "Forgot Password",
 
 			"DEAL_FIL" => "Deal Filters",
 
@@ -402,13 +402,13 @@ $content_text = array(
 
 			"RE_PASSWORD" => "Confirm Password",
 
-			"OLD_PASS" => "Old Password",
+			"OLD_PSWD" => "Old Password",
 
-			"NEW_PASS" => "New Password",
+			"NEW_PSWD" => "New Password",
 
 			"RE_ENTER"=>"Re-enter Password",
 
-			"CONFIRM_PASS" => "Confirm Password",
+			"CONFIRM_PSWD" => "Confirm Password",
 
 			"ADDR1" => "Address1",
 
@@ -554,7 +554,7 @@ $content_text = array(
 
 			"NO_MATCH_DEALS" => "No matching deals.",
 
-			"CITIES" => "Cities",
+			"CITIES" => "States",
 
 			"LINKS" => "Links",
 
@@ -1741,9 +1741,9 @@ $content_text = array(
 
 			"PAYMENT_MODE"=>"Payment Mode",
 
-			"TEST_ACCOUNT"=>"Test Account",
+			"TEST_ACCT"=>"Test Account",
 
-			"LIVE_ACCOUNT"=>"Live Account",
+			"LIVE_ACCT"=>"Live Account",
 
 			"BY" => "BY",
 
@@ -2118,7 +2118,7 @@ $content_text = array(
 
 			"PAL_ACC" => "Paypal Account",
 
-			"PAL_API_PASS" => "Paypal API Password",
+			"PAL_API_PSWD" => "Paypal API Password",
 
 			"PAYPAL_API_SIG" => "Paypal API Signature",
 
@@ -2174,9 +2174,9 @@ $content_text = array(
 
 			"AUTHORIZE" => "Authorize.net",
 
-			"PAYPAL_CREDIT" => "Credit card using Paypal",
+			"PPAL_CRDT" => "Credit card using Paypal",
 
-			"PAYPAL" => "Paypal",
+			"PPAL" => "Paypal",
 
 			"ACT_PRI_LES_PRO_PRI" => "Auction price should be less than product price",
 
@@ -3295,13 +3295,13 @@ $content_text = array(
 
 			"TRACKING_NO" => "Tracking Number : ",
 			
-			"ACCOUNTCOUNTRYCODE" =>"Account Country Code",
+			"ACCTCOUNTRYCODE" =>"Account Country Code",
 			
-			"ACCOUNTENTITY" =>"Account Entity",
+			"ACCTENTITY" =>"Account Entity",
 			
-			"ACCOUNTNUMBER" =>"Account Number",
+			"ACCTNUMBER" =>"Account Number",
 			
-			"ACCOUNTPIN" =>"Account Pin",
+			"ACCTPIN" =>"Account Pin",
 			
 			"USERNAME" =>"User Name",
 			
@@ -3671,7 +3671,7 @@ $content_text = array(
 
 			"USER_TYP" =>"User Type",
 
-			"PRIM_CUST" =>"Prime Customer",
+			"PRIM_CUST" =>"Club Member",
 			
 			"LOCATION" => "Location",
 			

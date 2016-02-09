@@ -159,7 +159,7 @@
                 </tr>
                 
 		        <tr>
-                    <td style="width: 200px;"><label><?php echo $this->Lang['PAL_API_PASS']; ?></label><span>*</span></td>
+                    <td style="width: 200px;"><label><?php echo $this->Lang['PAL_API_PSWD']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td><input type="text" name="Paypal_API_Password" maxlength="32"   value="<?php echo $general->paypal_api_password; ?>"/>
                     <em><?php if(isset($this->form_error["Paypal_API_Password"])){ echo $this->form_error["Paypal_API_Password"]; }?></em></td>
@@ -197,8 +197,8 @@
                     <td  style="width: 200px;"><label><?php echo $this->Lang["PAYMENT_MODE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                    <input type="radio" name="paypal_payment_mode" value="0" <?php if($general->paypal_payment_mode=="0"){ ?> checked <?php } ?>> <?php echo $this->Lang["TEST_ACCOUNT"]; ?>
-                    <input type="radio" name="paypal_payment_mode" value="1" <?php if($general->paypal_payment_mode=="1"){ ?> checked <?php } ?>> <?php echo $this->Lang["LIVE_ACCOUNT"]; ?>
+                    <input type="radio" name="paypal_payment_mode" value="0" <?php if($general->paypal_payment_mode=="0"){ ?> checked <?php } ?>> <?php echo $this->Lang["TEST_ACCT"]; ?>
+                    <input type="radio" name="paypal_payment_mode" value="1" <?php if($general->paypal_payment_mode=="1"){ ?> checked <?php } ?>> <?php echo $this->Lang["LIVE_ACCT"]; ?>
                     </td>
                 </tr>
                 

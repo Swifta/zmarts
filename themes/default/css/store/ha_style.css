@@ -289,7 +289,7 @@ em{float: left;clear:both;font:normal 12px arial;color:#f00; width: 100%; paddin
 .foot_social_icons li a.youtube:hover{background-position:-66px 0;}
 .foot_social_icons li a.rss_1{background-position: -88px -23px;}
 .foot_social_icons li a.rss_1:hover{background-position:-88px 0;}
-.foot_social_icons li a.instagram{background: url(../../images/new/inst_sprite.png)-44px -23px; no-repeat;width:21px;height:20px;}
+.foot_social_icons li a.instagram{background: url(../../images/new/inst_sprite.png)-44px -23px no-repeat;width:21px;height:20px;}
 .foot_social_icons li a.instagram:hover{background-position: -44px 0;}
 .footer_two{float: left;width: 160px;padding-left: 75px;padding-right: 30px;border-left: 1px solid #890202;}
 .footer_two ul{float: left;width:100%;}

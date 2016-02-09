@@ -710,7 +710,7 @@ html[xmlns] .clearfix {	display: block;}
 input[type=text],input[type=password]{border:#ccc solid 1px;}
 select{padding:5px 5px 5px 5px; background:url(../images/input_text_bg.png) repeat-x; height:31px;border-bottom:1px solid none;border-right:1px solid #B9C4CF;border-left:1px solid #B9C4CF;border-top:1px solid none; 
 border-bottom:0.5px solid #B9C4CF; border-top:none;}
-.admin_form table input[type=text],.content_middle form table input[type=password]{float:left; width:230px; font:normal 12px arial; color:#999; background:url(../images/input_text_bg.png) repeat-x; height:17px;height:15px \0/;}
+.admin_form table input[type=text],.content_middle form table input[type=password]{float:left; width:230px; font:normal 12px arial; color:#999; background:url(../images/input_text_bg.png) repeat-x; height:17px;height:15px;}
 .cleditorMain{ border:1px solid #B9C4CF!important;}
 
 /*munisamy*/
@@ -874,6 +874,3 @@ box-shadow: 0 1px 5px -1px #999999 inset;-webkit-box-shadow: 0 1px 5px -1px #999
 .content_middle .new_search_button{display: inline-block;background:linear-gradient(to bottom, hsl(42, 98%, 53%) 5%, hsl(35, 95%, 54%) 100%) repeat scroll 0 0 hsl(42, 98%, 53%);border-radius: 3px;-moz-border-radius: 3px; -webkit-border-radius: 3px;margin-left: 10px;}
 .content_middle .new_search_button input[type="submit"]{border: none;color: #fff;font: bold 12px arial;background:url("../images/search.png") 10px center no-repeat;padding: 6px 5px 6px 28px;margin: 0;border-radius: none;box-shadow: none;text-shadow: none;}
 .content_middle .new_search_button:hover{background: #414140;}
-
-
-

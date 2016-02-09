@@ -23,10 +23,10 @@ class Store_admin_Model extends Model
 	public function get_merchant_dashboard_data()
 	{
 
-		$result_active_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate >" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1","stores.store_id" => $this->store_id))->get();
+		$result_active_deals =$this->db->select()->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate >" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1","stores.store_id" => $this->store_id))->get();
 		$result["active_deals"]=count($result_active_deals);
 
-		$result_archive_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate <" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1","stores.store_id" => $this->store_id))->get();
+		$result_archive_deals =$this->db->select()->from("deals")->join("stores","stores.store_id","deals.shop_id")->where(array("enddate <" => time(),"deals.merchant_id" => $this->user_id,"deal_status"=>"1","stores.store_status" => "1","stores.store_id" => $this->store_id))->get();
 		$result["archive_deals"]=count($result_archive_deals);
 
 //		$result_active_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id 
@@ -34,7 +34,7 @@ class Store_admin_Model extends Model
 //                
 //		$result["active_products"]=count($result_active_products);
 
-                 $result_active_products =$this->db->from("product")
+                 $result_active_products =$this->db->select()->from("product")
                  ->join("stores","stores.store_id","product.shop_id")        
                  ->where(array("purchase_count <" => "user_limit_quantity","deal_status"=> 1,"stores.store_status"=>1,"product.merchant_id"=> $this->user_id ,"product.shop_id"=> $this->store_id));
                         
@@ -44,17 +44,17 @@ class Store_admin_Model extends Model
 //                $result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id 
 //                    WHERE  purchase_count = user_limit_quantity  and deal_status=1 and stores.store_status = 1 and product.merchant_id = ".$this->user_id." and product.shop_id = ".$this->store_id." ");
 //               
-                $result_sold_products =$this->db->from("product")
+                $result_sold_products =$this->db->select()->from("product")
                 ->join("stores","stores.store_id","product.shop_id")       
                 ->where(array("purchase_count" => "user_limit_quantity","deal_status" => 1,"stores.store_status"=> 1,"product.merchant_id"=>$this->user_id,"product.shop_id"=>$this->store_id));
                 
 		$result["sold_products"]=count($result_sold_products);
 
-		$result_active_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,"stores.store_id" => $this->store_id))->get();
+		$result_active_auction =$this->db->select()->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,"stores.store_id" => $this->store_id))->get();
 		
 		$result["active_auction"]=count($result_active_auction);
 
-		$result_archive_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,"stores.store_id" => $this->store_id))->get();
+		$result_archive_auction =$this->db->select()->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,"stores.store_id" => $this->store_id))->get();
 		
 		$result["archive_auction"]=count($result_archive_auction);
 
@@ -78,7 +78,7 @@ class Store_admin_Model extends Model
         public function get_merchant_balance_fund()
 	{
 
-                $result =$this->db->from("request_fund")->where(array("request_status" => 2, "user_id" => $this->user_id))->get();
+                $result =$this->db->select()->from("request_fund")->where(array("request_status" => 2, "user_id" => $this->user_id))->get();
 
                 return $result;
         }
@@ -129,7 +129,7 @@ class Store_admin_Model extends Model
 	public function user_details()
 	{
 
-                $result = $this->db->from("users")
+                $result = $this->db->select()->from("users")
                                 ->where(array("user_id" => $this->store_admin_id))
                                 ->join("city","city.city_id","users.city_id")
                                 ->join("country","country.country_id","city.country_id")
@@ -142,7 +142,7 @@ class Store_admin_Model extends Model
 	public function get_users_data()
 	{
 
-                $result = $this->db->from("users")->where(array("user_id" => $this->store_admin_id))->join("city","city.city_id","users.city_id")->limit(1)->get();
+                $result = $this->db->select()->from("users")->where(array("user_id" => $this->store_admin_id))->join("city","city.city_id","users.city_id")->limit(1)->get();
                 return $result;
 	}
 
@@ -151,7 +151,7 @@ class Store_admin_Model extends Model
 	public function getCityList()
 	{
 
-		$result = $this->db->from("city")
+		$result = $this->db->select()->from("city")
 			        ->join("country","country.country_id","city.country_id")
 			        ->orderby("city.city_name", "ASC")
 			        ->get();
@@ -250,7 +250,7 @@ class Store_admin_Model extends Model
 	                $dispa = array("category_status" => 1,"main_category_id"=>0 , "auction" =>1);
 	        } 
 
-		$result = $this->db->from("category")
+		$result = $this->db->select()->from("category")
 		->where($dispa)
 		->orderby("category_name","ASC")->get();
 		return $result;
@@ -259,14 +259,14 @@ class Store_admin_Model extends Model
 	public function get_gategory_list()
 	{
 
-		$result = $this->db->from("category")->where(array("category_status" => 1,"main_category_id"=>0))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1,"main_category_id"=>0))->orderby("category_name","ASC")->get();
 		return $result;
 	}
 
 	/** GET ALL CATEGORY LIST **/
 	public function all_category_list()
 	{
-		$result = $this->db->from("category")->where(array("category_status" => 1))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1))->orderby("category_name","ASC")->get();
 		return $result;
 
 	}
@@ -274,8 +274,8 @@ class Store_admin_Model extends Model
 
 	public function get_merchant_balance()
 	{
-                /*$result =$this->db->from("users")->where(array("user_type" => 3, "user_id" => $this->user_id))->get();*/
-                $result=$this->db->from("stores")->where(array("store_admin_id" =>$this->store_admin_id))->get();
+                /*$result =$this->db->select()->from("users")->where(array("user_type" => 3, "user_id" => $this->user_id))->get();*/
+                $result=$this->db->select()->from("stores")->where(array("store_admin_id" =>$this->store_admin_id))->get();
                 return $result;
 	}
 
@@ -284,7 +284,7 @@ class Store_admin_Model extends Model
 	public function get_shop_list()
 	{
 
-                $result = $this->db->from("stores")
+                $result = $this->db->select()->from("stores")
                             ->join("users","users.user_id","stores.merchant_id")
                             ->join("city","city.city_id","stores.city_id")
                             ->orderby("stores.store_name", "ASC")
@@ -298,7 +298,7 @@ class Store_admin_Model extends Model
 	public function get_city_by_country($country)
 	{
 
-		$result = $this->db->from("city")->where(array("country_id" => $country, "city_status" => '1'))->orderby("city_name")->get();
+		$result = $this->db->select()->from("city")->where(array("country_id" => $country, "city_status" => '1'))->orderby("city_name")->get();
 		return $result;
 	}
 
@@ -458,7 +458,7 @@ class Store_admin_Model extends Model
    	public function get_city_lists()
 	{
 
-                $result = $this->db->from("city")
+                $result = $this->db->select()->from("city")
 
                             ->orderby("city.city_name", "ASC")
 			    ->join("country","country.country_id","city.country_id")
@@ -502,7 +502,7 @@ class Store_admin_Model extends Model
 	public function get_edit_deal($deal_id = "",$deal_key = "")
 	{
 
-	 $result = $this->db->from("deals")
+	 $result = $this->db->select()->from("deals")
                         ->where(array("deal_id" => $deal_id, "deal_key" => $deal_key,"merchant_id" => $this->user_id,"shop_id"=>$this->store_id))
              		->get();
 
@@ -601,7 +601,7 @@ class Store_admin_Model extends Model
         public function getcountrylist()
 	{
 
-	        $result = $this->db->from("country")->where(array("country_status" => '1'))->orderby("country_name")->get();
+	        $result = $this->db->select()->from("country")->where(array("country_status" => '1'))->orderby("country_name")->get();
 	        return $result;
         }
 
@@ -685,7 +685,7 @@ class Store_admin_Model extends Model
 
 	public function get_merchant_shop_data($storeid = "")
 	{
-		$result = $this->db->from("stores")->join("city","city.city_id","stores.city_id")->join("users","users.user_id","stores.store_admin_id","left")->where(array("store_id" => $storeid, "merchant_id" => $this->user_id))->limit(1)->get();
+		$result = $this->db->select()->from("stores")->join("city","city.city_id","stores.city_id")->join("users","users.user_id","stores.store_admin_id","left")->where(array("store_id" => $storeid, "merchant_id" => $this->user_id))->limit(1)->get();
 		return $result;
 	}
 
@@ -698,7 +698,7 @@ class Store_admin_Model extends Model
                 if($type == 1){
                     $status = 1;
                 }
-                $get_data = $this->db->from("stores")->join("users","stores.merchant_id","users.user_id")->where(array("store_id" => $storesid,"user_id" => $this->user_id))->get();
+                $get_data = $this->db->select()->from("stores")->join("users","stores.merchant_id","users.user_id")->where(array("store_id" => $storesid,"user_id" => $this->user_id))->get();
                 foreach($get_data as $c){
 			if($c->user_status == 1){
 				$result = $this->db->update("stores", array("store_status" => $status), array("store_id" => $storesid));
@@ -730,7 +730,7 @@ class Store_admin_Model extends Model
         public function get_all_fund_request($offset = "", $record = "")
 	{
 
-        $result = $this->db->from("request_fund")
+        $result = $this->db->select()->from("request_fund")
                                     ->where(array("user_id" => $this->user_id))
                                     ->orderby("request_id", "DESC")
                                     ->limit($record, $offset)
@@ -767,7 +767,7 @@ class Store_admin_Model extends Model
 
 	public function get_fund_request_data($request_id = "")
 	{
-		$result = $this->db->from("request_fund")->where(array('request_id' => $request_id, 'request_status' => 1, "user_id" => $this->user_id))->limit(1)->get();
+		$result = $this->db->select()->from("request_fund")->where(array('request_id' => $request_id, 'request_status' => 1, "user_id" => $this->user_id))->limit(1)->get();
 		return $result;
 
 	}
@@ -791,7 +791,7 @@ class Store_admin_Model extends Model
 
 	public function get_transaction_data($deal_id = "")
 	{
-                $result = $this->db->from("deals")
+                $result = $this->db->select()->from("deals")
                                 ->where(array("transaction.deal_id" => $deal_id,"deals.merchant_id" =>$this->user_id,"deals.shop_id" => $this->store_id))
 	                        ->join("transaction","transaction.deal_id","deals.deal_id")
 	                        ->orderby("transaction.id","DESC")
@@ -827,7 +827,7 @@ class Store_admin_Model extends Model
 
 	public function get_auction_transaction_data($deal_id = "")
 	{
-                $result = $this->db->from("auction")
+                $result = $this->db->select()->from("auction")
                                 ->where(array("transaction.auction_id" => $deal_id,"auction.merchant_id" =>$this->user_id))
 	                        	->join("transaction","transaction.auction_id","auction.deal_id")
 	                        	->orderby("transaction.id","DESC")
@@ -923,9 +923,9 @@ class Store_admin_Model extends Model
                 $product_id = $result->insert_id();
                 if(($post->color_val) == 1){
                     foreach($post->color as $c){
-                        $result_count = $this->db->from("color")->where(array("deal_id" => $product_id, "color_name" => $c))->get();
+                        $result_count = $this->db->select()->from("color")->where(array("deal_id" => $product_id, "color_name" => $c))->get();
                         if(count($result_count)==0){
-                                $result_id = $this->db->from("color_code")->where(array("color_code" => $c))->get();
+                                $result_id = $this->db->select()->from("color_code")->where(array("color_code" => $c))->get();
                                 $result_color = $this->db->insert("color", array("deal_id" => $product_id, "color_name" => $c, "color_code_id" => $result_id->current()->id,"color_code_name" => $result_id->current()->color_name));
                         }
                     }
@@ -934,9 +934,9 @@ class Store_admin_Model extends Model
 	    if(($post->size_val) == 1){
 	        $i= 0;
 	        foreach($post->size as $s){
-	            $result_count = $this->db->from("product_size")->where(array("deal_id" => $product_id, "size_id" => $s))->get();
+	            $result_count = $this->db->select()->from("product_size")->where(array("deal_id" => $product_id, "size_id" => $s))->get();
 	            if(count($result_count)==0){
-	            $result_id = $this->db->from("size")->where(array("size_id" => $s))->get();
+	            $result_id = $this->db->select()->from("size")->where(array("size_id" => $s))->get();
 	            		$size_tot = count((array)$post->size);
 						//To avoid None size if other sizes selected
 					if($size_tot == 1 && ($s!=1 || $s==1)){
@@ -1276,7 +1276,7 @@ class Store_admin_Model extends Model
 				
 			 if(($post->color_val) == 1){
 				foreach($post->color as $c){
-					 $result_id = $this->db->from("color_code")->where(array("color_code" => $c))->get();
+					 $result_id = $this->db->select()->from("color_code")->where(array("color_code" => $c))->get();
 			        $result_color = $this->db->insert("color", array("deal_id" => $deal_id, "color_name" => $c, "color_code_id" => $result_id->current()->id,"color_code_name" => $result_id->current()->color_name));
 			    }
 	        }
@@ -1284,9 +1284,9 @@ class Store_admin_Model extends Model
 	        if(($post->size_val) == 1){
 				$i= 0;
 				foreach($post->size as $s){
-					$result_count = $this->db->from("product_size")->where(array("deal_id" => $deal_id, "size_id" => $s))->get();
+					$result_count = $this->db->select()->from("product_size")->where(array("deal_id" => $deal_id, "size_id" => $s))->get();
 					if(count($result_count)==0){
-					$result_id = $this->db->from("size")->where(array("size_id" => $s))->get();
+					$result_id = $this->db->select()->from("size")->where(array("size_id" => $s))->get();
 							$size_tot = count((array)$post->size);
 							//To avoid None size if other sizes selected
 						if($size_tot == 1 && ($s!=1 || $s==1)){
@@ -1330,7 +1330,7 @@ class Store_admin_Model extends Model
 
 	public function get_edit_product($deal_id = "",$deal_key = "")
 	{
-	   $result = $this->db->from("product")
+	   $result = $this->db->select()->from("product")
 	                        ->where(array("deal_id" => $deal_id, "deal_key" => $deal_key,"merchant_id" => $this->user_id))
 	             		->get();
            return $result;
@@ -2031,13 +2031,13 @@ class Store_admin_Model extends Model
 	/* GET SHIPPING PRODUCT COLOR */
 	public function get_shipping_product_color()
 	{
-		$result = $this->db->from("color_code")->orderby("color_name","asc")->get();
+		$result = $this->db->select()->from("color_code")->orderby("color_name","asc")->get();
 		return $result;
 	}
 	/*GET SHIPPING PRODUCT SIZE */
 	public function get_shipping_product_size()
 	{
-		$result = $this->db->from("size")->get();
+		$result = $this->db->select()->from("size")->get();
 		return $result;
 	}
 	/** UPDATE COUPON STATUS **/
@@ -2096,7 +2096,7 @@ class Store_admin_Model extends Model
 	/** GET USER LIST **/
 	public function get_transaction_chart_list()
 	{
-	        $result = $this->db->from("transaction_mapping")
+	        $result = $this->db->select()->from("transaction_mapping")
                                 ->where(array("deals.merchant_id" => $this->user_id,"deals.shop_id"=>$this->store_id))
 	                            ->join("deals","deals.deal_id","transaction_mapping.deal_id")
                                 ->get();
@@ -2135,7 +2135,7 @@ class Store_admin_Model extends Model
 	/** GET USER LIST **/
 	public function get_product_transaction_chart_list()
 	{
-	        $result = $this->db->from("transaction_mapping")
+	        $result = $this->db->select()->from("transaction_mapping")
                                 ->where(array("product.merchant_id" => $this->user_id,"product.shop_id"=>$this->store_id))
 	                            ->join("product","product.deal_id","transaction_mapping.product_id")
                                 ->get();
@@ -2145,7 +2145,7 @@ class Store_admin_Model extends Model
 	/** GET USER LIST **/
 	public function get_auction_transaction_chart_list()
 	{
-	        $result = $this->db->from("transaction")
+	        $result = $this->db->select()->from("transaction")
 	                            ->join("auction","auction.deal_id","transaction.auction_id")
 								 ->where(array("auction.merchant_id" => $this->user_id,"auction.shop_id"=>$this->store_id))
                                 ->get();
@@ -2156,7 +2156,7 @@ class Store_admin_Model extends Model
 
 	public function get_bidding_data_list()
 	{
-                $result =$this->db->from("bidding")->get();
+                $result =$this->db->select()->from("bidding")->get();
                 return $result;
 	 }
 
@@ -2399,7 +2399,7 @@ class Store_admin_Model extends Model
 
 	public function get_edit_auction($deal_id = "",$deal_key = "")
 	{
-		$result = $this->db->from("auction")
+		$result = $this->db->select()->from("auction")
 							->where(array("deal_id" => $deal_id, "deal_key" => $deal_key,"merchant_id" => $this->user_id,"shop_id"=>$this->store_id))
 		     				->get();
 		return $result;
@@ -2409,7 +2409,7 @@ class Store_admin_Model extends Model
 
 	public function get_auction_users_data($userid = "")
 	{
-		$result = $this->db->from("users")->where(array("user_type" => $userid))->where('user_status',1)->orderby("firstname","ASC")->get();
+		$result = $this->db->select()->from("users")->where(array("user_type" => $userid))->where('user_status',1)->orderby("firstname","ASC")->get();
 		return $result;
 	}
 
@@ -2521,7 +2521,7 @@ class Store_admin_Model extends Model
 	/* GET BIDDING LIST */
 	public function get_bidding_list($deal_id = "")
 		{
-			$result = $this->db->from("bidding")->join("auction","auction.deal_id","bidding.auction_id")->join("users","users.user_id","bidding.user_id")->where(array("auction.deal_status" => 1,"auction.deal_id" => $deal_id,"users.user_status" =>1))->orderby("bid_id","DESC")->get();
+			$result = $this->db->select()->from("bidding")->join("auction","auction.deal_id","bidding.auction_id")->join("users","users.user_id","bidding.user_id")->where(array("auction.deal_status" => 1,"auction.deal_id" => $deal_id,"users.user_status" =>1))->orderby("bid_id","DESC")->get();
 		return $result;
 
 		}
@@ -2529,20 +2529,20 @@ class Store_admin_Model extends Model
 
 	public function get_sub_category_list()
 	{
-		$result = $this->db->from("category")->where(array("category_status" => 1,"type"=>2))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1,"type"=>2))->orderby("category_name","ASC")->get();
 		return $result;
 	}
 
 	public function get_sec_category_list()
 	{
-		$result = $this->db->from("category")->where(array("category_status" => 1,"type"=>3))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1,"type"=>3))->orderby("category_name","ASC")->get();
 		return $result;
 	}
 
     /** GET SUB CATEGORY LIST BY CATEGORY **/
         public function get_sub_category($category = "")
 	{
-		$result = $this->db->from("category")
+		$result = $this->db->select()->from("category")
 		                    ->where(array("main_category_id" => $category, "category_status" => 1,"type" => 2))
 	                        ->orderby("category_name")->get();
 		return $result;
@@ -2552,7 +2552,7 @@ class Store_admin_Model extends Model
 	/** GET SEC SUB CATEGORY LIST BY CATEGORY **/
         public function get_sec_category($category = "")
 	{
-		$result = $this->db->from("category")
+		$result = $this->db->select()->from("category")
 		                    ->where(array("sub_category_id" => $category, "category_status" => 1,"type" => 3))
 	                        ->orderby("category_name")->get();
 		return $result;
@@ -2561,7 +2561,7 @@ class Store_admin_Model extends Model
 	/** GET SEC SUB CATEGORY LIST BY CATEGORY **/
         public function get_third_category($category = "")
 	{
-		$result = $this->db->from("category")
+		$result = $this->db->select()->from("category")
 		                    ->where(array("sub_category_id" => $category, "category_status" => 1,"type" => 4))
 	                        ->orderby("category_name")->get();
 		return $result;
@@ -2569,7 +2569,7 @@ class Store_admin_Model extends Model
 
         public function get_third_category_list()
 	{
-		$result = $this->db->from("category")->where(array("category_status" => 1,"type"=>4))->orderby("category_name","ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_status" => 1,"type"=>4))->orderby("category_name","ASC")->get();
 		return $result;
 	}
 
@@ -2579,7 +2579,7 @@ class Store_admin_Model extends Model
 	{
 
 		$email = trim($email);
-		$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 9,"user_status" => 1))->limit(1)->get();
+		$result = $this->db->select()->from("users")->where(array("email" => $email,"user_type" => 9,"user_status" => 1))->limit(1)->get();
 		if(count($result) > 0){
 			
 			$userid = $result->current()->user_id;
@@ -2596,17 +2596,17 @@ class Store_admin_Model extends Model
 	public function get_user_details_list($email)
 	{
 		$email = trim($email);
-		$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 9,"user_status" => 1))->limit(1)->get();
+		$result = $this->db->select()->from("users")->where(array("email" => $email,"user_type" => 9,"user_status" => 1))->limit(1)->get();
 		return $result;
 	}
 
 	/* GET DEALS CHART */
 	public function get_deals_chart_list()
 	{
-	    $result_active_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","deals.merchant_id" => $this->user_id,"stores.store_id"=>$this->store_id))->get();
+	    $result_active_deals =$this->db->select()->from("deals")->join("stores","stores.store_id","deals.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","deals.merchant_id" => $this->user_id,"stores.store_id"=>$this->store_id))->get();
 		$result["active_deals"]=count($result_active_deals);
 
-		$result_archive_deals =$this->db->from("deals")->join("stores","stores.store_id","deals.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","deals.merchant_id" => $this->user_id,"stores.store_id"=>$this->store_id))->get();
+		$result_archive_deals =$this->db->select()->from("deals")->join("stores","stores.store_id","deals.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","deals.merchant_id" => $this->user_id,"stores.store_id"=>$this->store_id))->get();
 		$result["archive_deals"]=count($result_archive_deals);
 		return $result;
 	}
@@ -2617,7 +2617,7 @@ class Store_admin_Model extends Model
 //                WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id and product.shop_id = ".$this->store_id." ");
 //		$result["active_products"]=count($result_active_products);
 
-                  $result_active_products = $this->db->from("product")
+                  $result_active_products = $this->db->select()->from("product")
                           ->join("stores","stores.store_id","product.shop_id")
 		                   ->where(array("purchase_count <" => "user_limit_quantity" , "deal_status" => 1,"stores.store_status" => 1,"product.merchant_id "=>$this->user_id,"product.shop_id"=>$this->store_id));
                        
@@ -2630,7 +2630,7 @@ class Store_admin_Model extends Model
 //                    WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id and product.shop_id = ".$this->store_id." ");
 //		$result["archive_products"]=count($result_sold_products);
                 
-                $result_sold_products = $this->db->from("product")
+                $result_sold_products = $this->db->select()->from("product")
                  ->join("stores","stores.store_id","product.shop_id")
 		 ->where(array("purchase_count =" => "user_limit_quantity" , "deal_status" => 1,"stores.store_status" => 1,"product.merchant_id "=>$this->user_id,"product.shop_id"=>$this->store_id));
                        
@@ -2646,10 +2646,10 @@ class Store_admin_Model extends Model
 
 	public function get_auction_chart_list()
 	{
-	    $result_active_deals =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate >" => time(), "auction.merchant_id" =>$this->user_id,"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.shop_id"=>$this->store_id))->get();
+	    $result_active_deals =$this->db->select()->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate >" => time(), "auction.merchant_id" =>$this->user_id,"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.shop_id"=>$this->store_id))->get();
 		$result["active_auction"]=count($result_active_deals);
 
-		$result_archive_deals =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"auction.merchant_id" =>$this->user_id, "deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.shop_id"=>$this->store_id))->get();
+		$result_archive_deals =$this->db->select()->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"auction.merchant_id" =>$this->user_id, "deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.shop_id"=>$this->store_id))->get();
 		$result["archive_auction"]=count($result_archive_deals);
 		return $result;
 	}
@@ -2675,7 +2675,7 @@ class Store_admin_Model extends Model
 
 	public function get_color_code()
 	{
-		$result = $this->db->from("color")->join("color_code","color_code.color_code","color.color_name","left")
+		$result = $this->db->select()->from("color")->join("color_code","color_code.color_code","color.color_name","left")
 				->where(array("color_status" =>0,"color_code.color_name!="=>"NULL"))
 				->orderby("color.color_code_name","ASC")
 				->groupby("color.color_name")
@@ -2696,7 +2696,7 @@ class Store_admin_Model extends Model
 
 	public function get_color_data($color_id="")
 	{
-		$result = $this->db->from("color_code")
+		$result = $this->db->select()->from("color_code")
 		                ->where(array("color_code" => $color_id))
 						->get();
 		return $result;
@@ -2706,7 +2706,7 @@ class Store_admin_Model extends Model
 
 	public function get_size_data($size_id="")
 	{
-		$result = $this->db->from("size")
+		$result = $this->db->select()->from("size")
 		                ->where(array("size_id" => $size_id))
 		     		->get();
 		return $result;
@@ -2716,7 +2716,7 @@ class Store_admin_Model extends Model
 
 	public function get_product_color($deal_id = "")
 	{
-		$result = $this->db->from("color")
+		$result = $this->db->select()->from("color")
 				->where(array("deal_id" => $deal_id))
 		     		->get();
 		return $result;
@@ -2725,7 +2725,7 @@ class Store_admin_Model extends Model
 
 	public function get_product_one_size($deal_id = "")
 	{
-		$result = $this->db->from("product_size")
+		$result = $this->db->select()->from("product_size")
 				->where(array("deal_id" => $deal_id))
 		     		->get();
 		return $result;
@@ -2868,7 +2868,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/* GET HIGHEST BID */
 		public function get_highest_bid($deal_id ="")
 		{
-			$result = $this->db->from("bidding")->select("bid_amount","bid_id")->where(array("auction_id" => $deal_id))->orderby("bid_amount","DESC")->limit(1)->get();
+			$result = $this->db->select()->from("bidding")->select("bid_amount","bid_id")->where(array("auction_id" => $deal_id))->orderby("bid_amount","DESC")->limit(1)->get();
 			return $result;
 		}
 
@@ -2883,14 +2883,14 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 		/* Attributes start */
 	/*To get all attributes*/
 	public function GetAttributes(){
-		 $result = $this->db->from("attribute")->get();
+		 $result = $this->db->select()->from("attribute")->get();
 
 		return $result;
 	}
 
 	/*To get single product attributes*/
 	public function get_product_attributes($product_id=""){
-		 $result = $this->db->from("product_attribute")->where(array("product_id"=>$product_id))->get();
+		 $result = $this->db->select()->from("product_attribute")->where(array("product_id"=>$product_id))->get();
 		 return $result;
 	}
 
@@ -2938,7 +2938,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	/*To get single product policy*/
 	public function get_product_policy($product_id=""){
-		 $result = $this->db->from("product_policy")->where(array("product_id"=>$product_id))->get();
+		 $result = $this->db->select()->from("product_policy")->where(array("product_id"=>$product_id))->get();
 		 return $result;
 	}
 	
@@ -2946,7 +2946,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function get_shipping_data()
 	{
-		$result = $this->db->from("shipping_module_settings")->where(array("ship_user_id" => $this->user_id))->limit(1)->get();
+		$result = $this->db->select()->from("shipping_module_settings")->where(array("ship_user_id" => $this->user_id))->limit(1)->get();
 		return $result;
 	}
 	
@@ -2954,7 +2954,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "AccountNumber" => $post->AccountNumber, "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
 		return 1;
 	}
 	
@@ -3048,7 +3048,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function get_color_details($color)
 	{
-		$result = $this->db->from("color_code")->where(array("color_name" => $color))->get();
+		$result = $this->db->select()->from("color_code")->where(array("color_name" => $color))->get();
 		return $result;
 	}
 	
@@ -3060,7 +3060,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 		if($result == 0){
 			$result = $this->db->insert("size",array("size_name" =>$size,"size_arabic" =>""));
 		}
-		$result = $this->db->from("size")->where(array("size_name" => $size))->get();
+		$result = $this->db->select()->from("size")->where(array("size_name" => $size))->get();
 		return $result;
 	}
 	
@@ -3167,7 +3167,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 		}
         
         public function get_data_list(){
-		 $result = $this->db->from("stores")->where(array("merchant_id"=>$this->user_id, "store_type" => 1,"store_id" =>$this->store_id))->get();
+		 $result = $this->db->select()->from("stores")->where(array("merchant_id"=>$this->user_id, "store_type" => 1,"store_id" =>$this->store_id))->get();
 		 return $result;
 	}
 	
@@ -3205,8 +3205,8 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	}
 	
 	public function get_merchant_sector_data_list(){
-		 /*$result = $this->db->from("users")->join("sector","sector.sector_id" ,"users.user_sector_id")->where(array("user_id"=>$this->user_id))->get();*/
-		 $result = $this->db->from("stores")->join("sector","sector.sector_id" ,"stores.store_subsector_id")->where(array("store_admin_id"=>$this->store_admin_id))->get();
+		 /*$result = $this->db->select()->from("users")->join("sector","sector.sector_id" ,"users.user_sector_id")->where(array("user_id"=>$this->user_id))->get();*/
+		 $result = $this->db->select()->from("stores")->join("sector","sector.sector_id" ,"stores.store_subsector_id")->where(array("store_admin_id"=>$this->store_admin_id))->get();
 		 return $result;
 	}
 	
@@ -3291,7 +3291,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
                 }
                 else{
-                        $result = $this->db->from("users")
+                        $result = $this->db->select()->from("users")
                                     ->where(array("user_type" => 8))
 				    				->join("city","city.city_id","users.city_id")
 				    				->join("country","country.country_id","users.country_id")
@@ -3377,7 +3377,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
         
          public function moderator_privileges($user_id)
 		{ 
-			$result = $this->db->from("moderator_privileges_map")
+			$result = $this->db->select()->from("moderator_privileges_map")
 							->where(array("moderator_id" => $user_id))
 							->get();
 
@@ -3388,7 +3388,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 		public function get_moderator_data($userid = "")
 		{
-			$result = $this->db->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->limit(1)->get();
+			$result = $this->db->select()->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->limit(1)->get();
 			return $result;
 		}
 		
@@ -3417,7 +3417,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 		public function get_user_view_data($userid = "")
 		{
-			$result = $this->db->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id") ->limit(1)->get();
+			$result = $this->db->select()->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id") ->limit(1)->get();
 			return $result;
 		}
 		
@@ -3471,12 +3471,12 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=4 ";
+					$conditions.=" and gender='".strip_tags(addslashes($gender))."' and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=4 ";
+				$conditions.=" and age_range='".strip_tags(addslashes($age_range))."' and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -3666,7 +3666,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/* Get edit data for duration */
 	public function getdurationData($durationid="") 
 	{
-		$result = $this->db->from("duration")->where(array("duration_id"=>$durationid))->get();
+		$result = $this->db->select()->from("duration")->where(array("duration_id"=>$durationid))->get();
 		return $result;
 	}
 	/** EDIT DURATION **/
@@ -3692,7 +3692,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/* GET DURATION PERIOD ACCORDING TO MERCHANT */
 	public function get_duration_values()
 	{
-		$result = $this->db->from("duration")->where(array("duration_merchantid"=>$this->user_id))->orderby("duration_period","ASC")->get();
+		$result = $this->db->select()->from("duration")->where(array("duration_merchantid"=>$this->user_id))->orderby("duration_period","ASC")->get();
 		return $result;
 	}
 	
@@ -3720,14 +3720,14 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/** GIFT LIST **/
 	public function get_gift_list($offset="",$record="")
 	{
-		$result=$this->db->from("free_gift")->where(array("merchant_id" => $this->user_id))->orderby("gift_id","DESC")->limit($record,$offset)->get();
+		$result=$this->db->select()->from("free_gift")->where(array("merchant_id" => $this->user_id))->orderby("gift_id","DESC")->limit($record,$offset)->get();
 		return $result;
 		
 	}
 	/** GIFT LIST **/
 	public function get_gift_list_count()
 	{
-		$result=$this->db->from("free_gift")->where(array("merchant_id" => $this->user_id1))->get();
+		$result=$this->db->select()->from("free_gift")->where(array("merchant_id" => $this->user_id1))->get();
 		return count($result);
 		
 	}
@@ -3756,7 +3756,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/** GIFT LIST **/
 	public function get_gift_data($gift_id="", $merchant_id="")
 	{
-		$result=$this->db->from("free_gift")->where(array("gift_id" => $gift_id, "merchant_id" => $this->user_id1,"gift_status" =>1))->get();
+		$result=$this->db->select()->from("free_gift")->where(array("gift_id" => $gift_id, "merchant_id" => $this->user_id1,"gift_status" =>1))->get();
 		return $result;
 		
 	}
@@ -4177,7 +4177,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	{
 		$result = $this->db->count_records("category", array("category_url" => url::title($category)));
 		if($result == 0){
-		        $sub_result = $this->db->from("category")->where(array("category_id" =>$cat_id,"type" => $type))->get();
+		        $sub_result = $this->db->select()->from("category")->where(array("category_id" =>$cat_id,"type" => $type))->get();
 		        $mail_cat_id = $sub_result->current()->main_category_id;
 		        if($type == 1){
 		         $mail_cat_id = $cat_id;
@@ -4195,13 +4195,13 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_category_list()
 	{
-		$result = $this->db->from("category")->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
 	public function get_main_category_list()
 	{
-		$result = $this->db->from("category")->where(array("type" => "1"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("type" => "1"))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
@@ -4210,7 +4210,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_sec_sub_category_list()
 	{
-		$result = $this->db->from("category")->where(array("type" => "3"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("type" => "3"))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
@@ -4218,7 +4218,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_third_sub_category_list()
 	{
-		$result = $this->db->from("category")->where(array("main_category_id !=" =>0,"type" => "4"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("main_category_id !=" =>0,"type" => "4"))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
@@ -4227,17 +4227,17 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	public function get_sub_category_list1($cat_id = "")
 	{
 
-		$result = $this->db->from("category")->where(array("sub_category_id" =>$cat_id,"type" => "2"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("sub_category_id" =>$cat_id,"type" => "2"))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
 	public function get_sub_category_list11($main_cat_id = "", $cat_id = "", $cat_url = "" )
 	{
 
-                $resultcount = $this->db->from("category")->where(array("category_id" =>$cat_id,"type" => 3))->get();
+                $resultcount = $this->db->select()->from("category")->where(array("category_id" =>$cat_id,"type" => 3))->get();
 
 		$main = $resultcount->current()->sub_category_id;
-		$result = $this->db->from("category")->where(array("category_id" =>$main ,"type" => "2"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("category_id" =>$main ,"type" => "2"))->orderby("category_name", "ASC")->get();
 
 		return $result;
 	}
@@ -4246,7 +4246,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_sub_category_list2($cat_id = "")
 	{
-		$result = $this->db->from("category")->where(array("sub_category_id" =>$cat_id,"type" => "3"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("sub_category_id" =>$cat_id,"type" => "3"))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
@@ -4254,7 +4254,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_sub_category_list3($cat_id = "")
 	{
-		$result = $this->db->from("category")->where(array("sub_category_id" =>$cat_id,"type" => "4"))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("sub_category_id" =>$cat_id,"type" => "4"))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
@@ -4262,9 +4262,9 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	public function get_mail_category($cat_id = "", $type = "")
 	{
 
-		$resultcount = $this->db->from("category")->where(array("category_id" =>$cat_id,"type" => $type))->get();
+		$resultcount = $this->db->select()->from("category")->where(array("category_id" =>$cat_id,"type" => $type))->get();
 		$mail = $resultcount->current()->main_category_id;
-		$result = $this->db->from("category")->where(array("category_id" =>$mail,"type" => "1"))->get();
+		$result = $this->db->select()->from("category")->where(array("category_id" =>$mail,"type" => "1"))->get();
 
 		return $result;
 	}
@@ -4272,28 +4272,28 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	public function get_sub_categoryy($cat_id = "",$type = "")
 	{
 	        $sub_type =  $type - 1;
-		$resultcount = $this->db->from("category")->where(array("category_id" =>$cat_id,"type" => $type))->get();
+		$resultcount = $this->db->select()->from("category")->where(array("category_id" =>$cat_id,"type" => $type))->get();
 		$mail = $resultcount->current()->sub_category_id;
-		$result = $this->db->from("category")->where(array("category_id" =>$mail,"type" =>$sub_type))->get();
+		$result = $this->db->select()->from("category")->where(array("category_id" =>$mail,"type" =>$sub_type))->get();
 		return $result;
 	}
 
 	public function get_category($cat_id = "")
 	{
-	$resultcount = $this->db->from("category")->where(array("category_id" =>$cat_id,"type" => "2"))->get();
+	$resultcount = $this->db->select()->from("category")->where(array("category_id" =>$cat_id,"type" => "2"))->get();
 	return $resultcount;
 	}
 
 	public function get_sub_sec_category($cat_id = "")
 	{
-	$resultcount = $this->db->from("category")->where(array("category_id" =>$cat_id,"type" => "3"))->get();
+	$resultcount = $this->db->select()->from("category")->where(array("category_id" =>$cat_id,"type" => "3"))->get();
 	return $resultcount;
 	}
 	/** GET MAIN CATEGORY DATA **/
 
 	public function get_category_data($cat_id = "", $cat_url = "")
 	{
-		$result = $this->db->from("category")->where( array("category_id" => $cat_id, "category_url" => url::title($cat_url)))->get();
+		$result = $this->db->select()->from("category")->where( array("category_id" => $cat_id, "category_url" => url::title($cat_url)))->get();
 		return $result;
 	}
 
@@ -4301,7 +4301,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_sub_category_data($cat_id = "", $cat_url = "",$cat_type = "")
 	{
-		$result = $this->db->from("category")->where( array("category_id" => $cat_id, "category_url" => url::title($cat_url),"main_category_id !=" =>0,"type" => $cat_type))->get();
+		$result = $this->db->select()->from("category")->where( array("category_id" => $cat_id, "category_url" => url::title($cat_url),"main_category_id !=" =>0,"type" => $cat_type))->get();
 		return $result;
 	}
 

@@ -19,9 +19,9 @@ $content_text = array(
 
 "TYPE_PAY"=>"Type of payment",
 
-"PAYPAL" => "Paypal",
+"PPAL" => "Paypal",
 
-"PAYPAL_CREDIT" => "Credit card using paypal",
+"PPAL_CRDT" => "Credit card using paypal",
 
 "STORE_EMAIL_ID" => "Please enter store email",
     
@@ -55,9 +55,9 @@ $content_text = array(
 
 "EMAIL" => "Email",
 
-"PASSWORD" => "Password",
+"PSWD" => "Password",
 
-"CPASSWORD" => "Confirm Password",
+"CPSWD" => "Confirm Password",
 
 "ENTER_EMAIL"=>"Enter your email here",
 
@@ -123,7 +123,7 @@ $content_text = array(
 
 "PRIVACY"=>"Privacy Policy",
 
-"FOOTER_COPYRIGHT" => "Copyright © 2015",
+"FOOTER_COPYRIGHT" => "Copyright &copy;".date("Y"),
 
 "FOOTER_ALLRIGHT" => "All rights reserved",
 
@@ -165,7 +165,7 @@ $content_text = array(
 
 "SUBMIT" => "Submit",
 
-"FORGOT_PASS" => "Forgot password?",
+"FORGOT_PSWD" => "Forgot password?",
 
 "CANCEL" => "Cancel",
 
@@ -998,7 +998,7 @@ $content_text = array(
 
 "PLS_SEL_COUNTRY_FIR" => "Please select your country first",
 
-"PCPM" => "Password and Confirm Password Doesn't Match",
+"PCPM" => "Passwords do not Match",
 
 "BY_CLICKING_SUBMIT"=>"By clicking Sign Up you agree to $THIS_SITENAME",
 
@@ -1212,7 +1212,7 @@ $content_text = array(
 
 "REF_AMM" =>"Referral Amount",
 
-"CREDIT_CHARGED"=>"You will be charged",
+"CRDT_CHARGED"=>"You will be charged",
 
 "BUY_CLOSE_EMAIL1" => "You can download your ticket from your ",
 
@@ -1530,7 +1530,7 @@ $content_text = array(
 
 "USER_BLOCKED_ADMIN" => " Your Account has been blocked Please Contact Administrator",
 
-"PLEASE_SELECT_TERMS" => "Please select our terms",
+"PLEASE_SELECT_TERMS" => "Please accept our terms",
 
 "ADD" => "Add",
 
@@ -1856,7 +1856,7 @@ $content_text = array(
 
 "Z_ACC_OPEN" => "Click to open up a Zenith Bank Account",
 	
-"ACCOUNT_NUMBER" => "NUBAN Account Number",
+"ACCT_NUMBER" => "NUBAN Account Number",
     
 "ENTER_ACCOUNT_NUMBER" => "ENTER YOUR NUBAN A/C NUMBER",
 

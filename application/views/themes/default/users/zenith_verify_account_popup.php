@@ -17,7 +17,7 @@
                             onsubmit="return false;"  autocomplete="off">
                       <ul>
                             <li>
-                                <label><?php echo $this->Lang["ACCOUNT_NUMBER"]; ?>:<span class="form_star">*</span></label>
+                                <label><?php echo $this->Lang["ACCT_NUMBER"]; ?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                    <input name="nuban" id="id_nuban" type="text" maxlength="10"  placeholder="<?php echo $this->Lang['ENTER_ACCOUNT_NUMBER']; ?>" value="" autofocus />
                                    <em id="z_acc_error"></em>

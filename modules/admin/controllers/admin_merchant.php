@@ -195,9 +195,9 @@ class Admin_merchant_Controller extends website_Controller {
 									}
 									
 									$this->password = $store_admin_password;
-									$this->email = $_POST['store_email'];
+									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
-									$this->name = $_POST['username'];
+									$this->name = strip_tags(addslashes($_POST['username']));
 									$this->store_admin = 1;
 									$message = new View("themes/".THEME_NAME."/mail_template");
 									if(EMAIL_TYPE==2){				
@@ -211,7 +211,7 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = $_POST['subsector'];
+										$subsector = strip_tags(addslashes($_POST['subsector']));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -269,10 +269,10 @@ class Admin_merchant_Controller extends website_Controller {
 			$post = Validation::factory($_POST)->add_rules('message', 'required');		
 				if($post->validate()){
 
-				$email_id = $this->input->post('email');
-				$this->email_id = $this->input->post('email');
-				$this->name = $this->input->post('name');
-				$this->message = $this->input->post('message');
+				$email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->name = strip_tags(addslashes($this->input->post('name')));
+				$this->message = strip_tags(addslashes($this->input->post('message')));
 				$fromEmail = NOREPLY_EMAIL;
 				$message = new View("themes/".THEME_NAME."/admin_mail_template");
 				if(EMAIL_TYPE==2){
@@ -556,7 +556,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = $_POST['subsector'];
+							$subsector = strip_tags(addslashes($_POST['subsector']));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -909,9 +909,9 @@ class Admin_merchant_Controller extends website_Controller {
 									}
 									
 									$this->password = $password;
-									$this->email = $_POST['store_email'];
+									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
-									$this->name = $_POST['username'];
+									$this->name = strip_tags(addslashes($_POST['username']));
 									$this->store_admin = 1;
 									$message = new View("themes/".THEME_NAME."/mail_template");
 									if(EMAIL_TYPE==2){				
@@ -926,7 +926,7 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = $_POST['subsector'];
+										$subsector = strip_tags(addslashes($_POST['subsector']));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -1050,7 +1050,7 @@ class Admin_merchant_Controller extends website_Controller {
 
 			if($post->validate()){
                             
-					$storename = $this->input->post("storename");
+					$storename = strip_tags(addslashes($this->input->post("storename")));
 					$store_details = $this->merchant->get_store_name($storeid,$merchantid);
 					$old_store_name = $store_details[0]->store_url_title;
 					$old_modules_name = 'stores';
@@ -1148,7 +1148,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = $_POST['subsector'];
+							$subsector = strip_tags(addslashes($_POST['subsector']));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -1272,11 +1272,12 @@ class Admin_merchant_Controller extends website_Controller {
 		url::redirect(PATH."admin/merchant-shop/".$merchantid.".html");
 	}
 	public function check_store_exist(){
-	    $exist = $this->merchant->exist_name($this->input->post("storename"));
+	    $exist = $this->merchant->exist_name(strip_tags(addslashes($this->input->post("storename"))));
 	    return ($exist == 0)?true:false; 
 	}
 	public function check_store_exist1(){
-	    $exist = $this->merchant->exist_name($this->input->post("storename"),$this->input->post("storeid"));
+	    $exist = $this->merchant->exist_name(strip_tags(addslashes($this->input->post("storename"))),
+                    strip_tags(addslashes($this->input->post("storeid"))));
 	    return ($exist == 0)?true:false; 
 	}
 	/** MANAGE USER COMMENTS **/
@@ -1295,7 +1296,8 @@ class Admin_merchant_Controller extends website_Controller {
 				));
 		$this->search = $this->input->get();
 		$this->search_key = arr::to_object($this->search);
-		$this->users_list = $this->merchant->get_users_comments_list($this->pagination->sql_offset, $this->pagination->items_per_page, $this->input->get('firstname'));
+		$this->users_list = $this->merchant->get_users_comments_list($this->pagination->sql_offset, $this->pagination->items_per_page,
+                        strip_tags(addslashes($this->input->get('firstname'))));
 		
 		$this->template->title = $this->Lang["USER_COMM"];
 		$this->template->content = new View("admin_merchant/manage_users_comments");
@@ -1503,13 +1505,13 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->end_date = "";
 
 		if($_GET){
-			$this->start_date = $this->input->get('start_date');
-			$this->end_date = $this->input->get('end_date');
+			$this->start_date = strip_tags(addslashes($this->input->get('start_date')));
+			$this->end_date = strip_tags(addslashes($this->input->get('end_date')));
 		}
 
 	    $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
-	    $this->start_date = $this->input->get("start_date");
-	    $this->end_date = $this->input->get("end_date");	   
+	    $this->start_date = strip_tags(addslashes($this->input->get("start_date")));
+	    $this->end_date = strip_tags(addslashes($this->input->get("end_date")));	   
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		$this->user_list = $this->merchant->get_user_list();
 		$this->stores_list = $this->merchant->getstoreslist();
@@ -1753,12 +1755,16 @@ class Admin_merchant_Controller extends website_Controller {
 
 		             	if($status == 1){
 							//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-							unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    if($post->add_temp==1){
+					unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(1, $this->Lang['NEWS_SENT']);
 			        }
 			        else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+	                            if($post->add_temp==1){
+					unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+                                    }
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 		       		 url::redirect(PATH."admin.html");
@@ -1791,12 +1797,13 @@ class Admin_merchant_Controller extends website_Controller {
 	}
 
 	public function check_store_admin(){
-		$exist = $this->merchant->exist_store_admin($this->input->post("store_email"));
+		$exist = $this->merchant->exist_store_admin(strip_tags(addslashes($this->input->post("store_email"))));
 	    return ($exist == 0)?true:false;
 	}
 	
 	public function check_store_admin1(){
-		$exist = $this->merchant->exist_store_admin($this->input->post("store_email"),$this->input->post("store_admin_id"));
+		$exist = $this->merchant->exist_store_admin(strip_tags(addslashes($this->input->post("store_email"))),
+                        strip_tags(addslashes($this->input->post("store_admin_id"))));
 	    return ($exist == 0)?true:false;
 	}
 	
@@ -1956,7 +1963,7 @@ class Admin_merchant_Controller extends website_Controller {
 	
 	
 	public function check_zenith_account_used(){
-		$nuban = $_POST['payment_acc'];
+		$nuban = strip_tags(addslashes($_POST['payment_acc']));
 		
 		return $this->merchant->check_zenith_account_used($nuban);
 	}

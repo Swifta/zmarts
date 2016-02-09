@@ -686,7 +686,10 @@ class Admin_auction_Model extends Model
 	
 	public function change_commission_data($commission = "" , $auction_id = "")
 	{
-	        $result = $this->db->query("update auction set commission_status = $commission where deal_id = '$auction_id'");
+	     //   $result = $this->db->query("update auction set commission_status = $commission where deal_id = '$auction_id'");
+                
+                 $result = $this->db->update("auction", array("commission_status" => $commission), array("deal_id" => $auction_id));
+            
 	        return $result;
 	}
 	
