@@ -41,7 +41,7 @@ class Admin_users_Model extends Model
     
 	public function getcountrylist()
         {
-		$result = $this->db->select()->from("country")->where(array("country_status" => '1'))->orderby("country_name")->get();
+		$result = $this->db->from("country")->where(array("country_status" => '1'))->orderby("country_name")->get();
 		return $result;
 	}
 	
@@ -49,7 +49,7 @@ class Admin_users_Model extends Model
         
 	public function getCityList()
         {
-                $result = $this->db->select()->from("city")
+                $result = $this->db->from("city")
 				->join("country","country.country_id","city.country_id")
 				->where(array("city_status" => '1'))
 				->orderby("city.country_id", "ASC")			
@@ -61,7 +61,7 @@ class Admin_users_Model extends Model
         
 	public function getCityListOnly()
         {
-                $result = $this->db->select()->from("city")
+                $result = $this->db->from("city")
 				->join("country","country.country_id","city.country_id")
 				->where(array("city_status" => 1,"country.country_status" => 1))
 				->orderby("city.city_name", "ASC")
@@ -72,7 +72,7 @@ class Admin_users_Model extends Model
 	/** GET COUNTRY BASED CITY LIST **/
 	
 	public function get_city_by_country($country){
-		$result = $this->db->select()->from("city")->where(array("country_id" => $country, "city_status" => '1'))->orderby("city_name")->get();
+		$result = $this->db->from("city")->where(array("country_id" => $country, "city_status" => '1'))->orderby("city_name")->get();
 		return $result;
 	}
 	
@@ -212,7 +212,7 @@ class Admin_users_Model extends Model
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
                 }
                 else{
-                        $result = $this->db->select()->from("users")
+                        $result = $this->db->from("users")
                                     ->where(array("user_type" => 4))
 				    				->join("city","city.city_id","users.city_id")
 				    				->join("country","country.country_id","users.country_id")
@@ -226,7 +226,7 @@ class Admin_users_Model extends Model
 	
 	public function get_users_data($userid = "")
 	{
-		$result = $this->db->select()->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->limit(1)->get();
+		$result = $this->db->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->limit(1)->get();
 		return $result;
 	}
 		     
@@ -274,7 +274,7 @@ class Admin_users_Model extends Model
 	
 	public function get_user_view_data($userid = "")
 	{
-		$result = $this->db->select()->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id") ->limit(1)->get();
+		$result = $this->db->from("users")->where(array("user_id" => $userid))->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id") ->limit(1)->get();
 		return $result;
 	}	
 	
@@ -282,7 +282,7 @@ class Admin_users_Model extends Model
 	
 	public function get_transaction_data($userid = "")
 	{ 
-	       $result = $this->db->select()->from("users")
+	       $result = $this->db->from("users")
                                 ->where(array("transaction.user_id" => $userid))
 	                            ->join("transaction","transaction.user_id","users.user_id")
 	                            ->join("deals","deals.deal_id","transaction.deal_id")
@@ -307,7 +307,7 @@ class Admin_users_Model extends Model
 	
 	public function get_transaction_auction_data($userid = "")
 	{
-	       $result = $this->db->select()->from("users")
+	       $result = $this->db->from("users")
                                 ->where(array("transaction.user_id" => $userid))
 	                            ->join("transaction","transaction.user_id","users.user_id")
 	                            ->join("auction","transaction.auction_id","auction.deal_id")
@@ -321,7 +321,7 @@ class Admin_users_Model extends Model
 
 	public function user_refrel_list($user_id)
 	{ 
-		$result = $this->db->select()->from("users")
+		$result = $this->db->from("users")
                         ->where(array("user_status"=>1,"referred_user_id" => $user_id))
                         ->get();
 
@@ -335,5 +335,240 @@ class Admin_users_Model extends Model
 //                return $result;
                 $result = $this->db->from("users")
                 ->where(array("user_status"=>1,"user_type !=" => 1))->get();
-                $result = $this->db->select()->from("users")
-                ->where(array("user_status"=>1,"user_type !=" => 1));
+                       
+
+		return $result;
+	}
+	public function getUSERList()
+	{
+		$result=$this->db->select("email","firstname","user_id")->from("users")->where(array("user_status"=>1,"user_type"=>4))->get();
+		return $result;
+	}
+	
+		/** NEWSLETTER SEND **/
+
+	public function send_newsletter($post="",$file="",$type="")
+	{
+		$conditions="";
+		
+		if(!isset($post->email)){
+			
+			if(isset($post->all_users)&&((isset($post->city)&&$post->city!="")||(isset($post->gender)&&$post->gender!="")||(isset($post->age_range)&&$post->age_range!=""))){
+				
+				if(($post->city=='all' && $post->gender =='all' && $post->age_range=='all')||($post->city=='all' && $post->gender !='all' && $post->age_range!='all')||($post->city!='all' && $post->gender =='all' && $post->age_range!='all')||($post->city=='all' && $post->gender !='all' && $post->age_range=='all') || ($post->city=='all' && $post->gender =='all' && $post->age_range!='all') || ($post->city!='all' && $post->gender =='all' && $post->age_range=='all') || ($post->city=='all' && $post->gender !='all' && $post->age_range=='all')){
+					
+					$conditions .=" and user_type=4";
+					
+				} 
+				if(isset($post->city) && $post->city!="" && $post->city!='all') {
+					$conditions.="and city_id=".$post->city;
+				}
+				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
+				{
+						$conditions.=" and gender=".$post->gender;
+					
+				}
+				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
+					
+					$conditions.=" and age_range=".$post->age_range;
+				}
+				
+				$news=$this->db->query("select * from  users where user_status=1 $conditions");
+				
+			}elseif(isset($post->all_users) && $post->all_users!=""){
+				
+//				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                               
+                                $news =$this->db->select()->from("users")
+                       
+                               ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                                return $news;
+			}
+			if(isset($post->users)&& $post->users!=""){
+				
+				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+                                $news =$this->db->select()->from("users")
+                       
+                               ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                                return $news;
+				
+			}
+			
+			$user_array1=array();
+			if(count($news) > 0){
+
+			foreach($news as $c){
+            		$from = CONTACT_EMAIL;
+            		
+				$this->email_id = "";
+				$this->name = "";
+				$user_array1[]=$c->user_id;
+				$this->message = $post->message;
+				if($type==1){
+					 if($post->template==1)
+					  {
+					$message = new View("themes/".THEME_NAME."/template1");
+					 }else{
+						 $message = new View("themes/".THEME_NAME."/template2");
+						}
+					if(EMAIL_TYPE==2){
+						email::smtp($from, $c->email,$post->subject,$message,$file);
+					} else{
+						email::sendgrid($from, $c->email,$post->subject,$message);
+					}
+				}else{
+					if(EMAIL_TYPE==2){
+						email::smtp($from, $c->email,$post->subject,$this->message);
+					} else{
+						email::sendgrid($from, $c->email,$post->subject,$this->message);
+					}
+				}
+				
+			}
+			$user_array1=implode(',',$user_array1);
+			$result=$this->db->insert("email",array("receivers_id" =>$user_array1,"sender_id" =>$this->user_id,"email_subject" =>$post->subject,"email_message" =>$this->message,"email_template" =>$post->template,"type" =>$post->mail_category,"send_time"=>time()));
+			return 1;
+  		}
+  		
+		}
+			if(isset($post->email) && $post->email!="") 
+			{
+				$email = $post->email;
+				$user_array=array();
+				
+				
+				$i=0;
+				foreach($email as $mail){
+					
+					if($mail=="0"){
+						if($i=="0" && $mail=="0"){
+										return -1;
+										}
+					}
+					
+													$mails = explode("__",$mail);
+										$useremail = $this->mail= $mails[0];
+										$username =  $mails[1];
+										$user_array[]=$mails[2];
+										if(isset($username) && isset($useremail))
+											$message = " <p> ".$post->message." </p>";
+											
+											
+												$this->email_id = $useremail;
+												$this->name = $username;
+												$this->message = $message;
+												$fromEmail = NOREPLY_EMAIL;
+												if($type==1){
+													if($post->template==1)
+													{
+														$message = new View("themes/".THEME_NAME."/template1");
+													}else{
+														$message = new View("themes/".THEME_NAME."/template2");
+													}
+													if(EMAIL_TYPE==2){
+														email::smtp($fromEmail,$useremail,$post->subject,$message,$file);
+													}else {
+														email::sendgrid($fromEmail,$useremail,$post->subject,$message);
+													}
+												}else{
+													if(EMAIL_TYPE==2){
+														email::smtp($fromEmail,$useremail,$post->subject,$this->message);
+													}else {
+														email::sendgrid($fromEmail,$useremail,$post->subject,$this->message);
+													}
+												}
+									$i++;}
+									$user_array=implode(',',$user_array);
+									$result=$this->db->insert("email",array("receivers_id" =>$user_array,"sender_id" =>$this->user_id,"email_subject" =>$post->subject,"email_message" =>$this->message,"email_template" =>$post->template,"type" =>$post->mail_category,"send_time"=>time()));
+									return 1;
+				
+			}
+	
+		
+	}
+	public function get_user_list3($all_users="",$city="",$gender="",$age_range="")
+	{
+		if($city==0)
+		{
+			$city="";
+		}if($gender==0)
+		{
+			$gender="";
+		}if($age_range==0)
+		{
+			$age_range="";
+		}
+		$conditions="";
+		
+		if($city=="" && $gender=="" && $age_range=="")
+		{
+		$news=$this->db->select("email","firstname","user_id")->from("users")->where(array("user_status"=>1,"user_type"=>4))->get();
+		return $news;
+		}
+		if(isset($all_users) && ((isset($city) && $city!="")||(isset($gender) && $gender!="")||(isset($age_range) && $age_range!=""))){
+			
+		if(($city=='all' && $gender =='all' && $age_range=='all')||($city=='all' && $gender !='all' && $age_range!='all')||($city!='all' && $gender =='all' && $age_range!='all')||($city=='all' && $gender !='all' && $age_range=='all') || ($city=='all' && $gender =='all' && $age_range!='all') || ($city!='all' && $gender =='all' && $age_range=='all') || ($city=='all' && $gender !='all' && $age_range=='all')){
+				
+				$conditions .=" and user_type=4 ";
+				
+			} 
+			if(isset($city) && $city!="" && $city!='all') {
+				$conditions.="and city_id=".$city." and user_type=4 ";
+			}
+			if(isset($gender) && $gender!="" && $gender!='all')
+			{
+					$conditions.=" and gender=".$gender." and user_type=4 ";
+				
+			}
+			if(isset($age_range) && $age_range!="" && $age_range!='all'){
+				
+				$conditions.=" and age_range=".$age_range." and user_type=4 ";
+			}
+			
+			$news=$this->db->query("select * from  users where user_status=1 $conditions");
+			return $news;
+			
+		}elseif(isset($all_users) && $all_users!=""){
+			
+//			$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
+//			return $news;
+                        $news =$this->db->select()->from("users")
+                       
+                        ->where(array("user_status" => 1,"user_type" => 4));
+                       
+                         return $news;
+		}
+		
+		
+	}
+	/** ADMIN TO USERS MAIL COMMUNICATION **/
+	public function get_user_messages($offset="",$record="")
+	{
+		$result=$this->db->from("email")->where(array("sender_id" =>$this->user_id,"type" =>1))->orderby("id","DESC")->limit($record,$offset)->get();
+		return $result;
+	}
+	
+	public function get_user_messages_count()
+	{
+		$result=$this->db->select("id")->from("email")->where(array("sender_id" =>$this->user_id,"type" =>1))->get();
+		return count($result);
+	}
+	
+	public function get_user_message($message_id="")
+	{
+		$result=$this->db->from("email")->where(array("id" =>$message_id ))->get();
+		return $result;
+		
+	}
+	
+	public function get_user_name($user_id="")
+	{
+		$result=$this->db->select("firstname")->from("users")->where(array("user_id" =>$user_id))->get();
+		return $result->current()->firstname;
+		
+	}
+	
+	
+}
