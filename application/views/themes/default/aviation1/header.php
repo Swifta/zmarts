@@ -137,7 +137,7 @@ $this->language_List = str_replace(".php", "", $DL);
                 <?php $compare = $this->session->get("product_compare"); 
                 if(is_array($compare) && count($compare)>1){  ?>
                 <a style="font-size: 12px;" href="<?php echo PATH; ?>product-compare.html" title="<?php echo $this->Lang['MY_COMP']; ?>"><?php echo $this->Lang['MY_COMP']; ?></a><?php } ?></li>								
-                <li style="margin-left: ;" class="mnav_dnone"> <?php $compare = $this->session->get("product_compare"); 
+                <li style="" class="mnav_dnone"> <?php $compare = $this->session->get("product_compare"); 
                 if(is_array($compare) && count($compare)>1){  ?> | <?php } ?></li> 
 
         <?php } ?>
