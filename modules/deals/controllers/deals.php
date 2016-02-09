@@ -407,9 +407,12 @@ class Deals_Controller extends Layout_Controller
 			{
 				if(htmlentities($_POST['action'], ENT_QUOTES, 'UTF-8') == 'rating')
 				{
-						$id = intval($_POST['idBox']);
-						$rate = floatval($_POST['rate']);
-						$deal_id=$_POST['deal_id'];
+						//$id = intval($_POST['idBox']);
+                                                $id= htmlspecialchars(intval($_POST['idBox']), ENT_QUOTES, "UTF-8");
+						//$rate = floatval($_POST['rate']);
+                                                $rate= htmlspecialchars(floatval($_POST['rate']), ENT_QUOTES, "UTF-8");
+                                          	//$deal_id=$_POST['deal_id'];
+                                                $deal_id= htmlspecialchars($_POST['deal_id'], ENT_QUOTES, "UTF-8");
 						$success = true;
 						if($success)
 						{

@@ -3,6 +3,7 @@ class Admin_auction_Controller extends website_Controller
 {
 	const ALLOW_PRODUCTION = FALSE;
 	public $template = 'admin_template/template';
+       
 	public function __construct()
 	{
 		parent::__construct();
@@ -12,8 +13,13 @@ class Admin_auction_Controller extends website_Controller
 		
 		$this->auction = new Admin_auction_Model();	
 		$this->auction_act = "1"; 
+                
+      
 	}
 
+       
+       
+        
 	/** ADD NEW DEALS **/
 	
 	public function add_auction()
@@ -194,14 +200,15 @@ class Admin_auction_Controller extends website_Controller
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."admin.html");
 		}
+              //  if ($_POST['token'] == $_SESSION['token'])
+                    
+                  //  {   
 	      if($_POST){ 
-//	        $commission = $this->input->post('commission_status');
-//	        $deal_key = $this->input->post('commission_deal_key');
-//	        $deal_id = $this->input->post('commission_deal_id'); 
+	        $commission = $this->input->post('commission_status');
+	        $deal_key = $this->input->post('commission_deal_key');
+	        $deal_id = $this->input->post('commission_deal_id'); 
                   
-                  $commission = stripslashes(addslashes($this->input->post('commission_status')));
-                  $deal_key = strip_tags(addslashes($this->input->post('commission_deal_key')));
-	          $deal_id = strip_tags(addslashes($this->input->post('commission_deal_id'))); 
+                 
 	                if($commission != ""){
 	                        $commission_deatils = $this->auction->change_commission_data($commission, $deal_id);
 	                }
@@ -276,6 +283,10 @@ class Admin_auction_Controller extends website_Controller
 		$this->highest_bid =  $this->auction->get_highest_bid($deal_id);
 		$this->template->title = $this->Lang['AUC_PRO_DETAILS'];
 		$this->template->content = new View("admin_auction/view_auction");
+               //  }
+ else {
+                     die();
+ }
 	}
 	
 	/** EDIT DEALS **/

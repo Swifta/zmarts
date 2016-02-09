@@ -223,7 +223,8 @@ class Store_Controller extends Layout_Controller
 				{
 						$id = intval($_POST['idBox']);
 						$rate = floatval($_POST['rate']);
-						$store_id=$_POST['deal_id'];
+						//$store_id=$_POST['deal_id'];
+                                                $store_id= htmlspecialchars($_POST['deal_id'], ENT_QUOTES, "UTF-8");
 						$success = true;
 						if($success)
 						{

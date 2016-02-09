@@ -674,6 +674,7 @@ class Auction_Controller extends Layout_Controller
 				}
 		}
 		echo json_encode($aResponse);
+              
 exit;
 
 	}

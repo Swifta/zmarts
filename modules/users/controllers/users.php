@@ -1,9 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 class Users_Controller extends Layout_Controller {
-
+ 
+            
 	const ALLOW_PRODUCTION = FALSE;
 	public function __construct()
 	{
+                
+                
 		parent::__construct();
                 define('YOUR_CONSUMER_KEY', 'RrKl1dAAutQmwY1o64RKnMbjH');
                 define('YOUR_CONSUMER_SECRET', 'DLRbmzANxfqMIaLR8Ozqj60pNahz1N4zzC8dkVIdQUzjttuhGq');

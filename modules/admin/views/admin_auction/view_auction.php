@@ -1,5 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
+     
 <div class="bread_crumb"><a href="<?php echo PATH.'admin.html'; ?>" title="<?php echo $this->Lang["HOME"]; ?>"><?php echo $this->Lang["HOME"]; ?> <span class="fwn">&#155;&#155;</span></a><p><?php echo $this->template->title; ?></p></div>
 <div class="cont_container mt15 mt10">
     <div class="content_top"><div class="top_left"></div><div class="top_center"></div><div class="top_rgt"></div></div>
@@ -10,6 +11,7 @@
         <table class="list_table fl clr show_details_table">
             <?php foreach( $this->deal_deatils as $d){	$symbol = CURRENCY_SYMBOL;      ?>
                 <tr>
+                        
                          <th valign="top" align="left" width="20%"><?php echo $this->Lang['AUC_TIT']; ?></th><th valign="top">:</th><td align="left"><?php echo ucfirst(htmlspecialchars($d->deal_title)); ?></td>
                 </tr>
                 <tr>
@@ -193,7 +195,8 @@
         <tr>
             <td></td>
             <td></td>
-            <input type="hidden" name="commission_status" value="2" />
+             <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
+             <input type="hidden" name="commission_status" value="2" />
             <input type="hidden" name="commission_deal_key" value="<?php echo $d->deal_key; ?>" />
             <input type="hidden" name="commission_deal_id" value="<?php echo $d->deal_id; ?>" />
             <td><input type="submit" value="<?php echo $this->Lang['CLICK_CHANGE_STATUS']; ?>"  /></td>

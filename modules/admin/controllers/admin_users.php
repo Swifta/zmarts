@@ -51,7 +51,7 @@ class Admin_users_Controller extends website_Controller {
         
 			if($_POST){
 				//$this->userPost = $this->input->post();
-                            $this->userPost = strip_tags(addslashes($this->input->post()));
+                            $this->userPost = $this->input->post();
 				$post = new Validation($_POST);
 				$post = Validation::factory($_POST)
 							

@@ -43,7 +43,9 @@ class Webpay_Controller extends Layout_Controller
         public function ajax_more_details(){
             if(isset($_POST['transaction_id'])){
                 $paint_red = "red";
-                $details = json_decode($this->webpay->getTransactionDetails($_POST['transaction_id']));
+               // $details = json_decode($this->webpay->getTransactionDetails($_POST['transaction_id']));
+                $details = json_decode($this->webpay->getTransactionDetails(htmlspecialchars($_POST['transaction_id'],ENT_QUOTES, "UTF-8")));
+              
                 if($details->status == "Success"){
                     $paint_red = "green";
                 }
@@ -62,8 +64,10 @@ class Webpay_Controller extends Layout_Controller
         public function ajax_confirm(){
             //$transaction_id = "jTnUlW1RGrVUALj";
             if(isset($_POST['transaction_id'])){
-                $transaction_id = $_POST['transaction_id'];
-                $transaction_total = $this->webpay->getTotalAmountOnTransaction($transaction_id);
+                //$transaction_id = $_POST['transaction_id'];
+                $transaction_id = htmlspecialchars($_POST['transaction_id'],ENT_QUOTES, "UTF-8");
+               // $transaction_total = $this->webpay->getTotalAmountOnTransaction($transaction_id);
+                $transaction_total = $this->webpay->getTotalAmountOnTransaction(strip_tags(addslashes($transaction_id)));
                 $txnref = $transaction_id;
                 $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
                 $url_call = $this->staging_url."gettransaction.json?productid=".$this->product_id."&transactionreference=".$txnref.

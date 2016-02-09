@@ -37,12 +37,12 @@
                                        <!-- <td style="font:normal 18px/21px arial;color:#000;">-->
                                         <td>
                                         <?php if(isset($this->signup) || isset($this->forgot) || isset($this->moderator) || isset($this->store_admin)) { ?>
-                                           <?php echo $this->Lang['DEAR']; ?> <?php echo ucfirst($this->name);?>,
-                                           
+                                           <?php echo $this->Lang['DEAR']; ?> <?php echo ucfirst(htmlspecialchars($this->name));?>,
+                                          
                                             <?php } ?>
                                             
                                             <?php if(isset($this->admin_signup)) { ?>
-                                           <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo strtoupper(($_POST['firstname'])); } ?>,
+                                           <?php echo $this->Lang['DEAR']; ?> <?php if(isset($_POST['firstname'])) { echo strtoupper(htmlspecialchars($_POST['firstname'])); } ?>,
                                           
 											<?php } ?>
                                             
