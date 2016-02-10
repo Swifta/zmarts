@@ -323,6 +323,8 @@ class Deals_Model extends Model
 			        if(count($count_view) == 0){
 			                $this->db->insert("view_count_location", array("deal_key" => $deal_key,"ip" =>$ip,"city" => $city,"country" => $country,"date" => time()));
 			                $this->db->query("update deals set view_count = view_count + 1 where deal_key = '$deal_key'");
+                                     //    $this->db->update("deals", array("view_count" => $status), array("user_id" => $uid));
+              
 			       }
 				 $condition = array("url_title" => $url_title, "deal_key" => $deal_key, "deal_status" => 1, "category.category_status" => 1, "store_status" => 1);
 				 

@@ -68,10 +68,14 @@ if($_POST){
 
 	
 	// authorize
-	$qty =  strip_tags(addslashes( $_POST['qty']));	
-	$couponid =  strip_tags(addslashes($_POST['couponid'])) ;
-	$sale->cust_id = strip_tags(addslashes($_POST['user']));
-        $amount = strip_tags(addslashes($_POST['amount']));
+        $qty = htmlspecialchars($_POST['qty'],ENT_QUOTES,"UTF-8");
+	//$qty =  strip_tags(addslashes( $_POST['qty']));	
+	//$couponid =  strip_tags(addslashes($_POST['couponid'])) ;
+        $couponid = htmlspecialchars($_POST['couponid'],ENT_QUOTES,"UTF-8");
+       // $sale->cust_id = strip_tags(addslashes($_POST['user']));
+          $sale->cust_id = htmlspecialchars($_POST['user'],ENT_QUOTES,"UTF-8");
+        //$amount = strip_tags(addslashes($_POST['amount']));
+        $amount = htmlspecialchars($_POST['amount'],ENT_QUOTES,"UTF-8");
         //if payable amount is equal to zero then process the customer directly
 	if($_POST['amount'] == 0) 
         {
@@ -79,6 +83,7 @@ if($_POST){
 			require_once(DOCUMENT_ROOT."/system/includes/transaction.php");
 			$L_QTY0 = $qty;	
 			$COUPONID = strip_tags(addslashes($couponid));	
+                        
 			$USERID = strip_tags(addslashes($_SESSION['userid']));
 			check_max_deal_purchase($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0,$USERID);
 			check_deal_quantity($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0);
@@ -208,7 +213,8 @@ if($_POST){
 		$transaction_id = $response->transaction_id;
 		$responseheader = array('Order Status'=>$response->response_reason_text,'Invoice Number'=>$response->invoice_number,'Authorization Code'=>$response->authorization_code,'Credit card'=>$response->card_type,'Billing Address'=>$response->address);
 
-		$TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
+		//$TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
+                $TYPE = htmlspecialchars($_POST['pay_mod_id'],ENT_QUOTES,"UTF-8");
 		$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
 		require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/dboperations.php"); 
 		$sql = "insert into transaction_details (PAYERID,COUPONID,TIMESTAMP,CORRELATIONID,ACK,FIRSTNAME,LASTNAME,TRANSACTIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,AMT,PAYMENTSTATUS,REASONCODE,L_QTY0,USERID,EMAIL,TYPE,CAPTURED,REFERRAL_AMOUNT) values ('$response->customer_id','$couponid',now(),'$response->authorization_code','$response->response_reason_text','$response->first_name','$response->last_name','$response->transaction_id','$response->transaction_type','$response->method',now(),'$response->amount','$response->response_reason_text','$response->response_reason_code','$qty','$userid','$response->email_address','$TYPE','0','$REFERRAL_AMOUNT')";
@@ -304,17 +310,24 @@ if($_POST){
 
 			}
 		
-	                $_SESSION['deductable_ref_amt'] = round($_POST['ref_amt2'],2); 
+	               // $_SESSION['deductable_ref_amt'] = round($_POST['ref_amt2'],2); 
+                         $_SESSION['deductable_ref_amt'] = round(strip_tags(addslashes($_POST['ref_amt2'],2))); 
+                       // $_SESSION['deductable_ref_amt'] =  htmlspecialchars(round($_POST['ref_amt2'],2),ENT_QUOTES,'UTF-8'); 
 	}else { 
 		$_SESSION['deductable_ref_amt'] = 0;
 	}
 
 	
 	// authorize
-	$qty = strip_tags(addslashes($_POST['qty']));	
-	$couponid = strip_tags(addslashes($_POST['couponid']));
-	$sale->cust_id = strip_tags(addslashes($_POST['user']));
-        $amount = strip_tags(addslashes($_POST['amount']));
+       
+	//$qty = strip_tags(addslashes($_POST['qty']));	
+        $qty = htmlspecialchars($_POST['qty'],ENT_QUOTES,"UTF-8");
+        $couponid = htmlspecialchars($_POST['couponid'],ENT_QUOTES,"UTF-8");
+	//$couponid = strip_tags(addslashes($_POST['couponid']));
+	//$sale->cust_id = strip_tags(addslashes($_POST['user']));
+        $sale->cust_id = htmlspecialchars($_POST['user'],ENT_QUOTES,"UTF-8");
+        $amount = htmlspecialchars($_POST['amount'],ENT_QUOTES,"UTF-8");
+        //$amount = strip_tags(addslashes($_POST['amount']));
         //if payable amount is equal to zero then process the customer directly
 	if($_POST['amount'] == 0) 
         {
@@ -449,7 +462,8 @@ if($_POST){
 		$transaction_id = $response->transaction_id;
 		$responseheader = array('Order Status'=>$response->response_reason_text,'Invoice Number'=>$response->invoice_number,'Authorization Code'=>$response->authorization_code,'Credit card'=>$response->card_type,'Billing Address'=>$response->address);
 
-		$TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
+		//$TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
+                $TYPE = htmlspecialchars($_POST['pay_mod_id'],ENT_QUOTES,"UTF-8");
 		$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
 		require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/dboperations.php"); 
 		$sql = "insert into transaction_details (PAYERID,COUPONID,TIMESTAMP,CORRELATIONID,ACK,FIRSTNAME,LASTNAME,TRANSACTIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,AMT,PAYMENTSTATUS,REASONCODE,L_QTY0,USERID,EMAIL,TYPE,CAPTURED,REFERRAL_AMOUNT) values ('$response->customer_id','$couponid',now(),'$response->authorization_code','$response->response_reason_text','$response->first_name','$response->last_name','$response->transaction_id','$response->transaction_type','$response->method',now(),'$response->amount','$response->response_reason_text','$response->response_reason_code','$qty','$userid','$response->email_address','$TYPE','0','$REFERRAL_AMOUNT')";
