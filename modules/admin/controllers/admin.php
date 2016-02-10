@@ -2055,8 +2055,16 @@ class Admin_Controller extends website_Controller
 					$check_insert_file = false;
 					/* Extrat Files */
 					if($_FILES["zip_file"]["name"]) {
+<<<<<<< HEAD
+						$filename = basename($_FILES["zip_file"]["name"]);
+						$source = basename($_FILES["zip_file"]["tmp_name"]);
+||||||| merged common ancestors
+						$filename = $_FILES["zip_file"]["name"];
+						$source = $_FILES["zip_file"]["tmp_name"];
+=======
 						$filename = basename($_FILES["zip_file"]["name"]);
 						$source = $_FILES["zip_file"]["tmp_name"];
+>>>>>>> 6cfe3291db52cc09eedcf8cac72e75a8b12c557f
 						$type = $_FILES["zip_file"]["type"];
 	
 						$name = explode(".", $filename);
@@ -2193,7 +2201,14 @@ class Admin_Controller extends website_Controller
 								/* check Model is already exsits or not  - end */
 								
 								
+<<<<<<< HEAD
+								
+								rename($target_dir.$file_folder.'/css',$target_css);
+||||||| merged common ancestors
+								rename($target_dir.$file_folder.'/css',$target_css);
+=======
 								rename(realpath($target_dir.$file_folder.'/css'),$target_css);
+>>>>>>> 6cfe3291db52cc09eedcf8cac72e75a8b12c557f
 								common::chmod_r($target_css);
 								rename(realpath($target_dir.$file_folder.'/view'),$target_view);
 								common::chmod_r($target_view);
