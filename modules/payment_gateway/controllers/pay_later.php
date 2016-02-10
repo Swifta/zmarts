@@ -321,11 +321,11 @@ class Pay_later_Controller extends Layout_Controller
 	public function deal_cash_delivery()
 	{
 		if($_POST){
-			$deal_id = $this->input->post("deal_id");
-			$deal_key = $this->input->post("deal_key");
-			$referral_amount = $this->input->post("p_referral_amount");
-			$item_qty = $this->input->post("P_QTY");
-			$amount = $this->input->post("amount");
+			$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+			$deal_key = strip_tags(addslashes($this->input->post("deal_key")));
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+			$amount = strip_tags(addslashes($this->input->post("amount")));
 
 			$this->deals_payment_deatils = $this->pay_later->get_deals_payment_details($deal_id, $deal_key);
 
