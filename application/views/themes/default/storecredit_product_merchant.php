@@ -73,7 +73,7 @@ $this->UserName = $this->session->get("UserName");
                                                         $merchant_firstneme = "";
                                                         $merchant_lastname = "";
                                                         $merchant_email = "";                                                        
-                                                        $this->get_merchant_details = $this->creditcard_paypal_pay->get_user_details();
+                                                        $this->get_merchant_details = $this->creditcard_paypal_pay->get_usr_details();
                                                         
                                                         $merchant_firstneme = $this->get_merchant_details->current()->firstname;
                                                         $merchant_lastname = $this->get_merchant_details->current()->lastname;
@@ -335,7 +335,7 @@ $this->UserName = $this->session->get("UserName");
 						 								$merchant_firstneme = "";
                                                         $merchant_lastname = "";
                                                         $merchant_email = "";                                                        
-                                                        $this->get_merchant_details = $this->creditcard_paypal_pay->get_user_details();
+                                                        $this->get_merchant_details = $this->creditcard_paypal_pay->get_usr_details();
 														
                                                         $merchant_firstneme = $this->get_merchant_details->current()->firstname;
                                                         $merchant_lastname = $this->get_merchant_details->current()->lastname;

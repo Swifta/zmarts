@@ -115,8 +115,8 @@ class Admin_Model extends Model
 		$email = strip_tags(addslashes($email));
 		$pswd = strip_tags(addslashes($email));
 		
-		$result=$this->db->query("SELECT * FROM users WHERE email = '$email' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)");
-		 
+		$result=$this->db->query("SELECT * FROM users WHERE email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)");
+
 		//$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd)), "user_type" ,"IN", array(1,7))->limit(1)->get();
 		if(count($result) == 1){
 			if($result->current()->user_status == 1){

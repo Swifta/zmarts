@@ -273,8 +273,8 @@ class Payment_Controller extends Layout_Controller {
 			   
 	        $this->result = $this->payment->insert_referral_tranasaction($referral_amount, $item_qty, $deal_id, $purchase_qty, $friend_name, $friend_email, $friend_gift_status,$merchant_id); 
 	                  
-			$this->get_user_details = $this->payment->get_user_details();
-			foreach($this->get_user_details as $U){ 
+			$this->get_usr_details = $this->payment->get_usr_details();
+			foreach($this->get_usr_details as $U){ 
 
 				if($U->referred_user_id && $U->deal_bought_count == $item_qty){
 					$update_reff_amount = $this->payment->update_referral_amount($U->referred_user_id);

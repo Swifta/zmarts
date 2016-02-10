@@ -758,12 +758,12 @@ class Merchant_Controller extends website_Controller
 								foreach($email as $mail){
 									$mails = explode("__",$mail);
 									$useremail = $this->mail= $mails[0];
-									$username =  $mails[1];
-									if(isset($username) && isset($useremail))
+									$usrname =  $mails[1];
+									if(isset($usrname) && isset($useremail))
 										$message = " <p> ".$post->message." </p>";
 										$message .= new View ("admin_deal/mail_deal");
 										 $this->email_id = $useremail;
-                                                                                $this->name = $username;
+                                                                                $this->name = $usrname;
                                                                                 $this->message = $message;
                                                                                 $fromEmail = NOREPLY_EMAIL;
                                                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -2404,12 +2404,12 @@ class Merchant_Controller extends website_Controller
 					foreach($email as $mail){
 						$mails = explode("__",$mail);
 						$useremail =$this->mail=  $mails[0];
-						$username =  $mails[1];
-						if(isset($username) && isset($useremail))
+						$usrname =  $mails[1];
+						if(isset($usrname) && isset($useremail))
 							$message = " <p> ".$post->message." </p>";
 							$message .= new View ("admin_product/mail_product");
 							$this->email_id = $useremail;
-                                                $this->name = $username;
+                                                $this->name = $usrname;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -3116,12 +3116,12 @@ class Merchant_Controller extends website_Controller
 					foreach($email as $mail){
 					$mails = explode("__",$mail);
 					$useremail = $this->mail= $mails[0];
-					$username =  $mails[1];
-					if(isset($username) && isset($useremail))
+					$usrname =  $mails[1];
+					if(isset($usrname) && isset($useremail))
 					$message = " <p> ".$post->message." </p>";
 						$message .= new View ("admin_auction/mail_auction");
 						$this->email_id = $useremail;
-                                                $this->name = $username;
+                                                $this->name = $usrname;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -4070,7 +4070,7 @@ class Merchant_Controller extends website_Controller
 					$status = $this->merchant->forgot_password($email,$pswd);
 						if($status == 1){				
 						        
-					        $users = $this->merchant->get_user_details_list($email);
+					        $users = $this->merchant->get_usr_details_list($email);
 					        $userid = $users->current()->user_id;
 		                                $name = $users->current()->firstname;
 		                                $email = $users->current()->email;
@@ -7132,7 +7132,7 @@ class Merchant_Controller extends website_Controller
 		if($status=="2") {    //approve
 			
 			$this->product_list1 = $this->merchant->get_storecredits_product_details($storecreditid,$productid);
-			$this->user_details = $this->merchant->get_user_details($storecreditid);
+			$this->user_details = $this->merchant->get_usr_details($storecreditid);
 			$change_status = $this->merchant->update_storecredit_status($status,$storecreditid);
 			$message_merchant = new View("themes/".THEME_NAME."/store_credits/storecredit_merchant_approvemail");
 			
@@ -7158,7 +7158,7 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant/storecredit/pending-transaction.html");
 		} else if($status=="4") { // after Purchase next installment payment request mail
 			$this->product_list1 = $this->merchant->get_storecredits_product_details($storecreditid,$productid);
-			$this->user_details = $this->merchant->get_user_details($storecreditid);
+			$this->user_details = $this->merchant->get_usr_details($storecreditid);
 			$change_status = $this->merchant->update_storecredit_status($status,$storecreditid);
 			$message_merchant = new View("themes/".THEME_NAME."/store_credits/storecredit_merchant_approvemail");
 			$this->username = $this->user_details->current()->firstname;

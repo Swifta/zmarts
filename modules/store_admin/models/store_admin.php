@@ -2593,7 +2593,7 @@ class Store_admin_Model extends Model
 		}
 	}
 	
-	public function get_user_details_list($email)
+	public function get_usr_details_list($email)
 	{
 		$email = trim($email);
 		$result = $this->db->select()->from("users")->where(array("email" => $email,"user_type" => 9,"user_status" => 1))->limit(1)->get();
@@ -3581,13 +3581,13 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$username =  $mails[1];
-										if(isset($username) && isset($useremail))
+										$usrname =  $mails[1];
+										if(isset($usrname) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 																					$this->email_id = $useremail;
-																					$this->name = $username;
+																					$this->name = $usrname;
 																					$this->message = $message;
 																					$fromEmail = NOREPLY_EMAIL;
 																					if($post->template==1)
@@ -4418,7 +4418,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
                 
 	}
 	
-	public function get_user_details($storecreditid="")
+	public function get_usr_details($storecreditid="")
 	{
 		$result = $this->db->select("email,firstname")->from("users")
 							->join("store_credit_save","store_credit_save.userid","users.user_id")

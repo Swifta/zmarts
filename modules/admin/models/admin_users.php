@@ -41,7 +41,7 @@ class Admin_users_Model extends Model
     
 	public function getcountrylist()
         {
-		$result = $this->db->from("country")->where(array("country_status" => '1'))->orderby("country_name")->get();
+		$result = $this->db->select()->from("country")->where(array("country_status" => '1'))->orderby("country_name")->get();
 		return $result;
 	}
 	
@@ -49,7 +49,7 @@ class Admin_users_Model extends Model
         
 	public function getCityList()
         {
-                $result = $this->db->from("city")
+                $result = $this->db->select()->from("city")
 				->join("country","country.country_id","city.country_id")
 				->where(array("city_status" => '1'))
 				->orderby("city.country_id", "ASC")			
@@ -72,7 +72,7 @@ class Admin_users_Model extends Model
 	/** GET COUNTRY BASED CITY LIST **/
 	
 	public function get_city_by_country($country){
-		$result = $this->db->from("city")->where(array("country_id" => $country, "city_status" => '1'))->orderby("city_name")->get();
+		$result = $this->db->select()->from("city")->where(array("country_id" => $country, "city_status" => '1'))->orderby("city_name")->get();
 		return $result;
 	}
 	
@@ -212,7 +212,7 @@ class Admin_users_Model extends Model
                         $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
                 }
                 else{
-                        $result = $this->db->from("users")
+                        $result = $this->db->select()->from("users")
                                     ->where(array("user_type" => 4))
 				    				->join("city","city.city_id","users.city_id")
 				    				->join("country","country.country_id","users.country_id")
@@ -282,7 +282,7 @@ class Admin_users_Model extends Model
 	
 	public function get_transaction_data($userid = "")
 	{ 
-	       $result = $this->db->from("users")
+	       $result = $this->db->select()->from("users")
                                 ->where(array("transaction.user_id" => $userid))
 	                            ->join("transaction","transaction.user_id","users.user_id")
 	                            ->join("deals","deals.deal_id","transaction.deal_id")
@@ -307,7 +307,7 @@ class Admin_users_Model extends Model
 	
 	public function get_transaction_auction_data($userid = "")
 	{
-	       $result = $this->db->from("users")
+	       $result = $this->db->select()->from("users")
                                 ->where(array("transaction.user_id" => $userid))
 	                            ->join("transaction","transaction.user_id","users.user_id")
 	                            ->join("auction","transaction.auction_id","auction.deal_id")
@@ -321,7 +321,7 @@ class Admin_users_Model extends Model
 
 	public function user_refrel_list($user_id)
 	{ 
-		$result = $this->db->from("users")
+		$result = $this->db->select()->from("users")
                         ->where(array("user_status"=>1,"referred_user_id" => $user_id))
                         ->get();
 
@@ -333,7 +333,8 @@ class Admin_users_Model extends Model
 	{
 //                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type != 1 ");
 //                return $result;
-                $result = $this->db->from("users")
+
+                $result = $this->db->select()->from("users")
                 ->where(array("user_status"=>1,"user_type !=" => 1))->get();
                        
 

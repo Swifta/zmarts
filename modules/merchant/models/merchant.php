@@ -2740,7 +2740,7 @@ class Merchant_Model extends Model
 		}
 	}
 	
-	public function get_user_details_list($email)
+	public function get_usr_details_list($email)
 	{
 		$email = strip_tags(addslashes(trim($email)));
 		/*$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 3,"user_status" => 1))->limit(1)->get();*/
@@ -3773,11 +3773,11 @@ class Merchant_Model extends Model
 					}
 						$mails = explode("__",$mail);
 						$useremail = $this->mail= $mails[0];
-						$username =  $mails[1];
-						if(isset($username) && isset($useremail))
+						$usrname =  $mails[1];
+						if(isset($usrname) && isset($useremail))
 						$message = " <p> ".$post->message." </p>";
 						$this->email_id = $useremail;
-						$this->name = $username;
+						$this->name = $usrname;
 						$this->message = $message;
 						$fromEmail = NOREPLY_EMAIL;
 						$this->newstitle = $post->title;
@@ -4745,14 +4745,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$username =  $mails[1];
+										$usrname =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($username) && isset($useremail))
+										if(isset($usrname) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 											$this->email_id = $useremail;
-											$this->name = $username;
+											$this->name = $usrname;
 											$this->message = $message;
 											$fromEmail = NOREPLY_EMAIL;
 											
@@ -4938,14 +4938,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$username =  $mails[1];
+										$usrname =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($username) && isset($useremail))
+										if(isset($usrname) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 												$this->email_id = $useremail;
-												$this->name = $username;
+												$this->name = $usrname;
 												$this->message = $message;
 												$fromEmail = NOREPLY_EMAIL;
 												
@@ -5110,7 +5110,7 @@ class Merchant_Model extends Model
 		return $result;
 	}
 	/* GET USER DETAILS */
-	public function get_user_details($storecreditid="")
+	public function get_usr_details($storecreditid="")
 	{
 		$result = $this->db->select("email,firstname")->from("users")
 							->join("store_credit_save","store_credit_save.userid","users.user_id")

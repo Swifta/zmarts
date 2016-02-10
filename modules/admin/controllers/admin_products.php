@@ -771,13 +771,13 @@ class Admin_products_Controller extends website_Controller
 				foreach($email as $mail){
 					$mails = explode("__",$mail);
 					$useremail =$this->mail=  $mails[0];
-					$username =  $mails[1];
-					if(isset($username) && isset($useremail))
+					$usrname =  $mails[1];
+					if(isset($usrname) && isset($useremail))
 						
 						$message = " <p> ".$post->message." </p>";
 						$message .= new View ("admin_product/mail_product");
 						 $this->email_id = $useremail;
-                                                $this->name = $username;
+                                                $this->name = $usrname;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");

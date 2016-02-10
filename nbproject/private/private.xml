@@ -3,16 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/users/store_detail_2yy.php</file>
-            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/store_detail_1.php</file>
-            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/header_1.php</file>
-            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/alt_style.css</file>
-            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/css/test.css</file>
-            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/css/responsive.css</file>
-            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/store_detail.php</file>
-            <file>file:/Users/mac/Sites/zmarts/themes/default/css/store/css/bootstrap.css</file>
-            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/header.php</file>
-            <file>file:/Users/mac/Sites/zmarts/application/views/themes/default/store/footer.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/users/controllers/users.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/admin/controllers/newsletter.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/admin/controllers/admin_products.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/merchant/controllers/merchant.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/system/libraries/drivers/Database/Mssql.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/webpay/controllers/webpay.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/BarcodeQR.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/store_admin/controllers/store_admin.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/system/controllers/template.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/admin/controllers/admin.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/modules/admin/controllers/admin_cms.php</file>
+            <file>file:/Users/Musty/Sites/zmarts/resize.php</file>
         </group>
     </open-files>
 </project-private>

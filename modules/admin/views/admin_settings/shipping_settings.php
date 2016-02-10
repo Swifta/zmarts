@@ -51,8 +51,13 @@
                                         <tr>
                                             <td style="width: 200px;"><label><?php echo $this->Lang['PSWD']; ?></label><span>*</span></td>
                                             <td><label>:</label></td>
+<<<<<<< HEAD
+                                            <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPswd; ?>"/>
+                                            <em><?php if(isset($this->form_error["Password"])){ echo $this->form_error["Password"]; }?></em></td>
+=======
                                             <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPassword; ?>"/>
                                             <em><?php if(isset($this->form_error["Pswd"])){ echo $this->form_error["Pswd"]; }?></em></td>
+>>>>>>> test
                                         </tr>
                                         
 			                        </table>
