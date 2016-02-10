@@ -82,11 +82,11 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   
   /**
    * Set the username to authenticate with.
-   * @param string $username
+   * @param string $usrname
    */
-  public function setUsername($username)
+  public function setUsername($usrname)
   {
-    $this->_username = $username;
+    $this->_username = $usrname;
   }
   
   /**
@@ -100,11 +100,11 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   
   /**
    * Set the password to authenticate with.
-   * @param string $password
+   * @param string $pswd
    */
-  public function setPassword($password)
+  public function setPswd($pswd)
   {
-    $this->_password = $password;
+    $this->_password = $pswd;
   }
   
   /**
@@ -221,7 +221,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
    */
   public function exposeMixinMethods()
   {
-    return array('setUsername', 'getUsername', 'setPassword', 'getPassword', 'setAuthMode', 'getAuthMode');
+    return array('setUsername', 'getUsername', 'setPswd', 'getPassword', 'setAuthMode', 'getAuthMode');
   }
   
   /**

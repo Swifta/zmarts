@@ -1594,7 +1594,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 	 */
 	private function _writeRangeProtection()
 	{
-		foreach ($this->_phpSheet->getProtectedCells() as $range => $password) {
+		foreach ($this->_phpSheet->getProtectedCells() as $range => $pswd) {
 			// number of ranges, e.g. 'A1:B3 C20:D25'
 			$cellRanges = explode(' ', $range);
 			$cref = count($cellRanges);
@@ -1621,7 +1621,7 @@ class PHPExcel_Writer_Excel5_Worksheet extends PHPExcel_Writer_Excel5_BIFFwriter
 			$recordData .= pack(
 				'VV',
 				0x0000,
-				hexdec($password)
+				hexdec($pswd)
 			);
 
 			$recordData .= PHPExcel_Shared_String::UTF8toBIFF8UnicodeLong('p' . md5($recordData));

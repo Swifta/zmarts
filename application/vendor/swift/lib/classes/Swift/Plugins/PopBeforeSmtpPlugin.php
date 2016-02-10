@@ -111,22 +111,22 @@ class Swift_Plugins_PopBeforeSmtpPlugin
   /**
    * Set the username to use when connecting (if needed).
    * 
-   * @param string $username
+   * @param string $usrname
    */
-  public function setUsername($username)
+  public function setUsrname($usrname)
   {
-    $this->_username = $username;
+    $this->_username = $usrname;
     return $this;
   }
   
   /**
    * Set the password to use when connecting (if needed).
    * 
-   * @param string $password
+   * @param string $pswd
    */
-  public function setPassword($password)
+  public function setPswd($pswd)
   {
-    $this->_password = $password;
+    $this->_password = $pswd;
     return $this;
   }
   

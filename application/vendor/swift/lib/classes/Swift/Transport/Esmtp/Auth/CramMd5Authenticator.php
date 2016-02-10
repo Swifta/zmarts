@@ -29,21 +29,21 @@ class Swift_Transport_Esmtp_Auth_CramMd5Authenticator
   }
   
   /**
-   * Try to authenticate the user with $username and $password.
+   * Try to authenticate the user with $usrname and $pswd.
    * @param Swift_Transport_SmtpAgent $agent
-   * @param string $username
-   * @param string $password
+   * @param string $usrname
+   * @param string $pswd
    * @return boolean
    */
   public function authenticate(Swift_Transport_SmtpAgent $agent,
-    $username, $password)
+    $usrname, $pswd)
   {
     try
     {
       $challenge = $agent->executeCommand("AUTH CRAM-MD5\r\n", array(334));
       $challenge = base64_decode(substr($challenge, 4));
       $message = base64_encode(
-        $username . ' ' . $this->_getResponse($password, $challenge)
+        $usrname . ' ' . $this->_getResponse($pswd, $challenge)
         );
       $agent->executeCommand(sprintf("%s\r\n", $message), array(235));
       return true;

@@ -42,10 +42,10 @@ class TwitterOAuth {
   /**
    * Set API URLS
    */
-  function accessTokenURL()  { return 'https://api.twitter.com/oauth/access_token'; }
+  function accessTokenURL()  { return 'https://api.twitter.com/oauth/access_tkn'; }
   function authenticateURL() { return 'https://twitter.com/oauth/authenticate'; }
   function authorizeURL()    { return 'https://twitter.com/oauth/authorize'; }
-  function requestTokenURL() { return 'https://api.twitter.com/oauth/request_token'; }
+  function requestTokenURL() { return 'https://api.twitter.com/oauth/request_tkn'; }
 
   /**
    * Debug helpers
@@ -56,21 +56,21 @@ class TwitterOAuth {
   /**
    * construct TwitterOAuth object
    */
-  function __construct($consumer_key, $consumer_secret, $oauth_token = NULL, $oauth_token_secret = NULL) {
+  function __construct($consumer_key, $consumer_secret, $oauth_tkn = NULL, $oauth_tkn_secret = NULL) {
     $this->sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
     $this->consumer = new OAuthConsumer($consumer_key, $consumer_secret);
-    if (!empty($oauth_token) && !empty($oauth_token_secret)) {
-      $this->token = new OAuthConsumer($oauth_token, $oauth_token_secret);
+    if (!empty($oauth_tkn) && !empty($oauth_tkn_secret)) {
+      $this->tkn = new OAuthConsumer($oauth_tkn, $oauth_tkn_secret);
     } else {
-      $this->token = NULL;
+      $this->tkn = NULL;
     }
   }
 
 
   /**
-   * Get a request_token from Twitter
+   * Get a request_tkn from Twitter
    *
-   * @returns a key/value array containing oauth_token and oauth_token_secret
+   * @returns a key/value array containing oauth_tkn and oauth_tkn_secret
    */
   function getRequestToken($oauth_callback = NULL) {
     $parameters = array();
@@ -78,9 +78,9 @@ class TwitterOAuth {
       $parameters['oauth_callback'] = $oauth_callback;
     } 
     $request = $this->oAuthRequest($this->requestTokenURL(), 'GET', $parameters);
-    $token = OAuthUtil::parse_parameters($request);
-    $this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
-    return $token;
+    $tkn = OAuthUtil::parse_parameters($request);
+    $this->tkn = new OAuthConsumer($tkn['oauth_tkn'], $tkn['oauth_tkn_secret']);
+    return $tkn;
   }
 
   /**
@@ -88,23 +88,23 @@ class TwitterOAuth {
    *
    * @returns a string
    */
-  function getAuthorizeURL($token, $sign_in_with_twitter = TRUE) {
-    if (is_array($token)) {
-      $token = $token['oauth_token'];
+  function getAuthorizeURL($tkn, $sign_in_with_twitter = TRUE) {
+    if (is_array($tkn)) {
+      $tkn = $tkn['oauth_tkn'];
     }
     if (empty($sign_in_with_twitter)) {
-      return $this->authorizeURL() . "?oauth_token={$token}";
+      return $this->authorizeURL() . "?oauth_tkn={$tkn}";
     } else {
-       return $this->authenticateURL() . "?oauth_token={$token}";
+       return $this->authenticateURL() . "?oauth_tkn={$tkn}";
     }
   }
 
   /**
-   * Exchange request token and secret for an access token and
+   * Exchange request tkn and secret for an access tkn and
    * secret, to sign API calls.
    *
-   * @returns array("oauth_token" => "the-access-token",
-   *                "oauth_token_secret" => "the-access-secret",
+   * @returns array("oauth_tkn" => "the-access-tkn",
+   *                "oauth_tkn_secret" => "the-access-secret",
    *                "user_id" => "9436992",
    *                "screen_name" => "abraham")
    */
@@ -114,29 +114,29 @@ class TwitterOAuth {
       $parameters['oauth_verifier'] = $oauth_verifier;
     }
     $request = $this->oAuthRequest($this->accessTokenURL(), 'GET', $parameters);
-    $token = OAuthUtil::parse_parameters($request);
-    $this->token = new OAuthConsumer(@$token['oauth_token'], @$token['oauth_token_secret']);
-    return $token;
+    $tkn = OAuthUtil::parse_parameters($request);
+    $this->tkn = new OAuthConsumer(@$tkn['oauth_tkn'], @$tkn['oauth_tkn_secret']);
+    return $tkn;
   }
 
   /**
-   * One time exchange of username and password for access token and secret.
+   * One time exchange of username and password for access tkn and secret.
    *
-   * @returns array("oauth_token" => "the-access-token",
-   *                "oauth_token_secret" => "the-access-secret",
+   * @returns array("oauth_tkn" => "the-access-tkn",
+   *                "oauth_tkn_secret" => "the-access-secret",
    *                "user_id" => "9436992",
    *                "screen_name" => "abraham",
    *                "x_auth_expires" => "0")
    */  
-  function getXAuthToken($username, $password) {
+  function getXAuthToken($usrname, $pswd) {
     $parameters = array();
-    $parameters['x_auth_username'] = $username;
-    $parameters['x_auth_password'] = $password;
+    $parameters['x_auth_username'] = $usrname;
+    $parameters['x_auth_password'] = $pswd;
     $parameters['x_auth_mode'] = 'client_auth';
     $request = $this->oAuthRequest($this->accessTokenURL(), 'POST', $parameters);
-    $token = OAuthUtil::parse_parameters($request);
-    $this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
-    return $token;
+    $tkn = OAuthUtil::parse_parameters($request);
+    $this->tkn = new OAuthConsumer($tkn['oauth_tkn'], $tkn['oauth_tkn_secret']);
+    return $tkn;
   }
 
   /**
@@ -179,8 +179,8 @@ class TwitterOAuth {
     if (strrpos($url, 'https://') !== 0 && strrpos($url, 'http://') !== 0) {
       $url = "{$this->host}{$url}.{$this->format}";
     }
-    $request = OAuthRequest::from_consumer_and_token($this->consumer, $this->token, $method, $url, $parameters);
-    $request->sign_request($this->sha1_method, $this->consumer, $this->token);
+    $request = OAuthRequest::from_consumer_and_tkn($this->consumer, $this->tkn, $method, $url, $parameters);
+    $request->sign_request($this->sha1_method, $this->consumer, $this->tkn);
     switch ($method) {
     case 'GET':
       return $this->http($request->to_url(), 'GET');

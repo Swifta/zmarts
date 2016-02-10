@@ -10,7 +10,7 @@ class Api_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 		
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = $s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;
 
 			$this->Live_Mode = $s->paypal_payment_mode;
@@ -20,7 +20,7 @@ class Api_Controller extends Layout_Controller
 			/**  For Authorize.net   **/
 			
 			require_once APPPATH.'vendor/authorize.net/AuthorizeNet.php'; 
-	                define("AUTHORIZENET_API_LOGIN_ID", $s->authorizenet_api_id);
+	                define("AUTHORIZENET_API_LOGIN_ID", $s->authnet_api_id);
 	                define("AUTHORIZENET_TRANSACTION_KEY", $s->authorizenet_transaction_key);
 	        
 	        
@@ -854,11 +854,11 @@ class Api_Controller extends Layout_Controller
 			$friend_details = $this->api->get_friend_transaction_details_product($deal_id, $transaction);
            $friend_email = $friend_details->current()->friend_email;
            $friend_name = $friend_details->current()->friend_name;
-           $username = $U->firstname;
+           $usrname = $U->firstname;
 	if($friend_email != "xxxyyy@zzz.com"){
 				
                 $from = CONTACT_EMAIL;
-                $this->transaction_mail =array("deal_title" => ucfirst($deal_title), "item_qty" => $qty ,"total" => ($deal_amount * $qty) ,"amount"=> ($deal_amount * $qty),"ref_amount"=> "0","value" =>$deal_amount,"friend_name" => $friend_name,"user_name" =>$username,"value" =>$deal_amount);
+                $this->transaction_mail =array("deal_title" => ucfirst($deal_title), "item_qty" => $qty ,"total" => ($deal_amount * $qty) ,"amount"=> ($deal_amount * $qty),"ref_amount"=> "0","value" =>$deal_amount,"friend_name" => $friend_name,"user_name" =>$usrname,"value" =>$deal_amount);
                 $this->result_mail = arr::to_object($this->transaction_mail); 
                 
                 $friend_message = new View("themes/".THEME_NAME."/friend_buyit_mail");  
@@ -1616,9 +1616,9 @@ class Api_Controller extends Layout_Controller
 		/*if($_POST){ */
 			$post = $this->input->post();
 			$email = $this->input->post('email');
-			$password = $this->input->post('password');
+			$pswd = $this->input->post('password');
 			$lang = $this->input->post('lang');
-			$status = $this->api->login($email, $password);
+			$status = $this->api->login($email, $pswd);
 			if($status >= 1){
 			        if($lang == "ar"){
 				$response = array("response" => array("user_id" => $status,"email" => $email,"httpCode" => 200,"Message" => "تسجيل بنجاح في"));

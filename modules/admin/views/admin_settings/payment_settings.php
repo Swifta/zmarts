@@ -161,7 +161,7 @@
 		        <tr>
                     <td style="width: 200px;"><label><?php echo $this->Lang['PAL_API_PASS']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td><input type="text" name="Paypal_API_Password" maxlength="32"   value="<?php echo $general->paypal_api_password; ?>"/>
+                    <td><input type="text" name="Paypal_API_Password" maxlength="32"   value="<?php echo $general->paypal_api_pswd; ?>"/>
                     <em><?php if(isset($this->form_error["Paypal_API_Password"])){ echo $this->form_error["Paypal_API_Password"]; }?></em></td>
                 </tr>
                 
@@ -182,8 +182,8 @@
                 <tr>
                     <td style="width: 200px;"><label><?php echo $this->Lang['AUTH_ID']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
-                    <td><input type="text" name="authorizenet_api_id" maxlength="100"   value="<?php echo $general->authorizenet_api_id; ?>"/>
-                    <em><?php if(isset($this->form_error["authorizenet_api_id"])){ echo $this->form_error["authorizenet_api_id"]; }?></em></td>
+                    <td><input type="text" name="authorizenet_api_id" maxlength="100"   value="<?php echo $general->authnet_api_id; ?>"/>
+                    <em><?php if(isset($this->form_error["authnet_api_id"])){ echo $this->form_error["authnet_api_id"]; }?></em></td>
                 </tr>
                 
                   <tr>

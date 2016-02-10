@@ -160,10 +160,10 @@ final class BarcodeQR {
 	 *
 	 * @param string $type
 	 * @param string $ssid
-	 * @param string $password
+	 * @param string $pswd
 	 */
-	public function wifi($type = null, $ssid = null, $password = null) {
-		$this->_data = "WIFI:T:{$type};S{$ssid};{$password};;";
+	public function wifi($type = null, $ssid = null, $pswd = null) {
+		$this->_data = "WIFI:T:{$type};S{$ssid};{$pswd};;";
 	}
 }
 ?>

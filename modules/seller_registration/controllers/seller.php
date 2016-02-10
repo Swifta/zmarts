@@ -350,10 +350,10 @@ class Seller_Controller extends Layout_Controller {
 							
 							
 							$store_key = text::random($type = 'alnum', $length = 8);
-							$password = text::random($type = 'alnum', $length = 8);
+							$pswd = text::random($type = 'alnum', $length = 8);
 							$store_admin_password = text::random($type = 'alnum', $length = 10);
 							$storename = $this->input->post('storename');
-							$status = $this->seller->add_merchant(arr::to_object($this->userPost),$store_key,$password,$store_admin_password); 
+							$status = $this->seller->add_merchant(arr::to_object($this->userPost),$store_key,$pswd,$store_admin_password); 
 							//DELETE
 							//$status = array("email"=>"livetest172@gmail.com", "image" =>"77_26");
 							
@@ -542,7 +542,7 @@ $admin_message	= '
 											@Live
 										*/
 										
-										/*$merchant_message = "<p><b>".$this->Lang['MERCHANT_ADD_SUC']." </b> </p><p></p><p> ".$this->Lang['YOR_EMAIL']." : ".$this->session->get('memail')."</p> <p>".$this->Lang['YOUR_PASS'].": ".$password."</p> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['CITY']."   : ".$city_name." <p/><p>".$this->Lang['COUNTRY']."   : ".$country_name." <p/><p>".$this->Lang['ZIP_CODE']."   : ".$post->zipcode." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><p>".$this->Lang['STORE_URL']." : <a href=".PATH.url::title($post->storename)."/>".PATH.url::title($post->storename)."/ </p>";*/
+										/*$merchant_message = "<p><b>".$this->Lang['MERCHANT_ADD_SUC']." </b> </p><p></p><p> ".$this->Lang['YOR_EMAIL']." : ".$this->session->get('memail')."</p> <p>".$this->Lang['YOUR_PASS'].": ".$pswd."</p> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['CITY']."   : ".$city_name." <p/><p>".$this->Lang['COUNTRY']."   : ".$country_name." <p/><p>".$this->Lang['ZIP_CODE']."   : ".$post->zipcode." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><p>".$this->Lang['STORE_URL']." : <a href=".PATH.url::title($post->storename)."/>".PATH.url::title($post->storename)."/ </p>";*/
 										
 										$merchant_message = "<p><b> Congratulations! </b> </p><p> Your Merchant account on <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a> has been successfully created!</p><p> Please await approval which will contain your login and setup details.</p><p></p><a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a>";
 										

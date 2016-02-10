@@ -38,12 +38,12 @@ class Admin_moderator_Model extends Model
 	}
     /** ADD USER'S LIST **/
 	
-	public function add_moderator($post = "",$referral_id = "", $password = "")
+	public function add_moderator($post = "",$referral_id = "", $pswd = "")
 	{
 
 		$city_id = trim($post->city);
 
-		$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $city_id, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2','user_type'=>'2', "joined_date" => time()));
+		$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $city_id, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2','user_type'=>'2', "joined_date" => time()));
 		$user_id = $result->insert_id();
 		$result_city = $this->db->select("city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 

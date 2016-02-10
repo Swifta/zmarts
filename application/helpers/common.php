@@ -458,7 +458,7 @@ class common{
                         $AccountNumber = $shipping->AccountNumber;
                         $AccountPin = $shipping->AccountPin;
                         $UserName = $shipping->UserName;
-                        $Password = $shipping->ShippingPassword;
+                        $Pswd = $shipping->ShippingPswd;
         }
 	$params = array(
 		       'ClientInfo'  			=> array(
@@ -467,7 +467,7 @@ class common{
 									        'AccountNumber'		=> $AccountNumber,
 									        'AccountPin'		 	=> $AccountPin,
 									        'UserName'			=> $UserName,
-									        'Password'			=> $Password,
+									        'Password'			=> $Pswd,
 									        'Version'			 	=> 'v1.0'
 								        ),
 		        'Transaction' 			=> array(

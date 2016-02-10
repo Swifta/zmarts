@@ -273,7 +273,7 @@ class Creditcard_paypal_Model extends Model
 	
 	/** GET USERS FULL DETAILS **/
 	
-	public function get_user_details()
+	public function get_usr_details()
 	{
 		$result = $this->db->select()->from("users")->where(array("user_id" => $this->UserID))->get();
 		return $result;

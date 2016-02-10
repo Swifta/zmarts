@@ -11,7 +11,7 @@ class Auction_Paypal_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = $s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;
 
 			$this->Api_Username = "nandhu_1337947987_biz_api1.gmail.com";

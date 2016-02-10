@@ -142,7 +142,7 @@ class PhpWsdlClient{
 	 * 
 	 * @var string
 	 */
-	public $HttpPassword=null;
+	public $HttpPswd=null;
 	/**
 	 * Use http Auth for SOAP requests, too? If FALSE, the login will only be used to fetch the WSDL from the given URI
 	 * 
@@ -195,7 +195,7 @@ class PhpWsdlClient{
 			// Fetch with http Auth (credits to faebu :)
 			PhpWsdl::Debug('Try CURL for http Auth');
             $ch=curl_init();
-            $credit=($this->HttpUser.':'.$this->HttpPassword);
+            $credit=($this->HttpUser.':'.$this->HttpPswd);
             curl_setopt_array($ch,array_merge(
             	Array(
             		CURLOPT_URL				=>	$wsdlUri,
@@ -283,7 +283,7 @@ class PhpWsdlClient{
 			){
 				PhpWsdl::Debug('Using http Auth options');
 				$options['login']=$this->HttpUser;
-				$options['password']=$this->HttpPassword;
+				$options['pswd']=$this->HttpPswd;
 			}
 			if($this->Debugging){
 				PhpWsdl::Debug('Debugging enabled');

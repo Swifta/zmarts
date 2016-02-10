@@ -84,11 +84,11 @@ class Users_Controller extends Layout_Controller {
                 } else if(!empty ($user_info->screen_name)){
                        $twitter_otoken=$_SESSION['oauth_token'];
                        $twitter_otoken_secret=$_SESSION['oauth_token_secret'];
-                        $password = text::random($type = 'alnum', $length = 10);
+                        $pswd = text::random($type = 'alnum', $length = 10);
                         //var_dump($user_info); die;
                         $this->name = $user_info->name;
                         $this->email = $user_info->screen_name;
-                        $this->password = $password;
+                        $this->password = $pswd;
                         //echo $this->name." and ".$this->email." and ".$this->password;die;
                         if($this->name == ""){
                             $this->name = "UNKNOWN";
@@ -137,10 +137,10 @@ class Users_Controller extends Layout_Controller {
         }
         
           public function google(){
-              $password = text::random($type = 'alnum', $length = 10);
+              $pswd = text::random($type = 'alnum', $length = 10);
               $this->name=$this->input->get('full_name');
               $this->email =$this->input->get('email');
-              $this->password =$password;
+              $this->password =$pswd;
               //echo $this->name." and ".$this->email." and ".$this->password;die;
               if($this->name == ""){
                   $this->name = "UNKNOWN";
@@ -265,7 +265,7 @@ class Users_Controller extends Layout_Controller {
 				  */
 				  if($_POST){
 				  $email = $this->input->post('email');
-				  $password = $this->input->post('password');
+				  $pswd = $this->input->post('password');
 				  $url_redirect = $this->input->post('url');
 				  
 				 
@@ -275,7 +275,7 @@ class Users_Controller extends Layout_Controller {
 					  $z_offer = $this->input->post('z_offer');
 				  }
 				 
-				  $status = $this->users->login_users($email,$password);
+				  $status = $this->users->login_users($email,$pswd);
 				 
 				  if($status == 1 || $status == -999){
 					  
@@ -337,14 +337,14 @@ class Users_Controller extends Layout_Controller {
 		  @Live
 	  */
 	  $email = $this->input->get('email');
-	  $password = $this->input->get('password');
+	  $pswd = $this->input->get('password');
 	  $z_offer = $this->input->get('z_offer');
-	  $check_user_exist = $this->users->login_users($email,$password, $z_offer);
+	  $check_user_exist = $this->users->login_users($email,$pswd, $z_offer);
 	  echo $check_user_exist;   exit;
 		  
 		/*$email = $this->input->get('email');
-		$password = $this->input->get('password');
-		$check_user_exist = $this->users->login_users($email,$password);
+		$pswd = $this->input->get('password');
+		$check_user_exist = $this->users->login_users($email,$pswd);
 		echo $check_user_exist;   exit;*/
 		
 		
@@ -615,8 +615,8 @@ class Users_Controller extends Layout_Controller {
 						echo $this->Lang["PROB_FB_CONNECT"]; exit;
 					}
 					else{
-					        $password = text::random($type = 'alnum', $length = 10);
-						$status = $this->users->register_facebook_user($Profile_data, $this->city_id, $FBtoken[0],$user_referral_id,$password);
+					        $pswd = text::random($type = 'alnum', $length = 10);
+						$status = $this->users->register_facebook_user($Profile_data, $this->city_id, $FBtoken[0],$user_referral_id,$pswd);
 						if($status > 1){
 							
 							$this->session->delete('fb_email');
@@ -626,7 +626,7 @@ class Users_Controller extends Layout_Controller {
                                                         $from = CONTACT_EMAIL;
                                                         $this->name=$user_details->current()->firstname;
                                                         $this->email =$user_details->current()->email;
-                                                        $this->password =$password;
+                                                        $this->password =$pswd;
                                                         $subject = SITENAME." - Facebook Registration Details";
                                                         $message = new View("themes/".THEME_NAME."/mail_template");
                                                         if(EMAIL_TYPE==2){
@@ -1028,10 +1028,10 @@ class Users_Controller extends Layout_Controller {
 
 	 /** CHECK PASSWORD EXIST **/
 	 
-	public function check_password($password = "")
+	public function check_password($pswd = "")
 	{
-		$exist = $this->users->exist_password($password, $this->UserID);
-		$this->user_details = $this->users->get_user_bought($password);
+		$exist = $this->users->exist_password($pswd, $this->UserID);
+		$this->user_details = $this->users->get_user_bought($pswd);
 		return $exist;
 	}
 

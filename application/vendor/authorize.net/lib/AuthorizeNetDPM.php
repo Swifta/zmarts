@@ -24,7 +24,7 @@
  * @package    AuthorizeNet
  * @subpackage AuthorizeNetDPM
  */
-class AuthorizeNetDPM extends AuthorizeNetSIM_Form
+class AuthorizeNetDPM extends AuthNetSIM_Form
 {
 
     const LIVE_URL = 'https://secure.authorize.net/gateway/transact.dll';
@@ -46,7 +46,7 @@ class AuthorizeNetDPM extends AuthorizeNetSIM_Form
         // Step 2: Handle AuthorizeNet Transaction Result & return snippet.
         elseif (count($_POST)) 
         {
-            $response = new AuthorizeNetSIM($api_login_id, $md5_setting);
+            $response = new AuthNetSIM($api_login_id, $md5_setting);
             if ($response->isAuthorizeNet()) 
             {
                 if ($response->approved) 
@@ -116,7 +116,7 @@ class AuthorizeNetDPM extends AuthorizeNetSIM_Form
     {
         $time = time();
         $fp = self::getFingerprint($api_login_id, $transaction_key, $amount, $fp_sequence, $time);
-        $sim = new AuthorizeNetSIM_Form(
+        $sim = new AuthNetSIM_Form(
             array(
             'x_amount'        => $amount,
             'x_fp_sequence'   => $fp_sequence,

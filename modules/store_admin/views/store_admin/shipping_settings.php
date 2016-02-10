@@ -51,7 +51,7 @@
                                         <tr>
                                             <td style="width: 200px;"><label><?php echo $this->Lang['PASSWORD']; ?></label></td>
                                             <td><label>:</label></td>
-                                            <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPassword; ?>"/>
+                                            <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPswd; ?>"/>
                                             <em><?php if(isset($this->form_error["Password"])){ echo $this->form_error["Password"]; }?></em></td>
                                         </tr>
                                         

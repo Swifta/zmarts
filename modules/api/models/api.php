@@ -487,9 +487,9 @@ class Api_Model extends Model
 	
 	/** USER LOGIN **/
 
-	public function login($email = "",$password = "")
+	public function login($email = "",$pswd = "")
 	{
-		$result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($password),"user_type !=" => 3))->get();
+		$result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($pswd),"user_type !=" => 3))->get();
 		
 		if(count($result) == 1){ 
 			if($result->current()->user_status == 1){
@@ -540,18 +540,18 @@ class Api_Model extends Model
 	{
 		$result = $this->db->count_records('users', array('email' => $emailid));
 		if($result){		
-		        $password = text::random($type = 'alnum', $length = 10);
-		        $this->db->update("users",array("password" => md5($password) ), array('email' => $emailid));	
+		        $pswd = text::random($type = 'alnum', $length = 10);
+		        $this->db->update("users",array("password" => md5($pswd) ), array('email' => $emailid));	
 			    if($emailid){
                                 $from = CONTACT_EMAIL;
                                 if($lang == "ar"){
                                 $message = "";
                                 $subject = "إعادة تعيين كلمة المرور الخاصة بك بنجاح.";
-                                $message .= "<p> تم إعادة تعيين كلمة المرور الخاصة بك  </p><p>البريد الإلكتروني : ".$emailid."<p/><p>كلمة السر : ".$password."<p/><br /> <p>شكرا,</p>";    
+                                $message .= "<p> تم إعادة تعيين كلمة المرور الخاصة بك  </p><p>البريد الإلكتروني : ".$emailid."<p/><p>كلمة السر : ".$pswd."<p/><br /> <p>شكرا,</p>";    
                                 } else {
                                 $message = "";
                                 $subject = "Your Password reset Successfully.";
-                                $message .= "<p>Your Password was reseted </p><p>Email : ".$emailid."<p/><p>Password : ".$password."<p/><br /> <p>Thanks,</p>"; 
+                                $message .= "<p>Your Password was reseted </p><p>Email : ".$emailid."<p/><p>Password : ".$pswd."<p/><br /> <p>Thanks,</p>"; 
                                 }
                                 if(EMAIL_TYPE==2) {
                                 email::smtp($from, $emailid, $subject ,$message); 

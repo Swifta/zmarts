@@ -103,15 +103,15 @@ class Payment_Controller extends Layout_Controller {
 				$url_title = $this->input->post("url");
 				$deal_key = $this->input->post("dealid");
 				$email = trim($this->input->post("email"));
-				$password = $this->input->post("password");
-				if(!$email || !$password){
+				$pswd = $this->input->post("password");
+				if(!$email || !$pswd){
 					 common::message(-1,$this->Lang["EMAIL_REQUIRED"]);
 				}
 				elseif(!valid::email($email)){
 					common::message(-1, $this->Lang["INVAL_EMAIL"]);
 				}
 				else{
-					$status = $this->users->login_users($email,$password);
+					$status = $this->users->login_users($email,$pswd);
 			
 					if($status == 1){
 					    url::redirect(PATH.'deal/payment_details/'.$deal_key.'/'.$url_title.'.html');
@@ -260,8 +260,8 @@ class Payment_Controller extends Layout_Controller {
 			   
 	        $this->result = $this->payment->insert_referral_tranasaction($referral_amount, $item_qty, $deal_id, $purchase_qty, $friend_name, $friend_email, $friend_gift_status,$merchant_id); 
 	                  
-			$this->get_user_details = $this->payment->get_user_details();
-			foreach($this->get_user_details as $U){ 
+			$this->get_usr_details = $this->payment->get_usr_details();
+			foreach($this->get_usr_details as $U){ 
 
 				if($U->referred_user_id && $U->deal_bought_count == $item_qty){
 					$update_reff_amount = $this->payment->update_referral_amount($U->referred_user_id);

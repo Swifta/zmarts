@@ -94,12 +94,12 @@ class Merchant_Model extends Model
 
 	/** MERCHANT LOGIN **/
 
-	public function merchant_login($email = "", $password = "")
+	public function merchant_login($email = "", $pswd = "")
 	{
                $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
-                       "' AND password ='".md5($password)."' AND user_type IN (3,8)");
+                       "' AND password ='".md5($pswd)."' AND user_type IN (3,8)");
                //echo count($result); die;
-                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type in" =>(3,8)))->limit(1)->get();
+                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd),"user_type in" =>(3,8)))->limit(1)->get();
 		     if(count($result)>0){
                         if(count($result) == 1){
 	                        if($result->current()->user_status == 1){
@@ -623,14 +623,14 @@ class Merchant_Model extends Model
 
 	/** ADD MERCHANT SHOP ACCOUNT **/
 
-	public function add_merchant_shop($post = "",$store_key = "",$password="")
+	public function add_merchant_shop($post = "",$store_key = "",$pswd="")
 	{
 			$website="http://".$post->website;
 
 		$sector = isset($post->sector)?$post->sector:0;
 		$subsector = isset($post->subsector)?$post->subsector:0;
 			
-			$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->email,"password"=>md5($password),"user_type"=>9,"created_by"=>$this->user_id,"referred_user_id"=>$this->user_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,
+			$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->email,"password"=>md5($pswd),"user_type"=>9,"created_by"=>$this->user_id,"referred_user_id"=>$this->user_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,
                             "country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector,'nuban'=>$post->nuban));
 			
 			$stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'created_by'=>$this->user_id, 'store_type' => '2','merchant_id'=>$this->user_id,"created_date" => time(),"about_us"=>$post->about_us,"store_admin_id"=>$res->insert_id(),"store_sector_id"=>$sector,"store_subsector_id"=>$subsector));
@@ -2665,7 +2665,7 @@ class Merchant_Model extends Model
 
 	/** FORGOT PASSWORD **/
 
-	public function forgot_password($email = "", $password = "")
+	public function forgot_password($email = "", $pswd = "")
 	{
 
 		$email = trim($email);
@@ -2675,7 +2675,7 @@ class Merchant_Model extends Model
 			$userid = $result->current()->user_id;
 			$name = $result->current()->firstname;
 			$email = $result->current()->email;
-			$this->db->update("users",array("password" => md5($password), "last_login" => 0 ), array("user_id" => $userid));
+			$this->db->update("users",array("password" => md5($pswd), "last_login" => 0 ), array("user_id" => $userid));
 			return 1;
 		}
 		else{
@@ -2683,7 +2683,7 @@ class Merchant_Model extends Model
 		}
 	}
 	
-	public function reset_password($email = "", $password = "")
+	public function reset_password($email = "", $pswd = "")
 	{
 		$time = time();
 		$email = trim($email);
@@ -2693,7 +2693,7 @@ class Merchant_Model extends Model
 			$userid = $result->current()->user_id;
 			$name = $result->current()->firstname;
 			$email = $result->current()->email;
-			$this->db->update("users",array("password" => md5($password) , "last_login" => $time), array("user_id" => $userid));
+			$this->db->update("users",array("password" => md5($pswd) , "last_login" => $time), array("user_id" => $userid));
 			return 1;
 		}
 		else{
@@ -2739,7 +2739,7 @@ class Merchant_Model extends Model
 		}
 	}
 	
-	public function get_user_details_list($email)
+	public function get_usr_details_list($email)
 	{
 		$email = strip_tags(addslashes(trim($email)));
 		/*$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 3,"user_status" => 1))->limit(1)->get();*/
@@ -3415,10 +3415,10 @@ class Merchant_Model extends Model
 	
 	/** ADD MODERATOR'S LIST **/
 	
-	public function add_moderator($post = "",$referral_id = "", $password = "")
+	public function add_moderator($post = "",$referral_id = "", $pswd = "")
 	{
 			$news_city = $post->city.",";
-			$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2','user_type'=>'8', "joined_date" => time(),"merchantid" =>$post->merchant_id));
+			$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2','user_type'=>'8', "joined_date" => time(),"merchantid" =>$post->merchant_id));
 			
 			$result_city = $this->db->select("city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 
@@ -3755,11 +3755,11 @@ class Merchant_Model extends Model
 					}
 						$mails = explode("__",$mail);
 						$useremail = $this->mail= $mails[0];
-						$username =  $mails[1];
-						if(isset($username) && isset($useremail))
+						$usrname =  $mails[1];
+						if(isset($usrname) && isset($useremail))
 						$message = " <p> ".$post->message." </p>";
 						$this->email_id = $useremail;
-						$this->name = $username;
+						$this->name = $usrname;
 						$this->message = $message;
 						$fromEmail = NOREPLY_EMAIL;
 						$this->newstitle = $post->title;
@@ -4722,14 +4722,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$username =  $mails[1];
+										$usrname =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($username) && isset($useremail))
+										if(isset($usrname) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 											$this->email_id = $useremail;
-											$this->name = $username;
+											$this->name = $usrname;
 											$this->message = $message;
 											$fromEmail = NOREPLY_EMAIL;
 											
@@ -4903,14 +4903,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$username =  $mails[1];
+										$usrname =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($username) && isset($useremail))
+										if(isset($usrname) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 												$this->email_id = $useremail;
-												$this->name = $username;
+												$this->name = $usrname;
 												$this->message = $message;
 												$fromEmail = NOREPLY_EMAIL;
 												
@@ -5067,7 +5067,7 @@ class Merchant_Model extends Model
 		return $result;
 	}
 	/* GET USER DETAILS */
-	public function get_user_details($storecreditid="")
+	public function get_usr_details($storecreditid="")
 	{
 		$result = $this->db->select("email,firstname")->from("users")
 							->join("store_credit_save","store_credit_save.userid","users.user_id")
