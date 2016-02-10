@@ -58,10 +58,12 @@ class Admin_deals_Controller extends website_Controller
 							foreach(arr::rotate($_FILES['image']) as $files){
 								if($files){
 									$filename = upload::save($files);
+									$filename = basename($filename);
 									if($filename!=''){
 
 										$IMG_NAME = $deal_key."_".$i.'.png';
 										common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
+										
 										unlink($filename);
 									}
 								 }
@@ -325,6 +327,7 @@ class Admin_deals_Controller extends website_Controller
 								foreach(arr::rotate($_FILES['image']) as $files){
 									if($files){
 										$filename = upload::save($files);
+										$filename = basename($filename);
 										if($filename!=''){
 											if($i==1)
 											{

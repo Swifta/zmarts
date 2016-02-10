@@ -121,8 +121,9 @@ class Newsletter_Controller extends website_Controller {
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-						$tmp_name = $_FILES["attach"]["tmp_name"];
-						$logo = $_FILES["attach"]["name"];
+						$tmp_name = basename($_FILES["attach"]["tmp_name"]);
+						$logo = basename($_FILES["attach"]["name"]);
+					
 						move_uploaded_file($tmp_name, DOCROOT."images/newsletter/".$logo);
 						chmod(DOCROOT."images/newsletter/".$logo,0777);
 					}

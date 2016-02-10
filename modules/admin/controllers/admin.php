@@ -2055,8 +2055,8 @@ class Admin_Controller extends website_Controller
 					$check_insert_file = false;
 					/* Extrat Files */
 					if($_FILES["zip_file"]["name"]) {
-						$filename = $_FILES["zip_file"]["name"];
-						$source = $_FILES["zip_file"]["tmp_name"];
+						$filename = basename($_FILES["zip_file"]["name"]);
+						$source = basename($_FILES["zip_file"]["tmp_name"]);
 						$type = $_FILES["zip_file"]["type"];
 	
 						$name = explode(".", $filename);
@@ -2076,14 +2076,14 @@ class Admin_Controller extends website_Controller
 						$file_folder = explode('.',$filename);
 						$file_folder = $file_folder[0];
 
-						$target_path = DOCROOT."upload/zipper/".$filename;  
-						$target_dir = DOCROOT."upload/zipper/";
+						$target_path = realpath(DOCROOT."upload/zipper/".$filename);  
+						$target_dir = realpath(DOCROOT."upload/zipper/");
 
 						$dir_name = strtolower($subsector);
 
-						$target_css = DOCROOT."themes/default/css/".$dir_name;
-						$target_view = DOCROOT."application/views/themes/default/".$dir_name;
-						$target_modules = DOCROOT."modules/".$dir_name;
+						$target_css = realpath(DOCROOT."themes/default/css/".$dir_name);
+						$target_view = realpath(DOCROOT."application/views/themes/default/".$dir_name);
+						$target_modules = realpath(DOCROOT."modules/".$dir_name);
 
 						if(is_dir($target_modules)){
 							common::message(-1, $this->Lang['ALREADY_MODULES_FOLDER_EXISTS']);
@@ -2191,6 +2191,7 @@ class Admin_Controller extends website_Controller
 									url::redirect(PATH."admin/manage-sector.html");
 								}
 								/* check Model is already exsits or not  - end */
+								
 								
 								
 								rename($target_dir.$file_folder.'/css',$target_css);

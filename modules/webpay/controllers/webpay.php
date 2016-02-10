@@ -366,7 +366,7 @@ class Webpay_Controller extends Layout_Controller
 		if($_POST){
 
 			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
-		        $this->userPost = strip_tags(addslashes($this->input->post()));
+		        $this->userPost = $this->input->post();
 			$product_color="";
 			$paymentType = "INTERSWITCH";
 			$captured = 0;
