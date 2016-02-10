@@ -104,8 +104,9 @@ class Inter_switch_Model extends Model
 	public function update_referral_amount($ref_user_id = "")
 	{
 		$referral_amount = REFERRAL_AMOUNT;
-		
-		$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+		$this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance+ '.$referral_amount)),
+                        array("user_id" => $ref_user_id));
+		//$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
 		return;
 	}
 
@@ -113,8 +114,14 @@ class Inter_switch_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = $deal_id");
-	        return $result;
+            $result = $this->db->select()->from("product")
+                    ->join("stores", "stores.store_id", "product.shop_id")
+                    ->join("category", "category.category_id", "product.category_id")
+                    ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1,
+                        "product.deal_id" => $deal_id))
+                    ->get();
+		//$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = $deal_id");
+	    return $result;
 	}
 	
 	/** GET FRIEND DETAILS **/

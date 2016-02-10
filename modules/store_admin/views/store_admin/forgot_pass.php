@@ -6,7 +6,7 @@
                    <div class="login_form_middle">
                     <div class="login_container">
                     <div class="login_form">
-                        <h1><?php echo $this->Lang['FORGOT_PASS']; ?></h1>
+                        <h1><?php echo $this->Lang['FORGOT_PSWD']; ?></h1>
                         <div class="form">
                         <form action="<?php echo PATH;?>store-admin/forgot-password.html" method="post">
                             

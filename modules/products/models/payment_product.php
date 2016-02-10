@@ -70,7 +70,13 @@ class Payment_product_Model extends Model
 		 
                  $purchase_count_total = $purchase_qty + $quantity;
 	         $result_deal = $this->db->update("deals", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-                 $this->db->query("update users set deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");
+                /* $this->db->query("update users set deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");*/
+				
+			/*	$this->db->query("update users set deal_bought_count = deal_bought_count + $quantity where user_id = $this->UserID");*/
+				
+				$this->db->update("users", array("deal_bought_count" => "deal_bought_count+$quantity"), array("user_id"=>$this->UserID));
+				
+				
                  
 		 return $result_deal; exit;
 	}
@@ -181,8 +187,8 @@ class Payment_product_Model extends Model
 	
 	public function get_products_list($duration_id="",$productid="") 
 	{
-		$result = $this->db->query("select *, $this->deal_value_condition,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = ".
-                strip_tags(addslashes($duration_id))." and deal_id = ".strip_tags(addslashes($productid)));
+		$result = $this->db->query("select *, $this->deal_value_condition,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = '".
+                strip_tags(addslashes($duration_id))."' and deal_id = '".strip_tags(addslashes($productid))."'");
                 /*
 		$result = $this->db->query("select *,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.store_credit_period from shipping_info as s join store_credit_save as t on t.productid=s.transaction_id join product as d on d.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' $condition order by shipping_id DESC "); 
 		*/

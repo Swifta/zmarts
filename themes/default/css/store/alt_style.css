@@ -1472,7 +1472,7 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .new_footer_social ul li{float: left;width:auto;padding: 0;margin: 0 10px 0 0;}
 .new_footer_social ul li a.new_fb{float: left;background:url(../../images/new/new_fb.png) center no-repeat;width:39px;height:39px;}
 .new_footer_social ul li a:hover{opacity: 0.7;}
-.new_footer_social ul li a.new_linkedin{float: left;background:url../(../images/new/new_linkedin.png) center no-repeat;width:39px;height:39px;}
+.new_footer_social ul li a.new_linkedin{float: left;background:url(../../images/new/new_linkedin.png) center no-repeat;width:39px;height:39px;}
 .new_footer_social ul li a.new_gplus{float: left;background:url(../../images/new/new_gplus.png) center no-repeat;width:39px;height:39px;}
 .new_footer_social ul li a.new_twitt{float: left;background:url(../../images/new/new_twitter.png) center no-repeat;width:39px;height:39px;}
 .new_footer_social ul li a.new_youtube{float: left;background:url(../../images/new/new_youtube.png) center no-repeat;width:39px;height:39px;}

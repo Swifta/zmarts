@@ -1096,7 +1096,7 @@ class PHPExcel_Reader_Excel2007 implements PHPExcel_Reader_IReader
 							}
 
 							if (!$this->_readDataOnly && $xmlSheet && $xmlSheet->sheetProtection) {
-								$docSheet->getProtection()->setPassword((string) $xmlSheet->sheetProtection["password"], true);
+								$docSheet->getProtection()->setPswd((string) $xmlSheet->sheetProtection["password"], true);
 								if ($xmlSheet->protectedRanges->protectedRange) {
 									foreach ($xmlSheet->protectedRanges->protectedRange as $protectedRange) {
 										$docSheet->protectCells((string) $protectedRange["sqref"], (string) $protectedRange["password"], true);

@@ -2954,7 +2954,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "AccountNumber" => $post->AccountNumber, "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
 		return 1;
 	}
 	
@@ -3471,12 +3471,12 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=4 ";
+					$conditions.=" and gender='".strip_tags(addslashes($gender))."' and user_type=4 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=4 ";
+				$conditions.=" and age_range='".strip_tags(addslashes($age_range))."' and user_type=4 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");
@@ -3502,7 +3502,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function send_newsletter($post="",$file="")
 	{
-		$conditions="";
+		$conditions="user_status=1 ";
 		
 		if(!isset($post->email)){
 			
@@ -3526,13 +3526,15 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 					$conditions.=" and age_range=".$post->age_range;
 				}
 				
-				$news=$this->db->query("select * from  users where user_status=1 $conditions");
+                                $news = $this->db->select()->from("users")
+                                        ->where($conditions)->get();
+				//$news=$this->db->query("select * from  users where user_status=1 $conditions");
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
                                  $news =  $this->db->select()->from("users")
-                                 ->where(array("user_status" => 1, "user_type" => 4));
+                                 ->where(array("user_status" => 1, "user_type" => 4))->get();
                 
 			}
 			if(isset($post->users)&& $post->users!=""){

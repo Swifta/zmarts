@@ -17,9 +17,13 @@ class Webpay_Model extends Model
                 $product_id = $get_detail[0]->product_id;
                 $quantity=$get_detail[0]->quantity;
                 $size_id = $get_detail[0]->product_size;
-                $this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
-
-                $this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+                $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
+                        array("deal_id" => $product_id, "size_id" =>$size_id));
+                //$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+                
+                $this->db->update("product", array("user_limit_quantity"=>new Database_Expression('user_limit_quantity + '.$quantity)),
+                        array("deal_id" => $product_id));
+                //$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
 
                 $this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('transaction_id' => $transaction_id));
             }
@@ -416,8 +420,13 @@ class Webpay_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = $deal_id");
-	        return $result;
+		//$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = $deal_id");
+	        $result = $this->db->select()->from("product")
+                        ->join("stores", "stores.store_id", "product.shop_id ")
+                        ->join("category", "category.category_id", "product.category_id")
+                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1,
+                            "product.deal_id" => $deal_id))->get();
+                return $result;
 	}
 	
 	/** GET FRIEND DETAILS **/
@@ -504,8 +513,12 @@ class Webpay_Model extends Model
         
 	public function get_product_payment_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
-	        return $result;
+		//$result = $this->db->query("select * from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
+	        $result = $this->db->select()->from("product")
+                        ->join("category", "category.category_id", "product.category_id")
+                        ->where(array("deal_status" => 1, "category.category_status" => 1,
+                            "deal_id" => $deal_id))->get();
+                return $result;
 
 	}
         

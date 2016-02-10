@@ -29,19 +29,33 @@ class Swift_Transport_Esmtp_Auth_LoginAuthenticator
   }
   
   /**
+<<<<<<< HEAD
    * Try to authenticate the user with $usrname and $pswd.
    * @param Swift_Transport_SmtpAgent $agent
    * @param string $usrname
+=======
+   * Try to authenticate the user with $username and $pswd.
+   * @param Swift_Transport_SmtpAgent $agent
+   * @param string $username
+>>>>>>> test
    * @param string $pswd
    * @return boolean
    */
   public function authenticate(Swift_Transport_SmtpAgent $agent,
+<<<<<<< HEAD
     $usrname, $pswd)
+=======
+    $username, $pswd)
+>>>>>>> test
   {
     try
     {
       $agent->executeCommand("AUTH LOGIN\r\n", array(334));
+<<<<<<< HEAD
       $agent->executeCommand(sprintf("%s\r\n", base64_encode($usrname)), array(334));
+=======
+      $agent->executeCommand(sprintf("%s\r\n", base64_encode($username)), array(334));
+>>>>>>> test
       $agent->executeCommand(sprintf("%s\r\n", base64_encode($pswd)), array(235));
       return true;
     }

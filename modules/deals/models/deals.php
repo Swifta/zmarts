@@ -307,6 +307,11 @@ class Deals_Model extends Model
 
 	public function get_deals_details($deal_key = "", $url_title = "",$type = "")
 	{
+		
+		$deal_key = addslashes(strip_tags($deal_key));
+		$url_title = addslashes(strip_tags($url_title));
+		
+		
 			if($type == "admin-preview" || $type == "merchant-preview"){
 				$condition = array("url_title" => $url_title, "deal_key" => $deal_key,"category.category_status" => 1, "store_status" => 1);
 			} else {
@@ -322,7 +327,10 @@ class Deals_Model extends Model
 			        $count_view = $this->db->from("view_count_location")->where(array("deal_key" => $deal_key,"ip" =>$ip))->get();
 			        if(count($count_view) == 0){
 			                $this->db->insert("view_count_location", array("deal_key" => $deal_key,"ip" =>$ip,"city" => $city,"country" => $country,"date" => time()));
-			                $this->db->query("update deals set view_count = view_count + 1 where deal_key = '$deal_key'");
+			               /* $this->db->query("update deals set view_count = view_count + 1 where deal_key = '$deal_key'");*/
+							
+							 $this->db->update("deals", array("view_count"=>new Database_Expression("view_count + 1")), array("deal_key"=>$deal_key));
+							 
 			       }
 				 $condition = array("url_title" => $url_title, "deal_key" => $deal_key, "deal_status" => 1, "category.category_status" => 1, "store_status" => 1);
 				 

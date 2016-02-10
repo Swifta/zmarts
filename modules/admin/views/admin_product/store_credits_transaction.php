@@ -92,7 +92,7 @@
 		<?php if(count($this->store_credits_transaction_list)>0){
                 $parm="";
                 if(isset($_GET['param'])){
-                        $parm='&param='.htmlentities($_GET['param'],  ENT_QUOTES,  "utf-8").'&sort='.$_GET['sort'];
+                        $parm='&param='.htmlspecialchars($_GET['param'], ENT_QUOTES,"UTF-8").'&sort='.htmlspecialchars($_GET['sort'], ENT_QUOTES,"UTF-8");
                 } ?>
 
                 <?php if($this->pagination !=""){ ?>

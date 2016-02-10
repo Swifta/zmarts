@@ -283,7 +283,11 @@ class PhpWsdlClient{
 			){
 				PhpWsdl::Debug('Using http Auth options');
 				$options['login']=$this->HttpUser;
+<<<<<<< HEAD
 				$options['pswd']=$this->HttpPswd;
+=======
+				$options['pswd']=$this->HttpPassword;
+>>>>>>> test
 			}
 			if($this->Debugging){
 				PhpWsdl::Debug('Debugging enabled');

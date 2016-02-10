@@ -54,7 +54,7 @@ $button = $buttonReturn["encryptedButton"];
 <tr><td align=left>Item Name</td><td align=left><?php echo $buttonParams["item_name"] ?></td></tr>
 <tr><td align=left>Amount</td><td align=left><?php echo $buttonParams["amount"] ?></td></tr>
 </table>
-<br><br><?php echo $button ?>
+<br><br><?php echo htmlspecialchars($button,ENT_QUOTES,'UTF-8'); ?>
 <br>Using the credentials specified in the utility.php file, the payment details are
 now encrypted. Click on the Buy Now button to complete the payment on PayPal<br><br>
 <font face="Verdana" color="black" size="2">The following are the parameters being passed: </font>

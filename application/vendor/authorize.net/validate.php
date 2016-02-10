@@ -12,14 +12,16 @@ if($_POST){
 
         $USERID = strip_tags(addslashes($_SESSION['userid']));
         //check whether deal is expired or closed
-        is_deal_expired($_POST['couponid']);
-	check_max_deal_purchase($_POST['couponid'],$_POST["friendname"],$_POST["friendemail"],$_POST['qty'],$USERID);
-	check_deal_quantity($_POST['couponid'],$_POST["friendname"],$_POST["friendemail"],$_POST['qty']);
+        is_deal_expired(strip_tags(addslashes($_POST['couponid'])));
+	check_max_deal_purchase(strip_tags(addslashes($_POST['couponid'])),strip_tags(addslashes($_POST["friendname"])),
+                strip_tags(addslashes($_POST["friendemail"])),strip_tags(addslashes($_POST['qty'])),$USERID);
+	check_deal_quantity(strip_tags(addslashes($_POST['couponid'])),strip_tags(addslashes($_POST["friendname"])),
+                strip_tags(addslashes($_POST["friendemail"])),strip_tags(addslashes($_POST['qty'])));
 
         $USERID = $userid = $_SESSION['userid'];
 	if($_POST['ref_amt2'] > 0) { 
 
-     $user = "SELECT * FROM coupons_users where userid='$USERID'";
+     $user = "SELECT * FROM coupons_users where userid='".intval($USERID)."'";
                 
                 $userSet = mysql_query($user);
                 while($r = mysql_fetch_array($userSet)) 
@@ -27,7 +29,7 @@ if($_POST){
                         $account_balance = round($r['referral_earned_amount'],2);
                 }
 
-			$deductable_ref_amt = round($_POST['ref_amt2'],2); 
+			$deductable_ref_amt = round(strip_tags(addslashes($_POST['ref_amt2'])),2); 
 
 			//referral amount validation			
 			if($deductable_ref_amt > $account_balance)
@@ -59,7 +61,7 @@ if($_POST){
 
 			}
 		
-	                $_SESSION['deductable_ref_amt'] = round($_POST['ref_amt2'],2); 
+	                $_SESSION['deductable_ref_amt'] = round(strip_tags(addslashes($_POST['ref_amt2'])),2); 
 	}else { 
 		$_SESSION['deductable_ref_amt'] = 0;
 	}
@@ -68,7 +70,7 @@ if($_POST){
 	// authorize
 	$qty =  strip_tags(addslashes( $_POST['qty']));	
 	$couponid =  strip_tags(addslashes($_POST['couponid'])) ;
-	$sale->cust_id = $_POST['user'];
+	$sale->cust_id = strip_tags(addslashes($_POST['user']));
         $amount = strip_tags(addslashes($_POST['amount']));
         //if payable amount is equal to zero then process the customer directly
 	if($_POST['amount'] == 0) 
@@ -77,12 +79,12 @@ if($_POST){
 			require_once(DOCUMENT_ROOT."/system/includes/transaction.php");
 			$L_QTY0 = $qty;	
 			$COUPONID = strip_tags(addslashes($couponid));	
-			$USERID = $_SESSION['userid'];
+			$USERID = strip_tags(addslashes($_SESSION['userid']));
 			check_max_deal_purchase($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0,$USERID);
 			check_deal_quantity($COUPONID,$_POST["friendname"],$_POST["friendemail"],$L_QTY0);
-                        $USERID = $_SESSION['userid'];
+                        $USERID = strip_tags(addslashes($_SESSION['userid']));
 
-			$_SESSION['pay_mod_id'] = $_POST['pay_mod_id'];
+			$_SESSION['pay_mod_id'] = strip_tags(addslashes($_POST['pay_mod_id']));
 			if(! isset($_SESSION['pay_mod_id'])) {
 				if($_POST["friendname"]!='' && $_POST["friendemail"]!='')
 				{
@@ -94,7 +96,7 @@ if($_POST){
 				}
 			}
 	
-                        $user = "SELECT * FROM coupons_users where userid='$USERID'";
+                        $user = "SELECT * FROM coupons_users where userid='".intval($USERID)."'";
                         
                         $userSet = mysql_query($user);
                         while($r = mysql_fetch_array($userSet)) 
@@ -109,12 +111,13 @@ if($_POST){
                         $PAYERSTATUS = '';
                         $COUNTRYCODE = '';			
                         $USERID = $uid = $_SESSION['userid'];
-                        $TYPE = $_POST['pay_mod_id'];
+                        $TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
                         $_SESSION['COUPONID'] = $cid = $COUPONID;
 			$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
 					//get the coupon value of the coupon and verify the amount
 			
-			$coupon_details = mysql_query("select * from coupons_coupons where coupon_id='$COUPONID'");	
+			$coupon_details = mysql_query("select * from coupons_coupons where coupon_id='".
+                        strip_tags(addslashes($COUPONID))."'");	
 			if(mysql_num_rows($coupon_details) > 0)
 			{
 			        while($coupon_info = mysql_fetch_array($coupon_details))
@@ -127,7 +130,12 @@ if($_POST){
 			
 			
 			
-		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('$PAYERID','$PAYERSTATUS','Success', '$COUNTRYCODE', '$COUPONID', '$FIRSTNAME', '$LASTNAME', '$TRANSACTIONID', '$L_QTY0', '$USERID', '$EMAIL','0','$CORRELATIONID','auth_only','cc',now(),'','Success','1','0','$REFERRAL_AMOUNT')";
+		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('".
+                       strip_tags(addslashes($PAYERID))."','".strip_tags(addslashes($PAYERSTATUS))."','Success', '".strip_tags(addslashes($COUNTRYCODE)).
+                               "', '".strip_tags(addslashes($COUPONID))."', '".strip_tags(addslashes($FIRSTNAME))."', '".strip_tags(addslashes($LASTNAME)).
+                               "', '".strip_tags(addslashes($TRANSACTIONID))."', '".strip_tags(addslashes($L_QTY0))."', '".strip_tags(addslashes($USERID)).
+                               "', '".strip_tags(addslashes($EMAIL))."','0','".strip_tags(addslashes($CORRELATIONID))."','auth_only','cc',now(),'','Success','1','0','".
+                               strip_tags(addslashes($REFERRAL_AMOUNT))."')";
 			require_once(DOCUMENT_ROOT."/system/includes/dboperations.php");	
 			$resultSet = mysql_query($queryString);
 			$_SESSION['txn_id'] = $txnid = mysql_insert_id();
@@ -159,20 +167,20 @@ if($_POST){
 	}
 	
         $sale->amount = $amount;
-        $sale->card_num = $_POST['creditCardNumber'];
-	$sale->card_code = $_POST['cvv2Number'];
-        $sale->exp_date = $_POST['expDateMonth'].'/'.$_POST['expDateYear'];
-	$sale->first_name = $_POST['firstName'];
-	$sale->last_name = $_POST['lastName'];
+        $sale->card_num = strip_tags(addslashes($_POST['creditCardNumber']));
+	$sale->card_code = strip_tags(addslashes($_POST['cvv2Number']));
+        $sale->exp_date = strip_tags(addslashes($_POST['expDateMonth'])).'/'.strip_tags(addslashes($_POST['expDateYear']));
+	$sale->first_name = strip_tags(addslashes($_POST['firstName']));
+	$sale->last_name = strip_tags(addslashes($_POST['lastName']));
 	
-	$sale->address = $_POST['address1'];
-        $sale->city = $_POST['city'];
-        $sale->state = $_POST['state'];
-	$sale->zip = $_POST['zip'];
-	$sale->country = $_POST['country'];
-	$sale->email = $_POST['mail'];
+	$sale->address = strip_tags(addslashes($_POST['address1']));
+        $sale->city = strip_tags(addslashes($_POST['city']));
+        $sale->state = strip_tags(addslashes($_POST['state']));
+	$sale->zip = strip_tags(addslashes($_POST['zip']));
+	$sale->country = strip_tags(addslashes($_POST['country']));
+	$sale->email = strip_tags(addslashes($_POST['mail']));
 	$sale->invoice_num = substr(time(), 0, 6);
-	$sale->description = $_POST['description'];
+	$sale->description = strip_tags(addslashes($_POST['description']));
 	$query = "select * from coupons_coupons where coupon_id='$couponid'";
             $resultset = mysql_query($query);
 	    while($row=mysql_fetch_array($resultset)){
@@ -364,7 +372,11 @@ if($_POST){
 			
 			
 			
-		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('$PAYERID','$PAYERSTATUS','Success', '$COUNTRYCODE', '$COUPONID', '$FIRSTNAME', '$LASTNAME', '$TRANSACTIONID', '$L_QTY0', '$USERID', '$EMAIL','0','$CORRELATIONID','auth_only','cc',now(),'','Success','1','0','$REFERRAL_AMOUNT')";
+		       $queryString = "insert into transaction_details(PAYERID, PAYERSTATUS, ACK, COUNTRYCODE, COUPONID, FIRSTNAME, LASTNAME, TRANSACTIONID, L_QTY0, USERID, EMAIL, TYPE, CORRELATIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,CURRENCYCODE,PAYMENTSTATUS,CAPTURED,AMT,REFERRAL_AMOUNT) values ('".
+                       strip_tags(addslashes($PAYERID))."','".strip_tags(addslashes($PAYERSTATUS))."','Success', '".strip_tags(addslashes($COUNTRYCODE))."', '".
+                               strip_tags(addslashes($COUPONID))."', '".strip_tags(addslashes($FIRSTNAME))."', '".strip_tags(addslashes($LASTNAME))."', '".strip_tags(addslashes($TRANSACTIONID)).
+                               "', '".strip_tags(addslashes($L_QTY0))."', '".strip_tags(addslashes($USERID))."', '".strip_tags(addslashes($EMAIL))."','0','".strip_tags(addslashes($CORRELATIONID)).
+                               "','auth_only','cc',now(),'','Success','1','0','".strip_tags(addslashes($REFERRAL_AMOUNT))."')";
 			require_once(DOCUMENT_ROOT."/system/includes/dboperations.php");	
 			$resultSet = mysql_query($queryString);
 			$_SESSION['txn_id'] = $txnid = mysql_insert_id();
@@ -396,20 +408,20 @@ if($_POST){
 	}
 	
         $sale->amount = $amount;
-        $sale->card_num = $_POST['creditCardNumber'];
-	$sale->card_code = $_POST['cvv2Number'];
-        $sale->exp_date = $_POST['expDateMonth'].'/'.$_POST['expDateYear'];
-	$sale->first_name = $_POST['firstName'];
-	$sale->last_name = $_POST['lastName'];
+        $sale->card_num = strip_tags(addslashes($_POST['creditCardNumber']));
+	$sale->card_code = strip_tags(addslashes($_POST['cvv2Number']));
+        $sale->exp_date = strip_tags(addslashes($_POST['expDateMonth'])).'/'.strip_tags(addslashes($_POST['expDateYear']));
+	$sale->first_name = strip_tags(addslashes($_POST['firstName']));
+	$sale->last_name = strip_tags(addslashes($_POST['lastName']));
 	
-	$sale->address = $_POST['address1'];
-        $sale->city = $_POST['city'];
-        $sale->state = $_POST['state'];
-	$sale->zip = $_POST['zip'];
-	$sale->country = $_POST['country'];
-	$sale->email = $_POST['mail'];
+	$sale->address = strip_tags(addslashes($_POST['address1']));
+        $sale->city = strip_tags(addslashes($_POST['city']));
+        $sale->state = strip_tags(addslashes($_POST['state']));
+	$sale->zip = strip_tags(addslashes($_POST['zip']));
+	$sale->country = strip_tags(addslashes($_POST['country']));
+	$sale->email = strip_tags(addslashes($_POST['mail']));
 	$sale->invoice_num = substr(time(), 0, 6);
-	$sale->description = $_POST['description'];
+	$sale->description = strip_tags(addslashes($_POST['description']));
 	$query = "select * from coupons_coupons where coupon_id='$couponid'";
             $resultset = mysql_query($query);
 	    while($row=mysql_fetch_array($resultset)){
@@ -437,7 +449,7 @@ if($_POST){
 		$transaction_id = $response->transaction_id;
 		$responseheader = array('Order Status'=>$response->response_reason_text,'Invoice Number'=>$response->invoice_number,'Authorization Code'=>$response->authorization_code,'Credit card'=>$response->card_type,'Billing Address'=>$response->address);
 
-		$TYPE = $_POST['pay_mod_id'];
+		$TYPE = strip_tags(addslashes($_POST['pay_mod_id']));
 		$REFERRAL_AMOUNT = $_SESSION['deductable_ref_amt'];
 		require_once($_SERVER['DOCUMENT_ROOT']."/system/includes/dboperations.php"); 
 		$sql = "insert into transaction_details (PAYERID,COUPONID,TIMESTAMP,CORRELATIONID,ACK,FIRSTNAME,LASTNAME,TRANSACTIONID,TRANSACTIONTYPE,PAYMENTTYPE,ORDERTIME,AMT,PAYMENTSTATUS,REASONCODE,L_QTY0,USERID,EMAIL,TYPE,CAPTURED,REFERRAL_AMOUNT) values ('$response->customer_id','$couponid',now(),'$response->authorization_code','$response->response_reason_text','$response->first_name','$response->last_name','$response->transaction_id','$response->transaction_type','$response->method',now(),'$response->amount','$response->response_reason_text','$response->response_reason_code','$qty','$userid','$response->email_address','$TYPE','0','$REFERRAL_AMOUNT')";

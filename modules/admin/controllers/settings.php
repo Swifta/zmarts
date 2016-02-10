@@ -132,7 +132,7 @@ const ALLOW_PRODUCTION = FALSE;
 						->add_rules('smtp_host', 'required')
 						->add_rules('smtp_port', 'required')
 						->add_rules('smtp_username', 'required');
-						//->add_rules('smtp_password', 'required');
+						//->add_rules('smtp_pswd', 'required');
 
 			
 			if($post->validate()){

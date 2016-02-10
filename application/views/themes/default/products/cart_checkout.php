@@ -880,12 +880,12 @@
                                         <?php if ($this->paypal_setting) { ?>
                                                 <div class="payment_sel_lft">
                                                 <a onclick="return SimilarProducts();" id="SimilarProducts"  >
-                                                <input id="paypal_radio" type="radio" name="name"  /></a><p><?php echo $this->Lang['PAYPAL']; ?></p></div>
+                                                <input id="paypal_radio" type="radio" name="name"  /></a><p><?php echo $this->Lang["PPAL"]; ?></p></div>
                                         <?php } ?>
                                         <?php if ($this->credit_card_setting) { ?>
                                                 <div class="payment_sel_lft">  <a onclick="return SimilarDeals();" id="SimilarDeals"  >
                                                 <input type="radio" name="name"  <?php if ($this->paypal_setting) {
-                                                } else {  ?> checked <?php } ?>  disabled /></a><p><?php echo $this->Lang['PAYPAL_CREDIT']; ?></p></div>
+                                                } else {  ?> checked <?php } ?>  disabled /></a><p><?php echo $this->Lang['PPAL_CRDT']; ?></p></div>
                                         <?php } ?>
                                         <?php if ($this->authorize_setting) { ?>
                                                 <div class="payment_sel_lft"> 

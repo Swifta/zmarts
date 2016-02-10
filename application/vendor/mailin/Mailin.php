@@ -18,7 +18,11 @@ class Mailin
   const WBA = 'MAILUPLOADS';
   const DOMAIN = 'http://mysmtp.mailin.fr/';
   
+<<<<<<< HEAD
   private $usrname, $pswd, $api, $webaction, $wba, $domain, $domainAttachment;
+=======
+  private $username, $pswd, $api, $webaction, $wba, $domain, $domainAttachment;
+>>>>>>> test
   private $to_list,
           $from,
           $from_name,
@@ -34,9 +38,15 @@ class Mailin
 
   protected $use_headers;
 
+<<<<<<< HEAD
   public function __construct($usrname, $pswd)
   {
     $this->username = $usrname;
+=======
+  public function __construct($username, $pswd)
+  {
+    $this->username = $username;
+>>>>>>> test
     $this->password = $pswd;
 	$this->webaction = self::WEBACTION;
 	$this->wba = self::WBA;

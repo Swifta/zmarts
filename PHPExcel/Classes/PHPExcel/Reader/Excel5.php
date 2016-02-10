@@ -3287,7 +3287,11 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 		if (!$this->_readDataOnly) {
 			// offset: 0; size: 2; 16-bit hash value of password
 			$pswd = strtoupper(dechex(self::_GetInt2d($recordData, 0))); // the hashed password
+<<<<<<< HEAD
 			$this->_phpSheet->getProtection()->setPassword($pswd, true);
+=======
+			$this->_phpSheet->getProtection()->setPswd($pswd, true);
+>>>>>>> test
 		}
 	}
 

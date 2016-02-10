@@ -2308,7 +2308,11 @@ class MCAPI {
      * @example xml-rpc_apikeyAdd.php
      * @example mcapi_apikeyAdd.php
      * 
+<<<<<<< HEAD
      * @param string $usrname Your MailChimp user name
+=======
+     * @param string $username Your MailChimp user name
+>>>>>>> test
      * @param string $pswd Your MailChimp password
      * @param boolean $expired optional - whether or not to include expired keys, defaults to false
      * @return array an array of API keys including:
@@ -2316,9 +2320,15 @@ class MCAPI {
      * @returnf string created_at The date the key was created
      * @returnf string expired_at The date the key was expired
      */
+<<<<<<< HEAD
     function apikeys($usrname, $pswd, $expired=false) {
         $params = array();
         $params["username"] = $usrname;
+=======
+    function apikeys($username, $pswd, $expired=false) {
+        $params = array();
+        $params["username"] = $username;
+>>>>>>> test
         $params["password"] = $pswd;
         $params["expired"] = $expired;
         return $this->callServer("apikeys", $params);
@@ -2330,14 +2340,24 @@ class MCAPI {
      * @section Security Related
      * @example xml-rpc_apikeyAdd.php
      *
+<<<<<<< HEAD
      * @param string $usrname Your MailChimp user name
+=======
+     * @param string $username Your MailChimp user name
+>>>>>>> test
      * @param string $pswd Your MailChimp password
      * @return string a new API Key that can be immediately used.
 
      */
+<<<<<<< HEAD
     function apikeyAdd($usrname, $pswd) {
         $params = array();
         $params["username"] = $usrname;
+=======
+    function apikeyAdd($username, $pswd) {
+        $params = array();
+        $params["username"] = $username;
+>>>>>>> test
         $params["password"] = $pswd;
         return $this->callServer("apikeyAdd", $params);
     }
@@ -2352,6 +2372,7 @@ class MCAPI {
      * @example mcapi_apikeyExpire.php
      * @example xml-rpc_apikeyExpire.php
      *
+<<<<<<< HEAD
      * @param string $usrname Your MailChimp user name
      * @param string $pswd Your MailChimp password
      * @return boolean true if it worked, otherwise an error is thrown.
@@ -2359,6 +2380,15 @@ class MCAPI {
     function apikeyExpire($usrname, $pswd) {
         $params = array();
         $params["username"] = $usrname;
+=======
+     * @param string $username Your MailChimp user name
+     * @param string $pswd Your MailChimp password
+     * @return boolean true if it worked, otherwise an error is thrown.
+     */
+    function apikeyExpire($username, $pswd) {
+        $params = array();
+        $params["username"] = $username;
+>>>>>>> test
         $params["password"] = $pswd;
         return $this->callServer("apikeyExpire", $params);
     }

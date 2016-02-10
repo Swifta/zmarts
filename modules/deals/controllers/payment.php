@@ -39,9 +39,12 @@ class Payment_Controller extends Layout_Controller {
 
                 if($_POST){
 
-			$this->userPost = $this->input->post();
-			$this->url_title = $this->input->post("url_title");
-			$this->deal_key = $this->input->post("deal_key");
+//			$this->userPost = $this->input->post();
+//			$this->url_title = $this->input->post("url_title");
+//			$this->deal_key = $this->input->post("deal_key");
+                        $this->userPost = strip_tags(addslashes($this->input->post()));
+			$this->url_title = strip_tags(addslashes($this->input->post("url_title")));
+			$this->deal_key = strip_tags(addslashes($this->input->post("deal_key")));
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
 						
@@ -55,9 +58,9 @@ class Payment_Controller extends Layout_Controller {
 			        $referral_id = text::random($type = 'alnum', $length = 8);
 			        $this->signup=1;
 				        $from = CONTACT_EMAIL;
-				        $this->name=$_POST['f_name'];
-				        $this->email =$_POST['email'];
-				        $this->password =$_POST['password'];  
+				        $this->name = strip_tags(addslashes($_POST['f_name']));
+				        $this->email = strip_tags(addslashes($_POST['email']));
+				        $this->password = strip_tags(addslashes($_POST['password']));  
 				        $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
 				        $message = new View("themes/".THEME_NAME."/mail_template");
 				        if(EMAIL_TYPE==2){
@@ -213,14 +216,24 @@ class Payment_Controller extends Layout_Controller {
 	{ 
 	       if($_POST){
 			
-			$deal_id = $this->input->post("deal_id");
-			$deal_key = $this->input->post("deal_key");
-			$referral_amount = $this->input->post("p_referral_amount");
-			$item_qty = $this->input->post("P_QTY");
-			$amount = $this->input->post("amount");
-			$friend_name = $this->input->post("friend_name");
-			$friend_email = $this->input->post("friend_email");
-			$friend_gift_status = $this->input->post("friend_gift");
+//			$deal_id = $this->input->post("deal_id");
+//			$deal_key = $this->input->post("deal_key");
+//			$referral_amount = $this->input->post("p_referral_amount");
+//			$item_qty = $this->input->post("P_QTY");
+//			$amount = $this->input->post("amount");
+//			$friend_name = $this->input->post("friend_name");
+//			$friend_email = $this->input->post("friend_email");
+//			$friend_gift_status = $this->input->post("friend_gift");
+                   
+                   
+                        $deal_id =  strip_tags(addslashes($this->input->post("deal_id"))) ;
+			$deal_key = strip_tags(addslashes($this->input->post("deal_key")));
+			$referral_amount = strip_tags($this->input->post("p_referral_amount"));
+			$item_qty = strip_tags(addslashes($this->input->post("P_QTY"))) ;
+			$amount = strip_tags(addslashes($this->input->post("amount")));
+			$friend_name = strip_tags(addslashes($this->input->post("friend_name")));
+			$friend_email = strip_tags(addslashes($this->input->post("friend_email")));
+			$friend_gift_status = strip_tags(addslashes($this->input->post("friend_gift")));
 			
 			$this->deals_payment_deatils = $this->payment->get_deals_payments_details($deal_id, $deal_key);
 			if(count($this->deals_payment_deatils) == 0){

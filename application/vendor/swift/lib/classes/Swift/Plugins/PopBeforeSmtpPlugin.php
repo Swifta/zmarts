@@ -37,7 +37,7 @@ class Swift_Plugins_PopBeforeSmtpPlugin
   private $_username;
   
   /** Password to use (if any) */
-  private $_password;
+  private $_pswd;
   
   /** Established connection via TCP socket */
   private $_socket;
@@ -126,7 +126,11 @@ class Swift_Plugins_PopBeforeSmtpPlugin
    */
   public function setPswd($pswd)
   {
+<<<<<<< HEAD
     $this->_password = $pswd;
+=======
+    $this->_pswd = $pswd;
+>>>>>>> test
     return $this;
   }
   
@@ -166,7 +170,7 @@ class Swift_Plugins_PopBeforeSmtpPlugin
         if ($this->_username)
         {
           $this->_command(sprintf("USER %s\r\n", $this->_username));
-          $this->_command(sprintf("PASS %s\r\n", $this->_password));
+          $this->_command(sprintf("PASS %s\r\n", $this->_pswd));
         }
       }
     }

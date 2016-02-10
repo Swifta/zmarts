@@ -876,16 +876,16 @@ class Admin_merchant_Model extends Model
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=3 ";
+				$conditions.="and city_id='".strip_tags(addslashes($city))."' and user_type=3 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
-					$conditions.=" and gender=".strip_tags(addslashes($gender))." and user_type=3 ";
+					$conditions.=" and gender='".strip_tags(addslashes($gender))."' and user_type=3 ";
 				
 			}
 			if(isset($age_range) && $age_range!="" && $age_range!='all'){
 				
-				$conditions.=" and age_range=".strip_tags(addslashes($age_range))." and user_type=3 ";
+				$conditions.=" and age_range='".strip_tags(addslashes($age_range))."' and user_type=3 ";
 			}
 			
 			$news=$this->db->query("select * from  users where user_status=1 $conditions");

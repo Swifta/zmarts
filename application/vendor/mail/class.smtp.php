@@ -207,7 +207,11 @@ class SMTP {
    * @access public
    * @return bool
    */
+<<<<<<< HEAD
   public function Authenticate($usrname, $pswd) {
+=======
+  public function Authenticate($username, $pswd) {
+>>>>>>> test
     // Start authentication
     fputs($this->smtp_conn,"AUTH LOGIN" . $this->CRLF);
 

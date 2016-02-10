@@ -49,8 +49,16 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			
 		
+<<<<<<< HEAD
 			$email = trim($this->input->post("email"));
 			$pswd = $this->input->post("password");
+=======
+//			$email = trim($this->input->post("email"));
+//			$pswd = $this->input->post("password");
+//                        
+                       $email =  strip_tags(addslashes(trim($this->input->post("email"))));
+			$pswd = strip_tags(addslashes($this->input->post("password")));
+>>>>>>> test
 			if($email){
 				
 				$status = $this->merchant->merchant_login($email, $pswd);
@@ -389,8 +397,8 @@ class Store_admin_Controller extends website_Controller
 					elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 					elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 
-					if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-					elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+					if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+					elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 					elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 					elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 					elseif($d->type=="5"){ $transaction_type="Cash On Delivery"; }
@@ -1307,8 +1315,8 @@ class Store_admin_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -1334,8 +1342,8 @@ class Store_admin_Controller extends website_Controller
 						elseif($d->payment_status=="Success"){ $status=$this->Lang["SUCCESS"]; }
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 
-						if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-						elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+						if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
 						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -1855,8 +1863,8 @@ class Store_admin_Controller extends website_Controller
 						elseif($d->payment_status=="Pending"){ $status=$this->Lang["PENDING"]; }
 						elseif($d->payment_status=="Failed"){ $status=$this->Lang["FAILED"]; }
 
-                                                if($d->type=="1"){ $transaction_type=$this->Lang["PAYPAL_CREDIT"]; }
-                                                elseif($d->type=="2"){ $transaction_type=$this->Lang["PAYPAL"]; }
+                                                if($d->type=="1"){ $transaction_type=$this->Lang["PPAL_CRDT"]; }
+                                                elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
                                                 elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
                                                 elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
                                                 elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
@@ -2451,8 +2459,8 @@ class Store_admin_Controller extends website_Controller
                                         if($u->payment_status=="Completed"){ $tran_type = $this->Lang["COMPLETED"]; }
                                         if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
 
@@ -2549,8 +2557,8 @@ class Store_admin_Controller extends website_Controller
                                         if($u->payment_status=="Success"){ $tran_type = $this->Lang["SUCCESS"]; }
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                         if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
 
@@ -2819,8 +2827,8 @@ class Store_admin_Controller extends website_Controller
                                         if($u->payment_status=="Pending"){$tran_type = $this->Lang["PENDING"];}
                                         if($u->payment_status=="Failed"){ $tran_type = $this->Lang["FAILED"]; }
 
-                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PAYPAL_CREDIT"]; }
-                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PAYPAL"]; }
+                                        if($u->type=="1"){ $tran_type1 = $this->Lang["PPAL_CRDT"]; }
+                                        if($u->type=="2"){ $tran_type1 = $this->Lang["PPAL"]; }
                                         if($u->type=="3"){ $tran_type1 = $this->Lang["REF_PAYMENT"]; }
                                         if($u->type=="4"){ $tran_type1 = "Authorize.net(".$u->transaction_type.")"; }
 					$out .= $i+$first_item.',"'.$u->firstname.'","'.$u->deal_title.'","'.$u->bid_amount.'","'.$u->shipping_amount.'","'.$u->amount.'","'.($u->bid_amount *($u->deal_merchant_commission/100)).'","'.$tran_type.'","'.date('d-M-Y h:i:s A',$u->transaction_date).'","'.$tran_type1.'"'."\r\n";
@@ -3042,14 +3050,14 @@ class Store_admin_Controller extends website_Controller
 	{
 		$this->captcha = new Captcha;
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = new Validation($_POST);
 			$post = Validation::factory($_POST)
 				
 				->add_rules('email', 'required','valid::email')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
-				$email = trim($this->input->post("email"));
+				$email = strip_tags(addslashes(trim($this->input->post("email"))));
 				if(Captcha::valid($this->input->post('captcha'))){
 				        $pswd = text::random($type = 'alnum', $length = 10);
 					$status = $this->merchant->forgot_password($email,$pswd);

@@ -119,8 +119,8 @@
                     <td align="left"><?php echo date('d-M-Y h:i:s A',$u->transaction_date); ?></td>
                     
                  <?php /*   <td ><span class="align">
-		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PAYPAL_CREDIT"] .'</span>'; } ?>
-		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PAYPAL"] .'</span>'; } ?>
+		    <?php if($u->type=="1"){ echo '<span class="clor2">'. $this->Lang["PPAL_CRDT"] .'</span>'; } ?>
+		    <?php if($u->type=="2"){ echo '<span class="clor2">'. $this->Lang["PPAL"] .'</span>'; } ?>
 		    <?php if($u->type=="3"){ echo '<span class="clor2">'. $this->Lang["REF_PAYMENT"] .'</span>'; } ?>
 		    <?php if($u->type=="4"){ echo '<span class="clor2">'. $this->Lang["AUTHORIZE"].'('.$u->transaction_type.')' .'</span>'; } ?>
 			<?php if($u->type =="5"){ echo '<span class="clor2">'. $this->Lang["CASH_ON_DEL"] .'</span>'; } ?>

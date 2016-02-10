@@ -104,7 +104,7 @@ class Payment_Model extends Model
                 //where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate > 'time()'and purchase_count < maximum_deals_limit");
 	       // return $result;
                 
-                 $result =  $this->db->select()->from("deals")
+                 $result =  $this->db->select("*")->from("deals")
                         ->join("stores", "stores.store_id", "deals.shop_id")
                         ->join("category", "category.category_id", "deals.category_id")
                         ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "deal_key" => $deal_key, "deals.deal_id" => $deal_id, "enddate >" => time(),"purchase_count <" => "maximum_deals_limit"))

@@ -119,8 +119,8 @@ class Utils
 		curl_setopt($ch,CURLOPT_POSTFIELDS,$postFields);
 
 		// grab URL, and print
-		curl_exec($ch);
-		curl_close($ch);
+		//curl_exec($ch);
+		//curl_close($ch);
 	}
 } // Utils
 
