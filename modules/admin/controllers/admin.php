@@ -481,15 +481,15 @@ class Admin_Controller extends website_Controller
 					$status = $this->admin->edit_category($category, $cat_status, $cat_id, $cat_url,$type,$deal,$product,$auction);
 						if($status == 1){
 							$listing_filename = upload::save('list_icon');
-							$Cat_img_URL = DOCROOT."images/category/icon/".url::title($cat_url).".png";  echo "<br>";
-							$cat_image_rename = DOCROOT."images/category/icon/".url::title($category).".png";
+							$Cat_img_URL = realpath(DOCROOT."images/category/icon/").url::title($cat_url).".png";  echo "<br>";
+							$cat_image_rename = realpath(DOCROOT."images/category/icon/").url::title($category).".png";
 								if(file_exists($Cat_img_URL)){
 									rename($Cat_img_URL,$cat_image_rename);
 								}
 								if($listing_filename && $cat_id){
-									common::createthumb($listing_filename, DOCROOT.'images/category/icon/'.url::title($category).'.png',200, 280);
+									common::createthumb($listing_filename, realpath(DOCROOT.'images/category/icon/').url::title($category).'.png',200, 280);
 									//common::createthumb($listing_filename, DOCROOT.'images/category/icon/'.url::title($category).'_home.png',197, 361);
-									common::createthumb($listing_filename, DOCROOT.'images/category/icon/'.url::title($category).'_home.png',200, 280);
+									common::createthumb($listing_filename, realpath(DOCROOT.'images/category/icon/').url::title($category).'_home.png',200, 280);
 							         //$source_img = $destination_img =  DOCROOT.'images/category/icon/'.url::title($category).'_home.png';
 							        /// common::compress($source_img, $destination_img, 90);
 									unlink($listing_filename);
@@ -2055,8 +2055,16 @@ class Admin_Controller extends website_Controller
 					$check_insert_file = false;
 					/* Extrat Files */
 					if($_FILES["zip_file"]["name"]) {
+<<<<<<< HEAD
 						$filename = basename($_FILES["zip_file"]["name"]);
 						$source = basename($_FILES["zip_file"]["tmp_name"]);
+||||||| merged common ancestors
+						$filename = $_FILES["zip_file"]["name"];
+						$source = $_FILES["zip_file"]["tmp_name"];
+=======
+						$filename = basename($_FILES["zip_file"]["name"]);
+						$source = $_FILES["zip_file"]["tmp_name"];
+>>>>>>> 6cfe3291db52cc09eedcf8cac72e75a8b12c557f
 						$type = $_FILES["zip_file"]["type"];
 	
 						$name = explode(".", $filename);
@@ -2193,12 +2201,18 @@ class Admin_Controller extends website_Controller
 								/* check Model is already exsits or not  - end */
 								
 								
+<<<<<<< HEAD
 								
 								rename($target_dir.$file_folder.'/css',$target_css);
+||||||| merged common ancestors
+								rename($target_dir.$file_folder.'/css',$target_css);
+=======
+								rename(realpath($target_dir.$file_folder.'/css'),$target_css);
+>>>>>>> 6cfe3291db52cc09eedcf8cac72e75a8b12c557f
 								common::chmod_r($target_css);
-								rename($target_dir.$file_folder.'/view',$target_view);
+								rename(realpath($target_dir.$file_folder.'/view'),$target_view);
 								common::chmod_r($target_view);
-								rename($target_dir.$file_folder.'/modules',$target_modules);
+								rename(realpath($target_dir.$file_folder.'/modules'),$target_modules);
 								common::chmod_r($target_modules);
 	
 								$zip->close();

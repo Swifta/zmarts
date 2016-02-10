@@ -27,8 +27,14 @@ class Auction_Paypal_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and auction.auction_id = $deal_id");
-	        return $result;
+            $result = $this->select()->from("auction")
+                    ->join("stores", "stores.store_id", "auction.shop_id")
+                    ->join("category", "category.category_id", "auction.category_id")
+                    ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1,
+                        "auction.auction_id" => $deal_id))
+                    ->get();
+		//$result = $this->db->query("select * from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and auction.auction_id = $deal_id");
+	    return $result;
 	}
 	
 	/** GET USER LIMIT **/

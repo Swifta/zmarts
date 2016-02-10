@@ -118,7 +118,6 @@ class Admin_products_Controller extends website_Controller
 							foreach(arr::rotate($_FILES['image']) as $files){
                 				        if($files){
 									$filename = upload::save($files);
-									$filename = basename($filename);
 										if($filename!=''){
 											$IMG_NAME = $deal_key."_".$i.'.png';
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
@@ -482,11 +481,10 @@ class Admin_products_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = basename(explode('.',$_FILES['im_product']['name']));
+						$temp = explode('.',  basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
-						$path = DOCROOT.'upload/admin_excel/';
-						
+						$path = realpath(DOCROOT.'upload/admin_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
 					}
 					
@@ -688,7 +686,6 @@ class Admin_products_Controller extends website_Controller
 								}
 								else
 								{
-									$inputFileName = realpath($inputFileName);
 									unlink($inputFileName);
 									 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 									 url::redirect(PATH."admin/manage-products.html");
@@ -696,7 +693,6 @@ class Admin_products_Controller extends website_Controller
 				                        } 
 			                        }
 	                         } 
-							 $inputFileName = realpath($inputFileName);
 				unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."admin/manage-products.html");
@@ -953,7 +949,6 @@ class Admin_products_Controller extends website_Controller
 										$source_img1 = $destination_img1 =  DOCROOT.'images/products/1000_800/'.$IMG_NAME1;
 										 common::compress($source_img1, $destination_img1, 90);
 										 
-										$filename = realpath($filename);
 										unlink($filename);
 									}
 								}

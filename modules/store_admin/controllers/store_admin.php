@@ -3507,10 +3507,10 @@ class Store_admin_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',$_FILES['im_product']['name']);
+						$temp = basename(explode('.',$_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
-						$path = DOCROOT.'upload/merchant_excel/';
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
 
 					}

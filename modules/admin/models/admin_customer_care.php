@@ -32,8 +32,8 @@ class Admin_customer_care_Model extends Model
   		        }
 
                 $user_id = $result->insert_id();
-                echo $this->session->set("id",$user_id); 
-               
+//                echo $this->session->set("id",$user_id); 
+                echo  htmlspecialchars($this->session->set("id",$user_id), ENT_QUOTES, "UTF-8");
 		return 1;
         }	
         
