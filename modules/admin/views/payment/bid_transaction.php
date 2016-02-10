@@ -25,7 +25,7 @@ $(document).ready(function(){
 });	
 function today_transaction(val)
 {
-        window.location='<?php $current_url = explode('?', $_SERVER["REQUEST_URI"]); echo $current_url[0]; ?>?today='+val;
+        window.location='<?php $current_url = explode('?', $_SERVER["REQUEST_URI"]); echo htmlspecialchars($current_url[0],ENT_QUOTES,"UTF-8"); ?>?today='+val;
 }
 </script>
 <div class="bread_crumb"><a href="<?php echo PATH."admin.html"; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang["HOME"]; ?> <span class="fwn">&#155;&#155;</span></a>

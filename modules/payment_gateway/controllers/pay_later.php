@@ -321,6 +321,7 @@ class Pay_later_Controller extends Layout_Controller
 	public function deal_cash_delivery()
 	{
 		if($_POST){
+
 			//$deal_id = $this->input->post("deal_id");
                         //$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
                         $deal_id = htmlspecialchars($this->input->post("deal_id") ,ENT_QUOTES,"UTF-8");
@@ -333,6 +334,7 @@ class Pay_later_Controller extends Layout_Controller
                         $item_qty = htmlspecialchars($this->input->post("P_QTY") ,ENT_QUOTES,"UTF-8");
 			//$amount = $this->input->post("amount");
                         $amount = htmlspecialchars($this->input->post("amount") ,ENT_QUOTES,"UTF-8");
+			
 			$this->deals_payment_deatils = $this->pay_later->get_deals_payment_details($deal_id, $deal_key);
 
 			if(count($this->deals_payment_deatils) == 0){

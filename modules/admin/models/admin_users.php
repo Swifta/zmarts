@@ -351,6 +351,11 @@ class Admin_users_Model extends Model
 	{
 		$conditions="";
 		
+		$city = addslashes(strip_tags($post->city));
+		$gender = addslashes(strip_tags($post->gender));
+		$age_range = addslashes(strip_tags($post->age_range));
+		
+		
 		if(!isset($post->email)){
 			
 			if(isset($post->all_users)&&((isset($post->city)&&$post->city!="")||(isset($post->gender)&&$post->gender!="")||(isset($post->age_range)&&$post->age_range!=""))){
@@ -361,16 +366,16 @@ class Admin_users_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					$conditions.="and city_id='".$city."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						$conditions.=" and gender='".$gender."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					$conditions.=" and age_range='".$age_range."'";
 				}
 				
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");

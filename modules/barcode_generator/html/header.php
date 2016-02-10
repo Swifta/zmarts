@@ -65,7 +65,7 @@ $a1 = isset($_POST['a1']) ? $_POST['a1'] : $default_value['a1'];
 $a2 = isset($_POST['a2']) ? $_POST['a2'] : $default_value['a2'];
 $a3 = isset($_POST['a3']) ? $_POST['a3'] : $default_value['a3'];
 ?>
-<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" name="barcode_drawer" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI'],ENT_QUOTES,'UTF-8'); ?>" name="barcode_drawer" method="post">
 <?php
 $table = new LSTable(10, 2, '500', $null);
 $table->setTitle('Configs for ' . $filename);

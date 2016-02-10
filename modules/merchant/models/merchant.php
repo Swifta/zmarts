@@ -3196,8 +3196,15 @@ class Merchant_Model extends Model
 	
 	public function get_merchant_details($shop_name="")
         {
-                $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.user_id=$this->user_id";
-                $result = $this->db->query($query);                     
+			$shop_name = addslashes(strip_tags($shop_name));
+			$this->user_id = addslashes(strip_tags($this->user_id));
+			
+                $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.user_id='$this->user_id'";
+				
+                $result = $this->db->query($query); 
+				
+				/*$result = $this->select("*")->from("users")->join("", array(), array())->where(array("stores.store_name"=>$shop_name,"users.user_id"=>$this->user_id))->get(); */
+				                   
                 return $result;
         }
         

@@ -3502,7 +3502,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function send_newsletter($post="",$file="")
 	{
-		$conditions="";
+		$conditions="user_status=1 ";
 		
 		if(!isset($post->email)){
 			
@@ -3526,13 +3526,15 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 					$conditions.=" and age_range=".$post->age_range;
 				}
 				
-				$news=$this->db->query("select * from  users where user_status=1 $conditions");
+                                $news = $this->db->select()->from("users")
+                                        ->where($conditions)->get();
+				//$news=$this->db->query("select * from  users where user_status=1 $conditions");
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
 				//$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
                                  $news =  $this->db->select()->from("users")
-                                 ->where(array("user_status" => 1, "user_type" => 4));
+                                 ->where(array("user_status" => 1, "user_type" => 4))->get();
                 
 			}
 			if(isset($post->users)&& $post->users!=""){
