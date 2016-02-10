@@ -678,6 +678,12 @@ class Admin_merchant_Model extends Model
 
 	public function send_newsletter($post="",$file="",$type="")
 	{
+		
+		$city = addslashes(strip_tags($post->city));
+		$gender = addslashes(strip_tags($post->gender));
+		$age_range = addslashes(strip_tags($post->age_range));
+		
+		
 		$conditions="";
 		
 		if(!isset($post->email)){
@@ -690,16 +696,16 @@ class Admin_merchant_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					$conditions.="and city_id='".$city."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						$conditions.=" and gender='".$gender."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					$conditions.=" and age_range='".$age_range."'";
 				}
 				
 				$news=$this->db->query("select * from  users where user_status=1 $conditions");
