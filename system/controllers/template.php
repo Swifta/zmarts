@@ -176,7 +176,7 @@ abstract class Template_Controller extends Controller {
 				/*smtp**/
 				define('PORT', $e->smtp_port);  	 	 
 				define('USERNAME', $e->smtp_username);
-				define('PASSWORD', $e->smtp_pswd);
+				define('PASSWORD', $e->smtp_password);
 				define('HOST', $e->smtp_host);
 
 				/*mailchimp**/

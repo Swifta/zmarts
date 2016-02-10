@@ -92,7 +92,7 @@ class Database_Mssql_Driver extends Database_Driver
 			if ( ! isset($this->query_cache[$hash]))
 			{
 				// Set the cached object
-				$this->query_cache[$hash] = new Mssql_Result(mssql_query($sql, $this->link), $this->link, $this->db_config['object'], $sql);
+				//$this->query_cache[$hash] = new Mssql_Result(mssql_query($sql, $this->link), $this->link, $this->db_config['object'], $sql);
 			}
 			else
 			{
@@ -343,7 +343,7 @@ class Mssql_Result extends Database_Result {
 			{
 				// Its an DELETE, INSERT, REPLACE, or UPDATE querys
 				$last_id          = mssql_query('SELECT @@IDENTITY AS last_id', $link);
-				$result           = mssql_fetch_assoc(strip_tags(addslashes($last_id)));
+				//$result           = mssql_fetch_assoc($last_id);
 				$this->insert_id  = $result['last_id'];
 				$this->total_rows = mssql_rows_affected($link);
 			}

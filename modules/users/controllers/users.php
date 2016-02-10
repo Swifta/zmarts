@@ -816,8 +816,9 @@ class Users_Controller extends Layout_Controller {
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					->add_rules('file', 'required');
 			if($post->validate()){
-				if($_FILES['file']['name'] != "" ){
-					$target_file = DOCROOT.'images/Pay_Later_Doc/'.base64_encode($_POST['transaction_id']).'_'.$_FILES["file"]["name"];
+				if(basename($_FILES['file']['name']) != "" ){
+					$target_file = realpath(DOCROOT.'images/Pay_Later_Doc/'.base64_encode($_POST['transaction_id']).'_'.
+                                                basename($_FILES["file"]["name"]));
 					if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 						$result = $this->users->update_bank_deposit_document($_POST['transaction_id'],$_FILES["file"]["name"]);
 						common::message(1, $this->Lang["SUCCESSFULLY_UPDATED_PAY_LATER_DOC"]);
