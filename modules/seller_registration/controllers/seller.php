@@ -311,6 +311,7 @@ class Seller_Controller extends Layout_Controller {
 				
 				$this->userPost = $this->input->post();
 				$post = new Validation($_POST);
+                                //htmlspecialchars($_POST['idBox'], ENT_QUOTES, "UTF-8")
 				$post = Validation::factory(array_merge($_POST,$_FILES))
 							
 							->add_rules('city', 'required')

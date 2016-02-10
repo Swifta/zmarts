@@ -4561,10 +4561,10 @@ class Merchant_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',$_FILES['im_product']['name']);
+						$temp = explode('.',  basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
-						$path = DOCROOT.'upload/merchant_excel/';
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
 
 					}
@@ -5465,7 +5465,7 @@ class Merchant_Controller extends website_Controller
 		$this->mer_settings_act="1";
 		
 	    if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$img_check = 0;
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							->add_rules('subject', 'required')
@@ -5488,9 +5488,9 @@ class Merchant_Controller extends website_Controller
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
 						$tmp_name = $_FILES["attach"]["tmp_name"];
-						$logo = $_FILES["attach"]["name"];
-						move_uploaded_file($tmp_name, DOCROOT."images/newsletter/".$logo);
-						chmod(DOCROOT."images/newsletter/".$logo,0777);
+						$logo = basename($_FILES["attach"]["name"]);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 					}
 					$file1=array();
 					pdf::template_create($post->template,$post->subject,$post->message);
@@ -5499,16 +5499,16 @@ class Merchant_Controller extends website_Controller
 					//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
 					if($_FILES["attach"]["name"]!=''){
-						$logo = $_FILES["attach"]["name"];
-						unlink(DOCROOT."images/newsletter/".$logo);
+						$logo = basename($_FILES["attach"]["name"]);
+						unlink(realpath(DOCROOT."images/newsletter/").$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 						common::message(1, $this->Lang['NEWS_SENT']);
 			        }else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 					url::redirect(PATH."merchant.html");
@@ -6359,8 +6359,8 @@ class Merchant_Controller extends website_Controller
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$category = $this->input->post("category");
-	 				$cat_status = $this->input->post("status");
+					$category = strip_tags(addslashes($this->input->post("category")));
+	 				$cat_status = strip_tags(addslashes($this->input->post("status")));
 					$deal = isset($_POST['deal'])? 1 : 0;
 					$product = isset($_POST['product'])? 1 : 0;
 					$auction = isset($_POST['auction'])? 1 : 0;
@@ -6368,13 +6368,13 @@ class Merchant_Controller extends website_Controller
 					$status = $this->merchant->edit_category($category, $cat_status, $cat_id, $cat_url,$type,$deal,$product,$auction);
 						if($status == 1){
 							$listing_filename = upload::save('list_icon');
-							$Cat_img_URL = DOCROOT."images/category/icon/".url::title($cat_url).".png";  echo "<br>";
-							$cat_image_rename = DOCROOT."images/category/icon/".url::title($category).".png";
+							$Cat_img_URL = realpath(DOCROOT."images/category/icon/").url::title($cat_url).".png";  echo "<br>";
+							$cat_image_rename = realpath(DOCROOT."images/category/icon/").url::title($category).".png";
 								if(file_exists($Cat_img_URL)){
 									rename($Cat_img_URL,$cat_image_rename);
 								}
 								if($listing_filename && $cat_id){
-									common::image($listing_filename, CATEGORY_WIDTH, CATEGORY_HEIGHT, DOCROOT.'images/category/icon/'.url::title($category).'.png');
+									common::image($listing_filename, CATEGORY_WIDTH, CATEGORY_HEIGHT, realpath(DOCROOT.'images/category/icon/').url::title($category).'.png');
 									unlink($listing_filename);
 								}
 							common::message(1, $this->Lang["CAT_EDIT_SUC"]);
@@ -7179,7 +7179,7 @@ class Merchant_Controller extends website_Controller
 	public function add_template(){
 		$this->newsletter_act = $this->mer_settings_act = 1;
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
 					->add_rules('title', 'required')
@@ -7191,13 +7191,13 @@ class Merchant_Controller extends website_Controller
 					if($_FILES["template_file"]){
 						$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
-						move_uploaded_file($tmp_name, DOCROOT."application/views/themes/".THEME_NAME."/".$name);
-						chmod(DOCROOT."application/views/themes/".THEME_NAME."/".$name,0777);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name));
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name),0777);
 					}
 					if($_FILES['template_image']['name']){
 						$filename = upload::save('template_image'); 						
 						$IMG_NAME = $status.'.png';						
-						common::image($filename, 192, 98, DOCROOT.'images/newsletter/'.$IMG_NAME);
+						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/'.$IMG_NAME));
 						unlink($filename);
 					}
 					common::message(1, $this->Lang["TEMPLATE_SUCESSS"]);
@@ -7236,7 +7236,7 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
 					->add_rules('title', 'required')
@@ -7248,13 +7248,13 @@ class Merchant_Controller extends website_Controller
 					if($_FILES["template_file"]["name"]!=''){
 						$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
-						move_uploaded_file($tmp_name, DOCROOT."application/views/themes/".THEME_NAME."/".$name);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name));
 						chmod(DOCROOT."application/views/themes/".THEME_NAME."/".$name,0777);
 					}
 					if($_FILES['template_image']['name']!=''){
 						$filename = upload::save('template_image'); 						
 						$IMG_NAME = $status.'.png';						
-						common::image($filename, 192, 98, DOCROOT.'images/newsletter/'.$IMG_NAME);
+						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/'.$IMG_NAME));
 						unlink($filename);
 					}
 					common::message(1, $this->Lang["TEMPLATE_EDIT_SUC"]);

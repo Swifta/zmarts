@@ -321,12 +321,20 @@ class Pay_later_Controller extends Layout_Controller
 	public function deal_cash_delivery()
 	{
 		if($_POST){
-			$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
-			$deal_key = strip_tags(addslashes($this->input->post("deal_key")));
-			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
-			$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
-			$amount = strip_tags(addslashes($this->input->post("amount")));
 
+			//$deal_id = $this->input->post("deal_id");
+                        //$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+                        $deal_id = htmlspecialchars($this->input->post("deal_id") ,ENT_QUOTES,"UTF-8");
+			//$deal_key = $this->input->post("deal_key");
+                       // $deal_key = strip_tags(addslashes($this->input->post("deal_key")));
+                        $deal_key = htmlspecialchars($this->input->post("deal_key") ,ENT_QUOTES,"UTF-8");
+			//$referral_amount = $this->input->post("p_referral_amount");
+                        $referral_amount = htmlspecialchars($this->input->post("p_referral_amount") ,ENT_QUOTES,"UTF-8");
+			//$item_qty = $this->input->post("P_QTY");
+                        $item_qty = htmlspecialchars($this->input->post("P_QTY") ,ENT_QUOTES,"UTF-8");
+			//$amount = $this->input->post("amount");
+                        $amount = htmlspecialchars($this->input->post("amount") ,ENT_QUOTES,"UTF-8");
+			
 			$this->deals_payment_deatils = $this->pay_later->get_deals_payment_details($deal_id, $deal_key);
 
 			if(count($this->deals_payment_deatils) == 0){
