@@ -2124,7 +2124,7 @@ $pdf->Output('voucher.pdf', 'I');
 								common::message(1, "Thank you for Zenith membership signup! You can now enjoy club membership offers.");
 								if($r == 1){
 									 $urlreferer = (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:PATH;
-									 echo $urlreferer;
+									 echo htmlspecialchars( $urlreferer,ENT_QUOTES,"UTF-8");
 									 exit;
 								}else{
 									
