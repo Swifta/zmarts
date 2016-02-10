@@ -100,7 +100,7 @@ class Newsletter_Controller extends website_Controller {
 	    if($_POST){
 			$img_check = 0;
 			//$this->userPost = $this->input->post();
-                        $this->userPost = $this->input->post();
+                        $this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
@@ -122,9 +122,9 @@ class Newsletter_Controller extends website_Controller {
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
 						$tmp_name = $_FILES["attach"]["tmp_name"];
-						$logo = $_FILES["attach"]["name"];
-						move_uploaded_file($tmp_name, DOCROOT."images/newsletter/".$logo);
-						chmod(DOCROOT."images/newsletter/".$logo,0777);
+						$logo = basename($_FILES["attach"]["name"]);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 					}
 					               
 					$file1=array();
@@ -146,15 +146,15 @@ class Newsletter_Controller extends website_Controller {
                     $status = $this->news->send_newsletter(arr::to_object($this->userPost),$file1,$logo);
                     if($_FILES["attach"]["name"]!=''){
 						$logo = $_FILES["attach"]["name"];
-						unlink(DOCROOT."images/newsletter/".$logo);
+						unlink(realpath(DOCROOT."images/newsletter/").$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 				        common::message(1, $this->Lang['NEWS_SENT']);
 			        }else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 			        url::redirect(PATH."admin.html");
@@ -282,7 +282,7 @@ class Newsletter_Controller extends website_Controller {
 		}
 		$this->newsletter_act = 1;
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
 					->add_rules('title', 'required')
@@ -294,13 +294,13 @@ class Newsletter_Controller extends website_Controller {
 					if($_FILES["template_file"]){
 						$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
-						move_uploaded_file($tmp_name, DOCROOT."application/views/themes/".THEME_NAME."/".$name);
-						chmod(DOCROOT."application/views/themes/".THEME_NAME."/".$name,0777);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 					}
 					if($_FILES['template_image']['name']){
 						$filename = upload::save('template_image'); 						
 						$IMG_NAME = $status.'.png';						
-						common::image($filename, 192, 98, DOCROOT.'images/newsletter/'.$IMG_NAME);
+						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/').$IMG_NAME);
 						unlink($filename);
 					}
 					common::message(1, $this->Lang["TEMPLATE_SUCESSS"]);
@@ -349,7 +349,7 @@ class Newsletter_Controller extends website_Controller {
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = strip_tags(addslashes($this->input->post()));
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
 					->add_rules('title', 'required')
@@ -358,16 +358,16 @@ class Newsletter_Controller extends website_Controller {
 			if($post->validate()){
 				$status = $this->news->edit_template(arr::to_object($this->userPost),$newsletter_id);
 				if($status > 0){
-					if($_FILES["template_file"]["name"]!=''){
+					if(basename($_FILES["template_file"]["name"])!=''){
 						$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
-						move_uploaded_file($tmp_name, DOCROOT."application/views/themes/".THEME_NAME."/".$name);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(DOCROOT."application/views/themes/".THEME_NAME."/".$name,0777);
 					}
 					if($_FILES['template_image']['name']!=''){
 						$filename = upload::save('template_image'); 						
 						$IMG_NAME = $status.'.png';						
-						common::image($filename, 192, 98, DOCROOT.'images/newsletter/'.$IMG_NAME);
+						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/'.$IMG_NAME));
 						unlink($filename);
 					}
 					common::message(1, $this->Lang["TEMPLATE_EDIT_SUC"]);

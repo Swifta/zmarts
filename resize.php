@@ -208,7 +208,7 @@ class timthumb {
 		//Clean the cache before we do anything because we don't want the first visitor after FILE_CACHE_TIME_BETWEEN_CLEANS expires to get a stale image. 
 		$this->cleanCache();
 		
-		$this->myHost = preg_replace('/^www\./i', '', $_SERVER['HTTP_HOST']);
+		$this->myHost = realpath(preg_replace('/^www\./i', '', strip_tags(addslashes($_SERVER['HTTP_HOST']))));
 		$this->src = $this->param('src');
 		$this->url = parse_url($this->src);
 		$this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);
@@ -825,19 +825,19 @@ class timthumb {
 	protected function calcDocRoot(){
 		$docRoot = @$_SERVER['DOCUMENT_ROOT'];
 		if (defined('LOCAL_FILE_BASE_DIRECTORY')) {
-			$docRoot = LOCAL_FILE_BASE_DIRECTORY;   
+			$docRoot = realpath(LOCAL_FILE_BASE_DIRECTORY);   
 		}
 		if(!isset($docRoot)){ 
 			$this->debug(3, "DOCUMENT_ROOT is not set. This is probably windows. Starting search 1.");
 			if(isset($_SERVER['SCRIPT_FILENAME'])){
-				$docRoot = str_replace( '\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0-strlen($_SERVER['PHP_SELF'])));
+				$docRoot = realpath(str_replace( '\\', '/', substr($_SERVER['SCRIPT_FILENAME'], 0, 0-strlen($_SERVER['PHP_SELF']))));
 				$this->debug(3, "Generated docRoot using SCRIPT_FILENAME and PHP_SELF as: $docRoot");
 			} 
 		}
 		if(!isset($docRoot)){ 
 			$this->debug(3, "DOCUMENT_ROOT still is not set. Starting search 2.");
 			if(isset($_SERVER['PATH_TRANSLATED'])){
-				$docRoot = str_replace( '\\', '/', substr(str_replace('\\\\', '\\', $_SERVER['PATH_TRANSLATED']), 0, 0-strlen($_SERVER['PHP_SELF'])));
+				$docRoot = realpath(str_replace( '\\', '/', substr(str_replace('\\\\', '\\', $_SERVER['PATH_TRANSLATED']), 0, 0-strlen($_SERVER['PHP_SELF']))));
 				$this->debug(3, "Generated docRoot using PATH_TRANSLATED and PHP_SELF as: $docRoot");
 			} 
 		}
@@ -851,7 +851,7 @@ class timthumb {
 		if(! $this->docRoot){
 			$this->debug(3, "We have no document root set, so as a last resort, lets check if the image is in the current dir and serve that.");
 			//We don't support serving images outside the current dir if we don't have a doc root for security reasons.
-			$file = preg_replace('/^.*?([^\/\\\\]+)$/', '$1', $src); //strip off any path info and just leave the filename.
+			$file = realpath(preg_replace('/^.*?([^\/\\\\]+)$/', '$1', $src)); //strip off any path info and just leave the filename.
 			if(is_file($file)){
 				return $this->realpath($file);
 			}
@@ -1076,7 +1076,7 @@ class timthumb {
 	}
 	protected function param($property, $default = ''){
 		if (isset ($_GET[$property])) {
-			return htmlentities($_GET[$property],  ENT_QUOTES,  "utf-8");
+			return htmlentities(strip_tags(addslashes($_GET[$property])),  ENT_QUOTES,  "utf-8");
 		} else {
 			return $default;
 		}
