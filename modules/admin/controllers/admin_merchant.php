@@ -910,11 +910,8 @@ class Admin_merchant_Controller extends website_Controller {
 									}
 									
 									$this->password = $pswd;
-<<<<<<< HEAD
-									$this->email = $_POST['store_email'];
-=======
+
 									$this->email = strip_tags(addslashes($_POST['store_email']));
->>>>>>> test
 									$from = CONTACT_EMAIL;
 									$this->name = strip_tags(addslashes($_POST['username']));
 									$this->store_admin = 1;

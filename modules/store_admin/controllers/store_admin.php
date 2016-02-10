@@ -49,16 +49,12 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			
 		
-<<<<<<< HEAD
-			$email = trim($this->input->post("email"));
-			$pswd = $this->input->post("password");
-=======
+
 //			$email = trim($this->input->post("email"));
 //			$pswd = $this->input->post("password");
 //                        
                        $email =  strip_tags(addslashes(trim($this->input->post("email"))));
 			$pswd = strip_tags(addslashes($this->input->post("password")));
->>>>>>> test
 			if($email){
 				
 				$status = $this->merchant->merchant_login($email, $pswd);

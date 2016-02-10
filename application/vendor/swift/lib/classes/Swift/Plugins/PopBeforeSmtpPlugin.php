@@ -126,11 +126,7 @@ class Swift_Plugins_PopBeforeSmtpPlugin
    */
   public function setPswd($pswd)
   {
-<<<<<<< HEAD
-    $this->_password = $pswd;
-=======
     $this->_pswd = $pswd;
->>>>>>> test
     return $this;
   }
   

@@ -104,11 +104,7 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
    */
   public function setPswd($pswd)
   {
-<<<<<<< HEAD
-    $this->_password = $pswd;
-=======
     $this->_pswd = $pswd;
->>>>>>> test
   }
   
   /**

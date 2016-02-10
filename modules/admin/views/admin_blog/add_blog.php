@@ -146,11 +146,9 @@ $usrname= $this->Lang['ENTER_USER_H'];  //use your sms api username
  $sender= $this->Lang['EN_SE_ID_H'];   //use your sms api sender id 
  $mobile= $this->Lang['US_DELI_CELL_NO'];  //use delivery cell no. 
  $message=$this->Lang['SUB_T'] . ": " . $fullname. on .$cell.$line; 
-<<<<<<< HEAD
-$sms_url = sprintf("http://www.yoursmsapigoeshere.comusername=%s&password=%s&sender=%s&mobile=%s&clientcharset=UTF-8&message=%s", $usrname, $pswd, $sender, $mobile, urlencode($message));
-=======
+
 $sms_url = sprintf("http://www.yoursmsapigoeshere.comusername=%s&password=%s&sender=%s&mobile=%s&clientcharset=UTF-8&message=%s", $username, $pswd, $sender, $mobile, urlencode($message));
->>>>>>> test
+
 
 // Let's try to send the message
 $result = openurl($sms_url);

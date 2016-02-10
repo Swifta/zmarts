@@ -29,32 +29,18 @@ class Swift_Transport_Esmtp_Auth_PlainAuthenticator
   }
   
   /**
-<<<<<<< HEAD
    * Try to authenticate the user with $usrname and $pswd.
    * @param Swift_Transport_SmtpAgent $agent
    * @param string $usrname
-=======
-   * Try to authenticate the user with $username and $pswd.
-   * @param Swift_Transport_SmtpAgent $agent
-   * @param string $username
->>>>>>> test
    * @param string $pswd
    * @return boolean
    */
   public function authenticate(Swift_Transport_SmtpAgent $agent,
-<<<<<<< HEAD
     $usrname, $pswd)
   {
     try
     {
       $message = base64_encode($usrname . chr(0) . $usrname . chr(0) . $pswd);
-=======
-    $username, $pswd)
-  {
-    try
-    {
-      $message = base64_encode($username . chr(0) . $username . chr(0) . $pswd);
->>>>>>> test
       $agent->executeCommand(sprintf("AUTH PLAIN %s\r\n", $message), array(235));
       return true;
     }
