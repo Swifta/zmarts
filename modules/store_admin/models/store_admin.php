@@ -3782,6 +3782,24 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function count_transaction_product_storecredit_list($type = "", $search_key = "",$sort_type = "",$param = "",$trans_type = "",$today="", $startdate = "", $enddate = "")
 	{
+		
+		$type =  addslashes($type);
+		$search_key =  addslashes($search_key);
+		//$offset =  addslashes($offset);
+		//$record =  addslashes($record);
+		//$type1 =  addslashes($type1);
+		$sort_type =  addslashes($sort_type);
+		$trans_type =  addslashes($trans_type);
+		//$limit =  addslashes($limit);
+		$today =  addslashes($today);
+		$startdate =  addslashes($startdate);
+		$enddate =  addslashes($enddate);
+		$param =  addslashes($param);
+		
+		$this->store_id = addslashes($this->store_id);
+		$this->user_id = addslashes($this->user_id);
+		
+		
 					$sort = "ASC";
 			if($sort_type == "DESC" ){
 				$sort = "DESC";
@@ -3799,27 +3817,27 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
                                 $to_date = date("Y-m-d 23:59:59"); 
                                 $from_date_str = strtotime($from_date);
                                 $to_date_str = strtotime($to_date);
-                                $conditions .= " and transaction.transaction_date between $from_date_str and $to_date_str";
+                                $conditions .= " and transaction.transaction_date between '$from_date_str' and '$to_date_str'";
                         }
                         else if($today == 2)
                         {
                                 $to_date = date("Y-m-d 23:59:59"); 
                                 $to_date_str = strtotime($to_date);
                                 $from_date_str = $to_date_str - (7*24*3600);
-                                $conditions .= " and transaction.transaction_date between $from_date_str and $to_date_str";
+                                $conditions .= " and transaction.transaction_date between '$from_date_str' and '$to_date_str'";
                         }
                         else if($today == 3)
                         {
                                 $to_date = date("Y-m-d 23:59:59"); 
                                 $to_date_str = strtotime($to_date);
                                 $from_date_str = $to_date_str - (30*24*3600);
-                                $conditions .= " and transaction.transaction_date between $from_date_str and $to_date_str";
+                                $conditions .= " and transaction.transaction_date between '$from_date_str' and '$to_date_str'";
                         }
                         if( $startdate != "" && $enddate != "")
                         {
 	                        $startdate_str = strtotime($startdate);
 	                        $enddate_str = strtotime($enddate);
-	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
+	                        $conditions .= " and ( transaction.transaction_date between '$startdate_str' and '$enddate_str' )";	
                         }
 				
 		        if($trans_type){
@@ -3831,10 +3849,10 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 				else{
 						$conditions .= " AND transaction.type != 5 AND store_credit_id !=0";
 					}
-			$result = $this->db->query("select transaction.id from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = $this->user_id and product.shop_id = ".$this->store_id."  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )");
+			$result = $this->db->query("select transaction.id from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )");
 		}
 		else{
-				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' and product.shop_id = ".$this->store_id." ";
+				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."' ";
 				if($trans_type){
 						
 							$conditions .= " AND transaction.type = 5 AND store_credit_id !=0";
@@ -3848,7 +3866,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
 		       }
 		      else {
-				$conditions = " payment_status = '$type' and product.merchant_id = '$this->user_id' and product.shop_id = ".$this->store_id." ";
+				$conditions = " payment_status = '$type' and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."' ";
 				if($trans_type){
 				
 							$conditions .= " AND transaction.type = 5 AND store_credit_id !=0";
@@ -3876,6 +3894,22 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function get_transaction_product_storecredit_list($type = "", $search_key = "", $offset = "", $record = "",$type1 = "",$sort_type = "",$param = "",$trans_type = "",$limit="",$today="", $startdate = "", $enddate = "")
 	{
+		
+		$type =  addslashes($type);
+		$search_key =  addslashes($search_key);
+		$offset =  addslashes($offset);
+		$record =  addslashes($record);
+		$type1 =  addslashes($type1);
+		$sort_type =  addslashes($sort_type);
+		$trans_type =  addslashes($trans_type);
+		$limit =  addslashes($limit);
+		$today =  addslashes($today);
+		$startdate =  addslashes($startdate);
+		$enddate =  addslashes($enddate);
+		$param =  addslashes($param);
+		
+		
+		
 		$limit1 = $limit !=1 ?"limit $offset,$record":"";
 		$sort = "ASC";
 			if($sort_type == "DESC" ){
@@ -3894,27 +3928,27 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
                                 $to_date = date("Y-m-d 23:59:59"); 
                                 $from_date_str = strtotime($from_date);
                                 $to_date_str = strtotime($to_date);
-                                $conditions .= " and transaction.transaction_date between $from_date_str and $to_date_str";
+                                $conditions .= " and transaction.transaction_date between '$from_date_str' and '$to_date_str'";
                         }
                         else if($today == 2)
                         {
                                 $to_date = date("Y-m-d 23:59:59"); 
                                 $to_date_str = strtotime($to_date);
                                 $from_date_str = $to_date_str - (7*24*3600);
-                                $conditions .= " and transaction.transaction_date between $from_date_str and $to_date_str";
+                                $conditions .= " and transaction.transaction_date between '$from_date_str' and '$to_date_str'";
                         }
                         else if($today == 3)
                         {
                                 $to_date = date("Y-m-d 23:59:59"); 
                                 $to_date_str = strtotime($to_date);
                                 $from_date_str = $to_date_str - (30*24*3600);
-                                $conditions .= " and transaction.transaction_date between $from_date_str and $to_date_str";
+                                $conditions .= " and transaction.transaction_date between '$from_date_str' and '$to_date_str'";
                         }
                         if( $startdate != "" && $enddate != "")
                         {
 	                        $startdate_str = strtotime($startdate);
 	                        $enddate_str = strtotime($enddate);
-	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
+	                        $conditions .= " and ( transaction.transaction_date between '$startdate_str' and '$enddate_str' )";	
                         }
 				
 		        if($trans_type){
@@ -3926,10 +3960,10 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 				else{
 						$conditions .= " AND transaction.type != 5  AND store_credit_id !=0";
 					}
-			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = $this->user_id and product.shop_id = ".$this->store_id."  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
+			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
 		}
 		else{
-				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' and product.shop_id = ".$this->store_id."  ";
+				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  ";
 				if($trans_type){
 						
 							$conditions .= " AND transaction.type = 5  AND store_credit_id !=0";
@@ -3942,7 +3976,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
 		       }
 		      else {
-				$conditions = " payment_status = '$type' and product.merchant_id = '$this->user_id' and product.shop_id = ".$this->store_id."  ";
+				$conditions = " payment_status = '$type' and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."' ";
 				if($trans_type){
 						
 							$conditions .= " AND transaction.type = 5  AND store_credit_id !=0";
@@ -4395,8 +4429,17 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	public function get_transaction_storecredit_list($status="",$search_key="",$offset = "", $record = "")
 	{
 		$store_id = $this->store_id;
+		
+		$store_id = addslashes($store_id);
+		$status = addslashes($status);
+		$search_key = addslashes($search_key);
+		$offset = addslashes($offset);
+		$record = addslashes($record);
+		
+		$this->user_id = addslashes($this->user_id);
+		
 		$condition="";
-		$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join users on users.user_id = s.userid where credit_status = $status and s.merchantid=$this->user_id and product.shop_id=$store_id $condition limit $offset,$record ");
+		$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join users on users.user_id = s.userid where credit_status = '$status' and s.merchantid='$this->user_id' and product.shop_id='$store_id' $condition limit '$offset','$record' ");
 		return $result;
                 
                 
