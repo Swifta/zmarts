@@ -1677,7 +1677,7 @@ class Store_admin_Controller extends website_Controller
 			            if($_FILES['image']['name']['0'] != "" )
                                     {
                                         $i=1;
-                                            foreach(arr::rotate($_FILES['image']) as $files){
+                                            foreach(arr::rotate(basename($_FILES['image'])) as $files){
 	                                         if($files){
                                                         $filename = upload::save($files);
 				                        if($filename!=''){
@@ -3507,7 +3507,7 @@ class Store_admin_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',$_FILES['im_product']['name']);
+						$temp = explode('.',basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = DOCROOT.'upload/merchant_excel/';
@@ -3999,7 +3999,7 @@ class Store_admin_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = $_POST['subsector'];
+							$subsector = strip_tags(addslashes($_POST['subsector']));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -4039,7 +4039,7 @@ class Store_admin_Controller extends website_Controller
 							fclose($file);
 	
 							
-							$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+							$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
 							$f = fopen($main_routes, "r");
 
 
