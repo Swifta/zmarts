@@ -345,15 +345,15 @@ class Authorize_Controller extends Layout_Controller
 
 		if($_POST){
 				$referral_amount = 0;
-				$auction_amount = $this->input->post("amount");
-				$deal_id = $this->input->post("deal_id");
-				$qty = $this->input->post("P_QTY");
-				$merchant_id = $this->input->post("merchant_id");
-				$bid_id = $this->input->post("bid_id");
-				$shipping_amount = $this->input->post("shipping_amount");
+				$auction_amount = strip_tags(addslashes($this->input->post("amount")));
+				$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+				$qty = strip_tags(addslashes($this->input->post("P_QTY")));
+				$merchant_id = strip_tags(addslashes($this->input->post("merchant_id")));
+				$bid_id = strip_tags(addslashes($this->input->post("bid_id")));
+				$shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
 				$tax_amount = 0;
                 $pay_amount = $pay_amount1 = $auction_amount+$shipping_amount+$tax_amount;
-                $product_title = $this->input->post("auction_title");
+                $product_title = strip_tags(addslashes($this->input->post("auction_title")));
 
                 $post = arr::to_object($this->input->post());
 

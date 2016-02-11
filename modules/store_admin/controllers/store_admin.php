@@ -241,7 +241,7 @@ class Store_admin_Controller extends website_Controller
 								if($filename!=''){
 									$IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
-									unlink($filename);
+									unlink(realpath($filename));
 								}
 							}
 							$i++;
@@ -478,7 +478,7 @@ class Store_admin_Controller extends website_Controller
                                                                         }
                                                                         $IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
-                                                                        unlink($filename);
+                                                                        unlink(realpath($filename));
                                                                 }
                                                         }
                                                         $i++;
@@ -897,7 +897,7 @@ class Store_admin_Controller extends website_Controller
 											$IMG_NAME = $deal_key."_".$i.'.png';
 
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
-											unlink($filename);
+											unlink(realpath($filename));
 										}
 									}
 								$i++;
@@ -1163,7 +1163,7 @@ class Store_admin_Controller extends website_Controller
 									}
 									$IMG_NAME = $deal_key."_".$i.'.png';
 									common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
-									unlink($filename);
+									unlink(realpath($filename));
 								}
 							}
 							$i++;
@@ -1684,7 +1684,7 @@ class Store_admin_Controller extends website_Controller
 				                        if($filename!=''){
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
 			                            		common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-					                        unlink($filename);
+					                        unlink(realpath($filename));
 				                        }
                                                    }
                                                 $i++;
@@ -1941,7 +1941,7 @@ class Store_admin_Controller extends website_Controller
                                                                 }
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
                                                                 common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-                                                                unlink($filename);
+                                                                unlink(realpath($filename));
                                                         }
                                                 }
                                                 $i++;
@@ -3508,7 +3508,7 @@ class Store_admin_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = basename(explode('.',$_FILES['im_product']['name']));
+						$temp = basename(explode('.',  basename($_FILES['im_product']['name'])));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
@@ -3710,7 +3710,7 @@ class Store_admin_Controller extends website_Controller
 								
 								else
 								{ 
-									unlink($inputFileName);
+									unlink(realpath($inputFileName));
 									common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				                    			url::redirect(PATH."store-admin/manage-products.html");
 								}
@@ -3718,7 +3718,7 @@ class Store_admin_Controller extends website_Controller
 							
 			}  
 	 } 
-				unlink($inputFileName);
+				unlink(realpath($inputFileName));
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."store-admin/manage-products.html");	
 						
@@ -4000,7 +4000,7 @@ class Store_admin_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = $_POST['subsector'];
+							$subsector = strip_tags(addslashes($_POST['subsector']));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -4008,11 +4008,11 @@ class Store_admin_Controller extends website_Controller
 						if(($modules_name != $old_modules_name) ){
 
 							
-							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
+							$old_modules_file = realpath(DOCROOT.'modules/'.$old_modules_name).'/config/routes.php';
 
 							$old_line = file($old_modules_file);
 
-							$old_file = DOCROOT.'modules/'.$old_modules_name.'/config/main_routes.php';
+							$old_file = realpath(DOCROOT.'modules/'.$old_modules_name).'/config/main_routes.php';
 							$old_f = fopen($old_file, "r");
 
 							unset($old_line[0]);
@@ -4040,11 +4040,11 @@ class Store_admin_Controller extends website_Controller
 							fclose($file);
 	
 							
-							$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+							$main_routes = realpath(DOCROOT.'modules/'.$modules_name).'/config/main_routes.php';
 							$f = fopen($main_routes, "r");
 
 
-							$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+							$file = realpath(DOCROOT.'modules/'.$modules_name).'/config/routes.php';
 							$fp = fopen($file, "a");
 						
 							while ( $line = fgets($f, 1000) ) {
@@ -4124,15 +4124,15 @@ class Store_admin_Controller extends website_Controller
 											$string = str_replace(".", "", substr($ext, 0, $lastDot)) . substr($ext, $lastDot);
 											$path = explode('.',$string);
 											$extension = end($path);
-											$f=file_get_contents($filename);
-											file_put_contents(DOCROOT.'images/newsletter/newsletter.'.$extension,$f);
+											$f=file_get_contents(realpath($filename));
+											file_put_contents(realpath(DOCROOT.'images/newsletter/newsletter.').$extension,$f);
 											
 										}
 							        }
 							    $i++;
 							}
 							
-                                        $file[0]=DOCROOT.'images/newsletter/newsletter.'.$extension;
+                                        $file[0]=  realpath(DOCROOT.'images/newsletter/newsletter.').$extension;
                                         }
                                         $file1=array();
                                         pdf::template_create($post->template,$post->subject,$post->message);

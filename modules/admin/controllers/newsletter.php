@@ -349,7 +349,7 @@ class Newsletter_Controller extends website_Controller {
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
+			$this->userPost = $this->input->post();
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 					
 					->add_rules('title', 'required')
@@ -362,12 +362,12 @@ class Newsletter_Controller extends website_Controller {
 						$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
-						chmod(DOCROOT."application/views/themes/".THEME_NAME."/".$name,0777);
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 					}
 					if($_FILES['template_image']['name']!=''){
 						$filename = upload::save('template_image'); 						
 						$IMG_NAME = $status.'.png';						
-						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/'.$IMG_NAME));
+						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/').$IMG_NAME);
 						unlink($filename);
 					}
 					common::message(1, $this->Lang["TEMPLATE_EDIT_SUC"]);
@@ -431,8 +431,8 @@ class Newsletter_Controller extends website_Controller {
 		if($newsletter_id){
 			$status = $this->news->deleteTemplate($newsletter_id);
 			if($status == 1){
-				unlink(DOCROOT."images/newsletter/".$newsletter_id.".png");
-				unlink( DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id.".php");
+				unlink(realpath(DOCROOT."images/newsletter/".$newsletter_id).".png");
+				unlink(realpath(DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id).".php");
 				common::message(1, $this->Lang["TEMPLATE_DEL_SUC"]);
 			}else{
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
