@@ -128,14 +128,42 @@ class Admin_deals_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 			
-			$query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions $limit1";
-                      
+//			$query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id
+//                            join city on city.city_id=stores.city_id  
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=deals.category_id 
+//                            join users on users.user_id=deals.merchant_id where $conditions $limit1";
+                         
+                          $result = $this->db->select("*,deals.created_date as createddate")
+                          ->from("deals")
+                         ->join("stores","stores.store_id","deals.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("country","country.country_id","stores.country_id")
+                          ->join("category","category.category_id","deals.category_id")
+                          ->join("users","users.user_id","deals.merchant_id")
+                         ->where($conditions)
+                         ->limit($limit1)->get();
 			
 		}
 		else{
-		      $query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1";
-		}
-		$result = $this->db->query($qry);
+//		      $query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id 
+//                          join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join 
+//                          users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1";
+		         $result = $this->db->select("*,deals.created_date as createddate")
+                         ->from("deals")
+                         ->join("stores","stores.store_id","deals.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("country","country.country_id","stores.country_id")
+                          ->join("category","category.category_id","deals.category_id")
+                          ->join("users","users.user_id","deals.merchant_id")
+                         ->where($conditions)
+                         ->orderby('deals.deal_id', 'DESC')
+                         ->limit($limit1)->get();
+                 
+               //  return $result;
+                      
+                }
+		//$result = $this->db->query($query);
 	
 		return $result;
 	}
@@ -202,8 +230,26 @@ class Admin_deals_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
-                                $query = "select * from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id   where $conditions";
-                                $result = $this->db->query($qry);
+//                                $query = "select * from deals 
+//                                    join stores on stores.store_id=deals.shop_id 
+//                                    join city on city.city_id=stores.city_id 
+//                                    join category on category.category_id=deals.category_id 
+//                                    join users on users.user_id=deals.merchant_id   where $conditions";
+//                                $result = $this->db->query($query);
+//                                
+                                
+                                
+                         
+                         $result = $this->db->select()->from("deals")
+                         ->join("stores","stores.store_id","deals.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("category","category.category_id","deals.category_id")
+                          ->join("users","users.user_id","deals.merchant_id")
+                         ->where($conditions)->get();
+                        
+                         
+                                
+                                
                 }
                 else{
                         $result = $this->db->select("deal_id")->from("deals")
@@ -383,9 +429,23 @@ class Admin_deals_Model extends Model
                         $contitions .= 'OR deals.deal_title like "%'.strip_tags($firstname).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%")';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join deals on deals.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
-                      return $result;
-        }
+//                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion 
+//                           join users on users.user_id=discussion.user_id 
+//                           join deals on deals.deal_id=discussion.deal_id 
+//                           where $contitions order by discussion_id DESC limit $offset, $record");
+//                      return $result;
+                      
+                      
+                      
+                           $result = $this->db->select("*,discussion.created_date as dis_create")->from("discussion")
+                          ->join("users","users.user_id","discussion.user_id")
+                          ->join("deals","deals.deal_id","discussion.deal_id")
+                          ->where($contitions)                           
+                         ->orderby('discussion_id', 'DESC')
+                         ->limit($offset,$record)->get();
+                          return $result;
+                                
+        }             
 	
         /** GET USERS COMMENTS COUNT  **/
 	
@@ -397,9 +457,26 @@ class Admin_deals_Model extends Model
                         $contitions .= 'OR deals.deal_title like "%'.strip_tags($firstname).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%")';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join deals on deals.deal_id=discussion.deal_id where $contitions order by discussion_id DESC");
-                       return count($result);
+//                       $result = $this->db->query("select *, discussion.created_date as dis_create 
+//                           from discussion join users on users.user_id=discussion.user_id 
+//                           join deals on deals.deal_id=discussion.deal_id where $contitions order by discussion_id DESC");
+//                       return count($result);
+                       
+                       
+                       
+                         $result = $this->db->select("*,discussion.created_date as dis_create")->from("discussion")
+                         ->join("users","users.user_id","discussion.user_id")
+                         ->join("deals","deals.deal_id","discussion.deal_id")
+                         ->where($contitions)                           
+                         ->orderby('discussion_id', 'DESC')
+                        ->get();
+                          return count($result);
+                       
+                       
         }
+        
+        
+        
         
         /** GET SINGLE USER COMMENT DATA **/
 	
@@ -544,11 +621,27 @@ class Admin_deals_Model extends Model
                     if($code){
 						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags($code).'%"';
 					}   
-                       $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 "); 
-		}
+//                       $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id 
+//                           join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 "); 
+		
+                          $result = $this->db->select()->from("transaction_mapping")
+                         ->join("deals","deals.deal_id","transaction_mapping.deal_id")
+                         ->join("users","users.user_id","transaction_mapping.user_id")
+                         ->where($contitions)                           
+                         ->Limit($limit1)
+                         ->get();
+                         
+                    }
 		else {
-		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
-	$result = $this->db->query($qry); 
+//		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
+                          $result = $this->db->select()->from("transaction_mapping")
+                         ->join("deals","deals.deal_id","transaction_mapping.deal_id")
+                         ->join("users","users.user_id","transaction_mapping.user_id")
+                         ->where($contitions)                           
+                         ->Limit($limit1)
+                         ->get();	
+
+                     //$result = $this->db->query($query); 
 		} 
 //print_r($result); exit;
 	return $result;  
@@ -566,11 +659,30 @@ class Admin_deals_Model extends Model
 						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags($code).'%"';
 					}   
                        
-                       $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions"); 
-		}
+//                       $result = $this->db->query("SELECT * FROM transaction_mapping
+//                           join deals on deals.deal_id = transaction_mapping.deal_id 
+//                           join users on users.user_id=transaction_mapping.user_id where $contitions"); 
+		
+                        $result = $this->db->select()->from("transaction_mapping")
+                         ->join("deals","deals.deal_id","transaction_mapping.deal_id")
+                         ->join("users","users.user_id","transaction_mapping.user_id")
+                         ->where($contitions)                           
+                         
+                         ->get();	
+                       
+                    }
 		else {
-		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
-	$result = $this->db->query($qry); 
+//		$query = "SELECT * FROM transaction_mapping 
+//                    join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
+                         $result = $this->db->select()->from("transaction_mapping")
+                         ->join("deals","deals.deal_id","transaction_mapping.deal_id")
+                         ->join("users","users.user_id","transaction_mapping.user_id")
+                         ->where($contitions)                           
+                        
+                         ->get();	
+                
+
+//$result = $this->db->query($query); 
 		} 
 	return count($result);  
 	}

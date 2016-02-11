@@ -314,8 +314,25 @@ class Admin_products_Model extends Model
 			if(isset($sort_arr[$param])){
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }			
-			$query = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
-			$result = $this->db->query($qry);
+//			$query = "select * , product.created_date as createddate from product 
+//                            join stores on stores.store_id=product.shop_id 
+//                            join city on city.city_id=stores.city_id  
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=product.category_id 
+//                            join users on users.user_id=product.merchant_id where $conditions $limit1 ";
+			
+                          $result = $this->db->select("* , product.created_date as createddate")->from("product")
+                          ->join("stores","stores.store_id","product.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("country","country.country_id","stores.country_id ")
+                          ->join("category","category.category_id","product.category_id")
+                           ->join("users","users.user_id","product.merchant_id")
+                          ->where($conditions,$limit1)                           
+                           ->get();
+                          //return $result;
+                        
+                        
+                        //$result = $this->db->query($query);
 		}
 		else{		
 		
@@ -332,8 +349,24 @@ class Admin_products_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 			
-			$query = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
-			$result = $this->db->query($qry);
+//			$query = "select * , product.created_date as createddate from product 
+//                            join stores on stores.store_id=product.shop_id 
+//                            join city on city.city_id=stores.city_id 
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=product.category_id 
+//                            join users on users.user_id=product.merchant_id where $conditions $limit1 ";
+//			$result = $this->db->query($query);
+                        
+                        
+                        $result = $this->db->select("*,product.created_date as createddate")->from("product")
+                          ->join("stores","stores.store_id","product.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("country","country.country_id","stores.country_id ")
+                          ->join("category","category.category_id","product.category_id")
+                           ->join("users","users.user_id","product.merchant_id")
+                          ->where($conditions,$limit1)                           
+                           ->get();
+                        
 		} 
 		return $result;
 	}
@@ -403,8 +436,22 @@ class Admin_products_Model extends Model
 	       		        $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 	        	
-			$query = "select product.deal_id from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$result = $this->db->query($qry);
+//			$query = "select product.deal_id from product
+//                            join stores on stores.store_id=product.shop_id 
+//                            join city on city.city_id=stores.city_id  
+//                            join category on category.category_id=product.category_id
+//                            join users on users.user_id=product.merchant_id where $conditions";
+//			$result = $this->db->query($query);
+                        
+                         $result = $this->db->select("*,product.deal_id")->from("product")
+                          ->join("stores","stores.store_id","product.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                         
+                          ->join("category","category.category_id","product.category_id")
+                           ->join("users","users.user_id","product.merchant_id")
+                          ->where($conditions)                           
+                           ->get();
+                        
                 } else {
                 
 			    if($type != "1")
@@ -420,8 +467,26 @@ class Admin_products_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; } 
 
-			$query = "select product.deal_id from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$result = $this->db->query($qry);
+//			$query = "select product.deal_id 
+//                         from product 
+//                         join stores on stores.store_id=product.shop_id 
+//                         join city on city.city_id=stores.city_id  
+//                         join country on country.country_id=stores.country_id 
+//                         join category on category.category_id=product.category_id 
+//                         join users on users.user_id=product.merchant_id where $conditions";
+//			$result = $this->db->query($query);
+                        
+                        
+                        
+                        
+                        $result = $this->db->select("*,product.deal_id")->from("product")
+                          ->join("stores","stores.store_id","product.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                           ->join("country","country.country_id","stores.country_id")
+                          ->join("category","category.category_id","product.category_id")
+                           ->join("users","users.user_id","product.merchant_id")
+                          ->where($conditions)                           
+                           ->get();
                 }
 		
                 return count($result);
@@ -506,8 +571,13 @@ class Admin_products_Model extends Model
 	
 	public function get_product_size()
 	{
-		$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
-	        $result = $this->db->query($qry);
+		//$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
+                   $result = $this->db->select()->from("size")
+                          ->orderby('size_name' ,'ASC')  ->get();
+                                               
+                         
+                
+	       // $result = $this->db->query($query);
 		return $result;
 	}
 	
@@ -894,10 +964,32 @@ class Admin_products_Model extends Model
 	
 	public function get_deals_chart_list()
 	{	
-	    $result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1");
-		$result["active_products"]=count($result_active_products);
+            
+            
+            $result_active_products = $this->db->select()
+                         ->from("product")
+                         ->join("stores","stores.store_id","product.shop_id")
+                         
+                         ->where(array("purchase_count < " =>'user_limit_quantity',"stores.store_status " => 1))
+                         ->orderby('deals.deal_id', 'DESC')->get();
+                      
+       
+//	    $result_active_products = $this->db->query("SELECT * FROM product 
+//                join stores on stores.store_id=product.shop_id 
+//                WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1");
 		
-		$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1");
+            $result["active_products"]=count($result_active_products);
+		
+            
+            
+            $result_sold_products = $this->db->select()
+                         ->from("product")
+                         ->join("stores","stores.store_id","product.shop_id")
+                         ->where(array("purchase_count = " =>'user_limit_quantity',"stores.store_status " => 1,"stores.store_status "=> 1))
+                         ->get();
+                      
+            
+		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1");
 		$result["archive_products"]=count($result_sold_products);
 		return $result;
 	}
@@ -912,8 +1004,22 @@ class Admin_products_Model extends Model
                         $contitions .= 'OR product.deal_title like "%'.strip_tags(addslashes($firstname)).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%")';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
-                return $result;
+                      
+                           $result = $this->db->select("*,discussion.created_date as dis_create")
+                          ->from("discussion")
+                          ->join("users","users.user_id","discussion.user_id")
+                          ->join("product","product.deal_id","discussion.deal_id")
+                         
+                         ->where($contitions)
+                         ->orderby('discussion_id', 'DESC')
+                         ->limit($offset, $record)->get();
+
+                        
+                        
+//                            $result = $this->db->query("select *, discussion.created_date as dis_create from discussion 
+//                            join users on users.user_id=discussion.user_id 
+//                            join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
+                        return $result;
         }
 	
         /** GET PRODUCT COMMENTS COUNT  **/
@@ -926,7 +1032,20 @@ class Admin_products_Model extends Model
                         $contitions .= 'OR product.deal_title like "%'.strip_tags(addslashes($firstname)).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%")';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC");
+                        
+                           $result = $this->db->select("*,discussion.created_date as dis_create")
+                          ->from("discussion")
+                          ->join("users","users.user_id","discussion.user_id")
+                          ->join("product","product.deal_id","discussion.deal_id")
+                         
+                         ->where($contitions)
+                         ->orderby('discussion_id', 'DESC')
+                        ->get();
+                        
+                        
+//                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion 
+//                           join users on users.user_id=discussion.user_id 
+//                           join product on product.deal_id=discussion.deal_id where $contitions order by discussion_id DESC");
                 return count($result);
         }
 		 /** GET SINGLE PRODUCT COMMENTS DATA **/
@@ -985,8 +1104,30 @@ class Admin_products_Model extends Model
 	        		$contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
                     $contitions .= 'OR u.email like "%'.strip_tags(addslashes($name)).'%"';
             		$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
-                   $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
-				}
+                   $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id
+                       from shipping_info as s 
+                       join transaction as t on t.id=s.transaction_id 
+                       join product as d on d.deal_id=t.product_id 
+                       join transaction_mapping as tm on tm.transaction_id = t.id 
+                       join city on city.city_id=s.city 
+                       join stores on stores.store_id = d.shop_id 
+                       join users as u on u.user_id=s.user_id 
+                       where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
+				
+//                    $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id ")
+//                          ->from("shipping_info as s")
+//                          ->join("transaction as t","t.id","s.transaction_id")
+//                          ->join("product","d.deal_id","t.product_id")
+//                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+//                          ->join("city","city.city_id","s.city")
+//                         
+//                         ->where($contitions)
+//                         ->orderby('discussion_id', 'DESC')
+//                        ->get();
+                   
+                   
+                   
+                        }
 				else {
 					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
 				}
