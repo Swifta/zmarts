@@ -2504,11 +2504,14 @@ class Store_admin_Model extends Model
 
 	public function get_winner_count($name = "")
 	{
-		$contitions = "auction.winner != 0 and auction.merchant_id = $this->user_id and bidding.winning_status!=0 and auction.shop_id = ".$this->store_id." ";
+		
+		$name = addslashes($name);
+		$this->store_id = addslashes($name);
+		$contitions = "auction.winner != 0 and auction.merchant_id = $this->user_id and bidding.winning_status!=0 and auction.shop_id = '".$this->store_id."' ";
 
 		if($_GET){
-		        	   $contitions .= ' and (users.firstname like "%'.strip_tags(addslashes($name)).'%"';
-                       $contitions .= ' OR auction.deal_title like "%'.strip_tags(addslashes($name)).'%")';
+		        	   $contitions .= " and (users.firstname like '%".strip_tags(addslashes($name))."%'";
+                       $contitions .= " OR auction.deal_title like '%".strip_tags(addslashes($name))."%')";
                        $result = $this->db->query("SELECT count(bidding.bid_id) as count FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions ");
 			}
 
@@ -3317,6 +3320,18 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
         public function get_moderator_list($offset = "", $record = "",  $name = "", $email = "", $city = "", $logintype = "",$sort_type = "",$param = "",$limit="")
         {
+			
+			$offset = addslashes($offset);
+			$record = addslashes($record);
+			$name = addslashes($name);
+			$email = addslashes($email);
+			$city = addslashes($city);
+			$logintype = addslashes($logintype);
+			$sort_type = addslashes($sort_type);
+			
+			$param = addslashes($$param);
+			$limit = addslashes($limit);
+			
 			$limit1 = $limit !=1 ?"limit $offset,$record":"";
 			
 				$sort = "ASC";
@@ -3326,10 +3341,10 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
                 $contitions = "user_type = 8";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and users.city_id = '.strip_tags(addslashes($city));
+                        $contitions .= " and users.city_id = '".strip_tags(addslashes($city))."'";
                         }
                         if($logintype){
-                        $contitions .= ' and login_type = '.strip_tags(addslashes($logintype));
+                        $contitions .= " and login_type = '".strip_tags(addslashes($logintype))."'";
                         }
                         if($name){
                         $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
@@ -3442,6 +3457,11 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function get_user_list1($all_users="",$city="",$gender="",$age_range="")
 	{
+		
+		$city = addslashes($city);
+		$gender = addslashes($gender);
+		$age_range = addslashes($age_range);
+		
 		if($city==0)
 		{
 			$city="";
@@ -3467,7 +3487,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 				
 			} 
 			if(isset($city) && $city!="" && $city!='all') {
-				$conditions.="and city_id=".strip_tags(addslashes($city))." and user_type=4 ";
+				$conditions.="and city_id='".strip_tags(addslashes($city))."' and user_type=4 ";
 			}
 			if(isset($gender) && $gender!="" && $gender!='all')
 			{
@@ -3502,6 +3522,12 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 
 	public function send_newsletter($post="",$file="")
 	{
+		
+		$gender = addslashes($post->gender);
+		$age_range = addslashes($post->age_range);
+		$city = addslashes($post->city);
+		
+		
 		$conditions="user_status=1 ";
 		
 		if(!isset($post->email)){
@@ -3514,16 +3540,16 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id=".$post->city;
+					$conditions.="and city_id='".$city."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender=".$post->gender;
+						$conditions.=" and gender='".$gender."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range=".$post->age_range;
+					$conditions.=" and age_range='".$age_range."'";
 				}
 				
                                 $news = $this->db->select()->from("users")
@@ -3642,6 +3668,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/* COUNT DURATION PERIOD */
 	public function get_count_duration($name="")
 	{
+		$name = addslashes($name);
 		$contitions = ' duration_merchantid = '.$this->user_id;
 		if($_GET){
 			if($name){
@@ -3654,6 +3681,11 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	/* GET DURATION LIST */
 	public function get_duration_list($offset="",$record="",$name="")
 	{
+		
+		$offset = addslashes($offset);
+		$record = addslashes($record);
+		$name = addslashes($name);
+		
 		$contitions = ' duration_merchantid = '.$this->user_id;
 		if($_GET){
 			if($name){
