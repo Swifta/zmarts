@@ -189,8 +189,19 @@ class Admin_merchant_Model extends Model
 				 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 			}
 
-                        $result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
-                }  else {
+                        //$result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
+                        
+                        $result = $this->db->select("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")
+                                        ->from("users")
+                                        ->join("stores", "stores.merchant_id", "users.user_id")
+                                        ->join("city", "city.city_id", "users.city_id")
+                                         ->join("country", "country.country_id", "users.country_id ")
+                                        ->where(array($contitions))
+                                        ->orderby("users.user_id","DESC")
+                                        ->limit($limit1)
+                                        ->get(); 
+                        
+                        }  else {
 			$result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
 
 				}
@@ -256,14 +267,29 @@ class Admin_merchant_Model extends Model
 	       		 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
-				$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions");
-
+				//$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions");
+                                $result = $this->db->select("*,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")
+                                        ->from("users")
+                                        ->join("stores", "stores.merchant_id", "users.user_id")
+                                        ->join("city", "city.city_id", "users.city_id")
+                                        ->join("country", "country.country_id", "users.country_id")
+                                        ->where($contitions)
+                                        ->get();
                        
                 }
                 else {
 
-					$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC ");
-				}
+				//$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC ");
+				$result = $this->db->select("*,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")
+                                        ->from("users")
+                                        ->join("stores", "stores.merchant_id", "users.user_id")
+                                        ->join("city", "city.city_id", "users.city_id")
+                                        ->join("country", "country.country_id", "users.country_id")
+                                        ->where($contitions)
+                                        ->orderby("users.user_id", "DESC")
+                                        ->get();
+                                
+                }
                  
                  
                 return count($result);
