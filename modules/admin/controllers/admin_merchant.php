@@ -26,9 +26,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->add_merchant = "1";
 		$adminid=$this->session->get('user_id');
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -362,9 +362,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->manage_merchant = "1";
 		$this->merchant_id=$userid;
 	    if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -455,9 +455,9 @@ class Admin_merchant_Controller extends website_Controller {
 	                $this->ads_height ="260";
 	        }
 	        if($_POST){    
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
@@ -742,9 +742,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->add_merchant = "1";
 	    $adminid=$this->session->get('user_id');
 	        if($_POST){
-		        $this->userPost = $this->input->post();
-		        $post = new Validation($_POST);
-		        $post = Validation::factory(array_merge($_POST,$_FILES))
+		        $this->userPost = utf8::clean($this->input->post());
+		        $post = new Validation(utf8::clean($_POST));
+		        $post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 					        ->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					        ->add_rules('address1', 'required')
@@ -1009,9 +1009,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->manage_merchant = "1";
 		$this->mer_id=$merchantid;
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('address1', 'required')
 						//->add_rules('address2', 'required')
@@ -1316,9 +1316,9 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 		$this->store_comments = 1;
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('comments', 'required');
 			if($post->validate()){
 				$status = $this->merchant->edit_users_comments($commentsid, arr::to_object($this->userpost));
@@ -1704,8 +1704,8 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->merchant_news_letter = "1";
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');

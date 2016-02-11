@@ -365,13 +365,13 @@ class Store_admin_Model extends Model
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
-					 $query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions $limit1 ";
+					 $qry = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions $limit1 ";
 
 
 
                 }
 	        else{
-				$query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1 ";
+				$qry = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1 ";
                 }
 
                 $result = $this->db->query($qry);
@@ -441,7 +441,7 @@ class Store_admin_Model extends Model
                              $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
-                        $query = "select * from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id where $conditions ";
+                        $qry = "select * from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id where $conditions ";
                         $result = $this->db->query($qry);
                 }
 		else{
@@ -566,7 +566,7 @@ class Store_admin_Model extends Model
                        $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions");
 		}
 		else {
-		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
+		$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
 	$result = $this->db->query($qry);
 		}
 
@@ -590,7 +590,7 @@ class Store_admin_Model extends Model
                        $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ");
 		}
 		else {
-		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
+		$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
 	$result = $this->db->query($qry);
 		}
 
@@ -1041,7 +1041,7 @@ class Store_admin_Model extends Model
 	       		 //$conditions .= $sort_arr[$param];
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
-			$query = "select ('deal_id') from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  ";
+			$qry = "select ('deal_id') from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  ";
 			$result = $this->db->query($qry);
 		}
 		else{
@@ -1060,7 +1060,7 @@ class Store_admin_Model extends Model
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$query = "select * from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
+			$qry = "select * from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
 			$result = $this->db->query($qry);
 		}
 		return count($result);
@@ -1131,7 +1131,7 @@ class Store_admin_Model extends Model
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$query = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  $limit1 ";
+			$qry = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  $limit1 ";
 			$result = $this->db->query($qry);
 		}
 	        else{
@@ -1149,7 +1149,7 @@ class Store_admin_Model extends Model
                              $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$query = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
+			$qry = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
 			$result = $this->db->query($qry);
                 }
             return $result;
@@ -2022,7 +2022,7 @@ class Store_admin_Model extends Model
               		if($code || $code=='0'){
                                 $conditions= "transaction_mapping.coupon_code ='".strip_tags(addslashes($code))."'";
                          }
-                        $query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id and transaction_mapping.deal_id=transaction.deal_id where $conditions and deals.expirydate > $time and merchant_id = '$this->user_id' and deals.shop_id=".$this->store_id." limit 1 ";
+                        $qry = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id and transaction_mapping.deal_id=transaction.deal_id where $conditions and deals.expirydate > $time and merchant_id = '$this->user_id' and deals.shop_id=".$this->store_id." limit 1 ";
                         $result = $this->db->query($qry);
 
 			return $result;
@@ -2271,13 +2271,13 @@ class Store_admin_Model extends Model
                           $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by auction.deal_id DESC'; }
 
-			$query = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions $limit1 ";
+			$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions $limit1 ";
 
 
 		}
 		else{
 
-			$query = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions order by auction.deal_id DESC $limit1 ";
+			$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions order by auction.deal_id DESC $limit1 ";
 		}
 
 		$result = $this->db->query($qry);
@@ -2348,7 +2348,7 @@ class Store_admin_Model extends Model
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by auction.deal_id DESC'; }
 
-                                $query = "select * from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id   where $conditions";
+                                $qry = "select * from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id   where $conditions";
                                 $result = $this->db->query($qry);
                 }
                 else{
@@ -2492,7 +2492,7 @@ class Store_admin_Model extends Model
 
 		}
 
-		$query = " SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id  join bidding on bidding.auction_id = auction.deal_id where $contitions order by auction.deal_id DESC $limit1 ";
+		$qry = " SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id  join bidding on bidding.auction_id = auction.deal_id where $contitions order by auction.deal_id DESC $limit1 ";
 
 				$result = $this->db->query($qry);
 
@@ -2690,7 +2690,7 @@ class Store_admin_Model extends Model
 
 	public function get_product_size()
 	{
-		$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
+		$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
 	        $result = $this->db->query($qry);
 		return $result;
 	}
@@ -3016,7 +3016,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function get_merchant_details($shop_name="")
         {
-//                $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.user_id=$this->user_id";
+//                $qry = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.user_id=$this->user_id";
 //                $result = $this->db->query($qry);                     
 //                return $result;
                 
@@ -3030,8 +3030,8 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
         public function get_merchant_and_shop_status($shop_name="")
 	{
                 $merchant_id = $this->user_id;
-               // $query = "select * from stores where store_name='$shop_name' AND merchant_id='$merchant_id'";
-                 $query =  $this->db->select()->from("stores")
+               // $qry = "select * from stores where store_name='$shop_name' AND merchant_id='$merchant_id'";
+                 $qry =  $this->db->select()->from("stores")
                  ->where(array("store_name" => $shop_name, "merchant_id" => $merchant_id));
                        
                 $result_1 = $this->db->query($qry);  

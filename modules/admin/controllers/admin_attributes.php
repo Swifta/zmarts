@@ -29,8 +29,8 @@ class Admin_attributes_Controller extends website_Controller
 		$this->attributegroup_settings = 1;
 		if($_POST){
 			
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
@@ -94,8 +94,8 @@ class Admin_attributes_Controller extends website_Controller
 		
 				if($_POST){
 					
-					$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+					$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
@@ -168,8 +168,8 @@ class Admin_attributes_Controller extends website_Controller
 		}
 		$this->attributegroup_settings = 1;
 		if($_POST){
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('groupname', 'required',array($this,'check_attrgroup_exist'))
 					->add_rules('sort_order', 'chars[0-9]');
@@ -226,8 +226,8 @@ class Admin_attributes_Controller extends website_Controller
 		$attribute_id =base64_decode($attribute_id);
 		
 				if($_POST){
-					$this->userPost = $this->input->post();
-					$post = Validation::factory($_POST)
+					$this->userPost = utf8::clean($this->input->post());
+					$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('groupname', 'required')
 					->add_rules('sort_order', 'chars[0-9]');

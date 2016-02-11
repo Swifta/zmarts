@@ -184,9 +184,9 @@ class Users_Controller extends Layout_Controller {
 	{
 	    $user_referral_id = $this->session->get("User_Referral_ID");
             if($_POST){
-		        $this->userPost = $this->input->post();
-                $post = new Validation($_POST);
-                $post = Validation::factory($_POST)
+		        $this->userPost = utf8::clean($this->input->post());
+                $post = new Validation(utf8::clean($_POST));
+                $post = Validation::factory(utf8::clean($_POST))
                                 ->add_rules('f_name', 'required')
                                 ->add_rules('email', 'required','valid::email', array($this, 'email_available'))
                         ->add_rules('email_confirm', 'required','valid::email','matches[email]')
@@ -216,9 +216,9 @@ class Users_Controller extends Layout_Controller {
             if($status == 1){
 				$this->signup=1;
 				$from = CONTACT_EMAIL;
-				$this->name=$_POST['f_name'];
-				$this->email =$_POST['email'];
-				$this->password =$_POST['password'];  
+				$this->name=  strip_tags(addslashes($_POST['f_name']));
+				$this->email =  strip_tags(addslashes($_POST['email']));
+				$this->password = strip_tags(addslashes($_POST['password']));  
 				/*$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];*/
 				$subject = SITENAME.' '.$this->Lang['M_REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
@@ -336,9 +336,9 @@ class Users_Controller extends Layout_Controller {
 		  Added zenith offer status, to autoload offer UI.
 		  @Live
 	  */
-	  $email = $this->input->get('email');
-	  $pswd = $this->input->get('password');
-	  $z_offer = $this->input->get('z_offer');
+	  $email = strip_tags(addslashes($this->input->get('email')));
+	  $pswd = strip_tags(addslashes($this->input->get('password')));
+	  $z_offer = strip_tags(addslashes($this->input->get('z_offer')));
 	  $check_user_exist = $this->users->login_users($email,$pswd, $z_offer);
 	  echo $check_user_exist;   exit;
 		  
@@ -358,10 +358,10 @@ class Users_Controller extends Layout_Controller {
 		  	Added Zenith offer parameter.
 		  	@Live
 		  */
-		  $email = $this->input->get('email');
+		  $email = strip_tags(addslashes($this->input->get('email')));
 		  $z_offer = "0";
 		  if(isset($_GET['z_offer']))
-		  $z_offer = $this->input->get('z_offer');
+		  $z_offer = strip_tags (addslashes ($this->input->get('z_offer')));
 		  echo $check = $this->users->check_user_exist($email, $z_offer);
 		  exit;
 		/*$email = $this->input->get('email');
@@ -379,11 +379,11 @@ class Users_Controller extends Layout_Controller {
 		}        
 		if($_POST){
 
-                    $cat_pref = $this->input->post("categorytag");
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
+                    $cat_pref = strip_tags(addslashes($this->input->post("categorytag")));
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
 			
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname','required','chars[a-zA-Z_ -.,%\']')
 						->add_rules('lastname', 'chars[a-zA-Z_ -.,]')
@@ -424,10 +424,10 @@ class Users_Controller extends Layout_Controller {
 		{ 
 
 
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
 			
-			$post = Validation::factory($_FILES)
+			$post = Validation::factory(utf8::clean($_FILES))
 					
 						->add_rules('image','required', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
@@ -461,9 +461,9 @@ class Users_Controller extends Layout_Controller {
 
 		if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('oldpassword','required',array($this, 'check_password'))
 						->add_rules('password','required')
@@ -545,12 +545,12 @@ class Users_Controller extends Layout_Controller {
 	public function forgot()
 	{
 		if($_POST){
-            $this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+            $this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 					->add_rules('email', 'required','valid::email');
 			                        if($post->validate()){
-						$email = trim($this->input->post("email"));
+						$email = trim(strip_tags(addslashes($this->input->post("email"))));
 						$status = $this->users->forgot_password($email);
 						if($status){
 						if($status == -2){
@@ -560,9 +560,9 @@ class Users_Controller extends Layout_Controller {
 						$this->forgot=1;
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
-						$this->name =$status['name'];
-						$this->password =$status['password'];
-						$this->email = $_POST['email'];
+						$this->name =  strip_tags(addslashes($status['name']));
+						$this->password =  strip_tags(addslashes($status['password']));
+						$this->email = strip_tags(addslashes($_POST['email']));
 						//$message .= "<p>Your Password  reset </p><p>Email : ".$status['email']."<p/><p>Password : ".$status['password']."<p/><br /> <p>Thanks,</p>";
 						$message = new View("themes/".THEME_NAME."/mail_template");
 						if(EMAIL_TYPE==2){
@@ -811,9 +811,9 @@ class Users_Controller extends Layout_Controller {
 			url::redirect(PATH);
 		}
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					->add_rules('file', 'required');
 			if($post->validate()){
 				if(basename($_FILES['file']['name']) != "" ){
@@ -1512,9 +1512,9 @@ $pdf->Output('voucher.pdf', 'I');
 		$this->auction_details1 = $this->home->auction_details1();
 		$this->all_payment_list = $this->home->payment_list();
 	        if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				->add_rules('subscribe_email','required','valid::email');
 			if($post->validate()){
 			        $status = $this->users->subscribe_city(arr::to_object($this->userPost));
@@ -1556,10 +1556,10 @@ $pdf->Output('voucher.pdf', 'I');
 		$this->deals_details = $this->home->deals_details();
 		$this->auction_details = $this->home->auction_details();
 	        if($_POST){
-			$this->user_Post = $this->input->post('subscribe_email');
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->user_Post = strip_tags(addslashes($this->input->post('subscribe_email')));
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				    ->add_rules('subscribe_email','required','valid::email');
 			if($post->validate()){
 			$status = $this->users->subscribe_category(arr::to_object($this->userPost));
@@ -1598,9 +1598,9 @@ $pdf->Output('voucher.pdf', 'I');
 			url::redirect(PATH);
 		}        
 		if($_POST){
-					$this->userPost = $this->input->post();
-					$post = new Validation($_POST);
-					$post = Validation::factory(array_merge($_POST,$_FILES))
+					$this->userPost = utf8::clean($this->input->post());
+					$post = new Validation(utf8::clean($_POST));
+					$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname','required','chars[a-zA-Z_ -.,%\']')
 						->add_rules('address1','required')
@@ -1901,7 +1901,7 @@ $pdf->Output('voucher.pdf', 'I');
   if($_POST){
   
   
-  $userPost = $this->input->post();
+  $userPost = utf8::clean($this->input->post());
   $testPost = Validation::factory($userPost)
  			 ->add_rules('f_name', 'required')
  			 ->add_rules('l_name', 'required')

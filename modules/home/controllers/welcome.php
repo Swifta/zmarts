@@ -185,7 +185,7 @@ class Welcome_Controller extends Layout_Controller
 	public function contact_us()
 	{
 	        if($_POST){
-		        $this->userPost = $this->input->post();
+		        $this->userPost = utf8::clean($this->input->post());
 		        $status = $this->home->contact_us_details(arr::to_object($this->userPost));
 		        if($status == 1){
 			        common::message(1, $this->Lang["THANK_CT"]);

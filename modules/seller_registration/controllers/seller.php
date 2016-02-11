@@ -47,7 +47,7 @@ class Seller_Controller extends Layout_Controller {
             if($_POST){
 				
           		
-				$userPost = $this->input->post();
+				$userPost = utf8::clean($this->input->post());
 		 			 $testPost = Validation::factory($userPost)
 					 ->add_rules('f_name', 'required')
 					 ->add_rules('l_name', 'required')
@@ -172,10 +172,10 @@ class Seller_Controller extends Layout_Controller {
 	{
 			if($_POST){ 
 			//$_POST['nuban'] ='9999999999';
-			$this->userPost = $this->input->post();
+			$this->userPost = utf8::clean($this->input->post());
                         //var_dump($this->userPost); die;
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('mr_mobile', 'required',array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
@@ -262,9 +262,9 @@ class Seller_Controller extends Layout_Controller {
 	{
 		if(($this->session->get('firstname') != "") && ($this->session->get('memail') != "") && ($this->session->get('payment_acc') != "")){
 			if($_POST){ 
-				$this->userPost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('sector', 'required');
 							if($post->validate())
@@ -309,10 +309,10 @@ class Seller_Controller extends Layout_Controller {
 				if($_POST){ 
 				
 				
-				$this->userPost = $this->input->post();
-				$post = new Validation($_POST);
+				$this->userPost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
                                 //htmlspecialchars($_POST['idBox'], ENT_QUOTES, "UTF-8")
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('city', 'required')
 							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
@@ -353,7 +353,7 @@ class Seller_Controller extends Layout_Controller {
 							$store_key = text::random($type = 'alnum', $length = 8);
 							$pswd = text::random($type = 'alnum', $length = 8);
 							$store_admin_password = text::random($type = 'alnum', $length = 10);
-							$storename = $this->input->post('storename');
+							$storename = strip_tags(addslashes($this->input->post('storename')));
 							$status = $this->seller->add_merchant(arr::to_object($this->userPost),$store_key,$pswd,$store_admin_password); 
 							//DELETE
 							//$status = array("email"=>"livetest172@gmail.com", "image" =>"77_26");
@@ -758,8 +758,8 @@ $admin_message	= '
 											$arr[$i] = $value;
 											$i++;
 										}
-										
-										echo json_encode($arr);
+										//i commented out below since we are not using async on merchant sign up
+										//echo htmlentities(json_encode($arr), ENT_NOQUOTES, "UTF-8");
 										exit;
 									}else{
 									$this->form_error = error::_error($post->errors());

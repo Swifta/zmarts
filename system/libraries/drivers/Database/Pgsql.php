@@ -436,7 +436,7 @@ class Pgsql_Result extends Database_Result {
 	{
 		if ($this->insert_id === NULL)
 		{
-			$query = 'SELECT LASTVAL() AS insert_id';
+			$qry = 'SELECT LASTVAL() AS insert_id';
 
 			// Disable error reporting for this, just to silence errors on
 			// tables that have no serial column.

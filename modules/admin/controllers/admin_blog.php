@@ -31,9 +31,9 @@ class Admin_blog_Controller extends website_Controller
 		if($_POST){ 
 
 			//$this->userPost = $this->input->post();	
-                        $this->userPost = strip_tags(addslashes($this->input->post()));		
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+                        $this->userPost = utf8::clean($this->input->post());		
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('title', 'required', 'length[5,200]', array($this, 'blogtitle_available'))
 						->add_rules('description', 'required')
@@ -41,7 +41,7 @@ class Admin_blog_Controller extends website_Controller
 						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 				if($post->validate()){
 					
-					$allow_comment = $this->input->post('allow_comments');
+					$allow_comment = strip_tags(addslashes($this->input->post('allow_comments')));
 						if(!$allow_comment){
 							$allow_comment = 0;
 						}					
@@ -117,9 +117,9 @@ class Admin_blog_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}		
 		if($_POST){ 
-			$this->userPost = $this->input->post();		
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());		
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('title', 'required','length[5,200]')
 						->add_rules('description', 'required')
@@ -280,9 +280,9 @@ class Admin_blog_Controller extends website_Controller
 		}
 		$this->blog_set = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('allow_comment_posting', 'required')
 						->add_rules('require_approval_comments', 'required')
 						->add_rules('post_per_page', 'required',array($this, 'validnum'));

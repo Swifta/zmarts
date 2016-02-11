@@ -128,7 +128,7 @@ class Admin_deals_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 			
-//			$query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id
+//			$qry = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id
 //                            join city on city.city_id=stores.city_id  
 //                            join country on country.country_id=stores.country_id 
 //                            join category on category.category_id=deals.category_id 
@@ -146,7 +146,7 @@ class Admin_deals_Model extends Model
 			
 		}
 		else{
-//		      $query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id 
+//		      $qry = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id 
 //                          join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join 
 //                          users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1";
 		         $result = $this->db->select("*,deals.created_date as createddate")
@@ -230,7 +230,7 @@ class Admin_deals_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
-//                                $query = "select * from deals 
+//                                $qry = "select * from deals 
 //                                    join stores on stores.store_id=deals.shop_id 
 //                                    join city on city.city_id=stores.city_id 
 //                                    join category on category.category_id=deals.category_id 
@@ -633,7 +633,7 @@ class Admin_deals_Model extends Model
                          
                     }
 		else {
-//		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
+//		$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
                           $result = $this->db->select()->from("transaction_mapping")
                          ->join("deals","deals.deal_id","transaction_mapping.deal_id")
                          ->join("users","users.user_id","transaction_mapping.user_id")
@@ -672,7 +672,7 @@ class Admin_deals_Model extends Model
                        
                     }
 		else {
-//		$query = "SELECT * FROM transaction_mapping 
+//		$qry = "SELECT * FROM transaction_mapping 
 //                    join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
                          $result = $this->db->select()->from("transaction_mapping")
                          ->join("deals","deals.deal_id","transaction_mapping.deal_id")
