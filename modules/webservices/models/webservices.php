@@ -13,8 +13,11 @@ class Webservices_Model extends Model
             $ret['msg'] = "Invalid User Credentials/Priviledge";
             $product_breakdown = array();
             $merchant_breakdown = array();
-            $result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
-            //var_dump($result);
+            //$result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
+            $result = $this->db->select()->from("users")
+                    ->where(array("email"=>$admin, "password"=>md5($key), "user_type"=>7))
+                    ->get();
+//var_dump($result);
             if(count($result) == 1){
 	         $result = $this->db->from("transaction")
                             ->where(array("transaction.transaction_id"=>$transaction_id))
@@ -112,7 +115,10 @@ class Webservices_Model extends Model
             $ret['status'] = false;
             $ret['description'] = "Authentication Failed";
             $ret['data'] = array();
-            $result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
+            //$result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."') AND user_type=7");
+            $result = $this->db->select()->from("users")
+                    ->where(array("email"=>$admin, "password"=>md5($key), "user_type"=>7))
+                    ->get();
             if(count($result) == 1){
 	         $result = $this->db->from("transaction")
                             ->where(array("transaction.transaction_id"=>$transaction_id))
