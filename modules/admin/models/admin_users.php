@@ -98,16 +98,16 @@ class Admin_users_Model extends Model
                 $joinorder = "order by users.user_id DESC ";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and users.city_id = '.$city;
+                        $contitions .= ' and users.city_id = '.strip_tags(addslashes($city));
                         }
                         if($logintype){
-                        $contitions .= ' and login_type = '.$logintype;
+                        $contitions .= ' and login_type = '.strip_tags(addslashes($logintype));
                         }
                         if($name){
-                        $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
+                        $contitions .= ' and firstname like "%'.strip_tags(addslashes($name)).'%"';
                         }
                         if($email){
-                        $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                        $contitions .= ' and email like "%'.strip_tags(addslashes($email)).'%"';
                         }
                         if($today == 1)
                         {
@@ -148,16 +148,19 @@ class Admin_users_Model extends Model
 			}
                 }
                        // $result = $this->db->query("select * from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $joinorder $limit1 ");
-                        $result = $this->db->select()
-                                           ->from ("users")
-                                           ->join("city","city.city_id","users.city_id")
-                                           ->join("country","country.country_id","users.country_id")
-                                           ->where($contitions)
-                                ->orderby($joinorder)
-                                ->limit($limit1)
-                                ->get();
-                                
-                return $result;
+                
+              //  return $result;
+                
+                $result = $this->db->select()
+                         ->from("users")
+                         ->join("city","city.city_id","users.city_id")
+                          ->join("country","country.country_id","users.country_id")
+                         ->where($contitions)
+                         ->orderby($joinorder)
+                         ->limit($limit1)->get();
+                 
+                 return $result;
+
         }
 	
         /** GET USERS COUNT DATA  **/
@@ -217,14 +220,22 @@ class Admin_users_Model extends Model
                             $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
-                        //$result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
-                
+                       // $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
+               // return $result;
                         $result = $this->db->select("user_id")
-                                           ->from ("users")
-                                           ->join ("city","city.city_id","users.city_id")
-                                           ->join ("country","country.country_id","users.country_id")
-                                           ->where ($contitions)
-                                           ->get();
+                         ->from("users")
+                         ->join("city","city.city_id","users.city_id")
+                          ->join("country","country.country_id","users.country_id")
+                         ->where($contitions)
+                         ->get();
+                 
+               return $result;
+
+                        
+                        
+                        
+                        
+                        
                 }
                 else{
                         $result = $this->db->select()->from("users")
@@ -382,24 +393,26 @@ class Admin_users_Model extends Model
 					
 				} 
 				if(isset($post->city) && $post->city!="" && $post->city!='all') {
-					$conditions.="and city_id='".$city."'";
+					$conditions.="and city_id='".strip_tags(addslashes($city))."'";
 				}
 				if(isset($post->gender) && $post->gender!="" && $post->gender!='all')
 				{
-						$conditions.=" and gender='".$gender."'";
+						$conditions.=" and gender='".strip_tags(addslashes($gender))."'";
 					
 				}
 				if(isset($post->age_range) && $post->age_range!="" && $post->age_range!='all'){
 					
-					$conditions.=" and age_range='".$age_range."'";
+					$conditions.=" and age_range='".strip_tags(addslashes($age_range))."'";
 				}
 				
 				//$news=$this->db->query("select * from  users where user_status=1 $conditions");
-				$news = $this->db->select()
-                                                 ->from("users")
-                                                 ->where("user_status=1 ". $conditions)
-                                        ->get();
-                                
+                                $news = $this->db->select("")
+                                ->from("users")
+                                ->where("user_status=1 ".$conditions)
+                                ->get();
+                 
+                 
+				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
 //				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
@@ -553,11 +566,14 @@ class Admin_users_Model extends Model
 			}
 			
 			//$news=$this->db->query("select * from  users where user_status=1 $conditions");
-                        $news = $this->db->select ()
-                                ->from ("users")
-                                ->where ("user_status=1" . $conditions)
+			//return $news;
+                        
+                         $news = $this->db->select("")
+                                ->from("users")
+                                ->where("user_status=1 ".$conditions)
                                 ->get();
-			return $news;
+                         
+                        return $news;
 			
 		}elseif(isset($all_users) && $all_users!=""){
 			

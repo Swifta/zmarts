@@ -98,10 +98,10 @@ class Admin_customer_care_Model extends Model
                 $joinorder = "order by users.user_id DESC ";
                 if($_GET){
                         if($city){
-                        $contitions .= ' and users.city_id = '.$city;
+                        $contitions .= ' and users.city_id = '.($city);
                         }
                         if($logintype){
-                        $contitions .= ' and login_type = '.$logintype;
+                        $contitions .= ' and login_type = '.($logintype);
                         }
                         if($name){
                         $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
@@ -147,16 +147,18 @@ class Admin_customer_care_Model extends Model
 				$contitions .= '';
 			}
                 }
-                        //$result = $this->db->query("select * from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $joinorder $limit1 ");
-                        $result = $this->db->select()
-                                           ->from ("users")
-                                           ->join ("city","city.city_id","users.city_id")
-                                           ->join("country","country.country_id","users.country_id")
-                                           ->where($contitions)
-                                ->orderby($joinorder)
-                                ->limit($limit1)
-                                ->get();
-                return $result;
+                       // $result = $this->db->query("select * from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $joinorder $limit1 ");
+                
+               // return $result;
+                 $result = $this->db->select()
+                         ->from("users")
+                         ->join("city","city.city_id","users.city_id")
+                          ->join("country","country.country_id","users.country_id")
+                         ->where($contitions)
+                         ->orderby($joinorder)
+                         ->limit($limit1)->get();
+                 
+                 return $result;
         }
 	
         /** GET USERS COUNT DATA  **/
@@ -171,15 +173,20 @@ class Admin_customer_care_Model extends Model
                 if($_GET){
                         if($city){
                         $contitions .= ' and users.city_id = '.$city;
+                         
                         }
                         if($logintype){
                         $contitions .= ' and login_type = '.$logintype;
+                          
+                            
                         }
                         if($name){
                         $contitions .= ' and firstname like "%'.strip_tags($name).'%"';
                         }
                         if($email){
                         $contitions .= ' and email like "%'.strip_tags($email).'%"';
+                         
+                            
                         }
                         if($today == 1)
                         {
@@ -215,15 +222,20 @@ class Admin_customer_care_Model extends Model
 	       		 $contitions .= $sort_arr[$param];
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
-                        //$result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
-                        $result = $this->db->select ("user_id")
-                                           ->from ("users")
-                                           ->join ("city","city.city_id","users.city_id")
-                                           ->join ("country","country.country_id","users.country_id")
-                                           ->where($contitions)
-                                           ->get();
+                       // $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
+                      
                         
-                }
+                         $result = $this->db->select("user_id")
+                         ->from("users")
+                         ->join("city","city.city_id","users.city_id")
+                          ->join("country","country.country_id","users.country_id")
+                         ->where($contitions)
+                          ->get();
+                      
+                 
+                // return $result;
+                        
+                        }
                 else{
                         $result = $this->db->from("users")
                                     ->where(array("user_type" => 7))
@@ -344,12 +356,14 @@ class Admin_customer_care_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-                //$result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 7 ");
-                $result = $this->db->select()
-                                   ->from("users")
-                                   ->where(array("user_status" => 1 , "user_type" => 7))
-                        ->get();
-                return $result;
+               // $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1  and user_type = 7 ");
+               // return $result;
+                 $result = $this->db->select("")
+                         ->from("users")
+                        ->where(array("user_status"=>1,"user_type"=>7))
+                         ->get();
+                 
+                 return $result;
 	}
 	
 	
