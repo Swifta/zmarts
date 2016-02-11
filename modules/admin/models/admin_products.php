@@ -315,7 +315,7 @@ class Admin_products_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }			
 			$query = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
-			$result = $this->db->query($query);
+			$result = $this->db->query($qry);
 		}
 		else{		
 		
@@ -333,7 +333,7 @@ class Admin_products_Model extends Model
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 			
 			$query = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
-			$result = $this->db->query($query);
+			$result = $this->db->query($qry);
 		} 
 		return $result;
 	}
@@ -404,7 +404,7 @@ class Admin_products_Model extends Model
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 	        	
 			$query = "select product.deal_id from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$result = $this->db->query($query);
+			$result = $this->db->query($qry);
                 } else {
                 
 			    if($type != "1")
@@ -421,7 +421,7 @@ class Admin_products_Model extends Model
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; } 
 
 			$query = "select product.deal_id from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$result = $this->db->query($query);
+			$result = $this->db->query($qry);
                 }
 		
                 return count($result);
@@ -507,7 +507,7 @@ class Admin_products_Model extends Model
 	public function get_product_size()
 	{
 		$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
-	        $result = $this->db->query($query);
+	        $result = $this->db->query($qry);
 		return $result;
 	}
 	
@@ -1263,7 +1263,7 @@ class Admin_products_Model extends Model
         public function get_merchant_details($merchant_name="",$shop_name="",$merchant_email ="")
         {
 	         //$query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
-	         //$result = $this->db->query($query);  
+	         //$result = $this->db->query($qry);  
 	         //print_r($result); exit;   
                  $result = $this->db->select()->from("users")
                          ->join("stores", "users.user_id", "stores.merchant_id", "LEFT")
@@ -1290,7 +1290,7 @@ class Admin_products_Model extends Model
 	public function get_merchant_and_shop_status($merchant_name="",$shop_name="",$merchant_email ="")
 	{
 		// $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
-		//$result_1 = $this->db->query($query);
+		//$result_1 = $this->db->query($qry);
                 $result_1 = $this->db->select()->from("users")
                         ->join("stores", "users.user_id", "stores.merchant_id", "LEFT")
                         ->where(array("stores.store_name"=>$shop_name, "users.email"=>$merchant_email));

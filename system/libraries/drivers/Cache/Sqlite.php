@@ -79,7 +79,7 @@ class Cache_Sqlite_Driver implements Cache_Driver {
 		// Find the id that matches
 		$query = "SELECT id FROM caches WHERE id = '$id'";
 
-		return ($this->db->query($query)->numRows() > 0);
+		return ($this->db->query($qry)->numRows() > 0);
 	}
 
 	/**
@@ -249,7 +249,7 @@ class Cache_Sqlite_Driver implements Cache_Driver {
 		// Delete all expired caches
 		$query = 'DELETE FROM caches WHERE expiration != 0 AND expiration <= '.time();
 
-		$this->db->unbufferedQuery($query);
+		$this->db->unbufferedQuery($qry);
 
 		return TRUE;
 	}

@@ -162,7 +162,7 @@ class PHPExcel_CachedObjectStorage_SQLite extends PHPExcel_CachedObjectStorage_C
 
 		//	Check if the requested entry exists in the cache
 		$query = "DELETE FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
-		if (!$this->_DBHandle->queryExec($query))
+		if (!$this->_DBHandle->queryExec($qry))
 			throw new Exception(sqlite_error_string($this->_DBHandle->lastError()));
 
 		$this->_currentCellIsDirty = false;

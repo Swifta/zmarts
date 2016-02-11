@@ -135,7 +135,7 @@ class Admin_deals_Model extends Model
 		else{
 		      $query = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1";
 		}
-		$result = $this->db->query($query);
+		$result = $this->db->query($qry);
 	
 		return $result;
 	}
@@ -203,7 +203,7 @@ class Admin_deals_Model extends Model
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
                                 $query = "select * from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id   where $conditions";
-                                $result = $this->db->query($query);
+                                $result = $this->db->query($qry);
                 }
                 else{
                         $result = $this->db->select("deal_id")->from("deals")
@@ -548,7 +548,7 @@ class Admin_deals_Model extends Model
 		}
 		else {
 		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
-	$result = $this->db->query($query); 
+	$result = $this->db->query($qry); 
 		} 
 //print_r($result); exit;
 	return $result;  
@@ -570,7 +570,7 @@ class Admin_deals_Model extends Model
 		}
 		else {
 		$query = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
-	$result = $this->db->query($query); 
+	$result = $this->db->query($qry); 
 		} 
 	return count($result);  
 	}
