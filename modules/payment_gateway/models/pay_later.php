@@ -220,8 +220,22 @@ class Pay_later_Model extends Model
 	
 	public function get_deals_payment_details($deal_id = "", $deal_key = "")
 	{
-		$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate >".time()."");
-		return $result;
+
+		
+		$deal_id = strip_tags(addslashes($deal_id));
+		$deal_key = strip_tags(addslashes($deal_key));
+		
+		//$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate >".time()."");
+
+		//$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate >".time()."");
+
+            $result = $this->db->select()->from("deals")
+                    ->join("stores", "stores.store_id", "deals.shop_id")
+                    ->join("category", "category.category_id", "deals.category_id")
+                    ->where(array("deal_status" => 1,"category.category_status" => 1,"store_status" => 1,"deal_key"=>$deal_key,
+                        "deals.deal_id"=>$deal_id, "enddate >"=>time()))->get();
+		//$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = '$deal_id' and enddate >".time()."");
+            return $result;
 	}
 	
 	public function get_user_referral_balance_details()

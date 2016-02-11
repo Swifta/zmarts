@@ -481,10 +481,10 @@ class Admin_products_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',$_FILES['im_product']['name']);
+						$temp = explode('.',  basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
-						$path = DOCROOT.'upload/admin_excel/';
+						$path = realpath(DOCROOT.'upload/admin_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
 					}
 					
@@ -495,6 +495,7 @@ class Admin_products_Controller extends website_Controller
 					/** PHPExcel_IOFactory */
 					include DOCROOT.'PHPExcel/Classes/PHPExcel/IOFactory.php';
 					$inputFileName = $path.$excel_name;
+					$inputFileName = realpath($inputFileName);
 					//echo 'Loading file ',pathinfo($inputFileName,PATHINFO_BASENAME),' using IOFactory to identify the format<br />';
 					$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
 					$data1 = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
@@ -757,9 +758,9 @@ class Admin_products_Controller extends website_Controller
 	if($_POST){
                 $this->product_deatils = $this->products->get_product_data_mail($deal_key, $deal_id);
   		$this->userPost = $this->input->post();
-		$users = $this->input->post("users");
-		$fname = $this->input->post("firstname");
-		$email = trim($this->input->post("email"));
+		$users = strip_tags(addslashes($this->input->post("users")));
+		$fname = strip_tags(addslashes($this->input->post("firstname")));
+		$email = trim(strip_tags(addslashes($this->input->post("email"))));
 		$post = Validation::factory(array_merge($_POST,$_FILES))
 						
 						->add_rules('users', 'required')
@@ -770,13 +771,13 @@ class Admin_products_Controller extends website_Controller
 				foreach($email as $mail){
 					$mails = explode("__",$mail);
 					$useremail =$this->mail=  $mails[0];
-					$username =  $mails[1];
-					if(isset($username) && isset($useremail))
+					$usrname =  $mails[1];
+					if(isset($usrname) && isset($useremail))
 						
 						$message = " <p> ".$post->message." </p>";
 						$message .= new View ("admin_product/mail_product");
 						 $this->email_id = $useremail;
-                                                $this->name = $username;
+                                                $this->name = $usrname;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");

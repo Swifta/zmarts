@@ -58,10 +58,12 @@ class Admin_deals_Controller extends website_Controller
 							foreach(arr::rotate($_FILES['image']) as $files){
 								if($files){
 									$filename = upload::save($files);
+									$filename = basename($filename);
 									if($filename!=''){
 
 										$IMG_NAME = $deal_key."_".$i.'.png';
 										common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
+										
 										unlink($filename);
 									}
 								 }
@@ -325,6 +327,7 @@ class Admin_deals_Controller extends website_Controller
 								foreach(arr::rotate($_FILES['image']) as $files){
 									if($files){
 										$filename = upload::save($files);
+										$filename = basename($filename);
 										if($filename!=''){
 											if($i==1)
 											{
@@ -416,13 +419,13 @@ class Admin_deals_Controller extends website_Controller
 								foreach($email as $mail){
 									$mails = explode("__",$mail);
 									$useremail = $this->mail= $mails[0];
-									$username =  $mails[1];
-									if(isset($username) && isset($useremail))
+									$usrname =  $mails[1];
+									if(isset($usrname) && isset($useremail))
 										$message = " <p> ".$post->message." </p>";
 										$message .= new View ("admin_deal/mail_deal");
 										
                                                                                 $this->email_id = $useremail;
-                                                                                $this->name = $username;
+                                                                                $this->name = $usrname;
                                                                                 $this->message = $message;
                                                                                 $fromEmail = NOREPLY_EMAIL;
                                                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");

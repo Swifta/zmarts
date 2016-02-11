@@ -59,12 +59,13 @@ class Admin_auction_Controller extends website_Controller
 									$i=1;
 										foreach(arr::rotate($_FILES['image']) as $files){
 											if($files){			
-												$filename = upload::save($files);
+												$filename = basename(upload::save($files));
 													if($filename!=''){ 
 														
 														$IMG_NAME = $deal_key."_".$i.'.png';
 														
 											                        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
+																	$filename = realpath($filename);
 														unlink($filename);
 													}
 										}
@@ -250,8 +251,8 @@ class Admin_auction_Controller extends website_Controller
 						elseif($d->type=="2"){ $transaction_type=$this->Lang["PPAL"]; }
 						elseif($d->type=="3"){ $transaction_type=$this->Lang["REF_PAYMENT"]; }
 						elseif($d->type=="4"){ $transaction_type="Authorize.net(".$d->transaction_type.")"; }
-						elseif($d->type=="5"){ $transaction_type=$d->transaction_type; }
-						elseif($d->type=="6"){ $transaction_type=$this->Lang["PAY_LATER"]; }
+						elseif($d->type > 4){ $transaction_type=$d->transaction_type; }
+						//elseif($d->type=="6"){ $transaction_type=$this->Lang["PAY_LATER"]; }
 					
 					
 	 					$out .= $i + $first_item.',"'.$d->firstname.'","'.$d->deal_title.'","'.$d->bid_amount.'","'.$d->shipping_amount.'","'.$d->amount.'","'.$status.'","'.date('d-M-Y h:i:s',$d->transaction_date).'","'.$transaction_type.'"'."\r\n";
@@ -322,6 +323,7 @@ class Admin_auction_Controller extends website_Controller
 										if($files){	
 											
 											$filename = upload::save($files); 
+											$filename = basename($filename);
 											if($filename!=''){ 
 												if($i==1){
 													$IMG_NAME = $deal_key."_1.png";
@@ -338,6 +340,7 @@ class Admin_auction_Controller extends website_Controller
 											
 
 											        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
+													$filename = basename($filename);
 												unlink($filename);
 											}
 										}
@@ -1259,3 +1262,4 @@ class Admin_auction_Controller extends website_Controller
 	
 		
 }
+

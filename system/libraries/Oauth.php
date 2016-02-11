@@ -20,13 +20,13 @@ class OAuthConsumer {
 }
 
 class OAuthToken {
-  // access tokens and request tokens
+  // access tkns and request tkns
   public $key;
   public $secret;
 
   /**
-   * key = the token
-   * secret = the token secret
+   * key = the tkn
+   * secret = the tkn secret
    */
   function __construct($key, $secret) {
     $this->key = $key;
@@ -34,13 +34,13 @@ class OAuthToken {
   }
 
   /**
-   * generates the basic string serialization of a token that a server
-   * would respond to request_token and access_token calls with
+   * generates the basic string serialization of a tkn that a server
+   * would respond to request_tkn and access_tkn calls with
    */
   function to_string() {
-    return "oauth_token=" .
+    return "oauth_tkn=" .
            OAuthUtil::urlencode_rfc3986($this->key) .
-           "&oauth_token_secret=" .
+           "&oauth_tkn_secret=" .
            OAuthUtil::urlencode_rfc3986($this->secret);
   }
 
@@ -67,21 +67,21 @@ abstract class OAuthSignatureMethod {
    * request is serialized
    * @param OAuthRequest $request
    * @param OAuthConsumer $consumer
-   * @param OAuthToken $token
+   * @param OAuthToken $tkn
    * @return string
    */
-  abstract public function build_signature($request, $consumer, $token);
+  abstract public function build_signature($request, $consumer, $tkn);
 
   /**
    * Verifies that a given signature is correct
    * @param OAuthRequest $request
    * @param OAuthConsumer $consumer
-   * @param OAuthToken $token
+   * @param OAuthToken $tkn
    * @param string $signature
    * @return bool
    */
-  public function check_signature($request, $consumer, $token, $signature) {
-    $built = $this->build_signature($request, $consumer, $token);
+  public function check_signature($request, $consumer, $tkn, $signature) {
+    $built = $this->build_signature($request, $consumer, $tkn);
     return $built == $signature;
   }
 }
@@ -98,13 +98,13 @@ class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod {
     return "HMAC-SHA1";
   }
 
-  public function build_signature($request, $consumer, $token) {
+  public function build_signature($request, $consumer, $tkn) {
     $base_string = $request->get_signature_base_string();
     $request->base_string = $base_string;
 
     $key_parts = array(
       $consumer->secret,
-      ($token) ? $token->secret : ""
+      ($tkn) ? $tkn->secret : ""
     );
 
     $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
@@ -133,10 +133,10 @@ class OAuthSignatureMethod_PLAINTEXT extends OAuthSignatureMethod {
    * Please note that the second encoding MUST NOT happen in the SignatureMethod, as
    * OAuthRequest handles this!
    */
-  public function build_signature($request, $consumer, $token) {
+  public function build_signature($request, $consumer, $tkn) {
     $key_parts = array(
       $consumer->secret,
-      ($token) ? $token->secret : ""
+      ($tkn) ? $tkn->secret : ""
     );
 
     $key_parts = OAuthUtil::urlencode_rfc3986($key_parts);
@@ -174,7 +174,7 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
   // Either way should return a string representation of the certificate
   protected abstract function fetch_private_cert(&$request);
 
-  public function build_signature($request, $consumer, $token) {
+  public function build_signature($request, $consumer, $tkn) {
     $base_string = $request->get_signature_base_string();
     $request->base_string = $base_string;
 
@@ -193,7 +193,7 @@ abstract class OAuthSignatureMethod_RSA_SHA1 extends OAuthSignatureMethod {
     return base64_encode($signature);
   }
 
-  public function check_signature($request, $consumer, $token, $signature) {
+  public function check_signature($request, $consumer, $tkn, $signature) {
     $decoded_sig = base64_decode($signature);
 
     $base_string = $request->get_signature_base_string();
@@ -286,14 +286,14 @@ class OAuthRequest {
   /**
    * pretty much a helper function to set up the request
    */
-  public static function from_consumer_and_token($consumer, $token, $http_method, $http_url, $parameters=NULL) {
+  public static function from_consumer_and_tkn($consumer, $tkn, $http_method, $http_url, $parameters=NULL) {
     @$parameters or $parameters = array();
     $defaults = array("oauth_version" => OAuthRequest::$version,
                       "oauth_nonce" => OAuthRequest::generate_nonce(),
                       "oauth_timestamp" => OAuthRequest::generate_timestamp(),
                       "oauth_consumer_key" => $consumer->key);
-    if ($token)
-      $defaults['oauth_token'] = $token->key;
+    if ($tkn)
+      $defaults['oauth_tkn'] = $tkn->key;
 
     $parameters = array_merge($defaults, $parameters);
 
@@ -442,18 +442,18 @@ class OAuthRequest {
   }
 
 
-  public function sign_request($signature_method, $consumer, $token) {
+  public function sign_request($signature_method, $consumer, $tkn) {
     $this->set_parameter(
       "oauth_signature_method",
       $signature_method->get_name(),
       false
     );
-    $signature = $this->build_signature($signature_method, $consumer, $token);
+    $signature = $this->build_signature($signature_method, $consumer, $tkn);
     $this->set_parameter("oauth_signature", $signature, false);
   }
 
-  public function build_signature($signature_method, $consumer, $token) {
-    $signature = $signature_method->build_signature($this, $consumer, $token);
+  public function build_signature($signature_method, $consumer, $tkn) {
+    $signature = $signature_method->build_signature($this, $consumer, $tkn);
     return $signature;
   }
 
@@ -494,45 +494,45 @@ class OAuthServer {
   // high level functions
 
   /**
-   * process a request_token request
-   * returns the request token on success
+   * process a request_tkn request
+   * returns the request tkn on success
    */
-  public function fetch_request_token(&$request) {
+  public function fetch_request_tkn(&$request) {
     $this->get_version($request);
 
     $consumer = $this->get_consumer($request);
 
-    // no token required for the initial token request
-    $token = NULL;
+    // no tkn required for the initial tkn request
+    $tkn = NULL;
 
-    $this->check_signature($request, $consumer, $token);
+    $this->check_signature($request, $consumer, $tkn);
 
     // Rev A change
     $callback = $request->get_parameter('oauth_callback');
-    $new_token = $this->data_store->new_request_token($consumer, $callback);
+    $new_tkn = $this->data_store->new_request_tkn($consumer, $callback);
 
-    return $new_token;
+    return $new_tkn;
   }
 
   /**
-   * process an access_token request
-   * returns the access token on success
+   * process an access_tkn request
+   * returns the access tkn on success
    */
-  public function fetch_access_token(&$request) {
+  public function fetch_access_tkn(&$request) {
     $this->get_version($request);
 
     $consumer = $this->get_consumer($request);
 
-    // requires authorized request token
-    $token = $this->get_token($request, $consumer, "request");
+    // requires authorized request tkn
+    $tkn = $this->get_tkn($request, $consumer, "request");
 
-    $this->check_signature($request, $consumer, $token);
+    $this->check_signature($request, $consumer, $tkn);
 
     // Rev A change
     $verifier = $request->get_parameter('oauth_verifier');
-    $new_token = $this->data_store->new_access_token($token, $consumer, $verifier);
+    $new_tkn = $this->data_store->new_access_tkn($tkn, $consumer, $verifier);
 
-    return $new_token;
+    return $new_tkn;
   }
 
   /**
@@ -541,9 +541,9 @@ class OAuthServer {
   public function verify_request(&$request) {
     $this->get_version($request);
     $consumer = $this->get_consumer($request);
-    $token = $this->get_token($request, $consumer, "access");
-    $this->check_signature($request, $consumer, $token);
-    return array($consumer, $token);
+    $tkn = $this->get_tkn($request, $consumer, "access");
+    $this->check_signature($request, $consumer, $tkn);
+    return array($consumer, $tkn);
   }
 
   // Internals from here
@@ -605,30 +605,30 @@ class OAuthServer {
   }
 
   /**
-   * try to find the token for the provided request's token key
+   * try to find the tkn for the provided request's tkn key
    */
-  private function get_token(&$request, $consumer, $token_type="access") {
-    $token_field = @$request->get_parameter('oauth_token');
-    $token = $this->data_store->lookup_token(
-      $consumer, $token_type, $token_field
+  private function get_tkn(&$request, $consumer, $tkn_type="access") {
+    $tkn_field = @$request->get_parameter('oauth_tkn');
+    $tkn = $this->data_store->lookup_tkn(
+      $consumer, $tkn_type, $tkn_field
     );
-    if (!$token) {
-      throw new OAuthException("Invalid $token_type token: $token_field");
+    if (!$tkn) {
+      throw new OAuthException("Invalid $tkn_type tkn: $tkn_field");
     }
-    return $token;
+    return $tkn;
   }
 
   /**
    * all-in-one function to check the signature on a request
    * should guess the signature method appropriately
    */
-  private function check_signature(&$request, $consumer, $token) {
+  private function check_signature(&$request, $consumer, $tkn) {
     // this should probably be in a different method
     $timestamp = @$request->get_parameter('oauth_timestamp');
     $nonce = @$request->get_parameter('oauth_nonce');
 
     $this->check_timestamp($timestamp);
-    $this->check_nonce($consumer, $token, $nonce, $timestamp);
+    $this->check_nonce($consumer, $tkn, $nonce, $timestamp);
 
     $signature_method = $this->get_signature_method($request);
 
@@ -636,7 +636,7 @@ class OAuthServer {
     $valid_sig = $signature_method->check_signature(
       $request,
       $consumer,
-      $token,
+      $tkn,
       $signature
     );
 
@@ -666,7 +666,7 @@ class OAuthServer {
   /**
    * check that the nonce is not repeated
    */
-  private function check_nonce($consumer, $token, $nonce, $timestamp) {
+  private function check_nonce($consumer, $tkn, $nonce, $timestamp) {
     if( ! $nonce )
       throw new OAuthException(
         'Missing nonce parameter. The parameter is required'
@@ -675,7 +675,7 @@ class OAuthServer {
     // verify that the nonce is uniqueish
     $found = $this->data_store->lookup_nonce(
       $consumer,
-      $token,
+      $tkn,
       $nonce,
       $timestamp
     );
@@ -691,23 +691,23 @@ class OAuthDataStore {
     // implement me
   }
 
-  function lookup_token($consumer, $token_type, $token) {
+  function lookup_tkn($consumer, $tkn_type, $tkn) {
     // implement me
   }
 
-  function lookup_nonce($consumer, $token, $nonce, $timestamp) {
+  function lookup_nonce($consumer, $tkn, $nonce, $timestamp) {
     // implement me
   }
 
-  function new_request_token($consumer, $callback = null) {
-    // return a new token attached to this consumer
+  function new_request_tkn($consumer, $callback = null) {
+    // return a new tkn attached to this consumer
   }
 
-  function new_access_token($token, $consumer, $verifier = null) {
-    // return a new access token attached to this consumer
-    // for the user associated with this token if the request token
+  function new_access_tkn($tkn, $consumer, $verifier = null) {
+    // return a new access tkn attached to this consumer
+    // for the user associated with this tkn if the request tkn
     // is authorized
-    // should also invalidate the request token
+    // should also invalidate the request tkn
   }
 
 }

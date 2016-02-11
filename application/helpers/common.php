@@ -365,49 +365,49 @@ class common{
 	}
 	public function currency_conversion($fromcurrency="",$tocurrency="",$amount="")
 	{
-		if($fromcurrency !="USD" && $amount!=0){
-				// Currency conversion start
-			/*$amount = urlencode($amount);
-			$from_Currency = urlencode($fromcurrency);
-			$to_Currency = urlencode($tocurrency);
-			$url = "http://www.google.com/ig/calculator?hl=en&q=$amount$from_Currency=?$to_Currency";
-			$ch = curl_init();
-			$timeout = 0;
-			curl_setopt ($ch, CURLOPT_URL, $url);
-			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch,  CURLOPT_USERAGENT , "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
-			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-			$rawdata = curl_exec($ch);
-			curl_close($ch);
-			$data = explode('"', $rawdata);
-			$data = explode(' ', $data['3']);
-			$var = $data['0'];
-			return round($var,2); ///the 2 indicates how many decimal points you want. I set it at the API's limit of 2 */
-
-			  $amount = urlencode($amount);
-			$from_Currency = urlencode($fromcurrency);
-			$to_Currency = urlencode($tocurrency);
-			$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
-			$get = explode("<span class=bld>",$get); //print_r($get);
-			$get = explode("</span>",$get[1]);
-			$converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
-			return round($converted_amount,2);
-		}
+//		if($fromcurrency !="USD" && $amount!=0){
+//				// Currency conversion start
+//			/*$amount = urlencode($amount);
+//			$from_Currency = urlencode($fromcurrency);
+//			$to_Currency = urlencode($tocurrency);
+//			$url = "http://www.google.com/ig/calculator?hl=en&q=$amount$from_Currency=?$to_Currency";
+//			$ch = curl_init();
+//			$timeout = 0;
+//			curl_setopt ($ch, CURLOPT_URL, $url);
+//			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+//			curl_setopt($ch,  CURLOPT_USERAGENT , "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+//			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+//			$rawdata = curl_exec($ch);
+//			curl_close($ch);
+//			$data = explode('"', $rawdata);
+//			$data = explode(' ', $data['3']);
+//			$var = $data['0'];
+//			return round($var,2); ///the 2 indicates how many decimal points you want. I set it at the API's limit of 2 */
+//
+//			  $amount = urlencode($amount);
+//			$from_Currency = urlencode($fromcurrency);
+//			$to_Currency = urlencode($tocurrency);
+//			$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
+//			$get = explode("<span class=bld>",$get); //print_r($get);
+//			$get = explode("</span>",$get[1]);
+//			$converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
+//			return round($converted_amount,2);
+//		}
 		return $amount;
 	}
 	
 	public function paypal_currency_conversion($fromcurrency="",$tocurrency="",$amount="")
 	{
-		if($fromcurrency !="USD" && $amount!=0){
-			  $amount = urlencode($amount);
-			$from_Currency = urlencode($fromcurrency);
-			$to_Currency = urlencode($tocurrency);
-			$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
-			$get = explode("<span class=bld>",$get); //print_r($get);
-			$get = explode("</span>",$get[1]);
-			$converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
-			return $converted_amount;
-		}
+//		if($fromcurrency !="USD" && $amount!=0){
+//			  $amount = urlencode($amount);
+//			$from_Currency = urlencode($fromcurrency);
+//			$to_Currency = urlencode($tocurrency);
+//			$get = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from_Currency&to=$to_Currency");
+//			$get = explode("<span class=bld>",$get); //print_r($get);
+//			$get = explode("</span>",$get[1]);
+//			$converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
+//			return $converted_amount;
+//		}
 		return $amount;
 	}
 
@@ -458,7 +458,7 @@ class common{
                         $AccountNumber = $shipping->AccountNumber;
                         $AccountPin = $shipping->AccountPin;
                         $UserName = $shipping->UserName;
-                        $Password = $shipping->ShippingPassword;
+                        $Pswd = $shipping->ShippingPswd;
         }
 	$params = array(
 		       'ClientInfo'  			=> array(
@@ -467,7 +467,7 @@ class common{
 									        'AccountNumber'		=> $AccountNumber,
 									        'AccountPin'		 	=> $AccountPin,
 									        'UserName'			=> $UserName,
-									        'Password'			=> $Password,
+									        'Password'			=> $Pswd,
 									        'Version'			 	=> 'v1.0'
 								        ),
 		        'Transaction' 			=> array(

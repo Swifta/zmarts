@@ -64,16 +64,16 @@ class Admin_merchant_Controller extends website_Controller {
 						}
 					if($post->validate())
 					{
-						$password = text::random($type = 'alnum', $length = 8);
+						$pswd = text::random($type = 'alnum', $length = 8);
 						$store_key = text::random($type = 'alnum', $length = 8);
 						$store_admin_password = text::random($type = 'alnum', $length = 10);
 						$storename = $this->input->post('storename');
 						
 						
 						$status = "1";
-						$status = $this->merchant->add_merchant(arr::to_object($this->userPost),$adminid,$store_key,$password,$store_admin_password);
+						$status = $this->merchant->add_merchant(arr::to_object($this->userPost),$adminid,$store_key,$pswd,$store_admin_password);
 							if($status){
-							        $this->password = $password;
+							        $this->password = $pswd;
 								$from = CONTACT_EMAIL;  
 								$this->country_list = $this->merchant->getcountrylist();
 		                                                $this->city_list = $this->merchant->getCityList();
@@ -92,7 +92,7 @@ class Admin_merchant_Controller extends website_Controller {
                                                                 }
                          
                                 				/* $message = "<b> ".$this->Lang['DEAR']." :".ucfirst($post->firstname)." ".$post->lastname.",</b>";
-				$message .= "<p>".$this->Lang['MERCHANT_ADD_SUC']."  </p><p> ".$this->Lang['YOR_EMAIL']." : ".$post->email."</p> <p>".$this->Lang['YOUR_PASS'].": ".$password."</p> <p>".$this->Lang['UR_DEAL_COMM']."  : ".$post->commission." % <p/> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><br /> <a href='".PATH."merchant-login.html' >".$this->Lang['LOGIN_URL']."</a><br/><p>".$this->Lang['THANK'].",</p>"; */ 
+				$message .= "<p>".$this->Lang['MERCHANT_ADD_SUC']."  </p><p> ".$this->Lang['YOR_EMAIL']." : ".$post->email."</p> <p>".$this->Lang['YOUR_PASS'].": ".$pswd."</p> <p>".$this->Lang['UR_DEAL_COMM']."  : ".$post->commission." % <p/> <p>".$this->Lang['YOUR_SHOP_NAM']." : ".$post->storename."<p/><p>".$this->Lang['SHOP_ADDR']."   : ".$post->address1.",".$post->address2." <p/><p>".$this->Lang['SHOP_WEB']."  : ".$post->website." <p/><br /> <a href='".PATH."merchant-login.html' >".$this->Lang['LOGIN_URL']."</a><br/><p>".$this->Lang['THANK'].",</p>"; */ 
 				
 								//$message = new View("themes/".THEME_NAME."/merchant_signin_mail_template");
 								
@@ -101,7 +101,7 @@ class Admin_merchant_Controller extends website_Controller {
 								$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been successfully created.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['email']."</a></p> 
-				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$password."</p> 
+				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
 				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p></div>";
 				
 									if($_FILES['image']['name'])
@@ -211,9 +211,10 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes($_POST['subsector']));
+										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
-										$modules_name = strtolower($sector_details[0]->sector_name);	
+										$modules_name = strtolower($sector_details[0]->sector_name);
+										
 									}
 									
 									
@@ -556,7 +557,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -788,9 +789,9 @@ class Admin_merchant_Controller extends website_Controller {
 			if($post->validate())
 			{	
 				$store_key = text::random($type = 'alnum', $length = 8);
-				$password = text::random($type = 'alnum', $length = 10);
+				$pswd = text::random($type = 'alnum', $length = 10);
 				$storename = $this->input->post("storename");
-				$status = $this->merchant->add_merchant_shop(arr::to_object($this->userPost),$uid,$adminid,$store_key,$password);
+				$status = $this->merchant->add_merchant_shop(arr::to_object($this->userPost),$uid,$adminid,$store_key,$pswd);
 
 				if($status){
 				
@@ -908,7 +909,8 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_NEWSHOP_ACC'] , $message);
 									}
 									
-									$this->password = $password;
+									$this->password = $pswd;
+
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
 									$this->name = strip_tags(addslashes($_POST['username']));
@@ -926,7 +928,7 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes($_POST['subsector']));
+										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -1148,7 +1150,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -1382,9 +1384,9 @@ class Admin_merchant_Controller extends website_Controller {
 
 	/** CHECK PASSWORD EXIST **/
 	 
-	public function check_password($password = "")
+	public function check_password($pswd = "")
 	{
-		$exist = $this->merchant->exist_password($password, $this->user_id);
+		$exist = $this->merchant->exist_password($pswd, $this->user_id);
 		return $exist;
 	}
 	
@@ -1531,11 +1533,11 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 		
 		
-		$password = text::random($type = 'alnum', $length = 8);
+		$pswd = text::random($type = 'alnum', $length = 8);
 		
 		
 		
-		$status = $this->merchant->approvedisapprove_merchant($type_n,base64_decode($merchant_id), $password);
+		$status = $this->merchant->approvedisapprove_merchant($type_n,base64_decode($merchant_id), $pswd);
 		
 		if($status == 1){
 			$details = $this->merchant->get_merchant_details(base64_decode($merchant_id));
@@ -1547,7 +1549,7 @@ class Admin_merchant_Controller extends website_Controller {
 				$merchant_message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been approved.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
-				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$password."</p> 
+				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
 				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p></div>";
 				
 				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
@@ -1724,7 +1726,9 @@ class Admin_merchant_Controller extends website_Controller {
 													$i=1;
 								foreach(arr::rotate($_FILES['attach']) as $files){
 											if($files){
+												
 										$filename = upload::save($files);
+										$filename = basename($filename);
 											if($filename!=''){
 												//$IMG_NAME = "news_letter";
 												$ext=$filename;

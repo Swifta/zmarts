@@ -29,20 +29,20 @@ class Swift_Transport_Esmtp_Auth_LoginAuthenticator
   }
   
   /**
-   * Try to authenticate the user with $username and $password.
+   * Try to authenticate the user with $usrname and $pswd.
    * @param Swift_Transport_SmtpAgent $agent
-   * @param string $username
-   * @param string $password
+   * @param string $usrname
+   * @param string $pswd
    * @return boolean
    */
   public function authenticate(Swift_Transport_SmtpAgent $agent,
-    $username, $password)
+    $usrname, $pswd)
   {
     try
     {
       $agent->executeCommand("AUTH LOGIN\r\n", array(334));
-      $agent->executeCommand(sprintf("%s\r\n", base64_encode($username)), array(334));
-      $agent->executeCommand(sprintf("%s\r\n", base64_encode($password)), array(235));
+      $agent->executeCommand(sprintf("%s\r\n", base64_encode($usrname)), array(334));
+      $agent->executeCommand(sprintf("%s\r\n", base64_encode($pswd)), array(235));
       return true;
     }
     catch (Swift_TransportException $e)

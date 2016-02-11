@@ -8,14 +8,14 @@
             <table>
                 <tr>
                 <td><label><?php echo $this->Lang["OLD_PSWD"]; ?> :</label><span>*</span></td>
-                <td><input name="oldpassword" type="password" value="" size="30"  placeholder="<?php echo $this->Lang["OLD_PSWD"]; ?>" autofocus /><em><?php if(isset($this->form_error['oldpassword'])){ echo $this->form_error['oldpassword']; }?></em></td>
+                <td><input name="oldpassword" type="password" value="" size="30"  placeholder="<?php echo $this->Lang["OLD_PSWD"]; ?>" autofocus /><em><?php if(isset($this->form_error['oldpswd'])){ echo $this->form_error['oldpswd']; }?></em></td>
                 <tr>
                 <td><label><?php echo $this->Lang["NEW_PSWD"]; ?> :</label><span>*</span></td>
-                <td><input name="password" type="password" value="" size="30" placeholder="<?php echo $this->Lang["NEW_PSWD"]; ?>"/><em><?php if(isset($this->form_error['password'])){ echo $this->form_error["password"]; }?></em></td>
+                <td><input name="password" type="password" value="" size="30" placeholder="<?php echo $this->Lang["NEW_PSWD"]; ?>"/><em><?php if(isset($this->form_error['pswd'])){ echo $this->form_error["pswd"]; }?></em></td>
                 </tr>
                 <tr>
                 <td><label><?php echo $this->Lang["CONFIRM_PSWD"]; ?> :</label><span>*</span></td>
-                <td><input name="cpassword" type="password" value="" size="30" placeholder="<?php echo $this->Lang["CONFIRM_PSWD"]; ?>" /><em><?php if(isset($this->form_error['cpassword'])){ echo $this->form_error["cpassword"]; }?></td>
+                <td><input name="cpassword" type="password" value="" size="30" placeholder="<?php echo $this->Lang["CONFIRM_PSWD"]; ?>" /><em><?php if(isset($this->form_error['cpswd'])){ echo $this->form_error["cpswd"]; }?></td>
                  <tr>
                  <td></td>
                   <td><input type="submit" value="<?php echo $this->Lang['UPDATE']; ?>" /><input type="button" value="<?php echo $this->Lang['CANCEL']; ?>" onclick='window.location.href="<?php echo PATH?>merchant/settings.html"'/></td>

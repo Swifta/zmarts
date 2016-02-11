@@ -27,11 +27,32 @@ class Admin_Model extends Model
 		$result_archive_auction =$this->db->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1"))->get();
 		$result["archive_auction"]=count($result_archive_auction);
 
-		$result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1");
-		$result["active_products"]=count($result_active_products);
+		//$result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1");
+		  $result_active_products = $this->db->select()
 
-		$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1");
+                                        ->from("product")
+
+                                        ->join("stores", "stores.store_id", "product.shop_id")
+
+                                        ->where(array("purchase_count < "=>"user_limit_quantity", "deal_status" => 1,
+                                            "stores.store_status" => 1))
+
+                                        ->get();
+           
+                $result["active_products"]=count($result_active_products);
+
+                
+		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1");
+                                        $result_sold_products = $this->db->select()
+                                        ->from("product")
+                                        ->join("stores", "stores.store_id", "product.shop_id")
+                                        ->where(array("purchase_count"=>"user_limit_quantity", "deal_status" => 1,
+                                            "stores.store_status" => 1))
+
+                                        ->get();
+                
 		$result["archive_products"]=count($result_sold_products);
+                
 
 		$result_users = $this->db->from("users")->join("city","city.city_id","users.city_id")->join("country","country.country_id","users.country_id")->where(array("user_type" => 4, "user_status" => 1)) ->get();
             	$result["users"] =count($result_users);
@@ -70,8 +91,18 @@ class Admin_Model extends Model
 		$result["auction_shipping"] = $this->db->count_records("shipping_info", array( "shipping_type" => 2));
 
 
-	$result_coupon= $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where transaction_mapping.coupon_code_status = 0");
-		$result["close_coupon"] = count($result_coupon);
+	//$result_coupon= $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where transaction_mapping.coupon_code_status = 0");
+	                		  $result_coupon = $this->db->select()
+
+                                        ->from("transaction_mapping")
+
+                                        ->join("users", "users.user_id", "transaction_mapping.deal_id")
+
+                                        ->where(array("transaction_mapping.coupon_code_status"=>0))
+
+                                        ->get();	
+        
+                $result["close_coupon"] = count($result_coupon);
 
 		return $result;
 	}
@@ -87,14 +118,23 @@ class Admin_Model extends Model
 	/** GET USER LIST **/
 	public function get_user_list()
 	{
-                $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1 ");
+               // $result = $this->db->query("SELECT * FROM users WHERE  user_status = 1 ");
+                	                $result = $this->db->select()
+                                        ->from("users")
+                                        ->where(array("user_status"=>0))
+                                        ->get();
+                
                 return $result;
 	}
 
 	/** GET USER LIST **/
 	public function get_transaction_list()
 	{
-                $result = $this->db->query("SELECT * FROM transaction_mapping");
+               // $result = $this->db->query("SELECT * FROM transaction_mapping");
+                                        $result = $this->db->select()
+                                        ->from("transaction_mapping")
+                                        ->get();
+            
                 return $result;
 	}
 
@@ -109,10 +149,23 @@ class Admin_Model extends Model
 
 	/** ADMINISTRATOR LOGIN **/
 
-	public function admin_login($email = "", $password = "")
+	public function admin_login($email = "", $pswd = "")
 	{
-		 $result=$this->db->query("SELECT * FROM users WHERE email = '$email' AND password ='".md5($password)."' AND user_type IN(1,7,2)");
-		//$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password)), "user_type" ,"IN", array(1,7))->limit(1)->get();
+		
+		$email = strip_tags(addslashes($email));
+		$pswd = strip_tags(addslashes($email));
+		
+		//$result=$this->db->query("SELECT * FROM users WHERE email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)");
+                                        $result = $this->db->select()
+                                        ->from("users")
+                                        ->where(array("email"=>$email,"password"=>md5($pswd)))
+                                        ->in("user_type",array(1,7,2))
+                                        ->get();
+
+
+                
+                
+		//$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd)), "user_type" ,"IN", array(1,7))->limit(1)->get();
 		if(count($result) == 1){
 			if($result->current()->user_status == 1){
 				$this->session->set(array(
@@ -719,12 +772,22 @@ class Admin_Model extends Model
 
 	public function coupon_code_validate($code="")
 	{
+		$code = addslashes($code);
 	                $time=time();
 			$conditions="";
               		if($code || $code=='0'){
                                 $conditions= "transaction_mapping.coupon_code ='".strip_tags($code)."'";
                          }
-                        $query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id where $conditions and expirydate > $time limit 1 ";
+                        //$query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id where $conditions and expirydate > $time limit 1 ";
+                        	        $query = $this->db->select("deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name")
+                                        ->from("deals")
+                                        ->join("transaction", "transaction.deal_id", "deals.deal_id")
+                                        ->join("transaction_mapping", "transaction_mapping.transaction_id", "transaction.id")
+                                        ->where(array($conditions,"expirydate >"=>$time))
+                                        ->limit(1)
+                                        ->get();
+                        
+                        
                         $result = $this->db->query($query);
 
 			return $result;
@@ -861,8 +924,15 @@ class Admin_Model extends Model
                        
                         }	
  
-                       $result = $this->db->query("select *,email_subscribe.category_id as category_ids from email_subscribe left join category on category.category_id=email_subscribe.category_id    $contitions  order by subscribe_id DESC limit $offset, $record");
-
+                      // $result = $this->db->query("select *,email_subscribe.category_id as category_ids from email_subscribe left join category on category.category_id=email_subscribe.category_id    $contitions  order by subscribe_id DESC limit $offset, $record");
+                                        $result = $this->db->select("select *,email_subscribe.category_id as category_ids")
+                                        ->from("email_subscribe")
+                                        ->join("category", "category.category_id", "email_subscribe.category_id", "LEFT")
+                                        ->where(array($contitions))
+                                        ->orderby("subscribe_id","DESC")
+                                        ->limit($record,$offset)
+                                        ->get();
+                               
                 return $result;
         }
 	
@@ -881,8 +951,13 @@ class Admin_Model extends Model
                         $contitions .= ' AND email_subscribe.email_id like "%'.mysql_escape_string($email).'%"';
                        
                         }	
-                       $result = $this->db->query("select * from email_subscribe left join category on category.category_id=email_subscribe.category_id   $contitions  order by email_subscribe.subscribe_id DESC ");
-
+                       //$result = $this->db->query("select * from email_subscribe left join category on category.category_id=email_subscribe.category_id   $contitions  order by email_subscribe.subscribe_id DESC ");
+                                        $result = $this->db->select()
+                                        ->from("email_subscribe")
+                                        ->join("category", "category.category_id", "email_subscribe.category_id", "LEFT")
+                                        ->where(array($contitions))
+                                        ->orderby("email_subscribe.subscribe_id","DESC")
+                                        ->get();
 
                 return count($result);
         }
@@ -922,8 +997,15 @@ class Admin_Model extends Model
 						$contitions .= ' AND name like "%'.strip_tags($name).'%"';
                         $contitions .= ' OR email like "%'.strip_tags($name).'%"';
                         }
-                       $result = $this->db->query("select * from contact $contitions order by contact_id DESC $limit1 ");
-                return $result;
+                     //  $result = $this->db->query("select * from contact $contitions order by contact_id DESC $limit1 ");
+                                        $result = $this->db->select()
+                                        ->from("contact")
+                                        ->where(array($contitions))
+                                        ->orderby("contact_id","DESC")
+                                        ->limit($limit1)
+                                        ->get();                
+                       
+                       return $result;
         }
 
 
@@ -938,7 +1020,13 @@ class Admin_Model extends Model
                         $contitions .= ' OR email like "%'.strip_tags($name).'%"';
                         }
                        $result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
-                return count($result);
+                                        $result = $this->db->select()
+                                        ->from("contact")
+                                        ->where(array($contitions))
+                                        ->orderby("contact_id","DESC")
+                                        ->get();   
+                       
+                       return count($result);
         }
 
 
@@ -966,8 +1054,14 @@ class Admin_Model extends Model
                         $contitions .= ' AND u2.email like "%'.strip_tags($email).'%"';
 
                         }
-                       $result = $this->db->query("select u1.firstname as refered_name,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC ");
-
+                       //$result = $this->db->query("select u1.firstname as refered_name,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC ");
+                                        $result = $this->db->select("u1.firstname as refered_name,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email")
+                                        ->from("users as u1")
+                                        ->join("users as u2", "u2.referred_user_id", "u1.user_id")
+                                        ->where(array($contitions))
+                                        ->orderby("u2.joined_date","DESC")
+                                        ->get();
+                       
                 return count($result);
 	}
 
@@ -987,8 +1081,17 @@ class Admin_Model extends Model
 		       // $contitions .= ' AND city.city_name like "%'.strip_tags($city).'%"';
                         $contitions .= ' AND u2.email like "%'.strip_tags($email).'%"';
                         }
-                       $result = $this->db->query("select u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC $limit1 ");
-                return $result;
+                      // $result = $this->db->query("select u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC $limit1 ");
+                                        $result = $this->db->select("select u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email")
+                                        ->from("users as u1")
+                                        ->join("users as u2", "u2.referred_user_id", "u1.user_id")
+                                        ->where(array($contitions))
+                                        ->orderby("u2.joined_date","DESC")
+                                        ->limit($limit1)
+                                        ->get();
+                                       
+                       
+                       return $result;
 	}
 
 	/** ADD COLOR  **/

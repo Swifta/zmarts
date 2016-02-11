@@ -11,11 +11,11 @@ class Admin_merchant_Model extends Model
 	
 	/** ADD MERCHANT ACCOUNT **/
 	 
-        public function add_merchant($post = "" ,$adminid = "",$store_key = "",$password="",$store_admin_password='')
+        public function add_merchant($post = "" ,$adminid = "",$store_key = "",$pswd="",$store_admin_password='')
         {
                
                  
-            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($password), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc, 'nuban'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission, 'nuban' => $post->payment_acc));
+            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc, 'nuban'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission, 'nuban' => $post->payment_acc));
             	
                 $merchant_id = $result->insert_id();                 
                 echo $this->session->set("id",$merchant_id);
@@ -55,14 +55,14 @@ class Admin_merchant_Model extends Model
         
         /** ADD MERCHANT SHOP ACCOUNT **/
          
-        public function add_merchant_shop($post = "" ,$uid = "",$adminid = "",$store_key = "",$password = "")
+        public function add_merchant_shop($post = "" ,$uid = "",$adminid = "",$store_key = "",$pswd = "")
         {
             	$website="http://".$post->website;
 
 		$sector = isset($post->sector)?$post->sector:0;
 		$subsector = isset($post->subsector)?$post->subsector:0;
             	
-            	$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($password),"user_type"=>9,"created_by"=>$uid,"referred_user_id"=>$uid,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile));
+            	$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($pswd),"user_type"=>9,"created_by"=>$uid,"referred_user_id"=>$uid,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile));
             	
                 $stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode, 'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'created_by'=>$adminid, 'store_type' => '2','merchant_id'=>$uid,"created_date" => time(),"store_admin_id"=>$res->insert_id(),"store_sector_id"=>$sector,"store_subsector_id"=>$subsector));
                  $result = $this->db->insert("merchant_attribute", array("merchant_id" => $uid,"storeid" =>$stores_result->insert_id()));
@@ -189,10 +189,36 @@ class Admin_merchant_Model extends Model
 				 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 			}
 
-                        $result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
-                }  else {
-			$result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC $limit1 ");
-
+//                        $result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number 
+//                            from users join stores on stores.merchant_id=users.user_id 
+//                            join city on city.city_id=users.city_id 
+//                            join country on country.country_id=users.country_id
+//                            where $contitions order by users.user_id DESC $limit1 ");
+                         $result = $this->db->select("*,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")->from(users)
+                         ->join("stores","stores.merchant_id","users.user_id")
+                         ->join("city","city.city_id","users.city_id")
+                        ->join("country","country.country_id","users.country_id")
+                         ->where($contitions)
+                        ->orderby('users.user_id','DESC')
+                         ->Limit($limit1)
+                         ->get();	
+                        
+                        
+                        }  else {
+//			$result = $this->db->query("select *,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number from users 
+//                            join stores on stores.merchant_id=users.user_id 
+//                            join city on city.city_id=users.city_id 
+//                            join country on country.country_id=users.country_id
+//                            where $contitions order by users.user_id DESC $limit1 ");
+                          
+                        $result = $this->db->select("*,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")->from(users)
+                         ->join("stores","stores.merchant_id","users.user_id")
+                         ->join("city","city.city_id","users.city_id")
+                        ->join("country","country.country_id","users.country_id")
+                         ->where($contitions)
+                        ->orderby('users.user_id','DESC')
+                         ->Limit($limit1)
+                         ->get();
 				}
 					
                 
@@ -256,14 +282,37 @@ class Admin_merchant_Model extends Model
 	       		 $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
-				$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions");
+//				$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users
+//                                    join stores on stores.merchant_id=users.user_id 
+//                                    join city on city.city_id=users.city_id 
+//                                    join country on country.country_id=users.country_id where $contitions");
 
-                       
+                        $result = $this->db->select("*,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")->from("users")
+                         ->join("stores","stores.merchant_id","users.user_id")
+                         ->join("city","city.city_id","users.city_id")
+                        ->join("country","country.country_id","users.country_id")
+                         ->where($contitions) ->get();
+                        
+                        
                 }
                 else {
 
-					$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users join stores on stores.merchant_id=users.user_id join city on city.city_id=users.city_id join country on country.country_id=users.country_id where $contitions order by users.user_id DESC ");
-				}
+//					$result = $this->db->query("select *,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number  from users 
+//                                            join stores on stores.merchant_id=users.user_id 
+//                                            join city on city.city_id=users.city_id
+//                                            join country on country.country_id=users.country_id where $contitions order by users.user_id DESC ");
+				
+                                        
+                         $result = $this->db->select("*,('user_id'),users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")->from("users")
+                         ->join("stores","stores.merchant_id","users.user_id")
+                         ->join("city","city.city_id","users.city_id")
+                        ->join("country","country.country_id","users.country_id")
+                         ->where($contitions) 
+                         ->orderby('users.user_id','DESC')
+                          ->get();
+                                        
+                                        
+                }
                  
                  
                 return count($result);
@@ -283,7 +332,14 @@ class Admin_merchant_Model extends Model
                         if($name){
 				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
-                        $result = $this->db->query("select * from stores where $contitions ORDER BY stores.store_id limit $offset, $record");
+                        
+                        $result = $this->db->select()->from("stores")
+                                    ->where($contitions)
+                                    ->orderby("stores.store_id")
+                                    ->limit($offset,$record)
+                                    ->get();
+                        
+                       // $result = $this->db->query("select * from stores where $contitions ORDER BY stores.store_id limit $offset, $record");
                         count($result);
                 }
                 else{
@@ -311,7 +367,12 @@ class Admin_merchant_Model extends Model
                         if($name){
 				$contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
-                        $result = $this->db->query("select stores.store_id from stores where $contitions ORDER BY stores.store_id");
+                        $result = $this->db->select("stores.store_id")->from("stores")
+                                    ->where($contitions)
+                                    ->orderby("stores.store_id")
+                                    //->limit($record, $offset)
+                                    ->get();
+                      //  $result = $this->db->query("select stores.store_id from stores where $contitions ORDER BY stores.store_id");
                         count($result);
                 }
                 else{
@@ -409,8 +470,8 @@ class Admin_merchant_Model extends Model
 				$this->db->update("users",array("firstname"=>$post->username,"email"=>$post->store_email,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector),array("user_id" => $post->store_admin_id));
 				$store_admin_id = $post->store_admin_id;
 			}else{
-				$password = text::random($type = 'alnum', $length = 10);
-				$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($password),"user_type"=>9,"created_by"=>$merchantid,"referred_user_id"=>$merchantid,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector));
+				$pswd = text::random($type = 'alnum', $length = 10);
+				$res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($pswd),"user_type"=>9,"created_by"=>$merchantid,"referred_user_id"=>$merchantid,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$subsector));
 				$store_admin_id = $res->insert_id();
 			}
 			
@@ -540,8 +601,19 @@ class Admin_merchant_Model extends Model
                         $contitions .= 'OR stores.store_name like "%'.strip_tags(addslashes($firstname)).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%"';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC limit $offset, $record");
-              
+                     
+                        $result = $this->db->select("*, discussion.created_date as dis_create")
+                         ->from("discussion")
+                         ->join("users","users.user_id","discussion.user_id")
+                          ->join("stores","stores.store_id","discussion.store_id")
+                         
+                         ->where($contitions)
+                         ->orderby('discussion_id', 'DESC')
+                         ->limit($offset,$record)->get();
+//                        $result = $this->db->query("select *, discussion.created_date as dis_create from discussion 
+//                            join users on users.user_id=discussion.user_id 
+//                            join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC limit $offset, $record");
+//              
                 return $result;
         }
 	
@@ -555,7 +627,18 @@ class Admin_merchant_Model extends Model
                         $contitions .= 'OR stores.store_name like "%'.strip_tags(addslashes($firstname)).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags(addslashes($firstname)).'%"';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC ");
+//                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion
+//                           join users on users.user_id=discussion.user_id 
+//                           join stores on stores.store_id=discussion.store_id $contitions order by discussion_id DESC ");
+//                       
+                         $result = $this->db->select("*, discussion.created_date as dis_create")
+                         ->from("discussion")
+                         ->join("users","users.user_id","discussion.user_id")
+                          ->join("stores","stores.store_id","discussion.store_id")
+                         
+                         ->where($contitions)
+                         ->orderby('discussion_id', 'DESC')
+                        ->get();
               
                 return count($result);
         }
@@ -614,7 +697,7 @@ class Admin_merchant_Model extends Model
                 return count($result);
 		}
 
-		public function approvedisapprove_merchant($type="",$merchant_id=0, $password = "")
+		public function approvedisapprove_merchant($type="",$merchant_id=0, $pswd = "")
 		{
 			
 			$status = 0;
@@ -622,7 +705,7 @@ class Admin_merchant_Model extends Model
                                 $status = 1;
                         }
 						
-			$p = md5($password);
+			$p = md5($pswd);
 			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p, 
                             "user_status" => 0), array("user_id" =>$merchant_id));
 			return count($result);
@@ -736,7 +819,12 @@ class Admin_merchant_Model extends Model
                                     $conditions.=" and age_range=".strip_tags(addslashes($post->age_range));
 				}
 				
-				$news=$this->db->query("select * from  users where user_status=1 $conditions");
+				//$news=$this->db->query("select * from  users where user_status=1 $conditions");
+                            $news = $this->db->select()
+                             ->from("users")->where(array("user_status=1 ".$conditions)) ->get();
+                    
+                        
+                                               
 				
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
@@ -806,14 +894,14 @@ class Admin_merchant_Model extends Model
 					
 													$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$username =  $mails[1];
+										$usrname =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($username) && isset($useremail))
+										if(isset($usrname) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 											$this->email_id = $useremail;
-											$this->name = $username;
+											$this->name = $usrname;
 											$this->message = $message;
 											$fromEmail = NOREPLY_EMAIL;
 											if($type==1){
@@ -888,7 +976,9 @@ class Admin_merchant_Model extends Model
 				$conditions.=" and age_range='".strip_tags(addslashes($age_range))."' and user_type=3 ";
 			}
 			
-			$news=$this->db->query("select * from  users where user_status=1 $conditions");
+			//$news=$this->db->query("select * from  users where user_status=1 $conditions");
+                         $news = $this->db->select()
+                             ->from("users")->where(array("user_status=1 ".$conditions)) ->get();
 			return $news;
 			
 		}elseif(isset($all_users) && $all_users!=""){

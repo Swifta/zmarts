@@ -11,7 +11,7 @@ class Users_Model extends Model
 		
 	}
 	
-	    public function add_users_social($full_name="", $email="", $password = "", $user_referral_id = "")
+	    public function add_users_social($full_name="", $email="", $pswd = "", $user_referral_id = "")
 	    {
                 $new_user = false;
                 $referral_id = text::random($type = 'alnum', $length = 8);
@@ -19,7 +19,7 @@ class Users_Model extends Model
                 if($this->check_user_exist($email) == 1){
                     $new_user = true;
                     $result = $this->db->insert("users", array("firstname" => $full_name, "email" => $email, 
-                        "password" =>  md5($password), "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, 
+                        "password" =>  md5($pswd), "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, 
                         "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"city_id" => 1, "country_id" => 1));
                         $this->session->set(array("UserID" => $result->insert_id(), "UserName" => $full_name, 
                             "UserEmail" => $email, "city_id" => 1, "country_id" => 1,
@@ -60,9 +60,9 @@ class Users_Model extends Model
 		users prime_customer session value.
 		@Live
 	*/
-	public function login_users($email = "",$password = "", $z_offer = "0")
+	public function login_users($email = "",$pswd = "", $z_offer = "0")
 	{ 
-		$result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($password),"user_type" =>4))->get();
+		$result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($pswd),"user_type" =>4))->get();
 		if(count($result) == 1){
 			foreach($result as $a){
 				if($a->user_status == 1){ 
@@ -180,7 +180,7 @@ class Users_Model extends Model
 	
 	/** REGISTER FACEBOOK USERS **/
 
-	public function register_facebook_user($fb_profile = array(), $city_id="", $fb_access_token = "",$user_referral_id = "",$password = "")
+	public function register_facebook_user($fb_profile = array(), $city_id="", $fb_access_token = "",$user_referral_id = "",$pswd = "")
 	{ 
 		$result_country = $this->db->from("city")->where(array("default" =>1))->limit(1)->get();
 		$fb_profile_email=$this->session->get('fb_email');
@@ -193,7 +193,7 @@ class Users_Model extends Model
 		$result = $this->db->from("users")->where(array("email" => $fb_profile_email))->limit(1)->get();
 		if(count($result) == 0){
 			$fb_image_url = "http://graph.facebook.com/".$fb_profile->id."/picture";
-			//$password = text::random($type = 'alnum', $length = 10);
+			//$pswd = text::random($type = 'alnum', $length = 10);
 			$store_key = text::random($type = 'alnum', $length = 10);
 			$referral_id = text::random($type = 'alnum', $length = 10);
 			$referred_user_id = 0;
@@ -209,7 +209,7 @@ class Users_Model extends Model
                         $fb_profile->name = "UNKNOWN";
                     }
 			
-			$insert = $this->db->insert("users",array("firstname" => $fb_profile->name,"UserType" => "4"/*, "lastname" => $fb_profile->last_name */, "email" => $fb_profile_email, "password" => md5($password), 
+			$insert = $this->db->insert("users",array("firstname" => $fb_profile->name,"UserType" => "4"/*, "lastname" => $fb_profile->last_name */, "email" => $fb_profile_email, "password" => md5($pswd), 
                             "city_id" => $city_id , "country_id" => $country_value,"referral_id" => $referral_id,"referred_user_id" =>$referred_user_id,"joined_date" => time(), "last_login" => time(),  "fb_user_id" => $fb_profile->id , "fb_session_key" => $fb_access_token ,"login_type"=>"3"));
 
 			$result_city = $this->db->select("category_id")->from("email_subscribe")->where(array("email_id" =>$fb_profile_email))->get();
@@ -455,15 +455,15 @@ class Users_Model extends Model
 		        if(count($result_new) == 0){
 		                return -2;
 		        }
-			$password = text::random($type = 'alnum', $length = 10);
+			$pswd = text::random($type = 'alnum', $length = 10);
 			$userid = $result->current()->user_id;
 			$name = $result->current()->firstname;
 			$email = $result->current()->email;
 			
 			$results['name']=$result->current()->firstname;
 			$results['email']=$result->current()->email;
-			$results['password']=$password;
-			$result1=$this->db->update("users",array("password" => md5($password) ), array("user_id" => $userid));
+			$results['password']=$pswd;
+			$result1=$this->db->update("users",array("password" => md5($pswd) ), array("user_id" => $userid));
 			if($result1){
 					return $results;	
 				}
@@ -1001,16 +1001,28 @@ class Users_Model extends Model
 	/* GET USER STORECREDIT LIST COUNT */
 	public function storecredit_list_count()
 	{
-		$result = $this->db->query("select storecredit_id from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4");
-		return count($result);
+		//$result = $this->db->query("select storecredit_id from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4");
+		$result = $this->select("storecredit_id")->from("store_credit_save as s")
+                        ->join("product", "product.deal_id", "s.productid")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->where(array("deal_status" =>1,"store_status"=>1,"userid"=>$this->UserID,"credit_status"!=4))
+                        ->get();
+                return count($result);
 		
 	}
 	
 	/* GET USER STORECREDIT LIST */
 	public function storecredit_list($offset = "",$record = "")
 	{
-		$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4 order by s.storecredit_id DESC limit $offset,$record");
-		return $result;
+		//$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4 order by s.storecredit_id DESC limit $offset,$record");
+		$result = $this->select()->from("store_credit_save as s")
+                        ->join("product", "product.deal_id", " s.productid")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->where(array("deal_status" =>1, "store_status" =>1, "userid" => $this->UserID, "credit_status !="=>4))
+                        ->orderby("s.storecredit_id", "DESC")
+                        ->limit($record,$offset)
+                        ->get();
+                return $result;
 	}
 	
 	/*

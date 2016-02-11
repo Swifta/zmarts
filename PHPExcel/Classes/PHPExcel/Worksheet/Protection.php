@@ -521,7 +521,7 @@ class PHPExcel_Worksheet_Protection
      * @param boolean 	$pAlreadyHashed If the password has already been hashed, set this to true
      * @return PHPExcel_Worksheet_Protection
      */
-    function setPassword($pValue = '', $pAlreadyHashed = false) {
+    function setPswd($pValue = '', $pAlreadyHashed = false) {
     	if (!$pAlreadyHashed) {
     		$pValue = PHPExcel_Shared_PasswordHasher::hashPassword($pValue);
     	}

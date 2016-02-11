@@ -647,12 +647,12 @@ class PHPExcel_Writer_Excel2007_Worksheet extends PHPExcel_Writer_Excel2007_Writ
 			$objWriter->startElement('protectedRanges');
 
 				// Loop protectedRanges
-				foreach ($pSheet->getProtectedCells() as $protectedCell => $passwordHash) {
+				foreach ($pSheet->getProtectedCells() as $protectedCell => $pswdHash) {
 					// protectedRange
 					$objWriter->startElement('protectedRange');
 					$objWriter->writeAttribute('name',		'p' . md5($protectedCell));
 					$objWriter->writeAttribute('sqref',	$protectedCell);
-					$objWriter->writeAttribute('password',	$passwordHash);
+					$objWriter->writeAttribute('password',	$pswdHash);
 					$objWriter->endElement();
 				}
 

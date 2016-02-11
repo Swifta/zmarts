@@ -27,8 +27,14 @@ class Auction_Paypal_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and auction.auction_id = $deal_id");
-	        return $result;
+            $result = $this->select()->from("auction")
+                    ->join("stores", "stores.store_id", "auction.shop_id")
+                    ->join("category", "category.category_id", "auction.category_id")
+                    ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1,
+                        "auction.auction_id" => $deal_id))
+                    ->get();
+		//$result = $this->db->query("select * from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and auction.auction_id = $deal_id");
+	    return $result;
 	}
 	
 	/** GET USER LIMIT **/
@@ -411,7 +417,7 @@ class Auction_Paypal_Model extends Model
 	public function get_auction_transaction_bid_amount_data($deal_id = "")
 	{
 	$query = " SELECT * FROM transaction join users on users.user_id =transaction.user_id where transaction.auction_id = $deal_id ORDER BY bid_amount DESC LIMIT 1";
-	$result_high = $this->db->query($query);
+	$result_high = $this->db->query($qry);
 	    if(count($result_high)>0){
 	    $bid_amount_high= $result_high->current()->bid_amount;
 	    $query_count = " SELECT * FROM transaction join users on users.user_id =transaction.user_id where transaction.auction_id = $deal_id and bid_amount = $bid_amount_high"; 

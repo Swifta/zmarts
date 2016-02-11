@@ -43,7 +43,7 @@ class Webpay_Controller extends Layout_Controller
         public function ajax_more_details(){
             if(isset($_POST['transaction_id'])){
                 $paint_red = "red";
-                $details = json_decode($this->webpay->getTransactionDetails($_POST['transaction_id']));
+                $details = json_decode($this->webpay->getTransactionDetails(strip_tags(addslashes($_POST['transaction_id']))));
                 if($details->status == "Success"){
                     $paint_red = "green";
                 }
@@ -62,7 +62,7 @@ class Webpay_Controller extends Layout_Controller
         public function ajax_confirm(){
             //$transaction_id = "jTnUlW1RGrVUALj";
             if(isset($_POST['transaction_id'])){
-                $transaction_id = $_POST['transaction_id'];
+                $transaction_id = strip_tags(addslashes($_POST['transaction_id']));
                 $transaction_total = $this->webpay->getTotalAmountOnTransaction($transaction_id);
                 $txnref = $transaction_id;
                 $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
@@ -164,11 +164,11 @@ class Webpay_Controller extends Layout_Controller
                 //echo "Response Details <br />";
                 //echo $_REQUEST['resp']."<br />";
                 //echo $_REQUEST['desc']."<br />";
-                $txnref = $_REQUEST['txnref'];
-                $payRef = $_REQUEST['payRef'];
-                $retRef = $_REQUEST['retRef'];
-                $cardNum = $_REQUEST['cardNum'];
-                $apprAmt = $_REQUEST['apprAmt'];
+                $txnref = strip_tags(addslashes($_REQUEST['txnref']));
+                $payRef = strip_tags(addslashes($_REQUEST['payRef']));
+                $retRef = strip_tags(addslashes($_REQUEST['retRef']));
+                $cardNum = strip_tags(addslashes($_REQUEST['cardNum']));
+                $apprAmt = strip_tags(addslashes($_REQUEST['apprAmt']));
                 //echo "Gotten from WebPaypay: ".$txnref.", ".$payRef.", ".$retRef.", ".$cardNum.", ".$apprAmt;
                 $hash = hash("sha512", $this->product_id.$txnref.$this->mac_key);
                 $url_call = $this->staging_url."gettransaction.json?productid=".$this->product_id."&transactionreference=".$txnref.
@@ -365,7 +365,7 @@ class Webpay_Controller extends Layout_Controller
 
 		if($_POST){
 
-			$referral_amount = $this->input->post("p_referral_amount");
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
 		        $this->userPost = $this->input->post();
 			$product_color="";
 			$paymentType = "INTERSWITCH";
@@ -535,16 +535,16 @@ class Webpay_Controller extends Layout_Controller
         public function pay_auction(){
             //var_dump($_SESSION);die;
 		if($_POST){  
-                    $deal_id = $this->input->post("deal_id");
-                    $merchant_id = $this->input->post("merchant_id"); 
-                    $bid_id = $this->input->post("bid_id"); 
-                    $deal_key = $this->input->post("deal_key"); 
-                    $url_title = $this->input->post("url_title");   
+                    $deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+                    $merchant_id = strip_tags(addslashes($this->input->post("merchant_id"))); 
+                    $bid_id = strip_tags(addslashes($this->input->post("bid_id"))); 
+                    $deal_key = strip_tags(addslashes($this->input->post("deal_key"))); 
+                    $url_title = strip_tags(addslashes($this->input->post("url_title")));   
                     $referral_amount = 0;
-                    $item_qty = $this->input->post("P_QTY");
-                    $amount = $this->input->post("amount");			
-                    $deal_value = $this->input->post("deal_value");
-                    $shipping_amount = $this->input->post("shipping_amount");
+                    $item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+                    $amount = strip_tags(addslashes($this->input->post("amount")));			
+                    $deal_value = strip_tags(addslashes($this->input->post("deal_value")));
+                    $shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
                     $tax_amount = 0;
 
                     $pay_amount1 = $tot_amount1 = $amount+$shipping_amount+$tax_amount;

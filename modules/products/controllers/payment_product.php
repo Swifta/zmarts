@@ -88,14 +88,14 @@ class Payment_product_Controller extends Layout_Controller {
 		else{
 			if($_POST){
 				$email = trim($this->input->post("email"));
-				$password = $this->input->post("password");
-				if(!$email || !$password){
+				$pswd = $this->input->post("password");
+				if(!$email || !$pswd){
 					 common::message(-1, $this->Lang["EMAIL_REQUIRED"]);
 				}
 				elseif(!valid::email($email)){
 					 common::message(-1, $this->Lang["INVAL_EMAIL"]);
 				} else {
-					$status = $this->users->login_users($email,$password);
+					$status = $this->users->login_users($email,$pswd);
 					if($status == 1){
 					    common::message(1, $this->Lang["SUCC_LOGIN"]);
 					    url::redirect(PATH.'cart.html');
@@ -604,9 +604,9 @@ class Payment_product_Controller extends Layout_Controller {
 				            url::redirect(PATH);
 			            }
 
-			            $this->get_user_details = $this->payment_products->get_user_details();
+			            $this->get_usr_details = $this->payment_products->get_usr_details();
 
-                        foreach($this->get_user_details as $U){
+                        foreach($this->get_usr_details as $U){
                         if($U->referred_user_id && $U->deal_bought_count == "0"){
 				        $update_reff_amount = $this->payment_products->update_referral_amount($U->referred_user_id);
 			            }

@@ -55,13 +55,13 @@ class Admin_moderator_Controller extends website_Controller {
 						->add_rules('city', 'required');
 			if($post->validate()){
 				$referral_id = text::random($type = 'alnum', $length = 8);
-				$password = text::random($type = 'alnum', $length = 8);
-				$status = $this->moderator->add_moderator(arr::to_object($this->userPost),$referral_id,$password);
+				$pswd = text::random($type = 'alnum', $length = 8);
+				$status = $this->moderator->add_moderator(arr::to_object($this->userPost),$referral_id,$pswd);
 				if($status == 1){
 					$from = CONTACT_EMAIL;    						
 					$this->admin_signup_moderator = "1";
 					$this->email = $post->email;
-					$this->password = $password;
+					$this->password = $pswd;
 					$this->name =$post->firstname;
 					$this->moderator = "1";
                       $data = array(

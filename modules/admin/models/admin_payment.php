@@ -49,7 +49,12 @@ class Admin_payment_Model extends Model
 	                        $conditions .= " and ( request_fund.date_time between $startdate_str and $enddate_str )";	
                         }
 
-			$result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%")');
+			//$result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%")');
+                        $result = $this->db->select()
+                                ->from("request_fund")
+                                ->join("users","users.user_id","request_fund.user_id")
+                                ->where($conditions.' and (users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%")')
+                                ->get();
 		} else {
 			if($type=="") {
 		                $conditions = array("request_id >" => 0);
@@ -107,10 +112,25 @@ class Admin_payment_Model extends Model
 		        
 		        if($_GET){
 		               $search_key = strip_tags($search_key);
-		               $result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%") order by request_id DESC '.$limit1.'');
-         		} else {
-			        $result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' order by request_id DESC '.$limit1.'');
-		        }
+		               //$result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%") order by request_id DESC '.$limit1.'');
+                               $result =  $this->db->select()
+                                       ->from("request_fund")
+                                       ->join("users","users.user_id","request_fund.user_id")
+                                       ->where($conditions. 'users.firstname like "%'.$search_key.'%" OR users.email like "%'.$search_key.'%')
+                                       ->orderby("request_id", "DESC")
+                                       ->limit($limit1)
+                                       ->get();
+                        } else {
+			        //$result = $this->db->query('select * from request_fund join users on users.user_id=request_fund.user_id where '.$conditions.' order by request_id DESC '.$limit1.'');
+                                $result =  $this->db->select()
+                                       ->from("request_fund")
+                                       ->join("users","users.user_id","request_fund.user_id")
+                                       ->where($conditions)
+                                       ->orderby("request_id", "DESC")
+                                       ->limit($limit1)
+                                       ->get();
+                                
+                        }
 		return $result;
 	}
 
@@ -122,7 +142,9 @@ class Admin_payment_Model extends Model
 	       if($result->ACK == 'Success' || $result->ACK == 'SuccessWithWarning'){
 	 	$result = $this->db->update("request_fund", array("request_status" => $request_status, "payment_status" => $payment_status,"transaction_date"=>strtotime($result->TIMESTAMP),"transaction_id"=>$result->CORRELATIONID), array("request_id" => $request_id, "user_id" => $user_id));
 	 	
-	 	$this->db->query("update users set merchant_account_balance = merchant_account_balance - $request_amount where user_type = 1");
+                $this->db->update("users", array("merchant_account_balance"=>new Database_Expression('merchant_account_balance - '.$request_amount)),
+                        array("user_type" => 1));
+	 	//$this->db->query("update users set merchant_account_balance = merchant_account_balance - $request_amount where user_type = 1");
 	 	
 	 	} elseif($result->ACK == 'Failure') {
 	 	$result = $this->db->update("request_fund", array("request_status" => $request_status, "payment_status" => $payment_status,"transaction_date"=>strtotime($result->TIMESTAMP),"transaction_id"=>$result->CORRELATIONID,"error_code"=>$result->L_ERRORCODE0,"error_title"=>$result->L_SHORTMESSAGE0,"error_message"=>$result->L_LONGMESSAGE0), array("request_id" => $request_id, "user_id" => $user_id));
@@ -146,7 +168,10 @@ class Admin_payment_Model extends Model
 		/** GET USER LIST **/
 	public function get_transaction_list_dashboard()
 	{
-                $result = $this->db->query("SELECT * FROM transaction_mapping");
+                //$result = $this->db->query("SELECT * FROM transaction_mapping");
+                $result = $this->db->select()
+                         ->from("transaction_mapping")
+                         ->get();
                 return $result;
 	}
 
@@ -264,8 +289,14 @@ class Admin_payment_Model extends Model
 	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
                         }
 				
-			$result = $this->db->query('select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where '.$conditions.' and ( users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%")');
-		}
+			//$result = $this->db->query('select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where '.$conditions.' and ( users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%")');
+                        $result = $this->db->select("*,users.firstname as firstname")
+                                ->from(transaction)
+                                ->join("users","users.user_id","transaction.user_id")
+                                ->join("auction","auction.deal_id","transaction.auction_id")
+                                ->where($conditions. 'users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%")')
+                                ->get();
+                        }
 		else{
 		       if(($type=="")||($type=="mail")) {
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by auction.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort_type","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by auction.shipping_fee $sort");
@@ -357,8 +388,15 @@ class Admin_payment_Model extends Model
                                 $conditions .= ' and (users.firstname like "%'.$search_key.'%"';
                                 $conditions .= ' OR product.deal_title like "%'.$search_key.'%")';
                                 
-                                $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions ");
- 		} 
+                                //$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions ");
+                                $result = $this->db->select("*,users.firstname as firstname")
+                                        ->from("transaction")
+                                        ->join("users","users.user_id","transaction.user_id")
+                                        ->join("product","product.deal_id","transaction.product_id")
+                                        ->where($conditions)
+                                        ->get();
+                                
+                                } 
 		else{
 		       if(($type=="")||($type=="mail")) {
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
@@ -443,8 +481,14 @@ class Admin_payment_Model extends Model
 	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
                         }
 				
-			$result = $this->db->query('select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR deals.deal_title like "%'.$search_key.'%")');
-		}
+			//$result = $this->db->query('select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where '.$conditions.' and (users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR deals.deal_title like "%'.$search_key.'%")');
+                        $result = $this->db->select("*,users.firstname as firstname")
+                                    ->from("transaction")
+                                    ->join("users","users.user_id","transaction.user_id")
+                                    ->join("deals","deals.deal_id","transaction.deal_id")
+                                    ->where($conditions.'users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR deals.deal_title like "%'.$search_key.'%")')
+                                    ->get();
+                        }
 		else{
 		       if(($type=="")||($type=="mail")) {
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by deals.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort_type","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by deals.shipping_fee $sort");
@@ -537,8 +581,16 @@ class Admin_payment_Model extends Model
                         }
 				
 			 $search_key = strip_tags($search_key);
-			 $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions and ( users.firstname like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%') $limit1 ");
-		} 
+			 //$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions and ( users.firstname like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%') $limit1 ");
+                         $result = $this->db->select("*,users.firstname as firstname")
+                                 ->from("transaction")
+                                 ->join("users","users.user_id","transaction.user_id")
+                                 ->join("auction","auction.deal_id","transaction.auction_id")
+                                 ->where($conditions. "users.firstname like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%")
+                                 ->limit($limit1)
+                                 ->get();
+                         
+                        } 
 		else{
 		       if(($type=="")||($type=="mail")) {
 				   
@@ -559,8 +611,14 @@ class Admin_payment_Model extends Model
 			if(isset($sort_arr[$param])){
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by transaction.id DESC'; }
-			 $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions $limit1 ");
-			
+			 //$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions $limit1 ");
+			 $result = $this->db->select("*,users.firstname as firstname")
+                                   ->from("transaction")
+                                   ->join("users","users.user_id","transaction.user_id")
+                                   ->join("auction","auction.deal_id","transaction.auction_id")
+                                   ->where($conditions)
+                                   ->limit($limit1)
+                                   ->get();
 		} 
 		return $result;
 	}
@@ -626,8 +684,16 @@ class Admin_payment_Model extends Model
 				$conditions .= ' and (users.firstname like "%'.$search_key.'%"';
                 $conditions .= ' OR product.deal_title like "%'.$search_key.'%")';
 
-			 $result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
- 		} 
+			 //$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
+                         $result = $this->db->select("*,users.firstname as firstname, transaction.shipping_amount as shippingamount")
+                                    ->from("transaction")
+                                    ->join("users","users.user_id","transaction.user_id")
+                                    ->join("product","product.deal_id","transaction.product_id")
+                                    ->where($conditions)
+                                    ->limit($limit1)
+                                    ->get();
+                         
+                         } 
 		else{
 		       if(($type=="")||($type=="mail")) {
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
@@ -652,8 +718,15 @@ class Admin_payment_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by transaction.id DESC'; }
 	        	//echo "select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ";
-			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
-		
+			//$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
+                        $result = $this->db->select("*,users.firstname as firstname, transaction.shipping_amount as shippingamount")
+                                        ->from("transaction")
+                                        ->join("users","users.user_id","transaction.user_id")
+                                        ->join("product","product.deal_id","transaction.product_id")
+                                        ->where($conditions)
+                                        ->limit($limit1)
+                                        ->get();
+                                
                         //die;
                         } 
 		return $result;
@@ -714,8 +787,15 @@ class Admin_payment_Model extends Model
 			
 			 $search_key = strip_tags($search_key);
 			
-			 $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where $conditions and (users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%') order by transaction.id DESC  $limit1 "); 
-
+			 //$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where $conditions and (users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%') order by transaction.id DESC  $limit1 "); 
+                         $result = $this->db->select("*,users.firstname as firstname")
+                                 ->from("transaction")
+                                 ->join("users","users.user_id","transaction.user_id")
+                                 ->join("deals","deals.deal_id","transaction.deal_id")
+                                 ->where($conditions. "users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%")
+                                 ->orderby("transaction.id", "DESC")
+                                 ->limit("$limit1")
+                                 ->get();
  		} 
 		else{
 		       if(($type=="")||($type=="mail")) {
@@ -744,7 +824,14 @@ class Admin_payment_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by transaction.id DESC'; }
 	        	
-			$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where $conditions $limit1 ");
+			//$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join deals on deals.deal_id=transaction.deal_id where $conditions $limit1 ");
+                        $result = $this->db->select("*,users.firstname as firstname")
+                                    ->from("transaction")
+                                    ->join("users","users.user_id","transaction.user_id")
+                                    ->join("deals","deals.deal_id","transaction.deal_id")
+                                    ->where($conditions)
+                                    ->limit($limit1)
+                                    ->get();
 		}
 		return $result;
 	}
@@ -813,7 +900,13 @@ class Admin_payment_Model extends Model
                                 $conditions .= ' and (users.firstname like "%'.$search_key.'%"';
                                 $conditions .= ' OR product.deal_title like "%'.$search_key.'%")';
                                 
-                                $result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions ");
+                                //$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions ");
+                                $result = $this->db->select("*,users.firstname as firstname")
+                                        ->from("transaction")
+                                        ->join("users","users.user_id","transaction.user_id")
+                                        ->join("product","product.deal_id","transaction.product_id")
+                                        ->where($conditions)
+                                        ->get();
  		} 
 		else{
 		       if(($type=="")||($type=="mail")) {
@@ -902,7 +995,14 @@ class Admin_payment_Model extends Model
 				$conditions .= ' and (users.firstname like "%'.$search_key.'%"';
                 $conditions .= ' OR product.deal_title like "%'.$search_key.'%")';
 
-			 $result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
+			 //$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
+                         $result = $this->db->select("*,users.firstname as firstname, transaction.shipping_amount as shippingamount")
+                                        ->from("transaction")
+                                        ->join("users","users.user_id","transaction.user_id")
+                                        ->join("product","product.deal_id","transaction.product_id")
+                                        ->where($conditions)
+                                        ->limit($limit1)
+                                        ->get();
  		} 
 		else{
 		       if(($type=="")||($type=="mail")) {
@@ -923,7 +1023,14 @@ class Admin_payment_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by transaction.id DESC'; }
 	        	
-			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
+			//$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions $limit1 ");
+                        $result = $this->db->select("*,users.firstname as firstname, transaction.shipping_amount as shippingamount")
+                                        ->from("transaction")
+                                        ->join("users","users.user_id","transaction.user_id")
+                                        ->join("product","product.deal_id","transaction.product_id")
+                                        ->where($conditions)
+                                        ->limit($limit1)
+                                        ->get();
 		} 
 		return $result;
 	}
@@ -981,8 +1088,14 @@ class Admin_payment_Model extends Model
 				else{
 						$conditions .= " AND storecredit_transaction.type != 5 AND store_credit_id !=0";
 					}
-			$result = $this->db->query("select storecredit_transaction.id from storecredit_transaction join store_credit_save on store_credit_save.storecredit_id = storecredit_transaction.main_storecreditid join users on users.user_id=storecredit_transaction.user_id join product on product.deal_id=storecredit_transaction.product_id where $conditions  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )");
-			
+			//$result = $this->db->query("select storecredit_transaction.id from storecredit_transaction join store_credit_save on store_credit_save.storecredit_id = storecredit_transaction.main_storecreditid join users on users.user_id=storecredit_transaction.user_id join product on product.deal_id=storecredit_transaction.product_id where $conditions  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )");
+			$result = $this->db->select("storecredit_transaction.id")
+                                ->from("storecredit_transaction")
+                                ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
+                                ->join("users","users.user_id","storecredit_transaction.user_id")
+                                ->join("product","product.deal_id","storecredit_transaction.product_id")
+                                ->where($conditions. 'users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )')
+                                ->get();
 		}
 		else{
 				$conditions = "storecredit_transaction.id >= 0 ";
@@ -1079,7 +1192,16 @@ class Admin_payment_Model extends Model
 				else{
 						$conditions .= " AND storecredit_transaction.type != 5  AND store_credit_id !=0";
 					}
-			$result = $this->db->query("select *,users.firstname as firstname, storecredit_transaction.shipping_amount as shippingamount from storecredit_transaction join store_credit_save on store_credit_save.storecredit_id = storecredit_transaction.main_storecreditid join users on users.user_id=storecredit_transaction.user_id join product on product.deal_id=storecredit_transaction.product_id where $conditions and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
+			//$result = $this->db->query("select *,users.firstname as firstname, storecredit_transaction.shipping_amount as shippingamount from storecredit_transaction join store_credit_save on store_credit_save.storecredit_id = storecredit_transaction.main_storecreditid join users on users.user_id=storecredit_transaction.user_id join product on product.deal_id=storecredit_transaction.product_id where $conditions and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
+                        $result = $this->db->select("*,users.firstname as firstname, storecredit_transaction.shipping_amount as shippingamount")
+                                ->from("storecredit_transaction")
+                                ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
+                                ->join("users","users.user_id","storecredit_transaction.user_id")
+                                ->join("product","product.deal_id","storecredit_transaction.product_id")
+                                ->where($conditions. 'users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )')
+                                ->limit($limit1)
+                                ->get();
+                        
 		}
 		else{
 				$conditions = "storecredit_transaction.id >= 0  ";

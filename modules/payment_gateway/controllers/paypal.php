@@ -17,7 +17,7 @@ class Paypal_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = $s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;
 
 			$this->Live_Mode = $s->paypal_payment_mode;
@@ -329,14 +329,14 @@ class Paypal_Controller extends Layout_Controller
 	{
 		if($_POST){
 
-			$deal_id = $this->input->post("deal_id");
-			$deal_key = $this->input->post("deal_key");
-			$referral_amount = $this->input->post("p_referral_amount");
-			$item_qty = $this->input->post("P_QTY");
-			$amount = $this->input->post("amount");
-			$friend_name = $this->input->post("friend_name");
-			$friend_email = $this->input->post("friend_email");
-			$friend_gift_status = $this->input->post("friend_gift");
+			$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+			$deal_key = strip_tags(addslashes($this->input->post("deal_key")));
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+			$amount = strip_tags(addslashes($this->input->post("amount")));
+			$friend_name = strip_tags(addslashes($this->input->post("friend_name")));
+			$friend_email = strip_tags(addslashes($this->input->post("friend_email")));
+			$friend_gift_status = strip_tags(addslashes($this->input->post("friend_gift")));
 			$currencyCodeType = CURRENCY_CODE;
 			$country_code = COUNTRY_CODE;
 
@@ -398,11 +398,11 @@ class Paypal_Controller extends Layout_Controller
 	public function deal_cash_delivery()
 	{
 		if($_POST){
-			$deal_id = $this->input->post("deal_id");
-			$deal_key = $this->input->post("deal_key");
-			$referral_amount = $this->input->post("p_referral_amount");
-			$item_qty = $this->input->post("P_QTY");
-			$amount = $this->input->post("amount");
+			$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+			$deal_key = strip_tags(addslashes($this->input->post("deal_key")));
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+			$amount = strip_tags(addslashes($this->input->post("amount")));
 
 			$this->deals_payment_deatils = $this->paypal->get_deals_payment_details($deal_id, $deal_key);
 

@@ -58,14 +58,14 @@ class Settings_Model extends Model
 	
 	public function sendgrid_mailer_settings($post = "")
 	{ 	 	 	
-		$result = $this->db->update("email_settings",array("sendgrid_host" => $post->smtp_host, "sendgrid_port" => $post->smtp_port, "sendgrid_username" => $post->smtp_username, "sendgrid_password" => $post->smtp_password), array("status" => 1));
+		$result = $this->db->update("email_settings",array("sendgrid_host" => $post->smtp_host, "sendgrid_port" => $post->smtp_port, "sendgrid_username" => $post->smtp_username, "sendgrid_password" => $post->smtp_pswd), array("status" => 1));
 		return 1;
 	}
 	/** UPDATE SMTP EMAIL SETTING **/
 	
 	public function smtp_mailer_settings($post = "")
 	{ 	 	 	
-		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_password" => $post->password), array("status" => 1));
+		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_pswd" => $post->password), array("status" => 1));
 		return 1;
 	}
 	/** UPDATE SMTP EMAIL SETTING **/
@@ -89,7 +89,7 @@ class Settings_Model extends Model
 	public function update_payment_settings($post = "")
 	{
 
-		$status = $this->db->update("settings",array("min_fund_request" => $post->minfund, "max_fund_request" => $post->maxfund, "currency_symbol" => trim($post->currency_symbol) , "currency_code" => trim($post->currency_code),"country_code" => trim($post->country_code),"referral_amount" => $post->referral_amount,"paypal_payment_mode" => $post->paypal_payment_mode,"paypal_account_id" => $post->Paypal_Account,"paypal_api_password" => $post->Paypal_API_Password,"paypal_api_signature" => $post->Paypal_API_Signature,"authorizenet_transaction_key" => $post->authorizenet_transaction_key,"authorizenet_api_id" => $post->authorizenet_api_id,"tax_percentage" => $post->tax_percentage,"flat_shipping" => $post->flat_shipping,"auction_extend_day" =>$post->auction_extend_day,"auction_alert_day" => $post->auction_alert_day,"pay_later"=>$post->pay_later,"monthly_storecredit"=>$post->monthly_storecredit), array("id" => 1)); 
+		$status = $this->db->update("settings",array("min_fund_request" => $post->minfund, "max_fund_request" => $post->maxfund, "currency_symbol" => trim($post->currency_symbol) , "currency_code" => trim($post->currency_code),"country_code" => trim($post->country_code),"referral_amount" => $post->referral_amount,"paypal_payment_mode" => $post->paypal_payment_mode,"paypal_account_id" => $post->Paypal_Account,"paypal_api_password" => $post->Paypal_API_Password,"paypal_api_signature" => $post->Paypal_API_Signature,"authorizenet_transaction_key" => $post->authorizenet_transaction_key,"authorizenet_api_id" => $post->authnet_api_id,"tax_percentage" => $post->tax_percentage,"flat_shipping" => $post->flat_shipping,"auction_extend_day" =>$post->auction_extend_day,"auction_alert_day" => $post->auction_alert_day,"pay_later"=>$post->pay_later,"monthly_storecredit"=>$post->monthly_storecredit), array("id" => 1)); 
 		return 1;
 	}
 

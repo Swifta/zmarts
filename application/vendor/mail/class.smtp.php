@@ -207,7 +207,7 @@ class SMTP {
    * @access public
    * @return bool
    */
-  public function Authenticate($username, $password) {
+  public function Authenticate($usrname, $pswd) {
     // Start authentication
     fputs($this->smtp_conn,"AUTH LOGIN" . $this->CRLF);
 
@@ -226,7 +226,7 @@ class SMTP {
     }
 
     // Send encoded username
-    fputs($this->smtp_conn, base64_encode($username) . $this->CRLF);
+    fputs($this->smtp_conn, base64_encode($usrname) . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);
@@ -243,7 +243,7 @@ class SMTP {
     }
 
     // Send encoded password
-    fputs($this->smtp_conn, base64_encode($password) . $this->CRLF);
+    fputs($this->smtp_conn, base64_encode($pswd) . $this->CRLF);
 
     $rply = $this->get_lines();
     $code = substr($rply,0,3);

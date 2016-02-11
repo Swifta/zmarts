@@ -77,9 +77,15 @@ class Smeonline_Controller extends Layout_Controller
         }
 
         public function confirm(){
-            $out_request_resp_code = $_REQUEST['out_request_resp_code'];
-            $out_errortext = @$_REQUEST['out_errortext'];
-            $out_lookup_sessionid = $_REQUEST['out_lookup_sessionid'];
+//            $out_request_resp_code = $_REQUEST['out_request_resp_code'];
+//            $out_errortext = @$_REQUEST['out_errortext'];
+            //htmlspecialchars( ,ENT_QUOTES,'UTF-8');  
+            $out_request_resp_code = htmlspecialchars($_REQUEST['out_request_resp_code'],ENT_QUOTES,'UTF-8');  
+           //$out_request_resp_code = strip_tags(addslashes($_REQUEST['out_request_resp_code']));
+             // $out_errortext = strip_tags(addslashes(@$_REQUEST['out_errortext']));
+              $out_errortext = htmlspecialchars(@$_REQUEST['out_errortext'],ENT_QUOTES,'UTF-8');
+//              $out_lookup_sessionid =  strip_tags(addslashes($_REQUEST['out_lookup_sessionid']));
+              $out_lookup_sessionid = htmlspecialchars($_REQUEST['out_lookup_sessionid'],ENT_QUOTES,'UTF-8');
             echo $out_request_resp_code." : ".$out_errortext." : ".$out_lookup_sessionid;
             //a86e5c89-4b4c-4c10-b6ea-31de4ae77261
             $this->getTokenizedCard($out_lookup_sessionid);

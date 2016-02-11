@@ -132,7 +132,7 @@ const ALLOW_PRODUCTION = FALSE;
 						->add_rules('smtp_host', 'required')
 						->add_rules('smtp_port', 'required')
 						->add_rules('smtp_username', 'required');
-						//->add_rules('smtp_password', 'required');
+						//->add_rules('smtp_pswd', 'required');
 
 			
 			if($post->validate()){
@@ -231,7 +231,7 @@ const ALLOW_PRODUCTION = FALSE;
 							->add_rules('Paypal_API_Password','required')
 							->add_rules('Paypal_API_Signature','required')
 							->add_rules('authorizenet_transaction_key','required')
-							->add_rules('authorizenet_api_id','required')
+							->add_rules('authnet_api_id','required')
 							->add_rules('referral_amount','required','chars[.0-9]')
 							->add_rules('monthly_storecredit','required')
 							->add_rules('pay_later','required');

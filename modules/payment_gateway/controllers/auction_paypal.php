@@ -11,7 +11,7 @@ class Auction_Paypal_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = $s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;
 
 			$this->Api_Username = "nandhu_1337947987_biz_api1.gmail.com";
@@ -38,27 +38,27 @@ class Auction_Paypal_Controller extends Layout_Controller
 	{ 
 
 		if($_POST){  
-				$deal_id = $this->input->post("deal_id");
-				$merchant_id = $this->input->post("merchant_id"); 
-				$bid_id = $this->input->post("bid_id"); 
-				$deal_key = $this->input->post("deal_key"); 
-				$url_title = $this->input->post("url_title");   
+				$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+				$merchant_id = strip_tags(addslashes($this->input->post("merchant_id"))); 
+				$bid_id = strip_tags(addslashes($this->input->post("bid_id"))); 
+				$deal_key = strip_tags(addslashes($this->input->post("deal_key"))); 
+				$url_title = strip_tags(addslashes($this->input->post("url_title")));   
 				$referral_amount = 0;
-				$item_qty = $this->input->post("P_QTY");
-				$amount = $this->input->post("amount");			
-				$deal_value = $this->input->post("deal_value");
-				$shipping_amount = $this->input->post("shipping_amount");
+				$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+				$amount = strip_tags(addslashes($this->input->post("amount")));			
+				$deal_value = strip_tags(addslashes($this->input->post("deal_value")));
+				$shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
 				$tax_amount = 0;
 					
 				$tot_amount = $tot_amount1 = $amount+$shipping_amount;
 			
-				$adderss1 = $this->input->post("adderss1");
-				$adderss2 = $this->input->post("adderss2");
-				$state = $this->input->post("state");
-				$city = $this->input->post("city");
-				$country = $this->input->post("country");
-				$zip = $this->input->post("postal_code");
-				$phone = $this->input->post("phone");
+				$adderss1 = strip_tags(addslashes($this->input->post("adderss1")));
+				$adderss2 = strip_tags(addslashes($this->input->post("adderss2")));
+				$state = strip_tags(addslashes($this->input->post("state")));
+				$city = strip_tags(addslashes($this->input->post("city")));
+				$country = strip_tags(addslashes($this->input->post("country")));
+				$zip = strip_tags(addslashes($this->input->post("postal_code")));
+				$phone = strip_tags(addslashes($this->input->post("phone")));
 
 				$post = arr::to_object($this->input->post());
 					$paymentType = "Sale";
@@ -151,30 +151,30 @@ class Auction_Paypal_Controller extends Layout_Controller
 	{
 
 		if($_POST){ 	
-			$deal_id = $this->input->post("deal_id"); 
-			$merchant_id = $this->input->post("merchant_id"); 
-			$bid_id = $this->input->post("bid_id"); 
-			$deal_key = $this->input->post("deal_key"); 
-		    $url_title = $this->input->post("url_title");   
+			$deal_id = strip_tags(addslashes($this->input->post("deal_id"))); 
+			$merchant_id = strip_tags(addslashes($this->input->post("merchant_id"))); 
+			$bid_id = strip_tags(addslashes($this->input->post("bid_id"))); 
+			$deal_key = strip_tags(addslashes($this->input->post("deal_key"))); 
+		    $url_title = strip_tags(addslashes($this->input->post("url_title")));   
 			$referral_amount = 0;
-			$item_qty = $this->input->post("P_QTY");
-			$amount = $this->input->post("amount");			
-			$deal_value = $this->input->post("deal_value");
-			$shipping_amount = $this->input->post("shipping_amount");
+			$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+			$amount = strip_tags(addslashes($this->input->post("amount")));			
+			$deal_value = strip_tags(addslashes($this->input->post("deal_value")));
+			$shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
 			$tax_amount = 0;			
 
 		    $tot_amount = $amount+$shipping_amount;
 			$paymentType = "Sale";
 			$captured = 0;
 			
-			$shipping_name = $this->input->post("shipping_name");			
-			$adderss1 = $this->input->post("adderss1");
-			$adderss2 = $this->input->post("adderss2");
-			$state = $this->input->post("state");
-			$city = $this->input->post("city");
-			$country = $this->input->post("country");
-			$zip = $this->input->post("postal_code");
-			$phone = $this->input->post("phone");
+			$shipping_name = strip_tags(addslashes($this->input->post("shipping_name")));			
+			$adderss1 = strip_tags(addslashes($this->input->post("adderss1")));
+			$adderss2 = strip_tags(addslashes($this->input->post("adderss2")));
+			$state = strip_tags(addslashes($this->input->post("state")));
+			$city = strip_tags(addslashes($this->input->post("city")));
+			$country = strip_tags(addslashes($this->input->post("country")));
+			$zip = strip_tags(addslashes($this->input->post("postal_code")));
+			$phone = strip_tags(addslashes($this->input->post("phone")));
 			
 			        //$tot_bid_increment = $deal_price + $bid_increment;
 			        $deal_custom_details = $deal_id."--".$amount."--".$shipping_amount."--".$tax_amount."--".$captured."--".$merchant_id."--"."--".$item_qty."--".$adderss1."--".$adderss2."--".$state."--".$city."--".$country."--".$zip."--".$phone."--".$shipping_name."--".$bid_id;

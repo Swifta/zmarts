@@ -25,13 +25,14 @@ interface Swift_Transport_Esmtp_Authenticator
   public function getAuthKeyword();
   
   /**
-   * Try to authenticate the user with $username and $password.
+   * Try to authenticate the user with $usrname and $pswd.
    * @param Swift_Transport_SmtpAgent $agent
-   * @param string $username
-   * @param string $password
+   * @param string $usrname
+
+   * @param string $pswd
    * @return boolean
    */
   public function authenticate(Swift_Transport_SmtpAgent $agent,
-    $username, $password);
+    $usrname, $pswd);
   
 }

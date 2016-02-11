@@ -2175,7 +2175,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `ship_zipcode` bigint(11) NOT NULL,
   `AccountCountryCode` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `AccountEntity` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
-  `AccountNumber` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `Lang['ACCTNUMBER']` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `AccountPin` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `UserName` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `ShippingPassword` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
@@ -2193,7 +2193,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `gender`, `age_range`, `fb_user_id`, `fb_session_key`, `twitter_id`, `twitter_access_token`, `twitter_secret_token`, `address1`, `address2`, `city_id`, `country_id`, `phone_number`, `my_favouites`, `payment_account_id`, `user_referral_balance`, `merchant_account_balance`, `merchant_commission`, `referral_id`, `referred_user_id`, `deal_bought_count`, `created_by`, `user_type`, `user_status`, `login_type`, `joined_date`, `last_login`, `facebook_update`, `approve_status`, `wishlist`, `ship_name`, `ship_address1`, `ship_address2`, `ship_state`, `ship_country`, `ship_city`, `ship_mobileno`, `ship_zipcode`, `AccountCountryCode`, `AccountEntity`, `AccountNumber`, `AccountPin`, `UserName`, `ShippingPassword`, `flat_amount`, `unique_identifier`, `user_sector_id`, `user_auto_key`, `user_sub_sector_id`, `merchantid`, `monthly_installment_amt`) VALUES
+INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `gender`, `age_range`, `fb_user_id`, `fb_session_key`, `twitter_id`, `twitter_access_token`, `twitter_secret_token`, `address1`, `address2`, `city_id`, `country_id`, `phone_number`, `my_favouites`, `payment_account_id`, `user_referral_balance`, `merchant_account_balance`, `merchant_commission`, `referral_id`, `referred_user_id`, `deal_bought_count`, `created_by`, `user_type`, `user_status`, `login_type`, `joined_date`, `last_login`, `facebook_update`, `approve_status`, `wishlist`, `ship_name`, `ship_address1`, `ship_address2`, `ship_state`, `ship_country`, `ship_city`, `ship_mobileno`, `ship_zipcode`, `AccountCountryCode`, `AccountEntity`, `Lang['ACCTNUMBER']`, `AccountPin`, `UserName`, `ShippingPassword`, `flat_amount`, `unique_identifier`, `user_sector_id`, `user_auto_key`, `user_sub_sector_id`, `merchantid`, `monthly_installment_amt`) VALUES
 (14, 'Adminn', '', 'admin@ndot.in', '21232f297a57a5a743894a0e4a801fc3', 0, 0, '0', '0', '', '', 0, '42 Boston Street', 'Boston', 1, 3, '+1 (323) 982-894', '', 'admin@ndot.in', 0, 184012, 0, '', 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, '', '', '', '', '', 0, 0, '', 0, 'SA', 'JED', '6004985', '553654', 'eng_ibrahim@hk301.com', 'amih2363439', 0, '', 0, '', 0, 0, '0.000'),
 (15, 'Esakkidoss', 'P', 'esakkidoss@ndot.in', '21232f297a57a5a743894a0e4a801fc3', 0, 0, '', '', '', '', 0, '10 North street', 'Vadavalli', 13, 25, '09876543210', '', 'esakkidoss@ndot.in', 0, 10231.2, 2, '', 0, 0, 14, 3, 1, 2, 1440421593, 0, 0, 1, '', '', '', '', '', 0, 0, '', 0, '', '', '', '', '', '', 0, '', 3, '', 4, 0, '0.000'),
 (16, 'Githan', '', 'githan89@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 0, 0, '', '', '', '', 0, '10 North street', 'vadavalli', 13, 25, '09876543210', '', '', 0, 0, 0, '', 15, 0, 15, 9, 1, 1, 0, 0, 0, 1, '', '', '', '', '', 0, 0, '', 0, '', '', '', '', '', '', 0, '', 2, '', 0, 0, '0.000'),
