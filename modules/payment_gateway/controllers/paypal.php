@@ -17,7 +17,7 @@ class Paypal_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = $s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;
 
 			$this->Live_Mode = $s->paypal_payment_mode;

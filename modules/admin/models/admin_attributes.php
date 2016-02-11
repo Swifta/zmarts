@@ -138,8 +138,10 @@ class Admin_attributes_Model extends Model
                }
                $attr_id = rtrim($attr_id,",");
                if($attr_id!=""){
-				$this->db->query(" DELETE ab FROM product_attribute AS ab WHERE ab.attribute_id IN ($attr_id) "); // for delete the releted product attributes
-				}
+		//$this->db->query(" DELETE ab FROM product_attribute AS ab WHERE ab.attribute_id IN ($attr_id) "); // for delete the releted product attributes
+		 $this->db->delete("product_attribute")->in("attribute_id", array($attr_id));
+                                
+               }
              
                $this->db->delete("attribute",array("attribute_group" => $group_id )); // for delete the releted atttributes
               

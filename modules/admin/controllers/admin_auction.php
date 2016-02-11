@@ -59,12 +59,13 @@ class Admin_auction_Controller extends website_Controller
 									$i=1;
 										foreach(arr::rotate($_FILES['image']) as $files){
 											if($files){			
-												$filename = upload::save($files);
+												$filename = basename(upload::save($files));
 													if($filename!=''){ 
 														
 														$IMG_NAME = $deal_key."_".$i.'.png';
 														
 											                        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
+																	$filename = realpath($filename);
 														unlink($filename);
 													}
 										}
@@ -322,6 +323,7 @@ class Admin_auction_Controller extends website_Controller
 										if($files){	
 											
 											$filename = upload::save($files); 
+											$filename = basename($filename);
 											if($filename!=''){ 
 												if($i==1){
 													$IMG_NAME = $deal_key."_1.png";
@@ -338,6 +340,7 @@ class Admin_auction_Controller extends website_Controller
 											
 
 											        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
+													$filename = basename($filename);
 												unlink($filename);
 											}
 										}
@@ -1259,3 +1262,4 @@ class Admin_auction_Controller extends website_Controller
 	
 		
 }
+

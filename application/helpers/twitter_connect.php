@@ -9,8 +9,8 @@ include APPPATH."/vendor/twitter/EpiOAuth.php";
 include APPPATH."/vendor/twitter/EpiTwitter.php";
 include APPPATH."/vendor/twitter/secret.php";
 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-$oauth_token = strip_tags(addslashes($_GET['oauth_token']));
-        if($oauth_token == '')
+$oauth_tkn = strip_tags(addslashes($_GET['oauth_tkn']));
+        if($oauth_tkn == '')
   	  { 
 	  	$url = $twitterObj->getAuthorizationUrl();
   		echo "<div style='width:200px;margin-top:200px;margin-left:auto;margin-right:auto'>";
@@ -19,16 +19,16 @@ $oauth_token = strip_tags(addslashes($_GET['oauth_token']));
           } 
 	else
 	  {
-		//$twitterObj->setToken($_GET['oauth_token']);
-                $twitterObj->setToken(strip_tags(addslashes($_GET['oauth_token'])));
-		$token = $twitterObj->getAccessToken();
-		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);	  	
-		$_SESSION['ot'] = $token->oauth_token;
-		$_SESSION['ots'] = $token->oauth_token_secret;
+		//$twitterObj->setToken($_GET['oauth_tkn']);
+                $twitterObj->setToken(strip_tags(addslashes($_GET['oauth_tkn'])));
+		$tkn = $twitterObj->getAccessToken();
+		$twitterObj->setToken($tkn->oauth_tkn, $tkn->oauth_tkn_secret);	  	
+		$_SESSION['ot'] = $tkn->oauth_tkn;
+		$_SESSION['ots'] = $tkn->oauth_tkn_secret;
 		$twitterInfo= $twitterObj->get_accountVerify_credentials();
 		$twitterInfo->response;
 		
-		$username = $twitterInfo->screen_name;
+		$usrname = $twitterInfo->screen_name;
 		$profilepic = $twitterInfo->profile_image_url;
 
 		include 'update.php';

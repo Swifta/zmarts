@@ -30,7 +30,7 @@ class Welcome_Controller extends Layout_Controller
 			$this->Api_Signature = "A0YqGlJEML24al4qg2LnV2U.g2ThAfXD37NEiWIVcgjl1pxlygg-XaVs";
 
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = @$s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;			
 
 			$this->Live_Mode = $s->paypal_payment_mode;

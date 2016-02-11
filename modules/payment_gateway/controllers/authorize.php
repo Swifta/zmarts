@@ -13,7 +13,7 @@ class Authorize_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 		    $this->Live_Mode = $s->paypal_payment_mode;
 		    require_once APPPATH.'vendor/authorize.net/AuthorizeNet.php';
-	        define("AUTHORIZENET_API_LOGIN_ID", $s->authorizenet_api_id);
+	        define("AUTHORIZENET_API_LOGIN_ID", $s->authnet_api_id);
 	        define("AUTHORIZENET_TRANSACTION_KEY", $s->authorizenet_transaction_key);
 	        define("AUTHORIZENET_SANDBOX", true);
 			if($this->Live_Mode == 1){
@@ -24,21 +24,21 @@ class Authorize_Controller extends Layout_Controller
 		foreach($this->generalSettings as $s){
 
 			$this->Api_Username = $s->paypal_account_id;
-			$this->Api_Password = $s->paypal_api_password;
+			$this->Api_Password = $s->paypal_api_pswd;
 			$this->Api_Signature = $s->paypal_api_signature;
 
 			$this->Live_Mode = $s->paypal_payment_mode;
 			$this->API_Endpoint = "https://api-3t.sandbox.paypal.com/nvp";
-			$this->Paypal_Url = "https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=";
+			$this->Paypal_Url = "https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&tkn=";
 
 			if($this->Live_Mode == 1){
 				$this->API_Endpoint = "https://api-3t.paypal.com/nvp";
-				$this->Paypal_Url = "https://www.paypal.com/webscr&cmd=_express-checkout&token=";
+				$this->Paypal_Url = "https://www.paypal.com/webscr&cmd=_express-checkout&tkn=";
 			}
 
 		}
 		$this->Api_Version = "76.0";
-		$this->Api_Subject = $this->AUTH_token = $this->AUTH_signature = $this->AUTH_timestamp = '';
+		$this->Api_Subject = $this->AUTH_tkn = $this->AUTH_signature = $this->AUTH_timestamp = '';
 		
 	}
 
@@ -345,15 +345,15 @@ class Authorize_Controller extends Layout_Controller
 
 		if($_POST){
 				$referral_amount = 0;
-				$auction_amount = $this->input->post("amount");
-				$deal_id = $this->input->post("deal_id");
-				$qty = $this->input->post("P_QTY");
-				$merchant_id = $this->input->post("merchant_id");
-				$bid_id = $this->input->post("bid_id");
-				$shipping_amount = $this->input->post("shipping_amount");
+				$auction_amount = strip_tags(addslashes($this->input->post("amount")));
+				$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+				$qty = strip_tags(addslashes($this->input->post("P_QTY")));
+				$merchant_id = strip_tags(addslashes($this->input->post("merchant_id")));
+				$bid_id = strip_tags(addslashes($this->input->post("bid_id")));
+				$shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
 				$tax_amount = 0;
                 $pay_amount = $pay_amount1 = $auction_amount+$shipping_amount+$tax_amount;
-                $product_title = $this->input->post("auction_title");
+                $product_title = strip_tags(addslashes($this->input->post("auction_title")));
 
                 $post = arr::to_object($this->input->post());
 
@@ -690,7 +690,7 @@ class Authorize_Controller extends Layout_Controller
 				foreach($deals_details as $D){
 					$dealURL = PATH."deals/".$D->deal_key.'/'.$D->url_title.".html";
 					$message = $this->Lang['PURS_DEAL'].$D->deal_title." ".$dealURL.$this->Lang['LIMIT_OFF'];
-					$post_arg = array("access_token" => $U->fb_session_key, "message" => $message, "id" => $U->fb_user_id, "method" => "post");
+					$post_arg = array("access_tkn" => $U->fb_session_key, "message" => $message, "id" => $U->fb_user_id, "method" => "post");
 					common::fb_curl_function("https://graph.facebook.com/feed", "POST", $post_arg );
 				}
 			}*/
@@ -732,7 +732,7 @@ class Authorize_Controller extends Layout_Controller
 				foreach($deals_details as $D){
 					$dealURL = PATH."deals/".$D->deal_key.'/'.$D->url_title.".html";
 					$message = $this->Lang['PURS_DEAL'].$D->deal_title." ".$dealURL.$this->Lang['LIMIT_OFF'];
-					$post_arg = array("access_token" => $U->fb_session_key, "message" => $message, "id" => $U->fb_user_id, "method" => "post");
+					$post_arg = array("access_tkn" => $U->fb_session_key, "message" => $message, "id" => $U->fb_user_id, "method" => "post");
 					common::fb_curl_function("https://graph.facebook.com/feed", "POST", $post_arg);
 				}
 			}
@@ -888,7 +888,7 @@ class Authorize_Controller extends Layout_Controller
 			if($row->facebook_update == 1){
 					$dealURL = PATH."auction/".$row->deal_key.'/'.$row->url_title.".html";
 					$message = $this->Lang['ACT_PURCASH'].$row->deal_title." ".$dealURL;
-					$post_arg = array("access_token" => $row->fb_session_key, "message" => $message, "id" => $row->fb_user_id, "method" => "post");
+					$post_arg = array("access_tkn" => $row->fb_session_key, "message" => $message, "id" => $row->fb_user_id, "method" => "post");
 					common::fb_curl_function("https://graph.facebook.com/feed", "POST", $post_arg );
 			}
 			$from = CONTACT_EMAIL;
@@ -915,7 +915,7 @@ class Authorize_Controller extends Layout_Controller
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 
-		if($this->AUTH_token && $this->AUTH_signature && $this->AUTH_timestamp){
+		if($this->AUTH_tkn && $this->AUTH_signature && $this->AUTH_timestamp){
 			$headers_array[] = "X-PP-AUTHORIZATION: ".$nvpheader;
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers_array);
 			curl_setopt($ch, CURLOPT_HEADER, false);
@@ -954,8 +954,8 @@ class Authorize_Controller extends Layout_Controller
 		elseif($this->Api_Username && $this->Api_Password && $this->Api_Signature) {
 			$nvpHeaderStr = "&PWD=".urlencode($this->Api_Password)."&USER=".urlencode($this->Api_Username)."&SIGNATURE=".urlencode($this->Api_Signature);
 		}
-		elseif ($this->AUTH_token && $this->AUTH_signature && $this->AUTH_timestamp) {
-			$nvpHeaderStr = $this->formAutorization($this->AUTH_token,$this->AUTH_signature,$this->AUTH_timestamp);
+		elseif ($this->AUTH_tkn && $this->AUTH_signature && $this->AUTH_timestamp) {
+			$nvpHeaderStr = $this->formAutorization($this->AUTH_tkn,$this->AUTH_signature,$this->AUTH_timestamp);
 		}
 		elseif($this->Api_Subject) {
 			$nvpHeaderStr = "&SUBJECT=".urlencode($this->Api_Subject);
@@ -965,9 +965,9 @@ class Authorize_Controller extends Layout_Controller
 
 	/** form Autorization**/
 
-	private function formAutorization($auth_token,$auth_signature,$auth_timestamp)
+	private function formAutorization($auth_tkn,$auth_signature,$auth_timestamp)
 	{
-		$authString="token=".$auth_token.",signature=".$auth_signature.",timestamp=".$auth_timestamp ;
+		$authString="tkn=".$auth_tkn.",signature=".$auth_signature.",timestamp=".$auth_timestamp ;
 		return $authString;
 	}
 

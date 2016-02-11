@@ -49,6 +49,7 @@ class Store_admin_Controller extends website_Controller
 		if($_POST){
 			
 		
+
 //			$email = trim($this->input->post("email"));
 //			$pswd = $this->input->post("password");
 //                        
@@ -240,7 +241,7 @@ class Store_admin_Controller extends website_Controller
 								if($filename!=''){
 									$IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
-									unlink($filename);
+									unlink(realpath($filename));
 								}
 							}
 							$i++;
@@ -477,7 +478,7 @@ class Store_admin_Controller extends website_Controller
                                                                         }
                                                                         $IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
-                                                                        unlink($filename);
+                                                                        unlink(realpath($filename));
                                                                 }
                                                         }
                                                         $i++;
@@ -655,12 +656,12 @@ class Store_admin_Controller extends website_Controller
 								foreach($email as $mail){
 									$mails = explode("__",$mail);
 									$useremail = $this->mail= $mails[0];
-									$username =  $mails[1];
-									if(isset($username) && isset($useremail))
+									$usrname =  $mails[1];
+									if(isset($usrname) && isset($useremail))
 										$message = " <p> ".$post->message." </p>";
 										$message .= new View ("admin_deal/mail_deal");
 										 $this->email_id = $useremail;
-                                                                                $this->name = $username;
+                                                                                $this->name = $usrname;
                                                                                 $this->message = $message;
                                                                                 $fromEmail = NOREPLY_EMAIL;
                                                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -896,7 +897,7 @@ class Store_admin_Controller extends website_Controller
 											$IMG_NAME = $deal_key."_".$i.'.png';
 
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
-											unlink($filename);
+											unlink(realpath($filename));
 										}
 									}
 								$i++;
@@ -1162,7 +1163,7 @@ class Store_admin_Controller extends website_Controller
 									}
 									$IMG_NAME = $deal_key."_".$i.'.png';
 									common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
-									unlink($filename);
+									unlink(realpath($filename));
 								}
 							}
 							$i++;
@@ -1495,12 +1496,12 @@ class Store_admin_Controller extends website_Controller
 					foreach($email as $mail){
 						$mails = explode("__",$mail);
 						$useremail =$this->mail=  $mails[0];
-						$username =  $mails[1];
-						if(isset($username) && isset($useremail))
+						$usrname =  $mails[1];
+						if(isset($usrname) && isset($useremail))
 							$message = " <p> ".$post->message." </p>";
 							$message .= new View ("admin_product/mail_product");
 							$this->email_id = $useremail;
-                                                $this->name = $username;
+                                                $this->name = $usrname;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -1683,7 +1684,7 @@ class Store_admin_Controller extends website_Controller
 				                        if($filename!=''){
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
 			                            		common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-					                        unlink($filename);
+					                        unlink(realpath($filename));
 				                        }
                                                    }
                                                 $i++;
@@ -1940,7 +1941,7 @@ class Store_admin_Controller extends website_Controller
                                                                 }
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
                                                                 common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-                                                                unlink($filename);
+                                                                unlink(realpath($filename));
                                                         }
                                                 }
                                                 $i++;
@@ -2164,12 +2165,12 @@ class Store_admin_Controller extends website_Controller
 					foreach($email as $mail){
 					$mails = explode("__",$mail);
 					$useremail = $this->mail= $mails[0];
-					$username =  $mails[1];
-					if(isset($username) && isset($useremail))
+					$usrname =  $mails[1];
+					if(isset($usrname) && isset($useremail))
 					$message = " <p> ".$post->message." </p>";
 						$message .= new View ("admin_auction/mail_auction");
 						$this->email_id = $useremail;
-                                                $this->name = $username;
+                                                $this->name = $usrname;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -3058,7 +3059,7 @@ class Store_admin_Controller extends website_Controller
 					$status = $this->merchant->forgot_password($email,$pswd);
 						if($status == 1){				
 						        
-					        $users = $this->merchant->get_user_details_list($email);
+					        $users = $this->merchant->get_usr_details_list($email);
 					        $userid = $users->current()->user_id;
 							$name = $users->current()->firstname;
 							$email = $users->current()->email;
@@ -3510,7 +3511,7 @@ class Store_admin_Controller extends website_Controller
 						$temp = explode('.',basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
-						$path = DOCROOT.'upload/merchant_excel/';
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
 
 					}
@@ -3709,7 +3710,7 @@ class Store_admin_Controller extends website_Controller
 								
 								else
 								{ 
-									unlink($inputFileName);
+									unlink(realpath($inputFileName));
 									common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				                    			url::redirect(PATH."store-admin/manage-products.html");
 								}
@@ -3717,7 +3718,7 @@ class Store_admin_Controller extends website_Controller
 							
 			}  
 	 } 
-				unlink($inputFileName);
+				unlink(realpath($inputFileName));
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."store-admin/manage-products.html");	
 						
@@ -4007,11 +4008,11 @@ class Store_admin_Controller extends website_Controller
 						if(($modules_name != $old_modules_name) ){
 
 							
-							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
+							$old_modules_file = realpath(DOCROOT.'modules/'.$old_modules_name).'/config/routes.php';
 
 							$old_line = file($old_modules_file);
 
-							$old_file = DOCROOT.'modules/'.$old_modules_name.'/config/main_routes.php';
+							$old_file = realpath(DOCROOT.'modules/'.$old_modules_name).'/config/main_routes.php';
 							$old_f = fopen($old_file, "r");
 
 							unset($old_line[0]);
@@ -4043,7 +4044,7 @@ class Store_admin_Controller extends website_Controller
 							$f = fopen($main_routes, "r");
 
 
-							$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+							$file = realpath(DOCROOT.'modules/'.$modules_name).'/config/routes.php';
 							$fp = fopen($file, "a");
 						
 							while ( $line = fgets($f, 1000) ) {
@@ -4123,15 +4124,15 @@ class Store_admin_Controller extends website_Controller
 											$string = str_replace(".", "", substr($ext, 0, $lastDot)) . substr($ext, $lastDot);
 											$path = explode('.',$string);
 											$extension = end($path);
-											$f=file_get_contents($filename);
-											file_put_contents(DOCROOT.'images/newsletter/newsletter.'.$extension,$f);
+											$f=file_get_contents(realpath($filename));
+											file_put_contents(realpath(DOCROOT.'images/newsletter/newsletter.').$extension,$f);
 											
 										}
 							        }
 							    $i++;
 							}
 							
-                                        $file[0]=DOCROOT.'images/newsletter/newsletter.'.$extension;
+                                        $file[0]=  realpath(DOCROOT.'images/newsletter/newsletter.').$extension;
                                         }
                                         $file1=array();
                                         pdf::template_create($post->template,$post->subject,$post->message);
@@ -4522,7 +4523,7 @@ class Store_admin_Controller extends website_Controller
 		if($status=="2") {    //approve
 			
 			$this->product_list1 = $this->merchant->get_storecredits_product_details($storecreditid,$productid);
-			$this->user_details = $this->merchant->get_user_details($storecreditid);
+			$this->user_details = $this->merchant->get_usr_details($storecreditid);
 			$change_status = $this->merchant->update_storecredit_status($status,$storecreditid);
 			$message_merchant = new View("themes/".THEME_NAME."/store_credits/storecredit_merchant_approvemail");
 			$this->username = $this->user_details->current()->firstname;
@@ -4539,7 +4540,7 @@ class Store_admin_Controller extends website_Controller
 			$change_status = $this->merchant->update_storecredit_status($status,$storecreditid);
 		} else if($status=="4") { // after Purchase next installment payment request mail
 			$this->product_list1 = $this->merchant->get_storecredits_product_details($storecreditid,$productid);
-			$this->user_details = $this->merchant->get_user_details($storecreditid);
+			$this->user_details = $this->merchant->get_usr_details($storecreditid);
 			$change_status = $this->merchant->update_storecredit_status($status,$storecreditid);
 			$message_merchant = new View("themes/".THEME_NAME."/store_credits/storecredit_merchant_approvemail");
 			$this->username = $this->user_details->current()->firstname;

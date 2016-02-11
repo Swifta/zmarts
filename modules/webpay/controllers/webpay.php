@@ -43,7 +43,7 @@ class Webpay_Controller extends Layout_Controller
         public function ajax_more_details(){
             if(isset($_POST['transaction_id'])){
                 $paint_red = "red";
-                $details = json_decode($this->webpay->getTransactionDetails($_POST['transaction_id']));
+                $details = json_decode($this->webpay->getTransactionDetails(strip_tags(addslashes($_POST['transaction_id']))));
                 if($details->status == "Success"){
                     $paint_red = "green";
                 }
@@ -366,7 +366,7 @@ class Webpay_Controller extends Layout_Controller
 		if($_POST){
 
 			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
-		        $this->userPost = strip_tags(addslashes($this->input->post()));
+		        $this->userPost = $this->input->post();
 			$product_color="";
 			$paymentType = "INTERSWITCH";
 			$captured = 0;

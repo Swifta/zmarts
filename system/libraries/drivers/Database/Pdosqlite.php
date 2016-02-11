@@ -246,7 +246,7 @@ class Database_Pdosqlite_Driver extends Database_Driver {
 	public function list_fields($table, $query = FALSE)
 	{
 		static $tables;
-		if (is_object($query))
+		if (is_object($qry))
 		{
 			if (empty($tables[$table]))
 			{

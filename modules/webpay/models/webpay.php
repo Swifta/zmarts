@@ -411,8 +411,9 @@ class Webpay_Model extends Model
 	public function update_referral_amount($ref_user_id = "")
 	{
 		$referral_amount = REFERRAL_AMOUNT;
-		
-		$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
+		$this->db->update("users", array("user_referral_balance"=>new Database_Expression('user_referral_balance+'.$referral_amount)),
+                        array("user_id" => $ref_user_id));
+		//$this->db->query("update users set user_referral_balance = user_referral_balance+$referral_amount where user_id = $ref_user_id");
 		return;
 	}
 
@@ -484,12 +485,24 @@ class Webpay_Model extends Model
 	
 	public function get_products_merchant_list($trans_id="",$merchant_id = "", $type="") 
 	{
-		$condition = "AND t.type != 5";				
+		$condition = "shipping_type = 1 and t.transaction_id ='".$trans_id."' and d.merchant_id ='".$merchant_id."'";				
 		if($type){
-			$condition = " AND t.type = 5 ";
+                    $condition .= " AND t.type = 5 ";
 		}
-		$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and d.merchant_id ='$merchant_id' $condition order by shipping_id DESC "); 
-		
+                else{
+                    $condition.=" AND t.type != 5";
+                }
+		//$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where  $condition order by shipping_id DESC "); 
+		$result = $this->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id")
+                        ->from("shipping_info as s")
+                        ->join("transaction as t", "t.id", "s.transaction_id")
+                        ->join("product as d", "d.deal_id", "t.product_id")
+                        ->join("city", "city.city_id", "s.city")
+                        ->join("stores", "stores.store_id", "d.shop_id")
+                        ->join("users as u", "u.user_id", "s.user_id")
+                        ->where($condition)
+                        ->orderby("shipping_id", "DESC")
+                        ->get();
 		return $result;
 	}
 	

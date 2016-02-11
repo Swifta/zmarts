@@ -211,9 +211,10 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes($_POST['subsector']));
+										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
-										$modules_name = strtolower($sector_details[0]->sector_name);	
+										$modules_name = strtolower($sector_details[0]->sector_name);
+										
 									}
 									
 									
@@ -556,7 +557,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -909,6 +910,7 @@ class Admin_merchant_Controller extends website_Controller {
 									}
 									
 									$this->password = $pswd;
+
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
 									$this->name = strip_tags(addslashes($_POST['username']));
@@ -926,7 +928,7 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes($_POST['subsector']));
+										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -1148,7 +1150,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -1723,7 +1725,9 @@ class Admin_merchant_Controller extends website_Controller {
 													$i=1;
 								foreach(arr::rotate($_FILES['attach']) as $files){
 											if($files){
+												
 										$filename = upload::save($files);
+										$filename = basename($filename);
 											if($filename!=''){
 												//$IMG_NAME = "news_letter";
 												$ext=$filename;

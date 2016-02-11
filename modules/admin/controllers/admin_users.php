@@ -466,6 +466,7 @@ class Admin_users_Controller extends website_Controller {
 								foreach(arr::rotate($_FILES['attach']) as $files){
 											if($files){
 										$filename = upload::save($files);
+										$filename = basename($filename);
 											if($filename!=''){
 												//$IMG_NAME = "news_letter";
 												$ext=$filename;
@@ -473,6 +474,7 @@ class Admin_users_Controller extends website_Controller {
 												$string = str_replace(".", "", substr($ext, 0, $lastDot)) . substr($ext, $lastDot);
 												$path = explode('.',$string);
 												$extension = end($path);
+												$filename = realpath($filename);
 												$f=file_get_contents($filename);
 												file_put_contents(DOCROOT.'images/newsletter/newsletter.'.$extension,$f);
 												

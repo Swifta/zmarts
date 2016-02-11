@@ -417,7 +417,7 @@ class Auction_Paypal_Model extends Model
 	public function get_auction_transaction_bid_amount_data($deal_id = "")
 	{
 	$query = " SELECT * FROM transaction join users on users.user_id =transaction.user_id where transaction.auction_id = $deal_id ORDER BY bid_amount DESC LIMIT 1";
-	$result_high = $this->db->query($query);
+	$result_high = $this->db->query($qry);
 	    if(count($result_high)>0){
 	    $bid_amount_high= $result_high->current()->bid_amount;
 	    $query_count = " SELECT * FROM transaction join users on users.user_id =transaction.user_id where transaction.auction_id = $deal_id and bid_amount = $bid_amount_high"; 
