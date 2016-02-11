@@ -25,11 +25,11 @@ class Ads_Controller extends website_Controller
 		}
 		if($_POST){
 			
-			$this->AddPost = $this->input->post();
+			$this->AddPost = utf8::clean($this->input->post());
 			
 			
 			
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 				
 				->add_rules('ads_position', 'required')
 				->add_rules('pages','required',array($this,'position_exist'),array($this,'home_position_exist'))
@@ -148,7 +148,7 @@ class Ads_Controller extends website_Controller
 		$pg_position = $get_code[2];
 		
 			if($_POST){ 
-				$this->AddPost = $this->input->post();
+				$this->AddPost = utf8::clean($this->input->post());
 				//$addCode = $this->input->raw("post",'ad_code');
 				//$addCode = stripslashes($addCode);
 				$addtitle = $this->AddPost["ad_title"];
@@ -164,7 +164,7 @@ class Ads_Controller extends website_Controller
 				if($z_offer == 1)
 					$redirect_url = '#" onclick="javascript:load_club();return false;';
 				
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('ads_position', 'required')
 						->add_rules('pages','required')

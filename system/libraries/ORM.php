@@ -711,7 +711,7 @@ class ORM_Core {
 
 			if ($this->loaded === TRUE)
 			{
-				$query = $this->db
+				$qry = $this->db
 					->where($this->primary_key, $this->object[$this->primary_key])
 					->update($this->table_name, $data);
 
@@ -720,7 +720,7 @@ class ORM_Core {
 			}
 			else
 			{
-				$query = $this->db
+				$qry = $this->db
 					->insert($this->table_name, $data);
 
 				if ($query->count() > 0)
@@ -1401,7 +1401,7 @@ class ORM_Core {
 		// Save the current query chain (otherwise the next call will clash)
 		$this->db->push();
 
-		$query = $this->db
+		$qry = $this->db
 			->select($model->foreign_key(NULL).' AS id')
 			->from($table)
 			->where($this->foreign_key(NULL, $table), $this->object[$this->primary_key])

@@ -102,7 +102,7 @@ class PHPExcel_CachedObjectStorage_SQLite extends PHPExcel_CachedObjectStorage_C
 		}
 		$this->_storeData();
 
-		$query = "SELECT value FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
+		$qry = "SELECT value FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
 		$cellResultSet = $this->_DBHandle->query($query,SQLITE_ASSOC);
 		if ($cellResultSet === false) {
 			throw new Exception(sqlite_error_string($this->_DBHandle->lastError()));
@@ -136,7 +136,7 @@ class PHPExcel_CachedObjectStorage_SQLite extends PHPExcel_CachedObjectStorage_C
 		}
 
 		//	Check if the requested entry exists in the cache
-		$query = "SELECT id FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
+		$qry = "SELECT id FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
 		$cellResultSet = $this->_DBHandle->query($query,SQLITE_ASSOC);
 		if ($cellResultSet === false) {
 			throw new Exception(sqlite_error_string($this->_DBHandle->lastError()));
@@ -161,7 +161,7 @@ class PHPExcel_CachedObjectStorage_SQLite extends PHPExcel_CachedObjectStorage_C
 		}
 
 		//	Check if the requested entry exists in the cache
-		$query = "DELETE FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
+		$qry = "DELETE FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
 		if (!$this->_DBHandle->queryExec($qry))
 			throw new Exception(sqlite_error_string($this->_DBHandle->lastError()));
 
@@ -175,7 +175,7 @@ class PHPExcel_CachedObjectStorage_SQLite extends PHPExcel_CachedObjectStorage_C
 	 * @return	array of string
 	 */
 	public function getCellList() {
-		$query = "SELECT id FROM kvp_".$this->_TableName;
+		$qry = "SELECT id FROM kvp_".$this->_TableName;
 		$cellIdsResult = $this->_DBHandle->unbufferedQuery($query,SQLITE_ASSOC);
 		if ($cellIdsResult === false)
 			throw new Exception(sqlite_error_string($this->_DBHandle->lastError()));

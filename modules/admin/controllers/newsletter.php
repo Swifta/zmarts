@@ -100,8 +100,8 @@ class Newsletter_Controller extends website_Controller {
 	    if($_POST){
 			$img_check = 0;
 			//$this->userPost = $this->input->post();
-                        $this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+                        $this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
@@ -282,8 +282,8 @@ class Newsletter_Controller extends website_Controller {
 		}
 		$this->newsletter_act = 1;
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
@@ -349,8 +349,8 @@ class Newsletter_Controller extends website_Controller {
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')

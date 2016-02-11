@@ -42,7 +42,7 @@ class Payment_Controller extends Layout_Controller {
 //			$this->userPost = $this->input->post();
 //			$this->url_title = $this->input->post("url_title");
 //			$this->deal_key = $this->input->post("deal_key");
-                        $this->userPost = strip_tags(addslashes($this->input->post()));
+                        $this->userPost = utf8::clean($this->input->post());
 			$this->url_title = strip_tags(addslashes($this->input->post("url_title")));
 			$this->deal_key = strip_tags(addslashes($this->input->post("deal_key")));
 			$post = new Validation($_POST);

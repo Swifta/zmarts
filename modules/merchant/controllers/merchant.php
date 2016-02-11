@@ -169,9 +169,9 @@ class Merchant_Controller extends website_Controller
 		$this->edit_merchant="1";
 		$userid = $this->user_id1;
 			if($_POST){
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
@@ -221,9 +221,9 @@ class Merchant_Controller extends website_Controller
 
 			if($_POST){
 
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('oldpassword','required',array($this, 'check_password'))
 							->add_rules('password','length[5,32]','required')
@@ -257,9 +257,9 @@ class Merchant_Controller extends website_Controller
 		$this->flat_amount="1";
 		$userid = $this->user_id;
 			if($_POST){
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							->add_rules('flat_shipping','required','chars[.0-9]');
 				if($post->validate()){
 					$status = $this->merchant->change_flat_amount($userid, arr::to_object($this->userpost));
@@ -290,9 +290,9 @@ class Merchant_Controller extends website_Controller
 		$this->shipp_acc_setting = "1";
 		$this->mer_settings_act = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
@@ -328,8 +328,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 			        ->add_rules('title', 'required')
 			        ->add_rules('description', array($this,'check_required'),'required')
@@ -554,8 +554,8 @@ class Merchant_Controller extends website_Controller
 			$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 			$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -743,11 +743,11 @@ class Merchant_Controller extends website_Controller
 		        }
 				if($_POST){
 						$this->deal_deatils = $this->merchant->get_deals_data($deal_key, $deal_id);
-						$this->userPost = $this->input->post();
-						$users = $this->input->post("users");
-						$fname = $this->input->post("firstname");
-						$email = $this->input->post("email");
-						$post = Validation::factory(array_merge($_POST,$_FILES))
+						$this->userPost = utf8::clean($this->input->post());
+						$users = strip_tags(addslashes($this->input->post("users")));
+						$fname = strip_tags(addslashes($this->input->post("firstname")));
+						$email = strip_tags(addslashes($this->input->post("email")));
+						$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 										
 										->add_rules('users', 'required')
 										->add_rules('email','required')
@@ -802,9 +802,9 @@ class Merchant_Controller extends website_Controller
 	    $this->add_merchant_shop ="1";
 		$adminid=$this->session->get('user_id');
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = utf8::clean($this->input->post());
 			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
@@ -1050,9 +1050,9 @@ class Merchant_Controller extends website_Controller
 	    $this->mer_merchant_act ="1";
 	    $this->manage_merchant_shop ="1";
 		if($_POST){
-			$this->userpost = $this->input->post();
+			$this->userpost = utf8::clean($this->input->post());
 			//$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($this->userpost,$_FILES))
+			$post = Validation::factory(array_merge($this->userpost,utf8::clean($_FILES)))
 					
 					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
@@ -1652,8 +1652,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -1957,8 +1957,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 				        ->add_rules('title', 'required')
 				        ->add_rules('description','required',array($this,'check_required'))
@@ -2387,14 +2387,13 @@ class Merchant_Controller extends website_Controller
 	        url::redirect(PATH."merchant/manage-products.html");
 	        
 		}
-
 		if($_POST){
 			$this->product_deatils = $this->merchant->get_products_data($deal_key, $deal_id);
-			$this->userPost = $this->input->post();
-			$users = $this->input->post("users");
-			$fname = $this->input->post("firstname");
-			$email = $this->input->post("email");
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$users = strip_tags(addslashes($this->input->post("users")));
+			$fname = strip_tags(addslashes($this->input->post("firstname")));
+			$email = strip_tags(addslashes($this->input->post("email")));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -2617,8 +2616,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -2864,8 +2863,8 @@ class Merchant_Controller extends website_Controller
                 $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js', PATH.'js/multiimage.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 	        if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('description', 'required',array($this,'check_required'))
@@ -3102,11 +3101,11 @@ class Merchant_Controller extends website_Controller
 	                
 		}
                 if($_POST){
-	  		$this->userPost = $this->deal_deatils = $this->input->post();
-			$users = $this->input->post("users");
-			$fname = $this->input->post("firstname");
-			$email = $this->input->post("email");
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+	  		$this->userPost = $this->deal_deatils = utf8::clean($this->input->post());
+			$users = strip_tags(addslashes($this->input->post("users")));
+			$fname = strip_tags(addslashes($this->input->post("firstname")));
+			$email = strip_tags(addslashes($this->input->post("email")));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -3625,10 +3624,10 @@ class Merchant_Controller extends website_Controller
 			$this->winner = 1;
 		if($_POST){
 			$this->type="winner";
-			$email_id = $this->input->post('email');
-			$message = $this->input->post('message');
+			$email_id = strip_tags(addslashes($this->input->post('email')));
+			$message = strip_tags(addslashes($this->input->post('message')));
 			//$this->deal_deatils = $this->merchant->get_deals_data($this->input->post('deal_key'), $this->input->post('deal_id'));
-			$this->deal_deatils = $this->input->post();
+			$this->deal_deatils =utf8::clean( $this->input->post());
 			$message .= new View ("merchant/mail_auction");
 			$message .= "<p></p><p>Thanks & Regards</p> <p>". SITENAME ." Merchant</p>";
 			$fromEmail = NOREPLY_EMAIL;
@@ -3642,8 +3641,8 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant-auction/winner-list.html");
 			
 		}
-		$this->search_key = arr::to_object($this->input->get());
-		$count = $this->merchant->get_winner_count($this->input->get('name'));
+		$this->search_key = arr::to_object(utf8::clean($this->input->get()));
+		$count = $this->merchant->get_winner_count(strip_tags(addslashes($this->input->get('name'))));
 		$this->pagination = new Pagination(array(
 				'base_url'       => 'merchant-auction/winner-list.html/page/'.$page."/",
 				'uri_segment'    => 4,
@@ -3652,7 +3651,7 @@ class Merchant_Controller extends website_Controller
 				'style'          => 'digg',
 				'auto_hide' => TRUE
 		));
-		$search=$this->input->get("id");
+		$search=  strip_tags(addslashes($this->input->get("id")));
 		$this->winner_list = $this->merchant->get_winner_list($this->pagination->sql_offset,$this->pagination->items_per_page, $this->input->get('name'),0);
 
 		if($search =='all'){ // for export all
@@ -4004,9 +4003,9 @@ class Merchant_Controller extends website_Controller
 			
 		if($_POST){
 			
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('pass1', 'required')
 				->add_rules('pass2', 'required', array($this, 'comfirm_pass'), array($this, 'unique_pass'));
@@ -4016,7 +4015,7 @@ class Merchant_Controller extends website_Controller
 				
 				
 				
-				    $pswd = $_POST['pass1'];
+				    $pswd = strip_tags(addslashes($_POST['pass1']));
 					$status = $this->merchant->reset_password($email,$pswd);
 					
 						if($status == 1){
@@ -4056,14 +4055,14 @@ class Merchant_Controller extends website_Controller
 	{
 		$this->captcha = new Captcha;
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('email', 'required')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
-				$email = $this->input->post("email");
+				$email = trim(strip_tags(addslashes($this->input->post("email"))));
 				if(Captcha::valid($this->input->post('captcha'))){
 				        $pswd = text::random($type = 'alnum', $length = 10);
 						
@@ -4833,9 +4832,9 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('terms_conditions','required');
 			if($post->validate()){
@@ -4863,9 +4862,9 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('return_policy','required');
 			if($post->validate()){
@@ -4893,9 +4892,9 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('about_us','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -4957,9 +4956,9 @@ class Merchant_Controller extends website_Controller
 			
 			
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
@@ -5183,9 +5182,9 @@ class Merchant_Controller extends website_Controller
 		$this->mer_moderator_act = "1";
 		if($_POST){
 			$from = CONTACT_EMAIL;    	
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -5348,9 +5347,9 @@ class Merchant_Controller extends website_Controller
 		$this->manage_mer_moderator = "1";
 		$this->mer_moderator_act = "1";
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);			
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));			
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
@@ -5465,9 +5464,9 @@ class Merchant_Controller extends website_Controller
 		$this->mer_settings_act="1";
 		
 	    if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
+			$this->userPost = utf8::clean($this->input->post());
 			$img_check = 0;
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
@@ -5560,8 +5559,8 @@ class Merchant_Controller extends website_Controller
 		$this->duration = "1";
 		$this->mer_settings_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						->add_rules('duration', 'required', 'chars[0-9]');
 			if($post->validate()){
 					$status = $this->merchant->add_duration(arr::to_object($this->userPost));
@@ -5591,8 +5590,8 @@ class Merchant_Controller extends website_Controller
 
 		if($_POST){
 
-		$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+		$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('duration', 'required', 'chars[0-9]');
 			if($post->validate()){
@@ -5670,8 +5669,8 @@ class Merchant_Controller extends website_Controller
 		$this->add_free_gift = "1";
 		$this->mer_products_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 			                        
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
@@ -5780,8 +5779,8 @@ class Merchant_Controller extends website_Controller
 		$this->free_gift = "1";
 		$this->mer_products_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
@@ -6088,8 +6087,8 @@ class Merchant_Controller extends website_Controller
 		$this->mer_settings_act="1";
 		if($_POST){
 			
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
@@ -6153,8 +6152,8 @@ class Merchant_Controller extends website_Controller
 		
 				if($_POST){
 					
-					$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+					$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
@@ -6196,8 +6195,8 @@ class Merchant_Controller extends website_Controller
 		$this->attributegroup_settings = 1;
 		$this->mer_settings_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('groupname', 'required',array($this,'check_attrgroup_exist'))
 					->add_rules('sort_order', 'chars[0-9]');
@@ -6255,8 +6254,8 @@ class Merchant_Controller extends website_Controller
 		$attribute_id =base64_decode($attribute_id);
 		
 				if($_POST){
-					$this->userPost = $this->input->post();
-					$post = Validation::factory($_POST)
+					$this->userPost = utf8::clean($this->input->post());
+					$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('groupname', 'required')
 					->add_rules('sort_order', 'chars[0-9]');
@@ -6308,14 +6307,14 @@ class Merchant_Controller extends website_Controller
 		$this->category = "1";
 		$this->mer_settings_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						->add_rules('category', 'required', 'chars[a-zA-Z0-9 _&-]')
 						->add_rules('list_icon', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) { // check the type
-						$category = $this->input->post('category');
-						$cat_status = $this->input->post('status');
+						$category = strip_tags(addslashes($this->input->post('category')));
+						$cat_status = strip_tags(addslashes($this->input->post('status')));
 						$deal = isset($_POST['deal'])? 1 : 0;
 						$product = isset($_POST['product'])? 1 : 0;
 						$auction = isset($_POST['auction'])? 1 : 0;
@@ -6847,8 +6846,8 @@ class Merchant_Controller extends website_Controller
 		
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
@@ -6950,8 +6949,8 @@ class Merchant_Controller extends website_Controller
 		
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
@@ -7179,8 +7178,8 @@ class Merchant_Controller extends website_Controller
 	public function add_template(){
 		$this->newsletter_act = $this->mer_settings_act = 1;
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
@@ -7236,8 +7235,8 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')

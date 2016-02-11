@@ -25,8 +25,8 @@ const ALLOW_PRODUCTION = FALSE;
 		
 		$this->general_settings = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('name', 'required', 'chars[a-zA-Z0-9_ -.,@%\']')
 							->add_rules('title', 'required','chars[a-zA-Z0-9_ -.,@%|\']')
@@ -82,9 +82,9 @@ const ALLOW_PRODUCTION = FALSE;
 		}
 		$this->email_settings = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('name', 'required', 'chars[a-zA-Z0-9_ -.,@%\']')
 						->add_rules('contact_email', 'required','valid::email')
 						->add_rules('webmaster_email', 'required', 'valid::email')
@@ -125,9 +125,9 @@ const ALLOW_PRODUCTION = FALSE;
 		/** SENDGRID**/
 	 	if(isset($_POST['sendgrid'])){ 
 
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('smtp_host', 'required')
 						->add_rules('smtp_port', 'required')
@@ -151,9 +151,9 @@ const ALLOW_PRODUCTION = FALSE;
 
 		if(isset($_POST['smtp'])){ 
 
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('host', 'required')
 						->add_rules('port', 'required')
@@ -176,9 +176,9 @@ const ALLOW_PRODUCTION = FALSE;
 		/** MAILCHIMP **/
 		if(isset($_POST['mailchimp'])){ 
 
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('api', 'required')
 						->add_rules('listid', 'required')
@@ -213,9 +213,9 @@ const ALLOW_PRODUCTION = FALSE;
 		}
 		$this->payment_settings = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = utf8::clean($this->input->post());
 			 
-			$post = Validation::factory($_POST)                        
+			$post = Validation::factory(utf8::clean($_POST))                        
 							
 							->add_rules('minfund','required',array($this, 'check_min_fund'),array($this, 'check_minfund_val_lmi'),'chars[.0-9]')
 							->add_rules('maxfund','required','chars[.0-9]')
@@ -276,9 +276,9 @@ const ALLOW_PRODUCTION = FALSE;
 	        
 		$this->shipping_settings = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
@@ -517,9 +517,9 @@ const ALLOW_PRODUCTION = FALSE;
 		}
 		$this->socialmedia_settings = "1";
 		if($_POST){
-	   	$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+	   	$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('facebook_app_id', 'required', 'chars[a-zA-Z0-9]')
 						->add_rules('facebook_secret_key', 'required', 'chars[a-zA-Z0-9_ -.,@%]')
@@ -643,10 +643,10 @@ const ALLOW_PRODUCTION = FALSE;
 		$this->image_settings = "1";
 		
 		if($_POST){ 
-			$this->userPost = $this->input->post();
+			$this->userPost = utf8::clean($this->input->post());
 			
 			 
-			$post = Validation::factory($_POST)                        
+			$post = Validation::factory(utf8::clean($_POST))                        
 							
 							->add_rules('logo_width','required',array($this,'check_value'),'chars[0-9]')
 							->add_rules('logo_height','required',array($this,'check_value'),'chars[0-9]')
@@ -720,9 +720,9 @@ const ALLOW_PRODUCTION = FALSE;
 		}
 		$this->banner_settings = 1;
 		if($_POST){ 
-				$this->userPost = $this->input->post();
+				$this->userPost = utf8::clean($this->input->post());
                
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							//->add_rules('position', 'required','chars[0-9]',array($this,'validposition')) 
 							->add_rules('title', 'required')
@@ -799,8 +799,8 @@ const ALLOW_PRODUCTION = FALSE;
 		$banner_id = base64_decode($banner_id);
 		$this->banner_settings = 1;
 		if($_POST){ 
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('redirect_url','required', 'valid::url')

@@ -59,7 +59,7 @@ class ORM_Versioned_Core extends ORM {
 		$this->last_version = ($this->last_version === NULL) ? $this->object['version'] : $this->last_version;
 		$version = $this->last_version - 1;
 
-		$query = $this->db
+		$qry = $this->db
 			->where($this->foreign_key(), $this->object[$this->primary_key])
 			->where('version', $version)
 			->limit(1)
@@ -84,7 +84,7 @@ class ORM_Versioned_Core extends ORM {
 		if ( ! $this->loaded)
 			return $this;
 
-		$query = $this->db
+		$qry = $this->db
 			->where($this->foreign_key(), $this->object[$this->primary_key])
 			->where('version', $version)
 			->limit(1)
