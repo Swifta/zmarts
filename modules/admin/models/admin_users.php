@@ -147,8 +147,16 @@ class Admin_users_Model extends Model
 				$contitions .= '';
 			}
                 }
-                        $result = $this->db->query("select * from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $joinorder $limit1 ");
-                
+                       // $result = $this->db->query("select * from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $joinorder $limit1 ");
+                        $result = $this->db->select()
+                                           ->from ("users")
+                                           ->join("city","city.city_id","users.city_id")
+                                           ->join("country","country.country_id","users.country_id")
+                                           ->where($contitions)
+                                ->orderby($joinorder)
+                                ->limit($limit1)
+                                ->get();
+                                
                 return $result;
         }
 	
@@ -209,7 +217,14 @@ class Admin_users_Model extends Model
                             $contitions .= strip_tags(addslashes($sort_arr[$param]));
 		}else{  $contitions .= ' order by users.user_id DESC'; }
 
-                        $result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
+                        //$result = $this->db->query("select ('user_id') from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions");
+                
+                        $result = $this->db->select("user_id")
+                                           ->from ("users")
+                                           ->join ("city","city.city_id","users.city_id")
+                                           ->join ("country","country.country_id","users.country_id")
+                                           ->where ($contitions)
+                                           ->get();
                 }
                 else{
                         $result = $this->db->select()->from("users")
@@ -379,8 +394,12 @@ class Admin_users_Model extends Model
 					$conditions.=" and age_range='".$age_range."'";
 				}
 				
-				$news=$this->db->query("select * from  users where user_status=1 $conditions");
-				
+				//$news=$this->db->query("select * from  users where user_status=1 $conditions");
+				$news = $this->db->select()
+                                                 ->from("users")
+                                                 ->where("user_status=1 ". $conditions)
+                                        ->get();
+                                
 			}elseif(isset($post->all_users) && $post->all_users!=""){
 				
 //				$news=$this->db->query("select * from  users where user_status=1 and user_type=4");
@@ -533,7 +552,11 @@ class Admin_users_Model extends Model
 				$conditions.=" and age_range=".$age_range." and user_type=4 ";
 			}
 			
-			$news=$this->db->query("select * from  users where user_status=1 $conditions");
+			//$news=$this->db->query("select * from  users where user_status=1 $conditions");
+                        $news = $this->db->select ()
+                                ->from ("users")
+                                ->where ("user_status=1" . $conditions)
+                                ->get();
 			return $news;
 			
 		}elseif(isset($all_users) && $all_users!=""){
