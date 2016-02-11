@@ -90,10 +90,10 @@ class Creditcard_paypal_Controller extends Layout_Controller
                 }
 
 		if($_POST){
-			$referral_amount = $this->input->post("p_referral_amount");
-			$prime_customer = $this->input->post("prime_customer");
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
 			
-		        $this->userPost = $this->input->post();
+		        $this->userPost = utf8::clean($this->input->post());
 		        $total_amount="";
 		        $total_qty="";
 		        $product_title="";
@@ -106,7 +106,7 @@ class Creditcard_paypal_Controller extends Layout_Controller
                     $deal_id = $_SESSION[$key];
                     $item_qty = $this->session->get('product_cart_qty'.$deal_id);
                     $this->session->set('product_cart_qty'.$deal_id,$item_qty);
-                    $amount = $this->input->post("amount");
+                    $amount = strip_tags(addslashes($this->input->post("amount")));
 			        $this->deals_payment_deatils = $this->creditcard_paypal_pay->get_product_payment_details($deal_id);
 			        if(count($this->deals_payment_deatils) == 0){
                         unset($_SESSION[$key]);
@@ -151,7 +151,7 @@ class Creditcard_paypal_Controller extends Layout_Controller
 	            $total_tax = (TAX_PRECENTAGE_VALUE/100)*($total_amount+$total_shipping);
                 $pay_amount = $pay_amount1 = $total_amount+$total_shipping+$total_tax;
 
-				$post = arr::to_object($this->input->post());
+				$post = arr::to_object(utf8::clean($this->input->post()));
 					$paymentType = "Sale";
 					$captured = 0;
 
@@ -341,9 +341,9 @@ class Creditcard_paypal_Controller extends Layout_Controller
         }
 
 		 if($_POST){
-		        $referral_amount = $this->input->post("p_referral_amount");
-		        $prime_customer = $this->input->post("prime_customer");
-		        $this->userPost = $this->input->post();
+		        $referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+		        $prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
+		        $this->userPost = utf8::clean($this->input->post());
 		        $total_amount="";
 		        $total_qty="";
 		        $product_title="";

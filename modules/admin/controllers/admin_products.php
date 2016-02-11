@@ -26,8 +26,8 @@ class Admin_products_Controller extends website_Controller
 		$this->add_product="1";
 		$adminid=$this->session->get('user_id');
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -757,11 +757,11 @@ class Admin_products_Controller extends website_Controller
 	}
 	if($_POST){
                 $this->product_deatils = $this->products->get_product_data_mail($deal_key, $deal_id);
-  		$this->userPost = $this->input->post();
+  		$this->userPost = utf8::clean($this->input->post());
 		$users = strip_tags(addslashes($this->input->post("users")));
 		$fname = strip_tags(addslashes($this->input->post("firstname")));
 		$email = trim(strip_tags(addslashes($this->input->post("email"))));
-		$post = Validation::factory(array_merge($_POST,$_FILES))
+		$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('users', 'required')
 						->add_rules('email','required')
@@ -846,8 +846,8 @@ class Admin_products_Controller extends website_Controller
 		$this->manage_product = "1";
 	
 	        if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 				
 				->add_rules('title', 'required')
 				->add_rules('description','required',array($this,'check_required'))
@@ -1083,9 +1083,9 @@ class Admin_products_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('comments', 'required');
                         if($post->validate()){

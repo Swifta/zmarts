@@ -857,11 +857,11 @@ class Deals_Model extends Model
 		}
 
 		if(CITY_SETTING){
-		$query = "select deals.deal_id from deals join stores on stores.store_id=deals.shop_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by deals.deal_id order by deals.deal_id DESC";
+		$qry = "select deals.deal_id from deals join stores on stores.store_id=deals.shop_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'  $conditions group by deals.deal_id order by deals.deal_id DESC";
 		$result = $this->db->query($qry);
 
 		} else {
-			$query = "select deals.deal_id from deals  join stores on stores.store_id=deals.shop_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 $conditions group by deals.deal_id order by deals.deal_id DESC";
+			$qry = "select deals.deal_id from deals  join stores on stores.store_id=deals.shop_id $join where purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 $conditions group by deals.deal_id order by deals.deal_id DESC";
 			$result = $this->db->query($qry);
 
 		} print_r($result);

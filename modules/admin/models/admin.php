@@ -767,8 +767,8 @@ class Admin_Model extends Model
               		if($code || $code=='0'){
                                 $conditions= "transaction_mapping.coupon_code ='".strip_tags($code)."'";
                          }
-                        //$query = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id where $conditions and expirydate > $time limit 1 ";
-                        	        $query = $this->db->select("deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name")
+                        //$qry = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id where $conditions and expirydate > $time limit 1 ";
+                        	        $qry = $this->db->select("deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name")
                                         ->from("deals")
                                         ->join("transaction", "transaction.deal_id", "deals.deal_id")
                                         ->join("transaction_mapping", "transaction_mapping.transaction_id", "transaction.id")

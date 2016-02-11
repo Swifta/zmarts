@@ -41,9 +41,9 @@ class Payment_product_Controller extends Layout_Controller {
 		}
 	        $user_referral_id = $this->session->get("User_Referral_ID");
                 if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('f_name', 'required', 'chars[a-zA-Z_ -.,%\']')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
@@ -57,9 +57,9 @@ class Payment_product_Controller extends Layout_Controller {
 				if($status == 1){
 				        $this->signup=1;
 				        $from = CONTACT_EMAIL;
-				        $this->name=$_POST['f_name'];
-				        $this->email =$_POST['email'];
-				        $this->password =$_POST['password'];  
+				        $this->name=  strip_tags(addslashes($_POST['f_name']));
+				        $this->email = strip_tags(addslashes($_POST['email']));
+				        $this->password = strip_tags(addslashes($_POST['password']));  
 				        $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
 				        $message = new View("themes/".THEME_NAME."/mail_template");
 				        if(EMAIL_TYPE==2){
@@ -571,14 +571,14 @@ class Payment_product_Controller extends Layout_Controller {
 	{
 
 	       if($_POST){
-		        $referral_amount = $this->input->post("p_referral_amount");
-		        $this->userPost = $this->input->post();
+		        $referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+		        $this->userPost = utf8::clean($this->input->post());
 		        foreach($_SESSION as $key=>$value)
                         {
                         if(($key=='product_cart_id'.$value)){
                         $deal_id = $_SESSION[$key];
-                        $item_qty = $this->input->post($key);
-		                $amount = $this->input->post("amount");
+                        $item_qty = strip_tags(addslashes($this->input->post($key)));
+		                $amount = strip_tags(addslashes($this->input->post("amount")));
 
 			            $this->deals_payment_deatils = $this->payment_products->get_product_payment_details($deal_id);
 			            if(count($this->deals_payment_deatils) == 0){

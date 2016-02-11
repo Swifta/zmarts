@@ -95,10 +95,10 @@ class url_Core {
 			$path .= Kohana::config('core.url_suffix');
 		}
 
-		if ($query = parse_url($uri, PHP_URL_QUERY))
+		if ($qry = parse_url($uri, PHP_URL_QUERY))
 		{
 			// ?query=string
-			$query = '?'.$query;
+			$qry = '?'.$query;
 		}
 
 		if ($fragment = parse_url($uri, PHP_URL_FRAGMENT))
@@ -141,11 +141,11 @@ class url_Core {
 	{
 		if ($_GET === $arguments)
 		{
-			$query = Router::$query_string;
+			$qry = Router::$query_string;
 		}
-		elseif ($query = http_build_query(array_merge($_GET, $arguments)))
+		elseif ($qry = http_build_query(array_merge($_GET, $arguments)))
 		{
-			$query = '?'.$query;
+			$qry = '?'.$query;
 		}
 
 		// Return the current URI with the arguments merged into the query string

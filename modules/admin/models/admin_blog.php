@@ -70,7 +70,7 @@ class Admin_blog_Model extends Model
 			if($category){
 				$conditions .= ' and blog.category_id = '.$category;
 			}
-			$query = "select * from blog left join category on category.category_id=blog.category_id where $conditions";			
+			$qry = "select * from blog left join category on category.category_id=blog.category_id where $conditions";			
 			$result = $this->db->query($qry);	
 		}
 		else{  												
@@ -95,7 +95,7 @@ class Admin_blog_Model extends Model
 			if($category){
 				$conditions .= ' and blog.category_id = '.$category;
 			}
-			$query = "select * from blog left join category on category.category_id=blog.category_id where $conditions order by blog.blog_id desc limit $offset,$record";			
+			$qry = "select * from blog left join category on category.category_id=blog.category_id where $conditions order by blog.blog_id desc limit $offset,$record";			
 			$result = $this->db->query($qry);	
 		}
 		else{ 							

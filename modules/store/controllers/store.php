@@ -233,10 +233,10 @@ class Store_Controller extends Layout_Controller
 								$aResponse['server'] .= '<strong>Rate received :</strong> '.$rate.'<br />';
 								$aResponse['server'] .= '<strong>Deal ID :</strong> '.$store_id.'<br />';
 								$aResponse['server'] .= '<strong>ID to update :</strong> '.$id;			
-								$this->userPost = $this->input->post(); 
+								$this->userPost = utf8::clean($this->input->post()); 
 								$this->auction_rate = $this->stores->save_store_rating($store_id,$rate);
-								$ch="auction_sess_".$_POST['deal_id'];
-								$sta= $this->session->set($ch,$_POST['rate']);
+								$ch="auction_sess_".strip_tags(addslashes($_POST['deal_id']));
+								$sta= $this->session->set($ch,  strip_tags(addslashes($_POST['rate'])));
 								echo json_encode($aResponse);
 						}		
 				}	

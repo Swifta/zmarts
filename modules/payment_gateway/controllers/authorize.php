@@ -105,9 +105,9 @@ class Authorize_Controller extends Layout_Controller
                     }
                 }
 		if($_POST){
-			$referral_amount = $this->input->post("p_referral_amount");
-			$prime_customer = $this->input->post("prime_customer");
-		        $this->userPost = $this->input->post();
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
+		        $this->userPost = utf8::clean($this->input->post());
 		        $total_amount="";
 		        $total_qty="";
 		        $product_title="";
@@ -120,7 +120,7 @@ class Authorize_Controller extends Layout_Controller
                     $deal_id = $_SESSION[$key];
                     $item_qty = $this->session->get('product_cart_qty'.$deal_id);
                     $this->session->set('product_cart_qty'.$deal_id,$item_qty);
-                    $amount = $this->input->post("amount");
+                    $amount = strip_tags(addslashes($this->input->post("amount")));
 			        $this->deals_payment_deatils = $this->authorize->get_product_payment_details($deal_id);
 			        if(count($this->deals_payment_deatils) == 0){
                         unset($_SESSION[$key]);
@@ -173,7 +173,7 @@ class Authorize_Controller extends Layout_Controller
                                 $currencyCode = "USD";
                         }
 
-                $post = arr::to_object($this->input->post());
+                $post = arr::to_object(utf8::clean($this->input->post()));
 
                 // authorize
                 $sale = new AuthorizeNetAIM;
@@ -355,7 +355,7 @@ class Authorize_Controller extends Layout_Controller
                 $pay_amount = $pay_amount1 = $auction_amount+$shipping_amount+$tax_amount;
                 $product_title = strip_tags(addslashes($this->input->post("auction_title")));
 
-                $post = arr::to_object($this->input->post());
+                $post = arr::to_object(utf8::clean($this->input->post()));
 
                 // authorize
                 $sale = new AuthorizeNetAIM;
@@ -501,7 +501,7 @@ class Authorize_Controller extends Layout_Controller
 								$post->add_rules('zip', 'chars[0-9.]');
 							}
 			if($post->validate()){
-				$post = arr::to_object($this->input->post());
+				$post = arr::to_object(utf8::clean($this->input->post()));
                 $sale = new AuthorizeNetAIM;
                 // authorize
                 $sale->cust_id = $this->UserID;

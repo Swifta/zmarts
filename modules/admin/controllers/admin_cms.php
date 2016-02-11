@@ -24,8 +24,8 @@ class Admin_cms_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('title','required', 'chars[a-zA-Z0-9 \,.&_-]',array($this, 'cms_exist'));
 				
@@ -97,8 +97,8 @@ class Admin_cms_Controller extends website_Controller
 		}
 		if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('title','required','chars[a-zA-Z0-9 \,.&_-]');
 				//->add_rules('desc',array($this,'check_desc_empty'));
