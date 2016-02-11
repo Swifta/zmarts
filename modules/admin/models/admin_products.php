@@ -1104,33 +1104,61 @@ class Admin_products_Model extends Model
 	        		$contitions = ' (u.firstname like "%'.strip_tags(addslashes($name)).'%"';
                     $contitions .= 'OR u.email like "%'.strip_tags(addslashes($name)).'%"';
             		$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
-                   $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id
-                       from shipping_info as s 
-                       join transaction as t on t.id=s.transaction_id 
-                       join product as d on d.deal_id=t.product_id 
-                       join transaction_mapping as tm on tm.transaction_id = t.id 
-                       join city on city.city_id=s.city 
-                       join stores on stores.store_id = d.shop_id 
-                       join users as u on u.user_id=s.user_id 
-                       where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
+//                   $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id
+//                       from shipping_info as s 
+//                       join transaction as t on t.id=s.transaction_id 
+//                       join product as d on d.deal_id=t.product_id 
+//                       join transaction_mapping as tm on tm.transaction_id = t.id 
+//                       join city on city.city_id=s.city 
+//                       join stores on stores.store_id = d.shop_id 
+//                       join users as u on u.user_id=s.user_id 
+//                       where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
 				
-//                    $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id ")
-//                          ->from("shipping_info as s")
-//                          ->join("transaction as t","t.id","s.transaction_id")
-//                          ->join("product","d.deal_id","t.product_id")
-//                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
-//                          ->join("city","city.city_id","s.city")
-//                         
-//                         ->where($contitions)
-//                         ->orderby('discussion_id', 'DESC')
-//                        ->get();
+                    $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id ")
+                          ->from("shipping_info as s")
+                          ->join("transaction as t","t.id","s.transaction_id")
+                          ->join("product","d.deal_id","t.product_id")
+                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                          ->join("city","city.city_id","s.city")
+                          ->join("stores","stores.store_id","d.shop_id")
+                          ->join("users as u","u.user_id","s.user_id")
+                          ->where($contitions,"user_status=1".$condition)
+                          ->groupby('shipping_id')
+                          ->orderby('shipping_id','DESC')
+                          ->Limit($limit1)
+                         ->get();
                    
                    
                    
                         }
 				else {
-					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
-				}
+//					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id 
+//                                            from shipping_info as s 
+//                                            join transaction as t on t.id=s.transaction_id 
+//                                            join product as d on d.deal_id=t.product_id 
+//                                            join transaction_mapping as tm on tm.transaction_id = t.id
+//                                            join city on city.city_id=s.city 
+//                                            join stores on stores.store_id = d.shop_id
+//                                            join users as u on u.user_id=s.user_id  
+//                                            where shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
+//				
+//                                        
+                           $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id ")
+                          ->from("shipping_info as s")
+                          ->join("transaction as t","t.id","s.transaction_id")
+                          ->join("product","d.deal_id","t.product_id")
+                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                          ->join("city","city.city_id","s.city")
+                          ->join("stores","stores.store_id","d.shop_id")
+                          ->join("users as u","u.user_id","s.user_id")
+                          ->where("shipping_type=1".$contitions)
+                          ->groupby('shipping_id')
+                          ->orderby('shipping_id','DESC')
+                          ->Limit($limit1)
+                         ->get();
+                                        
+                                        
+                                }
             
                 return $result;
         }
@@ -1150,11 +1178,53 @@ class Admin_products_Model extends Model
                     $contitions .= ' OR u.email like "%'.strip_tags(addslashes($name)).'%"';
 					$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
                    
-                   $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC "); 
-		}
+//                   $result = $this->db->query("select s.shipping_id from shipping_info as s 
+//                       join transaction as t on t.id=s.transaction_id 
+//                       join product as d on d.deal_id=t.product_id 
+//                       join transaction_mapping as tm on tm.transaction_id = t.id 
+//                       join city on city.city_id=s.city 
+//                       join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 $condition group by shipping_id order by shipping_id DESC "); 
+//		
+                    $result = $this->db->select("s.shipping_id")
+                          ->from("shipping_info as s")
+                          ->join("transaction as t","t.id","s.transaction_id")
+                          ->join("product","d.deal_id","t.product_id")
+                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                          ->join("city","city.city_id","s.city")
+                          ->join("users as u","u.user_id","s.user_id")
+                          ->where($contitions,"shipping_type=1".$condition)
+                          ->groupby('shipping_id')
+                          ->orderby('shipping_id','DESC')
+                          ->get();
+                       
+                   
+                   
+                        }
 		else {
-			$result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where shipping_type = 1 $condition group by shipping_id order by shipping_id DESC"); 
-		}
+//			$result = $this->db->query("select s.shipping_id from shipping_info as s 
+//                            join transaction as t on t.id=s.transaction_id 
+//                            join product as d on d.deal_id=t.product_id 
+//                            join transaction_mapping as tm on tm.transaction_id = t.id 
+//                            join city on city.city_id=s.city 
+//                            join users as u on u.user_id=s.user_id 
+//                            where shipping_type = 1 $condition group by shipping_id order by shipping_id DESC"); 
+//		
+                        
+                          $result = $this->db->select("s.shipping_id")
+                          ->from("shipping_info as s")
+                          ->join("transaction as t","t.id","s.transaction_id")
+                          ->join("product as d","d.deal_id","t.product_id")
+                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                          ->join("city","city.city_id","s.city")
+                          ->join("users as u","u.user_id","s.user_id")
+                          ->where("shipping_type=1".$condition)
+                          ->groupby('shipping_id')
+                          ->orderby('shipping_id','DESC')
+                          ->get();
+                        
+                        
+                        
+                }
                 return count($result);
         }
 
@@ -1216,10 +1286,16 @@ class Admin_products_Model extends Model
 				else if($type==5){  // for failed transcation reset the quantity for that size
 						$quantity=$get_detail[0]->quantity;
 						$size_id = $get_detail[0]->product_size;
-					$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
-                                        $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
+					//$this->db->query("update product_size set quantity = quantity + $quantity where deal_id = '$product_id' and size_id = '$size_id' ");
+                                        $this->db->update("product_size", array("quantity" =>new Database_Expression('quantity + '.$quantity)), array("deal_id" => $product_id,"size_id" => $size_id));
+                                      
+                                         
+                                         
+                                         $this->db->update("product_size", array("quantity"=>new Database_Expression('quantity + '.$quantity)),
                                                     array("deal_id" => $product_id, "size_id" => $size_id));
-					$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+					//$this->db->query("update product set user_limit_quantity = user_limit_quantity + $quantity where deal_id = '$product_id'");
+                                        $this->db->update("product", array("user_limit_quantity" =>new Database_Expression('user_limit_quantity + '.$quantity)), array("deal_id" => $product_id));
+                                      
 					
 					$this->db->update('transaction',array('payment_status' => 'Failed','pending_reason' =>'Not paid'),array('id' => $trans_id)); 	
 					
@@ -1238,8 +1314,33 @@ class Admin_products_Model extends Model
 	
         public function get_shipping_list1()
         {	
-			$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1  group by shipping_id order by shipping_id DESC"); 
-            return $result;
+//			$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping 
+//                            from shipping_info as s 
+//                            join transaction as t on t.id=s.transaction_id 
+//                            join product as d on d.deal_id=t.product_id 
+//                            join transaction_mapping as tm on tm.transaction_id = t.id 
+//                            join city on city.city_id=s.city 
+//                            join stores on stores.store_id = d.shop_id 
+//                            join users as u on u.user_id=s.user_id  where shipping_type = 1  group by shipping_id order by shipping_id DESC"); 
+//           
+                        $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping")
+                          ->from("shipping_info as s")
+                          ->join("transaction as t","t.id","s.transaction_id")
+                          ->join("product as d","d.deal_id","t.product_id")
+                          ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                          ->join("city","city.city_id","s.city")
+                          ->join("stores","stores.store_id","d.shop_id")
+                          ->join("users as u","u.user_id","s.user_id")
+                          ->where("shipping_type=1")
+                          ->groupby('shipping_id')
+                          ->orderby('shipping_id','DESC')
+                          ->get();
+                        
+                        
+                        
+                        
+                        
+                        return $result;
         }
 
         /** GET SINGLE USER DATA **/
@@ -1327,8 +1428,21 @@ class Admin_products_Model extends Model
 	/* Shipping information */
 	public function get_shipping_info($id = "")
 	{
-		$result = $this->db->query("SELECT *,transaction.currency_code as curren_code FROM (`shipping_info`)  LEFT JOIN transaction ON transaction.id = shipping_info.transaction_id WHERE `shipping_id` = ".
-                strip_tags(addslashes($id)));
+//		$result = $this->db->query("SELECT *,transaction.currency_code as curren_code FROM (`shipping_info`)  
+//                    LEFT JOIN transaction ON transaction.id = shipping_info.transaction_id 
+//                    WHERE `shipping_id` = ".
+                          $result = $this->db->select("*,transaction.currency_code as curren_code")
+                          ->from("shipping_info")
+                          ->join("transaction","transaction.id","shipping_info.transaction_id","LEFT")
+                         
+                          
+                         ->where("shipping_id= ".$id)->get();
+                        
+                         
+                        
+                        
+                        
+              //   strip_tags(addslashes($id)));
 		return $result;
 	}
 	
@@ -1556,8 +1670,24 @@ class Admin_products_Model extends Model
 	public function get_transaction_storecredit_list($status="",$search_key="",$offset = "", $record = "")
 	{
 		$condition="";
-		$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join users on users.user_id = s.userid where credit_status = $status $condition order by storecredit_id desc limit $offset,$record ");
+//		$result = $this->db->query("select * from store_credit_save as s 
+//                    join product on product.deal_id = s.productid 
+//                    join users on users.user_id = s.userid where credit_status = $status $condition order by storecredit_id desc limit $offset,$record ");
 		
+                 $result = $this->db->select("*")
+                          ->from("store_credit_save as s")
+                          ->join("product","product.deal_id","s.productid")
+                          ->join("users","users.user_id","s.userid")
+                         
+                          ->where("credit_status=".$status.$condition)
+                         
+                          ->orderby('storecredit_id','DESC')
+                          ->limit($offset,$record)
+                          ->get();
+                
+                
+                
+                
 		return $result;
 	}
 
