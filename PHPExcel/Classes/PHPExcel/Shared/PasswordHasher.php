@@ -46,7 +46,7 @@ class PHPExcel_Shared_PasswordHasher
 	 * @return 	string				Hashed password
 	 */
 	public static function hashPassword($pPassword = '') {
-        $pswd = 0x0000;
+        $password = 0x0000;
         $i        = 1;       // char position
 
         // split the plain text password in its component characters
@@ -55,13 +55,13 @@ class PHPExcel_Shared_PasswordHasher
             $value        = ord($char) << $i;   // shifted ASCII value
             $rotated_bits = $value >> 15;       // rotated bits beyond bit 15
             $value       &= 0x7fff;             // first 15 bits
-            $pswd    ^= ($value | $rotated_bits);
+            $password    ^= ($value | $rotated_bits);
             ++$i;
         }
 
-        $pswd ^= strlen($pPassword);
-        $pswd ^= 0xCE4B;
+        $password ^= strlen($pPassword);
+        $password ^= 0xCE4B;
 
-        return(strtoupper(dechex($pswd)));
+        return(strtoupper(dechex($password)));
 	}
 }

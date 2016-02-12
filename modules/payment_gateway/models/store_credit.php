@@ -14,8 +14,13 @@ class Store_credit_Model extends Model
 	
 	public function get_product_payment_details($deal_id = "")
 	{
-		$result = $this->db->query("select * from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
-	        return $result;
+		//$result = $this->db->query("select * from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
+	        $result = $this->db->select()
+                        ->from("product")
+                        ->join("category","category.category_id","product.category_id")
+                        ->where("deal_status = 1 and category.category_status = 1 and deal_id =" .$deal_id)
+                        ->get();
+                return $result;
 
 	}
 
@@ -77,9 +82,11 @@ class Store_credit_Model extends Model
 			 $commission=(($product_amount)*($commission_amount/100));
 					 $merchantcommission = $total_pay_amount - $commission ; 
 					 
-					 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+					 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+                                         $this->db->update("users",array("merchant_account_balance" => new Database_Expression ('merchant_account_balance +' .$merchantcommission)),array("user_type" => 3,"user_id" => $merchant_id));
 
-					$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");	     
+					 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");
+                                         $this->db->update("users",array("merchant_account_balance" => new Database_Expression ('merchant_account_balance +' .$total_pay_amount)),array("user_type" => 1));
 			 
 			$purchase_count_total = $purchase_qty + $qty+$total_bulk_discount;
 			$quantity=$qty+$total_bulk_discount;
