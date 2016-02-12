@@ -3508,11 +3508,25 @@ class Store_admin_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = basename(explode('.',  basename($_FILES['im_product']['name'])));
+						/*$temp = basename(explode('.',  basename($_FILES['im_product']['name'])));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
+						
+						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);*/
+						
+						$source = upload::save('im_product');
+						$temp = basename(explode('.',  basename($source)));
+						$ext = end($temp);
+						$excel_name = time().'.'.$ext;
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						
+						move_uploaded_file($source,$path.$excel_name);
+						
+						unlink($source);
+						
+						
+						
 
 					}
 
