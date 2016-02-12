@@ -60,7 +60,7 @@
 //		if ($this->_currentCellIsDirty) {
 //			$this->_currentObject->detach();
 //
-//			$query = $this->_DBHandle->prepare("INSERT OR REPLACE INTO kvp_".$this->_TableName." VALUES(:id,:data)");
+//			$qry = $this->_DBHandle->prepare("INSERT OR REPLACE INTO kvp_".$this->_TableName." VALUES(:id,:data)");
 //			$query->bindValue('id',$this->_currentObjectID,SQLITE3_TEXT);
 //			$query->bindValue('data',serialize($this->_currentObject),SQLITE3_BLOB);
 //			$result = $query->execute();
@@ -106,7 +106,7 @@
 //		}
 //		$this->_storeData();
 //
-//		$query = "SELECT value FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
+//		$qry = "SELECT value FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
 //		$cellResult = $this->_DBHandle->querySingle($qry);
 //		if ($cellResult === false) {
 //			throw new Exception($this->_DBHandle->lastErrorMsg());
@@ -139,7 +139,7 @@
 //		}
 //
 //		//	Check if the requested entry exists in the cache
-//		$query = "SELECT id FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
+//		$qry = "SELECT id FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
 //		$cellResult = $this->_DBHandle->querySingle($qry);
 //		if ($cellResult === false) {
 //			throw new Exception($this->_DBHandle->lastErrorMsg());
@@ -164,7 +164,7 @@
 //		}
 //
 //		//	Check if the requested entry exists in the cache
-//		$query = "DELETE FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
+//		$qry = "DELETE FROM kvp_".$this->_TableName." WHERE id='".$pCoord."'";
 //		$result = $this->_DBHandle->exec($qry);
 //		if ($result === false)
 //			throw new Exception($this->_DBHandle->lastErrorMsg());
@@ -179,7 +179,7 @@
 //	 * @return	array of string
 //	 */
 //	public function getCellList() {
-//		$query = "SELECT id FROM kvp_".$this->_TableName;
+//		$qry = "SELECT id FROM kvp_".$this->_TableName;
 //		$cellIdsResult = $this->_DBHandle->query($qry);
 //		if ($cellIdsResult === false)
 //			throw new Exception($this->_DBHandle->lastErrorMsg());

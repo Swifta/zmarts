@@ -179,7 +179,7 @@ class Router_Core {
 				Router::$current_uri = $_SERVER['argv'][1];
 
 				// Remove GET string from segments
-				if (($query = strpos(Router::$current_uri, '?')) !== FALSE)
+				if (($qry = strpos(Router::$current_uri, '?')) !== FALSE)
 				{
 					list (Router::$current_uri, $query) = explode('?', Router::$current_uri, 2);
 

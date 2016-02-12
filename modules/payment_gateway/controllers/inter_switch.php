@@ -62,9 +62,9 @@ class Inter_switch_Controller extends Layout_Controller
 
 		if($_POST){
 
-			$referral_amount = $this->input->post("p_referral_amount");
-			$prime_customer = $this->input->post("prime_customer");
-		        $this->userPost = $this->input->post();
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
+		        $this->userPost = utf8::clean($this->input->post());
 			$product_color="";
 			$paymentType = "Interswitch";
 			$captured = 0;

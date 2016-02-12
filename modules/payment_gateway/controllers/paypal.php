@@ -71,8 +71,8 @@ class Paypal_Controller extends Layout_Controller
 				url::redirect(PATH);
 			}
 
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 			                ->add_rules('firstName','required','chars[a-zA-Z_ -.,%\']')
 			                ->add_rules('address1','required')
 			                ->add_rules('creditCardNumber','required')
@@ -91,7 +91,7 @@ class Paypal_Controller extends Layout_Controller
 								$post->add_rules('zip','chars[0-9.]');
 							}
 			if($post->validate()){
-				$post = arr::to_object($this->input->post());
+				$post = arr::to_object(utf8::clean($this->input->post()));
 
 				if(($purchase_qty + $item_qty) >= $min_deals_limit){
 					    $paymentType = "Sale";

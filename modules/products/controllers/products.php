@@ -553,11 +553,11 @@ class Products_Controller extends Layout_Controller
 								$aResponse['server'] .= '<strong>Deal ID :</strong> '.$deal_id.'<br />';
 								$aResponse['server'] .= '<strong>ID to update :</strong> '.$id;
                                                                 $aResponse['success'] = true;
-								$this->userPost = $this->input->post();
+								$this->userPost = utf8::clean($this->input->post());
 								$this->product_rate = $this->products->save_product_rating(arr::to_object($this->userPost));
-								$ch="auction_sess_".$_POST['deal_id'];
-								$sta= $this->session->set($ch,$_POST['rate']);
-								echo json_encode($aResponse);
+								$ch="auction_sess_".strip_tags(addslashes($_POST['deal_id']));
+								$sta= $this->session->set($ch,  strip_tags(addslashes($_POST['rate'])));
+								echo htmlentities(json_encode($aResponse), ENT_NOQUOTES, "UTF-8");
                                                                 exit;
 						}
 				}

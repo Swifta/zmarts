@@ -42,9 +42,9 @@ class Admin_moderator_Controller extends website_Controller {
 		if($_POST){
 			$from = CONTACT_EMAIL;    	
 			//$this->userPost = $this->input->post();
-                        $this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+                        $this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -226,9 +226,9 @@ class Admin_moderator_Controller extends website_Controller {
 	{ 
 		$this->manage_moderator = "1";
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);			
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));			
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')

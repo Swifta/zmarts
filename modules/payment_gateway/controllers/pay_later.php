@@ -76,9 +76,9 @@ class Pay_later_Controller extends Layout_Controller
 		if($_POST){
 			
 			
-			$referral_amount = $this->input->post("p_referral_amount");
-			$prime_customer = $this->input->post("prime_customer");
-		    $this->userPost = $this->input->post();
+			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
+			$prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
+		    $this->userPost = utf8::clean($this->input->post());
 			$product_color="";
 			$paymentType = "Pay Later";
 			$captured = 0;
@@ -629,19 +629,19 @@ class Pay_later_Controller extends Layout_Controller
 	public function auction_payment()
 	{ 
 		if($_POST){  
-			$deal_id = $this->input->post("deal_id");
-			$merchant_id = $this->input->post("merchant_id"); 
-			$bid_id = $this->input->post("bid_id"); 
-			$deal_key = $this->input->post("deal_key"); 
-			$url_title = $this->input->post("url_title");   
+			$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+			$merchant_id = strip_tags(addslashes($this->input->post("merchant_id"))); 
+			$bid_id = strip_tags(addslashes($this->input->post("bid_id"))); 
+			$deal_key = strip_tags(addslashes($this->input->post("deal_key"))); 
+			$url_title = strip_tags(addslashes($this->input->post("url_title")));   
 			$referral_amount = 0;
-			$item_qty = $this->input->post("P_QTY");
-			$amount = $this->input->post("amount");			
-			$deal_value = $this->input->post("deal_value");
-			$shipping_amount = $this->input->post("shipping_amount");
+			$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+			$amount = strip_tags(addslashes($this->input->post("amount")));			
+			$deal_value = strip_tags(addslashes($this->input->post("deal_value")));
+			$shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
 			$tax_amount = 0;
 			$tot_amount = $tot_amount1 = $amount+$shipping_amount+$tax_amount;
-			$post = arr::to_object($this->input->post());
+			$post = arr::to_object(utf8::clean($this->input->post()));
 			$captured = 0;
 			
 			$transaction = $this->pay_later->insert_auction_pay_transaction_details($deal_id,$referral_amount, $item_qty, 6, $captured, $item_qty, $post,$merchant_id,$tax_amount,$shipping_amount,$amount,$bid_id);	

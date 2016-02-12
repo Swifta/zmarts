@@ -77,7 +77,7 @@ class Session_Database_Driver implements Session_Driver {
 	public function read($id)
 	{
 		// Load the session
-		$query = $this->db->from($this->table)->where('session_id', $id)->limit(1)->get()->result(TRUE);
+		$qry = $this->db->from($this->table)->where('session_id', $id)->limit(1)->get()->result(TRUE);
 
 		if ($query->count() === 0)
 		{
@@ -108,7 +108,7 @@ class Session_Database_Driver implements Session_Driver {
 		if ($this->session_id === NULL)
 		{
 			// Insert a new session
-			$query = $this->db->insert($this->table, $data);
+			$qry = $this->db->insert($this->table, $data);
 		}
 		elseif ($id === $this->session_id)
 		{
@@ -116,12 +116,12 @@ class Session_Database_Driver implements Session_Driver {
 			unset($data['session_id']);
 
 			// Update the existing session
-			$query = $this->db->update($this->table, $data, array('session_id' => $id));
+			$qry = $this->db->update($this->table, $data, array('session_id' => $id));
 		}
 		else
 		{
 			// Update the session and id
-			$query = $this->db->update($this->table, $data, array('session_id' => $this->session_id));
+			$qry = $this->db->update($this->table, $data, array('session_id' => $this->session_id));
 
 			// Set the new session id
 			$this->session_id = $id;
@@ -153,7 +153,7 @@ class Session_Database_Driver implements Session_Driver {
 	public function gc($maxlifetime)
 	{
 		// Delete all expired sessions
-		$query = $this->db->delete($this->table, array('last_activity <' => time() - $maxlifetime));
+		$qry = $this->db->delete($this->table, array('last_activity <' => time() - $maxlifetime));
 
 		Kohana::log('debug', 'Session garbage collected: '.$query->count().' row(s) deleted.');
 
