@@ -477,11 +477,11 @@ class Admin_products_Controller extends website_Controller
 		 	 
 				$row = 1;
 				$add_import = "";				
-					$file_name = $_FILES['im_product']['tmp_name'];					
+					$file_name = upload::save("im_product");					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',  basename($_FILES['im_product']['name']));
+						$temp = explode('.',  basename($file_name));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/admin_excel/');

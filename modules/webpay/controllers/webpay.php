@@ -49,11 +49,11 @@ class Webpay_Controller extends Layout_Controller
                 }
                 echo "<div style='width:100%;'>";
                 echo "<div style='width:49%;float:left'>Transacton Status :</div>";
-                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->status."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".htmlentities($details->status, ENT_QUOTES, "UTF-8")."</div><div style='clear:both;width:100%'><hr /></div>";
                 echo "<div style='width:49%;float:left'>Reason :</div>";
-                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->reason."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".htmlentities($details->reason, ENT_QUOTES, "UTF-8")."</div><div style='clear:both;width:100%'><hr /></div>";
                 echo "<div style='width:49%;float:left'>Transaction Type :</div>";
-                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->type."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".htmlentities($details->type, ENT_QUOTES, "UTF-8")."</div><div style='clear:both;width:100%'><hr /></div>";
                 echo "</div>";
             }
             die;

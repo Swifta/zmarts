@@ -59,13 +59,13 @@ class Admin_auction_Controller extends website_Controller
 									$i=1;
 										foreach(arr::rotate($_FILES['image']) as $files){
 											if($files){			
-												$filename = basename(upload::save($files));
+												$filename = upload::save($files);
 													if($filename!=''){ 
 														
 														$IMG_NAME = $deal_key."_".$i.'.png';
 														
 											                        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-																	$filename = realpath($filename);
+																	$filename = basename($filename);
 														unlink($filename);
 													}
 										}

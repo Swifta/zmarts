@@ -3503,16 +3503,16 @@ class Store_admin_Controller extends website_Controller
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					$file_name = $_FILES['im_product']['tmp_name'];
+					$file_name = upload::save('im_product'); //$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = basename(explode('.',  basename($_FILES['im_product']['name'])));
+						$temp = basename(explode('.',  basename($file_name)));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
+						move_uploaded_file($file_name,$path.$excel_name);
 
 					}
 
@@ -3710,7 +3710,8 @@ class Store_admin_Controller extends website_Controller
 								
 								else
 								{ 
-									unlink(realpath($inputFileName));
+                                                                    unlink($file_name);
+									unlink($inputFileName);
 									common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				                    			url::redirect(PATH."store-admin/manage-products.html");
 								}
@@ -3718,7 +3719,7 @@ class Store_admin_Controller extends website_Controller
 							
 			}  
 	 } 
-				unlink(realpath($inputFileName));
+				unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."store-admin/manage-products.html");	
 						
@@ -4000,7 +4001,7 @@ class Store_admin_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}

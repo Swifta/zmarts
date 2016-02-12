@@ -208,7 +208,7 @@ class timthumb {
 		//Clean the cache before we do anything because we don't want the first visitor after FILE_CACHE_TIME_BETWEEN_CLEANS expires to get a stale image. 
 		$this->cleanCache();
 		
-		$this->myHost = realpath(preg_replace('/^www\./i', '', strip_tags(addslashes($_SERVER['HTTP_HOST']))));
+		$this->myHost = realpath(preg_replace('/^www\./i', '', basename(strip_tags(addslashes($_SERVER['HTTP_HOST'])))));
 		$this->src = $this->param('src');
 		$this->url = parse_url($this->src);
 		$this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);

@@ -211,17 +211,17 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+										$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);
 										
 									}
 									
 									
-									$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+									$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
 									$f = fopen($main_routes, "r");
 
-									$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+									$file = realpath(DOCROOT.'modules/'.$modules_name.'/config/routes.php');
 									$fp = fopen($file, "a");
 						
 									$i = 1;	
@@ -617,7 +617,7 @@ class Admin_merchant_Controller extends website_Controller {
 							
 							
 							
-							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
+							$old_modules_file = realpath(DOCROOT.'modules/'.$old_modules_name.'/config/routes.php');
 
 							$old_line = file($old_modules_file);
 
@@ -650,11 +650,11 @@ class Admin_merchant_Controller extends website_Controller {
 	
 							
 							
-							$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+							$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
 							$f = fopen($main_routes, "r");
 
 
-							$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+							$file = realpath(DOCROOT.'modules/'.$modules_name.'/config/routes.php');
 							$fp = fopen($file, "a");
 						
 							while ( $line = fgets($f, 1000) ) {

@@ -861,9 +861,10 @@ class Merchant_Controller extends website_Controller
 					}*/
 					 if($_FILES['image']['name'])
 					{
-						$filename =  basename($_FILES["image"]["name"]);
-						$uploadedfile = $_FILES['image']['tmp_name'];
 						
+						$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+						$filename = basename($uploadedfile);//basename($_FILES["image"]["name"]);
+                                                
 						$extension = $this->getExtension($filename);
 						$extension = strtolower($extension);
 						
@@ -930,6 +931,8 @@ class Merchant_Controller extends website_Controller
 							imagedestroy($tmp0);
 							imagedestroy($tmp1);
 						}
+                                                
+                                                unlink($uploadedfile);
 					}
 
 					/** for routes creation for front end  start **/
@@ -1104,9 +1107,10 @@ class Merchant_Controller extends website_Controller
 						}*/
 						 if($_FILES['image']['name'])
 						{
-							$filename = strip_tags(addslashes($_FILES["image"]["name"]));
-							$uploadedfile = $_FILES['image']['tmp_name'];
 							
+							$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+							$filename = basename($uploadedfile); //strip_tags(addslashes($_FILES["image"]["name"]));
+                                                        
 							$extension = $this->getExtension($filename);
 							$extension = strtolower($extension);
 							
@@ -1174,12 +1178,12 @@ class Merchant_Controller extends website_Controller
 								imagedestroy($tmp1);
 							}
 						}
-
+                                                unlink($uploadedfile);
 
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -2096,7 +2100,7 @@ class Merchant_Controller extends website_Controller
 									}
 									$IMG_NAME = $deal_key."_".$i.'.png';
 									common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
-									unlink(realpath($filename));
+									unlink($filename);
 								}
 							}
 							$i++;
@@ -2906,7 +2910,7 @@ class Merchant_Controller extends website_Controller
                                                                 }
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
                                                                 common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-                                                                unlink(realpath($filename));
+                                                                unlink($filename);
                                                         }
                                                 }
                                                 $i++;
@@ -4555,12 +4559,12 @@ class Merchant_Controller extends website_Controller
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					$file_name = $_FILES['im_product']['tmp_name'];
+					$file_name = upload::save('im_product');//$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',  basename($_FILES['im_product']['name']));
+						$temp = explode('.',  basename($file_name));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
@@ -4762,7 +4766,7 @@ class Merchant_Controller extends website_Controller
 								
 								else
 								{ 
-									unlink(realpath($inputFileName));
+									unlink($inputFileName);
 									common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				                    			url::redirect(PATH."merchant/manage-products.html");
 								}
@@ -4770,7 +4774,8 @@ class Merchant_Controller extends website_Controller
 							
 			}  
 	 } 
-				unlink(realpath($inputFileName));
+         unlink($file_name);
+				unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."merchant/manage-products.html");	
 						
@@ -5064,7 +5069,7 @@ class Merchant_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = $_POST['subsector'];
+							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -5486,8 +5491,8 @@ class Merchant_Controller extends website_Controller
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-						$tmp_name = $_FILES["attach"]["tmp_name"];
-						$logo = basename($_FILES["attach"]["name"]);
+						$tmp_name = upload::save('attach');//$_FILES["attach"]["tmp_name"];
+						$logo = basename($tmp_name);
 						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
 						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 					}
@@ -5498,7 +5503,7 @@ class Merchant_Controller extends website_Controller
 					//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
 					if($_FILES["attach"]["name"]!=''){
-						$logo = basename($_FILES["attach"]["name"]);
+						//$logo = basename($_FILES["attach"]["name"]);
 						unlink(realpath(DOCROOT."images/newsletter/").$logo);
 					}
 					if($status == 1){
@@ -5517,6 +5522,7 @@ class Merchant_Controller extends website_Controller
 						$this->form_error['attach'] = $this->Lang['REQQ'];
 					}
 		        }
+                        unlink($tmp_name);
 		}
 	$this->city_list = $this->merchant->getCityList();  
 	$this->users = $this->merchant->getUSERList();      
@@ -7188,7 +7194,7 @@ class Merchant_Controller extends website_Controller
 				$status = $this->merchant->add_template(arr::to_object($this->userPost));
 				if($status > 0){
 					if($_FILES["template_file"]){
-						$tmp_name = $_FILES["template_file"]["tmp_name"];
+						$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);

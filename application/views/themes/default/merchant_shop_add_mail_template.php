@@ -79,7 +79,7 @@
                                     
                                     <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['STORE_URL']; ?> : <a style=" font:normal 12px arial; text-decoration: none; " href="<?php echo PATH.url::title($_POST['storename']); ?>" > <?php echo PATH.url::title( htmlentities($_POST['storename'],  ENT_QUOTES,  "utf-8")); ?> </a></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo $this->Lang['STORE_URL']; ?> : <a style=" font:normal 12px arial; text-decoration: none; " href="<?php echo PATH.url::title(htmlentities($_POST['storename'],  ENT_QUOTES,  "utf-8")); ?>" > <?php echo PATH.url::title( htmlentities($_POST['storename'],  ENT_QUOTES,  "utf-8")); ?> </a></p></td>
                                     </tr>
                                                                         
                                     <tr>

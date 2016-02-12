@@ -282,7 +282,7 @@ class Database_Mysql_Driver extends Database_Driver {
 	{
 		$tables = array();
 
-		if ($query = $this->query('SHOW TABLES FROM '.$this->escape_table($this->db_config['connection']['database'])))
+		if ($qry = $this->query('SHOW TABLES FROM '.$this->escape_table($this->db_config['connection']['database'])))
 		{
 			foreach ($query->result(FALSE) as $row)
 			{

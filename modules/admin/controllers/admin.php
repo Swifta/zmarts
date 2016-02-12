@@ -2055,10 +2055,13 @@ class Admin_Controller extends website_Controller
 					$check_insert_file = false;
 					/* Extrat Files */
 					if($_FILES["zip_file"]["name"]) {
-						$filename = basename($_FILES["zip_file"]["name"]);
-						$source = basename($_FILES["zip_file"]["tmp_name"]);
-						$filename = basename($_FILES["zip_file"]["name"]);
-						$source = $_FILES["zip_file"]["tmp_name"];
+						//$filename = basename($_FILES["zip_file"]["name"]);
+						//$source = basename($_FILES["zip_file"]["tmp_name"]);
+						//$filename = basename($_FILES["zip_file"]["name"]);
+    
+						$source = upload::save('zip_file'); ;//$_FILES["zip_file"]["tmp_name"];
+                                                $filename = basename($source);
+                                                
 						$type = $_FILES["zip_file"]["type"];
 	
 						$name = explode(".", $filename);
@@ -2204,7 +2207,7 @@ class Admin_Controller extends website_Controller
 								common::chmod_r($target_modules);
 	
 								$zip->close();
-	
+                                                                unlink($source);
 								unlink($target_path);
 								rmdir($target_dir.$file_folder);
 								$check_insert_file = true;
