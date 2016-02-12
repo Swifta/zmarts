@@ -341,8 +341,17 @@ class Creditcard_paypal_Model extends Model
 		
                                
                 
-		$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='".
-                strip_tags(addslashes($trans_id))."' $condition order by shipping_id DESC "); 
+		/**$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='".
+                strip_tags(addslashes($trans_id))."' $condition order by shipping_id DESC "); **/
+                $result = $this->db->select("*,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period")
+                                ->from("product")
+                                ->join("transaction as t","product.deal_id","t.product_id")
+                                ->join("shipping_info as s","t.id","s.transaction_id")
+                                ->join("city","city.city_id","s.city")
+                                ->join("stores","stores.store_id","product.shop_id")
+                                ->join("users as u","u.user_id","s.user_id")
+                                ->where("shipping_type = 1 and t.transaction_id =" .strip_tags(addslashes($trans_id)). " " .$condition)
+                                ->get();
 		
 		return $result;
                 
@@ -366,8 +375,17 @@ class Creditcard_paypal_Model extends Model
 		/*$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on product.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='$merchant_id' $condition order by shipping_id DESC ");*/
 		
 		
-		$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='$merchant_id' $condition order by shipping_id DESC ");  
-		
+		//$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='$merchant_id' $condition order by shipping_id DESC ");  
+		$result = $this->db->select("*,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period")
+                            ->from("product")
+                            ->join("transaction as t","product.deal_id","t.product_id")
+                            ->join("shipping_info as s","t.id","s.transaction_id")
+                            ->join("city","city.city_id","s.city")
+                            ->join("stores","stores.store_id","product.shop_id")
+                            ->join("users as u","u.user_id","s.user_id")
+                            ->where("shipping_type = 1 and t.transaction_id ='". strip_tags(addslashes($trans_id))."' and product.merchant_id ='". strip_tags(addslashes($merchant_id))."' ".$condition)
+                            ->orderby("shipping_id", "DESC")
+                            ->get();
 		return $result;
 	}
 	

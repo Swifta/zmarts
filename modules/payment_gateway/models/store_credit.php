@@ -77,31 +77,41 @@ class Store_credit_Model extends Model
 			 $commission=(($product_amount)*($commission_amount/100));
 					 $merchantcommission = $total_pay_amount - $commission ; 
 					 
-					 $this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
-
-					$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");	     
-			 
+					 //$this->db->query("update users set merchant_account_balance = merchant_account_balance + $merchantcommission where user_type = 3 and user_id = $merchant_id ");
+                                          $this->db->update("users", array("merchant_account_balance" =>new Database_Expression("merchant_account_balance +".$merchantcommission)), array("user_type" => 3,"user_id"=>$merchant_id)); 
+                                         
+					//$this->db->query("update users set merchant_account_balance = merchant_account_balance + $total_pay_amount where user_type = 1");	     
+			                 $this->db->update("users", array("merchant_account_balance" =>new Database_Expression("merchant_account_balance +".$total_pay_amount)), array("user_type" => 1)); 
+                                         
 			$purchase_count_total = $purchase_qty + $qty+$total_bulk_discount;
 			$quantity=$qty+$total_bulk_discount;
-			$result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-			 $this->db->query("update product_size set quantity = quantity - $quantity where deal_id = $deal_id and size_id = $product_size");
-			 
+			 $result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
+			// $this->db->query("update product_size set quantity = quantity - $quantity where deal_id = $deal_id and size_id = $product_size");
+			 $this->db->update("product_size", array("quantity" =>new Database_Expression("quantity -".$quantity)), array("deal_id" => $deal_id,"size_id"=>$product_size)); 
+                                         
 			if($product_offer==2 )
 			{
-				$this->db->query("update free_gift set purchased_quantity=purchased_quantity+1 where gift_id=$free_gift ");
+				//$this->db->query("update free_gift set purchased_quantity=purchased_quantity+1 where gift_id=$free_gift ");
+                                $this->db->update("free_gift", array("purchased_quantity" =>new Database_Expression("purchased_quantity+1")),array("gift_id" => $free_gift)); 
+                          
 			}
 		} else {
 			$result_ID = $this->db->select("id")->from("storecredit_transaction")->where(array("main_storecreditid"=>$main_storecreditid))->get()->current();
 			$trans_ID = $result_ID->id;
-			$this->db->query("update storecredit_transaction set storecredit_amount = storecredit_amount + $instalment_value,storecredit_transaction_date = ".time()." where main_storecreditid = $main_storecreditid ");
+			//$this->db->query("update storecredit_transaction set storecredit_amount = storecredit_amount + $instalment_value,storecredit_transaction_date = ".time()." where main_storecreditid = $main_storecreditid ");
 			//$this->db->update("storecredit_transaction",array("storecredit_amount"=>"storecredit_amount+$instalment_value,"storecredit_transaction_date"=>time()),array("main_storecreditid"=>$main_storecreditid));
-			
+			 $this->db->update("storecredit_transaction", array("storecredit_amount" =>new Database_Expression("storecredit_amount +".$instalment_value),"storecredit_transaction_date"=>time()), array("main_storecreditid" => $main_storecreditid )); 
+                         
 		}
 		$check_final_instalment = $this->db->select("duration_period,installments_paid")->from("store_credit_save")->where(array("storecredit_id"=>$main_storecreditid))->get();
 		if(count($check_final_instalment)>0) {
 			if($check_final_instalment->current()->duration_period == $installment_paid+1) {
-				$this->db->query("update users set monthly_installment_amt = monthly_installment_amt - $instalment_value where user_id = $this->UserID");
-				$this->db->query("update storecredit_transaction set payment_status = 'Completed' where  main_storecreditid = $main_storecreditid ");
+				//$this->db->query("update users set monthly_installment_amt = monthly_installment_amt - $instalment_value where user_id = $this->UserID");
+				//$this->db->query("update storecredit_transaction set payment_status = 'Completed' where  main_storecreditid = $main_storecreditid ");
+                                
+                                $this->db->update("users", array("monthly_installment_amt" =>new Database_Expression("monthly_installment_amt -".$instalment_value)) ,array("user_id" => $this->UserID )); 
+                                $this->db->update("storecredit_transaction", array("payment_status" =>'Completed'),array("main_storecreditid" => $main_storecreditid )); 
+                         
 			}
 		}
 		

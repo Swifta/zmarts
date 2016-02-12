@@ -4568,8 +4568,20 @@ class Merchant_Controller extends website_Controller
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
+						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);*/
 
+						$source = upload::save('im_product');
+						$temp = explode('.',  basename($source));
+						$ext = end($temp);
+						
+						$excel_name = time().'.'.$ext;
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						move_uploaded_file($source,$path.$excel_name);
+						
+						unlink($source);
+						
+						
+						
 					}
 
 					ini_set('memory_limit','5028m');
@@ -5495,6 +5507,15 @@ class Merchant_Controller extends website_Controller
 						$logo = basename($tmp_name);
 						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
 						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
+						*/
+						
+						$source = upload::save('attach');
+						$logo = basename($source);
+						move_uploaded_file($source, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
+						
+						unlink($source);
+						
 					}
 					$file1=array();
 					pdf::template_create($post->template,$post->subject,$post->message);
@@ -6364,7 +6385,7 @@ class Merchant_Controller extends website_Controller
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$category = strip_tags(addslashes($this->input->post("category")));
+					$category = strip_tags(basename(addslashes($this->input->post("category"))));
 	 				$cat_status = strip_tags(addslashes($this->input->post("status")));
 					$deal = isset($_POST['deal'])? 1 : 0;
 					$product = isset($_POST['product'])? 1 : 0;
@@ -7197,7 +7218,15 @@ class Merchant_Controller extends website_Controller
 						$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
+						
+						$source = upload::save('template_file');
+						$name = "Template_file_".$status.".php";
+						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+						
+						unlink($source);
+						
 					}
 					if($_FILES['template_image']['name']){
 						$filename = upload::save('template_image'); 						
@@ -7251,9 +7280,15 @@ class Merchant_Controller extends website_Controller
 				$status = $this->merchant->edit_template(arr::to_object($this->userPost),$newsletter_id);
 				if($status > 0){
 					if($_FILES["template_file"]["name"]!=''){
-						$tmp_name = $_FILES["template_file"]["tmp_name"];
+						/*$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name));
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
+						
+						$source = upload::save('template_file');
+						$name = "Template_file_".$status.".php";
+						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name));
+						
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 					}
 					if($_FILES['template_image']['name']!=''){

@@ -472,7 +472,7 @@ class Admin_Controller extends website_Controller
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$category = $this->input->post("category");
+					$category = basename($this->input->post("category"));
 	 				$cat_status = $this->input->post("status");
 					$deal = isset($_POST['deal'])? 1 : 0;
 					$product = isset($_POST['product'])? 1 : 0;
@@ -2046,7 +2046,7 @@ class Admin_Controller extends website_Controller
 
 
 			if($post->validate()){
-				$subsector = htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8');
+				$subsector = basename(htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8'));
  				$cat_status = htmlspecialchars($this->input->post("status"),ENT_QUOTES,'UTF-8');;
  				//$cat_type = "2";
  				$type = "2";

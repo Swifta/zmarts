@@ -250,6 +250,11 @@ class Admin_auction_Model extends Model
 
                                 $qry = "select * from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id   where $conditions";
                                 $result = $this->db->query($qry);
+                                
+                                
+                                
+                                
+                                
                 }
                 else{
                         $result = $this->db->select("deal_id")->from("auction")
@@ -257,8 +262,8 @@ class Admin_auction_Model extends Model
 			                            ->join("stores","stores.store_id","auction.shop_id")
 			                            ->join("city","city.city_id","stores.city_id")
 			                            ->join("country","country.country_id","stores.country_id")
-						    			->join("category","category.category_id","auction.category_id")
-						    			->join("users","users.user_id","auction.merchant_id")
+						    ->join("category","category.category_id","auction.category_id")
+						    ->join("users","users.user_id","auction.merchant_id")
 			                            ->orderby("deal_id","DESC")
                                         ->get();
                 }
@@ -460,11 +465,55 @@ class Admin_auction_Model extends Model
 	        		$contitions = ' (u.firstname like "%'.strip_tags($name).'%"';
                     $contitions .= ' OR u.email like "%'.strip_tags($name).'%")';
             		//$contitions .= ' OR tm.coupon_code like "%'.strip_tags($name).'%")';
-                   $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
-				}
+//                   $result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping 
+//                       from shipping_info as s 
+//                       join transaction as t on t.id=s.transaction_id
+//                       join auction as d on d.deal_id=t.auction_id 
+//                       join transaction_mapping as tm on tm.transaction_id = t.id 
+//                       join city on city.city_id=s.city 
+//                       join stores on stores.store_id = d.shop_id 
+//                       join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
+//				
+                   $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping")
+                      ->from("shipping_info as s")
+		      ->join("transaction as t","t.id","s.transaction_id")
+		      ->join("auction as d","d.deal_id","t.auction_id")
+                                                
+                      ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+		      ->join("city","city.city_id","s.city")
+                      ->join("stores","stores.store_id","d.shop_id")
+                      ->join("users as u","u.user_id","s.user_id")
+                      ->where( $contitions." and shipping_type = 2 " .$condition. "group by shipping_id order by shipping_id DESC $limit1 ")
+                      ->get();
+                  
+                   
+                   
+                        }
 				else {
-					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 2 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
-				} 
+//	$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping
+//            from shipping_info as s 
+//            join transaction as t on t.id=s.transaction_id 
+//            join auction as d on d.deal_id=t.auction_id 
+//            join transaction_mapping as tm on tm.transaction_id = t.id 
+//            join city on city.city_id=s.city 
+//            join stores on stores.store_id = d.shop_id 
+//            join users as u on u.user_id=s.user_id  where shipping_type = 2 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
+//				
+                                        
+                                        
+                                        
+                       $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping")
+                      ->from("shipping_info as s")
+		      ->join("transaction as t","t.id","s.transaction_id")
+		      ->join("auction as d","d.deal_id","t.auction_id")
+                                                
+                      ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+		      ->join("city","city.city_id","s.city")
+                      ->join("stores","stores.store_id","d.shop_id")
+                      ->join("users as u","u.user_id","s.user_id")
+                      ->where("shipping_type = 2" .$condition. " group by shipping_id order by shipping_id DESC ".$limit1)
+                      ->get();
+                                } 
                return $result;
         }
 

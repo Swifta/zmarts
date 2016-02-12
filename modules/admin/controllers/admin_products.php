@@ -485,7 +485,9 @@ class Admin_products_Controller extends website_Controller
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/admin_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
+						move_uploaded_file($source,$path.$excel_name);
+						unlink($source);
+						
 					}
 					
 					ini_set('memory_limit','5028m');
