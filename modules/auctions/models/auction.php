@@ -442,7 +442,7 @@ class Auction_Model extends Model
         $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,stores.store_url_title,(select avg(rating) 
             from rating where type_id=auction.deal_id and module_id=3) as avg_rating")
                            ->from("auction")
-                           ->where("type_id=auction.deal_id and module_id=3) as avg_rating from auction")
+                           
                            ->join("stores","stores.store_id","auction.shop_id")
                            ->join("category","category.category_id",'auction.category_id')
                            
@@ -569,13 +569,13 @@ class Auction_Model extends Model
                 
 		} else {
 		$conditions = "enddate > ".time()." and  deal_status = 1 ".$this->auction_club_condition."  and category.category_status = 1 and  store_status = 1 and auction_status = 0 ";
-		$query = "select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where $conditions and deal_feature = 1 and users.user_status=1 and city.city_status=1 ORDER BY RAND() limit 4";
-		$result = $this->db->query($qry);
+//		$query = "select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where $conditions and deal_feature = 1 and users.user_status=1 and city.city_status=1 ORDER BY RAND() limit 4";
+//		$result = $this->db->query($qry);
+//                
                 
-                
-                  $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating)")
-                           ->from("rating")
-                           ->where("type_id=auction.deal_id and module_id=3) as avg_rating from auction")
+                           $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating)")
+                           ->from("auction")
+                           
                            ->join("stores","stores.store_id","auction.shop_id")
                            ->join("category","category.category_id","auction.category_id")
                            ->join("users","users.user_id","stores.merchant_id")
@@ -905,7 +905,12 @@ class Auction_Model extends Model
 		if(count($result)>0)
 		{
 			$get_rate = count($result);
-			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=".strip_tags(addslashes($aucton_id))." AND module_id = 3");
+			//$sum= $this->db->query("select sum(rating) as sum from rating where type_id=".strip_tags(addslashes($aucton_id))." AND module_id = 3");
+                        
+                         $sum = $this->db->select("sum(rating) as sum")
+                         ->from("rating")
+                         ->where(array("type_id"=>strip_tags(addslashes($aucton_id)),"module_id"=>3))->get();
+                       
 			$get_sum=$sum->current()->sum;
 			$average= $get_sum/$get_rate;
 			return $average;
@@ -924,7 +929,12 @@ class Auction_Model extends Model
 		if(count($result)>0)
 		{
 			$get_rate = count($result);
-			$sum= $this->db->query("select sum(rating) as sum from rating where type_id=".strip_tags(addslashes($deal_id))." AND module_id = 3");
+			//$sum= $this->db->query("select sum(rating) as sum from rating where type_id=".strip_tags(addslashes($deal_id))." AND module_id = 3");
+                        
+                         $sum = $this->db->select("sum(rating) as sum")
+                         ->from("rating")
+                         ->where(array("type_id"=>strip_tags(addslashes($deal_id)),"module_id"=>3))->get();
+                       
 			$get_sum=$sum->current()->sum;
 			return $get_sum;
 		}
@@ -1316,11 +1326,21 @@ class Auction_Model extends Model
 		if(CITY_SETTING){ 
 			$con .= "and stores.city_id = '$this->city_id'";
 		}	
-		$result = $this->db->query("select category_url, category.category_id, category_name , product , count(product.deal_id) as product_count from category
-                    join product on product.category_id = category.category_id 
-                    join stores on stores.store_id=product.shop_id 
-                    where category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1 $con group by category.category_id  order by category_name ASC"); 
-		return $result;
+//		$result = $this->db->query("select category_url, category.category_id, category_name , product , count(product.deal_id) as product_count from category
+//                    join product on product.category_id = category.category_id 
+//                    join stores on stores.store_id=product.shop_id 
+//                    where category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1 $con group by category.category_id  order by category_name ASC"); 
+//		return $result;
+                
+                
+                
+                 $result = $this->db->select("category_url, category.category_id, category_name , product , count(product.deal_id) as product_count")
+                         ->from("category")
+                         ->join("product","product.category_id","category.category_id")
+                         ->join("stores", "stores.store_id","product.shop_id")
+                         ->where("category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1 $con group by category.category_id  order by category_name ASC")
+                         ->get();
+                          return $result;
 	}
 	
 	
