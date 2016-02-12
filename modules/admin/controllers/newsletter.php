@@ -297,7 +297,7 @@ class Newsletter_Controller extends website_Controller {
 						$tmp_name = upload::save('template_file');//basename($_FILES["template_file"]["tmp_name"]);
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
-						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 						
 						$source = upload::save('template_file');
 						$tmp_name = basename($source);
