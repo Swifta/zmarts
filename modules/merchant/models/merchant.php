@@ -97,10 +97,17 @@ class Merchant_Model extends Model
 	public function merchant_login($email = "", $pswd = "")
 	{
 			   $pswd = addslashes($email);
-               $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
-                       "' AND password ='".md5($pswd)."' AND user_type IN (3,8)");
-               //echo count($result); die;
-                //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd),"user_type in" =>(3,8)))->limit(1)->get();
+//               $result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
+//                       "' AND password ='".md5($pswd)."' AND user_type IN (3,8)");
+//               
+               $result = $this->db->select("")
+                         ->from("users")
+                         ->where("email = '".strip_tags(addslashes($email)). "' AND password ='".md5($pswd)."' AND user_type IN (3,8)")
+                         ->get();
+                 
+                 return $result;
+                  //echo count($result); die;
+                 //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd),"user_type in" =>(3,8)))->limit(1)->get();
 		     if(count($result)>0){
                         if(count($result) == 1){
 	                        if($result->current()->user_status == 1){
@@ -383,13 +390,47 @@ class Merchant_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
-					 $qry = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions $limit1 ";
+//					 $qry = "select * , deals.created_date as createddate from deals 
+//                                             join stores on stores.store_id=deals.shop_id
+//                                             join city on city.city_id=stores.city_id 
+//                                             join country on country.country_id=stores.country_id 
+//                                             join category on category.category_id=deals.category_id 
+//                                             join users on users.user_id=deals.merchant_id where $conditions $limit1 ";
 
-
+                          $qry = $this->db->select("*,deals.created_date as createddate")
+                          ->from("deals")
+                          ->join("stores","stores.store_id","deals.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("country","country.country_id","stores.country_id ")
+                          ->join("category","category.category_id","deals.category_id")
+                          ->join("users","users.user_id","deals.merchant_id")
+                          ->where($conditions .''.$limit1 )->get();
+                      
+                 
+                
 
                 }
 	        else{
-				$qry = "select * , deals.created_date as createddate from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=deals.category_id join users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1 ";
+//				$qry = "select * , deals.created_date as createddate from deals 
+//                                 join stores on stores.store_id=deals.shop_id 
+//                                 join city on city.city_id=stores.city_id 
+//                                 join country on country.country_id=stores.country_id 
+//                                 join category on category.category_id=deals.category_id 
+//                                 join users on users.user_id=deals.merchant_id where $conditions order by deals.deal_id DESC $limit1 ";
+                                
+                           $qry = $this->db->select("*,deals.created_date as createddate")
+                          ->from("deals")
+                          ->join("stores","stores.store_id","deals.shop_id")
+                          ->join("city","city.city_id","stores.city_id")
+                          ->join("country","country.country_id","stores.country_id ")
+                          ->join("category","category.category_id","deals.category_id")
+                          ->join("users","users.user_id","deals.merchant_id")
+                          ->where($conditions)
+                          ->orderby("deals.deal_id","DESC")
+                          ->limit($limit1)->get();
+                                   
+                                
+                                
                 }
 
                 $result = $this->db->query($qry);
@@ -458,8 +499,13 @@ class Merchant_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by deals.deal_id DESC'; }
 
-                        $qry = "select * from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id where $conditions ";
-                        $result = $this->db->query($qry);
+//                        $qry = "select * from deals join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id where $conditions ";
+//                        $result = $this->db->query($qry);
+                        $qry = $this->db->select("")->from("deals")
+						->join("stores","stores.store_id","deals.shop_id")
+						->join("city","city.city_id","stores.city_id")
+						->where($conditions)
+						->get();
                 }
 		else{
 			$result = $this->db->select("deal_id")->from("deals")
@@ -580,11 +626,28 @@ class Merchant_Model extends Model
 						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags(addslashes($code)).'%"';
 					}
 
-                       $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions");
-		}
+                      // $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id 
+                      // join users on users.user_id=transaction_mapping.user_id where $contitions");
+		       $result = $this->db->select("*")->from("transaction_mapping")
+						->join("deals","deals.deal_id ","transaction_mapping.deal_id")
+						->join("users","users.user_id","transaction_mapping.user_id")
+						->where($contitions)
+						->get();
+                       
+                       
+                    }
 		else {
-		$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions ";
-	$result = $this->db->query($qry);
+//		$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id
+//		 join users on users.user_id=transaction_mapping.user_id where $contitions ";
+//	        $result = $this->db->query($qry);
+        
+              $result = $this->db->select("*")->from("transaction_mapping")
+						->join("deals","deals.deal_id ","transaction_mapping.deal_id")
+						->join("users","users.user_id","transaction_mapping.user_id")
+						->where($contitions)
+						->get();
+                    
+                    
 		}
 
 	return count($result);
@@ -604,11 +667,29 @@ class Merchant_Model extends Model
                     if($code){
 						$contitions .= ' and transaction_mapping.coupon_code like "%'.strip_tags(addslashes($code)).'%"';
 					}
-                       $result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ");
-		}
+//                       $result = $this->db->query("SELECT * FROM transaction_mapping 
+//                           join deals on deals.deal_id = transaction_mapping.deal_id 
+//                           join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ");
+//		
+                        $result = $this->db->select("*")->from("transaction_mapping")
+						->join("deals","deals.deal_id ","transaction_mapping.deal_id")
+						->join("users","users.user_id","transaction_mapping.user_id")
+						->where($contitions.''.$limit1)
+						->get();
+                       
+                       
+                    }
 		else {
-		$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
-	$result = $this->db->query($qry);
+//		$qry = "SELECT * FROM transaction_mapping 
+//		join deals on deals.deal_id = transaction_mapping.deal_id 
+//		join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
+//	
+//                $result = $this->db->query($qry);
+                     $result = $this->db->select("*")->from("transaction_mapping")
+						->join("deals","deals.deal_id ","transaction_mapping.deal_id")
+						->join("users","users.user_id","transaction_mapping.user_id")
+						->where($contitions.''.$limit1)
+						->get();
 		}
 
 	return $result;
@@ -656,12 +737,33 @@ class Merchant_Model extends Model
                         if($name){
 			        $contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
-                         $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ORDER BY stores.store_id $limit1");
-
+//                         $result = $this->db->query("select * from stores 
+//                             join country on country.country_id = stores.country_id 
+//                             join city on city.city_id = stores.city_id where $contitions ORDER BY stores.store_id $limit1");
+                           
+                                                $result = $this->db->select("*")->from("stores")
+						->join("country","country.country_id","stores.country_id")
+						->join("city","city.city_id","stores.city_id")
+						->where($contitions)
+                                                ->orderby("stores.store_id")
+                                                ->limit($limit1)
+						->get();
+                         
                 }
                 else{
-                        $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ORDER BY stores.store_id $limit1");
-                }
+//                        $result = $this->db->query("select * from stores 
+//                            join country on country.country_id = stores.country_id
+//                            join city on city.city_id = stores.city_id 
+//                            where $contitions ORDER BY stores.store_id $limit1");
+                                                 $result = $this->db->select("*")->from("stores")
+						->join("country","country.country_id","stores.country_id")
+						->join("city","city.city_id","stores.city_id")
+						->where($contitions)
+                                                ->orderby("stores.store_id")
+                                                ->limit($limit1)
+						->get();
+                         
+                        }
                 return $result;
         }
 
@@ -680,11 +782,30 @@ class Merchant_Model extends Model
                         if($name){
 			        $contitions .= ' and store_name like "%'.strip_tags(addslashes($name)).'%"';
                         }
-                         $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ");
+//                         $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id
+//                             join city on city.city_id = stores.city_id where $contitions ");
 
-                }
+                 $result = $this->db->select("*")->from("stores")
+						->join("country","country.country_id","stores.country_id")
+						->join("city","city.city_id","stores.city_id")
+						->where($contitions)
+                                                
+						->get();
+                         
+                         
+                        }
                 else{
-                        $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id join city on city.city_id = stores.city_id where $contitions ");
+//                        $result = $this->db->query("select * from stores join country on country.country_id = stores.country_id
+//                            join city on city.city_id = stores.city_id where $contitions ");
+//              
+                        
+                         $result = $this->db->select("*")->from("stores")
+						->join("country","country.country_id","stores.country_id")
+						->join("city","city.city_id","stores.city_id")
+						->where($contitions)
+                                                
+						->get();
+                        
                 }
                 return count($result);
         }
@@ -1080,8 +1201,24 @@ class Merchant_Model extends Model
 			if(isset($sort_arr[$param])){
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
-			$qry = "select ('deal_id') from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$result = $this->db->query($qry);
+//			$qry = "select ('deal_id') from product 
+//                            join stores on stores.store_id=product.shop_id 
+//                            join city on city.city_id=stores.city_id 
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=product.category_id 
+//                            join users on users.user_id=product.merchant_id 
+//                            where $conditions";
+//			$result = $this->db->query($qry);
+//                        
+                             $result = $this->db->select("('deal_id')")->from("product")
+						->join("stores","stores.store_id","product.shop_id")
+						->join("city","city.city_id","stores.city_id")
+                                                 ->join("country","country.country_id","stores.country_id")
+						->join("category","category.category_id","product.category_id")
+                                                ->join("users","category.users.user_id","product.merchant_id")
+						->where($conditions)->get();
+                                                
+						
 		}
 		else{
 
@@ -1098,8 +1235,23 @@ class Merchant_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$qry = "select * from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$result = $this->db->query($qry);
+//			$qry = "select * from product join stores on stores.store_id=product.shop_id
+//                            join city on city.city_id=stores.city_id  
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=product.category_id 
+//                            join users on users.user_id=product.merchant_id where $conditions";
+//			$result = $this->db->query($qry);
+                        
+                        
+                         $result = $this->db->select("")->from("product")
+						->join("stores","stores.store_id","product.shop_id")
+						->join("city","city.city_id","stores.city_id")
+                                                 ->join("country","country.country_id","stores.country_id")
+						->join("category","category.category_id","product.category_id")
+                                                ->join("users","users.user_id","product.merchant_id")
+						->where($conditions)->get();
+                                                
+                        
 		}
 		return count($result);
 	}
@@ -1168,9 +1320,29 @@ class Merchant_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$qry = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  $limit1 ";
-			$result = $this->db->query($qry);
-		}
+//			$qry = "select * , product.created_date as createddate from product 
+//                            join stores on stores.store_id=product.shop_id 
+//                            join city on city.city_id=stores.city_id  
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=product.category_id 
+//                            join users on users.user_id=product.merchant_id where $conditions  $limit1 ";
+//			$result = $this->db->query($qry);
+		
+                        
+                          $result = $this->db->select("*,product.created_date as createddate ")->from("product")
+						->join("stores","stores.store_id","product.shop_id")
+						->join("city","city.city_id","stores.city_id")
+                                                ->join("country","country.country_id","stores.country_id")
+						->join("category","category.category_id","product.category_id")
+                                                ->join("users","users.user_id","product.merchant_id")
+						->where($conditions)
+                                                ->limit($limit1)
+                                                ->get();
+                                                
+                        
+                        
+                        
+                        }
 	        else{
 	                 if($type != "1")
 		        {
@@ -1185,8 +1357,22 @@ class Merchant_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$qry = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
-			$result = $this->db->query($qry);
+//			$qry = "select * , product.created_date as createddate from product 
+//                            join stores on stores.store_id=product.shop_id 
+//                            join city on city.city_id=stores.city_id  
+//                            join country on country.country_id=stores.country_id 
+//                            join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
+//			$result = $this->db->query($qry);
+                        
+                        $result = $this->db->select("*,product.created_date as createddate ")->from("product")
+						->join("stores","stores.store_id","product.shop_id")
+						->join("city","city.city_id","stores.city_id")
+                                                ->join("country","country.country_id","stores.country_id")
+						->join("category","category.category_id","product.category_id")
+                                                ->join("users","users.user_id","product.merchant_id")
+						->where($conditions)
+                                                ->limit($limit1)
+                                                ->get();
                 }
             return $result;
         }
@@ -1489,13 +1675,56 @@ class Merchant_Model extends Model
                     $contitions .= 'OR u.email like "%'.strip_tags(addslashes($name)).'%"';
             		$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
 
-					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ");
-
+//					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id 
+//                                            from shipping_info as s 
+//                                            join transaction as t on t.id=s.transaction_id 
+//                                            join product as d on d.deal_id=t.product_id
+//                                            join transaction_mapping as tm on tm.transaction_id = t.id 
+//                                            join city on city.city_id=s.city 
+//                                            join stores on stores.store_id = d.shop_id 
+//                                            join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ");
+//                                       
+                                                $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id")
+                                                ->from("shipping_info as s ")
+						->join("transaction as t","t.id","s.transaction_id")
+						->join("product as d","d.deal_id","t.product_id")
+                                                
+                                                ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+						->join("city","city.city_id","s.city")
+                                                ->join("stores","stores.store_id","d.shop_id")
+                                                ->join("users as u","u.user_id","s.user_id")
+						->where("$contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ")
+                                                ->get();
 				}
 				else {
 
-					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ");
-				}
+//					$result = $this->db->query("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id 
+//                                            from shipping_info as s 
+//                                            join transaction as t on t.id=s.transaction_id 
+//                                            join product as d on d.deal_id=t.product_id 
+//                                            join transaction_mapping as tm on tm.transaction_id = t.id 
+//                                            join city on city.city_id=s.city join stores on stores.store_id = d.shop_id 
+//                                            join users as u on u.user_id=s.user_id 
+//                                            where shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1 ");
+//				
+                                        
+                                                $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id")
+                                                ->from("shipping_info as s")
+						->join("transaction as t","t.id","s.transaction_id")
+						->join("product as d","d.deal_id","t.product_id")
+                                                
+                                                ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+						->join("city","city.city_id","s.city")
+                                                ->join("stores","stores.store_id","d.shop_id")
+                                                ->join("users as u","u.user_id","s.user_id")
+						->where("shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC $limit1")
+                                                ->get();
+                                        
+                                        
+                                        
+                                        
+                                        
+                                }
                 return $result;
         }
 
@@ -1516,8 +1745,28 @@ class Merchant_Model extends Model
                     $contitions .= ' OR u.email like "%'.strip_tags(addslashes($name)).'%"';
 					$contitions .= 'OR tm.coupon_code like "%'.strip_tags(addslashes($name)).'%")';
 
-                  $result = $this->db->query("select s.shipping_id  from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ");
-		}
+//                  $result = $this->db->query("select s.shipping_id  from shipping_info as s 
+//                      join transaction as t on t.id=s.transaction_id 
+//                      join product as d on d.deal_id=t.product_id 
+//                      join transaction_mapping as tm on tm.transaction_id = t.id 
+//                      join city on city.city_id=s.city 
+//                      join stores on stores.store_id = d.shop_id 
+//                      join users as u on u.user_id=s.user_id 
+//                      where $contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ");
+		
+                      $result = $this->db->select("s.shipping_id")
+                      ->from("shipping_info as s")
+		      ->join("transaction as t","t.id","s.transaction_id")
+		      ->join("product as d","d.deal_id","t.product_id")
+                                                
+                      ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+		      ->join("city","city.city_id","s.city")
+                      ->join("stores","stores.store_id","d.shop_id")
+                      ->join("users as u","u.user_id","s.user_id")
+                      ->where("$contitions and shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ")
+                      ->get();
+                  
+                        }
 		else {
 			 $result = $this->db->query("select s.shipping_id  from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ");
 		}
