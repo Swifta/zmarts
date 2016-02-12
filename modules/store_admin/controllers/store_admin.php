@@ -1678,7 +1678,7 @@ class Store_admin_Controller extends website_Controller
 			            if($_FILES['image']['name']['0'] != "" )
                                     {
                                         $i=1;
-                                            foreach(arr::rotate($_FILES['image']) as $files){
+                                            foreach(arr::rotate(basename($_FILES['image'])) as $files){
 	                                         if($files){
                                                         $filename = upload::save($files);
 				                        if($filename!=''){
@@ -3508,7 +3508,13 @@ class Store_admin_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
+<<<<<<< HEAD
 						/*$temp = basename(explode('.',  basename($_FILES['im_product']['name'])));
+||||||| merged common ancestors
+						$temp = basename(explode('.',  basename($_FILES['im_product']['name'])));
+=======
+						$temp = explode('.',basename($_FILES['im_product']['name']));
+>>>>>>> 55f786d37949da9fa11e8df57efaa2d2454962bc
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
@@ -4054,7 +4060,7 @@ class Store_admin_Controller extends website_Controller
 							fclose($file);
 	
 							
-							$main_routes = realpath(DOCROOT.'modules/'.$modules_name).'/config/main_routes.php';
+							$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
 							$f = fopen($main_routes, "r");
 
 
