@@ -17,13 +17,17 @@ class Inter_switch_Model extends Model
 	
 	public function get_product_payment_details($deal_id = "")
 	{
-		//$result = $this->db->query("select *, $this->deal_value_condition from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
-	        $result = $this->db->select("*, $this->deal_value_condition")
-                        ->from("product")
-                        ->join("category","category.category_id","product.category_id")
-                        ->where("deal_status = 1 and category.category_status = 1 and deal_id = ". $deal_id)
-                        ->get();
-                return $result;
+//		$result = $this->db->query("select *, $this->deal_value_condition from product  
+//                    join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
+//	        return $result;
+                
+                $result = $this->db->select("*, '.$this->deal_value_condition.'")
+                         ->from("product")
+                         ->join("category","category.category_id","product.category_id")
+                        
+                         ->where(array("deal_status"=> 1,"category.category_status"=>1,"deal_id"=>$deal_id))->get();
+                      return $result;  
+
 
 	}
 
@@ -85,12 +89,13 @@ class Inter_switch_Model extends Model
 		$purchase_count_total = $purchase_qty + $qty+$total_bulk_discount;
 		$quantity=$qty+$total_bulk_discount;
 	    $result_deal = $this->db->update("product", array("purchase_count" => $purchase_count_total), array("deal_id" => $deal_id)); 
-		 //$this->db->query("update product_size set quantity = quantity - $quantity where deal_id = $deal_id and size_id = $product_size");
-		 $this->db->update("product_size",array("quantity" => new Database_Expression("quantity -". $quantity)),array("deal_id" => $free_gift, "size_id" => $product_size));
+		// $this->db->query("update product_size set quantity = quantity - $quantity where deal_id = $deal_id and size_id = $product_size");
+                 $this->db->update("product_size", array("quantity" =>new Database_Expression("quantity -".$quantity)), array("deal_id" => $deal_id,"size_id"=>$product_size)); 
+		 
 		if($product_offer==2 )
 		{
 			//$this->db->query("update free_gift set purchased_quantity=purchased_quantity+1 where gift_id=$free_gift ");
-                        $this->db->update("free_gift",array("purchased_quantity" => new Database_Expression("purchased_quantity+1")),array("gift_id" => $free_gift));
+                        $this->db->update("free_gift", array("purchased_quantity" =>new Database_Expression("purchased_quantity +1")), array("gift_id" => $free_gift )); 
 		}
 		return $trans_ID;
 		return $trans_ID;
@@ -191,20 +196,29 @@ class Inter_switch_Model extends Model
 		/*$result = $this->db->query("select *,$this->deal_value_condition, s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id from shipping_info as s join transaction as t on t.id=s.transaction_id join product on product.deal_id=t.product_id join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='$merchant_id' $condition order by shipping_id DESC "); */
 		
 			
-		//$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='$merchant_id' $condition order by shipping_id DESC ");  
-                $result = $this->db->select("*,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period")
-                                ->from("product")
-                                ->join("transaction as t","product.deal_id","t.product_id")
-                                ->join("shipping_info as s","t.id","s.transaction_id")
-                                ->join("city","city.city_id","s.city")
-                                ->join("stores","stores.store_id","product.shop_id")
-                                ->join("users as u","u.user_id","s.user_id")
-                                ->where("shipping_type = 1 and t.transaction_id =" .$trans_id . " and product.merchant_id =" .$merchant_id . " " .$condition)
-                                ->orderby("shipping_id", "DESC")
-                                ->get();
-		
-		
-		return $result;
+//		$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  
+//                    from product 
+//                    join transaction as t on product.deal_id=t.product_id 
+//                    join shipping_info as s on t.id=s.transaction_id  
+//                    join city on city.city_id=s.city join 
+//                    stores on stores.store_id = product.shop_id 
+//                    join users as u on u.user_id=s.user_id  
+//                    where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='$merchant_id' $condition order by shipping_id DESC ");  
+//		
+//		
+//		return $result;
+                
+                         $result = $this->db->select("*, '.$this->deal_value_condition.',s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period ")
+                         ->from("product")
+                         ->join("transaction as t ","product.deal_id","t.product_id")
+                         ->join("shipping_info as s","t.id","s.transaction_id")
+                         ->join("stores","stores.store_id","product.shop_id")
+                         ->join("users as u","u.user_id","s.user_id")
+                        
+                         ->where(array("shipping_type"=> 1,"t.transaction_id"=>$trans_id,"product.merchant_id"=>$merchant_id,$condition))
+                         ->orderby("shipping_id","DESC")
+                         ->get();
+                         return $result;  
 	}
 	
 	public function get_merchant_details($merchant = "")
@@ -228,17 +242,20 @@ class Inter_switch_Model extends Model
 	
 	public function get_free_gift($gift_amount="",$merchant_id="",$deal_id="")
 	{
-	//$result=$this->db->query("select gift_offer from product join free_gift on free_gift.merchant_id=product.merchant_id where gift_Amount<= $gift_amount and free_gift.merchant_id=$merchant_id and gift_status=1 and product.deal_id=$deal_id order by gift_Amount DESC limit 1");
-        $result=  $this->db->select("gift_offer")
-                    ->from("product")
-                    ->join("free_gift","free_gift.merchant_id","product.merchant_id")
-                    ->where("gift_Amount<=" .$gift_amount . " and free_gift.merchant_id=" .$merchant_id . " and gift_status=1 and product.deal_id=" .$deal_id)
-                    ->orderby("gift_Amount", "DESC")
-                    ->limit(1)
-                    ->get();
-		/*$result=$this->db->select("gift_id")->from("free_gift")->where(array("gift_Amount <=" => $gift_amount))->orderby("gift_Amount","DESC")->limit(1,0)->get();*/
+//	$result=$this->db->query("select gift_offer from product 
+//            join free_gift on free_gift.merchant_id=product.merchant_id 
+//            where gift_Amount<= $gift_amount and free_gift.merchant_id=$merchant_id and gift_status=1 and product.deal_id=$deal_id order by gift_Amount DESC limit 1");
+		
+            /*$result=$this->db->select("gift_id")->from("free_gift")->where(array("gift_Amount <=" => $gift_amount))->orderby("gift_Amount","DESC")->limit(1,0)->get();*/
+		
+                 $result=$this->db->select("gift_offer")->from("product")
+                 ->join("free_gift","free_gift.merchant_id","product.merchant_id ")
+                 ->where(array("gift_Amount <=" => $gift_amount,"free_gift.merchant_id" => $merchant_id,"gift_status" => 1,"product.deal_id " =>$deal_id ))
+                 ->orderby("gift_Amount","DESC")->limit(1,0)->get();
 		
 		return $result;
+                
+                
 		
 	}
 	
