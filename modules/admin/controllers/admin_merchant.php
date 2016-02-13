@@ -1723,11 +1723,15 @@ class Admin_merchant_Controller extends website_Controller {
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
 													$i=1;
-								foreach(arr::rotate($_FILES['attach']) as $files){
-											if($files){
-												
-										$filename = upload::save($files);
-										$filename = basename($filename);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 											if($filename!=''){
 												//$IMG_NAME = "news_letter";
 												$ext=$filename;
