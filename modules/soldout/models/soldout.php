@@ -34,9 +34,20 @@ class Soldout_Model extends Model
 		}
 		
 		$conditions .= $this->club_condition;
-		$qry = "select *,stores.store_url_title from deals join category on category.category_id=deals.category_id  join stores on stores.store_id=deals.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id  where $conditions ";
-		$result = $this->db->query($qry);
-		return $result; 
+//		$qry = "select *,stores.store_url_title from deals 
+//                    join category on category.category_id=deals.category_id  join stores on stores.store_id=deals.shop_id 
+//                    join city on city.city_id=stores.city_id  
+//                    join country on country.country_id=stores.country_id  where $conditions ";
+//		$result = $this->db->query($qry);
+//		return $result; 
+//                
+                
+                $result=$this->db->select("*,stores.store_url_title")->from("deals")
+                        ->join("stores","stores.store_id","deals.shop_id")
+                        ->join("city","stores.store_id","stores.city_id")
+                        ->join("country","country.country_id","stores.country_id")
+                          ->where($conditions)->get();
+		return $result;
 	}
 	
 	/* GET SOLD OUT PRODUCTS LIST */
@@ -58,8 +69,20 @@ class Soldout_Model extends Model
 		
 		$conditions .= $this->club_condition;
 		
-		$qry = "select *,stores.store_url_title from product join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id where $conditions";
-		$result = $this->db->query($qry);
+//		$qry = "select *,stores.store_url_title from product 
+//                    join stores on stores.store_id=product.shop_id 
+//                    join category on category.category_id=product.category_id 
+//                    join city on city.city_id=stores.city_id  
+//                    join country on country.country_id=stores.country_id where $conditions";
+//		$result = $this->db->query($qry);
+//		return $result;
+//                
+                $result=$this->db->select("*,stores.store_url_title")->from("product")
+                        ->join("stores","stores.store_id","product.shop_id")
+                        ->join("category","category.category_id","product.category_id")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("country","country.country_id","stores.country_id")
+                          ->where($conditions)->get();
 		return $result;
 	}
 	
@@ -75,13 +98,46 @@ class Soldout_Model extends Model
 			$conditions = " and stores.store_id = $store_id ";
 			$conditions .= $this->club_condition;
 		if(CITY_SETTING){ 
-			$qry = " SELECT *,stores.store_url_title FROM auction join users on users.user_id=auction.winner join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join country on country.country_id=city.country_id join category on category.category_id=auction.category_id where auction.winner != 0 and auction.auction_status != 0 and stores.city_id=$cityid and category.category_status = 1 and city.city_status = 1 $conditions ";
-			$result_high = $this->db->query($qry); 
-			return $result_high; 
+//			$qry = " SELECT *,stores.store_url_title FROM auction 
+//                            join users on users.user_id=auction.winner 
+//                            join stores on stores.store_id=auction.shop_id 
+//                            join city on city.city_id=stores.city_id 
+//                            join country on country.country_id=city.country_id 
+//                            join category on category.category_id=auction.category_id
+//                            where 
+//                            auction.winner != 0 and auction.auction_status != 0 and stores.city_id=$cityid and category.category_status = 1 and city.city_status = 1 $conditions ";
+//			$result_high = $this->db->query($qry); 
+//			return $result_high; 
+                        
+                         $result_high=$this->db->select("*,stores.store_url_title")->from("auction")
+                        ->join("users","users.user_id","auction.winner")
+                        ->join("stores","stores.store_id","auction.shop_id")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("country","country.country_id","city.country_id ")
+                        ->join("category","category.category_id","auction.category_id")
+                          ->where("auction.winner != 0 and auction.auction_status != 0 and stores.city_id='.$cityid.' and category.category_status = 1 and city.city_status = 1". $conditions )->get();
+		return $result_high;
+                        
+                        
 		} else {
-			$qry = " SELECT *,stores.store_url_title FROM auction join users on users.user_id=auction.winner join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join country on country.country_id=city.country_id join category on category.category_id=auction.category_id where auction.winner != 0 and auction.auction_status !=0 and category.category_status = 1 and city.city_status = 1 $conditions ";
-			$result_high = $this->db->query($qry); 
-			return $result_high;
+//			$qry = " SELECT *,stores.store_url_title FROM auction 
+//                            join users on users.user_id=auction.winner 
+//                            join stores on stores.store_id=auction.shop_id 
+//                            join city on city.city_id=stores.city_id 
+//                            join country on country.country_id=city.country_id 
+//                            join category on category.category_id=auction.category_id 
+//                            where auction.winner != 0 and auction.auction_status !=0 and category.category_status = 1 and city.city_status = 1 $conditions ";
+//			$result_high = $this->db->query($qry); 
+//			return $result_high;
+                        
+                        $result_high=$this->db->select("*,stores.store_url_title")->from("auction")
+                        ->join("users","users.user_id","auction.winner")
+                        ->join("stores","stores.store_id","auction.shop_id")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("country","country.country_id","city.country_id ")
+                        ->join("category","category.category_id","auction.category_id")
+                        ->where("auction.winner != 0 and auction.auction_status !=0 and category.category_status = 1 and city.city_status = 1". $conditions  )->get();
+		         return $result_high;
 		} 
 	}
 	

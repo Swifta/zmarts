@@ -1561,7 +1561,8 @@ function set_selected_size(){
 			$size_q = strip_tags(addslashes($_POST['size_quantity']));
 	 for($i = 2; $i < count($_POST['size']); $i++){
 		 ?>
-			addSize("<?php echo $sizes[$i]?>", "<?php echo $size_q[$i]?>");
+			//addSize("<?php //echo $sizes[$i]?>", "<?php //echo $size_q[$i]?>");htmlspecialchars($this->Lang['ZIP_CODE'],ENT_QUOTES,"UTF-8");
+                        addSize("<?php echo htmlspecialchars($sizes[$i],ENT_QUOTES,"UTF-8"); ?>", "<?php echo htmlspecialchars($size_q[$i],ENT_QUOTES,"UTF-8") ?>");
 	<?php }?>
 	
 	<?php if($_POST['size_val'].'' === '1'){?>
