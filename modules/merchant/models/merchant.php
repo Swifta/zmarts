@@ -5261,7 +5261,9 @@ class Merchant_Model extends Model
 				$conditions.=" and age_range='".$age_range."' and user_type=8 ";
 			}
 			
-			$news=$this->db->query("select * from  users where user_status=1 $conditions");
+			//$news=$this->db->query("select * from  users where user_status=1 $conditions");
+                         $news = $this->db->select()->from("users")
+                                        ->where(array("user_status"=>1,$conditions));
 			return $news;
 			
 		}elseif(isset($all_users) && $all_users!=""){
