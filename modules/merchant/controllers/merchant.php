@@ -354,9 +354,15 @@ class Merchant_Controller extends website_Controller
 					if($_FILES['image']['name']['0'] != "" )
 					{
 						$i=1;
-						foreach(arr::rotate($_FILES['image']) as $files){
-							if($files){
-								$filename = upload::save($files);
+						foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 								if($filename!=''){
 									$IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
@@ -579,10 +585,15 @@ class Merchant_Controller extends website_Controller
 
                                 if($_FILES['image']['name'] != "" ){
                                     $i=1;
-                                    foreach(arr::rotate($_FILES['image']) as $files){
-
-                                                        if($files){
-                                                                $filename = upload::save($files);
+                                    foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
                                                                 if($filename!=''){
                                                                         if($i==1){
                                                                                 $IMG_NAME = $deal_key."_1.png";
@@ -1763,9 +1774,18 @@ class Merchant_Controller extends website_Controller
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
+								
+								foreach($_FILES as $key =>$value){
+									$n = uniqid();
+									$_FILES[$n] = $value;
+									unset($_FILES[$key]);
+								}
+								
+								
+								//foreach(arr::rotate($_FILES['image']) as $files){
+								foreach($_FILES as $key => $files){
 									if($files){
-										$filename = upload::save(realpath($files));
+										$filename = upload::save($key);
 										if($filename!=''){
 
 											$IMG_NAME = $deal_key."_".$i.'.png';
@@ -2085,9 +2105,16 @@ class Merchant_Controller extends website_Controller
 				if($status == 1 && $deal_key){
 					if($_FILES['image']['name'] != "" ){
 						$i=1;
-						foreach(arr::rotate($_FILES['image']) as $files){
+						
+						foreach($_FILES as $key =>$value){
+							$n = uniqid();
+							$_FILES[$n] = $value;
+							unset($_FILES[$key]);
+						}
+						//foreach(arr::rotate($_FILES['image']) as $files){
+							foreach($_FILES as $key => $files){
 							if($files){
-								$filename = upload::save($files);
+								$filename = upload::save($key);
 								if($filename!=''){
 									if($i==1){
 										$IMG_NAME = $deal_key."_1.png";
@@ -2649,9 +2676,15 @@ class Merchant_Controller extends website_Controller
 			            if($_FILES['image']['name']['0'] != "" )
                                     {
                                         $i=1;
-                                            foreach(arr::rotate($_FILES['image']) as $files){
+                                            foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
 	                                         if($files){
-                                                        $filename = upload::save($files);
+                                                  $filename = upload::save($key);
 				                        if($filename!=''){
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
 			                            		common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
@@ -2894,9 +2927,15 @@ class Merchant_Controller extends website_Controller
 					if($_FILES['image']['name'] != "" )
                      {
                                     $i=1;
-                                    foreach(arr::rotate($_FILES['image']) as $files){
-                                                if($files){
-                                                $filename = upload::save($files);
+                                   foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
                                                         if($filename!=''){
                                                                 if($i==1)
                                                                 {
@@ -4564,7 +4603,7 @@ class Merchant_Controller extends website_Controller
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',  basename($file_name));
+						/*$temp = explode('.',  basename($file_name));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
@@ -5503,7 +5542,7 @@ class Merchant_Controller extends website_Controller
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-						$tmp_name = upload::save('attach');//$_FILES["attach"]["tmp_name"];
+						/*$tmp_name = upload::save('attach');//$_FILES["attach"]["tmp_name"];
 						$logo = basename($tmp_name);
 						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
 						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
@@ -6892,9 +6931,15 @@ class Merchant_Controller extends website_Controller
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
                                                 $i=1;
-							foreach(arr::rotate($_FILES['attach']) as $files){
-                				        if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										if($filename!=''){
 											//$IMG_NAME = "news_letter";
 											$ext=$filename;
@@ -6994,9 +7039,16 @@ class Merchant_Controller extends website_Controller
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
 							$i=1;
-							foreach(arr::rotate($_FILES['attach']) as $files){
-								if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
+												  
 									if($filename!=''){
 										$ext=$filename;
 										$lastDot = strrpos($ext, ".");
@@ -7215,7 +7267,7 @@ class Merchant_Controller extends website_Controller
 				$status = $this->merchant->add_template(arr::to_object($this->userPost));
 				if($status > 0){
 					if($_FILES["template_file"]){
-						$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
+						/*$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/

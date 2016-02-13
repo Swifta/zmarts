@@ -115,9 +115,15 @@ class Admin_products_Controller extends website_Controller
 				if($status > 0 && $deal_key){
 				        if($_FILES['image']['name']['0'] != "" ){
                                                 $i=1;
-							foreach(arr::rotate($_FILES['image']) as $files){
-                				        if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										if($filename!=''){
 											$IMG_NAME = $deal_key."_".$i.'.png';
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
@@ -923,9 +929,15 @@ class Admin_products_Controller extends website_Controller
 							if($_FILES['image']['name'] != "" )
 							{
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
-								if($files){
-									$filename = upload::save($files);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 									if($filename!=''){
 										if($i==1)
 										{
