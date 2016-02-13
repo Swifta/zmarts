@@ -140,8 +140,9 @@ class Users_Model extends Model
                         $city_subscribe .=",".$post->city;
                         $result = $this->db->update("email_subscribe", array("user_id" =>$result->insert_id(),"category_id"=> $city_subscribe),array("email_id" => $post->email));		        
                         } else {
-                        $category_result = $this->db->query("select * from category   where type = 1 and category_status = 1  ORDER BY RAND() LIMIT 1");
-			$category_subscribe = $category_result->current()->category_id;
+                        //$category_result = $this->db->query("select * from category   where type = 1 and category_status = 1  ORDER BY RAND() LIMIT 1");
+			$category_result = $this->db->select()->from("category")->where("type = 1 and category_status = 1")->orderby("RAND()")->limit(1)->get();
+                        $category_subscribe = $category_result->current()->category_id;
 		        $result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $result->insert_id(), "email_id" => $post->email,"city_id" => $post->city,"country_id" =>$post->country,"category_id" =>$category_subscribe));
   		      }
 		
@@ -188,8 +189,9 @@ class Users_Model extends Model
 						$result = $this->db->update("email_subscribe", array("user_id" =>$insert->insert_id(),"category_id" =>$city_subscribe),array("email_id" => $fb_profile_email));
 				
 					} else {
-				$category_result = $this->db->query("select * from category   where type = 1 and category_status = 1  ORDER BY RAND() LIMIT 1");
-				$category_subscribe = $category_result->current()->category_id;
+				//$category_result = $this->db->query("select * from category   where type = 1 and category_status = 1  ORDER BY RAND() LIMIT 1");
+				$category_result = $this->db->select()->from("category")->where("type = 1 and category_status = 1")->orderby("RAND()")->limit(1)->get();
+                                $category_subscribe = $category_result->current()->category_id;
 				$result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $insert->insert_id(),"email_id" => $fb_profile_email,"category_id" => $category_subscribe));
   		                        }
 			$this->session->set(array("UserID" => $insert->insert_id(), "UserName" => $fb_profile->name, "UserEmail" => $fb_profile_email, "fb_access_token" => $fb_access_token,"UserType" => "4"));
