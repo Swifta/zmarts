@@ -404,7 +404,13 @@ class Admin_merchant_Model extends Model
 	
 	public function get_merchant_shop_data($storeid = "")
 	{
-		$result = $this->db->select()->from("stores")->join("city","city.city_id","stores.city_id")->join("users","users.user_id","stores.store_admin_id","left")->where(array("store_id" => $storeid))->limit(1)->get();
+		$result = $this->db->select()
+                        ->from("stores")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("users","users.user_id","stores.store_admin_id","left")
+                        ->where(array("store_id" => $storeid))
+                        ->limit(1)
+                        ->get();
 		return $result;
 	}
 	

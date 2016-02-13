@@ -1184,6 +1184,9 @@ class Products_Model extends Model
 	 public function get_products_lists_bysize($size="")
 	  {
 		if(CITY_SETTING){
+                    
+                    
+                    
 				$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
 				$result = $this->db->query($qry);
 				return $result;
