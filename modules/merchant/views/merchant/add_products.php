@@ -1435,10 +1435,11 @@ function set_selected_size(){
 	<?php
 	
 	if(isset($_POST['size'])){
-			$sizes =  $_POST['size'];
-			$size_q = $_POST['size_quantity'];
+			$sizes = strip_tags(addslashes($_POST['size']));
+                        $size_q = strip_tags(addslashes($_POST['size_quantity']));
 	 for($i = 2; $i < count($_POST['size']); $i++){?>
-			addSize("<?php echo $sizes[$i]?>", "<?php echo $size_q[$i]?>");
+			//addSize("<?php //echo $sizes[$i]?>", "<?php //echo $size_q[$i]?>");
+                        addSize("<?php echo htmlspecialchars($sizes[$i],ENT_QUOTES,"UTF-8")?>", "<?php echo htmlspecialchars($size_q[$i],ENT_QUOTES,"UTF-8")?>");
 	<?php } }?>
 }
 

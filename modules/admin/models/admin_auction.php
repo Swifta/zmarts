@@ -177,13 +177,34 @@ class Admin_auction_Model extends Model
 			if(isset($sort_arr[$param])){
 	       		 $conditions .= $sort_arr[$param];
 	        	}  else  {  $conditions .= ' order by auction.deal_id DESC'; }			
-				$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions $limit1 ";
+				//$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions $limit1 ";
+                                $result = $this->db->select("* , auction.created_date as createddate")
+                                        ->from("auction")
+                                        ->join("stores","stores.store_id","auction.shop_id")
+                                        ->join("city","city.city_id","stores.city_id")
+                                        ->join("country","country.country_id","stores.country_id")
+                                        ->join("category","category.category_id","auction.category_id")
+                                        ->join("users","users.user_id","auction.merchant_id")
+                                        ->where($conditions)
+                                        ->limit($limit1)
+                                        ->get();
 		}
 		else{
-				$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions order by auction.deal_id DESC $limit1 ";
+				//$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions order by auction.deal_id DESC $limit1 ";
+                                $result = $this->db->select("* , auction.created_date as createddate")
+                                        ->from("auction")
+                                        ->join("stores","stores.store_id","auction.shop_id")
+                                        ->join("city","city.city_id","stores.city_id")
+                                        ->join("country","country.country_id","stores.country_id")
+                                        ->join("category","category.category_id","auction.category_id")
+                                        ->join("users","users.user_id","auction.merchant_id")
+                                        ->where($conditions)
+                                        ->orderby("auction.deal_id", "DESC")
+                                        ->limit($limit1)
+                                        ->get();
 		}
 		
-		$result = $this->db->query($qry);
+		//$result = $this->db->query($qry);
 		
 		return $result;
 	}
@@ -248,8 +269,16 @@ class Admin_auction_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by auction.deal_id DESC'; }
 
-                                $qry = "select * from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id   where $conditions";
-                                $result = $this->db->query($qry);
+                                //$qry = "select * from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id   where $conditions";
+                                $result = $this->db->select()
+                                        ->from("auction")
+                                        ->join("stores","stores.store_id","auction.shop_id")
+                                        ->join("city","city.city_id","stores.city_id")
+                                        ->join("category","category.category_id","auction.category_id")
+                                        ->join("users","users.user_id","auction.merchant_id")
+                                        ->where($conditions)
+                                        ->get();
+                                //$result = $this->db->query($qry);
                                 
                                 
                                 
@@ -534,10 +563,32 @@ class Admin_auction_Model extends Model
                     $contitions .= ' OR u.email like "%'.strip_tags($name).'%"';
 					$contitions .= 'OR tm.coupon_code like "%'.strip_tags($name).'%")';
                    
-                   $result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC "); 
+                   //$result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where $contitions and shipping_type = 2 $condition group by shipping_id order by shipping_id DESC ");
+                   $result = $this->db->select("s.shipping_id")
+                           ->from("shipping_info as s")
+                           ->join("transaction as t","t.id","s.transaction_id")
+                           ->join("auction as d","d.deal_id","t.auction_id")
+                           ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                           ->join("city","city.city_id","s.city")
+                           ->join("users as u","u.user_id","s.user_id")
+                           ->where($contitions. " and shipping_type = 2 " .$condition)
+                           ->groupby("shipping_id")
+                           ->orderby("shipping_id","DESC")
+                           ->get();
 		}
 		else {
-			$result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where shipping_type = 2 $condition group by shipping_id order by shipping_id DESC"); 
+			//$result = $this->db->query("select s.shipping_id from shipping_info as s join transaction as t on t.id=s.transaction_id join auction as d on d.deal_id=t.auction_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join users as u on u.user_id=s.user_id where shipping_type = 2 $condition group by shipping_id order by shipping_id DESC");
+                        $result = $this->db->select("s.shipping_id")
+                           ->from("shipping_info as s")
+                           ->join("transaction as t","t.id","s.transaction_id")
+                           ->join("auction as d","d.deal_id","t.auction_id")
+                           ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                           ->join("city","city.city_id","s.city")
+                           ->join("users as u","u.user_id","s.user_id")
+                           ->where("shipping_type = 2", $condition)
+                           ->groupby("shipping_id")
+                           ->orderby("shipping_id","DESC")
+                           ->get();
 		}
                 return count($result);
         }
@@ -564,7 +615,17 @@ class Admin_auction_Model extends Model
                        $contitions .= ' OR auction.deal_title like "%'.strip_tags($name).'%")';
                       
 		}
-		 $result = $this->db->query("SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions order by auction.deal_id DESC $limit1 ");
+		 //$result = $this->db->query("SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions order by auction.deal_id DESC $limit1 ");
+                 $result = $this->db->select()
+                         ->from("auction")
+                         ->join("users","users.user_id","auction.winner")
+                         ->join("city","city.city_id","users.city_id")
+                         ->join("country","country.country_id","users.country_id")
+                         ->join("bidding","bidding.auction_id","auction.deal_id")
+                         ->where($contitions)
+                         ->orderby("auction.deal_id", "DESC")
+                         ->limit($limit1)
+                         ->get();
 		 
 	return $result;  
 	
@@ -582,9 +643,17 @@ class Admin_auction_Model extends Model
                        
                       
 		}
-		$qry = " SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions ";
+		//$qry = " SELECT * FROM auction join users on users.user_id=auction.winner join city on city.city_id=users.city_id join country on country.country_id=users.country_id join bidding on bidding.auction_id = auction.deal_id where $contitions ";
+                $result = $this->db->select()
+                         ->from("auction")
+                         ->join("users","users.user_id","auction.winner")
+                         ->join("city","city.city_id","users.city_id")
+                         ->join("country","country.country_id","users.country_id")
+                         ->join("bidding","bidding.auction_id","auction.deal_id")
+                         ->where($contitions)
+                         ->get();
 		
-		$result = $this->db->query($qry); 
+		//$result = $this->db->query($qry); 
 		
 		return count($result);  
 	
@@ -601,8 +670,15 @@ class Admin_auction_Model extends Model
                         $contitions .= 'OR auction.deal_title like "%'.strip_tags($firstname).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join auction on auction.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
-              
+                       //$result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join auction on auction.deal_id=discussion.deal_id where $contitions order by discussion_id DESC limit $offset, $record");
+                       $result = $this->db->select("*, discussion.created_date as dis_create") 
+                           ->from("discussion") 
+                           ->join("users","users.user_id","discussion.user_id") 
+                           ->join("auction","auction.deal_id","discussion.deal_id") 
+                           ->where($contitions) 
+                           ->orderby("discussion_id", "DESC") 
+                           ->limit($record,$offset)
+                           ->get();
                 return $result;
         }
 	
@@ -616,7 +692,14 @@ class Admin_auction_Model extends Model
                         $contitions .= 'OR auction.deal_title like "%'.strip_tags($firstname).'%"';
                         $contitions .= 'OR discussion.comments like "%'.strip_tags($firstname).'%"';
                         }
-                       $result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join auction on auction.deal_id=discussion.deal_id where $contitions  order by discussion_id DESC");
+                       //$result = $this->db->query("select *, discussion.created_date as dis_create from discussion join users on users.user_id=discussion.user_id join auction on auction.deal_id=discussion.deal_id where $contitions  order by discussion_id DESC");
+                       $result = $this->db->select("*, discussion.created_date as dis_create") 
+                           ->from("discussion") 
+                           ->join("users","users.user_id","discussion.user_id") 
+                           ->join("auction","auction.deal_id","discussion.deal_id") 
+                           ->where($contitions) 
+                           ->orderby("discussion_id", "DESC")
+                           ->get();
                 return count($result);
         }
 

@@ -198,7 +198,10 @@ class Seller_Model extends Model
 	
 	public function get_subsector_name($sector_id ='')
 	{
-		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
-		return $sector_query;
+//		$sector_query = $this->db->query("select * from  sector where sector_id='$sector_id' ");
+//		return $sector_query;
+                
+                $result=$this->db->select("")->from("sector")->where(array("sector_id" => $sector_id))->get();
+		return $result;
 	}	
 }

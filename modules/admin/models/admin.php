@@ -1008,7 +1008,7 @@ class Admin_Model extends Model
 		        $contitions .= ' AND name like "%'.strip_tags($name).'%"';
                         $contitions .= ' OR email like "%'.strip_tags($name).'%"';
                         }
-                       $result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
+                       //$result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
                                         $result = $this->db->select()
                                         ->from("contact")
                                         ->where(array($contitions))
