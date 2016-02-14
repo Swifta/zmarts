@@ -26,9 +26,9 @@ class Admin_customer_care_Controller extends website_Controller {
 		$this->add_users = "1";
         
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userPost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
@@ -181,9 +181,9 @@ class Admin_customer_care_Controller extends website_Controller {
 		}
 		$this->manage_customer_care = "1";
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);			
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));			
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')

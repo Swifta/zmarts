@@ -20,8 +20,12 @@ class Blog_Model extends Model
 	
 	public function get_category_list_cat($blogcat = "")
 	{
-	        $result = $this->db->query("SELECT * FROM category  WHERE category_id IN ($blogcat) and category_status = 1 and main_category_id= 0 ");
-		return $result;
+	        //$result = $this->db->query("SELECT * FROM category  WHERE category_id IN ($blogcat) and category_status = 1 and main_category_id= 0 ");
+		$result =  $this->db->select()
+                            ->from("category")
+                            ->where("category_id IN ($blogcat) and category_status = 1 and main_category_id= 0")
+                            ->get();
+                return $result;
 	}
 	
 	/** GET BLOG DATA **/
@@ -138,8 +142,10 @@ class Blog_Model extends Model
 			$result = $this->db->insert("blog_comments", array("name" => $post->sender_name, "email" => $post->email, "website" => $post->website, "comments" => htmlspecialchars($post->comments),"blogg_id" => $bloggid, "approve_status" => $approve_status, "notify_comments"=> $notify_comments, "comments_date" => time()));
 			if(count($result) == 1){			
 				if($approve_status == 1){			
-					$this->db->query("update blog set comments_count = comments_count+1 where blog_id='$bloggid'");
-					return 1 ;
+					//$this->db->query("update blog set comments_count = comments_count+1 where blog_id='$bloggid'");
+                                        $this->db->update("blog" ,array("comments_count"=> new Database_Expression('comments_count+1')),array("blog_id" =>$bloggid ));
+					
+                                        return 1 ;
 				}else{					
 					return 2;
 				}

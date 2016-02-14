@@ -25,8 +25,8 @@ class Faq_Controller extends website_Controller
 		}
 		if($_POST)
 		{
-			$this->userPost = $this->input->post();
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('add_qus', 'required')
 				->add_rules('answer', 'required');

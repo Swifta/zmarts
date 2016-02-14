@@ -51,9 +51,9 @@ class Admin_users_Controller extends website_Controller {
         
 			if($_POST){
 				//$this->userPost = $this->input->post();
-                            $this->userPost = strip_tags(addslashes($this->input->post()));
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+                            $this->userPost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
@@ -208,9 +208,9 @@ class Admin_users_Controller extends website_Controller {
 		$this->manage_users = "1";
 		if($_POST){
 			//$this->userpost = $this->input->post();
-                        $this->userpost = strip_tags(addslashes($this->input->post()));
-			$post = new Validation($_POST);			
-			$post = Validation::factory($_POST)
+                        $this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));			
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
@@ -444,8 +444,8 @@ class Admin_users_Controller extends website_Controller {
 	    if($_POST){
 
 			//$this->userPost =  $this->input->post();
-                        $this->userPost = strip_tags(addslashes($this->input->post())) ;
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+                        $this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
@@ -463,9 +463,15 @@ class Admin_users_Controller extends website_Controller {
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
 													$i=1;
-								foreach(arr::rotate($_FILES['attach']) as $files){
-											if($files){
-										$filename = upload::save($files);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										$filename = basename($filename);
 											if($filename!=''){
 												//$IMG_NAME = "news_letter";

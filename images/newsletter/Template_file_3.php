@@ -90,8 +90,8 @@ public function importproduct_addcategory($category = "",$sub_category = "",$sec
 	 
 	  public function get_merchant_details($merchant_name="",$shop_name="",$merchant_email ="")
         {
-	         $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
-	         $result = $this->db->query($query);  
+	         $qry = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
+	         $result = $this->db->query($qry);  
 	         //print_r($result); exit;                   
 	         return $result;
         }
@@ -114,8 +114,8 @@ public function importproduct_addcategory($category = "",$sub_category = "",$sec
 	
 	public function get_merchant_and_shop_status($merchant_name="",$shop_name="",$merchant_email ="")
 	{
-		 $query = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
-		$result_1 = $this->db->query($query);  
+		 $qry = "select * from users left join stores ON users.user_id=stores.merchant_id where stores.store_name='$shop_name' AND users.email='$merchant_email'";
+		$result_1 = $this->db->query($qry);  
 		$result = count($result_1);
 		if($result == 1)
 		{

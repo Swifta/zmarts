@@ -1142,7 +1142,7 @@ class Database_Core {
 			$this->where($where);
 		}
 
-		$query = $this->select('COUNT(*) AS '.$this->escape_column('records_found'))->get()->result(TRUE);
+		$qry = $this->select('COUNT(*) AS '.$this->escape_column('records_found'))->get()->result(TRUE);
 
 		return (int) $query->current()->records_found;
 	}

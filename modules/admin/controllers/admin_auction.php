@@ -28,8 +28,8 @@ class Admin_auction_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 								->pre_filter('trim', 'title')
 								->add_rules('title', 'required')
 								->add_rules('description', 'required',array($this,'check_required'))
@@ -57,15 +57,21 @@ class Admin_auction_Controller extends website_Controller
 							if($_FILES['image']['name']['0'] != "" )
 							{
 									$i=1;
-										foreach(arr::rotate($_FILES['image']) as $files){
-											if($files){			
-												$filename = basename(upload::save($files));
+										foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 													if($filename!=''){ 
 														
 														$IMG_NAME = $deal_key."_".$i.'.png';
 														
 											                        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-																	$filename = realpath($filename);
+																	$filename = basename($filename);
 														unlink($filename);
 													}
 										}
@@ -293,8 +299,8 @@ class Admin_auction_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js', PATH.'js/multiimage.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 	        if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 								->pre_filter('trim', 'title')
 								->add_rules('title', 'required')
 								->add_rules('description', 'required',array($this,'check_required'))
@@ -319,10 +325,15 @@ class Admin_auction_Controller extends website_Controller
 
 								if($_FILES['image']['name'] != "" ){         
 									$i=1;
-									foreach(arr::rotate($_FILES['image']) as $files){
-										if($files){	
-											
-											$filename = upload::save($files); 
+									foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key); 
 											$filename = basename($filename);
 											if($filename!=''){ 
 												if($i==1){
@@ -711,11 +722,11 @@ class Admin_auction_Controller extends website_Controller
 	                url::redirect(PATH."admin/manage-auction.html");
 		}
 		if($_POST){ 
-			$this->userPost = $this->deal_deatils = $this->input->post();
+			$this->userPost = $this->deal_deatils = utf8::clean($this->input->post());
 			$users = $this->input->post("users");
 			$fname = $this->input->post("firstname");
 			$email = trim($this->input->post("email"));
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							->add_rules('users', 'required')
 							->add_rules('email','required')
 							->add_rules('subject', 'required','chars[a-zA-z0-9- _,/.+]')
@@ -775,10 +786,10 @@ class Admin_auction_Controller extends website_Controller
 		$this->url="admin-auction/winner-list.html";
 
 		if($_POST){ 
-			$this->deal_deatils = $this->input->post(); 
+			$this->deal_deatils = utf8::clean($this->input->post()); 
 			$this->type="winner";
-			$email_id = $this->input->post('email');
-			$message = $this->input->post('message');
+			$email_id = strip_tags(addslashes($this->input->post('email')));
+			$message = strip_tags(addslashes($this->input->post('message')));
 			//$this->deal_deatils = $this->auction->get_deals_data($this->input->post('deal_key'), $this->input->post('deal_id'));
 			$message .= new View ("admin_auction/mail_auction");
 			$message .= "<p></p><p>".$this->Lang['THANKS_RE']."</p> <p>". SITENAME ." ".$this->Lang['ADMIN']." </p>"; 
@@ -1022,9 +1033,9 @@ class Admin_auction_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('comments', 'required');
 			if($post->validate()){
 				$status = $this->auction->edit_users_comments($commentsid, arr::to_object($this->userpost));

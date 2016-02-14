@@ -77,7 +77,7 @@
 //	public function exists($id)
 //	{
 //		// Find the id that matches
-//		$query = "SELECT id FROM caches WHERE id = '$id'";
+//		$qry = "SELECT id FROM caches WHERE id = '$id'";
 //
 //		return ($this->db->query($qry)->numRows() > 0);
 //	}
@@ -108,7 +108,7 @@
 //			$lifetime += time();
 //		}
 //
-//		$query = $this->exists($id)
+//		$qry = $this->exists($id)
 //			? "UPDATE caches SET tags = '$tags', expiration = '$lifetime', cache = '$data' WHERE id = '$id'"
 //			: "INSERT INTO caches VALUES('$id', '$tags', '$lifetime', '$data')";
 //
@@ -134,8 +134,8 @@
 //	 */
 //	public function find($tag)
 //	{
-//		$query = "SELECT id,cache FROM caches WHERE tags LIKE '%<{$tag}>%'";
-//		$query = $this->db->query($query, SQLITE_BOTH, $error);
+//		$qry = "SELECT id,cache FROM caches WHERE tags LIKE '%<{$tag}>%'";
+//		$qry = $this->db->query($query, SQLITE_BOTH, $error);
 //
 //		// An array will always be returned
 //		$result = array();
@@ -171,8 +171,8 @@
 //	 */
 //	public function get($id)
 //	{
-//		$query = "SELECT id, expiration, cache FROM caches WHERE id = '$id' LIMIT 0, 1";
-//		$query = $this->db->query($query, SQLITE_BOTH, $error);
+//		$qry = "SELECT id, expiration, cache FROM caches WHERE id = '$id' LIMIT 0, 1";
+//		$qry = $this->db->query($query, SQLITE_BOTH, $error);
 //
 //		if ( ! empty($error))
 //		{
@@ -247,7 +247,7 @@
 //	public function delete_expired()
 //	{
 //		// Delete all expired caches
-//		$query = 'DELETE FROM caches WHERE expiration != 0 AND expiration <= '.time();
+//		$qry = 'DELETE FROM caches WHERE expiration != 0 AND expiration <= '.time();
 //
 //		$this->db->unbufferedQuery($qry);
 //

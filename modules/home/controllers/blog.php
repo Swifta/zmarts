@@ -83,9 +83,9 @@ class Blog_Controller extends Layout_Controller
 	public function blog_detail($blog_url = "")
 	{
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userPost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('sender_name', 'required')
 							->add_rules('email', 'valid::email', 'required')

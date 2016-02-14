@@ -49,11 +49,11 @@ class Webpay_Controller extends Layout_Controller
                 }
                 echo "<div style='width:100%;'>";
                 echo "<div style='width:49%;float:left'>Transacton Status :</div>";
-                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->status."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".htmlentities($details->status, ENT_QUOTES, "UTF-8")."</div><div style='clear:both;width:100%'><hr /></div>";
                 echo "<div style='width:49%;float:left'>Reason :</div>";
-                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->reason."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".htmlentities($details->reason, ENT_QUOTES, "UTF-8")."</div><div style='clear:both;width:100%'><hr /></div>";
                 echo "<div style='width:49%;float:left'>Transaction Type :</div>";
-                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$details->type."</div><div style='clear:both;width:100%'><hr /></div>";
+                echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".htmlentities($details->type, ENT_QUOTES, "UTF-8")."</div><div style='clear:both;width:100%'><hr /></div>";
                 echo "</div>";
             }
             die;
@@ -366,7 +366,7 @@ class Webpay_Controller extends Layout_Controller
 		if($_POST){
 
 			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
-		        $this->userPost = $this->input->post();
+		        $this->userPost = utf8::clean($this->input->post());
 			$product_color="";
 			$paymentType = "INTERSWITCH";
 			$captured = 0;
@@ -550,7 +550,7 @@ class Webpay_Controller extends Layout_Controller
                     $pay_amount1 = $tot_amount1 = $amount+$shipping_amount+$tax_amount;
                     $TRANSACTIONID = text::random($type = 'alnum', $length = 15);
                     
-                    $post = arr::to_object($this->input->post());
+                    $post = arr::to_object(utf8::clean($this->input->post()));
                             $captured = 0;
 
                     $transaction = $this->paypal->insert_webpay_transaction_details($TRANSACTIONID, $deal_id,$referral_amount, $item_qty, 7, $captured, $item_qty, $post,$merchant_id,$tax_amount,$shipping_amount,$amount,$bid_id);

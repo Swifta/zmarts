@@ -100,8 +100,8 @@ class Newsletter_Controller extends website_Controller {
 	    if($_POST){
 			$img_check = 0;
 			//$this->userPost = $this->input->post();
-                        $this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+                        $this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
@@ -121,10 +121,12 @@ class Newsletter_Controller extends website_Controller {
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-						$tmp_name = basename($_FILES["attach"]["tmp_name"]);
-						$logo = basename($_FILES["attach"]["name"]);
-						move_uploaded_file($tmp_name, DOCROOT."images/newsletter/".$logo);
-						chmod(DOCROOT."images/newsletter/".$logo,0777);
+                                            $tmp_name = upload::save('attach');
+                                            $logo = basename($tmp_name);
+						//$tmp_name = basename($_FILES["attach"]["tmp_name"]);
+						//$logo = basename($_FILES["attach"]["name"]);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 					}
 					               
 					$file1=array();
@@ -145,7 +147,7 @@ class Newsletter_Controller extends website_Controller {
 					//chmod($_SERVER['DOCUMENT_ROOT']."images/newsletter/newsletter.pdf",0777);
                     $status = $this->news->send_newsletter(arr::to_object($this->userPost),$file1,$logo);
                     if($_FILES["attach"]["name"]!=''){
-						$logo = basename($_FILES["attach"]["name"]);
+						//$logo = basename($_FILES["attach"]["name"]);
 						unlink(realpath(DOCROOT."images/newsletter/").$logo);
 					}
 					if($status == 1){
@@ -282,8 +284,8 @@ class Newsletter_Controller extends website_Controller {
 		}
 		$this->newsletter_act = 1;
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
@@ -292,10 +294,17 @@ class Newsletter_Controller extends website_Controller {
 				$status = $this->news->add_template(arr::to_object($this->userPost));
 				if($status > 0){
 					if($_FILES["template_file"]){
-						$tmp_name = basename($_FILES["template_file"]["tmp_name"]);
+						$tmp_name = upload::save('template_file');//basename($_FILES["template_file"]["tmp_name"]);
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+						
+						$source = upload::save('template_file');
+						$tmp_name = basename($source);
+						$name = "Template_file_".$status.".php";
+						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+                                                unlink($tmp_name);
 					}
 					if($_FILES['template_image']['name']){
 						$filename = upload::save('template_image'); 						
@@ -349,8 +358,8 @@ class Newsletter_Controller extends website_Controller {
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
@@ -359,10 +368,11 @@ class Newsletter_Controller extends website_Controller {
 				$status = $this->news->edit_template(arr::to_object($this->userPost),$newsletter_id);
 				if($status > 0){
 					if(basename($_FILES["template_file"]["name"])!=''){
-						$tmp_name = $_FILES["template_file"]["tmp_name"];
+						$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+                                                unlink($tmp_name);
 					}
 					if($_FILES['template_image']['name']!=''){
 						$filename = upload::save('template_image'); 						

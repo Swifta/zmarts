@@ -26,9 +26,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->add_merchant = "1";
 		$adminid=$this->session->get('user_id');
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -211,17 +211,17 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+										$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);
 										
 									}
 									
 									
-									$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+									$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
 									$f = fopen($main_routes, "r");
 
-									$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+									$file = realpath(DOCROOT.'modules/'.$modules_name.'/config/routes.php');
 									$fp = fopen($file, "a");
 						
 									$i = 1;	
@@ -362,9 +362,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->manage_merchant = "1";
 		$this->merchant_id=$userid;
 	    if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -455,9 +455,9 @@ class Admin_merchant_Controller extends website_Controller {
 	                $this->ads_height ="260";
 	        }
 	        if($_POST){    
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
@@ -617,7 +617,7 @@ class Admin_merchant_Controller extends website_Controller {
 							
 							
 							
-							$old_modules_file = DOCROOT.'modules/'.$old_modules_name.'/config/routes.php';
+							$old_modules_file = realpath(DOCROOT.'modules/'.$old_modules_name.'/config/routes.php');
 
 							$old_line = file($old_modules_file);
 
@@ -650,11 +650,11 @@ class Admin_merchant_Controller extends website_Controller {
 	
 							
 							
-							$main_routes = DOCROOT.'modules/'.$modules_name.'/config/main_routes.php';
+							$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
 							$f = fopen($main_routes, "r");
 
 
-							$file = DOCROOT.'modules/'.$modules_name.'/config/routes.php';
+							$file = realpath(DOCROOT.'modules/'.$modules_name.'/config/routes.php');
 							$fp = fopen($file, "a");
 						
 							while ( $line = fgets($f, 1000) ) {
@@ -742,9 +742,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->add_merchant = "1";
 	    $adminid=$this->session->get('user_id');
 	        if($_POST){
-		        $this->userPost = $this->input->post();
-		        $post = new Validation($_POST);
-		        $post = Validation::factory(array_merge($_POST,$_FILES))
+		        $this->userPost = utf8::clean($this->input->post());
+		        $post = new Validation(utf8::clean($_POST));
+		        $post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 					        ->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					        ->add_rules('address1', 'required')
@@ -1009,9 +1009,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->manage_merchant = "1";
 		$this->mer_id=$merchantid;
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('address1', 'required')
 						//->add_rules('address2', 'required')
@@ -1316,9 +1316,9 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 		$this->store_comments = 1;
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('comments', 'required');
 			if($post->validate()){
 				$status = $this->merchant->edit_users_comments($commentsid, arr::to_object($this->userpost));
@@ -1705,8 +1705,8 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->merchant_news_letter = "1";
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
@@ -1724,11 +1724,15 @@ class Admin_merchant_Controller extends website_Controller {
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
 													$i=1;
-								foreach(arr::rotate($_FILES['attach']) as $files){
-											if($files){
-												
-										$filename = upload::save($files);
-										$filename = basename($filename);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 											if($filename!=''){
 												//$IMG_NAME = "news_letter";
 												$ext=$filename;

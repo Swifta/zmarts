@@ -125,9 +125,9 @@ class Store_admin_Controller extends website_Controller
 		$this->edit_merchant="1";
 		$userid = $this->store_admin_id;
 			if($_POST){
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
@@ -172,9 +172,9 @@ class Store_admin_Controller extends website_Controller
 
 			if($_POST){
 
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('oldpassword','required',array($this, 'check_password'))
 							->add_rules('password','length[5,32]','required')
@@ -210,8 +210,8 @@ class Store_admin_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 			        ->add_rules('title', 'required')
 			        ->add_rules('description', array($this,'check_required'),'required')
@@ -235,9 +235,15 @@ class Store_admin_Controller extends website_Controller
 					if($_FILES['image']['name']['0'] != "" )
 					{
 						$i=1;
-						foreach(arr::rotate($_FILES['image']) as $files){
-							if($files){
-								$filename = upload::save($files);
+						foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 								if($filename!=''){
 									$IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
@@ -438,8 +444,8 @@ class Store_admin_Controller extends website_Controller
 			$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 			$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -462,10 +468,16 @@ class Store_admin_Controller extends website_Controller
 
                                 if($_FILES['image']['name'] != "" ){
                                     $i=1;
-                                    foreach(arr::rotate($_FILES['image']) as $files){
-
-                                                        if($files){
-                                                                $filename = upload::save($files);
+                                    foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
+												  
                                                                 if($filename!=''){
                                                                         if($i==1){
                                                                                 $IMG_NAME = $deal_key."_1.png";
@@ -641,11 +653,11 @@ class Store_admin_Controller extends website_Controller
 		        }
 				if($_POST){
 						$this->deal_deatils = $this->merchant->get_deals_data($deal_key, $deal_id);
-						$this->userPost = $this->input->post();
-						$users = $this->input->post("users");
-						$fname = $this->input->post("firstname");
-						$email = trim($this->input->post("email"));
-						$post = Validation::factory(array_merge($_POST,$_FILES))
+						$this->userPost = utf8::clean($this->input->post());
+						$users = strip_tags(addslashes($this->input->post("users")));
+						$fname = strip_tags(addslashes($this->input->post("firstname")));
+						$email = trim(strip_tags(addslashes($this->input->post("email"))));
+						$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 										
 										->add_rules('users', 'required')
 										->add_rules('email','required')
@@ -835,8 +847,8 @@ class Store_admin_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -889,9 +901,15 @@ class Store_admin_Controller extends website_Controller
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
-									if($files){
-										$filename = upload::save($files);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										if($filename!=''){
 
 											$IMG_NAME = $deal_key."_".$i.'.png';
@@ -925,7 +943,7 @@ class Store_admin_Controller extends website_Controller
 							if($this->input->post('autopost')==1){
                                                         $producturl=url::title($this->input->post('title'));
                                                         $productURL = PATH."product/".$deal_key.'/'.$producturl.".html";
-                                                        $message = "A new product published onthe site"." ".$this->input->post('title')." ".$productURL." limited offer hurry up!";
+                                                        $message = "A new product published onthe site"." ".strip_tags(addslashes($this->input->post('title')))." ".$productURL." limited offer hurry up!";
                                                         $fb_access_token = $this->session->get("fb_access_token");
                                                         $fb_user_id = $this->session->get("fb_user_id");
                                                         $post_arg = array("access_token" => $fb_access_token, "message" => $message, "id" => $fb_user_id, "method" => "post");
@@ -1097,8 +1115,8 @@ class Store_admin_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 				        ->add_rules('title', 'required')
 				        ->add_rules('description','required',array($this,'check_required'))
@@ -1148,9 +1166,15 @@ class Store_admin_Controller extends website_Controller
 				if($status == 1 && $deal_key){
 					if($_FILES['image']['name'] != "" ){
 						$i=1;
-						foreach(arr::rotate($_FILES['image']) as $files){
-							if($files){
-								$filename = upload::save($files);
+						foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 								if($filename!=''){
 									if($i==1){
 										$IMG_NAME = $deal_key."_1.png";
@@ -1482,11 +1506,11 @@ class Store_admin_Controller extends website_Controller
 
 		if($_POST){
 			$this->product_deatils = $this->merchant->get_products_data($deal_key, $deal_id);
-			$this->userPost = $this->input->post();
-			$users = $this->input->post("users");
-			$fname = $this->input->post("firstname");
-			$email = trim($this->input->post("email"));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$users = strip_tags(addslashes($this->input->post("users")));
+			$fname = strip_tags(addslashes($this->input->post("firstname")));
+			$email = trim(strip_tags(addslashes($this->input->post("email"))));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -1650,8 +1674,8 @@ class Store_admin_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -1678,9 +1702,15 @@ class Store_admin_Controller extends website_Controller
 			            if($_FILES['image']['name']['0'] != "" )
                                     {
                                         $i=1;
-                                            foreach(arr::rotate(basename($_FILES['image'])) as $files){
+                                            foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
 	                                         if($files){
-                                                        $filename = upload::save($files);
+                                                  $filename = upload::save($key);
 				                        if($filename!=''){
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
 			                            		common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
@@ -1696,7 +1726,7 @@ class Store_admin_Controller extends website_Controller
 
 					        $producturl=url::title($this->input->post('title'));
 						$productURL = PATH."auction/".$deal_key.'/'.$producturl.".html";
-						$message = "A new auction published onthe site"." ".$this->input->post('title')." ".$productURL." limited offer hurry up!";
+						$message = "A new auction published onthe site"." ".strip_tags(addslashes($this->input->post('title')))." ".$productURL." limited offer hurry up!";
 						$fb_access_token = $this->session->get("fb_access_token");
 						$fb_user_id = $this->session->get("fb_user_id");
 						$post_arg = array("access_token" => $fb_access_token, "message" => $message, "id" => $fb_user_id, "method" => "post");
@@ -1899,8 +1929,8 @@ class Store_admin_Controller extends website_Controller
                 $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js', PATH.'js/multiimage.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 	        if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('description', 'required',array($this,'check_required'))
@@ -1925,9 +1955,15 @@ class Store_admin_Controller extends website_Controller
 					if($_FILES['image']['name'] != "" )
                      {
                                     $i=1;
-                                    foreach(arr::rotate($_FILES['image']) as $files){
-                                                if($files){
-                                                $filename = upload::save($files);
+                                    foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
                                                         if($filename!=''){
                                                                 if($i==1)
                                                                 {
@@ -2151,11 +2187,11 @@ class Store_admin_Controller extends website_Controller
 	                }
 		}
                 if($_POST){
-	  		$this->userPost = $this->deal_deatils = $this->input->post();
-			$users = $this->input->post("users");
-			$fname = $this->input->post("firstname");
-			$email = trim($this->input->post("email"));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+	  		$this->userPost = $this->deal_deatils = utf8::clean($this->input->post());
+			$users = strip_tags(addslashes($this->input->post("users")));
+			$fname = strip_tags(addslashes($this->input->post("firstname")));
+			$email = trim(strip_tags(addslashes($this->input->post("email"))));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -2675,10 +2711,10 @@ class Store_admin_Controller extends website_Controller
 			$this->winner = 1;
 		if($_POST){
 			$this->type="winner";
-			$email_id = $this->input->post('email');
-			$message = $this->input->post('message');
+			$email_id = strip_tags(addslashes($this->input->post('email')));
+			$message = strip_tags(addslashes($this->input->post('message')));
 			//$this->deal_deatils = $this->merchant->get_deals_data($this->input->post('deal_key'), $this->input->post('deal_id'));
-			$this->deal_deatils = $this->input->post();
+			$this->deal_deatils = utf8::clean($this->input->post());
 			$message .= new View ("store_admin/mail_auction");
 			$message .= "<p></p><p>Thanks & Regards</p> <p>". SITENAME ." Merchant</p>";
 			$fromEmail = NOREPLY_EMAIL;
@@ -2695,8 +2731,8 @@ class Store_admin_Controller extends website_Controller
 			url::redirect(PATH."store-admin-auction/winner-list.html");
 			}
 		}
-		$this->search_key = arr::to_object($this->input->get());
-		$count = $this->merchant->get_winner_count($this->input->get('name'));
+		$this->search_key = arr::to_object(utf8::clean($this->input->get()));
+		$count = $this->merchant->get_winner_count(strip_tags(addslashes($this->input->get('name'))));
 		$this->pagination = new Pagination(array(
 				'base_url'       => 'store-admin-auction/winner-list.html/page/'.$page."/",
 				'uri_segment'    => 4,
@@ -2706,10 +2742,10 @@ class Store_admin_Controller extends website_Controller
 				'auto_hide' => TRUE
 		));
 		$search=$this->input->get("id");
-		$this->winner_list = $this->merchant->get_winner_list($this->pagination->sql_offset,$this->pagination->items_per_page, $this->input->get('name'),0);
+		$this->winner_list = $this->merchant->get_winner_list($this->pagination->sql_offset,$this->pagination->items_per_page, strip_tags(addslashes($this->input->get('name'))),0);
 
 		if($search =='all'){ // for export all
-			$this->winner_list = $this->merchant->get_winner_list($this->pagination->sql_offset,$this->pagination->items_per_page, $this->input->get('name'),1);
+			$this->winner_list = $this->merchant->get_winner_list($this->pagination->sql_offset,$this->pagination->items_per_page, strip_tags(addslashes($this->input->get('name'))),1);
 		}
 		if($search){
 		$out = '"S.No","Auction Name","User name","Retail Price","Auction Price","Savings","Image"'."\r\n";
@@ -3046,9 +3082,9 @@ class Store_admin_Controller extends website_Controller
 	{
 		$this->captcha = new Captcha;
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('email', 'required','valid::email')
 				->add_rules('captcha', 'required');
@@ -3503,31 +3539,33 @@ class Store_admin_Controller extends website_Controller
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					$file_name = $_FILES['im_product']['tmp_name'];
+					$file_name = upload::save('im_product'); //$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
+						$temp = basename(explode('.',  basename($file_name)));
+						$ext = end($temp);
+						$excel_name = time().'.'.$ext;
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						move_uploaded_file($file_name,$path.$excel_name);
 						$temp = explode('.',basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
-
-					}
-
-					ini_set('memory_limit','5028m');
-					set_time_limit(6400);
-					/** Include path **/
-					set_include_path(get_include_path() . PATH_SEPARATOR . '../../../Classes/');
-					/** PHPExcel_IOFactory */
-
-					include DOCROOT.'PHPExcel/Classes/PHPExcel/IOFactory.php';
-                                        $inputFileName = $path.$excel_name;
-					$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
-                                        $data1 = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-
-
+						
+						move_uploaded_file($file_name,$path.$excel_name);
+						
+						$source = upload::save('im_product');
+						$temp = basename(explode('.',  basename($source)));
+						$ext = end($temp);
+						$excel_name = time().'.'.$ext;
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						
+						move_uploaded_file($source,$path.$excel_name);
+						
+						unlink($source);
+						
 			if(count($data1) > 0) {
 				     $num = count($data1);
 					   $row++;
@@ -3629,12 +3667,12 @@ class Store_admin_Controller extends website_Controller
 									if(isset($data1[$i]['X'])){
 										$meta_description = $data1[$i]['X'];
 									}
-									
+						
                                                                         /* attribute starts */
                                                                         $attribute_val .="$$";
                                                                         $attr_val = explode('$$',$attribute_val); //explode into single row
                                                                         $inner_attr= explode('#',$attr_val[0]);  //explode the multiple entry of specification from a single row 
-
+						
                                                                         $this->merchant = new Merchant_Model();
                                                                         $category_data = $this->merchant->importproduct_addcategory($category,$sub_category,$sec_category,$third_category);
 
@@ -3710,7 +3748,8 @@ class Store_admin_Controller extends website_Controller
 								
 								else
 								{ 
-									unlink(realpath($inputFileName));
+                                                                    unlink($file_name);
+									unlink($inputFileName);
 									common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				                    			url::redirect(PATH."store-admin/manage-products.html");
 								}
@@ -3718,7 +3757,7 @@ class Store_admin_Controller extends website_Controller
 							
 			}  
 	 } 
-				unlink(realpath($inputFileName));
+				unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."store-admin/manage-products.html");	
 						
@@ -3734,6 +3773,7 @@ class Store_admin_Controller extends website_Controller
 		$this->template->content = new View("store_admin/product_import");
 		
 	}
+                }
 	
 	public function csv_to_array($file='', $delimiter=',')
 	{//print_r($delimiter);exit;
@@ -3780,9 +3820,9 @@ class Store_admin_Controller extends website_Controller
 			url::redirect(PATH."store-admin.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('terms_conditions','required');
 			if($post->validate()){
@@ -3810,9 +3850,9 @@ class Store_admin_Controller extends website_Controller
 			url::redirect(PATH."store-admin.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('return_policy','required');
 			if($post->validate()){
@@ -3840,9 +3880,9 @@ class Store_admin_Controller extends website_Controller
 			url::redirect(PATH."store-admin.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('about_us','required');
 			if($post->validate()){
@@ -3897,9 +3937,9 @@ class Store_admin_Controller extends website_Controller
 	                $this->ads_height ="260";
 	        }
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
@@ -4000,7 +4040,7 @@ class Store_admin_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -4040,7 +4080,7 @@ class Store_admin_Controller extends website_Controller
 							fclose($file);
 	
 							
-							$main_routes = realpath(DOCROOT.'modules/'.$modules_name.'/config/main_routes.php');
+							$main_routes = realpath(DOCROOT.'modules/'.$modules_name).'/config/main_routes.php';
 							$f = fopen($main_routes, "r");
 
 
@@ -4098,8 +4138,8 @@ class Store_admin_Controller extends website_Controller
 		
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
@@ -4114,9 +4154,16 @@ class Store_admin_Controller extends website_Controller
 					$extension="";
 					if($_FILES['attach']['name']['0'] != "" ){
                                                 $i=1;
-							foreach(arr::rotate($_FILES['attach']) as $files){
-                				        if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
+												  
 										if($filename!=''){
 											//$IMG_NAME = "news_letter";
 											$ext=$filename;
@@ -4193,8 +4240,8 @@ class Store_admin_Controller extends website_Controller
 		$this->add_free_gift = "1";
 		$this->mer_products_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 			                        
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
@@ -4295,8 +4342,8 @@ class Store_admin_Controller extends website_Controller
 		$this->free_gift = "1";
 		$this->mer_products_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')

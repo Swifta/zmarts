@@ -83,8 +83,8 @@
                                      <tr style=" height:8"><td></td></tr>
                                      <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php echo  $this->Lang['ZIP_CODE']; ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['zipcode'])) { echo $_POST['zipcode']; } ?></span></p></td>
-                                    </tr>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;"><?php  echo htmlspecialchars($this->Lang['ZIP_CODE'],ENT_QUOTES,"UTF-8");  ?> : <span style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['zipcode'])) { echo htmlspecialchars($_POST['zipcode'],ENT_QUOTES,"UTF-8"); } ?></span></p></td>
+                                    </tr> 
                                      <tr style=" height:8"><td></td></tr>
                                      
                                     <tr>                   

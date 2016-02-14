@@ -26,8 +26,8 @@ class Admin_products_Controller extends website_Controller
 		$this->add_product="1";
 		$adminid=$this->session->get('user_id');
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -115,9 +115,15 @@ class Admin_products_Controller extends website_Controller
 				if($status > 0 && $deal_key){
 				        if($_FILES['image']['name']['0'] != "" ){
                                                 $i=1;
-							foreach(arr::rotate($_FILES['image']) as $files){
-                				        if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										if($filename!=''){
 											$IMG_NAME = $deal_key."_".$i.'.png';
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
@@ -477,15 +483,17 @@ class Admin_products_Controller extends website_Controller
 		 	 
 				$row = 1;
 				$add_import = "";				
-					$file_name = $_FILES['im_product']['tmp_name'];					
+					$file_name = upload::save("im_product");					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',  basename($_FILES['im_product']['name']));
+						$temp = explode('.',  basename($file_name));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/admin_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
+						move_uploaded_file($source,$path.$excel_name);
+						unlink($source);
+						
 					}
 					
 					ini_set('memory_limit','5028m');
@@ -757,11 +765,11 @@ class Admin_products_Controller extends website_Controller
 	}
 	if($_POST){
                 $this->product_deatils = $this->products->get_product_data_mail($deal_key, $deal_id);
-  		$this->userPost = $this->input->post();
+  		$this->userPost = utf8::clean($this->input->post());
 		$users = strip_tags(addslashes($this->input->post("users")));
 		$fname = strip_tags(addslashes($this->input->post("firstname")));
 		$email = trim(strip_tags(addslashes($this->input->post("email"))));
-		$post = Validation::factory(array_merge($_POST,$_FILES))
+		$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('users', 'required')
 						->add_rules('email','required')
@@ -846,8 +854,8 @@ class Admin_products_Controller extends website_Controller
 		$this->manage_product = "1";
 	
 	        if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 				
 				->add_rules('title', 'required')
 				->add_rules('description','required',array($this,'check_required'))
@@ -921,9 +929,15 @@ class Admin_products_Controller extends website_Controller
 							if($_FILES['image']['name'] != "" )
 							{
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
-								if($files){
-									$filename = upload::save($files);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 									if($filename!=''){
 										if($i==1)
 										{
@@ -1083,9 +1097,9 @@ class Admin_products_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('comments', 'required');
                         if($post->validate()){

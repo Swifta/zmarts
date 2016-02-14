@@ -243,7 +243,7 @@ class Database_Pdosqlite_Driver extends Database_Driver {
 		return isset($err[2]) ? $err[2] : 'Unknown error!';
 	}
 
-	public function list_fields($table, $query = FALSE)
+	public function list_fields($table, $qry = FALSE)
 	{
 		static $tables;
 		if (is_object($qry))

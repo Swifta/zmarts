@@ -29,8 +29,8 @@ class Admin_deals_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js', PATH.'js/multiimage.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 								
 								->add_rules('title', 'required')
 								->add_rules('description', 'required',array($this,'check_required'))
@@ -55,9 +55,15 @@ class Admin_deals_Controller extends website_Controller
 					if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
-							foreach(arr::rotate($_FILES['image']) as $files){
-								if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 									$filename = basename($filename);
 									if($filename!=''){
 
@@ -298,8 +304,8 @@ class Admin_deals_Controller extends website_Controller
                 $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js', PATH.'js/multiimage.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 	        if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 								
 								->add_rules('title', 'required')
 								->add_rules('description','required',array($this,'check_required'))
@@ -324,9 +330,15 @@ class Admin_deals_Controller extends website_Controller
 							if($status == 1 && $deal_key){
 								if($_FILES['image']['name']!= ""){
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
-									if($files){
-										$filename = upload::save($files);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										$filename = basename($filename);
 										if($filename!=''){
 											if($i==1)
@@ -404,11 +416,11 @@ class Admin_deals_Controller extends website_Controller
                         }
 				if($_POST){
 						$this->deal_deatils = $this->deals->get_deals_data_mail($deal_key, $deal_id);
-						$this->userPost = $this->input->post();
-						$users = $this->input->post("users");
-						$fname = $this->input->post("firstname");
-						$email = trim($this->input->post("email"));
-						$post = Validation::factory(array_merge($_POST,$_FILES))
+						$this->userPost = utf8::clean($this->input->post());
+						$users = strip_tags(addslashes($this->input->post("users")));
+						$fname = strip_tags(addslashes($this->input->post("firstname")));
+						$email = trim(strip_tags(addslashes($this->input->post("email"))));
+						$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 										
 										->add_rules('users', 'required')
 										->add_rules('email','required')
@@ -845,9 +857,9 @@ class Admin_deals_Controller extends website_Controller
 			url::redirect(PATH."admin.html");
 		}
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = strip_tags(addslashes($this->input->post()));
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('comments', 'required');
                         if($post->validate()){

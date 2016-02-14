@@ -60,7 +60,7 @@ class Auction_Paypal_Controller extends Layout_Controller
 				$zip = strip_tags(addslashes($this->input->post("postal_code")));
 				$phone = strip_tags(addslashes($this->input->post("phone")));
 
-				$post = arr::to_object($this->input->post());
+				$post = arr::to_object(utf8::clean($this->input->post()));
 					$paymentType = "Sale";
 					$captured = 0;
 				
@@ -112,21 +112,21 @@ class Auction_Paypal_Controller extends Layout_Controller
 	{ 
 
 		if($_POST){  
-				$deal_id = $this->input->post("deal_id");
-				$merchant_id = $this->input->post("merchant_id"); 
-				$bid_id = $this->input->post("bid_id"); 
-				$deal_key = $this->input->post("deal_key"); 
-				$url_title = $this->input->post("url_title");   
+				$deal_id = strip_tags(addslashes($this->input->post("deal_id")));
+				$merchant_id = strip_tags(addslashes($this->input->post("merchant_id"))); 
+				$bid_id = strip_tags(addslashes($this->input->post("bid_id"))); 
+				$deal_key = strip_tags(addslashes($this->input->post("deal_key"))); 
+				$url_title = strip_tags(addslashes($this->input->post("url_title")));   
 				$referral_amount = 0;
-				$item_qty = $this->input->post("P_QTY");
-				$amount = $this->input->post("amount");			
-				$deal_value = $this->input->post("deal_value");
-				$shipping_amount = $this->input->post("shipping_amount");
+				$item_qty = strip_tags(addslashes($this->input->post("P_QTY")));
+				$amount = strip_tags(addslashes($this->input->post("amount")));			
+				$deal_value = strip_tags(addslashes($this->input->post("deal_value")));
+				$shipping_amount = strip_tags(addslashes($this->input->post("shipping_amount")));
 				$tax_amount = 0;
 					
 				$tot_amount = $tot_amount1 = $amount+$shipping_amount+$tax_amount;
 
-				$post = arr::to_object($this->input->post());
+				$post = arr::to_object(utf8::clean($this->input->post()));
 					$captured = 0;
 					
 			        $transaction = $this->paypal->insert_cod_transaction_details($deal_id,$referral_amount, $item_qty, 5, $captured, $item_qty, $post,$merchant_id,$tax_amount,$shipping_amount,$amount,$bid_id);	

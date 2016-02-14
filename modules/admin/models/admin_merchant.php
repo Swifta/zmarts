@@ -18,7 +18,7 @@ class Admin_merchant_Model extends Model
             	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc, 'nuban'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission, 'nuban' => $post->payment_acc));
             	
                 $merchant_id = $result->insert_id();                 
-                echo $this->session->set("id",$merchant_id);
+                $this->session->set("id",$merchant_id);
                 
                 $free = "0";
                 if(isset($post->free)){
@@ -26,7 +26,8 @@ class Admin_merchant_Model extends Model
                 }
                 $flat = "0";
                 if(isset($post->flat)){
-                $flat = $post->flat;
+               // $flat = $post->flat;
+                $flat = strip_tags(addslashes($post->flat));
                 }
                 $product = "0";
                 if(isset($post->product)){
@@ -67,8 +68,9 @@ class Admin_merchant_Model extends Model
                 $stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode, 'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'created_by'=>$adminid, 'store_type' => '2','merchant_id'=>$uid,"created_date" => time(),"store_admin_id"=>$res->insert_id(),"store_sector_id"=>$sector,"store_subsector_id"=>$subsector));
                  $result = $this->db->insert("merchant_attribute", array("merchant_id" => $uid,"storeid" =>$stores_result->insert_id()));
                  $merchant_id = $stores_result->insert_id();                 
-                 echo $this->session->set("id",$merchant_id);
-
+                 //echo $this->session->set("id",$merchant_id);
+                  $this->session->set("id",$merchant_id);
+                  
 		 return $merchant_id;
         }	
         
@@ -402,7 +404,13 @@ class Admin_merchant_Model extends Model
 	
 	public function get_merchant_shop_data($storeid = "")
 	{
-		$result = $this->db->select()->from("stores")->join("city","city.city_id","stores.city_id")->join("users","users.user_id","stores.store_admin_id","left")->where(array("store_id" => $storeid))->limit(1)->get();
+		$result = $this->db->select()
+                        ->from("stores")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("users","users.user_id","stores.store_admin_id","left")
+                        ->where(array("store_id" => $storeid))
+                        ->limit(1)
+                        ->get();
 		return $result;
 	}
 	

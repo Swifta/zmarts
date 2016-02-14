@@ -169,9 +169,9 @@ class Merchant_Controller extends website_Controller
 		$this->edit_merchant="1";
 		$userid = $this->user_id1;
 			if($_POST){
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('firstname','required')
 							->add_rules('lastname','required')
@@ -221,9 +221,9 @@ class Merchant_Controller extends website_Controller
 
 			if($_POST){
 
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('oldpassword','required',array($this, 'check_password'))
 							->add_rules('password','length[5,32]','required')
@@ -257,9 +257,9 @@ class Merchant_Controller extends website_Controller
 		$this->flat_amount="1";
 		$userid = $this->user_id;
 			if($_POST){
-				$this->userpost = $this->input->post();
-				$post = new Validation($_POST);
-				$post = Validation::factory($_POST)
+				$this->userpost = utf8::clean($this->input->post());
+				$post = new Validation(utf8::clean($_POST));
+				$post = Validation::factory(utf8::clean($_POST))
 							->add_rules('flat_shipping','required','chars[.0-9]');
 				if($post->validate()){
 					$status = $this->merchant->change_flat_amount($userid, arr::to_object($this->userpost));
@@ -290,9 +290,9 @@ class Merchant_Controller extends website_Controller
 		$this->shipp_acc_setting = "1";
 		$this->mer_settings_act = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
@@ -328,8 +328,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 			        ->add_rules('title', 'required')
 			        ->add_rules('description', array($this,'check_required'),'required')
@@ -354,9 +354,15 @@ class Merchant_Controller extends website_Controller
 					if($_FILES['image']['name']['0'] != "" )
 					{
 						$i=1;
-						foreach(arr::rotate($_FILES['image']) as $files){
-							if($files){
-								$filename = upload::save($files);
+						foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 								if($filename!=''){
 									$IMG_NAME = $deal_key."_".$i.'.png';
                                                                         common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
@@ -554,8 +560,8 @@ class Merchant_Controller extends website_Controller
 			$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 			$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -579,10 +585,15 @@ class Merchant_Controller extends website_Controller
 
                                 if($_FILES['image']['name'] != "" ){
                                     $i=1;
-                                    foreach(arr::rotate($_FILES['image']) as $files){
-
-                                                        if($files){
-                                                                $filename = upload::save($files);
+                                    foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
                                                                 if($filename!=''){
                                                                         if($i==1){
                                                                                 $IMG_NAME = $deal_key."_1.png";
@@ -743,11 +754,11 @@ class Merchant_Controller extends website_Controller
 		        }
 				if($_POST){
 						$this->deal_deatils = $this->merchant->get_deals_data($deal_key, $deal_id);
-						$this->userPost = $this->input->post();
-						$users = $this->input->post("users");
-						$fname = $this->input->post("firstname");
-						$email = $this->input->post("email");
-						$post = Validation::factory(array_merge($_POST,$_FILES))
+						$this->userPost = utf8::clean($this->input->post());
+						$users = strip_tags(addslashes($this->input->post("users")));
+						$fname = strip_tags(addslashes($this->input->post("firstname")));
+						$email = strip_tags(addslashes($this->input->post("email")));
+						$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 										
 										->add_rules('users', 'required')
 										->add_rules('email','required')
@@ -802,9 +813,9 @@ class Merchant_Controller extends website_Controller
 	    $this->add_merchant_shop ="1";
 		$adminid=$this->session->get('user_id');
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = utf8::clean($this->input->post());
 			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
@@ -861,9 +872,10 @@ class Merchant_Controller extends website_Controller
 					}*/
 					 if($_FILES['image']['name'])
 					{
-						$filename =  basename($_FILES["image"]["name"]);
-						$uploadedfile = $_FILES['image']['tmp_name'];
 						
+						$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+						$filename = basename($uploadedfile);//basename($_FILES["image"]["name"]);
+                                                
 						$extension = $this->getExtension($filename);
 						$extension = strtolower($extension);
 						
@@ -930,6 +942,8 @@ class Merchant_Controller extends website_Controller
 							imagedestroy($tmp0);
 							imagedestroy($tmp1);
 						}
+                                                
+                                                unlink($uploadedfile);
 					}
 
 					/** for routes creation for front end  start **/
@@ -1050,9 +1064,9 @@ class Merchant_Controller extends website_Controller
 	    $this->mer_merchant_act ="1";
 	    $this->manage_merchant_shop ="1";
 		if($_POST){
-			$this->userpost = $this->input->post();
+			$this->userpost = utf8::clean($this->input->post());
 			//$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($this->userpost,$_FILES))
+			$post = Validation::factory(array_merge($this->userpost,utf8::clean($_FILES)))
 					
 					->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 					->add_rules('address1', 'required')
@@ -1104,9 +1118,10 @@ class Merchant_Controller extends website_Controller
 						}*/
 						 if($_FILES['image']['name'])
 						{
-							$filename = strip_tags(addslashes($_FILES["image"]["name"]));
-							$uploadedfile = $_FILES['image']['tmp_name'];
 							
+							$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+							$filename = basename($uploadedfile); //strip_tags(addslashes($_FILES["image"]["name"]));
+                                                        
 							$extension = $this->getExtension($filename);
 							$extension = strtolower($extension);
 							
@@ -1174,12 +1189,12 @@ class Merchant_Controller extends website_Controller
 								imagedestroy($tmp1);
 							}
 						}
-
+                                                unlink($uploadedfile);
 
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes($_POST['subsector']));
+							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -1652,8 +1667,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 			if($_POST){
-				$this->userPost = $this->input->post();
-				$post = Validation::factory(array_merge($_POST,$_FILES))
+				$this->userPost = utf8::clean($this->input->post());
+				$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -1759,9 +1774,18 @@ class Merchant_Controller extends website_Controller
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
+								
+								foreach($_FILES as $key =>$value){
+									$n = uniqid();
+									$_FILES[$n] = $value;
+									unset($_FILES[$key]);
+								}
+								
+								
+								//foreach(arr::rotate($_FILES['image']) as $files){
+								foreach($_FILES as $key => $files){
 									if($files){
-										$filename = upload::save(realpath($files));
+										$filename = upload::save($key);
 										if($filename!=''){
 
 											$IMG_NAME = $deal_key."_".$i.'.png';
@@ -1957,8 +1981,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 				        ->add_rules('title', 'required')
 				        ->add_rules('description','required',array($this,'check_required'))
@@ -2081,9 +2105,16 @@ class Merchant_Controller extends website_Controller
 				if($status == 1 && $deal_key){
 					if($_FILES['image']['name'] != "" ){
 						$i=1;
-						foreach(arr::rotate($_FILES['image']) as $files){
+						
+						foreach($_FILES as $key =>$value){
+							$n = uniqid();
+							$_FILES[$n] = $value;
+							unset($_FILES[$key]);
+						}
+						//foreach(arr::rotate($_FILES['image']) as $files){
+							foreach($_FILES as $key => $files){
 							if($files){
-								$filename = upload::save($files);
+								$filename = upload::save($key);
 								if($filename!=''){
 									if($i==1){
 										$IMG_NAME = $deal_key."_1.png";
@@ -2096,7 +2127,7 @@ class Merchant_Controller extends website_Controller
 									}
 									$IMG_NAME = $deal_key."_".$i.'.png';
 									common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
-									unlink(realpath($filename));
+									unlink($filename);
 								}
 							}
 							$i++;
@@ -2387,14 +2418,13 @@ class Merchant_Controller extends website_Controller
 	        url::redirect(PATH."merchant/manage-products.html");
 	        
 		}
-
 		if($_POST){
 			$this->product_deatils = $this->merchant->get_products_data($deal_key, $deal_id);
-			$this->userPost = $this->input->post();
-			$users = $this->input->post("users");
-			$fname = $this->input->post("firstname");
-			$email = $this->input->post("email");
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$users = strip_tags(addslashes($this->input->post("users")));
+			$fname = strip_tags(addslashes($this->input->post("firstname")));
+			$email = strip_tags(addslashes($this->input->post("email")));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -2617,8 +2647,8 @@ class Merchant_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('title', 'required')
 							->add_rules('description', 'required',array($this,'check_required'))
@@ -2646,9 +2676,15 @@ class Merchant_Controller extends website_Controller
 			            if($_FILES['image']['name']['0'] != "" )
                                     {
                                         $i=1;
-                                            foreach(arr::rotate($_FILES['image']) as $files){
+                                            foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
 	                                         if($files){
-                                                        $filename = upload::save($files);
+                                                  $filename = upload::save($key);
 				                        if($filename!=''){
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
 			                            		common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
@@ -2864,8 +2900,8 @@ class Merchant_Controller extends website_Controller
                 $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js', PATH.'js/multiimage.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
 	        if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('description', 'required',array($this,'check_required'))
@@ -2891,9 +2927,15 @@ class Merchant_Controller extends website_Controller
 					if($_FILES['image']['name'] != "" )
                      {
                                     $i=1;
-                                    foreach(arr::rotate($_FILES['image']) as $files){
-                                                if($files){
-                                                $filename = upload::save($files);
+                                   foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
                                                         if($filename!=''){
                                                                 if($i==1)
                                                                 {
@@ -2907,7 +2949,7 @@ class Merchant_Controller extends website_Controller
                                                                 }
                                                                 $IMG_NAME = $deal_key."_".$i.'.png';
                                                                 common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-                                                                unlink(realpath($filename));
+                                                                unlink($filename);
                                                         }
                                                 }
                                                 $i++;
@@ -3102,11 +3144,11 @@ class Merchant_Controller extends website_Controller
 	                
 		}
                 if($_POST){
-	  		$this->userPost = $this->deal_deatils = $this->input->post();
-			$users = $this->input->post("users");
-			$fname = $this->input->post("firstname");
-			$email = $this->input->post("email");
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+	  		$this->userPost = $this->deal_deatils = utf8::clean($this->input->post());
+			$users = strip_tags(addslashes($this->input->post("users")));
+			$fname = strip_tags(addslashes($this->input->post("firstname")));
+			$email = strip_tags(addslashes($this->input->post("email")));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('users', 'required')
 							->add_rules('email','required')
@@ -3625,10 +3667,10 @@ class Merchant_Controller extends website_Controller
 			$this->winner = 1;
 		if($_POST){
 			$this->type="winner";
-			$email_id = $this->input->post('email');
-			$message = $this->input->post('message');
+			$email_id = strip_tags(addslashes($this->input->post('email')));
+			$message = strip_tags(addslashes($this->input->post('message')));
 			//$this->deal_deatils = $this->merchant->get_deals_data($this->input->post('deal_key'), $this->input->post('deal_id'));
-			$this->deal_deatils = $this->input->post();
+			$this->deal_deatils =utf8::clean( $this->input->post());
 			$message .= new View ("merchant/mail_auction");
 			$message .= "<p></p><p>Thanks & Regards</p> <p>". SITENAME ." Merchant</p>";
 			$fromEmail = NOREPLY_EMAIL;
@@ -3642,8 +3684,8 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant-auction/winner-list.html");
 			
 		}
-		$this->search_key = arr::to_object($this->input->get());
-		$count = $this->merchant->get_winner_count($this->input->get('name'));
+		$this->search_key = arr::to_object(utf8::clean($this->input->get()));
+		$count = $this->merchant->get_winner_count(strip_tags(addslashes($this->input->get('name'))));
 		$this->pagination = new Pagination(array(
 				'base_url'       => 'merchant-auction/winner-list.html/page/'.$page."/",
 				'uri_segment'    => 4,
@@ -3652,7 +3694,7 @@ class Merchant_Controller extends website_Controller
 				'style'          => 'digg',
 				'auto_hide' => TRUE
 		));
-		$search=$this->input->get("id");
+		$search=  strip_tags(addslashes($this->input->get("id")));
 		$this->winner_list = $this->merchant->get_winner_list($this->pagination->sql_offset,$this->pagination->items_per_page, $this->input->get('name'),0);
 
 		if($search =='all'){ // for export all
@@ -4004,9 +4046,9 @@ class Merchant_Controller extends website_Controller
 			
 		if($_POST){
 			
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('pass1', 'required')
 				->add_rules('pass2', 'required', array($this, 'comfirm_pass'), array($this, 'unique_pass'));
@@ -4016,7 +4058,7 @@ class Merchant_Controller extends website_Controller
 				
 				
 				
-				    $pswd = $_POST['pass1'];
+				    $pswd = strip_tags(addslashes($_POST['pass1']));
 					$status = $this->merchant->reset_password($email,$pswd);
 					
 						if($status == 1){
@@ -4056,14 +4098,14 @@ class Merchant_Controller extends website_Controller
 	{
 		$this->captcha = new Captcha;
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 				
 				->add_rules('email', 'required')
 				->add_rules('captcha', 'required');
 			if($post->validate()){
-				$email = $this->input->post("email");
+				$email = trim(strip_tags(addslashes($this->input->post("email"))));
 				if(Captcha::valid($this->input->post('captcha'))){
 				        $pswd = text::random($type = 'alnum', $length = 10);
 						
@@ -4556,17 +4598,29 @@ class Merchant_Controller extends website_Controller
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					$file_name = $_FILES['im_product']['tmp_name'];
+					$file_name = upload::save('im_product');//$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
-						$temp = explode('.',  basename($_FILES['im_product']['name']));
+						/*$temp = explode('.',  basename($file_name));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
-						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);
+						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);*/
 
+						$source = upload::save('im_product');
+						$temp = explode('.',  basename($source));
+						$ext = end($temp);
+						
+						$excel_name = time().'.'.$ext;
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						move_uploaded_file($source,$path.$excel_name);
+						
+						unlink($source);
+						
+						
+						
 					}
 
 					ini_set('memory_limit','5028m');
@@ -4763,7 +4817,7 @@ class Merchant_Controller extends website_Controller
 								
 								else
 								{ 
-									unlink(realpath($inputFileName));
+									unlink($inputFileName);
 									common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				                    			url::redirect(PATH."merchant/manage-products.html");
 								}
@@ -4771,7 +4825,8 @@ class Merchant_Controller extends website_Controller
 							
 			}  
 	 } 
-				unlink(realpath($inputFileName));
+         unlink($file_name);
+				unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."merchant/manage-products.html");	
 						
@@ -4833,9 +4888,9 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('terms_conditions','required');
 			if($post->validate()){
@@ -4863,9 +4918,9 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('return_policy','required');
 			if($post->validate()){
@@ -4893,9 +4948,9 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."merchant.html");	        
 		}
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('about_us','required');
 			if($post->validate()){
 			        $status = $this->merchant->update_cms(arr::to_object($this->userpost));
@@ -4957,9 +5012,9 @@ class Merchant_Controller extends website_Controller
 			
 			
 	        if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('bg_color','required')
 						->add_rules('font_color','required')
@@ -5065,7 +5120,7 @@ class Merchant_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = $_POST['subsector'];
+							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -5183,9 +5238,9 @@ class Merchant_Controller extends website_Controller
 		$this->mer_moderator_act = "1";
 		if($_POST){
 			$from = CONTACT_EMAIL;    	
-			$this->userPost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
@@ -5348,9 +5403,9 @@ class Merchant_Controller extends website_Controller
 		$this->manage_mer_moderator = "1";
 		$this->mer_moderator_act = "1";
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);			
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));			
+			$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('firstname', 'required')
 						//->add_rules('lastname','required','chars[a-zA-Z0-9 _-]')
@@ -5465,9 +5520,9 @@ class Merchant_Controller extends website_Controller
 		$this->mer_settings_act="1";
 		
 	    if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
+			$this->userPost = utf8::clean($this->input->post());
 			$img_check = 0;
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
@@ -5487,10 +5542,19 @@ class Merchant_Controller extends website_Controller
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-						$tmp_name = $_FILES["attach"]["tmp_name"];
-						$logo = basename($_FILES["attach"]["name"]);
+						/*$tmp_name = upload::save('attach');//$_FILES["attach"]["tmp_name"];
+						$logo = basename($tmp_name);
 						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
 						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
+						*/
+						
+						$source = upload::save('attach');
+						$logo = basename($source);
+						move_uploaded_file($source, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
+						
+						unlink($source);
+						
 					}
 					$file1=array();
 					pdf::template_create($post->template,$post->subject,$post->message);
@@ -5499,7 +5563,7 @@ class Merchant_Controller extends website_Controller
 					//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
 					if($_FILES["attach"]["name"]!=''){
-						$logo = basename($_FILES["attach"]["name"]);
+						//$logo = basename($_FILES["attach"]["name"]);
 						unlink(realpath(DOCROOT."images/newsletter/").$logo);
 					}
 					if($status == 1){
@@ -5518,6 +5582,7 @@ class Merchant_Controller extends website_Controller
 						$this->form_error['attach'] = $this->Lang['REQQ'];
 					}
 		        }
+                        unlink($tmp_name);
 		}
 	$this->city_list = $this->merchant->getCityList();  
 	$this->users = $this->merchant->getUSERList();      
@@ -5560,8 +5625,8 @@ class Merchant_Controller extends website_Controller
 		$this->duration = "1";
 		$this->mer_settings_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						->add_rules('duration', 'required', 'chars[0-9]');
 			if($post->validate()){
 					$status = $this->merchant->add_duration(arr::to_object($this->userPost));
@@ -5591,8 +5656,8 @@ class Merchant_Controller extends website_Controller
 
 		if($_POST){
 
-		$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+		$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('duration', 'required', 'chars[0-9]');
 			if($post->validate()){
@@ -5670,8 +5735,8 @@ class Merchant_Controller extends website_Controller
 		$this->add_free_gift = "1";
 		$this->mer_products_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 			                        
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
@@ -5780,8 +5845,8 @@ class Merchant_Controller extends website_Controller
 		$this->free_gift = "1";
 		$this->mer_products_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
 						->add_rules('amount',  'chars[0-9 .]')
 						->add_rules('category', 'required')
@@ -6088,8 +6153,8 @@ class Merchant_Controller extends website_Controller
 		$this->mer_settings_act="1";
 		if($_POST){
 			
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
@@ -6153,8 +6218,8 @@ class Merchant_Controller extends website_Controller
 		
 				if($_POST){
 					
-					$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+					$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('name', 'required')
 					->add_rules('attribute_group', 'required',array($this,'check_attribute_group_sel'))
@@ -6196,8 +6261,8 @@ class Merchant_Controller extends website_Controller
 		$this->attributegroup_settings = 1;
 		$this->mer_settings_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('groupname', 'required',array($this,'check_attrgroup_exist'))
 					->add_rules('sort_order', 'chars[0-9]');
@@ -6255,8 +6320,8 @@ class Merchant_Controller extends website_Controller
 		$attribute_id =base64_decode($attribute_id);
 		
 				if($_POST){
-					$this->userPost = $this->input->post();
-					$post = Validation::factory($_POST)
+					$this->userPost = utf8::clean($this->input->post());
+					$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('groupname', 'required')
 					->add_rules('sort_order', 'chars[0-9]');
@@ -6308,14 +6373,14 @@ class Merchant_Controller extends website_Controller
 		$this->category = "1";
 		$this->mer_settings_act="1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						->add_rules('category', 'required', 'chars[a-zA-Z0-9 _&-]')
 						->add_rules('list_icon', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) { // check the type
-						$category = $this->input->post('category');
-						$cat_status = $this->input->post('status');
+						$category = strip_tags(addslashes($this->input->post('category')));
+						$cat_status = strip_tags(addslashes($this->input->post('status')));
 						$deal = isset($_POST['deal'])? 1 : 0;
 						$product = isset($_POST['product'])? 1 : 0;
 						$auction = isset($_POST['auction'])? 1 : 0;
@@ -6359,7 +6424,7 @@ class Merchant_Controller extends website_Controller
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$category = strip_tags(addslashes($this->input->post("category")));
+					$category = strip_tags(basename(addslashes($this->input->post("category"))));
 	 				$cat_status = strip_tags(addslashes($this->input->post("status")));
 					$deal = isset($_POST['deal'])? 1 : 0;
 					$product = isset($_POST['product'])? 1 : 0;
@@ -6847,8 +6912,8 @@ class Merchant_Controller extends website_Controller
 		
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
@@ -6866,9 +6931,15 @@ class Merchant_Controller extends website_Controller
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
                                                 $i=1;
-							foreach(arr::rotate($_FILES['attach']) as $files){
-                				        if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										if($filename!=''){
 											//$IMG_NAME = "news_letter";
 											$ext=$filename;
@@ -6950,8 +7021,8 @@ class Merchant_Controller extends website_Controller
 		
 	    if($_POST){
 
-			$this->userPost = $this->input->post();
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 							
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required');
@@ -6968,9 +7039,16 @@ class Merchant_Controller extends website_Controller
 						$extension="";
 						if($_FILES['attach']['name']['0'] != "" ){
 							$i=1;
-							foreach(arr::rotate($_FILES['attach']) as $files){
-								if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
+												  
 									if($filename!=''){
 										$ext=$filename;
 										$lastDot = strrpos($ext, ".");
@@ -7179,8 +7257,8 @@ class Merchant_Controller extends website_Controller
 	public function add_template(){
 		$this->newsletter_act = $this->mer_settings_act = 1;
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
@@ -7189,10 +7267,18 @@ class Merchant_Controller extends website_Controller
 				$status = $this->merchant->add_template(arr::to_object($this->userPost));
 				if($status > 0){
 					if($_FILES["template_file"]){
-						$tmp_name = $_FILES["template_file"]["tmp_name"];
+						/*$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
+						
+						$source = upload::save('template_file');
+						$name = "Template_file_".$status.".php";
+						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+						
+						unlink($source);
+						
 					}
 					if($_FILES['template_image']['name']){
 						$filename = upload::save('template_image'); 						
@@ -7236,8 +7322,8 @@ class Merchant_Controller extends website_Controller
 			url::redirect(PATH."admin/manage-template.html");
 		}
 		if($_POST){
-			$this->userPost = strip_tags(addslashes($this->input->post()));
-			$post = Validation::factory(array_merge($_POST,$_FILES))
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 					
 					->add_rules('title', 'required')
 					->add_rules('template_file','required', 'upload::valid', 'upload::type[php]', 'upload::size[1M]')
@@ -7246,9 +7332,15 @@ class Merchant_Controller extends website_Controller
 				$status = $this->merchant->edit_template(arr::to_object($this->userPost),$newsletter_id);
 				if($status > 0){
 					if($_FILES["template_file"]["name"]!=''){
-						$tmp_name = $_FILES["template_file"]["tmp_name"];
+						/*$tmp_name = $_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name));
+						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
+						
+						$source = upload::save('template_file');
+						$name = "Template_file_".$status.".php";
+						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/".$name));
+						
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 					}
 					if($_FILES['template_image']['name']!=''){

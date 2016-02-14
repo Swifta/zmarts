@@ -107,8 +107,8 @@ class Admin_Controller extends website_Controller
 		$this->country = "1";
 
 		if($_POST){
-			$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('country', 'required','chars[a-zA-Z _-]')
 					->add_rules('country_code','required','chars[A-Z]')
@@ -158,8 +158,8 @@ class Admin_Controller extends website_Controller
 
 		if($_POST){
 
-		$this->userPost = $this->input->post();
-		$post = Validation::factory($_POST)
+		$this->userPost = utf8::clean($this->input->post());
+		$post = Validation::factory(utf8::clean($_POST))
 						
 						->add_rules('country','required','chars[a-zA-Z _-]')
 						->add_rules('country_code','required','chars[A-Z]')
@@ -257,8 +257,8 @@ class Admin_Controller extends website_Controller
 		}
 		$this->city = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
-			$post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+			$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('country', 'required')
 							->add_rules('city', 'required','chars[a-zA-Z _-]')
@@ -320,7 +320,7 @@ class Admin_Controller extends website_Controller
 		}
 		$this->city = "1";
 		if($_POST){
-			$post = Validation::factory($_POST)
+			$post = Validation::factory(utf8::clean($_POST))
 							
 							->add_rules('city', 'required', 'chars[a-zA-Z _-]')
 							->add_rules('country', 'required')
@@ -329,7 +329,7 @@ class Admin_Controller extends website_Controller
 
 			if($post->validate()){
 
-				$status = $this->admin->edit_city($country, $city, $this->input->post());
+				$status = $this->admin->edit_city($country, $city, utf8::clean($this->input->post()));
 
 				if($status == 1){
 
@@ -418,14 +418,14 @@ class Admin_Controller extends website_Controller
 		}
 		$this->category = "1";
 		if($_POST){
-			$this->userPost = $this->input->post();
+			$this->userPost = utf8::clean($this->input->post());
 			$post = Validation::factory(array_merge($_POST,$_FILES))
 						->add_rules('category', 'required', 'chars[a-zA-Z0-9 _&-]')
 						->add_rules('list_icon', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) { // check the type
-						$category = $this->input->post('category');
-						$cat_status = $this->input->post('status');
+						$category = strip_tags(addslashes($this->input->post('category')));
+						$cat_status = strip_tags(addslashes($this->input->post('status')));
 						$deal = isset($_POST['deal'])? 1 : 0;
 						$product = isset($_POST['product'])? 1 : 0;
 						$auction = isset($_POST['auction'])? 1 : 0;
@@ -472,7 +472,7 @@ class Admin_Controller extends website_Controller
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$category = $this->input->post("category");
+					$category = basename($this->input->post("category"));
 	 				$cat_status = $this->input->post("status");
 					$deal = isset($_POST['deal'])? 1 : 0;
 					$product = isset($_POST['product'])? 1 : 0;
@@ -1114,9 +1114,9 @@ class Admin_Controller extends website_Controller
 
 	    	$userid = $this->user_id;
 		if($_POST){
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('name','required','chars[a-zA-Z_ -.,%\']')
 						->add_rules('email','required','valid::email')
 						->add_rules('mobile',array($this,'validphone'), array($this,'z_validphone'), 'chars[0-9 +()-]')
@@ -1151,9 +1151,9 @@ class Admin_Controller extends website_Controller
         $userid = $this->user_id;
 		if($_POST){
 
-			$this->userpost = $this->input->post();
-			$post = new Validation($_POST);
-			$post = Validation::factory($_POST)
+			$this->userpost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
 						->add_rules('oldpassword','required',array($this, 'check_password'))
 						->add_rules('password','length[5,32]', 'required')
 						->add_rules('cpassword','required','matches[password]');
@@ -1882,8 +1882,8 @@ class Admin_Controller extends website_Controller
 		} */ 
 		$this->sector_settings = 1;
 		if($_POST){
-			$this->userPost = $this->input->post();
-		        $post = Validation::factory($_POST)
+			$this->userPost = utf8::clean($this->input->post());
+		        $post = Validation::factory(utf8::clean($_POST))
 					
 					->add_rules('sector', 'required',array($this,'check_sector_exist'));
 
@@ -1945,8 +1945,8 @@ class Admin_Controller extends website_Controller
 		$this->sector_settings = 1;
 		$sector_id =base64_decode($sector_id);
                 if($_POST){
-                        $this->userPost = $this->input->post();
-                        $post = Validation::factory($_POST)
+                        $this->userPost = utf8::clean($this->input->post());
+                        $post = Validation::factory(utf8::clean($_POST))
                                         
                                      //   ->add_rules('category', 'required')
                                         ->add_rules('sector', 'required');
@@ -2046,7 +2046,7 @@ class Admin_Controller extends website_Controller
 
 
 			if($post->validate()){
-				$subsector = htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8');
+				$subsector = basename(htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8'));
  				$cat_status = htmlspecialchars($this->input->post("status"),ENT_QUOTES,'UTF-8');;
  				//$cat_type = "2";
  				$type = "2";
@@ -2055,10 +2055,13 @@ class Admin_Controller extends website_Controller
 					$check_insert_file = false;
 					/* Extrat Files */
 					if($_FILES["zip_file"]["name"]) {
-						$filename = basename($_FILES["zip_file"]["name"]);
-						$source = basename($_FILES["zip_file"]["tmp_name"]);
-						$filename = basename($_FILES["zip_file"]["name"]);
-						$source = $_FILES["zip_file"]["tmp_name"];
+						//$filename = basename($_FILES["zip_file"]["name"]);
+						//$source = basename($_FILES["zip_file"]["tmp_name"]);
+						//$filename = basename($_FILES["zip_file"]["name"]);
+    
+						$source = upload::save('zip_file'); ;//$_FILES["zip_file"]["tmp_name"];
+                                                $filename = basename($source);
+                                                
 						$type = $_FILES["zip_file"]["type"];
 	
 						$name = explode(".", $filename);
@@ -2204,7 +2207,7 @@ class Admin_Controller extends website_Controller
 								common::chmod_r($target_modules);
 	
 								$zip->close();
-	
+                                                                unlink($source);
 								unlink($target_path);
 								rmdir($target_dir.$file_folder);
 								$check_insert_file = true;
