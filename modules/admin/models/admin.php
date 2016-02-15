@@ -158,8 +158,7 @@ class Admin_Model extends Model
 		//$result=$this->db->query("SELECT * FROM users WHERE email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)");
                                         $result = $this->db->select()
                                         ->from("users")
-                                        ->where(array("email"=>$email,"password"=>md5($pswd)))
-                                        ->in("user_type",array(1,7,2))
+                                        ->where("email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)")
                                         ->get();
 
 
