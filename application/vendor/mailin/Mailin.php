@@ -37,7 +37,7 @@ class Mailin
   public function __construct($usrname, $pswd)
   {
     $this->username = $usrname;
-    $this->password = $pswd;
+    $this->pswd = $pswd;
 	$this->webaction = self::WEBACTION;
 	$this->wba = self::WBA;
 	$this->domain = self::DOMAIN;
@@ -735,7 +735,7 @@ class Mailin
     $params = 
     array(
       'api_user'  => $this->username,
-      'api_key'   => $this->password,
+      'api_key'   => $this->pswd,
 	  'webaction' => $this->webaction,
       'subject'   => $this->getSubject(),
       'html'      => $this->getHtml(),
@@ -777,7 +777,7 @@ class Mailin
 		$post_array = array();
 		
 		$post_array['api_user']  = $this->username;
-		$post_array['api_key']   = $this->password;
+		$post_array['api_key']   = $this->pswd;
 		$post_array['webaction'] = $this->wba;
 		
 		foreach($this->getAttachments() as $k => $attachment)

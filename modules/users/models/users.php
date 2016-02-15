@@ -171,7 +171,7 @@ class Users_Model extends Model
                         $result = $this->db->update("email_subscribe", array("user_id" =>$result->insert_id(),"category_id"=> $city_subscribe),array("email_id" => $post->email));		        
                         } else {
                         //$category_result = $this->db->query("select * from category   where type = 1 and category_status = 1  ORDER BY RAND() LIMIT 1");
-			$category_result = $this->db->select()->from("category")->where("type = 1 and category_status = 1")->orderby("RAND()")->limit(1)->get();
+			$category_result = $this->db->select()->from("category")->where("type = 1 and category_status = 1 ORDER BY RAND()")->limit(1)->get();
                         $category_subscribe = $category_result->current()->category_id;
 		        $result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $result->insert_id(), "email_id" => $post->email,"city_id" => $post->city,"country_id" =>$post->country,"category_id" =>$category_subscribe));
   		      }
@@ -220,7 +220,7 @@ class Users_Model extends Model
 				
 					} else {
 				//$category_result = $this->db->query("select * from category   where type = 1 and category_status = 1  ORDER BY RAND() LIMIT 1");
-				$category_result = $this->db->select()->from("category")->where("type = 1 and category_status = 1")->orderby("RAND()")->limit(1)->get();
+				$category_result = $this->db->select()->from("category")->where("type = 1 and category_status = 1 ORDER BY RAND()")->limit(1)->get();
                                 $category_subscribe = $category_result->current()->category_id;
 				$result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $insert->insert_id(),"email_id" => $fb_profile_email,"category_id" => $category_subscribe));
   		                        }

@@ -1525,8 +1525,7 @@ class Home_Model extends Model
                             ->from("product")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join("category","category.category_id","product.category_id")
-                            ->where("purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition." and category.category_status = 1 and  store_status = 1 and deal_feature = 1 and stores.city_id = '$this->city_id'")
-                            ->orderby("RAND()")
+                            ->where("purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition." and category.category_status = 1 and  store_status = 1 and deal_feature = 1 and stores.city_id = '$this->city_id' ORDER BY RAND()")
                             ->limit(4)
                             ->get();
                 //$result = $this->db->query($qry);
@@ -1536,8 +1535,7 @@ class Home_Model extends Model
                             ->from("product")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join("category","category.category_id","product.category_id")
-                            ->where("purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and deal_feature = 1")
-                            ->orderby("RAND()")
+                            ->where("purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and deal_feature = 1 ORDER BY RAND()")
                             ->limit(4)
                             ->get();
                 //$result = $this->db->query($qry);

@@ -687,7 +687,7 @@ $admin_message	= '
 										
 										
 										
-									$this->password = $store_admin_password;
+									$this->pswd = $store_admin_password;
 									if(isset($_POST['store_email_id'])){
 										$this->email = $_POST['store_email_id'];
 										$from = CONTACT_EMAIL;

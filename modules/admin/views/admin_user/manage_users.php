@@ -188,7 +188,8 @@
                 <th align="center" ><?php echo $this->Lang["LOGIN_TYPE"]; ?></th>
                  <th align="center" ><?php echo $this->Lang["USER_TYP"]; ?></th>
             </tr>
-            <?php $i=0; $first_item = $this->pagination->current_first_item;
+            <?php 
+ $i=0; $first_item = $this->pagination->current_first_item;
                 foreach($this->users_list as $u){?>
                 <?php $url ="none";  if(is_numeric($this->uri->last_segment())){ $url =$this->uri->last_segment();  } ?>
                 <tr>

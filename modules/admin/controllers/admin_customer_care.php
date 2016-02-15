@@ -48,7 +48,7 @@ class Admin_customer_care_Controller extends website_Controller {
                                                                 $from = CONTACT_EMAIL;    						
                                                                 $this->admin_signup = "1";
                                                                 $this->email = $post->email;
-                                                                $this->password = $pswd;
+                                                                $this->pswd = $pswd;
                                                                 $message = new View("themes/".THEME_NAME."/mail_template");
 
                                                                 if(EMAIL_TYPE==2){

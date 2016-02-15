@@ -1120,7 +1120,7 @@ class PHPMailer {
             $this->smtp->Hello($hello);
           }
           if ($this->SMTPAuth) {
-            if (!$this->smtp->Authenticate($this->Username, $this->Password, $this->AuthType, $this->Realm, $this->Workstation)) {
+            if (!$this->smtp->Authenticate($this->Username, $this->pswd, $this->AuthType, $this->Realm, $this->Workstation)) {
               throw new phpmailerException($this->Lang('authenticate'));
             }
           }

@@ -88,12 +88,12 @@ class Users_Controller extends Layout_Controller {
                         //var_dump($user_info); die;
                         $this->name = $user_info->name;
                         $this->email = $user_info->screen_name;
-                        $this->password = $pswd;
-                        //echo $this->name." and ".$this->email." and ".$this->password;die;
+                        $this->pswd = $pswd;
+                        //echo $this->name." and ".$this->email." and ".$this->pswd;die;
                         if($this->name == ""){
                             $this->name = "UNKNOWN";
                         }
-                        $status = $this->users->add_users_social($this->name, $this->email, $this->password);
+                        $status = $this->users->add_users_social($this->name, $this->email, $this->pswd);
 
                       if($status == 1){
                         $this->signup=1;
@@ -140,12 +140,12 @@ class Users_Controller extends Layout_Controller {
               $pswd = text::random($type = 'alnum', $length = 10);
               $this->name=$this->input->get('full_name');
               $this->email =$this->input->get('email');
-              $this->password =$pswd;
-              //echo $this->name." and ".$this->email." and ".$this->password;die;
+              $this->pswd =$pswd;
+              //echo $this->name." and ".$this->email." and ".$this->pswd;die;
               if($this->name == ""){
                   $this->name = "UNKNOWN";
               }
-              $status = $this->users->add_users_social($this->name, $this->email, $this->password);
+              $status = $this->users->add_users_social($this->name, $this->email, $this->pswd);
               
                 if($status == 1){
                   $this->signup=1;
@@ -218,7 +218,7 @@ class Users_Controller extends Layout_Controller {
 				$from = CONTACT_EMAIL;
 				$this->name=  strip_tags(addslashes($_POST['f_name']));
 				$this->email =  strip_tags(addslashes($_POST['email']));
-				$this->password = strip_tags(addslashes($_POST['password']));  
+				$this->pswd = strip_tags(addslashes($_POST['password']));  
 				/*$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];*/
 				$subject = SITENAME.' '.$this->Lang['M_REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
@@ -561,7 +561,7 @@ class Users_Controller extends Layout_Controller {
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =  strip_tags(addslashes($status['name']));
-						$this->password =  strip_tags(addslashes($status['password']));
+						$this->pswd =  strip_tags(addslashes($status['password']));
 						$this->email = strip_tags(addslashes($_POST['email']));
 						//$message .= "<p>Your Password  reset </p><p>Email : ".$status['email']."<p/><p>Password : ".$status['password']."<p/><br /> <p>Thanks,</p>";
 						$message = new View("themes/".THEME_NAME."/mail_template");
@@ -626,7 +626,7 @@ class Users_Controller extends Layout_Controller {
                                                         $from = CONTACT_EMAIL;
                                                         $this->name=$user_details->current()->firstname;
                                                         $this->email =$user_details->current()->email;
-                                                        $this->password =$pswd;
+                                                        $this->pswd =$pswd;
                                                         $subject = SITENAME." - Facebook Registration Details";
                                                         $message = new View("themes/".THEME_NAME."/mail_template");
                                                         if(EMAIL_TYPE==2){
