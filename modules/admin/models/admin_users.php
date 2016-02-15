@@ -148,16 +148,16 @@ class Admin_users_Model extends Model
 			}
                 }
                        // $result = $this->db->query("select * from users join city on city.city_id = users.city_id join country on country.country_id = users.country_id where $contitions $joinorder $limit1 ");
-                
+                //echo $contitions." ".$joinorder; die;
               //  return $result;
                 
                 $result = $this->db->select()
                          ->from("users")
                          ->join("city","city.city_id","users.city_id")
-                          ->join("country","country.country_id","users.country_id")
-                         ->where($contitions)
-                         ->orderby($joinorder)
-                         ->limit($limit1)->get();
+                         ->join("country","country.country_id","users.country_id")
+                         ->where($contitions." ".$joinorder." ".$limit1)
+                         //->orderby($joinorder)
+                         ->get();
                  
                  return $result;
 
@@ -239,11 +239,11 @@ class Admin_users_Model extends Model
                 }
                 else{
                         $result = $this->db->select()->from("users")
-                                    ->where(array("user_type" => 4))
-				    				->join("city","city.city_id","users.city_id")
-				    				->join("country","country.country_id","users.country_id")
-                                    ->orderby("user_id", "DESC")
-                                    ->get();
+                                ->join("city","city.city_id","users.city_id")
+                                ->join("country","country.country_id","users.country_id")
+                                ->where(array("user_type" => 4))
+                                ->orderby("user_id", "DESC")
+                                ->get();
                 }
                 return count($result);
         }

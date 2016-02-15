@@ -1453,12 +1453,12 @@ class Admin_Controller extends website_Controller
 				$post = Validation::factory($_POST)->add_rules('message', 'required','chars[a-zA-Z0-9 _-]');
 			if($post->validate()){
 
-				$email_id = $this->input->post('email');
-				$message = $this->input->post('message');
+				$email_id = strip_tags(addslashes($this->input->post('email')));
+				$message = strip_tags(addslashes($this->input->post('message')));
 				
-				$this->email_id = $this->input->post('email');
-				$this->name = $this->input->post('name');
-				$this->message = $this->input->post('message');
+				$this->email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->name = strip_tags(addslashes($this->input->post('name')));
+				$this->message = strip_tags(addslashes($this->input->post('message')));
 				$fromEmail = NOREPLY_EMAIL;
 				$message = new View("themes/".THEME_NAME."/admin_mail_template");
 				
@@ -2046,7 +2046,12 @@ class Admin_Controller extends website_Controller
 
 
 			if($post->validate()){
+				
 				$subsector = basename(htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8'));
+				
+				if(!in_array($subsector, $subsector_ids))
+					return false;
+					
  				$cat_status = htmlspecialchars($this->input->post("status"),ENT_QUOTES,'UTF-8');;
  				//$cat_type = "2";
  				$type = "2";

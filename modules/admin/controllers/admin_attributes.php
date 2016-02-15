@@ -148,12 +148,12 @@ class Admin_attributes_Controller extends website_Controller
 			}
 		}
 		common::message(1, $this->Lang['ATTR_GROUP_UPDATE']);
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+//		$lastsession = $this->session->get("lasturl");
+//                if($lastsession){
+//                url::redirect(PATH.$lastsession);
+//                } else {
                 url::redirect(PATH."admin/manage-attribute.html");
-                }
+//                }
 	}
 	
 
@@ -276,12 +276,12 @@ class Admin_attributes_Controller extends website_Controller
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-                if($lastsession){
-                url::redirect(PATH.$lastsession);
-                } else {
+//		$lastsession = $this->session->get("lasturl");
+//                if($lastsession){
+//                url::redirect(PATH.$lastsession);
+//                } else {
                 url::redirect(PATH."admin/manage-attribute-group.html");
-                }
+//                }
 	}
 	
 	public function check_attrgroup_exist(){ 

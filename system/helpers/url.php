@@ -98,7 +98,7 @@ class url_Core {
 		if ($qry = parse_url($uri, PHP_URL_QUERY))
 		{
 			// ?query=string
-			$qry = '?'.$query;
+			$qry = '?'.$qry;
 		}
 
 		if ($fragment = parse_url($uri, PHP_URL_FRAGMENT))
@@ -108,7 +108,7 @@ class url_Core {
 		}
 
 		// Concat the URL
-		return url::base(TRUE, $protocol).$path.$query.$fragment;
+		return url::base(TRUE, $protocol).$path.$qry.$fragment;
 	}
 
 	/**
@@ -145,11 +145,11 @@ class url_Core {
 		}
 		elseif ($qry = http_build_query(array_merge($_GET, $arguments)))
 		{
-			$qry = '?'.$query;
+			$qry = '?'.$qry;
 		}
 
 		// Return the current URI with the arguments merged into the query string
-		return Router::$current_uri.$query;
+		return Router::$current_uri.$qry;
 	}
 
 	/**

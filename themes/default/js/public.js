@@ -1268,8 +1268,8 @@ if(country == ''){ var country = -1;  }
 		
 		success:function(check)
 		{
-		   $("#CitySD").html(check);
-		     $("#CitySD_log").html(check);
+		   $("#CitySD_Signup").html(check);
+		     $("#CitySD_log_Signup").html(check);
 		},
 		error:function()
 		{		        

@@ -14,6 +14,20 @@ class Settings_Model extends Model
 						->get();
 		return $result;
 	}
+	
+	public function get_all_subsector_ids(){
+		$results = $this->db->select("sector_id")->from("sector")->where(array("sector_status"=>1, "type"=>2))->get();
+		$ids = array();
+		$i = 0;
+		foreach($results as $r){
+			$ids[$i] = $r->sector_id;
+			$i++;
+			
+		}
+		return $ids;
+		
+	}
+	
 	/* GET COUNTRY LIST */
 	public function getcountrylist()
 	{	
@@ -65,7 +79,7 @@ class Settings_Model extends Model
 	
 	public function smtp_mailer_settings($post = "")
 	{ 	 	 	
-		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_pswd" => $post->password), array("status" => 1));
+		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_password" => $post->password), array("status" => 1));
 		return 1;
 	}
 	/** UPDATE SMTP EMAIL SETTING **/

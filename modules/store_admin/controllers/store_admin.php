@@ -3104,7 +3104,7 @@ class Store_admin_Controller extends website_Controller
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->password = $pswd;
+						$this->pswd = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 
@@ -4041,6 +4041,8 @@ class Store_admin_Controller extends website_Controller
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
 							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
+							if(!in_array($subsector, $subsector_ids))
+							return false;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}

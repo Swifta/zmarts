@@ -2933,10 +2933,18 @@ class PHPMailer {
    */
   protected function doCallback($isSent, $to, $cc, $bcc, $subject, $body, $from = null) {
     if (!empty($this->action_function) && is_callable($this->action_function)) {
-      $params = array($isSent, $to, $cc, $bcc, $subject, $body, $from);
+      $params = array(strip_tags(addslashes($isSent)),strip_tags(addslashes($to)),strip_tags(addslashes($cc)),strip_tags(addslashes($bcc)),strip_tags(addslashes($subject)),strip_tags(addslashes($body)),strip_tags(addslashes($from)) );
       call_user_func_array($this->action_function, $params);
     }
   }
+  
+//  
+//   protected function doCallback($isSent, $to, $cc, $bcc, $subject, $body, $from = null) {
+//    if (!empty($this->action_function) && is_callable($this->action_function)) {
+//      $params = array($isSent, $to, $cc, $bcc, $subject, $body, $from);
+//      call_user_func_array($this->action_function, $params);
+//    }
+//  }
 }
 
 /**

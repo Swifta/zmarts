@@ -61,7 +61,7 @@ class Admin_moderator_Controller extends website_Controller {
 					$from = CONTACT_EMAIL;    						
 					$this->admin_signup_moderator = "1";
 					$this->email = $post->email;
-					$this->password = $pswd;
+					$this->pswd = $pswd;
 					$this->name =$post->firstname;
 					$this->moderator = "1";
                       $data = array(

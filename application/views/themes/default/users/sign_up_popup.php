@@ -79,7 +79,7 @@
                                             <option value="-99"><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
                                            <?php foreach ($this->all_country_list as $c) { ?>
                                              <option  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
-											<?php } ?>
+                                            <?php } ?>
                                     </select>
                                      <em id="country_error"></em>
                                 </div>
@@ -87,7 +87,7 @@
                             <li>
                                 <label>Select State:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                        <div id="CitySD_log">
+                                        <div id="CitySD_log_Signup">
                                       <select name="city" >
                                             <option value="-99"><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                     </select>

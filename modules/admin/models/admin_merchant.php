@@ -213,7 +213,7 @@ class Admin_merchant_Model extends Model
 //                            join country on country.country_id=users.country_id
 //                            where $contitions order by users.user_id DESC $limit1 ");
                           
-                        $result = $this->db->select("*,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")->from(users)
+                        $result = $this->db->select("*,users.address1 as user_address1,users.address2 as user_address2,users.phone_number as user_phone_number")->from("users")
                          ->join("stores","stores.merchant_id","users.user_id")
                          ->join("city","city.city_id","users.city_id")
                         ->join("country","country.country_id","users.country_id")

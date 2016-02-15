@@ -73,7 +73,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$status = "1";
 						$status = $this->merchant->add_merchant(arr::to_object($this->userPost),$adminid,$store_key,$pswd,$store_admin_password);
 							if($status){
-							        $this->password = $pswd;
+							        $this->pswd = $pswd;
 								$from = CONTACT_EMAIL;  
 								$this->country_list = $this->merchant->getcountrylist();
 		                                                $this->city_list = $this->merchant->getCityList();
@@ -194,7 +194,7 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message);
 									}
 									
-									$this->password = $store_admin_password;
+									$this->pswd = $store_admin_password;
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
 									$this->name = strip_tags(addslashes($_POST['username']));
@@ -211,7 +211,13 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
+										
 										$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
+										if(!in_array($subsector, $subsector_ids))
+											 return false;
+									
+										
+										
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);
 										
@@ -558,6 +564,8 @@ class Admin_merchant_Controller extends website_Controller {
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
 							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+							if(!in_array($subsector, $subsector_ids))
+											 return false;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -909,7 +917,7 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_NEWSHOP_ACC'] , $message);
 									}
 									
-									$this->password = $pswd;
+									$this->pswd = $pswd;
 
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
@@ -929,6 +937,8 @@ class Admin_merchant_Controller extends website_Controller {
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
 										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+										if(!in_array($subsector, $subsector_ids))
+											 return false;
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -1151,6 +1161,8 @@ class Admin_merchant_Controller extends website_Controller {
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
 							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+							if(!in_array($subsector, $subsector_ids))
+								return false;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
