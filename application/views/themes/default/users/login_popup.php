@@ -41,7 +41,8 @@
                             $val =   htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES,"UTF-8");
                             $scriptname = end(explode('index.php/',$val));
                             ?>
-                              <input type="hidden" placeholder="Enter your password here" value="<?php echo htmlspecialchars($scriptname ,ENT_QUOTES,"UTF-8"); ?>" name="url" autocomplete="off" class="fancy_input_bx" />
+                              
+                              <input type="hidden" placeholder="Enter your password here" value="<?php echo $scriptname;?>" name="url" autocomplete="off" class="fancy_input_bx" />
                           <a class="forget_link" href="javascript:showforgotpassword();" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>?"><?php echo $this->Lang['FORGOT_PSWD']; ?>?</a>
                           </li>
                           <li>
