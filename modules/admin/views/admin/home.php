@@ -863,7 +863,7 @@ $(document).ready(function() {
 			data: [
 				<?php if(ADMIN_PRIVILEGES_CUSTOMER){?>{
 					name: '<?php echo $this->Lang["USERS"]; ?>',
-					y: <?php echo $customer; ?>,
+					y: <?php echo @$customer; ?>,
 					sliced: true,
 					selected: true
 				},<?php }?>
