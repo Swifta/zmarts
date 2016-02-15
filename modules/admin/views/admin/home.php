@@ -867,9 +867,9 @@ $(document).ready(function() {
 					sliced: true,
 					selected: true
 				},<?php }?>
-				<?php if(ADMIN_PRIVILEGES_MERCHANT){?> ['<?php echo $this->Lang["MERCHANTS"]; ?>',    <?php echo $merchant; ?>],<?php }?>
-				<?php if(ADMIN_PRIVILEGES_CUSTOMERCARE){?> ['<?php echo $this->Lang['CUSTOMER_CARE']; ?>',     <?php echo $customer_care; ?>],<?php }?>
-				<?php if($this->user_type==1){?> ['<?php echo $this->Lang['MERCHANT_MODERATOR']; ?>',   <?php echo $admin_moderator;?>]<?php }?>
+				<?php if(ADMIN_PRIVILEGES_MERCHANT){?> ['<?php echo $this->Lang["MERCHANTS"]; ?>',    <?php echo @$merchant; ?>],<?php }?>
+				<?php if(ADMIN_PRIVILEGES_CUSTOMERCARE){?> ['<?php echo $this->Lang['CUSTOMER_CARE']; ?>',     <?php echo @$customer_care; ?>],<?php }?>
+				<?php if($this->user_type==1){?> ['<?php echo $this->Lang['MERCHANT_MODERATOR']; ?>',   <?php echo @$admin_moderator;?>]<?php }?>
 
 			]
 		}]
