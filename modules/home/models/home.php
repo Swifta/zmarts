@@ -1809,6 +1809,7 @@ class Home_Model extends Model
 		} else if($this->session->get("UserID")) {
 			$userid = $this->session->get("UserID");
 		}
+                //echo "here";die; 
 		$result = $this->db->update("users", array("online_status" => 0), array("user_id" => $userid));
 		$result = $this->db->update("chat_users", array("chat_user_status" => 0), array("chat_userid" => $userid));
 		unset($_COOKIE['image']);

@@ -2021,7 +2021,9 @@ $pdf->Output('voucher.pdf', 'I');
 		  if($_POST){
 			  $nuban = $this->input->post('nuban');
                           //echo $nuban;
-                          //$this->session->set("merchant_reg_nuban", $nuban);
+                          $this->session->set("merchant_reg_nuban", $nuban);
+                          $this->session->set("firstname", "Hello World");
+                          echo 1;die;
                          
 				 
 				  $r = $this->users->check_zenith_account_used($nuban);
