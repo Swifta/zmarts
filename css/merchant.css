@@ -35,7 +35,7 @@ input[type=button],input[type=submit] ,input[type=reset]{cursor:pointer; transit
 
 /*header*/
 .header{width:100%;background:url(../images/header_bg.png) repeat-x; padding-bottom:5px;}
-.header_in{margin:0 auto;width:90%;height:80px;}
+.header_in{margin:0 auto;width:1024px;height:80px;}
 .logo{margin:15px 0px 0px 15px;}
 .head_rgt{float:right;margin-top:30px;margin-right: 10px;}
 .head_out{width:100%;}
@@ -507,7 +507,7 @@ html[xmlns] .clearfix { display: block;}
 .left_setting_bg{width:23px;height:25px;float:left;background:url(../images/merchant/left_setting_bg.png) no-repeat;margin:1px 0px 0px 0px;}
 .left_user_log_bg{width:23px;height:25px;float:left;background:url(../images/merchant/left_user_log_bg.png) no-repeat;margin:1px 0px 0px 0px;}
 
-.dash_main_menu{clear:both; width:100%; margin:0 auto;}
+.dash_main_menu{clear:both; width:1024px; margin:0 auto;}
 
 .dash_main_menu ul{ float:left; clear:both; width:100%; border:1px solid #CECECE; border-left:none; background:url(../images/dash_mnu_bg.png) repeat-x;}
 .dash_main_menu ul li{ float:left; clear:none; text-transform:uppercase;}

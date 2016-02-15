@@ -560,8 +560,7 @@ class Auction_Model extends Model
                            ->join("category","category.category_id","auction.category_id")
                            ->join("users","users.user_id","stores.merchant_id")
                           ->join("city","city.city_id","stores.city_id")
-                           ->where($conditions." and deal_feature = 1 and stores.city_id = '$this->city_id'  and users.user_status=1 and city.city_status=1")
-                           ->orderby("RAND()")             
+                           ->where($conditions." and deal_feature = 1 and stores.city_id = '$this->city_id'  and users.user_status=1 and city.city_status=1 ORDER BY RAND()")           
                            ->Limit(4)->get();        
                            return $result;
                 
@@ -580,8 +579,7 @@ class Auction_Model extends Model
                            ->join("category","category.category_id","auction.category_id")
                            ->join("users","users.user_id","stores.merchant_id")
                           ->join("city","city.city_id","stores.city_id")
-                           ->where(".$conditions. and deal_feature = 1 and stores.city_id = '$this->city_id'  and users.user_status=1 and city.city_status=1")
-                           ->orderby("RAND()")             
+                           ->where(".$conditions. and deal_feature = 1 and stores.city_id = '$this->city_id'  and users.user_status=1 and city.city_status=1 ORDER BY RAND()")           
                            ->Limit(4)->get();        
                            return $result;
                 

@@ -60,7 +60,7 @@ class Payment_Controller extends Layout_Controller {
 				        $from = CONTACT_EMAIL;
 				        $this->name = strip_tags(addslashes($_POST['f_name']));
 				        $this->email = strip_tags(addslashes($_POST['email']));
-				        $this->password = strip_tags(addslashes($_POST['password']));  
+				        $this->pswd = strip_tags(addslashes($_POST['password']));  
 				        $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
 				        $message = new View("themes/".THEME_NAME."/mail_template");
 				        if(EMAIL_TYPE==2){
@@ -68,9 +68,9 @@ class Payment_Controller extends Layout_Controller {
 				        } else {
 					        email::sendgrid($from, $post->email,$subject, $message);
 				        }
-				        $this->users->login_users($this->email,$this->password);
+				        $this->users->login_users($this->email,$this->pswd);
 				$status = $this->users->add_users(arr::to_object($this->userPost),$referral_id,$user_referral_id);
-				$status_login = $this->users->login_users($this->email,$this->password);
+				$status_login = $this->users->login_users($this->email,$this->pswd);
 				if($status == 1){
 				    common::message(1, $this->Lang["SUCC_SIGN"]);
 				    url::redirect(PATH.'deal/payment_details/'.$this->deal_key.'/'.$this->url_title.'.html');

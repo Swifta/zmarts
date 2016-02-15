@@ -23,6 +23,24 @@ class Layout_Controller extends Template_Controller
                 {
                 
 		$this->UserID = $this->session->get("UserID");
+		$this->chatuserid = $this->session->get("chatuserid");
+		 if(isset($this->chatuserid) && $this->chatuserid !=""){
+			setcookie("username",$this->session->get("chatusername"));
+			setcookie("uid",$this->chatuserid);
+			$img = $this->chatuserid.'_1.png';
+			setcookie("image",$img);
+		} else {
+			setcookie("username", "", time()-3600);
+			setcookie("chat_type", "", time()-3600);
+			setcookie("uid", "", time()-3600);
+			setcookie("sel_id", "", time()-3600);
+			/* unset($_COOKIE['username']);
+			unset($_COOKIE['uid']);
+			unset($_COOKIE['image']);
+			*/
+		}
+		//setcookie("image", "", time() - 3600);
+		//unset($_COOKIE['image']);
 		/*if(isset($_COOKIE['front_language'])){
 		$this->session->set("front_language", $_COOKIE['front_language']);
 		$sess_lang = $_COOKIE['front_language'];
@@ -197,7 +215,11 @@ class Layout_Controller extends Template_Controller
 	
 	public function logout()
 	{
-		
+		setcookie("username", "", time()-3600);
+		setcookie("chat_type", "", time()-3600);
+		setcookie("uid", "", time()-3600);
+		setcookie("sel_id", "", time()-3600);
+		$this->change_onlinestatus = $this->home->update_login_status();
 		$city_id = $this->session->get("CityID");
 		$sess_lang = $this->session->get("front_language");		
 		$this->session->destroy();

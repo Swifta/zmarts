@@ -115,9 +115,15 @@ class Admin_products_Controller extends website_Controller
 				if($status > 0 && $deal_key){
 				        if($_FILES['image']['name']['0'] != "" ){
                                                 $i=1;
-							foreach(arr::rotate($_FILES['image']) as $files){
-                				        if($files){
-									$filename = upload::save($files);
+							foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 										if($filename!=''){
 											$IMG_NAME = $deal_key."_".$i.'.png';
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
@@ -284,12 +290,12 @@ class Admin_products_Controller extends website_Controller
                 $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
                 $this->page = $page ==""?1:$page; // for export per page
-                $this->type = $this->input->get('sort');
-                $this->sort = $this->input->get('param');
-                $serch=$this->input->get("id");
-                $this->today = $this->input->get("today");
-		$this->startdate  = $this->input->get("startdate");
-		$this->enddate  = $this->input->get("enddate");	
+                $this->type = strip_tags(addslashes($this->input->get('sort')));
+                $this->sort = strip_tags(addslashes($this->input->get('param')));
+                $serch= strip_tags(addslashes($this->input->get("id")));
+                $this->today = strip_tags(addslashes($this->input->get("today")));
+		$this->startdate  = strip_tags(addslashes($this->input->get("startdate")));
+		$this->enddate  = strip_tags(addslashes($this->input->get("enddate")));	
 		$this->date_range = isset($_GET['date_range'])?1:0;
 	    if($type == 1){
 			$this->archive_product = "1";
@@ -923,9 +929,15 @@ class Admin_products_Controller extends website_Controller
 							if($_FILES['image']['name'] != "" )
 							{
 								$i=1;
-								foreach(arr::rotate($_FILES['image']) as $files){
-								if($files){
-									$filename = upload::save($files);
+								foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+												}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+									foreach($_FILES as $key => $files){
+	                                         if($files){
+                                                  $filename = upload::save($key);
 									if($filename!=''){
 										if($i==1)
 										{

@@ -550,3 +550,11 @@ $config['admin/unblock-moderator/(.*)/(.*).html'] = "/admin_moderator/block_mode
 $config['admin/delete-moderator/(.*)/(.*).html'] = "/admin_moderator/delete_moderator/$1/$2";
 $config['admin/view-moderator/(.*).html'] ="/admin_moderator/view_moderator/$1";
 /* Moderator - End */
+/* CHAT MANAGEMENT */
+$config['admin/offline-chat.html'] = "/admin_chat/offline_chat_history";
+$config['admin/offline-chat.html/page/(.*)'] = "/admin_chat/offline_chat_history/$1";
+$config['admin/delete-offline-chat/(.*).html'] = "/admin_chat/delete_offlinechat/$1";
+$config['admin/online-chat.html'] = "/admin_chat/online_chat_history";
+$config['admin/online-chat.html/page/(.*)'] = "/admin_chat/online_chat_history/$1";
+$config['admin/view-conversation/(.*)/(.*).html'] = "/admin_chat/view_chat_history/$1/$2";
+$config['admin/view-offline-reply/(.*).html'] = "/admin_chat/view_offlinereply/$1";

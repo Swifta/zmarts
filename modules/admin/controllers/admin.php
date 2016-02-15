@@ -55,7 +55,7 @@ class Admin_Controller extends website_Controller
 
 		if($_POST){
 			  
-                          $email = strip_tags(addslashestrim(($this->input->post("email"))));
+                          $email = strip_tags(addslashes(trim(($this->input->post("email")))));
 			  $pswd = strip_tags(addslashes($this->input->post("password")));
                           
 //                          $email = trim($this->input->post("email"));

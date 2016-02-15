@@ -153,16 +153,15 @@ class Admin_Model extends Model
 	{
 		
 		$email = strip_tags(addslashes($email));
-		$pswd = strip_tags(addslashes($email));
+		$pswd = strip_tags(addslashes($pswd));
 		
 		//$result=$this->db->query("SELECT * FROM users WHERE email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)");
                                         $result = $this->db->select()
                                         ->from("users")
-                                        ->where(array("email"=>$email,"password"=>md5($pswd)))
-                                        ->in("user_type",array(1,7,2))
+                                        ->where("email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)")
                                         ->get();
 
-
+                               //var_dump($result);die;
                 
                 
 		//$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd)), "user_type" ,"IN", array(1,7))->limit(1)->get();
@@ -178,6 +177,17 @@ class Admin_Model extends Model
 							"fb_access_token" =>  $result->current()->fb_session_key,
 							"fb_user_id" =>  $result->current()->fb_user_id
 						));
+						if($result->current()->user_type==7) {
+							$this->session->set("chatuserid",$result->current()->user_id);
+							$this->session->set("nickname",$result->current()->nickname_url);
+							$this->session->set("chat_type",1);
+						//	$this->session->set("chatusername",$result->current()->firstname);
+						//	$this->session->set("chatuseremail",$result->current()->email);
+							setcookie("chat_type", 1);
+							setcookie("username", $result->current()->nickname_url);
+							setcookie("sel_id", $result->current()->user_id);
+							$this->db->update("users", array("online_status" => 1), array("user_id" => $result->current()->user_id));
+						}
 						return 10;
 			}
 			return 9;
@@ -1008,7 +1018,7 @@ class Admin_Model extends Model
 		        $contitions .= ' AND name like "%'.strip_tags($name).'%"';
                         $contitions .= ' OR email like "%'.strip_tags($name).'%"';
                         }
-                       $result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
+                       //$result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
                                         $result = $this->db->select()
                                         ->from("contact")
                                         ->where(array($contitions))

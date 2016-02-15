@@ -95,8 +95,15 @@ class Admin_blog_Model extends Model
 			if($category){
 				$conditions .= ' and blog.category_id = '.$category;
 			}
-			$qry = "select * from blog left join category on category.category_id=blog.category_id where $conditions order by blog.blog_id desc limit $offset,$record";			
-			$result = $this->db->query($qry);	
+			//$qry = "select * from blog left join category on category.category_id=blog.category_id where $conditions order by blog.blog_id desc limit $offset,$record";			
+			$result = $this->db->select()
+                                ->from("blog")
+                                ->join("category","category.category_id","blog.category_id","LEFT")
+                                ->where($conditions)
+                                ->orderby("blog.blog_id", "desc")
+                                ->limit($record,$offset)
+                                ->get();
+                        //$result = $this->db->query($qry);	
 		}
 		else{ 							
 			$result = $this->db->from("blog")

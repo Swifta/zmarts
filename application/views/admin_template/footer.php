@@ -16,3 +16,9 @@
         </div>
 </div>
 
+<?php /* chat code starts */ ?>
+<?php if($this->session->get("chatuserid")) { ?>
+<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/chat/chat.js"></script>
+<link type="text/css" rel="stylesheet" media="all" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/chat/chat.css" />
+<?php } ?>
+<?php /* chat code ends */ ?>

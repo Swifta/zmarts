@@ -32,6 +32,7 @@ class Admin_customer_care_Controller extends website_Controller {
 							
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
+							->add_rules('nickname', 'required', 'chars[a-zA-Z0-9 _-]',array($this,'nickname_available'))
 							->add_rules('email', 'required','valid::email', array($this, 'email_available'))
 							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
@@ -47,7 +48,7 @@ class Admin_customer_care_Controller extends website_Controller {
                                                                 $from = CONTACT_EMAIL;    						
                                                                 $this->admin_signup = "1";
                                                                 $this->email = $post->email;
-                                                                $this->password = $pswd;
+                                                                $this->pswd = $pswd;
                                                                 $message = new View("themes/".THEME_NAME."/mail_template");
 
                                                                 if(EMAIL_TYPE==2){
@@ -401,5 +402,17 @@ class Admin_customer_care_Controller extends website_Controller {
 		$this->template->content = new View("admin_customer_care/dashboard_customer_care");
 		$this->template->title = $this->Lang['CUSTM_DASH'];
 	}	
+	/** CHECK NICKNAME EXIST **/
+	public function nickname_available($name="")
+	{
+		$exist = $this->users->exist_nickname($name);
+		return ! $exist;
+	}
 	
+	/** CHECK NICKNAME EXIST **/
+	public function nickname_available1($name="")
+	{
+		$exist = $this->users->exist_nickname1($name);
+		return ! $exist;
+	}
 }

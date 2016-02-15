@@ -324,10 +324,11 @@ class Admin_products_Model extends Model
                           $result = $this->db->select("* , product.created_date as createddate")->from("product")
                           ->join("stores","stores.store_id","product.shop_id")
                           ->join("city","city.city_id","stores.city_id")
-                          ->join("country","country.country_id","stores.country_id ")
+                          ->join("country","country.country_id","stores.country_id")
                           ->join("category","category.category_id","product.category_id")
                            ->join("users","users.user_id","product.merchant_id")
-                          ->where($conditions,$limit1)                           
+                          ->where($conditions." ".$limit1)
+                          //->limit($limit1)
                            ->get();
                           //return $result;
                         
@@ -361,10 +362,10 @@ class Admin_products_Model extends Model
                         $result = $this->db->select("*,product.created_date as createddate")->from("product")
                           ->join("stores","stores.store_id","product.shop_id")
                           ->join("city","city.city_id","stores.city_id")
-                          ->join("country","country.country_id","stores.country_id ")
+                          ->join("country","country.country_id","stores.country_id")
                           ->join("category","category.category_id","product.category_id")
-                           ->join("users","users.user_id","product.merchant_id")
-                          ->where($conditions,$limit1)                           
+                          ->join("users","users.user_id","product.merchant_id")
+                          ->where($conditions." ".$limit1)                           
                            ->get();
                         
 		} 
@@ -970,8 +971,8 @@ class Admin_products_Model extends Model
                          ->from("product")
                          ->join("stores","stores.store_id","product.shop_id")
                          
-                         ->where(array("purchase_count < " =>'user_limit_quantity',"stores.store_status " => 1))
-                         ->orderby('deals.deal_id', 'DESC')->get();
+                         ->where(array("purchase_count < " =>'user_limit_quantity','stores.store_status' => 1))
+                         ->orderby('product.deal_id', 'DESC')->get();
                       
        
 //	    $result_active_products = $this->db->query("SELECT * FROM product 
@@ -985,7 +986,7 @@ class Admin_products_Model extends Model
             $result_sold_products = $this->db->select()
                          ->from("product")
                          ->join("stores","stores.store_id","product.shop_id")
-                         ->where(array("purchase_count = " =>'user_limit_quantity',"stores.store_status " => 1,"stores.store_status "=> 1))
+                         ->where(array("purchase_count = " =>'user_limit_quantity','stores.store_status'=> 1))
                          ->get();
                       
             
