@@ -153,16 +153,15 @@ class Admin_Model extends Model
 	{
 		
 		$email = strip_tags(addslashes($email));
-		$pswd = strip_tags(addslashes($email));
+		$pswd = strip_tags(addslashes($pswd));
 		
 		//$result=$this->db->query("SELECT * FROM users WHERE email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)");
                                         $result = $this->db->select()
                                         ->from("users")
-                                        ->where(array("email"=>$email,"password"=>md5($pswd)))
-                                        ->in("user_type",array(1,7,2))
+                                        ->where("email = '".$email."' AND password ='".md5($pswd)."' AND user_type IN(1,7,2)")
                                         ->get();
 
-
+                               //var_dump($result);die;
                 
                 
 		//$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd)), "user_type" ,"IN", array(1,7))->limit(1)->get();
