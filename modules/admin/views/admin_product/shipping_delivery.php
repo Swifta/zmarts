@@ -58,8 +58,8 @@
 
             </tr>
             <?php $i=0; $first_item = $this->pagination->current_first_item;
-
-                foreach($this->shipping_list as $u){?>
+                foreach($this->shipping_list as $u){
+                    ?>
                 <tr>
                         <td align="left"><?php echo $i+$first_item; ?></td>
                         <td align="left"><a href="<?php echo PATH.'admin/view-products/'.$u->deal_key.'/'.$u->product_id.'.html';?>"><?php echo $u->deal_title; ?></a></td>

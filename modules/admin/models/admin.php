@@ -493,7 +493,7 @@ class Admin_Model extends Model
 
 	public function get_main_category_list()
 	{
-		$result = $this->db->from("category")->where(array("type" => "1","category_status!=" =>2))->orderby("category_name", "ASC")->get();
+		$result = $this->db->select()->from("category")->where(array("type" => "1","category_status!=" =>2))->orderby("category_name", "ASC")->get();
 		return $result;
 	}
 
@@ -911,7 +911,7 @@ class Admin_Model extends Model
         public function get_subscriber_list($offset = "", $record = "",  $category= "",$email="")
         {
 
-                	$contitions = "where email_subscribe.is_deleted=0";
+                	$contitions = " email_subscribe.is_deleted=0";
 			 if($category){
                                 $contitions .= " AND find_in_set($category,email_subscribe.category_id)";
                         }
@@ -924,10 +924,10 @@ class Admin_Model extends Model
                         }	
  
                       // $result = $this->db->query("select *,email_subscribe.category_id as category_ids from email_subscribe left join category on category.category_id=email_subscribe.category_id    $contitions  order by subscribe_id DESC limit $offset, $record");
-                                        $result = $this->db->select("select *,email_subscribe.category_id as category_ids")
+                                        $result = $this->db->select("*,email_subscribe.category_id as category_ids")
                                         ->from("email_subscribe")
                                         ->join("category", "category.category_id", "email_subscribe.category_id", "LEFT")
-                                        ->where(array($contitions))
+                                        ->where($contitions)
                                         ->orderby("subscribe_id","DESC")
                                         ->limit($record,$offset)
                                         ->get();
@@ -939,7 +939,7 @@ class Admin_Model extends Model
 	
         public function get_subscriber_count($category = "",$email="")
         {
-               		$contitions = "where email_subscribe.is_deleted= 0";
+               		$contitions = " email_subscribe.is_deleted= 0";
                         if($category){
                                 $contitions .= " AND find_in_set($category,email_subscribe.category_id)";
                         }
@@ -954,7 +954,7 @@ class Admin_Model extends Model
                                         $result = $this->db->select()
                                         ->from("email_subscribe")
                                         ->join("category", "category.category_id", "email_subscribe.category_id", "LEFT")
-                                        ->where(array($contitions))
+                                        ->where($contitions)
                                         ->orderby("email_subscribe.subscribe_id","DESC")
                                         ->get();
 
@@ -989,9 +989,9 @@ class Admin_Model extends Model
 
         public function get_contacts_list($offset = "", $record = "",  $name= "",$limit="")
         {
-			$limit1 = $limit !=1 ?"limit $offset,$record":"";
+			$limit1 = $limit !=1 ?" limit $offset,$record":"";
 
-                	$contitions = "where status=1";
+                	$contitions = " status=1";
                         if($name){
 						$contitions .= ' AND name like "%'.strip_tags($name).'%"';
                         $contitions .= ' OR email like "%'.strip_tags($name).'%"';
@@ -999,9 +999,9 @@ class Admin_Model extends Model
                      //  $result = $this->db->query("select * from contact $contitions order by contact_id DESC $limit1 ");
                                         $result = $this->db->select()
                                         ->from("contact")
-                                        ->where(array($contitions))
-                                        ->orderby("contact_id","DESC")
-                                        ->limit($limit1)
+                                        ->where($contitions." order by contact_id DESC ".$limit1)
+                                        //->orderby("contact_id","DESC")
+                                        //->limit($limit1)
                                         ->get();                
                        
                        return $result;
@@ -1012,7 +1012,7 @@ class Admin_Model extends Model
 
         public function get_contacts_count($name = "")
         {
-               		$contitions = "where status=1";
+               		$contitions = " status=1";
                         if($name){
 
 		        $contitions .= ' AND name like "%'.strip_tags($name).'%"';
@@ -1021,7 +1021,7 @@ class Admin_Model extends Model
                        //$result = $this->db->query("select * from contact $contitions order by contact_id DESC ");
                                         $result = $this->db->select()
                                         ->from("contact")
-                                        ->where(array($contitions))
+                                        ->where($contitions)
                                         ->orderby("contact_id","DESC")
                                         ->get();   
                        
@@ -1057,8 +1057,8 @@ class Admin_Model extends Model
                                         $result = $this->db->select("u1.firstname as refered_name,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email")
                                         ->from("users as u1")
                                         ->join("users as u2", "u2.referred_user_id", "u1.user_id")
-                                        ->where(array($contitions))
-                                        ->orderby("u2.joined_date","DESC")
+                                        ->where($contitions." order by u2.joined_date DESC")
+                                        //->orderby("u2.joined_date","DESC")
                                         ->get();
                        
                 return count($result);
@@ -1068,7 +1068,7 @@ class Admin_Model extends Model
 
 	public function get_referral_users_list($offset = "", $record = "",$name = "",$email = "",$limit="")
 	{
-		$limit1 = $limit !=1 ?"limit $offset,$record":"";
+		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 
 		$contitions = "u2.user_status = 1";
                         if($name){
@@ -1081,12 +1081,12 @@ class Admin_Model extends Model
                         $contitions .= ' AND u2.email like "%'.strip_tags($email).'%"';
                         }
                       // $result = $this->db->query("select u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email from users as u1 join users as u2 on u2.referred_user_id = u1.user_id where $contitions  order by u2.joined_date DESC $limit1 ");
-                                        $result = $this->db->select("select u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email")
+                                        $result = $this->db->select("u1.firstname as refered_name,u1.user_id as referreduserid, u2.user_id as userid,u2.firstname as referal_name,u2.joined_date as ref_joined_date,u2.email as ref_email")
                                         ->from("users as u1")
                                         ->join("users as u2", "u2.referred_user_id", "u1.user_id")
-                                        ->where(array($contitions))
-                                        ->orderby("u2.joined_date","DESC")
-                                        ->limit($limit1)
+                                        ->where($contitions." order by u2.joined_date DESC ".$limit1)
+                                        //->orderby("u2.joined_date","DESC")
+                                        //->limit($limit1)
                                         ->get();
                                        
                        
