@@ -2015,9 +2015,9 @@ $pdf->Output('voucher.pdf', 'I');
   
   
   public function merchant_registration_validation(){
-      //$this->session->set("merchant_reg_nuban", "8025481373");
-      //$this->session->set("firstname", "Mustafa Segun");
-      //echo 1;die;
+      $this->session->set("merchant_reg_nuban", "8025481373");
+      $this->session->set("firstname", "Hello World");
+      echo 1;exit;
 		  if($_POST){
 			  $nuban = $this->input->post('nuban');
                           //echo $nuban;
