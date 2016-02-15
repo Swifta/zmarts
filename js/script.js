@@ -2101,3 +2101,29 @@ function deletemoderator(id,code)
 	}
 	return;
 }
+/**  Delete offline chat messages **/
+
+function deleteoffline_chat(id)
+{
+
+	if(id && confirm('Are you sure want to delete?')){
+
+
+		window.location.href = SrcPath+"/admin/delete-offline-chat/"+id+".html"
+	}
+	return;
+}
+
+
+/**  Delete offline merchant chat messages **/
+
+function deleteoffline_merchant_chat(id)
+{
+
+	if(id && confirm('Are you sure want to delete?')){
+
+
+		window.location.href = SrcPath+"/merchant/delete-offline-chat/"+id+".html"
+	}
+	return;
+}

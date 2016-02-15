@@ -56,7 +56,23 @@ $this->language_List = str_replace(".php", "", $DL);
 								<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
 						</div>
 					</div>-->
-				
+                                        
+                                        <div class="google_languages">
+                                            <div id="artitleTranslate"></div>
+                                            <select id="customTranslate">
+                                                    <option value="English">English</option>
+                                                    <option value="Hausa">Hausa</option>
+                                                    <option value="Igbo">Igbo</option>                
+                                                    <option value="Yoruba">Yoruba</option>
+                                            </select>
+                                            <script>
+                                            function googleTranslateElementInit() {
+                                                       new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ha,ig,yo', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'artitleTranslate');googObj.translator.init();
+                                            }
+
+                                            </script>
+                                            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                                        </div>
 					
                                     
                                          
@@ -544,7 +560,25 @@ $this->language_List = str_replace(".php", "", $DL);
 <a  href="<?php echo PATH ?>refer-friends.html" title="<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . '' . REFERRAL_AMOUNT . '*'; ?>">
 	<?php echo $this->Lang['REFER_FRIENDS'] . ' ' . CURRENCY_SYMBOL . ' ' . REFERRAL_AMOUNT . '*'; ?></a>
 </div>-->
-</div>          
+</div>
+
+ <div class="google_languages">
+	<div id="artitleTranslate"></div>
+	<select id="customTranslate">
+		<option value="English">English</option>
+		<option value="Hausa">Hausa</option>
+		<option value="Igbo">Igbo</option>                
+		<option value="Yoruba">Yoruba</option>
+	</select>
+	<script>
+	function googleTranslateElementInit() {
+		   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ha,ig,yo', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'artitleTranslate');googObj.translator.init();
+	}
+	
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</div>
+    
 <?php  if($this->session->get('user_auto_key')) { ?>
     <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div>
 <?php } ?>
@@ -1544,6 +1578,110 @@ function load_club(){
 	
 
 	
+</script>
+<style type="text/css">
+#artitleTranslate, #customTranslate, .goog-te-banner-frame {
+ display: none;
+}
+</style>
+<script>
+var googObj = googObj || {};
+(function($) {
+  googObj.translator = { 
+	  langCode: {
+		  'en': 'English',
+		  'ha': 'Hausa',
+		  'ig': 'Igbo',
+		  'yo': 'Yoruba'
+	  },
+	  
+	  initDropdown: function() {
+		  $('#customTranslate').change(function() {
+			  $(this).blur();
+			  var lang = $(this).val();
+			  var $frame = $('iframe.goog-te-menu-frame:first');
+			  if (!$frame.size()) {
+				  return false;
+			  }
+
+			  $( $frame.contents().find('.goog-te-menu2-item span.text') ).each(function( index ) {
+				  if ($(this).text() == lang) {
+					  if (lang == 'English') {
+						  googObj.translator.showOriginalText();
+						  return false;
+					  }
+					 
+					  $(this).click();
+					  $.post(Path+'welcome/set_session_lang/'+$('#customTranslate').val(), { 
+					  }, function(response){ 
+						   location.reload();
+					  });
+					  return false;
+				  }
+			  });
+			  return false;
+		  });
+	  },
+	  
+	  showOriginalText: function() {
+		  var googBar = $('iframe.goog-te-banner-frame:first');
+		  $( googBar.contents().find('.goog-te-button button') ).each(function( index ) { 
+			  if ( $(this).text() == 'Show original' ) {
+				  $(this).trigger('click');
+
+				  if ($('#customTranslate').val() != 'English') {
+					  $('#customTranslate').val('English');
+				  }
+				   $.post(Path+'welcome/set_session_lang/'+$('#customTranslate').val(), { 
+					  }, function(response){ 
+						   location.reload();
+					  });
+				  return false;
+			  }
+		  });
+	  },
+	  
+	  setLangDropdown: function() {
+		  var cookieVal = this.getCookieValue();
+		  if (cookieVal) {
+			  $('#customTranslate').val( this.langCode[cookieVal] );
+		  }
+	  },
+	  
+	  getCookieValue: function() {
+		  var transCookie = getCookie('googtrans');
+		  if ( transCookie ) {
+			  transCookie = transCookie.split('/');
+			  transCookie = transCookie[2];
+			  return transCookie;
+		  }
+		  
+		  return false;
+	  },
+	  
+	  init: function() {
+		  if (document.getElementById('customTranslate')) {
+			  $('#customTranslate').show();
+			  this.initDropdown();
+			  this.setLangDropdown();
+			 
+		  }
+	  }
+  }
+})(jQuery);
+
+function getCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i=0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+		if ( c.indexOf(nameEQ) == 0 ) {
+			return c.substring(nameEQ.length,c.length);
+		}
+	}
+	return null;
+}
 </script>
 
 

@@ -2472,6 +2472,5 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 	background: none;
 }
 
-
-
-
+.chatpopup {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
+.offlinechatpopup{display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}

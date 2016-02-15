@@ -73,7 +73,7 @@ class Admin_merchant_Controller extends website_Controller {
 						$status = "1";
 						$status = $this->merchant->add_merchant(arr::to_object($this->userPost),$adminid,$store_key,$pswd,$store_admin_password);
 							if($status){
-							        $this->password = $pswd;
+							        $this->pswd = $pswd;
 								$from = CONTACT_EMAIL;  
 								$this->country_list = $this->merchant->getcountrylist();
 		                                                $this->city_list = $this->merchant->getCityList();
@@ -194,7 +194,7 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message);
 									}
 									
-									$this->password = $store_admin_password;
+									$this->pswd = $store_admin_password;
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
 									$this->name = strip_tags(addslashes($_POST['username']));
@@ -917,7 +917,7 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_NEWSHOP_ACC'] , $message);
 									}
 									
-									$this->password = $pswd;
+									$this->pswd = $pswd;
 
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
@@ -1695,6 +1695,7 @@ class Admin_merchant_Controller extends website_Controller {
 							$list .='<option value="'.$s->sector_id.'">'.ucfirst($s->sector_name).'</option>';
 					}
 					echo $list .='</select></td>';
+                                        
 				}
 				else {
 					$list = '<td><label>'.$this->Lang['SUBSECTOR'].'</label></td><td><select name="sub_category">';

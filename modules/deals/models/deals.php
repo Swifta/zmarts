@@ -383,8 +383,7 @@ class Deals_Model extends Model
                         ->from("deals")
                         ->join("stores","stores.store_id","deals.shop_id")
                         ->join("category","category.category_id","deals.category_id")
-                        ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  deal_feature =  1 and store_status = 1 and stores.city_id = '$this->city_id'")
-                        ->orderby("RAND()")
+                        ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  deal_feature =  1 and store_status = 1 and stores.city_id = '$this->city_id' ORDER BY RAND()")
                         ->limit(4)
                         ->get();
         
@@ -396,8 +395,7 @@ class Deals_Model extends Model
                             ->from("deals")
                             ->join("stores","stores.store_id","deals.shop_id")
                             ->join("category","category.category_id","deals.category_id")
-                            ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1  ".$this->deal_club_condition."  and category.category_status = 1 and  deal_feature =  1 and store_status = 1")
-                            ->orderby("RAND()")
+                            ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1  ".$this->deal_club_condition."  and category.category_status = 1 and  deal_feature =  1 and store_status = 1 ORDER BY RAND()")
                             ->limit(4)
                             ->get();
 	//$result = $this->db->query($qry);
@@ -1027,8 +1025,7 @@ class Deals_Model extends Model
                                                 ->from("deals")
                                                 ->join("stores","stores.store_id","deals.shop_id")
                                                 ->join("category","category.category_id","deals.category_id")
-                                                ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and deal_id <> '$deal_id' and stores.city_id = '$this->city_id' and  deal_feature =  1 and store_status = 1")
-                                                ->orderby("RAND()")
+                                                ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and deal_id <> '$deal_id' and stores.city_id = '$this->city_id' and  deal_feature =  1 and store_status = 1 ORDER BY RAND()")
                                                 ->get();
                                 //$result = $this->db->query($qry);
 				return $result;
@@ -1039,8 +1036,7 @@ class Deals_Model extends Model
                                                     ->from("deals")
                                                     ->join("stores","stores.store_id","deals.shop_id")
                                                     ->join("category","category.category_id","deals.category_id")
-                                                    ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition." and category.category_status = 1 and deal_id <> '$deal_id' and  deal_feature =  1 and store_status = 1")
-                                                    ->orderby("RAND()")
+                                                    ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition." and category.category_status = 1 and deal_id <> '$deal_id' and  deal_feature =  1 and store_status = 1 ORDER BY RAND()")
                                                     ->get();
                                 //$result = $this->db->query($qry);
 	

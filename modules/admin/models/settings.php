@@ -79,7 +79,7 @@ class Settings_Model extends Model
 	
 	public function smtp_mailer_settings($post = "")
 	{ 	 	 	
-		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_pswd" => $post->password), array("status" => 1));
+		$result = $this->db->update("email_settings",array("smtp_host" => $post->host, "smtp_port" => $post->port, "smtp_username" => $post->username, "smtp_password" => $post->password), array("status" => 1));
 		return 1;
 	}
 	/** UPDATE SMTP EMAIL SETTING **/

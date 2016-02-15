@@ -72,7 +72,7 @@ class Admin_users_Controller extends website_Controller {
                                                                 $from = CONTACT_EMAIL;    						
                                                                 $this->admin_signup = "1";
                                                                 $this->email = $post->email;
-                                                                $this->password = $pswd;
+                                                                $this->pswd = $pswd;
                                                                 $message = new View("themes/".THEME_NAME."/mail_template");
 
                                                                 if(EMAIL_TYPE==2){
@@ -108,27 +108,26 @@ class Admin_users_Controller extends website_Controller {
 		}
 	        $this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
-                $this->type = $this->input->get('sort');
-                $this->sort = $this->input->get('param');
-                $serch=$this->input->get("id");
-                $this->today = $this->input->get("today");
-		$this->startdate  = $this->input->get("startdate");
-		$this->enddate  = $this->input->get("enddate");	
+                $this->type = strip_tags(addslashes($this->input->get('sort')));
+                $this->sort = strip_tags(addslashes($this->input->get('param')));
+                $serch= strip_tags(addslashes($this->input->get("id")));
+                $this->today = strip_tags(addslashes($this->input->get("today")));
+		$this->startdate  = strip_tags(addslashes($this->input->get("startdate")));
+		$this->enddate  = strip_tags(addslashes($this->input->get("enddate")));	
 		$this->date_range = isset($_GET['date_range'])?1:0;
 		$this->page = $page ==""?1:$page; // for export per page
 
 		$this->url="admin/manage-user.html"; // for export
 		
 		$this->manage_users = "1";
-		
 		if($_POST){
 			$post = Validation::factory($_POST)->add_rules('message', 'required');		
 				if($post->validate()){
 
-				$email_id = $this->input->post('email');
-				$this->email_id = $this->input->post('email');
-				$this->name = $this->input->post('name');
-				$this->message = $this->input->post('message');
+				$email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->name = strip_tags(addslashes($this->input->post('name')));
+				$this->message = strip_tags(addslashes($this->input->post('message')));
 				$fromEmail = NOREPLY_EMAIL;
 				$message = new View("themes/".THEME_NAME."/admin_mail_template");
 				
@@ -146,8 +145,8 @@ class Admin_users_Controller extends website_Controller {
 				$this->form_error = error::_error($post->errors());
 			}
 		}
-		$this->type = $this->input->get('sort');
-		$this->sort = $this->input->get('param');
+		$this->type = strip_tags(addslashes($this->input->get('sort')));
+		$this->sort = strip_tags(addslashes($this->input->get('param')));
 		$this->sort_url= PATH.'admin/manage-user.html?';
 		$this->count_user = $this->users->get_users_count($this->input->get('name'), $this->input->get('email'), $this->input->get('city'), $this->input->get('logintype'),$this->type,$this->sort,$this->today,$this->startdate,$this->enddate);
 

@@ -1987,11 +1987,11 @@ $pdf->Output('voucher.pdf', 'I');
                 
                 
                 echo "
-                <error key = \"".$key."\" value = \"".$value."\" />
+                <error key = \"".htmlspecialchars($key ,ENT_QUOTES,'UTF-8')."\" value = \"".htmlspecialchars($value ,ENT_QUOTES,'UTF-8')."\" />
                 ";
                 
                 
-                
+             
                 
                 }
                 

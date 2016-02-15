@@ -267,6 +267,25 @@ $(window).load(function() {
 				
 </script>
 
+<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/chat/chat.js"></script>
+	<link type="text/css" rel="stylesheet" media="all" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/chat/chat.css" />
+
+				<?php echo new View("themes/" . THEME_NAME . '/chat/online_chat'); ?>
+				
+				<div class="chatpopup" style="display:none;">
+					<?php echo new View("themes/" . THEME_NAME . '/chat/online_chat_popup'); ?>
+				</div>
+				<div class="offlinechatpopup" style="display:none;">
+					<?php echo new View("themes/" . THEME_NAME . '/chat/offline_chat_popup'); ?>
+				</div>
+				
+            <script type="text/javascript">
+				$(document).ready(function () {
+					<?php if(isset($_COOKIE["username"])) {  ?>
+						chatHeartbeat();
+					<?php } ?>
+				});
+            </script>
 
 
 </body>

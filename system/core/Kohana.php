@@ -1598,7 +1598,7 @@ final class Kohana {
 			{
 				// Separator starts as nothing
 				$sep = '';
-
+                               
 				while ($arg = array_shift($entry['args']))
 				{
 					if (is_string($arg) AND is_file($arg))

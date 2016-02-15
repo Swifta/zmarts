@@ -363,6 +363,17 @@ foreach ($this->deals_deatils as $deals) {
 											<script>(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src="//x.instagramfollowbutton.com/follow.js";s.parentNode.insertBefore(g,s);}(document,"script"));</script>
                                          </li>
                                     </div>
+<div style="float:left; padding:10px;">
+<?php /* Chat starts here */ ?>
+<p><?php echo $this->Lang['MER_ONL_STS']; ?>: 
+<?php if($deals->online_status==1) { ?>
+<a <?php   if($this->session->get("chatuserid")) {  ?> href="javascript:chatWith('<?php echo $deals->firstname; ?>','<?php echo $deals->user_id; ?>',2);" <?php } else { ?> href="javascript:chat_detail_popup('<?php echo $deals->firstname; ?>','<?php echo $deals->user_id; ?>');" <?php } ?> title="<?php echo $this->Lang["ON_LINE"]; ?>"><?php echo $this->Lang["ON_LINE"]; ?></a>
+<?php } else { ?>
+<a href="javascript:chat_offline(<?php echo $deals->user_id; ?>,2);" title="<?php echo $this->Lang["OFF_LINE"]; ?>"><?php echo $this->Lang["OFF_LINE"]; ?></a>
+<?php } ?>	
+</p>
+<?php /* Chat ends here */ ?>
+</div>
                                     </li> 
                                      <?php /* <li class="border_none">
                                         <div class="li_shareleft">

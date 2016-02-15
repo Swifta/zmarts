@@ -754,7 +754,18 @@
       </li>
       <?php } ?>
    	<!--NEWS LETTER END-->
-   
+   	<!-- CHAT MANAGEMENT STARTS -->
+   	<?php if($this->session->get("chatuserid")) { ?>
+   	 <li onclick="toggle(24)" <?php if(isset($this->chat_act)){ ?> class="menu_active"  <?php } ?> >
+        
+        <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['CHAT_MNG']; ?>"><span class="faq_management fl"><?php echo $this->Lang['CHAT_MNG']; ?></span><img id="left_menubutton_24" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
+        <ul class="toggleul_24">
+			<li><a href="<?php echo PATH; ?>admin/offline-chat.html" class="menu_rgt1" title="<?php echo $this->Lang['SEND_NEWSL']; ?>"><span class="news_letter"><?php echo $this->Lang["OFF_LINE_CHT"]; ?></span></a></li>
+			<li><a href="<?php echo PATH; ?>admin/online-chat.html" class="menu_rgt1" title="<?php echo $this->Lang['SEND_NEWSL']; ?>"><span class="news_letter"><?php echo $this->Lang["ON_LINE_CHT"]; ?></span></a></li>
+		 </ul>
+      </li>
+      <?php } ?>
+	 <!-- CHAT MANAGEEMENT STARTS -->
 
 	<?php } ?>
       </ul>  

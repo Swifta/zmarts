@@ -851,7 +851,7 @@ class Merchant_Controller extends website_Controller
 				$storename = strip_tags(addslashes($this->input->post("storename")));
 				$status = $this->merchant->add_merchant_shop(arr::to_object($this->userPost),$store_key,$pswd);
 				if($status){
-					$this->password = $pswd;
+					$this->pswd = $pswd;
 					$this->email = strip_tags(addslashes($_POST['email']));
 					$from = CONTACT_EMAIL;
 					$this->name = strip_tags(addslashes($_POST['username']));
@@ -4125,7 +4125,7 @@ class Merchant_Controller extends website_Controller
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->password = $pswd;
+						$this->pswd = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 
@@ -5263,7 +5263,7 @@ class Merchant_Controller extends website_Controller
 					$from = CONTACT_EMAIL;    						
 					$this->admin_signup_moderator = "1";
 					$this->email = $post->email;
-					$this->password = $pswd;
+					$this->pswd = $pswd;
 					$this->name =$post->firstname;
 					$this->moderator = "1";
                       $data = array(
