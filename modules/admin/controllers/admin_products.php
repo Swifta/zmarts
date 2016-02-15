@@ -1402,18 +1402,20 @@ class Admin_products_Controller extends website_Controller
 				'style'          => 'digg',
 				'auto_hide'      => TRUE
 				));
+                                //var_dump($this->pagination);die;
 		$this->search = $this->input->get();
 		$this->search_key = arr::to_object($this->search);
-		$this->shipping_list = $this->products->get_shipping_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("search"),"",0);
+		$this->shipping_list = $this->products->get_shipping_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("search"),"",
+                        $this->pagination->sql_limit);
 		if($search =='all'){ // for export all
 			$this->shipping_list = $this->products->get_shipping_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("search"),"",1);
 		}
 		$this->product_size = $this->products->get_shipping_product_size();
 		$this->product_color = $this->products->get_shipping_product_color();
 		if($_POST){
-				$email_id = $this->input->post('email');
-				$this->shipping_id = $this->input->post('id');
-				$message = $this->input->post('message');
+				$email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->shipping_id = strip_tags(addslashes($this->input->post('id')));
+				$message = strip_tags(addslashes($this->input->post('message')));
 				$message.= new View("admin_product/shipping_mail_template");
 				$fromEmail = NOREPLY_EMAIL;
 				if(EMAIL_TYPE==2){

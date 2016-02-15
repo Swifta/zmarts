@@ -482,9 +482,9 @@ class Admin_auction_Model extends Model
 	
         public function get_shipping_list($offset = "", $record = "",  $name= "",$type = "",$limit="")
         {
-			$limit1 = $limit !=1 ?"limit $offset,$record":"";
+			$limit1 = $limit !=1 ?" limit $offset,$record":"";
 			
-				$condition = "AND t.type != 5";
+				$condition = " AND t.type != 5";
 				
 				if($type){
 					$condition = " AND t.type = 5 ";
@@ -508,11 +508,11 @@ class Admin_auction_Model extends Model
 		      ->join("transaction as t","t.id","s.transaction_id")
 		      ->join("auction as d","d.deal_id","t.auction_id")
                                                 
-                      ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+                      ->join("transaction_mapping as tm","tm.transaction_id","t.id")
 		      ->join("city","city.city_id","s.city")
                       ->join("stores","stores.store_id","d.shop_id")
                       ->join("users as u","u.user_id","s.user_id")
-                      ->where( $contitions." and shipping_type = 2 " .$condition. "group by shipping_id order by shipping_id DESC $limit1 ")
+                      ->where($contitions." and shipping_type = 2 " .$condition. " group by shipping_id order by shipping_id DESC ".$limit1)
                       ->get();
                   
                    
@@ -536,11 +536,11 @@ class Admin_auction_Model extends Model
 		      ->join("transaction as t","t.id","s.transaction_id")
 		      ->join("auction as d","d.deal_id","t.auction_id")
                                                 
-                      ->join("transaction_mapping as tm","tm.transaction_id","t.id ")
+                      ->join("transaction_mapping as tm","tm.transaction_id","t.id")
 		      ->join("city","city.city_id","s.city")
                       ->join("stores","stores.store_id","d.shop_id")
                       ->join("users as u","u.user_id","s.user_id")
-                      ->where("shipping_type = 2" .$condition. " group by shipping_id order by shipping_id DESC ".$limit1)
+                      ->where("shipping_type = 2 ".$condition. " group by shipping_id order by shipping_id DESC ".$limit1)
                       ->get();
                                 } 
                return $result;
@@ -552,7 +552,7 @@ class Admin_auction_Model extends Model
 	
         public function get_shipping_count($name = "",$type = "")
         {
-				$condition = "AND t.type != 5";
+				$condition = " AND t.type != 5";
 				
 				if($type){
 					$condition = " AND t.type = 5 ";
@@ -585,7 +585,7 @@ class Admin_auction_Model extends Model
                            ->join("transaction_mapping as tm","tm.transaction_id","t.id")
                            ->join("city","city.city_id","s.city")
                            ->join("users as u","u.user_id","s.user_id")
-                           ->where("shipping_type = 2", $condition)
+                           ->where("shipping_type = 2 ". $condition)
                            ->groupby("shipping_id")
                            ->orderby("shipping_id","DESC")
                            ->get();

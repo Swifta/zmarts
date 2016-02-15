@@ -1453,12 +1453,12 @@ class Admin_Controller extends website_Controller
 				$post = Validation::factory($_POST)->add_rules('message', 'required','chars[a-zA-Z0-9 _-]');
 			if($post->validate()){
 
-				$email_id = $this->input->post('email');
-				$message = $this->input->post('message');
+				$email_id = strip_tags(addslashes($this->input->post('email')));
+				$message = strip_tags(addslashes($this->input->post('message')));
 				
-				$this->email_id = $this->input->post('email');
-				$this->name = $this->input->post('name');
-				$this->message = $this->input->post('message');
+				$this->email_id = strip_tags(addslashes($this->input->post('email')));
+				$this->name = strip_tags(addslashes($this->input->post('name')));
+				$this->message = strip_tags(addslashes($this->input->post('message')));
 				$fromEmail = NOREPLY_EMAIL;
 				$message = new View("themes/".THEME_NAME."/admin_mail_template");
 				

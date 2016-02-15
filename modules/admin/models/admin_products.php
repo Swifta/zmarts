@@ -1093,9 +1093,9 @@ class Admin_products_Model extends Model
 	
         public function get_shipping_list($offset = "", $record = "",  $name= "",$type = "",$limit="")
         { 
-			$limit1 = $limit !=1 ?"limit $offset,$record":"";
+			$limit1 = $limit !=1 ?" limit $offset,$record":"";
 			
-				$condition = "AND t.type != 5";
+				$condition = " AND t.type != 5";
 				
 				if($type){
 					$condition = " AND t.type = 5 ";
@@ -1123,10 +1123,10 @@ class Admin_products_Model extends Model
                           ->join("city","city.city_id","s.city")
                           ->join("stores","stores.store_id","d.shop_id")
                           ->join("users as u","u.user_id","s.user_id")
-                          ->where($contitions,"user_status=1".$condition)
+                          ->where($contitions." shipping_type = 1 ".$condition." group by shipping_id order by shipping_id DESC ".$limit1)
                           ->groupby('shipping_id')
                           ->orderby('shipping_id','DESC')
-                          ->Limit($limit1)
+                          //->limit($limit1)
                          ->get();
                    
                    
@@ -1144,18 +1144,18 @@ class Admin_products_Model extends Model
 //                                            where shipping_type = 1 $condition group by shipping_id order by shipping_id DESC $limit1 "); 
 //				
 //                                        
-                           $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id ")
+                           $result = $this->db->select("*,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id")
                           ->from("shipping_info as s")
                           ->join("transaction as t","t.id","s.transaction_id")
-                          ->join("product","d.deal_id","t.product_id")
+                          ->join("product as d","d.deal_id","t.product_id")
                           ->join("transaction_mapping as tm","tm.transaction_id","t.id")
                           ->join("city","city.city_id","s.city")
                           ->join("stores","stores.store_id","d.shop_id")
                           ->join("users as u","u.user_id","s.user_id")
-                          ->where("shipping_type=1".$contitions)
-                          ->groupby('shipping_id')
-                          ->orderby('shipping_id','DESC')
-                          ->Limit($limit1)
+                          ->where("shipping_type=1 ".$condition." group by shipping_id order by shipping_id DESC ".$limit1)
+                          //->groupby('shipping_id')
+                          //->orderby('shipping_id','DESC')
+                          //->limit($limit1)
                          ->get();
                                         
                                         
@@ -1169,7 +1169,7 @@ class Admin_products_Model extends Model
 	
         public function get_shipping_count($name = "",$type = "")
         {
-				$condition = "AND t.type != 5";
+				$condition = " AND t.type != 5";
 				
 				if($type){
 					$condition = " AND t.type = 5 ";
@@ -1193,7 +1193,7 @@ class Admin_products_Model extends Model
                           ->join("transaction_mapping as tm","tm.transaction_id","t.id")
                           ->join("city","city.city_id","s.city")
                           ->join("users as u","u.user_id","s.user_id")
-                          ->where($contitions,"shipping_type=1".$condition)
+                          ->where($contitions." shipping_type=1 ".$condition)
                           ->groupby('shipping_id')
                           ->orderby('shipping_id','DESC')
                           ->get();
@@ -1218,7 +1218,7 @@ class Admin_products_Model extends Model
                           ->join("transaction_mapping as tm","tm.transaction_id","t.id")
                           ->join("city","city.city_id","s.city")
                           ->join("users as u","u.user_id","s.user_id")
-                          ->where("shipping_type=1".$condition)
+                          ->where("shipping_type=1 ".$condition)
                           ->groupby('shipping_id')
                           ->orderby('shipping_id','DESC')
                           ->get();
