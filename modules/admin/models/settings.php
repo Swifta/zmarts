@@ -14,6 +14,20 @@ class Settings_Model extends Model
 						->get();
 		return $result;
 	}
+	
+	public function get_all_subsector_ids(){
+		$results = $this->db->select("sector_id")->from("sector")->where(array("sector_status"=>1, "type"=>2))->get();
+		$ids = array();
+		$i = 0;
+		foreach($results as $r){
+			$ids[$i] = $r->sector_id;
+			$i++;
+			
+		}
+		return $ids;
+		
+	}
+	
 	/* GET COUNTRY LIST */
 	public function getcountrylist()
 	{	

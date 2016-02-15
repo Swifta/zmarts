@@ -2046,7 +2046,12 @@ class Admin_Controller extends website_Controller
 
 
 			if($post->validate()){
+				
 				$subsector = basename(htmlspecialchars($this->input->post("subsector"),ENT_QUOTES,'UTF-8'));
+				
+				if(!in_array($subsector, $subsector_ids))
+					return false;
+					
  				$cat_status = htmlspecialchars($this->input->post("status"),ENT_QUOTES,'UTF-8');;
  				//$cat_type = "2";
  				$type = "2";
