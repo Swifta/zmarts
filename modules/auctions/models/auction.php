@@ -541,25 +541,22 @@ class Auction_Model extends Model
                            ->join("category","category.category_id","auction.category_id")
                            ->join("users","users.user_id","stores.merchant_id")
                           ->join("city","city.city_id","stores.city_id")
-                           ->where($conditions." and deal_feature = 1 and stores.city_id = '".$this->city_id."'  and users.user_status=1 and city.city_status=1 ORDER BY RAND()")           
+                           ->where($conditions." and deal_feature = 1 and stores.city_id = '".$this->city_id."' and users.user_status=1 and city.city_status=1 ORDER BY RAND()")           
                            ->limit(4)->get();        
                            return $result;
-                
-                
-                
 		} else {
 		$conditions = "enddate > ".time()." and  deal_status = 1 ".$this->auction_club_condition."  and category.category_status = 1 and  store_status = 1 and auction_status = 0 ";
 //		$query = "select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from auction  join stores on stores.store_id=auction.shop_id join category on category.category_id=auction.category_id join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where $conditions and deal_feature = 1 and users.user_status=1 and city.city_status=1 ORDER BY RAND() limit 4";
 //		$result = $this->db->query($qry);
 //                
                 
-                           $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating)")
+                           $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price,category.category_url,product_value,auction.enddate,store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating")
                            ->from("auction")
                            ->join("stores","stores.store_id","auction.shop_id")
                            ->join("category","category.category_id","auction.category_id")
                            ->join("users","users.user_id","stores.merchant_id")
                           ->join("city","city.city_id","stores.city_id")
-                           ->where($conditions." and deal_feature = 1 and stores.city_id = '".$this->city_id."'  and users.user_status=1 and city.city_status=1 ORDER BY RAND()")           
+                           ->where($conditions." and deal_feature = 1 and stores.city_id = ".$this->city_id." and users.user_status=1 and city.city_status=1 ORDER BY RAND()")           
                            ->limit(4)->get();        
                            return $result;
 
