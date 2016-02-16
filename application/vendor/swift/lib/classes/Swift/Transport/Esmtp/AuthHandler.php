@@ -82,11 +82,11 @@ class Swift_Transport_Esmtp_AuthHandler implements Swift_Transport_EsmtpHandler
   
   /**
    * Set the username to authenticate with.
-   * @param string $usrname
+   * @param string $username
    */
-  public function setUsername($usrname)
+  public function setUsername($username)
   {
-    $this->_username = $usrname;
+    $this->_username = $username;
   }
   
   /**

@@ -4168,11 +4168,11 @@ class Merchant_Model extends Model
 					}
 						$mails = explode("__",$mail);
 						$useremail = $this->mail= $mails[0];
-						$usrname =  $mails[1];
-						if(isset($usrname) && isset($useremail))
+						$username =  $mails[1];
+						if(isset($username) && isset($useremail))
 						$message = " <p> ".$post->message." </p>";
 						$this->email_id = $useremail;
-						$this->name = $usrname;
+						$this->name = $username;
 						$this->message = $message;
 						$fromEmail = NOREPLY_EMAIL;
 						$this->newstitle = $post->title;
@@ -5176,14 +5176,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
+										$username =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($usrname) && isset($useremail))
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 											$this->email_id = $useremail;
-											$this->name = $usrname;
+											$this->name = $username;
 											$this->message = $message;
 											$fromEmail = NOREPLY_EMAIL;
 											
@@ -5392,14 +5392,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
+										$username =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($usrname) && isset($useremail))
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 												$this->email_id = $useremail;
-												$this->name = $usrname;
+												$this->name = $username;
 												$this->message = $message;
 												$fromEmail = NOREPLY_EMAIL;
 												

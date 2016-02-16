@@ -140,7 +140,7 @@
 
    return $result;
 }
-$usrname= $this->Lang['ENTER_USER_H'];  //use your sms api username
+$username= $this->Lang['ENTER_USER_H'];  //use your sms api username
 
  $pswd= $this->Lang['EN_PASS_H'];   //use your sms api password 
  $sender= $this->Lang['EN_SE_ID_H'];   //use your sms api sender id 
