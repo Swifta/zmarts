@@ -28,7 +28,7 @@ $oauth_tkn = strip_tags(addslashes($_GET['oauth_tkn']));
 		$twitterInfo= $twitterObj->get_accountVerify_credentials();
 		$twitterInfo->response;
 		
-		$usrname = $twitterInfo->screen_name;
+		$username = $twitterInfo->screen_name;
 		$profilepic = $twitterInfo->profile_image_url;
 
 		include 'update.php';

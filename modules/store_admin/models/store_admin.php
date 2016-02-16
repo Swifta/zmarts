@@ -3792,13 +3792,13 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
-										if(isset($usrname) && isset($useremail))
+										$username =  $mails[1];
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 																					$this->email_id = $useremail;
-																					$this->name = $usrname;
+																					$this->name = $username;
 																					$this->message = $message;
 																					$fromEmail = NOREPLY_EMAIL;
 																					if($post->template==1)

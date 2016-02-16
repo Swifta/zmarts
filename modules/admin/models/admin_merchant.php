@@ -902,14 +902,14 @@ class Admin_merchant_Model extends Model
 					
 													$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
+										$username =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($usrname) && isset($useremail))
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 											$this->email_id = $useremail;
-											$this->name = $usrname;
+											$this->name = $username;
 											$this->message = $message;
 											$fromEmail = NOREPLY_EMAIL;
 											if($type==1){
