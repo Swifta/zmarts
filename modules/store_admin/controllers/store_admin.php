@@ -3539,32 +3539,41 @@ class Store_admin_Controller extends website_Controller
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					$file_name = upload::save('im_product'); //$_FILES['im_product']['tmp_name'];
+					 //$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
-					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
+					
+					/*foreach($_FILES as $key =>$value){
+												$n = uniqid();
+												$_FILES[$n] = $value;
+												unset($_FILES[$key]);
+					}*/
+					
+					$file_name = upload::save('im_product');
+					
+					/*if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')*/
+					if($file_name)
 					{
 						$temp = basename(explode('.',  basename($file_name)));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($file_name,$path.$excel_name);
-						$temp = explode('.',basename($_FILES['im_product']['name']));
+						/*$temp = explode('.',basename($_FILES['im_product']['name']));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						
-						move_uploaded_file($file_name,$path.$excel_name);
-						
-						$source = upload::save('im_product');
+						move_uploaded_file($file_name,$path.$excel_name);*/
+						/*$source = upload::save('im_product');
 						$temp = basename(explode('.',  basename($source)));
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						
-						move_uploaded_file($source,$path.$excel_name);
+						move_uploaded_file($source,$path.$excel_name);*/
 						
-						unlink($source);
+						unlink($file_name);
 						
 			if(count($data1) > 0) {
 				     $num = count($data1);
@@ -4040,9 +4049,17 @@ class Store_admin_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
-							if(!in_array($subsector, $subsector_ids))
-							return false;
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}

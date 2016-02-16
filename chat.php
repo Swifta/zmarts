@@ -210,9 +210,9 @@ function sendChat() {
     $buyerprofile = $_SESSION['image'];
     $UserID = $_SESSION['uid']; //  replace  with common $_SESSION['UserID']
     //$UserID = $_SESSION['chatuserid'];
-    $Sell_ID = $_POST['sellid'];
+    $Sell_ID = strip_tags(addslashes(trim($_POST['sellid'])));
     $_SESSION['sel_id'] = $Sell_ID;
-    $chat_type = $_POST['chattype'];
+    $chat_type = strip_tags(addslashes(trim($_POST['chattype'])));
 	if($chat_type=='' || $chat_type =='undefined') {
 		$chat_type = $_SESSION['chattype'];
 	}

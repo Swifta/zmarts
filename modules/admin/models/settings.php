@@ -28,6 +28,19 @@ class Settings_Model extends Model
 		
 	}
 	
+	public function get_all_category_urls(){
+		$results = $this->db->select("category_url")->from("category")->get();
+		$ids = array();
+		$i = 0;
+		foreach($results as $r){
+			$ids[$i] = $r->category_url;
+			$i++;
+			
+		}
+		return $ids;
+		
+	}
+	
 	/* GET COUNTRY LIST */
 	public function getcountrylist()
 	{	
