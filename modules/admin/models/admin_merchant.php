@@ -200,9 +200,7 @@ class Admin_merchant_Model extends Model
                          ->join("stores","stores.merchant_id","users.user_id")
                          ->join("city","city.city_id","users.city_id")
                         ->join("country","country.country_id","users.country_id")
-                         ->where($contitions)
-                        ->orderby('users.user_id','DESC')
-                         ->Limit($limit1)
+                         ->where($contitions." order by users.user_id DESC ".$limit1)
                          ->get();	
                         
                         
@@ -217,9 +215,7 @@ class Admin_merchant_Model extends Model
                          ->join("stores","stores.merchant_id","users.user_id")
                          ->join("city","city.city_id","users.city_id")
                         ->join("country","country.country_id","users.country_id")
-                         ->where($contitions)
-                        ->orderby('users.user_id','DESC')
-                         ->Limit($limit1)
+                         ->where($contitions." order by users.user_id DESC ".$limit1)
                          ->get();
 				}
 					
@@ -293,7 +289,8 @@ class Admin_merchant_Model extends Model
                          ->join("stores","stores.merchant_id","users.user_id")
                          ->join("city","city.city_id","users.city_id")
                         ->join("country","country.country_id","users.country_id")
-                         ->where($contitions) ->get();
+                        ->where($contitions)
+                        ->get();
                         
                         
                 }
@@ -315,8 +312,7 @@ class Admin_merchant_Model extends Model
                                         
                                         
                 }
-                 
-                 
+                
                 return count($result);
         }
 	

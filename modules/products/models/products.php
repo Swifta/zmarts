@@ -776,8 +776,8 @@ class Products_Model extends Model
 	        //$result = $this->db->query("select * from product_size  where  deal_id = '$deal_id' order by CAST(size_name as SIGNED INTEGER) ASC ");
                 $result = $this->db->select()
                         ->from("product_size")
-                        ->where("deal_id = '$deal_id'")
-                        ->orderby("CAST(size_name as SIGNED INTEGER)", "ASC")
+                        ->where("deal_id = '".$deal_id."' CAST(size_name as SIGNED INTEGER) ASC")
+                        //->orderby("", "ASC")
                         ->get();
                         
                         
@@ -1103,7 +1103,7 @@ class Products_Model extends Model
 	        //$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
                 $result = $this->db->select()
                         ->from("size")
-                        ->orderby("CAST(size_name as SIGNED INTEGER)", "ASC")
+                        ->orderby("size_name", "ASC")
                         ->get();
 	        //$result = $this->db->query($qry);
 	        //$result = $this->db->from("size")->orderby("size_name","ASC")->get();

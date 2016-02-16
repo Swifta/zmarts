@@ -3156,7 +3156,7 @@ class Merchant_Model extends Model
 		//$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER)  ASC";
                 $result = $this->db->select()
                         ->from("size")
-                        ->orderby("CAST(size_name as SIGNED INTEGER)", " ASC")
+                        ->orderby("size_name", " ASC")
                         ->get();
 	        //$result = $this->db->query($qry);
 		return $result;
