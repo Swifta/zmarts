@@ -294,7 +294,7 @@ class Products_Model extends Model
                 //group by product.deal_id order by product.deal_id DESC limit $offset,$record";
 		$result = $this->db->select("product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition, product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
                             ->from("product")
-                            ->join("stores","stores.store_id=product.shop_id")
+                            ->join("stores","stores.store_id", "product.shop_id")
                             ->join($join_table, $join_a, $join_b)
                             ->join("product_size","product_size.deal_id","product.deal_id")
                             ->where("purchase_count < user_limit_quantity and deal_status = 1 " .$this->club_condition. "and category.category_status = 1 and  store_status = 1 and stores.city_id = " .$this->city_id. " "  .$conditions)
@@ -311,7 +311,7 @@ class Products_Model extends Model
                         //purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1  $conditions  group by product.deal_id order by product.deal_id DESC limit $offset,$record";
 			$result = $this->db->select("product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition, product.deal_price, category.category_url,deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
                             ->from("product")
-                            ->join("stores","stores.store_id=product.shop_id")
+                            ->join("stores","stores.store_id", "product.shop_id")
                             ->join($join_table, $join_a, $join_b)
                             ->join("product_size","product_size.deal_id","product.deal_id")
                             ->where("purchase_count < user_limit_quantity and deal_status = 1 " .$this->club_condition. "and category.category_status = 1 and  store_status = 1" .$conditions)

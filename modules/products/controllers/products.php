@@ -155,20 +155,20 @@ class Products_Controller extends Layout_Controller
 	public function all_products_1($page = "")
 	{
 
-		$deal_record = $this->input->get('record');
-		$deal_offset = $this->input->get('offset');
-		$size = $this->input->get("size");
-		$color = $this->input->get("color");
-		$discount = $this->input->get("discount");
-		$price = $this->input->get("price");
-		$main_cat = $this->input->get("main");
-		$sub_cat = $this->input->get("sub");
-		$sec_cat = $this->input->get("sec");
-		$third_cat = $this->input->get("third");
-		$price_text = $this->input->get("price1");
+		$deal_record = strip_tags(addslashes($this->input->get('record')));
+		$deal_offset = strip_tags(addslashes($this->input->get('offset')));
+		$size = strip_tags(addslashes($this->input->get("size")));
+		$color = strip_tags(addslashes($this->input->get("color")));
+		$discount = strip_tags(addslashes($this->input->get("discount")));
+		$price = strip_tags(addslashes($this->input->get("price")));
+		$main_cat = strip_tags(addslashes($this->input->get("main")));
+		$sub_cat = strip_tags(addslashes($this->input->get("sub")));
+		$sec_cat = strip_tags(addslashes($this->input->get("sec")));
+		$third_cat = strip_tags(addslashes($this->input->get("third")));
+		$price_text = strip_tags(addslashes($this->input->get("price1")));
 
 		//$this->all_products_count = $this->products->get_products_count($size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat);
-		$this->record = $this->input->get('record');
+		$this->record = strip_tags(addslashes($this->input->get('record')));
 		$this->all_products_list = $this->products->get_products_list("","",$deal_offset, $deal_record,"","","",$size,$color,$discount,$price,$main_cat,$sub_cat,$sec_cat,$third_cat,$price_text);
 		$this->view_products_list = $this->products->get_products_view();
 		$this->view_hot_products_list = $this->products->get_hot_products_view();
