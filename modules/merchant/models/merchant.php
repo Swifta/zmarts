@@ -96,11 +96,11 @@ class Merchant_Model extends Model
 
 	public function merchant_login($email = "", $password = "")
 	{
-			   $password = addslashes($email);
+			   //$password = addslashes($email);
                /**$result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)");**/
                $result=$this->db->select()
-                       ->from("user")
+                       ->from("users")
                        ->where("email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)")
                        ->get();
