@@ -212,9 +212,17 @@ class Admin_merchant_Controller extends website_Controller {
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
 										
-										$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
-										if(!in_array($subsector, $subsector_ids))
-											 return false;
+										$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 									
 										
 										
@@ -563,9 +571,17 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
-							if(!in_array($subsector, $subsector_ids))
-											 return false;
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -936,9 +952,17 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
-										if(!in_array($subsector, $subsector_ids))
-											 return false;
+										$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -1160,9 +1184,17 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
-							if(!in_array($subsector, $subsector_ids))
-								return false;
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}

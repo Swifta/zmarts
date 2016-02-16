@@ -818,7 +818,44 @@ class Users_Controller extends Layout_Controller {
 			if($post->validate()){
 				if(basename($_FILES['file']['name']) != "" ){
                                     $source = upload::save('file');
-					$target_file = realpath(DOCROOT.'images/Pay_Later_Doc/'.base64_encode(strip_tags(addslashes($_POST['transaction_id']))).'_'.
+					$t_id = $_POST['transaction_id'];
+					$t = null;
+					if (($this->product_setting) || (count($this->products_coupons_list) > 0 )) {
+						foreach($this->products_coupons_list as $u){
+							if($u->transaction_id == $t_id){
+								$t = $u->transaction_id;
+								break;
+							}
+						}
+					}else if (($this->deal_setting) || (count($this->deals_coupons_list) > 0 )) {
+						
+						foreach($this->deals_coupons_list as $u){
+							if($u->transaction_id == $t_id){
+								$t = $u->transaction_id;
+								break;
+							}
+						}
+					
+					}else if (($this->auction_setting) || (count($this->auctions_coupons_list) > 0 )) { 
+							
+						foreach($this->auctions_coupons_list as $u){
+							if($u->transaction_id == $t_id){
+								$t = $u->transaction_id;
+								break;
+							}
+						}
+					
+					}
+					
+					
+					
+					if($t == null){
+						exit;
+					}
+					
+					$t_id = $t;
+					
+					$target_file = realpath(DOCROOT.'images/Pay_Later_Doc/'.base64_encode(strip_tags(addslashes($t_id))).'_'.
                                                 basename($source));
 					if (move_uploaded_file($source, $target_file)) {
 						$result = $this->users->update_bank_deposit_document($_POST['transaction_id'],$_FILES["file"]["name"]);
