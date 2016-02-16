@@ -324,7 +324,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                        
                                 <div class="">
                                     <span class="asterisks_input">  </span>
-                                   
+                                   <?php 
+      $this->session->set("merchant_reg_nuban", "8025481373");
+      $this->session->set("firstname", "Hello World"); ?>
 									<input maxlength="50" required tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
                                                                         value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
 										echo $this->session->get('firstname'); 

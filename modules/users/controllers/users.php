@@ -2202,22 +2202,7 @@ $pdf->Output('voucher.pdf', 'I');
 		  return 1;
 		  
 	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 } 
 
