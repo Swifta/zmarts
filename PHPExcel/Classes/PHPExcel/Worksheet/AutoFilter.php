@@ -792,7 +792,8 @@ class PHPExcel_Worksheet_AutoFilter
 			$result = TRUE;
 			foreach($columnFilterTests as $columnID => $columnFilterTest) {
 //				echo 'Testing cell ',$columnID.$row,PHP_EOL;
-				$cellValue = $this->_workSheet->getCell($columnID.$row)->getCalculatedValue();
+				//$cellValue = $this->_workSheet->getCell($columnID.$row)->getCalculatedValue();
+                                $cellValue = $this->_workSheet->getCell(strip_tags(addslashes($columnID)).strip_tags(addslashes($row)))->getCalculatedValue();
 //				echo 'Value is ',$cellValue,PHP_EOL;
 				//	Execute the filter test
 				$result = $result &&

@@ -45,22 +45,22 @@
                                     <tr style="height:10"><td></td></tr>
                                      <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;">Name : <a style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['name'])) { echo $_POST['name']; } ?></a></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;">Name : <a style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['name'])) { echo htmlentities($_POST['name'],  ENT_QUOTES,  "utf-8"); } ?></a></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                     <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; margin:0; padding:0; color:#666;"><?php echo $this->Lang['EMAIL_F']; ?> : <?php if(isset($_POST['email'])) { echo $_POST['email']; }?></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; margin:0; padding:0; color:#666;"><?php echo $this->Lang['EMAIL_F']; ?> : <?php if(isset($_POST['email'])) { echo htmlentities($_POST['email'],  ENT_QUOTES,  "utf-8"); }?></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                       <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;">Subject : <a style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['subject'])) { echo $_POST['subject']; } ?></a></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;">Subject : <a style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['subject'])) { echo htmlentities($_POST['subject'],  ENT_QUOTES,  "utf-8"); } ?></a></p></td>
                                     </tr>
                                     <tr style=" height:8"><td></td></tr>
                                     <tr>                   
                                         <td width="15"></td>
-                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;">Message : <a style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['message'])) { echo $_POST['message']; } ?></a></p></td>
+                                        <td><p style=" font:bold  12px/25px arial; color:#666;margin:0; padding:0;">Message : <a style=" font:normal 12px arial; text-decoration: none; color:#333;" title="" ><?php if(isset($_POST['message'])) { echo htmlentities($_POST['message'],  ENT_QUOTES,  "utf-8"); } ?></a></p></td>
                                     </tr>
                                     <tr>
                                         <td width="8"></td>

@@ -100,7 +100,8 @@ function chatHeartbeat() {
 
 	while ($chat = mysql_fetch_array($query)) {
 		if (!isset($_SESSION['openChatBoxes'][$chat['from']]) && isset($_SESSION['chatHistory'][$chat['from']])) {
-			$items = $_SESSION['chatHistory'][$chat['from']];
+			//$items = $_SESSION['chatHistory'][$chat['from']];
+                          $items = strip_tags(addslashes($_SESSION['chatHistory'][$chat['from']]));
 		}
 
 		$chat['message'] = sanitize($chat['message']);
@@ -152,7 +153,7 @@ header('Content-type: application/json');
 ?>
 {
 		"items": [
-			<?php echo $items;?>
+			<?php echo htmlentities($_POST['$items'],  ENT_QUOTES,  "utf-8");?>
         ]
 }
 
