@@ -31,13 +31,13 @@ class Layout_Controller extends Template_Controller
 			//setcookie("username",$this->session->get("chatusername"));
 			//setcookie("uid",$this->chatuserid);
 			$img = $this->chatuserid.'_1.png';
-			//setcookie("image",$img,$httponly);
+			//setcookie("image",$img);
                         cookie::set("image",$img);
 		} else {
-//			setcookie("username", "", time()-3600,$httponly);
-//			setcookie("chat_type", "", time()-3600,$httponly);
-//			setcookie("uid", "", time()-3600,$httponly);
-//			setcookie("sel_id", "", time()-3600,$httponly);
+//			setcookie("username", "", time()-3600);
+//			setcookie("chat_type", "", time()-3600);
+//			setcookie("uid", "", time()-3600);
+//			setcookie("sel_id", "", time()-3600);
 //                        
                         cookie::set("username", "", time()-3600);
 			cookie::set("chat_type", "", time()-3600);
@@ -232,10 +232,10 @@ class Layout_Controller extends Template_Controller
 //		setcookie("uid", "", time()-3600);
 //		setcookie("sel_id", "", time()-3600);
                 
-                cookie::set("username", "", time()-3600,$httponly);
-		cookie::set("chat_type", "", time()-3600,$httponly);
-		cookie::set("uid", "", time()-3600, $httponly);
-		cookie::set("sel_id", "", time()-3600,$httponly);
+                cookie::set("username", "", time()-3600);
+		cookie::set("chat_type", "", time()-3600);
+		cookie::set("uid", "", time()-3600);
+		cookie::set("sel_id", "", time()-3600);
                 
 		$this->change_onlinestatus = $this->home->update_login_status();
 		$city_id = $this->session->get("CityID");
@@ -243,9 +243,9 @@ class Layout_Controller extends Template_Controller
 		$this->session->destroy();
 //		setcookie("CityID_old", $city_id,$httponly);
 //		setcookie("front_language", $sess_lang,$httponly);
-//		
-                cookie::set("CityID_old", $city_id,$httponly);
-		cookie::set("front_language", $sess_lang,$httponly);
+		
+                cookie::set("CityID_old", $city_id);
+		cookie::set("front_language", $sess_lang);
 		
 		url::redirect(PATH.'subscribe.html');
 	}

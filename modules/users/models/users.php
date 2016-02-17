@@ -85,7 +85,7 @@ class Users_Model extends Model
 							cookie::set("uid",$chuserid);
 
 
-//setcookie("username",$a->firstname,$httponly);
+//setcookie("username",$a->firstname);
 							//setcookie("uid",$chuserid);
 							/* $img = $a->user_id.'_1.png';
 							setcookie("image",$img);
