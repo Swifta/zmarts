@@ -869,10 +869,12 @@ class Merchant_Controller extends website_Controller {
 						common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
 						unlink($filename);
 					}*/
-					 if($_FILES['image']['name'])
+					
+					$uploadedfile = upload::save('image');
+					 if($uploadedfile)
 					{
 						
-						$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+						//$_FILES['image']['tmp_name'];
 						$filename = basename($uploadedfile);//basename($_FILES["image"]["name"]);
                                                 
 						$extension = $this->getExtension($filename);
