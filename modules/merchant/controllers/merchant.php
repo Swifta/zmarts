@@ -1807,14 +1807,9 @@ class Merchant_Controller extends website_Controller {
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
-								
-<<<<<<< HEAD
+
 								
 								$_FILES = arr::rotate($_FILES['image']);
-||||||| merged common ancestors
-=======
-                                                                $_FILES = arr::rotate($_FILES['image']);
->>>>>>> 8ac5c17b6b7b5bbd3a933f1e22f1d69c9f67a19f
 								foreach($_FILES as $key =>$value){
 									$n = uniqid();
 									$_FILES[$n] = $value;
@@ -5393,8 +5388,8 @@ class Merchant_Controller extends website_Controller {
 				$this->form_error = error::_error($post->errors());
 			}
 		}
-		$this->type = $this->input->get('sort');
-		$this->sort = $this->input->get('param');
+		$this->type = strip_tags(addslashes($this->input->get('sort')));
+		$this->sort = strip_tags(addslashes($this->input->get('param')));
 		$this->sort_url= PATH.'admin/manage-moderator.html?';
 		$this->count_user = $this->merchant->get_moderator_count($this->input->get('name'), $this->input->get('email'), $this->input->get('city'), $this->input->get('logintype'),$this->type,$this->sort);
 
@@ -5408,7 +5403,7 @@ class Merchant_Controller extends website_Controller {
             'style'          => 'digg',
             'auto_hide'      => TRUE
         ));
-        $search = $this->input->get('id'); 
+        $search = strip_tags(addslashes($this->input->get('id'))); 
         $this->search = $this->input->get(); 
         $this->search_key = arr::to_object($this->search); 
         $this->city_list = $this->merchant->getCityListOnly();

@@ -766,8 +766,6 @@ class Merchant_Model extends Model
                                  ->join("country","country.country_id","stores.country_id")
                                  ->join("city","city.city_id","stores.city_id")
                                  ->where($contitions)
-                                 ->orderby("stores.store_id")
-                                 ->limit($limit1)
                                  ->get();
                 }
                 return count($result);
@@ -3857,11 +3855,11 @@ class Merchant_Model extends Model
                 }
                 else{
                         $result = $this->db->from("users")
-                                    ->where(array("user_type" => 8))
-				    				->join("city","city.city_id","users.city_id")
-				    				->join("country","country.country_id","users.country_id")
+                                ->where(array("user_type" => 8))
+                                ->join("city","city.city_id","users.city_id")
+                                ->join("country","country.country_id","users.country_id")
                                     //->orderby("user_id", "DESC")
-                                    ->get();
+                                ->get();
                 }
                 return count($result);
         }
@@ -3914,8 +3912,7 @@ class Merchant_Model extends Model
                                     ->from("users")
                                     ->join("city","city.city_id","users.city_id")
                                     ->join("country","country.country_id","users.country_id")
-                                    ->where($contitions)
-                                    ->limit($limit1)
+                                    ->where($contitions." ".$limit1)
                                     ->get();
                 
                 return $result;
