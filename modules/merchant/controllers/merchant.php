@@ -1808,8 +1808,13 @@ class Merchant_Controller extends website_Controller {
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
 								
+<<<<<<< HEAD
 								
 								$_FILES = arr::rotate($_FILES['image']);
+||||||| merged common ancestors
+=======
+                                                                $_FILES = arr::rotate($_FILES['image']);
+>>>>>>> 8ac5c17b6b7b5bbd3a933f1e22f1d69c9f67a19f
 								foreach($_FILES as $key =>$value){
 									$n = uniqid();
 									$_FILES[$n] = $value;

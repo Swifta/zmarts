@@ -1278,8 +1278,7 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->join("users","users.user_id","product.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
                                 ->get();
                         //$result = $this->db->query($qry);
 		}
@@ -1305,8 +1304,7 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->join("users","users.user_id","product.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
                                 ->get();
                         //$result = $this->db->query($qry);
                 }
