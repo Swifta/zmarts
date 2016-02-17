@@ -1085,7 +1085,7 @@ class Admin_merchant_Model extends Model
 	public function get_sector_data($sector_id="")
 	{
 		$result=$this->db->select("sector_name")->from("sector")->where(array("sector.sector_id" => $sector_id))->get();
-		return $result;
+                return $result;
 	
 	}
 }

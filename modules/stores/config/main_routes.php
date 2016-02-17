@@ -1,4 +1,4 @@
-//CHANGE start
+<?php //CHANGE start
 $config['CHANGE'] ="/stores/stores_home_page/CHANGE";
 $config['CHANGE/products.html'] = "/stores/product_list/CHANGE";
 $config['CHANGE/today-deals.html'] = "/stores/deal_list/CHANGE";
