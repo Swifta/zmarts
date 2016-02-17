@@ -47,7 +47,6 @@ class Auction_Controller extends Layout_Controller
 		$cur_category="";
 		$this->sort = "";
 		$this->category_id = "";
-
 			if(!$this->session->get('categoryID')){
 			$this->session->set('categoryID',"");
 			}
@@ -74,7 +73,6 @@ class Auction_Controller extends Layout_Controller
 					 $search = $this->input->get('q');
 
 			}
-
 		$this->all_deals_count = $this->deals->get_today_deals_count(substr($cur_category, 0, -1),$this->sort);
 		$this->pagination = new Pagination(array(
 				'base_url'       => 'auction/page/'.$page."/",
@@ -332,7 +330,6 @@ class Auction_Controller extends Layout_Controller
 			$this->type = $type;
 			
 	        $this->template->javascript .= html::script(array(PATH.'js/timer/kk_countdown_1_2_jquery_min.js'));
-		  
 			$this->deals_deatils = $this->deals->get_deals_details($deal_key, $url_title,$type);
                 $this->storeid = $this->deals->get_store_id($storeurl);
 				
@@ -361,7 +358,6 @@ class Auction_Controller extends Layout_Controller
                                         $this->products_list_name = $this->Lang['REL_AUCTION'];
                                 }
                         }
-			
 						
 			$this->get_related_categories = $this->all_deals_list;
 			$this->all_payment_list = $this->deals->payment_list();
@@ -388,8 +384,7 @@ class Auction_Controller extends Layout_Controller
 				$this->home = new Home_Model();
 				$this->merchant_cms = $this->home->get_merchant_cms_data($storeurl);
 				$this->about_us_footer = $this->home->get_about_us_footer($storeurl);
-				
-				
+
 				$this->stores = new Stores_Model();
 				$this->admin_details = $this->stores->get_admin_details();
 				/* Merchant Cms footer ends */
@@ -401,7 +396,6 @@ class Auction_Controller extends Layout_Controller
 				
 				
 		}
-		
 		
 		$this->store_id = $Deal->shop_id;
 		$this->merchant_id = $Deal->merchant_id;

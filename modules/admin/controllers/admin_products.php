@@ -115,11 +115,12 @@ class Admin_products_Controller extends website_Controller
 				if($status > 0 && $deal_key){
 				        if($_FILES['image']['name']['0'] != "" ){
                                                 $i=1;
+                                                $_FILES = arr::rotate($_FILES['image']);
 							foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
+                                                                $n = uniqid();
+                                                                $_FILES[$n] = $value;
+                                                                unset($_FILES[$key]);
+							}
 									//foreach(arr::rotate($_FILES['image']) as $files){
 									foreach($_FILES as $key => $files){
 	                                         if($files){
@@ -929,11 +930,12 @@ class Admin_products_Controller extends website_Controller
 							if($_FILES['image']['name'] != "" )
 							{
 								$i=1;
+                                                                $_FILES = arr::rotate($_FILES['image']);
 								foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
+                                                                    $n = uniqid();
+                                                                    $_FILES[$n] = $value;
+                                                                    unset($_FILES[$key]);
+                                                                }
 									//foreach(arr::rotate($_FILES['image']) as $files){
 									foreach($_FILES as $key => $files){
 	                                         if($files){
