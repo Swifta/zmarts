@@ -10,7 +10,8 @@ class Admin_merchant_Controller extends website_Controller {
 			url::redirect(PATH);
 		} 
 		 
-		$this->merchant = new Admin_merchant_Model();	
+		$this->merchant = new Admin_merchant_Model();
+                $this->settings = new Settings_Model();
 		$this->merchant_act = "1";		
 	}
 	
@@ -571,22 +572,23 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$s = basename(strip_tags(addslashes($_POST['subsector'])));
-										$subsector = null;
-										foreach($subsector_ids as $id){
-											if($id == $s){
-												$subsector = $id;
-												break;
-											}
-										}
-										
-										if(!$subsector)
-											exit;
+                                                    $s = basename(strip_tags(addslashes($_POST['subsector'])));
+                                                        $subsector = null;
+                                                        $subsector_ids = $this->settings->get_all_subsector_ids();
+                                                        foreach($subsector_ids as $id){
+                                                                if($id == $s){
+                                                                        $subsector = $id;
+                                                                        break;
+                                                                }
+                                                        }
+
+                                                        if(!$subsector)
+                                                                exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
 						
-						if(($modules_name != $old_modules_name) ){
+						//if(($modules_name != $old_modules_name) ){
 							/*
 							
 							
@@ -679,18 +681,19 @@ class Admin_merchant_Controller extends website_Controller {
 
 
 							$file = realpath(DOCROOT.'modules/'.$modules_name.'/config/routes.php');
+                                                        //var_dump($file); die;
 							$fp = fopen($file, "a");
 						
 							while ( $line = fgets($f, 1000) ) {
 								$change_line = str_replace("CHANGE",url::title($merchant_store_name),$line);
-								fputs($fp, $change_line);	
+								fputs($fp, $change_line);
 							}
 
 							fclose($f);
 							fclose($fp);
 
 						
-						}
+						//}
 						
 						$this->response = $this->Lang["STORE_PERSONALIZED_UPDATE"];
 				        common::message(1, $this->Lang["STORE_PERSONALIZED_UPDATE"]);

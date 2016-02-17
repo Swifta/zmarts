@@ -350,6 +350,7 @@ exit;
 		} else {
 			$this->sector ="";
 		}
+               // echo "here"; die;
 		
 		$this->search_key = $this->input->get('q');
 		$this->search_cate_id = $this->input->get('d_id');

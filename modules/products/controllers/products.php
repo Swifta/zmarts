@@ -406,8 +406,8 @@ class Products_Controller extends Layout_Controller
 	    $this->is_details = 1;
 		$this->store_url=$storeurl;
 		$this->storeurl = $storeurl;
+                //echo "here"; die;
 		$this->product_deatils = $this->products->get_product_details($deal_key, $url_title,$type);
-		
 		
 		if(count($this->product_deatils)==0){
 		        common::message(-1, $this->Lang["PAGE_NOT"]);
@@ -420,8 +420,7 @@ class Products_Controller extends Layout_Controller
 		$this->admin_details = $this->stores->get_admin_details();
 		
 		$this->product = null;
-		
-		
+
 		
 		foreach($this->product_deatils as $Deal){
 						$this->product = $Deal;
@@ -430,7 +429,7 @@ class Products_Controller extends Layout_Controller
                         $this->delivery_details =$this->products->get_product_delivery($Deal->deal_id);
                         $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
                         $this->products_list_name = $this->Lang['REL_PRODUCT'];
-                        if(count($this->all_products_list) < 3){        
+                        if(count($this->all_products_list) < 3){
                         $this->all_products_list = $this->products->get_hot_all_products_view($Deal->deal_id);
                          $this->products_list_name = $this->Lang['HOT_PRODUCT'];
                                  if(count($this->all_products_list) < 3){ 
