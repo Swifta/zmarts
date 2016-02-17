@@ -3946,9 +3946,8 @@ class Merchant_Model extends Model
          public function moderator_privileges($user_id)
 		{ 
 			$result = $this->db->from("moderator_privileges_map")
-							->where(array("moderator_id" => $user_id))
-							->get();
-
+                                    ->where(array("moderator_id" => $user_id))
+                                    ->get();
 			return $result;
 		}
 		
