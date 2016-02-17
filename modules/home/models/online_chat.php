@@ -30,8 +30,12 @@ class Online_chat_Model extends Model
 		if(count($result) == 0){
 			$insert_users = $this->db->insert("chat_users",array("chat_name"=>$name,"chat_email"=>$email,"chat_user_status" =>1));
 			$userid = $insert_users->insert_id();
-			setcookie("username",$name);
-			setcookie("uid",$userid);
+//			setcookie("username",$name);
+//			setcookie("uid",$userid);
+                        
+                        
+                        cookie::set("username",$name);
+			cookie::set("uid",$userid);
 			$this->session->set("chatuserid",$userid);
 			$this->session->set("chatusername",$name);
 			$this->session->set("chatuseremail",$email);
@@ -41,8 +45,8 @@ class Online_chat_Model extends Model
 		}  else if(count($result) > 0){
 			$user_update = $this->db->update("chat_users", array("chat_user_status" =>1),array("chat_id" =>$result->current()->chat_id));		
 			$userid = $result->current()->chat_id;
-			setcookie("username",$name);
-			setcookie("uid",$userid);
+			cookie::set("username",$name);
+			cookie::set("uid",$userid);
 			$this->session->set("chatuserid",$userid);
 			$this->session->set("chatusername",$name);
 			$this->session->set("chatuseremail",$email);

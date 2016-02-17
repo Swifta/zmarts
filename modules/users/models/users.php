@@ -8,6 +8,7 @@ class Users_Model extends Model
 		$this->session = Session::instance();
 		$this->city_id = $this->session->get("CityID");
 		$this->UserID = $this->session->get("UserID");
+               
 		
 	}
 	
@@ -62,6 +63,7 @@ class Users_Model extends Model
 	*/
 	public function login_users($email = "",$pswd = "", $z_offer = "0")
 	{ 
+          
 		$result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($pswd),"user_type" =>4))->get();
 		if(count($result) == 1){
 			foreach($result as $a){
@@ -78,8 +80,13 @@ class Users_Model extends Model
 							$insert_users = $this->db->insert("chat_users",array("chat_name"=>$a->firstname,"chat_email"=>$a->email,"chat_user_status" =>1,"chat_userid"=>$a->user_id));
 							$chuserid = $insert_users->insert_id();
 							/* online chat */
-							setcookie("username",$a->firstname);
-							setcookie("uid",$chuserid);
+                                                     //  $set("username",$a->firstname);
+                                                        cookie::set("uid",$a->firstname);
+							cookie::set("uid",$chuserid);
+
+
+//setcookie("username",$a->firstname,$httponly);
+							//setcookie("uid",$chuserid);
 							/* $img = $a->user_id.'_1.png';
 							setcookie("image",$img);
 							*/
@@ -90,8 +97,10 @@ class Users_Model extends Model
 							$user_update = $this->db->update("chat_users", array("chat_user_status" =>1),array("chat_email" =>$a->email));
 							$chuserid = $chat_users->current()->chat_id;
 							/* online chat */
-							setcookie("username",$a->firstname);
-							setcookie("uid",$chuserid);
+							//setcookie("username",$a->firstname);
+							//setcookie("uid",$chuserid);
+                                                         cookie::set("uid",$a->firstname);
+							 cookie::set("uid",$chuserid);
 							/* $img = $a->user_id.'_1.png';
 							setcookie("image",$img);
 							*/

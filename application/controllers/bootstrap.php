@@ -2,6 +2,7 @@
 class Bootstrap_Controller extends Template_Controller
 {
      public $template = "swifta_bootstrap";
+     
 	function __construct()
 	{
 		parent::__construct();
@@ -78,12 +79,16 @@ class Bootstrap_Controller extends Template_Controller
 			define('CITY_SETTING', $setting->is_city);
 		}
 		/** USING GEOIP FIND CITY ID **/
+               
        		$this->all_country_list = $this->home->get_all_country_list();
 		$this->all_city_list = $this->home->get_all_city_list();
 		$this->cms_tc = $this->home->get_cms_data("terms-and-conditions");
 		if(isset($_COOKIE['CityID_old'])){
 		$this->session->set("CityID", $_COOKIE['CityID_old']);
-		setcookie ("CityID_old", "", time() - 3600);
+		//setcookie ("CityID_old", "", time() - 3600);
+                 cookie::set("CityID_old", "", time() - 3600);
+						
+                
 		} else {
 		        if($this->city_id == ""){
 			        foreach($this->all_city_list as $cityList){
@@ -196,11 +201,14 @@ class Bootstrap_Controller extends Template_Controller
 	
 	public function logout()
 	{
+                
 		$city_id = $this->session->get("CityID");
 		$sess_lang = $this->session->get("front_language");		
 		$this->session->destroy();
-		setcookie("CityID_old", $city_id);
-		setcookie("front_language", $sess_lang);
+                cookie::set("CityID_old", $city_id);
+                cookie::set("front_language", $sess_lang);
+		//setcookie("CityID_old", $city_id);
+		//setcookie("front_language", $sess_lang);
 		url::redirect(PATH.'subscribe.html');
 	}
 

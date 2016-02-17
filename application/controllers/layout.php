@@ -2,6 +2,7 @@
 class Layout_Controller extends Template_Controller
 {
      public $template = "themes/template";
+    
 	function __construct()
 	{
 	
@@ -21,19 +22,28 @@ class Layout_Controller extends Template_Controller
                 }
                 else
                 {
-                
+               
 		$this->UserID = $this->session->get("UserID");
 		$this->chatuserid = $this->session->get("chatuserid");
 		 if(isset($this->chatuserid) && $this->chatuserid !=""){
-			setcookie("username",$this->session->get("chatusername"));
-			setcookie("uid",$this->chatuserid);
+                      cookie::set("username",$this->session->get("chatusername"));
+                       cookie::set("uid",$this->chatuserid);
+			//setcookie("username",$this->session->get("chatusername"));
+			//setcookie("uid",$this->chatuserid);
 			$img = $this->chatuserid.'_1.png';
-			setcookie("image",$img);
+			//setcookie("image",$img,$httponly);
+                        cookie::set("image",$img);
 		} else {
-			setcookie("username", "", time()-3600);
-			setcookie("chat_type", "", time()-3600);
-			setcookie("uid", "", time()-3600);
-			setcookie("sel_id", "", time()-3600);
+//			setcookie("username", "", time()-3600,$httponly);
+//			setcookie("chat_type", "", time()-3600,$httponly);
+//			setcookie("uid", "", time()-3600,$httponly);
+//			setcookie("sel_id", "", time()-3600,$httponly);
+//                        
+                        cookie::set("username", "", time()-3600);
+			cookie::set("chat_type", "", time()-3600);
+			cookie::set("uid", "", time()-3600);
+			cookie::set("sel_id", "", time()-3600);
+                        
 			/* unset($_COOKIE['username']);
 			unset($_COOKIE['uid']);
 			unset($_COOKIE['image']);
@@ -102,7 +112,8 @@ class Layout_Controller extends Template_Controller
 		$this->cms_tc = $this->home->get_cms_data("terms-and-conditions");
 		if(isset($_COOKIE['CityID_old'])){
 		$this->session->set("CityID", $_COOKIE['CityID_old']);
-		setcookie ("CityID_old", "", time() - 3600);
+		//setcookie ("CityID_old", "", time() - 3600);
+                cookie::set ("CityID_old", "", time() - 3600);
 		} else {
 		        if($this->city_id == ""){
 			        foreach($this->all_city_list as $cityList){
@@ -215,17 +226,26 @@ class Layout_Controller extends Template_Controller
 	
 	public function logout()
 	{
-		setcookie("username", "", time()-3600);
-		setcookie("chat_type", "", time()-3600);
-		setcookie("uid", "", time()-3600);
-		setcookie("sel_id", "", time()-3600);
+                
+//		setcookie("username", "", time()-3600);
+//		setcookie("chat_type", "", time()-3600);
+//		setcookie("uid", "", time()-3600);
+//		setcookie("sel_id", "", time()-3600);
+                
+                cookie::set("username", "", time()-3600,$httponly);
+		cookie::set("chat_type", "", time()-3600,$httponly);
+		cookie::set("uid", "", time()-3600, $httponly);
+		cookie::set("sel_id", "", time()-3600,$httponly);
+                
 		$this->change_onlinestatus = $this->home->update_login_status();
 		$city_id = $this->session->get("CityID");
 		$sess_lang = $this->session->get("front_language");		
 		$this->session->destroy();
-		setcookie("CityID_old", $city_id);
-		setcookie("front_language", $sess_lang);
-		
+//		setcookie("CityID_old", $city_id,$httponly);
+//		setcookie("front_language", $sess_lang,$httponly);
+//		
+                cookie::set("CityID_old", $city_id,$httponly);
+		cookie::set("front_language", $sess_lang,$httponly);
 		
 		url::redirect(PATH.'subscribe.html');
 	}

@@ -109,8 +109,8 @@ class PHPExcel_CachedObjectStorage_DiscISAM extends PHPExcel_CachedObjectStorage
      * @return 	PHPExcel_Cell 	Cell that was found, or null if not found
      */
 	public function getCacheData($pCoord) {
-		//if ($pCoord === $this->_currentObjectID) {
-                  if ($pCoord === strip_tags(addslashes($this->_currentObjectID))) {
+		if ($pCoord === $this->_currentObjectID) {
+                 // if ($pCoord === strip_tags(addslashes($this->_currentObjectID))) {
 			return $this->_currentObject;
 		}
 		$this->_storeData();
@@ -123,7 +123,8 @@ class PHPExcel_CachedObjectStorage_DiscISAM extends PHPExcel_CachedObjectStorage
 
 		//	Set current entry to the requested entry
 		$this->_currentObjectID = $pCoord;
-		fseek($this->_fileHandle,$this->_cellCache[$pCoord]['ptr']);
+		//fseek($this->_fileHandle,$this->_cellCache[$pCoord]['ptr']);
+                seek($this->_fileHandle,$this->_cellCache[strip_tags(addslashes($pCoord))]['ptr']);
 		$this->_currentObject = unserialize(fread($this->_fileHandle,$this->_cellCache[$pCoord]['sz']));
 		//	Re-attach the parent worksheet
 		$this->_currentObject->attach($this->_parent);

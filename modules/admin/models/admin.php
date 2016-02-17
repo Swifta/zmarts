@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 class Admin_Model extends Model
 {
+    
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,7 +11,7 @@ class Admin_Model extends Model
 	}
 
 	/** ADMIN HOME DASHBOARD DATA COUNT **/
-
+  
 	public function get_admin_dashboard_data()
 	{
 
@@ -162,7 +163,7 @@ class Admin_Model extends Model
                                         ->get();
 
                                //var_dump($result);die;
-                
+                 $httponly = false;
                 
 		//$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($pswd)), "user_type" ,"IN", array(1,7))->limit(1)->get();
 		if(count($result) == 1){
@@ -183,9 +184,13 @@ class Admin_Model extends Model
 							$this->session->set("chat_type",1);
 						//	$this->session->set("chatusername",$result->current()->firstname);
 						//	$this->session->set("chatuseremail",$result->current()->email);
-							setcookie("chat_type", 1);
-							setcookie("username", $result->current()->nickname_url);
-							setcookie("sel_id", $result->current()->user_id);
+//							setcookie("chat_type", 1);
+//							setcookie("username", $result->current()->nickname_url);
+//							setcookie("sel_id", $result->current()->user_id);
+//                                                        cookie::set
+                                                        cookie::set("chat_type", 1);
+							cookie::set("username", $result->current()->nickname_url);
+							cookie::set("sel_id", $result->current()->user_id);
 							$this->db->update("users", array("online_status" => 1), array("user_id" => $result->current()->user_id));
 						}
 						return 10;

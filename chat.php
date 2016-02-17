@@ -193,7 +193,7 @@ header('Content-type: application/json');
 		"username": "<?php echo $_SESSION['username'];?>",
 		
 		"items": [
-			<?php echo $items;?>
+			<?php echo htmlentities($_POST['$items'],  ENT_QUOTES,  "utf-8");?>
         ]
 }
 
@@ -209,7 +209,7 @@ function sendChat() {
 	$to = $_POST['to'];
 	$message = $_POST['message'];
     $buyerprofile = $_SESSION['image'];
-    $UserID = $_SESSION['uid']; //  replace  with common $_SESSION['UserID']
+    $UserID = strip_tags(addslashes($_SESSION['uid'])); //  replace  with common $_SESSION['UserID']
     //$UserID = $_SESSION['chatuserid'];
     $Sell_ID = strip_tags(addslashes(trim($_POST['sellid'])));
     $_SESSION['sel_id'] = $Sell_ID;
