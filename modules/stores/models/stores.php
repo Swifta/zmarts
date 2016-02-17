@@ -187,8 +187,19 @@ class Stores_Model extends Model
 		if(CITY_SETTING){ 
 			$conditions .= " and stores.city_id = '$this->city_id' ";
 		}
-		$qry = "select deal_id, deal_key, url_title, deal_title, deal_description, $this->deal_value_condition,category_url,stores.store_url_title,deal_price,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where $conditions and product.deal_status = 1 ".$this->club_condition." group by product.deal_id order by product.deal_id DESC"; 
-		$result = $this->db->query($qry);
+                
+                $result = $this->db->select("deal_id, deal_key, url_title, deal_title, deal_description, $this->deal_value_condition,category_url,stores.store_url_title,deal_price,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
+                        ->from("product")
+                        ->join("stores", "stores.store_id", "product.shop_id")
+                        ->join("category", "category.category_id", "product.category_id")
+                        ->where($conditions." and product.deal_status = 1 ".$this->club_condition)
+                        ->groupby("product.deal_id")
+                        ->orderby("product.deal_id", "DESC")
+                        ->get();
+//		$qry = "select deal_id, deal_key, url_title, deal_title, deal_description, $this->deal_value_condition,category_url,stores.store_url_title,deal_price,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id "
+//                        . "join category on category.category_id=product.category_id where $conditions and product.deal_status = 1 ".$this->club_condition." "
+//                        . "group by product.deal_id order by product.deal_id DESC"; 
+//		$result = $this->db->query($qry);
 	       
 	        return $result;
                 
