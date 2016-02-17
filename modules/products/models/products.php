@@ -451,7 +451,9 @@ class Products_Model extends Model
 	public function  get_ajax_products_list($size = "",$color="",$discount="",$price="",$main_cat="",$sub_cat="",$sec_cat="",$third_cat="",$price_text = "", $type = "")
 	{
 		$join =" join category on category.category_id=product.category_id";
-
+                $join_table = "category";
+                $join_a = "category.category_id";
+                $join_b = "product.category_id";
 		$conditions = "";
 
 		if($main_cat){
@@ -460,14 +462,23 @@ class Products_Model extends Model
 		if($sub_cat){
 			$conditions .= " and category.category_url='$sub_cat'";
 			$join ="join category on category.category_id=product.sub_category_id";
+                $join_table = "category";
+                $join_a = "category.category_id";
+                $join_b = "product.category_id";
 		}
 		if($sec_cat){
 			$conditions .= " and category.category_url='$sec_cat'";
 			$join ="join category on category.category_id=product.sec_category_id";
+                $join_table = "category";
+                $join_a = "category.category_id";
+                $join_b = "product.sec_category_id";
 		}
 		if($third_cat){
 			$conditions .= " and category.category_url='$third_cat'";
 			$join ="join category on category.category_id=product.third_category_id";
+                $join_table = "category";
+                $join_a = "category.category_id";
+                $join_b = "third_category_id";
 		}
 
 		if($size){
@@ -475,11 +486,12 @@ class Products_Model extends Model
 			$conditions .= " and product_size.size_id in($size)";
 		}
 
-		if($color){
-			$color = rtrim($color, ",");
-			$join = $join." join color on color.deal_id=product.deal_id";
-			$conditions .= " and color.color_code_id in($color) ";
-		}
+//		if($color){
+//			$color = rtrim($color, ",");
+//			$join = $join." join color on color.deal_id=product.deal_id";
+//			$conditions .= " and color.color_code_id in($color) ";
+//                        
+//		}
 
 		if($discount){
 			$discount = rtrim($discount, ",");
@@ -658,12 +670,13 @@ class Products_Model extends Model
                 //purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition." 
                 //and category.category_status = 1 and  store_status = 1 and deal_id <> '$deal_id' $condition
                 //  and product.sec_category_id =  '$category_id'   order by deal_id DESC ");
-	        $result = $this->db->select("*,$this->deal_value_condition")
+	        $result = $this->db->select("*, ".$this->deal_value_condition)
                         ->from("product")
                         ->join("stores","stores.store_id","product.shop_id")
                         ->join("category","category.category_id","product.category_id")
-                        ->where("purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition." and category.category_status = 1 and  store_status = 1 and deal_id <> $deal_id' $condition
-                                and product.sec_category_id =  '$category_id'")
+                        ->where("purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition." and category.category_status = 1 and  store_status = 1 and deal_id <> ".
+                                $deal_id." ". $condition.
+                                "and product.sec_category_id =  '".$category_id."'")
                         ->orderby("deal_id","DESC")
                         ->get();
                 return $result;
@@ -776,7 +789,7 @@ class Products_Model extends Model
 	        //$result = $this->db->query("select * from product_size  where  deal_id = '$deal_id' order by CAST(size_name as SIGNED INTEGER) ASC ");
                 $result = $this->db->select()
                         ->from("product_size")
-                        ->where("deal_id = '".$deal_id."' CAST(size_name as SIGNED INTEGER) ASC")
+                        ->where("deal_id = '".$deal_id."' order by CAST(size_name as SIGNED INTEGER) ASC")
                         //->orderby("", "ASC")
                         ->get();
                         
@@ -1271,7 +1284,7 @@ class Products_Model extends Model
 		 public function getProductAttributes($product_id) {
 		$product_attribute_group_data = array();
 
-		$product_attribute_group_query = $this->db->select("ag.attribute_group_id", "ag.groupname", "ag.sort_order")
+		$product_attribute_group_query = $this->db->select("ag.attribute_group_id, ag.groupname, ag.sort_order")
 						->from("product_attribute as pa")
 						->join("attribute as a","pa.attribute_id","a.attribute_id","left")
 						->join("attribute_group as ag","a.attribute_group" ,"ag.attribute_group_id","left")
@@ -1325,7 +1338,7 @@ class Products_Model extends Model
 	public function GetProductSize($deal_id = "")
 	{
 
-		 $result = $this->db->select("*","size.size_name as name", "size.size_id as id")->from("size")
+		 $result = $this->db->select("*,size.size_name as name,size.size_id as id")->from("size")
 	                        ->join("product_size","product_size.size_id","size.size_id","left")
 				->where(array("deal_id" =>$deal_id))
 				->orderby("size.size_name","ASC")
@@ -1406,11 +1419,11 @@ class Products_Model extends Model
 		$result = $this->db->query($qry);
 		} */
 		//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id where deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product.deal_id = '$id'";
-		$result = $this->db->select("*, $this->deal_value_condition")
+		$result = $this->db->select("*, ".$this->deal_value_condition)
                         ->from("product")
                         ->join("stores","stores.store_id","product.shop_id")
                         ->join("category","category.category_id","product.category_id")
-                        ->where("deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product.deal_id = '$id'")
+                        ->where("deal_status = 1  ".$this->club_condition."  and category.category_status = 1 and  store_status = 1 and product.deal_id = '".$id."'")
                         ->get();
                 //$result = $this->db->query($qry);
 	        return $result;
@@ -2162,7 +2175,7 @@ public function get_store_id($storeurl="")
                                 ->join("stores","stores.store_id","deals.shop_id")
                                 ->where("category_status = 1 AND main_category_id = 0 AND deal = 1 AND enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 and  store_status = 1" .$con)
                                 ->groupby("category.category_id")
-                                ->orderby("order by category_name", "ASC")
+                                ->orderby("category_name", "ASC")
                                 ->get();
                 return $result;
 	}
@@ -2182,7 +2195,7 @@ public function get_store_id($storeurl="")
                                 ->join("stores","stores.store_id","auction.shop_id")
                                 ->where("category_status = 1 AND main_category_id = 0 AND auction = 1 AND enddate > ".time()."  AND deal_status = 1 and  store_status = 1" .$con)
                                 ->groupby("category.category_id")
-                                ->orderby("order by category_name", "ASC")
+                                ->orderby("category_name", "ASC")
                                 ->get();
                 return $result;
 	}
