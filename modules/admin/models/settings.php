@@ -12,8 +12,8 @@ class Settings_Model extends Model
 	{
 		$result =$this->db->select("*, settings.paypal_api_password as paypalp, settings.authorizenet_api_id as auth_dat")->from("settings")
 						->get();
-						var_dump($result);
-						exit;
+						//var_dump($result);
+						//exit;
 		return $result;
 	}
 	
