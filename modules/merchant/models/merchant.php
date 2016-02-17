@@ -5708,5 +5708,15 @@ class Merchant_Model extends Model
             }
             return false;
         }
+		
+		
+		
+		public function get_template_by_id_sec($id){
+		$r = $this->db->select("newsletter_id")->from("newsletter")->where(array("newsletter_id" =>$id))->get();
+		if(count($r) == 1){
+			return $r->current()->newsletter_id;
+		}
+		return NULL;
+	}
 	
 }

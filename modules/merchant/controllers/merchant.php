@@ -880,11 +880,21 @@ class Merchant_Controller extends website_Controller {
 						
 						if (!(($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif"))){
 							if($extension=="jpg" || $extension=="jpeg" ){
-								$uploadedfile = $_FILES["image"]['tmp_name'];
-								$src = $this->LoadJpeg($uploadedfile);
+								$fn = upload::save('image');
+								if($fn){
+									$src = $this->LoadJpeg($fn);
+									unlink($fn);
+								}
+								//$uploadedfile = $_FILES["image"]['tmp_name'];
+								
 							}else if($extension=="png"){
-								$uploadedfile = $_FILES["image"]['tmp_name'];
-								$src = $this->LoadPNG($uploadedfile);
+								//$uploadedfile = $_FILES["image"]['tmp_name'];
+								$fn = upload::save('image');
+								if($fn){
+									$src = $this->LoadPNG($fn);
+									unlink($fn);
+								}
+								
 							}else{
 								$src = $this->LoadGif($uploadedfile);
 							}
@@ -1125,10 +1135,13 @@ class Merchant_Controller extends website_Controller {
 						    common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
 							unlink($filename);
 						}*/
-						 if($_FILES['image']['name'])
+						
+						
+						$uploadedfile = upload::save('image');
+						 if($uploadedfile)
 						{
 							
-							$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+							//$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
 							$filename = basename($uploadedfile); //strip_tags(addslashes($_FILES["image"]["name"]));
                                                         
 							$extension = $this->getExtension($filename);
@@ -1136,10 +1149,10 @@ class Merchant_Controller extends website_Controller {
 							
 							if (!(($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif"))){
 								if($extension=="jpg" || $extension=="jpeg" ){
-									$uploadedfile = $_FILES["image"]['tmp_name'];
+									//$uploadedfile = $_FILES["image"]['tmp_name'];
 									$src = $this->LoadJpeg($uploadedfile);
 								}else if($extension=="png"){
-									$uploadedfile = $_FILES["image"]['tmp_name'];
+									//$uploadedfile = $_FILES["image"]['tmp_name'];
 									$src = $this->LoadPNG($uploadedfile);
 								}else{
 									$src = $this->LoadGif($uploadedfile);
@@ -7317,7 +7330,13 @@ class Merchant_Controller extends website_Controller {
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
-						$name = "Template_file_".$status.".php";
+						
+						$template_id = null;
+						$template_id = $this->merchant->get_template_by_id_sec($status);
+						if(!$template_id)
+							exit;
+							
+						$name = "Template_file_".$template_id.".php";
 						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 						

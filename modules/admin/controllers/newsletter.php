@@ -296,13 +296,19 @@ class Newsletter_Controller extends website_Controller {
 					$tmp_name = upload::save('template_file');
 					if($tmp_name){
 						//basename($_FILES["template_file"]["tmp_name"]);
-						$name = "Template_file_".$status.".php";
+						$template_id = null;
+						$template_id = $this->news->get_template_by_id_sec($status);
+						if(!$template_id)
+							exit;
+							
+						$name = "Template_file_".$template_id.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
                         unlink($tmp_name);
 					}
-					if($_FILES['template_image']['name']){
-						$filename = upload::save('template_image'); 						
+					
+					$filename = upload::save('template_image'); 	
+					if($filename){					
 						$IMG_NAME = $status.'.png';						
 						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/').$IMG_NAME);
 						unlink($filename);
