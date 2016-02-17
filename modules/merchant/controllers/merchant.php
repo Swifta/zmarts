@@ -296,7 +296,7 @@ class Merchant_Controller extends website_Controller {
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
 						->add_rules('AccountNumber', 'required')
-						->add_rules('AccountPin', 'required')
+						->add_rules('AccP', 'required')
 						->add_rules('UserName', 'required')
 						->add_rules('Password', 'required');
 			if($post->validate()){
@@ -768,12 +768,12 @@ class Merchant_Controller extends website_Controller {
 								foreach($email as $mail){
 									$mails = explode("__",$mail);
 									$useremail = $this->mail= $mails[0];
-									$usrname =  $mails[1];
-									if(isset($usrname) && isset($useremail))
+									$username =  $mails[1];
+									if(isset($username) && isset($useremail))
 										$message = " <p> ".$post->message." </p>";
 										$message .= new View ("admin_deal/mail_deal");
 										 $this->email_id = $useremail;
-                                                                                $this->name = $usrname;
+                                                                                $this->name = $username;
                                                                                 $this->message = $message;
                                                                                 $fromEmail = NOREPLY_EMAIL;
                                                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -880,11 +880,21 @@ class Merchant_Controller extends website_Controller {
 						
 						if (!(($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif"))){
 							if($extension=="jpg" || $extension=="jpeg" ){
-								$uploadedfile = $_FILES["image"]['tmp_name'];
-								$src = $this->LoadJpeg($uploadedfile);
+								$fn = upload::save('image');
+								if($fn){
+									$src = $this->LoadJpeg($fn);
+									unlink($fn);
+								}
+								//$uploadedfile = $_FILES["image"]['tmp_name'];
+								
 							}else if($extension=="png"){
-								$uploadedfile = $_FILES["image"]['tmp_name'];
-								$src = $this->LoadPNG($uploadedfile);
+								//$uploadedfile = $_FILES["image"]['tmp_name'];
+								$fn = upload::save('image');
+								if($fn){
+									$src = $this->LoadPNG($fn);
+									unlink($fn);
+								}
+								
 							}else{
 								$src = $this->LoadGif($uploadedfile);
 							}
@@ -1125,10 +1135,13 @@ class Merchant_Controller extends website_Controller {
 						    common::image($filename, STORE_LIST_WIDTH, STORE_LIST_HEIGHT, DOCROOT.'images/merchant/290_215/'.$IMG_NAME);
 							unlink($filename);
 						}*/
-						 if($_FILES['image']['name'])
+						
+						
+						$uploadedfile = upload::save('image');
+						 if($uploadedfile)
 						{
 							
-							$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
+							//$uploadedfile = upload::save('image');//$_FILES['image']['tmp_name'];
 							$filename = basename($uploadedfile); //strip_tags(addslashes($_FILES["image"]["name"]));
                                                         
 							$extension = $this->getExtension($filename);
@@ -1136,10 +1149,10 @@ class Merchant_Controller extends website_Controller {
 							
 							if (!(($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif"))){
 								if($extension=="jpg" || $extension=="jpeg" ){
-									$uploadedfile = $_FILES["image"]['tmp_name'];
+									//$uploadedfile = $_FILES["image"]['tmp_name'];
 									$src = $this->LoadJpeg($uploadedfile);
 								}else if($extension=="png"){
-									$uploadedfile = $_FILES["image"]['tmp_name'];
+									//$uploadedfile = $_FILES["image"]['tmp_name'];
 									$src = $this->LoadPNG($uploadedfile);
 								}else{
 									$src = $this->LoadGif($uploadedfile);
@@ -1795,12 +1808,18 @@ class Merchant_Controller extends website_Controller {
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
 								
+<<<<<<< HEAD
+								
+								$_FILES = arr::rotate($_FILES['image']);
+||||||| merged common ancestors
+=======
+                                                                $_FILES = arr::rotate($_FILES['image']);
+>>>>>>> 8ac5c17b6b7b5bbd3a933f1e22f1d69c9f67a19f
 								foreach($_FILES as $key =>$value){
 									$n = uniqid();
 									$_FILES[$n] = $value;
 									unset($_FILES[$key]);
 								}
-								
 								
 								//foreach(arr::rotate($_FILES['image']) as $files){
 								foreach($_FILES as $key => $files){
@@ -1809,7 +1828,6 @@ class Merchant_Controller extends website_Controller {
 										if($filename!=''){
 
 											$IMG_NAME = $deal_key."_".$i.'.png';
-
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
 											unlink(realpath($filename));
 										}
@@ -2458,12 +2476,12 @@ class Merchant_Controller extends website_Controller {
 					foreach($email as $mail){
 						$mails = explode("__",$mail);
 						$useremail =$this->mail=  $mails[0];
-						$usrname =  $mails[1];
-						if(isset($usrname) && isset($useremail))
+						$username =  $mails[1];
+						if(isset($username) && isset($useremail))
 							$message = " <p> ".$post->message." </p>";
 							$message .= new View ("admin_product/mail_product");
 							$this->email_id = $useremail;
-                                                $this->name = $usrname;
+                                                $this->name = $username;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -3181,12 +3199,12 @@ class Merchant_Controller extends website_Controller {
 					foreach($email as $mail){
 					$mails = explode("__",$mail);
 					$useremail = $this->mail= $mails[0];
-					$usrname =  $mails[1];
-					if(isset($usrname) && isset($useremail))
+					$username =  $mails[1];
+					if(isset($username) && isset($useremail))
 					$message = " <p> ".$post->message." </p>";
 						$message .= new View ("admin_auction/mail_auction");
 						$this->email_id = $useremail;
-                                                $this->name = $usrname;
+                                                $this->name = $username;
                                                 $this->message = $message;
                                                 $fromEmail = NOREPLY_EMAIL;
                                                 $message = new View("themes/".THEME_NAME."/admin_mail_template");
@@ -7317,7 +7335,13 @@ class Merchant_Controller extends website_Controller {
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
-						$name = "Template_file_".$status.".php";
+						
+						$template_id = null;
+						$template_id = $this->merchant->get_template_by_id_sec($status);
+						if(!$template_id)
+							exit;
+							
+						$name = "Template_file_".$template_id.".php";
 						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
 						

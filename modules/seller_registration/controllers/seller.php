@@ -548,7 +548,7 @@ $admin_message	= '
 										$merchant_message = "<p><b> Congratulations! </b> </p><p> Your Merchant account on <a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a> has been successfully created!</p><p> Please await approval which will contain your login and setup details.</p><p></p><a style=\"color:#666; text-decoration: none;\" href=\"".PATH."\">".SITENAME."</a>";
 										
 										$merchant_message = "<p><b> Congratulations! </b> </p><p>You have successfully registered your merchant account.You will receive an email shortly containing approval of your registration as well as your access details on the platform.</p>
-										<p  >Merchant Account Email: <a style=\"color: #666; text-decoration: none;\">".$this->session->get('memail')."</a></p>";
+										<p>Merchant Account Email: <a style=\"color: #666; text-decoration: none;\">".$this->session->get('memail')."</a></p>";
 
 										
 										$this->adminname = $this->Lang['ADMIN'];

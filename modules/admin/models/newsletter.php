@@ -464,6 +464,14 @@ class Newsletter_Model extends Model
 		return 0;
 	}
 	
+	public function get_template_by_id_sec($id){
+		$r = $this->db->select("newsletter_id")->from("newsletter")->where(array("newsletter_id" =>$id))->get();
+		if(count($r) == 1){
+			return $r->current()->newsletter_id;
+		}
+		return NULL;
+	}
+	
 	public function get_template_count(){
 		$result = $this->db->select()->from("newsletter")->orderby("newsletter.newsletter_id", "DESC")->get();
 		return count($result);

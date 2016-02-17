@@ -574,7 +574,7 @@ class Admin_products_Model extends Model
 	{
 		//$query = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
                    $result = $this->db->select()->from("size")
-                          ->orderby('size_name' ,'ASC')  ->get();
+                          ->orderby('size_name' ,'ASC')->get();
                                                
                          
                 

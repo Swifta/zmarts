@@ -37,8 +37,8 @@
                                         <tr>
                                             <td style="width: 200px;"><label><?php echo $this->Lang['ACCTPIN']; ?></label><span>*</span></td>
                                             <td><label>:</label></td>
-                                            <td><input type="text" name="AccountPin" maxlength="32"   value="<?php echo $general->AccountPin; ?>"/>
-                                            <em><?php if(isset($this->form_error["AccountPin"])){ echo $this->form_error["AccountPin"]; }?></em></td>
+                                            <td><input type="text" name="AccP" maxlength="32"   value="<?php echo $general->AccP; ?>"/>
+                                            <em><?php if(isset($this->form_error["AccP"])){ echo $this->form_error["AccP"]; }?></em></td>
                                         </tr>
                                         
                                         <tr>

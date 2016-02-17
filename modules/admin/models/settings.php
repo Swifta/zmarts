@@ -10,8 +10,10 @@ class Settings_Model extends Model
 	
 	public function getGeneralSettingsData()
 	{
-		$result =$this->db->from("settings")
+		$result =$this->db->select("*, settings.paypal_api_password as paypalp, settings.authorizenet_api_id as auth_dat")->from("settings")
 						->get();
+						var_dump($result);
+						exit;
 		return $result;
 	}
 	
@@ -116,7 +118,7 @@ class Settings_Model extends Model
 	public function update_payment_settings($post = "")
 	{
 
-		$status = $this->db->update("settings",array("min_fund_request" => $post->minfund, "max_fund_request" => $post->maxfund, "currency_symbol" => trim($post->currency_symbol) , "currency_code" => trim($post->currency_code),"country_code" => trim($post->country_code),"referral_amount" => $post->referral_amount,"paypal_payment_mode" => $post->paypal_payment_mode,"paypal_account_id" => $post->Paypal_Account,"paypal_api_password" => $post->Paypal_API_Password,"paypal_api_signature" => $post->Paypal_API_Signature,"authorizenet_transaction_key" => $post->authorizenet_transaction_key,"authorizenet_api_id" => $post->authorizenet_api_id,"tax_percentage" => $post->tax_percentage,"flat_shipping" => $post->flat_shipping,"auction_extend_day" =>$post->auction_extend_day,"auction_alert_day" => $post->auction_alert_day,"pay_later"=>$post->pay_later,"monthly_storecredit"=>$post->monthly_storecredit), array("id" => 1)); 
+		$status = $this->db->update("settings",array("min_fund_request" => $post->minfund, "max_fund_request" => $post->maxfund, "currency_symbol" => trim($post->currency_symbol) , "currency_code" => trim($post->currency_code),"country_code" => trim($post->country_code),"referral_amount" => $post->referral_amount,"paypal_payment_mode" => $post->paypal_payment_mode,"paypal_account_id" => $post->Paypal_Account,"paypal_api_password" => $post->paypalp,"paypal_api_signature" => $post->Paypal_API_Signature,"authorizenet_transaction_key" => $post->authorizenet_transaction_key,"authorizenet_api_id" => $post->auth_dat,"tax_percentage" => $post->tax_percentage,"flat_shipping" => $post->flat_shipping,"auction_extend_day" =>$post->auction_extend_day,"auction_alert_day" => $post->auction_alert_day,"pay_later"=>$post->pay_later,"monthly_storecredit"=>$post->monthly_storecredit), array("id" => 1)); 
 		return 1;
 	}
 
@@ -339,14 +341,14 @@ class Settings_Model extends Model
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 1));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccP,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 1));
 		return 1;
 	}
 	
 	/* GET SHIPPING SETTINGS */
 	public function get_shipping_settings()
 	{
-		$result = $this->db->from("users")->where(array("user_type" => 1))->get();
+		$result = $this->db->select("*, users.AccountPin as AccP")->from("users")->where(array("user_type" => 1))->get();
 		return $result;
 	}
 	

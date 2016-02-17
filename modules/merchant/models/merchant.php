@@ -96,11 +96,11 @@ class Merchant_Model extends Model
 
 	public function merchant_login($email = "", $password = "")
 	{
-			   $password = addslashes($email);
+			   //$password = addslashes($email);
                /**$result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)");**/
                $result=$this->db->select()
-                       ->from("user")
+                       ->from("users")
                        ->where("email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)")
                        ->get();
@@ -160,7 +160,7 @@ class Merchant_Model extends Model
 	public function get_users_data()
 	{
 
-                $result = $this->db->from("users")->where(array("user_id" => $this->user_id1))->join("city","city.city_id","users.city_id")->limit(1)->get();
+                $result = $this->db->select("*, users.AccountPin as AccP")->from("users")->where(array("user_id" => $this->user_id1))->join("city","city.city_id","users.city_id")->limit(1)->get();
                 return $result;
 	}
 
@@ -1278,8 +1278,7 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->join("users","users.user_id","product.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
                                 ->get();
                         //$result = $this->db->query($qry);
 		}
@@ -1305,8 +1304,7 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->join("users","users.user_id","product.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
                                 ->get();
                         //$result = $this->db->query($qry);
                 }
@@ -3156,7 +3154,7 @@ class Merchant_Model extends Model
 		//$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER)  ASC";
                 $result = $this->db->select()
                         ->from("size")
-                        ->orderby("CAST(size_name as SIGNED INTEGER)", " ASC")
+                        ->orderby("size_name", " ASC")
                         ->get();
 	        //$result = $this->db->query($qry);
 		return $result;
@@ -3497,7 +3495,7 @@ class Merchant_Model extends Model
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "AccountNumber" => $post->AccountNumber, "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "AccountNumber" => $post->AccountNumber, "AccountPin" => $post->AccP,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
 		return 1;
 	}
 	
@@ -4168,11 +4166,11 @@ class Merchant_Model extends Model
 					}
 						$mails = explode("__",$mail);
 						$useremail = $this->mail= $mails[0];
-						$usrname =  $mails[1];
-						if(isset($usrname) && isset($useremail))
+						$username =  $mails[1];
+						if(isset($username) && isset($useremail))
 						$message = " <p> ".$post->message." </p>";
 						$this->email_id = $useremail;
-						$this->name = $usrname;
+						$this->name = $username;
 						$this->message = $message;
 						$fromEmail = NOREPLY_EMAIL;
 						$this->newstitle = $post->title;
@@ -4540,7 +4538,7 @@ class Merchant_Model extends Model
 						$conditions .= " AND storecredit_transaction.type != 5  AND store_credit_id !=0";
 					}
 			//$result = $this->db->query("select *,users.firstname as firstname, storecredit_transaction.shipping_amount as shippingamount from storecredit_transaction join store_credit_save on store_credit_save.storecredit_id = storecredit_transaction.main_storecreditid join users on users.user_id=storecredit_transaction.user_id join product on product.deal_id=storecredit_transaction.product_id where $conditions and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
-                        $result = $this->db->select("*,users.firstname as firstname, storecredit_transaction.shipping_amount as shippingamount")
+                        $result = $this->db->select("*,users.firstname as firstname, storecredit_transaction.main_storecreditid as main_s_d, storecredit_transaction.shipping_amount as shippingamount")
                                     ->from("storecredit_transaction")
                                     ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
                                     ->join("users","users.user_id","storecredit_transaction.user_id")
@@ -4578,7 +4576,7 @@ class Merchant_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by storecredit_transaction.storecredit_transaction_date DESC'; }
 
-			$result = $this->db->select("*","storecredit_transaction.shipping_amount as shippingamount")->from("storecredit_transaction")
+			$result = $this->db->select("*, storecredit_transaction.main_storecreditid as main_s_d, storecredit_transaction.shipping_amount as shippingamount")->from("storecredit_transaction")
 						->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
 						->join("users","users.user_id","storecredit_transaction.user_id")
 						->join("product","product.deal_id","storecredit_transaction.product_id")
@@ -5176,14 +5174,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
+										$username =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($usrname) && isset($useremail))
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 											$this->email_id = $useremail;
-											$this->name = $usrname;
+											$this->name = $username;
 											$this->message = $message;
 											$fromEmail = NOREPLY_EMAIL;
 											
@@ -5392,14 +5390,14 @@ class Merchant_Model extends Model
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
+										$username =  $mails[1];
 										$user_array[]=$mails[2];
-										if(isset($usrname) && isset($useremail))
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 												$this->email_id = $useremail;
-												$this->name = $usrname;
+												$this->name = $username;
 												$this->message = $message;
 												$fromEmail = NOREPLY_EMAIL;
 												
@@ -5708,5 +5706,15 @@ class Merchant_Model extends Model
             }
             return false;
         }
+		
+		
+		
+		public function get_template_by_id_sec($id){
+		$r = $this->db->select("newsletter_id")->from("newsletter")->where(array("newsletter_id" =>$id))->get();
+		if(count($r) == 1){
+			return $r->current()->newsletter_id;
+		}
+		return NULL;
+	}
 	
 }

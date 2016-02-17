@@ -2875,8 +2875,11 @@ class Store_admin_Model extends Model
 
 	public function get_product_size()
 	{
-		$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
-	        $result = $this->db->query($qry);
+		//$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
+	        //$result = $this->db->query($qry);
+                $result = $this->db->select()->from("size")
+                        ->orderby("size_name", "ASC")
+                        ->get();
 		return $result;
 	}
 
@@ -3142,7 +3145,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccP,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
 		return 1;
 	}
 	
@@ -3792,13 +3795,13 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 					}
 										$mails = explode("__",$mail);
 										$useremail = $this->mail= $mails[0];
-										$usrname =  $mails[1];
-										if(isset($usrname) && isset($useremail))
+										$username =  $mails[1];
+										if(isset($username) && isset($useremail))
 											$message = " <p> ".$post->message." </p>";
 											
 											
 																					$this->email_id = $useremail;
-																					$this->name = $usrname;
+																					$this->name = $username;
 																					$this->message = $message;
 																					$fromEmail = NOREPLY_EMAIL;
 																					if($post->template==1)
@@ -4177,7 +4180,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 				else{
 						$conditions .= " AND transaction.type != 5  AND store_credit_id !=0";
 					}
-			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
+			$result = $this->db->query("select *, storecredit_transaction.main_storecreditid as main_s_d, users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
 		}
 		else{
 				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  ";

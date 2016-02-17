@@ -104,9 +104,9 @@
 			
                     <td align="left"><?php echo date('d-M-Y h:i:s A',$u->transaction_date); ?></td>
                    <td align="center">
-					 <a id="details-panel<?php echo $u->main_storecreditid; ?>" title=""  href="javascript:;" ><img src="<?php echo PATH;?>images/details_view.gif"></a>
-					<div class="popup_show1 popup_block_mer_ship" id="lightboxdetails-panel<?php echo $u->main_storecreditid; ?>" style="display:none;"  >
-						<div class="rejected_shipping" id="details-close<?php echo $u->main_storecreditid; ?>" ></div>
+					 <a id="details-panel<?php echo $u->main_s_d; ?>" title=""  href="javascript:;" ><img src="<?php echo PATH;?>images/details_view.gif"></a>
+					<div class="popup_show1 popup_block_mer_ship" id="lightboxdetails-panel<?php echo $u->main_s_d; ?>" style="display:none;"  >
+						<div class="rejected_shipping" id="details-close<?php echo $u->main_s_d; ?>" ></div>
 						<?php   
 						$instalment_value =0;
 						$grand_tot = ($u->deal_value * $u->quantity)+ $u->shippingamount;
@@ -150,12 +150,12 @@
 					 });
                 
 					$(document).ready(function(){
-						$('a#details-panel<?php echo $u->main_storecreditid; ?>').click(function(){ 
-							$('#lightboxdetails-panel<?php echo $u->main_storecreditid; ?>').show();
+						$('a#details-panel<?php echo $u->main_s_d; ?>').click(function(){ 
+							$('#lightboxdetails-panel<?php echo $u->main_s_d; ?>').show();
 						});
 						
-						$('#details-close<?php echo $u->main_storecreditid; ?>').click(function(){ 
-						$('#lightboxdetails-panel<?php echo $u->main_storecreditid; ?>').hide();
+						$('#details-close<?php echo $u->main_s_d; ?>').click(function(){ 
+						$('#lightboxdetails-panel<?php echo $u->main_s_d; ?>').hide();
 						})
 					});
                 
