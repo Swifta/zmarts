@@ -88,12 +88,12 @@ class Users_Controller extends Layout_Controller {
                         //var_dump($user_info); die;
                         $this->name = $user_info->name;
                         $this->email = $user_info->screen_name;
-                        $this->pswd = $pswd;
-                        //echo $this->name." and ".$this->email." and ".$this->pswd;die;
+                        $this->password = $pswd;
+                        //echo $this->name." and ".$this->email." and ".$this->password;die;
                         if($this->name == ""){
                             $this->name = "UNKNOWN";
                         }
-                        $status = $this->users->add_users_social($this->name, $this->email, $this->pswd);
+                        $status = $this->users->add_users_social($this->name, $this->email, $this->password);
 
                       if($status == 1){
                         $this->signup=1;
@@ -140,12 +140,12 @@ class Users_Controller extends Layout_Controller {
               $pswd = text::random($type = 'alnum', $length = 10);
               $this->name=$this->input->get('full_name');
               $this->email =$this->input->get('email');
-              $this->pswd =$pswd;
-              //echo $this->name." and ".$this->email." and ".$this->pswd;die;
+              $this->password =$pswd;
+              //echo $this->name." and ".$this->email." and ".$this->password;die;
               if($this->name == ""){
                   $this->name = "UNKNOWN";
               }
-              $status = $this->users->add_users_social($this->name, $this->email, $this->pswd);
+              $status = $this->users->add_users_social($this->name, $this->email, $this->password);
               
                 if($status == 1){
                   $this->signup=1;
@@ -218,7 +218,7 @@ class Users_Controller extends Layout_Controller {
 				$from = CONTACT_EMAIL;
 				$this->name=  strip_tags(addslashes($_POST['f_name']));
 				$this->email =  strip_tags(addslashes($_POST['email']));
-				$this->pswd = strip_tags(addslashes($_POST['password']));  
+				$this->password = strip_tags(addslashes($_POST['password']));  
 				/*$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];*/
 				$subject = SITENAME.' '.$this->Lang['M_REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
@@ -561,7 +561,7 @@ class Users_Controller extends Layout_Controller {
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =  strip_tags(addslashes($status['name']));
-						$this->pswd =  strip_tags(addslashes($status['password']));
+						$this->password =  strip_tags(addslashes($status['password']));
 						$this->email = strip_tags(addslashes($_POST['email']));
 						//$message .= "<p>Your Password  reset </p><p>Email : ".$status['email']."<p/><p>Password : ".$status['password']."<p/><br /> <p>Thanks,</p>";
 						$message = new View("themes/".THEME_NAME."/mail_template");
@@ -626,7 +626,7 @@ class Users_Controller extends Layout_Controller {
                                                         $from = CONTACT_EMAIL;
                                                         $this->name=$user_details->current()->firstname;
                                                         $this->email =$user_details->current()->email;
-                                                        $this->pswd =$pswd;
+                                                        $this->password =$pswd;
                                                         $subject = SITENAME." - Facebook Registration Details";
                                                         $message = new View("themes/".THEME_NAME."/mail_template");
                                                         if(EMAIL_TYPE==2){
@@ -818,7 +818,44 @@ class Users_Controller extends Layout_Controller {
 			if($post->validate()){
 				if(basename($_FILES['file']['name']) != "" ){
                                     $source = upload::save('file');
-					$target_file = realpath(DOCROOT.'images/Pay_Later_Doc/'.base64_encode(strip_tags(addslashes($_POST['transaction_id']))).'_'.
+					$t_id = $_POST['transaction_id'];
+					$t = null;
+					if (($this->product_setting) || (count($this->products_coupons_list) > 0 )) {
+						foreach($this->products_coupons_list as $u){
+							if($u->transaction_id == $t_id){
+								$t = $u->transaction_id;
+								break;
+							}
+						}
+					}else if (($this->deal_setting) || (count($this->deals_coupons_list) > 0 )) {
+						
+						foreach($this->deals_coupons_list as $u){
+							if($u->transaction_id == $t_id){
+								$t = $u->transaction_id;
+								break;
+							}
+						}
+					
+					}else if (($this->auction_setting) || (count($this->auctions_coupons_list) > 0 )) { 
+							
+						foreach($this->auctions_coupons_list as $u){
+							if($u->transaction_id == $t_id){
+								$t = $u->transaction_id;
+								break;
+							}
+						}
+					
+					}
+					
+					
+					
+					if($t == null){
+						exit;
+					}
+					
+					$t_id = $t;
+					
+					$target_file = realpath(DOCROOT.'images/Pay_Later_Doc/'.base64_encode(strip_tags(addslashes($t_id))).'_'.
                                                 basename($source));
 					if (move_uploaded_file($source, $target_file)) {
 						$result = $this->users->update_bank_deposit_document($_POST['transaction_id'],$_FILES["file"]["name"]);
@@ -1987,11 +2024,11 @@ $pdf->Output('voucher.pdf', 'I');
                 
                 
                 echo "
-                <error key = \"".$key."\" value = \"".$value."\" />
+                <error key = \"".htmlspecialchars($key ,ENT_QUOTES,'UTF-8')."\" value = \"".htmlspecialchars($value ,ENT_QUOTES,'UTF-8')."\" />
                 ";
                 
                 
-                
+             
                 
                 }
                 
@@ -2015,15 +2052,13 @@ $pdf->Output('voucher.pdf', 'I');
   
   
   public function merchant_registration_validation(){
-      //$this->session->set("merchant_reg_nuban", "8025481373");
-      //$this->session->set("firstname", "Mustafa Segun");
-      //echo 1;die;
+      $this->session->set("merchant_reg_nuban", "8025481373");
+      $this->session->set("firstname", "Hello World");
+      echo 1;exit;
 		  if($_POST){
 			  $nuban = $this->input->post('nuban');
                           //echo $nuban;
-                          $this->session->set("merchant_reg_nuban", $nuban);
-                          $this->session->set("firstname", "Hello World");
-                          echo 1;die;
+                          //$this->session->set("merchant_reg_nuban", $nuban);
                          
 				 
 				  $r = $this->users->check_zenith_account_used($nuban);
@@ -2167,22 +2202,7 @@ $pdf->Output('voucher.pdf', 'I');
 		  return 1;
 		  
 	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 } 
 

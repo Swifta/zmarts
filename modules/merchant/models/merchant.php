@@ -96,11 +96,11 @@ class Merchant_Model extends Model
 
 	public function merchant_login($email = "", $password = "")
 	{
-			   $password = addslashes($email);
+			   //$password = addslashes($email);
                /**$result=$this->db->query("SELECT * FROM users WHERE email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)");**/
                $result=$this->db->select()
-                       ->from("user")
+                       ->from("users")
                        ->where("email = '".strip_tags(addslashes($email)).
                        "' AND password ='".md5($password)."' AND user_type IN (3,8)")
                        ->get();
@@ -1278,8 +1278,7 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->join("users","users.user_id","product.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
                                 ->get();
                         //$result = $this->db->query($qry);
 		}
@@ -1305,8 +1304,7 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","product.category_id")
                                 ->join("users","users.user_id","product.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
                                 ->get();
                         //$result = $this->db->query($qry);
                 }
@@ -3156,7 +3154,7 @@ class Merchant_Model extends Model
 		//$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER)  ASC";
                 $result = $this->db->select()
                         ->from("size")
-                        ->orderby("CAST(size_name as SIGNED INTEGER)", " ASC")
+                        ->orderby("size_name", " ASC")
                         ->get();
 	        //$result = $this->db->query($qry);
 		return $result;

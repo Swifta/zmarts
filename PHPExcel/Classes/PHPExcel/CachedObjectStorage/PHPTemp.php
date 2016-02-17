@@ -101,8 +101,9 @@ class PHPExcel_CachedObjectStorage_PHPTemp extends PHPExcel_CachedObjectStorage_
      * @return 	PHPExcel_Cell 	Cell that was found, or null if not found
      */
 	public function getCacheData($pCoord) {
-		if ($pCoord === $this->_currentObjectID) {
-			return $this->_currentObject;
+		//if ($pCoord === $this->_currentObjectID) {
+            if ($pCoord === strip_tags(addslashes($this->_currentObjectID))) {
+ 			return $this->_currentObject;
 		}
 		$this->_storeData();
 

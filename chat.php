@@ -100,7 +100,8 @@ function chatHeartbeat() {
 
 	while ($chat = mysql_fetch_array($query)) {
 		if (!isset($_SESSION['openChatBoxes'][$chat['from']]) && isset($_SESSION['chatHistory'][$chat['from']])) {
-			$items = $_SESSION['chatHistory'][$chat['from']];
+			//$items = $_SESSION['chatHistory'][$chat['from']];
+                          $items = strip_tags(addslashes($_SESSION['chatHistory'][$chat['from']]));
 		}
 
 		$chat['message'] = sanitize($chat['message']);
@@ -152,7 +153,7 @@ header('Content-type: application/json');
 ?>
 {
 		"items": [
-			<?php echo $items;?>
+			<?php echo htmlentities($_POST['$items'],  ENT_QUOTES,  "utf-8");?>
         ]
 }
 
@@ -210,9 +211,9 @@ function sendChat() {
     $buyerprofile = $_SESSION['image'];
     $UserID = $_SESSION['uid']; //  replace  with common $_SESSION['UserID']
     //$UserID = $_SESSION['chatuserid'];
-    $Sell_ID = $_POST['sellid'];
+    $Sell_ID = strip_tags(addslashes(trim($_POST['sellid'])));
     $_SESSION['sel_id'] = $Sell_ID;
-    $chat_type = $_POST['chattype'];
+    $chat_type = strip_tags(addslashes(trim($_POST['chattype'])));
 	if($chat_type=='' || $chat_type =='undefined') {
 		$chat_type = $_SESSION['chattype'];
 	}

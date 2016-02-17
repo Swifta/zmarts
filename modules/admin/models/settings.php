@@ -14,6 +14,33 @@ class Settings_Model extends Model
 						->get();
 		return $result;
 	}
+	
+	public function get_all_subsector_ids(){
+		$results = $this->db->select("sector_id")->from("sector")->where(array("sector_status"=>1, "type"=>2))->get();
+		$ids = array();
+		$i = 0;
+		foreach($results as $r){
+			$ids[$i] = $r->sector_id;
+			$i++;
+			
+		}
+		return $ids;
+		
+	}
+	
+	public function get_all_category_urls(){
+		$results = $this->db->select("category_url")->from("category")->get();
+		$ids = array();
+		$i = 0;
+		foreach($results as $r){
+			$ids[$i] = $r->category_url;
+			$i++;
+			
+		}
+		return $ids;
+		
+	}
+	
 	/* GET COUNTRY LIST */
 	public function getcountrylist()
 	{	
@@ -89,7 +116,7 @@ class Settings_Model extends Model
 	public function update_payment_settings($post = "")
 	{
 
-		$status = $this->db->update("settings",array("min_fund_request" => $post->minfund, "max_fund_request" => $post->maxfund, "currency_symbol" => trim($post->currency_symbol) , "currency_code" => trim($post->currency_code),"country_code" => trim($post->country_code),"referral_amount" => $post->referral_amount,"paypal_payment_mode" => $post->paypal_payment_mode,"paypal_account_id" => $post->Paypal_Account,"paypal_api_password" => $post->Paypal_API_Password,"paypal_api_signature" => $post->Paypal_API_Signature,"authorizenet_transaction_key" => $post->authorizenet_transaction_key,"authorizenet_api_id" => $post->authnet_api_id,"tax_percentage" => $post->tax_percentage,"flat_shipping" => $post->flat_shipping,"auction_extend_day" =>$post->auction_extend_day,"auction_alert_day" => $post->auction_alert_day,"pay_later"=>$post->pay_later,"monthly_storecredit"=>$post->monthly_storecredit), array("id" => 1)); 
+		$status = $this->db->update("settings",array("min_fund_request" => $post->minfund, "max_fund_request" => $post->maxfund, "currency_symbol" => trim($post->currency_symbol) , "currency_code" => trim($post->currency_code),"country_code" => trim($post->country_code),"referral_amount" => $post->referral_amount,"paypal_payment_mode" => $post->paypal_payment_mode,"paypal_account_id" => $post->Paypal_Account,"paypal_api_password" => $post->Paypal_API_Password,"paypal_api_signature" => $post->Paypal_API_Signature,"authorizenet_transaction_key" => $post->authorizenet_transaction_key,"authorizenet_api_id" => $post->authorizenet_api_id,"tax_percentage" => $post->tax_percentage,"flat_shipping" => $post->flat_shipping,"auction_extend_day" =>$post->auction_extend_day,"auction_alert_day" => $post->auction_alert_day,"pay_later"=>$post->pay_later,"monthly_storecredit"=>$post->monthly_storecredit), array("id" => 1)); 
 		return 1;
 	}
 

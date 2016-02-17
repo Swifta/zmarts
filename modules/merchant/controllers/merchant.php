@@ -1,6 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-class Merchant_Controller extends website_Controller
-{
+class Merchant_Controller extends website_Controller {
 	const ALLOW_PRODUCTION = FALSE;
 	public $template = 'admin_template/template';
 	public function __construct()
@@ -950,7 +949,17 @@ class Merchant_Controller extends website_Controller
 					$modules_name = 'stores';
 					if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 					{
-						$subsector = strip_tags(addslashes($_POST['subsector']));
+						$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 						$sector_details = $this->merchant->get_subsector_name($subsector);
 						$modules_name = strtolower($sector_details[0]->sector_name);	
 					}
@@ -1194,7 +1203,17 @@ class Merchant_Controller extends website_Controller
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -1281,12 +1300,13 @@ class Merchant_Controller extends website_Controller
 		$this->template->title = $this->Lang["EDIT_SHOP"];
 		$this->template->content = new View("merchant/edit_merchant_shop");
 	}
+	
 	public function check_store_exist(){
 	    $exist = $this->merchant->exist_name($this->input->post("storename"));
 	    return ($exist == 0)?true:false; 
 	}
         
-        public function validate_account(){
+    public function validate_account(){
             return $this->merchant->validate_account($this->input->post("nuban"));
         }
         
@@ -1775,6 +1795,7 @@ class Merchant_Controller extends website_Controller
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
 								
+                                                                $_FILES = arr::rotate($_FILES['image']);
 								foreach($_FILES as $key =>$value){
 									$n = uniqid();
 									$_FILES[$n] = $value;
@@ -1847,7 +1868,9 @@ class Merchant_Controller extends website_Controller
 					
 					
 				}
-		}
+				
+					}
+		
 
 		/** For attrbute adding **/
 		$this->all_attributes=$this->merchant->getProductAttributes();
@@ -1870,6 +1893,8 @@ class Merchant_Controller extends website_Controller
 	        $this->template->title = $this->Lang["ADD_PRODUCTS"];
 		$this->template->content = new View("merchant/add_products");
 	}
+	
+	
 
          public function confirm_product($product_id = "",$preview_type='')
 	{
@@ -2726,8 +2751,8 @@ class Merchant_Controller extends website_Controller
 		$this->shop_list = $this->merchant->get_shop_list();
 	    $this->template->title = $this->Lang['ADD_ACT_PRO'];
 		$this->template->content = new View("merchant/add_auction");
+	
 	}
-
 	/** MANAGE AUCTION **/
 
 	public function manage_auction($type= "", $page = "")
@@ -2813,7 +2838,6 @@ class Merchant_Controller extends website_Controller
 	}
 
 	/** VIEW AUCTION **/
-
 	public function view_auction($deal_key= "", $deal_id = "")
 	{
 		if(PRIVILEGES_AUCTIONS!= 1){
@@ -3105,7 +3129,7 @@ class Merchant_Controller extends website_Controller
 
         /** SELECT EMAIL UNDER THE USER **/
 
-        public function user_select($users= "")
+    public function user_select($users= "")
 	{
 		if($users == 4){
 	            $shoplistlist = $this->merchant->get_auction_users_data($users);
@@ -5120,7 +5144,17 @@ class Merchant_Controller extends website_Controller
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -6424,7 +6458,18 @@ class Merchant_Controller extends website_Controller
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$category = strip_tags(basename(addslashes($this->input->post("category"))));
+					$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
+					  
 	 				$cat_status = strip_tags(addslashes($this->input->post("status")));
 					$deal = isset($_POST['deal'])? 1 : 0;
 					$product = isset($_POST['product'])? 1 : 0;
@@ -7266,13 +7311,13 @@ class Merchant_Controller extends website_Controller
 			if($post->validate()){
 				$status = $this->merchant->add_template(arr::to_object($this->userPost));
 				if($status > 0){
-					if($_FILES["template_file"]){
+					
+					$source = upload::save('template_file');
+					if($source){
 						/*$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
-						
-						$source = upload::save('template_file');
 						$name = "Template_file_".$status.".php";
 						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
 						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
@@ -7280,8 +7325,8 @@ class Merchant_Controller extends website_Controller
 						unlink($source);
 						
 					}
-					if($_FILES['template_image']['name']){
-						$filename = upload::save('template_image'); 						
+					$filename = upload::save('template_image'); 
+					if($filename){						
 						$IMG_NAME = $status.'.png';						
 						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/'.$IMG_NAME));
 						unlink($filename);
@@ -7558,7 +7603,7 @@ class Merchant_Controller extends website_Controller
 		}
 		return 1;
 	}
-}
-
-
-
+	
+	}
+	
+	?>

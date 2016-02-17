@@ -24,16 +24,16 @@ class Soldout_Model extends Model
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = 'and deals.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition_arr = true:$this->club_condition_arr = false;
 		
-		if(CITY_SETTING)
+		if(CITY_SETTING){
 			$conditions = "stores.city_id = $cityid  and stores.store_status = 1 and category.category_status = 1 and city.city_status = 1 and (purchase_count = maximum_deals_limit or deals.enddate <".time()." ) ";
-		else
-			$conditions = "stores.store_status = 1 and category.category_status = 1 and city.city_status = 1 and (purchase_count = maximum_deals_limit or deals.enddate <".time()." )";
-			
+                }else{
+			$conditions = "stores.store_status = 1 and category.category_status = 1 and city.city_status = 1 and (purchase_count = maximum_deals_limit or deals.enddate <".time()." ) ";
+                }	
 		if($store_id!=''){
 			$conditions .= " and stores.store_id = $store_id ";
 		}
 		
-		$conditions .= $this->club_condition;
+		$conditions .= " ".$this->club_condition;
 //		$qry = "select *,stores.store_url_title from deals 
 //                    join category on category.category_id=deals.category_id  join stores on stores.store_id=deals.shop_id 
 //                    join city on city.city_id=stores.city_id  
@@ -43,6 +43,7 @@ class Soldout_Model extends Model
 //                
                 
                 $result=$this->db->select("*,stores.store_url_title")->from("deals")
+                        ->join("category","category.category_id","deals.category_id")
                         ->join("stores","stores.store_id","deals.shop_id")
                         ->join("city","stores.store_id","stores.city_id")
                         ->join("country","country.country_id","stores.country_id")
@@ -113,9 +114,10 @@ class Soldout_Model extends Model
                         ->join("users","users.user_id","auction.winner")
                         ->join("stores","stores.store_id","auction.shop_id")
                         ->join("city","city.city_id","stores.city_id")
-                        ->join("country","country.country_id","city.country_id ")
+                        ->join("country","country.country_id","city.country_id")
                         ->join("category","category.category_id","auction.category_id")
-                          ->where("auction.winner != 0 and auction.auction_status != 0 and stores.city_id='.$cityid.' and category.category_status = 1 and city.city_status = 1". $conditions )->get();
+                        ->where("auction.winner != 0 and auction.auction_status != 0 and stores.city_id='.$cityid.' and category.category_status = 1 and city.city_status = 1 ".$conditions )
+                        ->get();
 		return $result_high;
                         
                         
@@ -134,9 +136,10 @@ class Soldout_Model extends Model
                         ->join("users","users.user_id","auction.winner")
                         ->join("stores","stores.store_id","auction.shop_id")
                         ->join("city","city.city_id","stores.city_id")
-                        ->join("country","country.country_id","city.country_id ")
+                        ->join("country","country.country_id","city.country_id")
                         ->join("category","category.category_id","auction.category_id")
-                        ->where("auction.winner != 0 and auction.auction_status !=0 and category.category_status = 1 and city.city_status = 1". $conditions  )->get();
+                        ->where("auction.winner != 0 and auction.auction_status !=0 and category.category_status = 1 and city.city_status = 1 ". $conditions)
+                                ->get();
 		         return $result_high;
 		} 
 	}

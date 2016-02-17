@@ -109,7 +109,8 @@ class PHPExcel_CachedObjectStorage_DiscISAM extends PHPExcel_CachedObjectStorage
      * @return 	PHPExcel_Cell 	Cell that was found, or null if not found
      */
 	public function getCacheData($pCoord) {
-		if ($pCoord === $this->_currentObjectID) {
+		//if ($pCoord === $this->_currentObjectID) {
+                  if ($pCoord === strip_tags(addslashes($this->_currentObjectID))) {
 			return $this->_currentObject;
 		}
 		$this->_storeData();

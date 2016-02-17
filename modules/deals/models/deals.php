@@ -181,7 +181,8 @@ class Deals_Model extends Model
 
 		//$query = "select deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating from deals  join stores on stores.store_id=deals.shop_id $join  where enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' $conditions order by deal_id DESC limit $offset,$record";
 		$result = $this->db->select("deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating")
-                                ->from("stores","stores.store_id","deals.shop_id")
+                                ->from("deals")
+                                ->join("stores", "stores.store_id", "deals.shop_id")
                                 ->join($join_table, $join_a, $join_b)
                                 ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '".$this->city_id."' ".$conditions)
                         ->orderby("deal_id", "DESC")
@@ -192,7 +193,8 @@ class Deals_Model extends Model
 		} else {
 		//$query = "select deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating from deals  join stores on stores.store_id=deals.shop_id $join  where enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1 $conditions order by deal_id DESC limit $offset,$record";
 		$result = $this->db->select("deals.deal_id,deals.deal_key,deals.deal_title,deals.url_title,deals.deal_value,deals.deal_price, category.category_url, deals.maximum_deals_limit, deals.purchase_count,deals.enddate,deals.deal_percentage,stores.store_url_title,(select avg(rating) from rating where type_id=deals.deal_id and module_id=1) as avg_rating")
-                                ->from("stores","stores.store_id","deals.shop_id")
+                                ->from("deals")
+                                ->join("stores", "stores.store_id", "deals.shop_id")
                                 ->join($join_table, $join_a, $join_b)
                                 ->where("enddate > ".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1".$conditions)
                         ->orderby("deal_id", "DESC")
@@ -201,6 +203,7 @@ class Deals_Model extends Model
                 //$result = $this->db->query($qry);
 
 		}
+                
 		  return $result;
 
 	}

@@ -211,7 +211,21 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = basename(strip_tags(addslashes($_POST['subsector'])));
+										
+										$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
+									
+										
+										
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);
 										
@@ -292,12 +306,12 @@ class Admin_merchant_Controller extends website_Controller {
 		
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 		$this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
-                $this->type = $this->input->get('sort');
-                $this->sort = $this->input->get('param');
-                $serch=$this->input->get("id");
-                $this->today = $this->input->get("today");
-		$this->startdate  = $this->input->get("startdate");
-		$this->enddate  = $this->input->get("enddate");	
+                $this->type = strip_tags(addslashes($this->input->get('sort')));
+                $this->sort = strip_tags(addslashes($this->input->get('param')));
+                $serch= strip_tags(addslashes($this->input->get("id")));
+                $this->today = strip_tags(addslashes($this->input->get("today")));
+		$this->startdate  = strip_tags(addslashes($this->input->get("startdate")));
+		$this->enddate  = strip_tags(addslashes($this->input->get("enddate")));	
 		$this->date_range = isset($_GET['date_range'])?1:0;
 		$this->page = $page ==""?1:$page; // for export per page
 		$this->url="admin/merchant.html"; // for export
@@ -312,7 +326,7 @@ class Admin_merchant_Controller extends website_Controller {
 		                'style'          => 'digg',
 		                'auto_hide'      => TRUE
 	                ));
-		$search=$this->input->get("id");
+		$search= strip_tags(addslashes($this->input->get("id")));
                 $this->search = $this->input->get();
                 $this->search_key = arr::to_object($this->search);
                 $this->city_list = $this->merchant->getCityListOnly();
@@ -557,7 +571,17 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}
@@ -928,7 +952,17 @@ class Admin_merchant_Controller extends website_Controller {
 									$modules_name = 'stores';
 									if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 									{
-										$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+										$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 										$sector_details = $this->merchant->get_subsector_name($subsector);
 										$modules_name = strtolower($sector_details[0]->sector_name);	
 									}
@@ -1150,7 +1184,17 @@ class Admin_merchant_Controller extends website_Controller {
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
-							$subsector = strip_tags(addslashes(basename($_POST['subsector'])));
+							$s = basename(strip_tags(addslashes($_POST['subsector'])));
+										$subsector = null;
+										foreach($subsector_ids as $id){
+											if($id == $s){
+												$subsector = $id;
+												break;
+											}
+										}
+										
+										if(!$subsector)
+											exit;
 							$sector_details = $this->merchant->get_subsector_name($subsector);
 							$modules_name = strtolower($sector_details[0]->sector_name);	
 						}

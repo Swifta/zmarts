@@ -2875,8 +2875,11 @@ class Store_admin_Model extends Model
 
 	public function get_product_size()
 	{
-		$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
-	        $result = $this->db->query($qry);
+		//$qry = "SELECT * FROM size ORDER BY CAST(size_name as SIGNED INTEGER) ASC";
+	        //$result = $this->db->query($qry);
+                $result = $this->db->select()->from("size")
+                        ->orderby("size_name", "ASC")
+                        ->get();
 		return $result;
 	}
 
