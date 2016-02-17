@@ -94,6 +94,8 @@ class Webpay_Controller extends Layout_Controller
                     $transaction_status = "FAILED TRANSACTION";
                     $status = "Failed";
                     $interswitch = json_decode($response);
+                 
+                    
                     //echo $url_call."<br />";
                     //echo $hash;
                     if($interswitch){
