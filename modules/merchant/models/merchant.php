@@ -396,8 +396,8 @@ class Merchant_Model extends Model
                        ->join("country","country.country_id","stores.country_id")
                        ->join("category","category.category_id","deals.category_id")
                        ->join("users","users.user_id","deals.merchant_id")
-                       ->where($conditions)
-                       ->limit($limit1)
+                       ->where($conditions." ".$limit1)
+//                       ->limit()
                        ->get();
                 }
 	        else{
@@ -409,9 +409,9 @@ class Merchant_Model extends Model
                        ->join("country","country.country_id","stores.country_id")
                        ->join("category","category.category_id","deals.category_id")
                        ->join("users","users.user_id","deals.merchant_id")
-                       ->where($conditions)
-                       ->orderby("deals.deal_id", "DESC")
-                       ->limit($limit1)
+                       ->where($conditions." order by deals.deal_id DESC ".$limit1)
+//                       ->orderby("deals.deal_id", "DESC")
+//                       ->limit($limit1)
                        ->get();
                 }
 

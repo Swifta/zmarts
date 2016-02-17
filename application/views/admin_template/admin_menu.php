@@ -201,12 +201,15 @@
 	<li <?php if(isset($this->dashboard_merchant)){ ?> class="menu_active"  <?php } ?> >
         
         <a href="<?php echo PATH; ?>admin/merchant-dashboard.html" class="menu_rgt" title="<?php echo $this->Lang['MERCHANT_DASHBOARD']; ?>"><span class="customer_comments"><?php echo $this->Lang['MERCHANT_DASHBOARD']; ?></span></a></li>
+        
+        <!--
         <?php if(ADMIN_PRIVILEGES_MERCHANT_ADD){?>
 	<li  <?php if(isset($this->add_merchant)){ ?> class="menu_active"  <?php } ?>>
         
         <a href="<?php echo PATH; ?>admin/add-merchant.html" class="menu_rgt" title="<?php echo $this->Lang["MERCHANT_ADD"]; ?>"><span class="customer_comments"><?php echo $this->Lang["MERCHANT_ADD"]; ?></span></a></li>
         <?php } ?>
-
+        -->
+        
 	<li <?php if(isset($this->manage_merchant)){ ?> class="menu_active"  <?php } ?>>
         
         <a href="<?php echo PATH; ?>admin/merchant.html" class="menu_rgt" title="<?php echo $this->Lang["MERCHANT_MANAGE"]; ?>"><span class="customer_comments"><?php echo $this->Lang["MERCHANT_MANAGE"]; ?></span></a></li>
