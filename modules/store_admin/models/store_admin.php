@@ -3145,7 +3145,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 	
 	public function shipping_settings($post = "")
 	{
-		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccountPin,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
+		$result = $this->db->update("users",array("AccountCountryCode" => $post->AccountCountryCode, "AccountEntity" => $post->AccountEntity, "Lang['ACCTNUMBER']" => $post->Lang['ACCTNUMBER'], "AccountPin" => $post->AccP,"UserName" => $post->UserName, "ShippingPassword" => $post->Password ), array("user_type" => 3, "user_id" => $this->user_id));
 		return 1;
 	}
 	
@@ -4180,7 +4180,7 @@ $this->db->update("users", array("merchant_account_balance"=>new Database_Expres
 				else{
 						$conditions .= " AND transaction.type != 5  AND store_credit_id !=0";
 					}
-			$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
+			$result = $this->db->query("select *, storecredit_transaction.main_storecreditid as main_s_d, users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
 		}
 		else{
 				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' and product.shop_id = '".$this->store_id."'  ";

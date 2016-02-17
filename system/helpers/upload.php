@@ -45,7 +45,7 @@ class upload_Core {
 		}
 
 		// Make sure the directory ends with a slash
-		$directory = rtrim($directory, '/').'/';
+		$directory = rtrim($directory, '/').DIRECTORY_SEPARATOR;
 
 		if ( ! is_dir($directory) AND Kohana::config('upload.create_directories') === TRUE)
 		{

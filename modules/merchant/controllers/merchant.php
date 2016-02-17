@@ -296,7 +296,7 @@ class Merchant_Controller extends website_Controller {
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
 						->add_rules('AccountNumber', 'required')
-						->add_rules('AccountPin', 'required')
+						->add_rules('AccP', 'required')
 						->add_rules('UserName', 'required')
 						->add_rules('Password', 'required');
 			if($post->validate()){
@@ -1795,12 +1795,13 @@ class Merchant_Controller extends website_Controller {
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
 								
+								
+								$_FILES = arr::rotate($_FILES['image']);
 								foreach($_FILES as $key =>$value){
 									$n = uniqid();
 									$_FILES[$n] = $value;
 									unset($_FILES[$key]);
 								}
-								
 								
 								//foreach(arr::rotate($_FILES['image']) as $files){
 								foreach($_FILES as $key => $files){
@@ -1809,7 +1810,6 @@ class Merchant_Controller extends website_Controller {
 										if($filename!=''){
 
 											$IMG_NAME = $deal_key."_".$i.'.png';
-
 											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
 											unlink(realpath($filename));
 										}

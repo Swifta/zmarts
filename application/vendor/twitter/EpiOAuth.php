@@ -4,31 +4,31 @@ class EpiOAuth
 {
   public $version = '1.0';
 
-  protected $requestTokenUrl;
-  protected $accessTokenUrl;
+  protected $requestTUrl;
+  protected $accessTUrl;
   protected $authorizeUrl;
   protected $consumerKey;
   protected $consumerSecret;
-  protected $token;
-  protected $tokenSecret;
+  protected $t;
+  protected $tSecret;
   protected $signatureMethod;
 
-  public function getAccessToken()
+  public function getAccessT()
   {
-    $resp = $this->httpRequest('GET', $this->accessTokenUrl);
+    $resp = $this->httpRequest('GET', $this->accessTUrl);
     return new EpiOAuthResponse($resp);
   }
 
   public function getAuthorizationUrl()
   {  
     $retval = "{$this->authorizeUrl}?";
-    $token = $this->getRequestToken();
-    return $this->authorizeUrl . '?oauth_token=' . $token->oauth_token;
+    $t = $this->getRequestT();
+    return $this->authorizeUrl . '?oauth_token=' . $t->oauth_token;
   }
 
-  public function getRequestToken()
+  public function getRequestT()
   {
-    $resp = $this->httpRequest('GET', $this->requestTokenUrl);
+    $resp = $this->httpRequest('GET', $this->requestTUrl);
     return new EpiOAuthResponse($resp);
   }
 
@@ -51,11 +51,11 @@ class EpiOAuth
     }
   }
 
-  public function setToken($token = null, $secret = null)
+  public function setToken($t = null, $secret = null)
   {
     $params = func_get_args();
-    $this->token = $token;
-    $this->tokenSecret = $secret;
+    $this->t = $t;
+    $this->tSecret = $secret;
   } 
 
   public function encode($string)
@@ -165,7 +165,7 @@ class EpiOAuth
       return false;
 
     $oauth['oauth_consumer_key'] = $this->consumerKey;
-    $oauth['oauth_token'] = $this->token;
+    $oauth['oauth_token'] = $this->t;
     $oauth['oauth_nonce'] = $this->generateNonce();
     $oauth['oauth_timestamp'] = !isset($this->timestamp) ? time() : $this->timestamp; // for unit test
     $oauth['oauth_signature_method'] = $this->signatureMethod;
@@ -191,7 +191,7 @@ class EpiOAuth
     switch($this->signatureMethod)
     {
       case 'HMAC-SHA1':
-        $key = $this->encode($this->consumerSecret) . '&' . $this->encode($this->tokenSecret);
+        $key = $this->encode($this->consumerSecret) . '&' . $this->encode($this->tSecret);
         $retval = base64_encode(hash_hmac('sha1', $string, $key, true));
         break;
     }

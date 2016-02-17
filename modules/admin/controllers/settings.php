@@ -228,10 +228,10 @@ const ALLOW_PRODUCTION = FALSE;
 							->add_rules('currency_code','required','chars[A-Z]')
 							->add_rules('paypal_payment_mode','required')
 							->add_rules('Paypal_Account','required')
-							->add_rules('Paypal_API_Password','required')
+							->add_rules('paypalp','required')
 							->add_rules('Paypal_API_Signature','required')
 							->add_rules('authorizenet_transaction_key','required')
-							->add_rules('authorizenet_api_id','required')
+							->add_rules('auth_dat','required')
 							->add_rules('referral_amount','required','chars[.0-9]')
 							->add_rules('monthly_storecredit','required')
 							->add_rules('pay_later','required');
@@ -283,7 +283,7 @@ const ALLOW_PRODUCTION = FALSE;
 						->add_rules('AccountCountryCode', 'required')
 						->add_rules('AccountEntity', 'required')
 						->add_rules('AccountNumber', 'required')
-						->add_rules('AccountPin', 'required')
+						->add_rules('AccP', 'required')
 						->add_rules('UserName', 'required')
 						->add_rules('Password', 'required');
 
