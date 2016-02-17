@@ -396,8 +396,8 @@ class Merchant_Model extends Model
                        ->join("country","country.country_id","stores.country_id")
                        ->join("category","category.category_id","deals.category_id")
                        ->join("users","users.user_id","deals.merchant_id")
-                       ->where($conditions)
-                       ->limit($limit1)
+                       ->where($conditions." ".$limit1)
+//                       ->limit()
                        ->get();
                 }
 	        else{
@@ -409,9 +409,9 @@ class Merchant_Model extends Model
                        ->join("country","country.country_id","stores.country_id")
                        ->join("category","category.category_id","deals.category_id")
                        ->join("users","users.user_id","deals.merchant_id")
-                       ->where($conditions)
-                       ->orderby("deals.deal_id", "DESC")
-                       ->limit($limit1)
+                       ->where($conditions." order by deals.deal_id DESC ".$limit1)
+//                       ->orderby("deals.deal_id", "DESC")
+//                       ->limit($limit1)
                        ->get();
                 }
 
@@ -766,8 +766,6 @@ class Merchant_Model extends Model
                                  ->join("country","country.country_id","stores.country_id")
                                  ->join("city","city.city_id","stores.city_id")
                                  ->where($contitions)
-                                 ->orderby("stores.store_id")
-                                 ->limit($limit1)
                                  ->get();
                 }
                 return count($result);
@@ -3857,11 +3855,11 @@ class Merchant_Model extends Model
                 }
                 else{
                         $result = $this->db->from("users")
-                                    ->where(array("user_type" => 8))
-				    				->join("city","city.city_id","users.city_id")
-				    				->join("country","country.country_id","users.country_id")
+                                ->where(array("user_type" => 8))
+                                ->join("city","city.city_id","users.city_id")
+                                ->join("country","country.country_id","users.country_id")
                                     //->orderby("user_id", "DESC")
-                                    ->get();
+                                ->get();
                 }
                 return count($result);
         }
@@ -3914,8 +3912,7 @@ class Merchant_Model extends Model
                                     ->from("users")
                                     ->join("city","city.city_id","users.city_id")
                                     ->join("country","country.country_id","users.country_id")
-                                    ->where($contitions)
-                                    ->limit($limit1)
+                                    ->where($contitions." ".$limit1)
                                     ->get();
                 
                 return $result;
@@ -3949,9 +3946,8 @@ class Merchant_Model extends Model
          public function moderator_privileges($user_id)
 		{ 
 			$result = $this->db->from("moderator_privileges_map")
-							->where(array("moderator_id" => $user_id))
-							->get();
-
+                                    ->where(array("moderator_id" => $user_id))
+                                    ->get();
 			return $result;
 		}
 		

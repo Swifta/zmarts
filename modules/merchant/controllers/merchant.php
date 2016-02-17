@@ -353,23 +353,24 @@ class Merchant_Controller extends website_Controller {
 					if($_FILES['image']['name']['0'] != "" )
 					{
 						$i=1;
+                                                $_FILES = arr::rotate($_FILES['image']);
 						foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
-									//foreach(arr::rotate($_FILES['image']) as $files){
-									foreach($_FILES as $key => $files){
-	                                         if($files){
-                                                  $filename = upload::save($key);
-								if($filename!=''){
-									$IMG_NAME = $deal_key."_".$i.'.png';
-                                                                        common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
-									unlink($filename);
-								}
-							}
-							$i++;
+                                                    $n = uniqid();
+                                                    $_FILES[$n] = $value;
+                                                    unset($_FILES[$key]);
 						}
+									//foreach(arr::rotate($_FILES['image']) as $files){
+                                                    foreach($_FILES as $key => $files){
+                                                     if($files){
+                                                      $filename = upload::save($key);
+                                                                    if($filename!=''){
+                                                                            $IMG_NAME = $deal_key."_".$i.'.png';
+                                                                            common::image($filename, 620,752, DOCROOT.'images/deals/1000_800/'.$IMG_NAME);
+                                                                            unlink($filename);
+                                                                    }
+                                                            }
+                                                            $i++;
+                                                    }
 					}
 			                /**DEAL AUTOPOST FACEBOOK WALL**/
 					if($this->input->post('autopost')==1){
@@ -445,7 +446,7 @@ class Merchant_Controller extends website_Controller {
 				'style'          => 'digg',
 				'auto_hide' => TRUE
 			));
-
+                        //var_dump($this->pagination);die;
 		$this->all_deal_list = $this->merchant->get_all_deals_list($type, $this->pagination->sql_offset, $this->pagination->items_per_page ,$this->input->get("city"), $this->input->get('name'),$this->type,$this->sort,0,$this->today,$this->startdate,$this->enddate);
 		if($search == 'all'){
 			$this->all_deal_list = $this->merchant->get_all_deals_list($type, $this->pagination->sql_offset, $this->pagination->items_per_page ,$this->input->get("city"), $this->input->get('name'),$this->type,$this->sort,1,$this->today,$this->startdate,$this->enddate);
@@ -584,11 +585,12 @@ class Merchant_Controller extends website_Controller {
 
                                 if($_FILES['image']['name'] != "" ){
                                     $i=1;
+                                    $_FILES = arr::rotate($_FILES['image']);
                                     foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
+                                        $n = uniqid();
+                                        $_FILES[$n] = $value;
+                                        unset($_FILES[$key]);
+                                    }
 									//foreach(arr::rotate($_FILES['image']) as $files){
 									foreach($_FILES as $key => $files){
 	                                         if($files){
@@ -1807,14 +1809,9 @@ class Merchant_Controller extends website_Controller {
 						if($status > 0 && $deal_key){
 							if($_FILES['image']['name']['0'] != "" ){
 								$i=1;
-								
-<<<<<<< HEAD
+
 								
 								$_FILES = arr::rotate($_FILES['image']);
-||||||| merged common ancestors
-=======
-                                                                $_FILES = arr::rotate($_FILES['image']);
->>>>>>> 8ac5c17b6b7b5bbd3a933f1e22f1d69c9f67a19f
 								foreach($_FILES as $key =>$value){
 									$n = uniqid();
 									$_FILES[$n] = $value;
@@ -2147,7 +2144,7 @@ class Merchant_Controller extends website_Controller {
 				if($status == 1 && $deal_key){
 					if($_FILES['image']['name'] != "" ){
 						$i=1;
-						
+						$_FILES = arr::rotate($_FILES['image']);
 						foreach($_FILES as $key =>$value){
 							$n = uniqid();
 							$_FILES[$n] = $value;
@@ -2718,13 +2715,14 @@ class Merchant_Controller extends website_Controller {
 			            if($_FILES['image']['name']['0'] != "" )
                                     {
                                         $i=1;
+                                        $_FILES = arr::rotate($_FILES['image']);
                                             foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
+                                                $n = uniqid();
+                                                $_FILES[$n] = $value;
+                                                unset($_FILES[$key]);
+                                            }
 									//foreach(arr::rotate($_FILES['image']) as $files){
-									foreach($_FILES as $key => $files){
+						foreach($_FILES as $key => $files){
 	                                         if($files){
                                                   $filename = upload::save($key);
 				                        if($filename!=''){
@@ -2968,11 +2966,12 @@ class Merchant_Controller extends website_Controller {
 					if($_FILES['image']['name'] != "" )
                      {
                                     $i=1;
+                                    $_FILES = arr::rotate($_FILES['image']);
                                    foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
+                                        $n = uniqid();
+                                        $_FILES[$n] = $value;
+                                        unset($_FILES[$key]);
+                                    }
 									//foreach(arr::rotate($_FILES['image']) as $files){
 									foreach($_FILES as $key => $files){
 	                                         if($files){
@@ -5393,8 +5392,8 @@ class Merchant_Controller extends website_Controller {
 				$this->form_error = error::_error($post->errors());
 			}
 		}
-		$this->type = $this->input->get('sort');
-		$this->sort = $this->input->get('param');
+		$this->type = strip_tags(addslashes($this->input->get('sort')));
+		$this->sort = strip_tags(addslashes($this->input->get('param')));
 		$this->sort_url= PATH.'admin/manage-moderator.html?';
 		$this->count_user = $this->merchant->get_moderator_count($this->input->get('name'), $this->input->get('email'), $this->input->get('city'), $this->input->get('logintype'),$this->type,$this->sort);
 
@@ -5408,7 +5407,7 @@ class Merchant_Controller extends website_Controller {
             'style'          => 'digg',
             'auto_hide'      => TRUE
         ));
-        $search = $this->input->get('id'); 
+        $search = strip_tags(addslashes($this->input->get('id'))); 
         $this->search = $this->input->get(); 
         $this->search_key = arr::to_object($this->search); 
         $this->city_list = $this->merchant->getCityListOnly();

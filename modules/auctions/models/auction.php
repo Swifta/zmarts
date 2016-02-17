@@ -63,6 +63,7 @@ class Auction_Model extends Model
 		        $conditions .= " and (deal_title like '%".strip_tags(addslashes($search))."%'";
 			$conditions .= " or deal_description like '%".strip_tags(addslashes($search))."%')";
 			}
+                        var_dump($conditions); die;
 //			$query="select auction.deal_id from(auction)
 //                            join category on category.category_id=auction.category_id 
 //                            join stores on stores.store_id=auction.shop_id where $conditions $sort_con";
@@ -94,6 +95,7 @@ class Auction_Model extends Model
                         
                       //  $result = $this->db->query($qry);
 		        }
+                        
 		return count($result);
 
         }
@@ -250,7 +252,7 @@ class Auction_Model extends Model
                         $conditions .= " and (deal_title like '%".strip_tags(addslashes($search))."%'";
 	                $conditions .= " or deal_description like '%".strip_tags(addslashes($search))."%')";
 	                }
-
+//echo $conditions; die;
 //	                $query="select auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,stores.store_url_title,(select avg(rating)
 //                        from rating where type_id=auction.deal_id and module_id=3) as avg_rating from(auction) 
 //                        join category on category.category_id=auction.category_id 
@@ -262,7 +264,7 @@ class Auction_Model extends Model
                            ->from("auction")
                            ->join("category","category.category_id","auction.category_id")
                            ->join("stores","stores.store_id","auction.shop_id")
-                           ->where($conditions. ' ' .$sort_con. " limit ".$record.", ".$offset)
+                           ->where($conditions. " " .$sort_con. " limit ".$record.", ".$offset)
                            ->get();
                        
                         }

@@ -1082,16 +1082,17 @@ class Deals_Model extends Model
 		
 		$con = " and stores.store_id = $store_id ";
 		if(CITY_SETTING){ 
-			$con .= "and stores.city_id = '$this->city_id'";
+			$con .= "and stores.city_id = '".$this->city_id."'";
 		}	
 		//$result = $this->db->query("select category_url, category.category_id, category_name , product , count(product.deal_id) as product_count from category join product on product.category_id = category.category_id join stores on stores.store_id=product.shop_id where category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1 $con group by category.category_id  order by category_name ASC"); 
-		$result = $this->db->select("category_url, category.category_id, category_name , product , count(product.deal_id) as product_count")
-                                ->from("category")
-                                ->join("stores","stores.store_id","product.shop_id")
-                                ->where("category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1". $con)
-                                ->groupby("category.category_id")
-                                ->orderby("category_name", "ASC")
-                                ->get();
+		$result = $this->db->select("category_url, category.category_id, category_name, product , count(product.deal_id) as product_count")
+                            ->from("category")
+                            ->join("product", "product.category_id", "category.category_id")
+                            ->join("stores","stores.store_id","product.shop_id")
+                            ->where("category_status = 1 AND main_category_id = 0 AND product = 1 AND purchase_count < user_limit_quantity AND deal_status = 1  and  store_status = 1". $con)
+                            ->groupby("category.category_id")
+                            ->orderby("category_name", "ASC")
+                            ->get();
                 return $result;
 	}
 	

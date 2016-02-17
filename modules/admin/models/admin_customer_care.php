@@ -154,9 +154,10 @@ class Admin_customer_care_Model extends Model
 			 ->from("users")
 			 ->join("city","city.city_id","users.city_id")
 			  ->join("country","country.country_id","users.country_id")
-			 ->where($contitions)
-			 ->orderby($joinorder)
-			 ->limit($limit1)->get();
+			 ->where($contitions." ".$joinorder." ".$limit1)
+//			 ->orderby($joinorder)
+//			 ->limit($limit1)
+                         ->get();
 
 		 return $result;
 	}
@@ -228,7 +229,7 @@ class Admin_customer_care_Model extends Model
 			 $result = $this->db->select("user_id")
 			 ->from("users")
 			 ->join("city","city.city_id","users.city_id")
-			  ->join("country","country.country_id","users.country_id")
+			 ->join("country","country.country_id","users.country_id")
 			 ->where($contitions)
 			  ->get();
 
@@ -238,11 +239,11 @@ class Admin_customer_care_Model extends Model
 			}
 		else{
 			$result = $this->db->from("users")
-				    ->where(array("user_type" => 7))
-								->join("city","city.city_id","users.city_id")
-								->join("country","country.country_id","users.country_id")
-				    ->orderby("user_id", "DESC")
-				    ->get();
+                            ->where(array("user_type" => 7))
+                            ->join("city","city.city_id","users.city_id")
+                            ->join("country","country.country_id","users.country_id")
+                            ->orderby("user_id", "DESC")
+                            ->get();
 		}
 		return count($result);
 	}
