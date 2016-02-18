@@ -350,7 +350,7 @@ class Creditcard_paypal_Model extends Model
                                 ->join("city","city.city_id","s.city")
                                 ->join("stores","stores.store_id","product.shop_id")
                                 ->join("users as u","u.user_id","s.user_id")
-                                ->where("shipping_type = 1 and t.transaction_id =" .strip_tags(addslashes($trans_id)). " " .$condition)
+                                ->where("shipping_type = 1 and t.transaction_id ='" .strip_tags(addslashes($trans_id)). "' " .$condition)
                                 ->get();
 		
 		return $result;

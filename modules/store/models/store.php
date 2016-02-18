@@ -156,7 +156,7 @@ class Store_Model extends Model
                         ->join("stores","stores.store_id","deals.shop_id")
                         ->join("users","users.user_id","deals.merchant_id")
                         ->join("category","category.category_id","deals.category_id")
-                        ->where($conditions. "and purchase_count < maximum_deals_limit and category.category_status = 1 and  store_status = 1")
+                        ->where($conditions. " and purchase_count < maximum_deals_limit and category.category_status = 1 and  store_status = 1")
                         ->orderby($order1,$order)
                         ->get();
                         /*   $result = $this->db->from("deals")
@@ -460,9 +460,9 @@ class Store_Model extends Model
 			$store_id = strip_tags(addslashes($store_id));
 			$get_rate = count($result);
 			//$sum= $this->db->query("select sum(rating) as sum from rating where type_id='$store_id' AND module_id = 4");
-			$sum = $store_id->db->select("sum(rating) as sum")
+			$sum = $this->db->select("sum(rating) as sum")
                                 ->from("rating")
-                                ->where("type_id='.$store_id. ' AND module_id = 4")
+                                ->where("type_id='".$store_id." ' AND module_id = 4")
                                 ->get();
                         $get_sum=$sum->current()->sum;
 			$average= $get_sum/$get_rate;
@@ -490,11 +490,11 @@ class Store_Model extends Model
 		{
 			$conditions = "purchase_count < user_limit_quantity  and category.category_status = 1 and  store_status = 1  and shop_id = $storeid and product.merchant_id = $merchantid";
 			//$qry = "select deal_id, deal_key, url_title, deal_title, deal_description, $this->deal_value_condition,category_url,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where $conditions and product.deal_status = 1  order by purchase_count DESC limit 12"; 
-			$result = $this->db->select("deal_id, deal_key, url_title, deal_title, deal_description, $this->deal_value_condition,category_url,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
+			$result = $this->db->select("deal_id, deal_key, url_title, deal_title, deal_description,". $this->deal_value_condition.",category_url,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
                                     ->from("product")
                                     ->join("stores","stores.store_id","product.shop_id")
                                     ->join("category","category.category_id","product.category_id")
-                                    ->where($conditions. "and product.deal_status = 1")
+                                    ->where($conditions. " and product.deal_status = 1")
                                     ->orderby("purchase_count", "DESC")
                                     ->limit(12)
                                     ->get();

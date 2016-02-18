@@ -23,7 +23,7 @@ class Pay_later_Model extends Model
                     strip_tags(addslashes($deal_id)));**/
                 $result = $this->db->select("*, $this->deal_value_condition")
                         ->from("product")
-                        ->join("category","category.category_id=product.category_id")
+                        ->join("category","category.category_id", "product.category_id")
                         ->where("deal_status = 1 and category.category_status = 1 and deal_id = " .strip_tags(addslashes($deal_id)))
                         ->get();
                 
@@ -208,7 +208,7 @@ class Pay_later_Model extends Model
                             ->join("city","city.city_id","s.city")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join("users as u","u.user_id","s.user_id")
-                            ->where("shipping_type = 1 and t.transaction_id =" .$trans_id . " and product.merchant_id =" .strip_tags(addslashes($merchant_id)) . " " .$condition)
+                            ->where("shipping_type = 1 and t.transaction_id ='" .$trans_id . "' and product.merchant_id =" .strip_tags(addslashes($merchant_id)) . " " .$condition)
                             ->orderby("shipping_id", "DESC")
                         ->get();
 		

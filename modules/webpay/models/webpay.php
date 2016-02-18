@@ -423,7 +423,7 @@ class Webpay_Model extends Model
 	{
 		//$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = $deal_id");
 	        $result = $this->db->select()->from("product")
-                        ->join("stores", "stores.store_id", "product.shop_id ")
+                        ->join("stores", "stores.store_id", "product.shop_id")
                         ->join("category", "category.category_id", "product.category_id")
                         ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1,
                             "product.deal_id" => $deal_id))->get();

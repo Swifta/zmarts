@@ -202,7 +202,7 @@ class Payment_product_Model extends Model
 	{
 		//$result = $this->db->query("select *, $this->deal_value_condition,s.shipping_amount from product  join store_credit_save as s on productid=deal_id where s.storecredit_id = '".
                 //strip_tags(addslashes($duration_id))."' and deal_id = '".strip_tags(addslashes($productid))."'");
-                $result = $this->db->select("*, $this->deal_value_condition,s.shipping_amount")
+                $result = $this->db->select("*, ".$this->deal_value_condition.",s.shipping_amount")
                 ->from("product")
                 ->join("store_credit_save as s","productid","deal_id") 
                 ->where(array(
