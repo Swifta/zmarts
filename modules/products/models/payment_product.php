@@ -51,7 +51,7 @@ class Payment_product_Model extends Model
 	{
 		//$result = $this->db->query("select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_type = 2  and deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_id = '$deal_id' ");
 			
-		$result = $this->db->select("*, $this->deal_value_condition")
+		$result = $this->db->select("*, ".$this->deal_value_condition)
                         ->from("product") 
                         ->join("stores","stores.store_id","product.shop_id")
                         ->join("category","category.category_id","product.category_id")
@@ -141,7 +141,7 @@ class Payment_product_Model extends Model
 		/*
 		$result = $this->db->select("*, $this->deal_value_condition")->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();*/
 		                
-		$result = $this->db->select("*, $this->deal_value_condition")->from("product")->where(array("deal_id" => $deal_id))->get();
+		$result = $this->db->select("*, ".$this->deal_value_condition)->from("product")->where(array("deal_id" => $deal_id))->get();
 		return $result;
 	}
 	
@@ -239,7 +239,7 @@ public function get_cart_products1($deal_id = "")
 	{              
 		
 		     
-		$result = $this->db->select("*, $this->deal_value_condition")->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
+		$result = $this->db->select("*, ".$this->deal_value_condition)->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
 		return $result;
 	}
 	/* CHECK STORE CREDITS PRODUCT ALREADY EXITS */

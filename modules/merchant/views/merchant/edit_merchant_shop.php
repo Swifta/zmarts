@@ -313,7 +313,7 @@
                                 </td>
                         </tr>  
                         <tr>
-                                <td><label><?php echo $this->Lang["LATITUDE"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["LATITUDE"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <input type="text" onclick="show_popup();" name="latitude" class="gllpLatitude" readonly value="<?php echo $u->latitude; ?>"/>
@@ -321,7 +321,7 @@
                                 </td>
                         </tr>
                         <tr>
-                                <td><label><?php echo $this->Lang["LONGITUDE"]; ?><span>*</span></label></td>
+                                <td><label><?php echo $this->Lang["LONGITUDE"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <input type="text" name="longitude" class="gllpLongitude" readonly value="<?php echo $u->longitude; ?>"/>

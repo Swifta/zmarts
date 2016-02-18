@@ -11,7 +11,7 @@ class Webpay_Model extends Model
 	}
         
         public function addStockBack($transaction_id){
-            $get_detail = $this->db->select("deal_merchant_commission","shipping_amount","tax_amount","amount","product_size","product_id","deal_id","auction_id","quantity")->
+            $get_detail = $this->db->select("deal_merchant_commission,shipping_amount,tax_amount,amount,product_size,product_id,deal_id,auction_id,quantity")->
                     from('transaction')->where(array("transaction_id" =>$transaction_id))->get();
             if(count($get_detail)){
                 $product_id = $get_detail[0]->product_id;
@@ -458,7 +458,8 @@ class Webpay_Model extends Model
 	public function get_products_coupons_list($transaction = "",$deal_id = "")
 	{
 
-		$result = $this->db->select('*','shipping_info.adderss1 as saddr1','shipping_info.address2 as saddr2','users.phone_number','transaction.id as trans_id','transaction.transaction_id as transactionid','users.address1 as addr1','users.address2 as addr2','users.phone_number as str_phone','transaction.shipping_amount as shipping')->from("shipping_info")
+		$result = $this->db->select('*, shipping_info.adderss1 as saddr1,shipping_info.address2 as saddr2,users.phone_number,transaction.id as trans_id,transaction.transaction_id as transactionid,users.address1 as addr1,users.address2 as addr2,users.phone_number as str_phone,transaction.shipping_amount as shipping')
+                        ->from("shipping_info")
                                 ->where(array("shipping_type"=>1,"shipping_info.user_id" => $this->UserID,"transaction.id" =>$transaction,"transaction.product_id" =>$deal_id))
                                 ->join("users","users.user_id","shipping_info.user_id")
                                 ->join("transaction","transaction.id","shipping_info.transaction_id")

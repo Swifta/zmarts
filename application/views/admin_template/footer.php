@@ -10,7 +10,7 @@
             <li><a href="#" title="Tell a Friend">Tell a Friend</a></li><li>|</li>
             <li><a href="#" title="Site Map">Site Map</a></li>
         </ul><?php */?>
-        <p style="margin-left: -35px"> <?php echo $this->Lang["FOOTER_COPYRIGHT"]."&nbsp;".SITENAME.".&nbsp;".$this->Lang["FOOTER_ALLRIGHT"]; ?></p>
+        <p style="margin-left: -35px"> <?php echo $this->Lang["FOOTER_COPYRIGHT"]."&copy ".date("Y")."&nbsp;".SITENAME.".&nbsp;".$this->Lang["FOOTER_ALLRIGHT"]; ?></p>
 
         </div>
         </div>

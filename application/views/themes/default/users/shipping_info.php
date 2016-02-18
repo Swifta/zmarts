@@ -177,7 +177,7 @@
 
 
                                                     <li>
-                                                        <label><?php echo $this->Lang['ZIP_CODE']; ?><span>*</span></label>
+                                                        <label><?php echo $this->Lang['ZIP_CODE']; ?></label>
                                                         <div class="fullname">
                                                             <input  type="text" name="zip_code"  value="<?php if($u->ship_zipcode !='0'){ echo $u->ship_zipcode; } ?>" maxlength="8" placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>"/>
                                                         </div>

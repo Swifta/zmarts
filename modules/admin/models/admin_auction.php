@@ -185,8 +185,8 @@ class Admin_auction_Model extends Model
                                         ->join("country","country.country_id","stores.country_id")
                                         ->join("category","category.category_id","auction.category_id")
                                         ->join("users","users.user_id","auction.merchant_id")
-                                        ->where($conditions)
-                                        ->limit($limit1)
+                                        ->where($conditions." order by auction.deal_id DESC ".$limit1)
+                                        //->limit($limit1)
                                         ->get();
 		}
 		else{
@@ -198,9 +198,9 @@ class Admin_auction_Model extends Model
                                         ->join("country","country.country_id","stores.country_id")
                                         ->join("category","category.category_id","auction.category_id")
                                         ->join("users","users.user_id","auction.merchant_id")
-                                        ->where($conditions)
-                                        ->orderby("auction.deal_id", "DESC")
-                                        ->limit($limit1)
+                                        ->where($conditions." order by auction.deal_id DESC ".$limit1)
+                                        //->orderby("auction.deal_id", "DESC")
+                                        //->limit($limit1)
                                         ->get();
 		}
 		

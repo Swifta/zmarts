@@ -2,7 +2,7 @@
 $THIS_SITENAME = SITENAME;
 $content_text = array(
 
-			"FOOTER_COPYRIGHT" => "Copyright © 2015",
+			"FOOTER_COPYRIGHT" => "Copyright ",
 
 			"FOOTER_ALLRIGHT" => "All rights reserved",
 

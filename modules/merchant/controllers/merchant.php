@@ -36,6 +36,7 @@ class Merchant_Controller extends website_Controller {
 			        $this->template->style = html::stylesheet(array(PATH.'css/merchant.css'));
 		        }
 		}
+                $this->settings = new Settings_Model();
 	}
 
 	/** MERCHANT LOGIN **/
@@ -1100,8 +1101,8 @@ class Merchant_Controller extends website_Controller {
 					->add_rules('about_us', 'required')
 					->add_rules('zipcode', 'chars[a-zA-Z0-9.]')
 					//->add_rules('website', 'valid::url')
-					->add_rules('latitude', 'required','chars[0-9.-]')
-					->add_rules('longitude', 'required','chars[0-9.-]')
+					->add_rules('latitude', 'chars[0-9.-]')
+					->add_rules('longitude', 'chars[0-9.-]')
 					->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 					->add_rules('email',array($this,'check_store_admin1'))
                                 //->add_rules('email',array($this,'check_store_admin1'),array($this,'check_store_admin_with_supplier'))
@@ -1214,12 +1215,14 @@ class Merchant_Controller extends website_Controller {
 								imagedestroy($tmp0);
 								imagedestroy($tmp1);
 							}
+                                                        unlink($uploadedfile);
 						}
-                                                unlink($uploadedfile);
+                                                
 
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
+                                                    $subsector_ids = $this->settings->get_all_subsector_ids();
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
 										foreach($subsector_ids as $id){

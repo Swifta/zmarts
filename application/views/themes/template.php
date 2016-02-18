@@ -200,7 +200,7 @@
           'backgroundColor':'#FFFFFF', 
 
           // border color
-          'borderColor':'#BCE8F1',
+          'borderColor':'#f5791f',
 
           // border radius
           'borderRadius':'3px', 
@@ -212,7 +212,7 @@
           'maxWidth':'390px',
 
           // top position
-          'top':20, 
+          'top':140, 
 
           // z-index
           'zIndex': 888,
@@ -231,7 +231,7 @@
           'fontSize':'19px', 
 
           // font color
-          'fontColor': '#FFFFFF', 
+          'fontColor': '#f5791f', 
 
           // auto close
           'autoClose':true,
@@ -240,7 +240,7 @@
           'showCloseButton':false,
 
           // show / close duration
-          'showDuration':5000,  
+          'showDuration':25000,  
           'closeDuration':1000
 
         });

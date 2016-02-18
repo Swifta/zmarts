@@ -644,7 +644,8 @@ class Products_Model extends Model
 					$condition = array("url_title" => $url_title, "deal_key" => $deal_key,"deal_status" => 1, "for_store_cred" => 0, "category.category_status" => 1, "store_status" => 1);
 				
 			}
-	        $result = $this->db->select("*",$this->deal_saving_condition,$this->deal_value_condition, $this->deal_percentage_condition,"stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")->from("product")
+	        $result = $this->db->select("*,".$this->deal_saving_condition.",".$this->deal_value_condition.",". $this->deal_percentage_condition.",stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")
+                        ->from("product")
                                 ->where($condition)
                                 ->join("stores","stores.store_id","product.shop_id")
                                 ->join("city","city.city_id","stores.city_id")
@@ -705,7 +706,7 @@ class Products_Model extends Model
                         $join_table = "store_credit_save";
                         $join_a = "store_credit_save.productid";
                         $join_b = "product.deal_id";
-                    $result = $this->db->select("*,$this->deal_value_condition")
+                    $result = $this->db->select("*, ".$this->deal_value_condition)
                             ->from("product")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join($join_table, $join_a, $join_b, "LEFT")
@@ -713,7 +714,7 @@ class Products_Model extends Model
                             ->get();
 		} else { 				// Normal Products
 			$condition = ' and product_duration = ""';
-		$result = $this->db->select("*,$this->deal_value_condition")
+		$result = $this->db->select("*, ".$this->deal_value_condition)
                         ->from("product")
                         ->join("stores","stores.store_id","product.shop_id")
                         ->where("deal_id = " .$deal_id. " " .$condition)
@@ -1051,7 +1052,7 @@ class Products_Model extends Model
 		if(CITY_SETTING){
 	//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where 
         //purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and $this->deal_value_condition_field between $price_from and $price_to   order by deal_id ASC ";
-				$result = $this->db->select("*, $this->deal_value_condition")
+				$result = $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("category","category.category_id","product.category_id")
@@ -1138,7 +1139,7 @@ class Products_Model extends Model
 	  {
 		if(CITY_SETTING){
 				//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
-				$result =  $this->db->select("*, $this->deal_value_condition")
+				$result =  $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("color","color.deal_id","product.deal_id")
@@ -1151,7 +1152,7 @@ class Products_Model extends Model
 		}
 		else {
 				//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color  order by product.deal_id ASC";
-				$result =  $this->db->select("*, $this->deal_value_condition")
+				$result =  $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("color","color.deal_id","product.deal_id")
@@ -1170,7 +1171,7 @@ class Products_Model extends Model
 		if(CITY_SETTING){
 				/**$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id 
                                     where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";**/
-				$result = $this->db->select("*, $this->deal_value_condition")
+				$result = $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("color","color.deal_id","product.deal_id")
@@ -1183,7 +1184,7 @@ class Products_Model extends Model
 		}
 		else {
 				//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join color on color.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and color.color_id = $color  order by product.deal_id ASC";
-				$result = $this->db->select("*, $this->deal_value_condition")
+				$result = $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("color","color.deal_id","product.deal_id")
@@ -1203,7 +1204,7 @@ class Products_Model extends Model
 	  {
 		if(CITY_SETTING){
 				//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size and stores.city_id = '$this->city_id'  order by product.deal_id ASC ";
-				$result = $this->db->select("*, $this->deal_value_condition")
+				$result = $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("product_size","product_size.deal_id","product.deal_id")
@@ -1216,7 +1217,7 @@ class Products_Model extends Model
 		}
 		else {
 				//$qry = "select *, $this->deal_value_condition from product  join stores on stores.store_id=product.shop_id join product_size on product_size.deal_id=product.deal_id join category on category.category_id=product.category_id where  purchase_count < user_limit_quantity and deal_status = 1  ".$this->club_condition."   and category.category_status = 1 and  store_status = 1 and product_size.size_id = $size  order by product.deal_id ASC";
-				$result = $this->db->select("*, $this->deal_value_condition")
+				$result = $this->db->select("*, ".$this->deal_value_condition)
                                         ->from("product")
                                         ->join("stores","stores.store_id","product.shop_id")
                                         ->join("product_size","product_size.deal_id","product.deal_id")
