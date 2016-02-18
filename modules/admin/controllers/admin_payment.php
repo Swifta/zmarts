@@ -177,12 +177,12 @@ class Admin_payment_Controller extends website_Controller
 		$this->template->javascript .= html::script(array(PATH.'js/jquery-1.5.1.min.js', PATH.'js/jquery-ui-1.8.11.custom.min.js', PATH.'js/jquery-ui-timepicker-addon.js'));
 	        $this->template->style .= html::stylesheet(array(PATH.'css/datetime.css'));
                 $this->page = $page ==""?1:$page; // for export per page
-                $this->type = $this->input->get('sort');
-                $this->sort = $this->input->get('param');
-                $search=$this->input->get("id");
-                $this->today = $this->input->get("today");
-	        $this->startdate  = $this->input->get("startdate");
-	        $this->enddate  = $this->input->get("enddate");	
+                $this->type = strip_tags(addslashes($this->input->get('sort')));
+                $this->sort = strip_tags(addslashes($this->input->get('param')));
+                $search= strip_tags(addslashes($this->input->get("id")));
+                $this->today = strip_tags(addslashes($this->input->get("today")));
+	        $this->startdate  = strip_tags(addslashes($this->input->get("startdate")));
+	        $this->enddate  = strip_tags(addslashes($this->input->get("enddate")));	
 	        $this->date_range = isset($_GET['date_range'])?1:0;
 		$this->deal_trans = 1;
 
@@ -212,7 +212,7 @@ class Admin_payment_Controller extends website_Controller
 				$this->sort_url= PATH.'admin/all-transaction.html?';
 			}
 
-		$this->search_key =  $this->input->get('name');
+		$this->search_key =  strip_tags(addslashes($this->input->get('name')));
 		$this->count_transaction_list = $this->payment->count_transaction_deal_list($type,$this->search_key,$this->type,$this->sort,"",$this->today,$this->startdate,$this->enddate);
 
 		$this->pagination = new Pagination(array(
