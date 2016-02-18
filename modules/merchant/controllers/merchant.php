@@ -7331,27 +7331,38 @@ class Merchant_Controller extends website_Controller {
 					->add_rules('template_image','required','upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
 				$status = $this->merchant->add_template(arr::to_object($this->userPost));
-				if($status > 0){
-					
+				/*if($status > 0){
 					$source = upload::save('template_file');
-					if($source){
-						/*$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
-						$name = "Template_file_".$status.".php";
-						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
-						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);*/
+					if($source){//
+//						$tmp_name = upload::save('template_file');//$_FILES["template_file"]["tmp_name"];
+//						$name = "Template_file_".$status.".php";
+//						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
+//						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+//						
+//						$template_id = null;
+//						$template_id = $this->merchant->get_template_by_id_sec($status);
+//						if(!$template_id)
+//							exit;
+//							
+//						$name = "Template_file_".$template_id.".php";
+//						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
+//						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+//						
+//						unlink($source);
 						
-						$template_id = null;
-						$template_id = $this->merchant->get_template_by_id_sec($status);
-						if(!$template_id)
+					}*/
+				$template_id = null;
+				$template_id = $this->news->get_template_by_id_sec($status);
+				if($status === $template_id){
+						$filename = null;
+						$dir = null;
+						if($template_id){
+						 $filename = "Template_file_".$template_id.".php";
+						 $dir = realpaht(DOCROOT."application/views/themes/".THEME_NAME."/").$filename;
+						 upload::save('template_file', null, $dir, 0777);
+						}else{
 							exit;
-							
-						$name = "Template_file_".$template_id.".php";
-						move_uploaded_file($source, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
-						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
-						
-						unlink($source);
-						
-					}
+						}	
 					$filename = upload::save('template_image'); 
 					if($filename){						
 						$IMG_NAME = $status.'.png';						

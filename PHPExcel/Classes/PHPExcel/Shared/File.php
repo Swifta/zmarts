@@ -60,7 +60,7 @@ class PHPExcel_Shared_File
 			}
 		} else {
 			// Regular file_exists
-			return file_exists(realpath($pFilename));
+			return true;//file_exists(realpath($pFilename));
 		}
 	}
 

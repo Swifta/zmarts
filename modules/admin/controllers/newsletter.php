@@ -292,20 +292,25 @@ class Newsletter_Controller extends website_Controller {
 					->add_rules('template_image','required','upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
 				$status = $this->news->add_template(arr::to_object($this->userPost));
-				if($status > 0){
-					$tmp_name = upload::save('template_file');
-					if($tmp_name){
-						//basename($_FILES["template_file"]["tmp_name"]);
-						$template_id = null;
-						$template_id = $this->news->get_template_by_id_sec($status);
-						if(!$template_id)
+				$template_id = null;
+				$template_id = $this->news->get_template_by_id_sec($status);
+				if($status === $template_id){
+						$filename = null;
+						$dir = null;
+						if($template_id){
+						 $filename = "Template_file_".$template_id.".php";
+						 $dir = realpaht(DOCROOT."application/views/themes/".THEME_NAME."/").$filename;
+						 upload::save('template_file', null, $dir, 0777);
+						}else{
 							exit;
-							
-						$name = "Template_file_".$template_id.".php";
-						move_uploaded_file($tmp_name, realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name);
-						chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
-                        unlink($tmp_name);
-					}
+						}	
+						
+					//if($tmp_name){
+						//basename($_FILES["template_file"]["tmp_name"]);
+						//move_uploaded_file($tmp_name, realpath();
+						//chmod(realpath(DOCROOT."application/views/themes/".THEME_NAME."/").$name,0777);
+                        //unlink($tmp_name);
+					//}
 					
 					$filename = upload::save('template_image'); 	
 					if($filename){					
