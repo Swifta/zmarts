@@ -78,14 +78,22 @@ if (!isset($_SESSION['openChatBoxes'])) {
 }
 
 function chatHeartbeat() {
-	$sql = "select *,sellerid from chat where (chat.to1 = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0) order by id ASC";
-	$query = mysql_query($sql);
+//	$sql = "select *,sellerid from chat where (chat.to1 = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0) order by id ASC";
+//        
+//	$query = mysql_query($sql);
+          
+           $query = $this->db->select("*,sellerid")->from("chat")
+                                         
+          ->where("chat.to1 = '".mysql_real_escape_string($_SESSION['username'])."' AND recd = 0")
+          ->orderby("id","ASC") ->get();
+                                                   
 	if($_SESSION['sel_id']) {
 
-		$Sell_ID = $_SESSION['sel_id'];
+		//$Sell_ID = $_SESSION['sel_id'];
+            $Sell_ID = strip_tags(addslashes($_SESSION['sel_id']));
 	}else {
 
-		$Sell_ID = $_GET['sel_id'];
+		//$Sell_ID = $_GET['sel_id'];
 	}
 	if($_GET['cus_id']=="undefined") {
 
@@ -98,7 +106,8 @@ function chatHeartbeat() {
 
 	$chatBoxes = array();
 
-	while ($chat = mysql_fetch_array($query)) {
+	//while ($chat = mysql_fetch_array($query)) {
+            while($chat = $query){
 		if (!isset($_SESSION['openChatBoxes'][$chat['from']]) && isset($_SESSION['chatHistory'][$chat['from']])) {
 			//$items = $_SESSION['chatHistory'][$chat['from']];
                           $items = strip_tags(addslashes($_SESSION['chatHistory'][$chat['from']]));
@@ -142,10 +151,18 @@ EOD;
 		$_SESSION['openChatBoxes'][$chat['from']] = $chat['sent'];
 	}
 
-	$sql = "update chat set recd = 1 , sellerid ='".mysql_real_escape_string($Sell_ID)."',userid = '".mysql_real_escape_string($_SESSION['uid'])."'where chat.to1 = '".mysql_real_escape_string($_SESSION['username'])."' and recd = 0";
+//	$sql = "update chat set recd = 1 , sellerid ='".mysql_real_escape_string($Sell_ID)."',userid = '".mysql_real_escape_string($_SESSION['uid'])."'where chat.to1 = '".mysql_real_escape_string($_SESSION['username'])."' and recd = 0";
+//
+//	$query = mysql_query($sql);
 
-	$query = mysql_query($sql);
+        
+        
+        $query = $this->db->update("chat", array("recd" => 1,"sellerid" => $Sell_ID, "userid" => $_SESSION['uid']), array("chat.to1" => $_SESSION['username'], "recd" => 0 ));
+				
 
+        
+        
+        
 	if ($items != '') {
 		$items = substr($items, 0, -1);
 	}
@@ -205,11 +222,11 @@ header('Content-type: application/json');
 function sendChat() {
 
 	//$from = $_SESSION['username'];
-	$from = $_POST['customer_name'];
-	$to = $_POST['to'];
-	$message = $_POST['message'];
-    $buyerprofile = $_SESSION['image'];
-    $UserID = strip_tags(addslashes($_SESSION['uid'])); //  replace  with common $_SESSION['UserID']
+	$from = strip_tags(addslashes($_POST['customer_name']));
+	$to = strip_tags(addslashes($_POST['to']));
+	$message = strip_tags(addslashes($_POST['message']));
+        $buyerprofile = $_SESSION['image'];
+        $UserID = strip_tags(addslashes($_SESSION['uid'])); //  replace  with common $_SESSION['UserID']
     //$UserID = $_SESSION['chatuserid'];
     $Sell_ID = strip_tags(addslashes(trim($_POST['sellid'])));
     $_SESSION['sel_id'] = $Sell_ID;
@@ -238,12 +255,15 @@ EOD;
 
 
 	unset($_SESSION['tsChatBoxes'][$_POST['to']]);
-	$sql = "insert into chat (chat.from1,chat.to1,message,sent,chat.userid,chat.sellerid,chat.chat_type) values ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($message)."',NOW(),'".$UserID."','".$Sell_ID."','".$chat_type."')";
-	$query = mysql_query($sql);
+//	$sql = "insert into chat (chat.from1,chat.to1,message,sent,chat.userid,chat.sellerid,chat.chat_type) values 
+//            ('".mysql_real_escape_string($from)."', '".mysql_real_escape_string($to)."','".mysql_real_escape_string($message)."',NOW(),'".$UserID."','".$Sell_ID."','".$chat_type."')";
+//	$query = mysql_query($sql);
+	$query = $this->db->insert("chat",array("chat.from1"=>$from,"chat.to1"=>$to,"message"=>$message,"sent"=>NOW(),"chat.userid"=>$UserID,"chat.sellerid"=>$Sell_ID,"chat.chat_type"=>$chat_type));
+	//$sql1 = "update chat_users set last_update = NOW() where chat_name = '".mysql_real_escape_string($from)."'";
+        $query1 = $this->db->update("chat_users", array("last_update" => NOW()), array("chat_name" => $from ));
 	
-	$sql1 = "update chat_users set last_update = NOW() where chat_name = '".mysql_real_escape_string($from)."'";
 
-	$query1 = mysql_query($sql1);
+//	$query1 = mysql_query($sql1);
 
 	echo "1";
 	exit(0);
