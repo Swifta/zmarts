@@ -696,23 +696,30 @@ class Products_Model extends Model
 	{
 		$condition = '';
 		$join ="";
+                        $join_table = "";
+                        $join_a = "";
+                        $join_b = "";
 		if($type ==1) { 				// Store credits products
 			$condition = ' and credit_status =1 and product_duration != ""';
 			$join =" left join store_credit_save on store_credit_save.productid = product.deal_id";
                         $join_table = "store_credit_save";
                         $join_a = "store_credit_save.productid";
                         $join_b = "product.deal_id";
-		} else if($type==2) { 				// Normal Products
+                    $result = $this->db->select("*,$this->deal_value_condition")
+                            ->from("product")
+                            ->join("stores","stores.store_id","product.shop_id")
+                            ->join($join_table, $join_a, $join_b, "LEFT")
+                            ->where("deal_id = " .$deal_id. " " .$condition)
+                            ->get();
+		} else { 				// Normal Products
 			$condition = ' and product_duration = ""';
-		} 
-		//$result = $this->db->query("select *, $this->deal_value_condition from product join  stores on stores.store_id = product.shop_id $join where deal_id = $deal_id $condition");
 		$result = $this->db->select("*,$this->deal_value_condition")
                         ->from("product")
                         ->join("stores","stores.store_id","product.shop_id")
-                        ->join($join_table, $join_a, $join_b)
                         ->where("deal_id = " .$deal_id. " " .$condition)
                         ->get();
-
+		} 
+		//$result = $this->db->query("select *, $this->deal_value_condition from product join  stores on stores.store_id = product.shop_id $join where deal_id = $deal_id $condition");
                 //$result = $this->db->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
 		return $result;
 	}

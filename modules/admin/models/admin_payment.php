@@ -689,8 +689,7 @@ class Admin_payment_Model extends Model
                                     ->from("transaction")
                                     ->join("users","users.user_id","transaction.user_id")
                                     ->join("product","product.deal_id","transaction.product_id")
-                                    ->where($conditions)
-                                    ->limit($limit1)
+                                    ->where($conditions." ".$limit1)
                                     ->get();
                          
                          } 
@@ -723,8 +722,7 @@ class Admin_payment_Model extends Model
                                         ->from("transaction")
                                         ->join("users","users.user_id","transaction.user_id")
                                         ->join("product","product.deal_id","transaction.product_id")
-                                        ->where($conditions)
-                                        ->limit($limit1)
+                                        ->where($conditions." ".$limit1)
                                         ->get();
                                 
                         //die;
