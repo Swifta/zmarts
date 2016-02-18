@@ -139,7 +139,7 @@
                                                     <li class="frm_clr">
                                                         <label>State<span>*</span></label>
                                                         <div class="fullname">
-                                                            <select name="city" id="CitySD">
+                                                            <select name="city" id="CitySD_Signup">
                                                                 <option value="">Select a Country First</option>
     <?php foreach ($this->all_city_list as $c) { ?>
                 <?php if ($c->country_id == $u->ship_country) { ?>

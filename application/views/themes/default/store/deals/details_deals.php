@@ -253,8 +253,8 @@
                             <div class="deal_bought_detail clearfix">
                                 <div class="deal_bought_price">
                                     <span>(<?php echo round($deals->deal_percentage); ?>% <?php echo $this->Lang['OFFER']; ?>)</span>
-                                    <strike><?php echo $symbol . " " . $deals->deal_price; ?></strike>
-                                    <b><?php echo $symbol . " " . $deals->deal_value; ?> <?php echo CURRENCY_CODE; ?></b>                                    
+                                    <strike><?php echo $symbol . " " . number_format($deals->deal_price); ?></strike>
+                                    <b><?php echo $symbol . " " . number_format($deals->deal_value); ?> <?php echo CURRENCY_CODE; ?></b>                                    
                                     <p><?php echo $this->Lang['INCLU_OF_TAXES']; ?></p>
                                 </div>
                                 <div class="deal_bought_view">
@@ -276,7 +276,7 @@
                                 <div class="deal_price_detail">
                                     <div class="price_common">
                                         <p><?php echo $this->Lang['VALUE']; ?></p>
-                                        <span><?php echo $symbol . " " . $deals->deal_price; ?></span>
+                                        <span><?php echo $symbol . " " . number_format($deals->deal_price); ?></span>
                                     </div>
                                     <div class="price_common price_common_1">
                                         <p><?php echo $this->Lang['DISCOUNT']; ?></p>
@@ -284,7 +284,7 @@
                                     </div>
                                     <div class="price_common price_common_2">
                                         <p><?php echo $this->Lang['YOU_SAVE']; ?></p>
-                                        <span><?php echo $symbol . " " . $deals->deal_savings; ?></span>
+                                        <span><?php echo $symbol . " " . number_format($deals->deal_savings); ?></span>
                                     </div>
                                 </div>
                                 <?php if (($deals->maximum_deals_limit == $deals->purchase_count) || ($deals->maximum_deals_limit < $deals->purchase_count) || ($deals->enddate < time())) { ?>
