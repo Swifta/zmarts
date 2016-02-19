@@ -501,28 +501,17 @@ class Auction_Model extends Model
 //                    join stores on stores.store_id=auction.shop_id 
 //                    join category on category.category_id=auction.category_id
 //                    where $conditions order by deal_id DESC limit $offset,$record";
-//		$result = $this->db->query($qry);
+//		$result = $this->db->query($qry);               
                 
-                
-                     $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating from")
-                           ->from("auction")
-                          
-                           ->join("stores","stores.store_id","auction.shop_id")
-                           ->join("category","category.category_id",'auction.category_id')
-                           ->where($conditions)
-                           ->orderby('deal_id','DESC')             
-                           ->limit($offset,$record)->get();        
-                           return $result;
-                
-                
-                
-                
-                
-                    
-                
-                
-                
-	        return $result;
+                 $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating")
+                       ->from("auction")
+                       ->join("stores","stores.store_id","auction.shop_id")
+                       ->join("category","category.category_id",'auction.category_id')
+                       ->where($conditions)
+                       ->orderby('deal_id','DESC')             
+                       ->limit($record,$offset)->get();        
+                return $result;
+
 	}
 	
 	public function  get_hot_deals_view()
