@@ -71,7 +71,8 @@ class Auction_Model extends Model
                            ->from("auction")
                            ->join("category","category.category_id","auction.category_id")
                            ->join("stores","stores.store_id","auction.shop_id")
-                           ->where($conditions . ' ' .$sort_con) ->get();
+                           ->where($conditions . ' ' .$sort_con)
+                           ->get();
                         
                          
                         
@@ -95,7 +96,6 @@ class Auction_Model extends Model
                         
                       //  $result = $this->db->query($qry);
 		        }
-                        
 		return count($result);
 
         }
@@ -264,7 +264,7 @@ class Auction_Model extends Model
                            ->from("auction")
                            ->join("category","category.category_id","auction.category_id")
                            ->join("stores","stores.store_id","auction.shop_id")
-                           ->where($conditions. " " .$sort_con. " limit ".$record.", ".$offset)
+                           ->where($conditions. " " .$sort_con. " limit ".$offset.", ".$record)
                            ->get();
                        
                         }
@@ -282,10 +282,10 @@ class Auction_Model extends Model
                            ->from("auction")
                            ->join("category","category.category_id","auction.category_id")
                            ->join("stores","stores.store_id","auction.shop_id")
-                           ->where($conditions." order by deal_id DESC limit ".$record.", ".$offset)
+                           ->where($conditions." order by deal_id DESC limit ".$offset.", ".$record)
                            ->get();                     
 		}
-
+                //var_dump($result); die;
 		return $result;
 	}
 
@@ -1251,8 +1251,9 @@ class Auction_Model extends Model
                           $result = $this->db->select("auction.deal_id,auction.deal_key,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,product_value,auction.enddate")
                          ->from("auction")
                          ->join("stores","stores.store_id","auction.shop_id")
-                         ->join("join category on category.category_id=auction.category_id")
-                         ->where("enddate > ".time()." and  deal_status = 1 ".$this->auction_club_condition."  and category.category_status = 1 and  store_status = 1 and auction_status = 0 and stores.city_id = '$this->city_id' and deal_feature = 1 ORDER BY RAND()")
+                         ->join("category", "category.category_id", "auction.category_id")
+                         ->where("enddate > ".time()." and  deal_status = 1 ".$this->auction_club_condition."  and category.category_status = 1 and  store_status = 1 and auction_status = 0 and stores.city_id = '".
+                                 $this->city_id."' and deal_feature = 1 ORDER BY RAND()")
                          ->get();
                           return $result;
 	        

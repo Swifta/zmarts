@@ -429,6 +429,7 @@ class Products_Controller extends Layout_Controller
                         $this->delivery_details =$this->products->get_product_delivery($Deal->deal_id);
                         $this->all_products_list = $this->products->get_related_category_products_list($Deal->deal_id, $Deal->sec_category_id);
                         $this->products_list_name = $this->Lang['REL_PRODUCT'];
+                        
                         if(count($this->all_products_list) < 3){
                         $this->all_products_list = $this->products->get_hot_all_products_view($Deal->deal_id);
                          $this->products_list_name = $this->Lang['HOT_PRODUCT'];
@@ -458,6 +459,7 @@ class Products_Controller extends Layout_Controller
 			$this->theme_name = $this->products->get_theme_name($Deal->shop_id);
 			$this->footer_merchant_details = $this->products->get_merchant_details($Deal->merchant_id);
 		}
+                
 		$this->storeid = $this->products->get_store_id($storeurl);
 		$this->store_id = $this->storeid;
 		$this->merchant_id = $Deal->merchant_id;
