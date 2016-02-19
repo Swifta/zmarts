@@ -2519,7 +2519,7 @@ class Merchant_Model extends Model
 
 	public function get_all_auction_list($type = "",$offset = "", $record = "", $city = "", $name = "",$sort_type = "",$param = "",$limit="",$today="", $startdate = "", $enddate = "")
 	{
-		$limit1 = $limit !=1 ?"limit $offset,$record":"";
+		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 
 		$sort = "ASC";
 			if($sort_type == "DESC" ){
@@ -2588,8 +2588,8 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","auction.category_id")
                                 ->join("users","users.user_id","auction.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
+                                //->limit($limit1)
                                 ->get();
 
 		}
@@ -2603,9 +2603,9 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","auction.category_id")
                                 ->join("users","users.user_id","auction.merchant_id")
-                                ->where($conditions)
-                                ->orderby("auction.deal_id", "DESC")
-                                ->limit($limit1)
+                                ->where($conditions." order by auction.deal_id DESC ".$limit1)
+                                //->orderby("auction.deal_id", "DESC")
+                                //->limit($limit1)
                                 ->get();
 		}
 

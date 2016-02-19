@@ -753,7 +753,7 @@ class Store_Model extends Model
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join($join_table, $join_a, $join_b)
                             ->join("product_size","product_size.deal_id","product.deal_id")
-                            ->where("purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '.$this->city_id.' and stores.store_id = '.$store_id.'" .$conditions)
+                            ->where("purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1 and stores.city_id = '.$this->city_id.' and stores.store_id = '".$store_id."'" .$conditions)
                             ->orderby("product.deal_id", "DESC")
                             ->limit($record,$offset)
                             ->get();
@@ -768,7 +768,7 @@ class Store_Model extends Model
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join($join_table, $join_a, $join_b)
                             ->join("product_size","product_size.deal_id","product.deal_id")
-                            ->where("purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1  and stores.store_id = '.$store_id.'" .$conditions)
+                            ->where("purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1  and stores.store_id = '".$store_id."'" .$conditions)
                             ->orderby("product.deal_id", "DESC")
                             ->limit($record,$offset)
                             ->get();	
@@ -977,7 +977,7 @@ class Store_Model extends Model
 		//$result = $this->db->query( "select auction.deal_id,auction.deal_key,product_value,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating  from auction join category ON category.category_id = $join join stores ON stores.store_id = auction.shop_id  where $conditions  group by deal_id order by deal_id DESC limit $offset,$record ");
 		$result = $this->db->select("auction.deal_id,auction.deal_key,product_value,auction.deal_title,auction.url_title,auction.deal_value,auction.deal_price, category.category_url,auction.enddate,stores.store_url_title,(select avg(rating) from rating where type_id=auction.deal_id and module_id=3) as avg_rating")
                             ->from("auction")
-                            ->from("category","category.category_id",$join)
+                            ->join("category","category.category_id",$join)
                             ->join("stores","stores.store_id","auction.shop_id")  
                             ->where($conditions)  
                             ->groupby("deal_id") 
