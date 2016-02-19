@@ -291,10 +291,10 @@ class Admin_payment_Model extends Model
 				
 			//$result = $this->db->query('select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where '.$conditions.' and ( users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%")');
                         $result = $this->db->select("*,users.firstname as firstname")
-                                ->from(transaction)
+                                ->from("transaction")
                                 ->join("users","users.user_id","transaction.user_id")
                                 ->join("auction","auction.deal_id","transaction.auction_id")
-                                ->where($conditions. 'users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%")')
+                                ->where($conditions. ' and (users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%")')
                                 ->get();
                         }
 		else{

@@ -50,17 +50,17 @@
                                 </div>   
                             </li>
                             <li>
-                                <label>Confirm your email:<span class="form_star">*</span></label>
-                                <div class="fullname">
-                                  <input name="email_confirm" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
-                                  <em id="email_confirm_error"></em>
-                                </div>   
-                            </li>
-                            <li>
                                 <label><?php echo $this->Lang['PSWD'];?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                     <input name="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" value="" />
                                     <em id="pass_error"></em>
+                                </div>   
+                            </li>
+                            <li>
+                                <label>Confirm your email:<span class="form_star">*</span></label>
+                                <div class="fullname">
+                                  <input name="email_confirm" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
+                                  <em id="email_confirm_error"></em>
                                 </div>   
                             </li>
                             <li>
@@ -70,7 +70,6 @@
                                     <em id="cpass_error"></em>
                                 </div>   
                             </li>
-
 
                             <li>
                                 <label><?php echo $this->Lang['SEL_COUNTRY'];?>:<span class="form_star">*</span></label>
