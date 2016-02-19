@@ -486,7 +486,8 @@ class Admin_payment_Model extends Model
                                     ->from("transaction")
                                     ->join("users","users.user_id","transaction.user_id")
                                     ->join("deals","deals.deal_id","transaction.deal_id")
-                                    ->where($conditions.'users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR deals.deal_title like "%'.$search_key.'%")')
+                                    ->where($conditions." and (users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key.
+                                            "%' OR deals.deal_title like '%".$search_key."%')")       
                                     ->get();
                         }
 		else{
@@ -586,8 +587,8 @@ class Admin_payment_Model extends Model
                                  ->from("transaction")
                                  ->join("users","users.user_id","transaction.user_id")
                                  ->join("auction","auction.deal_id","transaction.auction_id")
-                                 ->where($conditions. "users.firstname like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%")
-                                 ->limit($limit1)
+                                 ->where($conditions. " and (users.firstname like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%') ".$limit1)
+                                 //->limit($limit1)
                                  ->get();
                          
                         } 
@@ -616,8 +617,8 @@ class Admin_payment_Model extends Model
                                    ->from("transaction")
                                    ->join("users","users.user_id","transaction.user_id")
                                    ->join("auction","auction.deal_id","transaction.auction_id")
-                                   ->where($conditions)
-                                   ->limit($limit1)
+                                   ->where($conditions." ".$limit1)
+                                   //->limit($limit1)
                                    ->get();
 		} 
 		return $result;
@@ -689,8 +690,7 @@ class Admin_payment_Model extends Model
                                     ->from("transaction")
                                     ->join("users","users.user_id","transaction.user_id")
                                     ->join("product","product.deal_id","transaction.product_id")
-                                    ->where($conditions)
-                                    ->limit($limit1)
+                                    ->where($conditions." ".$limit1)
                                     ->get();
                          
                          } 
@@ -723,8 +723,7 @@ class Admin_payment_Model extends Model
                                         ->from("transaction")
                                         ->join("users","users.user_id","transaction.user_id")
                                         ->join("product","product.deal_id","transaction.product_id")
-                                        ->where($conditions)
-                                        ->limit($limit1)
+                                        ->where($conditions." ".$limit1)
                                         ->get();
                                 
                         //die;
@@ -792,9 +791,8 @@ class Admin_payment_Model extends Model
                                  ->from("transaction")
                                  ->join("users","users.user_id","transaction.user_id")
                                  ->join("deals","deals.deal_id","transaction.deal_id")
-                                 ->where($conditions. "users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%")
-                                 ->orderby("transaction.id", "DESC")
-                                 ->limit("$limit1")
+                                 ->where($conditions. " and (users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".
+                                         $search_key."%') order by transaction.id DESC ".$limit1)
                                  ->get();
  		} 
 		else{
@@ -1094,7 +1092,7 @@ class Admin_payment_Model extends Model
                                 ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
                                 ->join("users","users.user_id","storecredit_transaction.user_id")
                                 ->join("product","product.deal_id","storecredit_transaction.product_id")
-                                ->where($conditions. 'users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )')
+                                ->where($conditions. " and (users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%')")
                                 ->get();
 		}
 		else{
@@ -1198,8 +1196,8 @@ class Admin_payment_Model extends Model
                                 ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
                                 ->join("users","users.user_id","storecredit_transaction.user_id")
                                 ->join("product","product.deal_id","storecredit_transaction.product_id")
-                                ->where($conditions. 'users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )')
-                                ->limit($limit1)
+                                ->where($conditions. " and (users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%') ".$limit1)
+                                //->limit($limit1)
                                 ->get();
                         
 		}
@@ -1232,12 +1230,13 @@ class Admin_payment_Model extends Model
 	       		 $conditions .= $sort_arr[$param];
 	        	}else{  $conditions .= ' order by storecredit_transaction.storecredit_transaction_date DESC'; }
 
-			$result = $this->db->select("*, storecredit_transaction.main_storecreditid as main_s_d, storecredit_transaction.shipping_amount as shippingamount")->from("storecredit_transaction")
+			$result = $this->db->select("*, storecredit_transaction.main_storecreditid as main_s_d, storecredit_transaction.shipping_amount as shippingamount")
+                                ->from("storecredit_transaction")
 						->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
 						->join("users","users.user_id","storecredit_transaction.user_id")
 						->join("product","product.deal_id","storecredit_transaction.product_id")
-						->where($conditions)
-						->limit($record, $offset)
+						->where($conditions. " ".$limit1)
+						//->limit($record, $offset)
 						->get();
 		}
 		return $result;

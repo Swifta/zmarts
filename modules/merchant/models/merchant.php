@@ -717,9 +717,7 @@ class Merchant_Model extends Model
                                  ->from("stores")
                                  ->join("country","country.country_id","stores.country_id")
                                  ->join("city","city.city_id","stores.city_id")
-                                 ->where($contitions)
-                                 ->orderby("stores.store_id")
-                                 ->limit($limit1)
+                                 ->where($contitions." order by stores.store_id ".$limit1)
                                  ->get();
                 }
                 else{
@@ -728,9 +726,7 @@ class Merchant_Model extends Model
                                  ->from("stores")
                                  ->join("country","country.country_id","stores.country_id")
                                  ->join("city","city.city_id","stores.city_id")
-                                 ->where($contitions)
-                                 ->orderby("stores.store_id")
-                                 ->limit($limit1)
+                                 ->where($contitions." order by stores.store_id ".$limit1)
                                  ->get();
                 }
                 return $result;

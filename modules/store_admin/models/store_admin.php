@@ -1119,17 +1119,17 @@ class Store_admin_Model extends Model
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 			//$qry = "select ('deal_id') from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  ";
-                               $qry = $this->db->select('deal_id')
-                               ->from("product")
-                               ->join("stores","stores.store_id","product.shop_id")
-                               ->join("city ","city.city_id","stores.city_id")
-                               ->join("country","country.country_id","stores.country_id")
-                               ->join("category ","category.category_id","product.category_id")
-                               ->join("users","users.user_id","product.merchant_id")
-                               ->where($conditions)
-                               ->get();
-                        
-                        $result = $this->db->query($qry);
+//                               $qry = $this->db->select('deal_id')
+//                               ->from("product")
+//                               ->join("stores","stores.store_id","product.shop_id")
+//                               ->join("city ","city.city_id","stores.city_id")
+//                               ->join("country","country.country_id","stores.country_id")
+//                               ->join("category ","category.category_id","product.category_id")
+//                               ->join("users","users.user_id","product.merchant_id")
+//                               ->where($conditions)
+//                               ->get();
+//                        
+//                        $result = $this->db->query($qry);
 		}
 		else{
 
@@ -1148,7 +1148,10 @@ class Store_admin_Model extends Model
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
 			//$qry = "select * from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions";
-			$qry = $this->db->select()
+			   
+                        //$result = $this->db->query($qry);
+		}
+			$result = $this->db->select()
                                ->from("product")
                                ->join("stores","stores.store_id","product.shop_id")
                                ->join("city","city.city_id","stores.city_id")
@@ -1157,9 +1160,6 @@ class Store_admin_Model extends Model
                                ->join("users","users.user_id","product.merchant_id")
                                ->where($conditions)
                                ->get();
-			   
-                        $result = $this->db->query($qry);
-		}
 		return count($result);
 	}
 
@@ -1228,8 +1228,8 @@ class Store_admin_Model extends Model
                          $conditions .= strip_tags(addslashes($sort_arr[$param]));
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
-			$qry = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  $limit1 ";
-			$result = $this->db->query($qry);
+			//$qry = "select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions  $limit1 ";
+			//$result = $this->db->query($qry);
 		}
 	        else{
 	                 if($type != "1")
@@ -1247,17 +1247,16 @@ class Store_admin_Model extends Model
 	        	}else{  $conditions .= ' order by product.deal_id DESC'; }
 
 			//$qry = select * , product.created_date as createddate from product join stores on stores.store_id=product.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=product.category_id join users on users.user_id=product.merchant_id where $conditions $limit1 ";
-			$qry = $this->db->select("* , product.created_date as createddate")
-                                    ->from("product")
-                                    ->join("stores","stores.store_id","product.shop_id")
-                                    ->join("city","city.city_id","stores.city_id")
-                                    ->join("country","country.country_id","stores.country_id")
-                                    ->join("category","category.category_id","product.category_id")
-                                    ->join("users","users.user_id","product.merchant_id")
-                                    ->where($conditions)
-                                    ->limit($limit1);
-                        $result = $this->db->query($qry);
                 }
+            $result = $this->db->select("* , product.created_date as createddate")
+                        ->from("product")
+                        ->join("stores","stores.store_id","product.shop_id")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("country","country.country_id","stores.country_id")
+                        ->join("category","category.category_id","product.category_id")
+                        ->join("users","users.user_id","product.merchant_id")
+                        ->where($conditions." ".$limit1)
+                        ->get();
             return $result;
         }
 	/** UPDATE PRODUCTS **/

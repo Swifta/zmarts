@@ -139,7 +139,7 @@
                                                     <li class="frm_clr">
                                                         <label>State<span>*</span></label>
                                                         <div class="fullname">
-                                                            <select name="city" id="CitySD">
+                                                            <select name="city" id="CitySD_Signup">
                                                                 <option value="">Select a Country First</option>
     <?php foreach ($this->all_city_list as $c) { ?>
                 <?php if ($c->country_id == $u->ship_country) { ?>
@@ -177,7 +177,7 @@
 
 
                                                     <li>
-                                                        <label><?php echo $this->Lang['ZIP_CODE']; ?><span>*</span></label>
+                                                        <label><?php echo $this->Lang['ZIP_CODE']; ?></label>
                                                         <div class="fullname">
                                                             <input  type="text" name="zip_code"  value="<?php if($u->ship_zipcode !='0'){ echo $u->ship_zipcode; } ?>" maxlength="8" placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>"/>
                                                         </div>

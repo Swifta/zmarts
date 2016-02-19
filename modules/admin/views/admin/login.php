@@ -197,7 +197,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     <h1 class="swifta_h1"><?php if(isset($this->is_merchat)){echo  $this->Lang["MERCHANT_LOGIN_TITLE"];}else if(isset($this->is_store_admin)){ echo $this->Lang['STORE_ADMIN_LOGIN']; }else{echo $this->Lang["VIEW_LOGIN_TITLE"]; }?></h1><?php if(isset($this->error_login)){ ?><span class="login_error"><?php echo $this->error_login; ?></span><?php } ?>
                    </h1>
 
-                      <input  class="swifta_input" name="email" placeholder="Username" type="text" value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
+                      <input  class="swifta_input" name="email" placeholder="Email" type="text" value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
 
                       <input class="swifta_input" name="password" placeholder="Password" type="password" required>
                       

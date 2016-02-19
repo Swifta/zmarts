@@ -240,7 +240,8 @@ class Store_credit_Model extends Model
                     ->join("city", "city.city_id", "s.city")
                     ->join("stores", "stores.store_id", "d.shop_id")
                     ->join("users as u", "u.user_id", "s.user_id")
-                    ->where($contitions)
+                    ->where("shipping_type = 1 and t.transaction_id ='".$trans_id."' and d.merchant_id ='".
+                            $merchant_id."' ".$condition)
                     ->orderby("shipping_id","DESC")
                     ->get();   
                     return $result;

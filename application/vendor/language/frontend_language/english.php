@@ -167,6 +167,8 @@ $content_text = array(
 
 "FORGOT_PSWD" => "Forgot password?",
 
+"FORGOT_PASS" => "Forgot password?",
+    
 "CANCEL" => "Cancel",
 
 "NAME" => "Name",
