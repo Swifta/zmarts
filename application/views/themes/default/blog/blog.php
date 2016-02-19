@@ -51,8 +51,10 @@
                                 ?>
                                 <div class="blog_list">
                                     <h3 class="deal_title blog_list_title">
-                                        <a href="<?php echo PATH . 'blog/' . $blog->url_title . '.html' ?>" title="<?php echo $blog->blog_title; ?>" >
-                                        <?php echo html_entity_decode(ucfirst($blog->blog_title)); ?></a>
+<!--                                        <a href="<?php //echo PATH . 'blog/' . $blog->url_title . '.html' ?>" title="<?php //echo $blog->blog_title; ?>" >
+                                        <?php //echo html_entity_decode(ucfirst($blog->blog_title)); ?></a>-->
+                                        <a href="<?php echo PATH . 'blog/' . htmlspecialchars($blog->url_title ,ENT_QUOTES,'UTF-8');  . '.html' ?>" title="<?php echo htmlspecialchars($blog->blog_title ,ENT_QUOTES,'UTF-8');  ?>" >
+                                        <?php echo htmlspecialchars(ucfirst($blog->url_title) ,ENT_QUOTES,'UTF-8'); ?></a>
                                     </h3>
                                     <div class="post_info">
                                         <ul>
@@ -113,8 +115,10 @@
                                                 </ul>
                                             </div>
                                             <div class="post_content">
-                                                <p>
-        <?php echo strip_tags(html_entity_decode(ucfirst(substr(($blog->blog_description), 0, 450)))) . "..."; ?></p>
+ <!--                                               <p>
+        <?php //echo strip_tags(html_entity_decode(ucfirst(substr(($blog->blog_description), 0, 450)))) . "..."; ?></p>-->
+         <p>
+        <?php echo htmlspecialchars((ucfirst(substr(($blog->blog_description), 0, 450))) ,ENT_QUOTES,'UTF-8'); . "..."; ?></p>
 
 
                                             </div>      

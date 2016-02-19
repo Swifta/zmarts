@@ -60,10 +60,16 @@
                       <ul>
                       <li>
                       <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/posts_bg.png" width="9" height="9" alt="<?php echo $this->Lang['IMAGE']; ?>" /><label>
-    <a href="<?php echo PATH.'blog/'.$popular->url_title.'.html'?>" title="<?php echo $popular->blog_title;?>"><?php if(strlen($popular->blog_title)>100) {
-  		echo html_entity_decode(ucfirst(substr(($popular->blog_title),0,100)))."... ";
+<!--    <a href="<?php //echo PATH.'blog/'.$popular->url_title.'.html'?>" title="<?php //echo $popular->blog_title;?>"><?php //if(strlen($popular->blog_title)>100) {
+  		//echo html_entity_decode(ucfirst(substr(($popular->blog_title),0,100)))."... ";
+	//} else {
+		//echo html_entity_decode(ucfirst($popular->blog_title));
+	//} ?>
+	</a>-->
+                       <a href="<?php echo PATH.'blog/'.htmlspecialchars($popular->url_title ,ENT_QUOTES,'UTF-8').'.html'?>" title="<?php echo htmlspecialchars($popular->blog_title,ENT_QUOTES,'UTF-8');?>"><?php if(strlen($popular->blog_title)>100) {
+  		echo htmlspecialchars(ucfirst(substr(($popular->blog_title),0,100)),ENT_QUOTES,'UTF-8')."... ";
 	} else {
-		echo html_entity_decode(ucfirst($popular->blog_title));
+		echo htmlspecialchars(ucfirst($popular->blog_title),ENT_QUOTES,'UTF-8');
 	} ?>
 	</a></label></li>
   </ul>    

@@ -114,18 +114,18 @@ class Webpay_Controller extends Layout_Controller
                                 $interswitch->CardNumber);
                         echo "<div style='width:100%;'>";
                         echo "<div style='width:49%;float:left'>Transacton Status :</div>";
-                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$transaction_status."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:right;color:".htmlspecialchars($paint_red,ENT_QUOTES,'UTF-8').";font-weight:bold'>".htmlspecialchars($transaction_status,ENT_QUOTES,'UTF-8')."</div><div style='clear:both;width:100%'><hr /></div>";
                         echo "<div style='width:49%;float:left'>Response Code :</div>";
-                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseCode."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:right;color:".htmlspecialchars($paint_red,ENT_QUOTES,'UTF-8').";font-weight:bold'>".htmlspecialchars($interswitch->ResponseCode,ENT_QUOTES,'UTF-8')."</div><div style='clear:both;width:100%'><hr /></div>";
                         echo "<div style='width:49%;float:left'>Description :</div>";
-                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->ResponseDescription."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:right;color:".htmlspecialchars($paint_red,ENT_QUOTES,'UTF-8').";font-weight:bold'>".htmlspecialchars($interswitch->ResponseDescription,ENT_QUOTES,'UTF-8')."</div><div style='clear:both;width:100%'><hr /></div>";
                         echo "<div style='width:49%;float:left'>Payment Reference :</div>";
-                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->PaymentReference."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:right;color:".htmlspecialchars($paint_red,ENT_QUOTES,'UTF-8'); .";font-weight:bold'>".htmlspecialchars($interswitch->PaymentReference,ENT_QUOTES,'UTF-8')."</div><div style='clear:both;width:100%'><hr /></div>";
                         echo "<div style='width:49%;float:left'>Card Number :</div>";
-                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->CardNumber."</div><div style='clear:both;width:100%'><hr /></div>";
+                        echo "<div style='width:49%;float:right;color:".htmlspecialchars($paint_red,ENT_QUOTES,'UTF-8'); .";font-weight:bold'>".htmlspecialchars($interswitch->CardNumber,ENT_QUOTES,'UTF-8')."</div><div style='clear:both;width:100%'><hr /></div>";
                         echo "<div style='width:49%;float:left'>Retrieval Ref Number :</div>";
-                        echo "<div style='width:49%;float:right;color:".$paint_red.";font-weight:bold'>".$interswitch->RetrievalReferenceNumber."</div>";
-                        echo "</div>";
+                        echo "<div style='width:49%;float:right;color:".htmlspecialchars($paint_red,ENT_QUOTES,'UTF-8'); .";font-weight:bold'>".htmlspecialchars($interswitch->RetrievalReferenceNumber,ENT_QUOTES,'UTF-8')."</div>";
+                        echo "</div>"; 
                     }
                     else{
                         echo "<div style='width:100%;text-align:center;color:red'>";

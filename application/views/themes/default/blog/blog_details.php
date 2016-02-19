@@ -75,7 +75,8 @@
                     <ul>
                         <li><p><a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
                         <li><p><a href="<?php echo PATH; ?>blog" title="<?php echo $this->Lang['BLOG_LIST']; ?>"><?php echo $this->Lang['BLOG_LIST']; ?></a></p></li>
-                        <li><p><?php echo html_entity_decode(ucfirst($blog_details->blog_title)); ?></p></li>
+<!--                        <li><p><?php //echo html_entity_decode(ucfirst($blog_details->blog_title)); ?></p></li>-->
+                             <li><p><?php htmlspecialchars(ucfirst($blog_details->blog_title),ENT_QUOTES,UTF-8); ?></p></li>
                     </ul>
                 </div>
                 <div class="blog_detalil_left_share">
@@ -105,7 +106,8 @@
                         <div class="blog_left_inner">                                                          
                             <h2 class="inner_commen_title"><?php echo $this->Lang['BLOG_DET']; ?></h2>
                             <div class="blog_list">
-                                <h3 class="deal_title blog_list_title"><?php echo html_entity_decode(ucfirst($blog_details->blog_title)); ?></h3>
+<!--                                <h3 class="deal_title blog_list_title"><?php //echo html_entity_decode(ucfirst($blog_details->blog_title)); ?></h3>-->
+                                     <h3 class="deal_title blog_list_title"><?php echo htmlspecialchars(ucfirst($blog_details->blog_title),ENT_QUOTES,'UTF-8'); ?></h3>
                                 <div class="post_info">
                                     <ul>
                                         <li>
@@ -149,7 +151,8 @@
                                       <i class="wloader_img" >&nbsp;</i>
                                                 <img src="<?php echo PATH.'resize.php';?>?src=<?php echo $imageName; ?>&w=246&h=176"/>
                                             </div>
-                                            <p><?php echo strip_tags(html_entity_decode(ucfirst($blog_details->blog_description))); ?></p>
+<!--                                            <p><?php //echo strip_tags(html_entity_decode(ucfirst($blog_details->blog_description))); ?></p>-->
+                                            <p><?php echo htmlspecialchars((ucfirst($blog_details->blog_description)),ENT_QUOTES,'UTF-8'); ?></p>
                                         </div>											
                                     </div>
                                 </div>

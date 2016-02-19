@@ -275,7 +275,12 @@ class Newsletter_Controller extends website_Controller {
 				}
 		exit;
 	}
-	
+	public function remove_extension($filename){
+            $ext = preg_replace('/(.+)\..*$/','$1',$filename );
+            
+            
+            
+        }
 	public function add_template(){
 		if(!ADMIN_PRIVILEGES_NEWSLETTER_ADD)
 		{
@@ -294,6 +299,8 @@ class Newsletter_Controller extends website_Controller {
 				$status = $this->news->add_template(arr::to_object($this->userPost));
 				if($status > 0){
 					$tmp_name = upload::save('template_file');
+                                        basename($tmp_name);
+                                        
 					if($tmp_name){
 						//basename($_FILES["template_file"]["tmp_name"]);
 						$template_id = null;

@@ -15,29 +15,29 @@
 											
 			?>
                 <tr>
-                         <th valign="top" align="left" width="20%"><?php echo $this->Lang['BLOG_TITLE']; ?></th><th valign="top">:</th><td align="left"><?php echo ucfirst(htmlspecialchars($d->blog_title)); ?></td>
+                         <th valign="top" align="left" width="20%"><?php echo $this->Lang['BLOG_TITLE']; ?></th><th valign="top">:</th><td align="left"><?php echo ucfirst(htmlspecialchars($d->blog_title),ENT_QUOTES,'UTF-8'); ?></td>
                 </tr>
                
                 <tr>
                         <th valign="top" align="left"><?php echo $this->Lang['DESC']; ?></th><th valign="top">:</th><td align="left"><?php echo nl2br(html_entity_decode(htmlspecialchars($d->blog_description)));?></td>
                 </tr>
                 <tr>
-                        <th valign="top" align="left" ><?php echo $this->Lang['SNAB']; ?></th><th valign="top">:</th><td align="left"><img src="<?php echo PATH.'images/blog_images/'.$d->blog_id.'.jpg'; ?>" alt="<?php echo $d->blog_title;?>" width="300"></td></td>  
+                    <th valign="top" align="left" ><?php echo $this->Lang['SNAB']; ?></th><th valign="top">:</th><td align="left"><img src="<?php echo PATH.'images/blog_images/'.htmlspecialchars($d->blog_id, ENT_QUOTES,'UTF-8').'.jpg'; ?>" alt="<?php echo htmlentities($d->blog_title, ENT_QUOTES,'UTF-8');?>" width="300"></td></td>  
                 </tr>                 
                 <tr>
-                        <th align="left" ><?php echo $this->Lang['CATEGORY']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->category_name); ?></td>
+                        <th align="left" ><?php echo $this->Lang['CATEGORY']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->category_name,ENT_QUOTES,'UTF-8'); ?></td>
                 </tr>
                 <tr>
-                        <th align="left"><?php echo $this->Lang['META_TITLE']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->meta_title); ?></td>
+                        <th align="left"><?php echo $this->Lang['META_TITLE']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->meta_title,ENT_QUOTES,'UTF-8'); ?></td>
                 </tr>
                 <tr>
-                        <th align="left" ><?php echo $this->Lang['META_DESC']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->meta_description); ?></td>
+                        <th align="left" ><?php echo $this->Lang['META_DESC']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->meta_description,ENT_QUOTES,'UTF-8'); ?></td>
                 </tr> 
                  <tr>
-                        <th align="left" ><?php echo $this->Lang['META_KEY']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->meta_keywords); ?></td>
+                        <th align="left" ><?php echo $this->Lang['META_KEY']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->meta_keywords,ENT_QUOTES,'UTF-8'); ?></td>
                 </tr> 
                 <tr>
-                        <th align="left" ><?php echo $this->Lang['TAGS']; ?></th><th>:</th><td align="left"><?php echo $d->tags; ?></td>
+                        <th align="left" ><?php echo $this->Lang['TAGS']; ?></th><th>:</th><td align="left"><?php echo htmlspecialchars($d->tags,ENT_QUOTES,'UTF-8'); ?></td>
                 </tr> 
                 <tr>
                         <th align="left" ><?php echo $this->Lang['ALLOW_COMM']; ?></th><th>:</th><td align="left"><?php if($d->allow_comments == 1){ $this->Lang['YES']; }else{ echo $this->Lang['NO']; }; ?></td>

@@ -1660,7 +1660,8 @@ class PHPMailer {
         }
         $file = tempnam(sys_get_temp_dir(), 'mail');
         file_put_contents($file, $body); //TODO check this worked
-        $signed = tempnam(sys_get_temp_dir(), 'signed');
+//      $signed = tempnam(sys_get_temp_dir(), 'signed');
+        $signed = tempnam(str_replace("/","",sys_get_temp_dir()), 'signed');
         if (@openssl_pkcs7_sign($file, $signed, 'file://'.realpath($this->sign_cert_file), array('file://'.realpath($this->sign_key_file), $this->sign_key_pass), null)) {
           @unlink($file);
           $body = file_get_contents($signed);

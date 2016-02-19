@@ -948,7 +948,7 @@ $username  = ucfirst($res->name);
                                                                         <ul>
                                                                             <li>
                                                                                 <label style="font: 19px kreonregular;"><?php echo $this->Lang['USER_NAME']; ?> : </label>
-                                                                                <p style="color: #231F20;font: bold 11px arial;"><?php echo  ucfirst($username);?></p>
+                                                                                <p style="color: #231F20;font: bold 11px arial;"><?php echo  htmlspecialchars(ucfirst($username),ENT_QUOTES,'UTF-8') //ucfirst($username);?></p>
                                                                             </li>
 
                                                                             <?php /*<li>

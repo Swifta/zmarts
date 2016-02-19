@@ -58,27 +58,33 @@ $httpParsedResponseAr = $ppResponseAr["httpParsedResponseAr"];
 
 		    <tr>
 			<td align="left">Transaction ID:</td>
-			<td align="left"><?php echo htmlspecialchars($_GET["tx"]); ?></td>
+<!--			<td align="left"><?php //echo htmlspecialchars($_GET["tx"]); ?></td>-->
+                        <td align="left"><?php echo urldecode(htmlspecialchars($_GET["tx"] ,ENT_QUOTES,"UTF-8")); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Currency Code: </td>
-			<td align="left"><?php echo urldecode(htmlspecialchars($_GET['cc'])); ?></td>
+<!--			<td align="left"><?php //echo urldecode(htmlspecialchars($_GET['cc'])); ?></td>-->
+                          <td align="left"><?php echo urldecode(htmlspecialchars($_GET["cc"] ,ENT_QUOTES,"UTF-8")); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Status:</td>
-			<td align="left"><?php echo urldecode(htmlspecialchars($_GET["st"])) ?></td>
+<!--			<td align="left"><?php //echo urldecode(htmlspecialchars($_GET["st"])) ?></td>-->
+                        <td align="left"><?php echo urldecode(htmlspecialchars($_GET["st"] ,ENT_QUOTES,"UTF-8")); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Amount: </td>
-			<td align="left"><?php echo urldecode(htmlspecialchars($_GET["amt"])) ?></td>
+<!--			<td align="left"><?php //echo urldecode(htmlspecialchars($_GET["amt"])) ?></td>-->
+                         <td align="left"><?php echo urldecode(htmlspecialchars($_GET["amt"] ,ENT_QUOTES,"UTF-8")); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Custom Message: </td>
-			<td align="left"><?php echo urldecode(htmlspecialchars($_GET["cm"])) ?></td>
+<!--			<td align="left"><?php //echo urldecode(htmlspecialchars($_GET["cm"])) ?></td>-->
+                         <td align="left"><?php echo urldecode(htmlspecialchars($_GET["cm"] ,ENT_QUOTES,"UTF-8")); ?></td>
 		    </tr>
 		    <tr>
 			<td align="left">Signature: </td>
-			<td align="left"><?php echo urldecode(htmlspecialchars($_GET["sig"])) ?></td>
+<!--			<td align="left"><?php //echo urldecode(htmlspecialchars($_GET["sig"])) ?></td>-->
+                        <td align="left"><?php echo urldecode(htmlspecialchars($_GET["sig"] ,ENT_QUOTES,"UTF-8")); ?></td>
 		    </tr>
 		  </table>
 
@@ -133,99 +139,124 @@ $httpParsedResponseAr = $ppResponseAr["httpParsedResponseAr"];
 				    </tr>
 				    <tr>
 					<td align="left">payment_date:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payment_date"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payment_date"]) ?></td>-->
+                                        <td align="left"><?php echo  htmlspecialchars(urldecode($httpParsedResponseAr["payment_date"]) ,ENT_QUOTES,"UTF-8");  ?></td>
+                                       
 				    </tr>
 				    <tr>
 					<td align="left">txn_type:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["txn_type"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["txn_type"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["txn_type"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">last_name:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["last_name"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["last_name"]) ?></td>-->
+                                         <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["last_name"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">residence_country:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["residence_country"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["residence_country"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["residence_country"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">item_name:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["item_name"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["item_name"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["item_name"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">payment_gross :</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payment_gross"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payment_gross"]) ?></td>-->
+                                         <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["payment_gross"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">mc_currency :</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["mc_currency"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["mc_currency"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["mc_currency"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">business:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["business"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["business"]) ?></td>-->
+                                         <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["business"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">payment_type:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payment_type"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payment_type"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["payment_type"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">payer_status:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payer_status"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payer_status"]) ?></td>-->
+                                         <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["payer_status"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">tax:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["tax"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["tax"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["tax"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">payer_email:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payer_email"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payer_email"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["payer_email"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">txn_id:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["txn_id"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["txn_id"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["txn_id"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">quantity:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["quantity"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["quantity"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["quantity"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">receiver_email:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["receiver_email"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["receiver_email"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["receiver_email"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">first_name:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["first_name"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["first_name"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["first_name"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">payer_id:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payer_id"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payer_id"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["payer_id"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">receiver_id:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["receiver_id"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["receiver_id"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["receiver_id"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">item_number:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["item_number"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["item_number"]) ?></td>-->
+                                         <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["item_number"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">payment_status:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["payment_status"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["payment_status"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["payment_status"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">shipping:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["shipping"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["shipping"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["shipping"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">mc_gross:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["mc_gross"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["mc_gross"]) ?></td>-->
+                                         <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["mc_gross"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">custom:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["custom"]) ?></td>
+					<td align="left"><?php //echo urldecode($httpParsedResponseAr["custom"]) ?></td>
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["custom"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				    <tr>
 					<td align="left">charset:</td>
-					<td align="left"><?php echo urldecode($httpParsedResponseAr["charset"]) ?></td>
+<!--					<td align="left"><?php //echo urldecode($httpParsedResponseAr["charset"]) ?></td>-->
+                                        <td align="left"><?php echo htmlspecialchars(urldecode($httpParsedResponseAr["charset"]) ,ENT_QUOTES,"UTF-8");  ?></td>
 				    </tr>
 				</table>
 		</CENTER>

@@ -17,7 +17,8 @@ class Webservices_Controller extends Controller
             $key = $this->input->get('key');
             $trnx = $this->input->get('transaction_id');
             $amount = $this->input->get('amount');
-            $result = json_decode($this->webservices->get_details($admin, $key, $trnx, $amount));
+//            $result = json_decode($this->webservices->get_details($admin, $key, $trnx, $amount));
+            $result = json_decode($this->webservices->get_details(strip_tags(addslashes($admin)), strip_tags(addslashes($key)),  strip_tags(addslashes($trnx)) , strip_tags(addslashes($amount))));
             if($result->success){
                 $ret['status'] = true;
                 $ret['description'] = $result->msg;
