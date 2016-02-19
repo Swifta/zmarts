@@ -154,7 +154,7 @@ break;
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/jquery.prettyPhoto.js'; ?>"></script>
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/js/custom.js'; ?>"></script>
 <?php if(false){ ?>
-<script src="<?php echo PATH.'bootstrap/themes/js/jquery-1.7.2.min.js'; ?>"></script>
+<script src="<?php echo PATH.'bootstrap/themes/js/jquery-xyx.js'; ?>"></script>
 <?php } ?>
 <script>
 function store_subscriber_validate1(store_url)

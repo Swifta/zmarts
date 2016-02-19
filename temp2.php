@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/themes/css/flexslider.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/default/css/fashion9/themes/css/main.css" />
 
-<script type="text/javascript" src="<?php echo PATH; ?>bootstrap/themes/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="<?php echo PATH; ?>bootstrap/themes/js/jquery-xyx.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>themes/default/js/public.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo PATH; ?>bootstrap/themes/js/jquery.scrolltotop.js"></script>
