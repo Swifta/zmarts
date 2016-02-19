@@ -1672,14 +1672,14 @@ class Merchant_Model extends Model
 		else {
 		  //$result = $this->db->query("select s.shipping_id  from shipping_info as s join transaction as t on t.id=s.transaction_id join product as d on d.deal_id=t.product_id join transaction_mapping as tm on tm.transaction_id = t.id join city on city.city_id=s.city join stores on stores.store_id = d.shop_id join users as u on u.user_id=s.user_id where shipping_type = 1 AND d.merchant_id = $this->user_id $condition group by shipping_id order by shipping_id DESC ");
                   $result = $this->db->select("s.shipping_id")
-                                                    ->from("shipping_info as s")
-                                                    ->join("transaction as t","t.id","s.transaction_id")
-                                                    ->join("product as d","d.deal_id","t.product_id")
-                                                    ->join("transaction_mapping as tm","tm.transaction_id","t.id")
-                                                    ->join("city","city.city_id","s.city")
-                                                    ->join("stores","stores.store_id","d.shop_id")
-                                                    ->join("users as u","u.user_id","s.user_id")
-                                                    ->where("shipping_type = 1 AND d.merchant_id = " .$this->user_id ." " .$condition)
+                                    ->from("shipping_info as s")
+                                    ->join("transaction as t","t.id","s.transaction_id")
+                                    ->join("product as d","d.deal_id","t.product_id")
+                                    ->join("transaction_mapping as tm","tm.transaction_id","t.id")
+                                    ->join("city","city.city_id","s.city")
+                                    ->join("stores","stores.store_id","d.shop_id")
+                                    ->join("users as u","u.user_id","s.user_id")
+                                    ->where("shipping_type = 1 AND d.merchant_id = " .$this->user_id ." " .$condition)
                                       ->groupby("shipping_id")
                                       ->orderby("shipping_id","DESC")
                                       ->get();
@@ -1768,7 +1768,7 @@ class Merchant_Model extends Model
                                 ->from("transaction")
                                 ->join("users","users.user_id","transaction.user_id")
                                 ->join("auction","auction.deal_id","transaction.auction_id")
-                                ->where($conditions. 'and auction.merchant_id ='.$this->user_id.' and users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%"')
+                                ->where($conditions. ' and auction.merchant_id ='.$this->user_id.' and users.firstname like "%'.$search_key.'%" OR transaction.transaction_id like "%'.$search_key.'%" OR auction.deal_title like "%'.$search_key.'%"')
                                 ->get();
 
 		}
@@ -1972,7 +1972,7 @@ class Merchant_Model extends Model
                                  ->from("transaction")
                                  ->join("users","users.user_id","transaction.user_id")
                                  ->join("deals","deals.deal_id","transaction.deal_id")
-                                 ->where($conditions. "and users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%'")
+                                 ->where($conditions. " and users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%'")
                                  ->orderby("transaction.id", "DESC")
                                  ->limit($limit1)
                                  ->get();
@@ -2067,7 +2067,7 @@ class Merchant_Model extends Model
                                 ->from("transaction")
                                 ->join("users","users.user_id","transaction.user_id")
                                 ->join("product","product.deal_id","transaction.product_id")
-                                ->where($conditions. "and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )")
+                                ->where($conditions. " and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )")
                                 ->get();
 		}
 		else{
@@ -2166,7 +2166,7 @@ class Merchant_Model extends Model
                                 ->from("transaction")
                                 ->join("users","users.user_id","transaction.user_id")
                                 ->join("auction","auction.deal_id","transaction.auction_id")
-                                ->where($conditions. "and auction.merchant_id = $this->user_id and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%' )")
+                                ->where($conditions. " and auction.merchant_id = $this->user_id and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%')")
                                 ->limit($record,$offset)
                                 ->get();
 		}
@@ -2218,7 +2218,7 @@ class Merchant_Model extends Model
 
 	public function get_transaction_product_list($type = "", $search_key = "", $offset = "", $record = "",$type1 = "",$sort_type = "",$param = "",$trans_type = "",$limit="",$today="", $startdate = "", $enddate = "")
 	{
-		$limit1 = $limit !=1 ?"limit $offset,$record":"";
+		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 		$sort = "ASC";
 			if($sort_type == "DESC" ){
 				$sort = "DESC";
@@ -2273,8 +2273,8 @@ class Merchant_Model extends Model
                                     ->from("transaction")
                                     ->join("users","users.user_id","transaction.user_id")
                                     ->join("product","product.deal_id","transaction.product_id")
-                                    ->where($conditions. "and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )")
-                                    ->limit($limit1)
+                                    ->where($conditions. " and product.merchant_id = ".$this->user_id."  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key.
+                                            "%' OR product.deal_title like '%".$search_key."%') ".$limit1)
                                     ->get();
 		}
 		else{
@@ -2309,8 +2309,8 @@ class Merchant_Model extends Model
 			$result = $this->db->select("*","transaction.shipping_amount as shippingamount")->from("transaction")
 						->join("users","users.user_id","transaction.user_id")
 						->join("product","product.deal_id","transaction.product_id")
-						->where($conditions)
-						->limit($record, $offset)
+						->where($conditions. " ".$limit1)
+						//->limit($record, $offset)
 						->get();
 		}
 		return $result;
@@ -2519,7 +2519,7 @@ class Merchant_Model extends Model
 
 	public function get_all_auction_list($type = "",$offset = "", $record = "", $city = "", $name = "",$sort_type = "",$param = "",$limit="",$today="", $startdate = "", $enddate = "")
 	{
-		$limit1 = $limit !=1 ?"limit $offset,$record":"";
+		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 
 		$sort = "ASC";
 			if($sort_type == "DESC" ){
@@ -2588,8 +2588,8 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","auction.category_id")
                                 ->join("users","users.user_id","auction.merchant_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions." ".$limit1)
+                                //->limit($limit1)
                                 ->get();
 
 		}
@@ -2603,9 +2603,9 @@ class Merchant_Model extends Model
                                 ->join("country","country.country_id","stores.country_id")
                                 ->join("category","category.category_id","auction.category_id")
                                 ->join("users","users.user_id","auction.merchant_id")
-                                ->where($conditions)
-                                ->orderby("auction.deal_id", "DESC")
-                                ->limit($limit1)
+                                ->where($conditions." order by auction.deal_id DESC ".$limit1)
+                                //->orderby("auction.deal_id", "DESC")
+                                //->limit($limit1)
                                 ->get();
 		}
 
@@ -4432,7 +4432,7 @@ class Merchant_Model extends Model
                                     ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
 		                    ->join("users","users.user_id","storecredit_transaction.user_id")
                                     ->join("product","product.deal_id","storecredit_transaction.product_id")
-                                    ->where($conditions. " and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )")
+                                    ->where($conditions. " and product.merchant_id = ".$this->user_id."  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )")
                                     ->get();
 		}
 		else{
@@ -4535,8 +4535,9 @@ class Merchant_Model extends Model
                                     ->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
                                     ->join("users","users.user_id","storecredit_transaction.user_id")
                                     ->join("product","product.deal_id","storecredit_transaction.product_id")
-                                    ->where($conditions. "and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' )")
-                                    ->limit($limit1)
+                                    ->where($conditions. " and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR storecredit_transaction.transaction_id like '%".$search_key.
+                                            "%' OR product.deal_title like '%".$search_key."%' ) ".$limit1)
+                                    //->limit($limit1)
                                     ->get();
 		}
 		else{
@@ -4572,8 +4573,8 @@ class Merchant_Model extends Model
 						->join("store_credit_save","store_credit_save.storecredit_id","storecredit_transaction.main_storecreditid")
 						->join("users","users.user_id","storecredit_transaction.user_id")
 						->join("product","product.deal_id","storecredit_transaction.product_id")
-						->where($conditions)
-						->limit($record, $offset)
+						->where($conditions. " ".$limit1)
+						//->limit($record, $offset)
 						->get();
 		}
 		return $result;

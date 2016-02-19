@@ -227,14 +227,7 @@ class Admin_users_Model extends Model
                          ->join("city","city.city_id","users.city_id")
                           ->join("country","country.country_id","users.country_id")
                          ->where($contitions)
-                         ->get();
-                 
-               return $result;
-
-                        
-                        
-                        
-                        
+                         ->get();      
                         
                 }
                 else{
@@ -245,6 +238,7 @@ class Admin_users_Model extends Model
                                 ->orderby("user_id", "DESC")
                                 ->get();
                 }
+                //var_dump($result); die;
                 return count($result);
         }
         

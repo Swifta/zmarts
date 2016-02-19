@@ -644,7 +644,7 @@ class Products_Model extends Model
 					$condition = array("url_title" => $url_title, "deal_key" => $deal_key,"deal_status" => 1, "for_store_cred" => 0, "category.category_status" => 1, "store_status" => 1);
 				
 			}
-	        $result = $this->db->select("*,".$this->deal_saving_condition.",".$this->deal_value_condition.",". $this->deal_percentage_condition.",stores.phone_number as phone","stores.address1 as addr1","stores.address2 as addr2")
+	        $result = $this->db->select("*,".$this->deal_saving_condition.",".$this->deal_value_condition.",". $this->deal_percentage_condition.",stores.phone_number as phone,stores.address1 as addr1,stores.address2 as addr2")
                         ->from("product")
                                 ->where($condition)
                                 ->join("stores","stores.store_id","product.shop_id")

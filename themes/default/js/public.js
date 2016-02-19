@@ -5,8 +5,8 @@ var Path;
 if(SrcPath.indexOf("js/jquery.js") > -1){
     Path = SrcPath.replace("js/jquery.js", "");
 }
-if(SrcPath.indexOf("bootstrap/themes/js/jquery-1.7.2.min.js") > -1){
-    Path = SrcPath.replace("bootstrap/themes/js/jquery-1.7.2.min.js", "");
+if(SrcPath.indexOf("bootstrap/themes/js/jquery-xyx.js") > -1){
+    Path = SrcPath.replace("bootstrap/themes/js/jquery-xyx.js", "");
 }
 if(SrcPath.indexOf("bootstrap/themes/js/jquery-1.11.3.min.js") > -1){
     Path = SrcPath.replace("bootstrap/themes/js/jquery-1.11.3.min.js", "");

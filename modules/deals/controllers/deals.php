@@ -361,7 +361,7 @@ class Deals_Controller extends Layout_Controller
                             $style_sheets[6] = PATH.'themes/'.THEME_NAME.'/css/'.$this->theme_name.'/themes/css/main.css';
                             $this->template->style = html::stylesheet($style_sheets);
                             $java_scripts = array();
-                            $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-1.7.2.min.js';
+                            $java_scripts[0] = PATH.'bootstrap/themes/js/jquery-xyx.js';
                             $java_scripts[1] = PATH.'themes/'.THEME_NAME.'/js/public.js'; //this is some parent js 
                             $java_scripts[2] = PATH.'bootstrap/js/bootstrap.min.js';
                             $java_scripts[3] = PATH.'bootstrap/themes/js/jquery.scrolltotop.js';
