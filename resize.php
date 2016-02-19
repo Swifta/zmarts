@@ -880,7 +880,7 @@ class timthumb {
 		} //Do not go past this point without docRoot set
 
 		//Try src under docRoot
-		if(file_exists ($this->docRoot . '/' . $src)) {
+		//if(file_exists ($this->docRoot . '/' . $src)) {
 			$this->debug(3, "Found file as " . $this->docRoot . '/' . $src);
 			$real = $this->realpath($this->docRoot . '/' . $src);
 			if(stripos($real, $this->docRoot) === 0){
@@ -889,10 +889,10 @@ class timthumb {
 				$this->debug(1, "Security block: The file specified occurs outside the document root.");
 				//allow search to continue
 			}
-		}
+		//}
 		//Check absolute paths and then verify the real path is under doc root
 		$absolute = $this->realpath('/' . $src);
-		if($absolute && file_exists($absolute)){ //realpath does file_exists check, so can probably skip the exists check here
+		if($absolute){// && file_exists($absolute)){ //realpath does file_exists check, so can probably skip the exists check here
 			$this->debug(3, "Found absolute path: $absolute");
 			if(! $this->docRoot){ $this->sanityFail("docRoot not set when checking absolute path."); }
 			if(stripos($absolute, $this->docRoot) === 0){
@@ -915,7 +915,7 @@ class timthumb {
 		foreach ($sub_directories as $sub){
 			$base .= $sub . '/';
 			$this->debug(3, "Trying file as: " . $base . $src);
-			if(file_exists($base . $src)){
+			//if(file_exists($base . $src)){
 				$this->debug(3, "Found file as: " . $base . $src);
 				$real = $this->realpath($base . $src);
 				if(stripos($real, $this->realpath($this->docRoot)) === 0){
@@ -924,7 +924,7 @@ class timthumb {
 					$this->debug(1, "Security block: The file specified occurs outside the document root.");
 					//And continue search
 				}
-			}
+			//}
 		}
 		return false;
 	}
