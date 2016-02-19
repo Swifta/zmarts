@@ -89,8 +89,11 @@
                    <tr>
                     <td><label><?php echo $this->Lang['SMTP_PASS']; ?></label></td>
                     <td><label>:</label></td>
-                    <td><input type="password" name="password"   value="<?php echo PASSWORD;?>" maxlength="50" />
-                    <em><?php if(isset($this->form_error["password"])){ echo $this->form_error["password"]; }?></em></td>
+<!--                 <td><input type="password" name="pswd"   value="<?php //echo PASSWORD;?>" maxlength="50" />
+                    <em><?php //if(isset($this->form_error["pswd"])){ echo $this->form_error["pswd"]; }?></em></td>-->
+                    
+                    <td><input type="password" name="drowssap"   value="<?php echo drowssap;?>" maxlength="50" />
+                    <em><?php if(isset($this->form_error["drowssap"])){ echo $this->form_error["drowssap"]; }?></em></td>
                   </tr>
 
                   <tr>

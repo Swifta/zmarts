@@ -480,7 +480,12 @@ $this->UserName = $this->session->get("UserName");
             <td>&nbsp;</td>
           </tr>
           <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-            <td colspan="7" width="80%" align="center" style="padding:10px"><span style="padding-right: 15px;">Shipping Address:</span> <?php echo $c_name.", "; ?><span style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $c_addr1?>, <?php echo " ".$c_addr2?>, <?php echo  " ".$c_city." "; ?> - <?php echo $c_zipcode." ".$c_state.", "; ?> <?php echo $c_country?>.</span></td>
+<!--            <td colspan="7" width="80%" align="center" style="padding:10px"><span style="padding-right: 15px;">Shipping Address:</span> <?php //echo $c_name.", "; ?><span style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php //echo $c_addr1?>, <?php //echo " ".$c_addr2?>, <?php //echo  " ".$c_city." "; ?> - <?php //echo $c_zipcode." ".$c_state.", "; ?> <?php //echo $c_country?>.</span></td>
+          -->
+          <td colspan="7" width="80%" align="center" style="padding:10px"><span style="padding-right: 15px;">Shipping Address:</span> <?php echo $c_name.", "; ?>
+              <span style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo htmlspecialchars($c_addr1 ,ENT_QUOTES,'UTF-8');  ?>, <?php echo " ". htmlspecialchars($c_addr2 ,ENT_QUOTES,'UTF-8'); ?>, <?php echo  " ".htmlspecialchars($c_city ,ENT_QUOTES,'UTF-8')." "; ?> - 
+                  <?php echo  htmlspecialchars($c_zipcode ,ENT_QUOTES,'UTF-8'); ." ". htmlspecialchars($c_state ,ENT_QUOTES,'UTF-8'); .", "; ?> <?php echo htmlspecialchars($c_country ,ENT_QUOTES,'UTF-8'); ?>.</span></td>
+         
           </tr>
           <tr>
             <td>&nbsp;</td>

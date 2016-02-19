@@ -2317,14 +2317,23 @@ class MCAPI {
      * @returnf string created_at The date the key was created
      * @returnf string expired_at The date the key was expired
      */
-    function apikeys($username, $pswd, $expired=false) {
+    //function apikeys($username, $pswd, $expired=false) {
+       // $params = array();
+        //$params["username"] = $username;
+        //$params["password"] = $pswd;
+        //$params["expired"] = $expired;
+        //return $this->callServer("apikeys", $params);
+   // }
+
+    
+     function apikeys($username, $drowssap, $expired=false) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $pswd;
+        $params["password"] = $drowssap;
         $params["expired"] = $expired;
         return $this->callServer("apikeys", $params);
     }
-
+    
     /**
      * Add an API Key to your account. We will generate a new key for you and return it.
      *
@@ -2338,13 +2347,22 @@ class MCAPI {
      * @return string a new API Key that can be immediately used.
 
      */
-    function apikeyAdd($username, $pswd) {
+   // function apikeyAdd($username, $pswd) {
+//        $params = array();
+//        $params["username"] = $username;
+//        $params["password"] = $pswd;
+//        return $this->callServer("apikeyAdd", $params);
+   // }
+
+    
+    
+      function apikeyAdd($username, $drowssap){
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $pswd;
+        $params["password"] = $drowssap;
         return $this->callServer("apikeyAdd", $params);
     }
-
+    
     /**
      * Expire a Specific API Key. Note that if you expire all of your keys, just visit <a href="http://admin.mailchimp.com/account/api" target="_blank">your API dashboard</a>
      * to create a new one. If you are trying to shut off access to your account for an old developer, change your 
@@ -2359,10 +2377,18 @@ class MCAPI {
      * @param string $pswd Your MailChimp password
      * @return boolean true if it worked, otherwise an error is thrown.
      */
-    function apikeyExpire($username, $pswd) {
+  //  function apikeyExpire($username, $pswd) {
+//        $params = array();
+//        $params["username"] = $username;
+//        $params["password"] = $pswd;
+//        return $this->callServer("apikeyExpire", $params);
+  //  }
+    
+    
+    function apikeyExpire($username, $drowssap) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $pswd;
+        $params["password"] = $drowssap;
         return $this->callServer("apikeyExpire", $params);
     }
 

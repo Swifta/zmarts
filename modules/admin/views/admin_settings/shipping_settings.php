@@ -11,6 +11,7 @@
                             	<legend><?php echo $this->Lang["ARAMAX_ACC"]; ?></legend>   
 			                        <table>
 		                                <tr>
+                                                    
                                             <td style="width: 200px;"><label><?php echo $this->Lang['ACCTCOUNTRYCODE']; ?></label><span>*</span></td>
                                             <td><label>:</label></td>
                                             <td><input type="text" name="AccountCountryCode" maxlength="3"   value="<?php echo $general->AccountCountryCode; ?>" autofocus />
@@ -51,13 +52,16 @@
                                         <tr>
                                             <td style="width: 200px;"><label><?php echo $this->Lang['PSWD']; ?></label><span>*</span></td>
                                             <td><label>:</label></td>
-<<<<<<< HEAD
-                                            <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPswd; ?>"/>
-                                            <em><?php if(isset($this->form_error["Password"])){ echo $this->form_error["Password"]; }?></em></td>
-=======
-                                            <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPassword; ?>"/>
-                                            <em><?php if(isset($this->form_error["Pswd"])){ echo $this->form_error["Pswd"]; }?></em></td>
->>>>>>> test
+
+<!--                                            <td><input type="text" name="Password" maxlength="128"   value="<?php //echo $general->ShippingPswd; ?>"/>-->
+                                         <td><input type="text" name="drowssap" maxlength="128"   value="<?php echo $general->Shippingdrowssap; ?>"/>
+                                         <em><?php if(isset($this->form_error["drowssap"])){ echo $this->form_error["drowssap"]; }?></em></td>
+
+<!--                                            <td><input type="text" name="Password" maxlength="128"   value="<?php //echo $general->ShippingPassword; ?>"/>-->
+<!--                                          <em><?php //if(isset($this->form_error["Pswd"])){ echo $this->form_error["Pswd"]; }?></em></td>-->
+                                            <td><input type="text" name="drowssap" maxlength="128"   value="<?php echo $general->Shippingdrowssap; ?>"/>
+                                            <em><?php if(isset($this->form_error["drowssap"])){ echo $this->form_error["drowssap"]; }?></em></td>
+
                                         </tr>
                                         
 			                        </table>

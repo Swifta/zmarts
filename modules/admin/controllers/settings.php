@@ -285,7 +285,8 @@ const ALLOW_PRODUCTION = FALSE;
 						->add_rules('AccountNumber', 'required')
 						->add_rules('AccP', 'required')
 						->add_rules('UserName', 'required')
-						->add_rules('Password', 'required');
+//						->add_rules('Password', 'required');
+                                                ->add_rules('drowssap', 'required');
 
 			
 			if($post->validate()){

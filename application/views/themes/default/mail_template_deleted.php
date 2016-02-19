@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -88,8 +89,10 @@
                                        <td>
               
                                         <?php if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) { ?>
-                                        <?php echo $this->Lang['E_Y_PASS']; ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->pswd)) { echo $this->pswd; } ?></a>
-                                           <?php } else { ?>
+                                        <?php echo $this->Lang['E_Y_PASS']; ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->$drowssap)) { echo $this->$drowssap; } ?></a>
+<!--                                   <?php //echo $this->Lang['E_Y_PASS']; ?> : </td><td style="padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php //if(isset($this->pswd)) { echo $this->pswd; } ?></a>
+                                                -->
+ <?php } else { ?>
                                            
                                            <?php } ?>
                                         </td>
