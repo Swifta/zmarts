@@ -5603,12 +5603,10 @@ class Merchant_Controller extends website_Controller {
 						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 						*/
 						
-						$source = upload::save('attach');
+						$dir = DOCROOT."images".DIRECTORY_SEPARATOR."newsletter";
+						$source = upload::save('attach', null, $dir, 0777);
 						$logo = basename($source);
-						move_uploaded_file($source, realpath(DOCROOT."images/newsletter/").$logo);
-						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 						
-						unlink($source);
 						
 					}
 					$file1=array();
@@ -5619,7 +5617,7 @@ class Merchant_Controller extends website_Controller {
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
 					if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
-						unlink(realpath(DOCROOT."images/newsletter/").$logo);
+						unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
@@ -5637,7 +5635,7 @@ class Merchant_Controller extends website_Controller {
 						$this->form_error['attach'] = $this->Lang['REQQ'];
 					}
 		        }
-                        unlink($tmp_name);
+                      
 		}
 	$this->city_list = $this->merchant->getCityList();  
 	$this->users = $this->merchant->getUSERList();      
@@ -5645,7 +5643,7 @@ class Merchant_Controller extends website_Controller {
 	
 	if(count($this->newsletter_list)==0){
 			common::message(-1, $this->Lang["NO_TEMPLATES_FOUND"]);        
-			url::redirect(PATH."admin.html");
+			url::redirect(PATH."merchant.html");
 		}
         $this->template->title = $this->Lang['SEND_NEWSL'];
         $this->template->content = new View("merchant/send_emils");	
