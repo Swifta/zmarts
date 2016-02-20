@@ -5642,6 +5642,7 @@ class Merchant_Controller extends website_Controller {
 	$this->city_list = $this->merchant->getCityList();  
 	$this->users = $this->merchant->getUSERList();      
 	$this->newsletter_list = $this->merchant->get_newsletter_list();
+	
 	if(count($this->newsletter_list)==0){
 			common::message(-1, $this->Lang["NO_TEMPLATES_FOUND"]);        
 			url::redirect(PATH."admin.html");
