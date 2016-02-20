@@ -5165,6 +5165,7 @@ class Merchant_Controller extends website_Controller {
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
+                                                    $subsector_ids = $this->settings->get_all_subsector_ids();
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
 										foreach($subsector_ids as $id){
