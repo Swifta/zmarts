@@ -366,11 +366,7 @@ $this->UserName = $this->session->get("UserName");
     <td>&nbsp;</td>
   </tr>
   <?php 	
-			
-		
-	
-	
-					$j=1;
+				        $j=1;
 					$val_tot = 0;
 					$tax_tot =0;
 					$tot_ship =0;
