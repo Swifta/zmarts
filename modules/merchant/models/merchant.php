@@ -648,20 +648,20 @@ class Merchant_Model extends Model
                        //$result = $this->db->query("SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ");
                        $result = $this->db->select()
                                ->from("transaction_mapping")
-                               ->join("deals","deals.deal_id = transaction_mapping.deal_id")
+                               ->join("deals","deals.deal_id","transaction_mapping.deal_id")
                                ->join("users","users.user_id","transaction_mapping.user_id")
-                               ->where($contitions)
-                               ->limit($limit1)
+                               ->where($contitions." ".$limit1)
+                               //->limit($limit1)
                                ->get();
 		}
 		else {
 		//$qry = "SELECT * FROM transaction_mapping join deals on deals.deal_id = transaction_mapping.deal_id join users on users.user_id=transaction_mapping.user_id where $contitions $limit1 ";
                 $result = $this->db->select()
                                ->from("transaction_mapping")
-                               ->join("deals","deals.deal_id = transaction_mapping.deal_id")
+                               ->join("deals","deals.deal_id","transaction_mapping.deal_id")
                                ->join("users","users.user_id","transaction_mapping.user_id")
-                               ->where($contitions)
-                               ->limit($limit1)
+                               ->where($contitions." ".$limit1)
+                               //->limit($limit1)
                                ->get();
 
         //$result = $this->db->query($qry);

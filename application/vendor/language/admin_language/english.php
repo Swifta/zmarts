@@ -1305,9 +1305,9 @@ $content_text = array(
 
 			"PRODUCT_PERCENT"=>"Product Percentage",
 
-			"PRODUCT_UNB_SUC"=>"Product unblock successfully ",
+			"PRODUCT_UNB_SUC"=>"Product unblocked successfully ",
 
-			"PRODUCT_B_SUC"=>"Product block successfully",
+			"PRODUCT_B_SUC"=>"Product blocked successfully",
 
 			"DISCOUNT_PRI"=>"Discount Price",
 

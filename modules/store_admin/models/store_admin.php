@@ -88,7 +88,9 @@ class Store_admin_Model extends Model
 	public function merchant_login($email = "", $pswd = "")
 	{
 		//$result=$this->db->query("SELECT * FROM users WHERE email = '$email' AND password ='".md5($pswd)."' AND user_type =9 ");
-                $result =$this->db->select()->from("users")->where(array("email" => $email, "password" => md5($pswd), "user_type"=> 9));
+                $result =$this->db->select()->from("users")
+                        ->where(array("email" => $email, "password" => md5($pswd), "user_type"=> 9))
+                        ->get();
         if(count($result)>0){
 			if($result->current()->user_status == 1){
 				$store_admin_id = $result[0]->user_id;

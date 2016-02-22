@@ -216,9 +216,9 @@ class Users_Controller extends Layout_Controller {
             if($status == 1){
 				$this->signup=1;
 				$from = CONTACT_EMAIL;
-				$this->name=  strip_tags(addslashes($_POST['f_name']));
-				$this->email =  strip_tags(addslashes($_POST['email']));
-				$this->password = strip_tags(addslashes($_POST['password']));  
+				$this->name=  strip_tags(addslashes($this->userPost->f_name));
+				$this->email =  strip_tags(addslashes($this->userPost->email));
+				$this->password = strip_tags(addslashes($this->userPost->password));  
 				/*$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];*/
 				$subject = SITENAME.' '.$this->Lang['M_REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
@@ -360,9 +360,11 @@ class Users_Controller extends Layout_Controller {
 		  */
 		  $email = strip_tags(addslashes($this->input->get('email')));
 		  $z_offer = "0";
-		  if(isset($_GET['z_offer']))
-		  $z_offer = strip_tags (addslashes ($this->input->get('z_offer')));
-		  echo $check = $this->users->check_user_exist($email, $z_offer);
+		  if(isset($_GET['z_offer'])){
+                    $z_offer = strip_tags (addslashes ($this->input->get('z_offer')));
+                  }
+		  $check = $this->users->check_user_exist($email, $z_offer);
+                  echo $check;
 		  exit;
 		/*$email = $this->input->get('email');
 		echo $check = $this->users->check_user_exist($email);
