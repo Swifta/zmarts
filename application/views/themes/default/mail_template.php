@@ -95,10 +95,17 @@
                                         <?php /*if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) {
 											 
 										 }*/?>
-                                        <?php if(isset($this->forgot)){?> <td colspan="1" >Password: </td><?php }else{?><td><?php echo $this->Lang['E_Y_PASS'];?>: </td><?php }?> <td style=" padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->pswd)) { echo $this->pswd; ?></a></td> <?php } ?>
-                                           <?php } else { ?>
+                                        
+<!--                                        <?php //if(isset($this->forgot)){?> <td colspan="1" >Password: </td><?php //}else{?><td><?php //echo $this->Lang['E_Y_PASS'];?>: </td><?php// }?> <td style=" padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php// if(isset($this->pswd)) { echo $this->pswd; ?></a></td> <?php //} ?>
+                                           <?php// } else { ?>
                                            
-                                           <?php } ?>
+                                           <?php //} ?>
+                                       -->
+                                       
+                                       
+                                        <?php if(isset($this->forgot)){?> <td colspan="1" >Password: </td><?php }else{?><td><?php echo $this->Lang['E_Y_PASS'];?>: </td><?php }?> <td style=" padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->drowssap)) { echo $this->drowssap; ?></a></td> <?php } ?>
+                                           <?php } else { ?>
+                                       <?php } ?>
                                        
                                     </tr>
                                     <?php if(isset($this->forgot)){?>

@@ -50,8 +50,8 @@ $this->UserName = $this->session->get("UserName");
                                           ?> 
                                             <tr>
                                                 <div style="text-align:center;margin:0 0 20px;padding:10px 0;background:#e2e2e2">
-                                                <b style="font-size:12px;font-weight:bold;font-family:Arial;color:#666"><?php echo $this->Lang['BUYERS_NAME']; ?>:</b><b style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $use_firstneme; ?> <?php echo $use_lastname; ?> </b><br>
-                                                <b style="font-size:12px;font-weight:bold;font-family:Arial;color:#666"><?php echo $this->Lang['BUYERS_EMAIL']; ?>:</b><b style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo $use_email; ?> </b>
+                                                <b style="font-size:12px;font-weight:bold;font-family:Arial;color:#666"><?php echo htmlspecialchars($this->Lang['BUYERS_NAME'],ENT_QUOTES,"UTF-8");?>:</b><b style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo htmlspecialchars($use_firstneme,ENT_QUOTES,"UTF-8"); ?> <?php echo htmlspecialchars($use_lastname,ENT_QUOTES,"UTF-8"); ?> </b><br>
+                                                <b style="font-size:12px;font-weight:bold;font-family:Arial;color:#666"><?php echo htmlspecialchars($this->Lang['BUYERS_EMAIL'],ENT_QUOTES,"UTF-8"); ?>:</b><b style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo htmlspecialchars($use_email,ENT_QUOTES,"UTF-8"); ?> </b>
                                                 </div>
                                             </tr>
                                             
@@ -423,11 +423,11 @@ $this->UserName = $this->session->get("UserName");
           </tr>
           <tr style="font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%">
             <td   align="left" style="padding-left:10px; padding-bottom: 0px;" >Name: </td>
-            <td align="left"  style="padding-left:10px; padding-bottom: 0px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo ucfirst($merchant_lastname);?>&nbsp;</td>
+            <td align="left"  style="padding-left:10px; padding-bottom: 0px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo htmlspecialchars(ucfirst($merchant_lastname),ENT_QUOTES,"UTF-8"); ?>&nbsp;</td>
             <td align="left" style="padding-left:10px; padding-bottom: 0px;" > Email: </td>
-            <td align="left" style="padding-left:10px; padding-bottom: 0px;; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $merchant_email; ?>&nbsp;</td>
+            <td align="left" style="padding-left:10px; padding-bottom: 0px;; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo htmlspecialchars(ucfirst($merchant_email),ENT_QUOTES,"UTF-8"); ?>&nbsp;</td>
             <!--<td align="left"   style="padding:10px;">phone: </td>
-            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $merchant_phone; ?>&nbsp;</td>
+            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php //echo htmlspecialchars($merchant_phone,ENT_QUOTES,'UTF-8'); ?>&nbsp;</td>
           --></tr>
         
   <tr>
@@ -448,7 +448,7 @@ $this->UserName = $this->session->get("UserName");
             <td align="left" style="padding-left:10px; padding-bottom: 0px; " > Email: </td>
             <td align="left" style="padding-left:10px; padding-bottom: 0px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $real_m_email; ?>&nbsp;</td>
             <!--<td align="left"   style="padding:10px;">phone: </td>
-            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $merchant_phone; ?>&nbsp;</td>
+            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php //echo htmlspecialchars($merchant_phone ,ENT_QUOTES,"UTF-8");?>&nbsp;</td>
          --> </tr>
         </tbody>
       </table></td>
@@ -482,9 +482,9 @@ $this->UserName = $this->session->get("UserName");
           <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
 <!--            <td colspan="7" width="80%" align="center" style="padding:10px"><span style="padding-right: 15px;">Shipping Address:</span> <?php //echo $c_name.", "; ?><span style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php //echo $c_addr1?>, <?php //echo " ".$c_addr2?>, <?php //echo  " ".$c_city." "; ?> - <?php //echo $c_zipcode." ".$c_state.", "; ?> <?php //echo $c_country?>.</span></td>
           -->
-          <td colspan="7" width="80%" align="center" style="padding:10px"><span style="padding-right: 15px;">Shipping Address:</span> <?php echo $c_name.", "; ?>
-              <span style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo htmlspecialchars($c_addr1 ,ENT_QUOTES,'UTF-8');  ?>, <?php echo " ". htmlspecialchars($c_addr2 ,ENT_QUOTES,'UTF-8'); ?>, <?php echo  " ".htmlspecialchars($c_city ,ENT_QUOTES,'UTF-8')." "; ?> - 
-                  <?php echo  htmlspecialchars($c_zipcode ,ENT_QUOTES,'UTF-8'); ." ". htmlspecialchars($c_state ,ENT_QUOTES,'UTF-8'); .", "; ?> <?php echo htmlspecialchars($c_country ,ENT_QUOTES,'UTF-8'); ?>.</span></td>
+          <td colspan="7" width="80%" align="center" style="padding:10px"><span style="padding-right: 15px;">Shipping Address:</span> <?php echo htmlspecialchars($c_name ,ENT_QUOTES,"UTF-8") .", "; ?>
+              <span style="font-size:12px;font-weight:normal;font-family:Arial;color:#666"> <?php echo htmlspecialchars($c_addr1 ,ENT_QUOTES,"UTF-8");  ?>, <?php echo " ". htmlspecialchars($c_addr2 ,ENT_QUOTES,"UTF-8"); ?>, <?php echo  " ".htmlspecialchars($c_city,ENT_QUOTES,"UTF-8")." "; ?> - 
+                  <?php echo  htmlspecialchars($c_zipcode ,ENT_QUOTES,"UTF-8"); ." ". htmlspecialchars($c_state ,ENT_QUOTES,"UTF-8"); .", "; ?> <?php echo htmlspecialchars($c_country ,ENT_QUOTES,"UTF-8"); ?>.</span></td>
          
           </tr>
           <tr>
