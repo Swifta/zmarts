@@ -5165,6 +5165,7 @@ class Merchant_Controller extends website_Controller {
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
+                                                    $subsector_ids = $this->settings->get_all_subsector_ids();
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
 										foreach($subsector_ids as $id){
@@ -5603,12 +5604,10 @@ class Merchant_Controller extends website_Controller {
 						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 						*/
 						
-						$source = upload::save('attach');
+						$dir = DOCROOT."images".DIRECTORY_SEPARATOR."newsletter";
+						$source = upload::save('attach', null, $dir, 0777);
 						$logo = basename($source);
-						move_uploaded_file($source, realpath(DOCROOT."images/newsletter/").$logo);
-						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
 						
-						unlink($source);
 						
 					}
 					$file1=array();
@@ -5619,7 +5618,7 @@ class Merchant_Controller extends website_Controller {
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
 					if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
-						unlink(realpath(DOCROOT."images/newsletter/").$logo);
+						unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
@@ -5637,14 +5636,15 @@ class Merchant_Controller extends website_Controller {
 						$this->form_error['attach'] = $this->Lang['REQQ'];
 					}
 		        }
-                        unlink($tmp_name);
+                      
 		}
 	$this->city_list = $this->merchant->getCityList();  
 	$this->users = $this->merchant->getUSERList();      
 	$this->newsletter_list = $this->merchant->get_newsletter_list();
+	
 	if(count($this->newsletter_list)==0){
 			common::message(-1, $this->Lang["NO_TEMPLATES_FOUND"]);        
-			url::redirect(PATH."admin.html");
+			url::redirect(PATH."merchant.html");
 		}
         $this->template->title = $this->Lang['SEND_NEWSL'];
         $this->template->content = new View("merchant/send_emils");	
@@ -7331,6 +7331,8 @@ class Merchant_Controller extends website_Controller {
 					->add_rules('template_image','required','upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 			if($post->validate()){
 				$status = $this->merchant->add_template(arr::to_object($this->userPost));
+				
+				
 				/*if($status > 0){
 					$source = upload::save('template_file');
 					if($source){//
@@ -7352,17 +7354,20 @@ class Merchant_Controller extends website_Controller {
 						
 					}*/
 				$template_id = null;
-				$template_id = $this->news->get_template_by_id_sec($status);
-				if($status === $template_id){
+				$template_id = $this->merchant->get_template_by_id_sec($status);
+				
+				
+				if($status == $template_id){
 						$filename = null;
 						$dir = null;
 						if($template_id){
 						 $filename = "Template_file_".$template_id.".php";
-						 $dir = realpaht(DOCROOT."application/views/themes/".THEME_NAME."/").$filename;
-						 upload::save('template_file', null, $dir, 0777);
-						}else{
+						 
+						 $dir = realpath(DOCROOT."application/views/themes/".THEME_NAME);
+						 $f = upload::save('template_file', $filename, $dir, 0777);
+						}else{ 
 							exit;
-						}	
+						}
 					$filename = upload::save('template_image'); 
 					if($filename){						
 						$IMG_NAME = $status.'.png';						
@@ -7372,6 +7377,8 @@ class Merchant_Controller extends website_Controller {
 					common::message(1, $this->Lang["TEMPLATE_SUCESSS"]);
 					url::redirect(PATH."merchant/manage-template.html");
 				}
+				
+				
 				$this->form_error["title"] = $this->Lang["TEMPLATE_TITLE_EXIT"];
 			}else{
 				$this->form_error = error::_error($post->errors());
@@ -7480,8 +7487,8 @@ class Merchant_Controller extends website_Controller {
 		if($newsletter_id){
 			$status = $this->merchant->deleteTemplate($newsletter_id);
 			if($status == 1){
-				unlink(DOCROOT."images/newsletter/".$newsletter_id.".png");
-				unlink( DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id.".php");
+				unlink(DOCROOT."images".DIRECTORY_SEPARATOR."newsletter".DIRECTORY_SEPARATOR."$newsletter_id".".png");
+				unlink( DOCROOT."application".DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.THEME_NAME."/Template_file_".$newsletter_id.".php");
 				common::message(1, $this->Lang["TEMPLATE_DEL_SUC"]);
 			}else{
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);

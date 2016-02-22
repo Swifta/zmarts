@@ -121,12 +121,13 @@ class Newsletter_Controller extends website_Controller {
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-                                            $tmp_name = upload::save('attach');
-                                            $logo = basename($tmp_name);
+					$dir = realpath(DOCROOT."images/newsletter");
+                       $tmp_name = upload::save('attach', null, $dir, 0777);
+                       $logo = basename($tmp_name);
 						//$tmp_name = basename($_FILES["attach"]["tmp_name"]);
 						//$logo = basename($_FILES["attach"]["name"]);
-						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
-						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
+						//move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod($tmp_name,0777);
 					}
 					               
 					$file1=array();
@@ -148,7 +149,7 @@ class Newsletter_Controller extends website_Controller {
                     $status = $this->news->send_newsletter(arr::to_object($this->userPost),$file1,$logo);
                     if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
-						unlink(realpath(DOCROOT."images/newsletter/").$logo);
+						unlink(realpath(DOCROOT."images/newsletter").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
@@ -294,16 +295,19 @@ class Newsletter_Controller extends website_Controller {
 				$status = $this->news->add_template(arr::to_object($this->userPost));
 				$template_id = null;
 				$template_id = $this->news->get_template_by_id_sec($status);
-				if($status === $template_id){
+				if($status == $template_id){
 						$filename = null;
 						$dir = null;
 						if($template_id){
 						 $filename = "Template_file_".$template_id.".php";
-						 $dir = realpaht(DOCROOT."application/views/themes/".THEME_NAME."/").$filename;
-						 upload::save('template_file', null, $dir, 0777);
+						 $dir = realpath(DOCROOT."application/views/themes/".THEME_NAME);
+						 $f = upload::save('template_file', $filename, $dir, 0777);
 						}else{
+							echo "Invalid request";
 							exit;
 						}	
+						
+					
 						
 					//if($tmp_name){
 						//basename($_FILES["template_file"]["tmp_name"]);
@@ -312,10 +316,10 @@ class Newsletter_Controller extends website_Controller {
                         //unlink($tmp_name);
 					//}
 					
-					$filename = upload::save('template_image'); 	
+					$filename = upload::save('template_image');
 					if($filename){					
 						$IMG_NAME = $status.'.png';						
-						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter/').$IMG_NAME);
+						common::image($filename, 192, 98, realpath(DOCROOT.'images/newsletter').DIRECTORY_SEPARATOR.$IMG_NAME);
 						unlink($filename);
 					}
 					common::message(1, $this->Lang["TEMPLATE_SUCESSS"]);

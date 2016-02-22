@@ -4004,9 +4004,9 @@ class Merchant_Model extends Model
 	public function get_user_list1($all_users="",$city="",$gender="",$age_range="")
 	{
 		
-			$city = addslashes($post->city);
-			$gender = addslashes($post->gender);
-			$age_range = addslashes($post->age_range);
+			$city = addslashes($city);
+			$gender = addslashes($gender);
+			$age_range = addslashes($age_range);
 			
 			
 		if($city==0)
