@@ -184,7 +184,7 @@ class Users_Controller extends Layout_Controller {
 	{
 	    $user_referral_id = $this->session->get("User_Referral_ID");
             if($_POST){
-		        $this->userPost = utf8::clean($this->input->post());
+		        $this->userPost = arr::to_object(utf8::clean($this->input->post()));
                 $post = new Validation(utf8::clean($_POST));
                 $post = Validation::factory(utf8::clean($_POST))
                                 ->add_rules('f_name', 'required')
@@ -197,7 +197,7 @@ class Users_Controller extends Layout_Controller {
                                  ->add_rules('country', 'required')
                                 ->add_rules('city', 'required');
 
-                $status = $this->users->add_users(arr::to_object($this->userPost),$user_referral_id);
+                $status = $this->users->add_users($this->userPost,$user_referral_id);
 				
 				/*
 					TODO

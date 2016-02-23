@@ -8,7 +8,7 @@ $content_text = array(
 
 			"LOGIN_SUCCESS" => "Successfully logged!",
 
-			"ACCOUNT_BLOCKED" => "Your account has been blocked Please Contact Administrator",
+			"ACCOUNT_BLOCKED" => "Your account has been blocked. Please Contact Administrator",
 
 			"EMAIL_NOT_EXIST" => "Email does not Exist",
 
@@ -1380,7 +1380,7 @@ $content_text = array(
 
 			"CODE"=>"Code",
 
-			"COUPON_VERIFIED"=>"Coupon Code  Did not Matched  Please Enter Valid Code",
+			"COUPON_VERIFIED"=>"Coupon does not exist. Please enter a valid coupon code",
 
 			"CLOSE"=>"Close",
 

@@ -61,21 +61,19 @@ class Merchant_Controller extends website_Controller {
 					
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
 					$status = $this->merchant->get_last_login($email);
-					
 					if($status == "0"){
 						$this->session->delete('user_id');
 						$this->session->delete('user_id1');
 						$reset_timeout = time()+(60);
 						$this->session->set("pass_reset_timeout", $reset_timeout);
-						url::redirect(PATH."merchant/reset-password.html");
-					
-						
+						url::redirect(PATH."merchant/reset-password.html");	
 					}
 					
 				}
 				
 				if($status == 10){
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
+                                        //echo "here"; die;
 					url::redirect(PATH."merchant.html");
 				}
 				elseif($status == 11){
