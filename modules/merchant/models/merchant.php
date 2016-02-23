@@ -102,15 +102,17 @@ class Merchant_Model extends Model
                $result=$this->db->select()
                        ->from("users")
                        ->where("email = '".strip_tags(addslashes($email)).
-                       "' AND password ='".md5($password)."' AND user_type IN (3,8)")
+                       "' AND password =md5('".$password."') AND user_type IN (3,8)")
                        ->get();
-               //echo count($result); die;
+               
+               //var_dump($result); die;
                 //$result = $this->db->from("users")->where(array("email" => $email, "password" => md5($password),"user_type in" =>(3,8)))->limit(1)->get();
 		     if(count($result)>0){
                         if(count($result) == 1){
 	                        if($result->current()->user_status == 1){
 				if($result->current()->user_type == 8){ 
-					$this->merchant_id=$result->current()->merchantid;
+					//$this->merchant_id=$result->current()->merchantid;
+                                        $this->merchant_id=$result->current()->user_id;
 					$this->merchant_id1=$result->current()->user_id;
 				} else {
 					$this->merchant_id=$result->current()->user_id;
@@ -127,6 +129,7 @@ class Merchant_Model extends Model
 								"fb_access_token" =>$result->current()->fb_session_key,
 								"fb_user_id" =>$result->current()->fb_user_id
 				                        ));
+                                        //echo "here ";die;
 				                        return 10;
 	                        }
 	                        return 9;
@@ -3007,7 +3010,10 @@ class Merchant_Model extends Model
 	{
 		$time = time();
 		$email = trim($email);
-		$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 3,"user_status" => 1))->limit(1)->get();
+		$result = $this->db->from("users")
+                        ->where("email='".$email."' and user_status=1 and user_type IN (3,8) ")
+                        //->where(array("email" => $email,"user_type" => 3,"user_status" => 1))
+                        ->limit(1)->get();
 		if(count($result) > 0){
 			
 			$userid = $result->current()->user_id;
@@ -3026,8 +3032,10 @@ class Merchant_Model extends Model
 		$email = trim(strip_tags(addslashes($email)));
 		//$result = $this->db->query("select password from users where email='$email' and user_status=1 and user_type = 3");
 		$result = $this->db->select("password")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))
+                        ->where("email='".$email."' and user_status=1 and user_type IN (3,8) ")
                         ->get();
+                        //->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))
+                        //->get();
                 if(count($result) > 0){
 			return $result->current()->password;
 		}else{
@@ -3043,14 +3051,15 @@ class Merchant_Model extends Model
 		$email = trim($email);
 		//$result = $this->db->query("select last_login from users where email='$email' and user_status=1 and user_type = 3");
 		$result = $this->db->select("last_login")->from("users")
-                        ->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))->get();
+                        ->where("email='".$email."' and user_status=1 and user_type IN (3,8) ")->get();
+                        //->where(array("email"=>$email, "user_status"=>1, "user_type" => 3))->get();
                 if(count($result) > 0){
 			
 			$last_login = $result->current()->last_login;
-			if($last_login == "0"){
+			if($last_login == 0){
 				return 0;
 			}else{
-				return 1;
+				return 10;
 			}
 			
 		}
