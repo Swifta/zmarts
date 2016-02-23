@@ -313,9 +313,9 @@ class Stores_Model extends Model
 
 	public function  get_store_list($search = "",  $offset = "", $record = "")
 	{
-		$search = addslashes($search);
-		$offset = addslashes($offset);
-		$record = addslashes($record);
+		$search = strip_tags(addslashes($search));
+		$offset = strip_tags(addslashes($offset));
+		$record = strip_tags(addslashes($record));
 		
 	        $conditions = " ";
 		if($search){
@@ -333,9 +333,7 @@ class Stores_Model extends Model
                            
                           ->where("store_status = 1 and users.user_type=3 and users.user_status=1 and stores.city_id = '.$this->city_id.'  ".$conditions)
 		          ->orderby("store_id","DESC")
-                          ->limit($offset,$record)->get();  
-                           
-                            return count($result);
+                          ->limit($record,$offset)->get();                           
 		} else {
 //		$qry = "select * from stores  join users on users.user_id=stores.merchant_id 
 //                    where store_status = 1 and users.user_type=3 and users.user_status=1 $conditions order by store_id DESC limit $offset,$record";
@@ -343,18 +341,14 @@ class Stores_Model extends Model
 //	        return $result;
                 
                 
-                 $result=$this->db->select("*")->from("stores")
+                 $result = $this->db->select()
+                         ->from("stores")
                           ->join("users","users.user_id","stores.merchant_id")
-                           
-                          ->where("store_status = 1 and users.user_type=3 and users.user_status=1". $conditions)
+                          ->where("store_status = 1 and users.user_type=3 and users.user_status=1 ". $conditions)
 		          ->orderby("store_id","DESC")
-                          ->limit($offset,$record)->get();  
-                           
-                            return $result;
-                
-                
-                
+                          ->limit($record,$offset)->get();
 		}
+                return $result;
 	}  
 		/** GET COMMENTS LIST **/
 
@@ -411,8 +405,8 @@ class Stores_Model extends Model
             $result = $this->db->insert("discussion_unlike",array("discussion_id" => $dis_id, "store_id" => $store_id, "user_id" => $this->session->get('UserID')));
             $result = $this->db->from('discussion_likes')->where(array("discussion_id" => $dis_id, "store_id" => $store_id, "user_id" => $this->session->get('UserID')))->get();
             if(count($result) > 0){
-				$result = $this->db->delete('discussion_likes', array("discussion_id" => $dis_id, "store_id" => $store_id, "user_id" => $this->session->get('UserID')));
-			}
+		$result = $this->db->delete('discussion_likes', array("discussion_id" => $dis_id, "store_id" => $store_id, "user_id" => $this->session->get('UserID')));
+            }
             return 1;
     }
     
@@ -457,17 +451,12 @@ class Stores_Model extends Model
 		{
 			$get_rate = count($result);
 			//$sum= $this->db->query("select sum(rating) as sum from rating where type_id='$store_id' AND module_id = 4");
-                         $sum=$this->db->select("select sum(rating) as sum")->from("rating")
+                         $sum = $this->db->select("select sum(rating) as sum")->from("rating")
                        
                           ->where(array("type_id"=>$store_id,"module_id"=>4))
 		         ->get();  
-                           
-                           
-                
                         
-                        
-                        
-			$get_sum=$sum->current()->sum;
+			$get_sum = $sum->current()->sum;
 			$average= $get_sum/$get_rate;
 			return $average;
 		}

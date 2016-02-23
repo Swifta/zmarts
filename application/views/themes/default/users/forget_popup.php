@@ -82,7 +82,7 @@
 		
             var url= Path+'users/check_user_signup/?email='+email;
             $.post(url,function(check){ 
-                if(check == -1){
+                if(check === -1){
                     document.forget_password.submit();
                     //return true;
                 }else{

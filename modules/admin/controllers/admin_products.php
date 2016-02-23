@@ -492,8 +492,8 @@ class Admin_products_Controller extends website_Controller
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/admin_excel/');
-						move_uploaded_file($source,$path.$excel_name);
-						unlink($source);
+						move_uploaded_file($file_name,$path.$excel_name);
+						unlink($file_name);
 						
 					}
 					
@@ -1060,12 +1060,12 @@ class Admin_products_Controller extends website_Controller
 		} else {
 		        common::message(-1, $this->Lang["PROD_ACTI"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-		url::redirect(PATH.$lastsession);
-		} else {
+//		$lastsession = $this->session->get("lasturl");
+//		if($lastsession){
+//		url::redirect(PATH.$lastsession);
+//		} else {
 		url::redirect(PATH."admin/manage-products.html");
-		}
+//		}
 	}
 
 	/** MANAGE USER COMMENTS **/

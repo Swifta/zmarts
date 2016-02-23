@@ -783,16 +783,16 @@ class Admin_Model extends Model
                                 $conditions= "transaction_mapping.coupon_code ='".strip_tags($code)."'";
                          }
                         //$qry = "select deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name from deals join transaction on transaction.deal_id=deals.deal_id  join transaction_mapping on transaction_mapping.transaction_id=transaction.id where $conditions and expirydate > $time limit 1 ";
-                        	        $qry = $this->db->select("deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name")
+                        	        $result = $this->db->select("deals.*,transaction_mapping.coupon_code,transaction_mapping.coupon_code_status,transaction.type,transaction.id as trans_id,transaction.amount,transaction.referral_amount,transaction.quantity,transaction.file_name")
                                         ->from("deals")
                                         ->join("transaction", "transaction.deal_id", "deals.deal_id")
                                         ->join("transaction_mapping", "transaction_mapping.transaction_id", "transaction.id")
-                                        ->where(array($conditions,"expirydate >"=>$time))
+                                        ->where($conditions." and expirydate > ".$time)
                                         ->limit(1)
                                         ->get();
                         
                         
-                        $result = $this->db->query($query);
+                        //$result = $this->db->query($query);
 
 			return $result;
 
@@ -924,7 +924,7 @@ class Admin_Model extends Model
                         if($email){
 
 		       // $contitions .= ' AND city.city_name like "%'.mysql_escape_string($city).'%"';
-                        $contitions .= ' AND email_subscribe.email_id like "%'.mysql_escape_string($email).'%"';
+                        $contitions .= ' AND email_subscribe.email_id like "%'.strip_tags(addslashes($email)).'%"';
                        
                         }	
  
@@ -952,7 +952,7 @@ class Admin_Model extends Model
                         if($email){
 
 		       // $contitions .= ' AND city.city_name like "%'.mysql_escape_string($city).'%"';
-                        $contitions .= ' AND email_subscribe.email_id like "%'.mysql_escape_string($email).'%"';
+                        $contitions .= ' AND email_subscribe.email_id like "%'.strip_tags(addslashes($email)).'%"';
                        
                         }	
                        //$result = $this->db->query("select * from email_subscribe left join category on category.category_id=email_subscribe.category_id   $contitions  order by email_subscribe.subscribe_id DESC ");

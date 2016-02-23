@@ -688,8 +688,9 @@ class Merchant_Controller extends website_Controller {
 		$this->url ="merchant/close-couopn-list.html";
 		$this->mer_deals_act=1;
 		$this->close_code = 1;
-		$search=$this->input->get("id");
-		$count = $this->merchant->get_coupon_count($this->input->get("coupon_code"), $this->input->get('name'));
+		$search= strip_tags(addslashes($this->input->get("id")));
+		$count = $this->merchant->get_coupon_count(strip_tags(addslashes($this->input->get("coupon_code"))), 
+                        strip_tags(addslashes($this->input->get('name'))));
 		$this->search_key = arr::to_object($this->input->get());
 		$this->pagination = new Pagination(array(
 				'base_url'       => 'merchant/close-couopn-list.html/page/'.$page."/",
@@ -4643,7 +4644,7 @@ class Merchant_Controller extends website_Controller {
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					$file_name = upload::save('im_product');//$_FILES['im_product']['tmp_name'];
+					//$file_name = upload::save('im_product');//$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
@@ -4653,15 +4654,17 @@ class Merchant_Controller extends website_Controller {
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);*/
-
-						$source = upload::save('im_product');
-						$temp = explode('.',  basename($source));
-						$ext = end($temp);
+                                                $excel_name = time().'.xls';
+						$path = DOCROOT.'upload/merchant_excel/';
+						$source = upload::save('im_product', $excel_name, $path);
+                                                
+						//$temp = explode('.',  basename($source));
+						//$ext = end($temp);
 						
-						$excel_name = time().'.'.$ext;
-						$path = realpath(DOCROOT.'upload/merchant_excel/');
-						move_uploaded_file($source,$path.$excel_name);
-						
+				
+                                                //var_dump($source);die;
+						//$ret = move_uploaded_file($source,$path.$excel_name);
+						//var_dump($ret);die;
 						unlink($source);
 						
 						
@@ -4870,8 +4873,8 @@ class Merchant_Controller extends website_Controller {
 							
 			}  
 	 } 
-         unlink($file_name);
-				unlink($inputFileName);
+         //unlink($file_name);
+				//unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."merchant/manage-products.html");	
 						
@@ -5340,6 +5343,7 @@ class Merchant_Controller extends website_Controller {
 					   $this->front_end = 1;
 						$this->moderator_privileges = substr($dispaly_privi,0,-2); 
 						$message = new View("themes/".THEME_NAME."/mail_template");
+                                                $this->isMerchantModerator = true;
 						if(EMAIL_TYPE==2){
 							email::smtp($from, $post->email, SITENAME , "<p>". SITENAME." - Moderator Registration </p>". $message);
 						}else{

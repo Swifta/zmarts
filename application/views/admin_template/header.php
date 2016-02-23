@@ -52,33 +52,33 @@
 <li> <a <?php if(isset($this->mer_settings_act)){ ?> class="active" <?php } ?> href="<?php echo PATH?>merchant/settings.html"><?php echo $this->Lang['SETTINGS']; ?>  </a>  </li>	
 
 <?php 
-if(PRIVILEGES_DEALS==1){?>	
+if(@PRIVILEGES_DEALS==1){?>	
 <li> <a <?php if(isset($this->mer_deals_act)){ ?> class="active" <?php } ?> href="<?php echo PATH?>merchant/deals-dashboard.html"><?php echo $this->Lang['DEALS']; ?>  </a>  </li>
 <?php } ?>
 
 <?php
-if(PRIVILEGES_PRODUCTS==1){?>
+if(@PRIVILEGES_PRODUCTS==1){?>
 <li> <a <?php   if(isset($this->mer_products_act)){ ?> class="active" <?php } ?>href="<?php echo PATH?>merchant/products-dashboard.html"> <?php echo $this->Lang['PRODUCTS']; ?> </a>  </li>
 <?php } ?>
 
 <?php 
-	if(PRIVILEGES_AUCTIONS==1){ ?>
+	if(@PRIVILEGES_AUCTIONS==1){ ?>
  <li> <a <?php   if(isset($this->mer_auction_act)){ ?> class="active" <?php } ?>href="<?php echo PATH?>merchant/auction-dashboard.html"> <?php echo $this->Lang['AUCTION']; ?> </a>  </li>
  <?php } ?> 
  
 <?php 
-if(PRIVILEGES_TRANSACTIONS==1){?>
+if(@PRIVILEGES_TRANSACTIONS==1){?>
 <li> <a <?php   if(isset($this->mer_transactions_act)){ ?> class="active" <?php } ?> href="<?php echo PATH?>merchant/transaction-dashboard.html"> <?php echo $this->Lang['TRANSACTIONS']; ?> </a>  </li>
 <?php }?>
 
 <!--
 <?php 
-if(PRIVILEGES_FUNDREQUEST==1){ ?>
+if(@PRIVILEGES_FUNDREQUEST==1){ ?>
 <li> <a <?php   if(isset($this->mer_fund_act)){ ?> class="active" <?php } ?> href="<?php echo PATH?>merchant/fund_request.html"><?php echo $this->Lang['FUND_REQ']; ?></a>  </li>
 <?php } ?>
 -->
 <?php 
-	if(PRIVILEGES_SHOPS==1){?>
+	if(@PRIVILEGES_SHOPS==1){?>
 <li> <a <?php  if(isset($this->mer_merchant_act)){ ?> class="active" <?php } ?>href="<?php echo PATH?>merchant/manage-shop.html"> <?php echo $this->Lang['SHOP']; ?> </a>  </li>
 <?php } ?>
 <?php if($this->user_type==3){?>
