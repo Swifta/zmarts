@@ -76,7 +76,7 @@ class Newsletter_Model extends Model
 				$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
 				if(EMAIL_TYPE==2){
 					
-					if(!email::send_campaign($post->subject,$message,$file))
+					if(!email::send_campaign($post->subject,$message))//,$file))
 						return -1;
 					
 						

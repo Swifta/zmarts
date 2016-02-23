@@ -113,7 +113,7 @@ class Store_admin_Model extends Model
 						"facebook_status" =>$result->current()->facebook_update,
 						"fb_access_token" =>$result->current()->fb_session_key,
 						"fb_user_id" =>$result->current()->fb_user_id,
-						"store_id" => $res->current()->store_id,
+						"store_id" => $result->current()->store_id,
 						"store_admin_id" => $result->current()->user_id
 					));
 					return 10;
