@@ -4652,10 +4652,10 @@ class Merchant_Controller extends website_Controller {
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);*/
-                                                $excel_name = time().'.xls';
-						$path = DOCROOT.'upload/merchant_excel/';
-						$source = upload::save('im_product', $excel_name, $path);
-                                                
+                                                //$excel_name = time().'.xls';
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						$source = upload::save('im_product', null, $path);
+                                                $excel_name = basename($source);
 						//$temp = explode('.',  basename($source));
 						//$ext = end($temp);
 						
@@ -4663,7 +4663,7 @@ class Merchant_Controller extends website_Controller {
                                                 //var_dump($source);die;
 						//$ret = move_uploaded_file($source,$path.$excel_name);
 						//var_dump($ret);die;
-						unlink($source);
+						//unlink($source);
 						
 						
 						
@@ -4676,7 +4676,7 @@ class Merchant_Controller extends website_Controller {
 					/** PHPExcel_IOFactory */
 
 					include DOCROOT.'PHPExcel/Classes/PHPExcel/IOFactory.php';
-                                        $inputFileName = $path.$excel_name;
+                                        $inputFileName = $path."/".$excel_name;
 					$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
                                         $data1 = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 
