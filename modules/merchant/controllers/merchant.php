@@ -134,8 +134,7 @@ class Merchant_Controller extends website_Controller {
 		$this->store_data = $this->merchant->get_store_data();
                 foreach($this->store_data as $value){
                     $this->session->set("store_name_swifta", $value->store_name);
-                    $this->session->set("store_name_id", $value->store_subsector_id);
-                    //echo $value->store_subsector_id; die;
+                    $this->session->set("store_name_id", $value->store_id);
                 }
                 
 		if($count == 1){
