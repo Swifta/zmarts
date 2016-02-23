@@ -1196,7 +1196,7 @@ class Home_Model extends Model
                                 ->from("deals")
                                 ->join("stores","stores.store_id","deals.shop_id")
                                 ->join("category","category.category_id", $join)
-                                ->where("enddate >".time()." and purchase_count < maximum_deals_limit and deal_status = 1".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'" .$conditions)
+                                ->where("enddate >".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id'" .$conditions)
                                 ->groupby("deals.deal_id")
                                 ->orderby("deals.deal_id","DESC")
                                 ->get();
@@ -1208,7 +1208,7 @@ class Home_Model extends Model
                                 ->from("deals")
                                 ->join("stores","stores.store_id","deals.shop_id")
                                 ->join("category","category.category_id",$join)
-                                ->where("enddate >".time()." and purchase_count < maximum_deals_limit and deal_status = 1".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1" .$conditions)
+                                ->where("enddate >".time()." and purchase_count < maximum_deals_limit and deal_status = 1 ".$this->deal_club_condition."  and category.category_status = 1 and  store_status = 1" .$conditions)
                                 ->groupby("deals.deal_id")
                                 ->orderby("deals.deal_id","DESC")
                                 ->get();

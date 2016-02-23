@@ -268,7 +268,7 @@ class Stores_Model extends Model
 //		return count($result);
                 
                          $result=$this->db->select("*")->from("stores")
-                        ->join("users","users.user_id","stores.merchant_id ")
+                        ->join("users","users.user_id","stores.merchant_id")
                         
                         ->where("store_status = 1 and users.user_type=3 and users.user_status=1  and stores.city_id = '.$this->city_id.'". $conditions)
 		        ->orderby("store_id","DESC")->get();     
@@ -284,7 +284,7 @@ class Stores_Model extends Model
 //	        return count($result);
                 
                           $result=$this->db->select("*")->from("stores")
-                          ->join("users","users.user_id","stores.merchant_id ")
+                          ->join("users","users.user_id","stores.merchant_id")
                            
                           ->where("store_status = 1 and users.user_type=3 and users.user_status=1 ". $conditions)
 		          ->orderby("store_id","DESC")->get();     
@@ -329,7 +329,7 @@ class Stores_Model extends Model
 //	        return $result;
                 
                            $result=$this->db->select("*")->from("stores")
-                          ->join("users","users.user_id","stores.merchant_id ")
+                          ->join("users","users.user_id","stores.merchant_id")
                            
                           ->where("store_status = 1 and users.user_type=3 and users.user_status=1 and stores.city_id = '.$this->city_id.'  ".$conditions)
 		          ->orderby("store_id","DESC")
@@ -344,7 +344,7 @@ class Stores_Model extends Model
                 
                 
                  $result=$this->db->select("*")->from("stores")
-                          ->join("users","users.user_id","stores.merchant_id ")
+                          ->join("users","users.user_id","stores.merchant_id")
                            
                           ->where("store_status = 1 and users.user_type=3 and users.user_status=1". $conditions)
 		          ->orderby("store_id","DESC")
