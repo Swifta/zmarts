@@ -4165,7 +4165,7 @@ class Merchant_Controller extends website_Controller {
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->pswd = $pswd;
+						$this->password = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 
@@ -5314,7 +5314,7 @@ class Merchant_Controller extends website_Controller {
 					$from = CONTACT_EMAIL;    						
 					$this->admin_signup_moderator = "1";
 					$this->email = $post->email;
-					$this->pswd = $pswd;
+					$this->password = $pswd;
 					$this->name =$post->firstname;
 					$this->moderator = "1";
                       $data = array(

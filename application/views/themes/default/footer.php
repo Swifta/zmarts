@@ -36,7 +36,7 @@
 						foreach($this->get_about_us as $cms){
 							if($cms->cms_url=='about-us'){?>
 <!--                    <p><?php //echo substr(html_entity_decode(strip_tags($cms->cms_desc)),0,280)."...";?></p>-->
-                        <p><?php echo htmlspecialchars(substr(($cms->cms_desc),0,280),ENT_QUOTES,'UTF-8')."...";?></p>-->
+                        <p><?php echo html_entity_decode(substr(($cms->cms_desc),0,280))."...";?></p>
                     <?php }}}?>
                 </div>
                      <div class="footer_coloumn_one footer_list">

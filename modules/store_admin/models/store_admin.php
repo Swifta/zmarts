@@ -36,7 +36,7 @@ class Store_admin_Model extends Model
 
                  $result_active_products =$this->db->select()->from("product")
                  ->join("stores","stores.store_id","product.shop_id")        
-                 ->where(array("purchase_count <" => "user_limit_quantity","deal_status"=> 1,"stores.store_status"=>1,"product.merchant_id"=> $this->user_id ,"product.shop_id"=> $this->store_id));
+                 ->where(array("purchase_count <" => "user_limit_quantity","deal_status"=> 1,"stores.store_status"=>1,"product.merchant_id"=> $this->user_id ,"product.shop_id"=> $this->store_id))->get();
                         
 		$result["active_products"]=count($result_active_products);
       
@@ -46,28 +46,51 @@ class Store_admin_Model extends Model
 //               
                 $result_sold_products =$this->db->select()->from("product")
                 ->join("stores","stores.store_id","product.shop_id")       
-                ->where(array("purchase_count" => "user_limit_quantity","deal_status" => 1,"stores.store_status"=> 1,"product.merchant_id"=>$this->user_id,"product.shop_id"=>$this->store_id));
+                ->where(array("purchase_count" => "user_limit_quantity","deal_status" => 1,"stores.store_status"=> 1,
+                    "product.merchant_id"=>$this->user_id,"product.shop_id"=>$this->store_id))->get();
                 
 		$result["sold_products"]=count($result_sold_products);
 
-		$result_active_auction =$this->db->select()->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->join("category","category.category_id","auction.category_id")->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,"stores.store_id" => $this->store_id))->get();
+		$result_active_auction =$this->db->select()->from("auction")
+                        ->join("stores","stores.store_id","auction.shop_id")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("country","country.country_id","city.country_id")
+                        ->join("category","category.category_id","auction.category_id")
+                        ->where(array("enddate >" => time(),"deal_status"=>"1","stores.store_status" => "1", 
+                            "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,
+                            "stores.store_id" => $this->store_id))->get();
 		
 		$result["active_auction"]=count($result_active_auction);
 
-		$result_archive_auction =$this->db->select()->from("auction")->join("stores","stores.store_id","auction.shop_id")->join("city","city.city_id","stores.city_id")->join("country","country.country_id","city.country_id")->where(array("enddate <" => time(),"deal_status"=>"1","stores.store_status" => "1", "city_status" => "1", "country_status"=>"1","auction.merchant_id" => $this->user_id,"stores.store_id" => $this->store_id))->get();
+		$result_archive_auction =$this->db->select()->from("auction")
+                        ->join("stores","stores.store_id","auction.shop_id")
+                        ->join("city","city.city_id","stores.city_id")
+                        ->join("country","country.country_id","city.country_id")
+                        ->where(array("enddate <" => time(),"deal_status"=>"1",
+                            "stores.store_status" => "1", "city_status" => "1",
+                            "country_status"=>"1","auction.merchant_id" => $this->user_id,
+                            "stores.store_id" => $this->store_id))->get();
 		
 		$result["archive_auction"]=count($result_archive_auction);
 
 		$result["products_shipping"] = count($this->db->select("shipping_info.shipping_id")->from("shipping_info")->join("transaction","transaction.id","shipping_info.transaction_id")->join("product","product.deal_id","transaction.product_id")->where(array( "shipping_type" => 1,"transaction.type !=" =>5,"product.merchant_id" => $this->user_id,"product.shop_id" => $this->store_id))->groupby("shipping_id")->get());
 
 		//$result["auction_shipping"] = $this->db->count_records("shipping_info", array( "shipping_type" => 2));
-		$result["auction_shipping"] = count($this->db->select("shipping_info.shipping_id")->from("shipping_info")->join("transaction","transaction.id","shipping_info.transaction_id")->join("auction","auction.deal_id","transaction.auction_id")->where(array( "shipping_type" => 2,"transaction.type !=" =>5,"auction.merchant_id" => $this->user_id,"auction.shop_id" => $this->store_id))->groupby("shipping_id")->get());
+		$result["auction_shipping"] = count($this->db->select("shipping_info.shipping_id")->from("shipping_info")
+                        ->join("transaction","transaction.id","shipping_info.transaction_id")
+                        ->join("auction","auction.deal_id","transaction.auction_id")
+                        ->where(array( "shipping_type" => 2,"transaction.type !=" =>5,
+                            "auction.merchant_id" => $this->user_id,"auction.shop_id" => $this->store_id))
+                        ->groupby("shipping_id")->get());
 		
 		$result["stores"] = $this->db->count_records("stores", array( "store_status" => 1, "merchant_id" => $this->user_id,"stores.store_id" => $this->store_id));
 		
 		$result["request_fund"] = $this->db->count_records("request_fund", array( "request_status" => 2, "user_id" => $this->user_id));
 		
-		$result_close_coupon = $this->db->select("transaction_mapping.id")->from("transaction_mapping")->join("deals","deals.deal_id","transaction_mapping.deal_id")->where(array("coupon_code_status" => 0,"deals.merchant_id" => $this->user_id,"deals.shop_id" => $this->store_id))->get();
+		$result_close_coupon = $this->db->select("transaction_mapping.id")->from("transaction_mapping")
+                        ->join("deals","deals.deal_id","transaction_mapping.deal_id")
+                        ->where(array("coupon_code_status" => 0,"deals.merchant_id" => $this->user_id,
+                            "deals.shop_id" => $this->store_id))->get();
 		$result["close_coupon"] = count($result_close_coupon);
 
 		return $result;
@@ -96,7 +119,7 @@ class Store_admin_Model extends Model
 				$store_admin_id = $result[0]->user_id;
 				//$res = $this->db->query("select store_id from stores where store_admin_id = $store_admin_id ");
                                  $res =  $this->db->select("store_id")->from("stores")
-                                 ->where(array("store_admin_id" => $store_admin_id));
+                                 ->where(array("store_admin_id" => $store_admin_id))->get();
                        
                 
 				if(count($res)>0){
@@ -113,7 +136,7 @@ class Store_admin_Model extends Model
 						"facebook_status" =>$result->current()->facebook_update,
 						"fb_access_token" =>$result->current()->fb_session_key,
 						"fb_user_id" =>$result->current()->fb_user_id,
-						"store_id" => $result->current()->store_id,
+						"store_id" => $res->current()->store_id,
 						"store_admin_id" => $result->current()->user_id
 					));
 					return 10;
@@ -2292,9 +2315,9 @@ class Store_admin_Model extends Model
 	/** GET DEAL TRANSACTION LIST FOR HOME PAGE**/
 	public function get_merchant_deal_transaction_chart_list()
 	{
-	        $result = $this->db->select("transaction.*")->from("transaction")
-								->where(array("deals.merchant_id" => $this->user_id,"deals.shop_id"=>$this->store_id))
-								->join("deals","deals.deal_id","transaction.deal_id")
+	        $result = $this->db->select("*")->from("transaction")
+			->where(array("deals.merchant_id" => $this->user_id,"deals.shop_id"=>$this->store_id))
+			->join("deals","deals.deal_id","transaction.deal_id")
                                 ->get();
                 return $result;
 	}
@@ -2302,9 +2325,9 @@ class Store_admin_Model extends Model
 	/** GET PRODUCT TRANSACTION LIST FOR HOME PAGE**/
 	public function get_merchant_product_transaction_chart_list()
 	{
-	        $result = $this->db->select("transaction.*")->from("transaction")
-								->where(array("product.merchant_id" => $this->user_id,"product.shop_id"=>$this->store_id))
-								->join("product","product.deal_id","transaction.product_id")
+	        $result = $this->db->select("")->from("transaction")
+				->where(array("product.merchant_id" => $this->user_id,"product.shop_id"=>$this->store_id))
+				->join("product","product.deal_id","transaction.product_id")
                                 ->get();
                 return $result;
 	}
@@ -2312,9 +2335,9 @@ class Store_admin_Model extends Model
 	/** GET AUCTION TRANSACTION LIST FOR HOME PAGE**/
 	public function get_merchant_auction_transaction_chart_list()
 	{
-	        $result = $this->db->select("transaction.*")->from("transaction")
-								->where(array("auction.merchant_id" => $this->user_id))
-								->join("auction","auction.deal_id","transaction.auction_id")
+	        $result = $this->db->select("*")->from("transaction")
+				->where(array("auction.merchant_id" => $this->user_id))
+				->join("auction","auction.deal_id","transaction.auction_id")
                                 ->get();
                 return $result;
 	}

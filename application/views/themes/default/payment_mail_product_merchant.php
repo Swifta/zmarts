@@ -12,6 +12,19 @@ $this->UserName = $this->session->get("UserName");
 
 <table width="700" cellpadding="0" align="center" cellspacing="0" border="0" bgcolor="#ffffff">
 <?php
+    $customer_firstname = "firstname";
+    $customer_lastname = "lastname";
+    $customer_phone = "phone_number";
+    $customer_email = "email";
+    
+$customer_details = new Webpay_Model();
+$user_details = $customer_details->get_purchased_user_details();
+foreach($user_details as $U){
+    $customer_firstname = $U->firstname;
+    $customer_lastname = $U->lastname;
+    $customer_phone = $U->phone_number;
+    $customer_email = $U->email;
+}
   foreach($this->products_list as $p ) { 
     $this->creditcard_paypal_pay = new Creditcard_paypal_Model;
 						if($p->type == 5) {
@@ -69,12 +82,12 @@ $this->UserName = $this->session->get("UserName");
             <td colspan="7" width="700" >&nbsp;</td>
           </tr>
           <tr style="font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%">
-            <td   align="left" style="padding:10px;" >Buyer Name: </td>
-            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo ucfirst($merchant_lastname);?>&nbsp;</td>
+            <td align="left" style="padding:10px;" >Buyer Name: </td>
+            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo ucfirst($customer_lastname);?>&nbsp;</td>
             <td align="left" style="padding:10px" > Email: </td>
-            <td align="left" style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $merchant_email; ?>&nbsp;</td>
+            <td align="left" style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $customer_email; ?>&nbsp;</td>
             <td align="left"   style="padding:10px;">phone: </td>
-            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $merchant_phone; ?>&nbsp;</td>
+            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $customer_phone; ?>&nbsp;</td>
           </tr>
         </tbody>
       </table></td>

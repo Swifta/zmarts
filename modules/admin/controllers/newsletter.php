@@ -454,7 +454,7 @@ class Newsletter_Controller extends website_Controller {
 		if($newsletter_id){
 			$status = $this->news->deleteTemplate($newsletter_id);
 			if($status == 1){
-				unlink(realpath(DOCROOT."images/newsletter/".$newsletter_id).".png");
+				@unlink(realpath(DOCROOT."images/newsletter/".$newsletter_id).".png");
 				unlink(realpath(DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id).".php");
 				common::message(1, $this->Lang["TEMPLATE_DEL_SUC"]);
 			}else{

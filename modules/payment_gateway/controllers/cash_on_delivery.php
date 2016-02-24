@@ -209,6 +209,8 @@ class Cash_on_delivery_Controller extends Layout_Controller
 
 	public function do_captured_transaction($captured = "", $deal_id = "", $qty = "",$transaction = "")
 	{
+            $user_details = $this->cod->get_purchased_user_details();
+            foreach($user_details as $U){
 		$from = CONTACT_EMAIL;
 		$this->products_list = $this->cod->get_products_coupons_list($transaction,$deal_id);
 		$this->product_size = $this->cod->get_shipping_product_size();
@@ -219,6 +221,12 @@ class Cash_on_delivery_Controller extends Layout_Controller
 		$this->merchant_firstneme = $this->get_merchant_details->current()->firstname;
 		$this->merchant_lastname = $this->get_merchant_details->current()->lastname;
 		$this->merchant_email = $this->get_merchant_details->current()->email;
+                
+                $this->customer_firstname = $U->firstname;
+                $this->customer_lastname = $U->lastname;
+                $this->customer_phone = $U->phone_number;
+                $this->customer_email = $U->email;
+                
 		$message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
 
 		if(EMAIL_TYPE==2) {
@@ -228,8 +236,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 			email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
-		$user_details = $this->cod->get_purchased_user_details();
-		foreach($user_details as $U){
+
 			if($U->referred_user_id && $U->deal_bought_count == $qty){
 				$update_reff_amount = $this->cod->update_referral_amount($U->referred_user_id);
 			}

@@ -463,7 +463,7 @@ class Webpay_Controller extends Layout_Controller
                         
                         $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 7, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
                         //var_dump($transaction);
-                        //$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
+                        $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
                         //echo "here"; die;
                         //break;
                        }
@@ -578,7 +578,7 @@ class Webpay_Controller extends Layout_Controller
                     //die;
                     //var_dump($_SESSION);
                     //die;
-               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+               $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
                 $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
                 $this->result_transaction = arr::to_object($this->transaction_result);
                 //dont need the line of code below
@@ -621,7 +621,8 @@ class Webpay_Controller extends Layout_Controller
 	public function do_captured_transaction($captured = "", $deal_id = "", $qty = "",$transaction = "")
 	{
 		
-		
+            $user_details = $this->webpay->get_purchased_user_details();
+		foreach($user_details as $U){
 	           
             //var_dump($_SESSION);
 	        $from = CONTACT_EMAIL;
@@ -634,6 +635,12 @@ class Webpay_Controller extends Layout_Controller
                 $this->merchant_firstneme = $this->get_merchant_details->current()->firstname;
                 $this->merchant_lastname = $this->get_merchant_details->current()->lastname;
                 $this->merchant_email = $this->get_merchant_details->current()->email;
+
+                $this->customer_firstname = $U->firstname;
+                $this->customer_lastname = $U->lastname;
+                $this->customer_phone = $U->phone_number;
+                $this->customer_email = $U->email;
+                
                 $message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
 				
 			
@@ -649,8 +656,8 @@ class Webpay_Controller extends Layout_Controller
 		                //email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
-		$user_details = $this->webpay->get_purchased_user_details();
-		foreach($user_details as $U){
+//		$user_details = $this->webpay->get_purchased_user_details();
+//		foreach($user_details as $U){
 			if($U->referred_user_id && $U->deal_bought_count == $qty){
 				$update_reff_amount = $this->webpay->update_referral_amount($U->referred_user_id);
 			}
@@ -664,7 +671,8 @@ class Webpay_Controller extends Layout_Controller
 				}
 			}
 
-		}
+//		}
+                }
 		return;
 	}
         
@@ -711,13 +719,13 @@ class Webpay_Controller extends Layout_Controller
 				$this->admin_list = $this->webpay->get_admin_list();
 				$this->admin_email = $this->admin_list->current()->email;
                 $message = new View("themes/".THEME_NAME."/payment_mail_product");
-                //$message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
+                $message_admin = new View("themes/".THEME_NAME."/payment_mail_product_admin");
 
                 if(EMAIL_TYPE==2) {
 			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 			email::smtp($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
-		//	email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
+			email::smtp($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
 		}else{
 			//email::sendgrid($from,$U->email, $this->Lang['THANKS_BUY'] ,$message);
 			//email::sendgrid($from,$this->admin_email, $this->Lang['USER_BUY'] ,$message_admin);
