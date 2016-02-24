@@ -452,7 +452,7 @@ class Seller_Controller extends Layout_Controller {
 										<tr>
 										<td align=\"left\">".$this->Lang['SHOP_ADDR']."   : </td>
 										<td> ".$post->address1.",".$post->address2." </td>
-										<td align=\"left\">".$this->Lang['CITY']."    : </td>
+										<td align=\"left\">State    : </td>
 										<td> ".$city_name." </td>
 										<td align=\"left\">".$this->Lang['COUNTRY']."    : </td>
 										<td> ".$country_name." </td>
@@ -509,7 +509,7 @@ $admin_message	= '
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$post->address2.'</td>
      </tr>
   <tr>
-    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">City: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">State: </td>
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$city_name.'</td>
      </tr>
   <tr>
