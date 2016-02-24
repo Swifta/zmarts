@@ -1261,13 +1261,12 @@ if(country == ''){ var country = -1;  }
 	{
 		type:'POST',
 		url:url,
-		cache:false,
-		async:true,
-		global:false,
 		dataType:"html",
 		
 		success:function(check)
 		{
+		   $(".CitySD_Signup").html(check);
+		     $(".CitySD_log_Signup").html(check);
 		   $("#CitySD_Signup").html(check);
 		     $("#CitySD_log_Signup").html(check);
 		},

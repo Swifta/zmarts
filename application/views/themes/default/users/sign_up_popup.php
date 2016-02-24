@@ -86,7 +86,7 @@
                             <li>
                                 <label>Select a State:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                        <div id="CitySD_log_Signup">
+                                    <div id="CitySD_log_Signup">
                                       <select name="city" >
                                             <option value="-99"><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                     </select>
