@@ -26,7 +26,8 @@
                            
                            
                    </div> 
-                            <div class="left_setting_bg">  </div><div class="welcome_mun_mid">  <a <?php if(isset($this->store_admin_panel)){?> href="<?php echo PATH; ?>store-admin/settings.html" <?php }else{?> href="<?php echo PATH; ?>merchant/settings.html" <?php }?> title="<?php echo $this->Lang['SETTINGS']; ?>" class="fl"><?php echo $this->Lang["SETTINGS"];?></a></div> <div class="welcome_mun_right"></div>
+                            <div class="left_setting_bg">  </div><div class="welcome_mun_mid">  <a <?php if(isset($this->store_admin_panel)){?> href="<?php echo PATH; ?>store-admin/settings.html" <?php }
+                            else if($this->session->get("user_type") == 2){?> href="<?php echo PATH; ?>admin/settings.html" <?php}else{?> href="<?php echo PATH; ?>merchant/settings.html" <?php }?> title="<?php echo $this->Lang['SETTINGS']; ?>" class="fl"><?php echo $this->Lang["SETTINGS"];?></a></div> <div class="welcome_mun_right"></div>
                            
                             <?php } ?>
 						<div class="left_user_log_bg"> </div> <div class="welcome_mun_mid">  <a href="<?php echo PATH; ?>logout.html" title="<?php echo $this->Lang['LOGOUT']; ?>" class="fl">
