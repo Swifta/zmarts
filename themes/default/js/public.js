@@ -1256,15 +1256,29 @@ function clear_filter(main,sub,sec,third,fild,t)
 
 function city_change_merchant(country){
     //alert(country);
-    var url = Path+"/payment_product/CitySelectionPayment/"+country;
-    $.post( url, function( data ) {
-       //$(".CitySD_Signup").html(data);
-         //$(".CitySD_log_Signup").html(data);
-         alert(data);
-         document.getElementById("CitySD_log_Signup").innerHTML = data;
-         $("#CitySD_Signup").html(data);
-         //$("#CitySD_log_Signup").html(data);
-    });
+    var urlx = Path+"/payment_product/CitySelectionPayment/"+country;
+   $.ajax({
+        url: urlx,
+        complete: function(data) {
+  //         $('#main').html($(data).find('#main *'));
+  //         $('#notification-bar').text('The page has been successfully loaded');
+           alert(data.responseText);
+           document.getElementById("CitySD_log_Signup").innerHTML = data.responseText;
+           $("#CitySD_Signup").html(data);
+        },
+        error: function() {
+           $('#CitySD_Signup-bar').text('An error occurred');
+        }
+   });
+   
+//    $.get( url, function( data ) {
+//       //$(".CitySD_Signup").html(data);
+//         //$(".CitySD_log_Signup").html(data);
+//         alert(data);
+//         document.getElementById("CitySD_log_Signup").innerHTML = data;
+//         $("#CitySD_Signup").html(data);
+//         //$("#CitySD_log_Signup").html(data);
+//    });
 }
 
 function city_change_payment(country){ 
