@@ -37,6 +37,7 @@
 							if($cms->cms_url=='about-us'){?>
 <!--                    <p><?php //echo substr(html_entity_decode(strip_tags($cms->cms_desc)),0,280)."...";?></p>-->
                         <p><?php echo substr(($cms->cms_desc),0,280)."...";?></p>
+                        
                     <?php }}}?>
                 </div>
                      <div class="footer_coloumn_one footer_list">
