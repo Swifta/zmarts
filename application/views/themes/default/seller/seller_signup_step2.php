@@ -6,7 +6,7 @@
 </style>                   
 <!-- SELLER SIGNUP -->
    
-
+  <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/css/materialize.min.css'>
 <style>
     
     .swifta_con{
@@ -122,7 +122,8 @@ a.tooltips span
 
 .swifta_input  {
 
- margin: 5px 0px;
+    
+/* margin: 5px 0px;
  
   width: 500px;
 
@@ -135,9 +136,9 @@ a.tooltips span
   outline:none;
 
   
-/*  border-bottom: solid 1px #A61C00;*/
 
-    border-bottom: thin 1px #A61C00;
+
+    border-bottom: thin 1px #A61C00 ;
   -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
 
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
@@ -154,10 +155,26 @@ a.tooltips span
 
  
  color: #000000;
+ font-size:small;*/
  font-size:small;
-
+}
+#label          {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
 }
 
+/* active state */
+input:focus ~ label, input:valid ~ label     {
+  top:-8px;
+  font-size:14px;
+  color:#5264AE;
+}
 
 /*.swifta_input  {
 
@@ -196,6 +213,7 @@ a.tooltips span
 }*/
 .swifta_input:focus, .swifta_input:valid {
 
+    
  box-shadow: none;
 
  outline: none;
@@ -216,7 +234,6 @@ a.tooltips span
 
  visibility: visible !important;
  
-
 }
 
 
@@ -322,53 +339,55 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <ul>
                                     <li>
                                        
-                                <div class="">
+                                <div class="input-field">
                                     <span class="asterisks_input">  </span>
                                    <?php 
       $this->session->set("merchant_reg_nuban", "8025481373");
       $this->session->set("firstname", "Hello World"); ?>
-									<input maxlength="50" required tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+									<input maxlength="50" required tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus class="" placeholder= "<?php //echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
                                                                         value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
 										echo $this->session->get('firstname'); 
 										} else {
 											echo $this->userPost['firstname'];
                                                                                         }}?>" readonly/> 			
 									<em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
-									
+									 <label for="fname" style=" font-size: small;"></label>
 								</div>
                                     </li>
 									<li>			
                                             
-								<div class="">
-								        <span>  </span>
-									<input type="text" tabindex="2" maxlength="50" name="lastname" class="swifta_input" id="lname" required placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
+                                                                            <div class="input-field" >
+								        <span class="asterisks_input">  </span>
+                                                                        <input style="font-size: 1em;"  type="text" tabindex="2" maxlength="50" name="lastname" class=" swifta_input" id="lname" required placeholder= "<?php //echo $this->Lang['ENTER_FULL_NAME']; ?>" 
 									
 									value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
 										echo $this->session->get('lastname'); 
 										} else {
 											echo $this->userPost['lastname'];
 										}}?>"  autofocus/> 	
-									<em ><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
+									<em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
+                                                                        <label   for="lname" style=" font-size: small;"> Enter Fullname</label>
 								</div>
                                     </li>
                                     <li>
                                        
-								<div class="">
+								<div class="input-field">
                                                                     <span class="asterisks_input">  </span>
-									<input maxlength="50" tabindex="3" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
+									<input style="font-size: 1em;" maxlength="50" tabindex="3" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="" placeholder= "<?php //echo $this->Lang['ENTE_EMAIL_F']; ?>"
 									value="<?php if($this->session->get('memail') || isset($this->userPost['email'])) { if($this->session->get('memail')) {
 										echo $this->session->get('memail'); 
 										} else {
 											echo $this->userPost['email'];
 										}}?>" required autofocus /> 			      
 									<em id="id_err_memail"> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
-								</div>
+								<label for="email" style=" font-size: small;"> Enter a valid Email</label>
+                                                                </div>
                                     </li>
                                     <li style="display:none;">
                                         <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
                                 
-											<input type="hidden"  name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
+											<input type="hidden"  name="payment_acc" class="" value="nopaypal@swifta.com" />
 							
                               
                                     </li>
@@ -376,15 +395,15 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                     <?php //echo $this->session->get('merchant_reg_nuban'); ?>
                                 
-									<input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
+									<input type="hidden" name="nuban" class="" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
                                                                                value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
                                 
                                 </li>
 									<li class="frm_clr">			
                                             
-								<div class="">
+								<div class="input-field">
                                                                     <span class="asterisks_input">  </span>
-									<input maxlength="50" tabindex="4" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
+									<input style="font-size: 1em;" maxlength="50" tabindex="4" type="text" name="mr_address1" id="addrs1" class="" placeholder= "<?php //echo $this->Lang['ENTER_ADDR1']; ?>"
 									
 									value="<?php if($this->session->get('mraddress1') || isset($this->userPost['mr_address1'])) { if($this->session->get('mraddress1')) {
 										echo $this->session->get('mraddress1'); 
@@ -392,25 +411,27 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 											echo $this->userPost['mr_address1'];
 										}}?>"  required autofocus/> 												
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
+                                                                        <label for="addrs1" style=" font-size: small;"> Enter Address Here</label>
                                         </div>
                                     </li>
                                     <li>
                                         
-                                     <div class="" style="">
-                                        <input maxlength="50" tabindex="5" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
+                                     <div class="input-field" style="">
+                                        <input style="font-size: 1em;" maxlength="50" tabindex="5" type="text" name="mr_address2" id="addrs2" class=""  placeholder=""
                                                                                  value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
                                             echo $this->session->get('mraddress2'); 
                                             } else {
                                                 echo $this->userPost['mr_address2'];
                                             }}?>" /> 			
                                         <em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
+                                         <label for="addrs2" style=" font-size: small;"> Enter address line 2 (if any)</label>
                                      </div>
                                     </li>
                                     <li class="frm_clr">
                                        
-                                    <div class="">
+                                    <div class="input-field">
                                       <span class="asterisks_input">  </span>
-                                        <input tabindex="6"  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
+                                        <input style="font-size: 1em;" tabindex="6"  type="text" name="mr_mobile" class="" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php //echo $this->Lang['ENTER_PHONE']; ?>"
                                         <?php  ?>
                                         value="<?php if($this->session->get('mphone_number') || isset($this->userPost['mr_mobile'])) { if($this->session->get('mphone_number')) {
                                             echo $this->session->get('mphone_number'); 
@@ -418,6 +439,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                 echo $this->userPost['mr_mobile'];
                                             }}?>" required autofocus /> 			
                                         <em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
+                                          <label for="addrs2" style=" font-size: small;">Enter Mobile Number</label>
                                     </div>
                                     </li>
 
@@ -1733,4 +1755,7 @@ function get_themes(sector){
 									});
 								
 								</script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/js/materialize.min.js'></script>
 
+        <script src="js/index.js"></script>

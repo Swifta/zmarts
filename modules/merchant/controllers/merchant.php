@@ -94,7 +94,8 @@ class Merchant_Controller extends website_Controller {
 				}
 				else{
 					common::message(-1,$this->Lang["CANT_LOGIN"]);
-					url::redirect(PATH."/merchant-login.html");
+//					url::redirect(PATH."/merchant-login.html");
+                                        url::redirect(PATH."/merchant-signup-step1.html");
 				}
 			} else {
 				$this->error_login = $this->Lang["EMAIL_REQUIRED"];
