@@ -484,7 +484,7 @@ class Admin_products_Controller extends website_Controller
 		 	 
 				$row = 1;
 				$add_import = "";				
-					$file_name = upload::save("im_product");					
+					$file_name = "";//upload::save("im_product");					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
 					{
@@ -492,8 +492,10 @@ class Admin_products_Controller extends website_Controller
 						$ext = end($temp);
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/admin_excel/');
-						move_uploaded_file($source,$path.$excel_name);
-						unlink($source);
+						//move_uploaded_file($file_name,$path.$excel_name);
+                                                $file_name = upload::save("im_product", null, $path, 0777);
+                                                $excel_name = basename($file_name);
+						//unlink($file_name);
 						
 					}
 					
@@ -503,7 +505,8 @@ class Admin_products_Controller extends website_Controller
 					set_include_path(get_include_path() . PATH_SEPARATOR . '../../../Classes/');
 					/** PHPExcel_IOFactory */
 					include DOCROOT.'PHPExcel/Classes/PHPExcel/IOFactory.php';
-					$inputFileName = $path.$excel_name;
+					$inputFileName = $path."/".$excel_name;
+                                        //var_dump($inputFileName); die;
 					$inputFileName = realpath($inputFileName);
 					//echo 'Loading file ',pathinfo($inputFileName,PATHINFO_BASENAME),' using IOFactory to identify the format<br />';
 					$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
@@ -1060,12 +1063,12 @@ class Admin_products_Controller extends website_Controller
 		} else {
 		        common::message(-1, $this->Lang["PROD_ACTI"]);
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-		url::redirect(PATH.$lastsession);
-		} else {
+//		$lastsession = $this->session->get("lasturl");
+//		if($lastsession){
+//		url::redirect(PATH.$lastsession);
+//		} else {
 		url::redirect(PATH."admin/manage-products.html");
-		}
+//		}
 	}
 
 	/** MANAGE USER COMMENTS **/

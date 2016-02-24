@@ -8,7 +8,7 @@
         <form action="" method="post" class="admin_form">
             <table>
                 <tr><td><label><?php echo $this->Lang["ADD_ABOUT_US"]; ?> :</label><em><?php if(isset($this->form_error["data"])){ echo $this->form_error["data"]; }?></em></td></tr>
-                <tr><td><textarea autofocus name="data"  class="TextArea" ><?php foreach($this->about_us as $d){ echo $d->cms_desc; }?></textarea></td></tr>
+                <tr><td><textarea autofocus name="data" class="TextArea" ><?php foreach($this->about_us as $d){ echo $d->cms_desc; }?></textarea></td></tr>
 		
                 <tr><td><input type="submit" value="<?php echo $this->Lang['SUBMIT']; ?>" /><input type="reset" value="<?php echo $this->Lang['RESET']; ?>" onclick="javascript:window.location='<?php echo PATH; ?>cms/about-us.html'"/></td></tr>
             </table>

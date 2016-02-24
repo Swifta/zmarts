@@ -8,7 +8,7 @@ $content_text = array(
 
 			"LOGIN_SUCCESS" => "Successfully logged!",
 
-			"ACCOUNT_BLOCKED" => "Your account has been blocked Please Contact Administrator",
+			"ACCOUNT_BLOCKED" => "Your account has been blocked. Please Contact Administrator",
 
 			"EMAIL_NOT_EXIST" => "Email does not Exist",
 
@@ -1305,9 +1305,9 @@ $content_text = array(
 
 			"PRODUCT_PERCENT"=>"Product Percentage",
 
-			"PRODUCT_UNB_SUC"=>"Product unblock successfully ",
+			"PRODUCT_UNB_SUC"=>"Product unblocked successfully ",
 
-			"PRODUCT_B_SUC"=>"Product block successfully",
+			"PRODUCT_B_SUC"=>"Product blocked successfully",
 
 			"DISCOUNT_PRI"=>"Discount Price",
 
@@ -1380,7 +1380,7 @@ $content_text = array(
 
 			"CODE"=>"Code",
 
-			"COUPON_VERIFIED"=>"Coupon Code  Did not Matched  Please Enter Valid Code",
+			"COUPON_VERIFIED"=>"Coupon does not exist. Please enter a valid coupon code",
 
 			"CLOSE"=>"Close",
 
@@ -1631,7 +1631,7 @@ $content_text = array(
 
 			"ADD_STR_BR" => "Add Stores Branch",
 
-			"MERCHANT_BLO" => "Merchant Is Blocked, You Can't able to Add a Shop",
+			"MERCHANT_BLO" => "Merchant Is Blocked",
 
 			"MANG_STORE" => "Manage Stores Branch's",
 
@@ -1912,7 +1912,7 @@ $content_text = array(
 
 			"TRANS_COUNT" => "Transaction Count",
 
-			"CAT_BLOG_CANT_AD" => "Category Is Blocked, You Can't able to Add a Category",
+			"CAT_BLOG_CANT_AD" => "Category Is Blocked",
 
 			"PH_NUM" => "Your Phone Number (e.g. 070..,080..)",
 

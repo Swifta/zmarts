@@ -218,6 +218,8 @@ class Pay_later_Controller extends Layout_Controller
 
 	public function do_captured_transaction($captured = "", $deal_id = "", $qty = "",$transaction = "")
 	{
+            $user_details = $this->pay_later->get_purchased_user_details();
+            foreach($user_details as $U){
 		$from = CONTACT_EMAIL;
 		$this->products_list = $this->pay_later->get_products_coupons_list($transaction,$deal_id);
 		$this->product_size = $this->pay_later->get_shipping_product_size();
@@ -229,6 +231,11 @@ class Pay_later_Controller extends Layout_Controller
 		$this->merchant_lastname = $this->get_merchant_details->current()->lastname;
 		$this->merchant_email = $this->get_merchant_details->current()->email;
 		
+                $this->customer_first_name = $U->firstname;
+                $this->customer_last_name = $U->lastname;
+                $this->customer_phone = $U->phone_number;
+                $this->customer_email = $U->email;
+                
 		$message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
 		
 		if(EMAIL_TYPE==2) {
@@ -238,8 +245,6 @@ class Pay_later_Controller extends Layout_Controller
 			email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 		
-		$user_details = $this->pay_later->get_purchased_user_details();
-		foreach($user_details as $U){
 			if($U->referred_user_id && $U->deal_bought_count == $qty){
 				$update_reff_amount = $this->pay_later->update_referral_amount($U->referred_user_id);
 			}

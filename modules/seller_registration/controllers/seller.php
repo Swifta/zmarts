@@ -371,9 +371,14 @@ class Seller_Controller extends Layout_Controller {
 										$city_name = ""; 
 										foreach($this->country_list as $count){
 												if($count->country_id == $post->country ){
-														$city_list = $this->seller->get_city_by_country($post->country);
-														$city_name = $city_list->current()->city_name;
-														$country_name = $count->country_name;
+                                                                                                        $city_list = $this->seller->get_city_by_country($post->country);
+                                                                                                        foreach($city_list as $cit){
+                                                                                                            if($cit->city_id == $post->city){
+//                                                                                                                $city_name = $city_list->current()->city_name;
+                                                                                                                $city_name = $cit->city_name;
+                                                                                                            }
+                                                                                                        }
+                                                                                                        $country_name = $count->country_name;
 												}
 										} 
 										$modules_name = 'stores';
@@ -447,7 +452,7 @@ class Seller_Controller extends Layout_Controller {
 										<tr>
 										<td align=\"left\">".$this->Lang['SHOP_ADDR']."   : </td>
 										<td> ".$post->address1.",".$post->address2." </td>
-										<td align=\"left\">".$this->Lang['CITY']."    : </td>
+										<td align=\"left\">State    : </td>
 										<td> ".$city_name." </td>
 										<td align=\"left\">".$this->Lang['COUNTRY']."    : </td>
 										<td> ".$country_name." </td>
@@ -504,7 +509,7 @@ $admin_message	= '
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$post->address2.'</td>
      </tr>
   <tr>
-    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">City: </td>
+    <td style="font-family: Arial, Helvetica, sans-serif bold 12px ;color:#666;">State: </td>
     <td style="font-family: Arial, Helvetica, sans-serif normal 12px ; color:#666; padding-left: 15px; ">'.$city_name.'</td>
      </tr>
   <tr>
@@ -687,7 +692,7 @@ $admin_message	= '
 										
 										
 										
-									$this->pswd = $store_admin_password;
+									$this->password = $store_admin_password;
 									if(isset($_POST['store_email_id'])){
 										$this->email = $_POST['store_email_id'];
 										$from = CONTACT_EMAIL;

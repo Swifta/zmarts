@@ -60,6 +60,7 @@
         var email = document.forget_password.email.value;	
         var atpos=email.indexOf("@");
         var dotpos=email.lastIndexOf(".");
+        
         if(email =='' || (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length))
         {
 		
@@ -80,9 +81,10 @@
         }
         else{
 		
-            var url= Path+'users/check_user_signup/?email='+email;
+            var url= Path+'users/check_user_forgot_password/?email='+email;
             $.post(url,function(check){ 
-                if(check == -1){
+                if(check === "1"){
+                    //alert("here");
                     document.forget_password.submit();
                     //return true;
                 }else{

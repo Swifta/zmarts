@@ -84,7 +84,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Select State:<span class="form_star">*</span></label>
+                                <label>Select a State:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                         <div id="CitySD_log_Signup">
                                       <select name="city" >

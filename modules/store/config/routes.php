@@ -35,3 +35,12 @@ $config['ABC-Pvt-Ltd/products/c/(.*)/(.*).html'] = "/store/product_list/ABC-Pvt-
 $config['ABC-Pvt-Ltd/deal/c/(.*)/(.*).html'] = "/store/deal_list/ABC-Pvt-Ltd/$1/$2";
 $config['ABC-Pvt-Ltd/auction/c/(.*)/(.*).html'] = "/store/auction_list/ABC-Pvt-Ltd/$1/$2";
 // ABC-Pvt-Ltd End
+// MUSTY-MUSTY Start
+$config['MUSTY-MUSTY'] = "store/stores_home_page/MUSTY-MUSTY";
+$config['MUSTY-MUSTY/products.html'] = "/store/product_list/MUSTY-MUSTY";
+$config['MUSTY-MUSTY/today-deals.html'] = "/store/deal_list/MUSTY-MUSTY";
+$config['MUSTY-MUSTY/auction.html'] = "/store/auction_list/MUSTY-MUSTY";
+$config['MUSTY-MUSTY/products/c/(.*)/(.*).html'] = "/store/product_list/MUSTY-MUSTY/$1/$2";
+$config['MUSTY-MUSTY/deal/c/(.*)/(.*).html'] = "/store/deal_list/MUSTY-MUSTY/$1/$2";
+$config['MUSTY-MUSTY/auction/c/(.*)/(.*).html'] = "/store/auction_list/MUSTY-MUSTY/$1/$2";
+// MUSTY-MUSTY End

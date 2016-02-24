@@ -3104,7 +3104,7 @@ class Store_admin_Controller extends website_Controller
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->pswd = $pswd;
+						$this->password = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 

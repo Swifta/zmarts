@@ -184,7 +184,7 @@ class Users_Controller extends Layout_Controller {
 	{
 	    $user_referral_id = $this->session->get("User_Referral_ID");
             if($_POST){
-		        $this->userPost = utf8::clean($this->input->post());
+		        $this->userPost = arr::to_object(utf8::clean($this->input->post()));
                 $post = new Validation(utf8::clean($_POST));
                 $post = Validation::factory(utf8::clean($_POST))
                                 ->add_rules('f_name', 'required')
@@ -197,7 +197,7 @@ class Users_Controller extends Layout_Controller {
                                  ->add_rules('country', 'required')
                                 ->add_rules('city', 'required');
 
-                $status = $this->users->add_users(arr::to_object($this->userPost),$user_referral_id);
+                $status = $this->users->add_users($this->userPost,$user_referral_id);
 				
 				/*
 					TODO
@@ -216,9 +216,9 @@ class Users_Controller extends Layout_Controller {
             if($status == 1){
 				$this->signup=1;
 				$from = CONTACT_EMAIL;
-				$this->name=  strip_tags(addslashes($_POST['f_name']));
-				$this->email =  strip_tags(addslashes($_POST['email']));
-				$this->password = strip_tags(addslashes($_POST['password']));  
+				$this->name=  strip_tags(addslashes($this->userPost->f_name));
+				$this->email =  strip_tags(addslashes($this->userPost->email));
+				$this->password = strip_tags(addslashes($this->userPost->password));  
 				/*$subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];*/
 				$subject = SITENAME.' '.$this->Lang['M_REG_COMPLETE'];
 				$message = new View("themes/".THEME_NAME."/mail_template");
@@ -360,13 +360,27 @@ class Users_Controller extends Layout_Controller {
 		  */
 		  $email = strip_tags(addslashes($this->input->get('email')));
 		  $z_offer = "0";
-		  if(isset($_GET['z_offer']))
-		  $z_offer = strip_tags (addslashes ($this->input->get('z_offer')));
-		  echo $check = $this->users->check_user_exist($email, $z_offer);
+		  if(isset($_GET['z_offer'])){
+                    $z_offer = strip_tags (addslashes ($this->input->get('z_offer')));
+                  }
+		  $check = $this->users->check_user_exist($email, $z_offer);
+                  echo $check;
 		  exit;
 		/*$email = $this->input->get('email');
 		echo $check = $this->users->check_user_exist($email);
 		exit;*/
+	}
+        
+	public function check_user_forgot_password()
+	{
+		/*
+		  	Added Zenith offer parameter.
+		  	@Live
+		  */
+		  $email = strip_tags(addslashes($this->input->get('email')));
+		  $check = $this->users->check_user_forgot_password($email);
+                  echo $check;
+		  exit;
 	}
 
     	/** EDIT USER PROFILE **/

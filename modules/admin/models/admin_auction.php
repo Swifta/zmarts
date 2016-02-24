@@ -176,7 +176,10 @@ class Admin_auction_Model extends Model
 
 			if(isset($sort_arr[$param])){
 	       		 $conditions .= $sort_arr[$param];
-	        	}  else  {  $conditions .= ' order by auction.deal_id DESC'; }			
+	        	}  else  {  
+                            //$conditions .= ' order by auction.deal_id DESC'; 
+                            
+                        }			
 				//$qry = "select * , auction.created_date as createddate from auction join stores on stores.store_id=auction.shop_id join city on city.city_id=stores.city_id  join country on country.country_id=stores.country_id join category on category.category_id=auction.category_id join users on users.user_id=auction.merchant_id where $conditions $limit1 ";
                                 $result = $this->db->select("* , auction.created_date as createddate")
                                         ->from("auction")
@@ -287,7 +290,7 @@ class Admin_auction_Model extends Model
                 }
                 else{
                         $result = $this->db->select("deal_id")->from("auction")
-                                        ->where(array("enddate $cont" => time()))
+                                        ->where(array("enddate ".$cont." " => time()))
 			                            ->join("stores","stores.store_id","auction.shop_id")
 			                            ->join("city","city.city_id","stores.city_id")
 			                            ->join("country","country.country_id","stores.country_id")

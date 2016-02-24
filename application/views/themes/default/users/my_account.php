@@ -557,11 +557,11 @@
                                             <div class="tab_mid"><a href="<?php echo PATH; ?>users/my-coupons.html" title="<?php echo $this->Lang['MY_BUYS']; ?>"><?php echo $this->Lang['MY_BUYS']; ?></a></div>
                                             <div class="tab_rgt"></div>
                                         </li>
-                                        <li>
+                                        <!--<li>
                                             <div class="tab_left"></div>
                                             <div class="tab_mid"><a href="<?php echo PATH; ?>users/my-referral-list.html" title="<?php echo $this->Lang['MY_REFERAL']; ?>"><?php echo $this->Lang['MY_REFERAL']; ?></a></div>
                                             <div class="tab_rgt"></div>
-                                        </li>
+                                        </li>-->
                                         
                                         <li>
                                             <div class="tab_left"></div>
@@ -883,7 +883,7 @@
                                         </div>
 
                                         <div class="empty_space">&nbsp;</div>
-                                        <div class="rl_section">
+                                        <!--<div class="rl_section">
                                             <h3><?php echo $this->Lang['REFERAL_LINK']; ?> </h3>
 
                                             <div class="rl_mid">
@@ -901,7 +901,7 @@
                                                     </div>
                                             </div>
 
-                                        </div>
+                                        </div>-->
                                         <div class="rl_section">
                                             <h3><?php echo $this->Lang['CONNECTIONS'];?></h3>
                                             <div class="rl_mid">

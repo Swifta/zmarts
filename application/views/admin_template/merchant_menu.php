@@ -15,28 +15,28 @@ function toggle(ids){
 <div class="menu">
   <div class="menu_container">
 	  
-	  <?php if(PRIVILEGES_DEALS==1){?>
+	  <?php if(@PRIVILEGES_DEALS==1){?>
     <?php if(isset($this->mer_deals_act)){ ?>
 	 <div class="menu_title"><p> <img src="<?php echo PATH ?>images/title_deals.png" alt="<?php echo $this->Lang['DEALS']; ?>"/><span><?php echo $this->Lang['DEALS']; ?></span></p></div>
 	<?php }}?>
-	<?php if(PRIVILEGES_PRODUCTS==1){?>
+	<?php if(@PRIVILEGES_PRODUCTS==1){?>
 	<?php if(isset($this->mer_products_act)){ ?>
 	 <div class="menu_title"><p><img src="<?php echo PATH ?>images/title_products.png" alt="<?php echo $this->Lang['PRODUCTS']; ?>"/><span><?php echo $this->Lang['PRODUCTS']; ?></span></p></div>
 	<?php }} ?>
 	<?php if(isset($this->mer_auction_act)){ ?>
 	 <div class="menu_title"><p><img src="<?php echo PATH ?>images/title_products.png" alt="<?php echo $this->Lang['AUCTION']; ?>"/><span><?php echo $this->Lang['AUCTION']; ?></span></p></div>
 	<?php } ?>
-	<?php if(PRIVILEGES_AUCTIONS==1){ ?>
+	<?php if(@PRIVILEGES_AUCTIONS==1){ ?>
 	<?php if(isset($this->mer_merchant_act)){ ?>
 	 <div class="menu_title"><p><img src="<?php echo PATH ?>images/title_merchant.png" alt="<?php echo $this->Lang['SHOP']; ?>"/><span><?php echo $this->Lang['SHOP']; ?></span></p></div>
 	<?php }} ?>
-	<?php if(PRIVILEGES_TRANSACTIONS==1){?>
+	<?php if(@PRIVILEGES_TRANSACTIONS==1){?>
 	<?php if(isset($this->mer_transactions_act)){ ?>
 	 <div class="menu_title"><p> <img src="<?php echo PATH ?>images/title_balance.png" alt="<?php echo $this->Lang['TRANS']; ?>"/><span><?php echo $this->Lang['TRANS']; ?></span></p></div>
 	<?php }} ?>
          
          <!--
-	<?php if(PRIVILEGES_FUNDREQUEST==1){ ?>
+	<?php if(@PRIVILEGES_FUNDREQUEST==1){ ?>
 	<?php if(isset($this->mer_fund_act)){ ?>
 	 <div class="menu_title"><p> <img src="<?php echo PATH ?>images/title_fund_request.png" alt="<?php echo $this->Lang['FUND_REQ']; ?>"/><span><?php echo $this->Lang['FUND_REQ']; ?></span></p></div>
 	<?php } }?>
@@ -50,11 +50,11 @@ function toggle(ids){
 	<?php }} ?>
     <ul>   
         
-        <?php if(PRIVILEGES_DEALS==1){?>
+        <?php if(@PRIVILEGES_DEALS==1){?>
         <?php if(isset($this->mer_deals_act)){ ?>
         <li <?php if(isset($this->dashboard_deals)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/deals-dashboard.html" title="<?php echo $this->Lang['DEAL_DASH']; ?>"><span class="fund_management fl"><?php echo $this->Lang['DEAL_DASH']; ?></span></a></li>
-        <?php if(PRIVILEGES_DEALS_ADD==1){?>
+        <?php if(@PRIVILEGES_DEALS_ADD==1){?>
         <li <?php if(isset($this->add_deal)){ ?> class="menu_active"  <?php } ?> >        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add-deals.html" title="<?php echo $this->Lang["ADD_DEALS"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ADD_DEALS"]; ?></span></a></li>
         <?php } ?>
@@ -67,11 +67,11 @@ function toggle(ids){
         <li <?php if(isset($this->close_code)){ ?> class="menu_active"  <?php } ?> >        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/close-couopn-list.html" title="<?php echo $this->Lang["REDEM_COU_LI"]; ?>"><span class="fund_management fl"><?php echo $this->Lang['REDEM_COU_LI']; ?></span></a></li>
         <?php } }?>
-		<?php if(PRIVILEGES_PRODUCTS==1){?>
+		<?php if(@PRIVILEGES_PRODUCTS==1){?>
         <?php if(isset($this->mer_products_act)){ ?>
         <li <?php if(isset($this->dashboard_products)){ ?> class="menu_active"  <?php } ?>>
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/products-dashboard.html" title="<?php echo $this->Lang['PRODUCT_DASH']; ?>"><span class="fund_management fl"><?php echo $this->Lang['PRODUCT_DASH']; ?></span></a></li>
-        <?php if(PRIVILEGES_PRODUCTS_ADD){?>
+        <?php if(@PRIVILEGES_PRODUCTS_ADD){?>
         <li <?php if(isset($this->add_product)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add-products.html" title="<?php echo $this->Lang["ADD_PRODUCTS"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ADD_PRODUCTS"]; ?></span></a></li>
         <?php } ?>
@@ -81,8 +81,8 @@ function toggle(ids){
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/sold-products.html" title="<?php echo $this->Lang["ARCHIVE_PRODUCTS"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ARCHIVE_PRODUCTS"]; ?></span></a></li>
         <li <?php if(isset($this->import_product)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/product-import.html" title="<?php echo $this->Lang["PRODUCT_IMPORT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["PRODUCT_IMPORT"]; ?></span></a></li>
-        <!-- <?php if(PRIVILEGES_GIFT==1){?>
-        <?php if(PRIVILEGES_GIFT_ADD==1){?>
+        <!-- <?php if(@PRIVILEGES_GIFT==1){?>
+        <?php if(@PRIVILEGES_GIFT_ADD==1){?>
         <li <?php if(isset($this->add_free_gift)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add-free-gift.html" title="<?php echo $this->Lang["ADD_FREE_GIFT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ADD_FREE_GIFT"]; ?></span></a></li>
         <?php } ?>
@@ -128,11 +128,11 @@ function toggle(ids){
       
       
         <?php }} ?>
-        <?php if(PRIVILEGES_AUCTIONS==1){?>
+        <?php if(@PRIVILEGES_AUCTIONS==1){?>
         <?php   if(isset($this->mer_auction_act)){ ?>
         <li <?php if(isset($this->auction_products)){ ?> class="menu_active"  <?php } ?> >        
         <a href="<?php echo PATH; ?>merchant/auction-dashboard.html" class="menu_rgt" title="<?php echo $this->Lang['ACT_DASH']; ?>"><span class="customer_comments"><?php echo $this->Lang['ACT_DASH']; ?></span></a></li>
-        <?php if(PRIVILEGES_AUCTIONS_ADD==1){?>
+        <?php if(@PRIVILEGES_AUCTIONS_ADD==1){?>
         <li <?php if(isset($this->add_auction)){ ?> class="menu_active"  <?php } ?>>        
         <a href="<?php echo PATH; ?>merchant/add-auction.html" class="menu_rgt" title="<?php echo $this->Lang['ADD_ACT_PRO']; ?>"><span class="customer_comments"><?php echo $this->Lang['ADD_ACT_PRO']; ?></span></a></li>
         <?php } ?>
@@ -151,7 +151,7 @@ function toggle(ids){
         <?php if(isset($this->mer_merchant_act)){ ?>
         <li <?php if(isset($this->manage_merchant_shop)){ ?> class="menu_active"  <?php } ?> >        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/manage-shop.html" title="<?php echo $this->Lang["MANAGE_SHOP"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["MANAGE_SHOP"]; ?></span></a></li>
-        <?php if(PRIVILEGES_SHOPS_ADD==1){?>
+        <?php if(@PRIVILEGES_SHOPS_ADD==1){?>
         <li <?php if(isset($this->add_merchant_shop)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add-shop.html" title="<?php echo $this->Lang['ADD_SHOPS']; ?>"><span class="fund_management fl"><?php echo $this->Lang['ADD_SHOPS']; ?></span></a></li>
         <?php } ?>
@@ -160,11 +160,11 @@ function toggle(ids){
         <li <?php if(isset($this->return_policy)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/return-policy.html" title="<?php echo $this->Lang['RET_POL']; ?>"><span class="fund_management fl"><?php echo $this->Lang['RET_POL']; ?></span></a></li>
         <?php } */?>
-        <?php if(PRIVILEGES_ABOUT_US_EDIT==1){?>
+        <?php if(@PRIVILEGES_ABOUT_US_EDIT==1){?>
         <li <?php if(isset($this->about_us)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/warranty.html" title="<?php echo $this->Lang['WARRANTY']; ?>"><span class="fund_management fl"><?php echo $this->Lang['WARRANTY']; ?></span></a></li>
         <?php } ?>
-	 <?php if(PRIVILEGES_TERMS_AND_CONDITIONS_EDIT==1){?>
+	 <?php if(@PRIVILEGES_TERMS_AND_CONDITIONS_EDIT==1){?>
         <li <?php if(isset($this->terms_and_conditions)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/terms-and-conditions.html" title="<?php echo $this->Lang['SHIP_ING']; ?>"><span class="fund_management fl"><?php echo $this->Lang['SHIP_ING']; ?></span></a></li>
         <?php } ?>
@@ -175,13 +175,13 @@ function toggle(ids){
         
         <?php } ?>
         
-        <?php if (PRIVILEGES_TRANSACTIONS) { ?>
-     <?php if((PRIVILEGES_DEALS)||(PRIVILEGES_PRODUCTS)||(PRIVILEGES_AUCTIONS)){ ?>
+        <?php if (@PRIVILEGES_TRANSACTIONS) { ?>
+     <?php if((@PRIVILEGES_DEALS)||(@PRIVILEGES_PRODUCTS)||(@PRIVILEGES_AUCTIONS)){ ?>
         <!--
         <?php if(isset($this->mer_fund_act)){ ?>	
         <li <?php if(isset($this->manage_fund_request)){ ?> class="menu_active"  <?php } ?> >        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/fund_request.html" title="<?php echo $this->Lang["FUND_REQ_REP"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["FUND_REQ_REP"]; ?></span></a></li>
-        <?php if(PRIVILEGES_FUNDREQUEST_EDIT==1){?>
+        <?php if(@PRIVILEGES_FUNDREQUEST_EDIT==1){?>
         <li <?php if(isset($this->add_fund_request)){ ?> class="menu_active"  <?php } ?>>        
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/add_fund_request.html" title="<?php echo $this->Lang["WITHDRAW_FUND"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["WITHDRAW_FUND"]; ?></span></a></li>
         <?php } }?>
@@ -189,7 +189,7 @@ function toggle(ids){
 	<?php   if(isset($this->mer_transactions_act)){ ?>    
 	<li <?php if(isset($this->dashboard_transaction)){ ?> class="menu_active"  <?php } ?>>        
         <a href="<?php echo PATH; ?>merchant/transaction-dashboard.html" class="menu_rgt" title="<?php echo $this->Lang['TRANS_DASH']; ?>"><span class="payment_transactions"><?php echo $this->Lang['TRANS_DASH']; ?></span></a></li>	
-        <?php if(PRIVILEGES_DEALS){ ?>	
+        <?php if(@PRIVILEGES_DEALS){ ?>	
 		<li onclick="toggle(12)" <?php if(isset($this->deal_trans)){ ?> class="menu_active"  <?php } ?> >        
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['DLS_TRANS']; ?>"><span class="category_management fl"><?php echo $this->Lang['DLS_TRANS']; ?></span><img id="left_menubutton_12" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
         <ul class="toggleul_12">
@@ -203,7 +203,7 @@ function toggle(ids){
         </ul>
       </li>
       <?php } ?>
-		<?php if(PRIVILEGES_PRODUCTS){ ?>
+		<?php if(@PRIVILEGES_PRODUCTS){ ?>
 		<li onclick="toggle(11)" <?php if(isset($this->pro_trans)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['PRO_TRANS']; ?>"><span class="category_management fl"><?php echo $this->Lang['PRO_TRANS']; ?></span><img id="left_menubutton_11" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
@@ -274,7 +274,7 @@ function toggle(ids){
       </li>
       
       <?php }?>
-      <?php if(PRIVILEGES_AUCTIONS){ ?>
+      <?php if(@PRIVILEGES_AUCTIONS){ ?>
 		<li onclick="toggle(10)" <?php if(isset($this->act_trans)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['ACT_TRANS']; ?>"><span class="category_management fl"><?php echo $this->Lang['ACT_TRANS']; ?></span><img id="left_menubutton_10" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
@@ -339,7 +339,7 @@ function toggle(ids){
         <li <?php if(isset($this->merchant_password)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/change_password.html" title="<?php echo $this->Lang['CHANGE_PASS']; ?>"><span class="fund_management fl"><?php echo $this->Lang['CHANGE_PASS']; ?></span></a></li>
-        <?php if(PRIVILEGES_SHIPPING_MODULE==1){?>
+        <?php if(@PRIVILEGES_SHIPPING_MODULE==1){?>
         
         <li <?php if(isset($this->flat_amount)){ ?> class="menu_active"  <?php } ?> >
         
@@ -361,7 +361,7 @@ function toggle(ids){
             </li>
         </ul>
       </li>
-       <?php if(PRIVILEGES_NEWSLETTER==1){?>
+       <?php if(@PRIVILEGES_NEWSLETTER==1){?>
         <li  onclick="toggle(31)" <?php if(isset($this->news_letter) || isset($this->newsletter_act)){ ?> class="menu_active"  <?php } ?> >
         
 			 <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['NEWSLETTER']; ?>"><span class="faq_management fl"><?php echo $this->Lang['NEWSLETTER']; ?></span><img id="left_menubutton_31" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
@@ -400,7 +400,7 @@ function toggle(ids){
         <a class="menu_rgt"  href="<?php echo PATH; ?>merchant/shipping-account-settings.html" title="<?php echo $this->Lang['SHIPP_ACC_SETT']; ?>"><span class="fund_management fl"><?php echo $this->Lang['SHIPP_ACC_SETT']; ?></span></a></li>  
                 <?php }  */ ?> 
                 
-    <?php if(PRIVILEGES_ATTRIBUTES==1){?>
+    <?php if(@PRIVILEGES_ATTRIBUTES==1){?>
     <li onclick="toggle(19)" <?php if(isset($this->color_settings)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['ATTRI_MANA']; ?>"><span class="img_settings fl"><?php echo $this->Lang['ATTRI_MANA']; ?></span><img id="left_menubutton_19" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
@@ -424,7 +424,7 @@ function toggle(ids){
         </ul>
       </li>
       <?php } ?>
-      <?php if(PRIVILEGES_SPECIFICATION==1){?>
+      <?php if(@PRIVILEGES_SPECIFICATION==1){?>
       <li onclick="toggle(22)" <?php if(isset($this->attributegroup_settings)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['SPEC_MGT']; ?>"><span class="img_settings fl"><?php echo $this->Lang['SPEC_MGT']; ?></span><img id="left_menubutton_22" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
@@ -450,7 +450,7 @@ function toggle(ids){
         </ul>
       </li>
       <?php } ?>
-      <?php if(PRIVILEGES_CATEGORY==1){?>
+      <?php if(@PRIVILEGES_CATEGORY==1){?>
       <li onclick="toggle(5)" <?php if(isset($this->category)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['CATEGORY_MANAGE']; ?>"><span class="category_management fl"><?php echo $this->Lang["CATEGORY_MANAGE"]; ?></span><img id="left_menubutton_3" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
