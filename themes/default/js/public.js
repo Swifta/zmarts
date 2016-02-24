@@ -1255,13 +1255,15 @@ function clear_filter(main,sub,sec,third,fild,t)
 }
 
 function city_change_merchant(country){
-    alert(country);
+    //alert(country);
     var url = Path+"/payment_product/CitySelectionPayment/"+country;
     $.post( url, function( data ) {
-       $(".CitySD_Signup").html(data);
-         $(".CitySD_log_Signup").html(data);
-       $("#CitySD_Signup").html(data);
-         $("#CitySD_log_Signup").html(data);
+       //$(".CitySD_Signup").html(data);
+         //$(".CitySD_log_Signup").html(data);
+         alert(data);
+         document.getElementById("CitySD_log_Signup").innerHTML = data;
+         $("#CitySD_Signup").html(data);
+         //$("#CitySD_log_Signup").html(data);
     });
 }
 
