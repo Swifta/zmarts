@@ -128,12 +128,12 @@
 					 <td><label><?php echo $this->Lang["WANT_TO_ADD_NS_TMP"]; ?></label><span>*</span></td>
                      <td><label>:</label></td>
                      <td>
-						 <span><input type="radio" name="add_temp" value="1" onclick="show_temp()" <?php if(!isset($this->form_error['add_temp']) && isset($this->userPost['add_temp'])&& $this->userPost['add_temp']==1){?>checked<?php }else if(empty($_POST)){?> checked <?php }?>><?php echo $this->Lang['YES']; ?></span>
-						 <span><input type="radio" name="add_temp" value="0" onclick="show_temp()" <?php if(!isset($this->form_error['add_temp']) && isset($this->userPost['add_temp'])&& $this->userPost['add_temp']==0){?>checked<?php }?>><?php echo $this->Lang['NO']; ?></span>
+						 <!--<span><input type="radio" name="add_temp" value="1" onclick="show_temp()" <?php if(!isset($this->form_error['add_temp']) && isset($this->userPost['add_temp'])&& $this->userPost['add_temp']==1){?>checked<?php }else if(empty($_POST)){?> checked <?php }?>><?php echo $this->Lang['YES']; ?></span>-->
+						 <span><input type="radio" checked name="add_temp" value="0" onclick="show_temp()" <?php if(!isset($this->form_error['add_temp']) && isset($this->userPost['add_temp'])&& $this->userPost['add_temp']==0){?>checked<?php }?>><?php echo $this->Lang['NO']; ?></span>
 						  
                      </td>
                  </tr>
-                  <tr class="show_news_temp">
+                  <!--<tr class="show_news_temp">
                         <td><label><?php echo $this->Lang["EMAIL_TEMPLATE"]; ?></label><span>*</span></td>
                         <td><label>:</label></td>
                         <td>
@@ -165,7 +165,8 @@
 							
 							
                         <em><?php if(isset($this->form_error["template"])){ echo $this->form_error["template"]; }?></em></td>
-                 </tr>
+                 </tr>-->
+                 <input type="hidden" name="template" value="2"/>
                  <tr>
                         <td valign="top"><label><?php echo $this->Lang["MSGG"]; ?></label><span>*</span></td>
                         <td valign="top"><label>:</label></td>

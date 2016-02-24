@@ -1263,7 +1263,7 @@ function city_change_merchant(country){
   //         $('#main').html($(data).find('#main *'));
   //         $('#notification-bar').text('The page has been successfully loaded');
            //alert(data.responseText);
-           if(data == ""){
+           if(data.responseText === ""){
                $('#CitySD_Signup-bar').text('An error occurred, Use HTTPS protocol');
            }
            else{

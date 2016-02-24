@@ -2452,7 +2452,7 @@ class Merchant_Model extends Model
 	{
 	        $result = $this->db->from("transaction_mapping")
                                 ->where(array("product.merchant_id" => $this->user_id))
-	                            ->join("product","product.deal_id","transaction_mapping.product_id")
+	                        ->join("product","product.deal_id","transaction_mapping.product_id")
                                 ->get();
                 return $result;
 	}
@@ -3108,7 +3108,7 @@ class Merchant_Model extends Model
 		$result_sold_products = $this->db->select()->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("purchase_count" => "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
-                            "product.merchant_id" => $this->user_id));
+                            "product.merchant_id" => $this->user_id))->get();
                 $result["archive_products"]=count($result_sold_products);
 		return $result;
 	}
