@@ -1257,24 +1257,12 @@ function clear_filter(main,sub,sec,third,fild,t)
 function city_change_merchant(country){
 if(country == ''){ var country = -1;  }
 	if(country){var url = Path+'/payment_product/CitySelectionPayment/'+country; }
-	$.ajax(
-	{
-		type:'POST',
-		url:url,
-		dataType:"html",
-		
-		success:function(check)
-		{
-		   $(".CitySD_Signup").html(check);
-		     $(".CitySD_log_Signup").html(check);
-		   $("#CitySD_Signup").html(check);
-		     $("#CitySD_log_Signup").html(check);
-		},
-		error:function()
-		{		        
-			alert('No city has been added under this country.');
-		}
-	});
+    $.post( url, function( data ) {
+       $(".CitySD_Signup").html(data);
+         $(".CitySD_log_Signup").html(data);
+       $("#CitySD_Signup").html(data);
+         $("#CitySD_log_Signup").html(data);
+    });
 }
 
 function city_change_payment(country){ 
