@@ -1262,9 +1262,14 @@ function city_change_merchant(country){
         complete: function(data) {
   //         $('#main').html($(data).find('#main *'));
   //         $('#notification-bar').text('The page has been successfully loaded');
-           alert(data.responseText);
-           document.getElementById("CitySD_log_Signup").innerHTML = data.responseText;
-           $("#CitySD_Signup").html(data);
+           //alert(data.responseText);
+           if(data == ""){
+               $('#CitySD_Signup-bar').text('An error occurred, Use HTTPS protocol');
+           }
+           else{
+                document.getElementById("CitySD_log_Signup").innerHTML = data.responseText;
+                $("#CitySD_Signup").html(data);
+            }
         },
         error: function() {
            $('#CitySD_Signup-bar').text('An error occurred');
