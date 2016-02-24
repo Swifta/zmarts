@@ -5613,9 +5613,9 @@ class Merchant_Controller extends website_Controller {
 						
 					}
 					$file1=array();
-					pdf::template_create($post->template,$post->subject,$post->message);
+					//pdf::template_create($post->template,$post->subject,$post->message);
 
-					array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
+					//array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
 					//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
 					if($_FILES["attach"]["name"]!=''){
@@ -7132,19 +7132,19 @@ class Merchant_Controller extends website_Controller {
 							$file[0]=DOCROOT.'images/newsletter/newsletter.'.$extension;
 						}
 						$file1=array();
-						pdf::template_create($post->template,$post->subject,$post->message);
-						array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
-						chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
+						//pdf::template_create($post->template,$post->subject,$post->message);
+						//array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
+						//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
                         $status = $this->merchant->send_merchant_newsletter(arr::to_object($this->userPost),$file1,1);
 					}else{
 						$status = $this->merchant->send_merchant_newsletter(arr::to_object($this->userPost),"",2);
 					}
 					if($status == 1){
-						if(file_exists(DOCROOT.'images/newsletter/newsletter.pdf'))
-							unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+//						if(file_exists(DOCROOT.'images/newsletter/newsletter.pdf'))
+//							unlink(DOCROOT.'images/newsletter/newsletter.pdf');
 						common::message(1, $this->Lang['NEWS_SENT']);
 					}else{
-						unlink(DOCROOT.'images/newsletter/newsletter.pdf');
+						//unlink(DOCROOT.'images/newsletter/newsletter.pdf');
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 		       		url::redirect(PATH."merchant.html");
