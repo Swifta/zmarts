@@ -6,7 +6,7 @@
 
 <!--<script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>-->
 
-<script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery.leanModal.min.js" ></script>
+<script type="text/javascript" src="<?php echo PATH;?>js/Popup/js/jquery.leanModal.min.js" ></script>
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet" href="<?php echo PATH;?>js/Popup/css/style.css" />
     <!-- Bootstrap core CSS -->
