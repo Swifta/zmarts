@@ -10,8 +10,8 @@
 
   <!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
   
-  <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
-  <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/css/materialize.min.css'>
+  <!--<link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />-->
+  <!--<link rel='stylesheet prefetch' href='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/css/materialize.min.css'>-->
 <style>
     
     
