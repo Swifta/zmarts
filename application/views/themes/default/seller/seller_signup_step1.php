@@ -731,7 +731,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					</div>-->
 
 					<div class="action_btns">
-						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Forgot Password</a></div>
+						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Forgot your password ?</a></div>
 <!--						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>-->
 
                                                 <input type="submit" style="width:160px; margin-left: 62px;" class="one_half last swifta_button" value="LOGIN"  title="<?php echo $this->Lang['LOGIN']; ?>" />
