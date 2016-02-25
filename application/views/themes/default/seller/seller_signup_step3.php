@@ -228,10 +228,10 @@ padding: 0 5px 0 0;
                                <input type="text" id="mobile" name="mobile"  tabindex="3" maxlength="11" onkeypress="return isNumberKey(event)" class="form-control" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus>
                              <em id="id_err_mobile"><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
                              </div>
-                            <div>
-<!--                                    <span class="asterisk_input">  </span>-->
+                        <!--     <div>
+                                   <span class="asterisk_input">  </span>
                                                                   <label   for="address1" style=" font-size: small;"> <?php echo $this->Lang["ENTER_ADDR1"]; ?> </label>
-                                 </div>
+                                 </div>-->
                                  
                             <div class="form-group">
                                         <span class="asterisks_input">  </span>
