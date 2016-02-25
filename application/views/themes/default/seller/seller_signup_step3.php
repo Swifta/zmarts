@@ -166,7 +166,6 @@ padding: 0 5px 0 0;
 	<!-- CSS and JS for our code -->
 	<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>css/map/jquery-gmaps-latlon-picker.css"/>
 	<script src="<?php echo PATH; ?>js/map/jquery-gmaps-latlon-picker.js"></script>
-        <link rel="stylesheet" href="<?php echo PATH; ?>" />
         <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/material_style.css" />
   
 <!-- SELLER SIGNUP -->
@@ -250,7 +249,7 @@ padding: 0 5px 0 0;
                                         <div class="fullname map_loc_section map_re_w">
                                         <div class="gllpLatlonPicker">
                                         <div class="top_popup_select2">        
-                                        <input type="text" maxlength="50" class="form-control" tabindex="6" id="gf" style="width:370px" placeholder="<?php echo $this->Lang["SEARCH_LOCATION"]; ?>">
+                                        <input type="text" maxlength="50" class="gllpSearchField form-control" tabindex="6" id="gf" style="width:370px" placeholder="<?php echo $this->Lang["SEARCH_LOCATION"]; ?>">
                                         <input style="margin-top:5px; padding: 5px 20px 5px;" type="button" class="btn btn-danger gllpSearchButton sign_submit"  value="<?php echo $this->Lang['SEARCH']; ?>">
                                         </div>
                                         <br/>

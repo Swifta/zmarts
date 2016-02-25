@@ -2326,10 +2326,10 @@ class MCAPI {
    // }
 
     
-     function apikeys($username, $drowssap, $expired=false) {
+     function apikeys($username, $password, $expired=false) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $drowssap;
+        $params["password"] = $password;
         $params["expired"] = $expired;
         return $this->callServer("apikeys", $params);
     }
@@ -2356,10 +2356,10 @@ class MCAPI {
 
     
     
-      function apikeyAdd($username, $drowssap){
+      function apikeyAdd($username, $password){
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $drowssap;
+        $params["password"] = $password;
         return $this->callServer("apikeyAdd", $params);
     }
     
@@ -2385,10 +2385,10 @@ class MCAPI {
   //  }
     
     
-    function apikeyExpire($username, $drowssap) {
+    function apikeyExpire($username, $password) {
         $params = array();
         $params["username"] = $username;
-        $params["password"] = $drowssap;
+        $params["password"] = $password;
         return $this->callServer("apikeyExpire", $params);
     }
 

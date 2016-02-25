@@ -52,11 +52,11 @@
                                             <td style="width: 200px;"><label><?php echo $this->Lang['PSWD']; ?></label></td>
                                             <td><label>:</label></td>
                                             
-                                             <td><input type="text" name="drowssap" maxlength="128"   value="<?php echo $general->Shippingdrowssap; ?>"/>
-                                            <em><?php if(isset($this->form_error["drowssap"])){ echo $this->form_error["drowssap"]; }?></em></td>
+                                             <td><input type="text" name="password" maxlength="128"   value="<?php echo $general->Shippingpassword; ?>"/>
+                                            <em><?php if(isset($this->form_error["password"])){ echo $this->form_error["password"]; }?></em></td>
 
-                                            <td><input type="text" name="drowssap" maxlength="128"   value="<?php echo $general->Shippingdrowssap; ?>"/>
-                                            <em><?php if(isset($this->form_error["drowssap"])){ echo $this->form_error["drowssap"]; }?></em></td>-->
+                                            <td><input type="text" name="password" maxlength="128"   value="<?php echo $general->Shippingpassword; ?>"/>
+                                            <em><?php if(isset($this->form_error["password"])){ echo $this->form_error["password"]; }?></em></td>-->
 
 <!--                                         <td><input type="text" name="Password" maxlength="128"   value="<?php //echo $general->ShippingPswd; ?>"/>
                                             <em><?php //if(isset($this->form_error["Password"])){ echo $this->form_error["Password"]; }?></em></td>
