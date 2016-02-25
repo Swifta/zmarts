@@ -7,10 +7,12 @@
 <script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery.leanModal.min.js" ></script>
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet" href="<?php echo PATH;?>js/Popup/css/style.css" />
     <!-- Bootstrap core CSS -->
    
+    
+    
 <!--    <link href="<?php echo PATH;?>js/login/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo PATH;?>js/login/css/style.css" rel="stylesheet">
     
@@ -627,7 +629,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     
                                <div style="margin-top: 15px; text-align: center; height: 80px;">
 <!--                                   <h3 style="font-size: larger; font-style: italic;">If you have already registered as a merchant, <a style="color:blue;" href="<?php echo PATH . 'merchant-login.html'; ?>">click here</a> to login.</h3>-->
-                                   <h3 style="font-size: larger; font-style: italic;">If you have already registered as a merchant, <a id="modal_trigger" class="btn" style="color:blue;" href="#modal">click here</a> to login.</h3>
+                                   <h3 style="font-size: larger; font-style: bold;">If you have already registered as a merchant, <a id="modal_trigger" class="btn" style="color:blue; font-style: italic" href="#modal">click here</a> to login.</h3>
 <!--                             <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>-->
                                </div>
                                             
@@ -685,16 +687,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 				<div class="clearfix">
 
 				</div>
-
-
-				<div class="centeredText">
+<!--				<div class="centeredText">
 					<span>Login Or Change Your Password</span>
-				</div>
+				</div>-->
 
-				<div class="action_btns">
+<!--				<div class="action_btns">
 					<div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
 					<div class="one_half last"><a href="#" id="register_form" class="btn">Forget password</a></div>
-				</div>
+				</div>-->
 			</div>
 
 			<!-- Username & Password Login form -->
@@ -716,18 +716,19 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					</div>-->
 
 					<div class="action_btns">
-						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Back</a></div>
+						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Forget Password ?</a></div>
 <!--						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>-->
 
                                                 <input type="submit" style="width:160px; margin-left: 62px;" class="one_half last swifta_button" value="LOGIN"  title="<?php echo $this->Lang['LOGIN']; ?>" />
 					</div>
 				</form>
 
-				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>
+<!--				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>-->
+                                
 			</div>
 
 			<!-- Register Form -->
-			<div class="user_register">
+			<div class="user_register" style="margin-top: -50px;">
                             <form method="post" action="<?php echo PATH;?>merchant/forgot-password.html">
 					<li>
                                     <div class=""><input type="text" name="email" value="" class="swifta_input" placeholder="Enter Your Email" maxlength="256" style="margin-top:40px" required autofocus/></div>
@@ -741,10 +742,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					<br />-->
                                         
                                         
-<!--                                <li class="mv"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php //echo $this->Lang['CAPTCHA']; ?>"  /></li>
+                                <li class="mv" style="margin-left:200px;"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php //echo $this->Lang['CAPTCHA']; ?>"  /></li>
                                 <li class="mv"><p><?php //echo $this->Lang['ETR_TXT_BLW']; ?></p></li>
                                 <li class="mv"><strong ><?php //echo $this->Lang['CAPTCHA']; ?> : </strong></li>
-                                <li>-->
+                                <li>
                                     <div class="login_capcta_bg"> <input class="swifta_input" placeholder="Enter Your Captcha" type="text" name="captcha"  maxlength="32" required autofocus/> </div>
                                     <div class="captcha_error_msg"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></div>
                                     <div class="captcha_error_msg"><em><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></em></div>
@@ -771,7 +772,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					</div>-->
 
 					<div class="action_btns">
-						<div class="one_half"><a id="register_form" href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+						<div class="one_half"><a  href="#" style="width:30%; margin-left: 200px;color:#fff;background-color:#A61C00 ;" class="btn back_btns swifta_input"><i class="fa fa-angle-double-left"></i> Back</a></div>
 <!--						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>-->
                                                 <input class="swifta_button" type="submit" style="width:160px; margin-left: 62px;" value="Submit" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
 					</div>
@@ -802,10 +803,27 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 		// Going back to Social Forms
 		$(".back_btn").click(function(){
-			$(".user_login").hide();
+//			$(".user_login").hide();
+//			$(".user_register").hide();
+//			$(".social_login").show();
+                        $(".user_login").hide();
+			$(".user_register").show();
+			$(".social_login").show();
+                        
+			$(".header_title").text('Forget Password');
+			return false;
+		});
+                
+                
+                $(".back_btns").click(function(){
+//			$(".user_login").hide();
+//			$(".user_register").hide();
+//			$(".social_login").show();
+                        $(".user_login").show();
 			$(".user_register").hide();
 			$(".social_login").show();
-			$(".header_title").text('Login');
+                        
+			$(".header_title").text('Merchant Login');
 			return false;
 		});
 
@@ -909,10 +927,18 @@ closeOnConfirm: false,
 closeOnCancel: false}, 
 function(isConfirm){ 
     if (isConfirm) {     
-        location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1"  
+        //location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1" 
+        window.open(
+  "http://www.zenithbank.com/ViewAllBranches.aspx?id=1",
+  '_blank' // <- This is what makes it open in a new window.
+);
     } else {     
       //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
-        location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+        ///location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+        window.open(
+  "http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf",
+  '_blank' // <- This is what makes it open in a new window.
+);
    }
 
      
@@ -1055,10 +1081,18 @@ closeOnConfirm: false,
 closeOnCancel: false}, 
 function(isConfirm){ 
     if (isConfirm) {     
-        location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1"  
+       // location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1" 
+       window.open(
+  "http://www.zenithbank.com/ViewAllBranches.aspx?id=1",
+  '_blank' // <- This is what makes it open in a new window.
+);
     } else {     
       //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
-        location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+        ///location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+         window.open(
+  "http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf",
+  '_blank' // <- This is what makes it open in a new window.
+);
    }
 
      
@@ -1101,7 +1135,8 @@ function validation_failed(){
 			if (isConfirm) {     
 				
 			} else {     
-			  location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
+			//  location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
+                         location.href ="<?php echo PATH; ?>";
 		   }
 
    

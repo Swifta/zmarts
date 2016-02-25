@@ -24,7 +24,9 @@ body {font-family: 'Source Sans Pro', sans-serif; font-size: 14px; color: #666;}
         border-radius: 10px;
 }
 
-#modal_trigger {margin:0px auto; width:100px; display:block;}
+/*#modal_trigger {margin:0px auto; width:100px; display:block;}*/
+
+#modal_trigger {margin:0px auto;}
 
 .btn {padding:10px 20px; background: #F4F4F2;}
 .btn_red {background: #ED6347; color: #FFF;}
@@ -47,7 +49,7 @@ a.btn_red {color: #FFF;}
 
 
 /* Social Login Form */
-.social_login {}
+.social_login {display: none;}
 .social_login .social_box {display:block; clear:both; padding:10px; margin-bottom: 10px; background: #F4F4F2; overflow: hidden;}
 .social_login .icon {display:block; width:10px; padding:5px 10px; margin-right: 10px; float:left; color:#FFF; font-size:16px; text-align: center;} 
 .social_login .fb .icon {background:#3B5998;}
@@ -55,13 +57,14 @@ a.btn_red {color: #FFF;}
 .social_login .icon_title {display:block; padding:5px 0; float:left; font-weight: bold; font-size: 16px; color:#777;}
 .social_login .social_box:hover {background: #E4E4E2;}
 
+
 .centeredText {text-align: center; margin: 20px 0; clear: both; overflow: hidden; text-transform: uppercase;}
 
 .action_btns {clear:both; overflow: hidden;}
 .action_btns a {display: block;}
 
 /* User Login Form */
-.user_login {display: none;}
+.user_login {}
 .user_login label {display: block; margin-bottom:5px;}
 .user_login input[type="text"], .user_login input[type="email"], .user_login input[type="password"] {display: block; width:50%; margin-left: 200px;  padding: 10px; border:1px solid #DDD; color:#666;}
 .user_login input[type="checkbox"] {float:left; margin-right:5px;}

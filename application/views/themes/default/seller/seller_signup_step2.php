@@ -6,8 +6,10 @@
 </style>                   
 <!-- SELLER SIGNUP -->
    
-  <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/css/materialize.min.css'>
+  
 <style>
+
+    
     
     .swifta_con{
         
@@ -123,7 +125,7 @@ a.tooltips span
 .swifta_input  {
 
     
-/* margin: 5px 0px;
+ margin: 5px 0px;
  
   width: 500px;
 
@@ -155,7 +157,7 @@ a.tooltips span
 
  
  color: #000000;
- font-size:small;*/
+ font-size:small;
  font-size:small;
 }
 #label          {
@@ -169,7 +171,7 @@ a.tooltips span
   transition:0.2s ease all; 
 }
 
-/* active state */
+ active state 
 input:focus ~ label, input:valid ~ label     {
   top:-8px;
   font-size:14px;
@@ -300,6 +302,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 </style>
 
+<link rel='stylesheet prefetch' type="text/css" href="<?php echo PATH;?>js/Popup/materialize.min.css" />
+
+<!--<link rel='stylesheet prefetch' href='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/css/materialize.min.css'>-->
 <?php $tcmsg = ""; ?>
 
 
@@ -336,7 +341,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         <div class="p_inner_block clearfix">
                             <div class="payment_form_sections">
                                 <div class="payment_form ">
+                                  
                                 <ul>
+                                    
+									
                                     <li>
                                        
                                 <div class="input-field">
@@ -399,11 +407,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                                                value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
                                 
                                 </li>
-									<li class="frm_clr">			
-                                            
+                                
+                                
+                                <li class="frm_clr">	
+                                                                            
+                                                                  
 								<div class="input-field">
                                                                     <span class="asterisks_input">  </span>
-									<input style="font-size: 1em;" maxlength="50" tabindex="4" type="text" name="mr_address1" id="addrs1" class="" placeholder= "<?php //echo $this->Lang['ENTER_ADDR1']; ?>"
+									<input style="font-size: 1em;" maxlength="50" tabindex="4" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php //echo $this->Lang['ENTER_ADDR1']; ?>"
 									
 									value="<?php if($this->session->get('mraddress1') || isset($this->userPost['mr_address1'])) { if($this->session->get('mraddress1')) {
 										echo $this->session->get('mraddress1'); 
@@ -614,7 +625,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                         </div>
                     </div>
-                            
+      
                      <div class="p_inner_block clearfix" style="margin-left:300px; margin-top:-50px;">
                             <p class="merchant_intro">
                                
