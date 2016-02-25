@@ -919,12 +919,14 @@ text: "YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON 
         "KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES",  
 imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
 //imageSize: '100x180',
+text:"<a href='http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf' target='_blank' class='btn btn-info'>DOWNLOAD A/C OPENING FORM</a>",
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "VIEW A LIST OF BRANCHES",   
-cancelButtonText: "DOWNLOAD A/C OPENING FORM",   
+//cancelButtonText: "DOWNLOAD A/C OPENING FORM",
+html:true,
 closeOnConfirm: false,   
-closeOnCancel: false}, 
+closeOnCancel: true}, 
 function(isConfirm){ 
     if (isConfirm) {     
         //location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1" 
@@ -932,14 +934,15 @@ function(isConfirm){
   "http://www.zenithbank.com/ViewAllBranches.aspx?id=1",
   '_blank' // <- This is what makes it open in a new window.
 );
-    } else {     
-      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
-        ///location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
-        window.open(
-  "http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf",
-  '_blank' // <- This is what makes it open in a new window.
-);
-   }
+    }
+//    else {     
+//      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
+//        ///location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+//        window.open(
+//  "http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf",
+//  '_blank' // <- This is what makes it open in a new window.
+//);
+//   }
 
      
  
