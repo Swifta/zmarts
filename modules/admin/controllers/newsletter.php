@@ -124,10 +124,13 @@ class Newsletter_Controller extends website_Controller {
 					$dir = realpath(DOCROOT."images/newsletter");
                        $tmp_name = upload::save('attach', null, $dir, 0777);
                        $logo = basename($tmp_name);
+                       $this->news_logo = $logo;
+                       //echo $tmp_name." and ".$dir." and ".basename($tmp_name);die;
 						//$tmp_name = basename($_FILES["attach"]["tmp_name"]);
 						//$logo = basename($_FILES["attach"]["name"]);
 						//move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
 						chmod($tmp_name,0777);
+                                                //die;
 					}
 					               
 					$file1=array();
@@ -451,7 +454,7 @@ class Newsletter_Controller extends website_Controller {
 		if($newsletter_id){
 			$status = $this->news->deleteTemplate($newsletter_id);
 			if($status == 1){
-				unlink(realpath(DOCROOT."images/newsletter/".$newsletter_id).".png");
+				@unlink(realpath(DOCROOT."images/newsletter/".$newsletter_id).".png");
 				unlink(realpath(DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id).".php");
 				common::message(1, $this->Lang["TEMPLATE_DEL_SUC"]);
 			}else{

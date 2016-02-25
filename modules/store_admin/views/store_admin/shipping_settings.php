@@ -58,10 +58,10 @@
                                             <td><input type="text" name="drowssap" maxlength="128"   value="<?php echo $general->Shippingdrowssap; ?>"/>
                                             <em><?php if(isset($this->form_error["drowssap"])){ echo $this->form_error["drowssap"]; }?></em></td>-->
 
-<!--                                         <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPswd; ?>"/>
+<!--                                         <td><input type="text" name="Password" maxlength="128"   value="<?php //echo $general->ShippingPswd; ?>"/>
                                             <em><?php //if(isset($this->form_error["Password"])){ echo $this->form_error["Password"]; }?></em></td>
 
-                                            <td><input type="text" name="Password" maxlength="128"   value="<?php echo $general->ShippingPassword; ?>"/>
+                                            <td><input type="text" name="Password" maxlength="128"   value="<?php //echo $general->ShippingPassword; ?>"/>
                                             <em><?php //if(isset($this->form_error["Pswd"])){ echo $this->form_error["Pswd"]; }?></em></td>-->
 
                                         </tr>

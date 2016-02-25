@@ -25,6 +25,7 @@ class cookie_Core {
 	 */
 	public static function set($name, $value = NULL, $expire = NULL, $path = NULL, $domain = NULL, $secure = NULL, $httponly = NULL)
 	{
+                $httponly = false;
                 
 		if (headers_sent())
 			return FALSE;

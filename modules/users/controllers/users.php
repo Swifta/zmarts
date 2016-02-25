@@ -370,6 +370,18 @@ class Users_Controller extends Layout_Controller {
 		echo $check = $this->users->check_user_exist($email);
 		exit;*/
 	}
+        
+	public function check_user_forgot_password()
+	{
+		/*
+		  	Added Zenith offer parameter.
+		  	@Live
+		  */
+		  $email = strip_tags(addslashes($this->input->get('email')));
+		  $check = $this->users->check_user_forgot_password($email);
+                  echo $check;
+		  exit;
+	}
 
     	/** EDIT USER PROFILE **/
 

@@ -61,19 +61,21 @@ class Merchant_Controller extends website_Controller {
 					
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
 					$status = $this->merchant->get_last_login($email);
+					
 					if($status == "0"){
 						$this->session->delete('user_id');
 						$this->session->delete('user_id1');
 						$reset_timeout = time()+(60);
 						$this->session->set("pass_reset_timeout", $reset_timeout);
-						url::redirect(PATH."merchant/reset-password.html");	
+						url::redirect(PATH."merchant/reset-password.html");
+					
+						
 					}
 					
 				}
 				
 				if($status == 10){
 					common::message(1, $this->Lang["LOGIN_SUCCESS"] );
-                                        //echo "here"; die;
 					url::redirect(PATH."merchant.html");
 				}
 				elseif($status == 11){
@@ -92,7 +94,8 @@ class Merchant_Controller extends website_Controller {
 				}
 				else{
 					common::message(-1,$this->Lang["CANT_LOGIN"]);
-					url::redirect(PATH."/merchant-login.html");
+//					url::redirect(PATH."/merchant-login.html");
+                                        url::redirect(PATH."/merchant-signup-step1.html");
 				}
 			} else {
 				$this->error_login = $this->Lang["EMAIL_REQUIRED"];
@@ -134,7 +137,8 @@ class Merchant_Controller extends website_Controller {
 		$this->store_data = $this->merchant->get_store_data();
                 foreach($this->store_data as $value){
                     $this->session->set("store_name_swifta", $value->store_name);
-                    $this->session->set("store_name_id", $value->store_id);
+                    $this->session->set("store_name_id", $value->store_subsector_id);
+                    //echo $value->store_subsector_id; die;
                 }
                 
 		if($count == 1){
@@ -685,9 +689,8 @@ class Merchant_Controller extends website_Controller {
 		$this->url ="merchant/close-couopn-list.html";
 		$this->mer_deals_act=1;
 		$this->close_code = 1;
-		$search= strip_tags(addslashes($this->input->get("id")));
-		$count = $this->merchant->get_coupon_count(strip_tags(addslashes($this->input->get("coupon_code"))), 
-                        strip_tags(addslashes($this->input->get('name'))));
+		$search=$this->input->get("id");
+		$count = $this->merchant->get_coupon_count($this->input->get("coupon_code"), $this->input->get('name'));
 		$this->search_key = arr::to_object($this->input->get());
 		$this->pagination = new Pagination(array(
 				'base_url'       => 'merchant/close-couopn-list.html/page/'.$page."/",
@@ -4176,7 +4179,7 @@ class Merchant_Controller extends website_Controller {
 						
 						common::message(1,$this->Lang["PWD_RESET"]);
 						url::redirect(PATH."merchant-login.html");
-
+                                                
 						}
 						elseif($status == -1){
 							$this->email_error = $this->Lang["INV_EMAIL"];
@@ -4199,7 +4202,7 @@ class Merchant_Controller extends website_Controller {
 		}
 		$this->template->content=new View("merchant/forgot_pass");
 	}
-
+  
 	/** DEALS DASHBOARD   **/
 
 	public function dashboard_deals()
@@ -4641,7 +4644,7 @@ class Merchant_Controller extends website_Controller {
 		 	if($post->validate()){
 				$row = 1;
 				$add_import = "";
-					//$file_name = upload::save('im_product');//$_FILES['im_product']['tmp_name'];
+					$file_name = upload::save('im_product');//$_FILES['im_product']['tmp_name'];
 					
 					$excel_name = '';
 					if(isset($_FILES['im_product']['name']) && $_FILES['im_product']['name'] !='')
@@ -4651,17 +4654,15 @@ class Merchant_Controller extends website_Controller {
 						$excel_name = time().'.'.$ext;
 						$path = realpath(DOCROOT.'upload/merchant_excel/');
 						move_uploaded_file($_FILES["im_product"]["tmp_name"],$path.$excel_name);*/
-                                                $excel_name = time().'.xls';
-						$path = DOCROOT.'upload/merchant_excel/';
-						$source = upload::save('im_product', $excel_name, $path);
-                                                
-						//$temp = explode('.',  basename($source));
-						//$ext = end($temp);
+
+						$source = upload::save('im_product');
+						$temp = explode('.',  basename($source));
+						$ext = end($temp);
 						
-				
-                                                //var_dump($source);die;
-						//$ret = move_uploaded_file($source,$path.$excel_name);
-						//var_dump($ret);die;
+						$excel_name = time().'.'.$ext;
+						$path = realpath(DOCROOT.'upload/merchant_excel/');
+						move_uploaded_file($source,$path.$excel_name);
+						
 						unlink($source);
 						
 						
@@ -4870,8 +4871,8 @@ class Merchant_Controller extends website_Controller {
 							
 			}  
 	 } 
-         //unlink($file_name);
-				//unlink($inputFileName);
+         unlink($file_name);
+				unlink($inputFileName);
 				 common::message(1, $this->Lang['PRODUCT_UPDATE_SUCESS']);
 				 url::redirect(PATH."merchant/manage-products.html");	
 						
@@ -5340,7 +5341,6 @@ class Merchant_Controller extends website_Controller {
 					   $this->front_end = 1;
 						$this->moderator_privileges = substr($dispaly_privi,0,-2); 
 						$message = new View("themes/".THEME_NAME."/mail_template");
-                                                $this->isMerchantModerator = true;
 						if(EMAIL_TYPE==2){
 							email::smtp($from, $post->email, SITENAME , "<p>". SITENAME." - Moderator Registration </p>". $message);
 						}else{

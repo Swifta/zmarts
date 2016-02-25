@@ -148,7 +148,7 @@ if(($this->uri->segment(2)=='view-products')){
                     <?php } elseif($u->payment_status=="Failed") {
                                 echo "<span style='color:red'>".$this->Lang['FAILED']."</span>";
                             } else { ?>
-                            <select onchange="return product_change_status('<?php echo $u->email; ?>','<?php echo $u->firstname; ?>',this.value,'<?php echo $u->transaction_id; ?>','<?php echo $u->product_id; ?>','<?php echo $u->merchant_id; ?>','1')">
+                            <select onchange="return product_change_status('<?php echo @$u->email; ?>','<?php echo $u->firstname; ?>',this.value,'<?php echo $u->transaction_id; ?>','<?php echo $u->product_id; ?>','<?php echo $u->merchant_id; ?>','1')">
                                 <option value="Pending" <?php if($u->payment_status=="Pending"){ ?> selected <?php } ?>><?php echo $this->Lang['PENDING']; ?></option>
                                     <option value="Completed" <?php if($u->payment_status=="Completed"){ ?> selected <?php } ?>><?php echo $this->Lang['COMPLETED']; ?></option>
                                     <option value="Failed" <?php if($u->payment_status=="Failed"){ ?> selected <?php } ?>><?php echo $this->Lang['FAILED']; ?></option>

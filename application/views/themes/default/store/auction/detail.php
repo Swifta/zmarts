@@ -534,16 +534,14 @@ foreach ($this->deals_deatils as $deals) {
                                                 <h2 class="deal_sub_title"><?php echo $this->Lang['COMM']; ?></h2>                                    
                                                 <div class="fbok_comment wloader_parent">
                                                     <i class="wloader_img" style="min-height:220px;">&nbsp;</i>
-                                                    <div id="fb-root"></div>
-                                                    <script>
-                                                        (function(d, s, id) {
-                                                            var js, fjs = d.getElementsByTagName(s)[0];
-                                                            if (d.getElementById(id)) return;
-                                                            js = d.createElement(s); js.id = id;
-                                                            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-                                                            fjs.parentNode.insertBefore(js, fjs);
-                                                        }(document, 'script', 'facebook-jssdk'));
-                                                    </script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1619327111666020";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
                                                     <div width="370" class="fb-comments" data-href="<?php echo PATH . $deals->store_url_title.'/auction/' . $deals->deal_key . '/' . $deals->url_title . '.html'; ?>" data-num-posts="10" ></div>
                                                 </div>                                                                      
                                                 </div>

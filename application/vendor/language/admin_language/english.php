@@ -1631,7 +1631,7 @@ $content_text = array(
 
 			"ADD_STR_BR" => "Add Stores Branch",
 
-			"MERCHANT_BLO" => "Merchant Is Blocked, You Can't able to Add a Shop",
+			"MERCHANT_BLO" => "Merchant Is Blocked",
 
 			"MANG_STORE" => "Manage Stores Branch's",
 
@@ -1912,7 +1912,7 @@ $content_text = array(
 
 			"TRANS_COUNT" => "Transaction Count",
 
-			"CAT_BLOG_CANT_AD" => "Category Is Blocked, You Can't able to Add a Category",
+			"CAT_BLOG_CANT_AD" => "Category Is Blocked",
 
 			"PH_NUM" => "Your Phone Number (e.g. 070..,080..)",
 

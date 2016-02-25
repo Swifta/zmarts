@@ -95,10 +95,17 @@
                                         <?php /*if(isset($this->signup) || isset($this->forgot)|| isset($this->admin_signup) || isset($this->moderator) || isset($this->store_admin)) {
 											 
 										 }*/?>
-                                        <?php if(isset($this->forgot)){?> <td colspan="1" >Password: </td><?php }else{?><td><?php echo $this->Lang['E_Y_PASS'];?>: </td><?php }?> <td style=" padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->password)) { echo $this->password; ?></a></td> <?php } ?>
-                                           <?php } else { ?>
+                                        
+<!--                                        <?php //if(isset($this->forgot)){?> <td colspan="1" >Password: </td><?php //}else{?><td><?php //echo $this->Lang['E_Y_PASS'];?>: </td><?php// }?> <td style=" padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php// if(isset($this->pswd)) { echo $this->pswd; ?></a></td> <?php //} ?>
+                                           <?php// } else { ?>
                                            
-                                           <?php } ?>
+                                           <?php //} ?>
+                                       -->
+                                       
+                                       
+                                        <?php if(isset($this->forgot)){?> <td colspan="1" >Password: </td><?php }else{?><td><?php echo $this->Lang['E_Y_PASS'];?>: </td><?php }?> <td style=" padding-left: 20px;" ><a style=" font:normal 12px/25px arial; color:#666;" ><?php if(isset($this->drowssap)) { echo $this->drowssap; ?></a></td> <?php } ?>
+                                           <?php } else { ?>
+                                       <?php } ?>
                                        
                                     </tr>
                                     <?php if(isset($this->forgot)){?>
@@ -119,7 +126,7 @@
 				     <tr>
                                         <td>
                                         <?php if(isset($this->moderator) ||  isset($this->admin_signup)) { ?>
-                                            Login URL: <a href="<?php  if(isset($this->isMerchantModerator)){echo PATH.'merchant-login.html';}else{echo PATH.'admin-login.html';} ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
+					    Login URL: <a href="<?php  echo PATH.'admin-login.html'; ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
                                            <?php } else if(isset($this->store_admin)) { ?>
                                            <a href="<?php  echo PATH.'store-admin-login.html'; ?>"><input type="button" value="Click to login" style="background: #930;" /></a>
                                            <?php } ?>
@@ -130,7 +137,7 @@
 										<td style="font:normal 18px/21px arial;color:#666;">Your privileges are below :</td>
                                     </tr>
                                     <tr>
-                                        <td><?php if(is_string($this->moderator_privileges)){echo $this->moderator_privileges;} ?></td>
+										<td><?php echo $this->moderator_privileges; ?></td>
                                     </tr>
                                     <?php } ?>
                                     

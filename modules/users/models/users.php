@@ -280,8 +280,16 @@ class Users_Model extends Model
 		}
 		return -1;
 	}
-	
-	  /** CHECK PASSWORD **/
+        
+        public function check_user_forgot_password($email = ""){
+            $result = $this->db->from('users')->where(array('email' => $email))->get();
+            if(count($result)> 0){
+                return 1;
+            }
+            return -1;
+        }
+
+                /** CHECK PASSWORD **/
     
 	public function exist_password($pass = "", $id = "")
 	{

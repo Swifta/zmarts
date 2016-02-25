@@ -11,7 +11,7 @@
   <!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
   
   <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
-  
+  <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/Dogfalo/materialize/master/dist/css/materialize.min.css'>
 <style>
     /*test style*/
 table, th, td {
@@ -189,6 +189,29 @@ padding: 0 5px 0 0;
 
 
 
+#label          {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label     {
+  top:-8px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+
+
+
+
+
 .swifta_input:focus, .swifta_input:valid {
 
  box-shadow: none;
@@ -222,7 +245,7 @@ padding: 0 5px 0 0;
   border: none;
 
   /*background: #1abc9c;*/
- background:#A61C00;
+  background:#A61C00;
   cursor: pointer;
 
   border-radius: 3px;
@@ -307,11 +330,12 @@ input[type=text],input[type=password]
                                     <tbody>
   <tr>
     <td>
-                                       <div class="">
+                                       <div class="input-field">
                                      <span class="asterisks_input">  </span>
-                                 <input type="text" maxlength="50" required onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" autofocus tabindex="1" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
+                                 <input type="text" maxlength="50" required onchange="set_shop_changed(true);" onblur="verify_shop_name(this)" name="storename" id="storename" autofocus tabindex="1" class="" placeholder="<?php //echo $this->Lang["ENTER_STORE_NAME"]; ?>"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"  />
 				<em id="id_err_storename"><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
+                                <label   for="storename" style=" font-size: small;"> Enter the store name </label>
                                  </div>
                              </td>
     <td> 
@@ -340,9 +364,11 @@ input[type=text],input[type=password]
                                 
     </td>-->
 <td>
-                                        <div class="">
-				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="swifta_input" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus  />
-                                 </div>
+                                        <div class="input-field">
+				<input type="text" name="zipcode" tabindex="9" onkeypress="return isNumberKey(event)" maxlength="10" id="zipcode" class="" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>" placeholder="<?php //echo $this->Lang["ENTER_ZIP_CODE"]; ?>" autofocus  />
+                               
+                                <label   for="zipcode" style=" font-size: small;"> Enter zip code </label>
+                                        </div>
  </td>
     <td>
                                 <div class="">
@@ -365,22 +391,23 @@ input[type=text],input[type=password]
   </tr>
 <tr>
 <td>
-                             <div class="">
+                             <div class="input-field">
                                      <span class="asterisks_input">  </span>
-                                     <input type="text" id="mobile" name="mobile"  tabindex="3" maxlength="11" onkeypress="return isNumberKey(event)" class="swifta_input" placeholder="<?php echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
+                                     <input type="text" id="mobile" name="mobile"  tabindex="3" maxlength="11" onkeypress="return isNumberKey(event)" class="" placeholder="<?php // echo $this->Lang["ENTER_PHONE"]; ?>" value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>" required autofocus/>
                                      <em id="id_err_mobile"><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
+                                     <label   for="mobile" style=" font-size: small;"> Enter mobile number </label>
                                  </div>
                                 </td>
 
 <td>
 
  
-                                 <div class="" style='margin-top:-1px;'>
+                                 <div class="input-field" style='margin-top:-1px;'>
                                     
-                                     <input type="text" maxlength="50" name="website" class="swifta_input" tabindex="10" id="website" placeholder="<?php echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
+                                     <input type="text" maxlength="50" name="website" class="" tabindex="10" id="website" placeholder="<?php //echo $this->Lang["STORE_WEBSITE"]; ?>" value="<?php if(!isset($this->form_error['website']) && isset($this->userPost['website'])){echo $this->userPost['website'];}?>"  autofocus />
 									
 									<em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
-                                 
+                                  <label   for="website" style=" font-size: small;"> Enter existing website (if any) www.example.com </label>
                                  
                                  </div>
                                  
@@ -392,12 +419,13 @@ input[type=text],input[type=password]
 
 <tr>
 <td> 
-                                      <div>
+    <div class="input-field">
                                      <span class="asterisks_input">  </span>
-                                     <input type="text" maxlength="50" name="address1" class="swifta_input" id="address1" tabindex="4" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
+                                     <input type="text" maxlength="50" name="address1" class="" id="address1" tabindex="4" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>" placeholder="<?php //echo $this->Lang["ENTER_ADDR1"]; ?>" required autofocus />
                             
 								<em id="id_err_address1"><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
 <!--                                    <span class="asterisk_input">  </span>-->
+                                                                  <label   for="address1" style=" font-size: small;"> <?php echo $this->Lang["ENTER_ADDR1"]; ?> </label>
                                  </div>
                                      </td>
 
@@ -417,12 +445,13 @@ input[type=text],input[type=password]
 <tr>
 <td>
     
-      <div class="">		
+      <div class="input-field">		
                                      <!--<span class="asterisks_input">  </span>-->
-                            <input maxlength="50" type="text" name="address2" class="swifta_input" tabindex="5" id="address2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php echo $this->Lang["ENTER_ADDR2"]; ?>"  autofocus />
+                            <input maxlength="50" type="text" name="address2" class="" tabindex="5" id="address2" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>" placeholder="<?php //echo $this->Lang["ENTER_ADDR2"]; ?>"  autofocus />
                             
 								<em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
 <!--                                  <span class="asterisk_input">  </span>-->
+                                                                 <label   for="address2" style=" font-size: small;"> Enter city </label>
                                  </div>
 
 
@@ -442,10 +471,11 @@ input[type=text],input[type=password]
                              
                               <li id="store_admin_email_li" style="display: none;">
 <!--                                <label><?php echo $this->Lang["EMAIL_ID"]; ?> <span style="color:red">*</span>:</label>-->
-                                 <div class="">
+                                 <div class="input-field">
                                      <span class="asterisks_input">  </span>
-                                 <input maxlength="150" type="text" tabindex="" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php echo "store_admin@store.com" ?>"  />
+                                 <input maxlength="150" type="text" tabindex="" value="" name="store_email_id" onchange="set_email_changed(true);" onblur="verify_memail(this);" id="store_email_id" class="swifta_input"  placeholder="<?php //echo "store_admin@store.com" ?>"  />
 <!--                                   <span class="asterisk_input">  </span>-->
+                                <label   for="store_email_id" style=" font-size: small;"> store_admin@store.com </label>
                                  </div>
                                  <em id="id_err_memail"></em>
                              </li>
@@ -457,11 +487,11 @@ input[type=text],input[type=password]
 <tr>
 <td>
 				<li class="frm_clr">
-                                        <label style="width:480px"><?php echo $this->Lang["SEARCH_LOCATION"]; ?> <!--<span style="color:red">*</span>:</label>-->
+                                        <label style="width:480px;"><?php echo $this->Lang["SEARCH_LOCATION"]; ?> <!--<span style="color:red">*</span>:</label>-->
                                         <div class="fullname map_loc_section map_re_w">
                                         <div class="gllpLatlonPicker">
                                         <div class="top_popup_select2">        
-                                            <input type="text" maxlength="50" class="gllpSearchField " tabindex="6" id="gf" style="width:370px" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
+                                            <input type="text" maxlength="50" class="gllpSearchField " tabindex="6" id="gf" style="width:370px;height:20px;" placeholder="Locate Your Store (Enter Full Address Below & Search) ">
                                         <input type="button" class="gllpSearchButton sign_submit"  value="<?php echo $this->Lang['SEARCH']; ?>">
                                         </div>
                                         <br/>
@@ -470,9 +500,9 @@ input[type=text],input[type=password]
                                         <br/>
                                         
                                         <div class="">
-                                        <input maxlength="50" type="text" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>" required  value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>" readonly/>
+                                        <input maxlength="50" type="text" style="height:20px;" name="latitude" class="gllpLatitude required" placeholder="<?php echo $this->Lang["LATITUDE"]; ?>" required  value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>" readonly/>
                                       
-                                        <input type="text" name="longitude" class="gllpLongitude required" required placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>" value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" readonly/>
+                                        <input type="text" name="longitude" style="height:20px;" class="gllpLongitude required" required placeholder="<?php echo $this->Lang["LONGITUDE"]; ?>" value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>" readonly/>
                                           <em id="id_err_latitude"><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
                                         <em id="id_err_longitude"><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
                                         </div>

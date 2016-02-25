@@ -74,9 +74,11 @@ class Newsletter_Model extends Model
 				$this->news_footer = $post->footer;
 				$this->news_logo = $logo;
 				$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
+                                //$message->set("news_logo", $this->news_logo);
+                                //$message->news_logo = $this->news_logo;
 				if(EMAIL_TYPE==2){
 					
-					if(!email::send_campaign($post->subject,$message))//,$file))
+					if(!email::send_campaign($post->subject,$message,$file))
 						return -1;
 					
 						

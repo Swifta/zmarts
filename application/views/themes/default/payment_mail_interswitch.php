@@ -17,28 +17,29 @@ $this->UserName = $this->session->get("UserName");
 <tr  style="text-align:left;  padding:20px 15px 15px 15px; ;margin:0 0 20px; background:#e2e2e2;" >
   <td colspan="8" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear <?php echo trim($this->UserName);?>,</strong></td>
 </tr>
+<tr>
   <td>&nbsp;</td>
 </tr>
 
-</tr>
+<tr>
   <td colspan="8" width="100%" align="left">Find below your completed transaction details:</td>
 </tr>
-</tr>
+<tr>
   <td colspan="8" width="100%" align="left">Transaction ID: <?php echo $id; ?></td>
 </tr>
-</tr>
+<tr>
   <td colspan="8" width="100%" align="left">Status: <?php if($amount > 0){echo "Successful";}else{echo "Failed";}  ?></td>
 </tr>
-</tr>
+<tr>
   <td colspan="8" width="100%" align="left">Transaction Description: <?php echo $interswitch->ResponseDescription; ?></td>
 </tr>
-</tr>
+<tr>
   <td colspan="8" width="100%" align="left">Transaction Reference: <?php echo $interswitch->PaymentReference; ?></td>
 </tr>
-</tr>
+<tr>
 <td colspan="8" width="100%" align="left">Amount: &#8358; <?php echo number_format($amount/100); ?></td>
 </tr>
-</tr>
+<tr>
   <td colspan="8" width="100%" align="left"></td>
 </tr>
 
@@ -55,8 +56,3 @@ $this->UserName = $this->session->get("UserName");
 </table>
 </body>
 </html>
-
-<!--<?php echo "payment_mail_interswitch"; ?>-->
-
-
-
