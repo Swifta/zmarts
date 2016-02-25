@@ -3933,7 +3933,10 @@ class Merchant_Model extends Model
         {
                 $result_emailid = $this->db->count_records("users", array("email" => $post->email,"user_id !=" => $id));
                         if($result_emailid == 0){
-                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile,"merchantid" =>$post->merchant_id), array('user_id' => $id,'user_type'=>'8'));
+                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname,
+                                    "email" => $post->email, 'address1' => $post->address1, 'address2' => $post->address2,
+                                    'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile,
+                                    "merchantid" =>$post->merchant_id), array('user_id' => $id,'user_type'=>'8'));
                                 $data = array("privileges_deals","privileges_deals_add","privileges_deals_edit","privileges_deals_block",
 								 "privileges_products","privileges_products_add","privileges_products_edit","privileges_products_block",
 								 "privileges_auctions","privileges_auctions_add","privileges_auctions_edit","privileges_auctions_block",
