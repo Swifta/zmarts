@@ -1,13 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
 <script src="<?php echo PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'; ?>" type="text/javascript"></script>
-<style>
-.error{float: left;width: 50%; } 
-</style>                   
-<!-- SELLER SIGNUP -->
+
+<link rel="stylesheet" href="<?php echo PATH; ?>" />
+<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/material_style.css" />
    
 
 <style>
+   .error{float: left;width: 50%; }  
     
     .swifta_con{
         
@@ -22,23 +22,24 @@
     /*test style*/
     
 a.tooltips {outline:none; }
-a.tooltips strong {line-height:30px;}
+a.tooltips strong {line-height:20px;}
 a.tooltips:hover {text-decoration:none;} 
 a.tooltips span {
-    z-index:10;display:none; padding:14px 20px;
-    margin-top:-30px; margin-left:28px;
-    width:300px; line-height:16px;
+    z-index:10;display:none; padding:5px 5px;
+    margin-top:-30px; margin-left:10px;
+    width:250px; line-height:15px;
 }
 a.tooltips:hover span{
     display:inline; position:absolute; color:#111;
-    border:1px solid #DCA; background:#fffAF0;}
+    border:1px solid #DCA; background:#FCFCFC;}
 .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
     
 /*CSS3 extras*/
 a.tooltips span
 {
     border-radius:4px;
-    box-shadow: 5px 5px 8px #CCC;
+    overflow:auto;
+    box-shadow: 2px 2px 4px #CCC;
 }
 
 .swifta_h1, .swifta_input::-webkit-input-placeholder, button {
@@ -264,7 +265,7 @@ a.tooltips span
 content:"*"; 
 color: #e32;
 position: absolute; 
-margin: 10px 0px 0px -57px; 
+margin: 10px 0px 0px -50px; 
 font-size: small; 
 padding: 0 5px 0 0;
 
@@ -274,7 +275,7 @@ padding: 0 5px 0 0;
 content:"*"; 
 color: #e32;
 position: absolute; 
-margin: -5px 0px 0px 492px; 
+margin: -5px 0px 0px 400px; 
 font-size: small; 
 padding: 0 5px 0 0;
 
@@ -289,7 +290,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 	<div class="contianer_outer">
         <div class="contianer_inner">
             <div class="contianer seller_t">                
-                <h2 class="seller_sign_title"><?php echo $this->Lang['WEL_SEL_SIGN']; ?></h2>
+<!--                <h2 class="seller_sign_title"><?php echo $this->Lang['WEL_SEL_SIGN']; ?></h2>-->
                 <p class="seller_sign_info"><?php echo $this->Lang['YOU_GUIDED_CRTE_STRE']; ?></p>
                 <div class="seller_signup clearfix">
                     <div class="seller_signup_menu">
@@ -312,58 +313,24 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                         </div>
                     </div>
                     
-                   
+<!-- Anthony                  -->
+<div class="container" style="margin-top:40px;">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-lg-12">
                  <form action="" method="post" name="signup2" id="signup2">
-                    <div class="payouter_block pay_br">
+                        <div class="">
 <!--                        <h3 class="paybr_title pay_titlebg"><?php //echo $this->Lang['CRTE_YR_STRE']; ?>: <?php //echo $this->Lang['SIGN_UP']; ?></h3>-->
-                        <div class="p_inner_block clearfix">
-                            <div class="payment_form_sections">
-                                <div class="payment_form ">
-                                <ul>
-                                    <li>
+                            <div class="">
                                        
                                 <div class="">
-                                    <span class="asterisks_input">  </span>
+                                 
                                    <?php 
       $this->session->set("merchant_reg_nuban", "8025481373");
       $this->session->set("firstname", "Hello World"); ?>
-									<input maxlength="50" required tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" type="text" name="firstname" id="fname" autofocus class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
-                                                                        value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
-										echo $this->session->get('firstname'); 
-										} else {
-											echo $this->userPost['firstname'];
-                                                                                        }}?>" readonly/> 			
-									<em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
 									
-								</div>
-                                    </li>
-									<li>			
                                             
-								<div class="">
-								        <span>  </span>
-									<input type="text" tabindex="2" maxlength="50" name="lastname" class="swifta_input" id="lname" required placeholder= "<?php echo $this->Lang['ENTER_FULL_NAME']; ?>" 
 									
-									value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
-										echo $this->session->get('lastname'); 
-										} else {
-											echo $this->userPost['lastname'];
-										}}?>"  autofocus/> 	
-									<em ><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
-								</div>
-                                    </li>
-                                    <li>
                                        
-								<div class="">
-                                                                    <span class="asterisks_input">  </span>
-									<input maxlength="50" tabindex="3" onblur="verify_memail(this);" onchange="set_email_changed(true);" type="text" name="email" id="email"  class="swifta_input" placeholder= "<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
-									value="<?php if($this->session->get('memail') || isset($this->userPost['email'])) { if($this->session->get('memail')) {
-										echo $this->session->get('memail'); 
-										} else {
-											echo $this->userPost['email'];
-										}}?>" required autofocus /> 			      
-									<em id="id_err_memail"> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
-								</div>
-                                    </li>
                                     <li style="display:none;">
                                         <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
                                 
@@ -383,51 +350,99 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 									<li class="frm_clr">			
                                             
 								<div class="">
+<!--                                        <div class="col-md-2"></div>-->
+                                            <div class="col-md-5 col-md-offset-3">
+                                                  <div class="form-group">  
                                                                     <span class="asterisks_input">  </span>
-									<input maxlength="50" tabindex="4" type="text" name="mr_address1" id="addrs1" class="swifta_input" placeholder= "<?php echo $this->Lang['ENTER_ADDR1']; ?>"
+                                                    <input type="text" class="form-control" name="firstname" id="fname" readonly="true"  maxlength="50" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" autofocus placeholder="<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+                                                     value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
+                                                   echo $this->session->get('firstname'); 
+                                                   } else {
+                                                   echo $this->userPost['firstname'];
+                                                   }}?>">
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="fname">Company name</label>
+                                                    <em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
+                                                  </div>
+                                                  <div class="form-group">  
+                                                    <input type="text" class="form-control" tabindex="2" maxlength="50" name="lastname" id="lname" required placeholder="<?php echo $this->Lang['ENTER_FULL_NAME']; ?>"
+                                                    value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
+                                                    echo $this->session->get('lastname'); 
+                                                    } else {
+                                                    echo $this->userPost['lastname'];
+                                                    }}?>"  autofocus>
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="lname">Full name</label> 
+                                                    <em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
+                                                  </div>
+                                                  <div class="form-group"> 
+                                                    <span class="asterisks_input">  </span>
+                                                    <input type="email"  maxlength="50" tabindex="3" onblur="verify_memail(this);" onchange="set_email_changed(true);" class="form-control" id="email" name="email" id="email" required placeholder="<?php echo $this->Lang['ENTE_EMAIL_F']; ?>"
+                                                    value="<?php if($this->session->get('memail') || isset($this->userPost['email'])) { if($this->session->get('memail')) {
+                                                    echo $this->session->get('memail'); 
+                                                    } else {
+                                                    echo $this->userPost['email'];
+                                                    }}?>" required autofocus>
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="email">Email</label>  
+                                                    <em id="id_err_memail"> <?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?> </em>
+                                                  </div>                                                
+                                                <div style="display:none;">
+                                                    <label><?php //echo $this->Lang['ADD_PAYPAL_ACC']; ?> </label>
+                                                    <input type="hidden"  name="payment_acc" class="swifta_input" value="nopaypal@swifta.com" />
+                                                </div>
+                                                <div>
+                                                    <?php //echo $this->session->get('merchant_reg_nuban'); ?>
+                                                    <input type="hidden" name="nuban" class="swifta_input" placeholder= "<?php echo $this->Lang['ZENITH_ACCOUNT_ENTER_PLACEHOLDER']; ?>"
+                                                    value="<?php echo $this->session->get('merchant_reg_nuban'); ?>" />
+                                                </div>
+                                                 <div class="form-group"> 
+                                                    <span class="asterisks_input">  </span>
+                                                    <input type="text" maxlength="50" tabindex="4" class="form-control" name="mr_address1" id="addrs1" placeholder="<?php echo $this->Lang['ENTER_ADDR1']; ?>"
 									
 									value="<?php if($this->session->get('mraddress1') || isset($this->userPost['mr_address1'])) { if($this->session->get('mraddress1')) {
 										echo $this->session->get('mraddress1'); 
 										} else {
 											echo $this->userPost['mr_address1'];
-										}}?>"  required autofocus/> 												
+                                                    }}?>"  required autofocus>
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="addrs1">Address</label>
 									<em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
                                         </div>
-                                    </li>
-                                    <li>
                                         
-                                     <div class="" style="">
-                                        <input maxlength="50" tabindex="5" type="text" name="mr_address2" class="swifta_input"  placeholder="Enter address line 2 (if any)"
+                                                   <div class="form-group">  
+                                                    <input type="text" class="form-control" maxlength="50" tabindex="5" name="mr_address2" id="mr_address2" placeholder=""
                                                                                  value="<?php if($this->session->get('mraddress2') || isset($this->userPost['mr_address2'])) { if($this->session->get('lastname')) {
                                             echo $this->session->get('mraddress2'); 
                                             } else {
                                                 echo $this->userPost['mr_address2'];
-                                            }}?>" /> 			
+                                                        }}?>">
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="mr_address2"> Enter address line 2 (if any)</label>
                                         <em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
                                      </div>
-                                    </li>
-                                    <li class="frm_clr">
                                        
-                                    <div class="">
+                                                <div class="form-group">  
                                       <span class="asterisks_input">  </span>
-                                        <input tabindex="6"  type="text" name="mr_mobile" class="swifta_input" maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
-                                        <?php  ?>
+                                                    <input type="text" tabindex="6" class="form-control" name="mr_mobile"  maxlength="11" onkeypress="return isNumberKey(event)" id="mob" placeholder= "<?php echo $this->Lang['ENTER_PHONE']; ?>"
                                         value="<?php if($this->session->get('mphone_number') || isset($this->userPost['mr_mobile'])) { if($this->session->get('mphone_number')) {
                                             echo $this->session->get('mphone_number'); 
                                             } else {
                                                 echo $this->userPost['mr_mobile'];
-                                            }}?>" required autofocus /> 			
+                                                        }}?>" required autofocus>
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="mob">Mobile Number</label>  
                                         <em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
                                     </div>
-                                    </li>
 
-								<!-- 
-                                	Sector code for theme preview with the relevant JS
-                                    @Live
-                                -->
-                                <!--<li >
                                 
-				<div class="">
+<!--                                                <div class="spacing">
               
                                 <select name="sector" tabindex="7" id="sector"   class="swifta_input"  onchange="changing_sectors(this.value); get_themes(this.value);">
                                 <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
@@ -439,13 +454,18 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 								
 								<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
                                 </div>
-                                </li>-->
+                                                </div>-->
                                 
-                                	<li >
                                 
-				<div class="">
+<!--                                                    <div class="form-group">  
+                                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Placeholder">
+                                                    <span class="form-highlight"></span>
+                                                    <span class="form-bar"></span>
+                                                    <label class="label" for="exampleInputPassword1">Static label</label>        
+                                                  </div> -->
               
-                                <select name="sectorx" tabindex="7" id="sector"   class="swifta_input"  onchange="">
+                                                    <div class="form-group">
+                                                        <select name="sectorx" tabindex="7" id="sector"   class="form-control"  onchange="">
                                 <option value=""><?php echo $this->Lang["SECTOR_SEL"]; ?></option>
                                
                                 <?php foreach ($this->sector_list as $c) { ?>
@@ -455,7 +475,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 								
 								<em><?php if(isset($this->form_error['sector'])){ echo $this->form_error["sector"]; }?></em>
                                 </div>
-                                </li>
+
                                 
                                 
                                 
@@ -483,58 +503,33 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 <em ><?php if (isset($this->form_error['subsector'])) {
                                 echo $this->form_error["subsector"];
-                                } ?></em>
+                                                  } ?></em> -->  
 
-                                </li>-->
-                                <!--<li id="id_label_theme_preview" style="position:relative; margin-top: 15px;">
-                                    <label style=" color: #FFF;width: auto; position:absolute; padding: 10px; bottom: -10px; left: 0; display:inline-block; " class = "buy_it complete_order_button">Theme Preview(s)</label>
-                                    <<a href="javascript:openMainView();">
-                                        <img src="" class="preview_theme_selected" style="width:150px;height:150px;"/>
-                                    </a>
                                     
                                     
-                                </li>-->
                                 
-                                <!-- 
-                                    	Theme preview content code.
-                                        @Live
-                                    -->
-                                <!--
-                                <li>
                                 	
-                                     <div id="id_themes_container" style=" width:100%; height:auto;">
-                                      <ul id="brandcarousal" style="width:100%; background:#A61C00;">
-                                        <li style="width: 250px; height:200px; background:#06F"><img src="<?php echo PATH?>themes/default/images/sasa/brand1.jpg" alt="" title=""/><p><input name="theme" type="radio" /></p></li>
-                                      </ul>
-                                      <div class="clearfix"></div>
-                                      <a id="prev" class="prev" href="#">&lt;</a>
-                                      <a id="next" class="next" href="#">&gt;</a>
-                                       <em ><?php if (isset($this->form_error['subsector'])) {
-                                			echo $this->form_error["subsector"];
-                                		}else{ echo '';} ?></em>
-                                      </div>
+                                                  <div class="spacing" >
                                       
                                     
-                                </li>
-                                
-                                -->
                                 
                                 
                                 
                                 
-                                <li>
+                                
                                     <label>Shipping method <span style="color:red;">*</span>:</label>
+                                                    <div class="">
                     			    <table style=""> 
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
-                                        <tr><td style="width:px;"><label><input tabindex="8"  type="checkbox" name="free" value="1" 
+                                                        <tr><td style=""><label style="font-weight:normal;"><input tabindex="8"  type="checkbox" name="free" value="1" 
                                         <?php if($this->session->get('payment_acc')) { if($this->session->get('free')) { ?>
                                                               checked <?php } } else { ?> checked <?php } ?>>Free Shipping
-                                                    
-                                         </label></td><td style="width:30px; padding-left:5px;">
+                                                                </label>
+                                                    </td><td style="width:30px; padding-left:5px;">
                                                  <a href="#" class="tooltips">
                                                      <i class="fa fa-question-circle"></i>
-                                                    <span>
+                                                                <span style="font-weight:normal;">
         
         <strong>Free Shipping</strong><br />
    No shipping cost incurred by customer to ship the item.
@@ -542,21 +537,21 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                     
                                                     </a></td>
                                         <?php } else { ?>
-                                        <input tabindex="2" type="hidden" name="free" value="0" >
+                                                        <input tabindex="9" type="hidden" name="free" value="0" >
                                         <?php } if($this->flat_shipping_setting == 1){ ?>
-                                       <td ><label><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
+                                                       <td ><label style="font-weight:normal;"><input type="checkbox" name="flat" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('flat')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Flat Rate Shipping 
                                               </label></td><td> <a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
-    <span>
+                                                        <span style="font-weight:normal;">
         <strong>Flat Rate Shipping</strong><br />
         The shipping cost value is the same for all types of items.
     </span>
                                                </a></td></tr>
                                         <?php } else { ?>
-                                        <input type="hidden" name="flat" value="0" >
+                                                        <input type="hidden" name="flat" value="10" >
                                         <?php } if($this->per_product_setting == 1){ ?>
-                                        <tr><td style=""><label><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
+                                                        <tr><td style=""><label style="font-weight:normal;"><input type="checkbox" name="product" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('product')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Per product based Shipping</td><td><a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
     <span>
@@ -565,9 +560,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
     </span>
                                                </a></td></label>
                                         <?php } else { ?>
-                                        <input type="hidden" name="product" value="0" >
+                                                        <input type="hidden" name="product" value="12" >
                                         <?php } if($this->per_quantity_setting == 1){ ?>
-                                        <td><label><input type="checkbox" name="quantity" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('quantity')) { ?>
+                                                        <td><label style="font-weight:normal;"><input type="checkbox" name="quantity" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('quantity')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Per quantity based Shipping</td><td><a href="#" class="tooltips">
                                                    &nbsp;<i class="fa fa-question-circle"></i>
     <span>
@@ -576,7 +571,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
     </span>
                                                </a></td></tr>
                                         <?php } else { ?>
-                                        <input type="hidden" name="quantity" value="0" >
+                                                        <input type="hidden" name="quantity" value="13" >
                                         <?php } if($this->aramex_setting == 1){ ?>
                                         <tr><td><label><input type="checkbox" name="aramex" value="1" <?php if($this->session->get('payment_acc')) { if($this->session->get('aramex')) { ?>
                                         checked <?php } } else { ?> checked <?php } ?>>Aramex Shipping</label></td><td></td></tr>
@@ -585,25 +580,25 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <?php } ?>
                                         </label>
                                         </table>
-                                </li>
                                 
                                 
-                                    </ul>
                                     
                         </div>
                     </div>
                                                
-                     <div class="p_inner_block clearfix" style="margin-left:300px; margin-top:-50px;">
-                            <p class="merchant_intro">
+                                                    <div class="" style=" color:#737373; font-size:12px; margin-top:20px; width:100%">
+                                                       <div>
                                
                             <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a data-toggle="modal" data-target="#confirm-delete" href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
-                            <br><input tabindex="10" type="checkbox" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
+                                                       <br><input tabindex="14" type="checkbox" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
                             <p id="tcerror" style="color:red;"></p>
-                            </p>
+                                                       </div>
                         </div>       
-                    <div class="buy_it complete_order_button" style="margin-left:300px;">
+                                                    <div class="buy_it complete_order_button" style="">
                         <input tabindex="11"type="submit" id="merchant_step1" title="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" value="<?php echo $this->Lang['SAVE']; ?> & <?php echo $this->Lang['CONTINUE']; ?>" >
                     </div>
+                                                </div>
+                                        <div class="col-md-3"></div>
                             
                                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
   
@@ -997,9 +992,13 @@ Prohibited Merchant businesses and activities on ZMart include, but are not limi
  </div>
     </div>
     </div>
+                                </div>
+                            </div>
+                        </div>
     <input type="hidden" name="sector" value="33" />
     <input type="hidden" name="subsector" value="34" />
     
+                 </form>
 
 <script>
 //      $('#confirm-delete').on('show.bs.modal', function(e)
@@ -1011,7 +1010,11 @@ Prohibited Merchant businesses and activities on ZMart include, but are not limi
 //        });
     
 </script>
-               </form>
+</div>
+</div>
+</div>
+
+<!--Anthony--><!--comment here-->
                 </div>
             </div>
         </div>
@@ -1022,24 +1025,16 @@ Prohibited Merchant businesses and activities on ZMart include, but are not limi
         <div class='popup_block_theme'><?php echo new View("themes/" . THEME_NAME . '/seller/preview_theme_popup'); ?></div>
         
     
-    <!-- SELLER SIGNUP -->
- <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
- <!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
-  
- 	<script src="<?php echo PATH?>bootstrap/js/bootstrap.min.js"></script>
-  <!-- <link rel="stylesheet" href="<?php echo PATH?>themes/default/css/sasa/bootstrap.css" />
-  <link rel="stylesheet" href="<?php echo PATH?>themes/default/style.css" />-->
   
   
-  <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
-  <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
+  
   
   
   
 
   <!--<link rel="stylesheet" href="<?php echo PATH?>themes/default/css/style.css" />-->
     
-<script src="<?php echo PATH;?>js/script.js"></script>
+<!--<script src="<?php echo PATH;?>js/script.js"></script>-->
  <script>
  
 function openMainView(){
