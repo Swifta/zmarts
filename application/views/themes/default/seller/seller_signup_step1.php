@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
 <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />
 
-<script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>
+<!--<script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>-->
 
 <script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery.leanModal.min.js" ></script>
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
@@ -861,7 +861,7 @@ $('#autoUpdate').fadeOut('slow');
     
     
     </script>  -->
-    <script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery.min.js"></script>-->
     <!--<script type="text/javascript" src="<?php echo PATH; ?>js/timer/jquery-2.0.3.min.js"></script>-->
 
 

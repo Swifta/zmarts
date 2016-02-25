@@ -26,3 +26,4 @@ application/logs/*
 !themes/default/**
 /images/
 /upload/
+/cache/
