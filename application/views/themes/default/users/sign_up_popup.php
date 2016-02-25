@@ -86,7 +86,7 @@
                             <li>
                                 <label>Select a State:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                        <div id="CitySD_log_Signup">
+                                    <div id="CitySD_log_Signup">
                                       <select name="city" >
                                             <option value="-99"><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                     </select>
@@ -127,8 +127,8 @@
                         </form>
                     </div>
                     <div class="signup_social_block">                        
-                        <!--<p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>-->
-                        <!--<a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>-->
+                        <p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>
+                        <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>
 <br />
     <button class="g-signin g_connect" 
             data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"

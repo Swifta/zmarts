@@ -33,10 +33,10 @@
                 <div class="footer_aboutus footer_list">
                     <h3><?php echo $this->Lang['ABT'];?></h3>
                     <?php if(count($this->get_about_us)>0){
-						foreach($this->get_about_us as $cms){
-							if($cms->cms_url=='about-us'){?>
-<!--                    <p><?php //echo substr(html_entity_decode(strip_tags($cms->cms_desc)),0,280)."...";?></p>-->
+                            foreach($this->get_about_us as $cms){
+                                    if($cms->cms_url=='about-us'){?>
                         <p><?php echo substr(($cms->cms_desc),0,280)."...";?></p>
+                        
                     <?php }}}?>
                 </div>
                      <div class="footer_coloumn_one footer_list">

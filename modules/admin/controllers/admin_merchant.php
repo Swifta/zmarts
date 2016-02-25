@@ -1798,9 +1798,9 @@ class Admin_merchant_Controller extends website_Controller {
 											}
 											
 											$file1=array();
-											pdf::template_create($post->template,$post->subject,$post->message);
+											//pdf::template_create($post->template,$post->subject,$post->message);
 										   
-											array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
+											//array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
 											// chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
 											
 						 $status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1,1);
