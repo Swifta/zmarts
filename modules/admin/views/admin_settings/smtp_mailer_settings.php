@@ -92,7 +92,7 @@
 <!--                 <td><input type="password" name="pswd"   value="<?php //echo PASSWORD;?>" maxlength="50" />
                     <em><?php //if(isset($this->form_error["pswd"])){ echo $this->form_error["pswd"]; }?></em></td>-->
                     
-                    <td><input type="password" name="password"   value="<?php echo password;?>" maxlength="50" />
+                    <td><input type="password" name="password" value="<?php echo PASSWORD;?>" maxlength="50" />
                     <em><?php if(isset($this->form_error["password"])){ echo $this->form_error["password"]; }?></em></td>
                   </tr>
 
