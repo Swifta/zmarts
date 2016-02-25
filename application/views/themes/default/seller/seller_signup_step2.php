@@ -1450,9 +1450,17 @@ function verify_shop_name(sector){
 					 
 </script>
 
-<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.carouFredSel-6.1.0-packed.js"></script> 
+<!--<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.carouFredSel-6.1.0-packed.js"></script> 
 <script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.mousewheel.min.js"></script> 
-<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.touchSwipe.min.js"></script> 
+<script type="text/javascript"  src="<?php echo PATH?>themes/default/js/sasa/jquery.touchSwipe.min.js"></script> -->
+<!--<script type="text/javascript"  src="<?php echo PATH?>js/jquery.min.js"></script>
+<script type="text/javascript"  src="<?php echo PATH?>bootstrap/js/bootstrap.min.js"></script>-->
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 // Themes Carousal
