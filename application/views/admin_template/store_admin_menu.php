@@ -78,8 +78,8 @@ function toggle(ids){
         <a class="menu_rgt"  href="<?php echo PATH?>store-admin/manage-products.html" title="<?php echo $this->Lang["MANAGE_PRODUCTS"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["MANAGE_PRODUCTS"]; ?></span></a></li>
         <li <?php if(isset($this->archive_product)){ ?> class="menu_active"  <?php } ?> >
         <a class="menu_rgt"  href="<?php echo PATH?>store-admin/sold-products.html" title="<?php echo $this->Lang["ARCHIVE_PRODUCTS"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["ARCHIVE_PRODUCTS"]; ?></span></a></li>
-        <li <?php if(isset($this->import_product)){ ?> class="menu_active"  <?php } ?> >
-        <a class="menu_rgt"  href="<?php echo PATH?>store-admin/product-import.html" title="<?php echo $this->Lang["PRODUCT_IMPORT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["PRODUCT_IMPORT"]; ?></span></a></li>
+        <!--<li <?php if(isset($this->import_product)){ ?> class="menu_active"  <?php } ?> >
+        <a class="menu_rgt"  href="<?php echo PATH?>store-admin/product-import.html" title="<?php echo $this->Lang["PRODUCT_IMPORT"]; ?>"><span class="fund_management fl"><?php echo $this->Lang["PRODUCT_IMPORT"]; ?></span></a></li>-->
         <?php if(PRIVILEGES_GIFT==1){?>
         <?php if(PRIVILEGES_GIFT_ADD==1){?>
         <li <?php if(isset($this->add_free_gift)){ ?> class="menu_active"  <?php } ?> >
