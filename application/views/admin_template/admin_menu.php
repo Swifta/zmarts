@@ -174,9 +174,9 @@
         
         <a href="<?php echo PATH; ?>admin/manage-email-subscriber.html" class="menu_rgt" title="<?php echo $this->Lang['MANAGE_SUBSCRIBER']; ?>"><span class="customer_comments"><?php echo $this->Lang['MANAGE_SUBSCRIBER']; ?></span></a></li>
 
-		<li <?php if(isset($this->manage_referral_user)){ ?> class="menu_active"  <?php } ?> >
+		<!--<li <?php if(isset($this->manage_referral_user)){ ?> class="menu_active"  <?php } ?> >
         
-        <a href="<?php echo PATH; ?>admin/manage-referral-users.html" class="menu_rgt" title="<?php echo $this->Lang['MANA_REFE_USER']; ?>"><span class="customer_comments"><?php echo $this->Lang['MANA_REFE_USER']; ?></span></a></li>
+        <a href="<?php echo PATH; ?>admin/manage-referral-users.html" class="menu_rgt" title="<?php echo $this->Lang['MANA_REFE_USER']; ?>"><span class="customer_comments"><?php echo $this->Lang['MANA_REFE_USER']; ?></span></a></li>-->
         <?php if(ADMIN_PRIVILEGES_DAILY_NEWSLETTER){?>
         <li onclick="toggle(12)" <?php if(isset($this->user_news_letter)){ ?> class="menu_active"  <?php } ?> >
         
