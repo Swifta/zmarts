@@ -7,10 +7,15 @@
 <script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery.leanModal.min.js" ></script>
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet" href="<?php echo PATH;?>js/Popup/css/style.css" />
     <!-- Bootstrap core CSS -->
-   
+<link rel="stylesheet" href="<?php echo PATH; ?>css/netdna-bootstrap.css" />
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/style.css" />
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/reset.css" />
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/animate.css" />
+    
+    
 <!--    <link href="<?php echo PATH;?>js/login/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo PATH;?>js/login/css/style.css" rel="stylesheet">
     
@@ -144,6 +149,19 @@ document.forms[0][0].focus();
 }
 
 
+
+.sell_title{
+        font-size:16px;
+        color:#616769 !important;
+        margin-bottom: 5px;
+        font-family:sans-serif !important;
+        font-weight: 400 !important;
+    }
+
+    .sell_text{
+        font-size:13px;
+        color:#616769 !important;
+    }   
 
 
 .swifta_input  {
@@ -526,32 +544,31 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                       
                             
            
-                 <div class="container-fluid">
-                               
-                     
-                     
-  <h1 class="text-center" style="color:#A61C00 ; margin:5px 0px 10px; font-size:30px; font-weight:bold; font-family:'Actor', sans-serif;">Why you should sell on Zmart!</h1>
-  
-  <div class="row">
-      <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif; "><h4 style="color:#60532f;font-family: 'Actor', sans-serif; font-weight:  bold; ">Sell More Earn More</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/pla.png" class="img-circle" alt="Cinque Terre"> <p style="text-align:  justify;  margin-top:10px;">Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
-    <div class="col-sm-4" style="background-color:#fff; font-family: 'Actor', sans-serif; ">  <h4 style="color:#60532f;font-weight:  bold; ">Contacting buyers is a breeze</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/breeze.png" class="img-circle" alt="Cinque Terre"><p style="text-align:  justify; margin-top:10px;">Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">Low transaction fees</h4>
-<img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/lowtrans.png" class="img-circle" alt="Cinque Terre"><p style="text-align:  justify;margin-top:10px;">Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
-  </div>
-  
-   <div class="row">
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">Dedicated Support 24/7</h4>
-    <img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/supports.png" class="img-circle" alt="Cinque Terre" > <p style="text-align:  justify;margin-top:10px;">Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">You decide everything</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/whyusezmart-01n.png" class="img-circle" alt="Cinque Terre" ><p style="text-align:justify;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
-    <div class="col-sm-4" style="background-color:#fff;font-family: 'Actor', sans-serif;"><h4 style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/secure.png" class="img-circle" alt="Cinque Terre" > <p style=" text-align:  justify;margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
-  </div>
-</div>          
+                 <div class="container-fluid text-center custorm">
+                            <h1 class="animated bounce" id="htext" style="color:#A61C00 ;font-size:24px;margin-top:20px; font-family:sans-serif;">Why you should sell on Zmart!</h1>
+
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:bold; ">Sell More, Earn More</h4>
+                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/pla.png" class="img-circle" alt="Cinque Terre"> <p class="sell_text" style="text-align:  justify;  margin-top:10px;">Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
+                                <div class="col-sm-4 " style="background-color:#fff; ">  <h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Contacting buyers is a breeze</h4>
+                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/breeze.png" class="img-circle" alt="Cinque Terre"><p class="sell_text" style="text-align:  justify; margin-top:10px;">Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
+                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Low transaction fees</h4>
+                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/lowtrans.png" class="img-circle" alt="Cinque Terre"><p class="sell_text" style="text-align:  justify;margin-top:10px;">Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
+                            </div>
+
+                            <div class="row" style="margin-top:15px;">
+                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Dedicated Support 24/7</h4>
+                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/supports.png" class="img-circle" alt="Cinque Terre"> <p class="sell_text" style="text-align:  justify;margin-top:10px;">Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
+                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">You decide everything</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/whyusezmart-01n.png" class="img-circle" alt="Cinque Terre" ><p class="sell_text" style="text-align:justify;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
+                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/secure.png" class="img-circle" alt="Cinque Terre" > <p class="sell_text" style=" text-align:  justify;margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
+                            </div>
+                        </div>               
                             
 <p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
                           
                            <form name="formName" method="post"><p style="font-size:20px; margin-left:5px;margin-top: 10px; font-family: sans-serif;">Do you have a Zenith Bank account ? </p><p style="margin-left:10px;">
 <input type="radio" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" />&nbsp;<label for="priorityHigh" >Yes</label>
-<input type="radio" name="priorityLow" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
+<input type="radio" name="priorityHigh" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
  
 <br>
 <!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a>-->
@@ -627,7 +644,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     
                                <div style="margin-top: 15px; text-align: center; height: 80px;">
 <!--                                   <h3 style="font-size: larger; font-style: italic;">If you have already registered as a merchant, <a style="color:blue;" href="<?php echo PATH . 'merchant-login.html'; ?>">click here</a> to login.</h3>-->
-                                   <h3 style="font-size: larger; font-style: italic;">If you have already registered as a merchant, <a id="modal_trigger" class="btn" style="color:blue;" href="#modal">click here</a> to login.</h3>
+                                   <h3 style="font-size: larger; font-style: bold;">If you have already registered as a merchant, <a id="modal_trigger" class="btn" style="color:blue; font-style: italic" href="#modal">click here</a> to login.</h3>
 <!--                             <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>-->
                                </div>
                                             
@@ -685,16 +702,14 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 				<div class="clearfix">
 
 				</div>
-
-
-				<div class="centeredText">
+<!--				<div class="centeredText">
 					<span>Login Or Change Your Password</span>
-				</div>
+				</div>-->
 
-				<div class="action_btns">
+<!--				<div class="action_btns">
 					<div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
 					<div class="one_half last"><a href="#" id="register_form" class="btn">Forget password</a></div>
-				</div>
+				</div>-->
 			</div>
 
 			<!-- Username & Password Login form -->
@@ -716,18 +731,19 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					</div>-->
 
 					<div class="action_btns">
-						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Back</a></div>
+						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Forget Password ?</a></div>
 <!--						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>-->
 
                                                 <input type="submit" style="width:160px; margin-left: 62px;" class="one_half last swifta_button" value="LOGIN"  title="<?php echo $this->Lang['LOGIN']; ?>" />
 					</div>
 				</form>
 
-				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>
+<!--				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>-->
+                                
 			</div>
 
 			<!-- Register Form -->
-			<div class="user_register">
+			<div class="user_register" style="margin-top: -50px;">
                             <form method="post" action="<?php echo PATH;?>merchant/forgot-password.html">
 					<li>
                                     <div class=""><input type="text" name="email" value="" class="swifta_input" placeholder="Enter Your Email" maxlength="256" style="margin-top:40px" required autofocus/></div>
@@ -741,10 +757,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					<br />-->
                                         
                                         
-<!--                                <li class="mv"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php //echo $this->Lang['CAPTCHA']; ?>"  /></li>
+                                <li class="mv" style="margin-left:200px;"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php //echo $this->Lang['CAPTCHA']; ?>"  /></li>
                                 <li class="mv"><p><?php //echo $this->Lang['ETR_TXT_BLW']; ?></p></li>
                                 <li class="mv"><strong ><?php //echo $this->Lang['CAPTCHA']; ?> : </strong></li>
-                                <li>-->
+                                <li>
                                     <div class="login_capcta_bg"> <input class="swifta_input" placeholder="Enter Your Captcha" type="text" name="captcha"  maxlength="32" required autofocus/> </div>
                                     <div class="captcha_error_msg"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></div>
                                     <div class="captcha_error_msg"><em><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></em></div>
@@ -771,7 +787,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					</div>-->
 
 					<div class="action_btns">
-						<div class="one_half"><a id="register_form" href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+						<div class="one_half"><a  href="#" style="width:30%; margin-left: 200px;color:#fff;background-color:#A61C00 ;" class="btn back_btns swifta_input"><i class="fa fa-angle-double-left"></i> Back</a></div>
 <!--						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>-->
                                                 <input class="swifta_button" type="submit" style="width:160px; margin-left: 62px;" value="Submit" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
 					</div>
@@ -802,10 +818,27 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 		// Going back to Social Forms
 		$(".back_btn").click(function(){
-			$(".user_login").hide();
+//			$(".user_login").hide();
+//			$(".user_register").hide();
+//			$(".social_login").show();
+                        $(".user_login").hide();
+			$(".user_register").show();
+			$(".social_login").show();
+                        
+			$(".header_title").text('Forget Password');
+			return false;
+		});
+                
+                
+                $(".back_btns").click(function(){
+//			$(".user_login").hide();
+//			$(".user_register").hide();
+//			$(".social_login").show();
+                        $(".user_login").show();
 			$(".user_register").hide();
 			$(".social_login").show();
-			$(".header_title").text('Login');
+                        
+			$(".header_title").text('Merchant Login');
 			return false;
 		});
 
@@ -898,22 +931,34 @@ $('#autoUpdates').hide('slow') //&& $('#g').fadeIn('slow') ;
          {    swal({   
        title: "PLEASE NOTE",  
 text: "YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON ZMART. "+
-        "KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES",  
+        "KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES<br>\n\
+        <a href='http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf' target='_blank' class='btn btn-info'>DOWNLOAD A/C OPENING FORM</a>",  
 imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
 //imageSize: '100x180',
+//text:"<a href='http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf' target='_blank' class='btn btn-info'>DOWNLOAD A/C OPENING FORM</a>",
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "VIEW A LIST OF BRANCHES",   
-cancelButtonText: "DOWNLOAD A/C OPENING FORM",   
+//cancelButtonText: "DOWNLOAD A/C OPENING FORM",
+html:true,
 closeOnConfirm: false,   
-closeOnCancel: false}, 
+closeOnCancel: true}, 
 function(isConfirm){ 
     if (isConfirm) {     
-        location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1"  
-    } else {     
-      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
-        location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
-   }
+        //location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1" 
+        window.open(
+  "http://www.zenithbank.com/ViewAllBranches.aspx?id=1",
+  '_blank' // <- This is what makes it open in a new window.
+);
+    }
+//    else {     
+//      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
+//        ///location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+//        window.open(
+//  "http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf",
+//  '_blank' // <- This is what makes it open in a new window.
+//);
+//   }
 
      
  
@@ -1044,22 +1089,33 @@ $('#autoUpdate').hide('slow') //&& $('#g').fadeIn('slow') ;
          {    swal({   
        title: "PLEASE NOTE",  
 text: "YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON ZMART. "+
-        "KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES",  
+        "KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES\n\<br>\n\
+<a href='http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf' target='_blank' class='btn btn-info'>DOWNLOAD A/C OPENING FORM</a>",  
 imageUrl:src="<?php echo PATH; ?>custom/images/ZenithBanklogo.jpg",
 //imageSize: '100x180',
 showCancelButton: true,
 confirmButtonColor: "#DD6B55",   
 confirmButtonText: "VIEW A LIST OF BRANCHES",   
-cancelButtonText: "DOWNLOAD A/C OPENING FORM",   
+//cancelButtonText: "DOWNLOAD A/C OPENING FORM",   
+html:true,
 closeOnConfirm: false,   
-closeOnCancel: false}, 
+closeOnCancel: true}, 
 function(isConfirm){ 
     if (isConfirm) {     
-        location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1"  
-    } else {     
-      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
-        location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
-   }
+       // location.href ="http://www.zenithbank.com/ViewAllBranches.aspx?id=1" 
+       window.open(
+  "http://www.zenithbank.com/ViewAllBranches.aspx?id=1",
+  '_blank' // <- This is what makes it open in a new window.
+);
+    } 
+//    else {     
+//      //swal("Cancelled", "Please, come back and complete your merchant sign up" , "error" );
+//        ///location.href ="http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf"
+//         window.open(
+//  "http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf",
+//  '_blank' // <- This is what makes it open in a new window.
+//);
+//   }
 
      
  
@@ -1101,7 +1157,8 @@ function validation_failed(){
 			if (isConfirm) {     
 				
 			} else {     
-			  location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
+			//  location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
+                         location.href ="<?php echo PATH; ?>";
 		   }
 
    

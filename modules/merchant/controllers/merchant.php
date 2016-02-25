@@ -4184,7 +4184,7 @@ class Merchant_Controller extends website_Controller {
 						
 						common::message(1,$this->Lang["PWD_RESET"]);
 						url::redirect(PATH."merchant-login.html");
-
+                                                
 						}
 						elseif($status == -1){
 							$this->email_error = $this->Lang["INV_EMAIL"];
@@ -4207,7 +4207,7 @@ class Merchant_Controller extends website_Controller {
 		}
 		$this->template->content=new View("merchant/forgot_pass");
 	}
-
+  
 	/** DEALS DASHBOARD   **/
 
 	public function dashboard_deals()
