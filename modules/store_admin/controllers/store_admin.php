@@ -593,7 +593,6 @@ class Store_admin_Controller extends website_Controller
 				'style'          => 'digg',
 				'auto_hide' => TRUE
 		));
-
 		$this->all_coupon_list = $this->merchant->get_coupon_list($this->pagination->sql_offset, $this->pagination->items_per_page ,$this->input->get("coupon_code"), $this->input->get('name'),0);
 
 		if($search == 'all'){
@@ -1416,9 +1415,7 @@ class Store_admin_Controller extends website_Controller
 			));
 		$this->search = $this->input->get();
 		$this->search_key = arr::to_object($this->search);
-
 		$this->shipping_list = $this->merchant->get_shipping_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("search"),"",0);
-
 		if($search){ // For Export all in CSV format
 			$this->shipping_list = $this->merchant->get_shipping_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("search"),"",1);
 		}
@@ -2571,7 +2568,6 @@ class Store_admin_Controller extends website_Controller
 			'style'          => 'digg',
 			'auto_hide'      => TRUE
 		));
-
                 $this->product_transaction_list = $this->merchant->get_transaction_product_list($type, $this->search_key,$this->pagination->sql_offset, $this->pagination->items_per_page,2,$this->type,$this->sort,"",0,$this->today,$this->startdate,$this->enddate);
 
                 if($search == 'all'){ // Export in CSV format
@@ -4047,6 +4043,8 @@ class Store_admin_Controller extends website_Controller
 						unlink($ads3);
 					}
 					$modules_name = 'stores';
+                                        $settings = new Settings_Model();
+                                        $subsector_ids = $settings->get_all_subsector_ids();
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));

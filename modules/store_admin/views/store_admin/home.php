@@ -278,7 +278,7 @@ foreach($this->store_details as $deta){
                        </div>
                        
                        <a href="<?php echo PATH?>store-admin/manage-deals.html" title="<?php echo $this->Lang['ACTIVE_DEALS']; ?>">
-                       <?php echo $this->Lang["ACTIVE_DEALS"]; ?>
+                        <?php echo $this->Lang["ACTIVE_DEALS"]; ?>
                        <span>(<?php echo $c["active_deals"]?>)</span>
                        </a> 
                       
@@ -465,12 +465,12 @@ foreach($this->store_details as $deta){
                       <div class="dash_act_img">
                     
                      <a class="dash_icons" href="<?php echo PATH?>store-admin-auction/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="<?php echo $this->Lang['SHIP_DEL']; ?>"/>
+                     <img src="<?php echo PATH ?>images/shipping_delivery.png" class="image" alt="Auction <?php echo $this->Lang['SHIP_DEL']; ?>"/>
                       </a>
                        </div>
                        
-                       <a href="<?php echo PATH?>store-admin-auction/shipping-delivery.html" title="<?php echo $this->Lang['SHIP_DEL']; ?>">
-                       <?php echo $this->Lang['SHIP_DEL']; ?>
+                       <a href="<?php echo PATH?>store-admin-auction/shipping-delivery.html" title="Auction <?php echo $this->Lang['SHIP_DEL']; ?>">
+                       Auction <?php echo $this->Lang['SHIP_DEL']; ?>
                        <span>(<?php echo $c["auction_shipping"]?>)</span>
                        </a> 
                       
@@ -484,7 +484,7 @@ foreach($this->store_details as $deta){
                       <div class="dash_act_img">
                     
                      <a class="dash_icons" href="<?php echo PATH?>store-admin-auction/all-transaction.html" title="<?php echo $this->Lang['AUCTION']; ?> <?php echo $this->Lang['TRANS']; ?>">
-                     <img src="<?php echo PATH ?>images/balance.png" class="image" alt="<?php echo $this->Lang['AUCTION']; ?> <?php echo $this->Lang['TRANS']; ?>"/>
+                     <img src="<?php echo PATH ?>images/balance.png" class="image" alt="<?php echo $this->Lang['AUCTION']; ?>  <?php echo $this->Lang['TRANS']; ?>"/>
                       </a>
                        </div>
                        

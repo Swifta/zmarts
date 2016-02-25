@@ -281,6 +281,7 @@
                        <legend><?php echo $this->Lang['EDIT_MODE']; ?></legend>
                 <table>
                         <tr> 
+                            <input type="hidden" name="merchant_id" value="<?php echo $this->user_id; ?>" />
                                 <td><label><?php echo $this->Lang["FIRST_NAME"]; ?></label><span>*</span></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="firstname" value="<?php echo $u->firstname;?>"/>
@@ -527,7 +528,6 @@
                                 <td><input type="checkbox" value="1" <?php if($mo->privileges_gift_edit == "1" ){  ?>checked = "checked" <?php } ?>name="privileges_gift_edit" class="privileges_gift"></td>
                                 <td><input type="checkbox" value="1" <?php if($mo->privileges_gift_block == "1" ){  ?>checked = "checked" <?php } ?>name="privileges_gift_block" class="privileges_gift"></td>
                                  </tr>
-                                 <input type="hidden" name="merchant_id" value="<?php echo $this->user_id;?>">
                                  
                                 
                                  

@@ -135,17 +135,22 @@ class Merchant_Controller extends website_Controller {
                 
                 
 		$this->store_data = $this->merchant->get_store_data();
+                //var_dump($this->store_data);die;
                 foreach($this->store_data as $value){
+                    //var_dump($value);die;
                     $this->session->set("store_name_swifta", $value->store_name);
-                    $this->session->set("store_name_id", $value->store_subsector_id);
+                    //$this->session->set("store_name_id", $value->store_subsector_id);
+                    $this->session->set("store_name_id", $value->store_id);
                     //echo $value->store_subsector_id; die;
+                    //$this->session->get("store_name_id")
                 }
                 
 		if($count == 1){
-		$this->template->content = new View("merchant/home");
+                    //$this->template->content = new View("merchant/home_new");
+                    $this->template->content = new View("merchant/home");
 		} else {
                     
-		$this->template->content = new View("merchant/home_new");
+                    $this->template->content = new View("merchant/home_new");
 		}
 		
 		$this->template->title = $this->Lang["MERCHANT_DASHBOARD"];
@@ -4167,7 +4172,7 @@ class Merchant_Controller extends website_Controller {
 						$from = CONTACT_EMAIL;  
 						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
 						$this->name =$name;
-						$this->pswd = $pswd;
+						$this->password = $pswd;
 						$this->email = $email;
 						$message = new View("themes/".THEME_NAME."/mail_template");
 

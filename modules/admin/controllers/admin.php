@@ -1417,7 +1417,7 @@ class Admin_Controller extends website_Controller
 		$this->city_list = $this->users->getCityListOnly();
 
 		$this->users_list = $this->admin->get_referral_users_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("name"), $this->input->get('email'),0);
-
+                var_dump($this->users_list);die;
 		if($search =='all'){  // for export all
 			$this->users_list = $this->admin->get_referral_users_list($this->pagination->sql_offset, $this->pagination->items_per_page,$this->input->get("name"), $this->input->get('email'),1);
 		}
