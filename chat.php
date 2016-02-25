@@ -28,7 +28,7 @@ define ('DBNAME','Emarketplace');
 define ('DBPATH','localhost');
 define ('DBUSER','root');
 define ('DBPASS','mysql');
-define ('DBNAME','chatapp');
+define ('DBNAME','zmart_purged');
 
 ?>
 
