@@ -191,8 +191,9 @@ class Payment_product_Controller extends Layout_Controller {
                     }
 	        $this->session->set('count',$count_value);
 	        $this->session->set('product_cart_id'.$product_cart_id,$product_cart_id);
-	        common::message(1, $this->Lang['CART_PRODUCT_SUCCESS']);
-	       
+	        common::message(1, $this->Lang['CART_PRODUCT_SUCCESS']); //will comment ths out
+                $this->session->set('just_added_cart', true);
+                $this->session->set('item_description', str_replace("-", " ", $url_title));
 	        url::redirect( PATH .$store_url_title. '/product/' . $deal_key . '/' . $url_title . '.html');
 	}
 

@@ -160,12 +160,12 @@
 <?php } ?>
 
 
-
-
 <script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/toastr/jquery.jnotify.js"></script> 
+<script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/zebra_dialog.js"></script>
+<link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/flat/zebra_dialog.css" type="text/css">
 <script type="text/javascript">
 <?php
- 
+ $display_popup = "";
         if($this->response != "" || $this->error_response != ""){
             $success_alert = false;
             $msg_to_alert = $this->error_response;
@@ -177,8 +177,10 @@
 				
             }
 			
-			
-		
+	$display_popup = $this->session->get("just_added_cart");//display cart popup or not	
+	$this->session->delete("just_added_cart");
+        
+        
     ?>
 
 	
@@ -245,9 +247,7 @@
 
         });
         <?php if($success_alert){ ?>
-		
-        jNotify.setTheme('success');
-		
+            jNotify.setTheme('success');		
         <?php } ?>
     });
     <?php
@@ -256,15 +256,34 @@
 	$this->error_response = null;
 	
         }
+        
+        if($display_popup){
+    ?>
+$(function() {
+    $.Zebra_Dialog('<strong><?php echo $this->session->get('item_description'); ?></strong> was' +
+        ' added to your cart successfully!', {
+        'type':     'confirmation',
+        //'title':    'Item successfully added to your cart',
+        'buttons':  ['Checkout', 'Continue Shopping'],
+        'modal': true,
+        'auto_close': 30000,
+        'buttons':  [
+                        {caption: 'Checkout', callback: function() { location.href='<?php echo PATH; ?>cart.html'; }},
+                        {caption: 'Continue Shopping', callback: function() { location.href='<?php echo PATH; ?>'; }}
+                    ]
+    });
+});
+    <?php
+        }
     ?>
 				
-			</script> 
+</script>
+
 <script type="text/javascript">
 $(window).load(function() {
-					$(".wloader_img").fadeOut("slow");
-					$(".wloader_img").css("visibility:visible");
-				});
-				
+    $(".wloader_img").fadeOut("slow");
+    $(".wloader_img").css("visibility:visible");
+});			
 </script>
 
 <script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/chat/chat.js"></script>

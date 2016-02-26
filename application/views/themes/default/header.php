@@ -1433,20 +1433,20 @@ function lookup1(inputString) {
 $("#cart_window1").mouseover(function(){
 
 	var url=Path+'/payment_product/cart_window_products';
-			  $.ajax(
-			{
-				type:'POST',
-				url:url,
-				cache:false,
-				async:true,
-				global:false,
-				dataType:"html",
-				success:function(check)
-				{
-					$(".cart_window_products1").css({"display":"block"});
-					$(".cart_window_products1").html(check);
-				}
-			});
+          $.ajax(
+        {
+                type:'POST',
+                url:url,
+                cache:false,
+                async:true,
+                global:false,
+                dataType:"html",
+                success:function(check)
+                {
+                        $(".cart_window_products1").css({"display":"block"});
+                        $(".cart_window_products1").html(check);
+                }
+        });
 });
 
 $("#cart_window1").mouseout(function(){

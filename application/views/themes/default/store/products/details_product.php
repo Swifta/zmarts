@@ -1,7 +1,6 @@
 <?php 
-	
-		$nosize = "";
-	?>
+	$nosize = "";
+?>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#messagedisplay1').hide();
