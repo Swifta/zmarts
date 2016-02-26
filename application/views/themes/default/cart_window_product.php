@@ -49,7 +49,7 @@
 </div>
         <?php if(count($this->cart_window_product_details)>0){?>
 
-<a class="btn btn-warning" style="background: red; padding:8px 25px; margin-right: 20px" <?php if($this->UserID){ ?>  href="<?php echo PATH ?>cart.html"  <?php } else { ?> href="javascript:showlogin();" <?php } ?>>Checkout</a>
+<a class="btn btn-warning" style="background: red; padding:8px 25px; float:left;" <?php if($this->UserID){ ?>  href="<?php echo PATH ?>cart.html"  <?php } else { ?> href="javascript:showlogin();" <?php } ?>>Checkout</a>
 <a class="btn btn-info" style="background: #144f5d; padding:8px 25px; float: right;" href="<?php echo PATH ?>">Continue Shopping</a>
 
         <?php } ?>
