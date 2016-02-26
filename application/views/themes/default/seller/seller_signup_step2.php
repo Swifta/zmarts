@@ -325,8 +325,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 <div class="">
                                  
                                    <?php 
-      $this->session->set("merchant_reg_nuban", "8025481373");
-      $this->session->set("firstname", "Hello World"); ?>
+//      $this->session->set("merchant_reg_nuban", "8025481373");
+//      $this->session->set("firstname", "Hello World"); 
+      ?>
 									
                                             
 									

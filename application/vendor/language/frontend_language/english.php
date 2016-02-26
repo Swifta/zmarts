@@ -850,7 +850,7 @@ $content_text = array(
 
 "ALREADY_A_MEMBER"=>"Already a member?",
 
-"USER_NT_EX" =>"User not exist",
+"USER_NT_EX" =>"User does not exist",
 
 "DONT_HAV" => "Don’t have an account yet?",
 
