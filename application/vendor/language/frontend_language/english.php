@@ -301,7 +301,7 @@ $content_text = array(
 
 "SHOP_BY_CATE" => "Shop by category",
 
-"NEAR_MAP" => "Near me map",
+"NEAR_MAP" => "Near map",
 
 "BLOG" => "Blog",
 
