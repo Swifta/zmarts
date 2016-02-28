@@ -502,10 +502,10 @@ class Admin_merchant_Model extends Model
                     $result = $this->db->update("users", array("user_status" => $status), array("user_id" => $c->store_admin_id));
                 }
                 //echo count($result); die;
-                if(count($result)){
+//                if(count($result)){
                     $this->auditor = new Auditor_Model();
                     $this->auditor->log($this->user_id, $uid, $event);
-                }
+//                }
                 return count($result);
         }
     
@@ -722,10 +722,10 @@ class Admin_merchant_Model extends Model
                             "user_status" => 0), array("user_id" =>$merchant_id));
                     //when merchant is successfully approved or disapproved. 
                     //store it in audit trail
-                        if(count($result)){
+                        //if(count($result)){
                             $this->auditor = new Auditor_Model();
                             $this->auditor->log($this->user_id, $merchant_id, $event);
-                        }
+                        //}
 			return count($result);
 		}
 		

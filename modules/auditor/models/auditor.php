@@ -19,8 +19,10 @@ class Auditor_Model extends Model
 	}
         
         public function log($admin_id, $user_id, $event){
-            $this->db->insert("audit", array("timing"=>time(), "admin_id"=>$admin_id, 
+            $result = $this->db->insert("audit", array("timing"=>time(), "admin_id"=>$admin_id, 
                 "user_id"=>$user_id, "event"=>$event));
+            //var_dump($result);die;
+            return count($result);
         }
         
         public function fetchUserLog($user_id){
