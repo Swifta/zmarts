@@ -51,10 +51,10 @@
                         a++;
                 }
         }
-        if(a == rdbtn.length) {
+        /*if(a == rdbtn.length) {
                 alert("Please choose a shipping method.");
                 return false;
-        } 
+        } */
 
 
          if ((document.getElementById('perquantity').checked)) {   
@@ -232,20 +232,7 @@ function toggle() {
 
 <script type="text/javascript">
 function validate() {
-        var a = 0, rdbtn=document.getElementsByName("shipping")
-        //alert(rdbtn);
-        for(i=0;i<rdbtn.length;i++) {
-        if(rdbtn.item(i).checked == false) {
-        a++;
-        }
-        }
-        if(a == rdbtn.length) {
-        alert("Please select your gender");
-        //document.getElementById("gen").style.border = "2px solid red";
-        return false;
-        } else {
-        //document.getElementById("gen").style.border = "";
-        }
+       
 }
 </script>
 
@@ -486,27 +473,32 @@ function validate() {
                         <em><?php if(isset($this->form_error["description"])){ echo $this->form_error["description"]; }?></em>
                     </td>
                 </tr>
-            <tr>
+            
+                 
+                 
+			    <tr>
                     <td><label><?php echo $this->Lang['WNT_ADD_ATTR']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="radio" name="attr_option" onclick="shospe()" checked value="0"> <?php echo $this->Lang['NO']; ?>
-                        <input type="radio" name="attr_option" value="1"  onclick="shospe()"> <?php echo $this->Lang['YES']; ?>
+                        <input type="radio" id="id_spec_no" name="attr_option" onclick="shospe()" checked value="0"> <?php echo $this->Lang['NO']; ?>
+                        <input type="radio" id="id_spec_yes" name="attr_option" checked  value="1"  onclick="shospe()"> <?php echo $this->Lang['YES']; ?>
                         <p class="guide"><?php echo $this->Lang['MENTION_SPECIFICATION'];?></p>
                        
                     </td>
                  </tr>
-			
-				 <tr class="spe_show" >
+				<tr class="spe_show" >
                     <td><label><?php echo $this->Lang["ENTRY_ATTRIBUTE"]; ?></label></td>
                     <td></td>
                     <td><label style="color:green">Click <a href="<?php echo PATH; ?>merchant/add-attribute.html" target="_blank">here</a> to add More Specifications<?php /*echo $this->Lang["TXT_LABEL"];*/ ?></label>  </td>
 			   </tr>
-					<tr class="atrmain spe_show"> 
+               	<?php if(isset($this->form_error["attribute"])){?><tr class="spe_show"><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["attribute"]; ?></em></td></tr><?php }?>
+                
+                
+				<tr class="atrmain spe_show"> 
 					<td></td>
-					<td></td>
+					<td><?php ?></td>
                     <td>
-                       <select name="attribute[]">
+                       <select name="attribute[]" id="id_sel_spec" class = "sel_spec_s" onchange="check_dup_spec(this);">
                        <option value=""><?php echo $this->Lang['SEL_SPECI']; ?></option>
 						 <?php
 						 $attr= $this->all_attributes;
@@ -534,8 +526,11 @@ function validate() {
 						  <?php
 						 }
 						 ?>
+                         
+                         
 						</select> 
-                        <input type="text" class="spec_attrib" name="attribute_value[]" value=""> 
+                        
+                       <input type="text" class="spec_attrib" name="attribute_value[]" value="<?php if(isset($this->attr_q_arr[0])){echo htmlspecialchars($this->attr_q_arr[0],ENT_QUOTES,"UTF-8");}?>"> 
                     </td>
                 </tr>
                 <tr id="btns" class="spe_show" >
@@ -550,7 +545,7 @@ function validate() {
                     <td><label><?php echo $this->Lang['DEL_DAYS']; ?> </label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="text" name="delivery_days" maxlength="255"  value="" />
+                        <input type="text" name="delivery_days" maxlength="255"  value="<?php if(!isset($this->form_error["delivery_days"])&&isset($this->userPost["delivery_days"])){ echo $this->userPost["delivery_days"]; }?>" />
                         
                         <em><?php if(isset($this->form_error["delivery_days"])){ echo $this->form_error["delivery_days"]; }?></em>
                     </td>
@@ -569,7 +564,11 @@ function validate() {
                     <td> 
                         <!--<input type="text" name="Delivery_value[]" value=""> -->
                     
-                        <textarea name="Delivery_value[]" rows="4"></textarea>
+                        <textarea name="Delivery_value[]" rows="4"><?php if(isset($this->userPost["Delivery_value"]) && !isset($this->form_error["Delivery_value"]) && count($this->userPost["Delivery_value"]) > 0){ 
+						foreach($this->userPost['Delivery_value'] as $p){
+								echo $p;
+							}
+						 }?></textarea>
                     <em><?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?></em>
                       </td>
 		    </tr>                 
@@ -604,7 +603,7 @@ function validate() {
                     <td><label><?php echo $this->Lang["SEL_SHOP"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <select name="stores">
+                        <select name="stores" id="id_store_s">
                         <option value=""><?php echo $this->Lang["SELECT_Y_SHOP"]; ?></option>
 							<?php foreach($this->shop_list as $c){ ?>
 								<option value="<?php echo $c->store_id; ?>" <?php if(isset($_POST['stores'])){ if($_POST['stores'] == $c->store_id){ ?> selected <?php } } ?>><?php echo $c->store_name; ?></option>
@@ -630,25 +629,26 @@ function validate() {
                                 <td>
                                 <table style="border: 1px solid #999; border-collapse: collapse; width:242px;">
                                         <?php if($this->free_shipping_setting == 1 && $free == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="1" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 1){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)" >Free Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="1" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores']) && isset($_POST['shipping'])){ if($_POST['shipping'] == 1){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)" >Free Shipping</td></tr>
                                         <?php } if($this->flat_shipping_setting == 1 && $flat == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="2" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 2){ ?> checked <?php } } ?>onchange="return checkedretailprice(this)">Flat Rate Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="2" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])&& isset($_POST['shipping'])){ if($_POST['shipping'] == 2){ ?> checked <?php } } ?>onchange="return checkedretailprice(this)">Flat Rate Shipping</td></tr>
                                          <?php } if($this->per_product_setting == 1 && $per_product == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="3" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 3){ ?> checked <?php } } ?>id="perproduct" onchange="return checkedwholesaleprice(this)" >Per product base Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="3" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])&& isset($_POST['shipping'])){ if($_POST['shipping'] == 3){ ?> checked <?php } } ?>id="perproduct" onchange="return checkedwholesaleprice(this)" >Per product base Shipping</td></tr>
                                          <?php } if($this->per_quantity_setting == 1 && $per_quantity == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="4" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 4){ ?> checked <?php } } ?>id="perquantity" onchange="return checkedwholesaleprice(this)">Per quantity base Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="4" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])&& isset($_POST['shipping'])){ if($_POST['shipping'] == 4){ ?> checked <?php } } ?>id="perquantity" onchange="return checkedwholesaleprice(this)">Per quantity base Shipping</td></tr>
                                          <?php } if($this->aramex_setting == 1 && $aramex == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="5" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){ if($_POST['shipping'] == 5){ ?> checked <?php } } ?>id="productaramex" onchange="return checkedaramex(this)">Aramex Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="5" <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])&& isset($_POST['shipping'])){ if($_POST['shipping'] == 5){ ?> checked <?php } } ?>id="productaramex" onchange="return checkedaramex(this)">Aramex Shipping</td></tr>
                                         <?php }  if($submit == "0"){ ?>
                                         <tr><td><label><font size="2" color="red"><?php echo $this->Lang["PLZ_CONT_ADMIN_SHIPP_METHODS"]; ?></font> </label></td></tr>
                                         <?php } ?>
                                           </table>
+                                <em><?php if(isset($this->form_error["shipping"])){ echo $this->form_error["shipping"]; }?></em>
                                           <p class="guide"><?php echo $this->Lang['MENTION_SHIPPING'];?></p>
                                           
                                 </td>
                         </tr> 
                         
-                        <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])){  ?>
+                        <?php if(!isset($this->form_error['stores']) && isset($_POST['stores'])&& isset($_POST['shipping'])){  ?>
                 
                 <?php if(($_POST['shipping'] == 4) || ($_POST['shipping'] == 3)) { ?>
                         <script type="text/javascript">
@@ -791,7 +791,7 @@ function validate() {
                        </tr>
                        
                        
-                       <?php if(isset($this->form_error["size"])){?><tr><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["size"]; ?></em></td></tr><?php }?>
+                       <?php if(isset($this->form_error["size"])){?><tr class="size_show"><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["size"]; ?></em></td></tr><?php }?>
                         <tr class="display_div">
                                         <td><label><?php echo $this->Lang['QUAN']; ?></label><span>*</span></td>
                                         <td><label>:</label></td>
@@ -1239,18 +1239,34 @@ var totrow=  <?php echo count($this->product_attributes);?>;
  
 var sel= '<?php echo $append_select;?>';
  
-function addAttribute() {
+function addAttribute(spec_id, spec_val) {
  var addedrow = $('.atrmain').length;
 
  if (totrow > addedrow){
+	 	 if(spec_id || spec_val){
+			 html  = '<tr class="atrmain" id="row-'+addedrow+'">  <td></td><td></td> <td> ';
+		 html += '<select name="attribute[]" id="r-'+addedrow+'" class = "sel_spec_s" onchange="check_dup_spec(this);" >';
+		 html += sel;
+		 html += '  </select> ';
+	
+		 html+= ' <input class="spec_attrib" type="text" name="attribute_value[]" value="'+spec_val+'">   ' ;
+		html+= '<input type="button" name="remove" onclick="RemoveAttribute('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		
+		 }else{
 		 html  = '<tr class="atrmain" id="row-'+addedrow+'">  <td></td><td></td> <td> ';
-		 html += '<select name="attribute[]">';
+		 html += '<select name="attribute[]" id="r-'+addedrow+'" class = "sel_spec_s" onchange="check_dup_spec(this);" >';
 		 html += sel;
 		 html += '  </select> ';
 		 html+= ' <input class="spec_attrib" type="text" name="attribute_value[]" value="">   ' ;
 		html+= '<input type="button" name="remove" onclick="RemoveAttribute('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		
+		 }
 		 
 		 $('#btns').before(html);
+		 if(spec_id){
+		 	$('#r-'+addedrow).val(spec_id);
+		 }
+		 
 	   }else{
 		alert("Maximum limit reached");
 		return false;
@@ -1340,10 +1356,10 @@ function gift()
 				a++;
 			}
         }
-        if(a == rdbtn.length) {
+       if(a == rdbtn.length) {
 			alert("Please choose a shipping method.");
 			return false;
-        } 
+        }
 
 
 		if ((document.getElementById('perquantity').checked)) {   
@@ -1524,5 +1540,48 @@ $(document).ready(function(e) {
 			
 	<?php }?>
 	
+});
+</script>
+
+
+
+<script type="text/javascript">
+
+function check_dup_spec(obj){
+	var spec = $(obj);
+	var specs = $('.sel_spec_s');
+	for(i = 0; i < specs.length; i++){
+		if($(spec).attr('id') == $(specs[i]).attr('id'))
+			continue;
+		if($(spec).val() == $(specs[i]).val()){
+			alert("Specification already selected. Choose a unique one please.");
+			$(spec).val('');
+			return false;
+		}
+	}
+	
+}
+
+<!-- Handling specification -->
+<!-- @Live -->
+
+$(document).ready(function(e) {
+	$('#id_spec_no').trigger('click');
+	shospe();
+	<?php if(isset($this->attr_arr)){?>
+    <?php if(isset($this->userPost['attr_option']) && $this->userPost['attr_option'] == '0'){?>
+		$('#id_spec_no').trigger('click');
+		shospe();
+	<?php }else{?>
+		$('#id_spec_yes').trigger('click');
+		shospe();
+	<?php if(isset($this->attr_arr[0])){?>
+			$('#id_sel_spec').val("<?php echo htmlspecialchars( $this->attr_arr[0],ENT_QUOTES,"UTF-8"); ?>");
+	<?php }?>
+	<?php for($i = 1; $i < count($this->attr_arr); $i++){?>
+		addAttribute("<?php echo htmlspecialchars($this->attr_arr[$i],ENT_QUOTES,"UTF-8"); ?>", "<?php echo htmlspecialchars($this->attr_q_arr[$i],ENT_QUOTES,"UTF-8"); ?>");
+	<?php }?>
+	<?php }?>
+	<?php } ?>
 });
 </script>

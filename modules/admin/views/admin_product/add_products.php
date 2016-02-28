@@ -19,10 +19,10 @@
                                 }
                         }
 						
-						if(a == rdbtn.length) {
-                                alert("Please select a shipping method.");
+						/*if(a == rdbtn.length) {
+                               // alert("Please select a shipping method.");
                                 return false;
-                        } 
+                        } */
 						
                         
                         
@@ -421,22 +421,24 @@ function toggle() {
                     <td><label><?php echo $this->Lang['WNT_ADD_ATTR']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                        <input type="radio" name="attr_option" onclick="shospe()" checked value="0"> <?php echo $this->Lang['NO']; ?>
-                        <input type="radio" name="attr_option" value="1"  onclick="shospe()"> <?php echo $this->Lang['YES']; ?>
+                        <input type="radio" name="attr_option" id="id_spec_no" onclick="shospe()" checked value="0"> <?php echo $this->Lang['NO']; ?>
+                        <input type="radio" name="attr_option" id="id_spec_yes" value="1"  onclick="shospe()"> <?php echo $this->Lang['YES']; ?>
                     </td>
                  </tr>
                  
 				
-                         <tr class="spe_show" >
+                        <!-- <tr class="spe_show" >
                     <td><label><?php echo $this->Lang["ENTRY_ATTRIBUTE"]; ?></label></td>
                     <td></td>
 					<td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label>   ( <label><?php echo $this->Lang['MORE_CUS_SPECIFI']; ?>  <a href="<?php echo PATH; ?>admin/manage-attribute.html"> <?php echo $this->Lang['ADD']; ?></a></label> )</td>
-			   </tr>
+			   </tr>-->
+               	<?php if(isset($this->form_error["attribute"])){?><tr class="spe_show"><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["attribute"]; ?></em></td></tr><?php }?>
+                
 					<tr class="atrmain spe_show"> 
 					<td></td>
 					<td></td>
                     <td>
-                       <select name="attribute[]">
+                       <select name="attribute[]" id="id_sel_spec" class = "sel_spec_s" onchange="check_dup_spec(this);">
                        <option value=""><?php echo $this->Lang['SEL_SPECI']; ?></option>
 						 <?php
 						 $attr= $this->all_attributes;
@@ -468,7 +470,7 @@ function toggle() {
 						 }
 						 ?>
 						</select> 
-                        <input type="text" name="attribute_value[]" value=""> 
+                        <input type="text" class="spec_attrib" name="attribute_value[]" value="<?php if(isset($this->attr_q_arr[0])){echo htmlspecialchars($this->attr_q_arr[0],ENT_QUOTES,"UTF-8");}?>"> 
                     </td>
                 </tr>
                 <tr id="btns" class="spe_show" >
@@ -657,7 +659,11 @@ function toggle() {
                     <td>
                         <!--<input type="text" name="Delivery_value[]" value=""> -->
                     
-                        <textarea name="Delivery_value[]" rows="4"></textarea>
+                        <textarea name="Delivery_value[]" rows="4"><?php if(isset($this->userPost["Delivery_value"]) && !isset($this->form_error["Delivery_value"]) && count($this->userPost["Delivery_value"]) > 0){ 
+						foreach($this->userPost['Delivery_value'] as $p){
+								echo $p;
+							}
+						 }?></textarea>
                     <em><?php if(isset($this->form_error["Delivery_value"])){ echo $this->form_error["Delivery_value"]; }?></em>  
                     </td>
 		    </tr>                 
@@ -742,20 +748,21 @@ function toggle() {
                                 <td id="change_shipping" >
                                 <table style="border: 1px solid #999; border-collapse: collapse; width:242px;">
                                         <?php if($this->free_shipping_setting == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="1" <?php if(!isset($this->form_error['users']) && isset($_POST['users'])){ if($_POST['shipping'] == 1){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)">Free Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="1" <?php if(!isset($this->form_error['users']) && isset($_POST['users']) && isset($_POST['shipping'])){ if($_POST['shipping'] == 1){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)">Free Shipping</td></tr>
                                         <?php } if($this->flat_shipping_setting == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="2" <?php if(!isset($this->form_error['users']) && isset($_POST['users'])){ if($_POST['shipping'] == 2){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)">Flat Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="2" <?php if(!isset($this->form_error['users']) && isset($_POST['users']) && isset($_POST['shipping'])){ if($_POST['shipping'] == 2){ ?> checked <?php } } ?> onchange="return checkedretailprice(this)">Flat Shipping</td></tr>
                                          <?php } if($this->per_product_setting == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="3"  <?php if(!isset($this->form_error['users']) && isset($_POST['users'])){ if($_POST['shipping'] == 3){ ?> checked <?php } } ?> id="perproduct" onchange="return checkedwholesaleprice(this)" >Per product base Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="3"  <?php if(!isset($this->form_error['users']) && isset($_POST['users']) && isset($_POST['shipping'])){ if($_POST['shipping'] == 3){ ?> checked <?php } } ?> id="perproduct" onchange="return checkedwholesaleprice(this)" >Per product base Shipping</td></tr>
                                          <?php } if($this->per_quantity_setting == 1){ $submit = "1"; ?>
-                                        <tr><td><input type="radio" name="shipping" value="4" <?php if(!isset($this->form_error['users']) && isset($_POST['users'])){ if($_POST['shipping'] == 4){ ?> checked <?php } } ?> id="perquantity" onchange="return checkedwholesaleprice(this)" >Per quantity base Shipping</td></tr>
+                                        <tr><td><input type="radio" name="shipping" value="4" <?php if(!isset($this->form_error['users']) && isset($_POST['users']) && isset($_POST['shipping'])){ if($_POST['shipping'] == 4){ ?> checked <?php } } ?> id="perquantity" onchange="return checkedwholesaleprice(this)" >Per quantity base Shipping</td></tr>
                                          <?php } if($this->aramex_setting == 1){ $submit = "1"; ?>
                                         <?php /*<tr><td><input type="radio" name="shipping" value="5" <?php if(!isset($this->form_error['users']) && isset($_POST['users'])){ if($_POST['shipping'] == 5){ ?> checked <?php } } ?> id="productaramex" onchange="return checkedaramex(this)">Aramex Shipping</td></tr>*/?>
                                         <?php } ?>
                                         </table>
+                                    <em><?php if(isset($this->form_error['shipping'])){echo $this->form_error['shipping']; }?></em>
                                 </td>
                         </tr>
-                <?php if(!isset($this->form_error['users']) && isset($_POST['users'])){  ?>
+                <?php if(!isset($this->form_error['users']) && isset($_POST['users']) && isset($_POST['shipping'])){  ?>
                 
                 <?php if(($_POST['shipping'] == 4) || ($_POST['shipping'] == 3)) { ?>
                         <script type="text/javascript">
@@ -959,7 +966,7 @@ function RemoveSize(val) {
 
 var totrow=  <?php echo count($this->product_attributes);?>;
 var sel= '<?php echo $append_select;?>';
-function addAttribute() {
+/*function addAttribute() {
 var addedrow = $('.atrmain').length;
 
 if (totrow > addedrow){
@@ -974,6 +981,43 @@ if (totrow > addedrow){
 		alert("Maximum limit reached");
 		return false;
 	   }
+}*/
+
+function addAttribute(spec_id, spec_val) {
+ var addedrow = $('.atrmain').length;
+
+ if (totrow > addedrow){
+	 	 if(spec_id || spec_val){
+			 html  = '<tr class="atrmain spe_show" id="row-'+addedrow+'">  <td></td><td></td> <td> ';
+		 html += '<select name="attribute[]" id="r-'+addedrow+'" class = "sel_spec_s" onchange="check_dup_spec(this);" >';
+		 html += sel;
+		 html += '  </select> ';
+	
+		 html+= ' <input class="spec_attrib" type="text" name="attribute_value[]" value="'+spec_val+'">   ' ;
+		html+= '<input type="button" name="remove" onclick="RemoveAttribute('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		
+		 }else{
+		 html  = '<tr class="atrmain spe_show" id="row-'+addedrow+'">  <td></td><td></td> <td> ';
+		 html += '<select name="attribute[]" id="r-'+addedrow+'" class = "sel_spec_s" onchange="check_dup_spec(this);" >';
+		 html += sel;
+		 html += '  </select> ';
+		 html+= ' <input class="spec_attrib" type="text" name="attribute_value[]" value="">   ' ;
+		html+= '<input type="button" name="remove" onclick="RemoveAttribute('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		
+		 }
+		 
+		 $('#btns').before(html);
+		 if(spec_id){
+		 	$('#r-'+addedrow).val(spec_id);
+		 }
+		 
+	   }else{
+		alert("Maximum limit reached");
+		return false;
+		
+	   }
+ 
+ 
 }
 
 
@@ -1235,6 +1279,48 @@ $(document).ready(function(e) {
 	
 	
 	
+});
+</script>
+
+
+<script type="text/javascript">
+
+function check_dup_spec(obj){
+	var spec = $(obj);
+	var specs = $('.sel_spec_s');
+	for(i = 0; i < specs.length; i++){
+		if($(spec).attr('id') == $(specs[i]).attr('id'))
+			continue;
+		if($(spec).val() == $(specs[i]).val()){
+			alert("Specification already selected. Choose a unique one please.");
+			$(spec).val('');
+			return false;
+		}
+	}
+	
+}
+
+<!-- Handling specification -->
+<!-- @Live -->
+
+$(document).ready(function(e) {
+	$('#id_spec_no').trigger('click');
+	shospe();
+	<?php if(isset($this->attr_arr)){?>
+    <?php if(isset($this->userPost['attr_option']) && $this->userPost['attr_option'] == '0'){?>
+		$('#id_spec_no').trigger('click');
+		shospe();
+	<?php }else{?>
+		$('#id_spec_yes').trigger('click');
+		shospe();
+	<?php if(isset($this->attr_arr[0])){?>
+			$('#id_sel_spec').val("<?php echo htmlspecialchars( $this->attr_arr[0],ENT_QUOTES,"UTF-8"); ?>");
+	<?php }?>
+	<?php for($i = 1; $i < count($this->attr_arr); $i++){?>
+		addAttribute("<?php echo htmlspecialchars($this->attr_arr[$i],ENT_QUOTES,"UTF-8"); ?>", "<?php echo htmlspecialchars($this->attr_q_arr[$i],ENT_QUOTES,"UTF-8"); ?>");
+	<?php }?>
+	<?php }?>
+	<?php } ?>
 });
 </script>
 

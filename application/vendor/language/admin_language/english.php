@@ -3072,7 +3072,7 @@ $content_text = array(
 
 			"MAIN_CAT_FIRST" => "Select Main Category First",
 
-			"NEAR_LI" => "Near Me Map",
+			"NEAR_LI" => "Near Map",
 
 			"ACTION" => "Actions",
 

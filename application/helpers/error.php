@@ -19,6 +19,9 @@ class error {
 				case 'validate_size_quantity':
 					$my_error[$key] = "Please specify a size and quantity for every field below or remove them.";
 					break;
+				case 'validate_spec_quantity':
+					$my_error[$key] = "Please select a specification and set a value for every field below or remove them.";
+					break;
 					
 				case 'check_required':
 					$my_error[$key] = $this->Lang["REQQ"];
