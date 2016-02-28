@@ -342,12 +342,14 @@
           <td><label><?php echo $this->Lang['WNT_ADD_ATTR']; ?> </label>
             <span>*</span></td>
           <td><label>:</label></td>
-          <td><input type="radio" name="attr_option" <?php if($u->attribute ==0) {?> checked <?php } ?> onclick="shospe(0)" value="0">
+          <td><input type="radio" name="attr_option" id="id_spec_no" <?php if($u->attribute ==0) {?> checked <?php } ?> onclick="shospe(0)" value="0">
             <?php echo $this->Lang['NO']; ?>
-            <input type="radio" name="attr_option" value="1" <?php if($u->attribute ==1) {?> checked <?php } ?> onclick="shospe(1)">
+            <input type="radio" id="id_spec_yes" name="attr_option" value="1" <?php if($u->attribute ==1) {?> checked <?php } ?> onclick="shospe(1)">
             <?php echo $this->Lang['YES']; ?>
             <p class="guide"><?php echo $this->Lang['MENTION_SPECIFICATION'];?></p></td>
         </tr>
+        
+        <tr><td colspan="4">&nbsp</td></tr>
         <script type="text/javascript"> 
                 $(document).ready(function(){
                 var textVal = <?php echo $u->attribute; ?>;
@@ -359,11 +361,13 @@
                 }
                 });
                 </script>
-        <tr class="spe_show">
-          <td><label><?php echo $this->Lang["ENTRY_ATTRIBUTE"]; ?></label></td>
-          <td>&nbsp;</td>
-          <td><label><?php echo $this->Lang["TXT_LABEL"]; ?></label></td>
-        </tr>
+                
+        
+        
+          <?php if(isset($this->form_error["attribute"])){?><tr class="spe_show"><td>&nbsp;</td><td>&nbsp;</td><td><em><?php echo $this->form_error["attribute"]; ?></em></td></tr><?php }?>
+          
+          
+          
         <?php
 			$atr_option =$u->attribute;
 			$inc=1;
@@ -373,7 +377,7 @@
         <tr class="atrmain spe_show" id="row-<?php echo $inc;?>" >
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-          <td class="spe_show"><select name="attribute[]">
+          <td><select name="attribute[]" id="id_sel_spec" class = "sel_spec_s" onchange="check_dup_spec(this);">
               <?php
 						 $attr= $this->all_attributes;
 						  
@@ -411,7 +415,7 @@
 						
 					}else{
 						 ?>
-        <tr class="atrmain" id="row-<?php echo $inc;?>">
+        <tr class="atrmain spe_show"  id="row-<?php echo $inc;?>">
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td class="spe_show"><select name="attribute[]" style="margin:0 5px 0 0;">
@@ -450,6 +454,8 @@
           <?php				
 					}
 					?>
+      </tr>
+        
         <tr id="btns" class="spe_show">
           <td>&nbsp;</td>
           <td>&nbsp;</td>
@@ -518,7 +524,7 @@
         <tr id="Delivery">
           <td>&nbsp;</td>
           <td>&nbsp;</td>
-          <td><input class="search_submit" id="Delivery_add" type="button" name="addmore" value="<?php echo $this->Lang['ADDMORE'];?>" onclick="addDelivery()"></td>
+          <!--<td><input class="search_submit" id="Delivery_add" type="button" name="addmore" value="<?php echo $this->Lang['ADDMORE'];?>" onclick="addDelivery()"></td> -->
         </tr>
         
         <!-- policy end -->
@@ -1349,7 +1355,7 @@ var totrow=  <?php echo count($this->product_attributes);?>;
 var sel= '<?php echo $append_select;?>';
 
 
-function addAttribute() {
+/*function addAttribute() {
  var addedrow = $('.atrmain').length;
 
  if (totrow > addedrow){
@@ -1368,7 +1374,46 @@ function addAttribute() {
 	   }
  
  
+}*/
+
+
+function addAttribute(spec_id, spec_val) {
+ var addedrow = $('.atrmain').length;
+
+ if (totrow > addedrow){
+	 	 if(spec_id || spec_val){
+			 html  = '<tr class="atrmain spe_show" id="row-'+addedrow+'">  <td></td><td></td> <td> ';
+		 html += '<select name="attribute[]" id="r-'+addedrow+'" class = "sel_spec_s" onchange="check_dup_spec(this);" >';
+		 html += sel;
+		 html += '  </select> ';
+	
+		 html+= ' <input class="spec_attrib" type="text" name="attribute_value[]" value="'+spec_val+'">   ' ;
+		html+= '<input type="button" name="remove" onclick="RemoveAttribute('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		
+		 }else{
+		 html  = '<tr class="atrmain spe_show" id="row-'+addedrow+'">  <td></td><td></td> <td> ';
+		 html += '<select name="attribute[]" id="r-'+addedrow+'" class = "sel_spec_s" onchange="check_dup_spec(this);" >';
+		 html += sel;
+		 html += '  </select> ';
+		 html+= ' <input class="spec_attrib" type="text" name="attribute_value[]" value="">   ' ;
+		html+= '<input type="button" name="remove" onclick="RemoveAttribute('+addedrow+')" class="btn_remove" value="Remove">   </td> </tr>' ;
+		
+		 }
+		 
+		 $('#btns').before(html);
+		 if(spec_id){
+		 	$('#r-'+addedrow).val(spec_id);
+		 }
+		 
+	   }else{
+		alert("Maximum limit reached");
+		return false;
+		
+	   }
+ 
+ 
 }
+
 
 function addDelivery() {
  var Deliverydrow = $('.policymain').length;
@@ -1557,8 +1602,8 @@ function set_selected_size(){
 	
 			
 			
-			<?php $sizes = strip_tags(addslashes($_POST['size']));
-			$size_q = strip_tags(addslashes($_POST['size_quantity']));
+			<?php $sizes = $_POST['size'];
+			$size_q = $_POST['size_quantity'];
 	 for($i = 2; $i < count($_POST['size']); $i++){
 		 ?>
 			//addSize("<?php //echo $sizes[$i]?>", "<?php //echo $size_q[$i]?>");htmlspecialchars($this->Lang['ZIP_CODE'],ENT_QUOTES,"UTF-8");
@@ -1661,4 +1706,56 @@ function RemoveSize(val) {
         $("#row_s-"+val).remove();
 }
 
+</script>
+
+
+<script type="text/javascript">
+
+function check_dup_spec(obj){
+	var spec = $(obj);
+	var specs = $('.sel_spec_s');
+	for(i = 0; i < specs.length; i++){
+		if($(spec).attr('id') == $(specs[i]).attr('id'))
+			continue;
+		if($(spec).val() == $(specs[i]).val()){
+			alert("Specification already selected. Choose a unique one please.");
+			$(spec).val('');
+			return false;
+		}
+	}
+	
+}
+
+<!-- Handling specification -->
+<!-- @Live -->
+
+$(document).ready(function(e) {
+	$('#id_spec_no').trigger('click');
+	shospe(0);
+	<?php if(isset($this->attr_arr)){?>
+    <?php if(isset($this->userPost['attr_option']) && $this->userPost['attr_option'] == '0'){?>
+		$('#id_spec_no').trigger('click');
+		shospe(0);
+	<?php }else{?>
+		$('#id_spec_yes').trigger('click');
+		shospe(1);
+	<?php if(isset($this->attr_arr[0])){?>
+			$('#id_sel_spec').val("<?php echo htmlspecialchars( $this->attr_arr[0],ENT_QUOTES,"UTF-8"); ?>");
+	<?php }?>
+	<?php for($i = 1; $i < count($this->attr_arr); $i++){?>
+		addAttribute("<?php echo htmlspecialchars($this->attr_arr[$i],ENT_QUOTES,"UTF-8"); ?>", "<?php echo htmlspecialchars($this->attr_q_arr[$i],ENT_QUOTES,"UTF-8"); ?>");
+	<?php }?>
+	<?php }?>
+	<?php }else{
+		
+		if($u->attribute == 1){?>
+			$('#id_spec_yes').trigger('click');
+			shospe(1);
+		<?php }else {?>
+			$('#id_spec_no').trigger('click');
+			shospe(0);
+			
+		<?php }
+	}?>
+});
 </script>

@@ -11,6 +11,7 @@ $(document).ready(function () {
 	    
 $('.processing_image').hide();
   $("form").submit( function () {
+	 
    $('.processing_image').show();
 	$('#submit').hide();
 	$('#check2').hide();

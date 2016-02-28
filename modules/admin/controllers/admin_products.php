@@ -42,7 +42,8 @@ class Admin_products_Controller extends website_Controller
 							->add_rules('color_val','required')
 							->add_rules('users', 'required')
 							->add_rules('delivery_days','required')
-							->add_rules('Delivery_value', array($this, 'check_return_policy'));
+							->add_rules('Delivery_value', array($this, 'check_return_policy'))
+							->add_rules('shipping', 'required');
 							
 							
 							if(isset($_POST['color_val'])){
@@ -55,6 +56,11 @@ class Admin_products_Controller extends website_Controller
 								
 							}
 						}
+						
+						
+						if($_POST['attr_option'] == '1'){
+								$post->add_rules('attribute', array($this, 'validate_spec_quantity'));
+							}
 						
 						if($_POST['size_val'] == '1'){
 								
@@ -873,7 +879,13 @@ class Admin_products_Controller extends website_Controller
 				->add_rules('users', 'required')
 				->add_rules('stores','required')
 				->add_rules('delivery_days','required')
-				->add_rules('Delivery_value', array($this, 'check_return_policy'));
+				->add_rules('Delivery_value', array($this, 'check_return_policy'))
+				->add_rules('shipping', 'required');
+				
+				
+				if($_POST['attr_option'] == '1'){
+								$post->add_rules('attribute', array($this, 'validate_spec_quantity'));
+							}
 				
 				
 				if(isset($_POST['color_val'])){
@@ -2121,6 +2133,29 @@ class Admin_products_Controller extends website_Controller
 		}
 		
 		foreach($size_q as $q){
+			if($q == '')
+				return 0;
+		}
+		return 1;
+	}
+	
+	
+	
+	function validate_spec_quantity(){
+		$attr_q = $_POST['attribute_value'];
+		$attr = $_POST['attribute'];
+		
+		$this->attr_arr = $attr;
+		$this->attr_q_arr = $attr_q;
+		
+		//unset($attr[0]);
+		//unset($attr_q[0]);
+		foreach($attr as $a){
+			if($a == '')
+				return 0;
+		}
+		
+		foreach($attr_q as $q){
 			if($q == '')
 				return 0;
 		}
