@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 $THIS_SITENAME = SITENAME;
 $content_text = array(
-
+"Audit"=>"Audit",
 			"FOOTER_COPYRIGHT" => "Copyright ",
 
 			"FOOTER_ALLRIGHT" => "All rights reserved",
