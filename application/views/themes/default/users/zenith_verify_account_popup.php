@@ -26,7 +26,7 @@
                           <li>
                               <input class="sign_submit" id ="submit_acc" type="submit" value="<?php echo $this->Lang['Z_SUBSCRIBE NOW'];?>" title="<?php echo $this->Lang['Z_SUBSCRIBE NOW'];?>" onclick="show_gif(this);">
                           </li>
-                           <li>
+                           <!--<li>
                            <br />
                           <p><?php echo $this->Lang['Z_OPEN']; ?></p>
                           </li>
@@ -34,7 +34,7 @@
                           <li>
                               <input class="sign_submit"  type="submit" value="OPEN A ZENITH BANK ACC." title="<?php echo $this->Lang['Z_SUBSCRIBE NOW'];?>" onclick="javascript:showmembershipsignup_open();">
                           </li>
-                          
+                          -->
                       </ul>
                       </form>
                      <!--<a class="f_connect" onclick="return false;" title="<?php echo $this->Lang['SIGN_UP_WITH']; ?>">&nbsp;</a> -->
@@ -377,12 +377,15 @@ function show_gif(obj){
 					
                                         if(check == 1){
 						sub_btn_parent.html(sub_btn_parent_bak);
-						$('#z_acc_error').html("<?php echo ", Account verification Completed. ."; ?>");
+						$('#z_acc_error').html("<?php echo "Account verification Completed and Successful"; ?>");
 						return false;
 					}
+                                        if(check == -11 || check == 1){
+                                            location.reload();
+                                        }
 					
 					sub_btn_parent.html(sub_btn_parent_bak);
-					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
+					$('#z_acc_error').html("<?php echo "Something went wrong. We cannot validate you at this time."; ?>");
 					return false;
 						
 			

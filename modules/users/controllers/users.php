@@ -2174,6 +2174,8 @@ $pdf->Output('voucher.pdf', 'I');
 						  $nuban_response = (isset($response['errorMessage']))?-1:1;
 						  if($nuban_response == 1){
 							 
+                                                      //then futher check is its salary account or non salary
+                                                      if($response['accountClass'] == "SALARY ACCOUNT"){
 							   $r = $this->users->update_user_to_club_membership(FALSE, $nuban);
 								common::message(1, "Thank you for Zenith membership signup! You can now enjoy club membership offers.");
 								if($r == 1){
@@ -2184,8 +2186,11 @@ $pdf->Output('voucher.pdf', 'I');
 									
 									echo -2;
 								}
-								
-								exit;	
+                                                      }{
+                                                          common::message(-1, "Sorry, Your club membership was denied. the account provided is not a valid salary account.");
+                                                          echo -11;
+                                                      }
+								exit;
 							  
 						  }
 					  }

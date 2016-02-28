@@ -184,6 +184,7 @@
                 <?php if(ADMIN_PRIVILEGES_MERCHANT_BLOCK){?>
                 <th align="left" ><?php echo $this->Lang["B_UNB"]; ?></th>
                 <?php }?>
+                <th align="left" ><?php echo $this->Lang["Audit"]; ?></th>
 				<?php /*<th align="left" ><?php echo 'Rating'; ?></th> */ ?>
             </tr>
             <?php $i=0; $first_item = $this->pagination->current_first_item;
@@ -297,7 +298,11 @@
 				 <input type="text" size="5px" id="rating-<?php echo $u->user_id; ?>" maxlength="3" name="rating" onkeyup="return rating(this.value,'<?php echo PATH; ?>',<?php echo $u->user_id; ?>);" value="<?php echo $u->rating; ?>"> */ ?>
 					</td>
 					<?php }?>
-                    
+                      <?php
+                                $clickfunction = 'viewAuditEvent("'.$u->user_id.'")'; //pass the merchant ID to look up
+                                $audit_btn = "<a style='color:blue' href='javascript:".$clickfunction."'>View</a>";
+                      ?>
+                    <td><?php echo $audit_btn; ?></td>
                 </tr>
             <?php $i++;} ?>   
         </table>
@@ -308,3 +313,43 @@
 </div>
     <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
 </div>
+<div id="dialog" title="View Merchant's Admin Events Log" style="display:none;">
+    <div id="dialog_content" style="margin:5px auto; width:100%; text-align:center;">Please wait ....... </div>
+</div>
+  <script>
+  $(function() {
+    $( "#dialog" ).dialog({
+        width: 500,
+      autoOpen: false,
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+  });
+  var merchant_id = "";
+  function viewAuditEvent(m_id){
+      merchant_id = m_id;
+      $("#dialog_content").html("Please wait .......");
+      $( "#dialog" ).dialog( "open" );
+      setTimeout(loadAudit, 1000);
+  }
+  
+  function loadAudit(){
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else { 
+        // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    //alert("here");
+    var params = "merchant_id="+merchant_id;
+    xmlhttp.open("POST","<?php echo PATH; ?>/auditor/get_merchant_audit",false);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.setRequestHeader("Content-length", params.length);
+    xmlhttp.setRequestHeader("Connection", "close");
+    xmlhttp.send(params);
+    $("#dialog_content").html(xmlhttp.responseText); 
+  }
+  </script>

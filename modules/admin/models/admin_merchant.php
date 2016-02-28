@@ -488,8 +488,10 @@ class Admin_merchant_Model extends Model
         public function blockunblockmerchant($type = "", $uid = "", $email = "")
         {
                 $status = 0;
+                $event = "Blocked";
                 if($type == 1){
                     $status = 1;
+                    $event = "Un-Blocked";
                 }
                 
                 $result = $this->db->update("users", array("user_status" => $status), array("user_id" => $uid, "email" => $email));
@@ -500,6 +502,10 @@ class Admin_merchant_Model extends Model
                     $result = $this->db->update("users", array("user_status" => $status), array("user_id" => $c->store_admin_id));
                 }
                 //echo count($result); die;
+                if(count($result)){
+                    $this->auditor = new Auditor_Model();
+                    $this->auditor->log($this->user_id, $uid, $event);
+                }
                 return count($result);
         }
     
@@ -705,13 +711,21 @@ class Admin_merchant_Model extends Model
 		{
 			
 			$status = 0;
+                        $event = "Dis-approved";
                         if($type == 1){
                                 $status = 1;
+                                $event = "Approved";
                         }
 						
 			$p = md5($pswd);
 			$result = $this->db->update("users",array("approve_status" => $status, "password"=>$p, 
                             "user_status" => 0), array("user_id" =>$merchant_id));
+                    //when merchant is successfully approved or disapproved. 
+                    //store it in audit trail
+                        if(count($result)){
+                            $this->auditor = new Auditor_Model();
+                            $this->auditor->log($this->user_id, $merchant_id, $event);
+                        }
 			return count($result);
 		}
 		
