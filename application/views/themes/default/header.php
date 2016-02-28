@@ -112,7 +112,7 @@ $this->language_List = str_replace(".php", "", $DL);
 								
 							<?php } ?>
                             
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px  ">Sell on <?php echo SITENAME; ?></b></a></li>
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live

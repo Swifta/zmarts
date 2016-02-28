@@ -124,36 +124,40 @@ class Admin_products_Model extends Model
 		$sub_cat1 = $_POST['sub_category'];	 //Multiple stores have same deal          
 		//$sub_cat = implode(',',$sub_cat1);
 		
-		if($post->price!='') // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
-		{
-			$deal_price = $post->deal_value;
-			$deal_val = $post->price;
-			$savings=($post->deal_value - $post->price);
-			$value=($savings/$post->deal_value)*100;
-			
-			$deal_prime_val = $deal_val;
-			$prime_savings = $savings;
-			$prime_value =$value;
-			
-		}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
-			$deal_val = $post->deal_value;
-			$savings=0;
-			$deal_price=0;
-			$value=0;
-			
-			$deal_prime_val = $deal_val;
-			$prime_savings = $savings;
-			$prime_value =$value;
-		}
-		
-		if($post->prime_price !=''){
+		if(isset($post->price) && $post->price!='' && $post->price!= 0 ) // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
+			{
+				$deal_price = $post->deal_value;
+				$deal_val = $post->price;
 				
-			$deal_price = $post->deal_value;
-			$deal_prime_val = $post->prime_price;
-			$prime_savings=($post->deal_value - $post->prime_price);
-			$prime_value=($prime_savings/$post->deal_value)*100;
+				$savings=($post->deal_value - $post->price);
+				$value=($savings/$post->deal_value)*100;
 				
-	  }
+				$deal_prime_val = $deal_val;
+				$prime_savings = $savings;
+				$prime_value =$value;
+				
+			}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
+				$deal_price = $post->deal_value;
+				$deal_val = $deal_price;
+				$savings=0;
+				$value=0;
+				
+				$deal_prime_val = $deal_val;
+				$prime_savings = $savings;
+				$prime_value =$value;
+				
+			}
+			if(isset($post->prime_price) && $post->prime_price !='' && $post->prime_price != 0){
+				
+				$deal_price = $post->deal_value;
+				$deal_prime_val = $post->prime_price;
+				$prime_savings=($post->deal_value - $post->prime_price);
+				$prime_value=($prime_savings/$post->deal_value)*100;
+				
+			}
+			
+			
+			
 		
 		//$savings=($post->price-$post->deal_value);
 		$atr_option = isset($post->attr_option)?$post->attr_option:0;  // for attribute is present or not
@@ -728,8 +732,10 @@ class Admin_products_Model extends Model
 				$value=0;
 			}*/
 			
-			 
-			 if($post->price!='') // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
+			
+			
+			
+			if(isset($post->price) && $post->price!='' && $post->price!= 0 ) // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
 			{
 				$deal_price = $post->deal_value;
 				$deal_val = $post->price;
@@ -742,19 +748,17 @@ class Admin_products_Model extends Model
 				$prime_value =$value;
 				
 			}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
-				$deal_val = $post->deal_value;
+				$deal_price = $post->deal_value;
+				$deal_val = $deal_price;
 				$savings=0;
-				$deal_price=0;
 				$value=0;
 				
 				$deal_prime_val = $deal_val;
 				$prime_savings = $savings;
 				$prime_value =$value;
+				
 			}
-			
-			
-			
-			if(isset($post->prime_price)){
+			if(isset($post->prime_price) && $post->prime_price !='' && $post->prime_price != 0){
 				
 				$deal_price = $post->deal_value;
 				$deal_prime_val = $post->prime_price;

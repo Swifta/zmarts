@@ -1764,19 +1764,19 @@ class Merchant_Controller extends website_Controller {
 							
 						}
 							
-							$price_s = $post->price;
-							if(isset($price_s)){
-								$price_s = trim($price_s);
-								if($price_s != "")
-								$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
-							}
+							if(isset($post->price)){
+							$price_s = trim($post->price);
+							if($price_s != "" && $price_s != 0)
+							$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
+						}
 							
-							$prime_price_s = $post->prime_price;
-							if(isset($prime_price_s)){
-								$prime_price_s = trim($prime_price_s);
-								if($prime_price_s != "")
-								$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
-							}
+						//$prime_price_s = $post->prime_price;
+						if(isset($post->prime_price)){
+							$prime_price_s = trim($post->prime_price);
+							if($prime_price_s != ""  && $prime_price_s != 0)
+							$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
+						}
+						
 							
 							
 							
@@ -2115,17 +2115,17 @@ class Merchant_Controller extends website_Controller {
 						
 						
 				        
-				        $price_s = $post->price;
-						if(isset($price_s)){
-							$price_s = trim($price_s);
-							if($price_s != "")
+				      
+						if(isset($post->price)){
+							$price_s = trim($post->price);
+							if($price_s != "" && $price_s != 0)
 							$post->add_rules('price','chars[0-9.]',array($this,'check_price_val_lmi'));
 						}
 							
-						$prime_price_s = $post->prime_price;
-						if(isset($prime_price_s)){
-							$prime_price_s = trim($prime_price_s);
-							if($prime_price_s != "")
+						//$prime_price_s = $post->prime_price;
+						if(isset($post->prime_price)){
+							$prime_price_s = trim($post->prime_price);
+							if($prime_price_s != ""  && $prime_price_s != 0)
 							$post->add_rules('prime_price','chars[0-9.]',array($this,'check_price_val_lmi'));
 						}
 						

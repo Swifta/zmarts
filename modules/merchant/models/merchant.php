@@ -979,7 +979,7 @@ class Merchant_Model extends Model
 			        $duration = serialize($_POST['duration']);
 			 }
 			 
-			 if($post->price!='') // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
+			if(isset($post->price) && $post->price!='' && $post->price!= 0 ) // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
 			{
 				$deal_price = $post->deal_value;
 				$deal_val = $post->price;
@@ -992,19 +992,17 @@ class Merchant_Model extends Model
 				$prime_value =$value;
 				
 			}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
-				$deal_val = $post->deal_value;
+				$deal_price = $post->deal_value;
+				$deal_val = $deal_price;
 				$savings=0;
-				$deal_price=0;
 				$value=0;
 				
 				$deal_prime_val = $deal_val;
 				$prime_savings = $savings;
 				$prime_value =$value;
+				
 			}
-			
-			
-			
-			if($post->prime_price !=''){
+			if(isset($post->prime_price) && $post->prime_price !='' && $post->prime_price != 0){
 				
 				$deal_price = $post->deal_value;
 				$deal_prime_val = $post->prime_price;
@@ -1012,7 +1010,6 @@ class Merchant_Model extends Model
 				$prime_value=($prime_savings/$post->deal_value)*100;
 				
 			}
-			
 			
 			
 	        $atr_option = isset($post->attr_option)?$post->attr_option:0;  // for attribute is present or not
@@ -1395,8 +1392,10 @@ class Merchant_Model extends Model
 				$value=0;
 			}*/
 			
+			
+			
 			 
-			 if($post->price!='') // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
+			 if(isset($post->price) && $post->price!='' && $post->price!= 0 ) // if discount price is not empty orignal price value is inserted to deal_price field and discount price is inserted to deal value 
 			{
 				$deal_price = $post->deal_value;
 				$deal_val = $post->price;
@@ -1409,19 +1408,17 @@ class Merchant_Model extends Model
 				$prime_value =$value;
 				
 			}else{ // if discount price is given empty orignal price value is inserted to deal_value field 
-				$deal_val = $post->deal_value;
+				$deal_price = $post->deal_value;
+				$deal_val = $deal_price;
 				$savings=0;
-				$deal_price=0;
 				$value=0;
 				
 				$deal_prime_val = $deal_val;
 				$prime_savings = $savings;
 				$prime_value =$value;
+				
 			}
-			
-			
-			
-			if($post->prime_price !=''){
+			if(isset($post->prime_price) && $post->prime_price !='' && $post->prime_price != 0){
 				
 				$deal_price = $post->deal_value;
 				$deal_prime_val = $post->prime_price;
@@ -1429,6 +1426,8 @@ class Merchant_Model extends Model
 				$prime_value=($prime_savings/$post->deal_value)*100;
 				
 			}
+			
+			
 			
 			
 			

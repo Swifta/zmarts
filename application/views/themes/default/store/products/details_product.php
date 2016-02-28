@@ -359,8 +359,10 @@ foreach ($this->product_deatils as $products) {
                         <?php if($products->deal_percentage>0 && $products->deal_percentage!=''){ ?>
                         <span>(<?php echo round($products->deal_percentage); ?>% <?php echo $this->Lang['OFFER']; ?>)</span>
                         <?php } ?>
-						 <?php if($products->deal_price!=0) { ?>	
+						 <?php if($products->deal_price!=0 && $products->deal_value < $products->deal_price) { ?>
+                         <?php if($products->deal_value > $products->deal_price){?>	
                         <strike><?php echo $symbol . "" . number_format($products->deal_price); ?> </strike>
+                        <?php } ?>
 							<b><?php echo $symbol . "" . number_format($products->deal_value); ?></b>
 						<?php } else  { ?>
 							<strike></strike>
@@ -642,7 +644,7 @@ foreach ($this->product_deatils as $products) {
                                                                 <a class="cursor" onclick="redirect_url('<?php echo $url; ?>');" title="<?php echo $products_list->deal_title; ?>"><?php echo substr(ucfirst($products_list->deal_title), 0, 100); ?></a>
                                                             </h2>
                                                             <div class="new_price_details">
-																<?php if($products_list->deal_price!=0) { ?>	
+																<?php if($products_list->deal_price!=0 && $products_list->deal_value < $products_list->deal_price) { ?>	
 																	<p><?php echo $symbol . "" . $products_list->deal_price; ?> </p>
 																	<span><?php echo $symbol . "" . $products_list->deal_value; ?></span>
 																<?php } else  { ?>

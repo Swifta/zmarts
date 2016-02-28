@@ -59,7 +59,7 @@
                         
                         <tr>
                             <td align="left" style="font:normal 13px/19px arial;color:#333;">
-                               <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#666;; text-decoration:none;"><?php echo PATH; ?></a> ,
+                               <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; color:#666;; text-decoration:none;">www.zmart.com.ng</a> ,
                             </td> 
                         </tr>
                         <tr height="5">

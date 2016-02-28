@@ -35,7 +35,7 @@ foreach ($this->all_products_list as $products) {
                 <h2><a href="<?php echo PATH .  $products->store_url_title.'/product/' . $products->deal_key . '/' . $products->url_title . '.html'; ?>" title="<?php echo $products->deal_title; ?>"><?php echo substr(ucfirst($products->deal_title), 0, 100) ; ?></a>                </h2>
 <?php //echo substr(ucfirst(strip_tags($products->deal_description)), 0, 25) . ".."; ?>
                 <div class="new_price_details">
-					<?php if($products->deal_price!=0) { ?>	
+					<?php if($products->deal_price!=0 && $products->deal_value < $products->deal_price) { ?>	
 						<p><?php echo $symbol . "" . $products->deal_price; ?> </p>
 						<span><?php echo $symbol . "" . $products->deal_value; ?></span>
 					<?php } else  { ?>
