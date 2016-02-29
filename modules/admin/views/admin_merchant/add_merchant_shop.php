@@ -262,18 +262,18 @@
                        
                         </td>
 							</tr>  
-							   <td><label><?php echo $this->Lang["LATITUDE"]; ?><span>*</span></label></td>
+							   <td><label><?php echo $this->Lang["LATITUDE"]; ?></label></td>
 								<td><label>:</label></td>
 								<td>
-								<input type="text" onclick="show_popup();" name="latitude" class="gllpLatitude" readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
+								<input type="text" onclick="show_popup();" name="latitude" class="gllpLatitude" value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
 								<em><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
 								</td>
 								</tr>
 								<tr>
-								<td><label><?php echo $this->Lang["LONGITUDE"]; ?><span>*</span></label></td>
+								<td><label><?php echo $this->Lang["LONGITUDE"]; ?></td>
 								<td><label>:</label></td>
 								<td>
-								<input type="text" name="longitude" class="gllpLongitude" readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>"/>
+								<input type="text" name="longitude" class="gllpLongitude" value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>"/>
 								<em><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
 								<input type="hidden" class="gllpZoom" value="3"/>
 								<input type="hidden" class="gllpUpdateButton" value="update map">
