@@ -116,13 +116,13 @@ class Home_Model extends Model
                   return count($result);
 		} else {
 			//$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id  where deal_status = 1  ".$this->product_club_condition." and  store_status = 1  and product.category_id = '$category_id' and purchase_count < user_limit_quantity order by deal_id DESC  ");
-                                $result->db->select()
-                                        ->from("product")
-                                        ->join("stores","stores.store_id","product.shop_id")
-                                        ->join("category","category.category_id","product.category_id")
-                                        ->where("deal_status = 1  ".$this->product_club_condition." and  store_status = 1  and product.category_id = '$category_id' and purchase_count < user_limit_quantity")
-                                        ->orderby("deal_id", "DESC")
-                                        ->get();
+                        $result = $this->db->select()
+                                ->from("product")
+                                ->join("stores","stores.store_id","product.shop_id")
+                                ->join("category","category.category_id","product.category_id")
+                                ->where("deal_status = 1  ".$this->product_club_condition." and  store_status = 1  and product.category_id = '$category_id' and purchase_count < user_limit_quantity")
+                                ->orderby("deal_id", "DESC")
+                                ->get();
 	        return count($result);
 		}
 	}

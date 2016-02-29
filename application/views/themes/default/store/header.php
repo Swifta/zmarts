@@ -70,7 +70,7 @@ $this->language_List = str_replace(".php", "", $DL);
 						<ul class="htop_nav">
 
 							<?php if ($this->session->get('UserID')) { ?>
-                                                   <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+                                                    <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px">Sell on Zmart</b></a></li>
                                                     
                                                     <li class="mnav_dnone">|</li>
 								<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
@@ -100,7 +100,7 @@ $this->language_List = str_replace(".php", "", $DL);
 								
 							<?php } ?>
                             
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+                                                                <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px">Sell on Zmart</b></a></li>
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live
@@ -567,7 +567,7 @@ if ($lan != LANGUAGE) {
  </ul>
 </li> */ ?>
 <?php if ($this->session->get('UserID')) { ?>
-    <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+    <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px">Sell on Zmart</b></a></li>
     <li class="mnav_dnone">|</li>
 	<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 	<li class="mnav_dnone">|</li>
@@ -615,7 +615,7 @@ if ($lan != LANGUAGE) {
 
 	
 
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart">Sell on Zmart</a></li>
+        <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px">Sell on Zmart</b></a></li>
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live
