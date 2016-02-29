@@ -474,6 +474,7 @@ class Admin_Controller extends website_Controller
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
 					$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;
@@ -1322,7 +1323,7 @@ class Admin_Controller extends website_Controller
 					{
 						$category_ids = explode(',',$u->category_ids);
 						$category_names = "";
-
+						$category_ids = common::get_all_category_urls();
 						foreach($category_ids as $d){ 
 							foreach($this->category_list as $s){
 								if($s->category_id == $d){
@@ -2060,6 +2061,7 @@ class Admin_Controller extends website_Controller
 				
 				$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;

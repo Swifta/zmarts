@@ -4043,12 +4043,12 @@ class Store_admin_Controller extends website_Controller
 						unlink($ads3);
 					}
 					$modules_name = 'stores';
-                                        $settings = new Settings_Model();
-                                        $subsector_ids = $settings->get_all_subsector_ids();
+                                       $subsector_ids = common::get_all_subsector_ids();
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;

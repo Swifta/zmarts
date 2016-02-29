@@ -215,6 +215,7 @@ class Admin_merchant_Controller extends website_Controller {
 										
 										$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;
@@ -574,7 +575,7 @@ class Admin_merchant_Controller extends website_Controller {
 						{
                                                     $s = basename(strip_tags(addslashes($_POST['subsector'])));
                                                         $subsector = null;
-                                                        $subsector_ids = $this->settings->get_all_subsector_ids();
+                                                       $subsector_ids = common::get_all_subsector_ids();
                                                         foreach($subsector_ids as $id){
                                                                 if($id == $s){
                                                                         $subsector = $id;
@@ -957,6 +958,7 @@ class Admin_merchant_Controller extends website_Controller {
 									{
 										$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;
@@ -1189,6 +1191,7 @@ class Admin_merchant_Controller extends website_Controller {
 						{
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;
