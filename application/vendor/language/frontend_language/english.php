@@ -301,7 +301,7 @@ $content_text = array(
 
 "SHOP_BY_CATE" => "Shop by category",
 
-"NEAR_MAP" => "Near map",
+"NEAR_MAP" => "Nearme Map",
 
 "BLOG" => "Blog",
 
@@ -854,7 +854,9 @@ $content_text = array(
 
 "DONT_HAV" => "Don’t have an account yet?",
 
-"EMAIL_PASS_NT_MCH" =>"Email or password doesn't match",
+"EMAIL_PASS_NT_MCH" =>"Invalid Email or Password",
+    
+"EMAIL_NOT_EXIST" => "User does not exist",
 
 "USER_BLK_AD" =>"User has been blocked contact admin",
 

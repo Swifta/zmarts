@@ -992,7 +992,7 @@ function validation_failed(){
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "Try again",   
-		cancelButtonText: "Open A New Account",   
+		cancelButtonText: "Cancel",   
 		closeOnConfirm: true,   
 		closeOnCancel: true,
 		}, 
@@ -1000,7 +1000,8 @@ function validation_failed(){
 			if (isConfirm) {     
 				
 			} else {     
-			  location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
+//                          location.href ="<?php echo PATH; ?>merchant-signup-account-opening.html";
+                          location.href ="<?php echo PATH; ?>";
 		   }
 
    
@@ -1149,7 +1150,7 @@ function validation_failed(){
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "Try again",   
-		cancelButtonText: "Open A New Account",   
+		cancelButtonText: "Cancel",   
 		closeOnConfirm: true,   
 		closeOnCancel: true,
 		}, 

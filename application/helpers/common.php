@@ -668,6 +668,17 @@ function get_payment_store_details($store_id = ""){
 	return $r->current();
 }
 
+public function get_all_subsector_ids(){
+		$db = new Settings_Model();
+		return $db->get_all_subsector_ids();
+	}
+	
+public function get_all_category_urls(){
+		$db = new Settings_Model();
+		return $db->get_all_category_urls();
+		
+	}
+
 
 
 }
