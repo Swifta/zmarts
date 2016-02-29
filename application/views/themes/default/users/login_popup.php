@@ -327,6 +327,14 @@ function validateForms()
 					return false;
 					
 				}
+                                
+                                else if(check == -2){
+					$('#email_error').html("<?php echo $this->Lang['EMAIL_NOT_EXIST']; ?>");
+					$('#password_error').html('');
+					//document.login.email.value = '';
+					document.login.password.value = '';
+					
+				}
 			
 				else if(check == 8){
 					$('#email_error').html("<?php echo $this->Lang['USER_BLK_AD']; ?>");
@@ -344,6 +352,7 @@ function validateForms()
 					return false;
 					
 				}
+                                
 				
 				else if(check == 1){ 
 					document.login.submit();

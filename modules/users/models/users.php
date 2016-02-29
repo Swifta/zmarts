@@ -64,66 +64,71 @@ class Users_Model extends Model
 	public function login_users($email = "",$pswd = "", $z_offer = "0")
 	{ 
           
-		$result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($pswd),"user_type" =>4))->get();
-		if(count($result) == 1){
-			foreach($result as $a){
-				if($a->user_status == 1){ 
-						
-				        $this->session->set(array("UserID" => $a->user_id, "UserName" => $a->firstname , "UserEmail" => $a->email, "city_id" => $a->city_id,"UserType" => $a->user_type, "Club" => $a->club_member));
-				        if($a->unique_identifier !="" && $a->user_auto_key !="") {
-							$this->session->set("user_auto_key",$a->user_auto_key);
-							$this->session->set("prime_customer",1);
-						}
-                                                
-                                                $chat_users = $this->db->select("chat_id")->from("chat_users")->where(array("chat_email"=>$a->email))->limit(1)->get();
-						if(count($chat_users)==0) {
-							$insert_users = $this->db->insert("chat_users",array("chat_name"=>$a->firstname,"chat_email"=>$a->email,"chat_user_status" =>1,"chat_userid"=>$a->user_id));
-							$chuserid = $insert_users->insert_id();
-							/* online chat */
-                                                     //  $set("username",$a->firstname);
-                                                        cookie::set("uid",$a->firstname);
-							cookie::set("uid",$chuserid);
+                $resultuser = $this->db->from("users")->where(array("email" => $email,"user_type" =>4))->get();
+                if (count($resultuser) == 1) {
+                    $result = $this->db->from("users")->where(array("email" => $email, "password" =>  md5($pswd),"user_type" =>4))->get();
+                    if(count($result) == 1){
+                            foreach($result as $a){
+                                    if($a->user_status == 1){ 
+
+                                            $this->session->set(array("UserID" => $a->user_id, "UserName" => $a->firstname , "UserEmail" => $a->email, "city_id" => $a->city_id,"UserType" => $a->user_type, "Club" => $a->club_member));
+                                            if($a->unique_identifier !="" && $a->user_auto_key !="") {
+                                                            $this->session->set("user_auto_key",$a->user_auto_key);
+                                                            $this->session->set("prime_customer",1);
+                                                    }
+
+                                                    $chat_users = $this->db->select("chat_id")->from("chat_users")->where(array("chat_email"=>$a->email))->limit(1)->get();
+                                                    if(count($chat_users)==0) {
+                                                            $insert_users = $this->db->insert("chat_users",array("chat_name"=>$a->firstname,"chat_email"=>$a->email,"chat_user_status" =>1,"chat_userid"=>$a->user_id));
+                                                            $chuserid = $insert_users->insert_id();
+                                                            /* online chat */
+                                                         //  $set("username",$a->firstname);
+                                                            cookie::set("uid",$a->firstname);
+                                                            cookie::set("uid",$chuserid);
 
 
-//setcookie("username",$a->firstname);
-							//setcookie("uid",$chuserid);
-							/* $img = $a->user_id.'_1.png';
-							setcookie("image",$img);
-							*/
-							$this->session->set("chatuserid",$chuserid);
-							$this->session->set("chatusername",$a->firstname);
-							$this->session->set("chatuseremail",$a->email);
-						} else if(count($chat_users)==1) {
-							$user_update = $this->db->update("chat_users", array("chat_user_status" =>1),array("chat_email" =>$a->email));
-							$chuserid = $chat_users->current()->chat_id;
-							/* online chat */
-							//setcookie("username",$a->firstname);
-							//setcookie("uid",$chuserid);
-                                                         cookie::set("uid",$a->firstname);
-							 cookie::set("uid",$chuserid);
-							/* $img = $a->user_id.'_1.png';
-							setcookie("image",$img);
-							*/
-							$this->session->set("chatuserid",$chuserid);
-							$this->session->set("chatusername",$a->firstname);
-							$this->session->set("chatuseremail",$a->email);	
-						}
-                                                
-                                                //$this->db->update("users", array("online_status" => 1), array("user_id" => $a->user_id));
-						/* online chat */
-						
-						if(strcmp($z_offer, "1") == 0)
-				        	return -999;
-				        return 1;
-				}
-				else if($a->user_status == 0){
-				        return 8;
-				}
-				else{
-				        return -1;
-				}
-			}
-		} else { return -1; }
+    //setcookie("username",$a->firstname);
+                                                            //setcookie("uid",$chuserid);
+                                                            /* $img = $a->user_id.'_1.png';
+                                                            setcookie("image",$img);
+                                                            */
+                                                            $this->session->set("chatuserid",$chuserid);
+                                                            $this->session->set("chatusername",$a->firstname);
+                                                            $this->session->set("chatuseremail",$a->email);
+                                                    } else if(count($chat_users)==1) {
+                                                            $user_update = $this->db->update("chat_users", array("chat_user_status" =>1),array("chat_email" =>$a->email));
+                                                            $chuserid = $chat_users->current()->chat_id;
+                                                            /* online chat */
+                                                            //setcookie("username",$a->firstname);
+                                                            //setcookie("uid",$chuserid);
+                                                             cookie::set("uid",$a->firstname);
+                                                             cookie::set("uid",$chuserid);
+                                                            /* $img = $a->user_id.'_1.png';
+                                                            setcookie("image",$img);
+                                                            */
+                                                            $this->session->set("chatuserid",$chuserid);
+                                                            $this->session->set("chatusername",$a->firstname);
+                                                            $this->session->set("chatuseremail",$a->email);	
+                                                    }
+
+                                                    //$this->db->update("users", array("online_status" => 1), array("user_id" => $a->user_id));
+                                                    /* online chat */
+
+                                                    if(strcmp($z_offer, "1") == 0)
+                                                    return -999;
+                                            return 1;
+                                    }
+                                    else if($a->user_status == 0){
+                                            return 8;
+                                    }
+                                    else{
+                                            return -1;
+                                    }
+                            }
+                    } else { return -1; }
+                }else{
+                    return -2;
+                }
 	}
 	
 	    /** REGISTER USERS **/

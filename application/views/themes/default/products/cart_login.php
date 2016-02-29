@@ -448,7 +448,7 @@
                             <div class="what_happens">
                                 <div class="faq-content-text">
 
-                                    <p>When you add a product to cart, you will have to provide the exact address to which the product is to be shipped.Once, you checkout successfully, you will thereafter receive the ordered item.</p>
+                                    <p>When you add a product to cart, you will have to provide the exact address to which the product is to be shipped.Once you checkout successfully, you will thereafter receive the ordered item.</p>
                                 </div>
                             </div>
                         </div>
