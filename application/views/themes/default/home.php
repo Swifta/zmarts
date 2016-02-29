@@ -338,8 +338,11 @@
                                         <div class="new_prdt_listing_details">
                                             <h2><a href="<?php echo PATH .$new_arrival->store_url_title. '/product/' . $new_arrival->deal_key . '/' . $new_arrival->url_title . '.html'; ?>" title="<?php echo $new_arrival->deal_title; ?>"><?php echo substr(ucfirst($new_arrival->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
-											 <?php if($new_arrival->deal_price!=0) { ?>	
+											 <?php if($new_arrival->deal_price!=0 ) { ?>
+                                             <?php if($new_arrival->deal_value < $new_arrival->deal_price){?>
+                                             
                                                 <p><?php echo $symbol . "" . number_format($new_arrival->deal_price); ?> </p>
+                                                <?php } ?>
 												<span><?php echo $symbol . "" . number_format($new_arrival->deal_value); ?></span>
 											   <?php } else  { ?>
 												<span><?php echo $symbol."".number_format($new_arrival->deal_value); ?> </span>
@@ -426,7 +429,11 @@
                                         <div class="new_prdt_listing_details">
                                            <h2><a href="<?php echo PATH .$best_sel->store_url_title. '/product/' . $best_sel->deal_key . '/' . $best_sel->url_title . '.html'; ?>" title="<?php echo $best_sel->deal_title; ?>"><?php echo substr(ucfirst($best_sel->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
-												 <?php if($best_sel->deal_price!=0) { ?>	
+												 <?php if($best_sel->deal_price!=0 && 
+												 
+												 $best_sel->deal_value < $best_sel->deal_price
+												 
+												 ) { ?>	
 												<p><?php echo $symbol . "" . number_format($best_sel->deal_price); ?> </p>
 												<span><?php echo $symbol . "" . number_format($best_sel->deal_value); ?></span>
 											   <?php } else  { ?>
@@ -713,7 +720,9 @@
                                         <div class="new_prdt_listing_details">
                                            <h2><a href="<?php echo PATH .$pro->store_url_title. '/product/' . $pro->deal_key . '/' . $pro->url_title . '.html'; ?>" title="<?php echo $pro->deal_title; ?>"><?php echo substr(ucfirst($pro->deal_title), 0, 100); ?></a></h2>
                                             <div class="new_price_details">
-												 <?php if($pro->deal_price!=0) { ?>	
+												 <?php if($pro->deal_price!=0 && $pro->deal_value < $pro->deal_price
+												 
+												 ) { ?>	
                                                 <p><?php echo $symbol . "" . number_format($pro->deal_price); ?> </p>
                                                 <span><?php echo $symbol . "" . number_format($pro->deal_value); ?></span>
 											   <?php } else  { ?>
@@ -822,7 +831,7 @@
 													<img alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/gray.png"/>
 												<?php }?>
 											</div>
-											 <?php if($cat_pro->deal_price!=0) { ?>	
+											 <?php if($cat_pro->deal_price!=0&& $cat_pro->deal_value < $cat_pro->deal_price) { ?>	
                                                                                                 <p><?php echo $symbol . " " . number_format($cat_pro->deal_value); ?> <span><?php echo $symbol . " " . number_format($cat_pro->deal_price); ?></span></p>
 											   <?php } else  { ?>
                                                                                                 <p><?php echo $symbol . " " . number_format($cat_pro->deal_value); ?> <span></span></p>

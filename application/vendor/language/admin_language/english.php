@@ -1777,7 +1777,7 @@ $content_text = array(
 
 			"MOD_SET" => "Modules Settings",
 
-			"OLD_NEW_MISMATCH" => "New password and confirm password are Mismatch",
+			"OLD_NEW_MISMATCH" => "Password mismatch. New and Confirm passwords should match.",
 
 			"OFF" => "OFF",
 

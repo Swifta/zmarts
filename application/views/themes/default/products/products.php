@@ -232,7 +232,7 @@ $symbol = CURRENCY_SYMBOL;
                                     <div class="new_prdt_listing_details">
                                         <h2><a class="cursor" href="<?php echo PATH . $h->store_url_title . '/product/' . $h->deal_key . '/' . $h->url_title . '.html'; ?>" title="<?php echo $h->deal_title; ?>"><?php echo substr(ucfirst($h->deal_title), 0, 100); ?></a></h2>
                                         <div class="new_price_details">
-											<?php if($h->deal_price!=0) { ?>	
+											<?php if($h->deal_price!=0 && $h->deal_value < $h->deal_price) { ?>	
 												<p><?php echo $symbol . "" . $h->deal_price; ?> </p>
 												<span><?php echo $symbol . "" . $h->deal_value; ?></span>
 											<?php } else  { ?>
@@ -515,7 +515,7 @@ $symbol = CURRENCY_SYMBOL;
                                 <div class="pricerange_inner">
                                     <div class="catogory_list2">
                                         <div id="slider-range"></div>
-                                        <div><input class="pricerange_input" type="text"  id="amount" style="border:none; color:#333;  font-weight:normal;" readonly="readonly" name="amount"/></div>
+                                        <div><input class="pricerange_input" type="text"  id="amount" style="border:none; color:#333;  font-weight:normal;" readonly name="amount"/></div>
                                        </div>
                                        <input type="hidden" id="amount1" style="border: 0;text-align:center;" />
                                 </div>
@@ -570,7 +570,7 @@ $symbol = CURRENCY_SYMBOL;
                                                             </h2>
 
                                                         <div class="new_price_details">
-															<?php if($products_list->deal_price!=0) { ?>	
+															<?php if($products_list->deal_price!=0 && $products_list->deal_value < $products_list->deal_price) { ?>	
 																<p><?php echo $symbol . "" . $products_list->deal_price; ?> </p>
 																<span><?php echo $symbol . "" . $products_list->deal_value; ?></span>
 															<?php } else  { ?>

@@ -299,7 +299,7 @@ foreach ($this->product_deatils as $products) {
                         <?php if($products->deal_percentage>0 && $products->deal_percentage!=''){ ?>
                         <span>(<?php echo round($products->deal_percentage); ?>% <?php echo $this->Lang['OFFER']; ?>)</span>
                         <?php } ?>
-						 <?php if($products->deal_price!=0) { ?>	
+						 <?php if($products->deal_price!=0 && $products->deal_value < $products->deal_price) { ?>	
 							<strike><?php echo $symbol . "" . $products->deal_price; ?> </strike>
 							<b><?php echo $symbol . "" . $products->deal_value; ?></b>
 						<?php } else  { ?>
@@ -566,7 +566,7 @@ foreach ($this->product_deatils as $products) {
 
                                                         </div>
                                                         <div class="product_listing_price_details">
-															<?php if($products_list->deal_price!=0) { ?>	
+															<?php if($products_list->deal_price!=0&& $products_list->deal_value < $products_list->deal_price) { ?>	
 																	<p><?php echo $symbol . "" . $products_list->deal_value; ?></p>
 																<?php } else  { ?>
 																	<p><?php echo $symbol."".$products_list->deal_value; ?> </p>
