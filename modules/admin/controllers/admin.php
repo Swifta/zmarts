@@ -44,6 +44,68 @@ class Admin_Controller extends website_Controller
 		$this->template->title = $this->Lang["ADMIN_DASHBOARD"];
 	}
 
+        public function forgot_password()
+        {
+//		$this->captcha = new Captcha;
+		if($_POST){
+			$this->userPost = utf8::clean($this->input->post());
+			$post = new Validation(utf8::clean($_POST));
+			$post = Validation::factory(utf8::clean($_POST))
+				
+				->add_rules('email', 'required')
+				->add_rules('captcha', 'required');
+			if($post->validate()){
+				$email = trim(strip_tags(addslashes($this->input->post("email"))));
+				if(Captcha::valid($this->input->post('captcha'))){
+				        $pswd = text::random($type = 'alnum', $length = 10);
+						
+					$status = $this->merchant->forgot_password($email,$pswd);
+						if($status == 1){				
+						        
+					        $users = $this->merchant->get_usr_details_list($email);
+					        $userid = $users->current()->user_id;
+		                                $name = $users->current()->firstname;
+		                                $email = $users->current()->email;
+
+			                        $this->forgot=1;
+						$from = CONTACT_EMAIL;  
+						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
+						$this->name =$name;
+						$this->password = $pswd;
+						$this->email = $email;
+						$message = new View("themes/".THEME_NAME."/mail_template");
+
+						if(EMAIL_TYPE==2){
+						email::smtp($from, $post->email,$subject, $message);
+						}else{
+						email::sendgrid($from, $post->email,$subject, $message);
+						} 
+						
+						common::message(1,$this->Lang["PWD_RESET"]);
+						url::redirect(PATH."merchant-login.html");
+                                                
+						}
+						elseif($status == -1){
+							$this->email_error = $this->Lang["INV_EMAIL"];
+						}
+						elseif($status == 0){
+							$this->email_error = $this->Lang["MER_EMAIL_EXIT"];
+						}
+						else {
+							$this->email_error = $this->Lang["EMAIL_NOT_EXIST"];
+						}
+				}
+				else{
+					$this->captcha_error = $this->Lang["CODE_NOT"];
+				}
+
+			}
+			else{
+				$this->form_error = error::_error($post->errors());
+			}
+		}
+		$this->template->content=new View("admin/forgot_pass");
+        }
 	/** ADMINISTRATOR LOGIN **/
 
 	public function login()
