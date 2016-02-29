@@ -50,10 +50,9 @@ class Admin_Controller extends website_Controller
 		if($_POST){
 			$this->userPost = utf8::clean($this->input->post());
 			$post = new Validation(utf8::clean($_POST));
-			$post = Validation::factory(utf8::clean($_POST))
-				
-				->add_rules('email', 'required')
-				->add_rules('captcha', 'required');
+			$post = Validation::factory(utf8::clean($_POST))				
+				->add_rules('email', 'required');
+//				->add_rules('captcha', 'required');
 			if($post->validate()){
 				$email = trim(strip_tags(addslashes($this->input->post("email"))));
 				if(Captcha::valid($this->input->post('captcha'))){
@@ -110,6 +109,7 @@ class Admin_Controller extends website_Controller
 
 	public function login()
 	{
+            $this->is_admin = true;
 		if($this->user_id && ($this->user_type == 1 || $this->user_type == 2 || $this->user_type == 7)){
 
 			url::redirect(PATH."admin.html");

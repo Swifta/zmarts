@@ -25,6 +25,7 @@ foreach($user_details as $U){
     $customer_phone = $U->phone_number;
     $customer_email = $U->email;
 }
+
   foreach($this->products_list as $p ) { 
     $this->creditcard_paypal_pay = new Creditcard_paypal_Model;
 						if($p->type == 5) {

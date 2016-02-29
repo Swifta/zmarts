@@ -25,7 +25,7 @@ class Auditor_Controller extends Layout_Controller
             $ret.="<p><strong>Store Name : </strong> ".
                     $this->auditor->getStorename(strip_tags(addslashes($this->input->post("merchant_id"))))."</p>";
             $ret.= "<table class='list_table fl clr mt5'><thead><td><strong>Date/Time</strong></td><td>".
-                    "<strong>Administrator</strong></td><td><strong>Event</strong></td></thead><tbody>";
+                    "<strong>Administrator</strong></td><td><strong>Activity</strong></td></thead><tbody>";
             foreach ($details as $single){
                 $ret.= "<tr>";
                 $ret.= "<td>".date("d-m-Y H:i:s", $single->timing)."</td>";
