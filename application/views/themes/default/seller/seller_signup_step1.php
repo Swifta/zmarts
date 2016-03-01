@@ -709,7 +709,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <div class="form-group">
                                       <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                                       <div class="col-sm-8">
-                                          <input type="email" name="email" class="form-control bdr" id="inputEmail3" placeholder="Email your email"  value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
+                                          <input type="email" name="email" class="form-control bdr" id="inputEmail3" placeholder="Enter your email"  value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
                                       </div>
                                     </div>
                                     <div class="form-group">
