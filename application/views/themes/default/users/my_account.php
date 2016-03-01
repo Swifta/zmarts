@@ -901,7 +901,7 @@
                                                     </div>
                                             </div>
 
-                                        </div>-->
+                                        </div>
                                         <div class="rl_section">
                                             <h3><?php echo $this->Lang['CONNECTIONS'];?></h3>
                                             <div class="rl_mid">
@@ -979,6 +979,7 @@ $username  = ucfirst($res->name);
                                                     </div>
                                             </div>
                                         </div>
+                                        -->
                                     </div>
 <?php } ?>
                             </div>
