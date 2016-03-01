@@ -43,7 +43,7 @@ foreach ($this->transaction_details as $tran) {
                                             <td style="vertical-align: top; width: 183px;">
                                                 <table>
                                                     <tr>
-                                                        <td style=" vertical-align: top;  width: 183px; text-align: right;font:  normal 12px arial; color: #333; padding: 0px; margin: 0px;"><?php echo date('F d,Y l'); ?></td>
+                                                        <td style=" vertical-align: top;  width: 183px; text-align: right;font:  normal 12px arial; color: #333; padding: 0px; margin: 0px;"><?php echo date('l\,  F d,Y'); ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>
