@@ -1,11 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <?php
 foreach ($this->transaction_details as $tran) {
-    if (file_exists(DOCROOT . 'images/auction/466_347/' . $tran->deal_key . '_1' . '.png')) {
-        $image = PATH . 'images/auction/466_347/' . $tran->deal_key . '_1' . '.png';
+	
+    if (file_exists(DOCROOT . 'images/auction/1000_800/' . $tran->deal_key . '_1' . '.png')) {
+        $image = PATH . 'images/auction/1000_800/' . $tran->deal_key . '_1' . '.png';
     } else {
         $image = PATH . "themes/" . THEME_NAME . "/images/noimage_deals_list.png";
     }
+	
+	
     $end_time = $tran->end_time + (AUCTION_ALERT_DAY * 24 * 60 * 60);
     ?>
     <!DOCTYPE html>
