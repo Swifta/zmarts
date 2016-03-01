@@ -921,22 +921,22 @@
                                                                 <div class="user_img"><img src="http://graph.facebook.com/<?php echo $facebook_id; ?>/picture?type=normal"/></div>
                                                                 <form method="post" class="admin_form" name="edit_users" enctype="multipart/form-data" >
 																	<?php 
-$ch4 = curl_init();
-curl_setopt($ch4, CURLOPT_RETURNTRANSFER,1);
-curl_setopt($ch4, CURLOPT_URL, "https://graph.facebook.com/$facebook_id?access_token=$facebook_session");
-curl_setopt($ch4, CURLOPT_SSL_VERIFYPEER, false);
-$result = curl_exec($ch4);
-$res = json_decode($result);
-/*if(isset($res->verified)){ 
-$count = 1;
-} else {
-$count = 0;
-$pageContent = file_get_contents('http://graph.facebook.com/'.$facebook_id);
-$parsedJson  = json_decode($pageContent);
-}*/
-
-
-$username  = ucfirst($res->name);
+//$ch4 = curl_init();
+//curl_setopt($ch4, CURLOPT_RETURNTRANSFER,1);
+//curl_setopt($ch4, CURLOPT_URL, "https://graph.facebook.com/$facebook_id?access_token=$facebook_session");
+//curl_setopt($ch4, CURLOPT_SSL_VERIFYPEER, false);
+//$result = curl_exec($ch4);
+//$res = json_decode($result);
+///*if(isset($res->verified)){ 
+//$count = 1;
+//} else {
+//$count = 0;
+//$pageContent = file_get_contents('http://graph.facebook.com/'.$facebook_id);
+//$parsedJson  = json_decode($pageContent);
+//}*/
+//
+//
+//$username  = ucfirst($res->name);
 //$gender = ucfirst($res->gender);
 //$link = $res->link;
 

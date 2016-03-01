@@ -199,8 +199,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
                       <input  class="swifta_input" name="email" placeholder="Email" type="text" value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
 
-                      <input class="swifta_input" name="password" placeholder="Password" type="password" required>
-                      
+                      <input class="swifta_input" name="password" placeholder="Password" type="password" required> 
             <?php if(isset($this->is_merchat) || isset($this->is_store_admin) || isset($this->is_admin) ){?> <span style="cursor:pointer; color:black; margin-left: 25px;" >
         <a <?php if(isset($this->is_merchat)){?> onclick="window.location.href='<?php echo PATH; ?>merchant/forgot-password.html'" <?php }
         else if(isset($this->is_admin)){?> onclick="window.location.href='<?php echo PATH; ?>admin/forgot-password.html'" 

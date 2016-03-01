@@ -147,11 +147,11 @@ if(@PRIVILEGES_FUNDREQUEST==1){ ?>
 
 <?php } ?>
 
-<?php if(ADMIN_PRIVILEGES_DEALS==1){?>
+<?php if(@ADMIN_PRIVILEGES_DEALS==1){?>
 <li> <a <?php if(isset($this->deals_act)){ ?> class="active" <?php } ?> href="<?php echo PATH?>admin/deals-dashboard.html"><?php echo $this->Lang['DEALS']; ?>  </a>  </li>
 <?php }?>
 
-<?php if(ADMIN_PRIVILEGES_PRODUCTS==1 || ADMIN_PRIVILEGES_STORECREDIT==1 || ADMIN_PRIVILEGES_TRANSACTIONS==1){
+<?php if(@ADMIN_PRIVILEGES_PRODUCTS==1 || @ADMIN_PRIVILEGES_STORECREDIT==1 || @ADMIN_PRIVILEGES_TRANSACTIONS==1){
 	if(ADMIN_PRIVILEGES_PRODUCTS)
 		$href_pro = 'admin/products-dashboard.html';
 	else if(ADMIN_PRIVILEGES_TRANSACTIONS)
@@ -161,7 +161,7 @@ if(@PRIVILEGES_FUNDREQUEST==1){ ?>
 <li> <a <?php   if(isset($this->products_act)){ ?> class="active" <?php } ?>href="<?php echo PATH.$href_pro?>"> <?php echo $this->Lang['PRODUCTS']; ?> </a>  </li> 
 <?php }?>
 
-<?php if(ADMIN_PRIVILEGES_AUCTIONS==1 || ADMIN_PRIVILEGES_TRANSACTIONS==1){
+<?php if(@ADMIN_PRIVILEGES_AUCTIONS==1 || @ADMIN_PRIVILEGES_TRANSACTIONS==1){
 	if(ADMIN_PRIVILEGES_AUCTIONS)
 		$href_auc = 'admin/auction-dashboard.html';
 	else
@@ -169,15 +169,15 @@ if(@PRIVILEGES_FUNDREQUEST==1){ ?>
  <li> <a <?php   if(isset($this->auction_act)){ ?> class="active" <?php } ?>href="<?php echo PATH.$href_auc?>"> <?php echo $this->Lang['AUCTION']; ?> </a>  </li> 
  <?php }?>
  
- <?php if(ADMIN_PRIVILEGES_CUSTOMER==1){?>
+ <?php if(@ADMIN_PRIVILEGES_CUSTOMER==1){?>
 <li> <a <?php   if(isset($this->users_act)){ ?> class="active" <?php } ?>href="<?php echo PATH?>admin/users-dashboard.html"><?php echo $this->Lang['CUSTOMERS']; ?> </a>  </li>
 <?php }?>
 
-<?php if(ADMIN_PRIVILEGES_MERCHANT==1){?>
+<?php if(@ADMIN_PRIVILEGES_MERCHANT==1){?>
 <li> <a <?php  if(isset($this->merchant_act)){ ?> class="active" <?php } ?>href="<?php echo PATH?>admin/merchant-dashboard.html"> <?php echo $this->Lang['MERCHANTS']; ?> </a>  </li>
 <?php }?>
 
-<?php if(ADMIN_PRIVILEGES_TRANSACTIONS==1 || ADMIN_PRIVILEGES_FUNDREQUEST==1 || ADMIN_PRIVILEGES_STORECREDIT==1){
+<?php if(@ADMIN_PRIVILEGES_TRANSACTIONS==1 || @ADMIN_PRIVILEGES_FUNDREQUEST==1 || @ADMIN_PRIVILEGES_STORECREDIT==1){
 	if(ADMIN_PRIVILEGES_TRANSACTIONS)
 		$href_trans = "admin/transaction-dashboard.html";
 	else if(ADMIN_PRIVILEGES_STORECREDIT)
@@ -188,11 +188,11 @@ if(@PRIVILEGES_FUNDREQUEST==1){ ?>
 <li> <a <?php   if(isset($this->transactions_act)){ ?> class="active" <?php } ?> href="<?php echo PATH.$href_trans?>"> <?php echo $this->Lang['TRANSACTIONS']; ?> </a>  </li>
 <?php }?>
 
-<?php if(ADMIN_PRIVILEGES_BLOG==1){?>
+<?php if(@ADMIN_PRIVILEGES_BLOG==1){?>
 <li> <a <?php   if(isset($this->blog_act)){ ?> class="active" <?php } ?> href="<?php echo PATH?>admin/manage-publish-blog.html"><?php echo $this->Lang['BLOGS']; ?></a>  </li>
 <?php }?>
 
-<?php if(ADMIN_PRIVILEGES_CUSTOMERCARE==1){?>
+<?php if(@ADMIN_PRIVILEGES_CUSTOMERCARE==1){?>
 <li> <a <?php   if(isset($this->customer_care_act)){ ?> class="active" <?php } ?>href="<?php echo PATH?>admin/customer-care-dashboard.html"><?php echo $this->Lang['CUSTOMER_CARE']; ?> </a>  </li>
 <?php }?>
 

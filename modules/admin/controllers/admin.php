@@ -11,22 +11,25 @@ class Admin_Controller extends website_Controller
                 $serverurl= $_SERVER['HTTP_HOST']; 
                 if( $actual_link != $serverurl)
                 {
-                echo  DEFAULT_WEBSITE_MESSAGE;
-                exit;
+                    echo  DEFAULT_WEBSITE_MESSAGE;
+                    exit;
                 }
                 else
                 {
-                
-		if((!$this->user_id && ($this->user_type != 1 || $this->user_type != 2 || $this->user_type != 7)) && $this->uri->last_segment() != "admin-login.html" ){
-			url::redirect(PATH);
-		}      
-		if($this->user_type==3 || $this->user_type==8){
-			$this->session->destroy();
-			url::redirect(PATH);
-		}
-		        
-		$this->admin = new Admin_Model();
-		$this->users = new Admin_users_Model();
+
+                    if((!$this->user_id && ($this->user_type != 1 || $this->user_type != 2 || 
+                            $this->user_type != 7)) && 
+                            $this->uri->last_segment() != "admin-login.html" && 
+                            $this->uri->last_segment() != "forgot-password.html"){
+                            url::redirect(PATH);
+                    }      
+                    if($this->user_type==3 || $this->user_type==8){
+                            $this->session->destroy();
+                            url::redirect(PATH);
+                    }
+
+                    $this->admin = new Admin_Model();
+                    $this->users = new Admin_users_Model();
 		}
 	}
 
@@ -47,6 +50,8 @@ class Admin_Controller extends website_Controller
         public function forgot_password()
         {
 //		$this->captcha = new Captcha;
+            $this->session->delete("user_type", 0);
+            //$this->template = new View('admin_template/template');
 		if($_POST){
 			$this->userPost = utf8::clean($this->input->post());
 			$post = new Validation(utf8::clean($_POST));
@@ -55,55 +60,52 @@ class Admin_Controller extends website_Controller
 //				->add_rules('captcha', 'required');
 			if($post->validate()){
 				$email = trim(strip_tags(addslashes($this->input->post("email"))));
-				if(Captcha::valid($this->input->post('captcha'))){
-				        $pswd = text::random($type = 'alnum', $length = 10);
+				$pswd = text::random($type = 'alnum', $length = 10);
 						
-					$status = $this->merchant->forgot_password($email,$pswd);
-						if($status == 1){				
-						        
-					        $users = $this->merchant->get_usr_details_list($email);
-					        $userid = $users->current()->user_id;
-		                                $name = $users->current()->firstname;
-		                                $email = $users->current()->email;
+                                $status = $this->admin->forgot_password($email,$pswd);
+                                if($status == 1){				
 
-			                        $this->forgot=1;
-						$from = CONTACT_EMAIL;  
-						$subject = $this->Lang['YOUR_PASS_RE_SUCC'];
-						$this->name =$name;
-						$this->password = $pswd;
-						$this->email = $email;
-						$message = new View("themes/".THEME_NAME."/mail_template");
+                                    $users = $this->admin->get_usr_details_list($email);
+                                    $userid = $users->current()->user_id;
+                                    $name = $users->current()->firstname;
+                                    $email = $users->current()->email;
 
-						if(EMAIL_TYPE==2){
-						email::smtp($from, $post->email,$subject, $message);
-						}else{
-						email::sendgrid($from, $post->email,$subject, $message);
-						} 
-						
-						common::message(1,$this->Lang["PWD_RESET"]);
-						url::redirect(PATH."merchant-login.html");
-                                                
-						}
-						elseif($status == -1){
-							$this->email_error = $this->Lang["INV_EMAIL"];
-						}
-						elseif($status == 0){
-							$this->email_error = $this->Lang["MER_EMAIL_EXIT"];
-						}
-						else {
-							$this->email_error = $this->Lang["EMAIL_NOT_EXIST"];
-						}
-				}
-				else{
-					$this->captcha_error = $this->Lang["CODE_NOT"];
-				}
+                                    $this->forgot=1;
+                                    $from = CONTACT_EMAIL;  
+                                    $subject = $this->Lang['YOUR_PASS_RE_SUCC'];
+                                    $this->name =$name;
+                                    $this->password = $pswd;
+                                    $this->email = $email;
+                                    $message = new View("themes/".THEME_NAME."/mail_template");
+
+                                    if(EMAIL_TYPE==2){
+                                    email::smtp($from, $post->email,$subject, $message);
+                                    }else{
+                                    email::sendgrid($from, $post->email,$subject, $message);
+                                    } 
+
+                                    common::message(1,$this->Lang["PWD_RESET"]);
+                                    url::redirect(PATH."admin-login.html");
+
+                                }
+                                elseif($status == -1){
+                                        $this->email_error = $this->Lang["INV_EMAIL"];
+                                }
+                                elseif($status == 0){
+                                        $this->email_error = "Admin Email does not Exist";
+                                }
+                                else {
+                                        $this->email_error = $this->Lang["EMAIL_NOT_EXIST"];
+                                }
 
 			}
 			else{
 				$this->form_error = error::_error($post->errors());
 			}
 		}
-		$this->template->content=new View("admin/forgot_pass");
+		$this->template->content = new View("admin/forgot_pass");
+		$this->template->title = "Admin Password Recovery";
+		//$this->template->content=new View("admin/forgot_pass");
         }
 	/** ADMINISTRATOR LOGIN **/
 
