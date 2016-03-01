@@ -3,7 +3,7 @@
 foreach ($this->transaction_details as $tran) {
 	
     if (file_exists(DOCROOT . 'images/auction/1000_800/' . $tran->deal_key . '_1' . '.png')) {
-        $image = PATH . 'images/auction/1000_800/' . $tran->deal_key . '_1' . '.png';
+        $image = PATH . 'images/auction/466_347/' . $tran->deal_key . '_1' . '.png';
     } else {
         $image = PATH . "themes/" . THEME_NAME . "/images/noimage_deals_list.png";
     }
@@ -139,7 +139,7 @@ foreach ($this->transaction_details as $tran) {
                                                                 <tr>
                                                                     <td style=" vertical-align: top;">
                                                                         <p  style=" font:  normal 12px arial;  padding-top: 10px;color: #666;  margin: 0px;  text-align: center; text-decoration: none;"><?php echo $this->Lang['NON_PAY_AUC']; ?> <?php echo SITENAME; ?>  <?php echo $this->Lang['CANCEL_CURR_BID']; ?>
-                                                                            <br/><?php echo $this->Lang['INTO_INVEN']; ?></p>
+                                                                            </p>
                                                                     </td>
                                                                 </tr>
                                                             </table>

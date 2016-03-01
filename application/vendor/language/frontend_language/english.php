@@ -375,7 +375,7 @@ $content_text = array(
 
 "AUTO_CANCEL_PRO" => "If payment is not made by this date, your order will be automatically canceled and the product will be returned ",
 
-"INTO_INVEN" => "into the inventory",
+"INTO_INVEN" => "into the inventory.",
 
 "NON_PAY_AUC" => "Non-payment of auctions you have won on ",
 
