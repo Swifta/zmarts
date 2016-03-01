@@ -215,6 +215,7 @@ class Admin_merchant_Controller extends website_Controller {
 										
 										$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;
@@ -383,7 +384,7 @@ class Admin_merchant_Controller extends website_Controller {
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
-						->add_rules('email', 'required','valid::email',array($this,'check_store_admin_with_supplier33'))
+						->add_rules('email', 'required','valid::email')//,array($this,'check_store_admin_with_supplier33'))
 						->add_rules('mer_mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mer_address1', 'required')
 						//->add_rules('mer_address2', 'required')
@@ -574,7 +575,7 @@ class Admin_merchant_Controller extends website_Controller {
 						{
                                                     $s = basename(strip_tags(addslashes($_POST['subsector'])));
                                                         $subsector = null;
-                                                        $subsector_ids = $this->settings->get_all_subsector_ids();
+                                                       $subsector_ids = common::get_all_subsector_ids();
                                                         foreach($subsector_ids as $id){
                                                                 if($id == $s){
                                                                         $subsector = $id;
@@ -957,6 +958,7 @@ class Admin_merchant_Controller extends website_Controller {
 									{
 										$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;
@@ -1057,8 +1059,8 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('storename', 'required',array($this,'check_store_exist1'))
 						//->add_rules('zipcode', 'required', 'chars[a-zA-Z0-9.]')
 						//->add_rules('website', 'required'/*,'valid::url'*/)
-						->add_rules('latitude', 'required','chars[0-9.-]')
-						->add_rules('longitude', 'required','chars[0-9.-]')
+						//->add_rules('latitude', 'required','chars[0-9.-]')
+						//->add_rules('longitude', 'required','chars[0-9.-]')
 						//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						//->add_rules('store_email', 'required',array($this,'check_store_admin1'))
 						->add_rules('sector', 'required')
@@ -1070,9 +1072,9 @@ class Admin_merchant_Controller extends website_Controller {
 								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 							}
 							
-							if(isset($_POST['website'])){
-								$post->add_rules('website', 'required','valid::url');
-							}
+//							if(isset($_POST['website'])){
+//								$post->add_rules('website', 'required','valid::url');
+//							}
 							
 							if(isset($_POST['zipcode'])){
 								$post->add_rules('zipcode', 'chars[a-zA-Z0-9.]');
@@ -1189,6 +1191,7 @@ class Admin_merchant_Controller extends website_Controller {
 						{
 							$s = basename(strip_tags(addslashes($_POST['subsector'])));
 										$subsector = null;
+										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
 											if($id == $s){
 												$subsector = $id;

@@ -20,11 +20,6 @@ abstract class Template_Controller extends Controller {
 
 	// Template view name
 	public $template = 'template';
-	
-	public $subsector_ids;
-	
-	public $category_ids;
-
 	// Default to do auto-rendering
 	public $auto_render = TRUE;
 
@@ -85,8 +80,9 @@ abstract class Template_Controller extends Controller {
 		$this->ads_details = $this->settings->get_ads_list();
 		$this->banner_details = $this->settings->get_banner_list();
 		$this->admin_details = $this->settings->get_admin_details();
-		$subsector_ids = $this->settings->get_all_subsector_ids();
-		$category_urls = $this->settings->get_all_category_urls();
+		
+		
+		
 		
 		
 		

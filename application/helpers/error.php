@@ -70,7 +70,7 @@ class error {
 					 $my_error[$key] = "Invalid number of digits.";
 					break;
 				case 'z_validphone':
-					 $my_error[$key] = "Invalid initial digits. Begin with 07, or 08.";
+					 $my_error[$key] = "Invalid initial digits. Begin with 07,08, or 09.";
 				break;
 					
 				case 'validnum':

@@ -10,8 +10,8 @@ class Cash_on_delivery_Model extends Model
 		$this->UserName = $this->session->get("UserName");
 		
 		
-			(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+			(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = "product.deal_prime_value as deal_value":$this->deal_value_condition = "product.deal_value";
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = "product.deal_prime_value":$this->deal_value_condition_field = "product.deal_value";
 		
 	}
 
@@ -19,16 +19,13 @@ class Cash_on_delivery_Model extends Model
 	
 	public function get_product_payment_details($deal_id = "")
 	{
-		/**$result = $this->db->query("select *, $this->deal_value_condition from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = ".
-                strip_tags(addslashes($deal_id)));**/
-                $result = $this->db->select("*, $this->deal_value_condition")
-                        ->from("product")
-                        ->join("category","category.category_id","product.category_id")
-                        ->where("deal_status = 1 and category.category_status = 1 and deal_id = ".strip_tags(addslashes($deal_id)))
-                        ->get();
-		//$result = $this->db->select("*",$this->deal_value_condition)->from("product")
-                //        ->join("category", "category.category_id", "product.category_id")
-                //        ->where(array("deal_status" => 1, "category.category_status" => 1, "deal_id" => $deal_id));
+//		$result = $this->db->query("select *, $this->deal_value_condition from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = ".
+//                strip_tags(addslashes($deal_id)));
+
+	        $result = $this->db->select("*,".$this->deal_value_condition)->from("product")
+                        ->join("category", "category.category_id", "product.category_id")
+                        ->where(array("deal_status" => 1, "category.category_status" => 1,
+                            "deal_id" => $deal_id))->get();
                 return $result;
 	}
 
@@ -149,10 +146,11 @@ class Cash_on_delivery_Model extends Model
 	public function get_deals_details($deal_id = "")
 	{
 		//$result = $this->db->query("select * from product  join stores on stores.store_id=product.shop_id join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and product.deal_id = $deal_id");
-		$result = $this->db->select("*")->from("product")
+		$result = $this->db->select()->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->join("category", "category.category_id", "product.category_id")
-                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "product.deal_id" => $deal_id));
+                        ->where(array("deal_status" => 1, "category.category_status" => 1, "store_status" => 1, "product.deal_id" => $deal_id))
+                        ->get();
                 return $result;
 	}
 	
@@ -182,7 +180,7 @@ class Cash_on_delivery_Model extends Model
 
 	public function get_products_coupons_list($transaction = "",$deal_id = "")
 	{
-		$result = $this->db->select('*',$this->deal_value_condition,'shipping_info.adderss1 as saddr1','shipping_info.address2 as saddr2','users.phone_number','transaction.id as trans_id','transaction.transaction_id as transactionid','users.address1 as addr1','users.address2 as addr2','users.phone_number as str_phone','transaction.shipping_amount as shipping','transaction.prime_customer')->from("shipping_info")
+		$result = $this->db->select("*,".$this->deal_value_condition.",shipping_info.adderss1 as saddr1,shipping_info.address2 as saddr2,users.phone_number,transaction.id as trans_id,transaction.transaction_id as transactionid,users.address1 as addr1,users.address2 as addr2,users.phone_number as str_phone,transaction.shipping_amount as shipping,transaction.prime_customer")->from("shipping_info")
                                 ->where(array("shipping_type"=>1,"shipping_info.user_id" => $this->UserID,"transaction.id" =>$transaction,"transaction.product_id" =>$deal_id))
                                 ->join("users","users.user_id","shipping_info.user_id")
                                 ->join("transaction","transaction.id","shipping_info.transaction_id")
@@ -216,7 +214,7 @@ class Cash_on_delivery_Model extends Model
 			
 		/**$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='".
                 strip_tags(addslashes($trans_id))."' and product.merchant_id ='".strip_tags(addslashes($merchant_id))."' $condition order by shipping_id DESC ");  **/
-                $result = $this->db->select("*,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period")
+                $result = $this->db->select("*,".$this->deal_value_condition.",s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period")
                             ->from("product")
                             ->join("transaction as t","product.deal_id","t.product_id")
                             ->join("shipping_info as s","t.id","s.transaction_id")
@@ -251,7 +249,7 @@ class Cash_on_delivery_Model extends Model
 	public function get_deals_payment_details($deal_id = "", $deal_key = "")
 	{
 		//$result = $this->db->query("select * from deals  join stores on stores.store_id=deals.shop_id join category on category.category_id=deals.category_id where deal_status = 1 and category.category_status = 1 and  store_status = 1 and deal_key = '$deal_key'  and deals.deal_id = $deal_id and enddate >".time()."");
-		$result = $this->db->select("*")->from("deals")
+		$result = $this->db->select()->from("deals")
                         ->join("stores", "stores.store_id", "deals.shop_id")
                         ->join("category", "category.category_id", "deals.category_id")
                         ->where(array("deal_status"=>1, "category.category_status"=>1, "store_status" => 1, 
@@ -473,7 +471,8 @@ class Cash_on_delivery_Model extends Model
                 ->where(array("gift_Amount<="=> $gift_amount, "free_gift.merchant_id"=>$merchant_id, "gift_status"=>1,
                     "product.deal_id"=>$deal_id))
                 ->orderby("gift_Amount", "DESC")
-                ->limit(1);
+                ->limit(1)
+                ->get();
         /*$result=$this->db->select("gift_id")->from("free_gift")->where(array("gift_Amount <=" => $gift_amount))->orderby("gift_Amount","DESC")->limit(1,0)->get();*/
 		
 		return $result;

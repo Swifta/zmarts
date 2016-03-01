@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 /** Admin Details **/
+$config['admin/forgot-password.html'] = "/admin/forgot_password";
 
 $config['admin.html'] = '/admin';
 $config['admin-login.html'] = "/admin/login";

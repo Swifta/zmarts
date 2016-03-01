@@ -100,6 +100,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 					$this->session->set('product_cart_qty'.$deal_id,$item_qty);
 					$amount = $this->input->post("amount");
 					$this->deals_payment_deatils = $this->cod->get_product_payment_details($deal_id);
+
 					if(count($this->deals_payment_deatils) == 0){
 						unset($_SESSION[$key]);
 						$this->session->delete('product_cart_qty'.$value);
@@ -168,6 +169,10 @@ class Cash_on_delivery_Controller extends Layout_Controller
 							$product_color = $value;
 						}
 					}
+//                                            $this->free_gift="";
+//                                            $transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
+//
+//                                                    $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
 					if($this->session->get('prime_customer')==1){
 								//if(array_key_exists($merchant_id,$cart_merchant)){
 									
@@ -186,12 +191,12 @@ class Cash_on_delivery_Controller extends Layout_Controller
 
 					$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
 				//}
-			}else{
-				$this->free_gift="";
-				$transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
+                                    }else{
+                                            $this->free_gift="";
+                                            $transaction = $this->cod->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 5, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type);
 
-					$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
-			}
+                                                    $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
+                                    }
 				}
                             }
 			}
@@ -215,7 +220,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 		$this->products_list = $this->cod->get_products_coupons_list($transaction,$deal_id);
 		$this->product_size = $this->cod->get_shipping_product_size();
 		$this->product_color = $this->cod->get_shipping_product_color();
-
+                //echo "die here"
 		$this->merchant_id = $this->products_list->current()->merchant_id;
 		$this->get_merchant_details = $this->cod->get_merchant_details($this->merchant_id);
 		$this->merchant_firstneme = $this->get_merchant_details->current()->firstname;
@@ -228,7 +233,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
                 $this->customer_email = $U->email;
                 
 		$message_merchant = new View("themes/".THEME_NAME."/payment_mail_product_merchant");
-
+                
 		if(EMAIL_TYPE==2) {
 			email::smtp($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 			
@@ -236,7 +241,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
 			email::sendgrid($from,$this->merchant_email, $this->Lang['USER_BUY'] ,$message_merchant);
 		}
 
-
+                
 			if($U->referred_user_id && $U->deal_bought_count == $qty){
 				$update_reff_amount = $this->cod->update_referral_amount($U->referred_user_id);
 			}
