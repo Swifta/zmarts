@@ -188,8 +188,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     <div class="">
 <!--                        <h1><?php echo $this->Lang['FORGOT_PSWD']; ?></h1>-->
                         <div class="">
-                        <form action="<?php echo PATH;?>merchant/forgot-password.html" method="post" class="swifta_form" style="background:#fff">
-                             <h1 class="swifta_h1">Forgot Password?</h1>
+                        <form action="<?php echo PATH;?>admin/forgot-password.html" method="post" class="swifta_form" style="background:#fff">
+                             <h1 class="swifta_h1">Admin Password Recovery</h1>
                             <ul>
                                
                                 <li>
@@ -197,17 +197,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <?php if(isset($this->email_error)){ echo "<em>".$this->email_error."</em>"; } ?>
                                     <em><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></em>
                                 </li>
-                                <li class="mv"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php echo $this->Lang['CAPTCHA']; ?>"  /></li>
-                                <li class="mv"><p><?php echo $this->Lang['ETR_TXT_BLW']; ?></p></li>
-                                <li class="mv"><strong ><?php echo $this->Lang['CAPTCHA']; ?> : </strong></li>
-                                <li>
-                                    <div class="login_capcta_bg"> <input class="swifta_input" placeholder="Enter Your Captcha" type="text" name="captcha"  maxlength="32" required autofocus/> </div>
-                                    <div class="captcha_error_msg"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></div>
-                                    <div class="captcha_error_msg"><em><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></em></div>
-                                 </li>
                                 <li class="mv">
                                     <input class="submit" type="submit" value="" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
-                                    <input class="cancel" type="button"  title="<?php echo $this->Lang['CANCEL']; ?>"  onclick="window.location.href='<?php echo PATH; ?>merchant-login.html'"/>
+                                    <input class="cancel" type="button"  title="<?php echo $this->Lang['CANCEL']; ?>"  onclick="window.location.href='<?php echo PATH; ?>admin/forgot-password.html'"/>
                                 </li>
                             </ul>
                      </form>

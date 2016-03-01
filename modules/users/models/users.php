@@ -224,7 +224,7 @@ class Users_Model extends Model
                         $fb_profile->name = "UNKNOWN";
                     }
 			
-			$insert = $this->db->insert("users",array("firstname" => $fb_profile['name'],"UserType" => "4"/*, "lastname" => $fb_profile->last_name */,
+			$insert = $this->db->insert("users",array("firstname" => $fb_profile['name'],"user_type" => "4"/*, "lastname" => $fb_profile->last_name */,
                             "email" => $fb_profile_email, "password" => md5($pswd), 
                             "city_id" => $city_id , "country_id" => $country_value,"referral_id" => $referral_id,
                             "referred_user_id" =>$referred_user_id,"joined_date" => time(), "last_login" => time(),  "fb_user_id" => $fb_profile['id'],

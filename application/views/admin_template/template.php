@@ -15,7 +15,8 @@ echo $this->template->javascript;
 </head>
 <body>
     <div class="container_outer fl clr">
-		<?php  echo new View("admin_template/header"); ?>
+        
+                <?php if($this->session->get("user_type")>0){ echo new View("admin_template/header"); } ?>
 
         <div class='success_msg_out'>
 		    <?php if(!empty($this->response)){ ?>
