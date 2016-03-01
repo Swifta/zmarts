@@ -1269,7 +1269,7 @@ function city_change_merchant(country){
            }
            else{
                 document.getElementById("CitySD_log_Signup").innerHTML = data.responseText;
-                $("#CitySD_Signup").html(data);
+                $("#CitySD_Signup").html(data.responseText);
             }
         },
         error: function() {
