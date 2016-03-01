@@ -474,7 +474,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             
 <!--                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>-->
                         
-           <div style="background-color: lightgoldenrodyellow; opacity: .8; border:1px solid #ccc; min-height:30px; padding:5px 5px 8px; ">
+           <div style="background-color: #FFFBEF; opacity: .8; border:1px solid #ccc; min-height:30px; padding:5px 5px 8px; ">
                         
                         <div class="row">
                             
@@ -696,53 +696,104 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 			<span class="modal_close"><i class="fa fa-times"></i></span>
 		</header>
 		
-		<section class="popupBody">
-			<!-- Social Login -->
+            <section class="popupBody">
+			<!-- Social Login  #7f8c8d-->
 			<div class="social_login">
-				<div class="clearfix">
-
-				</div>
-<!--				<div class="centeredText">
-					<span>Login Or Change Your Password</span>
-				</div>-->
-
-<!--				<div class="action_btns">
-					<div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
-					<div class="one_half last"><a href="#" id="register_form" class="btn">Forget password</a></div>
-				</div>-->
+				<div class="clearfix"></div>
 			</div>
+                        
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 user_login mrg-left">
+                                   <form class="form-horizontal" method="post" action="<?php echo PATH; ?>/merchant-login.html">
+                                    <div class="form-group">
+                                      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                      <div class="col-sm-8">
+                                          <input type="email" name="email" class="form-control bdr" id="inputEmail3" placeholder="Email your email"  value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="inputEmail" class="col-sm-2 control-label">Password</label>
+                                      <div class="col-sm-8">
+                                        <input type="password" name="password" class="form-control bdr" id="inputEmail" placeholder="Enter your password" required>
+                                      </div>
+                                    </div> 
+                                       <div class="form-group" style="margin-left:26px;">
+                                        <div class="col-sm-offset-2 col-sm-5">
+                                            <p style="font-size:16px; color:#7f8c8d; line-height: 40px" id="forgot_pwd" class="back_btn">Forgot Username / Password?</p>
+                                        </div>
+                                         <div class="col-sm-offset-1 col-sm-2 ">
+                                             <button type="submit" style="padding-left:40px; padding-right:40px;" id="sign_in" class="btn btn-danger red_btn">Sign in</button>
+                                         </div>
+                                    </div>
+                                  </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 user_register mrg-left">
+                                   <form class="form-horizontal" method="post" action="<?php echo PATH;?>merchant/forgot-password.html">
+                                    <div class="form-group">
+                                      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                      <div class="col-sm-8">
+                                          <input type="text" name="email" class="form-control bdr" id="inputEmail3" placeholder="Email your email"  value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-sm-2 control-label">Captcha</label>
+                                        <div class="col-sm-2">
+                                            <img height="50" width="160" src="<?php echo PATH; ?>/captcha/default" alt="captcha"/>
+                                            <?php if(isset($this->email_error)){ echo "<em>".$this->email_error."</em>"; } ?>
+                                            <p class="help-block"><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></p>
+                                        </div>
+                                        <div class="col-sm-5 ml">
+                                          <input type="text" name="captcha" class="form-control bdr" id="inputcaptcha" placeholder="Enter the captcha code here"  maxlength="32" required autofocus>
+                                          <p class="help-block"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></p>
+                                          <p class="help-block"><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></p>
+                                      </div>
+                                    </div>
+                                       
+                                    <div class="form-group btn_margin ">
+                                        <div class="col-sm-offset-2  col-sm-5">
+                                            <button type="submit" style="padding-left:40px; padding-right:40px;" class="btn btn-default back_btns button_left"><i class="fa fa-angle-double-left"></i> Back</button>
+                                         </div>
+                                         <div class="col-sm-offset-1 col-sm-2">
+                                             <button type="submit" id="sign_in" style="padding-left:40px; padding-right:40px;" class="btn btn-danger red_btn button_right" title="<?php echo $this->Lang['SUBMIT']; ?>">Submit</button>
+                                         </div>
+                                    </div>
+                                  </form>
+                                </div>
+                            </div>
+                                
+                            </div>
+                        </section>
+                        </div>
+                    </div>
 
-			<!-- Username & Password Login form -->
+<!--                                                <div class="one_half"><a  href="#" style="width:30%; margin-left: 200px;color:#fff;background-color:#A61C00 ;" class="btn back_btns swifta_input"><i class="fa fa-angle-double-left"></i> Back</a></div>
+						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>
+                                                <input class="swifta_button" type="submit" style="width:160px; margin-left: 62px;" value="Submit" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
+					
+
+
+			 Username & Password Login form 
 			<div class="user_login">
                             <form method="post" action="<?php echo PATH; ?>/merchant-login.html" >
-<!--					<label>Email / Username </label>
-					<input type="text" required />
-					<br />
-
-					<label>Password</label>
-					<input type="password" required />
-					<br />-->
-<input  class="swifta_input" name="email" placeholder="Email" type="text" value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
+                            <input  class="swifta_input" name="email" placeholder="Email" type="text" value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
 
                       <input class="swifta_input" name="password" placeholder="Password" type="password" required>
-<!--					<div class="checkbox">
-						<input id="remember" type="checkbox" />
-						<label for="remember">Remember me on this computer</label>
-					</div>-->
-
 					<div class="action_btns">
 						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Forgot your password ?</a></div>
-<!--						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>-->
+						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>
 
                                                 <input type="submit" style="width:160px; margin-left: 62px;" class="one_half last swifta_button" value="LOGIN"  title="<?php echo $this->Lang['LOGIN']; ?>" />
 					</div>
 				</form>
 
-<!--				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>-->
+				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>
                                 
 			</div>
 
-			<!-- Register Form -->
+			 Register Form 
 			<div class="user_register" style="margin-top: -50px;">
                             <form method="post" action="<?php echo PATH;?>merchant/forgot-password.html">
 					<li>
@@ -751,10 +802,10 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <em><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></em>
                                 </li>
 
-<!--                                        
+                                        
                                         <label>Captcha</label>
 					<input type="text" required />
-					<br />-->
+					<br />
                                         
                                         
                                 <li class="mv" style="margin-left:200px;"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php //echo $this->Lang['CAPTCHA']; ?>"  /></li>
@@ -765,15 +816,15 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <div class="captcha_error_msg"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></div>
                                     <div class="captcha_error_msg"><em><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></em></div>
                                  </li>
-<!--                                <li class="mv">
+                                <li class="mv">
                                     <input class="submit" type="submit" value="" title="<?php //echo $this->Lang['SUBMIT']; ?>"/> 
                                     <input class="cancel" type="button"  title="<?php //echo $this->Lang['CANCEL']; ?>"  onclick="window.location.href='<?php //echo PATH; ?>merchant-login.html'"/>
-                                </li>-->
+                                </li>
                                         
                                         
                                         
                                         
-<!--					<label>Email Address</label>
+					<label>Email Address</label>
 					<input type="email" />
 					<br />
 
@@ -784,21 +835,21 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 					<div class="checkbox">
 						<input id="send_updates" type="checkbox" />
 						<label for="send_updates">Send me occasional email updates</label>
-					</div>-->
+					</div>
 
 					<div class="action_btns">
 						<div class="one_half"><a  href="#" style="width:30%; margin-left: 200px;color:#fff;background-color:#A61C00 ;" class="btn back_btns swifta_input"><i class="fa fa-angle-double-left"></i> Back</a></div>
-<!--						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>-->
+						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>
                                                 <input class="swifta_button" type="submit" style="width:160px; margin-left: 62px;" value="Submit" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
 					</div>
 				</form>
 			</div>
 		</section>
 	</div>
-</div>
+</div>-->
  
  <script type="text/javascript">
-	$("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+	$("#modal_trigger").leanModal({top : 100, overlay : 0.6, closeButton: ".modal_close" });
 
 	$(function(){
 		// Calling Login Form
@@ -825,7 +876,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 			$(".user_register").show();
 			$(".social_login").show();
                         
-			$(".header_title").text('Forget Password');
+			$(".header_title").text('Password Recovery');
 			return false;
 		});
                 
