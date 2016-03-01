@@ -373,9 +373,9 @@ $content_text = array(
 
 "PAY_BEFORE" => "Payment must be made on or before",
 
-"AUTO_CANCEL_PRO" => "or this order automatically cancels and the product is placed back",
+"AUTO_CANCEL_PRO" => "If payment is not made by this date, your order will be automatically canceled and the product will be returned ",
 
-"INTO_INVEN" => "into inventory",
+"INTO_INVEN" => "into the inventory",
 
 "NON_PAY_AUC" => "Non-payment of auctions you have won on ",
 
