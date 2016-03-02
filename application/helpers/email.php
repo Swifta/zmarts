@@ -225,10 +225,10 @@ class Email{
 									$reply_to,
 									$to_field,
 									$exclude_list,
-									$attachmentUrl,
-									$inline_image,
-									$mirror_active,
-									$send_now
+									@$attachmentUrl,
+									@$inline_image,
+									@$mirror_active,
+									@$send_now
 		);
 		
 		

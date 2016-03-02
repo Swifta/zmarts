@@ -205,6 +205,7 @@
 			<?php } */ ?>
 			<th align="left" width="10%"><?php echo $this->Lang["PRD_TYP"]; ?></th>
 			<th align="left" width="10%"><?php echo $this->Lang["PRODUCT_DET"]; ?></th>
+                        <th align="center" width="10%"><span style="color:red">Delete</span></th>
                </tr>
             
                 <?php $i=0; 
@@ -259,6 +260,8 @@
 						<span style="color:#0000FF;" ><?php echo $this->Lang["NOR_PRD"]; ?></span> 
 						<?php } ?></td>
                     <td align="left"><a href="<?php echo PATH.'merchant/view-products/'.$u->deal_key.'/'.$u->deal_id.'.html';?>"><?php echo $this->Lang["VIEW_DET"]; ?></a></td>
+                    <td align="center"><a href="<?php echo PATH.'merchant/delete-products/'.$u->deal_key.'/'.$u->deal_id.'.html';?>" onclick="return deleteProduct('<?php echo htmlspecialchars($u->deal_title); ?>');">
+                            <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/delete_icon.png" /></a></td>
                 </tr>
             <?php $i++;} ?>   
         </table>
@@ -271,3 +274,8 @@
     </div>
     <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
 </div>
+<script>
+    function deleteProduct(title){
+        return confirm("Are you sure you want to completely delete '"+title+"' ?");
+    }
+</script>
