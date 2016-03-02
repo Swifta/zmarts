@@ -1443,14 +1443,14 @@ $("#cart_window1").mouseover(function(){
                 dataType:"html",
                 success:function(check)
                 {
-                        $(".cart_window_products1").css({"display":"block"});
+                        //$(".cart_window_products1").css({"display":"block"});
                         $(".cart_window_products1").html(check);
                 }
         });
 });
 
 $("#cart_window1").mouseout(function(){
-	$(".cart_window_products1").css({"display":"none"});
+	//$(".cart_window_products1").css({"display":"none"});
 });
 
 

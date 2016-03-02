@@ -31,7 +31,7 @@ a{text-decoration: none;}
 .add_cart a{float: left;font:normal 14px arial;color:#fff; text-decoration: none;background: url(../../images/new/cart1.png) left center  no-repeat;padding:5px 0 5px 26px; height:21px}
 /*.add_cart a{float: left;font:normal 14px arial;color:#fff; text-decoration: none;background: url(../../images/new/cart1.png) left center  no-repeat;padding:5px 0 5px 26px; height:21px}*/
 .add_cart a span{font:normal 18px arial;color:#fff;padding: 0 3px;}
-.add_cart a:hover,.drop_down ul li a:hover,.cities ul li a:hover{color:#A61C00; list-style: none; text-decoration: none;}
+.add_cart a:hover,.drop_down ul li a:hover,.cities ul li a:hover{list-style: none; text-decoration: none;}
 .menu_left{width: 892px;float: left;}
 .logo h1 a{ float:left;}
 .city_cat ul li a:hover{text-decoration: none;}
