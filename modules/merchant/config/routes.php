@@ -125,6 +125,10 @@ $config['merchant/shipping-delivery.html/page/(.*)'] = "/merchant/shipping_deliv
 $config['merchant/cash-delivery.html'] = "/merchant/cash_on_delivery";
 $config['merchant/cash-delivery.html/page/(.*)'] = "/merchant/cash_on_delivery/$1";
 $config['merchant/view-products/(.*)/(.*).html'] ="/merchant/view_products/$1/$2";
+
+$config['merchant/delete-products/(.*)/(.*).html'] ="/merchant/delete_products/$1/$2";
+
+
 $config['merchant/edit-products/(.*)/(.*)/(.*).html'] = "/merchant/edit_products/$1/$2/$3";
 $config['merchant/block-products/(.*)/(.*).html'] = "/merchant/block_products/0/$1/$2";
 $config['merchant/unblock-products/(.*)/(.*).html'] = "/merchant/block_products/1/$1/$2";

@@ -105,16 +105,19 @@ class Newsletter_Controller extends website_Controller {
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
-							->add_rules('attach', 'required')
+							//->add_rules('attach', 'required')
 							->add_rules('title', 'required')
 							->add_rules('footer', 'required');
 									
 				if(!isset($post->users) && !isset($post->all_users))
 				{
 					$post->add_rules('all_users','required');
-				}	
+				}
+                                if(isset($post->attach)){
+                                    $post->add_rules('attach', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
+                                }
 				if($_FILES["attach"]["name"]==''){
-					$img_check = 1;
+                                    $img_check = 0; //1; //image upload no more compulsary
 				} 
 				if($post->validate() && $img_check ==0){
 					$file=array();
@@ -455,17 +458,18 @@ class Newsletter_Controller extends website_Controller {
 			$status = $this->news->deleteTemplate($newsletter_id);
 			if($status == 1){
 				@unlink(realpath(DOCROOT."images/newsletter/".$newsletter_id).".png");
-				unlink(realpath(DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id).".php");
+				@unlink(realpath(DOCROOT."application/views/themes/".THEME_NAME."/Template_file_".$newsletter_id).".php");
 				common::message(1, $this->Lang["TEMPLATE_DEL_SUC"]);
 			}else{
 				common::message(-1, $this->Lang["NO_RECORD_FOUND"]);
 			}
 		}
-		$lastsession = $this->session->get("lasturl");
-		if($lastsession){
-			url::redirect(PATH.$lastsession);
-		} else {
-			url::redirect(PATH."admin/manage-template.html");
-		}
+		//$lastsession = $this->session->get("lasturl");
+                url::redirect(PATH."admin/manage-template.html");
+//		if($lastsession){
+//			url::redirect(PATH.$lastsession);
+//		} else {
+//			url::redirect(PATH."admin/manage-template.html");
+//		}
 	}
 }

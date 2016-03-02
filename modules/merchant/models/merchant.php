@@ -1546,6 +1546,23 @@ class Merchant_Model extends Model
 	             		->get();
            return $result;
 	}
+        
+        public function isProductDeleteable($deal_key = "", $deal_id = ""){
+            $result = $this->db->select()
+                    ->from("product")
+                    ->where(array("purchase_count"=>0, "deal_id" => $deal_id, 
+                        "deal_key" => $deal_key,"product.merchant_id" => $this->user_id))
+                    ->get();
+            if(count($result) == 0){
+                return false;
+            }
+            return true;
+        }
+        
+        public function deleteProduct($deal_key = "", $deal_id = ""){
+            $this->db->delete("product", array("deal_id" => $deal_id, 
+                        "deal_key" => $deal_key,"product.merchant_id" => $this->user_id));
+        }
 
 	 /** VIEW PRODUCTSS **/
 
@@ -4151,6 +4168,7 @@ class Merchant_Model extends Model
 				$this->news_message = $post->message;
 				$this->news_footer = $post->footer;
 				$this->news_logo = $logo;
+                                
 				$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
 				if(EMAIL_TYPE==2){
 					email::smtp($from, $c->email,$post->subject,$message,$file);
@@ -4184,7 +4202,7 @@ class Merchant_Model extends Model
 						$this->newstitle = $post->title;
 						$this->newsmessage = $post->message;
 						$this->newsfooter = $post->footer;
-						$this->newslogo = $logo;
+						$this->news_logo = $logo;
 						$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
 
 						$fromEmail = NOREPLY_EMAIL;

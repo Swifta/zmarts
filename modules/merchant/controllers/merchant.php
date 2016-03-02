@@ -2288,6 +2288,23 @@ class Merchant_Controller extends website_Controller {
 	        
 	        
         }
+        
+        public function delete_products($deal_key = "", $deal_id = ""){
+		if(PRIVILEGES_PRODUCTS!= 1){
+			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
+			url::redirect(PATH."merchant.html");	        
+		}
+                if($this->merchant->isProductDeleteable($deal_key, $deal_id)){
+                    $this->merchant->deleteProduct($deal_key, $deal_id); //delete the product
+                    common::message(1, "Product successfully deleted. Thank you.");
+                    url::redirect(PATH."merchant/manage-products.html");
+                }
+                else{
+                    common::message(-1, "Cannot delete this product as it might have sales history or ".
+                            "you dont have enough privilege to perform this operation.");
+                    url::redirect(PATH."merchant/manage-products.html");
+                }
+        }
 
 	/** VIEW PRODUCTS **/
 
@@ -5611,16 +5628,18 @@ class Merchant_Controller extends website_Controller {
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
-							->add_rules('attach', 'required', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							->add_rules('title', 'required')
 							->add_rules('footer', 'required');
 				
 				if(!isset($post->users) && !isset($post->all_users))
 				{
 					$post->add_rules('all_users','required');
-				}	
+				}
+                                if(isset($post->attach)){
+                                    $post->add_rules('attach', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
+                                }
 				if($_FILES["attach"]["name"]==''){
-					$img_check = 1;
+					$img_check = 0; //1; //image upload no more compulsary
 				}
 				if($post->validate() && $img_check ==0){
 					$file=array();
@@ -5641,21 +5660,21 @@ class Merchant_Controller extends website_Controller {
 					}
 					$file1=array();
 					pdf::template_create($post->template,$post->subject,$post->message);
-
-					array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
+                                        $this->news_logo = $logo;
+					//array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
 					//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
-					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
+					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1, $logo);
 					if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
 						unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
+						//unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 						common::message(1, $this->Lang['NEWS_SENT']);
 			        }else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
+						//unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 					url::redirect(PATH."merchant.html");
