@@ -1029,7 +1029,7 @@ class Users_Model extends Model
 	public function storecredit_list_count()
 	{
 		//$result = $this->db->query("select storecredit_id from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4");
-		$result = $this->select("storecredit_id")->from("store_credit_save as s")
+		$result = $this->db->select("storecredit_id")->from("store_credit_save as s")
                         ->join("product", "product.deal_id", "s.productid")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("deal_status" =>1,"store_status"=>1,"userid"=>$this->UserID,"credit_status"!=4))
@@ -1042,8 +1042,8 @@ class Users_Model extends Model
 	public function storecredit_list($offset = "",$record = "")
 	{
 		//$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4 order by s.storecredit_id DESC limit $offset,$record");
-		$result = $this->select()->from("store_credit_save as s")
-                        ->join("product", "product.deal_id", " s.productid")
+		$result = $this->db->select()->from("store_credit_save as s")
+                        ->join("product", "product.deal_id", "s.productid")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("deal_status" =>1, "store_status" =>1, "userid" => $this->UserID, "credit_status !="=>4))
                         ->orderby("s.storecredit_id", "DESC")
