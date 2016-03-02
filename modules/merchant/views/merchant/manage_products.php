@@ -205,7 +205,7 @@
 			<?php } */ ?>
 			<th align="left" width="10%"><?php echo $this->Lang["PRD_TYP"]; ?></th>
 			<th align="left" width="10%"><?php echo $this->Lang["PRODUCT_DET"]; ?></th>
-                        <th align="center" width="10%"><span style="color:red">Delete</span></th>
+                        <th align="center" width="10%">Delete</th>
                </tr>
             
                 <?php $i=0; 
