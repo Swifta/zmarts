@@ -2300,8 +2300,9 @@ class Merchant_Controller extends website_Controller {
                     url::redirect(PATH."merchant/manage-products.html");
                 }
                 else{
-                    common::message(-1, "Cannot delete this product as it might have sales history or ".
-                            "you dont have enough privilege to perform this operation.");
+                    common::message(-1, "This product cannot be deleted as it may contain "
+                            ."certain sales history or that you do not have enough permission "
+                                ."to perform this operation.");
                     url::redirect(PATH."merchant/manage-products.html");
                 }
         }
@@ -5116,18 +5117,19 @@ class Merchant_Controller extends website_Controller {
 						->add_rules('banner_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						->add_rules('banner_2_link','valid::url')
 						->add_rules('bannee_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('banner_3_link','valid::url')
-						->add_rules('ads_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_1_link','valid::url')
-						->add_rules('ads_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_2_link','valid::url')
-						->add_rules('ads_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_3_link','valid::url');
+						->add_rules('banner_3_link','valid::url');
+//						->add_rules('ads_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_1_link','valid::url')
+//						->add_rules('ads_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_2_link','valid::url')
+//						->add_rules('ads_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_3_link','valid::url');
 						if($post->sector!="")
 						{
 							$post->add_rules('subsector','required');
 						}
 			if($post->validate()){
+                            
 					$store_details = $this->merchant->get_store_name($store_id);
 					$old_store_name = $store_details[0]->store_url_title;
 					$old_modules_name = 'stores';
@@ -5139,8 +5141,10 @@ class Merchant_Controller extends website_Controller {
 						$old_modules_details = $this->merchant->get_subsector_name($store_details[0]->store_subsector_id);
 						$old_modules_name = isset($old_modules_details[0]->sector_name)?strtolower($old_modules_details[0]->sector_name):'stores';
 					}
+                                        
 			        $status = $this->merchant->update_merchant_attribute(arr::to_object($this->userpost),$store_id);
-			        if($status){
+			        
+                                if($status){
 						
 						$this->sectorname = "Default";
 						if($this->userpost['sector']!=''){
@@ -5167,46 +5171,50 @@ class Merchant_Controller extends website_Controller {
 						
 						
 			                if($_FILES['banner_1']['name']){
-						$banner1 = upload::save('banner_1');
-						$IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
-						common::image($banner1, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner1);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
+						$banner1 = upload::save('banner_1', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						
+						//common::image($banner1, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner1);
 					}
 					
 					if($_FILES['banner_2']['name']){
-						$banner2 = upload::save('banner_2');
-						$IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
-						common::image($banner2, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner2);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
+						$banner2 = upload::save('banner_2', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						
+						//common::image($banner2, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner2);
 					}
 					
 					if($_FILES['banner_3']['name']){
-						$banner3 = upload::save('banner_3');
-						$IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
-						common::image($banner3, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner3);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
+						$banner3 = upload::save('banner_3', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						
+						//common::image($banner3, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner3);
 					}
 					
-					if($_FILES['ads_1']['name']){
-						$ads1 = upload::save('ads_1');
-						$IMG_NAME = $status."_".$this->sectorname."_1_ads.png";
-						common::image($ads1, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads1);
-					}
-					
-					if($_FILES['ads_2']['name']){
-						$ads2 = upload::save('ads_2');
-						$IMG_NAME = $status."_".$this->sectorname."_2_ads.png";
-						common::image($ads2, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads2);
-					}
-					
-					if($_FILES['ads_3']['name']){
-						$ads3 = upload::save('ads_3');
-						$IMG_NAME = $status."_".$this->sectorname."_3_ads.png";
-						common::image($ads3, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads3);
-					}
+//					if($_FILES['ads_1']['name']){
+//						$ads1 = upload::save('ads_1');
+//						$IMG_NAME = $status."_".$this->sectorname."_1_ads.png";
+//						common::image($ads1, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						unlink($ads1);
+//					}
+//					
+//					if($_FILES['ads_2']['name']){
+//						$ads2 = upload::save('ads_2');
+//						$IMG_NAME = $status."_".$this->sectorname."_2_ads.png";
+//						common::image($ads2, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						unlink($ads2);
+//					}
+//					
+//					if($_FILES['ads_3']['name']){
+//						$ads3 = upload::save('ads_3');
+//						$IMG_NAME = $status."_".$this->sectorname."_3_ads.png";
+//						common::image($ads3, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						unlink($ads3);
+//					}
+                                       
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
@@ -5286,9 +5294,12 @@ class Merchant_Controller extends website_Controller {
 			        url::redirect(PATH."merchant/manage-shop.html");
 			}
 			else{
+                             
 				$this->form_error = error::_error($post->errors());
 			}
+                        
 		}
+                
 	        $this->mer_merchant_act = 1;
 	        $this->store_personalized = 1;
 	       // $this->user_details = $this->merchant->get_merchant_balance();

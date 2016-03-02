@@ -163,6 +163,9 @@
                 <input type="hidden" name="ads_1_link" value="" />
                 <input type="hidden" name="ads_2_link" value="" />
                 <input type="hidden" name="ads_3_link" value="" />
+                <input type="hidden" name="ads_1" value="" />
+                <input type="hidden" name="ads_2" value="" />
+                <input type="hidden" name="ads_3" value="" />
                 <!-- 
                 <tr style="background-color:#ff9800;width:8px;border:1px solid black;padding:10px;"> <td></td><td><label><b><?php echo $this->Lang["ADS_2"]; ?></b></label></td></tr>
                 <tr>
