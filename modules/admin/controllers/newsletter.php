@@ -124,15 +124,17 @@ class Newsletter_Controller extends website_Controller {
 					$extension="";
 					$logo = "";
 					if($_FILES["attach"]["name"]!=''){
-					$dir = realpath(DOCROOT."images/newsletter");
-                       $tmp_name = upload::save('attach', null, $dir, 0777);
-                       $logo = basename($tmp_name);
-                       $this->news_logo = $logo;
+                                            
+					$dir = DOCROOT."images/newsletter/";
+                                        $tmp_name = upload::save('attach', text::random($type = 'alnum', $length = 10).".png", $dir);
+                                        $logo = basename($tmp_name);
+                                        //echo "was here ".$logo;die;
+                                        $this->news_logo = $logo;
                        //echo $tmp_name." and ".$dir." and ".basename($tmp_name);die;
 						//$tmp_name = basename($_FILES["attach"]["tmp_name"]);
 						//$logo = basename($_FILES["attach"]["name"]);
 						//move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
-						chmod($tmp_name,0777);
+						//chmod($tmp_name,0777);
                                                 //die;
 					}
 					               
@@ -155,7 +157,7 @@ class Newsletter_Controller extends website_Controller {
                     $status = $this->news->send_newsletter(arr::to_object($this->userPost),$file1,$logo);
                     if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
-						unlink(realpath(DOCROOT."images/newsletter").DIRECTORY_SEPARATOR.$logo);
+						//unlink(realpath(DOCROOT."images/newsletter").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);

@@ -116,7 +116,7 @@ class Newsletter_Model extends Model
 					$this->newstitle = $post->title;
 					$this->newsmessage = $post->message;
 					$this->newsfooter = $post->footer;
-					$this->newslogo = $logo;
+					$this->news_logo = $logo;
 					$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
 
 					$fromEmail = NOREPLY_EMAIL;

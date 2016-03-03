@@ -610,7 +610,7 @@ class Admin_auction_Model extends Model
 
 	public function get_winner_list($offset = "", $record = "", $name = "",$limit="")
 	{
-		$limit1 = $limit !=1 ?"limit $offset,$record":"";
+		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 		
 		$contitions = "auction.winner != 0 and  bidding.winning_status!=0";
 		if($_GET){
@@ -625,13 +625,11 @@ class Admin_auction_Model extends Model
                          ->join("city","city.city_id","users.city_id")
                          ->join("country","country.country_id","users.country_id")
                          ->join("bidding","bidding.auction_id","auction.deal_id")
-                         ->where($contitions)
-                         ->orderby("auction.deal_id", "DESC")
-                         ->limit($limit1)
+                         ->where($contitions." order by auction.deal_id DESC ".$limit1)
+//                         ->orderby("auction.deal_id", "DESC")
+//                         ->limit($limit1)
                          ->get();
-		 
-	return $result;  
-	
+                return $result;  
 	}
 
 	/** AUCTION WINNER 	COUNT  **/

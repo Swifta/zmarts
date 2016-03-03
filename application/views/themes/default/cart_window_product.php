@@ -32,7 +32,7 @@
                         </td>
                         <td><span>X</span></td>
 
-                                                                        <td width="20"><p id="head_totalamount<?php echo $cart->deal_id; ?>"><?php  echo number_format((float) $cart->deal_value ,3,'.',''); ?></p></td>
+                        <td width="20"><p id="head_totalamount<?php echo $cart->deal_id; ?>"><?php  echo number_format((float) $cart->deal_value ,2,'.',''); ?></p></td>
                                                                         <td width="15">
                                                                                  <a class="cart_delete" onclick="delete_cart('<?php echo $cart->deal_id; ?>');" title="<?php echo $this->Lang['RMV']; ?>">&nbsp;</a>
                                                                                 </td>
@@ -49,8 +49,9 @@
 </div>
         <?php if(count($this->cart_window_product_details)>0){?>
 
-<a class="btn btn-warning" style="background: red; padding:8px 25px; float:left;" <?php if($this->UserID){ ?>  href="<?php echo PATH ?>cart.html"  <?php } else { ?> href="javascript:showlogin();" <?php } ?>>Checkout</a>
-<a class="btn btn-info" style="background: #144f5d; padding:8px 25px; float: right;" href="<?php echo PATH ?>">Continue Shopping</a>
+<a class="btn btn-warning" style="background: red; padding:8px 25px; color:white; float:left;z-index: 55555555555555555555;" <?php if($this->UserID){ ?> onclick="window.location.href='<?php echo PATH ?>cart.html';"  <?php } 
+else { ?> onclick="showlogin();" <?php } ?> >Checkout</a>
+<a class="btn btn-info" style="background: #144f5d; padding:8px 25px; color:white; float: right;z-index: 55555555555555555555;" onclick="window.location.href='<?php echo PATH ?>';">Continue Shopping</a>
 
         <?php } ?>
 
