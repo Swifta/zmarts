@@ -20,6 +20,11 @@ class Products_Model extends Model
 		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
 		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
 		
+                $this->deal_value_condition_cart = 'product.deal_prime_value as deal_value';
+                $this->deal_value_condition_field_cart = 'product.deal_prime_value';
+//                (strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_cart = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+//		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field_cart = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+
 		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = 'product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
 		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = 'product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
 		
@@ -701,12 +706,12 @@ class Products_Model extends Model
                         $join_a = "";
                         $join_b = "";
 		if($type ==1) { 				// Store credits products
-			$condition = ' and credit_status =1 and product_duration != ""';
+			$condition = ' and credit_status =1 and product_duration = ""';
 			$join =" left join store_credit_save on store_credit_save.productid = product.deal_id";
                         $join_table = "store_credit_save";
                         $join_a = "store_credit_save.productid";
                         $join_b = "product.deal_id";
-                    $result = $this->db->select("*, ".$this->deal_value_condition)
+                    $result = $this->db->select("*, ".$this->deal_value_condition_cart)
                             ->from("product")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join($join_table, $join_a, $join_b, "LEFT")
@@ -714,12 +719,21 @@ class Products_Model extends Model
                             ->get();
 		} else { 				// Normal Products
 			$condition = ' and product_duration = ""';
-		$result = $this->db->select("*, ".$this->deal_value_condition)
+		$result = $this->db->select("*, ".$this->deal_value_condition_cart)
                         ->from("product")
                         ->join("stores","stores.store_id","product.shop_id")
                         ->where("deal_id = " .$deal_id. " " .$condition)
                         ->get();
+                    if(count($result) == 0){
+                        $condition = "";
+                            $result = $this->db->select("*, ".$this->deal_value_condition_cart)
+                            ->from("product")
+                            ->join("stores","stores.store_id","product.shop_id")
+                            ->where("deal_id = " .$deal_id. " " .$condition)
+                            ->get();
+                    }
 		} 
+                //var_dump($result);die;
 		//$result = $this->db->query("select *, $this->deal_value_condition from product join  stores on stores.store_id = product.shop_id $join where deal_id = $deal_id $condition");
                 //$result = $this->db->from("product")->join("stores","stores.store_id","product.shop_id")->where(array("deal_id" => $deal_id))->get();
 		return $result;

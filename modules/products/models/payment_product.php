@@ -259,7 +259,7 @@ public function get_cart_products1($deal_id = "")
 	public function check_user_instalment_limit($installment_value="")
 	{
             $result = $this->db->select("monthly_installment_amt")->from("users")
-                    ->where(array("user_id"=>$this->UserID));
+                    ->where(array("user_id"=>$this->UserID))->get();
 		//$result = $this->db->query("select monthly_installment_amt from users where user_id = $this->UserID");
 		if(isset($result)) {
 			$balance_instalment_amt = MONTHLY_INSTALLMENT_LIMIT - $result->current()->monthly_installment_amt;

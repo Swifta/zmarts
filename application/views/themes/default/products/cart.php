@@ -244,7 +244,9 @@
                                     if ((is_string($value)) && ($key == 'product_cart_id' . $value)) {
                                         $this->products = new Products_Model();
                                         $this->get_cart_products = $this->products->get_cart_products($this->session->get($key));
+                                        //var_dump($this->get_cart_products);
                                         foreach ($this->get_cart_products as $products) {
+                                            //var_dump($products);
                                             $get_size_name = $this->products->get_size_data($products->deal_id);
                                             $get_color_data = $this->products->get_color_data($products->deal_id);
                                             $taxamount = TAX_PRECENTAGE_VALUE;
@@ -322,7 +324,8 @@
                                                                 <?php } ?>
                                                         </div> 
                                                         
-                                                        <?php  if($this->session->get('user_auto_key')) { $product_duration =  unserialize($products->product_duration);
+                                                        <?php  if($this->session->get('prime_customer')) { 
+                                                            $product_duration =  unserialize($products->product_duration);
 																if($product_duration !="") { ?>
                                                 <div class="store_credits">
 																<label> <?php echo $this->Lang["STR_CRD"]; ?></label>

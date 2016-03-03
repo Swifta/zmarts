@@ -5664,7 +5664,7 @@ class Merchant_Controller extends website_Controller {
 						*/
 						
 						$dir = DOCROOT."images".DIRECTORY_SEPARATOR."newsletter";
-						$source = upload::save('attach', null, $dir, 0777);
+						$source = upload::save('attach', text::random($type = 'alnum', $length = 10).".png", $dir, 0777);
 						$logo = basename($source);
 						
 						
@@ -5677,7 +5677,7 @@ class Merchant_Controller extends website_Controller {
 					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1, $logo);
 					if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
-						unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
+						//unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
