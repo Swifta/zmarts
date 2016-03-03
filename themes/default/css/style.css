@@ -2411,7 +2411,10 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .store_deal ul li{float: left;margin:10px 6px;}
 
 /*header cart over*/
-.cart_window_products1{position: absolute;width: 300px;display: none;border:1px solid #ddd;background: #fff;top: 87px;right: 233px;z-index: 5;padding:5px;}
+.add_cart{
+	position:relative;
+}
+.cart_window_products1{position: absolute;width: 300px;display: none;border:1px solid #ddd;background: #fff;top: 30px;right: 2px;z-index: 5;padding:5px;}
 .add_cart:hover .cart_window_products1{display: block;}
 .limit_scroll{width: 100%;max-height: 270px;overflow-y: auto;float: left;}
 .crt_top_slt{float: left;width: 94%;padding: 10px 3%;background: #00A2E8;}
