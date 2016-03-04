@@ -158,6 +158,7 @@ class Webpay_Controller extends Layout_Controller
             $this->CardNumber = "0000";
             $this->RetrievalReferenceNumber = 0;
             $this->paid_amount = 0;
+            $db_transaction_id = $this->session->get("db_transaction_id");
 //            echo "Interswitch Called Redirect URL HERE<br />"; 
 //            echo $_REQUEST['resp']."<br />";
 //            echo $_REQUEST['desc']."<br />";
@@ -214,39 +215,95 @@ class Webpay_Controller extends Layout_Controller
                         $this->success = true;
                         $ack = "SUCCESSFUL TRANSACTION";
                         $this->paid_amount = intval($interswitch->Amount/100);
+                        
+			$product_color="";
+			$paymentType = "INTERSWITCH";
+			$captured = 0;
+			$total_amount="";
+		        $total_qty="";
+		        $product_title="";
+		        $produ_qty="";
+		        $total_shipping="";
+		        $pay_amount1=0; // for total transaction amount for success page
+                        
+		foreach($_SESSION as $key=>$value){
+                  
+                    //$value = $this->session->get("count");
+                    if(!is_array($value)){
+                        if(($value && $key=='product_cart_id'.$value)){
+                            //echo "in ";
+                            $product_color = 0;
+                            $product_size = 0;
+                            $deal_id = $_SESSION[$key]; //$value = intval($loop+1); 
+                            $item_qty = $this->session->get('product_cart_qty'.$deal_id);
+                            $this->session->set('product_cart_qty'.$deal_id,$item_qty);
+                            $amount = $this->input->post("amount");
+                            //echo $deal_id;break;
+                            $this->deals_payment_deatils = $this->webpay->get_product_payment_details($deal_id);
+                            //var_dump($this->deals_payment_deatils); die;
+                            //echo $deal_id." and ".$this->deals_payment_deatils->deal_title; die;
+                            foreach($this->deals_payment_deatils as $UL){
+
+                                    $purchase_qty = $UL->purchase_count;
+                                    $deal_title = $UL->deal_title;
+                                    $deal_key  = $UL->deal_key;
+                                    $url_title = $UL->url_title;
+                                    $deal_value = $UL->deal_value;
+                                    $product_amount = $UL->deal_value*$item_qty;
+                                    //echo $this->session->get('user_auto_key'); die;
+                                    if($this->session->get('user_auto_key')) {
+                                        $product_amount = $UL->deal_prime_value*$item_qty;
+                                        $deal_value = $UL->deal_prime_value;
+                                    }
+                                    $merchant_id = $UL->merchant_id;
+                                    $product_shipping = $UL->shipping_amount;
+                                    $shipping_methods = $UL->shipping;
+                            }
+
+                             if($shipping_methods  == 1){
+                                    $shipping_amount = 0;
+                            }  elseif($shipping_methods  == 2){
+                                    $merchant_flat_amount = $this->webpay->get_userflat_amount($merchant_id);
+                                    $shipping_amount = $merchant_flat_amount->flat_amount;
+                            } elseif($shipping_methods  == 3){
+                                    $shipping_amount =$product_shipping;
+                            } elseif($shipping_methods  == 4){
+                                    $shipping_amount =$product_shipping*$item_qty;
+                            } elseif($shipping_methods  == 5){
+                                     $shipping_amount = 0;
+                            }
+
+                            $taxdeal_amount=($deal_value*$item_qty)+$shipping_amount;
+                            $tax_amount = ((TAX_PRECENTAGE_VALUE/100)*$taxdeal_amount);
+                            $pay_amount1 += ($taxdeal_amount+$tax_amount);
+
+                            foreach($_SESSION as $key=>$value)
+                            {
+                                    if(($key=='product_size_qty'.$deal_id)){
+                                    $product_size = $value;
+                                    }
+                                    if(($key=='product_color_qty'.$deal_id)){
+                                    $product_color = $value;
+                                    }
+                            }
+
+                            //$transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 7, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
+                            //var_dump($transaction);
+                            //$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
+                            //echo "here"; die;
+                            //break;
+                            $status = $this->do_captured_transaction(0, $deal_id,$item_qty,$db_transaction_id);
+                           }
+                            //$loop++;
+                        }
+	            }
+                    
+                        //process email sending
+                        
+                        $status = $this->do_captured_transaction1(0, $deal_id,$item_qty,$db_transaction_id,$txnref);
                         //on successful transaction. empty the cart
                         //unset($_SESSION['count']);
                         //var_dump($_SESSION);
-                        /*
-                        foreach($_SESSION as $key=>$value){
-                            if(true){
-                                
-                            $deal_id = $_SESSION[$key];
-                            //unset($_SESSION[$key]);
-                             $item_qty = $this->session->get('product_cart_qty'.$deal_id);
-                             unset($_SESSION['product_cart_qty'.$deal_id]);
-                             $product_size = "1";
-                               foreach($_SESSION as $key=>$value) {
-                                    if(($key=='product_size_qty'.$deal_id)){
-                                        unset($_SESSION[$key]);
-                                    }
-                                    if(($key=='product_quantity_qty'.$deal_id)){
-                                       unset($_SESSION[$key]);
-                                    }
-                                    if(($key=='store_credit_id'.$deal_id)){
-                                        $this->session->delete('product_size_qty'.$deal_id);
-                                        $this->session->delete('product_quantity_qty'.$deal_id);
-                                        $this->session->delete('product_color_qty'.$deal_id);
-                                        $this->session->delete('store_credit_period'.$deal_id);
-                                        $this->session->delete('product_cart_qty'.$deal_id);
-                                        $this->session->delete('product_cart_id'.$deal_id);
-                                        unset($_SESSION[$key]);
-                                    }
-                                }
-                                
-                            }
-                        }  
-                        */
 				 foreach($_SESSION as $key=>$value)
 					{
 						//if(!is_object($value) && !is_array($value)) {
@@ -289,6 +346,7 @@ class Webpay_Controller extends Layout_Controller
 								unset($_SESSION[$key]);
 						}
 				}
+                                
                 $this->session->delete("count");
                 $this->session->delete('shipping_name');
                 $this->session->delete('shipping_address1');
@@ -302,6 +360,7 @@ class Webpay_Controller extends Layout_Controller
                 $this->session->delete('aramex_currencycode');
                 $this->session->delete('aramex_value');
                 $this->session->delete('payment_result');
+                $this->session->delete("db_transaction_id");
                 
                 
                     }
@@ -462,8 +521,10 @@ class Webpay_Controller extends Layout_Controller
                         }
                         
                         $transaction = $this->webpay->insert_transaction_details($deal_id, $referral_amount, $item_qty, 7, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID);
-                        //var_dump($transaction);
-                        $status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
+                        //store transaction_db id in the session
+                        $this->session->set("db_transaction_id", $transaction);
+//var_dump($transaction);
+                        //$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
                         //echo "here"; die;
                         //break;
                        }
@@ -507,7 +568,7 @@ class Webpay_Controller extends Layout_Controller
                     //var_dump($_SESSION);
                     //die;
                     //remove comment below
-               $status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
+               //$status = $this->do_captured_transaction1($captured, $deal_id,$item_qty,$transaction,$TRANSACTIONID);
                 $this->transaction_result = array("TIMESTAMP" => date('m/d/Y h:i:s a', time()), "ACK" => $this->Lang['SUCCESS'] ,"AMT"=> $pay_amount1,"CURRENCYCODE"=>CURRENCY_CODE);
                 $this->result_transaction = arr::to_object($this->transaction_result);
                 //dont need the line of code below

@@ -73,12 +73,12 @@
                 </tr>
                         
                
-                <tr><td><label><?php echo $this->Lang['BG_COLOR']; ?> :</label></td><td><input type="text" id="color" name="bg_color" value="<?php echo $d->bg_color; ?>" readonly /><em><?php if(isset($this->form_error["bg_color"])){ echo $this->form_error["bg_color"]; }?></em></td><td><div style="background-color:<?php echo $d->bg_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
+                <tr style="display:none"><td><label><?php echo $this->Lang['BG_COLOR']; ?> :</label></td><td><input type="text" id="color" name="bg_color" value="<?php echo $d->bg_color; ?>" readonly /><em><?php if(isset($this->form_error["bg_color"])){ echo $this->form_error["bg_color"]; }?></em></td><td><div style="background-color:<?php echo $d->bg_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
                 
-                <tr><td><label><?php echo $this->Lang['FONT_COLOR']; ?> :</label></td><td><input type="text" id="color" value="<?php echo $d->font_color; ?>" name="font_color" readonly /><em><?php if(isset($this->form_error["font_color"])){ echo $this->form_error["font_color"]; }?></em></td><td><div style="background-color:<?php echo $d->font_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
+                <tr style="display:none"><td><label><?php echo $this->Lang['FONT_COLOR']; ?> :</label></td><td><input type="text" id="color" value="<?php echo $d->font_color; ?>" name="font_color" readonly /><em><?php if(isset($this->form_error["font_color"])){ echo $this->form_error["font_color"]; }?></em></td><td><div style="background-color:<?php echo $d->font_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
                 
                 
-                 <tr><td><label><?php echo $this->Lang['FONT_SIZE']; ?> :</label></td><td>
+                 <tr style="display:none"><td><label><?php echo $this->Lang['FONT_SIZE']; ?> :</label></td><td>
                  <select name="font_size" >
                  <option value=""><?php echo $this->Lang['SELECT_FONT_SIZE']; ?></option>
                  <?php for($i=6; $i<=40; $i++){ ?>
@@ -92,7 +92,7 @@
                 <td><label><?php echo $this->Lang["BANNER_1"]; ?> :</label></td>
                 <td>
                 <div class = "inputs">
-                <input type="file" name="banner_1" /></div>
+                <input type="file" name="banner_1" id="banner_1" class="imgInp"/></div>
                 <em><?php if(isset($this->form_error["banner_1"])){ echo $this->form_error["banner_1"]; }?></em>
                 <label><?php echo $this->Lang['IMG_UP']; ?> <?php echo $this->banner_width; ?> X <?php echo $this->banner_height; ?></label>
                 </td>
@@ -101,10 +101,10 @@
                 <tr>
                 <td></td>
                 <?php  if(file_exists(DOCROOT.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_1_banner.png'))  { ?>
-                <td><img border="0" src= "<?php echo PATH.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_1_banner.png';?>" alt="" width="240" />
+                <td><img border="0" id="banner_1_show" src="<?php echo PATH.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_1_banner.png';?>" alt="" width="240" />
                 </td>
                 <?php } else { ?>
-                <td><img border="0" src= "<?php echo PATH.'/images/no-images.png';?>" alt="" width="100" /></td>
+                <td><img border="0" id="banner_1_show" src= "<?php echo PATH.'/images/no-images.png';?>" alt="" width="100" /></td>
                 <?php } ?>
                 </tr>
 
@@ -120,7 +120,7 @@
                 <td><label><?php echo $this->Lang["BANNER_2"]; ?> :</label></td>
                 <td>
                 <div class = "inputs">
-                <input type="file" name="banner_2" /></div>
+                <input type="file" name="banner_2" id="banner_2" class="imgInp" /></div>
                 <em><?php if(isset($this->form_error["banner_2"])){ echo $this->form_error["banner_2"]; }?></em>
                 <label><?php echo $this->Lang['IMG_UP']; ?> <?php echo $this->banner_width; ?> X <?php echo $this->banner_height; ?></label>
                 </td>
@@ -128,10 +128,10 @@
                 <tr>
                 <td></td>
                 <?php  if(file_exists(DOCROOT.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_2_banner.png'))  { ?>
-                <td><img border="0" src= "<?php echo PATH.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_2_banner.png';?>" alt="" width="240" />
+                <td><img border="0" id="banner_2_show" src= "<?php echo PATH.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_2_banner.png';?>" alt="" width="240" />
                 </td>
                 <?php } else { ?>
-                <td><img border="0" src= "<?php echo PATH.'/images/no-images.png';?>" alt="" width="100" /></td>
+                <td><img border="0" id="banner_2_show" src= "<?php echo PATH.'/images/no-images.png';?>" alt="" width="100" /></td>
                 <?php } ?>
                 </tr>
                 
@@ -148,7 +148,7 @@
                 <td><label><?php echo $this->Lang["BANNER_3"]; ?> :</label></td>
                 <td>
                 <div class = "inputs">
-                <input type="file" name="banner_3" /></div>
+                <input type="file" name="banner_3" id="banner_3" class="imgInp" /></div>
                 <em><?php if(isset($this->form_error["banner_3"])){ echo $this->form_error["banner_3"]; }?></em>
                 <label><?php echo $this->Lang['IMG_UP']; ?> <?php echo $this->banner_width; ?> X <?php echo $this->banner_height; ?></label>
                 </td>
@@ -156,10 +156,10 @@
                 <tr>
                 <td></td>
                 <?php  if(file_exists(DOCROOT.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_3_banner.png'))  { ?>
-                <td><img border="0" src= "<?php echo PATH.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_3_banner.png';?>" alt="" width="240" />
+                <td><img border="0" id="banner_3_show" src="<?php echo PATH.'images/merchant/banner/'.$d->storeid.'_'.$d->sector_name.'_3_banner.png';?>" alt="" width="240" />
                 </td>
                 <?php } else { ?>
-                <td><img border="0" src= "<?php echo PATH.'/images/no-images.png';?>" alt="" width="100" /></td>
+                <td><img border="0" id="banner_3_show" src="<?php echo PATH.'/images/no-images.png';?>" alt="" width="100" /></td>
                 <?php } ?>
                 </tr>
                 <tr>
@@ -170,7 +170,7 @@
                 </td>
                 </tr>
 
-                
+                <!--
                 <tr style="background-color:#046DBE;width:8px;border:1px solid black;padding:10px;"> <td></td><td><label><b><?php echo $this->Lang["ADS_2"]; ?></b></label></td></tr>
                  <tr>
                 <td><label><?php echo $this->Lang["ADS_1"]; ?> :</label></td>
@@ -251,7 +251,13 @@
                 <em><?php if(isset($this->form_error["ads_3_link"])){ echo $this->form_error["ads_3_link"]; }?></em>
                 </td>
                 </tr>
-                
+                -->
+                <input type="hidden" name="ads_1_link" value="" />
+                <input type="hidden" name="ads_2_link" value="" />
+                <input type="hidden" name="ads_3_link" value="" />
+                <input type="hidden" name="ads_1" value="" />
+                <input type="hidden" name="ads_2" value="" />
+                <input type="hidden" name="ads_3" value="" />
                 <tr><td><input type="submit" value="<?php echo $this->Lang['SUBMIT']; ?>" /><input type="reset" value="<?php echo $this->Lang['RESET']; ?>" onclick="javascript:window.location='<?php echo PATH; ?>cms/about-us.html'"/></td></tr>
                 
 
@@ -272,5 +278,23 @@ $(document).ready(function() {
     $('input#color3').simpleColorPicker({ colors: colors });
     $('input#color4').simpleColorPicker({ showEffect: 'fade', hideEffect: 'slide' });
     $('button#color5').simpleColorPicker({ onChangeColor: function(color) { $('label#color-result').text(color); } });
+    
+    $(".imgInp").change(function(){
+        //id="banner_1-6_show"
+        readURL(this, $(this).attr("id"));
+    });
 });
+
+
+function readURL(input, target) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#'+target+'_show').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
