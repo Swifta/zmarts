@@ -97,49 +97,14 @@
         <div class="payment_form_section">
             <div class="payment_form payment_shipping_form">
                 <ul>
-                    <li>
+                
+                
+                    <li class="left">
                     
                         <label><?php echo $this->Lang['NAME']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname"><input id="ship_nam_p1"  name="shipping_name" size="40" tabindex="2" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" value="<?php if($this->session->get('shipping_name')){ echo $this->session->get('shipping_name'); } ?>" class="required" maxlength="35" autofocus /></div>
                     </li>
-                    <li>
-                        <label><?php echo $this->Lang['ADDR1']; ?> :<span class="form_star">*</span></label>
-                        <div class="fullname"><input id="ship_addr_p1" name="address1" tabindex="3" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address1')){ echo $this->session->get('shipping_address1'); } ?>" class="required" maxlength="100"/></div>
-                    </li>
-                    <li class="frm_clr">
-                        <label><?php echo $this->Lang['ADDR2']; ?> : </label>
-                        <div class="fullname"><input id="ship_addr_p2" name="address2" tabindex="4" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address2')){ echo $this->session->get('shipping_address2'); } ?>" size="40"  maxlength="100"/></div>
-                    </li>
-                    <li>
-                        <label><?php echo $this->Lang['COUNTRY']; ?> :<span class="form_star">*</span></label>
-                        <div class="fullname">
-                        <input type="text" value="Nigeria" readonly="readonly" />
-                        <input type="hidden" name="country" value="25" />
-                        
-                        <!--<select name="country" id="ship_country_p1" tabindex="5" onchange="return city_change_payment(this.value);" class="required">
-                        <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
-                        <?php if($this->session->get('shipping_country')){ ?>
-                        <?php foreach ($this->all_country_list as $countryL) { ?>
-                        <option <?php if ($countryL->country_name == $this->session->get('shipping_country')) {
-                        echo 'Selected="true"';
-                        } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
-                        <?php } ?>
-                        <?php } else { ?>
-                        <?php foreach ($this->all_country_list as $countryL) { ?>
-                        <option <?php if ($countryL->country_url == $this->input->get('country')) {
-                        echo 'Selected="true"';
-                        } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
-                        <?php } ?>
-                        <?php } ?>
-                        </select>-->
-                        </div>
-                    </li>                    
-                    <li class="frm_clr">
-                        <label>City :<span class="form_star">*</span></label>
-<div class="fullname"><input id="ship_state_p1"  name="state" tabindex="7" AUTOCOMPLETE="OFF"  placeholder="Enter your city name here" type="text" value="<?php if($this->session->get('shipping_state')){ echo $this->session->get('shipping_state'); } ?>" size="40" class="required" maxlength="100"/></div>
-
-                    </li>
-                    <li>
+                   	<li class ="right">
                         <label><?php echo $this->Lang['STATE']; ?> :<span class="form_star">*</span> </label>
                         <div class="fullname">
                             <select name="city"  id="ship_city_p1" tabindex="6" class="CityPAY required">
@@ -162,20 +127,56 @@
                             
                         </div>                        
                     </li>
-                    <li class="frm_clr">
-                        <label><?php echo $this->Lang['POSTAL_CODE']; ?> :</label>
-                        <div class="fullname"><input id="ship_postal_code_p1" class="ignore"
-                        name="postal_code" tabindex="8" size="40" AUTOCOMPLETE="OFF"  
-                        placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" 
-                        type="text" value="<?php if($this->session->get('shipping_postal_code')){ 
-                            echo $this->session->get('shipping_postal_code'); } ?>" class="required number"
-                            maxlength="8"/></div>
+                    
+                    <li class="left">
+                        <label><?php echo $this->Lang['ADDR1']; ?> :<span class="form_star">*</span></label>
+                        <div class="fullname"><input id="ship_addr_p1" name="address1" tabindex="3" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address1')){ echo $this->session->get('shipping_address1'); } ?>" class="required" maxlength="100"/></div>
                     </li>
-                    <li>
+                    <li class="right">
+                        <label><?php echo $this->Lang['COUNTRY']; ?> :<span class="form_star">*</span></label>
+                        <div class="fullname">
+                        <input type="text" value="Nigeria" readonly />
+                        <input type="hidden" name="country" value="25" />
+                        
+                        </div>
+                    </li>
+                    
+                    <li class="left">
+                        <label><?php echo $this->Lang['ADDR2']; ?> : </label>
+                        <div class="fullname"><input id="ship_addr_p2" name="address2" tabindex="4" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address2')){ echo $this->session->get('shipping_address2'); } ?>" size="40"  maxlength="100"/></div>
+                    </li>
+                    <li class="right">
                         <label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname"><input id="ship_phone_p1" name="phone" tabindex="9" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" type="text" value="<?php if($this->session->get('shipping_phone')){ echo $this->session->get('shipping_phone'); } ?>" class="required number" maxlength="16"/></div>
                         <em id="id_err_phone"></em>
                     </li>
+                    
+                    <li class="left">
+                        <label>City :<span class="form_star">*</span></label>
+<div class="fullname"><input id="ship_state_p1"  name="state" tabindex="7" AUTOCOMPLETE="OFF"  placeholder="Enter your city name here" type="text" value="<?php if($this->session->get('shipping_state')){ echo $this->session->get('shipping_state'); } ?>" size="40" class="required" maxlength="100"/></div>
+
+                    </li>
+                    <li class="right">
+                        <label><?php echo $this->Lang['POSTAL_CODE']; ?> :</label>
+                        <div class="fullname"><input id="ship_postal_code_p1" class="ignore required number"
+                        name="postal_code" tabindex="8" size="40" AUTOCOMPLETE="OFF"  
+                        placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" 
+                        type="text" value="<?php if($this->session->get('shipping_postal_code')){ 
+                            echo $this->session->get('shipping_postal_code'); } ?>" 
+                            maxlength="8"/></div>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                  
+                                        
+                    
+                    
+                    
+                    
                 </ul>
                 <?php foreach ($this->get_cart_products as $payment) { ?>
                     <?php  $total_amount = "";
