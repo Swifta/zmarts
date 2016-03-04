@@ -3,7 +3,7 @@
     var po = document.createElement('script');
     po.type = 'text/javascript'; po.async = true;
     po.src = 'https://plus.google.com/js/client:plusone.js';
-    var s = document.getElementsByTagName('script')[0];
+    var s = document.getElementsByTagName('script')[1];
     s.parentNode.insertBefore(po, s);
   })();
     </script>
@@ -72,7 +72,7 @@
                             </li>
 
                             <li>
-                                <label>Coountry:<span class="form_star">*</span></label>
+                                <label>Country:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                 	<input type="text" id="id_rush_country">
                                     <input type="hidden" name="country" value="25" id="id_rush_country">

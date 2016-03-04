@@ -324,7 +324,7 @@
                                                                 <?php } ?>
                                                         </div> 
                                                         
-                                                        <?php  if($this->session->get('prime_customer')) { 
+                                                        <?php if($this->session->get('prime_customer')) { 
                                                             $product_duration =  unserialize($products->product_duration);
 																if($product_duration !="") { ?>
                                                 <div class="store_credits">
@@ -819,3 +819,29 @@
              </div>
       </div>
 </div>
+ <script>
+ 
+$(document).ready(function(){
+        //$('#country_select').val("Nigeria").attr('readonly', 'readonly');
+	var url = 'payment_product/CitySelectionPayment/25';
+	$.ajax(
+	{
+		type:'POST',
+		url:url,
+		cache:false,
+		async:true,
+		global:false,
+		dataType:"html",
+		success:function(check)
+		{
+		   $("#CitySD").html(check);
+		},
+		error:function()
+		{
+			//alert('No city has been added under this country.');
+		}
+	});
+});
+ 
+ 
+ </script>

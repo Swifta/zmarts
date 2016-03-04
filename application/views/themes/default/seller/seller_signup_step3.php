@@ -276,12 +276,12 @@ padding: 0 5px 0 0;
                             <div class="form-group">
                                <span class="asterisks_input"></span>
                                <label for="storename">Country</label>
-                               <select name="country" id="country" tabindex=""  onchange="return city_change_payment_step(this.value);" class="form-control" required>
-                                    <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option> 
+                               
+                               <select name="country" id="country_select" tabindex=""  onchange="return city_change_payment_step(this.value);" class="form-control" required readonly>
                                     <?php foreach ($this->country_list as $c) { ?>
                                     <option <?php  if(isset($this->userPost['country'])){ if ($c->country_id == $this->userPost['country']) { ?> selected <?php } } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
                                     <?php } ?>
-                                    </select> 
+                               </select>
                                     
                                     <em id="id_err_country"><?php if (isset($this->form_error['country'])) {
                                     echo $this->form_error["country"];
@@ -341,7 +341,7 @@ padding: 0 5px 0 0;
                              </div>
                            
                               <div class="form-group" style="margin-top:70px;">
-                                <label for="image">Upload logo: Size <?php /*echo $this->Lang['IM_UP_S'];*/ ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
+                                <label for="image">Upload store logo: Size <?php /*echo $this->Lang['IM_UP_S'];*/ ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
                                 <input  type="file" name="image" id="image" tabindex="12"/>
                                 <p class="help-block">Not more than 2mb</p>
                                 <em id="id_err_image"><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
@@ -385,8 +385,27 @@ $('#have_store_admin').click(function () {
     <!-- SELLER SIGNUP -->
  <script>
  
-     $(document).ready(function(){
+$(document).ready(function(){
 
+        $('#country_select').val("Nigeria").attr('readonly', 'readonly');
+	var url = 'payment_product/CitySelectionPayment/25';
+	$.ajax(
+	{
+		type:'POST',
+		url:url,
+		cache:false,
+		async:true,
+		global:false,
+		dataType:"html",
+		success:function(check)
+		{
+		   $("#CitySD").html(check);
+		},
+		error:function()
+		{
+			//alert('No city has been added under this country.');
+		}
+	});
 });
  
  
@@ -930,7 +949,4 @@ function save_last_step(){
 	return false;
 }
 
-
-
-
-        </script>
+</script>

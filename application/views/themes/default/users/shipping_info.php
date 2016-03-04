@@ -124,7 +124,7 @@
                                                         <label><?php echo $this->Lang['COUNTRY']; ?><span>*</span></label>
                                                         <div class="fullname">
                                                             <select name="country" id="country" onchange="return city_change_merchant(this.value);">
-                                                                <option value="">Select your Country</option>
+                                                                <!--<option value="">Select your Country</option>-->
     <?php foreach ($this->country_list as $c) { ?>
                                                                 
                                                                     <option <?php if ($c->country_id == $u->ship_country) { ?> selected <?php } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
