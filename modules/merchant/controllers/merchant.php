@@ -6538,7 +6538,7 @@ class Merchant_Controller extends website_Controller {
 
 			if($post->validate()){
 				if( isset($_POST['deal']) || isset($_POST['product']) || isset($_POST['auction']) ) {
-					$s = basename(strip_tags(addslashes($_POST['subsector'])));
+					$s = basename(strip_tags(addslashes(@$_POST['subsector'])));
 										$subsector = null;
 										$subsector_ids = common::get_all_subsector_ids();
 										foreach($subsector_ids as $id){
@@ -6557,23 +6557,24 @@ class Merchant_Controller extends website_Controller {
 					$auction = isset($_POST['auction'])? 1 : 0;
 					$type=1;
 					$status = $this->merchant->edit_category($category, $cat_status, $cat_id, $cat_url,$type,$deal,$product,$auction);
-						if($status == 1){
-							$listing_filename = upload::save('list_icon');
-							$Cat_img_URL = realpath(DOCROOT."images/category/icon/").url::title($cat_url).".png";  echo "<br>";
-							$cat_image_rename = realpath(DOCROOT."images/category/icon/").url::title($category).".png";
-								if(file_exists($Cat_img_URL)){
-									rename($Cat_img_URL,$cat_image_rename);
-								}
-								if($listing_filename && $cat_id){
-									common::image($listing_filename, CATEGORY_WIDTH, CATEGORY_HEIGHT, realpath(DOCROOT.'images/category/icon/').url::title($category).'.png');
-									unlink($listing_filename);
-								}
-							common::message(1, $this->Lang["CAT_EDIT_SUC"]);
-							url::redirect(PATH."merchant/manage-category.html");
-						}
-						else{
-							$this->form_error["category"] = $this->Lang["CATEGORY_EXISTS"];
-						}
+//                            if($status == 1){
+//                                $dir = realpath(DOCROOT.'images/category/icon/');
+//                                    $listing_filename = upload::save('list_icon', url::title($category).'.png', $dir);
+//                                    $Cat_img_URL = realpath(DOCROOT."images/category/icon/").url::title($cat_url).".png";  echo "<br>";
+//                                    $cat_image_rename = realpath(DOCROOT."images/category/icon/").url::title($category).".png";
+//                                            if(file_exists($Cat_img_URL)){
+//                                                    rename($Cat_img_URL,$cat_image_rename);
+//                                            }
+//                                            if($listing_filename && $cat_id){
+//                                                    //common::image($listing_filename, CATEGORY_WIDTH, CATEGORY_HEIGHT, realpath(DOCROOT.'images/category/icon/').url::title($category).'.png');
+//                                                    //unlink($listing_filename);
+//                                            }
+//                                    common::message(1, $this->Lang["CAT_EDIT_SUC"]);
+//                                    url::redirect(PATH."merchant/manage-category.html");
+//                            }
+//                            else{
+//                                    $this->form_error["category"] = $this->Lang["CATEGORY_EXISTS"];
+//                            }
 			}else{
 				$this->form_error["type_error"] = 'Please select any one type';
 			}
