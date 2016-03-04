@@ -198,14 +198,14 @@ foreach ($this->transaction_details as $tran) {
                                             <td width="10"></td> 
                                         </tr>
                                         <tr height="7"></tr>	
-                                        <? /* <tr>
+                                        <!--<tr>
                                             <td width="10"></td>
                                             <td>
                                                 <p style="font: normal 12px arial; text-align: center; color: #666;margin: 0px;  "><?php echo $this->Lang['REVIEW_SHIPP']; ?> <a style="font: bold 12px arial; text-align: center; color: #000; " href="<?php echo PATH; ?>users/my-coupons.html" title="My page"> My page.</a> </p>   
                                             </td>
                                             <td width="10"></td> 
-                                        </tr>
-                                        <tr height="7"></tr> */ ?>
+                                        </tr>-->
+                                        <tr height="7"></tr>
                                     </table>
                                 </td>
                                 <td width="7"></td>
