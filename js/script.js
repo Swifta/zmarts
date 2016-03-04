@@ -541,28 +541,7 @@ if(country == ''){ var country = -1;  }
 }
 
 
-function city_change_merchant(country){ 
-if(country == ''){ var country = -1;  }
 
-	if(country){var url = '/payment_product/CitySelectionPayment/'+country; }
-	$.ajax(
-	{
-		type:'POST',
-		url:url,
-		cache:false,
-		async:true,
-		global:false,
-		dataType:"html",
-		success:function(check)
-		{
-		   $("#CitySD").html(check);
-		},
-		error:function()
-		{
-			//alert('No city has been added under this country.');
-		}
-	});
-}
 
 function city_change_merchant_shop(country){ 
 if(country == ''){ var country = -1;  }

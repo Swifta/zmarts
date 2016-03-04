@@ -230,3 +230,9 @@ var adjustMenu = function() {
 
 
 </script>
+
+<script type="application/javascript">
+	$(document).ready(function(e) {
+		city_change_payment("25");
+    });
+</script>
