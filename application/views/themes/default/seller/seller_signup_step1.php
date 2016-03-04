@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
-<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
 <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />
 
 <!--<script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>-->
@@ -10,16 +10,14 @@
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet" href="<?php echo PATH;?>js/Popup/css/style.css" />
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="<?php echo PATH; ?>css/netdna-bootstrap.css" />
-<link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/style.css" />
+<!--<link rel="stylesheet" href="<?php echo PATH; ?>css/netdna-bootstrap.css" />-->
+<!--<link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/style.css" />-->
 <link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/reset.css" />
 <link rel="stylesheet" href="<?php echo PATH; ?>themes/default/css/animate.css" />
     
     
-<!--    <link href="<?php echo PATH;?>js/login/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?php echo PATH;?>js/login/css/style.css" rel="stylesheet">
-    
-    -->
+    <link href="<?php echo PATH;?>js/login/css/font-awesome.min.css" rel="stylesheet"><!--
+    <link href="<?php echo PATH;?>js/login/css/style.css" rel="stylesheet"> -->
     <script type="text/javascript">
 window.onload=function() {
 document.forms[0][0].focus();
@@ -58,30 +56,10 @@ document.forms[0][0].focus();
     </script>
 <style>
     
-    .merchant_intro{font:normal 16px/21px arial;color:#666666;}
-	
-	
-</style>
+ @import "https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic";
 
-
-<style>
-    /*test style*/
-/*  .box{
-        padding: 0px;
-        display: none;
-        margin-top: -20px;
-        margin-left: 0px;
-        border: 1px solid #000;
-        width: 240px;
-        height: 27px;
-        border-top:none;
-        font-size: 15px;
-        border-radius:5px;
-       padding-left: 30px;
-            }
-    .white{ background: #ff0000; }*/
-       
     
+.merchant_intro{font:normal 16px/21px arial;color:#666666;}
 
 .swifta_h1, .swifta_input::-webkit-input-placeholder, button {
 
@@ -92,9 +70,6 @@ document.forms[0][0].focus();
  transition: all 0.40s ease-in-out;
 
 }
-
-
-
 
 .swifta_h1 {
 
@@ -118,9 +93,6 @@ document.forms[0][0].focus();
 
 }
 
-
-
-
 .swifta_form {
 
  box-sizing: border-box;
@@ -137,9 +109,6 @@ document.forms[0][0].focus();
 
 }
 
-
-
-
 .swifta_form .swifta_h1  {
 
   box-sizing: border-box;
@@ -148,20 +117,60 @@ document.forms[0][0].focus();
 
 }
 
-
-
-.sell_title{
-        font-size:16px;
+    #htext{
+        color:#A61C00;
+        font-size:24px;
+        margin-top:25px;
+        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+    }
+    
+    .sell_title{
+        font-size:17px;
         color:#616769 !important;
-        margin-bottom: 5px;
-        font-family:sans-serif !important;
-        font-weight: 400 !important;
+        margin: 10px 0px 5px;
+        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+        font-weight: 500 !important;
     }
 
     .sell_text{
-        font-size:13px;
+        font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif;
+        font-size:14px;
         color:#616769 !important;
-    }   
+    } 
+    
+    .note_red{
+        font-size: 15px;
+        margin-top: 5px;
+        color: red; 
+        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+    }
+    
+    .zenith_question{
+        font-size:20px; 
+        margin-left:5px;
+        margin-top: 10px; 
+        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+    }
+    
+    .click_here_btn{
+        background:transparent; 
+        padding:0px 10px 0px; 
+        color:#A61C00;
+    }
+    
+    .click_here_btn:hover{
+        background:#A61C00;  
+        color:#fff;
+    }
+    
+    .breaker{
+        display:none;
+    }
+    
+    #acctnums{
+        width:250px;
+    }
+
 
 
 .swifta_input  {
@@ -286,9 +295,6 @@ document.forms[0][0].focus();
 
 }
 
-
-
-
 .swifta_button:hover {
 
   -webkit-transform: translateY(-3px);
@@ -352,7 +358,6 @@ document.forms[0][0].focus();
 
 .swifta_input2:focus::-webkit-input-placeholder, swifta_input2:valid::-webkit-input-placeholder {
 
- /*color: #1abc9c;*/
  color:#A61C00;
  font-size: 11px;
 
@@ -382,15 +387,9 @@ document.forms[0][0].focus();
   width: 100px;
 
   color: white;
-
-/*  margin-left: 340px;*/
-  
 /*  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);*/
 
 }
-
-
-
 
 .asterisk_input:after
 {
@@ -412,14 +411,85 @@ font-size: small;
 padding: 0 5px 0 0;
 
  }
-input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px thin #ccc;}
+input[type=text],input[type=password]{
+    border:#ccc solid 0px; 
+    border-bottom: 1px thin #ccc;
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+     .sell_title{
+        margin: 15px 0px 10px;
+        font-weight: bold;
+    }
+    
+    .bdr_bottom_mobile{
+        border-bottom: 1px solid #f0f0f0;
+        padding:5px 0px 10px;
+    }
+    
+    .note_red{
+        font-size: 13px;
+        margin-top: 5px;
+        color: #e32; 
+        text-justify: auto;
+        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+    }
+    .zenith_question{
+        font-size:14px;
+        margin-top: 10px; 
+    }
+        
+    #submit_acc{
+      margin-top:5px;
+    }
+    
+    .breaker{
+        display:block;
+    }
+    
+/*    #acctnums{
+        width:80%;
+    }
+    
+    #acctnum{
+        width:80%;
+    }*/
+    
+    .htext{
+        font-size:18px;
+        font-weight:bold;
+        margin-top:35px;
+    }
+
+}   
 
 </style>
 
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+ <!--  <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>-->
  <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
         <div class="contianer_inner">
@@ -448,20 +518,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                     </div> 
                     
       
-                        
-
-
-
-
-
-
- <!-- -Login Modal -->
-
-<!--  <script type="text/javascript" src="<?php echo PATH; ?>js/login/js/jquery.min.js"></script>
- <script type="text/javascript" src="<?php echo PATH; ?>js/login/js/bootstrap.min.js"></script>
-    
-    -->
-    
  	<!-- - Login Model Ends Here -->
                     <div class="payouter_block pay_br">
 <!--                        <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['CRTE_YR_STRE']; ?>: <?php echo $this->Lang['INTRO']; ?></h3>-->
@@ -472,7 +528,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             -->
                             <img style="width:100%" src="<?php echo PATH; ?>custom/images/WelcomeToZmart.png"></img>
                             
-<!--                            <img style="width:100%" src="..\zmartst\images\zmarts.jpg"></img>-->
                         
            <div style="background-color: #FFFBEF; opacity: .8; border:1px solid #ccc; min-height:30px; padding:5px 5px 8px; ">
                         
@@ -480,172 +535,113 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             
                               <form name="formName" method="post">
                             <div class="col-md-12">
-                               <h1 style="font-size:20px; font-weight:bold">Do you have a Zenith Bank account ? 
-                                        <span style="font-size:16px;"><input type="radio" name="priority" id="priorityHighs" onclick="if(this.checked)  {document.formNames.priorityLows.checked=false;}" />&nbsp;<label for="priorityHighs" >Yes</label></span>
-                                        <span style="font-size:16px;"><input type="radio" name="priority" id="priorityLows"  value="yes" onclick="if(this.checked)  {document.formNames.priorityHighs.checked=false; }" /> <label for="priorityLows"> No</label></span>
-                                    </h1>
-                            
-      
-                               
+                                <h1 class="zenith_question">Do you have a Zenith Bank account ?
+                                    <div class="breaker"></div>
+                                        <span style="font-size:16px;"><input type="radio" name="Account_info_radio" id="radio1_yes" />&nbsp;<label for="radio1_yes" >Yes</label></span>
+                                        <span style="font-size:16px;"><input type="radio" name="Account_info_radio" id="radio1_no" /> <label for="radio1_no"> No</label></span>
+                               </h1>
+                            </div>                 
+                            <div class="col-md-4" style="margin-top:10px;">
+                                <div id="autoUpdate" class="autoUpdate" style="display:none">
                                 
-                                </div>                 
-                       
-<!--                        </form>-->
-                            <div id="autoUpdates" class="autoUpdate col-md-6" style="display:none">
-
-<!-- Account validation div starts here
-    <div>  
-        <input type = "textbox" name="acctnum" id="acctnum" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="swifta_input2" autofocus required/>
-        
-        <input type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button2" onclick="show_gif(this);">
-        
-    </div>-->
-    
-<div class="col-md-12" style="margin-top:30px;">
-                        <form class="form-inline">
-                        <div class="form-group">
-                          <label for="exampleInputName2">Enter NUBAN account name : </label>
-<!--                         -->
-                           <input type = "textbox" name="acctnums" id="acctnums" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="swifta_input2" autofocus required/>
-                        </div>
-<!--                       -->
-                         <input type="submit"  name="submit" value="Proceed" id="submit_accs" class="swifta_button2" onclick="show_gifs(this);">
-                      </form>
-                        </div>
-    
-<!--   <input type="submit"  name="submit" value="proceed" class="swifta_button " onclick="validateForm();">-->
-
- <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
-                      <input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">  
-     <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
-                    </div>
-  
-
-    
-<!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a><br>
-    -->
-   
- 
-  
-</div>
-                            
-                            
-<!--                        <div class="col-md-12">
-                        <form class="form-inline">
-                        <div class="form-group">
-                          <label for="exampleInputName2">Enter NUBAN account name : </label>
-                          <input type="text" class="form-control" id="exampleInputName2" placeholder="e.g 01*************">
-                        </div>
-                        <button type="submit" class="btn btn-danger">Proceed</button>
-                      </form>
-                        </div>-->
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="submit_accs">Enter <strong>NUBAN</strong> account name : </label>
+                                            <input type = "textbox" name="acctnums" id="acctnums" maxlength="10" onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="form-control bdr" autofocus required/>
+                                        </div>
+                                        <input type="submit"  name="submit" value="Proceed" id="submit_accs" class="swifta_button2" onclick="show_gifs(this);" >
+                                    </form>
+                                
+                                    <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
+                                        <input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">  
+                                        <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
+                                   </div>
+                                </div>
+                            </div>
+       
                          </div>
                     </div>
                       
-                            
-           
-                 <div class="container-fluid text-center custorm">
-                            <h1 class="animated bounce" id="htext" style="color:#A61C00 ;font-size:24px;margin-top:20px; font-family:sans-serif;">Why you should sell on Zmart!</h1>
+                    <div class="container-fluid text-center custorm">
+                            <h1 class="animated bounce" id="htext" >Why you should sell on Zmart!</h1>
 
                             <div class="row" style="margin-top:20px;">
-                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:bold; ">Sell More, Earn More</h4>
+                                <div class="col-sm-4 col-md-4 col-lg-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:bold; ">Sell More, Earn More</h4>
                                     <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/pla.png" class="img-circle" alt="Cinque Terre"> <p class="sell_text" style="text-align:  justify;  margin-top:10px;">Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
-                                <div class="col-sm-4 " style="background-color:#fff; ">  <h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Contacting buyers is a breeze</h4>
+                                <div class="col-sm-4 col-md-4 col-lg-4 bdr_bottom_mobile" style="background-color:#fff; ">  <h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Contacting buyers is a breeze</h4>
                                     <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/breeze.png" class="img-circle" alt="Cinque Terre"><p class="sell_text" style="text-align:  justify; margin-top:10px;">Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
-                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Low transaction fees</h4>
+                                <div class="col-sm-4 col-md-4 col-lg bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Low transaction fees</h4>
                                     <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/lowtrans.png" class="img-circle" alt="Cinque Terre"><p class="sell_text" style="text-align:  justify;margin-top:10px;">Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
                             </div>
 
                             <div class="row" style="margin-top:15px;">
-                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Dedicated Support 24/7</h4>
+                                <div class="col-sm-4 col-md-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Dedicated Support 24/7</h4>
                                     <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/supports.png" class="img-circle" alt="Cinque Terre"> <p class="sell_text" style="text-align:  justify;margin-top:10px;">Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
-                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">You decide everything</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/whyusezmart-01n.png" class="img-circle" alt="Cinque Terre" ><p class="sell_text" style="text-align:justify;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
-                                <div class="col-sm-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/secure.png" class="img-circle" alt="Cinque Terre" > <p class="sell_text" style=" text-align:  justify;margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
+                                <div class="col-sm-4 col-md-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">You decide everything</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/whyusezmart-01n.png" class="img-circle" alt="Cinque Terre" ><p class="sell_text" style="text-align:justify;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
+                                <div class="col-sm-4 col-md-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/secure.png" class="img-circle" alt="Cinque Terre" > <p class="sell_text" style=" text-align:  justify;margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
                             </div>
                         </div>               
-                            
-<p style="font-size: 15px; margin-top: 5px;margin-top: -10px; font-style: italic; color: red; font-weight: bold;"> <br  >* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered
+                            <br>
+                            <p class="note_red">* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered</p>
                           
-                           <form name="formName" method="post"><p style="font-size:20px; margin-left:5px;margin-top: 10px; font-family: sans-serif;">Do you have a Zenith Bank account ? </p><p style="margin-left:10px;">
-<input type="radio" name="priorityHigh" id="priorityHigh" onclick="if(this.checked)  {document.formName.priorityLow.checked=false;}" />&nbsp;<label for="priorityHigh" >Yes</label>
-<input type="radio" name="priorityHigh" id="priorityLow"  value="yes" onclick="if(this.checked)  {document.formName.priorityHigh.checked=false; }" /> <label for="priorityLow"> No</label><br></p>
- 
-<br>
-<!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a>-->
-<div id="autoUpdate" class="autoUpdate" style="display:none">
-
-<!-- Account validation div starts here-->
-    <div style="margin-top: 20px;">  
-        <input type = "textbox" name="acctnum" id="acctnum" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="swifta_input2" autofocus required/>
-        
-        <input type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button2" onclick="show_gif(this);">
-        
-    </div>
-    
-    
-<!--   <input type="submit"  name="submit" value="proceed" class="swifta_button " onclick="validateForm();">-->
-
- <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
-                      <!--<input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">-->  
-     <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
-                    </div>
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
-  
-      <div class="modal-dialog">
-          
-  <div class="modal-content">
-            
-               
- <div class="modal-header">
-   
-                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                
-    <h4 class="modal-title" id="myModalLabel">Confirm</h4>
-                </div>
-            
-               
- <div class="modal-body">
+                            <form name="formName" method="post"><p class="zenith_question">Do you have a Zenith Bank account ? </p><p style="margin-left:10px;">
+                                 <input type="radio" name="priorityHigh" id="radio2_yes" />&nbsp;<label for="priorityHigh" >Yes</label>
+                                <input type="radio" name="priorityHigh" id="radio2_no"/> <label for="priorityLow"> No</label><br></p>
+                                <br>
+                        
+                        <div id="autoUpdate2" class="autoUpdate" style="display:none">
                    
- <p>You are about to Create An Account.</p>
-   
-                 <p>Do you want to proceed?</p>
-                    
-<p class="debug-url"></p>
-               
- </div>
-              
-  
-                <div class="modal-footer">
-    
-                <button type="button" class="btn btn-default" data-dismiss="modal"> No</button>
-   
-                 <a class="btn btn-danger btn-ok" href="<?php echo PATH; ?>merchant-signup-step3.html"> Yes</a>
-                </div>
-            </div>
-      
- 
- </div>
-    </div>
+                             <div class="col-md-4">
+                                    <form class=""> 
+                                        <div class="form-group">
+                                            <label for="acctnum">Enter <strong>NUBAN</strong> account name : </label>
+                                            <input type = "textbox" name="acctnum" id="acctnum" maxlength="10"  onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="form-control bdr" autofocus required >
+                                        </div>
+                                        <input type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button2" onclick="show_gif(this);" >
+                                    </form>
+                            </div>
 
-    
-<!--<a href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">No</a><br>-->
-    
-   
- 
-  
-</div>
+                         <div class="merchant_submit_buttons clearfix" id="sendNewSms">                      
+                                              <!--<input style="display:none;" type="submit"  name="submit" value="Proceed" id="submit_acc" class="swifta_button " onclick="show_gif(this);">-->  
+                             <a style="display:none;" id="shw" href="<?php echo PATH; ?>merchant-signup-step2.html" title="<?php echo $this->Lang['ACC']; ?>" class="buy_it"><?php echo $this->Lang['ACC']; ?></a>
+                        </div>
+                            <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:20px;">
 
-<em id="z_acc_error"></em>
-<div id="" class="red box"><a href="<?php echo PATH; ?>merchant-signup-account-opening.html"></a></div>
-   
-                           </form>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>You are about to Create An Account.</p>
+                                            <p>Do you want to proceed?</p>
+                                            <p class="debug-url"></p>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"> No</button>
+                                            <a class="btn btn-danger btn-ok" href="<?php echo PATH; ?>merchant-signup-step3.html"> Yes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                                <em id="z_acc_error"></em>
+                                <div id="" class="red box"><a href="<?php echo PATH; ?>merchant-signup-account-opening.html"></a></div>
+                        </form>
                             </p>
                         </div>
                     
                                <div style="margin-top: 15px; text-align: center; height: 80px;">
 <!--                                   <h3 style="font-size: larger; font-style: italic;">If you have already registered as a merchant, <a style="color:blue;" href="<?php echo PATH . 'merchant-login.html'; ?>">click here</a> to login.</h3>-->
-                                   <h3 style="font-size: larger; font-style: bold;">If you have already registered as a merchant, <a id="modal_trigger" class="btn" style="color:blue; font-style: italic" href="#modal">click here</a> to login.</h3>
-<!--                             <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>-->
+                                   <h3 class="zenith_question">If you have already registered as a merchant,
+                                       <button id="modal_trigger" class="btn btn-default zenith_question click_here_btn" href="#modal">Click here to login.</button>
+                                       <button id="modal_trigger2" style="display:none;" class="" href="#modal2"></button>
+                                       <button id="modal_trigger3" style="display:none;" class="" href="#modal3"></button>
+                                   </h3>                           
+<!--                                   <a id="modal_trigger" class="btn" style="color:blue; font-style: italic" href="#modal">click here</a> -->
                                </div>
                                             
                     </div>   
@@ -660,34 +656,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
     </div>
  
  
- 
-<!-- <div class="container">
-	<div class="row">
-		<a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a>
 
-        <div class="modal fade" id="myModal">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">x</button>
-            <h3>Login to MyWebsite.com</h3>
-          </div>
-          <div class="modal-body">
-            <form method="post" action='' name="login_form">
-              <p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
-              <p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
-              <p><button type="submit" class="btn btn-primary">Sign in</button>
-                <a href="#">Forgot Password?</a>
-              </p>
-            </form>
-          </div>
-          <div class="modal-footer">
-            New To MyWebsite.com?
-            <a href="#" class="btn btn-primary">Register</a>
-          </div>
-        </div>
-	</div>
-</div>-->
- 
- <div class="container">
+    <div class="container">
 <!--	<a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a>-->
 
 	<div id="modal" class="popupContainer" style="display:none;">
@@ -709,7 +679,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <div class="form-group">
                                       <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                                       <div class="col-sm-8">
-                                          <input type="email" name="email" class="form-control bdr" id="inputEmail3" placeholder="Email your email"  value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
+                                          <input type="email" name="email" class="form-control bdr" id="inputEmail3" placeholder="Enter your email"  value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
                                       </div>
                                     </div>
                                     <div class="form-group">
@@ -718,12 +688,13 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                         <input type="password" name="password" class="form-control bdr" id="inputEmail" placeholder="Enter your password" required>
                                       </div>
                                     </div> 
-                                       <div class="form-group" style="margin-left:26px;">
-                                        <div class="col-sm-offset-2 col-sm-5">
-                                            <p style="font-size:16px; color:#7f8c8d; line-height: 40px" id="forgot_pwd" class="back_btn">Forgot Username / Password?</p>
+                                       <div class="form-group">
+                                       <label for="" class="col-sm-2 control-label"></label>    
+                                        <div class="col-sm-6">
+                                            <p style="font-size:16px; color:#7f8c8d; line-height: 40px" id="forgot_pwd" class="back_btn">Forgot Password?</p>
                                         </div>
-                                         <div class="col-sm-offset-1 col-sm-2 ">
-                                             <button type="submit" style="padding-left:40px; padding-right:40px;" id="sign_in" class="btn btn-danger red_btn">Sign in</button>
+                                         <div class="col-sm-2 ">
+                                             <button type="submit" style="padding-left:18px; padding-right:18px;" id="sign_in" class="btn btn-danger red_btn">Sign in</button>
                                          </div>
                                     </div>
                                   </form>
@@ -740,24 +711,24 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     </div>
                                     <div class="form-group">
                                       <label class="col-sm-2 control-label">Captcha</label>
-                                        <div class="col-sm-2">
-                                            <img height="50" width="160" src="<?php echo PATH; ?>/captcha/default" alt="captcha"/>
+                                        <div class="col-sm-3">
+                                            <img height="50" width="140" src="<?php echo PATH; ?>/captcha/default" alt="captcha"/>
                                             <?php if(isset($this->email_error)){ echo "<em>".$this->email_error."</em>"; } ?>
                                             <p class="help-block"><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></p>
                                         </div>
-                                        <div class="col-sm-5 ml">
+                                        <div class="col-sm-5">
                                           <input type="text" name="captcha" class="form-control bdr" id="inputcaptcha" placeholder="Enter the captcha code here"  maxlength="32" required autofocus>
                                           <p class="help-block"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></p>
                                           <p class="help-block"><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></p>
                                       </div>
                                     </div>
                                        
-                                    <div class="form-group btn_margin ">
-                                        <div class="col-sm-offset-2  col-sm-5">
+                                    <div class="form-group ">
+                                        <label class="col-sm-2 control-label"></label>
+                                        <div class="col-sm-6 col-sm-offset-2">
                                             <button type="submit" style="padding-left:40px; padding-right:40px;" class="btn btn-default back_btns button_left"><i class="fa fa-angle-double-left"></i> Back</button>
-                                         </div>
-                                         <div class="col-sm-offset-1 col-sm-2">
-                                             <button type="submit" id="sign_in" style="padding-left:40px; padding-right:40px;" class="btn btn-danger red_btn button_right" title="<?php echo $this->Lang['SUBMIT']; ?>">Submit</button>
+                                        
+                                            <button type="submit" id="sign_in" style="margin-left: 5px; padding-left:40px; padding-right:40px;" class="btn btn-danger red_btn button_right" title="<?php echo $this->Lang['SUBMIT']; ?>">Submit</button>
                                          </div>
                                     </div>
                                   </form>
@@ -767,91 +738,114 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                             </div>
                         </section>
                         </div>
-                    </div>
+    </div>
 
-<!--                                                <div class="one_half"><a  href="#" style="width:30%; margin-left: 200px;color:#fff;background-color:#A61C00 ;" class="btn back_btns swifta_input"><i class="fa fa-angle-double-left"></i> Back</a></div>
-						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>
-                                                <input class="swifta_button" type="submit" style="width:160px; margin-left: 62px;" value="Submit" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
-					
+                   
+<!--dont have a zenith bank account form-->
+<div class="container">
+	<div id="modal2" class="popupForm col-md-6 col-xs-12" style="display:none;">
+		<header class="popupHeader2">
+			<span class="modal_close"><i class="fa fa-times"></i></span>
+		</header>
+		
+            <section class="popupBody2">           
+                    <div class="container-fluid">
+                            <div class="row disclaimerform" >
+                                <div class="col-md-12"  style="margin-bottom:30px;">
+                                     <div class="text-center">
+                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/ZenithLogo.png"/></h1>
+                                        <h2>PLEASE NOTE</h2>
+                                        <div>
+                                            <p>YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON ZMART 
+                                            KINDLY VISIT ANY OF OUR BANK BRANCHES. CLICK ON THE LINK BELOW TO VIEW A LIST OF OUR BRANCHES<br></p>
+                                        </div>  
+                                     </div>
+                                    <div style="margin-top:20px;">
+                                        <div class="col-md-6 col-sm-12">
+                                            <button onClick="window.open('http://www.zenithbank.com/Corporate%20Current%20Account%20Form.pdf','_blank');" class="btn btn-default"><span style="color:red;" class="fa fa-file-pdf-o"></span> Download A/C Opening Form</button>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <button onClick="window.open('http://www.zenithbank.com/ViewAllBranches.aspx?id=1','_blank');" class="btn btn-default"><span class="fa fa fa-list"></span> View A List of All Our Branches</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>                      
+                    
+            </section>
+        </div>
+    </div>
+<!--dont have a zenith bank account form-->
 
+<!--Account Verification failed-->
+<div class="container">
+	<div id="modal3" class="popupForm col-md-6 col-xs-12" style="display:none;">
+		<header class="popupHeader2">
+			<span class="modal_close"><i class="fa fa-times"></i></span>
+		</header>
+		
+            <section class="popupBody2">           
+                    <div class="container-fluid">
+                            <div class="row disclaimerform" >
+                                <div class="col-md-12"  style="margin-bottom:30px;">
+                                     <div class="text-center">
+                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/ZenithLogo.png"/></h1>
+                                        <h2>VERIFICATION FAILED</h2>
+                                        <div>
+                                            <p>Please try again . . .<br></p>
+                                        </div>  
+                                     </div>
+                                </div>
+                            </div>
+                    </div>                      
+                    
+            </section>
+        </div>
+    </div>
+<!-- Account verification failed -->
 
-			 Username & Password Login form 
-			<div class="user_login">
-                            <form method="post" action="<?php echo PATH; ?>/merchant-login.html" >
-                            <input  class="swifta_input" name="email" placeholder="Email" type="text" value="<?php if(isset($this->postemail)){ echo $this->postemail; }?>" required>
-
-                      <input class="swifta_input" name="password" placeholder="Password" type="password" required>
-					<div class="action_btns">
-						<div class="one_half"><a href="#" style="width:30%; margin-left: 200px;color:#fff;" class="btn back_btn swifta_button"><i class="fa fa-angle-double-left"></i> Forgot your password ?</a></div>
-						<div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>
-
-                                                <input type="submit" style="width:160px; margin-left: 62px;" class="one_half last swifta_button" value="LOGIN"  title="<?php echo $this->Lang['LOGIN']; ?>" />
-					</div>
-				</form>
-
-				<a href="" style="margin-left: 200px;" class="forgot_password">Forgot password?</a>
-                                
-			</div>
-
-			 Register Form 
-			<div class="user_register" style="margin-top: -50px;">
-                            <form method="post" action="<?php echo PATH;?>merchant/forgot-password.html">
-					<li>
-                                    <div class=""><input type="text" name="email" value="" class="swifta_input" placeholder="Enter Your Email" maxlength="256" style="margin-top:40px" required autofocus/></div>
-                                    <?php if(isset($this->email_error)){ echo "<em>".$this->email_error."</em>"; } ?>
-                                    <em><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></em>
-                                </li>
-
-                                        
-                                        <label>Captcha</label>
-					<input type="text" required />
-					<br />
-                                        
-                                        
-                                <li class="mv" style="margin-left:200px;"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php //echo $this->Lang['CAPTCHA']; ?>"  /></li>
-                                <li class="mv"><p><?php //echo $this->Lang['ETR_TXT_BLW']; ?></p></li>
-                                <li class="mv"><strong ><?php //echo $this->Lang['CAPTCHA']; ?> : </strong></li>
-                                <li>
-                                    <div class="login_capcta_bg"> <input class="swifta_input" placeholder="Enter Your Captcha" type="text" name="captcha"  maxlength="32" required autofocus/> </div>
-                                    <div class="captcha_error_msg"><?php if(isset($this->captcha_error)){ echo "<em>".$this->captcha_error."</em>"; } ?></div>
-                                    <div class="captcha_error_msg"><em><?php if(isset($this->form_error['captcha'])){ echo $this->form_error["captcha"]; }?></em></div>
-                                 </li>
-                                <li class="mv">
-                                    <input class="submit" type="submit" value="" title="<?php //echo $this->Lang['SUBMIT']; ?>"/> 
-                                    <input class="cancel" type="button"  title="<?php //echo $this->Lang['CANCEL']; ?>"  onclick="window.location.href='<?php //echo PATH; ?>merchant-login.html'"/>
-                                </li>
-                                        
-                                        
-                                        
-                                        
-					<label>Email Address</label>
-					<input type="email" />
-					<br />
-
-					<label>Password</label>
-					<input type="password" />
-					<br />
-
-					<div class="checkbox">
-						<input id="send_updates" type="checkbox" />
-						<label for="send_updates">Send me occasional email updates</label>
-					</div>
-
-					<div class="action_btns">
-						<div class="one_half"><a  href="#" style="width:30%; margin-left: 200px;color:#fff;background-color:#A61C00 ;" class="btn back_btns swifta_input"><i class="fa fa-angle-double-left"></i> Back</a></div>
-						<div class="one_half last"><a href="#"  class="btn btn_red">Forget Password</a></div>
-                                                <input class="swifta_button" type="submit" style="width:160px; margin-left: 62px;" value="Submit" title="<?php echo $this->Lang['SUBMIT']; ?>"/> 
-					</div>
-				</form>
-			</div>
-		</section>
-	</div>
-</div>-->
- 
  <script type="text/javascript">
-	$("#modal_trigger").leanModal({top : 100, overlay : 0.6, closeButton: ".modal_close" });
+	$("#modal_trigger").leanModal({top : 50, overlay : 0.6, closeButton: ".modal_close" });
+        $("#modal_trigger2").leanModal({top : 50, overlay : 0.6, closeButton: ".modal_close" });
+        $("#modal_trigger3").leanModal({top : 50, overlay : 0.6, closeButton: ".modal_close" });
 
 	$(function(){
+            
+                $("#radio1_no").click(function(){
+                     $('#autoUpdate').hide();
+//                     $(this).ch
+                    this.checked = false;       
+                    
+                    $("#modal_trigger2").click();
+                   
+                });
+                
+                $("#radio2_no").click(function(){
+                     $('#autoUpdate2').hide();
+//                     $(this).ch
+                    this.checked = false;       
+                    
+                    $("#modal_trigger2").click();
+                   
+                });
+                
+                $('#radio1_yes').click(function(){;
+                    $('#autoUpdate').fadeIn('slow')
+                });
+                
+                 $('#radio2_yes').click(function(){
+                    $('#autoUpdate2').fadeIn('slow')
+                });
+                
+//                $("#priorityc2").click(function(){
+//                     $('#autoUpdate2').hide();
+////                     $(this).ch
+//                    this.checked = false;       
+//                    
+//                    $("#modal_trigger2").click();
+//                   
+//                });
+                
 		// Calling Login Form
 		$("#login_form").click(function(){
 			$(".social_login").hide();
@@ -869,9 +863,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
 
 		// Going back to Social Forms
 		$(".back_btn").click(function(){
-//			$(".user_login").hide();
-//			$(".user_register").hide();
-//			$(".social_login").show();
                         $(".user_login").hide();
 			$(".user_register").show();
 			$(".social_login").show();
@@ -882,9 +873,6 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                 
                 
                 $(".back_btns").click(function(){
-//			$(".user_login").hide();
-//			$(".user_register").hide();
-//			$(".social_login").show();
                         $(".user_login").show();
 			$(".user_register").hide();
 			$(".social_login").show();
@@ -923,12 +911,12 @@ $('#autoUpdate').fadeOut('slow');
     
     
    $(document).ready(function () {
-    $('#priorityHighs').change(function () {
+    $('#priorityHigh2').change(function () {
         if (this.checked) 
         //  ^
-           $('#autoUpdates').fadeIn('slow') ;//&& $('#g').hide('slow')
+           $('#autoUpdate2').fadeIn('slow') ;//&& $('#g').hide('slow')
         else 
-            $('#autoUpdates').fadeOut('slow');
+            $('#autoUpdate2').fadeOut('slow');
     });
 });
 
@@ -1926,8 +1914,11 @@ function show_gif(obj){
 			//is_z_verify_account_api_running = true;
 			var url = Path+'users/merchant_registration_validation/'; 
                         //alert(url);
-			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
-			
+//			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
+                        sub_btn_parent.html("<img src = \"<?php echo PATH."custom/images/loadingGif.gif";?>\" /><p>verifying...</p>");
+                        
+//			src="<?php echo PATH; ?>custom/images/pla.png"
+                        
 			$.ajax(
 	            {
 		        type:'POST',
@@ -1970,7 +1961,8 @@ closeOnCancel: false},
 					is_z_verify_account_api_running = false;
                                         //alert("Your account cannot be validated. Please try again");
 					//$('#z_acc_error').html("<?php echo ""; ?>");
-							validation_failed();
+//							validation_failed();
+                                                        $("#modal_trigger3").click();
                             }
                             return false;
 						
@@ -2033,7 +2025,7 @@ function show_gifs(obj){
 			//is_z_verify_account_api_running = true;
 			var url = Path+'users/merchant_registration_validation/'; 
                         //alert(url);
-			sub_btn_parent.html("<img src = \"<?php echo PATH."images/anim/6.gif";?>\" /><p>verifying...</p>");
+			sub_btn_parent.html("<img src = \"<?php echo PATH."custom/images/loadingGif.gif";?>\" /><p>verifying...</p>");
 			
 			$.ajax(
 	            {
@@ -2077,7 +2069,7 @@ closeOnCancel: false},
 					is_z_verify_account_api_running = false;
                                         //alert("Your account cannot be validated. Please try again");
 					//$('#z_acc_error').html("<?php echo ""; ?>");
-							validation_failed();
+							$("#modal_trigger3").click();
                             }
                             return false;
 						
@@ -2103,10 +2095,10 @@ closeOnCancel: false},
 </script>
 
 <script src="<?php echo PATH;?>js/netdna-bootstrap.js"></script>
-
+<!--
 <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
 <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />
-<!--<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />-->
+<link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />-->
   
 
 
