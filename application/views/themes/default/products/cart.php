@@ -324,7 +324,7 @@
                                                                 <?php } ?>
                                                         </div> 
                                                         
-                                                        <?php  if($this->session->get('prime_customer')) { 
+                                                        <?php if($this->session->get('prime_customer')) { 
                                                             $product_duration =  unserialize($products->product_duration);
 																if($product_duration !="") { ?>
                                                 <div class="store_credits">

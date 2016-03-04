@@ -5077,10 +5077,10 @@ class Merchant_Controller extends website_Controller {
 		    $this->sector_name ="Default";
 		    $this->sectorname ="Default";
 		}
-	        $this->banner_width ="1280";
-	        $this->banner_height ="350"; 
-	        $this->ads_width ="370";
-	        $this->ads_height ="260";
+                $this->banner_width ="1000";
+                $this->banner_height ="373"; 
+                $this->ads_width ="370";
+                $this->ads_height ="260";
 	        if($this->sectorname =="Electronics"){
 	                $this->banner_width ="900";
 	                $this->banner_height ="350"; 
@@ -5107,11 +5107,11 @@ class Merchant_Controller extends website_Controller {
 			$post = new Validation(utf8::clean($_POST));
 			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
-						->add_rules('bg_color','required')
-						->add_rules('font_color','required')
-						->add_rules('sector','required')
-						->add_rules('subsector','required')
-						->add_rules('font_size','required')
+//						->add_rules('bg_color','required')
+//						->add_rules('font_color','required')
+//						->add_rules('sector','required')
+//						->add_rules('subsector','required')
+//						->add_rules('font_size','required')
 						->add_rules('banner_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						->add_rules('banner_1_link','valid::url')
 						->add_rules('banner_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
@@ -5152,23 +5152,23 @@ class Merchant_Controller extends website_Controller {
 							$this->sectorname=$sector->current()->sector_name;
 						}
 						
-						$this->banner_width ="1280";
-						$this->banner_height ="525"; 
+						$this->banner_width ="1000";
+						$this->banner_height ="373"; 
 						$this->ads_width ="370";
 						$this->ads_height ="260";
-						if(strtolower($this->sectorname) == "electronics"){
-								$this->banner_width ="900";
-								$this->banner_height ="350"; 
-								$this->ads_width ="565";
-								$this->ads_height ="157";
-						}
-						if(strtolower($this->sectorname) == "fashion"){
-								$this->banner_width ="1400";
-								$this->banner_height ="525"; 
-								$this->ads_width ="370";
-								$this->ads_height ="260";
-						}
-						
+//						if(strtolower($this->sectorname) == "electronics"){
+//								$this->banner_width ="900";
+//								$this->banner_height ="350"; 
+//								$this->ads_width ="565";
+//								$this->ads_height ="157";
+//						}
+//						if(strtolower($this->sectorname) == "fashion"){
+//								$this->banner_width ="1400";
+//								$this->banner_height ="525"; 
+//								$this->ads_width ="370";
+//								$this->ads_height ="260";
+//						}
+//						
 						
 			                if($_FILES['banner_1']['name']){
                                             $IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";

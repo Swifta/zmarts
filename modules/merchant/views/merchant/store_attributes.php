@@ -64,12 +64,12 @@
 			</td></tr>
                         
                
-                <tr><td><label><?php echo $this->Lang['BG_COLOR']; ?> :</label></td><td><input type="text" id="color" name="bg_color" value="<?php echo $d->bg_color; ?>" readonly /><em><?php if(isset($this->form_error["bg_color"])){ echo $this->form_error["bg_color"]; }?></em></td><td><div style="background-color:<?php echo $d->bg_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
+                <tr style="display:none"><td><label><?php echo $this->Lang['BG_COLOR']; ?> :</label></td><td><input type="text" id="color" name="bg_color" value="<?php echo $d->bg_color; ?>" readonly /><em><?php if(isset($this->form_error["bg_color"])){ echo $this->form_error["bg_color"]; }?></em></td><td><div style="background-color:<?php echo $d->bg_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
                 
-                <tr><td><label><?php echo $this->Lang['FONT_COLOR']; ?> :</label></td><td><input type="text" id="color" value="<?php echo $d->font_color; ?>" name="font_color" readonly /><em><?php if(isset($this->form_error["font_color"])){ echo $this->form_error["font_color"]; }?></em></td><td><div style="background-color:<?php echo $d->font_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
+                <tr style="display:none"><td><label><?php echo $this->Lang['FONT_COLOR']; ?> :</label></td><td><input type="text" id="color" value="<?php echo $d->font_color; ?>" name="font_color" readonly /><em><?php if(isset($this->form_error["font_color"])){ echo $this->form_error["font_color"]; }?></em></td><td><div style="background-color:<?php echo $d->font_color; ?>;width:8px;border:1px solid black;padding:10px;"></td></tr>
                 
                 
-                 <tr><td><label><?php echo $this->Lang['FONT_SIZE']; ?> :</label></td><td>
+                 <tr style="display:none"><td><label><?php echo $this->Lang['FONT_SIZE']; ?> :</label></td><td>
                  <select name="font_size" >
                  <option value=""><?php echo $this->Lang['SELECT_FONT_SIZE']; ?></option>
                  <?php for($i=6; $i<=40; $i++){ ?>

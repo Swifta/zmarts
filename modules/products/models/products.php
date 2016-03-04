@@ -700,6 +700,9 @@ class Products_Model extends Model
 
 	public function get_cart_products($deal_id = "",$type="")
 	{
+            if(!$this->session->get("prime_customer")){
+                $this->deal_value_condition_cart = "deal_value";
+            }
 		$condition = '';
 		$join ="";
                         $join_table = "";
