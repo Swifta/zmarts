@@ -529,7 +529,7 @@ input[type=text],input[type=password]{
                             <img style="width:100%" src="<?php echo PATH; ?>custom/images/WelcomeToZmart.png"></img>
                             
                         
-           <div style="background-color: #FFFBEF; opacity: .8; border:1px solid #ccc; min-height:30px; padding:5px 5px 8px; ">
+           <div style="background-color: #FFFBEF; border-left:5px solid #A61C00; border-top:1px dotted #A61C00;border-bottom:1px dotted #A61C00; border-right:1px dotted #A61C00; min-height:30px; padding:5px 5px 8px;">
                         
                         <div class="row">
                             
