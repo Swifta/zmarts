@@ -355,7 +355,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             <div class="col-md-5 col-md-offset-3">
                                                   <div class="form-group">  
                                                                     <span class="asterisks_input">  </span>
-                                                    <input type="text" class="form-control" name="firstname" id="fname" readonly="true"  maxlength="50" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" autofocus placeholder="<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+                                                    <input type="text" class="form-control" name="firstname" id="fname" maxlength="50" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" autofocus placeholder="<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
                                                      value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
                                                    echo $this->session->get('firstname'); 
                                                    } else {
@@ -521,6 +521,9 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <label>Shipping method <span style="color:red;">*</span>:</label>
                                                     <div class="">
                     			    <table style=""> 
+                                    <?php if(isset($this->form_error['free']) || isset($this->form_error['flat'])|| isset($this->form_error['product']) || isset($this->form_error['quantity'])){?>
+										<tr><td><em>Please select at least one shopping method.</em></td></tr>
+										<?php }?>
                                  <label>
                                         <?php if($this->free_shipping_setting == 1){ ?>
                                                         <tr><td style=""><label style="font-weight:normal;"><input tabindex="8"  type="checkbox" name="free" value="1" 
@@ -591,7 +594,8 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                        <div>
                                
                             <?php echo $this->Lang['SELLER_INTRODUCTION']; ?> <a data-toggle="modal" data-target="#confirm-delete" href="<?php echo $this->Lang['ZMART AGREEMENT URL']; ?>"><?php echo $this->Lang['ZMART AGREEMENT']; ?></a>
-                                                       <br><input tabindex="14" type="checkbox" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
+                                                       <br><input tabindex="14" type="checkbox" name="t_n_c" id="ch1"  /> <?php echo $this->Lang['ZMART CHECKBOX']; ?> <b><?php echo $this->Lang['ZMART AGREEMENT']; ?></b>
+                                                       <?php if(isset($this->form_error['t_n_c'])){?><em>Required.</em><?php }?>
                             <p id="tcerror" style="color:red;"></p>
                                                        </div>
                         </div>       
