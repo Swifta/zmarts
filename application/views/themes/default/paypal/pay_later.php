@@ -190,7 +190,7 @@
 
                                                 </div>
                                                                  <div class="buy_it complete_order_button" id="submit">                                                        
-                                    <input type="submit" value="<?php echo $this->Lang['COMP_ODR']; ?>" tabindex="1" title="<?php echo $this->Lang['COMP_ODR']; ?>" />                                                                                                               
+                                    <input type="submit" value="Complete 'PAY LATER' Order" tabindex="1" title="<?php echo $this->Lang['COMP_ODR']; ?>" />                                                                                                               
                                 </div>
                                 <?php if(count($this->cms_tc) > 0){ ?>
                                 <div class="payment_terms_outer"><p class="terms-conditons-text" id="terms1"> <span class="fl font_myriad_pro"><?php echo $this->Lang['BY_CLICK']; ?> </span> <a onclick="show_dis_tc();" title="<?php echo $this->Lang['TEMRS']; ?>" class="font_myriad_pro mt5" tabindex="2"><?php echo $this->Lang['TEMRS']; ?>.</a></p> </div>

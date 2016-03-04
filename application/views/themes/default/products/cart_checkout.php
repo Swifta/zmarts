@@ -857,16 +857,17 @@
                         <div class="p_inner_block">                            
                                 <div class="payment_select"> 
                                     <?php if ($this->interswitch) { ?>
-                                        <div class="payment_sel_lft">
-                                        <a onclick="return InterswitchPay();" id="InterswitchPay"  >
-                                        <input id="paypal_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['GLOBAL_PAY']; ?></p></div>
+                                        <a onclick="return InterswitchPay();" 
+                                           style="background-color: #fda237;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;" id="InterswitchPay">
+                                            <?php echo $this->Lang['GLOBAL_PAY']; ?></a>
                                     <?php
                                     }
                                     ?>
                                     <?php if ($this->cash_on_delivery) { ?>    
-                                    <div class="payment_sel_lft">
-                                        <a onclick="return COD();" id="cod"  >
-                                        <input id="cod_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['CASH_ON_DEL']; ?></p></div>
+                                    
+                                        <a onclick="return COD();" id="cod"
+                                           style="background-color: #fda237;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"><?php echo $this->Lang['CASH_ON_DEL']; ?>
+                                        </a>
                                     <?php
                                     }
                                     ?>
@@ -874,8 +875,10 @@
                                         <a onclick="return false;" id="cod"  >
                                         <input id="cod_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['DIRECT_DEBIT']; ?></p></div>-->
                                          <?php if ($this->pay_later_setting) { ?>
-                                                <div class="payment_sel_lft"> 
-                                                <a onclick="return Pay_later();" id="Wire"  > <input type="radio" name="name"  /></a> <p><?php echo $this->Lang['PAY_LATER']; ?></p></div>
+                                                
+                                                <a onclick="return Pay_later();" id="Wire" 
+                                                   style="background-color: #fda237;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;">
+                                                       <?php echo $this->Lang['PAY_LATER']; ?></a>
                                         <?php } ?>
                                         <?php if ($this->paypal_setting) { ?>
                                                 <div class="payment_sel_lft">
