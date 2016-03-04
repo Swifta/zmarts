@@ -9,6 +9,38 @@ class Admin_Model extends Model
 		$this->session = Session::instance();
 		$this->user_id = $this->session->get("user_id");
 	}
+        
+	/** FORGOT PASSWORD **/
+
+	public function forgot_password($email = "", $password = "")
+	{
+
+		$email = trim($email);
+		$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 1,"user_status" => 1))->limit(1)->get();
+		if(count($result) > 0){
+			
+			$userid = $result->current()->user_id;
+			$name = $result->current()->firstname;
+			$email = $result->current()->email;
+			$this->db->update("users",array("password" => md5($password), "last_login" => 0 ), array("user_id" => $userid));
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
+        
+	public function get_usr_details_list($email)
+	{
+		$email = strip_tags(addslashes(trim($email)));
+		/*$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 3,"user_status" => 1))->limit(1)->get();*/
+		//$result=$this->db->query("select * from users where email='$email' and user_status=1 and user_type IN(3,8)");
+		$result = $this->db->select()
+                        ->from("users")
+                        ->where("email='$email' and user_status=1 and user_type=1")
+                        ->get();
+                return $result;
+	}
 
 	/** ADMIN HOME DASHBOARD DATA COUNT **/
   

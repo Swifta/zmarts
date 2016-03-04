@@ -72,14 +72,17 @@
                             </li>
 
                             <li>
-                                <label><?php echo $this->Lang['SEL_COUNTRY'];?>:<span class="form_star">*</span></label>
+                                <label>Coountry:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                    <select name="country" onchange="return city_change_merchant(this.value);">
-                                            <option value="-99"><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
+                                	<input type="text" id="id_rush_country">
+                                    <input type="hidden" name="country" value="25" id="id_rush_country">
+                                    
+                                    <!--<select name="country" id="id_rush_country" onchange="return city_change_merchant(this.value);">
+                                           
                                            <?php foreach ($this->all_country_list as $c) { ?>
                                              <option  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
                                             <?php } ?>
-                                    </select>
+                                    </select>-->
                                      <em id="country_error"></em>
                                 </div>
                             </li>
@@ -87,8 +90,8 @@
                                 <label>Select a State:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                     <div id="CitySD_log_Signup">
-                                      <select name="city" >
-                                            <option value="-99"><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
+                                      <select name="city" id="id_rush_sel_state" >
+                                          
                                     </select>
                                     </div>
                                      <em id="city_error"></em>
@@ -587,4 +590,12 @@ function validatesignup()
 }
 
 </script> 
+
+<script type="application/javascript">
+	$(document).ready(function(e) {
+        $('#id_rush_country').val("Nigeria").attr('readonly', 'readonly');
+		city_change_merchant("25");
+		$('#id_rush_sel_state').val("-99");
+    });
+</script>
 

@@ -147,7 +147,7 @@
 							<em><?php if(isset($this->form_error["template"])){ echo $this->form_error["template"]; }?></em></td>
                  </tr>
                   <tr>
-                        <td><label><?php echo $this->Lang["LOGO"]; ?></label><span>*</span></td>
+                        <td><label>Attach Banner</label></td>
                         <td><label>:</label></td>
                         <td><input type="file" name="attach" id="attach"/>
                         <em><?php if(isset($this->form_error["attach"])){ echo $this->form_error["attach"]; }?></em></td>

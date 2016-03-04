@@ -1018,6 +1018,7 @@ class Merchant_Model extends Model
 				$pro_status = $_POST['status'];
 				
 			/*$result = $this->db->insert("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period" => $post->delivery_days,"category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category,"deal_price" => $deal_price,"deal_value" => $deal_val,"deal_type"=> 2,"deal_savings" => $savings,"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => $value,"merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"shipping"=>$post->shipping,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"deal_status" =>$pro_status,"attribute"=>$atr_option,"Including_tax" =>$inc_tax,"product_duration"=>$duration,"created_date" => time(), "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift, "for_store_cred" => $post->store_cred));*/
+			
 		
 			$result = $this->db->insert("product", array("deal_title" => $post->title, "url_title" => url::title($post->title), "deal_key" => $deal_key, "deal_description" => $post->description,"delivery_period" => $post->delivery_days,"category_id" => $post->category,"sub_category_id" => $post->sub_category,"sec_category_id" => $post->sec_category,"third_category_id" => $post->third_category,"deal_price" => $deal_price,"deal_value" => $deal_val, "deal_prime_value" =>$deal_prime_val, "deal_type"=> 2,"deal_savings" => $savings, "deal_prime_savings" => $prime_savings, "meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description,"deal_percentage" => $value, "deal_prime_percentage" => $prime_value, "merchant_id"=>$this->user_id,"shop_id"=>$post->stores,"shipping"=>$post->shipping,"created_by"=>$this->user_id,"color" => $post->color_val,"size" => $post->size_val,"weight" => $weight,"height" => $height,"length" => $length,"width" => $width,"shipping_amount" => $shipping_amount,"user_limit_quantity"=>$quantity,"deal_status" =>$pro_status,"attribute"=>$atr_option,"Including_tax" =>$inc_tax,"product_duration"=>$duration,"created_date" => time(), "bulk_discount_buy" => $post->buy_bulk,"bulk_discount_get"=>$post->get_bulk,"product_offer" =>$post->offer,"start_date"=>strtotime($post->start_date),"end_date" =>strtotime($post->end_date),"gift_offer" =>$post->free_gift, "for_store_cred" => $post->store_cred));
 		
@@ -1545,6 +1546,23 @@ class Merchant_Model extends Model
 	             		->get();
            return $result;
 	}
+        
+        public function isProductDeleteable($deal_key = "", $deal_id = ""){
+            $result = $this->db->select()
+                    ->from("product")
+                    ->where(array("purchase_count"=>0, "deal_id" => $deal_id, 
+                        "deal_key" => $deal_key,"product.merchant_id" => $this->user_id))
+                    ->get();
+            if(count($result) == 0){
+                return false;
+            }
+            return true;
+        }
+        
+        public function deleteProduct($deal_key = "", $deal_id = ""){
+            $this->db->delete("product", array("deal_id" => $deal_id, 
+                        "deal_key" => $deal_key,"product.merchant_id" => $this->user_id));
+        }
 
 	 /** VIEW PRODUCTSS **/
 
@@ -2871,7 +2889,7 @@ class Merchant_Model extends Model
 
 	public function get_winner_list($offset = "", $record = "", $name = "",$limit="")
 	{
-		$limit1 = $limit !=1 ?"limit $offset,$record":"";
+		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 
 		$contitions = "auction.winner != 0 and auction.merchant_id = $this->user_id and bidding.winning_status!=0 ";
 
@@ -2889,9 +2907,9 @@ class Merchant_Model extends Model
                             ->join("city","city.city_id","users.city_id")
                             ->join("country","country.country_id","users.country_id")
                             ->join("bidding","bidding.auction_id","auction.deal_id")
-                            ->where($contitions)
-                            ->orderby("auction.deal_id", "DESC")
-                            ->limit($limit1)
+                            ->where($contitions." order by auction.deal_id DESC ".$limit1)
+//                            ->orderby("auction.deal_id", "DESC")
+//                            ->limit($limit1)
                             ->get();
 
 				//$result = $this->db->query($qry);
@@ -3099,14 +3117,14 @@ class Merchant_Model extends Model
 	    //$result_active_products = $this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count < user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
             $result_active_products = $this->db->select("*")->from("product")
                     ->join("stores", "stores.store_id", "product.shop_id")
-                    ->where(array("purchase_count <"=> "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
+                    ->where(array("purchase_count"=> 0, "deal_status" => 1, "stores.store_status" => 1,
                         "product.merchant_id" => $this->user_id))->get();
             $result["active_products"]=count($result_active_products);
 
 		//$result_sold_products =$this->db->query("SELECT * FROM product join stores on stores.store_id=product.shop_id WHERE purchase_count = user_limit_quantity and deal_status = 1 and stores.store_status = 1 and product.merchant_id = $this->user_id");
 		$result_sold_products = $this->db->select()->from("product")
                         ->join("stores", "stores.store_id", "product.shop_id")
-                        ->where(array("purchase_count" => "user_limit_quantity", "deal_status" => 1, "stores.store_status" => 1,
+                        ->where(array("purchase_count > " => 0, "deal_status" => 1, "stores.store_status" => 1,
                             "product.merchant_id" => $this->user_id))->get();
                 $result["archive_products"]=count($result_sold_products);
 		return $result;
@@ -4150,6 +4168,7 @@ class Merchant_Model extends Model
 				$this->news_message = $post->message;
 				$this->news_footer = $post->footer;
 				$this->news_logo = $logo;
+                                
 				$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
 				if(EMAIL_TYPE==2){
 					email::smtp($from, $c->email,$post->subject,$message,$file);
@@ -4183,7 +4202,7 @@ class Merchant_Model extends Model
 						$this->newstitle = $post->title;
 						$this->newsmessage = $post->message;
 						$this->newsfooter = $post->footer;
-						$this->newslogo = $logo;
+						$this->news_logo = $logo;
 						$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
 
 						$fromEmail = NOREPLY_EMAIL;

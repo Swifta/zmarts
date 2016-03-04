@@ -357,7 +357,7 @@ $content_text = array(
 
 "CASH_ON_DEL" => "Cash On Delivery",
 
-"SORRY_NOT_BUY_AUC" => "Sorry you are not a val user to buy this auction ",
+"SORRY_NOT_BUY_AUC" => "Sorry you are not qualified to buy this auction",
 
 "CLK_IT" => "Click It",
 
@@ -373,9 +373,9 @@ $content_text = array(
 
 "PAY_BEFORE" => "Payment must be made on or before",
 
-"AUTO_CANCEL_PRO" => "or this order automatically cancels and the product is placed back",
+"AUTO_CANCEL_PRO" => "If payment is not made by this date, your order will be automatically cancelled and the product will be returned ",
 
-"INTO_INVEN" => "into inventory",
+"INTO_INVEN" => "into the inventory.",
 
 "NON_PAY_AUC" => "Non-payment of auctions you have won on ",
 

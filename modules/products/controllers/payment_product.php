@@ -116,24 +116,27 @@ class Payment_product_Controller extends Layout_Controller {
 	{
 		if($country == -99 || $country == -1 || $country == ""){
 			$list = '<select name="city" class="CityPAY select required" >';
-			$list .='<option value="" >'.$this->Lang["COUNTRY_FIRST"].'</option>';
+			$list .='<option value="-99" selected >Select state</option>';
 			echo $list .='</select>';
 		exit;
 		} else {
 		        $CitySlist = $this->payment_products->get_city_by_country_pay($country);
 		        if(count($CitySlist) == 0){
 		                $list = '<select name="city"  class="select required" >';
-			        $list .='<option value="">'.$this->Lang["CITY_FIRST"].'</option>';
+			        $list .='<option value="-99" selected >Select state</option>';
 			        echo $list .='</select>';
 		                exit;
 		        } else {
 		                foreach($CitySlist as $s) {	
                                         if($s->city_id != 0)
                                         {
+											
                                                 $list = '<select name="city" class="CityPAY" >';
+												$list .='<option value="-99" selected>Select state</option>';
                                         }
                                 }
 		                foreach($CitySlist as $s){
+							
 			                $list .='<option value="'.$s->city_id.'">'.ucfirst($s->city_name).'</option>';
 		                }
 		                echo $list .='</select>';

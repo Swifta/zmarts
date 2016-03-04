@@ -548,6 +548,7 @@ class Admin_merchant_Model extends Model
 	{
 		$result = $this->db->select()->from("users")
 				   ->join("city","city.city_id","users.city_id")
+                        ->join("stores","users.user_id","stores.merchant_id")
 		                   ->join("country","country.country_id","users.country_id")
 		                   ->where(array("user_id" => $id, "user_type" => 3))->get();
 		return $result;

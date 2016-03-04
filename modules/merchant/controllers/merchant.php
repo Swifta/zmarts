@@ -2288,6 +2288,24 @@ class Merchant_Controller extends website_Controller {
 	        
 	        
         }
+        
+        public function delete_products($deal_key = "", $deal_id = ""){
+		if(PRIVILEGES_PRODUCTS!= 1){
+			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
+			url::redirect(PATH."merchant.html");	        
+		}
+                if($this->merchant->isProductDeleteable($deal_key, $deal_id)){
+                    $this->merchant->deleteProduct($deal_key, $deal_id); //delete the product
+                    common::message(1, "Product successfully deleted. Thank you.");
+                    url::redirect(PATH."merchant/manage-products.html");
+                }
+                else{
+                    common::message(-1, "This product cannot be deleted as it may contain "
+                            ."certain sales history or that you do not have enough permission "
+                                ."to perform this operation.");
+                    url::redirect(PATH."merchant/manage-products.html");
+                }
+        }
 
 	/** VIEW PRODUCTS **/
 
@@ -5099,18 +5117,19 @@ class Merchant_Controller extends website_Controller {
 						->add_rules('banner_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						->add_rules('banner_2_link','valid::url')
 						->add_rules('bannee_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('banner_3_link','valid::url')
-						->add_rules('ads_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_1_link','valid::url')
-						->add_rules('ads_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_2_link','valid::url')
-						->add_rules('ads_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_3_link','valid::url');
+						->add_rules('banner_3_link','valid::url');
+//						->add_rules('ads_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_1_link','valid::url')
+//						->add_rules('ads_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_2_link','valid::url')
+//						->add_rules('ads_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_3_link','valid::url');
 						if($post->sector!="")
 						{
 							$post->add_rules('subsector','required');
 						}
 			if($post->validate()){
+                            
 					$store_details = $this->merchant->get_store_name($store_id);
 					$old_store_name = $store_details[0]->store_url_title;
 					$old_modules_name = 'stores';
@@ -5122,8 +5141,10 @@ class Merchant_Controller extends website_Controller {
 						$old_modules_details = $this->merchant->get_subsector_name($store_details[0]->store_subsector_id);
 						$old_modules_name = isset($old_modules_details[0]->sector_name)?strtolower($old_modules_details[0]->sector_name):'stores';
 					}
+                                        
 			        $status = $this->merchant->update_merchant_attribute(arr::to_object($this->userpost),$store_id);
-			        if($status){
+			        
+                                if($status){
 						
 						$this->sectorname = "Default";
 						if($this->userpost['sector']!=''){
@@ -5150,46 +5171,50 @@ class Merchant_Controller extends website_Controller {
 						
 						
 			                if($_FILES['banner_1']['name']){
-						$banner1 = upload::save('banner_1');
-						$IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
-						common::image($banner1, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner1);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
+						$banner1 = upload::save('banner_1', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						
+						//common::image($banner1, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner1);
 					}
 					
 					if($_FILES['banner_2']['name']){
-						$banner2 = upload::save('banner_2');
-						$IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
-						common::image($banner2, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner2);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
+						$banner2 = upload::save('banner_2', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						
+						//common::image($banner2, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner2);
 					}
 					
 					if($_FILES['banner_3']['name']){
-						$banner3 = upload::save('banner_3');
-						$IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
-						common::image($banner3, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner3);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
+						$banner3 = upload::save('banner_3', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						
+						//common::image($banner3, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner3);
 					}
 					
-					if($_FILES['ads_1']['name']){
-						$ads1 = upload::save('ads_1');
-						$IMG_NAME = $status."_".$this->sectorname."_1_ads.png";
-						common::image($ads1, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads1);
-					}
-					
-					if($_FILES['ads_2']['name']){
-						$ads2 = upload::save('ads_2');
-						$IMG_NAME = $status."_".$this->sectorname."_2_ads.png";
-						common::image($ads2, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads2);
-					}
-					
-					if($_FILES['ads_3']['name']){
-						$ads3 = upload::save('ads_3');
-						$IMG_NAME = $status."_".$this->sectorname."_3_ads.png";
-						common::image($ads3, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads3);
-					}
+//					if($_FILES['ads_1']['name']){
+//						$ads1 = upload::save('ads_1');
+//						$IMG_NAME = $status."_".$this->sectorname."_1_ads.png";
+//						common::image($ads1, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						unlink($ads1);
+//					}
+//					
+//					if($_FILES['ads_2']['name']){
+//						$ads2 = upload::save('ads_2');
+//						$IMG_NAME = $status."_".$this->sectorname."_2_ads.png";
+//						common::image($ads2, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						unlink($ads2);
+//					}
+//					
+//					if($_FILES['ads_3']['name']){
+//						$ads3 = upload::save('ads_3');
+//						$IMG_NAME = $status."_".$this->sectorname."_3_ads.png";
+//						common::image($ads3, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						unlink($ads3);
+//					}
+                                       
 					$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
@@ -5269,9 +5294,12 @@ class Merchant_Controller extends website_Controller {
 			        url::redirect(PATH."merchant/manage-shop.html");
 			}
 			else{
+                             
 				$this->form_error = error::_error($post->errors());
 			}
+                        
 		}
+                
 	        $this->mer_merchant_act = 1;
 	        $this->store_personalized = 1;
 	       // $this->user_details = $this->merchant->get_merchant_balance();
@@ -5611,16 +5639,18 @@ class Merchant_Controller extends website_Controller {
 							->add_rules('subject', 'required')
 							->add_rules('message', 'required')
 							->add_rules('template', 'required')
-							->add_rules('attach', 'required', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 							->add_rules('title', 'required')
 							->add_rules('footer', 'required');
 				
 				if(!isset($post->users) && !isset($post->all_users))
 				{
 					$post->add_rules('all_users','required');
-				}	
+				}
+                                if(isset($post->attach)){
+                                    $post->add_rules('attach', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
+                                }
 				if($_FILES["attach"]["name"]==''){
-					$img_check = 1;
+					$img_check = 0; //1; //image upload no more compulsary
 				}
 				if($post->validate() && $img_check ==0){
 					$file=array();
@@ -5634,28 +5664,28 @@ class Merchant_Controller extends website_Controller {
 						*/
 						
 						$dir = DOCROOT."images".DIRECTORY_SEPARATOR."newsletter";
-						$source = upload::save('attach', null, $dir, 0777);
+						$source = upload::save('attach', text::random($type = 'alnum', $length = 10).".png", $dir, 0777);
 						$logo = basename($source);
 						
 						
 					}
 					$file1=array();
 					pdf::template_create($post->template,$post->subject,$post->message);
-
-					array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
+                                        $this->news_logo = $logo;
+					//array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
 					//chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
-					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1);
+					$status = $this->merchant->send_newsletter(arr::to_object($this->userPost),$file1, $logo);
 					if($_FILES["attach"]["name"]!=''){
 						//$logo = basename($_FILES["attach"]["name"]);
-						unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
+						//unlink(realpath(DOCROOT."images/newsletter/").DIRECTORY_SEPARATOR.$logo);
 					}
 					if($status == 1){
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
+						//unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 						common::message(1, $this->Lang['NEWS_SENT']);
 			        }else{
 						//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
-						unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
+						//unlink(realpath(DOCROOT.'images/newsletter/newsletter.pdf'));
 				        common::message(-1, $this->Lang['NEWS_NOT_SENT']);
 			        }
 					url::redirect(PATH."merchant.html");

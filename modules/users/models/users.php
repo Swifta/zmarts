@@ -198,7 +198,7 @@ class Users_Model extends Model
 	public function register_facebook_user($fb_profile = array(), $city_id="", $fb_access_token = "",$user_referral_id = "",$pswd = "")
 	{ 
 		$result_country = $this->db->from("city")->where(array("default" =>1))->limit(1)->get();
-		$fb_profile_email=$this->session->get('fb_email');
+		$fb_profile_email= $fb_profile['email']; //$this->session->get('fb_email');
 		$country_value = "";
 		if(count($result_country) >0 ){
 		$country_value = $result_country->current()->country_id; 
@@ -207,7 +207,7 @@ class Users_Model extends Model
 				                              
 		$result = $this->db->from("users")->where(array("email" => $fb_profile_email))->limit(1)->get();
 		if(count($result) == 0){
-			$fb_image_url = "http://graph.facebook.com/".$fb_profile->id."/picture";
+			$fb_image_url = $fb_profile['picture']['url'];//"http://graph.facebook.com/".$fb_profile->id."/picture";
 			//$pswd = text::random($type = 'alnum', $length = 10);
 			$store_key = text::random($type = 'alnum', $length = 10);
 			$referral_id = text::random($type = 'alnum', $length = 10);
@@ -224,8 +224,11 @@ class Users_Model extends Model
                         $fb_profile->name = "UNKNOWN";
                     }
 			
-			$insert = $this->db->insert("users",array("firstname" => $fb_profile->name,"UserType" => "4"/*, "lastname" => $fb_profile->last_name */, "email" => $fb_profile_email, "password" => md5($pswd), 
-                            "city_id" => $city_id , "country_id" => $country_value,"referral_id" => $referral_id,"referred_user_id" =>$referred_user_id,"joined_date" => time(), "last_login" => time(),  "fb_user_id" => $fb_profile->id , "fb_session_key" => $fb_access_token ,"login_type"=>"3"));
+			$insert = $this->db->insert("users",array("firstname" => $fb_profile['name'],"user_type" => "4"/*, "lastname" => $fb_profile->last_name */,
+                            "email" => $fb_profile_email, "password" => md5($pswd), 
+                            "city_id" => $city_id , "country_id" => $country_value,"referral_id" => $referral_id,
+                            "referred_user_id" =>$referred_user_id,"joined_date" => time(), "last_login" => time(),  "fb_user_id" => $fb_profile['id'],
+                            "fb_session_key" => $fb_access_token ,"login_type"=>"3"));
 
 			$result_city = $this->db->select("category_id")->from("email_subscribe")->where(array("email_id" =>$fb_profile_email))->get();
 			if(count($result_city) > 0){
@@ -238,7 +241,7 @@ class Users_Model extends Model
                                 $category_subscribe = $category_result->current()->category_id;
 				$result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $insert->insert_id(),"email_id" => $fb_profile_email,"category_id" => $category_subscribe));
   		                        }
-			$this->session->set(array("UserID" => $insert->insert_id(), "UserName" => $fb_profile->name, "UserEmail" => $fb_profile_email, "fb_access_token" => $fb_access_token,"UserType" => "4"));
+			$this->session->set(array("UserID" => $insert->insert_id(), "UserName" => $fb_profile['name'], "UserEmail" => $fb_profile_email, "fb_access_token" => $fb_access_token,"UserType" => "4"));
 			
 			if($fb_image_url){
 				$image = file_get_contents($fb_image_url);
@@ -1026,7 +1029,7 @@ class Users_Model extends Model
 	public function storecredit_list_count()
 	{
 		//$result = $this->db->query("select storecredit_id from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4");
-		$result = $this->select("storecredit_id")->from("store_credit_save as s")
+		$result = $this->db->select("storecredit_id")->from("store_credit_save as s")
                         ->join("product", "product.deal_id", "s.productid")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("deal_status" =>1,"store_status"=>1,"userid"=>$this->UserID,"credit_status"!=4))
@@ -1039,8 +1042,8 @@ class Users_Model extends Model
 	public function storecredit_list($offset = "",$record = "")
 	{
 		//$result = $this->db->query("select * from store_credit_save as s join product on product.deal_id = s.productid join stores on stores.store_id = product.shop_id where deal_status =1 and store_status =1 and userid = $this->UserID and credit_status !=4 order by s.storecredit_id DESC limit $offset,$record");
-		$result = $this->select()->from("store_credit_save as s")
-                        ->join("product", "product.deal_id", " s.productid")
+		$result = $this->db->select()->from("store_credit_save as s")
+                        ->join("product", "product.deal_id", "s.productid")
                         ->join("stores", "stores.store_id", "product.shop_id")
                         ->where(array("deal_status" =>1, "store_status" =>1, "userid" => $this->UserID, "credit_status !="=>4))
                         ->orderby("s.storecredit_id", "DESC")

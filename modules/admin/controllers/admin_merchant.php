@@ -1483,7 +1483,7 @@ class Admin_merchant_Controller extends website_Controller {
 	{
 		if($country == -1){
 			$list = '<td><label>'.$this->Lang["SEL_CITY"].'*</label></td><td><label>:</label></td><td><select name="city">';
-			$list .='<option value=" " >'.$this->Lang["CITY_FIRST"].'</option>';
+			$list .='<option value="-99" >Select state</option>';
 			echo $list .='</select></td>';
 		exit;
 		}
@@ -1600,7 +1600,10 @@ class Admin_merchant_Controller extends website_Controller {
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been approved.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
 				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
-				<p style = \"text-decoration: underline; color: #666;font-weight: bold;\"> Click <a style = \"text-decoration: none; color: #ff0000;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p></div>";
+				<p style = \"text-decoration: underline; color: #666;font-weight: bold;\"> Click <a style = \"text-decoration: none; color: #ff0000;\" href='".PATH.
+                                        "merchant-login.html' >".PATH."merchant-login.html</a> to login to your account.</p>"
+                                . "<p style = \"text-decoration: none; color: #666;\"> Your merchant store address is : <a style = \"text-decoration: none; color: #ff0000;\" href='".PATH.$details[0]->store_url_title."' >".
+                                        PATH.$details[0]->store_url_title."</a></p> </div>";
 				
 				$this->name = ucfirst($details[0]->firstname);//." ".$details[0]->lastname;
 				$this->merchant_message = $merchant_message;

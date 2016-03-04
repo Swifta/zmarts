@@ -1,11 +1,14 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 <?php
 foreach ($this->transaction_details as $tran) {
-    if (file_exists(DOCROOT . 'images/auction/466_347/' . $tran->deal_key . '_1' . '.png')) {
+	
+    if (file_exists(DOCROOT . 'images/auction/1000_800/' . $tran->deal_key . '_1' . '.png')) {
         $image = PATH . 'images/auction/466_347/' . $tran->deal_key . '_1' . '.png';
     } else {
         $image = PATH . "themes/" . THEME_NAME . "/images/noimage_deals_list.png";
     }
+	
+	
     $end_time = $tran->end_time + (AUCTION_ALERT_DAY * 24 * 60 * 60);
     ?>
     <!DOCTYPE html>
@@ -40,7 +43,7 @@ foreach ($this->transaction_details as $tran) {
                                             <td style="vertical-align: top; width: 183px;">
                                                 <table>
                                                     <tr>
-                                                        <td style=" vertical-align: top;  width: 183px; text-align: right;font:  normal 12px arial; color: #333; padding: 0px; margin: 0px;"><?php echo date('F d,Y l'); ?></td>
+                                                        <td style=" vertical-align: top;  width: 183px; text-align: right;font:  normal 12px arial; color: #333; padding: 0px; margin: 0px;"><?php echo date('l\,  F d,Y'); ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -136,7 +139,7 @@ foreach ($this->transaction_details as $tran) {
                                                                 <tr>
                                                                     <td style=" vertical-align: top;">
                                                                         <p  style=" font:  normal 12px arial;  padding-top: 10px;color: #666;  margin: 0px;  text-align: center; text-decoration: none;"><?php echo $this->Lang['NON_PAY_AUC']; ?> <?php echo SITENAME; ?>  <?php echo $this->Lang['CANCEL_CURR_BID']; ?>
-                                                                            <br/><?php echo $this->Lang['INTO_INVEN']; ?></p>
+                                                                            </p>
                                                                     </td>
                                                                 </tr>
                                                             </table>

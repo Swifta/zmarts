@@ -24,6 +24,7 @@
          $(".CityPAY_new").hide();
         
         $("#cashForm").validate({
+            ignore: ".ignore",
             messages: {
                 friend_name: {
                     required: "<?php echo $this->Lang['PLS_ENT_FRD_NAM']; ?>"                         
@@ -42,7 +43,6 @@
                     required: "<?php echo $this->Lang['PLS_ENT_STATE1']; ?>"                         
                 },
                 postal_code : {
-                    required: "<?php echo $this->Lang['PLS_ENT_ZIP']; ?>",
                     number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
                 },
                 phone : {
@@ -161,7 +161,12 @@
                     </li>
                     <li class="frm_clr">
                         <label><?php echo $this->Lang['POSTAL_CODE']; ?> :</label>
-                        <div class="fullname"><input id="ship_postal_code_p1" name="postal_code" tabindex="8" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" value="<?php if($this->session->get('shipping_postal_code')){ echo $this->session->get('shipping_postal_code'); } ?>" class="required number" maxlength="8"/></div>
+                        <div class="fullname"><input id="ship_postal_code_p1" class="ignore"
+                        name="postal_code" tabindex="8" size="40" AUTOCOMPLETE="OFF"  
+                        placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" 
+                        type="text" value="<?php if($this->session->get('shipping_postal_code')){ 
+                            echo $this->session->get('shipping_postal_code'); } ?>" class="required number"
+                            maxlength="8"/></div>
                     </li>
                     <li>
                         <label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>

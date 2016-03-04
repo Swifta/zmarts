@@ -328,8 +328,8 @@ $this->language_List = str_replace(".php", "", $DL);
 			           echo "0";
 		           }
 		           ?></span><?php echo $this->Lang['CART']; ?></a>
-                                            <div class="cart_window_products1" ></div>
 		                        </div>
+                                <div class="cart_window_products1" ></div>
 	                        </div>
 <?php } ?>
 
@@ -851,8 +851,10 @@ $srch = $this->Lang['SRCH_DEAL'];
 			           echo "0";
 		           }
 		           ?></span><?php echo $this->Lang['CART']; ?></a>
-            <div class="cart_window_products1" ></div>
+            
         </div>
+        
+        <div class="cart_window_products1" ></div>
         </div>
         <?php } ?>
         
@@ -1443,14 +1445,14 @@ $("#cart_window1").mouseover(function(){
                 dataType:"html",
                 success:function(check)
                 {
-                        $(".cart_window_products1").css({"display":"block"});
+                        //$(".cart_window_products1").css({"display":"block"});
                         $(".cart_window_products1").html(check);
                 }
         });
 });
 
 $("#cart_window1").mouseout(function(){
-	$(".cart_window_products1").css({"display":"none"});
+	//$(".cart_window_products1").css({"display":"none"});
 });
 
 

@@ -206,8 +206,9 @@ $(document).ready(function () {
 var win2;
 function facebookconnect()
 {
-        win2 = window.open(Path+'facebook-connect.php',null,'width=750,location=0,status=0,height=500');
-        checkChild();
+    location.href = Path+'facebook-connect.php';
+        //win2 = window.open(Path+'facebook-connect.php',null,'width=750,location=0,status=0,height=500');
+        //checkChild();
 }
 
 var win3;
@@ -1268,7 +1269,7 @@ function city_change_merchant(country){
            }
            else{
                 document.getElementById("CitySD_log_Signup").innerHTML = data.responseText;
-                $("#CitySD_Signup").html(data);
+                $("#CitySD_Signup").html(data.responseText);
             }
         },
         error: function() {
@@ -1341,15 +1342,16 @@ if(country == ''){ var country = -1;  }
 
 function showfbsignup()
 {
-	document.fb_signup.email.value='';
-	$('#femail_error').html('');
-	$('#fade').css({'visibility' : 'visible'});
-	$('.popup_block2').css({'display' : 'none'});
-	$('.popup_block').css({'display' : 'none'});
-	$('.popup_block1').css({'display' : 'none'});
-	$('.popup_block3_0').css({'display' : 'none'});
-	$('.popup_block3_1').css({'display' : 'none'});
-	$('.popup_block4').css({'display' : 'block'});
+//	document.fb_signup.email.value='';
+//	$('#femail_error').html('');
+//	$('#fade').css({'visibility' : 'visible'});
+//	$('.popup_block2').css({'display' : 'none'});
+//	$('.popup_block').css({'display' : 'none'});
+//	$('.popup_block1').css({'display' : 'none'});
+//	$('.popup_block3_0').css({'display' : 'none'});
+//	$('.popup_block3_1').css({'display' : 'none'});
+//	$('.popup_block4').css({'display' : 'block'});
+facebookconnect();
 	
 }
 

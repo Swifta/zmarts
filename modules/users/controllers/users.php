@@ -610,69 +610,134 @@ class Users_Controller extends Layout_Controller {
 
 	/** FACEBOOK CONNECT **/
 
-	public function facebook()
+	public function facebook($done = false)
 	{ 
-		
-		$user_referral_id = $this->session->get("User_Referral_ID");
-		$fb_access_token = $this->session->get("fb_access_token"); 
-		$redirect_url = PATH."users/facebook/";
-		if(!$fb_access_token && !$this->UserID){ 
-			if($this->input->get("code")){
-			$token_url = "https://graph.facebook.com/oauth/access_token?client_id=".FB_APP_ID."&redirect_uri=".$redirect_url."&client_secret=".FB_APP_SECRET."&code=".$this->input->get("code");
-				$access_token = $this->curl_function($token_url);
-				$FBtoken = str_replace("access_token=","", $access_token);
-				$FBtoken = explode("&expires=", $FBtoken);
-				if(isset($FBtoken[0])){
-					$profile_data_url = "https://graph.facebook.com/me?access_token=".$FBtoken[0];
-					$Profile_data = json_decode($this->curl_function($profile_data_url));
-					if(isset($Profile_data->error)){
-						echo $this->Lang["PROB_FB_CONNECT"]; exit;
-					}
-					else{
-					        $pswd = text::random($type = 'alnum', $length = 10);
-						$status = $this->users->register_facebook_user($Profile_data, $this->city_id, $FBtoken[0],$user_referral_id,$pswd);
-						if($status > 1){
-							
-							$this->session->delete('fb_email');
-						        
-						        $user_details = $this->users->get_edit_name($status);
-                                                        $this->signup=1;
-                                                        $from = CONTACT_EMAIL;
-                                                        $this->name=$user_details->current()->firstname;
-                                                        $this->email =$user_details->current()->email;
-                                                        $this->password =$pswd;
-                                                        $subject = SITENAME." - Facebook Registration Details";
-                                                        $message = new View("themes/".THEME_NAME."/mail_template");
-                                                        if(EMAIL_TYPE==2){
-                                                        email::smtp($from, $this->email,$subject, $message);
-                                                        } else {
-                                                        email::sendgrid($from, $this->email,$subject, $message);
-                                                        }
-						
-						}
-			
-			
-						($status==1)?common::message(1, $this->Lang["SUCC_LOGIN"]):common::message(1, $this->Lang["SUCC_SIGN"]);
-					}
-				}
-				else{
-					echo $this->Lang["PROB_FB_CONNECT"]; exit;
-				}
-				?>
-<script>window.close();</script>
-<?php
-			}
-			else{ 
-				
-				url::redirect("https://www.facebook.com/dialog/oauth?client_id=".FB_APP_ID."&redirect_uri=".urlencode($redirect_url)."&scope=email,read_stream,publish_stream,offline_access&display=popup");
-				die();
-			}
-		}
-		else{
-			?>
-<script>window.close();</script>
-<?php
-		 }
+            $user_referral_id = $this->session->get("User_Referral_ID");
+            //using the updated facebook login implementation
+            require_once Kohana::find_file('vendor/Facebook', 'autoload');
+            //
+            $fb = new Facebook\Facebook([
+              'app_id' => FB_APP_ID,
+              'app_secret' => FB_APP_SECRET,
+              'default_graph_version' => 'v2.4',
+            ]);
+            if($done){
+                $helper = $fb->getRedirectLoginHelper();  
+                try {  
+                  $accessToken = $helper->getAccessToken();  
+                } catch(Facebook\Exceptions\FacebookResponseException $e) {  
+                  echo $this->Lang["PROB_FB_CONNECT"]; exit;
+                  exit;  
+                } catch(Facebook\Exceptions\FacebookSDKException $e) {  
+                  echo $this->Lang["PROB_FB_CONNECT"]; exit;
+                  exit;  
+                }
+
+
+                try {
+                  // Returns a `Facebook\FacebookResponse` object
+                  $response = $fb->get('/me?fields=id,name,email,picture', $accessToken);
+                } catch(Facebook\Exceptions\FacebookResponseException $e) {
+                  //echo 'Graph returned an error: ' . $e->getMessage();
+                  echo $this->Lang["PROB_FB_CONNECT"]; exit;
+                  exit;
+                } catch(Facebook\Exceptions\FacebookSDKException $e) {
+                  //echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                  echo $this->Lang["PROB_FB_CONNECT"]; exit;
+                  exit;
+                }
+                $user = $response->getGraphUser();//$user['picture']['url']
+                $pswd = text::random($type = 'alnum', $length = 10);
+                $status = $this->users->register_facebook_user($user, "", $user['id'],$user_referral_id,$pswd);
+                if($status > 1){
+                    $user_details = $this->users->get_edit_name($status);
+                    $this->signup=1;
+                    $from = CONTACT_EMAIL;
+                    $this->name=$user_details->current()->firstname;
+                    $this->email =$user_details->current()->email;
+                    $this->password =$pswd;
+                    $subject = SITENAME." - Facebook Registration Details";
+                    $message = new View("themes/".THEME_NAME."/mail_template");
+                    if(EMAIL_TYPE==2){
+                        email::smtp($from, $this->email,$subject, $message);
+                    } else {
+                        email::sendgrid($from, $this->email,$subject, $message);
+                    }
+                }
+
+
+                if($status != 1){
+                    common::message(1, $this->Lang["SUCC_LOGIN"]);
+                }
+                else{
+                    common::message(1, "Welcome back ".$this->session->get("UserName"));
+                }
+                url::redirect(PATH);
+            }
+            else{
+                $helper = $fb->getRedirectLoginHelper();
+
+                $permissions = ['email']; // Optional permissions
+                $loginUrl = $helper->getLoginUrl(PATH."users/facebook/true", $permissions);
+                //var_dump($loginUrl);die;
+                
+                url::redirect($loginUrl);
+            }
+            
+//		$user_referral_id = $this->session->get("User_Referral_ID");
+//		$fb_access_token = $this->session->get("fb_access_token"); 
+//		$redirect_url = PATH."users/facebook/";
+//		if(!$fb_access_token && !$this->UserID){ 
+//			if($this->input->get("code")){
+//			$token_url = "https://graph.facebook.com/oauth/access_token?client_id=".FB_APP_ID."&redirect_uri=".$redirect_url."&client_secret=".FB_APP_SECRET."&code=".$this->input->get("code");
+//				$access_token = $this->curl_function($token_url);
+//				$FBtoken = str_replace("access_token=","", $access_token);
+//				$FBtoken = explode("&expires=", $FBtoken);
+//				if(isset($FBtoken[0])){
+//					$profile_data_url = "https://graph.facebook.com/me?access_token=".$FBtoken[0];
+//					$Profile_data = json_decode($this->curl_function($profile_data_url));
+//					if(isset($Profile_data->error)){
+//						echo $this->Lang["PROB_FB_CONNECT"]; exit;
+//					}
+//					else{
+//					        $pswd = text::random($type = 'alnum', $length = 10);
+//						$status = $this->users->register_facebook_user($Profile_data, $this->city_id, $FBtoken[0],$user_referral_id,$pswd);
+//						if($status > 1){
+//							
+//							$this->session->delete('fb_email');
+//						        
+//						        $user_details = $this->users->get_edit_name($status);
+//                                                        $this->signup=1;
+//                                                        $from = CONTACT_EMAIL;
+//                                                        $this->name=$user_details->current()->firstname;
+//                                                        $this->email =$user_details->current()->email;
+//                                                        $this->password =$pswd;
+//                                                        $subject = SITENAME." - Facebook Registration Details";
+//                                                        $message = new View("themes/".THEME_NAME."/mail_template");
+//                                                        if(EMAIL_TYPE==2){
+//                                                        email::smtp($from, $this->email,$subject, $message);
+//                                                        } else {
+//                                                        email::sendgrid($from, $this->email,$subject, $message);
+//                                                        }
+//						
+//						}
+//			
+//			
+//						($status==1)?common::message(1, $this->Lang["SUCC_LOGIN"]):common::message(1, $this->Lang["SUCC_SIGN"]);
+//					}
+//				}
+//				else{
+//					echo $this->Lang["PROB_FB_CONNECT"]; exit;
+//				}
+//			}
+//			else{ 
+//				
+//				url::redirect("https://www.facebook.com/dialog/oauth?client_id=".FB_APP_ID."&redirect_uri=".urlencode($redirect_url)."&scope=email,read_stream,publish_stream,offline_access&display=popup");
+//				die();
+//			}
+//		}
+//		else{
+//		 }
 	}
 
 	

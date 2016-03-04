@@ -975,7 +975,7 @@ class Admin_products_Model extends Model
                          ->from("product")
                          ->join("stores","stores.store_id","product.shop_id")
                          
-                         ->where(array("purchase_count < " =>'user_limit_quantity','stores.store_status' => 1))
+                         ->where(array("purchase_count > " => 0,'stores.store_status' => 1))
                          ->orderby('product.deal_id', 'DESC')->get();
                       
        

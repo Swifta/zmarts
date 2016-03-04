@@ -81,15 +81,6 @@ abstract class Template_Controller extends Controller {
 		$this->banner_details = $this->settings->get_banner_list();
 		$this->admin_details = $this->settings->get_admin_details();
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		if(count($this->generalSettings) == 1){
 			foreach($this->generalSettings as $s){
 

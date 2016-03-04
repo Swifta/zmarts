@@ -1021,11 +1021,13 @@ function validate() {
                 </tr>
                 
                 
-				<tr>
+				<tr class ="r_offer">
                     <td><label><?php echo $this->Lang["OFFER"]; ?></label> <span>*</span></td>
 		   
                     <td><label>:</label></td>
                     <td>
+                    	<input type="radio" name="offer" value="0" onclick="empty_offers();" >None</input>
+                        <input type="radio" name="offer" value="0" onclick="bulk_discount();" checked  style="display:none" >
                         <input type="radio" name="offer" value="0" onclick="bulk_discount();" checked  style="display:none" >
                     	<input type="radio" name="offer" value="1"  onclick="bulk_discount();" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==1){?>checked<?php } ?>><?php echo $this->Lang["BULK_DISCOUNT"]; ?>
                     	<input type="radio" name="offer" value="2" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==2){?>checked<?php } ?> onclick="gift();"><?php echo $this->Lang["GIFT"]; ?>
@@ -1033,7 +1035,7 @@ function validate() {
                    	</td>
                 </tr>
 						
-				<tr class="gift" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]!=2){?>style="display:none;" <?php }elseif(isset($this->userPost["offer"]) && $this->userPost["offer"]==2){?>style="visibility:visible;"<?php } ?> style="display:none">
+				<tr class="gift r_offer" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]!=2){?>style="display:none;" <?php }elseif(isset($this->userPost["offer"]) && $this->userPost["offer"]==2){?>style="visibility:visible;"<?php } ?> style="display:none">
                     <td><label><?php echo $this->Lang["GIFT"]; ?></label> <span>*</span></td>
 		   
                     <td><label>:</label></td>
@@ -1048,7 +1050,7 @@ function validate() {
                    	</td>
                 </tr>
                 
-                <tr class="bulk_discount" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==2){?>style="display:none;" <?php } ?>>
+                <tr class="bulk_discount r_offer" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==2){?>style="display:none;" <?php } ?>>
                     <td><label><?php echo $this->Lang["BULK_DISCOUNT"]; ?></label></td>
                     <td><label>:</label></td>
                     <td>
@@ -1078,7 +1080,7 @@ function validate() {
                    	</td>
                 </tr>
                
-                <tr class="date_offer" >
+                <tr class="date_offer r_offer" >
                     <td><label><?php echo $this->Lang["START_DATE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -1087,7 +1089,7 @@ function validate() {
                     </td>
                 </tr>
                 
-                <tr class="date_offer" >
+                <tr class="date_offer r_offer" >
                     <td><label><?php echo $this->Lang["END_DATE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -1584,4 +1586,12 @@ $(document).ready(function(e) {
 	<?php }?>
 	<?php } ?>
 });
+</script>
+
+<script type="application/javascript">
+	function empty_offers(){
+		$('.r_offer input').val('');
+		$('.r_offer select').val('');
+		$('.r_offer em').text('');
+	}
 </script>

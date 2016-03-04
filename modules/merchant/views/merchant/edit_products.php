@@ -1206,98 +1206,87 @@ function validateFileExtension1(input,idvalue) {
           <td><label></label></td>
           <td></td>
         </tr>
-        <tr>
-          <td><label><?php echo $this->Lang["OFFER"]; ?></label>
-            <span>*</span></td>
-          <td><label>:</label></td>
-          <td><input type="radio" name="offer" value="0" onclick="bulk_discount();" <?php if($u->product_offer==0){?>checked<?php } ?> style="display:none">
-            <input type="radio" name="offer" value="1" onclick="bulk_discount();"  <?php if(isset($this->userPost['offer']) && $this->userPost['offer']==1){?>checked<?php }else if($u->product_offer==1){?>checked<?php } ?>>
-            <?php echo $this->Lang["BULK_DISCOUNT"]; ?>
-            <input type="radio" name="offer" value="2" onclick="gift();" <?php if(isset($this->userPost['offer']) && $this->userPost['offer']==2){?>checked<?php }else if($u->product_offer==2){?>checked<?php } ?>>
-            <?php echo $this->Lang["GIFT"]; ?> <em>
-            <?php if(isset($this->form_error["offer"])){ echo $this->form_error["offer"]; }?>
-            </em></td>
-        </tr>
-        <tr class="gift" <?php if($u->product_offer!=2){?>style="display:none;"<?php } ?>>
-          <td><label><?php echo $this->Lang["GIFT"]; ?></label>
-            <span>*</span></td>
-          <td><label>:</label></td>
-          <td><select name="free_gift" class="free_gift">
-              <option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
-              <?php foreach($this->gift_list as $free){?>
-              <option value="<?php echo $free->gift_id; ?>" <?php if($u->gift_offer==$free->gift_id){?>selected<?php } ?>><?php echo $free->gift_name;?></option>
-              <?php } ?>
-            </select>
-            <em>
-            <?php if(isset($this->form_error["offer"])){ echo $this->form_error["offer"]; }?>
-            </em></td>
-        </tr>
-        <tr class="bulk_discount" <?php if($u->product_offer==2){?>style="display:none;"<?php } ?>>
-          <td><label><?php echo $this->Lang["BULK_DISCOUNT"]; ?></label></td>
-          <td><label>:</label></td>
-          <td><table>
-              <tr>
-                <td><?php echo $this->Lang['BUY_ONE'];?></td>
-                <td><?php if(!isset($_POST['buy_bulk'])){?>
-                  <select name="buy_bulk" class="required buy_bulk" style="width:130px;">
-                    <option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
-                    <?php for($i=1;$i<=40;$i++){?>
-                    <option value="<?php echo $i;?>" <?php if($u->bulk_discount_buy==$i){   ?>selected<?php  } ?>><?php echo $i;?></option>
-                    <?php } ?>
-                  </select>
-                  <?php }else{ ?>
-                  <select name="buy_bulk" class="required buy_bulk" style="width:130px;">
-                    <option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
-                    <?php for($i=1;$i<=40;$i++){?>
-                    <option value="<?php echo $i;?>" <?php if($_POST['buy_bulk']==$i){   ?>selected<?php  } ?>><?php echo $i;?></option>
-                    <?php } ?>
-                  </select>
-                  <?php } ?>
-                  <em>
-                  <?php if(isset($this->form_error["buy_bulk"])){ echo $this->form_error["buy_bulk"]; }?>
-                  </em></td>
-                <td><?php echo $this->Lang['GET'];?></td>
-                <td><?php if(!isset($_POST['buy_bulk'])){?>
-                  <select name="get_bulk" class="required" style="width:130px;">
-                    <option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
-                    <?php for($i=1;$i<=20;$i++){?>
-                    <option value="<?php echo $i;?>" <?php if($u->bulk_discount_get==$i){   ?>selected<?php  } ?>><?php echo $i;?></option>
-                    <?php } ?>
-                  </select>
-                  <?php }else{ ?>
-                  <select name="get_bulk" class="required" style="width:130px;">
-                    <option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
-                    <?php for($i=1;$i<=20;$i++){?>
-                    <option value="<?php echo $i;?>" <?php if($_POST['get_bulk']==$i){   ?>selected<?php  } ?>><?php echo $i;?></option>
-                    <?php } ?>
-                  </select>
-                  <?php } ?>
-                  <em>
-                  <?php if(isset($this->form_error["get_bulk"])){ echo $this->form_error["get_bulk"]; }?>
-                  </em></td>
-              </tr>
-            </table>
-            <?php /*<input type="text" name="bulk_discount" maxlength="255" value="<?php echo $u->bulk_discount; ?>" autofocus />
-                      	<em><?php if(isset($this->form_error["bulk_discount"])){ echo $this->form_error["bulk_discount"]; }?></em>*/?></td>
-        </tr>
-        <tr class="date_offer">
-          <td><label><?php echo $this->Lang["START_DATE"]; ?></label>
-            <span>*</span></td>
-          <td><label>:</label></td>
-          <td><input type="text" id="startdate" name="start_date" readonly  value="<?php echo date('m/d/Y H:i:s', $u->start_date); ?>" />
-            <em>
-            <?php if(isset($this->form_error["start_date"])){ echo $this->form_error["start_date"]; }?>
-            </em></td>
-        </tr>
-        <tr class="date_offer">
-          <td><label><?php echo $this->Lang["END_DATE"]; ?></label>
-            <span>*</span></td>
-          <td><label>:</label></td>
-          <td><input type="text" name="end_date" id="enddate" readonly value="<?php echo date('m/d/Y H:i:s', $u->end_date); ?>" />
-            <em>
-            <?php if(isset($this->form_error["end_date"])){ echo $this->form_error["end_date"]; }?>
-            </em></td>
-        </tr>
+        
+      		    <tr class ="r_offer">
+                    <td><label><?php echo $this->Lang["OFFER"]; ?></label> <span>*</span></td>
+		   
+                    <td><label>:</label></td>
+                    <td>
+                    	<input type="radio" name="offer" value="0" onclick="empty_offers();" >None</input>
+                        <input type="radio" name="offer" value="0" onclick="bulk_discount();" checked  style="display:none" >
+                        <input type="radio" name="offer" value="0" onclick="bulk_discount();" checked  style="display:none" >
+                    	<input type="radio" name="offer" value="1"  onclick="bulk_discount();" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==1){?>checked<?php } ?>><?php echo $this->Lang["BULK_DISCOUNT"]; ?>
+                    	<input type="radio" name="offer" value="2" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==2){?>checked<?php } ?> onclick="gift();"><?php echo $this->Lang["GIFT"]; ?>
+                      	<em><?php if(isset($this->form_error["offer"])){ echo $this->form_error["offer"]; }?></em>
+                   	</td>
+                </tr>
+						
+				<tr class="gift r_offer" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]!=2){?>style="display:none;" <?php }elseif(isset($this->userPost["offer"]) && $this->userPost["offer"]==2){?>style="visibility:visible;"<?php } ?> style="display:none">
+                    <td><label><?php echo $this->Lang["GIFT"]; ?></label> <span>*</span></td>
+		   
+                    <td><label>:</label></td>
+                    <td>
+                    	<select name="free_gift" class="free_gift">
+			<option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
+			<?php foreach($this->gift_list as $free){?>
+			<option value="<?php echo $free->gift_id; ?>"  <?php if(!isset($this->form_error['free_gift']) && isset($_POST['free_gift'])){  if($_POST['free_gift'] == $free->gift_id){ ?>selected<?php } } ?>><?php echo $free->gift_name;?></option>
+			<?php } ?>
+                    	</select>
+                      	<em><?php if(isset($this->form_error["free_gift"])){ echo $this->form_error["free_gift"]; }?></em>
+                   	</td>
+                </tr>
+                
+                <tr class="bulk_discount r_offer" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==2){?>style="display:none;" <?php } ?>>
+                    <td><label><?php echo $this->Lang["BULK_DISCOUNT"]; ?></label></td>
+                    <td><label>:</label></td>
+                    <td>
+						<table>
+							<tr>
+								<td><?php echo $this->Lang['BUY_ONE'];?></td>
+								<td><select name="buy_bulk" class=" buy_bulk required" style="width:130px;">
+									<option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
+									<?php for($i=1;$i<=40;$i++){?>
+									<option value="<?php echo $i;?>" <?php if(!isset($this->form_error['buy_bulk']) && isset($_POST['buy_bulk'])){  if($_POST['buy_bulk'] == $i){ ?>selected<?php } } ?>><?php echo $i;?></option>
+									<?php } ?>
+								</select>
+								<em><?php if(isset($this->form_error["buy_bulk"])){ echo $this->form_error["buy_bulk"]; }?></em></td>
+								<td><?php echo $this->Lang['GET'];?></td>
+								<td><select name="get_bulk" class=" get_bulk required" style="width:130px;">
+									<option value=""><?php echo $this->Lang['SEL_ANY'];?></option>
+									<?php for($i=1;$i<=20;$i++){?>
+									<option value="<?php echo $i;?>" <?php if(!isset($this->form_error['get_bulk']) && isset($_POST['get_bulk'])){  if($_POST['get_bulk'] == $i){ ?>selected<?php } } ?>><?php echo $i;?></option>
+									<?php } ?>
+								</select>
+								<em><?php if(isset($this->form_error["get_bulk"])){ echo $this->form_error["get_bulk"]; }?></em></td>
+							</tr>
+						</table>
+                    	<?php /*<input type="text" name="bulk_discount" maxlength="255" value="<?php if(!isset($this->form_error["bulk_discount"])&&isset($this->userPost["bulk_discount"])){ echo $this->userPost["bulk_discount"]; }?>" autofocus />*/?>
+                    	
+                      	<em><?php if(isset($this->form_error["bulk_discount"])){ echo $this->form_error["bulk_discount"]; }?></em>
+                   	</td>
+                </tr>
+               
+                <tr class="date_offer r_offer" >
+                    <td><label><?php echo $this->Lang["START_DATE"]; ?></label><span>*</span></td>
+                    <td><label>:</label></td>
+                    <td>
+                    	<input type="text" id="startdate" name="start_date" readonly  value="<?php if(!isset($this->form_error["start_date"])&&isset($this->userPost["start_date"])){ echo $this->userPost["start_date"]; }?>" />
+                        <em><?php if(isset($this->form_error["start_date"])){ echo $this->form_error["start_date"]; }?></em>
+                    </td>
+                </tr>
+                
+                <tr class="date_offer r_offer" >
+                    <td><label><?php echo $this->Lang["END_DATE"]; ?></label><span>*</span></td>
+                    <td><label>:</label></td>
+                    <td>
+                    	<input type="text" name="end_date" id="enddate" readonly value="<?php if(!isset($this->form_error["end_date"])&&isset($this->userPost["end_date"])){ echo $this->userPost["end_date"]; }?>" />
+                    	<em><?php if(isset($this->form_error["end_date"])){ echo $this->form_error["end_date"]; }?></em>
+                    </td>
+                </tr>
+                
+       
+       
+       
       </table>
       </div>
       <tr>
@@ -1758,4 +1747,12 @@ $(document).ready(function(e) {
 		<?php }
 	}?>
 });
+</script>
+
+<script type="application/javascript">
+	function empty_offers(){
+		$('.r_offer input').val('');
+		$('.r_offer select').val('');
+		$('.r_offer em').text('');
+	}
 </script>
