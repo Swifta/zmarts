@@ -403,7 +403,7 @@
                                          <div class="lessouter">
                                         <div class="lessthen1">
                                         
-                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly="readonly" type="text" rel="20">
+                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly type="text" rel="20">
                                         </div>
                                         </div>
                                         </td>
@@ -656,7 +656,7 @@
                                          <div class="lessouter">
                                         <div class="lessthen1">
                                         
-                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly="readonly" type="text" rel="20">
+                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly type="text" rel="20">
                                         </div>
                                         </div>
                                         </td>
@@ -802,13 +802,13 @@
                                                                 <label><?php echo $this->Lang['SEL_CITY']; ?>  <span> * </span></label>                                        
                                                                 <div class="clearfix fullname">
                                                                         <div class="select_box_outer country_select_box">
-                                                                        <select name="city" class="select" id="CitySD">
+                                                                        <!--<select name="city" class="select" id="CitySD">
                                                                         <?php foreach ($this->all_city_list as $CityL) { ?>
                                                                         <option <?php if ($CityL->city_id == $s->ship_city) {
                                                                         echo 'Selected="true"';
                                                                         } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                         <?php } ?>
-                                                                        </select>                            
+                                                                        </select>-->                            
                                                                         </div>
                                                                 </div>  
                                                         </li>        

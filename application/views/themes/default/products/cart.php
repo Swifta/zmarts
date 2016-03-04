@@ -406,7 +406,7 @@
                                         </div>
                                         <?php } ?>
                                         <div class="lessthen1">
-                                        <input name="QTY" id="<?php echo $key; ?>" value="1" readonly="readonly" type="text" rel="20">
+                                        <input name="QTY" id="<?php echo $key; ?>" value="1" readonly type="text" rel="20">
                                         </div>
                                         <?php  if ($size_count > 1) {  ?>
                                         <div class="greaterthen">
@@ -754,7 +754,7 @@
                                                                         <option <?php if ($CityL->city_id == $s->ship_city) { echo 'Selected="true"';  } ?> 
                                                                         value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                         <?php } } ?>
-                                                                        </select>  
+                                                                        </select>
                                                                         <div id="city_validation"> </div>                          
                                                                         </div>
                                                                 </div> 

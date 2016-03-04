@@ -113,7 +113,10 @@
                     <li>
                         <label><?php echo $this->Lang['COUNTRY']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname">
-                        <select name="country" id="ship_country_p1" tabindex="5" onchange="return city_change_payment(this.value);" class="required">
+                        <input type="text" value="Nigeria" readonly="readonly" />
+                        <input type="hidden" name="country" value="25" />
+                        
+                        <!--<select name="country" id="ship_country_p1" tabindex="5" onchange="return city_change_payment(this.value);" class="required">
                         <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
                         <?php if($this->session->get('shipping_country')){ ?>
                         <?php foreach ($this->all_country_list as $countryL) { ?>
@@ -128,7 +131,7 @@
                         } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
                         <?php } ?>
                         <?php } ?>
-                        </select>
+                        </select>-->
                         </div>
                     </li>                    
                     <li class="frm_clr">
@@ -140,7 +143,7 @@
                         <label><?php echo $this->Lang['STATE']; ?> :<span class="form_star">*</span> </label>
                         <div class="fullname">
                             <select name="city"  id="ship_city_p1" tabindex="6" class="CityPAY required">
-                            <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
+                            <option value="-99">Select state</option>
                             <?php if($this->session->get('shipping_city')){ ?>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>                                
                                     <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) {
@@ -205,4 +208,10 @@
                         
         <div class="payment_terms_outer"><?php /*<p class="terms-conditons-text" id="terms1"> <span class="fl font_myriad_pro"><?php echo $this->Lang['BY_CLICK1']; ?> </span> <a onclick="show_dis_tc();" title="<?php echo $this->Lang['TEMRS']; ?>" tabindex="11" class="font_myriad_pro mt5"><?php echo $this->Lang['TEMRS']; ?>.</a></p>*/ ?> </div> 
     </div>
+    
+    <script type="application/javascript">
+	$(document).ready(function(e) {
+		city_change_payment("25");
+    });
+</script>
 
