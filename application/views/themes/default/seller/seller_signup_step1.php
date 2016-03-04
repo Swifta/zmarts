@@ -529,7 +529,7 @@ input[type=text],input[type=password]{
                             <img style="width:100%" src="<?php echo PATH; ?>custom/images/WelcomeToZmart.png"></img>
                             
                         
-           <div style="background-color: #FFFBEF; opacity: .8; border:1px solid #ccc; min-height:30px; padding:5px 5px 8px; ">
+                            <div class="" style="background-color: #FFFBEF; border-left:5px solid #A61C00; border-top:1px dotted #A61C00;border-bottom:1px dotted #A61C00; border-right:1px dotted #A61C00; min-height:30px; padding:5px 5px 8px; ">
                         
                         <div class="row">
                             
@@ -753,7 +753,7 @@ input[type=text],input[type=password]{
                             <div class="row disclaimerform" >
                                 <div class="col-md-12"  style="margin-bottom:30px;">
                                      <div class="text-center">
-                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/ZenithLogo.png"/></h1>
+                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/zenithLogo.png"/></h1>
                                         <h2>PLEASE NOTE</h2>
                                         <div>
                                             <p>YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON ZMART 
@@ -789,7 +789,7 @@ input[type=text],input[type=password]{
                             <div class="row disclaimerform" >
                                 <div class="col-md-12"  style="margin-bottom:30px;">
                                      <div class="text-center">
-                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/ZenithLogo.png"/></h1>
+                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/zenithLogo.png"/></h1>
                                         <h2>VERIFICATION FAILED</h2>
                                         <div>
                                             <p>Please try again . . .<br></p>
