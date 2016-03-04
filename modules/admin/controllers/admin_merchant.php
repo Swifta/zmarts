@@ -1489,7 +1489,7 @@ class Admin_merchant_Controller extends website_Controller {
 	{
 		if($country == -1){
 			$list = '<td><label>'.$this->Lang["SEL_CITY"].'*</label></td><td><label>:</label></td><td><select name="city">';
-			$list .='<option value=" " >'.$this->Lang["CITY_FIRST"].'</option>';
+			$list .='<option value="-99" >Select state</option>';
 			echo $list .='</select></td>';
 		exit;
 		}

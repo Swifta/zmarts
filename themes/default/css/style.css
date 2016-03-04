@@ -32,7 +32,7 @@ a{text-decoration: none;}
 .add_cart{float: right;width: auto; margin: 27px 0 0 0px;transition: all 0.4s ease;-o-transition: all 0.4s ease;-webkit-transition: all 0.4s ease;}
 .add_cart a{float: left;font:normal 14px arial;color:#fff; text-decoration: none;background: url(../images/new/cart1.png) left center  no-repeat;padding:5px 0 5px 26px; height:21px}
 .add_cart a span{font:normal 18px arial;color:#fff;padding: 0 3px;}
-.add_cart a:hover,.drop_down ul li a:hover,.cities ul li a:hover{color:#A61C00; list-style: none; text-decoration: none;}
+.add_cart a:hover,.drop_down ul li a:hover,.cities ul li a:hover{list-style: none; text-decoration: none;}
 .menu_left{width: 892px;float: left;}
 .logo h1 a{ float:left;}
 .city_cat ul li a:hover{text-decoration: none;}
@@ -1083,7 +1083,7 @@ em{float: left;clear:both;font:normal 12px arial;color:#f00; width: 100%; paddin
 .head_menu{width:867px;float:right;}
 .head_menu1{width:867px;float:left;}
 .head_menu > li{position: relative;float: left;padding:0;border-left: 1px solid #fff;cursor: pointer;}
-.hmenu{font:normal 14px/25px arial;color:#fff;padding: 18px 36px;float: left;clear: both;}
+.hmenu{font:normal 14px/25px arial;color:#fff;padding: 18px 30px;float: left;clear: both;}
 
 .hover_icon{display:none;background: url(../images/new/menu_act3.png) no-repeat;position: absolute;width:10px;height:6px;bottom:0;left:50%;margin:0 0 0 -5px;}
 .head_menu li:hover .hover_icon,.head_menu li.active .hover_icon{display:block;}
@@ -2411,8 +2411,11 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .store_deal ul li{float: left;margin:10px 6px;}
 
 /*header cart over*/
-.cart_window_products1{position: absolute;width: 300px;display: none;border:1px solid #ddd;background: #fff;top: 30px;right: 0;z-index: 5;padding:5px;}
-.cart_mid:hover .cart_window_products1{display: block;}
+.add_cart{
+	position:relative;
+}
+.cart_window_products1{position: absolute;width: 300px;display: none;border:1px solid #ddd;background: #fff;top: 30px;right: 2px;z-index: 5;padding:5px;}
+.add_cart:hover .cart_window_products1{display: block;}
 .limit_scroll{width: 100%;max-height: 270px;overflow-y: auto;float: left;}
 .crt_top_slt{float: left;width: 94%;padding: 10px 3%;background: #00A2E8;}
 .cart_pur_list{float: left;width: 94%;padding: 10px 3%;border-bottom: 1px solid #ece9e4;}

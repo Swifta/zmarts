@@ -532,6 +532,7 @@ if(country == ''){ var country = -1;  }
 		dataType:"html",
 		success:function(check)
 		{
+		   alert(check);
 		   $("#CitySD").html(check);
 		},
 		error:function()
