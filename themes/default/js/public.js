@@ -1309,7 +1309,7 @@ if(country == '-99'){ var country = -1;  }
 		},
 		error:function()
 		{
-			alert('No city has been added under this country.');
+			//alert('No city has been added under this country.');
 		}
 	});
 }
@@ -1335,7 +1335,7 @@ if(country == ''){ var country = -1;  }
 		},
 		error:function()
 		{
-			alert('No city has been added under this country.');
+			//alert('No city has been added under this country.');
 		}
 	});
 }

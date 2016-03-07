@@ -144,7 +144,7 @@
                         <label><?php echo $this->Lang['SEL_CITY']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname">
                             <select name="city"  id="ship_city_p1" class="CityPAY required">
-                            <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
+                            <option value="-99"><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>
                                     <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) {
                                         echo 'Selected="true"';
@@ -199,3 +199,11 @@
         <?php } ?>      
     </div>
 </form>
+
+<script type="application/javascript">
+	$(document).ready(function(e) {
+        $('#id_rush_country').val("Nigeria").attr('readonly', 'readonly');
+		city_change_merchant("25");
+		$('#id_rush_sel_state').val("-99");
+    });
+</script>

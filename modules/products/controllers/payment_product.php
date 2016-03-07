@@ -150,14 +150,14 @@ class Payment_product_Controller extends Layout_Controller {
 	{
 		if($country == -1 || $country == "" ){
 			//$list = '<td><label>'.$this->Lang["SEL_CITY"].'*</label></td><td><label>:</label></td><td><select name="city" class="CityPAY select required" >';
-			$list ='<option value="" >'.$this->Lang["COUNTRY_FIRST"].'</option>';
+			$list ='<option value="" >Select state</option>';
 			//echo $list .='</select></td>';
 			echo $list .='';
 		exit;
 		} else {
 		        $CitySlist = $this->payment_products->get_city_by_country_pay($country);
 		        if(count($CitySlist) == 0){
-			        $list ='<option value="">'.$this->Lang["CITY_FIRST"].'</option>';
+			        $list ='<option value="-99">Select state</option>';
 			        echo $list .='';
 		                exit;
 		        } else {
@@ -165,6 +165,7 @@ class Payment_product_Controller extends Layout_Controller {
                                         if($s->city_id != 0)
                                         {
                                                 $list = '<select name="city" class="CityPAY" >';
+												$list .='<option value="-99">Select state</option>';
                                         }
                                 }
 		                foreach($CitySlist as $s){

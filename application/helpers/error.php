@@ -23,6 +23,10 @@ class error {
 					$my_error[$key] = "Please select a specification and set a value for every field below or remove them.";
 					break;
 					
+				case 'validate_shipping':
+					$my_error[$key] = "Please check at least one shipping method.";
+					break;
+					
 				case 'check_required':
 					$my_error[$key] = $this->Lang["REQQ"];
 					break;

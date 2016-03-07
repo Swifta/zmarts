@@ -324,7 +324,7 @@
                                                                 <?php } ?>
                                                         </div> 
                                                         
-                                                        <?php  if($this->session->get('prime_customer')) { 
+                                                        <?php if($this->session->get('prime_customer')) { 
                                                             $product_duration =  unserialize($products->product_duration);
 																if($product_duration !="") { ?>
                                                 <div class="store_credits">
@@ -406,7 +406,7 @@
                                         </div>
                                         <?php } ?>
                                         <div class="lessthen1">
-                                        <input name="QTY" id="<?php echo $key; ?>" value="1" readonly="readonly" type="text" rel="20">
+                                        <input name="QTY" id="<?php echo $key; ?>" value="1" readonly type="text" rel="20">
                                         </div>
                                         <?php  if ($size_count > 1) {  ?>
                                         <div class="greaterthen">
@@ -754,7 +754,7 @@
                                                                         <option <?php if ($CityL->city_id == $s->ship_city) { echo 'Selected="true"';  } ?> 
                                                                         value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                         <?php } } ?>
-                                                                        </select>  
+                                                                        </select>
                                                                         <div id="city_validation"> </div>                          
                                                                         </div>
                                                                 </div> 
@@ -819,3 +819,29 @@
              </div>
       </div>
 </div>
+ <script>
+ 
+$(document).ready(function(){
+        //$('#country_select').val("Nigeria").attr('readonly', 'readonly');
+	var url = 'payment_product/CitySelectionPayment/25';
+	$.ajax(
+	{
+		type:'POST',
+		url:url,
+		cache:false,
+		async:true,
+		global:false,
+		dataType:"html",
+		success:function(check)
+		{
+		   $("#CitySD").html(check);
+		},
+		error:function()
+		{
+			//alert('No city has been added under this country.');
+		}
+	});
+});
+ 
+ 
+ </script>

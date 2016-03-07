@@ -4,8 +4,6 @@ SrcPath = scripts[1].src;
 
 SrcPath = SrcPath.replace("/js/script.js", "");
 
-
-
 $(document).ready(function () {
 
 	    
@@ -537,39 +535,18 @@ if(country == ''){ var country = -1;  }
 		},
 		error:function()
 		{
-			alert('No city has been added under this country.');
+			//alert('No city has been added under this country.');
 		}
 	});
 }
 
 
-function city_change_merchant(country){ 
-if(country == ''){ var country = -1;  }
 
-	if(country){var url = SrcPath+'/admin_merchant/CityS/'+country; }
-	$.ajax(
-	{
-		type:'POST',
-		url:url,
-		cache:false,
-		async:true,
-		global:false,
-		dataType:"html",
-		success:function(check)
-		{
-		   $("#CitySD").html(check);
-		},
-		error:function()
-		{
-			alert('No city has been added under this country.');
-		}
-	});
-}
 
 function city_change_merchant_shop(country){ 
 if(country == ''){ var country = -1;  }
 
-	if(country){var url = SrcPath+'/merchant/CitySS/'+country; }
+	if(country){var url = SrcPath+'/payment_product/CitySelectionPayment/'+country; }
 	$.ajax(
 	{
 		type:'POST',
@@ -584,7 +561,7 @@ if(country == ''){ var country = -1;  }
 		},
 		error:function()
 		{
-			alert('No city has been added under this country.');
+			//alert('No city has been added under this country.');
 		}
 	});
 }

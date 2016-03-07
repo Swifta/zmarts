@@ -1885,7 +1885,13 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .payment_shipping_form{width:100%;}
 .mandarory_txt{color:#666666;font:normal 13px arial;padding:0 0 10px;}
 .mandarory_txt span{color:#A61C00;padding:0 1px 0 0;font-size:15px;}
-.payment_shipping_form ul li{width:50%;float:left;}
+.payment_shipping_form ul li.left{width:50%;float:left;}
+.payment_shipping_form ul li.right{width:50%;float:right;}
+
+.user_rush ul li.left{width:50%;float:left;}
+.user_rush ul li.right{width:50%;float:right;}
+
+
 .fullname{display: block;padding:0px 0 5px; }
 .fullname input[type=text],.fullname input[type=password],.fullname textarea{border: 1px solid #d9d9d9;font:normal 12px arial;  width:220px;color:#000;  padding: 7px;
     box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;

@@ -403,7 +403,7 @@
                                          <div class="lessouter">
                                         <div class="lessthen1">
                                         
-                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly="readonly" type="text" rel="20">
+                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly type="text" rel="20">
                                         </div>
                                         </div>
                                         </td>
@@ -656,7 +656,7 @@
                                          <div class="lessouter">
                                         <div class="lessthen1">
                                         
-                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly="readonly" type="text" rel="20">
+                                        <input name="QTY" id="<?php echo $key; ?>" value="<?php  if($this->session->get('product_cart_qty'.$products->deal_id)) { echo $this->session->get('product_cart_qty'.$products->deal_id); } else { echo'1'; }?>" readonly type="text" rel="20">
                                         </div>
                                         </div>
                                         </td>
@@ -802,13 +802,13 @@
                                                                 <label><?php echo $this->Lang['SEL_CITY']; ?>  <span> * </span></label>                                        
                                                                 <div class="clearfix fullname">
                                                                         <div class="select_box_outer country_select_box">
-                                                                        <select name="city" class="select" id="CitySD">
+                                                                        <!--<select name="city" class="select" id="CitySD">
                                                                         <?php foreach ($this->all_city_list as $CityL) { ?>
                                                                         <option <?php if ($CityL->city_id == $s->ship_city) {
                                                                         echo 'Selected="true"';
                                                                         } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                         <?php } ?>
-                                                                        </select>                            
+                                                                        </select>-->                            
                                                                         </div>
                                                                 </div>  
                                                         </li>        
@@ -857,16 +857,17 @@
                         <div class="p_inner_block">                            
                                 <div class="payment_select"> 
                                     <?php if ($this->interswitch) { ?>
-                                        <div class="payment_sel_lft">
-                                        <a onclick="return InterswitchPay();" id="InterswitchPay"  >
-                                        <input id="paypal_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['GLOBAL_PAY']; ?></p></div>
+                                        <a onclick="return InterswitchPay();" 
+                                           style="background-color: #fda237;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;" id="InterswitchPay">
+                                            <?php echo $this->Lang['GLOBAL_PAY']; ?></a>
                                     <?php
                                     }
                                     ?>
                                     <?php if ($this->cash_on_delivery) { ?>    
-                                    <div class="payment_sel_lft">
-                                        <a onclick="return COD();" id="cod"  >
-                                        <input id="cod_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['CASH_ON_DEL']; ?></p></div>
+                                    
+                                        <a onclick="return COD();" id="cod"
+                                           style="background-color: #fda237;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;"><?php echo $this->Lang['CASH_ON_DEL']; ?>
+                                        </a>
                                     <?php
                                     }
                                     ?>
@@ -874,8 +875,10 @@
                                         <a onclick="return false;" id="cod"  >
                                         <input id="cod_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['DIRECT_DEBIT']; ?></p></div>-->
                                          <?php if ($this->pay_later_setting) { ?>
-                                                <div class="payment_sel_lft"> 
-                                                <a onclick="return Pay_later();" id="Wire"  > <input type="radio" name="name"  /></a> <p><?php echo $this->Lang['PAY_LATER']; ?></p></div>
+                                                
+                                                <a onclick="return Pay_later();" id="Wire" 
+                                                   style="background-color: #fda237;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;">
+                                                       <?php echo $this->Lang['PAY_LATER']; ?></a>
                                         <?php } ?>
                                         <?php if ($this->paypal_setting) { ?>
                                                 <div class="payment_sel_lft">

@@ -454,44 +454,44 @@ class Admin_merchant_Controller extends website_Controller {
 		    $this->sector_name ="Default";
 		    $this->sectorname ="Default";
 		}
-	        $this->banner_width ="1280";
-	        $this->banner_height ="525"; 
+	        $this->banner_width ="1000";
+	        $this->banner_height ="373"; 
 	        $this->ads_width ="370";
 	        $this->ads_height ="260";
-	        if($this->sectorname =="Electronics"){
-	                $this->banner_width ="900";
-	                $this->banner_height ="350"; 
-	                $this->ads_width ="565";
-	                $this->ads_height ="157";
-	        }
-	        if($this->sectorname =="Fashion"){
-	                $this->banner_width ="1400";
-	                $this->banner_height ="525"; 
-	                $this->ads_width ="370";
-	                $this->ads_height ="260";
-	        }
+//	        if($this->sectorname =="Electronics"){
+//	                $this->banner_width ="900";
+//	                $this->banner_height ="350"; 
+//	                $this->ads_width ="565";
+//	                $this->ads_height ="157";
+//	        }
+//	        if($this->sectorname =="Fashion"){
+//	                $this->banner_width ="1400";
+//	                $this->banner_height ="525"; 
+//	                $this->ads_width ="370";
+//	                $this->ads_height ="260";
+//	        }
 	        if($_POST){    
 			$this->userpost = utf8::clean($this->input->post());
 			$post = new Validation(utf8::clean($_POST));
 			$post = Validation::factory(array_merge(utf8::clean($_POST),utf8::clean($_FILES)))
 						
-						->add_rules('bg_color','required')
-						->add_rules('font_color','required')
-						->add_rules('sector','required')
-						->add_rules('subsector','required')
-						->add_rules('font_size','required')
+//						->add_rules('bg_color','required')
+//						->add_rules('font_color','required')
+//						->add_rules('sector','required')
+//						->add_rules('subsector','required')
+//						->add_rules('font_size','required')
 						->add_rules('banner_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						->add_rules('banner_1_link','valid::url')
 						->add_rules('banner_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						->add_rules('banner_2_link','valid::url')
 						->add_rules('bannee_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('banner_3_link','valid::url')
-						->add_rules('ads_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_1_link','valid::url')
-						->add_rules('ads_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_2_link','valid::url')
-						->add_rules('ads_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
-						->add_rules('ads_3_link','valid::url');
+						->add_rules('banner_3_link','valid::url');
+//						->add_rules('ads_1', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_1_link','valid::url')
+//						->add_rules('ads_2', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_2_link','valid::url')
+//						->add_rules('ads_3', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+//						->add_rules('ads_3_link','valid::url');
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
 							$post->add_rules('subsector','required');
@@ -515,61 +515,67 @@ class Admin_merchant_Controller extends website_Controller {
 							$this->sectorname=$sector->current()->sector_name;
 						}
 						
-						$this->banner_width ="1280";
-						$this->banner_height ="525"; 
-						$this->ads_width ="370";
-						$this->ads_height ="260";
-						if(strtolower($this->sectorname) == "electronics"){
-								$this->banner_width ="900";
-								$this->banner_height ="350"; 
-								$this->ads_width ="565";
-								$this->ads_height ="157";
-						}
-						if(strtolower($this->sectorname) == "fashion"){
-								$this->banner_width ="1400";
-								$this->banner_height ="525"; 
-								$this->ads_width ="370";
-								$this->ads_height ="260";
-						}
+	        $this->banner_width ="1000";
+	        $this->banner_height ="373"; 
+	        $this->ads_width ="370";
+	        $this->ads_height ="260";
+//						if(strtolower($this->sectorname) == "electronics"){
+//								$this->banner_width ="900";
+//								$this->banner_height ="350"; 
+//								$this->ads_width ="565";
+//								$this->ads_height ="157";
+//						}
+//						if(strtolower($this->sectorname) == "fashion"){
+//								$this->banner_width ="1400";
+//								$this->banner_height ="525"; 
+//								$this->ads_width ="370";
+//								$this->ads_height ="260";
+//						}
 						
 					if($_FILES['banner_1']['name']){
-						$banner1 = upload::save('banner_1');
-						$IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
-						common::image($banner1, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner1);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
+						$banner1 = upload::save('banner_1', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+						//$banner1 = upload::save('banner_1');
+						//$IMG_NAME = $status.'_'.$this->sectorname."_1_banner.png";
+						//common::image($banner1, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner1);
 					}
 					if($_FILES['banner_2']['name']){
-						$banner2 = upload::save('banner_2');
-						$IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
-						common::image($banner2, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner2);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
+						$banner2 = upload::save('banner_2', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+//						$banner2 = upload::save('banner_2');
+//						$IMG_NAME = $status.'_'.$this->sectorname."_2_banner.png";
+						//common::image($banner2, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner2);
 					}
 					if($_FILES['banner_3']['name']){
-						$banner3 = upload::save('banner_3');
-						$IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
-						common::image($banner3, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
-						unlink($banner3);
+                                            $IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
+						$banner1 = upload::save('banner_3', $IMG_NAME, DOCROOT.'images/merchant/banner/');
+//						$banner3 = upload::save('banner_3');
+//						$IMG_NAME = $status.'_'.$this->sectorname."_3_banner.png";
+						//common::image($banner3, $this->banner_width, $this->banner_height, DOCROOT.'images/merchant/banner/'.$IMG_NAME);
+						//unlink($banner3);
 					}
-					if($_FILES['ads_1']['name']){
-						$ads1 = upload::save('ads_1');
-						$IMG_NAME = $status."_".$this->sectorname."_1_ads.png";
-						common::image($ads1, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads1);
-					}
-					
-					if($_FILES['ads_2']['name']){
-						$ads2 = upload::save('ads_2');
-						$IMG_NAME = $status."_".$this->sectorname."_2_ads.png";
-						common::image($ads2, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads2);
-					}
-					
-					if($_FILES['ads_3']['name']){
-						$ads3 = upload::save('ads_3');
-						$IMG_NAME = $status."_".$this->sectorname."_3_ads.png";
-						common::image($ads3, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
-						unlink($ads3);
-					}
+//					if($_FILES['ads_1']['name']){
+//						$ads1 = upload::save('ads_1');
+//						$IMG_NAME = $status."_".$this->sectorname."_1_ads.png";
+//						//common::image($ads1, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						//unlink($ads1);
+//					}
+//					
+//					if($_FILES['ads_2']['name']){
+//						$ads2 = upload::save('ads_2');
+//						$IMG_NAME = $status."_".$this->sectorname."_2_ads.png";
+//						//common::image($ads2, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						//unlink($ads2);
+//					}
+//					
+//					if($_FILES['ads_3']['name']){
+//						$ads3 = upload::save('ads_3');
+//						$IMG_NAME = $status."_".$this->sectorname."_3_ads.png";
+//						//common::image($ads3, $this->ads_width, $this->ads_height, DOCROOT.'images/merchant/ads/'.$IMG_NAME);
+//						//unlink($ads3);
+//					}
 						$modules_name = 'stores';
 						if(isset($_POST['subsector']) && ($_POST['subsector']!=''))
 						{
@@ -1596,11 +1602,11 @@ class Admin_merchant_Controller extends website_Controller {
 				$from = CONTACT_EMAIL;
 				$subject = $this->Lang['MER_APP']. " on ".SITENAME;
 				
-				$merchant_message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
-				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been approved.</p>
+				$merchant_message = "<br /><div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+				<br /><p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been approved.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$details[0]->email."</a></p> 
-				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
-				<p style = \"text-decoration: underline; color: #666;font-weight: bold;\"> Click <a style = \"text-decoration: none; color: #ff0000;\" href='".PATH.
+				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> <br />
+				<p style = \"color: #666;font-weight: bold;\"> Click <a style = \"text-decoration: none; color: #ff0000;\" href='".PATH.
                                         "merchant-login.html' >".PATH."merchant-login.html</a> to login to your account.</p>"
                                 . "<p style = \"text-decoration: none; color: #666;\"> Your merchant store address is : <a style = \"text-decoration: none; color: #ff0000;\" href='".PATH.$details[0]->store_url_title."' >".
                                         PATH.$details[0]->store_url_title."</a></p> </div>";

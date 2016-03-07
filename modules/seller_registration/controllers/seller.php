@@ -184,7 +184,14 @@ class Seller_Controller extends Layout_Controller {
 						->add_rules('nuban', 'required')
 						->add_rules('sector', 'required')
 						->add_rules('subsector', 'required')
-						->add_rules('email', 'required','valid::email',array($this, 'email_available'));
+						->add_rules('email', 'required','valid::email',array($this, 'email_available'))
+						->add_rules('t_n_c', 'required')
+						->add_rules('free', array($this, 'validate_shipping'))
+						->add_rules('flat', array($this, 'validate_shipping'))
+						->add_rules('product', array($this, 'validate_shipping'))
+						->add_rules('quantity', array($this, 'validate_shipping'));
+						
+						
 						//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
@@ -194,6 +201,21 @@ class Seller_Controller extends Layout_Controller {
 						if(isset($_FILES['image'])){
 							$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 						}
+						
+						$shipping = false;
+						if(!$shipping && isset($_POST['free']))
+							$shipping = true;
+						if(!$shipping && isset($_POST['flat']))
+							$shipping = true;
+						if(!$shipping && isset($_POST['product']))
+							$shipping = true;
+						if(!$shipping && isset($_POST['quantity']))
+							$shipping = true;
+							
+						
+							
+						
+						
 						
 						
                                    
@@ -1054,6 +1076,25 @@ $admin_message	= '
 		  }
 		  
 		  return 1;
+		  
+	  }
+	  
+	  
+	  public function validate_shipping(){
+		  
+		$shipping = false;
+		if(!$shipping && isset($_POST['free']))
+			$shipping = true;
+		if(!$shipping && isset($_POST['flat']))
+			$shipping = true;
+		if(!$shipping && isset($_POST['product']))
+			$shipping = true;
+		if(!$shipping && isset($_POST['quantity']))
+			$shipping = true;
+			
+		if($shipping)
+			return 1;
+		return 0;
 		  
 	  }
 	

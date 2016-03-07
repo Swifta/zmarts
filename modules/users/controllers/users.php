@@ -1756,7 +1756,7 @@ $pdf->Output('voucher.pdf', 'I');
 	{
 		if($country == -1){
 			$list = '<td><label>'.$this->Lang["SEL_CITY"].'*</label></td><td><label>:</label></td><td><select name="city">';
-			$list .='<option value=" " >'.$this->Lang["CITY_FIRST"].'</option>';
+			$list .='<option value=" " >Select state</option>';
 			echo $list .='</select></td>';
 		exit;
 		}

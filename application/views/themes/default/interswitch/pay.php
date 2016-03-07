@@ -188,7 +188,7 @@
 
                                                 </div>
                                 <div class="buy_it complete_order_button" id="submit">                                                        
-                                    <input type="submit" value="<?php echo $this->Lang['PAY_NOW']; ?>" tabindex="1" title="<?php echo $this->Lang['PAY_NOW']; ?>" />
+                                    <input type="submit" value="Pay Now" tabindex="1" title="<?php echo $this->Lang['PAY_NOW']; ?>" />
                                 </div>
                     <br />
                     <div style="clear:both;margin-top:10px;">

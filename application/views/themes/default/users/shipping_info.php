@@ -88,8 +88,11 @@
                                         <div class="payment_form_section">
                                             <div class="payment_form payment_shipping_form">
                                                 <p class="mandarory_txt"><span>*</span> = <?php echo $this->Lang['ALL_MANDATORY']; ?></p>
-                                                <ul class="clearfix">                                                    
-                                                    <li>
+                                                <ul> 
+                                                   
+                                                   
+                                                                                                   
+                                                  <li class="left">
                                                         <label><?php echo $this->Lang['FUL_NAM']; ?><span>*</span></label>
                                                         <div class="fullname">
                                                             <input type="text" name="firstname" maxlength="35"  value="<?php echo $u->ship_name; ?>" placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" autofocus />
@@ -99,8 +102,24 @@
                                 echo $this->form_error["firstname"];
                             } ?></em>
                                                     </li>
+                                                   <li class="right">
+                                                        <label>State<span>*</span></label>
+                                                        <div class="fullname">
+                                                            <select name="city" id="CitySD_Signup">
+                                                                <option value="">Select state</option>
+    <?php foreach ($this->all_city_list as $c) { ?>
+                <?php if ($c->country_id == $u->ship_country) { ?>
+                                                                    <option  <?php if ($c->city_id == $u->ship_city) { ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
+    <?php } } ?>
+                                                            </select> </div>
+                                                        <em><?php if (isset($this->form_error['city'])) {
+        echo $this->form_error["city"];
+    } ?></em>
 
-                                                    <li>
+                                                    </li>
+                                                    
+                                                  
+                                                  <li class="left">
                                                         <label><?php echo $this->Lang['ADDR1']; ?><span>*</span></label>
                                                         <div class="fullname">
                                                             <input type="text" name="address1" maxlength="100" value="<?php echo $u->ship_address1; ?>" class="fancy_input_bx"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>"/>
@@ -109,22 +128,12 @@
                                 echo $this->form_error["address1"];
                             } ?></em>
                                                         <span></span>
-                                                    </li>
-                                                    <li class="frm_clr">
-                                                        <label><?php echo $this->Lang['ADDR2']; ?><span>*</span></label>
-                                                        <div class="fullname">
-                                                            <input type="text" name="address2" maxlength="100" value="<?php echo $u->ship_address2; ?>" class="fancy_input_bx" placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>"/>
-                                                        </div>
-                                                        <em><?php if (isset($this->form_error['address2'])) {
-                                echo $this->form_error["address2"];
-                            } ?></em>
-                                                        <span></span>
-                                                    </li>
-                                                    <li>
+                                                    </li>  
+                                                   <li class="right">
                                                         <label><?php echo $this->Lang['COUNTRY']; ?><span>*</span></label>
                                                         <div class="fullname">
                                                             <select name="country" id="country" onchange="return city_change_merchant(this.value);">
-                                                                <option value="">Select your Country</option>
+                                                              
     <?php foreach ($this->country_list as $c) { ?>
                                                                 
                                                                     <option <?php if ($c->country_id == $u->ship_country) { ?> selected <?php } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
@@ -136,35 +145,19 @@
     } ?></em>
 
                                                     </li>
-                                                    <li class="frm_clr">
-                                                        <label>State<span>*</span></label>
+                                                    
+                                                    
+                                                    <li class="left">
+                                                        <label><?php echo $this->Lang['ADDR2']; ?><span>*</span></label>
                                                         <div class="fullname">
-                                                            <select name="city" id="CitySD_Signup">
-                                                                <option value="">Select a Country First</option>
-    <?php foreach ($this->all_city_list as $c) { ?>
-                <?php if ($c->country_id == $u->ship_country) { ?>
-                                                                    <option  <?php if ($c->city_id == $u->ship_city) { ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
-    <?php } } ?>
-                                                            </select> </div>
-                                                        <em><?php if (isset($this->form_error['city'])) {
-        echo $this->form_error["city"];
-    } ?></em>
-
-                                                    </li>
-
-
-
-                                                    <li>
-                                                        <label>City<span>*</span></label>
-                                                        <div class="fullname">
-                                                            <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="Enter your city here"/>
+                                                            <input type="text" name="address2" maxlength="100" value="<?php echo $u->ship_address2; ?>" class="fancy_input_bx" placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>"/>
                                                         </div>
-                                                        <em><?php if (isset($this->form_error['state'])) {
-        echo $this->form_error["state"];
-    } ?></em>
-
+                                                        <em><?php if (isset($this->form_error['address2'])) {
+                                echo $this->form_error["address2"];
+                            } ?></em>
+                                                        <span></span>
                                                     </li>
-                                                    <li class="frm_clr">
+                                                    <li class="right">
                                                         <label><?php echo $this->Lang['MOBILE']; ?><span>*</span></label>
                                                         <div class="fullname">
                                                             <input type="text"  name="mobile" maxlength="18" value="<?php echo $u->ship_mobileno; ?>" placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" />
@@ -174,9 +167,18 @@
     } ?></em>
                                                         <span></span>
                                                     </li>
+                                                    
+                                                     <li class="left">
+                                                        <label>City<span>*</span></label>
+                                                        <div class="fullname">
+                                                            <input type="text" name="state" maxlength="35" value="<?php echo $u->ship_state; ?>"  placeholder="Enter your city here"/>
+                                                        </div>
+                                                        <em><?php if (isset($this->form_error['state'])) {
+        echo $this->form_error["state"];
+    } ?></em>
 
-
-                                                    <li>
+                                                    </li>  
+                                                  <li class="right">
                                                         <label><?php echo $this->Lang['ZIP_CODE']; ?></label>
                                                         <div class="fullname">
                                                             <input  type="text" name="zip_code"  value="<?php if($u->ship_zipcode !='0'){ echo $u->ship_zipcode; } ?>" maxlength="8" placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>"/>
@@ -186,6 +188,26 @@
     } ?></em>
 
                                                     </li>
+                                                    
+                                                    
+                                                 <!--  
+                                                    
+                                                    
+                                                  
+                                                  -->
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+
+
+
+                                                    
+                                                    
+                                                    
 
 
 
