@@ -943,7 +943,7 @@ class Admin_products_Controller extends website_Controller
                                               //bellieve update was made and successful
                                               //so, lets log it
                                               
-                    $log_description = "Price Change: ";
+                    $log_description = "(".$this->userPost['title'].") -> Price Change: ";
                     $log_product = $this->products->get_edit_product($deal_id,$deal_key);
                     foreach ($log_product as $p) {
                         $log_description.=$p->deal_price."->".$this->userPost['deal_value']." , Discount Change: ".
