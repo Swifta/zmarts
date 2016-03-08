@@ -8,19 +8,20 @@ class Auditor_Model extends Model
 		$this->session = Session::instance();	
                 $this->user_id = $this->session->get("user_id");//admin id
                 
-                $create_table_sql = "CREATE TABLE IF NOT EXISTS audit (".
-                    "id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,".
-                    "admin_id int(11) NOT NULL,".
-                    "user_id int(11) NOT NULL,".
-                    "event varchar(225) NOT NULL,".
-                    "timing int(10) NOT NULL".
-                  ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-                $this->db->query($create_table_sql);
+//                $create_table_sql = "CREATE TABLE IF NOT EXISTS audit (".
+//                    "id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,".
+//                    "admin_id int(11) NOT NULL,".
+//                    "user_id int(11) NOT NULL,".
+//                    "event varchar(225) NOT NULL,".
+//                    "timing int(10) NOT NULL".
+//                  ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+//                $this->db->query($create_table_sql);
+//                ALTER TABLE `audit` ADD `ip` VARCHAR(25) NOT NULL AFTER `timing`, ADD `more_info` MEDIUMTEXT NOT NULL AFTER `ip`;
 	}
         
-        public function log($admin_id, $user_id, $event){
+        public function log($admin_id, $user_id, $event, $ip="127.0.0.1", $desc=""){
             $result = $this->db->insert("audit", array("timing"=>time(), "admin_id"=>$admin_id, 
-                "user_id"=>$user_id, "event"=>$event));
+                "user_id"=>$user_id, "event"=>$event, "ip"=>$ip, "more_info"=>$desc));
             //var_dump($result);die;
             return count($result);
         }

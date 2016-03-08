@@ -167,6 +167,13 @@ class Admin_products_Model extends Model
 		
 	
 	    $product_id = $result->insert_id();
+            
+            if($product_id > 0){
+                $adminid=$this->session->get('user_id');
+                //means the insert was successful
+                $logger = new Auditor_Model();
+                $logger->log($adminid, $post->users, "Product Added", $_SERVER['REMOTE_ADDR'], "Added product '".$post->title."' Successfully");
+            }
 	    if(($post->color_val) == 1){
 	        foreach($post->color as $c){
 	            $result_count = $this->db->from("color")->where(array("deal_id" => $product_id, "color_name" => $c))->get();

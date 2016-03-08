@@ -10,8 +10,9 @@
 echo $this->template->style; 
 echo $this->template->javascript;
 ?>
-
-
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.powertip.min.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.powertip-blue.min.css" />
+<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/jquery.powertip.js"></script>
 </head>
 <body>
     <div class="container_outer fl clr">

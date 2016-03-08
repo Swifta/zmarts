@@ -504,7 +504,7 @@ class Admin_merchant_Model extends Model
                 //echo count($result); die;
 //                if(count($result)){
                     $this->auditor = new Auditor_Model();
-                    $this->auditor->log($this->user_id, $uid, $event);
+                    $this->auditor->log($this->user_id, $uid, $event, $_SERVER['REMOTE_ADDR']);
 //                }
                 return count($result);
         }
@@ -725,7 +725,7 @@ class Admin_merchant_Model extends Model
                     //store it in audit trail
                         //if(count($result)){
                             $this->auditor = new Auditor_Model();
-                            $this->auditor->log($this->user_id, $merchant_id, $event);
+                            $this->auditor->log($this->user_id, $merchant_id, $event, $_SERVER['REMOTE_ADDR']);
                         //}
 			return count($result);
 		}

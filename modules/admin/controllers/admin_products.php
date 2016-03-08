@@ -939,6 +939,20 @@ class Admin_products_Controller extends website_Controller
 								}
 					$status = $this->products->edit_product($deal_id, $deal_key, arr::to_object($this->userPost), $size_quantity,$this->preview_type);
 					  if($status == 1 && $deal_key){
+                                              
+                                              //bellieve update was made and successful
+                                              //so, lets log it
+                                              
+                    $log_description = "Price Change: ";
+                    $log_product = $this->products->get_edit_product($deal_id,$deal_key);
+                    foreach ($log_product as $p) {
+                        $log_description.=$p->deal_price."->".$this->userPost['deal_value']." , Discount Change: ".
+                                $p->deal_value."->".$this->userPost['deal_value']." , Club Price: ".$p->deal_prime_value."->".
+                                $this->userPost['prime_price'];
+                    }
+                    $this->auditor = new Auditor_Model();
+                    $this->auditor->log($this->user_id, $this->userPost['users'], "Product Modified", $_SERVER['REMOTE_ADDR'], $log_description);
+                    
 							if($_FILES['image']['name'] != "" )
 							{
 								$i=1;
