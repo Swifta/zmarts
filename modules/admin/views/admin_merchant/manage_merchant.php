@@ -316,7 +316,8 @@
 <div id="dialog" title="View Merchant's Admin Events Log" style="display:none;height:50px;overflow:auto;">
     <div id="dialog_content" style="margin:5px auto; width:100%;height:300px;overflow:auto; text-align:center;">Please wait ....... </div>
 </div>
-
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" />
+<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
   <script>
   
   $(function() {

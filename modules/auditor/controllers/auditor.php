@@ -32,8 +32,9 @@ class Auditor_Controller extends Layout_Controller
                 if(!empty($single->more_info)){
                     $title = $single->more_info;
                 }
-                $more_info = "<span style='color:blue;' class='tooltips' ".
-                        " title='".$title."'>know-more</span>";
+                $more_info = "<a style='color:blue;' class='tooltips' ".
+                        " title='".str_replace("'", "-", $title)."' onclick=\"swal('".
+                        str_replace("'", "-", $title)."'); return false;\">know-more</a>";
                 $ip = "<span style='color:red'>Unknown</span>";
                 if($single->ip!=""){
                     $ip = "<span style='color:green'>".$single->ip."</span>";
