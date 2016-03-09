@@ -946,8 +946,8 @@ class Admin_products_Controller extends website_Controller
                     $log_description = "(".$this->userPost['title'].") -> Price Change: ";
                     $log_product = $this->products->get_edit_product($deal_id,$deal_key);
                     foreach ($log_product as $p) {
-                        $log_description.=$p->deal_price."->".$this->userPost['deal_value']." , Discount Change: ".
-                                $p->deal_value."->".$this->userPost['deal_value']." , Club Price: ".$p->deal_prime_value."->".
+                        $log_description.=$p->deal_price." updated to ".$this->userPost['deal_value']." , Discount Change: ".
+                                $p->deal_value." updated to ".$this->userPost['deal_value']." , Club Price: ".$p->deal_prime_value." updated to ".
                                 $this->userPost['prime_price'];
                     }
                     $this->auditor = new Auditor_Model();

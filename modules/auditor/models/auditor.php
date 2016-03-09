@@ -16,7 +16,8 @@ class Auditor_Model extends Model
 //                    "timing int(10) NOT NULL".
 //                  ") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 //                $this->db->query($create_table_sql);
-//                ALTER TABLE `audit` ADD `ip` VARCHAR(25) NOT NULL AFTER `timing`, ADD `more_info` MEDIUMTEXT NOT NULL AFTER `ip`;
+//ALTER TABLE `audit` ADD `ip` VARCHAR(25) NOT NULL AFTER `timing`, ADD `more_info` MEDIUMTEXT NOT NULL AFTER `ip`;
+//ALTER TABLE `settings` ADD `send_error_log` INT(1) NOT NULL DEFAULT '1' AFTER `webpay_pay_item_name`;
 	}
         
         public function log($admin_id, $user_id, $event, $ip="127.0.0.1", $desc=""){
