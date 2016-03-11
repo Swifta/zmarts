@@ -132,7 +132,26 @@
 						  
                      </td>
                  </tr>
-                  <tr class="show_news_temp">
+                  <tr>
+                        <td><label><?php echo $this->Lang["N/W_TEMPLATE"]; ?></label><span>*</span></td>
+                        <td><label>:</label></td>
+                        <td>
+							<?php if(count($this->newsletter_list)>0){
+								$cnt = 1;
+								foreach($this->newsletter_list as $ns){?>
+								<div style="float:left;margin-right:10px;">
+									<div class="dash_act_img" style="float: left;width: 192px;padding: 5px;height: auto;border: 2px solid #d8d8d8;border-radius: 3px;">
+										<img src="<?php echo PATH.'images/newsletter/'.$ns->newsletter_id.'.png';?>" class="image" alt="<?php echo $ns->newsletter_title; ?>"/>
+								   </div>
+								   <p style="float:left;clear:both;margin:5px 0 0 0;"><?php echo $ns->newsletter_title; ?>
+										<span><input type="radio" name="template" value="<?php echo $ns->newsletter_id;?>" <?php if(!isset($this->form_error['template']) && isset($this->userPost['template'])&& $this->userPost['template']==$ns->newsletter_id){?>checked<?php }else if($cnt==1){ ?> checked<?php } ?>><label></label></span>
+								  </p>
+								</div>
+								<?php $cnt++;}
+								}?>
+							<em><?php if(isset($this->form_error["template"])){ echo $this->form_error["template"]; }?></em></td>
+                 </tr>
+                 <!-- <tr class="show_news_temp">
                         <td><label><?php echo $this->Lang["N/W_TEMPLATE"]; ?></label><span>*</span></td>
                         <td><label>:</label></td>
                         <td>
@@ -163,7 +182,7 @@
 						   </div> 
 						    </div>
                         <em><?php if(isset($this->form_error["template"])){ echo $this->form_error["template"]; }?></em></td>
-                 </tr>
+                 </tr>-->
                  <tr>
                         <td valign="top"><label><?php echo $this->Lang["MSGG"]; ?></label><span>*</span></td>
                         <td valign="top"><label>:</label></td>
@@ -175,10 +194,10 @@
                             ?></em>
                         </td>
                  </tr>
-                 <tr style="display:none;">
-                        <td><label><?php echo $this->Lang["ATACH"]; ?></label><span>*</span></td>
+                 <tr>
+                        <td><label>Attach Logo</label></td>
                         <td><label>:</label></td>
-                        <td><input type="file" name="attach[]" id="attachment"/>
+                        <td><input type="file" name="attach" id="attachment"/>
                         <em><?php if(isset($this->form_error["attach"])){ echo $this->form_error["attach"]; }?></em></td>
                  </tr>
                  <tr>

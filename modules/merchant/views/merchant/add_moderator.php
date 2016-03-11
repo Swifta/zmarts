@@ -282,7 +282,6 @@
         
         
                 <table>
-                                              
                        <tr>
                         <td></td>
                                 <td></td> 
@@ -299,7 +298,16 @@
                          <td></td>
                                 <td></td>
                         <table class="list_table3 fl clr show_details_table show_details_table_new">
-                                <tr>
+                                 <?php
+                                 if($this->show_toast){
+                                 ?>
+                    <tr width="100">
+                    <p  style="color:red; text-align: center; font-size: 140%;">You cannot add a moderator without a privilege.</p><br />
+                    </tr>
+                                 <?php
+                                 }
+                                 ?>
+                            <tr>
                                 <td width="200"><label><?php echo $this->Lang["MANAG_NAME"]; ?></label></td>
                                 
                                 <td width="100"><label><?php echo $this->Lang["VIEW"]; ?></label></td>

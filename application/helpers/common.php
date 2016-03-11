@@ -47,17 +47,17 @@ class common{
 		$extension = end($path);
 		if($extension=="jpg" || $extension=="jpeg"|| $extension=="JPG"|| $extension=="JPEG" )
 		{
-		$uploadedfile = $filename;
+		$uploadedfile = $image_path.$filename;
 		$src = imagecreatefromjpeg($uploadedfile);
 		}
 		else if($extension=="png"|| $extension=="PNG")
 		{
-		$uploadedfile = $filename;
+		$uploadedfile = $image_path.$filename;
 		$src = imagecreatefrompng($uploadedfile);
 		}
 		else
 		{
-		$uploadedfile = $filename;
+		$uploadedfile = $image_path.$filename;
 		$src = imagecreatefromgif($uploadedfile);
 		}
                  //ORIGINAL DIMENTIONS

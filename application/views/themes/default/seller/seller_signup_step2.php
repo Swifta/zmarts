@@ -355,7 +355,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                             <div class="col-md-5 col-md-offset-3">
                                                   <div class="form-group">  
                                                                     <span class="asterisks_input">  </span>
-                                                    <input type="text" class="form-control" name="firstname" id="fname" maxlength="50" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" autofocus placeholder="<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
+                                                    <input type="text" readonly class="form-control" name="firstname" id="fname" maxlength="50" tabindex="1" onchange="set_shop_changed(true);" onblur="verify_shop_name(this);" autofocus placeholder="<?php echo $this->Lang['ENTER_COMPANY_NAME']; ?>" 
                                                      value="<?php if($this->session->get('firstname') || isset($this->userPost['firstname'])) { if($this->session->get('firstname')) {
                                                    echo $this->session->get('firstname'); 
                                                    } else {
@@ -367,7 +367,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                                     <em id="id_err_fname"><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
                                                   </div>
                                                   <div class="form-group">  
-                                                    <input type="text" class="form-control" tabindex="2" maxlength="50" name="lastname" id="lname" required placeholder="<?php echo $this->Lang['ENTER_FULL_NAME']; ?>"
+                                                      <input type="text" class="form-control" tabindex="2" maxlength="50" name="lastname" id="lname" required placeholder="<?php echo $this->Lang['ENTER_FULL_NAME']; ?>"
                                                     value="<?php if($this->session->get('lastname') || isset($this->userPost['lastname'])) { if($this->session->get('lastname')) {
                                                     echo $this->session->get('lastname'); 
                                                     } else {

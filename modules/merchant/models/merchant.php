@@ -5100,7 +5100,7 @@ class Merchant_Model extends Model
 	
 	/** NEWSLETTER SEND **/
 
-	public function send_moderator_newsletter($post="",$file="",$type="")
+	public function send_moderator_newsletter($post="",$file="",$type="", $logo)
 	{
 	
 		$city = addslashes($post->city);
@@ -5162,24 +5162,38 @@ class Merchant_Model extends Model
 				$this->name = "";
 				$this->message = $post->message;
 				if($type==1){
-					if($post->template==1)
-					  {
-					$message = new View("themes/".THEME_NAME."/template1");
-					 }else{
-						 $message = new View("themes/".THEME_NAME."/template2");
-						}
-					if(EMAIL_TYPE==2){
-						email::smtp($from, $c->email,$post->subject,$message,$file);
-					} else{
-						email::sendgrid($from, $c->email,$post->subject,$message);
-					}
-				}else{
-					if(EMAIL_TYPE==2){
-						email::smtp($from, $c->email,$post->subject,$this->message);
-					} else{
-						email::sendgrid($from, $c->email,$post->subject,$this->message);
-					}
+//					if($post->template==1)
+//					  {
+//					$message = new View("themes/".THEME_NAME."/template1");
+//					 }else{
+//						 $message = new View("themes/".THEME_NAME."/template2");
+//						}
+//					if(EMAIL_TYPE==2){
+//						email::smtp($from, $c->email,$post->subject,$message,$file);
+//					} else{
+//						email::sendgrid($from, $c->email,$post->subject,$message);
+//					}
+            	$this->email_id = "";
+				$this->name = "";
+				$this->message = $post->message;
+				$this->news_title = $post->title;
+				$this->news_message = $post->message;
+				$this->news_footer = $post->footer;
+				$this->news_logo = $logo;
+				$message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
+				if(EMAIL_TYPE==2){
+					email::smtp($from, $c->email,$post->subject,$message,$file);
+				} else{
+					email::sendgrid($from, $c->email,$post->subject,$message);
 				}
+                                
+                            }else{
+                                    if(EMAIL_TYPE==2){
+                                            email::smtp($from, $c->email,$post->subject,$this->message);
+                                    } else{
+                                            email::sendgrid($from, $c->email,$post->subject,$this->message);
+                                    }
+                            }
 				 
 			}
 			$user_array1=implode(',',$user_array1);
@@ -5213,28 +5227,35 @@ class Merchant_Model extends Model
 											$fromEmail = NOREPLY_EMAIL;
 											
 											if($type==1){
-												if($post->template==1)
-												{
-													$message = new View("themes/".THEME_NAME."/template1");
-												}else{
-													$message = new View("themes/".THEME_NAME."/template2");
-												}
-												if(EMAIL_TYPE==2){
-													email::smtp($fromEmail,$useremail,$post->subject,$message,$file);
-												}else {
-													email::sendgrid($fromEmail,$useremail,$post->subject,$message);
-												}
-											}else{
-												if(EMAIL_TYPE==2){
-													email::smtp($fromEmail,$useremail,$post->subject,$this->message);
-												}else {
-													email::sendgrid($fromEmail,$useremail,$post->subject,$this->message);
-												}
-											}
-									}
-									$user_array=implode(',',$user_array);
-									$result=$this->db->insert("email",array("receivers_id" =>$user_array,"sender_id" =>$this->user_id,"email_subject" =>$post->subject,"email_message" =>$this->message,"email_template" =>$post->template,"type" =>$post->mail_category,"send_time"=>time()));
-									return 1;
+//												if($post->template==1)
+//												{
+//													$message = new View("themes/".THEME_NAME."/template1");
+//												}else{
+//													$message = new View("themes/".THEME_NAME."/template2");
+//												}
+//												if(EMAIL_TYPE==2){
+//													email::smtp($fromEmail,$useremail,$post->subject,$message,$file);
+//												}else {
+//													email::sendgrid($fromEmail,$useremail,$post->subject,$message);
+//												}
+                                    $message = new View("themes/".THEME_NAME."/Template_file_".$post->template);
+                                    
+                                    if(EMAIL_TYPE==2){
+                                            //email::smtp($fromEmail, $useremail,$post->subject,$message,$file);
+                                    } else{
+                                        //email::sendgrid($fromEmail, $useremail,$post->subject,$message);
+                                    }
+                                }else{
+                                        if(EMAIL_TYPE==2){
+                                                //email::smtp($fromEmail,$useremail,$post->subject,$this->message);
+                                        }else {
+                                                //email::sendgrid($fromEmail,$useremail,$post->subject,$this->message);
+                                        }
+                                }
+                            }
+                            $user_array=implode(',',$user_array);
+                            $result=$this->db->insert("email",array("receivers_id" =>$user_array,"sender_id" =>$this->user_id,"email_subject" =>$post->subject,"email_message" =>$this->message,"email_template" =>$post->template,"type" =>$post->mail_category,"send_time"=>time()));
+                            return 1;
 				
 			}
 	
