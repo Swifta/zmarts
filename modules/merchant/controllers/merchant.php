@@ -2772,7 +2772,9 @@ class Merchant_Controller extends website_Controller {
                                                 $_FILES[$n] = $value;
                                                 unset($_FILES[$key]);
                                             }
-									//foreach(arr::rotate($_FILES['image']) as $files){
+								
+                                        
+                                            //foreach(arr::rotate($_FILES['image']) as $files){
 						foreach($_FILES as $key => $files){
 	                                         if($files){
                                                   $filename = upload::save($key);
@@ -3023,8 +3025,8 @@ class Merchant_Controller extends website_Controller {
                                         $_FILES[$n] = $value;
                                         unset($_FILES[$key]);
                                     }
-									//foreach(arr::rotate($_FILES['image']) as $files){
-									foreach($_FILES as $key => $files){
+                                        //foreach(arr::rotate($_FILES['image']) as $files){
+                                        foreach($_FILES as $key => $files){
 	                                         if($files){
                                                   $filename = upload::save($key);
                                                         if($filename!=''){
