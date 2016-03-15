@@ -74,7 +74,7 @@ class Seller_Model extends Model
                 if(count($result_email) == 0){
 		$result_country1 = $this->db->select("country_id")->from("city")->where(array("city_id" => $post->city ))->limit(1)->get(); 
 		// for store country value
-			$country_value1 = $result_country1->current()->country_id;
+			$country_value1 = @$result_country1->current()->country_id;
 			//$pswd = text::random($type = 'alnum', $length = 8);
 
 			$result = $this->db->insert("users", array("firstname" => $this->session->get('firstname'),"lastname" => $this->session->get('lastname'), "email" =>$this->session->get('memail'),'password' => md5($pswd),"payment_account_id" =>$this->session->get("merchant_reg_nuban"),

@@ -14,23 +14,23 @@ class Products_Model extends Model
 			@Live
 		*/
 		
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = 'and product.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = ' and product.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition_arr = true:$this->club_condition_arr = false;
 		
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = ' product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = ' product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
 		
                 $this->deal_value_condition_cart = 'product.deal_prime_value as deal_value';
                 $this->deal_value_condition_field_cart = 'product.deal_prime_value';
 //                (strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_cart = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
 //		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field_cart = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
 
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = 'product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = 'product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = ' product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = ' product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
 		
 		
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition = 'product.deal_prime_savings as deal_savings':$this->deal_saving_condition = 'product.deal_savings';
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition_field = 'product.deal_prime_savings':$this->deal_saving_condition_field = 'product.deal_savings';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition = ' product.deal_prime_savings as deal_savings':$this->deal_saving_condition = 'product.deal_savings';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition_field = ' product.deal_prime_savings':$this->deal_saving_condition_field = 'product.deal_savings';
 		
 		
 		
