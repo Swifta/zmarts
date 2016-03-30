@@ -9,7 +9,7 @@
     foreach($this->about_us_footer as $stores) { ?>
 
 <div class="footer-wrap">
-    <div class="container">
+    <div class="con">
         <div class="row">
 
             <div class="footer clearfix">

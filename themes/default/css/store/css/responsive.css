@@ -3,6 +3,10 @@
 ****************************************************************************/
 @media only screen and (min-width: 959px) and (max-width: 1024px)
 {
+    #testing{
+        background-color:pink;
+    }
+    
     .languages {position: absolute; top: 0px; right: 3px;width: 129px;}
 
     .header-top { height: 141px; }
@@ -81,7 +85,7 @@
 
     #sidebar2 .widget iframe {width: 178px !important; height: 181px !important;;}
 
-    .commnts-wrap {width: 660px; margin: 0 auto;}
+    .cc {width: 660px; margin: 0 auto;}
     .comments li div { width:420px; float:left; }
     .comments .children { padding-left:30px; border: 0px;padding-bottom:0px; margin-bottom:0px; }
     .comments .children div { width:300px;  }
@@ -130,6 +134,10 @@
 ****************************************************************************/
 @media only screen and (min-width: 768px) and (max-width: 959px)
 {
+        #testing{
+        background-color: pink;
+    }
+    
     .languages {position: absolute; top: 0px; right: 3px;width: 129px;}
 
     .header-top { height: 141px; }
@@ -276,6 +284,11 @@
 ****************************************************************************/
 @media only screen and ( max-width: 768px )
 {
+        #testing{
+        background-color: blue;
+    }
+    
+    
     .languages {position: absolute; top: 0px; right: 3px;width: 129px;}
 
     .header-top { height: 141px; }
@@ -427,6 +440,10 @@
 ****************************************************************************/
 @media only screen and (min-width: 481px) and (max-width: 767px)
 {
+        #testing{
+        background-color: graytext;
+    }
+    
     .languages {position: absolute; top: 0px ; right: 0px;width: 129px;}
     .header-top .logo {line-height: 19px; margin-top: 40px;text-align: center;}
     .social-strip {position: absolute;top: 0px;right: 151px;}
@@ -576,6 +593,10 @@
 ****************************************************************************/
 @media only screen and (max-width: 480px)
 {
+        #testing{
+        background-color:brown;
+    }
+    
     .languages {position: absolute; top: 0px ; right: 0px;width: 129px;}
     .header-top .logo {line-height: 19px; margin-top: 40px;text-align: center;}
     .header-top { height: 222px; }
@@ -594,7 +615,7 @@
     header { padding-top: 1px; height: 38px;  text-align: center; }
     header .selectBox-dropdown { width: 250px !important; float: none; display: block !important;margin:4px auto !important; }
 
-    .slider { position: relative; height: 200px; margin-bottom: 20px; width: 100%; }
+    .slider { position: relative; height: 200px; margin-bottom: 20px; width: 100% !important; }
     .slider-slides { width: 100%; height: 200px; }
     .slider a  { height: 200px;}
     .slides  { height: 200px !important; width: 100% !important;}

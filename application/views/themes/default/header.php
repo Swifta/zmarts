@@ -38,6 +38,7 @@ $this->language_List = str_replace(".php", "", $DL);
     <?php ?>
     <!--header start-->
     <header>
+        <div class="container">
         <div id="header">
 			<div class="first_header">
 				<div class="header_inner">
@@ -112,7 +113,7 @@ $this->language_List = str_replace(".php", "", $DL);
 								
 							<?php } ?>
                             
-<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px  ">Sell on <?php echo SITENAME; ?></b></a></li>
+<li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px; font-weight:normal; ">Sell on <?php echo SITENAME; ?></b></a></li>
     <!-- 
     	Adding Zenith Offer Label to the header.
     	@Live
@@ -338,20 +339,20 @@ $this->language_List = str_replace(".php", "", $DL);
 												</div>
 <div class="bottom_header near_map_hdr">
     <div class="header_inner">
-<ul class="head_menu head_menu1 bold">                                                                                                                                    
+<ul class=" head_menu">                                                                                                                                    
     <li class="orange_bg" <?php
 		if (isset($this->is_home)) {
 			echo "class='active'";
 		}
 		?>>
            
-		<a class="hmenu" href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"> <span class="home_icon"></span><?php echo $this->Lang['HOME']; ?>
+		<a class="hmenu" href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"> <!-- <span class="home_icon"></span> --> <?php echo $this->Lang['HOME']; ?>
 		</a>
 	</li>
 <?php if ($this->product_setting) {  ?>
-		<li class="<?php if (isset($this->is_product)) echo "active"; ?> yellow_bg">
+		<li class="<?php if (isset($this->is_product)) echo "active"; ?> orange_bg">
                     
-                    <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/products.html" <?php }else{?> href="<?php echo PATH; ?>products.html" <?php }?> title="<?php echo $this->Lang['PRODUCTS']; ?>"><span class="product_icon"></span><?php echo $this->Lang['PRODUCTS']; ?>
+                    <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/products.html" <?php }else{?> href="<?php echo PATH; ?>products.html" <?php }?> title="<?php echo $this->Lang['PRODUCTS']; ?>"> <!-- <span class="product_icon"></span> --> <?php echo $this->Lang['PRODUCTS']; ?>
 
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
@@ -398,7 +399,7 @@ $this->language_List = str_replace(".php", "", $DL);
 		<li class="<?php if (isset($this->is_todaydeals)) echo "active"; ?> orange_bg">
                     
                     <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?>  href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" <?php }else{?> href="<?php echo PATH; ?>today-deals.html" <?php }?> title="<?php echo $this->Lang['DEALS']; ?>">
-                        <span class="deal_menu_icon"></span>
+<!--                        <span class="deal_menu_icon"></span> header2--> 
 			<?php echo $this->Lang['DEALS']; ?>
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
@@ -436,9 +437,9 @@ $this->language_List = str_replace(".php", "", $DL);
 			</li>
 <?php } ?>
 <?php if ($this->auction_setting) { ?>
-<li class="<?php if (isset($this->is_auction)) echo "active"; ?> yellow_bg">    
+<li class="<?php if (isset($this->is_auction)) echo "active"; ?> orange_bg">    
     <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/auction.html" <?php }else{?> href="<?php echo PATH; ?>auction.html" <?php }?> title="<?php echo $this->Lang['AUCTION']; ?>">
-        <span class="auction_menu_icon"></span>
+<!--        <span class="auction_menu_icon"></span>-->
         <?php echo $this->Lang['AUCTION']; ?>
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
@@ -485,7 +486,7 @@ $this->language_List = str_replace(".php", "", $DL);
 			}
 			?>>                    
 			<a   class="hmenu" href="<?php echo PATH; ?>soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>">
-                            <span class="soldout_menu_icon"></span>
+<!--                            <span class="soldout_menu_icon"></span>-->
 				<?php echo $this->Lang['SOLD_OUT2']; ?>
 			</a>
 
@@ -493,25 +494,25 @@ $this->language_List = str_replace(".php", "", $DL);
 	<?php } ?>
 
 	<?php if ($this->store_setting) { ?>
-                <li class="yellow_bg" <?php
+                <li class="orange_bg" <?php
 			if (isset($this->is_store)) {
 				echo "class='active'";
 			}
 			?>>                    
 			<a  class="hmenu" href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">
-                            <span class="store_menu_icon"></span>
+<!--                            <span class="store_menu_icon"></span>-->
 				<?php echo $this->Lang['STORES']; ?>
 			</a></li>
 	<?php } ?>
 
 	<?php if (($this->deal_setting == 1 || $this->product_setting == 1 || $this->auction_setting == 1 ) && $this->map_setting) { ?>
-                        <li class="green_bg" <?php
+                        <li class="orange_bg" <?php
 			if (isset($this->is_map)) {
 				echo "class='active'";
 			}
 			?>>                    
 			<a class="hmenu" href="<?php echo PATH; ?>near-map.html" title="<?php echo $this->Lang['NEAR_MAP']; ?>">
-                            <span class="near_map_menu_icon"></span>
+<!--                            <span class="near_map_menu_icon"></span>-->
 				<?php echo $this->Lang['NEAR_MAP']; ?>
 			</a>
 
@@ -886,7 +887,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 				        ?>>
                                         
 				        <a class="hmenu" href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>">
-                                            <span class="home_icon"></span>
+<!--                                            <span class="home_icon"></span>-->
                                             <?php echo $this->Lang['HOME']; ?>
 				        </a>
 
@@ -894,10 +895,10 @@ $srch = $this->Lang['SRCH_DEAL'];
 
         <?php if ($this->product_setting) { ?>
 
-        <li class="<?php if (isset($this->is_product)) echo "active"; ?> yellow_bg"> 
+        <li class="<?php if (isset($this->is_product)) echo "active"; ?> orange_bg"> 
             
             <a class="hmenu" href="<?php echo PATH; ?>products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>">
-                <span class="product_icon"></span>
+<!--                <span class="product_icon"></span>-->
                     <?php echo $this->Lang['PRODUCTS']; ?>
         </a>
         <?php $pr = 0; $pro = 0; $val_pro ="";
@@ -962,7 +963,7 @@ $srch = $this->Lang['SRCH_DEAL'];
         <?php if ($this->deal_setting) { ?>
         <li class="<?php if (isset($this->is_todaydeals)) echo "active"; ?> orange_bg">            
             <a class="hmenu" href="<?php echo PATH; ?>today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>">
-                <span class="deal_menu_icon"></span>
+<!--                <span class="deal_menu_icon"></span>-->
 	        <?php echo $this->Lang['DEALS']; ?>
                 
         </a>
@@ -1028,9 +1029,9 @@ $srch = $this->Lang['SRCH_DEAL'];
         <?php } ?>
 
         <?php if ($this->auction_setting) { ?>
-        <li class="<?php if (isset($this->is_auction)) echo "active"; ?> yellow_bg">            
+        <li class="<?php if (isset($this->is_auction)) echo "active"; ?> orange_bg">            
             <a class="hmenu" href="<?php echo PATH; ?>auction.html" title="<?php echo $this->Lang['AUCTION']; ?>">
-                <span class="auction_menu_icon"></span>
+<!--                <span class="auction_menu_icon"></span>-->
         <?php echo $this->Lang['AUCTION']; ?>
         </a>
         <?php $au = 0; $aut = 0; $val = "";
@@ -1098,33 +1099,33 @@ $srch = $this->Lang['SRCH_DEAL'];
 		        }
 		        ?>>                    
 		        <a   class="hmenu" href="<?php echo PATH; ?>soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>">
-                            <span class="soldout_menu_icon"></span>
+<!--                            <span class="soldout_menu_icon"></span>-->
 			        <?php echo $this->Lang['SOLD_OUT2']; ?>
 		        </a>
 	        </li>
         <?php } ?>
 
         <?php if ($this->store_setting) { ?>
-                <li class="yellow_bg" <?php
+                <li class="orange_bg" <?php
 		        if (isset($this->is_store)) {
 			        echo "class='active'";
 		        }
 		        ?>>
                     
 		        <a  class="hmenu" href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">
-                            <span class="store_menu_icon"></span>
+<!--                            <span class="store_menu_icon"></span>-->
 			        <?php echo $this->Lang['STORES']; ?>
 		        </a></li>
         <?php } ?>
         <?php if (($this->deal_setting == 1 || $this->product_setting == 1 || $this->auction_setting == 1 ) && $this->map_setting) { ?>
-                        <li class="green_bg" <?php
+                        <li class="orange_bg" <?php
 		        if (isset($this->is_map)) {
 			        echo "class='active'";
 		        }
 		        ?>>
                     
 		        <a class="hmenu" href="<?php echo PATH; ?>near-map.html" title="<?php echo $this->Lang['NEAR_MAP']; ?>">
-                            <span class="near_map_menu_icon"></span>
+<!--                            <span class="near_map_menu_icon"></span>-->
 			        <?php echo $this->Lang['NEAR_MAP']; ?>
 		        </a>
 	        </li>
@@ -1143,9 +1144,9 @@ $srch = $this->Lang['SRCH_DEAL'];
 	        </a>
         </li>
         <?php } */?>
-        </ul>
-        </div>
-        </div>
+            </ul>
+            </div>
+            </div>
         </div>
         </header>
         <!--header end-->

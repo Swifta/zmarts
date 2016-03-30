@@ -9,6 +9,11 @@
 @import url('css/prettyPhoto.css');
 @import url('../reset.css');
 
+.redbox{
+    background-color:red;
+    color:blue;
+}
+
 /*LAYOUT CSS*/
 a{text-decoration: none;}
 /*header*/
