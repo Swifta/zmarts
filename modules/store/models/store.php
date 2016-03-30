@@ -477,7 +477,10 @@ class Store_Model extends Model
 		public function get_store_key($storeurl="") 
 		{
 			$result = $this->db->select("store_key")->from("stores")->where(array("store_url_title"=>url::title($storeurl)))->get();
-			return $result->current()->store_key;
+			if(count($result) == 0){
+                            return 0;
+                        }
+                        return $result->current()->store_key;
 		}
 		/* GET THE PERSONALISED DETAILS */
 		public function get_merchant_personalised_details($merchantid="",$store_id="")

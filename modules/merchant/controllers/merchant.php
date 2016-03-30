@@ -2772,7 +2772,9 @@ class Merchant_Controller extends website_Controller {
                                                 $_FILES[$n] = $value;
                                                 unset($_FILES[$key]);
                                             }
-									//foreach(arr::rotate($_FILES['image']) as $files){
+								
+                                        
+                                            //foreach(arr::rotate($_FILES['image']) as $files){
 						foreach($_FILES as $key => $files){
 	                                         if($files){
                                                   $filename = upload::save($key);
@@ -3023,8 +3025,8 @@ class Merchant_Controller extends website_Controller {
                                         $_FILES[$n] = $value;
                                         unset($_FILES[$key]);
                                     }
-									//foreach(arr::rotate($_FILES['image']) as $files){
-									foreach($_FILES as $key => $files){
+                                        //foreach(arr::rotate($_FILES['image']) as $files){
+                                        foreach($_FILES as $key => $files){
 	                                         if($files){
                                                   $filename = upload::save($key);
                                                         if($filename!=''){
@@ -5343,6 +5345,8 @@ class Merchant_Controller extends website_Controller {
 	
 	public function add_moderator()
 	{
+                      $priviledge_valid = false;
+                      $this->show_toast = true;
 	        if($this->user_type!= 3){
 			common::message(-1, $this->Lang["YOU_CAN_NOT_MODULE"]);        
 			url::redirect(PATH."merchant.html");	        
@@ -5362,7 +5366,26 @@ class Merchant_Controller extends website_Controller {
 						->add_rules('address1', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
-			if($post->validate()){
+                      $data = array(
+					 "privileges_deals","privileges_deals_add","privileges_deals_edit","privileges_deals_block",
+					 "privileges_products","privileges_products_add","privileges_products_edit","privileges_products_block",
+					 "privileges_auctions","privileges_auctions_add","privileges_auctions_edit","privileges_auctions_block",
+					 "privileges_transactions","privileges_fundrequest","privileges_fundrequest_edit","privileges_shop",
+                          "privileges_shop_add","privileges_shop_edit","privileges_shop_block","privileges_shipping",
+                          "privileges_shipping_edit","privileges_tac","privileges_tac_edit","privileges_return_policy",
+                          "privileges_return_policy_edit","privileges_about_us","privileges_about_us_edit","privileges_personalized_store",
+                          "privileges_personalized_store_edit","privileges_newsletter","privileges_newsletter_add",
+                          "privileges_attributs","privileges_attributs_add","privileges_attributs_edit","privileges_categories","privileges_categories_add",
+                          "privileges_categories_edit","privileges_specification","privileges_specification_add",
+                          "privileges_specification_edit","privileges_gift","privileges_gift_add","privileges_gift_edit",
+                          "privileges_gift_block");
+                      foreach ($data as $val){
+                          if(@$this->userPost[$val]){
+                              $priviledge_valid = true;
+                              $this->show_toast = true;
+                          }
+                      }
+			if($post->validate() && $priviledge_valid){
 				$referral_id = text::random($type = 'alnum', $length = 8);
 				$pswd = text::random($type = 'alnum', $length = 8);
 				$status = $this->merchant->add_moderator(arr::to_object($this->userPost),$referral_id,$pswd);
@@ -5373,12 +5396,7 @@ class Merchant_Controller extends website_Controller {
 					$this->pswd = $pswd;
 					$this->name =$post->firstname;
 					$this->moderator = "1";
-                      $data = array(
-					 "privileges_deals","privileges_deals_add","privileges_deals_edit","privileges_deals_block",
-					 "privileges_products","privileges_products_add","privileges_products_edit","privileges_products_block",
-					 "privileges_auctions","privileges_auctions_add","privileges_auctions_edit","privileges_auctions_block",
-					
-					 "privileges_transactions","privileges_fundrequest","privileges_fundrequest_edit","privileges_shop","privileges_shop_add","privileges_shop_edit","privileges_shop_block","privileges_shipping","privileges_shipping_edit","privileges_tac","privileges_tac_edit","privileges_return_policy","privileges_return_policy_edit","privileges_about_us","privileges_about_us_edit","privileges_personalized_store","privileges_personalized_store_edit","privileges_newsletter","privileges_newsletter_add","privileges_attributs","privileges_attributs_add","privileges_attributs_edit","privileges_categories","privileges_categories_add","privileges_categories_edit","privileges_specification","privileges_specification_add","privileges_specification_edit","privileges_gift","privileges_gift_add","privileges_gift_edit","privileges_gift_block");
+
 					   $arr =array();
 					   if(count($data)){
 							   foreach($data as $row) {
@@ -7055,45 +7073,65 @@ class Merchant_Controller extends website_Controller {
 				}	 
 				if($post->validate()){
 					if($post->add_temp==1){
-						$file=array();
-						$extension="";
-						if($_FILES['attach']['name']['0'] != "" ){
-                                                $i=1;
-							foreach($_FILES as $key =>$value){
-												$n = uniqid();
-												$_FILES[$n] = $value;
-												unset($_FILES[$key]);
-												}
-									//foreach(arr::rotate($_FILES['image']) as $files){
-									foreach($_FILES as $key => $files){
-	                                         if($files){
-                                                  $filename = upload::save($key);
-										if($filename!=''){
-											//$IMG_NAME = "news_letter";
-											$ext=$filename;
-											$lastDot = strrpos($ext, ".");
-											$string = str_replace(".", "", substr($ext, 0, $lastDot)) . substr($ext, $lastDot);
-											$path = explode('.',$string);
-											$extension = end($path);
-											$f=file_get_contents(basename($filename));
-											file_put_contents(realpath(DOCROOT.'images/newsletter/newsletter.').$extension,$f);
-											
-										}
-							        }
-							    $i++;
-							}
-							
-						$file[0]=DOCROOT.'images/newsletter/newsletter.'.$extension;
-						}
-						$file1=array();
-						pdf::template_create($post->template,$post->subject,$post->message);
+		$file=array();
+					$extension="";
+					$logo = "";
+					if($_FILES["attach"]["name"]!=''){
+						/*$tmp_name = upload::save('attach');//$_FILES["attach"]["tmp_name"];
+						$logo = basename($tmp_name);
+						move_uploaded_file($tmp_name, realpath(DOCROOT."images/newsletter/").$logo);
+						chmod(realpath(DOCROOT."images/newsletter/").$logo,0777);
+						*/
+						
+						$dir = DOCROOT."images".DIRECTORY_SEPARATOR."newsletter";
+						$source = upload::save('attach', text::random($type = 'alnum', $length = 10).".png", $dir, 0777);
+						$logo = basename($source);
+						
+						
+					}
+					$file1=array();
+					//pdf::template_create($post->template,$post->subject,$post->message);
+                                        $this->news_logo = $logo;
+//						$file=array();
+//						$extension="";
+//						if($_FILES['attach']['name']['0'] != "" ){
+//                                                $i=1;
+//							foreach($_FILES as $key =>$value){
+//												$n = uniqid();
+//												$_FILES[$n] = $value;
+//												unset($_FILES[$key]);
+//												}
+//									//foreach(arr::rotate($_FILES['image']) as $files){
+//									foreach($_FILES as $key => $files){
+//	                                         if($files){
+//                                                  $filename = upload::save($key);
+//										if($filename!=''){
+//											//$IMG_NAME = "news_letter";
+//											$ext=$filename;
+//											$lastDot = strrpos($ext, ".");
+//											$string = str_replace(".", "", substr($ext, 0, $lastDot)) . substr($ext, $lastDot);
+//											$path = explode('.',$string);
+//											$extension = end($path);
+//											$f=file_get_contents(basename($filename));
+//											file_put_contents(realpath(DOCROOT.'images/newsletter/newsletter.').$extension,$f);
+//											
+//										}
+//							        }
+//							    $i++;
+//							}
+//							
+//						$file[0]=DOCROOT.'images/newsletter/newsletter.'.$extension;
+//						}
+//						$file1=array();
+//						pdf::template_create($post->template,$post->subject,$post->message);
+//
+//						array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
+//						chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
 
-						array_push($file1, $_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf");
-						chmod($_SERVER['DOCUMENT_ROOT']."/images/newsletter/newsletter.pdf",0777);
-
-						$status = $this->merchant->send_moderator_newsletter(arr::to_object($this->userPost),$file1,1);
+                                        
+						$status = $this->merchant->send_moderator_newsletter(arr::to_object($this->userPost),$file1,1, $this->news_logo);
 					}else{
-						$status = $this->merchant->send_moderator_newsletter(arr::to_object($this->userPost),"",2);
+						$status = $this->merchant->send_moderator_newsletter(arr::to_object($this->userPost),"",2, $this->news_logo);
 					}
 		             	if($status == 1){
 							//unlink(DOCROOT.'images/newsletter/newsletter.'.$extension);
@@ -7114,7 +7152,8 @@ class Merchant_Controller extends website_Controller {
 		        }
 		}
 	$this->city_list = $this->merchant->getCityList();  
-	$this->users = $this->merchant->getUSERList1();      
+	$this->users = $this->merchant->getUSERList1();
+        $this->newsletter_list = $this->merchant->get_newsletter_list();
         $this->template->title = $this->Lang['SEND_NEWSL'];
         $this->template->content = new View("merchant/send_moderator_email");	
 	}

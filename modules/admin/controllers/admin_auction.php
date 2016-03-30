@@ -72,7 +72,7 @@ class Admin_auction_Controller extends website_Controller
 														$IMG_NAME = $deal_key."_".$i.'.png';
 														
 											                        common::image($filename, 620,752, DOCROOT.'images/auction/1000_800/'.$IMG_NAME);
-																	$filename = basename($filename);
+																	//$filename = basename($filename);
 														unlink($filename);
 													}
 										}

@@ -160,7 +160,7 @@
                         </tr>
                          <tr>
                             <td align="left" style="font:normal 13px/19px arial; color:#666;">
-                              <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; text-decoration:none; color:#666;"><?php echo $this->Lang['THE']." ".SITENAME; ?></a> <?php echo $this->Lang['TEAM']; ?>.
+                              <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>" style="font:normal 12px arial; text-decoration:none; color:#267bef;"><?php echo $this->Lang['THE']." ".SITENAME; ?></a> <?php echo $this->Lang['TEAM']; ?>.
                             </td>
                         </tr>
                         
