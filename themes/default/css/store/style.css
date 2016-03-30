@@ -13,6 +13,12 @@
 /*fashion theme*/
 /*header*/
 
+
+.redbox{
+    background-color:red;
+    color:blue;
+}
+
 .first_header{float: left;width:100%;background: #F3F3F3;}
 .header_inner{width:1140px;margin: 0 auto;}
 .header_top_left{float: left;width:auto;padding: 4px 0;}

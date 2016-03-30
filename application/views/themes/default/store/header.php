@@ -1148,7 +1148,6 @@ $srch = $this->Lang['SRCH_DEAL'];
 <div class='popup_block3_0'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_verify_account_popup'); ?></div>
 <div class='popup_block3_1'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_open_account_popup'); ?></div>
 <div class='popup_block4'><?php echo new View("themes/" . THEME_NAME . '/users/fb_popup'); ?></div>
-
 <link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" type="text/css" /> 
 <script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
 <script>

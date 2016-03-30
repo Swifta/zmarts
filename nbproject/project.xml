@@ -3,7 +3,14 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>zmarts</name>
+            <name>zmarts2</name>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>fgdgd</word>
+            <word>fhfhjhjfhjh</word>
+            <word>hcgfgjjfjjgghgjghj</word>
+            <word>hcgfgjjfjjgghgjghjjhhjghj</word>
+            <word>hhjhjgh</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

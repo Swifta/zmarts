@@ -21,7 +21,10 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 table {	border-collapse: collapse; border-spacing: 0; }
 
 
-
+.redbox{
+    background-color:red;
+    color:blue;
+}
 
 /****************************************************************************
 BASIC STYLES
@@ -860,10 +863,7 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
 .price-range .ui-widget-content a {
     color: #222222;
 }
-.container{
-    /*width:1170px;*/
-    width:1170px;
-}
+
 
 
 
