@@ -38,7 +38,7 @@ $this->language_List = str_replace(".php", "", $DL);
     <?php ?>
     <!--header start-->
     <header>
-        <div class="container">
+<!--        <div class="container">-->
         <div id="header">
 			<div class="first_header">
 				<div class="header_inner">
@@ -189,7 +189,7 @@ $this->language_List = str_replace(".php", "", $DL);
 			</div>
 			<div class="middle_header">
 				<div class="header_inner">
-					<div class="logo">
+					<div class="logo2">
 						<h1>
 							<a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>">
 								<img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png"/>
@@ -244,7 +244,7 @@ $this->language_List = str_replace(".php", "", $DL);
                         <form id="myform" action="<?php echo $url; ?>products/search.html">
 
                         <?php } ?>
-                        <div class="text_box_outer_header">
+                        <div class="text_box_outer_header2">
                         <div class="text_box_header">
                         <?php $search = $this->input->get('q'); ?>
 
@@ -337,9 +337,10 @@ $this->language_List = str_replace(".php", "", $DL);
                                     </div>
 												</div>
 												</div>
-<div class="bottom_header near_map_hdr">
+<!--header2            -->
+<div class="bottom_header2 near_map_hdr2">
     <div class="header_inner">
-<ul class=" head_menu">                                                                                                                                    
+<ul class=" head_menu2">                                                                                                                                    
     <li class="orange_bg" <?php
 		if (isset($this->is_home)) {
 			echo "class='active'";
@@ -534,10 +535,13 @@ $this->language_List = str_replace(".php", "", $DL);
 </ul>
                                         </div>
                                         </div>
-                                        </div>
+<!--                                        </div>-->
                                         </header>
                                 <?php } else { ?>
 <!--header start-->
+
+
+
 <!--header start-->
 <header>
 <div id="header">

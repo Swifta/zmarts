@@ -593,8 +593,8 @@
 ****************************************************************************/
 @media only screen and (max-width: 480px)
 {
-        #testing{
-        background-color:brown;
+    .main_wrap_body{
+        margin-top: 300px;
     }
     
     .languages {position: absolute; top: 0px ; right: 0px;width: 129px;}
