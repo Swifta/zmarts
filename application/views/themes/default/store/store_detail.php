@@ -38,7 +38,7 @@ $(".slidetabs").tabs(".images > div", {
 </script>
 
 
-<div style="margin-top:300px" class="wrapper">
+<div class="wrapper main_wrap_body">
     <div class="con">
         <div class="row ">
 
@@ -71,26 +71,44 @@ if(count($this->merchant_personalised_details)>0) {
                                 
                             }
 ?>
-<div class="slides">                                                                               
+                    
+<div class="slides">
+  <a href="<?php echo $banner_link; ?>">
+      <img src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" alt="<?php echo $this->Lang['LOGO']; ?>">
+  </a>
+</div>   
+                                         
+                    
+<!--<div class="slides">                                                                               
     <a href="<?php echo $banner_link; ?>"  title="<?php echo $banner_link; ?>">
         <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" 
              data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
     </a>
-</div>
+</div>-->
 <?php
                     }
                     else{
                         //echo "No Image file";
 ?>
+<div class="slides">
+  <a href="#"><img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/<?php echo $i; ?>.jpg" alt="">
+  </a>
+</div> 
+
+
+<!--
                 <div class="slides">
                         <img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/<?php echo $i; ?>.jpg" alt="" />
-                </div>
+                </div>-->
 <?php
                     }
                 }
         }
 }
 else{?>
+
+
+
 
     <div class="slides">
         <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/1.jpg" alt="" />

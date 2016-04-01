@@ -1,8 +1,7 @@
 <!-- FOOTER -->
 <style>
-    .cb{
-        
-       /* background-color: #144f5d;*/
+    .sub_btn{
+       background-color: #144f5d !important;
     }
     </style>
 <?php if(count($this->about_us_footer)>0) { 
@@ -97,10 +96,12 @@ echo $stores->about_us;
                         <ul>
 			<li>Subscribe to receive our news everyday !</li>
                         </ul>
-            <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
+                        <div>
+                <input type="hidden" name="subscriber_store_id" id="subscriber_store_id1" value="<?php echo $this->storeid;?>"/>
                 <input class="newsletter" type="text" name="store_subscriber" id="store_subscriber1"  placeholder="Enter Email Address" onkeypress="return check_color();"/>
-                <button class="btn btn-success cb"  type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');">Join</button>
+                <button class="btn btn-default" style="margin:0px;"  type="submit" onclick="return store_subscriber_validate1('<?php echo $this->storeurl;?>');">Join</button>
                     </div>
+                        </div>
                 </div>
 
             </div>
