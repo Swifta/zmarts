@@ -746,6 +746,7 @@ class Products_Controller extends Layout_Controller
 
 	public function productcompare()
 	{
+            $this->is_first = false;
 	    $this->is_product_compare = 1;
 		$this->template->title = $this->Lang["PRODUCT_COMPARE"]." | ".SITENAME;
 		$this->title_display = $this->Lang["PRODUCT_COMPARE"];
@@ -896,7 +897,7 @@ class Products_Controller extends Layout_Controller
 
 	public function wishlist()
 	{
-		
+		$this->is_first = false;
                 if(!$this->UserID){
                         url::redirect(PATH);
                 }

@@ -29,7 +29,7 @@ class Payment_product_Controller extends Layout_Controller {
 			$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
 		}
 		$this->template->javascript .= html::script(array(PATH.'themes/'.THEME_NAME.'/js/buy.js',PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'));
-		
+		$this->is_first = false;
 	}
 
 	/** PRODUCTS USER SIGNUP **/
@@ -261,6 +261,7 @@ class Payment_product_Controller extends Layout_Controller {
 
 	public function cart_products_item()
 	{
+            $this->is_first = false;
 	     if($this->UserID){
 	        $this->payment = new Payment_Model();
 	        $this->get_cart_products_list = $this->payment_products->get_cart_products();
@@ -276,7 +277,7 @@ class Payment_product_Controller extends Layout_Controller {
 
 	public function cart_checkout_item()
 	{
-		
+            $this->is_first = false;
 		if(!$this->UserID){
 			url::redirect(PATH."prodicts/cart.html");
 		}
