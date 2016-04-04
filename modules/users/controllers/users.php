@@ -40,6 +40,8 @@ class Users_Controller extends Layout_Controller {
 			$this->template->style .= html::stylesheet(array(PATH.'themes/'.THEME_NAME.'/css/style.css',PATH.'themes/'.THEME_NAME.'/css/multi_style.css'));
 		}*/
 		}
+                
+                $this->is_first = false;
 	}
 
         public function twitter(){

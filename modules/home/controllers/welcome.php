@@ -51,7 +51,7 @@ class Welcome_Controller extends Layout_Controller
         
         /** PAGE NOT FOUND **/
         public function not_found(){
-            $this->is_auction = true;
+            $this->is_first = false;
 		$this->template->title = "PAGE NOT FOUND | ".SITENAME; 
 		$this->template->content = new View("themes/".THEME_NAME."/404_page");
         }
