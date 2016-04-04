@@ -9,7 +9,7 @@
 				$('#id_err_phone').text('Invalid Phone Number. Enter your phone number (e.g. 070...,080...)');
 				return false;
 			}else if(status == "-1"){
-				$('#id_err_phone').text('Invalid initial digits. Begin with 07, or 08.');
+				$('#id_err_phone').text('Invalid initial digits. Begin with 070, or 080.');
 				return false;
 			} else{
 				
@@ -108,7 +108,7 @@
                         <label><?php echo $this->Lang['STATE']; ?> :<span class="form_star">*</span> </label>
                         <div class="fullname">
                             <select name="city"  id="ship_city_p1" tabindex="6" class="CityPAY required">
-                            <option value="-99">Select state</option>
+                            <option value="">Select state</option>
                             <?php if($this->session->get('shipping_city')){ ?>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>                                
                                     <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) {
@@ -210,9 +210,9 @@
         <div class="payment_terms_outer"><?php /*<p class="terms-conditons-text" id="terms1"> <span class="fl font_myriad_pro"><?php echo $this->Lang['BY_CLICK1']; ?> </span> <a onclick="show_dis_tc();" title="<?php echo $this->Lang['TEMRS']; ?>" tabindex="11" class="font_myriad_pro mt5"><?php echo $this->Lang['TEMRS']; ?>.</a></p>*/ ?> </div> 
     </div>
     
-    <script type="application/javascript">
+    <!--<script type="application/javascript">
 	$(document).ready(function(e) {
 		city_change_payment("25");
     });
-</script>
+</script>-->
 
