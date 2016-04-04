@@ -270,7 +270,7 @@ header nav > ul > li ul li a{display: block;}
     *-*-*-*BAR *-*-*-*
 ****************************************************************************/
 .title-bar { height: 109px; line-height: 109px; background: url("images/banner.png") no-repeat; margin-bottom: 18px; border:1px solid #d4d4d4;}
-.title-bar h1 {background:rgba(71,71,71,0.7);vertical-align: middle; position: relative; padding: 10px 20px; color: #ffffff; display: inline-block;}
+.title-bar h1 {background:rgba(71,71,71,0.7);vertical-align: middle; position: relative; padding: 0px 20px; color: #ffffff; display: inline-block;}
 
 .sorting-bar { margin-bottom: 18px; border:1px solid #d4d4d4; background: #f9f9f9 url("images/header-bg.png") bottom repeat-x; height: 48px; border-bottom: 1px solid #d6d6d6; }
 
