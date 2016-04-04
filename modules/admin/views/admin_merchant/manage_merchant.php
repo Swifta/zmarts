@@ -192,7 +192,7 @@
                 <tr>    
                         <td align="left"><?php echo $i+$first_item; ?></td>
                         <td align="left"><a href="<?php echo PATH; ?>admin/merchant-details/<?php echo base64_encode($u->user_id); ?>.html"><?php echo ucfirst(htmlspecialchars($u->firstname)); ?></a></td>
-                        <td align="left"><?php echo $u->email; ?></td>
+                        <td align="left" class="tooltips" title="X Y Z"><?php echo $u->email; ?></td>
                         <td align="left"><?php echo htmlspecialchars($u->store_name);?></td>		
                         <td align="left"><?php foreach($this->city_list as $c){ if($c->city_id == $u->city_id){ echo ucfirst(htmlspecialchars($c->city_name));}  }?></td>
                         <td align="left"><?php echo date('d-M-Y h:i:s A',$u->joined_date);?></td>
@@ -313,10 +313,13 @@
 </div>
     <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
 </div>
-<div id="dialog" title="View Merchant's Admin Events Log" style="display:none;">
-    <div id="dialog_content" style="margin:5px auto; width:100%; text-align:center;">Please wait ....... </div>
+<div id="dialog" title="View Merchant's Admin Events Log" style="display:none;height:50px;overflow:auto;">
+    <div id="dialog_content" style="margin:5px auto; width:100%;height:300px;overflow:auto; text-align:center;">Please wait ....... </div>
 </div>
+<link rel="stylesheet" type="text/css" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" />
+<script type="text/javascript" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
   <script>
+  
   $(function() {
     $( "#dialog" ).dialog({
         width: 500,
@@ -326,6 +329,7 @@
         duration: 1000
       }
     });
+    
   });
   var merchant_id = "";
   function viewAuditEvent(m_id){
@@ -352,4 +356,8 @@
     xmlhttp.send(params);
     $("#dialog_content").html(xmlhttp.responseText); 
   }
+  
+  $(function() {
+      $('.tooltips').powerTip();
+  });
   </script>

@@ -13,7 +13,7 @@ class Soldout_Model extends Model
 			@Live
 		*/
 		
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = 'and for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = ' and for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition_arr = true:$this->club_condition_arr = false;
 	}
 	
@@ -55,7 +55,7 @@ class Soldout_Model extends Model
 	public function get_soldproducts_list($cityid="",$store_id="")
 	{
 		
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = 'and product.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
+                                                                            (strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition = ' and product.for_store_cred = '.$_SESSION['Club'].' ':$this->club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->club_condition_arr = true:$this->club_condition_arr = false;
 		
 		if(CITY_SETTING){ 

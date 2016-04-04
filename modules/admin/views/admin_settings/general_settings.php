@@ -68,7 +68,11 @@
                         <em><?php if(isset($this->form_error["language"])){ echo $this->form_error["language"]; }?></em>
                    </td>
                 </tr>
-
+                <tr>
+                    <td><label>Send *Email* Error Logs</label></td>
+                    <td><label>:</label></td>
+                    <td><input type="checkbox" name="error_logs" value="1" <?php if(SEND_ERROR_LOG){echo "checked";}?>/></td>
+                </tr>
                 <tr>
                     <td></td>
                     <td></td>

@@ -238,7 +238,7 @@ smaller than 1024
 .advertice_part img{max-width:100%;}
 .htop_navicon,.htop_navicon1{background: url(../../images/new/res.png) no-repeat;height:20px;display: inline-block;font:bold 12px/24px arial;color:#fff;margin-top: 2px;width:20px;}
 .header_top_right ul.htop_nav{display: none;position: absolute;width:200px;padding:5px;background: #f3f3f3;z-index: 1;top:26px;right: 0;}
-.header_top_left ul.htop_nav1{display: none;position: absolute;width:200px;padding:5px;background: #f3f3f3;z-index: 1;top:26px;left: 0;}
+.header_top_left ul.htop_nav1{display: none;position: absolute;width:200px;padding:5px;background: #ededed;z-index: 1;top:26px;left: 0;}
 .htop_nav ul,.htop_nav1 ul{width:100%;}
 .htop_nav li,.htop_nav1 li{width:100%;padding:0;border-top:1px solid #BBBBBB;}
 .header_top_right .htop_nav li,.header_top_left ul.htop_nav1 li{padding:5px 0;}

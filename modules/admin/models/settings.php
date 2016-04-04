@@ -71,7 +71,8 @@ class Settings_Model extends Model
 	
 	public function update_general_settings($post = "")
 	{
-		$status = $this->db->update("settings",array("site_name" => $post->name, "meta_keywords" => $post->keywords, "meta_description" => $post->description , "title" => $post->title , "theme" => $post->theme, "default_language" => $post->language), array("id" => 1));
+		$status = $this->db->update("settings",array("site_name" => $post->name, "meta_keywords" => $post->keywords, "meta_description" => $post->description , "title" => $post->title , "theme" => $post->theme, 
+                    "default_language" => $post->language, "send_error_log"=>@$post->error_logs), array("id" => 1));
 		return 1;
 	}
 

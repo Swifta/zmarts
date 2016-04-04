@@ -21,24 +21,24 @@ class Home_Model extends Model
 		*/
 		
 		//PRODUCT club conditioning
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->product_club_condition = 'and product.for_store_cred = '.$_SESSION['Club'].' ':$this->product_club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->product_club_condition = ' and product.for_store_cred = '.$_SESSION['Club'].' ':$this->product_club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->product_club_condition_arr = true:$this->product_club_condition_arr = false;
 		
 		//DEAL club contioning
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->deal_club_condition = 'and deals.for_store_cred = '.$_SESSION['Club'].' ':$this->deal_club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->deal_club_condition = ' and deals.for_store_cred = '.$_SESSION['Club'].' ':$this->deal_club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->deal_club_condition_arr = true:$this->deal_club_condition_arr = false;
 		
 		//AUCTION club conditioning
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition = 'and auction.for_store_cred = '.$_SESSION['Club'].' ':$this->auction_club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition = ' and auction.for_store_cred = '.$_SESSION['Club'].' ':$this->auction_club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition_arr = true:$this->auction_club_condition_arr = false;
 		
 		
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = ' product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
 		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
 		
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = 'product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = ' product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
 		
-		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = 'product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = ' product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
 		
 		
 		
@@ -1570,7 +1570,7 @@ class Home_Model extends Model
 	
 	public function get_search_all_category_list($search = "")
 	{
-	        $conditions = " and category_name like '%".mysql_escape_string($search)."%'";
+	        $conditions = " and category_name like '%".  strip_tags(addslashes($search))."%'";
 	        //$qry = "select * from category where category_status = 1  $conditions order by category_name ASC ";
 		$result  = $this->db->select()
                         ->from("category")

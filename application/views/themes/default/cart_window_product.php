@@ -2,7 +2,7 @@
 
         <?php 
         $shipping_amount=0;
-
+        $this->cart_window_product_details = array();
 
         foreach ($_SESSION as $key => $value) {
                 if ((is_string($value)) && ($key == 'product_cart_id' . $value)) {
