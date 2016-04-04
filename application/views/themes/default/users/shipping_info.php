@@ -109,7 +109,9 @@
                                                                 <option value="">Select state</option>
     <?php foreach ($this->all_city_list as $c) { ?>
                 <?php if ($c->country_id == $u->ship_country) { ?>
-                                                                    <option  <?php if ($c->city_id == $u->ship_city) { ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
+                                                                    <option  <?php if ($c->city_id == $u->ship_city) {
+																		$state = $u->ship_city;
+																		 ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
     <?php } } ?>
                                                             </select> </div>
                                                         <em><?php if (isset($this->form_error['city'])) {
@@ -132,13 +134,15 @@
                                                    <li class="right">
                                                         <label><?php echo $this->Lang['COUNTRY']; ?><span>*</span></label>
                                                         <div class="fullname">
-                                                            <select name="country" id="country" onchange="return city_change_merchant(this.value);">
+                                                           <!-- <select name="country" id="country" onchange="return city_change_merchant(this.value);">
                                                               
     <?php foreach ($this->country_list as $c) { ?>
                                                                 
                                                                     <option <?php if ($c->country_id == $u->ship_country) { ?> selected <?php } ?>  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
     <?php } ?>
-                                                            </select> 
+                                                            </select>--> 
+                                                            <input type="text" readonly value="Nigeria">
+                                                            <input name="country" type="hidden" value="25" />
                                                         </div>
                                                         <em><?php if (isset($this->form_error['country'])) {
         echo $this->form_error["country"];
@@ -284,4 +288,11 @@ var adjustMenu = function() {
 }
 
 
+</script>
+
+<script>
+$(document).ready(function(e) {
+    $('#CitySD_Signup').val(1);
+	alert(1111);
+});
 </script>

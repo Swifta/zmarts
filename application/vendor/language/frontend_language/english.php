@@ -996,7 +996,7 @@ $content_text = array(
 
 "SELECT_Y_COUNTRY" => "Select your country",
 
-"COUNTRY_FIRST" => "Select your country first",
+"COUNTRY_FIRST" => "Select state",
 
 "PLS_SEL_COUNTRY" => "Please select your country",
 

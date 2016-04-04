@@ -115,6 +115,7 @@
                                                                 <?php } ?>
                                                                 </select>
                                                                 <select name="city" tabindex="5" class="CityPAY_new required">
+                                                                <option value="">Select state</option>
                                                                 <?php 
                                                                 foreach($this->all_city_list as $CityL){ ?>
                                                                 <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'Selected="true"'; } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>

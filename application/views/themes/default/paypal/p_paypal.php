@@ -144,7 +144,7 @@
                         <label><?php echo $this->Lang['SEL_CITY']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname">
                             <select name="city"  id="ship_city_p1" class="CityPAY required">
-                            <option value="-99"><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
+                            <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>
                                     <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) {
                                         echo 'Selected="true"';
@@ -155,6 +155,7 @@
                             <select name="city"  class="CityPAY_new required">
                                 <?php  foreach ($this->all_city_list as $CityL) {
                                     ?>
+                                     <option value="">Select state</option>
                                     <option <?php
                                     if ($CityL->city_id == $this->session->get('shipping_city')) {
                                         echo 'Selected="true"';
