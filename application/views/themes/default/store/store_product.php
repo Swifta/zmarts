@@ -141,7 +141,7 @@ $(".slidetabs").tabs(".images > div", {
             </div>
         </div>
     </div>
-</div>
+</div> 
             
             
 <section  id="messagedisplay1" style="display:none;">      

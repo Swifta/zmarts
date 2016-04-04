@@ -217,7 +217,7 @@
 										<a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
                                   </div>  <?php } ?>
         <?php } ?>
-    <?php } ?>
+    <?php } ?> 
                      <div class="clearfix">
                 <?php if (count($this->banner_details) > 0) {   ?>
                 <?php if(count($this->banner_details) != 1) {   ?>                         

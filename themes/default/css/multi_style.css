@@ -52,7 +52,7 @@ smaller than 1024
 /* Header start */
 .logo h1,.logo h1 a{width: 100%;}
 .logo h1 a img{max-width: 100%;}
-.merchant_log{width: 17%;}
+.merchant_log{width: 17%;} 
 .search_new_common{width:62%;}
 .sub input[type="submit"]{padding: 0;width: 100%;}
 .header_top_left,.header_top_right{width:auto;position:relative;margin-top:3px;}

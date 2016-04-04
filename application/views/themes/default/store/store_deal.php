@@ -52,7 +52,7 @@ $(".slidetabs").tabs(".images > div", {
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 </div>
 <!-- BAR -->
 
