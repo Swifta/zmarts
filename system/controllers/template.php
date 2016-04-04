@@ -87,7 +87,9 @@ abstract class Template_Controller extends Controller {
 				if($this->session->get("theme")){
 					define('THEME_NAME', $this->session->get("theme"));
 				} else {
-                                    define('THEME_NAME', $s->theme);
+                                    if(!defined('THEME_NAME')){
+                                        define('THEME_NAME', $s->theme);
+                                    }
 				}
 
 				define('SITENAME', $s->site_name);
