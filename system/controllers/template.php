@@ -85,12 +85,18 @@ abstract class Template_Controller extends Controller {
 			foreach($this->generalSettings as $s){
 
 				if($this->session->get("theme")){
-					define('THEME_NAME', $this->session->get("theme"));
+                                    if(!defined('THEME_NAME')){
+                                        define('THEME_NAME', $this->session->get("theme"));
+                                    }
 				} else {
-                                    define('THEME_NAME', $s->theme);
+                                    if(!defined('THEME_NAME')){
+                                        define('THEME_NAME', $s->theme);
+                                    }
 				}
-
-				define('SITENAME', $s->site_name);
+                                
+                                if(!defined('SITENAME')){
+                                    define('SITENAME', $s->site_name);
+                                }
 				define('THEME',PATH."themes/".THEME_NAME."/");
 				define('DEFAULT_LANGUAGE', $s->default_language); 
 				define('SITE_TITLE', $s->title);

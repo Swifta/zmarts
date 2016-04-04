@@ -115,7 +115,7 @@ foreach ($this->deals_deatils as $deals) {
 
 <!-- BAR -->
 <div class="bar-wrap">
-    <div class="container">
+    <div class="con">
         <div class="row">
             <div class="span12">
                 <div class="title-bar">
@@ -138,7 +138,7 @@ foreach ($this->deals_deatils as $deals) {
 </div>
 <!-- BAR -->
 
-    <div class="container">
+    <div class="con">
         <div class="row">
             <div class="span12">
                 

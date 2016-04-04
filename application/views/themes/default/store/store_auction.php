@@ -38,7 +38,7 @@ $(".slidetabs").tabs(".images > div", {
     });
 </script>
 <div class="wrapper">
-    <div class="container">
+    <div class="con">
         <div class="row ">
             
 
@@ -63,7 +63,7 @@ $(".slidetabs").tabs(".images > div", {
                                 ?>
 <!-- BAR -->
 <div class="bar-wrap">
-    <div class="container">
+    <div class="con">
         <div class="row">
             <div class="span12">
                 <div class="title-bar">
@@ -88,7 +88,7 @@ $(".slidetabs").tabs(".images > div", {
 //				}	 
 ?>
 <div class="product_wrap">
-    <div class="container">
+    <div class="con">
         <div class="row">
             <div class="span10">
                 <div class=" clearfix">
@@ -101,7 +101,7 @@ $(".slidetabs").tabs(".images > div", {
         <div id="loading">
         <?php if (($this->pagination) != "") { ?>
                     <div class="feature_viewmore text-center">
-                            <div class="fea_view_more text-center">                                                
+                            <div class="fea_view_more text-center">                                                 
                                     <a class="view_more view_more1 view_more_but">
                                             <span class="view_more_icon">- - -</span><?php echo $this->Lang['SEE_M_AUC']; ?><span class="view_more_icon">- - -</span>
                                     </a> 

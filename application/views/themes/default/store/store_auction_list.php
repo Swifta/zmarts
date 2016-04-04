@@ -100,7 +100,7 @@ $avg_rating = round($avg_rating); ?>
                 </div>
             </div>
         </div>
-
+ 
     </div>
 
 			<?php 

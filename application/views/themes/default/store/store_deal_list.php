@@ -238,7 +238,7 @@ else{
                 </h4>
                         <div class="ratings text-center">
         <?php 
-        $avg_rating = $deals_categories->avg_rating;
+        $avg_rating = $deals_categories->avg_rating; 
         if($avg_rating!=''){
         $avg_rating = round($avg_rating); ?>
         <img style="margin:0px auto; text-align: center;" alt="" src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/new/star_<?php echo $avg_rating;?>.png"/>
