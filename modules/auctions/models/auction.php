@@ -14,7 +14,7 @@ class Auction_Model extends Model
 			@Live
 		*/
 		
-		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition = 'and auction.for_store_cred = '.$_SESSION['Club'].' ':$this->auction_club_condition = '';
+		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition = ' and auction.for_store_cred = '.$_SESSION['Club'].' ':$this->auction_club_condition = '';
 		(strcmp($_SESSION['Club'], '0') == 0)?$this->auction_club_condition_arr = true:$this->auction_club_condition_arr = false;
 	}
 	
@@ -1252,7 +1252,10 @@ class Auction_Model extends Model
 	public function get_store_id($storeurl="") 
 	{ 
 			$result = $this->db->select("store_id")->from("stores")->where(array("store_url_title"=>$storeurl))->get();
-			return $result->current()->store_id;
+			if(count($result) == 0){
+                            return 0;
+                        }
+                        return $result->current()->store_id;
 	}
 
 	public function get_theme_name($store_id=''){

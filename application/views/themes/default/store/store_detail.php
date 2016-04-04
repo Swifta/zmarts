@@ -38,12 +38,12 @@ $(".slidetabs").tabs(".images > div", {
 </script>
 
 
-<div class="wrapper">
-    <div class="container">
+<div class="wrapper main_wrap_body">
+    <div class="con">
         <div class="row ">
 
             <!-- SLIDER -->
-            <div class="span10 slider">
+            <div class="span9 slider">
                 <div class="slider-slides">
 <?php
 $font_color = "";
@@ -71,26 +71,44 @@ if(count($this->merchant_personalised_details)>0) {
                                 
                             }
 ?>
-<div class="slides">                                                                               
+                    
+<div class="slides">
+  <a href="<?php echo $banner_link; ?>">
+      <img src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" alt="<?php echo $this->Lang['LOGO']; ?>">
+  </a>
+</div>   
+                                         
+                    
+<!--<div class="slides">                                                                               
     <a href="<?php echo $banner_link; ?>"  title="<?php echo $banner_link; ?>">
         <img alt="<?php echo $this->Lang['LOGO']; ?>" src="<?php echo PATH; ?>images/merchant/banner/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_banner.png'; ?>" 
              data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat" />
     </a>
-</div>
+</div>-->
 <?php
                     }
                     else{
                         //echo "No Image file";
 ?>
+<div class="slides">
+  <a href="#"><img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/<?php echo $i; ?>.jpg" alt="">
+  </a>
+</div> 
+
+
+<!--
                 <div class="slides">
                         <img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/<?php echo $i; ?>.jpg" alt="" />
-                </div>
+                </div>-->
 <?php
                     }
                 }
         }
 }
 else{?>
+
+
+
 
     <div class="slides">
         <img src="<?php echo PATH; ?>bootstrap/themes/images/<?php echo $this->theme_name; ?>/banners/1.jpg" alt="" />
@@ -113,65 +131,33 @@ else{?>
 </div>
 <!-- SLIDER -->
 
-            <!-- SPECIAL-OFFER -->
-            <div class="span2">
-            <?php 
-            $ads_check = "";
-        //    if(count($this->merchant_personalised_details)>0) { 
-	//foreach($this->merchant_personalised_details as $m) {
-		/*  ?>        
-		<?php for ($i = 1; $i <= 1; $i++) { ?>
-		<?php if (file_exists(DOCROOT . 'images/merchant/ads/' . $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png')) {
-											$ads_link="";
-											if($m->ads_1_link !="" || $m->ads_2_link !="" || $m->ads_3_link !="") {  $ads_check = 1;
-											if($i==1) { $ads_link = $m->ads_1_link; } else if($i==2) { $ads_link = $m->ads_2_link; } else if($i==3) { $ads_link = $m->ads_3_link; } } ?>
-                <div class="offers">
-                    <figure>
-                            <a class="img-caption" href="<?php echo $ads_link; ?>" title="<?php echo $ads_link; ?>">
-                              <img alt="" src="<?php echo PATH; ?>images/merchant/ads/<?php echo $m->storeid.'_'.$m->sector_name.'_'.$i.'_ads.png'; ?>"/>
-                            </a>
-                    </figure>
-                </div>
-                    <?php }else{?>
-                <div class="offers">
-                    <figure>
-				<img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/ads/<?php echo $i; ?>.jpg" alt="" />
-			</figure>
-                </div>
-                    <?php }} */?> 
- <?php if (count($this->ads_details) > 0) { ?>   
-        <?php foreach ($this->ads_details as $ads) { ?>    
-    <?php if ($ads->ads_position == "hr1" && $ads->page_position==1) {  ?>                     
-      <div class="banner_right_add wloader_parent">
-          <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
-                                                     <a   href="<?php echo $ads->redirect_url; ?>" target="_blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
-                                                    <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
-      </div>
- <?php } } }?>
-                <div class='clearfix' ></div>
- <?php if (count($this->ads_details) > 0) { ?>   
-    <?php foreach ($this->ads_details as $ads) {
-          if($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
- <div class="banner_right_add2 wloader_parent" style='margin-top: 25px'>
-              <i class="wloader_img" style="min-height:250px;">&nbsp;</i>
-                                                         <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
-                                                        <?php /*<iframe src='http://www.flipkart.com/affiliate/displayWidget?affrid=WRID-138286787903644940' frameborder=0 height=250 width=300></iframe>  */ ?>
-          </div>
- <?php } } } ?>                
- <?php /* if (count($this->ads_details) > 0) { ?>   
+            
+                            <!-- SPECIAL-OFFER -->
+                            <div class="span3">
+                                 <?php 
+                                    $ads_check = "";
+                                 ?> 
+                                <?php if (count($this->ads_details) > 0) { ?>   
                                     <?php foreach ($this->ads_details as $ads) { ?>    
-            <?php if ($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>   
-    <figure>
-        <a href="<?php echo $ads->redirect_url; ?>" target="blank" title="<?php echo ucfirst($ads->ads_title); ?>"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
-    </figure>
- <?php }}} */ ?>
-                
-                
-                
-            <?php // } } ?>
+                                <?php if ($ads->ads_position == "hr1" && $ads->page_position==1) {  ?>  
+                                <div class="offers">
+                                    <figure>
+                                        <a href="<?php echo $ads->redirect_url; ?>" title="<?php echo ucfirst($ads->ads_title); ?>" target="_blank"><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " alt=""></a>
+                                    </figure>
+                                </div>
+                                <?php } } }?>
 
-            </div>
-            <!-- SPECIAL-OFFER -->
+                                 <?php if (count($this->ads_details) > 0) { ?>   
+                                <?php foreach ($this->ads_details as $ads) {
+                                if($ads->ads_position == "hr2" && $ads->page_position==1) {  ?>  
+                                <div class="offers">
+                                    <figure>
+                                        <a href="<?php echo $ads->redirect_url; ?>" target="_blank" title="<?php echo ucfirst($ads->ads_title); ?>" alt=""><img src="<?php echo PATH; ?>images/ad_image/<?php echo $ads->ads_id; ?>.png " /></a>
+                                    </figure>
+                                </div>
+                                 <?php } } } ?>  
+                            </div>
+                            <!-- SPECIAL-OFFER -->
 
         </div>
     </div>
@@ -179,7 +165,7 @@ else{?>
 
 <!-- PRODUCT-OFFER -->
 <div class="product_wrap">
-    <div class="container">
+    <div class="con">
         <div class="row heading-wrap">
             <div class="span12 heading">
                 <h2>Best Seller <span></span></h2>
@@ -323,7 +309,7 @@ else{
 
 <!-- DEALS -->
 <div class="product_wrap">
-    <div class="container">
+    <div class="con">
         <div class="row heading-wrap">
             <div class="span12 heading">
                 <h2>Related Deals <span></span></h2>
@@ -455,7 +441,7 @@ $avg_rating = round($avg_rating); ?>
 
 <!-- AUCTION -->
 <div class="product_wrap">
-    <div class="container">
+    <div class="con">
         <div class="row heading-wrap">
             <div class="span12 heading">
                 <h2>Related Auction <span></span></h2>
@@ -580,7 +566,7 @@ $avg_rating = round($avg_rating); ?>
 
 <section  id="messagedisplay1" style="display:none;">      
     <div class="session_wrap">
-        <div class="session_container">
+        <div class="session_con">
             <div class="success_session">
                 <p><span ><?php echo $this->Lang['COMM_POST_SUCC']; ?>.</span></p>
                 <div class="close_session_2">
@@ -594,7 +580,7 @@ $avg_rating = round($avg_rating); ?>
 
 <!-- CATEGORIES -->
 <div class="categories-wrap">
-    <div class="container">
+    <div class="con">
         <div class="row">
 
             <div class="span4">
@@ -685,7 +671,7 @@ $avg_rating = round($avg_rating); ?>
 <div class="clearfix" style="margin-top: 10px;"></div>
 <!-- BRANCHES -->
 <div class="clients-wrap">
-    <div class="container">
+    <div class="con">
         <div class="row heading-wrap">
             <div class="span12 heading">
                 <h2><?php echo $this->Lang['BRANCHES']; ?><span></span></h2>

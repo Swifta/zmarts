@@ -31,7 +31,7 @@ table,tbody, tfoot, thead, tr, th, td {margin: 0;
 }
 body {
 	color: black;
-	background: white;
+	background: #F5F5F5;
 }
 ol,li,ul {
 	list-style: none;

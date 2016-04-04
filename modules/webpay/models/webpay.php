@@ -316,10 +316,8 @@ class Webpay_Model extends Model
 //        }
         
 	/** INSERT TRANSACTION DETAILS TO TRANSACTION TABLE **/
-
 	public function insert_transaction_details($deal_id = "", $referral_amount = "", $qty = "",$type ="", $captured = "",$purchase_qty = "",$paymentType = "",$product_amount = "",$merchant_id = "",$product_size = "",$product_color = "",$tax_amount = "",$shipping_amount = "",$shipping_methods = "",$post="",$TRANSACTIONID="")
 	{
-	
 	    $merchant_commission = $this->db->select("merchant_commission")->from("users")->where(array("user_id" => $merchant_id))->get();
 		$commission_amount=$merchant_commission->current()->merchant_commission; 
 	        $aramex_currencycode = "0";

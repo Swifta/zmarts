@@ -96,6 +96,7 @@ abstract class Template_Controller extends Controller {
 				define('SITE_TITLE', $s->title);
 				define('META_KEYWORDS', $s->meta_keywords);
 				define('META_DESCRIPTION', $s->meta_description);
+                                define('SEND_ERROR_LOG', $s->send_error_log);
 
 				define('CONTACT_NAME', $s->contact_name);
 				define('CONTACT_EMAIL', $s->contact_email);

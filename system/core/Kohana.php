@@ -855,6 +855,10 @@ final class Kohana {
 	 */
 	public static function exception_handler($exception, $message = NULL, $file = NULL, $line = NULL)
 	{
+                //handle the error here
+                $content_of_log = "Type :: ".$exception."<br />Message :: ".
+                        $message."<br />File :: ".$file."<br />Line :: ".$line;
+                Kohana::log("debug", $content_of_log);
 		try
 		{
 			// PHP errors have 5 args, always
@@ -881,9 +885,10 @@ final class Kohana {
 				$message  = $exception->getMessage();
 				$file     = $exception->getFile();
 				$line     = $exception->getLine();
+
 				$template = ($exception instanceof Kohana_Exception) ? $exception->getTemplate() : 'kohana_error_page';
 			}
-	
+                                                        
 			if (is_numeric($code))
 			{
 				$codes = self::lang('errors');
@@ -898,6 +903,7 @@ final class Kohana {
 					$error = $PHP_ERROR ? 'Unknown Error' : get_class($exception);
 					$description = '';
 				}
+                                
 			}
 			else
 			{
@@ -914,9 +920,19 @@ final class Kohana {
 			if ($level <= self::$configuration['core']['log_threshold'])
 			{
 				// Log the error
-				self::log('error', self::lang('core.uncaught_exception', $type, $message, $file, $line));
+				//self::log('error', self::lang('core.uncaught_exception', $type, $message, $file, $line));
+                        
+                //echo $content_of_log; die;
+                if(SEND_ERROR_LOG){
+                    //then send it as email
+                    $email_address = array("smustafa@swifta.com", "aonasile@swifta.com");
+                    foreach($email_address as $email){
+                        email::smtp("error@zmart.com.ng",$email, "[Zmart] Error Occurrence" ,$content_of_log);
+                    }
+                }
+                //                      
 			}
-	
+                        
 			if ($PHP_ERROR)
 			{
 				$description = self::lang('errors.'.E_RECOVERABLE_ERROR);
@@ -973,7 +989,7 @@ final class Kohana {
 				// Run the shutdown even to ensure a clean exit
 				Event::run('system.shutdown');
 			}
-	
+
 			// Turn off error reporting
 			error_reporting(0);
 			exit;

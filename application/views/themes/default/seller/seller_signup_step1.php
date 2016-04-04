@@ -1,13 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />-->
 <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/reset.css" />
 
 <!--<script type="text/javascript" src="<?php echo PATH;?>js/popup/js/jquery-1.11.0.min.js"></script>-->
 
 <script type="text/javascript" src="<?php echo PATH;?>js/Popup/js/jquery.leanModal.min.js" ></script>
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />-->
 <link type="text/css" rel="stylesheet" href="<?php echo PATH;?>js/Popup/css/style.css" />
     <!-- Bootstrap core CSS -->
 <!--<link rel="stylesheet" href="<?php echo PATH; ?>css/netdna-bootstrap.css" />-->
@@ -118,22 +118,23 @@ document.forms[0][0].focus();
 }
 
     #htext{
-        color:#A61C00;
+        color:#000;
+        font-weight:500;
         font-size:24px;
         margin-top:25px;
-        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+        font-family:"Arial", 'Helvetica Neue, Helvetica', sans-serif !important;
     }
     
     .sell_title{
         font-size:17px;
         color:#616769 !important;
         margin: 10px 0px 5px;
-        font-family:"Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif !important;
+        font-family:"Arial", 'Helvetica Neue, Helvetica', sans-serif !important;
         font-weight: 500 !important;
     }
 
     .sell_text{
-        font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif;
+        font-family: "Arial", 'Helvetica Neue, Helvetica', sans-serif;
         font-size:14px;
         color:#616769 !important;
     } 
@@ -488,7 +489,7 @@ input[type=text],input[type=password]{
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+-->  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  <!--  <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'>-->
  <!-- SELLER SIGNUP -->
     <div class="contianer_outer">
@@ -529,6 +530,7 @@ input[type=text],input[type=password]{
                             <img style="width:100%" src="<?php echo PATH; ?>custom/images/WelcomeToZmart.png"></img>
                             
                         
+
            <div style="background-color: #FFFBEF; border-left:5px solid #A61C00; border-top:1px solid #A61C00;border-bottom:1px solid #A61C00; border-right:5px solid #A61C00; min-height:30px; padding:5px 5px 8px;">
                         
                         <div class="row">
@@ -567,18 +569,20 @@ input[type=text],input[type=password]{
 
                             <div class="row" style="margin-top:20px;">
                                 <div class="col-sm-4 col-md-4 col-lg-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:bold; ">Sell More, Earn More</h4>
-                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/pla.png" class="img-circle" alt="Cinque Terre"> <p class="sell_text" style="text-align:  justify;  margin-top:10px;">Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
+                                    <img style="" height="100" width="100" src="<?php echo PATH; ?>custom/images/earn_more.png" class="" alt="Cinque Terre"> <p class="sell_text" style="text-align:  center;  margin-top:10px;">Zmart comes with a built-in customer base, leveraging the over 3 million high quality customers of Zenith Bank spread across every state in Nigeria.</p></div>
                                 <div class="col-sm-4 col-md-4 col-lg-4 bdr_bottom_mobile" style="background-color:#fff; ">  <h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Contacting buyers is a breeze</h4>
-                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/breeze.png" class="img-circle" alt="Cinque Terre"><p class="sell_text" style="text-align:  justify; margin-top:10px;">Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
+                                    <img style=""  height="100" width="100"  src="<?php echo PATH; ?>custom/images/location.png" class="" alt="Cinque Terre"><p class="sell_text" style="text-align:  center; margin-top:10px;">Communication between you and your buyers is crucial and we have made it easy to exchange messages with buyers who may need to contact you.</p> </div>
                                 <div class="col-sm-4 col-md-4 col-lg bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Low transaction fees</h4>
-                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/lowtrans.png" class="img-circle" alt="Cinque Terre"><p class="sell_text" style="text-align:  justify;margin-top:10px;">Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
+                                    <img style=""  height="100" width="100"  src="<?php echo PATH; ?>custom/images/low_cost.png" class="" alt="Cinque Terre"><p class="sell_text" style="text-align:  center;margin-top:10px;">Transaction fees are as low as 1.5%, and you are only charged when you actually make a successful sale and collect payment on the site.</p> </div>
                             </div>
 
                             <div class="row" style="margin-top:15px;">
                                 <div class="col-sm-4 col-md-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">Dedicated Support 24/7</h4>
-                                    <img style="border:1px solid #E6E9EB;" src="<?php echo PATH; ?>custom/images/supports.png" class="img-circle" alt="Cinque Terre"> <p class="sell_text" style="text-align:  justify;margin-top:10px;">Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
-                                <div class="col-sm-4 col-md-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">You decide everything</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/whyusezmart-01n.png" class="img-circle" alt="Cinque Terre" ><p class="sell_text" style="text-align:justify;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
-                                <div class="col-sm-4 col-md-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4><img style="border:1px solid #ccc;" src="<?php echo PATH; ?>custom/images/secure.png" class="img-circle" alt="Cinque Terre" > <p class="sell_text" style=" text-align:  justify;margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
+                                    <img style=""  height="100" width="100"  src="<?php echo PATH; ?>custom/images/customer_care.png" class="img-" alt="customer care "> <p class="sell_text" style="text-align:center; margin-top:10px;">Zmart provides a dedicated merchant support team to ensure you have all the help you need to make a success of your store on Zmart.</p>  </div>
+                                <div class="col-sm-4 col-md-4 bdr_bottom_mobile" style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">You decide everything</h4>
+                                    <img style=""  height="100" width="100"  src="<?php echo PATH; ?>custom/images/decision.png" class="" alt="Cinque Terre" ><p class="sell_text" style="text-align:center;margin-top:10px;" >Everything is in your control: your pricing, what payment methods to accept, your return policy, how your goods are delivered, and other important decisions.</p> </div>
+                                <div class="col-sm-4 col-md-4 " style="background-color:#fff;"><h4 class="sell_title" style="color:#60532f;font-weight:  bold; ">It's bank-secure</h4>
+                                    <img style=""  height="100" width="100"  src="<?php echo PATH; ?>custom/images/secured.png" class="" alt="Cinque Terre" > <p class="sell_text" style="text-align:center; margin-top:10px;">Zmart is among the safest and most trusted platforms to buy and sell online in Nigeria. Safety and security are huge priorities for both buyers and sellers and  we have put in place stringent measures to ensure our community is safe and secure.</p></div>
                             </div>
                         </div>               
                             <br>
@@ -753,7 +757,7 @@ input[type=text],input[type=password]{
                             <div class="row disclaimerform" >
                                 <div class="col-md-12"  style="margin-bottom:30px;">
                                      <div class="text-center">
-                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/ZenithLogo.png"/></h1>
+                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/zenithLogo.png"/></h1>
                                         <h2>PLEASE NOTE</h2>
                                         <div>
                                             <p>YOU REQUIRE A ZENITH BANK CORPORATE ACCOUNT TO REGISTER AS A MERCHANT ON ZMART 
@@ -789,7 +793,7 @@ input[type=text],input[type=password]{
                             <div class="row disclaimerform" >
                                 <div class="col-md-12"  style="margin-bottom:30px;">
                                      <div class="text-center">
-                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/ZenithLogo.png"/></h1>
+                                        <h1><img width="60px" height="60px" src="<?php echo PATH; ?>custom/images/zenithLogo.png"/></h1>
                                         <h2>VERIFICATION FAILED</h2>
                                         <div>
                                             <p>Please try again . . .<br></p>
@@ -2094,7 +2098,7 @@ closeOnCancel: false},
 
 </script>
 
-<script src="<?php echo PATH;?>js/netdna-bootstrap.js"></script>
+<!--<script src="<?php echo PATH;?>js/netdna-bootstrap.js"></script>-->
 <!--
 <link rel="stylesheet" href="<?php echo PATH;?>css/netdna-bootstrap.css" />
 <link rel="stylesheet" href="<?php echo PATH;?>themes/default/css/style.css" />

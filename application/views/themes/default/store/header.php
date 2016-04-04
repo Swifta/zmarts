@@ -327,26 +327,26 @@ $this->language_List = str_replace(".php", "", $DL);
 												</div>
 <div class="bottom_header near_map_hdr" style="margin-bottom: 15px">
     <div class="header_inner">
-<ul class="head_menu head_menu1 bold"  style="margin-left:-27px;">                                                                                                                                    
+<ul class="head_menu head_menu1 bold">                                                                                                                                    
     <li class="orange_bg" <?php
 		if (isset($this->is_home)) {
 			echo "class='active'";
 		}
 		?>>
            
-		<a class="hmenu" href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"> <span class="home_icon"></span><?php echo $this->Lang['HOME']; ?>
+		<a class="hmenu" href="<?php echo PATH.$this->storeurl; ?>" title="<?php echo $this->Lang['HOME']; ?>"> <?php echo $this->Lang['HOME']; ?>
 		</a>
 	</li>
 <?php if ($this->product_setting) {  ?>
-		<li class="<?php if (isset($this->is_product)) echo "active"; ?> yellow_bg">
+		<li class="<?php if (isset($this->is_product)) echo "active"; ?> orange_bg">
                     
-                    <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/products.html" <?php }else{?> href="<?php echo PATH; ?>products.html" <?php }?> title="<?php echo $this->Lang['PRODUCTS']; ?>"><span class="product_icon"></span><?php echo $this->Lang['PRODUCTS']; ?>
+                    <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/products.html" <?php }else{?> href="<?php echo PATH; ?>products.html" <?php }?> title="<?php echo $this->Lang['PRODUCTS']; ?>"><?php echo $this->Lang['PRODUCTS']; ?>
 
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
                     <i class="hover_icon">&nbsp;</i>
 			<div class="cate_menu head_cate_menu">
-				<b><?php echo $this->Lang['SHOP_BY_CATE']; ?></b>
+<!--				<b><?php echo $this->Lang['SHOP_BY_CATE']; ?></b>-->
 				<ul>
 					<?php
 					foreach ($this->categeory_list_product as $d) {
@@ -387,13 +387,13 @@ $this->language_List = str_replace(".php", "", $DL);
 		<li class="<?php if (isset($this->is_todaydeals)) echo "active"; ?> orange_bg">
                     
                     <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?>  href="<?php echo PATH.$this->storeurl; ?>/today-deals.html" <?php }else{?> href="<?php echo PATH; ?>today-deals.html" <?php }?> title="<?php echo $this->Lang['DEALS']; ?>">
-                        <span class="deal_menu_icon"></span>
+<!--                        <span class="deal_menu_icon"></span>-->
 			<?php echo $this->Lang['DEALS']; ?>
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
                         <i class="hover_icon">&nbsp;</i>
 			<div class="cate_menu head_cate_menu">
-				<b><?php echo $this->Lang['SHOP_BY_CATE']; ?></b>
+<!--				<b><?php echo $this->Lang['SHOP_BY_CATE']; ?></b>-->
 				<ul>
 					<?php
 					foreach ($this->categeory_list_deal as $d) {
@@ -425,15 +425,15 @@ $this->language_List = str_replace(".php", "", $DL);
 			</li>
 <?php } ?>
 <?php if ($this->auction_setting) { ?>
-<li class="<?php if (isset($this->is_auction)) echo "active"; ?> yellow_bg">    
+<li class="<?php if (isset($this->is_auction)) echo "active"; ?> orange_bg">    
     <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/auction.html" <?php }else{?> href="<?php echo PATH; ?>auction.html" <?php }?> title="<?php echo $this->Lang['AUCTION']; ?>">
-        <span class="auction_menu_icon"></span>
+<!--        <span class="auction_menu_icon"></span>-->
         <?php echo $this->Lang['AUCTION']; ?>
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
                 <i class="hover_icon">&nbsp;</i>
 			<div class="cate_menu head_cate_menu">
-				<b><?php echo $this->Lang['SHOP_BY_CATE']; ?></b>
+<!--				<b><?php echo $this->Lang['SHOP_BY_CATE']; ?></b>-->
 				<ul>
 					<?php
 					foreach ($this->categeory_list_auction as $d) {
@@ -474,7 +474,7 @@ $this->language_List = str_replace(".php", "", $DL);
 			}
 			?>>                    
 			<a   class="hmenu" href="<?php echo PATH; ?>soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>">
-                            <span class="soldout_menu_icon"></span>
+<!--                            <span class="soldout_menu_icon"></span>-->
 				<?php echo $this->Lang['SOLD_OUT2']; ?>
 			</a>
 
@@ -482,25 +482,25 @@ $this->language_List = str_replace(".php", "", $DL);
 	<?php } ?>
 
 	<?php if ($this->store_setting) { ?>
-                <li class="yellow_bg" <?php
+                <li class="orange_bg" <?php
 			if (isset($this->is_store)) {
 				echo "class='active'";
 			}
 			?>>                    
 			<a  class="hmenu" href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">
-                            <span class="store_menu_icon"></span>
+<!--                            <span class="store_menu_icon"></span>-->
 				<?php echo $this->Lang['STORES']; ?>
 			</a></li>
 	<?php } ?>
 
 	<?php if (($this->deal_setting == 1 || $this->product_setting == 1 || $this->auction_setting == 1 ) && $this->map_setting) { ?>
-                        <li class="green_bg" <?php
+                        <li class="orange_bg" <?php
 			if (isset($this->is_map)) {
 				echo "class='active'";
 			}
 			?>>                    
 			<a class="hmenu" href="<?php echo PATH; ?>near-map.html" title="<?php echo $this->Lang['NEAR_MAP']; ?>">
-                            <span class="near_map_menu_icon"></span>
+<!--                            <span class="near_map_menu_icon"></span>-->
 				<?php echo $this->Lang['NEAR_MAP']; ?>
 			</a>
 
@@ -856,7 +856,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 				        ?>>
                                         
 				        <a class="hmenu" href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>">
-                                            <span class="home_icon"></span>
+<!--                                            <span class="home_icon"></span>-->
                                             <?php echo $this->Lang['HOME']; ?>
 				        </a>
 
@@ -864,10 +864,10 @@ $srch = $this->Lang['SRCH_DEAL'];
 
         <?php if ($this->product_setting) { ?>
 
-        <li class="<?php if (isset($this->is_product)) echo "active"; ?> yellow_bg"> 
+        <li class="<?php if (isset($this->is_product)) echo "active"; ?> orange_bg"> 
             
             <a class="hmenu" href="<?php echo PATH; ?>products.html" title="<?php echo $this->Lang['PRODUCTS']; ?>">
-                <span class="product_icon"></span>
+<!--                <span class="product_icon"></span>-->
                     <?php echo $this->Lang['PRODUCTS']; ?>
         </a>
         <?php $pr = 0; $pro = 0; $val_pro ="";
@@ -932,7 +932,7 @@ $srch = $this->Lang['SRCH_DEAL'];
         <?php if ($this->deal_setting) { ?>
         <li class="<?php if (isset($this->is_todaydeals)) echo "active"; ?> orange_bg">            
             <a class="hmenu" href="<?php echo PATH; ?>today-deals.html" title="<?php echo $this->Lang['DEALS']; ?>">
-                <span class="deal_menu_icon"></span>
+<!--                <span class="deal_menu_icon"></span>-->
 	        <?php echo $this->Lang['DEALS']; ?>
                 
         </a>
@@ -998,9 +998,9 @@ $srch = $this->Lang['SRCH_DEAL'];
         <?php } ?>
 
         <?php if ($this->auction_setting) { ?>
-        <li class="<?php if (isset($this->is_auction)) echo "active"; ?> yellow_bg">            
+        <li class="<?php if (isset($this->is_auction)) echo "active"; ?> orange_bg">            
             <a class="hmenu" href="<?php echo PATH; ?>auction.html" title="<?php echo $this->Lang['AUCTION']; ?>">
-                <span class="auction_menu_icon"></span>
+<!--                <span class="auction_menu_icon"></span>-->
         <?php echo $this->Lang['AUCTION']; ?>
         </a>
         <?php $au = 0; $aut = 0; $val = "";
@@ -1068,7 +1068,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 		        }
 		        ?>>                    
 		        <a   class="hmenu" href="<?php echo PATH; ?>soldout.html" title=" <?php echo $this->Lang['SOLD_OUT2']; ?>">
-                            <span class="soldout_menu_icon"></span>
+<!--                            <span class="soldout_menu_icon"></span>-->
 			        <?php echo $this->Lang['SOLD_OUT2']; ?>
 		        </a>
 	        </li>
@@ -1082,7 +1082,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 		        ?>>
                     
 		        <a  class="hmenu" href="<?php echo PATH; ?>stores.html" title="<?php echo $this->Lang['STORES']; ?>">
-                            <span class="store_menu_icon"></span>
+<!--                            <span class="store_menu_icon"></span>-->
 			        <?php echo $this->Lang['STORES']; ?>
 		        </a></li>
         <?php } ?>
@@ -1094,7 +1094,7 @@ $srch = $this->Lang['SRCH_DEAL'];
 		        ?>>
                     
 		        <a class="hmenu" href="<?php echo PATH; ?>near-map.html" title="<?php echo $this->Lang['NEAR_MAP']; ?>">
-                            <span class="near_map_menu_icon"></span>
+<!--                            <span class="near_map_menu_icon"></span>-->
 			        <?php echo $this->Lang['NEAR_MAP']; ?>
 		        </a>
 	        </li>
@@ -1148,7 +1148,6 @@ $srch = $this->Lang['SRCH_DEAL'];
 <div class='popup_block3_0'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_verify_account_popup'); ?></div>
 <div class='popup_block3_1'><?php echo new View("themes/" . THEME_NAME . '/users/zenith_open_account_popup'); ?></div>
 <div class='popup_block4'><?php echo new View("themes/" . THEME_NAME . '/users/fb_popup'); ?></div>
-
 <link rel="stylesheet" href="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/css/sweetalert.css" type="text/css" /> 
 <script src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/js/sweetalert.min.js"></script>
 <script>

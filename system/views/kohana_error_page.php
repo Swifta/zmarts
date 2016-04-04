@@ -6,21 +6,17 @@
 <?php include Kohana::find_file('views', 'kohana_errors', FALSE, 'css') ?>
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title><?php echo $error ?></title>
-<base href="http://php.net/" />
+<title>Application Error</title>
 </head>
 <body>
-<div id="framework_error" style="width:42em;margin:20px auto;">
-<h3><?php echo html::specialchars($error) ?></h3>
-<p><?php echo html::specialchars($description) ?></p>
-<?php if ( ! empty($line) AND ! empty($file)): ?>
-<p><?php echo Kohana::lang('core.error_file_line', $file, $line) ?></p>
-<?php endif ?>
-<p><code class="block"><?php echo $message ?></code></p>
-<?php if ( ! empty($trace)): ?>
-<h3><?php echo Kohana::lang('core.stack_trace') ?></h3>
-<?php endif ?>
-<p class="stats"><?php echo Kohana::lang('core.stats_footer') ?></p>
+<div id="framework_error" style="width:42em;margin:20px auto; padding-top:20px; text-align: center;">
+    <img src="<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/logo.png" />
+<h3>The platform just encountered an application error</h3>
+<p>The error has been captured and logged appropriately.</p>
+<p>Please, try again later.</p>
+<p style="font-size:89%;">If this error persists, contact 
+        <a href="mailto:<?php echo CONTACT_EMAIL;?>"><?php echo CONTACT_EMAIL;?></a></p>
+<h3><a style="color:white;" href="javascript:window.history.back();">click here to go back</a></h3>
 </div>
 </body>
 </html>

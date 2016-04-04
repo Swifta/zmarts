@@ -111,7 +111,16 @@
                                     $cat1 = array_unique($cat);
                                     ?>
 
-                                        <?php if(count($this->categeory_list_product)>0){  foreach ($this->categeory_list_product as $d) {
+                                        <?php if(count($this->categeory_list_product)>0){  
+                                            $count_category = 1;
+                                            foreach ($this->categeory_list_product as $d) {
+                                                if($count_category == 8){
+                                                    ?>
+<li><a href="<?php echo PATH; ?>shop-all-category.html" title="<?php echo $this->Lang['SHOP_AL']; ?>">Others</li>
+                                                    <?php
+                                                    break;
+                                                }
+                                                $count_category++;
                                         $check_sub_cat = $d->product_count;
                                          /*   COUNT OF SUBCATEGORY   */
                                         //$subcate_count = common::get_subcat_count1($d->category_id,$d->type);
@@ -236,7 +245,7 @@
 										 
                                          <a  href="<?php echo $banner->redirect_url;	 ?>"  title = "<?php echo $banner->image_title; ?>" target="_blank">
                                          
-                                           <img src="<?php echo PATH . 'images/banner_images/' . $banner->banner_id . '.png'; ?>" alt="<?php echo $banner->image_title; ?>">
+                                           <img src="<?php echo PATH . 'custom/images/banner.jpg'; ?>" alt="<?php echo $banner->image_title; ?>">
                                          </a>
                                          
                                          
