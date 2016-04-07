@@ -91,7 +91,7 @@ if(count($this->merchant_personalised_details)>0) {
                         //echo "No Image file";
 ?>
 <div class="slides">
-  <a href="#"><img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/<?php echo $i; ?>.jpg" alt="">
+  <a href="#"><img src="<?php echo PATH; ?>bootstrap/themes/images/entertainment2/banners/<?php echo $i; ?>.png" alt="">
   </a>
 </div> 
 
