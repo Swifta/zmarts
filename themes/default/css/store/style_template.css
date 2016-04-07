@@ -184,7 +184,7 @@ header nav > ul > li ul li a{display: block;}
 
 
 .offers { margin-bottom: 30px; }
-.offers figure a{ width: 270px; height: 171px;  display: block; }
+.offers figure a{ width: 270px; height: 171px;  display: block; } 
 .offers figure a img{ width: 100%; height: 100%;  }
 
 .offers figure  { position: relative; }
