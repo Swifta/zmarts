@@ -63,7 +63,7 @@ foreach ($this->product_deatils as $products) {
 
 <!-- BAR -->
 <div class="bar-wrap">
-    <div class="container">
+    <div class="con">
         <div class="row">
             <div class="span12">
                 <div class="title-bar">
@@ -89,7 +89,7 @@ foreach ($this->product_deatils as $products) {
     <!-- PRODUCT-OFFER -->
     <div class="product_wrap">
 
-        <div class="container">
+        <div class="con">
             <div class="row">
                 <div class="span12">
                 <div  id="messagedisplay1" style="display:none;">

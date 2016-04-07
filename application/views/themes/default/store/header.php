@@ -73,7 +73,7 @@ $this->language_List = str_replace(".php", "", $DL);
                                                     <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px">Sell on Zmart</b></a></li>
                                                     
                                                     <li class="mnav_dnone">|</li>
-								<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+								<li class="wel_txt"><span style="color:black;"><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 								<li class="mnav_dnone">|</li>
 								<li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
 								<li class="mnav_dnone">|</li>
@@ -217,7 +217,7 @@ $this->language_List = str_replace(".php", "", $DL);
                         $ajax_type = 5; // userd in auto suggestion search
                         $srch = $this->Lang['SRCH_STR_DET'];
                         ?>
-                        <form id="myform" action="<?php echo $url; ?>stores/<?php echo $this->uri->segment(2) . "/" . $this->uri->segment(3); ?>">
+                        <form id="myform" action="<?php echo $url; ?>/<?php echo $this->uri->segment(2) . "/" . $this->uri->segment(3); ?>">
                         <?php
                         } elseif (isset($this->is_store)) {
                         $ajax_type = 4; // userd in auto suggestion search
@@ -570,7 +570,7 @@ if ($lan != LANGUAGE) {
 <?php if ($this->session->get('UserID')) { ?>
     <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px">Sell on Zmart</b></a></li>
     <li class="mnav_dnone">|</li>
-	<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+	<li class="wel_txt"><span style="color:black;"><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 	<li class="mnav_dnone">|</li>
 	<li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
 	<li class="mnav_dnone">|</li>
@@ -720,7 +720,7 @@ $srch = $this->Lang['SRCH_PRD'];
 $ajax_type = 5; // userd in auto suggestion search
 $srch = $this->Lang['SRCH_STR_DET'];
 ?>
-<form id="myform" action="<?php echo PATH; ?>stores/<?php echo $this->uri->segment(2) . "/" . $this->uri->segment(3); ?>">
+<form id="myform" action="<?php echo PATH; ?><?php echo $this->uri->segment(2) . "/" . $this->uri->segment(3); ?>">
 <?php
 } elseif (isset($this->is_store)) {
 $ajax_type = 4; // userd in auto suggestion search

@@ -33,8 +33,15 @@ $this->language_List = str_replace(".php", "", $DL);
         });
     });
 </script>
+<?php
+if(!isset($this->is_first)){
+    $this->is_first = true;
+}
+?>
 <!--[if IE]><script src="<?php echo PATH; ?>js/html5.js" type="text/javascript"></script><![endif]-->
-<?php if (($this->uri->last_segment() == "near-map.html") || ($this->uri->last_segment() == "nearmap.html") || (isset($this->is_blog)) || (isset($this->is_cms)) || (isset($this->is_store)) || (isset($this->sold)) || (isset($this->is_seller)) || (isset($this->is_details))) { ?>
+<?php if (($this->uri->last_segment() == "near-map.html") || ($this->uri->last_segment() == "nearmap.html") || (isset($this->is_blog)) || (isset($this->is_cms)) ||
+        (isset($this->is_store)) || (isset($this->sold)) || (isset($this->is_seller)) ||
+        (isset($this->is_details)) || (!$this->is_first)) { ?>
     <?php ?>
     <!--header start-->
     <header>
@@ -86,7 +93,7 @@ $this->language_List = str_replace(".php", "", $DL);
                                             <a class="toggleMenu htop_navicon" href="#" title="Menu">&nbsp;</a>
 						<ul class="htop_nav">
 							<?php if ($this->session->get('UserID')) { ?>
-								<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+								<li class="wel_txt"><span style="color:black;"><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 								<li class="mnav_dnone">|</li>
 								<li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
 								<li class="mnav_dnone">|</li>
@@ -604,7 +611,7 @@ if ($lan != LANGUAGE) {
 <?php if ($this->session->get('UserID')) { ?>
     <li><a id="" href="<?php echo PATH . 'merchant-signup-step1.html'; ?>" title="Sell on Zmart"><b style="font: 15px/29px  ">Sell on <?php echo SITENAME; ?></b></a></li>
     <li class="mnav_dnone">|</li>
-	<li class="wel_txt"><span><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
+	<li class="wel_txt"><span style="color:black;"><?php echo $this->Lang['WELCOME']; ?> </span> <a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->session->get('UserName'); if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?>"><b class="wel_usr"><?php echo $this->session->get('UserName');  if($this->session->get('user_auto_key')) { echo "(".$this->session->get('user_auto_key').")"; } ?></b></a></li>                                                                
 	<li class="mnav_dnone">|</li>
 	<li><a href="<?php echo PATH; ?>users/my-account.html" title="<?php echo $this->Lang['MY_ACC']; ?>"><?php echo $this->Lang['MY_ACC']; ?></a> </li>
 	<li class="mnav_dnone">|</li>

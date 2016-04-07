@@ -366,6 +366,8 @@
                                 </select>
                                 
                                  <select name="shipping_city" class="CityPAY_new required">
+                                 
+                                  <option value="">Select state</option>
                                     <?php foreach ($this->all_city_list as $CityL) { ?>
                                                                         <option <?php
                                        if ($CityL->city_id == $this->session->get('shipping_city')) {
