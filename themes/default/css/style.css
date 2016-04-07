@@ -2423,7 +2423,7 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .sub_list_ad_part img{display: inline-block;}
 .cate_menu li:hover .sub_cate_list_show{display: block;}
 .main_cate_lft{float: left;width:630px;}
-.main_cate_rgt{float: right;width: 214px;text-align: center;overflow: hidden;}
+.main_cate_rgt{float: right;width: 212px;text-align: center;overflow: hidden;}
 .main_cate_rgt img{display: inline-block;}
 
 
