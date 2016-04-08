@@ -1552,7 +1552,7 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
     box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;
 }
 
-@media only screen and (min-width: 1360px) {
+@media only screen and (min-width: 1340px) {
     .near_map_hdr .head_menu1{ margin-left:94px !important;}
 }
 
