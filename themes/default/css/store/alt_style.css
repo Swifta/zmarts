@@ -9,10 +9,8 @@
 @import url('css/prettyPhoto.css');
 @import url('../reset.css');
 
-.redbox{
-    background-color:red;
-    color:blue;
-}
+/* Large desktops and laptops */
+
 
 /*LAYOUT CSS*/
 a{text-decoration: none;}
@@ -1552,4 +1550,8 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 }
 .fullname select{display: block;width:233px; padding: 6px 8px; color:#000; font:normal 12px arial;border: 1px solid #d9d9d9;
     box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;
+}
+
+@media only screen and (min-width: 1200px) {
+    .near_map_hdr .head_menu1{ margin-left:94px !important;}
 }
