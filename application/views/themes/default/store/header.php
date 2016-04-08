@@ -326,7 +326,7 @@ $this->language_List = str_replace(".php", "", $DL);
 												</div>
 												</div>
 <div class="bottom_header near_map_hdr" style="margin-bottom: 15px">
-    <div class="header_inner">
+    <div class="">
 <ul class="head_menu head_menu1 bold">                                                                                                                                    
     <li class="orange_bg" <?php
 		if (isset($this->is_home)) {

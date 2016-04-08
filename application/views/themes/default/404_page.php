@@ -8,7 +8,7 @@
 <div class="" style="margin:0px auto;">
     
     
-    <img style="margin:10px 32%; text-align: center;" src="<?php echo PATH; ?>bootstrap/themes/images/pagenotfound.jpg" 
+    <img style="margin:10px 32%; text-align: center;" src="<?php echo PATH; ?>bootstrap/themes/images/error404.png" 
          alt="page_not_found" class="img_responsive"/>
     
     
