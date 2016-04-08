@@ -346,7 +346,7 @@ if(!isset($this->is_first)){
 												</div>
 <!--header2            -->
 <div class="bottom_header2 near_map_hdr2">
-    <div class="header_inner">
+    <div class="">
 <ul class=" head_menu2">                                                                                                                                    
     <li class="orange_bg" <?php
 		if (isset($this->is_home)) {
