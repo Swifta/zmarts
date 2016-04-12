@@ -679,17 +679,18 @@ float:left; width:24px; text-align: center; font:normal 12px/18px arial;color:#0
 
 /*NO DEALS CITY*/
 .subscribe_right{width:800px;float:right;}
-.content_deals_top{display: block;border:1px solid #dfdfdf; padding:10px; position:relative;}
-.subscribe_bg{background: url(../images/new/city_rgt_img.png) no-repeat;display: block;height:370px;padding:5px;}
-.deals_under_bg{float:left; width:100%;height:40px;background-color:#A61C00;background: rgba(255, 155, 2, 0.8); margin:59px 0 0}
-.deals_under_bg p{float:left; width:100%;  text-shadow: 0 -2px 2px #000000;text-align:center;  font:normal 18px/42px arial; color:#FFF; padding:0 0 0 0;}
-.content_deals_midd{float:left; width:100%; margin:50px 0 0; background-color:#fff; background: rgba(255,255,255,0.9);}
-.content_deals_midd span{display: block; font:normal 14px/25px arial; color:#A61C00; padding:10px 0 0; text-align:center;}
+.content_deals_top{display: block; padding:10px; position:relative;} 
+.subscribe_bg{display: block;height:370px;padding:5px;background:url(../images/new/auction_bg.png) no-repeat}
+.deals_under_bg{float:left; width:100%;height:40px;background: rgba(255,255,255,0.4); border:1px solid #f9b004;margin:59px 0 0}
+.deals_under_bg p{float:left; width:100%;text-align:center;  font:normal 18px/42px arial; color:#000; padding:0 0 0 0;}
+.content_deals_midd{float:left; width:100%;}
+.content_deals_midd span{display: block; font:normal 24px/25px arial; color:#444444; padding:10px 0 0; text-align:center;}
 .subscribe_frm{float:left; width:96%; padding:15px 2%; text-align: center;}
 .subscribe_frm .fullname{width:250px;display: inline-block;vertical-align: top;text-align: left;}
+.subscribe_frm>select {width:500px; color:red;}
 .deal_sub_button{display: inline-block;width:auto;vertical-align: top;}
 .deal_already{float:left; width:100%; padding:5px 0 12px 0; text-align: center;}
-.deal_already a{ width:auto; text-align:center;  font:bold  13px arial; color:#A61C00; display: inline-block;}
+.deal_already a{ width:auto; text-align:center;  font:13px arial; color:#9b9b9b; display: inline-block;}
 .deal_already a:hover{text-decoration:underline;}
 .deal_already p{display: block;text-align:center; font:normal 12px arial; color:#666; padding:12px 0 0 ;}
 .deal_sub_button input.sign_submit{padding:7px 10px;}
@@ -1933,11 +1934,11 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 
 
 .fullname{display: block;padding:0px 0 5px; }
-.fullname input[type=text],.fullname input[type=password],.fullname textarea{border: 1px solid #d9d9d9;font:normal 12px arial;  width:220px;color:#000;  padding: 7px;
-    box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;
+.fullname input[type=text],.fullname input[type=password],.fullname textarea{border: 1px solid #ededed;font:normal 12px arial;  width:220px;color:#000;  padding: 7px;
+    background: #fff;
 }
-.fullname select{display: block;width:233px; padding: 6px 8px; color:#000; font:normal 12px arial;border: 1px solid #d9d9d9;
-    box-shadow: 1px 1px 1px 0 #EEEEEE inset;-moz-box-shadow: 1px 1px 1px 0 #EEEEEE inset;-webkit-box-shadow: 1px 1px 1px 0 #EEEEEE inset;background: #fff;
+.fullname select{display: block; height:30px; width:233px; padding: 6px 8px; color:#000; font:normal 12px arial;border: 1px solid #ededed;
+    background: #fff;
 }
 
 .security_code_outer{ display: block; width:250px;}
@@ -2017,7 +2018,7 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 .forget_link{font:normal 13px arial;color:#144F5D;text-decoration: underline;}
 .forget_link:hover{color:#E71C3B;} .forget_link:focus{color:#E71C3B;}
 input.sign_submit{    
-    background:#A61C00;
+    background:#c12102;
     -webkit-border-radius:3px;
     border-radius:3px;
     border:0;
@@ -2027,7 +2028,7 @@ input.sign_submit{
     padding:7px 10px;
     text-transform: capitalize;
 }
-input.sign_submit:hover{cursor: pointer;background: #144F5D;}
+input.sign_submit:hover{cursor: pointer;background: #A61C00;}
 .email_subcription{margin:20px 0 0;}
 .signup_social_block{float:left;width:280px;padding:50px 20px;text-align: center;}
 .new_user_signup .signup_social_block{width:90%;padding:10px 5% 5px;}
