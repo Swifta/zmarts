@@ -2529,3 +2529,11 @@ transition: all 0.4s ease;-webkit-transition: all 0.4s ease;-o-transition: all 0
 
 .chatpopup {display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
 .offlinechatpopup{display:none;float: left; font-size: 1.2em; position: fixed; top: 5%; left:50%; z-index: 101;width:630px;margin:0 0 0 -315px;}
+
+@media only screen and (min-width: 1340px) {
+    .near_map_hdr2 .head_menu2{ margin-left:117px !important;}
+}
+
+@media only screen and (min-width: 2048px) {
+    .near_map_hdr2 .head_menu2{ margin-left:21.2% !important;} 
+} 
