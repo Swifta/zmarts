@@ -683,7 +683,7 @@ float:left; width:24px; text-align: center; font:normal 12px/18px arial;color:#0
 .subscribe_bg{display: block;height:370px;padding:5px;background:url(../images/new/auction_bg.png) no-repeat}
 .deals_under_bg{float:left; width:100%;height:40px;background: rgba(255,255,255,0.4); border:1px solid #f9b004;margin:59px 0 0}
 .deals_under_bg p{float:left; width:100%;text-align:center;  font:normal 18px/42px arial; color:#000; padding:0 0 0 0;}
-.content_deals_midd{float:left; width:100%;}
+.content_deals_midd{float:left; width:100%;} 
 .content_deals_midd span{display: block; font:normal 24px/25px arial; color:#444444; padding:10px 0 0; text-align:center;}
 .subscribe_frm{float:left; width:96%; padding:15px 2%; text-align: center;}
 .subscribe_frm .fullname{width:250px;display: inline-block;vertical-align: top;text-align: left;}
