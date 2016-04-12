@@ -293,6 +293,6 @@ var adjustMenu = function() {
 <script>
 $(document).ready(function(e) {
     $('#CitySD_Signup').val(1);
-	alert(1111);
+	//alert(1111);
 });
 </script>
