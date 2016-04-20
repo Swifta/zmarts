@@ -312,7 +312,6 @@ function validatesignup()
 	
 	
 	
-	
 	var atpos=email.indexOf("@");
 	var dotpos=email.lastIndexOf(".");
 	var unique_identifier = document.signup.unique_identifier.value;
@@ -324,8 +323,21 @@ function validatesignup()
 	if(fname == '' || email =='' || password == '' || cpassword == ''|| 
                 terms == 'false' || (atpos<1 || dotpos<atpos+2 || 
                 dotpos+2>=email.length) || city == '-99'|| city == ''
-                || email_confirm == '')
+                || email_confirm == '' || gender == '' || age_range == '')
 	{
+		if(gender == ''){
+			$('#gender_error').html("Please confirm your gender");
+		}
+		else {
+			$('#gender_error').html('');
+		}
+		if(age_range == ''){
+			$('#age_range_error').html("Please confirm your age range");
+		}
+		else {
+			$('#age_range_error').html('');
+		}
+            
 		if(fname == ''){
 			$('#fname_error').html("<?php echo $this->Lang['PLS_ENT_NAM']; ?>");
 		}
@@ -363,15 +375,8 @@ function validatesignup()
 			$('#country_error').html('');
 		}
 		
-		if(city == '-99'){
-			$('#city_error').html("<?php echo $this->Lang['PLS_SEL_COUNTRY_FIR']; ?>");
-		
-		}
-		else {
-			$('#city_error').html('');
-		}
-		if(city == ' '){
-			$('#city_error').html("<?php echo $this->Lang['PLS_SEL_COUNTRY_FIR']; ?>");
+		if(city == '-99' || city == ''){
+			$('#city_error').html("Please confirm your state");
 		
 		}
 		else {

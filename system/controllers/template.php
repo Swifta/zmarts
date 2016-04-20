@@ -97,7 +97,9 @@ abstract class Template_Controller extends Controller {
                                 if(!defined('SITENAME')){
                                     define('SITENAME', $s->site_name);
                                 }
-				define('THEME',PATH."themes/".THEME_NAME."/");
+                                if(!defined('THEME')){
+                                    define('THEME',PATH."themes/".THEME_NAME."/");
+                                }
 				define('DEFAULT_LANGUAGE', $s->default_language); 
 				define('SITE_TITLE', $s->title);
 				define('META_KEYWORDS', $s->meta_keywords);

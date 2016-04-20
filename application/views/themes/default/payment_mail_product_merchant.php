@@ -84,7 +84,7 @@ foreach($user_details as $U){
           </tr>
           <tr style="font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%">
             <td align="left" style="padding:10px;" >Buyer Name: </td>
-            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo ucfirst($customer_lastname);?>&nbsp;</td>
+            <td align="left"  style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo ucfirst($customer_lastname)." ".ucfirst($customer_firstname);?>&nbsp;</td>
             <td align="left" style="padding:10px" > Email: </td>
             <td align="left" style="padding:10px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo $customer_email; ?>&nbsp;</td>
             <td align="left"   style="padding:10px;">phone: </td>

@@ -46,6 +46,8 @@ class Welcome_Controller extends Layout_Controller
 		$this->Api_Version = "76.0";
 		$this->Api_Subject = $this->AUTH_token = $this->AUTH_signature = $this->AUTH_timestamp = '';
 		$this->template->javascript .= html::script(array(PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'));
+                
+                $this->is_first = false;
 	}
         
         

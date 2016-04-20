@@ -36,11 +36,11 @@ foreach ($this->all_products_list as $products) {
 <?php //echo substr(ucfirst(strip_tags($products->deal_description)), 0, 25) . ".."; ?>
                 <div class="new_price_details">
 					<?php if($products->deal_price!=0 && $products->deal_value < $products->deal_price) { ?>	
-						<p><?php echo $symbol . "" . $products->deal_price; ?> </p>
-						<span><?php echo $symbol . "" . $products->deal_value; ?></span>
+						<p><?php echo $symbol . "" . number_format($products->deal_price); ?> </p>
+						<span><?php echo $symbol . "" . number_format($products->deal_value); ?></span>
 					<?php } else  { ?>
 						<p></p>
-						<span><?php echo $symbol."".$products->deal_value; ?> </span>
+                                                <span><?php echo $symbol."".number_format($products->deal_value); ?> </span>
 					<?php } ?> 
                 </div>                
                 <?php /*<div class="product_view_detail">
