@@ -403,6 +403,14 @@ class Webpay_Model extends Model
 		$result = $this->db->from("users")->where(array("user_id" => $this->UserID))->get();
 		return $result;
 	}
+        
+	public function get_purchased_user_details_email_sending()
+	{
+		$result = $this->db->from("users")
+                        ->join("shipping_info", "shipping_info.user_id", "users.")
+                        ->where(array("user_id" => $this->UserID))->get();
+		return $result;
+	}
 	
 	/** UPDATE AMOUNT TO REFERED USER **/
 

@@ -18,11 +18,11 @@ $this->UserName = $this->session->get("UserName");
     $customer_email = "email";
     
 $customer_details = new Webpay_Model();
-$user_details = $customer_details->get_purchased_user_details();
+$user_details = $customer_details->get_purchased_user_details_email_sending();
 foreach($user_details as $U){
     $customer_firstname = $U->firstname;
     $customer_lastname = $U->lastname;
-    $customer_phone = $U->phone_number;
+    $customer_phone = $U->phone;
     $customer_email = $U->email;
 }
 

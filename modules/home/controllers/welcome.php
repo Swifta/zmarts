@@ -62,7 +62,7 @@ class Welcome_Controller extends Layout_Controller
 	
 	public function index($cityid = "")
 	{ 
-		
+		$this->is_first = true;
 		if(!$cityid){
 			$cityid = $this->city_id;
 		}
