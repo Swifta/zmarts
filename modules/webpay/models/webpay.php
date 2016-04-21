@@ -408,7 +408,7 @@ class Webpay_Model extends Model
 	{
 		$result = $this->db->from("users")
                         ->join("shipping_info", "shipping_info.user_id", "users.user_id")
-                        ->where(array("user_id" => $this->UserID))->get();
+                        ->where(array("users.user_id" => $this->UserID))->get();
 		return $result;
 	}
 	
