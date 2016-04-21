@@ -407,7 +407,7 @@ class Webpay_Model extends Model
 	public function get_purchased_user_details_email_sending()
 	{
 		$result = $this->db->from("users")
-                        ->join("shipping_info", "shipping_info.user_id", "users.")
+                        ->join("shipping_info", "shipping_info.user_id", "users.user_id")
                         ->where(array("user_id" => $this->UserID))->get();
 		return $result;
 	}
