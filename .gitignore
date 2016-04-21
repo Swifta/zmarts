@@ -17,6 +17,7 @@ modules/**/config/routes.php
 !modules/seller_registration/config/routes.php
 !modules/products/config/routes.php
 !modules/soldout/config/routes.php
+!modules/webpay/config/routes.php
 !modules/users/config/routes.php
 application/config/database.php
 application/logs/*

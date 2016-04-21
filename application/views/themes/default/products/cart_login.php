@@ -160,7 +160,7 @@
                                                             <p><?php echo text::limit_words(strip_tags($products->deal_description), 12, '&nbsp;'); ?></p>
                                                         </td>
             <?php $total_amount +=$products->deal_value; ?>
-                                                        <td><?php echo CURRENCY_SYMBOL . $products->deal_value; ?></td>	
+                                                        <td><?php echo CURRENCY_SYMBOL . number_format($products->deal_value); ?></td>	
 
                                                         <td align="center">
                                                     <?php /* for ajax  <a style="cousor:pointer;" onclick="remove_cart_item('<?php echo 'product_cart_id'.$value; ?>')" title="<?php echo $this->Lang['DELETE']; ?>">&nbsp;</a> */ ?>

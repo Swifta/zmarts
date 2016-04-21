@@ -360,7 +360,7 @@ if(!isset($this->is_first)){
 <?php if ($this->product_setting) {  ?>
 		<li class="<?php if (isset($this->is_product)) echo "active"; ?> orange_bg">
                     
-                    <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/products.html" <?php }else{?> href="<?php echo PATH; ?>products.html" <?php }?> title="<?php echo $this->Lang['PRODUCTS']; ?>"> <!-- <span class="product_icon"></span> --> <?php echo $this->Lang['PRODUCTS']; ?>
+                    <a class="hmenu" <?php if((isset($this->is_store_details) && $this->is_store_details==1) || isset($this->is_details)){?> href="<?php echo PATH.$this->storeurl; ?>/products.html" <?php }else{?> href="<?php echo PATH; ?>products.html" <?php }?> title="<?php echo $this->Lang['PRODUCTS']; ?>"> <?php echo $this->Lang['PRODUCTS']; ?>
 
 			</a>
 			<?php if(isset($this->is_store_details) && $this->is_store_details==1){?>
