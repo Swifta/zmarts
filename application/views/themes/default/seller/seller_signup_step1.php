@@ -537,7 +537,7 @@ input[type=text],input[type=password]{
                             
                               <form name="formName" method="post">
                             <div class="col-md-12">
-                                <h1 class="zenith_question">Do you have a zenith bank COPORATE account ?
+                                <h1 class="zenith_question">Do you have a zenith bank CORPORATE account ?
                                     <div class="breaker"></div>
                                         <span style="font-size:16px;"><input type="radio" name="Account_info_radio" id="radio1_yes" />&nbsp;<label for="radio1_yes" >Yes</label></span>
                                         <span style="font-size:16px;"><input type="radio" name="Account_info_radio" id="radio1_no" /> <label for="radio1_no"> No</label></span>
@@ -588,7 +588,7 @@ input[type=text],input[type=password]{
                             <br>
                             <p class="note_red">* Kindly note that you will be required to open a Corporate/Business Account with Zenith Bank to be registered</p>
                           
-                            <form name="formName" method="post"><p class="zenith_question">Do you have a zenith bank COPORATE account ? </p><p style="margin-left:10px;">
+                            <form name="formName" method="post"><p class="zenith_question">Do you have a zenith bank CORPORATE account ? </p><p style="margin-left:10px;">
                                  <input type="radio" name="priorityHigh" id="radio2_yes" />&nbsp;<label for="priorityHigh" >Yes</label>
                                 <input type="radio" name="priorityHigh" id="radio2_no"/> <label for="priorityLow"> No</label><br></p>
                                 <br>
