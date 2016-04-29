@@ -3695,11 +3695,11 @@ $content_text = array(
 
 			"ALL_STR" => "Already Exist Store Name",
 // Duration 
-			"DUR_MANAGE" => "Store Credit Duration ",
+			"DUR_MANAGE" => "Installmental Payment Duration ",
 			
-			"ADD_DUR" => "Add Store Credit Duration",
+			"ADD_DUR" => "Add Installmental Payment Duration",
 			
-			"MANAGE_DUR" => "Manage Store Credit Duration",
+			"MANAGE_DUR" => "Manage Installmental Payment Duration",
 			
 			"DUR_ADD_SUC" => "Duration added successfully!",
 			
@@ -3713,7 +3713,7 @@ $content_text = array(
 						
 			"DUR_UNB" => "Duration unblocked successfully",					
 			
-			"STR_CRD" => "Store Credit",
+			"STR_CRD" => "Installmental Payment",
 			
 			"NO_SHOP_CREDITS" => "No shop credits available",
 			
@@ -3759,9 +3759,9 @@ $content_text = array(
 			
 			"PAY_LATER" => "Pay Later",
 			
-			"PRD_STR_CRDS" =>"Products Store Credits",
+			"PRD_STR_CRDS" =>"Products Installmental Payments",
 			
-			"NO_STR_T_FOUND" => "No Store Credits Transaction Found",
+			"NO_STR_T_FOUND" => "No Installmental Payments Transaction Found",
 			
 			"APP_REJ" => "Approve/Rejected",
 
@@ -3830,7 +3830,7 @@ $content_text = array(
 			
 			"PRD_TYP" => "Product Type",	
 			
-			"STR_CRD_PRD" => "Store Credits Product",
+			"STR_CRD_PRD" => "Installmental Payments Product",
 			
 			"NOR_PRD" => "Normal Product",
 			
@@ -3904,7 +3904,7 @@ $content_text = array(
 			"FOOTER_CONTENT" => "Footer Content",
 
 
-			"STR_CRD_ORD" => "Store Credit Orders",
+			"STR_CRD_ORD" => "Installmental Payment Orders",
 			
 			"PEN_ORD" => "Pending Orders",
 			
@@ -3916,7 +3916,7 @@ $content_text = array(
 			
 			"PURCH_ORD" => "Purchased Orders",
 			
-			"STR_DOC" =>"Store Credit Documents",
+			"STR_DOC" =>"Installmental Payment Documents",
 			
 			"PURCHS" => "Purchased",
 			
@@ -3924,7 +3924,7 @@ $content_text = array(
 			
 			"MER_PRD_APPR_MSG" => " Your Storecredit request for the product is approved by the Merchant. You can Purchase the Product.",
 			
-			"STR_APPR_MAIL" => "Store Credit Approval ",	
+			"STR_APPR_MAIL" => "Installmental Payment Approval ",	
 			
 			"STA_CHG_SUCC" => "Status has been changed successfully",	
 			
@@ -3936,7 +3936,7 @@ $content_text = array(
 
 			"INST_DET" => "Installment Details",
 			
-			"STR_CRD" => "Store Credits",
+			"STR_CRD" => "Installmental Payments",
 			
 			"INSTL" => "Installment",
 			

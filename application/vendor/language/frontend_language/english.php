@@ -1620,11 +1620,11 @@ $content_text = array(
 
  "SECTOR" => "Sector",
 
-"SEL_STR_CRD" => "Select Store Credit",
+"SEL_STR_CRD" => "Select Installmental Payment",
 
 "MON" => "Months",
 
-"STR_CRD" => "Store Credits : ",
+"STR_CRD" => "Installmental Payments : ",
 
 "CONFIRM" => "Confirm",
 
@@ -1695,11 +1695,11 @@ $content_text = array(
 
 "CONTACT_US1" => "Contact us",
 
-"STR_CRDS" => "Store Credits ",
+"STR_CRDS" => "Installmental Payments ",
 
 "CUSTOMER_SERVICE" => "Customer Service",
 
-"STR_CRDS_PRDS" => "Store Credits Products",
+"STR_CRDS_PRDS" => "Installmental Payments Products",
 
 "YOU_CNT" => "You Can't access this page!",
 
@@ -1709,9 +1709,9 @@ $content_text = array(
 
 "MER_PRD_MSG" => "Please approve  the store credit product",
 
-"THANKS_CHOOS" => "Store Credit Request  ",
+"THANKS_CHOOS" => "Installmental Payment Request  ",
 
-"THANKS_APPR" => "Store Credit Request  ",
+"THANKS_APPR" => "Installmental Payment Request  ",
 
 "STR_CRD_APPR" => "NOTE: Stored credit transaction is awaiting for merchant approval ",
 
@@ -1864,7 +1864,7 @@ $content_text = array(
     
 "ENTER_ACCOUNT_NUMBER" => "ENTER YOUR NUBAN A/C NUMBER",
 
-"STORE_CRED" => "For Store Credit",
+"STORE_CRED" => "For Installmental Payment",
  
 "GLOBAL_PAY" => "Pay Online",    
     

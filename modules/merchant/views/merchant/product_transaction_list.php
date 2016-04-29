@@ -53,7 +53,7 @@ if(($this->uri->segment(2)=='view-products')){
                         <th align="left" >REF</th>
                         
 			<?php if(($this->uri->segment(2) == "view-deal")||($this->uri->segment(2) == "view-products")||($this->uri->last_segment() == "all-transaction.html")||($this->uri->segment(2) == "all-transaction")){  ?>			
-			<th align="left" ><?php echo $this->Lang["STATUS"]; ?></th> 
+			<th align="left" >Payment <?php echo $this->Lang["STATUS"]; ?></th> 
 			<?php } ?>
 			<th align="left" ><?php echo $this->Lang["TRANS_DATE"]; ?></th>
 			<th align="left" ><?php echo $this->Lang["TRANS_TYPE"]; ?></th>
