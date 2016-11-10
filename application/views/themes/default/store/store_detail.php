@@ -579,7 +579,7 @@ $avg_rating = round($avg_rating); ?>
 
 
 <!-- CATEGORIES -->
-<div class="categories-wrap">
+<div class="categories-wrap" style="display:none">
     <div class="con">
         <div class="row">
 
@@ -697,7 +697,7 @@ $avg_rating = round($avg_rating); ?>
                                             <a href="<?php echo PATH . $stores->store_url_title.'/'; ?>" title="<?php echo $stores->store_name; ?>"><img src="<?php echo PATH . 'resize.php'; ?>?src=<?php echo PATH; ?>themes/<?php echo THEME_NAME; ?>/images/noimage_stores_list.png&w=150&h=130"   alt="<?php echo $stores->store_name; ?>" title="<?php echo $stores->store_name; ?>" ></a>
 <?php } ?>                                                   
                                     </div>
-                                    <div class="branch_details">
+                                    <div class="branch_details" >
                                         <a style="font:bold <?php echo $font_size; ?>  arial;<?php echo $font_color; ?> " href="<?php echo PATH . $stores->store_url_title . '/'; ?>" title="<?php echo $stores->store_name; ?>"><?php echo substr(ucfirst($stores->store_name), 0, 100) ; ?></a>
                                         <p style="font:11px/15px arial;color:#666;"><?php echo substr($stores->about_us,0,150); ?></p>
                                         <!--<h3> <a title="<?php echo $stores->address1; ?>"><?php echo $stores->address1; ?></a></h3>-->                                                                                                                                                                                                                                                                                              

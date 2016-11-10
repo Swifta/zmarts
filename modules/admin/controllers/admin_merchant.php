@@ -54,11 +54,12 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('commission','required',array($this, 'valid_commision'),'chars[0-9]')
 						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						//->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
+						->add_rules('store_email', 'required','valid::email',array($this, 'email_available'))
 						->add_rules('username', 'required');
 						
-						if(isset($_POST['store_email'])){
+						/*if(isset($_POST['store_email'])){
 							$post->add_rules('store_email', array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
-						}
+						}*/
 						if(isset($_POST['sector']) && $post->sector!=0)
 						{
 							$post->add_rules('subsector', 'required');
@@ -67,7 +68,7 @@ class Admin_merchant_Controller extends website_Controller {
 					{
 						$pswd = text::random($type = 'alnum', $length = 8);
 						$store_key = text::random($type = 'alnum', $length = 8);
-						$store_admin_password = text::random($type = 'alnum', $length = 10);
+						$store_admin_password = text::random($type = 'alnum', $length = 8);
 						$storename = $this->input->post('storename');
 						
 						
@@ -103,7 +104,10 @@ class Admin_merchant_Controller extends website_Controller {
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been successfully created.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['email']."</a></p> 
 				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
-				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p></div>";
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p>
+				<p> You will also be required to review and accept the terms and condition..</p
+				<p>Thanks,</p>
+				<p>--<a style = \"text-decoration: none; color: #666;\" href = \"".PATH."\">ZMART</a></p></div>";
 				
 									if($_FILES['image']['name'])
 									{
@@ -200,7 +204,17 @@ class Admin_merchant_Controller extends website_Controller {
 									$from = CONTACT_EMAIL;
 									$this->name = strip_tags(addslashes($_POST['username']));
 									$this->store_admin = 1;
-									$message = new View("themes/".THEME_NAME."/mail_template");
+									//$message = new View("themes/".THEME_NAME."/mail_template");
+									
+									$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+				<p style = \"text-decoration: none; color: #666;\"> Your store has been successfully created.</p>
+				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant store account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['store_email']."</a></p> 
+				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$store_admin_password."</p> 
+				<p style = \"text-decoration: none; color: #666;\"> Store name is : ".$storename."</p>
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p><p>You will also be required to accept the terms and conditions.</p>
+				<p>Thanks,</p>
+				<p>--<a style = \"text-decoration: none; color: #666;\" href = \"".PATH."\">ZMART</a></p></div>";
+				
 									if(EMAIL_TYPE==2){				
 										email::smtp($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
 									}

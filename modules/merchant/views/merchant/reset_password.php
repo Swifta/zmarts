@@ -210,6 +210,29 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     
                                 </li>
                                 
+                                
+                                <?php
+								 if($this->addedByAdmin){ ?>
+                                	<li>
+                                    <div  class="" ><input type="hidden" name="t_and_c" value="0" />
+    												<input style="margin-top: 10px; margin-bottom: 10px; vertical-align: middle;
+    margin-left: 20px;" type="checkbox" name="t_and_c" value="<?php if(isset($_POST['t_and_c'])){ echo 1;}?>" class="swifta_inputx" required />
+                                    <label>I agree to the terms and conditions specified <a href="<?php echo PATH?>Disclaimer.php">here</a>.</label>
+                                    <br>
+                                   <em style=" margin-left:20px; padding-left: 0;">
+                                    <?php if(isset($_POST['t_and_c']) && $_POST['t_and_c'] == "0") {?>
+									    Needs to be checked
+									   <?php }?>
+                                   </em></div>
+                                   
+                                  
+                                    
+                                    
+                                </li>
+                                <?php } ?>
+                                
+                                
+                                
                                 <!--<li class="mv"><img height="35" width="150" src="<?php echo PATH; ?>/captcha/default" alt="<?php echo $this->Lang['CAPTCHA']; ?>"  /></li>
                                 <li class="mv"><p><?php echo $this->Lang['ETR_TXT_BLW']; ?></p></li>
                                 <li class="mv"><strong ><?php echo $this->Lang['CAPTCHA']; ?> : </strong></li>

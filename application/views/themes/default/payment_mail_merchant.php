@@ -67,15 +67,15 @@ $R = $this->result_mail;
                                         <td></td>
                                     </tr>
 
-                                    <tr>
+                                    <!--<tr>
                                         <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['BUYERS_NAME']; ?>: <b style="color:#144F5D;"><?php echo $this->UserName; ?></b></td> 
-                                    </tr>
+                                    </tr>-->
                                     <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['BUYERS_EMAIL']; ?>: <b style="color:#144F5D;"><?php echo $this->UserEmail; ?></b></td>
-                                    </tr>          
+                                    </tr>-->          
                                     
                                     <tr height="10">
                                         <td></td>

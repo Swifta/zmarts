@@ -366,11 +366,12 @@ function toggle() {
                     </td>
                 </tr>
                 
-                <tr>
+                <tr style="display:none;">
                     <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
-						 <input type="text" name="prime_price" onkeypress='return isNumberKey(event)' maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
+                    <!--<input type="text" name="prime_price" onkeypress='return isNumberKey(event)' maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />-->
+						 <input type="text" name="prime_price" onkeypress='return isNumberKey(event)' maxlength="8" value="" />
                         <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
                        
                         
@@ -698,7 +699,7 @@ function toggle() {
                 	@Live
                  -->
                 
-                   <tr>
+                   <tr style="display: none;">
                     <td><label><?php echo $this->Lang['STORE_CRED']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -879,7 +880,7 @@ function toggle() {
                 </tr>
             </table>
                 </div>
-                <div class="mergent_det2 user_date">
+                <div class="mergent_det2 user_date" style="display:none;">
 					<fieldset>
 						<legend><?php echo $this->Lang["FR_STR_TRANS_ONLY"]; ?></legend>
 						<table>

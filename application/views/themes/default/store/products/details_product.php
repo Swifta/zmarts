@@ -521,7 +521,7 @@ foreach ($this->product_deatils as $products) {
                         
                         
                         
-                    <div class="deal_comment_block">
+                    <div class="deal_comment_block" style="display:none">
                         <div class="deal_address">
                             <h2 class="deal_sub_title"><?php echo $this->Lang['ADDRES']; ?></h2>
                             <div class="deal_map_sec wloader_parent">

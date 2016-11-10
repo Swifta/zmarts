@@ -62,26 +62,26 @@ $R = $this->result_mail;
                                         <td></td>
                                     </tr>
                                     <?php if(isset($R->ip)){ ?>
-                                    <tr>
+                                    <!--<tr>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP']; ?>  :  <?php echo $R->ip; ?></td>
-                                    </tr>
+                                    </tr>-->
                                     <?php } ?>
                                     <?php if(isset($R->ip_city_name)){ ?>
                                      <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_CITY']; ?>  :   <?php echo $R->ip_city_name; ?></td>
-                                    </tr>
+                                    </tr>-->
                                     <?php } ?>
                                      <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <?php if(isset($R->ip_country_name)){ ?>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP_COUNTRY']; ?>  :   <?php echo $R->ip_country_name; ?></td>
                                         <?php } ?>
-                                    </tr>
+                                    </tr>-->
                                         
                                     <tr <?php if(isset($this->set_pay_later) && $this->set_pay_later==1){?> height="10" <?php }else{?> height="25" <?php }?>>
                                         <td></td>

@@ -73,10 +73,10 @@ foreach($user_details as $U){
   
     <td>-->
   
-  <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+  <!--<tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
     <td colspan="7" width="50%" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Customer Details</span></td>
-  </tr>
-  <tr>
+  </tr>-->
+  <!--<tr>
     <td colspan="7" ><table class="printtable" cellpadding="0" cellspacing="0" width="100%;" >
         <tbody>
           <tr>
@@ -92,7 +92,7 @@ foreach($user_details as $U){
           </tr>
         </tbody>
       </table></td>
-  </tr>
+  </tr>-->
   <tr>
     <td>&nbsp;</td>
   </tr>
@@ -222,9 +222,9 @@ foreach($user_details as $U){
         <tr height="30"  valign="middle" style=" background: #eaeaea;font-size: 11px; font-weight:bold; font-family: Arial;color:#666;">
           <td  colspan="2" style=" border-top: 1px solid #000; padding:10px;" align="left">Name: <a style="text-decoration:none" href="<?php echo PATH.$u->store_url_title;?>"><?php echo $u->store_name; ?></a></td>
           
-          <td  colspan="3" style="border-top: 1px solid #000; padding:10px;" align="left">Address: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->address1.", ".$store_payment_details->city.", ".$store_payment_details->country; ?></a></td>
+          <!--<td  colspan="3" style="border-top: 1px solid #000; padding:10px;" align="left">Address: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->address1.", ".$store_payment_details->city.", ".$store_payment_details->country; ?></a></td>-->
           
-          <td  colspan="2" style="border-top: 1px solid #000; padding:10px;" align="left">Phone: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->phone; ?></a></td>
+          <!--<td  colspan="2" style="border-top: 1px solid #000; padding:10px;" align="left">Phone: <a style="text-decoration:none" href="#"><?php echo $store_payment_details->phone; ?></a></td>-->
           
         </tr>
         

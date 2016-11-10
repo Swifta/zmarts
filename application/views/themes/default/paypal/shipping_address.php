@@ -141,9 +141,9 @@
                         </div>
                     </li>
                     
-                    <li class="left">
+                    <li class="left" style="display:none;">
                         <label><?php echo $this->Lang['ADDR2']; ?> : </label>
-                        <div class="fullname"><input id="ship_addr_p2" name="address2" tabindex="4" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address2')){ echo $this->session->get('shipping_address2'); } ?>" size="40"  maxlength="100"/></div>
+                        <div class="fullname"><input id="ship_addr_p2" name="address2" tabindex="4" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="N/A" size="40"  maxlength="100"/></div>
                     </li>
                     <li class="right">
                         <label><?php echo $this->Lang['PHONE']; ?> :<span class="form_star">*</span></label>

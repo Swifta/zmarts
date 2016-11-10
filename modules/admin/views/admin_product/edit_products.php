@@ -288,12 +288,13 @@
                     </td>
                 </tr>
                 
-               	 <tr>
+               	 <tr style="display:none;">
                     <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
                    	<?php if($u->deal_price!=0) { ?>
                       <input type="text" name="prime_price" maxlength="8" value="<?php echo $u->deal_prime_value; ?>" />
+                      <!--<input type="text" name="price" maxlength="8" value="" />-->
 					
 					<?php }else{?>
 						 <input type="text" name="price" maxlength="8" value="" />
@@ -1261,7 +1262,7 @@ function validateFileExtension1(input,idvalue) {
                 </tr> 
                  </table>
                 </div>
-                 <div class="mergent_det2 user_date">
+                 <div class="mergent_det2 user_date" style="display:none;">
 					<fieldset>
 						<legend><?php echo $this->Lang["FR_STR_TRANS_ONLY"]; ?></legend>
 						<table>

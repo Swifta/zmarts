@@ -442,7 +442,7 @@ function validate() {
                     </td>
                 </tr>
                 
-                <tr>
+                <tr style="display:none;">
                     <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
@@ -586,7 +586,7 @@ function validate() {
                 	@Live
                  -->
                 
-                   <tr>
+                   <tr style="display:none;">
                     <td><label><?php echo $this->Lang['STORE_CRED']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -967,7 +967,7 @@ function validate() {
                 
                 </table>
                 </div>
-                <fieldset>
+                <fieldset style="display:none;">
 					<legend><?php echo $this->Lang["FR_STR_TRANS_ONLY"]; ?></legend>
 					<table>
 						<?php $this->merchant_duration = $this->merchant->get_duration_values(); // store credits options ?>

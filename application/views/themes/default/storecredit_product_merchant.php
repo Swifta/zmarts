@@ -370,10 +370,10 @@ $this->UserName = $this->session->get("UserName");
   
     <td>-->
   
-  <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+  <!--<tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
     <td colspan="7" width="50%" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Customer Details</span></td>
-  </tr>
-  <tr>
+  </tr>-->
+  <!--<tr>
     <td colspan="7" ><table class="printtable" cellpadding="0" cellspacing="0" width="100%;" >
         <tbody>
           <tr>
@@ -389,7 +389,7 @@ $this->UserName = $this->session->get("UserName");
           </tr>
         </tbody>
       </table></td>
-  </tr>
+  </tr>-->
   <tr>
     <td>&nbsp;</td>
   </tr>

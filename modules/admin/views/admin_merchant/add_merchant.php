@@ -253,8 +253,8 @@
                         <tr>
                                 <td><label><?php echo $this->Lang["SEL_COUNTRY"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td>
-                                <select name="country" onchange="return city_change_merchant(this.value);">
+                                <td class="co">
+                                <select name="country" onchange="return city_change_merchant_shop(this.value);">
                                 <option value=""><?php echo $this->Lang["SEL_COUNTRY"]; ?></option>
                                 <?php foreach($this->country_list as $d){ ?>
                                 <option value="<?php echo $d->country_id ?>" <?php if(!isset($this->form_error['country']) && isset($_POST['country'])){ if($_POST['country'] == $d->country_id){ ?> selected <?php } } ?>><?php echo $d->country_name; ?></option>
@@ -264,10 +264,11 @@
                                 </td>
                         </tr>
 
-                        <tr id="CitySD">
+                        <tr>
                                 <td><label><?php echo $this->Lang["SEL_CITY"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td>
+                                <span id="CitySD">
                                <?php if(!isset($this->form_error['city']) && isset($_POST['city'])){ ?>
 				<select name="city">
 				<?php foreach($this->city_list as $s){ ?>
@@ -279,9 +280,9 @@
 		                <select name="city">
 		                <option value=""> <?php echo $this->Lang["CITY_FIRST"]; ?></option>
 		                </select>
-                        <?php } ?>
+                        <?php } ?> </span>
                                 <em><?php if(isset($this->form_error["city"])){ echo $this->form_error["city"]; }?></em>
-                                </td>
+                               </td>
                         </tr> 
                         
                         <tr>
@@ -405,7 +406,6 @@
                                 <td><input type="submit" id="submit" value="<?php echo $this->Lang['SUBMIT']; ?>" /><input type="button" value="<?php echo $this->Lang['RESET']; ?>" onclick="javascript:window.location='<?php echo PATH; ?>admin/add-merchant.html'"/></td>
                         </tr>
                 </table>
-                
         </form>
         
         </div>
@@ -416,5 +416,10 @@
         
 </div>
 <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
-</div>
+
+<script>
+ $('.co select').val(25);
+ $('.co select').trigger('change');
+ 
+</script>
 

@@ -151,10 +151,10 @@
                                                     </li>
                                                     
                                                     
-                                                    <li class="left">
+                                                    <li class="left" style="display:none;">
                                                         <label><?php echo $this->Lang['ADDR2']; ?><span>*</span></label>
                                                         <div class="fullname">
-                                                            <input type="text" name="address2" maxlength="100" value="<?php echo $u->ship_address2; ?>" class="fancy_input_bx" placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>"/>
+                                                            <input type="text" name="address2" maxlength="100" value="N/A" class="fancy_input_bx" placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>"/>
                                                         </div>
                                                         <em><?php if (isset($this->form_error['address2'])) {
                                 echo $this->form_error["address2"];

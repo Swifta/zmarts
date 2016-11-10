@@ -311,12 +311,13 @@
             <?php }?>
             <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?></td>
         </tr>
-        <tr>
+        <tr style="display:none;">
           <td><label>Discounted Price (<b>Club Members Only</b>)</label>
             <span></span></td>
           <td><label>:</label></td>
           <td><?php if($u->deal_price!=0) { ?>
-            <input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="<?php echo $u->deal_prime_value; ?>" />
+            <!--<input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="<?php echo $u->deal_prime_value; ?>" />-->
+            <input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="0" />
             <?php }else{?>
             <input type="text" name="price" maxlength="8" value="" />
             <?php }?>
@@ -1158,7 +1159,7 @@ function validateFileExtension1(input,idvalue) {
         
       </table>
       </div>
-      <fieldset>
+      <fieldset style="display:none;">
         <legend><?php echo $this->Lang["FR_STR_TRANS_ONLY"]; ?></legend>
         <table>
           <?php $duration = unserialize($u->product_duration);?>

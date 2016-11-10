@@ -359,7 +359,7 @@
                         <h2 class="deal_sub_title"><?php echo ucfirst($deals->deal_title); ?></h2>
                         <?php echo nl2br($deals->deal_description); ?>
                     </div>                    
-                    <div class="deal_comment_block">
+                    <div class="deal_comment_block" style="display:none;">
                         <div class="deal_address">
                             <h2 class="deal_sub_title"><?php echo $this->Lang['ADDRES']; ?></h2>
                             <div class="deal_map_sec wloader_parent">

@@ -2,10 +2,11 @@
 class Merchant_Controller extends website_Controller {
 	const ALLOW_PRODUCTION = FALSE;
 	public $template = 'admin_template/template';
+	public $addedByAdmin = false;
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$addedByAdmin = false;
 		$actual_link = $_SERVER['HTTP_HOST'];                
                 $serverurl= $_SERVER['HTTP_HOST']; 
                 if( $actual_link != $serverurl)
@@ -67,6 +68,7 @@ class Merchant_Controller extends website_Controller {
 						$this->session->delete('user_id1');
 						$reset_timeout = time()+(60);
 						$this->session->set("pass_reset_timeout", $reset_timeout);
+						
 						url::redirect(PATH."merchant/reset-password.html");
 					
 						
@@ -4180,6 +4182,7 @@ class Merchant_Controller extends website_Controller {
 			}
 		}
 		
+		$this->addedByAdmin = $this->merchant->get_creator($this->session->get("user_email")) != "0";
 		$this->template->content=new View("merchant/reset_password");
 	}
 	

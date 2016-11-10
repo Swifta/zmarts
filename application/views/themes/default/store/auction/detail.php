@@ -466,8 +466,8 @@ foreach ($this->deals_deatils as $deals) {
                         <h2 class="deal_sub_title"><?php echo $deals->deal_title; ?></h2>
                         <?php echo nl2br($deals->deal_description); ?>
                     </div>
-                    <div class="deal_comment_block">
-                    <div class="deal_address">                                                                                                                       
+                    <div class="deal_comment_block" style="display:none;">
+                                                    <div class="deal_address">                                                                                                                       
                                     <h2 class="deal_sub_title"><?php echo $this->Lang['ADDRES']; ?></h2>                                
                                 <div class="deal_map_sec wloader_parent">
                                     <i class="wloader_img">&nbsp;</i>
@@ -530,7 +530,7 @@ foreach ($this->deals_deatils as $deals) {
                                       </div>
                                       <?php } */ ?>
                                                     </div>
-                                            <div class="fbok_comment_block">                                                                                                                      
+                                                    <div class="fbok_comment_block">                                                                                                                      
                                                 <h2 class="deal_sub_title"><?php echo $this->Lang['COMM']; ?></h2>                                    
                                                 <div class="fbok_comment wloader_parent">
                                                     <i class="wloader_img" style="min-height:220px;">&nbsp;</i>
@@ -605,6 +605,7 @@ foreach ($this->deals_deatils as $deals) {
                                     <?php } ?>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                         </div>
                                                     </form>
                                                     <!--end-->  

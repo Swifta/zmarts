@@ -415,12 +415,12 @@ $this->UserName = $this->session->get("UserName");
     <td colspan="7" ><table class="printtable" cellpadding="0" cellspacing="0" width="100%;" >
         <tbody>
         
-        <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+        <!--<tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
     <td colspan="7" width="50%" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Customer Details</span></td>
-  </tr>
-          <tr>
+  </tr>-->
+        <!--<tr>
             <td colspan="7" width="700" >&nbsp;</td>
-          </tr>
+          </tr>-->
           <tr style="font-size: 12px; font-weight:bold; font-family: Arial;color:#666; width:100%">
             <td   align="left" style="padding-left:10px; padding-bottom: 0px;" >Name: </td>
             <td align="left"  style="padding-left:10px; padding-bottom: 0px; font-size:12px;font-weight:normal;font-family:Arial;color:#666;"><?php echo htmlspecialchars(ucfirst($merchant_lastname),ENT_QUOTES,"UTF-8"); ?>&nbsp;</td>

@@ -253,8 +253,10 @@ background:url(../images/button_bgr.jpg) repeat-x  ;border:1px solid #E60F0F;col
 em{ color:#FF0000; padding-left:5px;}
 .editicon{ float:left;width:16px;height:16px;background:url(../images/edit.png) no-repeat; margin:5px 0px 0px 5px;}
 .previewicon{ float:left;width:16px;height:16px;background:url(../images/preview-icon.png) no-repeat; margin:5px 0px 0px 5px;}
-.unblockicon{float:left;width:16px;height:16px;background:url(../images/unblock.png) no-repeat; margin:5px 0px 0px 5px;}
-.blockicon{float:left;width:16px;height:16px;background:url(../images/block.png) no-repeat; margin:5px 0px 0px 5px;}
+/*.unblockicon{float:left;width:16px;height:16px;background:url(../images/unblock.png) no-repeat; margin:5px 0px 0px 5px;}*/
+.unblockicon{float:left;width:16px;height:16px;background:url(../images/block.png) no-repeat; margin:5px 0px 0px 5px;}
+/*.blockicon{float:left;width:16px;height:16px;background:url(../images/block.png) no-repeat; margin:5px 0px 0px 5px;}*/
+.blockicon{float:left;width:16px;height:16px;background:url(../images/tick_circle_frame.png) no-repeat; margin:5px 0px 0px 5px;}
 .deleteicon{float:left;width:16px;height:16px;background:url(../images/delete.png) no-repeat;margin:5px 0px 0px 5px;}
 .list_table{width:100%;border:1px solid #ddd;border-right:0px;}
 .list_table a{color:#1D95D0;}

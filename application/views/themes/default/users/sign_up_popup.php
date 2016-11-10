@@ -70,6 +70,13 @@
                                     <em id="cpass_error"></em>
                                 </div>   
                             </li>
+                            <li>
+                                <label>NUBAN:<!--<span class="form_star">*</span>--></label>
+                                <div class="fullname">
+                                    <input name="nuban" maxlength="10" placeholder="Please enter your NUBAN" type="text" value="" />
+                                    <em id="cpass_error"></em>
+                                </div>   
+                            </li>
 
                             <li>
                                 <label>Country:<span class="form_star">*</span></label>
@@ -116,6 +123,7 @@
                                   <em id="gender_error"></em>
                                 </div>   
                             </li>
+                            
                            <li class="check_box">
                                 <p><input type="checkbox" name="terms" id="termsquantity" value="terms"><?php echo $this->Lang['BY_CLICKING_SUBMIT']; ?> 									
                                 <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>Disclaimer.php"><?php echo $this->Lang['TEMRS']; ?></a>									

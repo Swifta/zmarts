@@ -13,6 +13,8 @@ class Merchant_Model extends Model
 		$this->user_id1 = $this->session->get("user_id1");
 		
 		
+		
+		
 	}
 
         /** MERCHANT DASHBORAD DATA **/
@@ -5764,5 +5766,14 @@ class Merchant_Model extends Model
 		}
 		return NULL;
 	}
+	
+	   public function get_creator($email) {
+		   if(!$email)
+		   	 throw new Exception("Email address required");
+			 
+			$result=$this->db->select("created_by")->from("users")->where(array("email" =>$email))->get();
+			return $result->current()->created_by;
+		   
+	   }
 	
 }
