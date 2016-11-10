@@ -1703,5 +1703,12 @@ class Admin_products_Model extends Model
                 
 		return $result;
 	}
+	
+	public function allow_on_home($pid, $flag)
+	{  
+		$result = $this->db->update("product", array("allow_on_home" => $flag), array("deal_id" => $pid));
+		return (bool)count($result);
+		
+	}
 
 }

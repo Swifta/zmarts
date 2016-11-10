@@ -1624,26 +1624,28 @@ class Home_Model extends Model
 	public function get_new_arrivals(){
 		if(CITY_SETTING){ 
 			//$qry = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,$this->deal_percentage_condition,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id  join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where purchase_count < user_limit_quantity and deal_status = 1".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and users.user_status=1 and city.city_status=1 order by product.deal_id DESC limit 8";
+			
 			$result = $this->db->select("product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,$this->deal_percentage_condition,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
                                     ->from("product")
                                     ->join("stores","stores.store_id","product.shop_id")
                                     ->join("category","category.category_id","product.category_id")
                                     ->join("users","users.user_id","stores.merchant_id")
                                     ->join("city","city.city_id","stores.city_id")
-                                    ->where("purchase_count < user_limit_quantity and deal_status = 1".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and users.user_status=1 and city.city_status=1")
+                                    ->where("allow_on_home = 1 and purchase_count < user_limit_quantity and deal_status = 1".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and users.user_status=1 and city.city_status=1")
                                     ->orderby("product.deal_id", "DESC")
                                     ->limit(8)
                                     ->get();
                         //$result = $this->db->query($qry);
 		} else {
 			//$qry = "select product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,$this->deal_percentage_condition,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating  from product  join stores on stores.store_id=product.shop_id  join category on category.category_id=product.category_id  join users on users.user_id=stores.merchant_id join city on city.city_id=stores.city_id where purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1 order by product.deal_id DESC limit 8";
+			
 			$result = $this->db->select("product.deal_id,product.deal_key,product.deal_title,product.url_title,$this->deal_value_condition,product.deal_price, category.category_url,$this->deal_percentage_condition,stores.store_url_title,(select avg(rating) from rating where type_id=product.deal_id and module_id=2) as avg_rating")
                                     ->from("product")
                                     ->join("stores","stores.store_id","product.shop_id")
                                     ->join("category","category.category_id","product.category_id")
                                     ->join("users","users.user_id","stores.merchant_id")
                                     ->join("city","city.city_id","stores.city_id")
-                                    ->where("purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1")
+                                    ->where("allow_on_home = 1 and purchase_count < user_limit_quantity and deal_status = 1 ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1")
                                     ->orderby("product.deal_id", "DESC")
                                     ->limit(8)
                                     ->get();
@@ -1661,7 +1663,7 @@ class Home_Model extends Model
                                     ->join("category","category.category_id","product.category_id")
                                     ->join("users","users.user_id","stores.merchant_id")
                                     ->join("city","city.city_id","stores.city_id")
-                                    ->where("purchase_count < user_limit_quantity and deal_status = 1".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and users.user_status=1 and city.city_status=1")
+                                    ->where("allow_on_home = 1 and purchase_count < user_limit_quantity and deal_status = 1".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and stores.city_id = '$this->city_id' and users.user_status=1 and city.city_status=1")
                                     ->orderby("product.purchase_count", "DESC")
                                     ->limit(8)
                                     ->get();
@@ -1674,7 +1676,7 @@ class Home_Model extends Model
                                     ->join("category","category.category_id","product.category_id")
                                     ->join("users","users.user_id","stores.merchant_id")
                                     ->join("city","city.city_id","stores.city_id")
-                                    ->where("purchase_count < user_limit_quantity and deal_status = 1  ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1")
+                                    ->where("allow_on_home = 1 and purchase_count < user_limit_quantity and deal_status = 1  ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1")
                                     ->orderby("product.purchase_count", "DESC")
                                     ->limit(8)
                                     ->get();
@@ -1689,7 +1691,7 @@ class Home_Model extends Model
 		else
 			$li = 3;
 			
-		$condition = " purchase_count < user_limit_quantity and deal_status = 1  ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1 ";
+		$condition = " allow_on_home = 1 and purchase_count < user_limit_quantity and deal_status = 1  ".$this->product_club_condition."  and category.category_status = 1 and  store_status = 1 and users.user_status=1 and city.city_status=1 ";
 		
 		if(CITY_SETTING)
 			$condition .= " and stores.city_id = '$this->city_id' ";

@@ -178,7 +178,11 @@
         <table class="list_table fl clr mt20">
         	<tr>
 			<th align="left" width="5"><?php echo $this->Lang['S_NO']; ?></th>
+            <th align="left" width="10%">On Home</th>
                         <th align="left" width="20%"><div class="arrow"><a href="<?php echo $this->sort_url;?>param=name&sort=<?php if($this->input->get('sort')=='DESC'){ echo 'ASC'; }else{ echo 'DESC'; } ?>" title="Sort By Products Name" ><?php echo $this->Lang["PRODUCT_NAME"]; ?></a></div></th>
+                        
+                        
+                        
 			<th align="left" width="12%"><div class="arrow1"><a href="<?php echo $this->sort_url;?>param=city&sort=<?php if($this->input->get('sort')=='DESC'){ echo 'ASC'; }else{ echo 'DESC'; } ?>" title="Sort By City" ><?php echo $this->Lang["CITY"]; ?></a></div></th>			
 			<th align="left" width="12%"><div class="arrow2"><a href="<?php echo $this->sort_url;?>param=store&sort=<?php if($this->input->get('sort')=='DESC'){ echo 'ASC'; }else{ echo 'DESC'; } ?>" title="Sort By Store Name" ><?php echo $this->Lang["STORE_NAME"]; ?></a></div></th>
 			<th align="left" width="5%"><div class="arrow3"><a href="<?php echo $this->sort_url;?>param=price&sort=<?php if($this->input->get('sort')=='DESC'){ echo 'ASC'; }else{ echo 'DESC'; } ?>" title="Sort By Price" ><?php echo $this->Lang["PRICE"]; ?><?php echo '('.CURRENCY_SYMBOL.')';?></a></div></th>
@@ -201,6 +205,7 @@
 			<th align="left" width="10%"><?php echo $this->Lang["PRD_TYP"]; ?></th>
 			
 			<th align="left" width="10%"><?php echo $this->Lang["PRODUCT_DET"]; ?></th>
+            
                  </tr>
             
                 <?php $i=0; 
@@ -208,6 +213,10 @@
 			foreach($this->all_product_list as $u){ ?>
                 <tr>    
 					<td align="left"><?php echo $i + $first_item ; ?></td>
+                    <td align="left">
+                    <input type="radio" <?php if(isset($u->allow_on_home) && $u->allow_on_home == "1"){?> checked <?php }?> value="1" name="opt_on_home_<?php echo $u->deal_id;?>" id = "opt_id_on_home_<?php echo $u->deal_id;?>" onChange ="allowOnHome('<?php echo $u->deal_id;?>', 1, this)" >Yes</input>
+                    <input id = "opt_id_off_home_<?php echo $u->deal_id;?>" type="radio" <?php if(isset($u->allow_on_home) && $u->allow_on_home == "0"){?> checked <?php }?> value="0" name="opt_on_home_<?php echo $u->deal_id;?>" onChange ="allowOnHome('<?php echo $u->deal_id;?>', 0, this)"  >No</input>
+                    </td>
 					<td align="left"><?php echo htmlspecialchars($u->deal_title); ?></td>
 					<td align="left"><?php echo htmlspecialchars($u->city_name); ?></td>
 					<td align="left"><?php echo htmlspecialchars($u->store_name); ?></td>
@@ -267,6 +276,7 @@
 						<span style="color:#0000FF;" ><?php echo $this->Lang["NOR_PRD"]; ?></span> 
 						<?php } ?></td>
                     <td align="left"><a href="<?php echo PATH.'admin/view-products/'.$u->deal_key.'/'.$u->deal_id.'.html';?>"><?php echo $this->Lang["VIEW_DET"]; ?></a></td>
+                    
                 </tr>
             <?php $i++;} ?>   
         </table>
@@ -279,3 +289,57 @@
     </div>
     <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
 </div>
+
+<script>
+	function allowOnHome(pid, flag, field){
+		if(pid == null || flag == null)
+			throw new Exception("both product id and flag are required.");
+			var data = {pid:pid,flag:flag};
+			var url = "<?php echo PATH?>admin_products/allow_on_home";
+			//console.log(url);
+			//console.log(data);
+			
+		var $a = $.ajax(
+		{
+		  type: 'POST',
+		  url: url,
+		  data: data,
+		  beforeSend: function()
+		  {
+			console.log("Pre: ", "Pre-sending processing...");
+		  },
+		  success: function(data)
+		  {
+			  console.log("Data: ", data);
+			  console.log("Success: ", "Request successfully executed.");
+			  if(data == 1){
+			  }else {
+				  alert("Error occured while performing operation. Please try again.");
+				  
+				  /*if(optoff === field){
+					  $(field).attr('checked', false);
+					  $(opton).attr('checked', true);
+				  }else {
+					   $(opton).attr('checked', false);
+					   $(field).attr('checked', true);
+				  }*/
+				  
+				   /*if(opton === field){
+					  $(field).attr('checked', true);
+					  $(opton).attr('checked', false);
+				  }else {
+					   $(opton).attr('checked', true);
+					   $(field).attr('checked', false);
+				  }*/
+			  }
+		  },
+		  error: function()
+		  {
+			  console.log("Error: ", "Fatal error occured.");
+			  alert("Fata error occured.");
+		  }
+		 
+		});
+		
+	}
+</script>

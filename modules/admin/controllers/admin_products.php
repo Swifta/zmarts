@@ -2172,5 +2172,29 @@ class Admin_products_Controller extends website_Controller
 		}
 		return 1;
 	}
+	
+	function allow_on_home(){
+		if(isset($_POST)){
+			
+			$pid = $_POST['pid'];
+			$flag = $_POST['flag'];
+			$arr = array(0,1);
+			if(!in_array($flag, $arr)){
+				echo 0;
+				exit;
+			}
+			if($this->products->allow_on_home($pid,$flag)){
+		  		echo 1;
+				exit;
+			}
+		}else{
+			
+			echo 0;
+			exit;
+		}
+		  
+			
+	
+	exit;}
         
 }
