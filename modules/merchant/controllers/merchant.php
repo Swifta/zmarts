@@ -18,7 +18,7 @@ class Merchant_Controller extends website_Controller {
                 {
 				
 				
-		        if((!$this->user_id && ( $this->user_type != 3||$this->user_type != 8)) && $this->uri->last_segment() != "merchant-login.html" && $this->uri->last_segment() != "forgot-password.html" && $this->uri->last_segment() != "reset-password.html"){
+		        if((!$this->user_id && ( $this->user_type != 3||$this->user_type != 8)) && $this->uri->last_segment() != "merchant-login.html" && $this->uri->last_segment() != "forgot-password.html" && $this->uri->last_segment() != "reset-password.html"  && $this->uri->last_segment() != "merchant-terms-and-conditions.html"){
 			        url::redirect(PATH."/merchant-login.html");
 		        }
 		        if($this->user_type==1||$this->user_type==7)
@@ -107,6 +107,7 @@ class Merchant_Controller extends website_Controller {
 		$this->template->content = new View("admin/login");
 		$this->template->title = $this->Lang["MERCHANT_LOGIN_TITLE"];
 	}
+	
 
 	/** MERCHANT HOME **/
 

@@ -217,7 +217,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     <div  class="" ><input type="hidden" name="t_and_c" value="0" />
     												<input style="margin-top: 10px; margin-bottom: 10px; vertical-align: middle;
     margin-left: 20px;" type="checkbox" name="t_and_c" value="<?php if(isset($_POST['t_and_c'])){ echo 1;}?>" class="swifta_inputx" required />
-                                    <label>I agree to the terms and conditions specified <a href="<?php echo PATH?>Disclaimer.php">here</a>.</label>
+                                    <label>I agree to the terms and conditions specified <a href="<?php echo PATH?>termsandconditions">here</a>.</label>
                                     <br>
                                    <em style=" margin-left:20px; padding-left: 0;">
                                     <?php if(isset($_POST['t_and_c']) && $_POST['t_and_c'] == "0") {?>
