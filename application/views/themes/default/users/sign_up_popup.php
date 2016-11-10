@@ -71,7 +71,7 @@
                                 </div>   
                             </li>
                             <li>
-                                <label>NUBAN:<!--<span class="form_star">*</span>--></label>
+                                <label>Account Number:<!--<span class="form_star">*</span>--></label>
                                 <div class="fullname">
                                     <input name="nuban" maxlength="10" placeholder="Please enter your NUBAN" type="text" value="" />
                                     <em id="cpass_error"></em>
