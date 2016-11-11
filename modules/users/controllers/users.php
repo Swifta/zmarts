@@ -2131,13 +2131,26 @@ $pdf->Output('voucher.pdf', 'I');
   }
   
   
+  public function get_merchant_account_company(){
+	  $company = $this->session->get("firstname");
+	   if(isset($company)){
+		   echo $company;
+		   exit;
+	   }
+	   exit;
+  }
   
   public function merchant_registration_validation(){
-//      $this->session->set("merchant_reg_nuban", "8025481373");
-//      $this->session->set("firstname", "Hello World");
-//      echo 1;exit;
+		 $this->session->set("merchant_reg_nuban", "8025481373");
+         $this->session->set("firstname", "Hello World");
+		 echo 1;exit;
+		 
 		  if($_POST){
-			  $nuban = $this->input->post('nuban');
+			  
+			   $this->session->set("merchant_reg_nuban", "");
+         	   $this->session->set("firstname", "");
+			   
+			   $nuban = $this->input->post('nuban');
                           //echo $nuban;
                           //$this->session->set("merchant_reg_nuban", $nuban);
                          

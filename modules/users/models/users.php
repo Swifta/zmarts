@@ -173,7 +173,7 @@ class Users_Model extends Model
 		
 		
 		
-		$result = $this->db->insert("users", array("firstname" => $post->f_name, "email" => $post->email, "password" =>  md5($post->password),"city_id" => $post->city, "country_id" => $post->country, "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key, "AccountNumber"=> $post->nuban));
+		$result = $this->db->insert("users", array("firstname" => $post->f_name, "email" => $post->email, "password" =>  md5($post->password),"city_id" => $post->city, "country_id" => $post->country, "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key, "AccountNumber"=> $post->nuban, "nuban"=> $post->nuban,));
 		
 			$this->session->set(array("UserID" => $result->insert_id(), "UserName" => $post->f_name, "UserEmail" => $post->email, "city_id" => $post->city, "UserType" => 4, "Club" => 0));
 		

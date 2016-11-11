@@ -19,7 +19,7 @@ class Admin_users_Model extends Model
 				$user_auto_key ="";
 			}
                	$news_city = $post->city.",";
-                $result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2', "joined_date" => time(),"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key));
+                $result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'referral_id' => $referral_id, 'phone_number' => $post->mobile, 'login_type'=>'2', "joined_date" => time(),"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key, "AccountNumber"=>$post->payment_acc, "nuban"=>$post->payment_acc));
                 
                 $result_city = $this->db->select("city_id")->from("email_subscribe")->where(array("email_id" =>$post->email))->get();
 
@@ -250,13 +250,7 @@ class Admin_users_Model extends Model
 		return $result;
 	}
 		     
-	/** CHECK EMAIL EXIST **/ 
 	
-	public function exist_email($email = "")
-	{
-		$result = $this->db->count_records('users', array('email' => $email));
-		return (bool) $result;
-	}
 	
 	/** UPDATE USER **/
 	
@@ -608,6 +602,58 @@ class Admin_users_Model extends Model
 		return $result->current()->firstname;
 		
 	}
+	
+	public function check_zenith_account_used($nuban = "", $user_id = "", $editMode = false){
+		
+		if(!$editMode){
+				if(!isset($nuban))
+					return -1;
+					
+				$nuban = trim($nuban);
+				if($nuban == "")
+					return -1;
+				
+				$r = $this->db->select()->from("users")
+								  ->where(array("nuban" => $nuban))
+								  ->get();
+				if(count($r)== 0)
+					return 1;
+				return 0;
+		
+		}else{
+			
+				if(!isset($nuban))
+					return -1;
+					
+				$nuban = trim($nuban);
+				if($nuban == "")
+					return -1;
+				
+				$r = $this->db->select()->from("users")
+								  ->where(array("nuban" => $nuban, "user_id !=" => $user_id))
+								  ->get();
+				if(count($r)== 0)
+					return 1;
+				return 0;
+		
+			
+		}
+		
+	}
+	
+	public function exist_email($email = "", $user_id = "", $editMode = false)
+	{
+		if(!$editMode){
+			$result = $this->db->count_records('users', array('email' => $email));
+			return (bool) $result;
+		}else{
+			
+			$get_data = $this->db->select("email")->from("users")->where(array("user_id !=" => $user_id, "email" => $email))->get();
+			$exists = (bool) count($get_data);
+			return $exists;
+		}
+	}
+	
 	
 	
 }

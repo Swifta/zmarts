@@ -7,6 +7,19 @@
         <?php foreach($this->user_data as $u){ ?>
         <form method="post" class="admin_form" name="edit_users" >
                 <table>
+                
+                        <!-- nuban -->
+                        <tr class="error_double">
+                                <td><label>Zenith Bank Account Number<span>*</span></label></td>
+                                <td><label>:</label></td>
+                                <td><input onChange="validateAcc(this.value)" type="text" name="payment_acc" maxlength="255" value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}else{ echo $u->nuban; }?>"/>
+
+                                <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+                                
+                                <em id="nuban_err"></em>
+                                </td>
+                        </tr>  
+                        
                         <tr> 
                                 <td><label><?php echo $this->Lang["FIRST_NAME"]; ?></label><span>*</span></td>
                                 <td><label>:</label></td>
@@ -105,7 +118,7 @@
                         <em><?php if(isset($this->form_error["city"])){ echo $this->form_error["city"]; }?></em>
 					</td>
                         </tr>
-                        <tr>
+                        <tr style="display:none;">
                                 <td><label><?php echo $this->Lang["UNIQ_IDEN"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td> <label><?php if($u->unique_identifier !="") {echo $u->unique_identifier; } else { echo "-"; } ?></label>
@@ -125,3 +138,73 @@
     </div>
     <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
 </div>
+
+<script>
+ $('.co select').val(25);
+ $('.co select').trigger('change');
+ 
+  function validateAcc(val){
+	 
+	 var $errorField = $('#nuban_err');
+	 $errorField.text("");
+	 $('.error_double em').text('');
+	 
+	 if(val === ""){
+		 $('.error_double em').text('');
+	 	return;
+	 }
+	 
+	 val = $.trim(val);
+	 if(val === null){
+		 $('.error_double em').text('');
+	 	return;
+	 }
+	 
+	  if(!isValidNumber(val)){
+		$errorField.text('Account number should contain only digits [ i.e. 0-9 ].');
+	 	return;
+	 }
+	 
+	 if(val.length !== 10){
+		$errorField.text('Account number should be 10 digits.');
+	 	return;
+	 }
+		
+	console.log("Acc: ", val);
+	
+	var val = "11111111111111";
+	
+	 
+	 var data = {nuban:val};
+	 var url = "<?php echo PATH?>users/merchant_registration_validation"
+	 $.ajax(
+	 {
+		 method: "POST",
+		 data: data,
+		 url:url,
+		 success: function(response)
+		 {
+			 console.log("data: ", response);
+			 if(response === "1"){
+				 console.log("Success: ", "Acc. no. verified, and company name retrieved successfully.");
+			 } else {
+				 console.log("Error: ", "Could not verify acc. no.");
+			 }
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Error: ", "Fatal error occured.");
+		 }
+		 
+		 	
+	});
+ }
+ 
+  function isValidNumber(val){
+	  var reg = /^\d+$/;
+	  return reg.test(val);
+  }
+  
+  
+ 
+</script>

@@ -33,13 +33,15 @@ class Admin_customer_care_Controller extends website_Controller {
 							->add_rules('firstname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('nickname', 'required', 'chars[a-zA-Z0-9 _-]',array($this,'nickname_available'))
-							->add_rules('email', 'required','valid::email', array($this, 'email_available'))
+							->add_rules('email', 'required', 'valid::email', array($this,'email_available'))
 							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 							->add_rules('address1', 'required')
 							//->add_rules('gender', 'required')
 							//->add_rules('age_range', 'required')
 							->add_rules('country', 'required')
 							->add_rules('city', 'required');
+							
+							
 				if($post->validate()){
 					$referral_id = text::random($type = 'alnum', $length = 8);
 					$pswd = text::random($type = 'alnum', $length = 8);
@@ -48,7 +50,7 @@ class Admin_customer_care_Controller extends website_Controller {
                                                                 $from = CONTACT_EMAIL;    						
                                                                 $this->admin_signup = "1";
                                                                 $this->email = $post->email;
-                                                                $this->pswd = $pswd;
+                                                                $this->password = $pswd;
                                                                 $message = new View("themes/".THEME_NAME."/mail_template");
 
                                                                 if(EMAIL_TYPE==2){
@@ -61,9 +63,9 @@ class Admin_customer_care_Controller extends website_Controller {
 							common::message(1, $this->Lang["USER_ADD_SUC"]);
 							url::redirect(PATH."admin/manage-customer-care.html");
 						}
-				}
-				else{
+				}else{
 					$this->form_error = error::_error($post->errors());	
+					
 				}
 			}
 		$this->country_list = $this->users->getcountrylist();

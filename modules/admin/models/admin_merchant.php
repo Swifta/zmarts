@@ -15,7 +15,7 @@ class Admin_merchant_Model extends Model
         {
                
                  
-            	$result = $this->db->insert("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->mr_address1, 'address2' => $post->mr_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc, 'nuban'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'merchant_commission' => $post->commission, 'nuban' => $post->payment_acc));
+            	$result = $this->db->insert("users", array("firstname" => $this->session->get("firstname"),"lastname" => $post->lastname, "email" => $post->email, 'password' => md5($pswd), 'address1' => $post->mr_address1, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mr_mobile, 'payment_account_id'=> $post->payment_acc, 'nuban'=> $post->payment_acc,'created_by'=>$adminid, 'user_type'=>'3','login_type'=>'2', "joined_date" => time(),'nuban' => $this->session->get("merchant_reg_nuban"), 'AccountNumber' => $this->session->get("merchant_reg_nuban"))); 
             	
                 $merchant_id = $result->insert_id();                 
                 $this->session->set("id",$merchant_id);
@@ -44,9 +44,9 @@ class Admin_merchant_Model extends Model
                 $result = $this->db->insert("shipping_module_settings", array("free" => $free,"flat" => $flat, "per_product" => $product,'per_quantity' => $quantity, 'aramex' => $aramex,'ship_user_id' => $merchant_id));
                 $website="http://".$post->website;
                 
-                $res = $this->db->insert("users",array("firstname"=>$post->username,"email"=>$post->store_email,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$post->subsector));
+                $res = $this->db->insert("users",array("firstname"=>$this->session->get("firstname"),"email"=>$post->store_email,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$post->subsector));
                 
-                $stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'address2' => $post->address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode,"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description, 'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'store_type' => '1','merchant_id'=>$merchant_id,'created_by'=>$adminid,"created_date" => time(),"about_us"=>$post->about_us,"store_admin_id"=>$res->insert_id(),'store_sector_id' => $post->sector,"store_subsector_id" =>$post->subsector));
+                $stores_result = $this->db->insert("stores", array("store_name" => $post->storename,"store_url_title" => url::title($post->storename),'store_key' =>$store_key,'address1' => $post->address1, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mobile, 'zipcode' => $post->zipcode,"meta_keywords" => $post->meta_keywords , "meta_description" =>  $post->meta_description, 'website' => $website, 'latitude' => $post->latitude, 'longitude' => $post->longitude,'store_type' => '1','merchant_id'=>$merchant_id,'created_by'=>$adminid,"created_date" => time(),"about_us"=>$post->about_us,"store_admin_id"=>$res->insert_id(),'store_sector_id' => $post->sector,"store_subsector_id" =>$post->subsector));
 
                 $result = $this->db->insert("merchant_attribute", array("merchant_id" => $merchant_id,"storeid" =>$stores_result->insert_id()));
                    $store_id = $stores_result->insert_id();
@@ -420,10 +420,17 @@ class Admin_merchant_Model extends Model
 		     
 	/** CHECK EMAIL EXIST **/ 
 	
-	public function exist_email($email = "")
+	public function exist_email($email = "", $user_id = "", $editMode = false)
 	{
-		$result = $this->db->count_records('users', array('email' => $email));
-		return (bool) $result;
+		if(!$editMode){
+			$result = $this->db->count_records('users', array('email' => $email));
+			return (bool) $result;
+		}else{
+			
+			$get_data = $this->db->select("email")->from("users")->where(array("user_id !=" => $user_id, "email" => $email))->get();
+			$exists = (bool) count($get_data);
+			return $exists;
+		}
 	}
 	
 	
@@ -431,9 +438,14 @@ class Admin_merchant_Model extends Model
 	
         public function edit_merchant($id = "" ,$post = "") 
         {
+			
+			
+			
                 $result_emailid = $this->db->count_records("users", array("email" => $post->email,"user_id !=" => $id));
                         if($result_emailid == 0){
-                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email,'address1' => $post->mer_address1, 'address2' => $post->mer_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mer_mobile,'merchant_commission' => $post->commission), array('user_id' => $id));
+                                $result = $this->db->update("users", array("firstname" => $post->firstname,"lastname" => $post->lastname, "email" => $post->email,'address1' => $post->mer_address1, 'address2' => $post->mer_address2, 'city_id' => $post->city, 'country_id' => $post->country, 'phone_number' => $post->mer_mobile,'merchant_commission' => $post->commission, "nuban" => $post->payment_acc, "AccountNumber" => $post->payment_acc), array('user_id' => $id));
+								
+			
                                 
                                 $free = "0";
                                 if(isset($post->free)){
@@ -1066,20 +1078,42 @@ class Admin_merchant_Model extends Model
 		Check whether zenith account number already used before.
 		@Live
 	*/
-	public function check_zenith_account_used($nuban = ""){
-		if(!isset($nuban))
-			return -1;
-			
-		$nuban = trim($nuban);
-		if($nuban == "")
-			return -1;
+	public function check_zenith_account_used($nuban = "", $user_id = "", $editMode = false){
 		
-		$r = $this->db->select()->from("users")
-						  ->where(array("nuban" => $nuban))
-						  ->get();
-		if(count($r)== 0)
-			return 1;
-		return 0;
+		if(!$editMode){
+				if(!isset($nuban))
+					return -1;
+					
+				$nuban = trim($nuban);
+				if($nuban == "")
+					return -1;
+				
+				$r = $this->db->select()->from("users")
+								  ->where(array("nuban" => $nuban))
+								  ->get();
+				if(count($r)== 0)
+					return 1;
+				return 0;
+		
+		}else{
+			
+				if(!isset($nuban))
+					return -1;
+					
+				$nuban = trim($nuban);
+				if($nuban == "")
+					return -1;
+				
+				$r = $this->db->select()->from("users")
+								  ->where(array("nuban" => $nuban, "user_id !=" => $user_id))
+								  ->get();
+								 
+				if(count($r)== 0)
+					return 1;
+				return 0;
+		
+			
+		}
 		
 	}
 	

@@ -59,11 +59,16 @@ class Admin_users_Controller extends website_Controller {
 							->add_rules('lastname', 'required', 'chars[a-zA-Z0-9 _-]')
 							->add_rules('email', 'required','valid::email', array($this, 'email_available'))
 							->add_rules('mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
+							
 							->add_rules('address1', 'required')
 							->add_rules('gender', 'required')
 							->add_rules('age_range', 'required')
 							->add_rules('country', 'required')
 							->add_rules('city', 'required');
+							
+							if(isset($_POST['payment_acc']))
+							  $post->add_rules('payment_acc','chars[0-9.-]', array($this,'check_zenith_account_used'));
+							 
 				if($post->validate()){
 					$referral_id = text::random($type = 'alnum', $length = 8);
 					$pswd = text::random($type = 'alnum', $length = 8);
@@ -205,7 +210,13 @@ class Admin_users_Controller extends website_Controller {
 			url::redirect(PATH."admin.html");
 		}
 		$this->manage_users = "1";
+		
+		$this->user_id = $userid;
+		
+		
 		if($_POST){
+			
+		
 			//$this->userpost = $this->input->post();
                         $this->userpost = utf8::clean($this->input->post());
 			$post = new Validation(utf8::clean($_POST));			
@@ -219,16 +230,23 @@ class Admin_users_Controller extends website_Controller {
 						->add_rules('age_range', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required');
+						
+						if(isset($_POST['payment_acc']))
+							  $post->add_rules('payment_acc','chars[0-9.-]', array($this,'check_zenith_account_used'));
+							  
 			if($post->validate()){			
 				$status = $this->users->edit_users($userid, arr::to_object($this->userpost));
+				
+				
 				if($status ==1){
+					
+		
+					
 					common::message(1, $this->Lang["USER_EDIT_SUC"]);
 					$lastsession = $this->session->get("lasturl");
-		                        if($lastsession){
-		                        url::redirect(PATH.$lastsession);
-		                        } else {
-		                        url::redirect(PATH."admin/manage-user.html");
-		                        }
+		            url::redirect(PATH."admin/manage-user.html");
+		                        
+				
 				}
 				elseif($status == 2 ){
 					$this->form_error["email"] = $this->Lang["EMAIL_AL_E"];
@@ -314,13 +332,7 @@ class Admin_users_Controller extends website_Controller {
 		return $exist;
 	}
 	
-	/** CHECK EMAIL EXIST **/
-	 
-	public function email_available($email)
-	{
-		$exist = $this->users->exist_email($email);
-		return ! $exist;
-	}
+
 	
 	
 	public function z_validphone($phone = "")
@@ -557,6 +569,29 @@ class Admin_users_Controller extends website_Controller {
 		$this->user_news_letter = "1";
 		$this->message=$this->users->get_user_message($message_id);
 		$this->template->content = new View("themes/".THEME_NAME."/user_inbox_email_messages");	
+	}
+	
+	public function check_zenith_account_used(){
+		$nuban = strip_tags(addslashes($_POST['payment_acc']));
+		if(isset($this->user_id)){
+			return $this->users->check_zenith_account_used($nuban, $this->user_id, true);
+		}else{
+			return $this->users->check_zenith_account_used($nuban);
+		}
+	}
+	
+	public function email_available($email= "")
+	{
+		
+		if(isset($this->user_id)){
+			
+			$exist = $this->users->exist_email($email, $this->user_id, true);
+			return ! $exist;
+		}else {
+			
+			$exist = $this->users->exist_email($email);
+			return ! $exist;
+		}
 	}
 	
 }

@@ -51,7 +51,7 @@ class Admin_merchant_Controller extends website_Controller {
 						//->add_rules('website', 'required'/*,'valid::url'*/)
 						->add_rules('latitude', 'required','chars[0-9.-]')
 						->add_rules('longitude', 'required','chars[0-9.-]')
-						->add_rules('commission','required',array($this, 'valid_commision'),'chars[0-9]')
+						//->add_rules('commission','required',array($this, 'valid_commision'),'chars[0-9]')
 						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						//->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
 						->add_rules('store_email', 'required','valid::email',array($this, 'email_available'))
@@ -391,6 +391,7 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 		$this->manage_merchant = "1";
 		$this->merchant_id=$userid;
+		$this->edit_mode = true;
 	    if($_POST){
 			$this->userpost = utf8::clean($this->input->post());
 			$post = new Validation(utf8::clean($_POST));
@@ -398,14 +399,14 @@ class Admin_merchant_Controller extends website_Controller {
 						
 						->add_rules('firstname', 'required')
 						->add_rules('lastname', 'required')
-						->add_rules('email', 'required','valid::email')//,array($this,'check_store_admin_with_supplier33'))
+						->add_rules('email', 'required','valid::email',array($this, 'email_available'))
 						->add_rules('mer_mobile', 'required', array($this, 'validphone'), array($this, 'z_validphone'), 'chars[0-9-+(). ]')
 						->add_rules('mer_address1', 'required')
 						//->add_rules('mer_address2', 'required')
 						->add_rules('country', 'required')
 						->add_rules('city', 'required')
-						->add_rules('commission','required', array($this, 'valid_commision'),'chars[0-9]');
-						//->add_rules('payment_acc', 'required','valid::email');
+						//->add_rules('commission','required', array($this, 'valid_commision'),'chars[0-9]');
+						->add_rules('payment_acc', 'required','chars[0-9.-]', array($this,'check_zenith_account_used'));
 
 				if($post->validate())
 				{
@@ -1343,10 +1344,27 @@ class Admin_merchant_Controller extends website_Controller {
 		}
 		url::redirect(PATH."admin/merchant-shop/".$merchantid.".html");
 	}
-	public function check_store_exist(){
+	/*public function check_store_exist(){
 	    $exist = $this->merchant->exist_name(strip_tags(addslashes($this->input->post("storename"))));
+		
+	    return ($exist == 0)?true:false; 
+	}*/
+	
+	public function check_store_exist($store_name = "", $async = FALSE){
+		if($async){
+			 $exist = $this->merchant->exist_name($store_name);
+			 if($exist == 0){
+				 echo 0;
+			 }else {
+				 echo 1;
+			 }
+			exit;
+		}
+	   
+	    $exist = $this->merchant->exist_name($this->input->post("storename"));
 	    return ($exist == 0)?true:false; 
 	}
+	
 	public function check_store_exist1(){
 	    $exist = $this->merchant->exist_name(strip_tags(addslashes($this->input->post("storename"))),
                     strip_tags(addslashes($this->input->post("storeid"))));
@@ -1464,8 +1482,16 @@ class Admin_merchant_Controller extends website_Controller {
 	 
 	public function email_available($email= "")
 	{
-		$exist = $this->merchant->exist_email($email);
-		return ! $exist;
+		
+		if(isset($this->edit_mode) && $this->edit_mode){
+			
+			$exist = $this->merchant->exist_email($email, $this->merchant_id, true);
+			return ! $exist;
+		}else {
+			
+			$exist = $this->merchant->exist_email($email);
+			return ! $exist;
+		}
 	}
 	
 	/** CHECK VALID PHONE OR NOT **/
@@ -2045,8 +2071,11 @@ class Admin_merchant_Controller extends website_Controller {
 	
 	public function check_zenith_account_used(){
 		$nuban = strip_tags(addslashes($_POST['payment_acc']));
-		
-		return $this->merchant->check_zenith_account_used($nuban);
+		if(isset($this->merchant_id)){
+			return $this->merchant->check_zenith_account_used($nuban, $this->merchant_id, true);
+		}else{
+			return $this->merchant->check_zenith_account_used($nuban);
+		}
 	}
 
 }

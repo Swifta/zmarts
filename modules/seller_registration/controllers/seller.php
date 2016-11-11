@@ -161,11 +161,11 @@ class Seller_Controller extends Layout_Controller {
 		
 	}
 
-        public function merchant_completed(){
-                $this->template->title = "Merchant Sign Up Complete";
-                $this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_completed");
-				//common::message(1, "Signup complete. Thanks you!");
-        }
+	public function merchant_completed(){
+			$this->template->title = "Merchant Sign Up Complete";
+			$this->template->content = new View("themes/".THEME_NAME."/seller/seller_signup_completed");
+			//common::message(1, "Signup complete. Thanks you!");
+	}
 	/** SELLER  SIGNUP STEP 2 **/
 
 	public function seller_signup_step2()
@@ -859,7 +859,7 @@ $admin_message	= '
 		
 	}
         
-        public function nuban_available($nuban = ""){
+    public function nuban_available($nuban = ""){
             $ret = false;
             $ret = $this->seller->validate_nuban($nuban);
             //var_dump($ret);die;

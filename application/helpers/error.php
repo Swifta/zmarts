@@ -64,6 +64,9 @@ class error {
 			        case 'email_available':
 				    $my_error[$key] = $this->Lang["EMAIL_AL_E"];
 				    break;
+					case 'nickname_available':
+				    $my_error[$key] = "Nickname already in use.";
+				    break;
 			        case 'affiliate_available':
 				    $my_error[$key] = $this->Lang["SITE_NA_E"];
 				    break;

@@ -925,7 +925,7 @@ final class Kohana {
                 //echo $content_of_log; die;
                 if(SEND_ERROR_LOG){
                     //then send it as email
-                    $email_address = array("smustafa@swifta.com", "aonasile@swifta.com");
+                    $email_address = array("smustafa@swifta.com", "pkigozi@swifta.com");
                     foreach($email_address as $email){
                         email::smtp("error@zmart.com.ng",$email, "[Zmart] Error Occurrence" ,$content_of_log);
                     }

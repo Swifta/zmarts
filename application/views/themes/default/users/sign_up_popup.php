@@ -23,14 +23,14 @@
                             <li>
                                 <label><?php echo $this->Lang["NAME"]; ?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                   <input name="f_name" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" autofocus />
+                                   <input tabindex="1" name="f_name" type="text" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="" autofocus />
                                    <em id="fname_error"></em>
                                 </div>   
                             </li>
                              <li>
                                 <label><?php echo $this->Lang['AGE_RNG']; ?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-									<select name="age_range">
+									<select name="age_range" tabindex="4">
 										<option value=""><?php echo $this->Lang['SEL_AGE_RNG']; ?></option>
 										<option value="1" ><?php echo $this->Lang["17_BEL"]; ?></option>
 										<option value="2"><?php echo $this->Lang["18_25"]; ?></option>
@@ -45,35 +45,35 @@
                             <li>
                                 <label><?php echo $this->Lang['EMAIL']; ?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                  <input name="email" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
+                                  <input name="email" tabindex="2" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
                                   <em id="emai_error"></em>
                                 </div>   
                             </li>
                             <li>
                                 <label><?php echo $this->Lang['PSWD'];?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                    <input name="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" value="" />
+                                    <input tabindex="5" name="password" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" value="" />
                                     <em id="pass_error"></em>
                                 </div>   
                             </li>
                             <li>
                                 <label>Confirm your email:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                  <input name="email_confirm" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
+                                  <input tabindex="3" name="email_confirm" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
                                   <em id="email_confirm_error"></em>
                                 </div>   
                             </li>
                             <li>
                                 <label><?php echo $this->Lang['CPSWD'];?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                    <input name="cpassword" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" value="" />
+                                    <input tabindex="6" name="cpassword" maxlength="15" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" value="" />
                                     <em id="cpass_error"></em>
                                 </div>   
                             </li>
                             <li>
-                                <label>Account Number:<!--<span class="form_star">*</span>--></label>
+                                <label>Zenith Bank Account Number:<!--<span class="form_star">*</span>--></label>
                                 <div class="fullname">
-                                    <input name="nuban" maxlength="10" placeholder="Please enter your NUBAN" type="text" value="" />
+                                    <input name="nuban" tabindex="7" maxlength="10" placeholder="Please enter your account no." type="text" value="" />
                                     <em id="cpass_error"></em>
                                 </div>   
                             </li>
@@ -81,7 +81,7 @@
                             <li>
                                 <label>Country:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                	<input type="text" id="id_rush_country">
+                                	<input tabindex="8" type="text" id="id_rush_country">
                                     <input type="hidden" name="country" value="25" id="id_rush_country">
                                     
                                     <!--<select name="country" id="id_rush_country" onchange="return city_change_merchant(this.value);">
@@ -97,7 +97,7 @@
                                 <label>Select a State:<span class="form_star">*</span></label>
                                 <div class="fullname">
                                     <div id="CitySD_log_Signup">
-                                      <select name="city" id="id_rush_sel_state" >
+                                      <select tabindex="9" name="city" id="id_rush_sel_state" >
                                           
                                     </select>
                                     </div>
@@ -115,7 +115,7 @@
                              <li>
                                 <label><?php echo $this->Lang['GENDER']; ?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-									 <select name="gender">
+									 <select tabindex="9" name="gender">
 										<option value=""><?php echo $this->Lang["SEL_GEN"]; ?></option>
 										<option value="1"><?php echo $this->Lang["MALE"]; ?></option>
 										<option value="2"><?php echo $this->Lang["FEMALE"]; ?></option>
@@ -125,13 +125,13 @@
                             </li>
                             
                            <li class="check_box">
-                                <p><input type="checkbox" name="terms" id="termsquantity" value="terms"><?php echo $this->Lang['BY_CLICKING_SUBMIT']; ?> 									
+                                <p><input tabindex="10" type="checkbox" name="terms" id="termsquantity" value="terms"><?php echo $this->Lang['BY_CLICKING_SUBMIT']; ?> 									
                                 <a class="forget_link" target="_blank" title="<?php echo $this->Lang['TEMRS']; ?>" href="<?php echo PATH; ?>Disclaimer.php"><?php echo $this->Lang['TEMRS']; ?></a>									
                                 </p>
                                 <em id="terms_error"></em>
                             </li>
                             <li>                                  
-                                <input class="sign_submit" type="submit" title="Sign Up" value="Sign Up" /> 
+                                <input tabindex="11" class="sign_submit" type="submit" title="Sign Up" value="Sign Up" /> 
                                 <input id = "id_z_offer_click_status_signup" type="hidden" value="0"/>
                             </li>
                             </ul>

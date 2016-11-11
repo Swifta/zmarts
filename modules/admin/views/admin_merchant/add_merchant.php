@@ -39,37 +39,44 @@
 
                 <table>
                 
-                         <tr>
-                                <td><label><?php echo $this->Lang["FIRST_NAME"]; ?><span>*</span></label></td>
+                	    <!-- nuban -->
+                        <tr class="error_double">
+                                <td><label>Zenith Bank Account Number<span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input autofocus type="text" name="firstname" maxlength="32"  value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['firstname'])){echo $this->userPost['firstname'];}?>"/>
-                                <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
+                                <td><input onChange="validateAcc(this.value)" type="text" name="payment_acc" maxlength="255" value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>"/>
+
+                                <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
+                                
+                                <em id="nuban_err"></em>
                                 </td>
-                        </tr>
-                        
+                        </tr>  
+                        <!-- company name -->
                         <tr>
-                                <td><label><?php echo $this->Lang["LAST_NAME"]; ?><span>*</span></label></td>
+                                <td><label>Company Name<span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="lastname"  maxlength="32" value="<?php if(!isset($this->form_error['lastname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>"/>
+                                <td><input id="company" placeholder="None retrieved yet. Enter account no. 1st" readonly type="text" name="firstname" maxlength="255" value="<?php if(!isset($this->form_error['firstname']) && isset($this->userPost['firstname'])){echo $this->userPost['firstname'];}?>"/>
+                                <em><?php if(isset($this->form_error['firstname'])){ echo $this->form_error["firstname"]; }?></em>
+                                
+                                </td>
+                        </tr>  
+                       <!-- 1st name -->
+                        <tr>
+                                <td><label>Full Name<span>*</span></label></td>
+                                <td><label>:</label></td>
+                                <td><input autofocus type="text" name="lastname" maxlength="32"  value="<?php if(!isset($this->form_error['lastname']) && isset($this->userPost['lastname'])){echo $this->userPost['lastname'];}?>"/>
                                 <em><?php if(isset($this->form_error['lastname'])){ echo $this->form_error["lastname"]; }?></em>
                                 </td>
                         </tr>
                         
+                       <!-- email -->
                         <tr>
-                                <td><label><?php echo $this->Lang["EMAIL_F"]; ?><span>*</span></label></td>
+                                <td><label>Email<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="email" maxlength="255" value="<?php if(!isset($this->form_error['email']) && isset($this->userPost['email'])){echo $this->userPost['email'];}?>"/>
                                 <em><?php if(isset($this->form_error['email'])){ echo $this->form_error["email"]; }?></em>
                                 </td>
                         </tr>
-
-                         <?php /*<tr>
-                                <td><label><?php echo $this->Lang["RE_PASSWORD"]; ?><span>*</span></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="password" name="cpassword" maxlength="16"/>
-                                <em><?php if(isset($this->form_error['cpassword'])){ echo $this->form_error["cpassword"]; }?></em>
-                                </td>
-                        </tr>  */ ?>
+                       <!-- phone -->
                         <tr>
                                 <td><label><?php echo $this->Lang["PHONE"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
@@ -78,28 +85,17 @@
                                 <em><?php if(isset($this->form_error['mr_mobile'])){ echo $this->form_error["mr_mobile"]; }?></em>
                                 </td>
                         </tr>
-                         <tr>
-                                <td><label><?php echo $this->Lang["ADDR1"]; ?><span>*</span></label></td>
+                       <!-- address -->
+                        <tr>
+                                <td><label>Address<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="mr_address1" maxlength="100" value="<?php if(isset($this->userPost['mr_address1'])){echo $this->userPost['mr_address1'];}?>"/>
                                 <em><?php if(isset($this->form_error['mr_address1'])){ echo $this->form_error["mr_address1"]; }?></em>
                                 </td>
                         </tr>
-                        <tr>
-                                <td><label><?php echo $this->Lang["ADDR2"]; ?></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="text" name="mr_address2" maxlength="100" value="<?php if(isset($this->userPost['mr_address2'])){echo $this->userPost['mr_address2'];}?>"/>
-                                <em><?php if(isset($this->form_error['mr_address2'])){ echo $this->form_error["mr_address2"]; }?></em>
-                                </td>
-                        </tr> 
-                        <tr>
-                                <td><label><?php echo $this->Lang["PAYMENT_ACC"]; ?><span>*</span></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="text" name="payment_acc" maxlength="255" value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>"/>
-
-                                <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
-                                </td>
-                        </tr>  
+                      
+  
+                       <!-- shipping methods -->
                         <tr>
                                 <td><label>Shipping method<span>*</span></label></td>
                                 <td><label>:</label></td>
@@ -129,6 +125,7 @@
                                  </table>
                                  </td>
                         </tr>
+                        
                        </table>
             
                        </fieldset>
@@ -139,31 +136,36 @@
      
                      <table>
                        
-                       
-                         <tr>
+                         <!-- store name -->
+                         <tr class="error_double2">
                                 <td width="110px;"><label><?php echo $this->Lang["STORE_NAME"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input type="text" name="storename" maxlength="255"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"/>
+                                <td><input onChange="checkStoreName(this.value)" type="text" name="storename" maxlength="255"  value="<?php if(!isset($this->form_error['storename']) && isset($this->userPost['storename'])){echo $this->userPost['storename'];}?>"/>
                                 <em><?php if(isset($this->form_error['storename'])){ echo $this->form_error["storename"]; }?></em>
+                                <em id="store_err"></em>
                                 </td>
                         </tr>
                         
-                        <tr>
-                                <td><label><?php echo $this->Lang["USER_NAME"]; ?><span>*</span></label></td>
+                         <!-- username -->
+                         <tr>
+                                <td><label>Username<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="username" maxlength="255" value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" />
                                 <em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
                                 </td>
                         </tr>
-                        <tr>
-                                <td><label><?php echo $this->Lang["EMAIL_ID"]; ?><span>*</span></label></td>
+                        
+                         <!-- email address -->
+                         <tr>
+                                <td><label>Email<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="store_email" maxlength="255" value="<?php if(!isset($this->form_error['store_email']) && isset($this->userPost['store_email'])){echo $this->userPost['store_email'];}?>" />
                                 <em><?php if(isset($this->form_error['store_email'])){ echo $this->form_error["store_email"]; }?></em>
                                 </td>
                         </tr>
-
-                        <tr>
+						  
+                         <!-- sector -->
+                         <tr>
                         <td><label><?php echo $this->Lang["SECTOR"]; ?></label><span>*</span></td>
                         <td><label>:</label></td>
                         <td>
@@ -191,7 +193,9 @@
                                 <em><?php if(isset($this->form_error["sector"])){ echo $this->form_error["sector"]; }?></em>
                         </td>
                         </tr>
-                        <tr id="subsector" class="subsector_list">
+                        
+                         <!-- subsector -->
+                         <tr id="subsector" class="subsector_list">
                                 <td><label><?php echo $this->Lang["SUBSECTOR"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
 
@@ -227,30 +231,25 @@
                                 </td>
                         </tr>
 
-                        
-                        <tr>
+                         <!-- store phone -->
+                         <tr>
                                 <td><label><?php echo $this->Lang["PHONE"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="mobile" maxlength="15"  value="<?php if(!isset($this->form_error['mobile']) && isset($this->userPost['mobile'])){echo $this->userPost['mobile'];}?>"/>
                                 <em><?php if(isset($this->form_error['mobile'])){ echo $this->form_error["mobile"]; }?></em>
                                 </td>
                         </tr>
+                         <!-- store address -->
                          <tr>
-                                <td><label><?php echo $this->Lang["ADDR1"]; ?><span>*</span></label></td>
+                                <td>Address<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="address1" maxlength="255" value="<?php if(isset($this->userPost['address1'])){echo $this->userPost['address1'];}?>"/>
                                 <em><?php if(isset($this->form_error['address1'])){ echo $this->form_error["address1"]; }?></em>
                                 </td>
                         </tr>
-                        <tr>
-                                <td><label><?php echo $this->Lang["ADDR2"]; ?></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="text" name="address2" maxlength="255" value="<?php if(isset($this->userPost['address2'])){echo $this->userPost['address2'];}?>"/>
-                                <em><?php if(isset($this->form_error['address2'])){ echo $this->form_error["address2"]; }?></em>
-                                </td>
-                        </tr>                     
                        
-                        <tr>
+                         <!-- store country -->
+                         <tr>
                                 <td><label><?php echo $this->Lang["SEL_COUNTRY"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td class="co">
@@ -264,7 +263,8 @@
                                 </td>
                         </tr>
 
-                        <tr>
+						 <!-- store state -->
+                         <tr>
                                 <td><label><?php echo $this->Lang["SEL_CITY"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td>
@@ -285,15 +285,28 @@
                                </td>
                         </tr> 
                         
-                        <tr>
+                         <!-- company city -->
+                         <tr>
+                                <td><label>City<span></span></label></td>
+                                <td><label>:</label></td>
+                                <td><input type="text" name="t_city" maxlength="255" value="<?php if(!isset($this->form_error['t_city']) && isset($this->userPost['t_city'])){echo $this->userPost['t_city'];}?>"/>
+
+                                <em><?php if(isset($this->form_error['t_city'])){ echo $this->form_error["t_city"]; }?></em>
+                                </td>
+                        </tr>  
+                        
+                         <!-- store zip code -->
+                         <tr>
                                 <td><label><?php echo $this->Lang["ZIP_CODE"]; ?></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="zipcode" maxlength="10" value="<?php if(!isset($this->form_error['zipcode']) && isset($this->userPost['zipcode'])){echo $this->userPost['zipcode'];}?>"/>
                                 <em><?php if(isset($this->form_error['zipcode'])){ echo $this->form_error["zipcode"]; }?></em>
                                 </td>
                         </tr>
-			  <tr>
-                                <td><label><?php echo $this->Lang["ABOUT_US_PAGE"]; ?><span>*</span></label></td>
+                        
+                         <!-- store business description -->
+			             <tr>
+                                <td><label>Business Descriptions<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <textarea name="about_us" maxlength="1000"><?php if(!isset($this->form_error["about_us"])&&isset($this->userPost["about_us"])){ echo $this->userPost["about_us"]; }?></textarea>
@@ -301,28 +314,7 @@
                                 </td>
                         </tr>
                         
-                        <tr>
-                                <td><label><?php echo $this->Lang["META_KEY"]; ?></label></td>
-                                <td><label>:</label></td>
-                                <td>
-                                <textarea name="meta_keywords"><?php if(!isset($this->form_error["meta_keywords"])&&isset($this->userPost["meta_keywords"])){ echo $this->userPost["meta_keywords"]; }?></textarea>
-                                <em><?php if(isset($this->form_error["meta_keywords"])){ echo $this->form_error["meta_keywords"]; }?></em>
-                                </td>
-                        </tr>
-
-                        <tr>
-                                <td><label><?php echo $this->Lang["META_DESC"]; ?></label></td>
-                                <td><label>:</label></td>
-                                <td>
-                                <textarea name="meta_description"><?php if(!isset($this->form_error["meta_description"])&&isset($this->userPost["meta_description"])){ echo $this->userPost["meta_description"]; }?></textarea>
-
-
-
-
-                                <em><?php if(isset($this->form_error["meta_description"])){ echo $this->form_error["meta_description"]; }?></em>
-                                </td>
-                        </tr>
-                        
+                         <!-- store website -->
                          <tr>
                                 <td><label><?php echo $this->Lang["WEBSITE"]; ?></label></td>
                                 <td><label>:http://</label></td>
@@ -330,28 +322,35 @@
                                 <em><?php if(isset($this->form_error['website'])){ echo $this->form_error["website"]; }?></em>
                                 </td>
                         </tr>
-							<tr >
-									  <td><label><?php echo $this->Lang['MAP_SEARCH_LO']; ?><span>*</span></label></td>
-                                <td><label>:</label></td>
-								  <td >
-                       
+                        
+                         <!-- store map search -->
+						 <tr >
+                              <td><label><?php echo $this->Lang['MAP_SEARCH_LO']; ?><span>*</span></label></td>
+                              <td><label>:</label></td>
+                              <td >
                    
-                    <input type="text" class="gllpSearchField">
-		            <input type="button" class="gllpSearchButton" value="<?php echo $this->Lang['SEARCH']; ?>">
-		            <br/><br/><br/>
-		            <div class="gllpMap" ><?php echo $this->Lang['GOOG_MAP']; ?></div>
-		           
-                       
-                        </td>
-							</tr>  
+               
+                <input type="text" class="gllpSearchField">
+                <input type="button" class="gllpSearchButton" value="<?php echo $this->Lang['SEARCH']; ?>">
+                <br/><br/><br/>
+                <div class="gllpMap" ><?php echo $this->Lang['GOOG_MAP']; ?></div>
+               
+                   
+                    </td>
+						</tr>  
+                        
+                         <!-- store latitude -->
+                         <tr>
 							   <td><label><?php echo $this->Lang["LATITUDE"]; ?><span>*</span></label></td>
 								<td><label>:</label></td>
 								<td>
 								<input type="text" onclick="show_popup();" name="latitude" class="gllpLatitude" readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
 								<em><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
 								</td>
-								</tr>
-								<tr>
+								</tr>  
+                                
+                         <!-- store longitude -->    
+						 <tr>
 								<td><label><?php echo $this->Lang["LONGITUDE"]; ?><span>*</span></label></td>
 								<td><label>:</label></td>
 								<td>
@@ -361,46 +360,24 @@
 								<input type="hidden" class="gllpUpdateButton" value="update map">
 								</td>
 						</tr>
-					
-					<?php /*	<tr>
-                                <td><label><?php echo $this->Lang["LATITUDE"]; ?><span>*</span></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="text" name="latitude" id="lat" onclick="show_popup();" readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
-                                <em><?php if(isset($this->form_error['latitude'])){ echo $this->form_error["latitude"]; }?></em>
-                                </td>
-                        </tr>
+                     
                         
+                         <!-- Logo -->
                          <tr>
-                                <td><label><?php echo $this->Lang["LONGITUDE"]; ?><span>*</span></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="text" name="longitude" id="lng" readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>"/>
-                                <em><?php if(isset($this->form_error['longitude'])){ echo $this->form_error["longitude"]; }?></em>
-                                </td>
-                        </tr> */ ?>
-                        
-                        
-                       
-			 <tr>
-                                <td><label><?php echo $this->Lang["COMMISION"]; ?><span>*</span></label></td>
-                                <td><label>:</label></td>
-                                <td><input type="text" name="commission" maxlength="3" onkeypress="return isNumberKey(event)"  value="<?php if(!isset($this->form_error['commission']) && isset($this->userPost['commission'])){echo $this->userPost['commission'];}?>"/>
-				 <span class="pbl1">%</span>
-                                <em><?php if(isset($this->form_error['commission'])){ echo $this->form_error["commission"]; }?></em>
-                              
- </td>
-			
-                        </tr>
-                        <tr>
-                                <td><label><?php echo $this->Lang["STORES_IMG"]; ?></label></td>
+                                <td><label>Logo</label><span>*</span></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <input type="file" name="image" />
                                 <em><?php if(isset($this->form_error["image"])){ echo $this->form_error["image"]; }?></em>
                                  <label><?php echo $this->Lang['IM_UP_S']; ?> <?php echo STORE_DETAIL_WIDTH; ?> X <?php echo STORE_DETAIL_HEIGHT; ?> </label>
                                 </td>
-                        </tr>                    
+                        </tr>   
+                        
+                        <input type="hidden" name="meta_keywords" value="" />   
+                        <input type="hidden" name="meta_description" value="" />        
                      
-                        <tr>
+                         <!-- form controls -->
+                         <tr>
                                 <td></td>
                                 <td></td>
                                 <td><input type="submit" id="submit" value="<?php echo $this->Lang['SUBMIT']; ?>" /><input type="button" value="<?php echo $this->Lang['RESET']; ?>" onclick="javascript:window.location='<?php echo PATH; ?>admin/add-merchant.html'"/></td>
@@ -417,9 +394,146 @@
 </div>
 <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>
 
+
 <script>
  $('.co select').val(25);
  $('.co select').trigger('change');
+ 
+  function validateAcc(val){
+	 
+	 var $errorField = $('#nuban_err');
+	 $errorField.text("");
+	 $('.error_double em').text('');
+	 
+	 if(val === ""){
+		$errorField.text('Required to verify and retrieve company name');
+	 	return;
+	 }
+	 
+	 val = $.trim(val);
+	 if(val === null){
+		$errorField.text('Required to verify and retrieve company name');
+	 	return;
+	 }
+	 
+	  if(!isValidNumber(val)){
+		$errorField.text('Account number should contain only digits [ i.e. 0-9 ].');
+	 	return;
+	 }
+	 
+	 if(val.length !== 10){
+		$errorField.text('Account number should be 10 digits.');
+	 	return;
+	 }
+		
+	console.log("Acc: ", val);
+	
+	var val = "11111111111111";
+	
+	 
+	 var data = {nuban:val};
+	 var url = "<?php echo PATH?>users/merchant_registration_validation"
+	 $.ajax(
+	 {
+		 method: "POST",
+		 data: data,
+		 url:url,
+		 success: function(response)
+		 {
+			 console.log("data: ", response);
+			 if(response === "1"){
+				 console.log("Success: ", "Acc. no. verified, and company name retrieved successfully.");
+				 getAccountCompany();
+			 } else {
+				 console.log("Error: ", "Could not verify acc. no.");
+			 }
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Error: ", "Fatal error occured.");
+		 }
+		 
+		 	
+	});
+ }
+ 
+  function getAccountCompany(){
+	 
+	 var url = "<?php echo PATH?>users/get_merchant_account_company"
+	 $.ajax(
+	 {
+		 method: "GET",
+		 url:url,
+		 success: function(response)
+		 {
+			 console.log("data: ", response);
+			 if( response !==  null ){
+				 console.log("Success: ", "Acc. co. name retrieved successfully.");
+				 $('#company').val(response);
+			 } else {
+				 $('#company').val("");
+				 console.log("Error: ", "Could not retrieve Acc. co. name.");
+			 }
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Error: ", "Fatal error occured.");
+		 }
+		 
+		 	
+	});
+ }
+ 
+  function isValidNumber(val){
+	  var reg = /^\d+$/;
+	  return reg.test(val);
+  }
+  
+  function checkStoreName(val){
+	 
+	 var $errorField = $('#store_err');
+	 $errorField.text("");
+	 $('.error_double2 em').text('');
+	 
+	 if(val === ""){
+		$errorField.text('Required');
+	 	return;
+	 }
+	 
+	 val = $.trim(val);
+	 if(val === null){
+		$errorField.text('Required');
+	 	return;
+	 }
+		
+	 console.log("Acc: ", val);
+	 var data = {nuban:val};
+	 var url = "<?php echo PATH?>admin_merchant/check_store_exist/"+val+"/true"
+	 $.ajax(
+	 {
+		 method: "POST",
+		 data: data,
+		 url:url,
+		 success: function(response)
+		 {
+			 console.log("data: ", response);
+			 if(response === "1"){
+				 console.log("Success: ", "Existing storename.");
+				 $('#store_err').text('Store name already in use.');
+			 } else {
+				$('.error_double2 em').text('');
+			 }
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Error: ", "Fatal error occured.");
+		 }
+		 
+		 	
+	});
+ }
+  
+  
  
 </script>
 
