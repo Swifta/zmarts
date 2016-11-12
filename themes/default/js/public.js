@@ -1852,3 +1852,19 @@ function open_zenith_account(form_html){
 	          });	  
 }
 
+
+$(document).ready(function(e) {
+	var $imageContainer = $('.new_prdt_listing_img');
+    console.log($imageContainer.length); 
+	$imageContainer.each(function(index, element) {
+        var $element = $(element);
+		
+		$imageCount = $element.find('img').length;
+		if($imageCount === 1){
+			$singImageContainer = $element.find('.new_prdt_listing_img1');
+			$singImageContainer.removeClass("new_prdt_listing_img1");
+			$singImageContainer.addClass("new_prdt_listing_img_static");
+		}
+		
+    });
+});
