@@ -49,13 +49,19 @@ class Admin_merchant_Controller extends website_Controller {
 						->add_rules('about_us', 'required')
 						->add_rules('zipcode','chars[a-zA-Z0-9.]')
 						//->add_rules('website', 'required'/*,'valid::url'*/)
-						->add_rules('latitude', 'required','chars[0-9.-]')
-						->add_rules('longitude', 'required','chars[0-9.-]')
+						->add_rules('latitude','chars[0-9.-]')
+						->add_rules('longitude','chars[0-9.-]')
 						//->add_rules('commission','required',array($this, 'valid_commision'),'chars[0-9]')
-						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
+						->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
 						//->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'))
-						->add_rules('store_email', 'required','valid::email',array($this, 'email_available'))
-						->add_rules('username', 'required');
+						//->add_rules('store_email', 'required','valid::email',array($this, 'email_available'))
+						//->add_rules('username', 'required');
+						
+						
+						
+						if(isset($_POST['store_email'])){
+							$post->add_rules('store_email','valid::email',array($this, 'email_available'));
+						}
 						
 						/*if(isset($_POST['store_email'])){
 							$post->add_rules('store_email', array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier'));
@@ -68,11 +74,19 @@ class Admin_merchant_Controller extends website_Controller {
 					{
 						$pswd = text::random($type = 'alnum', $length = 8);
 						$store_key = text::random($type = 'alnum', $length = 8);
-						$store_admin_password = text::random($type = 'alnum', $length = 8);
+						
+						$store_admin_password = "";
+						
+						if(isset($_POST['store_email'])){
+							$store_admin_password = text::random($type = 'alnum', $length = 8);
+						}
+						
 						$storename = $this->input->post('storename');
 						
 						
 						$status = "1";
+						
+						
 						$status = $this->merchant->add_merchant(arr::to_object($this->userPost),$adminid,$store_key,$pswd,$store_admin_password);
 							if($status){
 							        $this->pswd = $pswd;
@@ -199,10 +213,11 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message);
 									}
 									
+									if(isset($_POST['store_email'])){
 									$this->pswd = $store_admin_password;
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
-									$this->name = strip_tags(addslashes($_POST['username']));
+									$this->name = strip_tags(addslashes($_POST['storename']));
 									$this->store_admin = 1;
 									//$message = new View("themes/".THEME_NAME."/mail_template");
 									
@@ -220,6 +235,8 @@ class Admin_merchant_Controller extends website_Controller {
 									}
 									else{
 										email::sendgrid($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
+									}
+									
 									}
 					
 									/** for routes creation for front end  start **/
@@ -806,10 +823,10 @@ class Admin_merchant_Controller extends website_Controller {
 					        ->add_rules('latitude', 'required','chars[0-9.-]')
 					        ->add_rules('longitude', 'required','chars[0-9.-]')
 							->add_rules('sector', 'required')
-							->add_rules('subsector', 'required')
+							->add_rules('subsector', 'required');
 					        //->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 					        //->add_rules('store_email', 'required',array($this,'check_store_admin'),array($this,'check_store_admin_with_supplier2'))
-							->add_rules('username', 'required');
+							//->add_rules('storename', 'required');
 							
 							if(isset($_FILE['image'])){
 								$post->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]');
@@ -962,7 +979,7 @@ class Admin_merchant_Controller extends website_Controller {
 
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;
-									$this->name = strip_tags(addslashes($_POST['username']));
+									$this->name = strip_tags(addslashes($_POST['storename']));
 									$this->store_admin = 1;
 									$message = new View("themes/".THEME_NAME."/mail_template");
 									if(EMAIL_TYPE==2){				
@@ -1085,8 +1102,8 @@ class Admin_merchant_Controller extends website_Controller {
 						//->add_rules('image', 'upload::valid', 'upload::type[gif,jpg,png,jpeg]', 'upload::size[1M]')
 						//->add_rules('store_email', 'required',array($this,'check_store_admin1'))
 						->add_rules('sector', 'required')
-						->add_rules('subsector', 'required')
-						->add_rules('username', 'required');
+						->add_rules('subsector', 'required');
+						//->add_rules('username', 'required');
 						
 						
 						if(isset($_FILE['image'])){

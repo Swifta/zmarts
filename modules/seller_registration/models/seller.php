@@ -98,7 +98,7 @@ class Seller_Model extends Model
 	
 
 	if($post->store_email_id != ""){
-		 $res = $this->db->insert("users",array("firstname"=>$post->store_email_id,"email"=>$post->store_email_id,"password"=>md5($store_admin_password),"user_type"=>9,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$country_value1, 'phone_number' => $post->mobile,"user_sector_id"=>$this->session->get("sub_sector")));
+		 $res = $this->db->insert("users",array("firstname"=>$post->store_email_id,"email"=>$post->store_email_id,"password"=>md5($store_admin_password),"user_type"=>8,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"address2"=>$post->address2,"city_id"=>$post->city,"country_id"=>$country_value1, 'phone_number' => $post->mobile,"user_sector_id"=>$this->session->get("sub_sector")));
                  $m_id = $res->insert_id();
         }
         else{

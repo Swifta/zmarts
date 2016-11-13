@@ -116,6 +116,8 @@ class Admin_Controller extends website_Controller
 
 			url::redirect(PATH."admin.html");
 		}
+		
+	
 
 		if($_POST){
 			  
@@ -126,6 +128,8 @@ class Admin_Controller extends website_Controller
 //			  $pswd = $this->input->post("password");
 			if($email){
 				$status = $this->admin->admin_login($email, $pswd);
+				
+				
 				if($status == 10){
 				    common::message(1, $this->Lang["LOGIN_SUCCESS"] );
 					url::redirect(PATH."admin.html");

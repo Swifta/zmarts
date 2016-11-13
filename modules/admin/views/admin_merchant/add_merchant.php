@@ -146,18 +146,18 @@
                                 </td>
                         </tr>
                         
-                         <!-- username -->
-                         <tr>
+                         <!-- username x -->
+                         <!--<tr>
                                 <td><label>Username<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="username" maxlength="255" value="<?php if(!isset($this->form_error['username']) && isset($this->userPost['username'])){echo $this->userPost['username'];}?>" />
                                 <em><?php if(isset($this->form_error['username'])){ echo $this->form_error["username"]; }?></em>
                                 </td>
-                        </tr>
+                        </tr>-->
                         
-                         <!-- email address -->
+                         <!-- email address x -->
                          <tr>
-                                <td><label>Email<span>*</span></label></td>
+                                <td><label>Email <span style="font-weight:normal; font-size:11px">(Specify if different from merchant's email above )</span></label></td>
                                 <td><label>:</label></td>
                                 <td><input type="text" name="store_email" maxlength="255" value="<?php if(!isset($this->form_error['store_email']) && isset($this->userPost['store_email'])){echo $this->userPost['store_email'];}?>" />
                                 <em><?php if(isset($this->form_error['store_email'])){ echo $this->form_error["store_email"]; }?></em>
@@ -194,8 +194,8 @@
                         </td>
                         </tr>
                         
-                         <!-- subsector -->
-                         <tr id="subsector" class="subsector_list">
+                         <!-- subsector x -->
+                         <!--<tr id="subsector" class="subsector_list">
                                 <td><label><?php echo $this->Lang["SUBSECTOR"]; ?><span>*</span></label></td>
                                 <td><label>:</label></td>
 
@@ -228,6 +228,19 @@
                                 </select>
                                  <?php }?>
                                 <em><?php if(isset($this->form_error['subsector'])){ echo $this->form_error["subsector"]; }?></em>
+                                </td>
+                        </tr>-->
+                         <tr style="display:none;">
+                                <td><label><?php echo $this->Lang["SUBSECTOR"]; ?><span>*</span></label></td>
+                                <td><label>:</label></td>
+
+                                <td>
+									 
+			<select name="subsector" >
+            <option value="107" selected>Store</option>
+            </select>
+                                
+                                
                                 </td>
                         </tr>
 
@@ -323,9 +336,9 @@
                                 </td>
                         </tr>
                         
-                         <!-- store map search -->
+                         <!-- store map search x -->
 						 <tr >
-                              <td><label><?php echo $this->Lang['MAP_SEARCH_LO']; ?><span>*</span></label></td>
+                              <td><label><?php echo $this->Lang['MAP_SEARCH_LO']; ?></label></td>
                               <td><label>:</label></td>
                               <td >
                    
@@ -339,9 +352,9 @@
                     </td>
 						</tr>  
                         
-                         <!-- store latitude -->
+                         <!-- store latitude x -->
                          <tr>
-							   <td><label><?php echo $this->Lang["LATITUDE"]; ?><span>*</span></label></td>
+							   <td><label><?php echo $this->Lang["LATITUDE"]; ?></label></td>
 								<td><label>:</label></td>
 								<td>
 								<input type="text" onclick="show_popup();" name="latitude" class="gllpLatitude" readonly value="<?php if(!isset($this->form_error['latitude']) && isset($this->userPost['latitude'])){echo $this->userPost['latitude'];}?>"/>
@@ -349,9 +362,9 @@
 								</td>
 								</tr>  
                                 
-                         <!-- store longitude -->    
+                         <!-- store longitude x -->    
 						 <tr>
-								<td><label><?php echo $this->Lang["LONGITUDE"]; ?><span>*</span></label></td>
+								<td><label><?php echo $this->Lang["LONGITUDE"]; ?></label></td>
 								<td><label>:</label></td>
 								<td>
 								<input type="text" name="longitude" class="gllpLongitude" readonly value="<?php if(!isset($this->form_error['longitude']) && isset($this->userPost['longitude'])){echo $this->userPost['longitude'];}?>"/>
@@ -362,9 +375,9 @@
 						</tr>
                      
                         
-                         <!-- Logo -->
+                         <!-- Logo x -->
                          <tr>
-                                <td><label>Logo</label><span>*</span></td>
+                                <td><label>Logo</label></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <input type="file" name="image" />

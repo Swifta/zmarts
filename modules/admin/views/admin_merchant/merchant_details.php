@@ -18,12 +18,12 @@
 			
 			?>
       <tr>
-        <th valign="top" align="left" width="20%"><?php echo $this->Lang["FIRST_NAME"]; ?></th>
+        <th valign="top" align="left" width="20%">Company</th>
         <th valign="top">:</th>
         <td align="left"><?php echo htmlspecialchars($d->firstname); ?></td>
       </tr>
       <tr>
-        <th valign="top" align="left" width="20%"><?php echo $this->Lang["LAST_NAME"]; ?></th>
+        <th valign="top" align="left" width="20%">Full Name</th>
         <th valign="top">:</th>
         <td align="left"><?php echo htmlspecialchars($d->lastname); ?></td>
       </tr>

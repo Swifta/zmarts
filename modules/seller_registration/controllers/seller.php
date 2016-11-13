@@ -365,8 +365,7 @@ class Seller_Controller extends Layout_Controller {
 								$post->add_rules('zipcode', 'chars[0-9.]');
 							}
 							
-							if(isset($_POST[''])){
-							}
+							
 						if($post->validate()){    
 							
 							
