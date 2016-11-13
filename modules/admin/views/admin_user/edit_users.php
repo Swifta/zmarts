@@ -170,9 +170,7 @@
 	 	return;
 	 }
 		
-	console.log("Acc: ", val);
-	
-	var val = "11111111111111";
+	 console.log("Acc: ", val);
 	
 	 
 	 var data = {nuban:val};
@@ -187,13 +185,14 @@
 			 console.log("data: ", response);
 			 if(response === "1"){
 				 console.log("Success: ", "Acc. no. verified, and company name retrieved successfully.");
+				 $errorField.text("");
 			 } else {
-				 console.log("Error: ", "Could not verify acc. no.");
+				 $errorField.text("Could not verify acc. no.");
 			 }
 		 },
 		 error: function(response) 
 		 {
-			 console.log("Error: ", "Fatal error occured.");
+			 $errorField.text("Fatal error occured. Please try again.");
 		 }
 		 
 		 	

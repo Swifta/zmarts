@@ -181,8 +181,6 @@
 		
 	console.log("Acc: ", val);
 	
-	var val = "11111111111111";
-	
 	 
 	 var data = {nuban:val};
 	 var url = "<?php echo PATH?>users/merchant_registration_validation"
@@ -196,13 +194,14 @@
 			 console.log("data: ", response);
 			 if(response === "1"){
 				 console.log("Success: ", "Acc. no. verified, and company name retrieved successfully.");
+				 $errorField.text("");
 			 } else {
-				 console.log("Error: ", "Could not verify acc. no.");
+				 $errorField.text("Could not verify acc. no.");
 			 }
 		 },
 		 error: function(response) 
 		 {
-			 console.log("Error: ", "Fatal error occured.");
+			 $errorField.text("Fatal error occured.");
 		 }
 		 
 		 	

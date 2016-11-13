@@ -70,11 +70,11 @@
                                     <em id="cpass_error"></em>
                                 </div>   
                             </li>
-                            <li>
+                            <li class="error_double">
                                 <label>Zenith Bank Account Number:<!--<span class="form_star">*</span>--></label>
                                 <div class="fullname">
                                     <input name="nuban" tabindex="7" maxlength="10" placeholder="Please enter your account no." type="text" value="" />
-                                    <em id="cpass_error"></em>
+                                    <em id="acc_error"></em>
                                 </div>   
                             </li>
 
@@ -289,7 +289,8 @@ function disconnectUser() {
 
 
 function validatesignup()
-{
+{ try{
+	
 	
 	
 	/*
@@ -304,6 +305,8 @@ function validatesignup()
 	var city = document.signup.city.value;
 	var country = document.signup.country.value;
 	var terms = document.getElementById('termsquantity').checked;*/
+	
+	$('em').text('');
 	
 	var fname = document.signup.f_name.value;	
 	var email = document.signup.email.value;
@@ -448,11 +451,15 @@ function validatesignup()
 		        $('#terms_error').html("<?php echo $this->Lang['PLEASE_SELECT_TERMS']; ?>");
 		        return false;
                 }
+				
+				
+				
+				
 		var url= Path+'users/check_user_signup/?email='+email+'&z_offer='+z_offer;
 		$.post(url,function(check){
 			
 			if(check == -1){
-				$('#emai_error').html("<?php echo $this->Lang['EMAIL_EXIST']; ?>");
+				$('#emai_error').html("Email already used for registration. login or enter a unique email account.");
 				
 				document.signup.email.value = '';
 				document.signup.password.value = '';
@@ -466,7 +473,10 @@ function validatesignup()
 					
 			}
 			
-			document.signup.submit();
+			console.log(validateAcc($('.error_double input').val()));
+			
+			if(!validateAcc($('.error_double input').val()))
+			   return false;
 		});
 	}
 	return false;
@@ -600,6 +610,11 @@ function validatesignup()
 		});
 	}
 	return false;*/
+  }catch(e){
+	  console.log(e);
+	  return false;
+  }
+	
 }
 
 </script> 
@@ -610,5 +625,81 @@ function validatesignup()
 		city_change_merchant("25");
 		$('#id_rush_sel_state').val("-99");
     });
+	
+	
+  
+</script>
+
+<script>
+ 
+  function validateAcc(val){
+	 
+	 var $errorField = $('#acc_error');
+	 console.log($errorField.length);
+	 $errorField.text("");
+	 $('.error_double em').text('');
+	 console.log($('.error_double em').length);
+	 
+	 if(val === ""){
+		$errorField.text("");
+	 	return true;
+	 }
+	 
+	 val = $.trim(val);
+	 if(val === null){
+		$errorField.text('');
+	 	return true;
+	 }
+	 
+	  if(!isValidNumber(val)){
+		$errorField.text('Account number should contain only digits [ i.e. 0-9 ].');
+	 	return false;
+	 }
+	 
+	 if(val.length !== 10){
+		$errorField.text('Account number should be 10 digits.');
+	 	return false;
+	 }
+		
+	console.log("Acc: ", val);
+	 var data = {nuban:val};
+	 var url = "<?php echo PATH?>users/merchant_registration_validation"
+	 $.ajax(
+	 {
+		 method: "POST",
+		 data: data,
+		 url:url,
+		 success: function(response)
+		 {
+			 console.log("data: ", response);
+			 if(response === "1"){
+				 $errorField.text('');
+				 document.signup.submit();
+				 return true;
+				 
+			 } else {
+				console.log("Error: ", "Could not verify acc. no.");
+				$errorField.text('Could not verify acc. no.');
+				 return false;
+			 }
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Error: ", "Fatal error occured.");
+			 $errorField.text('Error occured. Could not verify acc. no. Please try again');
+			 return false;
+		 }
+		 
+		 	
+	});
+ }
+ 
+  function isValidNumber(val){
+	  var reg = /^\d+$/;
+	  return reg.test(val);
+  }
+  
+  
+ 
 </script>
 

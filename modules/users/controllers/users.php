@@ -198,6 +198,8 @@ class Users_Controller extends Layout_Controller {
 				->add_rules('age_range', 'required')
                                  ->add_rules('country', 'required')
                                 ->add_rules('city', 'required');
+								
+								
 
                 $status = $this->users->add_users($this->userPost,$user_referral_id);
 				
