@@ -116,3 +116,12 @@ $config['pxshops/products/c/(.*)/(.*).html'] = "/store/product_list/pxshops/$1/$
 $config['pxshops/deal/c/(.*)/(.*).html'] = "/store/deal_list/pxshops/$1/$2";
 $config['pxshops/auction/c/(.*)/(.*).html'] = "/store/auction_list/pxshops/$1/$2";
 // pxshops End
+// GMLispa Start
+$config['GMLispa'] = "store/stores_home_page/GMLispa";
+$config['GMLispa/products.html'] = "/store/product_list/GMLispa";
+$config['GMLispa/today-deals.html'] = "/store/deal_list/GMLispa";
+$config['GMLispa/auction.html'] = "/store/auction_list/GMLispa";
+$config['GMLispa/products/c/(.*)/(.*).html'] = "/store/product_list/GMLispa/$1/$2";
+$config['GMLispa/deal/c/(.*)/(.*).html'] = "/store/deal_list/GMLispa/$1/$2";
+$config['GMLispa/auction/c/(.*)/(.*).html'] = "/store/auction_list/GMLispa/$1/$2";
+// GMLispa End

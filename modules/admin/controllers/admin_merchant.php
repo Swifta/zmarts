@@ -213,7 +213,9 @@ class Admin_merchant_Controller extends website_Controller {
 										email::sendgrid($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message);
 									}
 									
-									if(isset($_POST['store_email'])){
+									if($_POST['store_email'] != ''){
+										
+										
 									$this->pswd = $store_admin_password;
 									$this->email = strip_tags(addslashes($_POST['store_email']));
 									$from = CONTACT_EMAIL;

@@ -46,7 +46,7 @@ class Admin_merchant_Model extends Model
 				
 				$m_id = $merchant_id;
 				
-				if(isset($_POST['store_email'])){
+				if($_POST['store_email'] != 1){
                 
                 $res = $this->db->insert("users",array("firstname"=>$this->session->get("firstname"),"email"=>$post->store_email,"password"=>md5($store_admin_password),"user_type"=>8,"created_by"=>$merchant_id,"referred_user_id"=>$merchant_id,"user_status"=>1,"login_type"=>1,"approve_status"=>1,"address1"=>$post->address1,"city_id"=>$post->city,"country_id"=>$post->country, 'phone_number' => $post->mobile,"user_sector_id"=>$post->subsector));
 				
