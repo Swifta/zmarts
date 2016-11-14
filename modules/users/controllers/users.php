@@ -2143,11 +2143,13 @@ $pdf->Output('voucher.pdf', 'I');
   }
   
   public function merchant_registration_validation(){
-		 $this->session->set("merchant_reg_nuban", "8025481373");
-         $this->session->set("firstname", "Hello World");
-		 echo 1;exit;
+	   
 		 
 		  if($_POST){
+			  
+			 $this->session->set("merchant_reg_nuban", $_POST['nuban']);
+			 $this->session->set("firstname", "Demo Inc.");
+			 echo 1;exit;
 			  
 			   $this->session->set("merchant_reg_nuban", "");
          	   $this->session->set("firstname", "");

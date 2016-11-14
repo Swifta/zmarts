@@ -573,6 +573,8 @@ class Admin_merchant_Model extends Model
                         ->join("stores","users.user_id","stores.merchant_id")
 		                   ->join("country","country.country_id","users.country_id")
 		                   ->where(array("user_id" => $id, "user_type" => 3))->get();
+						   
+						  
 		return $result;
 	}
 	
@@ -584,6 +586,7 @@ class Admin_merchant_Model extends Model
 		                   ->join("users","users.user_id","stores.store_admin_id","left")
 		                   ->where(array("merchant_id" => $id))
 		                   ->orderby("store_id")->get();
+						   
 		return $result;
 	}
 	

@@ -71,12 +71,12 @@
       <tr>
         <th align="left" ><?php echo $this->Lang["SECTOR"]; ?></th>
         <th>:</th>
-        <?php if($d->user_sector_id != 0){ ?>
+        <?php if($d->store_sector_id != 0){ ?>
         <?php foreach($this->sector_list as $c){ 
-                if($d->user_sector_id == $c->sector_id){ ?>
+                if($d->store_sector_id == $c->sector_id){ ?>
         <td align="left"><?php echo htmlspecialchars($c->sector_name); ?></td>
         <?php } } }else { ?>
-        <td align="left"><?php echo "Dafult"; ?></td>
+        <td align="left"><?php echo "Default"; ?></td>
         <?php } ?>
         
       </tr>

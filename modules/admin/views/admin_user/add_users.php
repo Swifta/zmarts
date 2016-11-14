@@ -186,9 +186,9 @@
 	 var url = "<?php echo PATH?>users/merchant_registration_validation"
 	 $.ajax(
 	 {
-		 method: "POST",
-		 data: data,
-		 url:url,
+		  type:'POST',
+		  url:url,
+		  data:{nuban:val},
 		 success: function(response)
 		 {
 			 console.log("data: ", response);

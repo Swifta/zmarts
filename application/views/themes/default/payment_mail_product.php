@@ -13,6 +13,7 @@ $this->UserName = $this->session->get("UserName");
 <tr height="63">
   <td colspan="8" valign="middle" align="left"><div style="margin:0 auto;width:636px;"> <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>"> <img src="<?php echo THEME; ?>images/logo.png"  alt="<?php echo SITENAME; ?>"  /> </a> </div></td>
 </tr>
+
 <tr  style="text-align:left;  padding:20px 15px 15px 15px; ;margin:0 0 20px; background:#e2e2e2;" >
   <td colspan="8" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear <?php echo trim($this->UserName);?>,</strong></td>
 </tr>
@@ -22,6 +23,7 @@ $this->UserName = $this->session->get("UserName");
 <tr>
   <td>&nbsp;</td>
 </tr>
+
 <?php foreach($this->products_list as $p ) { 
   		$p_m = "-";
   		if($p->type == 5)

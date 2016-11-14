@@ -16,7 +16,7 @@ class Admin_Model extends Model
 	{
 
 		$email = trim($email);
-		$result = $this->db->from("users")->where(array("email" => $email,"user_type" => 1,"user_status" => 1))->limit(1)->get();
+		$result = $this->db->from("users")->where(array("email" => $email,"user_status" => 1))->limit(1)->get();
 		if(count($result) > 0){
 			
 			$userid = $result->current()->user_id;

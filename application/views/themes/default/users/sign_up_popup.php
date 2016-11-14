@@ -458,7 +458,7 @@ function validatesignup()
 		var url= Path+'users/check_user_signup/?email='+email+'&z_offer='+z_offer;
 		$.post(url,function(check){
 			
-			if(check == -1){
+			if(check === -1){
 				$('#emai_error').html("Email already used for registration. login or enter a unique email account.");
 				
 				document.signup.email.value = '';
@@ -466,15 +466,13 @@ function validatesignup()
 				$('#city_error').html('');
 				return false;
 			}
-			else if(check == -999){
+			else if(check === -999){
                             //email_confirm
 					javascript:signup_after_zenith_offer_click(fname, email, password,cpassword, gender, age_range, country, city, terms, z_offer, unique_identifier);
 					return false;
 					
 			}
-			
-			console.log(validateAcc($('.error_double input').val()));
-			
+		
 			if(!validateAcc($('.error_double input').val()))
 			   return false;
 		});
@@ -663,13 +661,15 @@ function validatesignup()
 		
 	console.log("Acc: ", val);
 	 var data = {nuban:val};
-	 var url = "<?php echo PATH?>users/merchant_registration_validation"
-	 $.ajax(
+	 var url = "<?php echo PATH?>users/merchant_registration_validation";
+	 
+	 
+	 $post = $.ajax(
 	 {
-		 method: "POST",
-		 data: data,
-		 url:url,
-		 success: function(response)
+		  type:'POST',
+		  url:url,
+		  data:{nuban:val},
+		  success: function(response)
 		 {
 			 console.log("data: ", response);
 			 if(response === "1"){
@@ -680,7 +680,7 @@ function validatesignup()
 			 } else {
 				console.log("Error: ", "Could not verify acc. no.");
 				$errorField.text('Could not verify acc. no.');
-				 return false;
+				return false;
 			 }
 		 },
 		 error: function(response) 
@@ -692,6 +692,8 @@ function validatesignup()
 		 
 		 	
 	});
+	
+	console.log(typeof $post);
  }
  
   function isValidNumber(val){

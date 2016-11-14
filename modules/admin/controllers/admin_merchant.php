@@ -117,8 +117,10 @@ class Admin_merchant_Controller extends website_Controller {
 								$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been successfully created.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['email']."</a></p> 
-				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
-				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p>
+					<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
+					
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p>
+				<p> You will be required to change your password on first login.</p>
 				<p> You will also be required to review and accept the terms and condition..</p
 				<p>Thanks,</p>
 				<p>--<a style = \"text-decoration: none; color: #666;\" href = \"".PATH."\">ZMART</a></p></div>";
@@ -228,7 +230,7 @@ class Admin_merchant_Controller extends website_Controller {
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant store account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['store_email']."</a></p> 
 				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$store_admin_password."</p> 
 				<p style = \"text-decoration: none; color: #666;\"> Store name is : ".$storename."</p>
-				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"text-decoration: none; color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p><p>You will also be required to accept the terms and conditions.</p>
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p><p>You will also be required to accept the terms and conditions.</p>
 				<p>Thanks,</p>
 				<p>--<a style = \"text-decoration: none; color: #666;\" href = \"".PATH."\">ZMART</a></p></div>";
 				
@@ -1603,7 +1605,9 @@ class Admin_merchant_Controller extends website_Controller {
 		$this->shipping_data = $this->merchant->get_shipping_data($id);
 		$this->merchant_details = $this->merchant->get_merchant_details($id);
 		$this->store_details = $this->merchant->get_store_details($id);
+		
 		$this->sector_list = $this->merchant->get_all_sector_data();
+		
 		$this->template->title = $this->Lang["MERCHANT_DETAILS"];
 		$this->template->content = new View("admin_merchant/merchant_details");
 	}
