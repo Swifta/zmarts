@@ -66,6 +66,7 @@ class Admin_Controller extends website_Controller
                                 if($status == 1){				
 
                                     $users = $this->admin->get_usr_details_list($email);
+						
                                     $userid = $users->current()->user_id;
                                     $name = $users->current()->firstname;
                                     $email = $users->current()->email;

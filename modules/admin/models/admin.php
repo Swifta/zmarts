@@ -37,7 +37,7 @@ class Admin_Model extends Model
 		//$result=$this->db->query("select * from users where email='$email' and user_status=1 and user_type IN(3,8)");
 		$result = $this->db->select()
                         ->from("users")
-                        ->where("email='$email' and user_status=1 and user_type=1")
+                        ->where("email='$email' and user_status=1")
                         ->get();
                 return $result;
 	}
