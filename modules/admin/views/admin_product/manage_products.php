@@ -179,8 +179,9 @@
         	<tr>
 			<th align="left" width="5"><?php echo $this->Lang['S_NO']; ?></th>
             
-            <?php if(ADMIN_PRIVILEGES_ALLOW_ON_HOME){?>
+            <?php if($this->user_type == 1){?>
             	<th align="left" width="10%">On Home</th>
+                
             <?php } ?>
                         <th align="left" width="20%"><div class="arrow"><a href="<?php echo $this->sort_url;?>param=name&sort=<?php if($this->input->get('sort')=='DESC'){ echo 'ASC'; }else{ echo 'DESC'; } ?>" title="Sort By Products Name" ><?php echo $this->Lang["PRODUCT_NAME"]; ?></a></div></th>
                         
@@ -216,7 +217,7 @@
 			foreach($this->all_product_list as $u){ ?>
                 <tr>    
 					<td align="left"><?php echo $i + $first_item ; ?></td>
-                    <?php if(ADMIN_PRIVILEGES_ALLOW_ON_HOME){?>
+                    <?php if($this->user_type == 1){?>
                    		 <td align="left">
                     <input type="radio" <?php if(isset($u->allow_on_home) && $u->allow_on_home == "1"){?> checked <?php }?> value="1" name="opt_on_home_<?php echo $u->deal_id;?>" id = "opt_id_on_home_<?php echo $u->deal_id;?>" onChange ="allowOnHome('<?php echo $u->deal_id;?>', 1, this)" >Yes</input>
                     <input id = "opt_id_off_home_<?php echo $u->deal_id;?>" type="radio" <?php if(isset($u->allow_on_home) && $u->allow_on_home == "0"){?> checked <?php }?> value="0" name="opt_on_home_<?php echo $u->deal_id;?>" onChange ="allowOnHome('<?php echo $u->deal_id;?>', 0, this)"  >No</input>
