@@ -758,7 +758,7 @@
       <?php } ?>
    	<!--NEWS LETTER END-->
    	<!-- CHAT MANAGEMENT STARTS -->
-   	<?php if($this->session->get("chatuserid")) { ?>
+   	<?php if(!$this->session->get("chatuserid") && $this->session->get("chatuserid")) { ?>
    	 <li onclick="toggle(24)" <?php if(isset($this->chat_act)){ ?> class="menu_active"  <?php } ?> >
         
         <a class="menu_rgt"  href="javascript:;" title="<?php echo $this->Lang['CHAT_MNG']; ?>"><span class="faq_management fl"><?php echo $this->Lang['CHAT_MNG']; ?></span><img id="left_menubutton_24" src="<?php echo PATH; ?>images/plus_but.png" alt="<?php echo $this->Lang['IMAGE']; ?>" /></a>
@@ -768,7 +768,7 @@
 		 </ul>
       </li>
       <?php } ?>
-	 <!-- CHAT MANAGEEMENT STARTS -->
+	 <!-- CHAT MANAGEMENT ENDS -->
 
 	<?php } ?>
       </ul>  

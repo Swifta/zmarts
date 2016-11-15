@@ -13,7 +13,7 @@
                         <tr class="error_double">
                                 <td><label>Zenith Bank Account Number<span>*</span></label></td>
                                 <td><label>:</label></td>
-                                <td><input onChange="validateAcc(this.value)" type="text" name="payment_acc" maxlength="255" value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>"/>
+                                <td><input onChange="validateAcc(this.value)" type="text" name="payment_acc" maxlength="10" value="<?php if(!isset($this->form_error['payment_acc']) && isset($this->userPost['payment_acc'])){echo $this->userPost['payment_acc'];}?>"/>
 
                                 <em><?php if(isset($this->form_error['payment_acc'])){ echo $this->form_error["payment_acc"]; }?></em>
                                 

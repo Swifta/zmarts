@@ -91,6 +91,7 @@ class Admin_merchant_Controller extends website_Controller {
 							if($status){
 							        $this->pswd = $pswd;
 								$from = CONTACT_EMAIL;  
+								$this->name = $this->input->post('lastname');
 								$this->country_list = $this->merchant->getcountrylist();
 		                                                $this->city_list = $this->merchant->getCityList();
                                                                 $this->country_name = "";
@@ -114,7 +115,7 @@ class Admin_merchant_Controller extends website_Controller {
 								
 				                               	// echo $message;  exit;
 												
-								$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+								$this->merchant_message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
 				<p style = \"text-decoration: none; color: #666;\"> Your Merchant Account has been successfully created.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['email']."</a></p> 
 					<p style = \"text-decoration: none; color: #666;\"> Password is : ".$pswd."</p> 
@@ -122,8 +123,7 @@ class Admin_merchant_Controller extends website_Controller {
 				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p>
 				<p> You will be required to change your password on first login.</p>
 				<p> You will also be required to review and accept the terms and condition..</p
-				<p>Thanks,</p>
-				<p>--<a style = \"text-decoration: none; color: #666;\" href = \"".PATH."\">ZMART</a></p></div>";
+				</div>";
 				
 									if($_FILES['image']['name'])
 									{
@@ -204,6 +204,8 @@ class Admin_merchant_Controller extends website_Controller {
 										unlink($filename);*/
 									}
 									
+									$message = new View("themes/".THEME_NAME."/merchant_signup_mail_template");
+									
 									if(EMAIL_TYPE==2){				
 										/*if(email::smtp($from, $post->email, SITENAME ." - ".$this->Lang['CRT_MER_ACC'] , $message))
 										email::add_account_to_sendinblue("merchant", $post->email);*/
@@ -225,14 +227,14 @@ class Admin_merchant_Controller extends website_Controller {
 									$this->store_admin = 1;
 									//$message = new View("themes/".THEME_NAME."/mail_template");
 									
-									$message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
+									$this->merchant_message = "<div style=\"padding: 15px;\"><p > <b style = \"text-decoration: none; color: #666;\" >".$this->Lang['CONGRA']."! </b></p>
 				<p style = \"text-decoration: none; color: #666;\"> Your store has been successfully created.</p>
 				<p style = \"text-decoration: none; color: #666;\"> The email associated with your merchant store account is : <a style = \"text-decoration: none; color: #666;\">".$_POST['store_email']."</a></p> 
 				<p style = \"text-decoration: none; color: #666;\"> Password is : ".$store_admin_password."</p> 
 				<p style = \"text-decoration: none; color: #666;\"> Store name is : ".$storename."</p>
-				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p><p>You will also be required to accept the terms and conditions.</p>
-				<p>Thanks,</p>
-				<p>--<a style = \"text-decoration: none; color: #666;\" href = \"".PATH."\">ZMART</a></p></div>";
+				<p style = \"text-decoration: none; color: #666;\"> Click <a style = \"color: #666;\" href='".PATH."merchant-login.html' >here</a> to login to your account.</p><p> You will be required to change your password on first login.</p><p>You will also be required to accept the terms and conditions.</p></div>";
+				
+				$message = new View("themes/".THEME_NAME."/merchant_signup_mail_template");
 				
 									if(EMAIL_TYPE==2){				
 										email::smtp($from, $this->email, SITENAME ." - ".$this->Lang['CRT_STORE_ADMIN_ACC'] , $message);
@@ -872,6 +874,7 @@ class Admin_merchant_Controller extends website_Controller {
 								$user_detail = $this->merchant->user_details($shop_detail->current()->merchant_id);
 								//print_r($user_detail); exit;
 								$this->email = $user_detail->current()->email;
+								
 								$this->firstname = $user_detail->current()->firstname;
 								$this->country_list = $this->merchant->getcountrylist();
 		                                                $this->city_list = $this->merchant->getCityList();

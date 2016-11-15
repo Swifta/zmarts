@@ -24,7 +24,7 @@
                 <tr>
                 <td valign=top align="left"><?php echo $i + $first_item ; ?></td>
                 <td valign=top align="left"><?php echo ucfirst(htmlspecialchars($c->question)) ; ?></td>
-                <td valign=top align="left"><?php echo ucfirst(htmlspecialchars($c->answer)) ; ?></td> 
+                <td valign=top align="left"><?php echo ucfirst($c->answer) ; ?></td> 
                 <?php if(ADMIN_PRIVILEGES_FAQ_EDIT){?>
                 <td valign=top align="left">
 					<a href="<?php echo PATH.'faq/edit-faq/'.$c->faq_id;?>" class="editicon" title="<?php echo $this->Lang['EDIT_FAQ']; ?>"></a>

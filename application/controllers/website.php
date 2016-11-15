@@ -282,6 +282,8 @@ class Website_Controller extends Template_Controller
 					define('ADMIN_PRIVILEGES_NEWSLETTER_ADD', 1);
 					define('ADMIN_PRIVILEGES_NEWSLETTER_EDIT', 1);
 					define('ADMIN_PRIVILEGES_NEWSLETTER_BLOCK', 1);
+					define('ADMIN_PRIVILEGES_ALLOW_ON_HOME', 1);
+					
 					
 			}else if($this->user_type == "2"){ 
 				$this->moderator_privileges = $this->settings->get_admin_moderator_privileges($this->user_id);
