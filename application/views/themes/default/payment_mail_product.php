@@ -37,13 +37,6 @@ $this->UserName = $this->session->get("UserName");
 		
   ?>
 
-<!-- <tr height="63">
-    <td colspan="8" valign="middle" align="left"><div style="margin:0 auto;width:636px;"> <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>"> <img src="<?php echo THEME; ?>images/logo.png"  alt="<?php echo SITENAME; ?>"  /> </a> </div></td>
-  </tr>--> 
-<!--<tr>
-    <td colspan="8"><div style="width:636px;margin:0 auto;">
-        <div style="text-align:center;margin:0 0 20px;padding:10px 0;background:#e2e2e2;"> <strong style="font-size: 20px; font-weight:bold; font-family: Arial;color:#666;"><?php echo $this->Lang['SHIP_DET']; ?></strong> <b style="font-size: 12px; font-weight:bold; font-family: Arial;color:#666;"><?php echo $this->Lang['NOTE']; ?>:</b><b style="font-size: 12px; font-weight: normal;font-family: Arial;color:#666;"> <?php echo $this->Lang['THIS_SH_CON_FO_IT']; ?> </b> </div>
-      </div></td></tr>-->
 <tr>
 <td colspan="8">
   <table width="100%" cellpadding="0" align="center" cellspacing="0" border="0" bgcolor="#ffffff">
