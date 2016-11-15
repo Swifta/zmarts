@@ -8,21 +8,30 @@ $this->UserName = $this->session->get("UserName");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
 </head>
-
 <body>
 <table width="800" cellpadding="0" align="center" cellspacing="0" border="0" bgcolor="#ffffff">
 <tr height="63">
   <td colspan="8" valign="middle" align="left"><div style="margin:0 auto;width:636px;"> <a href="<?php echo PATH; ?>" title="<?php echo SITENAME; ?>"> <img src="<?php echo THEME; ?>images/logo.png"  alt="<?php echo SITENAME; ?>"  /> </a> </div></td>
 </tr>
- <tr  style="text-align:left;  padding:20px 15px 15px 15px; ;margin:0 0 20px; background:#e2e2e2;" >
-    <td colspan="7" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear Admin,</strong></td>
-  </tr>
-  <tr style="text-align:left; margin:0 0 20px; background:#e2e2e2;" >
-    <td colspan="7"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> An order has been made on <a style="text-decoration:none" href="<?php echo PATH; ?>"><?php echo SITENAME; ?></a> with the following details: </td>
-  </tr>
+
+<tr  style="text-align:left;  padding:20px 15px 15px 15px; ;margin:0 0 20px; background:#e2e2e2;" >
+  <td colspan="8" style="padding:30px 15px 15px 15px;" ><strong style="font-size: 13px; font-weight:bold; font-family: Arial;color:#666;">Dear Admin,</strong></td>
+</tr>
+<tr style="text-align:left; margin:0 0 10px; background:#e2e2e2;" >
+  <td colspan="8"  style="font-family:Arial, Helvetica, sans-serif; font-weight:normal; font-size:12px; padding: 0px 15px 15px 15px "> An order has been received with the following details. </td>
+</tr>
 <tr>
   <td>&nbsp;</td>
 </tr>
+
+<?php
+
+                                                         
+    $this->get_merchant_details = $this->creditcard_paypal_pay->get_usr_details();												
+    $merchant_firstneme = $this->get_merchant_details->current()->firstname;
+    $merchant_lastname = $this->get_merchant_details->current()->lastname;
+    $merchant_email = $this->get_merchant_details->current()->email; 
+	$merchant_phone =   $this->get_merchant_details->current()->phone_number; ?>
 
 <?php foreach($this->products_list as $p ) { 
   		$p_m = "-";
@@ -40,9 +49,12 @@ $this->UserName = $this->session->get("UserName");
 <tr>
 <td colspan="8">
   <table width="100%" cellpadding="0" align="center" cellspacing="0" border="0" bgcolor="#ffffff">
-  
-   <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
-    <td colspan="7" width="50%" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Customer Details</span></td>
+   
+   <tr>
+      <td colspan="8">&nbsp;</td>
+    </tr>
+   <tr height="30"    valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+    <td colspan="8" width="80%" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Customer Details</span></td>
   </tr>
    <tr>
     <td colspan="7" ><table class="printtable" cellpadding="0" cellspacing="0" width="100%;" >
@@ -62,14 +74,10 @@ $this->UserName = $this->session->get("UserName");
       </table></td>
   </tr>
   
-   <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
+    <tr height="30" valign="middle" style="background: #eaeaea;font-size: 12px; font-weight:bold; font-family: Arial;color:#666;">
       <td colspan="8" width="800" align="left" style="padding:10px; border-bottom: solid 1px #000000;"><span style="padding-right: 15px;">Shipping Details</span></td
               >
     </tr>
-    
-     
- 
-  
     <tr>
       <td>&nbsp;</td>
     </tr>
@@ -381,7 +389,6 @@ $this->UserName = $this->session->get("UserName");
   </tr>
 </table>
 </body>
-
 </html>
 
-<!--<?php echo "admin_mail_product_admin"; ?>-->
+<!--<?php echo "payment-product-admin email template"; ?>-->
