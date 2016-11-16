@@ -643,7 +643,7 @@ class Admin_payment_Model extends Model
 					
 				}
 				else{
-					$conditions .= " AND transaction.type != 5";
+					//$conditions .= " AND transaction.type != 5";
 				}
 			if($_GET){ 
 				$search_key = strip_tags($search_key);
@@ -695,6 +695,8 @@ class Admin_payment_Model extends Model
                          
                          } 
 		else{
+			
+			
 		       if(($type=="")||($type=="mail")) {
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
 			$conditions = "transaction.id >= 0 ";
