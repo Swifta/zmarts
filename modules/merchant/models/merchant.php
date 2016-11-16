@@ -2138,6 +2138,7 @@ class Merchant_Model extends Model
 
 	public function get_transaction_list($type = "", $search_key = "", $offset = "", $record = "",$sort_type = "",$param = "",$trans_type="",$today="", $startdate = "", $enddate = "")
 	{
+		
 		$sort = "ASC";
 			if($sort_type == "DESC" ){
 				$sort = "DESC";
@@ -2178,12 +2179,26 @@ class Merchant_Model extends Model
 	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
                         }
 				
-		          if($trans_type){
+		          /*if($trans_type){
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
 						//$conditions .= " AND transaction.type != 5 ";
-					}
+					}*/
+					
+					
+					
+					if($trans_type){
+					if($trans_type==7){
+						$conditions .= " AND transaction.type = 7";
+					} else {
+						$conditions .= " AND transaction.type = 5";
+					}	
+					
+				}
+				else{
+					$conditions .= " AND transaction.type != 5";
+				}
 
 			//$result = $this->db->query("select *,users.firstname as firstname from transaction join users on users.user_id=transaction.user_id join auction on auction.deal_id=transaction.auction_id where $conditions and auction.merchant_id = $this->user_id and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR auction.deal_title like '%".$search_key."%' ) limit $offset,$record");
                         $result = $this->db->select("*,users.firstname as firstname")
@@ -2198,12 +2213,26 @@ class Merchant_Model extends Model
 
 			if(($type=="")||($type=="mail")) {
 				$conditions = "transaction.id >= 0 and auction.merchant_id = '$this->user_id'";
-				if($trans_type){
+				/*if($trans_type){
 						$conditions .= " AND transaction.type = 5 ";
 					}
 				else{
 						//$conditions .= " AND transaction.type != 5 ";
-					}
+					}*/
+					
+					
+					
+					if($trans_type){
+					if($trans_type==7){
+						$conditions .= " AND transaction.type = 7";
+					} else {
+						$conditions .= " AND transaction.type = 5";
+					}	
+					
+				}
+				else{
+					////$conditions .= " AND transaction.type != 5 ";
+				}
 
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by auction.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by auction.shipping_fee $sort");
 
@@ -2242,12 +2271,15 @@ class Merchant_Model extends Model
 
 	public function get_transaction_product_list($type = "", $search_key = "", $offset = "", $record = "",$type1 = "",$sort_type = "",$param = "",$trans_type = "",$limit="",$today="", $startdate = "", $enddate = "")
 	{
+		
 		$limit1 = $limit !=1 ?" limit $offset,$record":"";
 		$sort = "ASC";
 			if($sort_type == "DESC" ){
 				$sort = "DESC";
 			}
 		 if($_GET){
+			 
+			 
 			 $search_key = strip_tags(addslashes($search_key));
 			  if(($type=="")||($type=="mail")) {
 		                $conditions = "transaction.id > 0";
@@ -2283,7 +2315,7 @@ class Merchant_Model extends Model
 	                        $conditions .= " and ( transaction.transaction_date between $startdate_str and $enddate_str )";	
                         }
 				
-		        if($trans_type){
+		       /* if($trans_type){
 						
 							$conditions .= " AND transaction.type = 5";
 						
@@ -2291,7 +2323,19 @@ class Merchant_Model extends Model
 					}
 				else{
 						$conditions .= " AND transaction.type != 5";
-					}
+					}*/
+					
+					if($trans_type){
+					if($trans_type==7){
+						$conditions .= " AND transaction.type = 7";
+					} else {
+						$conditions .= " AND transaction.type = 5";
+					}	
+					
+				}else{
+					//$conditions .= " AND transaction.type != 5 ";
+				}
+				
 			//$result = $this->db->query("select *,users.firstname as firstname, transaction.shipping_amount as shippingamount from transaction join users on users.user_id=transaction.user_id join product on product.deal_id=transaction.product_id where $conditions and product.merchant_id = $this->user_id  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR product.deal_title like '%".$search_key."%' ) $limit1 ");
                         $result = $this->db->select("*,users.firstname as firstname, transaction.shipping_amount as shippingamount")
                                     ->from("transaction")
@@ -2300,30 +2344,63 @@ class Merchant_Model extends Model
                                     ->where($conditions. " and product.merchant_id = ".$this->user_id."  and ( users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key.
                                             "%' OR product.deal_title like '%".$search_key."%') ".$limit1)
                                     ->get();
+		
+		    
 		}
 		else{
+			
+			
+			
 				$conditions = "transaction.id >= 0 and product.merchant_id = '$this->user_id' ";
-				if($trans_type){
+				/*if($trans_type){
 						
 							$conditions .= " AND transaction.type = 5";
 						
 					}
 				else{
 						$conditions .= " AND transaction.type != 5";
-					}
+					}*/
+					
+					
+					if($trans_type){
+					if($trans_type==7){
+						$conditions .= " AND transaction.type = 7";
+					} else {
+						$conditions .= " AND transaction.type = 5";
+					}	
+					
+				}else{
+					//$conditions .= " AND transaction.type != 5 ";
+				}
+		       
+					
+					
+					
 			if(($type=="")||($type=="mail")) {
 		             $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
 		       }
 		      else {
 				$conditions = " payment_status = '$type' and product.merchant_id = '$this->user_id'";
-				if($trans_type){
+				/*if($trans_type){
 						
 							$conditions .= " AND transaction.type = 5";
 						
 					}
 				else{
 						$conditions .= " AND transaction.type != 5";
-					}
+					}*/
+					
+					
+					if($trans_type){
+					if($trans_type==7){
+						$conditions .= " AND transaction.type = 7";
+					} else {
+						$conditions .= " AND transaction.type = 5";
+					}	
+					
+				}else{
+					//$conditions .= " AND transaction.type != 5 ";
+				}
 		           $sort_arr = array("username"=>" order by users.firstname $sort","title"=>" order by product.deal_title $sort","quantity"=>" order by transaction.quantity $sort_type","amount"=>" order by transaction.amount $sort","refamount"=>" order by transaction.referral_amount $sort","commision"=>" order by transaction.deal_merchant_commission $sort","bidamount" => "order by transaction.bid_amount $sort","shipping_fee" =>"order by product.shipping_fee $sort");
 		             }
 			if(isset($sort_arr[$param])){
@@ -2336,6 +2413,7 @@ class Merchant_Model extends Model
 						->where($conditions. " ".$limit1)
 						//->limit($record, $offset)
 						->get();
+		
 		}
 		return $result;
 	}
