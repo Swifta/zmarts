@@ -50,7 +50,7 @@
                 }
         }
         if(a == rdbtn.length) {
-                alert("No way you submit it without choose shipping method");
+                alert("Please choose shipping option(s)");
                 return false;
         } 
 
@@ -545,7 +545,7 @@ function validate() {
                                 $aramex = $ship->aramex;
                          } ?>
                        <tr>
-                                <td><label>Shipping method <span>*</span></label></td>
+                                <td><label>Shipping option(s) <span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <table style="border: 1px solid #999; border-collapse: collapse; width:242px;">
@@ -904,7 +904,7 @@ function validate() {
                     <td><label><?php echo $this->Lang["START_DATE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" id="startdate" name="start_date" readonly="readonly"  value="<?php if(!isset($this->form_error["start_date"])&&isset($this->userPost["start_date"])){ echo $this->userPost["start_date"]; }?>" />
+                    	<input type="text" id="startdate" name="start_date" readonly  value="<?php if(!isset($this->form_error["start_date"])&&isset($this->userPost["start_date"])){ echo $this->userPost["start_date"]; }?>" />
                         <em><?php if(isset($this->form_error["start_date"])){ echo $this->form_error["start_date"]; }?></em>
                     </td>
                 </tr>
@@ -913,7 +913,7 @@ function validate() {
                     <td><label><?php echo $this->Lang["END_DATE"]; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" name="end_date" id="enddate" readonly="readonly" value="<?php if(!isset($this->form_error["end_date"])&&isset($this->userPost["end_date"])){ echo $this->userPost["end_date"]; }?>" />
+                    	<input type="text" name="end_date" id="enddate" readonly value="<?php if(!isset($this->form_error["end_date"])&&isset($this->userPost["end_date"])){ echo $this->userPost["end_date"]; }?>" />
                     	<em><?php if(isset($this->form_error["end_date"])){ echo $this->form_error["end_date"]; }?></em>
                     </td>
                 </tr>
@@ -1079,7 +1079,7 @@ function check_validation(){
 		}
 	}
 	if(a == rdbtn.length) {
-		alert("No way you submit it without choose shipping method");
+		alert("Please select shipping option");
 		return false;
 	} 
 	if ((document.getElementById('perquantity').checked)) {   

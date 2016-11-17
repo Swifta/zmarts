@@ -548,7 +548,7 @@ input[type=text],input[type=password]{
                                 
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="submit_accs">Enter <strong>NUBAN</strong> account name : </label>
+                                            <label for="submit_accs">Enter your NUBAN account number: </label>
                                             <input type = "textbox" name="acctnums" id="acctnums" maxlength="10" onkeypress="return isNumberKey(event)" placeholder="Enter Nuban Account Number"  class="form-control bdr" autofocus required/>
                                         </div>
                                         <input type="submit"  name="submit" value="Proceed" id="submit_accs" class="swifta_button2" onclick="show_gifs(this);" >

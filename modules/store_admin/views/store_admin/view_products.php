@@ -135,7 +135,7 @@
                 </tr>
                 <?php } } ?>
                 <tr>
-                         <th valign="top" align="left" width="20%">Shipping method</th><th valign="top">:</th><td align="left"><?php if($d->shipping == 1){ echo "Free Shipping"; } elseif($d->shipping == 2) { echo "Flat Shipping"; } elseif($d->shipping == 3) {echo "Per product base Shipping"; } elseif($d->shipping == 4) { echo "Per quantity base Shipping"; } elseif($d->shipping == 5) { echo "Aramex Shipping"; } ; ?></td>
+                         <th valign="top" align="left" width="20%">Shipping option(s)</th><th valign="top">:</th><td align="left"><?php if($d->shipping == 1){ echo "Free Shipping"; } elseif($d->shipping == 2) { echo "Flat Shipping"; } elseif($d->shipping == 3) {echo "Per product base Shipping"; } elseif($d->shipping == 4) { echo "Per quantity base Shipping"; } elseif($d->shipping == 5) { echo "Aramex Shipping"; } ; ?></td>
                 </tr>
                 
                 

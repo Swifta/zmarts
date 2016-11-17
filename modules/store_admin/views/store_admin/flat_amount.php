@@ -3,7 +3,7 @@
 	function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
-              alert('Shipping Method Should be Mandatory, You should choose any one of the shipping method');
+              alert('Shipping options Should be Mandatory, You should choose any one of the shipping option');
               $('.processing_image').hide();
               return false;
           } 

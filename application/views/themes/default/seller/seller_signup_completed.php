@@ -147,7 +147,7 @@ function previewTheme(s){
 function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
-              alert('Shipping Method Should be Mandatory, You should choose any one of the shipping method');
+              alert('Shipping option Should be Mandatory, You should choose any one of the shipping option');
               return false;
           }
 }

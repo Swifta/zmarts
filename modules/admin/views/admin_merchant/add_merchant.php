@@ -19,7 +19,7 @@
 	function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
-              alert('Shipping Method Should be Mandatory, You should choose any one of the shipping method');
+              alert('Shipping option Should be Mandatory, You should choose any one of the shipping option');
               return false;
           }
 }
@@ -97,7 +97,7 @@
   
                        <!-- shipping methods -->
                         <tr>
-                                <td><label>Shipping method<span>*</span></label></td>
+                                <td><label>Shipping options<span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td>
                                  <table style="border: 1px solid #999; border-collapse: collapse; width:242px;">

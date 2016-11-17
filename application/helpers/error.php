@@ -24,7 +24,7 @@ class error {
 					break;
 					
 				case 'validate_shipping':
-					$my_error[$key] = "Please check at least one shipping method.";
+					$my_error[$key] = "Please check at least one shipping option.";
 					break;
 					
 				case 'check_required':

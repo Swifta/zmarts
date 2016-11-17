@@ -518,7 +518,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                 
                                 
                                 
-                                    <label>Shipping method <span style="color:red;">*</span>:</label>
+                                    <label>Shipping option <span style="color:red;">*</span>:</label>
                                                     <div class="">
                     			    <table style=""> 
                                     <?php if(isset($this->form_error['free']) || isset($this->form_error['flat'])|| isset($this->form_error['product']) || isset($this->form_error['quantity'])){?>
@@ -1130,7 +1130,7 @@ $('#signup2').submit(function(e) {
 function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
-              alert('Shipping Method Should be Mandatory, You should choose any one of the shipping method');
+              alert('Shipping option Should be Mandatory, You should choose any one of the shipping option');
               return false;
           }
 }

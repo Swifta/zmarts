@@ -85,7 +85,7 @@
       
       <?php foreach($this->shipping_data as $ship){ ?>
                                 <tr>
-                                <th align="left" >Shipping method </th>
+                                <th align="left" >Shipping option(s) </th>
                                 <th>:</th>
                                 <td>
                                         <?php if($this->free_shipping_setting == 1 && $ship->free ==1){ ?>

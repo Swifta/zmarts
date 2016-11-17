@@ -624,7 +624,7 @@ function validate() {
                                 $aramex = $ship->aramex;
                          } ?>
                        <tr>
-                                <td><label>Shipping method <span>*</span></label></td>
+                                <td><label>Shipping options <span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td>
                                 <table style="border: 1px solid #999; border-collapse: collapse; width:242px;">

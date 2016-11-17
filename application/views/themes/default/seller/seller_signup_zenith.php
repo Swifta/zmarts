@@ -464,7 +464,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
           <ul>
           <li><div>
                                      <span class="asterisks_input">  </span>
-                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo htmlentities($_POST['f_name'],  ENT_QUOTES,  "utf-8");}?>" autofocus required="required"  />
+                                    <input class="swifta_input" name="f_name" type="text" id="fname"  tabindex="1"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" value="<?php if(isset($_POST['f_name'])){echo htmlentities($_POST['f_name'],  ENT_QUOTES,  "utf-8");}?>" autofocus required  />
                                    <em id="f_name_err"><?php if(isset($this->form_error['f_name'])){echo $this->form_error['f_name'];}?></em>
                                 </div></li>
           <li><div>
@@ -482,7 +482,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
           <em id="addr_err"><?php if(isset($this->form_error['addr'])){echo $this->form_error['addr'];}?></em>
           </div></li>
           <li><div class="" style="margin-top:15px;"><span class="asterisks_input">  </span>
-                                    <select name="gender" class="swifta_input" tabindex="6" required="required" value="<?php if(isset($_POST['gender'])){echo htmlentities($_POST['gender'],  ENT_QUOTES,  "utf-8");}?>">
+                                    <select name="gender" class="swifta_input" tabindex="6" required value="<?php if(isset($_POST['gender'])){echo htmlentities($_POST['gender'],  ENT_QUOTES,  "utf-8");}?>">
                                             <option value="-99"><?php echo $this->Lang['SEL_GENDER']; ?></option>
                                            
                                              <option  title="<?php echo $this->Lang['MALE']; ?>" value="M" ><?php echo $this->Lang['MALE']; ?></option>
@@ -491,7 +491,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     </select>
                                     <em id="gender_err"><?php if(isset($this->form_error['gender'])){echo $this->form_error['gender'];}?></em>
                                 </div></li>                     
-          <li><div id="CitySD_log"><span class="asterisks_input">  </span><select name="branch_no" onfocus="load_branches(this)" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo htmlentities($_POST['branch_no'],  ENT_QUOTES,  "utf-8");}?>" tabindex="6"  class="swifta_input" required="required">
+          <li><div id="CitySD_log"><span class="asterisks_input">  </span><select name="branch_no" onfocus="load_branches(this)" id="id_z_branch" value="<?php if(isset($_POST['branch_no'])){echo htmlentities($_POST['branch_no'],  ENT_QUOTES,  "utf-8");}?>" tabindex="6"  class="swifta_input" required>
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_BRANCH']; ?></option>
                                             <?php
                                             //echo $this->branch_options;
@@ -499,7 +499,7 @@ input[type=text],input[type=password]{border:#ccc solid 0px; border-bottom: 1px 
                                     </select>
                                    <em id="branch_no_err"><?php if(isset($this->form_error['branch_no'])){echo $this->form_error['branch_no'];}?></em></div></li>                        
           <li><div id="CitySD_log"><span class="asterisks_input">  </span><span class="asterisks_input">  </span>
-                                      <select name="class_code" onfocus="load_classes(this)" id = "id_z_class" class="swifta_input" tabindex="7" required="required" value ="<?php if(isset($_POST['class_code'])){echo htmlentities($_POST['class_code'],  ENT_QUOTES,  "utf-8");}?>">
+                                      <select name="class_code" onfocus="load_classes(this)" id = "id_z_class" class="swifta_input" tabindex="7" required value ="<?php if(isset($_POST['class_code'])){echo htmlentities($_POST['class_code'],  ENT_QUOTES,  "utf-8");}?>">
                                             <option value="-99"><?php echo $this->Lang['ZENITH_SEL_CLASS']; ?></option>
                                             <?php
                                             //echo $this->class_code_options;
@@ -1086,7 +1086,7 @@ function previewTheme(s){
 function atleast_onecheckbox(e) {
           if ($("input[type=checkbox]:checked").length === 0) {
               e.preventDefault();
-              alert('Shipping Method Should be Mandatory, You should choose any one of the shipping method');
+              alert('Shipping option Should be Mandatory, You should choose any one of the shipping option');
               return false;
           }
 }

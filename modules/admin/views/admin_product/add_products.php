@@ -744,7 +744,7 @@ function toggle() {
                         ?>
                         
                        <tr>
-                                <td><label>Shipping method <span>*</span></label></td>
+                                <td><label>Shipping options <span>*</span></label></td>
                                 <td><label>:</label></td>
                                 <td id="change_shipping" >
                                 <table style="border: 1px solid #999; border-collapse: collapse; width:242px;">
@@ -1089,7 +1089,7 @@ function check_validation(){
 		}
 	}
 	if(a == rdbtn.length) {
-		alert("Please select a shipping method.");
+		alert("Please select a shipping option.");
 		return false;
 	} 
 					

@@ -258,7 +258,7 @@ $content_text = array(
 
 			"SEARCH_DEALS" => "Search Deals",
 
-			"DEAL_TITLE" => "Deal Title",
+			"DEAL_TITLE" => "Deal Name",
 
 			"DEAL_DESCC" => "Deal Description",
 
@@ -1297,7 +1297,7 @@ $content_text = array(
 
 			"EDIT_PRODUCT"=>"Edit Product",
 
-			"PRODUCT_TITLE"=>"Product Title",
+			"PRODUCT_TITLE"=>"Product Name",
 
 			"PRODUCT_DESCC"=>"Product Description",
 
@@ -1332,7 +1332,7 @@ $content_text = array(
 
 			"PAYMENT_TRAN"=>"Payment Transactions",
 
-			"SEARCH_TRAN"=>"Search by Deal Title, Customer Name",
+			"SEARCH_TRAN"=>"Search by Deal Name, Customer Name",
 
 			"NO_PRODUCTS"=>"No Products Found",
 			
@@ -2202,9 +2202,9 @@ $content_text = array(
 
 			"FUND_REQ_DET" => "Fund Request Details",
 
-			"SEARCH_TRAN_PRODUCT"=>"Search by Product Title, Customer Name",
+			"SEARCH_TRAN_PRODUCT"=>"Search by Product Name, Customer Name",
 
-			"SEARCH_TRAN_AUCTION"=>"Search by Auction Title, Customer Name",
+			"SEARCH_TRAN_AUCTION"=>"Search by Auction Name, Customer Name",
 
 			/* 07 -03 -2013 */
 
@@ -2534,7 +2534,7 @@ $content_text = array(
 
 			"ORDER_BEEN_CANC" => "This order's been cancelled!",
 
-			"AUC_TIT" => "Auction title",
+			"AUC_TIT" => "Auction Name",
 
 			"DELETE3" => "delete",
 
@@ -2848,11 +2848,11 @@ $content_text = array(
 
 			"ALL2" => "all",
 
-			"SORT_B_DEAL_TIT" => "Sort By  Deal Title",
+			"SORT_B_DEAL_TIT" => "Sort By  Deal Name",
 
 			"SORT_B_BID_AMOU" => "Sort By  Bid Amount",
 
-			"AUC_TIT2" => "Auction Title",
+			"AUC_TIT2" => "Auction Name",
 
 			"BIDING_PRICE" => "Biding Price",
 
@@ -3311,9 +3311,9 @@ $content_text = array(
 			
 			"FLAT_SHIP" => "Shipping module settings updated successfully !",
 			
-			"PLZ_CONT_ADMIN_SHIPP_METHODS" => "Please contact the administrator for enabling shipping method. Only then the 'Submit' button will be visible.",
+			"PLZ_CONT_ADMIN_SHIPP_METHODS" => "Please contact the administrator for enabling shipping option. Only then the 'Submit' button will be visible.",
 			
-			"ADMIN_SHIPP_METHODS" => "Based on Selected Merchant Shipping Method Will Display",
+			"ADMIN_SHIPP_METHODS" => "Based on selected merchant shipping option will display",
 			
 			//"PLZ_CONT_ADMIN_SHIPP_METHODS" => "Please contact the administrator for enabling shipping method.",
 			
@@ -3857,7 +3857,7 @@ $content_text = array(
 			
 			"MENTION_SPECIFICATION" => 'Choose "Yes" to select the available specifications for your product.',
 			
-			"MENTION_SHIPPING" => 'Choose the shipping method available for your product',
+			"MENTION_SHIPPING" => 'Choose the shipping option available for your product',
 			
 			"MENTION_COLOR" => 'Choose "Yes" to select the available colours for your product',
 			

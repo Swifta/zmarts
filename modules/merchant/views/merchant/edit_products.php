@@ -550,7 +550,7 @@
                                         $aramex = $ship->aramex;
                          } ?>
         <tr>
-          <td><label>Shipping method <span>*</span></label></td>
+          <td><label>Shipping options <span>*</span></label></td>
           <td><label>:</label></td>
           <td><table style="border: 1px solid #999; border-collapse: collapse; width:242px;">
               <?php if($this->free_shipping_setting == 1 && $free == 1){ $submit = "1"; ?>

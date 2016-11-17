@@ -489,7 +489,7 @@ $content_text = array(
 
 "FI_REQ_TIM_OUT" => "Final request - time is running out!",
 
-"AUC_TIT" => "Auction title",
+"AUC_TIT" => "Auction Name",
 
 "OR_B_CANCEL" => "Your order has been cancelled",
 
@@ -663,7 +663,7 @@ $content_text = array(
 
 "DELI_T_SHIPP_ADD" => "Delivery time may vary on shipping address",
 
-"PRODUCT_TITLE"=>"Product title",
+"PRODUCT_TITLE"=>"Product Name",
 
 "SAVE" => "Save",
 
@@ -1748,7 +1748,7 @@ $content_text = array(
  
  "PRODUCT_IMG"=>"Product Image",
  
- "DEAL_TITLE" => "Deal Title",
+ "DEAL_TITLE" => "Deal Name",
  
  "DEAL_PRICE" => "Deal Price",
  
@@ -1760,7 +1760,7 @@ $content_text = array(
  
  "BRANCH_IMAGE" => "Branch Image",
  
- "BRANCH_TITLE" => "Branch Title",
+ "BRANCH_TITLE" => "Branch Name",
  
  "BRANCH_DESC" => "Branch Description",
  
@@ -1860,7 +1860,7 @@ $content_text = array(
 
 "Z_ACC_OPEN" => "Click to open up a Zenith Bank Account",
 	
-"ACCT_NUMBER" => "NUBAN Account Number",
+"ACCT_NUMBER" => "Enter your NUBAN account number",
     
 "ENTER_ACCOUNT_NUMBER" => "ENTER YOUR NUBAN A/C NUMBER",
 

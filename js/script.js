@@ -688,7 +688,7 @@ if(users == ''){ var users = -1;  }
 		},
 		error:function()
 		{
-			$("#change_shipping").html('No Shipping shipping method so add under this merchant .');
+			$("#change_shipping").html('No Shipping shipping option  so add under this merchant .');
 		}
 	});
 }
@@ -715,7 +715,7 @@ if(users == ''){ var users = -1;  }
 		},
 		error:function()
 		{
-			$("#change_shipping").html('No Shipping shipping method so add under this merchant .');
+			$("#change_shipping").html('No Shipping shipping option so add under this merchant .');
 		}
 	});
 }
