@@ -2147,9 +2147,9 @@ $pdf->Output('voucher.pdf', 'I');
 		 
 		  if($_POST){
 			  
-			 $this->session->set("merchant_reg_nuban", $_POST['nuban']);
+			/* $this->session->set("merchant_reg_nuban", $_POST['nuban']);
 			 $this->session->set("firstname", "Demo Inc.");
-			 echo 1;exit;
+			 echo 1;exit;*/
 			  
 			   $this->session->set("merchant_reg_nuban", "");
          	   $this->session->set("firstname", "");
