@@ -640,12 +640,14 @@ function validatesignup()
 	 
 	 if(val === ""){
 		$errorField.text("");
+		document.signup.submit();
 	 	return true;
 	 }
 	 
 	 val = $.trim(val);
 	 if(val === null){
 		$errorField.text('');
+		document.signup.submit();
 	 	return true;
 	 }
 	 
