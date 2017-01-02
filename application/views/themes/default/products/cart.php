@@ -698,7 +698,7 @@
                 </div>
         </div>
         
-        <div id="show" class="popup_block5" style="display:none;">                                                                   
+        <div id="show" class="popup_block5" style="display:nonex;">                                                                   
                 <?php foreach($this->shipping_address as $s) { ?> 
                         <form method="post" id="submit_changes">
                                 <div class="sign_up_outer"> 
@@ -732,10 +732,11 @@
                                                                         <select class="select required" name="country" onchange="return city_change_merchant(this.value);">
                                                                                 <?php foreach ($this->all_country_list as $countryL) { ?>
                                                                                 <option <?php if ($countryL->country_id == $s->ship_country) {
-                                                                                echo 'Selected="true"';
+                                                                                echo 'selected="selected"';
                                                                                 } ?> value="<?php echo $countryL->country_id; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
                                                                                 <?php } ?>
-                                                                        </select>      
+                                                                        </select>  
+                                                                        <input type="hidden" name="country_name" value="Nigeria" />
                                                                 </div>
                                                                 </li>    
                                                                 <li class="frm_clr">
@@ -751,7 +752,7 @@
                                                                         <select name="city" class="select required" id="CitySD">
                                                                         <?php foreach ($this->all_city_list as $CityL) { ?>
                                                                           <?php if ($CityL->country_id == $s->ship_country) { ?>
-                                                                        <option <?php if ($CityL->city_id == $s->ship_city) { echo 'Selected="true"';  } ?> 
+                                                                        <option <?php if ($CityL->city_id == $s->ship_city) { echo 'selected="selected"';  } ?> 
                                                                         value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                         <?php } } ?>
                                                                         </select>
@@ -784,6 +785,10 @@
                              <?php if ($total_amount != 0) { ?>  
                              
 <form name="payment" method="POST"  id="cashForm" enctype="multipart/form-data" action="<?php echo PATH; ?>cart_checkout.html" > 
+
+    <input name="friend_name"  type="hidden" value="xxxyyy" >
+	<input name="friend_email"   type="hidden" value="xxxyyy@zzz.com" >
+	<input name="friend_gift"  value="0" type="hidden">
                         
     <div class="storecredit_document"   <?php  if(!$this->session->get('user_auto_key')) {  ?>  style="display:none;" <?php } ?> >
     <?php  if($this->session->get('user_auto_key')) {  ?> 
@@ -815,33 +820,13 @@
                         </form>
                       <?php } ?>                        
                         </div>
-                    <!--Blog content ends-->
+                   
              </div>
       </div>
-</div>
- <script>
+     
+     <script>
+	 	var forms = document.forms;
+		console.log("Total forms: "+forms.length);
+     </script>
+
  
-$(document).ready(function(){
-        //$('#country_select').val("Nigeria").attr('readonly', 'readonly');
-	var url = 'payment_product/CitySelectionPayment/25';
-	$.ajax(
-	{
-		type:'POST',
-		url:url,
-		cache:false,
-		async:true,
-		global:false,
-		dataType:"html",
-		success:function(check)
-		{
-		   $("#CitySD").html(check);
-		},
-		error:function()
-		{
-			//alert('No city has been added under this country.');
-		}
-	});
-});
- 
- 
- </script>

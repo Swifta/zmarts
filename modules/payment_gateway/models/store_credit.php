@@ -8,6 +8,16 @@ class Store_credit_Model extends Model
 		$this->session = Session::instance();	
 		$this->UserID = $this->session->get("UserID");
 		$this->UserName = $this->session->get("UserName");
+		
+			(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition = 'product.deal_prime_value as deal_value':$this->deal_value_condition = 'product.deal_value';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_value_condition_field = 'product.deal_prime_value':$this->deal_value_condition_field = 'product.deal_value';
+		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition = 'product.deal_prime_percentage as deal_percentage':$this->deal_percentage_condition = 'product.deal_percentage';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_percentage_condition_field = 'product.deal_prime_percentage':$this->deal_percentage_condition_field = 'product.deal_percentage';
+		
+		
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition = 'product.deal_prime_savings as deal_savings':$this->deal_saving_condition = 'product.deal_savings';
+		(strcmp($_SESSION['Club'], '1') == 0)?$this->deal_saving_condition_field = 'product.deal_prime_savings':$this->deal_saving_condition_field = 'product.deal_savings';
 	}
 
 	/** GET PRODUCT PAYMENT DETAILS  **/
@@ -16,7 +26,7 @@ class Store_credit_Model extends Model
 	{
 		//$result = $this->db->query("select * from product  join category on category.category_id=product.category_id where deal_status = 1 and category.category_status = 1 and deal_id = $deal_id ");
 
-                    $result = $this->db->select("*")
+                    $result = $this->db->select("*, ".$this->deal_value_condition)
                     ->from("product")
                     ->join("category", "category.category_id", "product.category_id")
                     ->where(
@@ -32,7 +42,7 @@ class Store_credit_Model extends Model
 
 	/** INSERT TRANSACTION DETAILS TO TRANSACTION TABLE - CASH ON DELIVERY **/
 
-	public function insert_cash_delivery_transaction_details($deal_id = "", $referral_amount = "", $qty = "",$type ="", $captured = "",$purchase_qty = "",$paymentType = "",$product_amount = "",$merchant_id = "",$product_size = "",$product_color = "",$tax_amount = "",$shipping_amount = "",$shipping_methods = "",$post="",$TRANSACTIONID="",$bulk_discount="",$free_gift="",$store_credit_id="",$store_credit_period="",$bulk_discount="",$free_gift="",$prime_customer=0,$bulk_discount1="",$total_bulk_discount="",$product_offer="",$gift_type="",$instalment_value="",$installment_paid="",$main_storecreditid="")
+	public function insert_cash_delivery_transaction_details($deal_id = "", $referral_amount = "", $qty = "",$type ="", $captured = "",$purchase_qty = "",$paymentType = "",$product_amount = "",$merchant_id = "",$product_size = "",$product_color = "",$tax_amount = "",$shipping_amount = "",$shipping_methods = "",$post="",$TRANSACTIONID="",$bulk_discount="",$free_gift="",$store_credit_id="",$store_credit_period="",$bulk_discount="",$free_gift="",$prime_customer=0,$bulk_discount1="",$total_bulk_discount="",$product_offer="",$gift_type="",$instalment_value="",$installment_paid="",$main_storecreditid="", $is_initial = false)
 	{
 	
                 $merchant_commission = $this->db->select("merchant_commission")->from("users")->where(array("user_id" => $merchant_id))->get();
@@ -72,12 +82,17 @@ class Store_credit_Model extends Model
                                 $ip_country_name="Other";
                                 $ip_city_name="Other";
 		
-		if($installment_paid==0) {	
-			$result = $this->db->insert("storecredit_transaction",array("user_id" => $this->UserID , "product_id" => $deal_id, "firstname" => $this->UserName, "lastname" => $this->UserName, "order_date" => time(), "amount" => $product_amount, "payment_status" => 'Pending', "pending_reason" => 'None', "country_code" => COUNTRY_CODE, "currency_code" => CURRENCY_CODE,"transaction_id" => $TRANSACTIONID,"referral_amount" => $referral_amount,"transaction_type" => $paymentType, "quantity" => $qty, "type" => $type, "captured" => $captured,"transaction_date" =>time(),'deal_merchant_commission' => $commission_amount,"friend_gift_status" => $post->friend_gift,"product_size" => $product_size, "product_color"=>$product_color,"shipping_amount"=>$shipping_amount, "tax_amount"=>$tax_amount, "shipping_methods"=>$shipping_methods, "aramex_currencycode"=>$aramex_currencycode, "aramex_value"=>$aramex_value,"ip"=>$ip,"ip_country_code" => $ip_country_code, "ip_country_name" => $ip_country_name, "ip_city_name"=>$ip_city_name,"bulk_discount" =>$bulk_discount,"gift_id" =>$free_gift,"store_credit_id"=>$store_credit_id,"store_credit_period"=>$store_credit_period,"bulk_discount" =>$bulk_discount,"gift_id" =>$free_gift,"prime_customer" =>$prime_customer,"bulk_buy"=>$bulk_discount1,"total_discount"=>$total_bulk_discount,"main_storecreditid"=>$main_storecreditid,"storecredit_amount"=>$instalment_value,"storecredit_transaction_date"=>time()));
+		if($is_initial) {	
+		
+		
+			$result = $this->db->insert("storecredit_transaction",array("user_id" => $this->UserID , "product_id" => $deal_id, "firstname" => $this->UserName, "lastname" => $this->UserName, "order_date" => time(), "amount" => $product_amount, "payment_status" => 'Pending', "pending_reason" => 'Installment', "country_code" => COUNTRY_CODE, "currency_code" => CURRENCY_CODE,"transaction_id" => $TRANSACTIONID,"referral_amount" => $referral_amount,"transaction_type" => $paymentType, "quantity" => $qty, "type" => $type, "captured" => $captured,"transaction_date" =>time(),'deal_merchant_commission' => $commission_amount,"friend_gift_status" => $post->friend_gift,"product_size" => $product_size, "product_color"=>$product_color,"shipping_amount"=>$shipping_amount, "tax_amount"=>$tax_amount, "shipping_methods"=>$shipping_methods, "aramex_currencycode"=>$aramex_currencycode, "aramex_value"=>$aramex_value,"ip"=>$ip,"ip_country_code" => $ip_country_code, "ip_country_name" => $ip_country_name, "ip_city_name"=>$ip_city_name,"bulk_discount" =>$bulk_discount,"gift_id" =>$free_gift,"store_credit_id"=>$store_credit_id,"store_credit_period"=>$store_credit_period,"bulk_discount" =>$bulk_discount,"gift_id" =>$free_gift,"prime_customer" =>$prime_customer,"bulk_buy"=>$bulk_discount1,"total_discount"=>$total_bulk_discount,"main_storecreditid"=>$main_storecreditid,"storecredit_amount"=>$instalment_value,"storecredit_transaction_date"=>time()));
 
 			$trans_ID = $result->insert_id();
 			
+			
+		
 			$this->db->insert("storecredit_shipping_info", array("transaction_id" => $trans_ID , "user_id" => $this->UserID, "adderss1" => $post->adderss1 , "address2" => $post->address2, "city" => $post->city ,"state" => $post->state ,"country" => $post->country,"name" => $post->shipping_name ,"postal_code" => $post->postal_code ,"phone" => $post->phone,"shipping_type" =>1,"shipping_date" => time()));
+			
 
 			//for($q=1; $q <= $qty; $q++){
 				$coupon_code = text::random($type = 'alnum', $length = 8);
@@ -112,6 +127,8 @@ class Store_credit_Model extends Model
 			//$this->db->query("update storecredit_transaction set storecredit_amount = storecredit_amount + $instalment_value,storecredit_transaction_date = ".time()." where main_storecreditid = $main_storecreditid ");
 			//$this->db->update("storecredit_transaction",array("storecredit_amount"=>"storecredit_amount+$instalment_value,"storecredit_transaction_date"=>time()),array("main_storecreditid"=>$main_storecreditid));
 			 $this->db->update("storecredit_transaction", array("storecredit_amount" =>new Database_Expression("storecredit_amount +".$instalment_value),"storecredit_transaction_date"=>time()), array("main_storecreditid" => $main_storecreditid )); 
+			 
+			  $this->db->update("users", array("monthly_installment_amt" =>new Database_Expression("monthly_installment_amt - ".$instalment_value)) ,array("user_id" => $this->UserID )); 
                          
 		}
 		$check_final_instalment = $this->db->select("duration_period,installments_paid")->from("store_credit_save")->where(array("storecredit_id"=>$main_storecreditid))->get();
@@ -120,13 +137,16 @@ class Store_credit_Model extends Model
 				//$this->db->query("update users set monthly_installment_amt = monthly_installment_amt - $instalment_value where user_id = $this->UserID");
 				//$this->db->query("update storecredit_transaction set payment_status = 'Completed' where  main_storecreditid = $main_storecreditid ");
                                 
-                                $this->db->update("users", array("monthly_installment_amt" =>new Database_Expression("monthly_installment_amt -".$instalment_value)) ,array("user_id" => $this->UserID )); 
+                               // $this->db->update("users", array("monthly_installment_amt" =>new Database_Expression("monthly_installment_amt - ".$instalment_value)) ,array("user_id" => $this->UserID )); 
                                 $this->db->update("storecredit_transaction", array("payment_status" =>'Completed'),array("main_storecreditid" => $main_storecreditid )); 
                          
 			}
 		}
 		
-		$this->db->update("store_credit_save",array("credit_status"=>4,"installments_paid"=>$installment_paid+1),array("storecredit_id"=>$main_storecreditid));
+		
+		if(!$is_initial){
+			$this->db->update("store_credit_save",array("credit_status"=>4,"installments_paid"=>$installment_paid+1),array("storecredit_id"=>$main_storecreditid));
+		}
 		
 		return $trans_ID;
 		
@@ -155,7 +175,7 @@ class Store_credit_Model extends Model
 
 	public function get_deals_details($deal_id = "")
 	{
-            $result = $this->db->select()->from("product")
+            $result = $this->db->select("*, ".$this->deal_value_condition)->from("product")
                     ->join("stores", "stores.store_id", "product.shop_id")
                     ->join("category", "category.category_id", "product.category_id")
                     ->where(array("deal_status" => 1, "category.category_status" => 1,  "store_status" => 1,
@@ -193,7 +213,7 @@ class Store_credit_Model extends Model
 	public function get_products_coupons_list($transaction = "",$deal_id = "")
 	{
 
-		$result = $this->db->select('*','storecredit_shipping_info.adderss1 as saddr1','storecredit_shipping_info.address2 as saddr2','users.phone_number','storecredit_transaction.id as trans_id','storecredit_transaction.transaction_id as transactionid','users.address1 as addr1','users.address2 as addr2','users.phone_number as str_phone','storecredit_transaction.shipping_amount as shipping','storecredit_transaction.prime_customer')->from("storecredit_shipping_info")
+		$result = $this->db->select('*','storecredit_shipping_info.adderss1 as saddr1','storecredit_shipping_info.address2 as saddr2','users.phone_number','storecredit_transaction.id as trans_id','storecredit_transaction.transaction_id as transactionid','users.address1 as addr1','users.address2 as addr2','users.phone_number as str_phone','storecredit_transaction.shipping_amount as shipping','storecredit_transaction.prime_customer', $this->deal_value_condition)->from("storecredit_shipping_info")
                                 ->where(array("shipping_type"=>1,"storecredit_shipping_info.user_id" => $this->UserID,"storecredit_transaction.id" =>$transaction,"storecredit_transaction.product_id" =>$deal_id))
                                 ->join("users","users.user_id","storecredit_shipping_info.user_id")
                                 ->join("storecredit_transaction","storecredit_transaction.id","storecredit_shipping_info.transaction_id")
@@ -202,6 +222,8 @@ class Store_credit_Model extends Model
                                 ->join("city","city.city_id","storecredit_shipping_info.city")
                                 ->orderby("shipping_id","DESC")
                                 ->get();
+								
+								
 		return $result;	
                 
 	}
@@ -232,8 +254,11 @@ class Store_credit_Model extends Model
 //                        . " join city on city.city_id=s.city join stores on stores.store_id = d.shop_id "
 //                        . "join users as u on u.user_id=s.user_id  "
 //                        . "where shipping_type = 1 and t.transaction_id ='$trans_id' and d.merchant_id ='$merchant_id' $condition order by shipping_id DESC "); 
+
 //		    
-                    $result = $this->db->select("select *,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id")
+
+
+                    $result = $this->db->select("*, d.deal_prime_value as deal_value, s.country as scountry, s.phone , s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id")
                     ->from("storecredit_shipping_info as s")
                     ->join("storecredit_transaction as t", "t.id", "s.transaction_id")
                     ->join("product as d", "d.deal_id", "t.product_id")
@@ -244,7 +269,10 @@ class Store_credit_Model extends Model
                             $merchant_id."' ".$condition)
                     ->orderby("shipping_id","DESC")
                     ->get();   
+					
                     return $result;
+					
+					
              
 	}
 	

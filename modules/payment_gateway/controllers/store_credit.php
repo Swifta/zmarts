@@ -15,6 +15,7 @@ class Store_credit_Controller extends Layout_Controller
 	$cart_merchant=array();
 	$cart_merchant=array();
     $merchant_id_array=array();
+	
 	foreach($_SESSION as $key=>$value)
         {
             if(($key=='product_cart_id'.$value)){
@@ -56,10 +57,13 @@ class Store_credit_Controller extends Layout_Controller
         }
 
 		if($_POST){
-
 			$referral_amount = 0;
 			$prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
 		        $this->userPost = utf8::clean($this->input->post());
+				
+				$this->is_initial = $this->userPost["install_no"] == 0;
+				
+				
 			$product_color="";
 			$paymentType = "Storecredit";
 			$captured = 0;
@@ -81,13 +85,20 @@ class Store_credit_Controller extends Layout_Controller
                         $store_credit_id = 0;
                         $store_credit_period = 0;
                         $instalment_value =0;
-
+						
+					
+					
                     $deal_id = $_SESSION[$key];
                     $main_storecreditid = $this->session->get('main_storecreditid'.$deal_id);
+					
                     $item_qty = $this->session->get('product_cart_qty'.$deal_id);
                     $this->session->set('product_cart_qty'.$deal_id,$item_qty);
                     $amount = $this->input->post("amount");
+					
+					
 			        $this->deals_payment_deatils = $this->cash->get_product_payment_details($deal_id);
+					
+					
 
                                 if(count($this->deals_payment_deatils) == 0){
                                         unset($_SESSION[$key]);
@@ -125,6 +136,7 @@ class Store_credit_Controller extends Layout_Controller
                                 $this->gift_type=$this->cash->get_product_gift_type($merchant_id,$deal_id,$gift_offer);
 								$gift_type=isset($this->gift_type[0]->gift_type)?$this->gift_type[0]->gift_type:0;
 
+
                                  if($shipping_methods  == 1){
                                         $shipping_amount = 0;
                                 }  elseif($shipping_methods  == 2){
@@ -158,6 +170,8 @@ class Store_credit_Controller extends Layout_Controller
                                         
                                 }
                                 
+								
+								
                                 
 								if($store_credit_period!=""){ 
 									 $pay_amount1 = $instalment_value = $taxdeal_amount/$store_credit_period;
@@ -173,7 +187,16 @@ class Store_credit_Controller extends Layout_Controller
 											}
 												$this->free_gift=isset($this->free_gift[0]->gift_offer)?$this->free_gift[0]->gift_offer:0;
 												
-                                $transaction = $this->cash->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 1, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$store_credit_id,$store_credit_period,$bulk_discount,$this->free_gift,$prime_customer,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type,$instalment_value,$installment_paid,$main_storecreditid);
+												
+									if($this->is_initial){
+										$instalment_value = 0;
+									}
+										
+									
+                                $transaction = $this->cash->insert_cash_delivery_transaction_details($deal_id, $referral_amount, $item_qty, 1, $captured, $purchase_qty,$paymentType,$product_amount,$merchant_id,$product_size,$product_color,$tax_amount,$shipping_amount,$shipping_methods, arr::to_object($this->userPost),$TRANSACTIONID,$bulk_discount,$this->free_gift,$store_credit_id,$store_credit_period,$bulk_discount,$this->free_gift,$prime_customer,$bulk_discount1,$total_bulk_discount,$product_offer,$gift_type,$instalment_value,$installment_paid,$main_storecreditid, $this->is_initial);
+								
+				   	
+								
 
 				$status = $this->do_captured_transaction($captured, $deal_id,$item_qty,$transaction);
 			//}
@@ -204,13 +227,17 @@ class Store_credit_Controller extends Layout_Controller
 
 	/** DOCAPTURED PAYMENT, UPDATED AMOUNT TO REFERED USERS, POST PURCHASE DEALS TO FACEBOOK WALL and SEND MAIL **/
 
-	public function do_captured_transaction($captured = "", $deal_id = "", $qty = "",$transaction = "")
+	public function do_captured_transaction($captured = "", $deal_id = "", $qty = "",$transaction = "", $is_init = false)
 	{
 
 	        $from = CONTACT_EMAIL;
 		$this->products_list = $this->cash->get_products_coupons_list($transaction,$deal_id);
+		
+		
 		$this->product_size = $this->cash->get_shipping_product_size();
 		$this->product_color = $this->cash->get_shipping_product_color();
+		
+		
 
                 $this->merchant_id = $this->products_list->current()->merchant_id;
                 $this->get_merchant_details = $this->cash->get_merchant_details($this->merchant_id);

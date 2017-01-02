@@ -189,10 +189,16 @@ class Pay_later_Model extends Model
 	
 	public function get_products_merchant_list($trans_id="",$merchant_id = "", $type="") 
 	{
-		$condition = "AND t.type != 5";				
+		$c = array();
+		$c["transaction.type !="] = 5;				
 		if($type){
-			$condition = " AND t.type = 5 ";
+			$c["transaction.type"] = 5;	
 		}
+		
+		$c["shipping_type"] = 1;
+		$c["transaction.transaction_id"] = $trans_id;
+		$c["product.merchant_id"] = strip_tags(addslashes($merchant_id));
+		$c["shipping_type"] = 1;
 		
 		
 		
@@ -201,16 +207,19 @@ class Pay_later_Model extends Model
 			
 		/**$result = $this->db->query("select *,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period  from product join transaction as t on product.deal_id=t.product_id join shipping_info as s on t.id=s.transaction_id  join city on city.city_id=s.city join stores on stores.store_id = product.shop_id join users as u on u.user_id=s.user_id  where shipping_type = 1 and t.transaction_id ='$trans_id' and product.merchant_id ='".
                 strip_tags(addslashes($merchant_id))."' $condition order by shipping_id DESC ");  **/
-                $result = $this->db->select("*,$this->deal_value_condition,s.adderss1 as saddr1,s.address2 as saddr2,u.phone_number,t.id as trans_id,stores.address1 as addr1,stores.address2 as addr2,stores.phone_number as str_phone,t.shipping_amount as shipping,stores.city_id as str_city_id,t.bulk_discount,t.store_credit_period")
+                $result = $this->db->select('*',$this->deal_value_condition,'shipping_info.adderss1 as saddr1','shipping_info.address2 as saddr2','users.phone_number','transaction.id as trans_id','stores.address1 as addr1','stores.address2 as addr2','stores.phone_number as str_phone','transaction.shipping_amount as shipping','stores.city_id as str_city_id','transaction.bulk_discount','transaction.store_credit_period')
                             ->from("product")
-                            ->join("transaction as t","product.deal_id","t.product_id")
-                            ->join("shipping_info as s","t.id","s.transaction_id")
-                            ->join("city","city.city_id","s.city")
+                            ->join("transaction","product.deal_id","transaction.product_id")
+                            ->join("shipping_info","transaction.id","shipping_info.transaction_id")
+                            ->join("city","city.city_id","shipping_info.city")
                             ->join("stores","stores.store_id","product.shop_id")
-                            ->join("users as u","u.user_id","s.user_id")
-                            ->where("shipping_type = 1 and t.transaction_id ='" .$trans_id . "' and product.merchant_id =" .strip_tags(addslashes($merchant_id)) . " " .$condition)
-                            ->orderby("shipping_id", "DESC")
-                        ->get();
+                            ->join("users","users.user_id","shipping_info.user_id")
+							->where($c)
+                          // ->where("shipping_type = 1 and transaction.transaction_id = $trans_id and product.merchant_id =" .strip_tags(addslashes($merchant_id)) . " " .$condition)
+                            ->orderby("shipping_info.shipping_id", "DESC")
+                       ->get();
+					  
+					   
 		
 		
 		return $result;

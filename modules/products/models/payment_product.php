@@ -175,7 +175,7 @@ class Payment_product_Model extends Model
 /* GET STORE CREDIT PRODUCT DETAILS */
 	public function get_store_credits_product($productid="",$durationid="")
 	{
-		$result = $this->db->from("product")
+		$result = $this->db->select("*, ".$this->deal_value_condition)->from("product ")
                             ->join("duration","duration.duration_merchantid","product.merchant_id")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->where(array("duration_id"=>$durationid,"deal_id"=>$productid,"store_status" => 1))
@@ -185,8 +185,10 @@ class Payment_product_Model extends Model
 	/* INSERT STORE CREDIT PRODUCTS */
 	public function insert_storecredit_products($deal_id="",$deal_value="",$product_qty="",$merchant_id="",$shipping_amount="",$shipping_methods="",$durationid="",$duration_period="",$product_size="",$product_color="",$installment_value="")
 	{
-		$this->db->update("users", array("monthly_installment_amt"=>new Database_Expression('monthly_installment_amt + '.$installment_value)), array("user_id "=> $this->UserID));
+		$s_c_a = $installment_value*$duration_period;
+		$this->db->update("users", array("monthly_installment_amt"=>new Database_Expression('monthly_installment_amt + '.$s_c_a)), array("user_id"=> $this->UserID));
 		//$this->db->query("update users set monthly_installment_amt = monthly_installment_amt + $installment_value where user_id = $this->UserID");
+		
 		$result = $this->db->insert("store_credit_save",array("productid"=>$deal_id,"product_value"=>$deal_value,"product_quantity"=>$product_qty,"sizeid"=>$product_size,"colorid"=>$product_color,"durationid"=>$durationid,"duration_period"=>$duration_period,"shipping_method"=>$shipping_methods,"shipping_amount"=>$shipping_amount,"merchantid"=>$merchant_id,"userid"=>$this->UserID,"credit_status"=>1,"document_no"=>$this->UserID));
 		$storecredit_ID = $result->insert_id();
 		return $storecredit_ID;
@@ -258,6 +260,7 @@ public function get_cart_products1($deal_id = "")
 	/* check user limit installment */
 	public function check_user_instalment_limit($installment_value="")
 	{
+		
             $result = $this->db->select("monthly_installment_amt")->from("users")
                     ->where(array("user_id"=>$this->UserID))->get();
 		//$result = $this->db->query("select monthly_installment_amt from users where user_id = $this->UserID");
@@ -280,4 +283,28 @@ public function get_cart_products1($deal_id = "")
 		
 		//echo MONTHLY_INSTALLMENT_LIMIT." ";
 	}
+	
+	public function get_user_instalment_limit()
+	{
+		
+            $result = $this->db->select("monthly_installment_amt")->from("users")
+                    ->where(array("user_id"=>$this->UserID))->get();
+		if(isset($result)) {
+			$balance_instalment_amt = MONTHLY_INSTALLMENT_LIMIT - $result->current()->monthly_installment_amt;
+			if($balance_instalment_amt > 0) { 				//100 - 80 = 20
+				$balance = $balance_instalment_amt;
+			} elseif($balance_instalment_amt < 0) { 			// 80-50 = -30
+				$balance = 0;
+			} elseif($balance_instalment_amt ==0) {  // 100 -100 =0
+				$balance =0;
+			}
+			
+			return $balance;
+		}
+		return 0;
+		
+		
+	}
+	
+
 }

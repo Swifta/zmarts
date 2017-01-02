@@ -323,7 +323,7 @@ function validate() {
 		   
                     <td><label>:</label></td>
                     <td>
-                    	<input type="text" name="title" tabindex="1" autofocus maxlength="255" value="<?php if(!isset($this->form_error["title"])&&isset($this->userPost["title"])){ echo $this->userPost["title"]; }?>" autofocus />
+                    	<input type="text" name="title" tabindex="1" autofocus maxlength="255" value="<?php if(!isset($this->form_error["title"])&&isset($this->userPost["title"])){ echo $this->userPost["title"]; }?>" />
                       	<em><?php if(isset($this->form_error["title"])){ echo $this->form_error["title"]; }?></em>
                    	</td>
                 </tr>
@@ -442,7 +442,7 @@ function validate() {
                     </td>
                 </tr>
                 
-                <tr style="display:none;">
+                <tr style="display:nonex;">
                     <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
@@ -586,7 +586,7 @@ function validate() {
                 	@Live
                  -->
                 
-                   <tr style="display:none;">
+                   <tr style="display:nonex;">
                     <td><label><?php echo $this->Lang['STORE_CRED']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
@@ -966,9 +966,8 @@ function validate() {
                 
                 
                 </table>
-                </div>
-                <fieldset style="display:none;">
-					<legend><?php echo $this->Lang["FR_STR_TRANS_ONLY"]; ?></legend>
+            <fieldset style="display:nonex;">
+			  <legend><?php echo $this->Lang["FR_STR_TRANS_ONLY"]; ?></legend>
 					<table>
 						<?php $this->merchant_duration = $this->merchant->get_duration_values(); // store credits options ?>
 						<?php if((!isset($this->form_error['duration'])) && (!isset($_POST['duration']))){ ?>
@@ -1026,7 +1025,7 @@ function validate() {
 		   
                     <td><label>:</label></td>
                     <td>
-                    	<input type="radio" name="offer" value="0" onclick="empty_offers();" >None</input>
+                    	<input type="radio" name="offer" value="0" onclick="empty_offers();" >None
                         <input type="radio" name="offer" value="0" onclick="bulk_discount();" checked  style="display:none" >
                         <input type="radio" name="offer" value="0" onclick="bulk_discount();" checked  style="display:none" >
                     	<input type="radio" name="offer" value="1"  onclick="bulk_discount();" <?php if(!isset($this->form_error["offer"])&&isset($this->userPost["offer"])&& $this->userPost["offer"]==1){?>checked<?php } ?>><?php echo $this->Lang["BULK_DISCOUNT"]; ?>
@@ -1181,8 +1180,8 @@ function validate() {
                 
 					</table>
 					
-                </div>
-                <?php if($submit == "1"){ ?>
+              
+          <?php if($submit == "1"){ ?>
                 <tr>
                     <td></td>
                     <td></td>
@@ -1196,9 +1195,9 @@ function validate() {
                     </td>
                 </tr>
                 <?php } ?>
-        </div>
+       
            
-        </form>
+      </form>
         
     </div>
     <div class="content_bottom"><div class="bot_left"></div><div class="bot_center"></div><div class="bot_rgt"></div></div>

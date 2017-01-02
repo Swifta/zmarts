@@ -219,9 +219,10 @@
             <div class="pay_br payleft_block" style="border:0;"> 
             <?php  if(($this->session->get('user_auto_key')) && ($this->session->get("is_store_credit"))) { ?>
             <?php /* store credit products starts here */ ?>                                         
-                        <div class="cart_table clearfix new_store_transaction">
+                        <div class="cart_table clearfix new_store_transaction" style="display:nonex;">
 							 <h1>Store Credit Product Transaction</h1>
-                            <table class="mcart_table_inner" width="100%" cellspacing="0" cellpadding="5" border="0" >                                        
+                             <p style="padding:10px;font: 13px arial;color: #5a9c59;">Store credit purchase request(s) sent successfully. Please await approval email from merchant.</p>
+                           <table style="display:none" class="mcart_table_inner" width="100%" cellspacing="0" cellpadding="5" border="0" >                                        
                                 <thead class="pay_titlebg">
                                     <tr>                                            
                                         <th  align="left"><?php echo $this->Lang['IMAGE']; ?></th>
@@ -470,7 +471,7 @@
                         </tr>
                 
                 </tfoot>
-                </table>
+                </table> 
                 </div> 
                 <?php } ?>
                <?php /* store credit products ends here */ ?> 
@@ -744,8 +745,8 @@
                                  <p>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>
                                 <?php if ($CityL->city_id == $this->session->get('shipping_city')) {  echo ucfirst($CityL->city_name); } ?>
-                                <?php } ?> , <?php echo ucfirst($this->session->get('shipping_country')); ?> </p>
-                                <p>Zipcode : <?php echo $this->session->get('shipping_postal_code'); ?></p>
+                                <?php } ?> , <?php echo ucfirst($this->session->get('shipping_country_name')); ?> </p>
+                                <p>Zip Code : <?php echo $this->session->get('shipping_postal_code'); ?></p>
                                 <p>Phone : <?php echo $this->session->get('shipping_phone'); ?></p>
                                 
                                 </address>                         
@@ -786,7 +787,7 @@
                                                                         <select class="select" name="country" onchange="return city_change_merchant(this.value);">
                                                                                 <?php foreach ($this->all_country_list as $countryL) { ?>
                                                                                 <option <?php if ($countryL->country_id == $s->ship_country) {
-                                                                                echo 'Selected="true"';
+                                                                                echo 'selected="selected"';
                                                                                 } ?> value="<?php echo $countryL->country_id; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
                                                                                 <?php } ?>
                                                                         </select>      

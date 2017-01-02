@@ -1256,7 +1256,7 @@ function clear_filter(main,sub,sec,third,fild,t)
 }
 
 function city_change_merchant(country){
-    //alert(country);
+   
     var urlx = Path+"/payment_product/CitySelectionPayment/"+country;
    $.ajax({
         url: urlx,

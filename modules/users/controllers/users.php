@@ -162,7 +162,7 @@ class Users_Controller extends Layout_Controller {
                   common::message(1, $this->Lang["SUCC_SIGN"]);
                   //url::redirect(PATH."users/my-account.html");
                   $this->UserID = $this->session->get("UserID");
-                  $_SESSION['Club'] = 0;
+                  $_SESSION['Club'] = 1;
                 }
                 else if($status == 2){
                     //welcome back user
@@ -205,7 +205,7 @@ class Users_Controller extends Layout_Controller {
 				
 				/*
 					TODO
-					Need to send both emarketplace and club membership signup emails
+					Need to send zmart and club membership signup emails
 					@Live
 				*/
 					
@@ -1063,16 +1063,22 @@ class Users_Controller extends Layout_Controller {
 	
 	 /** CHECK EMAIL EXIST **/
 
-	public function email_available($email)
+	public function email_available($email, $async = false)
 	{
 		
 		$this->user_details = $this->users->get_user_bought_product($email);
 	    if($email == $this->session->get('user_email')){
 	    $exist = 0;
 	    }else{
-		$exist = $this->users->exist_email($email);
+			$exist = $this->users->exist_email($email);
 		}
-		return ! $exist;
+		
+		if(!$async){
+			return !$exist;
+		}else{
+			echo !$exist;
+			exit;
+		}
 	}
 	
 	/** MY CONNECTIONS **/
@@ -2009,7 +2015,7 @@ $pdf->Output('voucher.pdf', 'I');
   
   }elseif($status && strcmp($status, "-1") == 0){
   
-		common::message(-1, "Sothing wen't wrong when openning up a Zenith bank account. Please try again.");
+		common::message(-1, "Something wen't wrong when openning up a Zenith bank account. Please try again.");
 		url::redirect(PATH);
   
   }elseif($status){
@@ -2142,10 +2148,122 @@ $pdf->Output('voucher.pdf', 'I');
 	   exit;
   }
   
+public function check_club_membership_domain($email, $async = true){
+	  $this->session->set("is_salary_account_email", "0");
+			if($email){
+				/*
+					Invoke salary account user email domain checker API.
+					@Live
+				*/
+				$domain = substr($email, strpos($email, '@')+1, strlen($email));
+				if(!$domain){
+					if($async){
+						echo  -1;
+						exit;
+					}else{
+						return -1;
+					}
+				}
+				if($domain == "swifta.com"){
+					$this->session->set("is_salary_account_email", "1");
+					if($async){
+						echo  1;
+						exit;
+					}else{
+						return 1;
+					}
+				}else{
+				 	 if($async){
+						echo  -2;
+						exit;
+					}else{
+						return -2;
+					}
+				}
+			}
+			if($async){
+				echo  -1;
+				exit;
+			}else{
+				return -1;
+			}
+			
+		}
+		
+public function validate_customer_salary_account($nuban, $email){
+	$this->session->set("set_as_prime_customer", "0");
+	
+	$r = $this->email_available($email,false);
+	if($r != "1"){
+		echo -4;
+		exit;
+	}
+	$domain_status = $this->check_club_membership_domain($email, false);
+	if($domain_status == "1" ){
+		if($nuban){
+		 $r = $this->users->check_zenith_account_used($nuban);
+		 if($r && $r != "1"){
+			 echo -3;
+			 exit;
+		 }
+		 
+		/*
+			Invoke salary account validation API.
+			@Live
+		*/
+		
+		
+		
+		$this->session->set("set_as_prime_customer", "1");
+		echo 1;
+		exit;
+	}
+	}else{
+		echo $domain_status;
+		exit;
+	}
+	echo -1;
+	exit;
+	
+}
+		
+		public function cancel_account_otp_verification(){
+			$this->session->set("set_as_prime_customer", "0");
+			echo 1;
+			exit;
+		}
+		
+		public function account_otp_verification($otp = ""){
+			
+			/*
+				If OTP valid, set session var set_as_prime_customer to 2, echo 1 and exit.
+				else echo -1 and exit.
+			*/
+			if($this->session->get("set_as_prime_customer") == "1" && $otp && $otp == 12343){
+				$this->session->set("set_as_prime_customer", "2");
+				echo 1;
+				exit;
+			}else{
+				echo -1;
+				exit;
+			}
+		}
+	
+  
   public function merchant_registration_validation(){
 	   
 		 
 		  if($_POST){
+			 
+			
+			$salary_acc_verif = $this->session->get("set_as_prime_customer");
+			if($salary_acc_verif == "2"){
+				echo 1;
+				exit;
+			}
+			
+			
+			  
 			  
 			/* $this->session->set("merchant_reg_nuban", $_POST['nuban']);
 			 $this->session->set("firstname", "Demo Inc.");
@@ -2163,6 +2281,7 @@ $pdf->Output('voucher.pdf', 'I');
 				  if(isset($r) && $r == "1"){
 					   $fun_resp = null;
 					try{
+						  
 						
 						  $arg = array();
 						  $arg['userName'] = ZENITH_TEST_USER;
@@ -2170,6 +2289,7 @@ $pdf->Output('voucher.pdf', 'I');
 						  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 						  $arg['account_number'] = $nuban;
 						  //$fun_resp = $soap->VerifyAccount($arg);
+						 
                                                   $fun_resp = $soap->VerifyMerchantAccount($arg);
 							
 					  } catch(Exception $e){
@@ -2178,6 +2298,7 @@ $pdf->Output('voucher.pdf', 'I');
 					  }
 				  
 				  $response = (array)$fun_resp->VerifyMerchantAccountResult;
+				  
 				  
 					  if($response){
 						  $nuban_response = (isset($response['errorMessage']))?-1:1;

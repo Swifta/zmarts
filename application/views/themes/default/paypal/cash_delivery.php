@@ -127,7 +127,7 @@
                                                                  <select name="country" id="ship_countrycod1" onchange="return city_change_payment(this.value);">
                                                                  <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
                                                                  <?php foreach($this->all_country_list as $countryL){ ?>
-                                                                <option <?php if ($countryL->country_name == $this->session->get('shipping_country')) { echo 'Selected="true"'; } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
+                                                                <option <?php if ($countryL->country_id == $this->session->get('shipping_country')) { echo 'selected="selected"'; } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                                  </div>
@@ -139,7 +139,7 @@
                                                                 <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                                                 <?php 
                                                                 foreach($this->all_city_list as $CityL){ ?>
-                                                                <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'Selected="true"'; } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
+                                                                <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'Selected="true"'; } ?> value="<?php echo $CityL->city_name; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                                 <select name="city" tabindex="5" class="CityPAY_new required">

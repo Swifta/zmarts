@@ -70,7 +70,9 @@
   
 <form name="payment" method="POST" id="commentForm" action="<?php echo PATH;?>store_credit/storecredit">  
 	<input name="friend_name"  type="hidden" value="xxxyyy" >
+    
 	<input name="friend_email"   type="hidden" value="xxxyyy@zzz.com" >
+    <input type="hidden" name="install_no" value="<?php echo $this->installment_no;?>" />
 	<input name="friend_gift"  value="0" type="hidden">
 	<div class="payment_form_block clearfix">
                                             <h3 class="type_form_title"  style="display:none"><?php echo $this->Lang['SHIPPING_INFO']; ?></h3>
@@ -93,13 +95,14 @@
                                                                 <label><?php echo $this->Lang['ADDR2']; ?> :</label>
                                                                 <div class="fullname"><input id="ship_addr_cod2" name="address2" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php echo ucfirst($this->session->get('shipping_address2')); ?>" size="40"  maxlength="256"/></div>
                                                         </li>
+                                                        
                                                         <li>
                                                                  <label><?php echo $this->Lang['COUNTRY']; ?> :<span class="form_star">*</span></label>
                                                                  <div class="fullname">
                                                                  <select name="country" id="ship_countrycod1" onchange="return city_change_payment(this.value);">
                                                                  <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
                                                                  <?php foreach($this->all_country_list as $countryL){ ?>
-                                                                <option <?php if ($countryL->country_name == $this->session->get('shipping_country')) { echo 'Selected="true"'; } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
+                                                                <option <?php if ($countryL->country_id == $this->session->get('shipping_country')) { echo 'selected="selected"'; } ?> value="<?php echo $countryL->country_name; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                                  </div>
@@ -111,14 +114,14 @@
                                                                 <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
                                                                 <?php 
                                                                 foreach($this->all_city_list as $CityL){ ?>
-                                                                <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'Selected="true"'; } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
+                                                                <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'selected="selected"'; } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                                 <select name="city" tabindex="5" class="CityPAY_new required">
                                                                 <option value="">Select state</option>
                                                                 <?php 
                                                                 foreach($this->all_city_list as $CityL){ ?>
-                                                                <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'Selected="true"'; } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
+                                                                <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) { echo 'selected="selected"'; } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                 <?php } ?>
                                                                 </select>
                                                                 </div>
@@ -156,6 +159,7 @@
                 <?php } ?>
                 
                 <input name="prime_customer" id="IS_PRIME_CUSTOMER" value="<?php echo $this->session->get('prime_customer');?>" type="hidden" >
+                
                           
                             
                              
@@ -170,5 +174,7 @@
                                 <div class="payment_terms_outer"><p class="terms-conditons-text" id="terms1"> <span class="fl font_myriad_pro"><?php echo $this->Lang['BY_CLICK']; ?> </span> <a onclick="show_dis_tc();" title="<?php echo $this->Lang['TEMRS']; ?>" class="font_myriad_pro mt5" tabindex="2"><?php echo $this->Lang['TEMRS']; ?>.</a></p> </div>
                                 <?php } ?>
                                                 </div>
-                                                </div>                                                
+                                                </div> 
+                                                                                          
                                         </form>
+                                        

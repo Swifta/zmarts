@@ -1,94 +1,5 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
-<script>
-	function is_valid_phone(form){
-		var url = "<?php echo PATH?>products/validphone";
-		var phone = $('#ship_phone_p1').val();
-		$.post(url, {"phone":phone}, function success(status){
-			$('#id_err_phone').text('');
-			if(status == "0"){
-				$('#id_err_phone').text('Invalid Phone Number. Enter your phone number (e.g. 070...,080...)');
-				return false;
-			}else if(status == "-1"){
-				$('#id_err_phone').text('Invalid initial digits. Begin with 070, or 080.');
-				return false;
-			} else{
-				
-				 form.submit();
-				
-			}
-			});
-		
-	}
-	
-    $(document).ready(function(){
-         $(".CityPAY_new").hide();
-        
-        $("#cashForm").validate({
-            ignore: ".ignore",
-            messages: {
-                friend_name: {
-                    required: "<?php echo $this->Lang['PLS_ENT_FRD_NAM']; ?>"                         
-                },
-                friend_email: {
-                    required: "<?php echo $this->Lang['PLS_ENT_FRD_EMAIL']; ?>", 
-                    email : "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                             
-                },
-                shipping_name: {
-                    required: "<?php echo $this->Lang['PLS_ENT_NAM']; ?>"                         
-                },		  
-                adderss1: {
-                    required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
-                },		    
-                state : {
-                    required: "<?php echo $this->Lang['PLS_ENT_STATE1']; ?>"                         
-                },
-                postal_code : {
-                    number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
-                },
-                phone : {
-                    required: "<?php echo $this->Lang['PLZ_ETR_PHO']; ?>",
-                    number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
-                },
-                storecredit : {
-                    required: "Please upload store credit document",
-                },
-            },
-            submitHandler: function(form) {
-                $('div#submit').hide();
-				is_valid_phone(form);
-				
-               
-            }
-        });
-        $("#shipping_address1").change(function() { 
-                $(".CityPAY").show();
-	     $(".CityPAY_new").hide();
-            if($(this).is(':checked')) {  
-                $("#ship_nam_p1").val($("#ship_nam").val());
-                $("#ship_addr_p2").val($("#ship_address2").val());
-                $("#ship_postal_code_p1").val($("#ship_zipcode").val());
-                $("#ship_addr_p1").val($("#ship_address1").val());
-                $("#ship_city_p1").val($("#ship_city").val());
-                $(".CityPAY_new").val($("#ship_city").val());
-                city_change_payment($("#ship_country").val());
-                $("#ship_country_p1").val($("#ship_country").val());
-                $("#ship_state_p1").val($("#ship_state").val());
-                $("#ship_phone_p1").val($("#ship_phone").val());
-            } else {
-                $("#ship_nam_p1").val('');
-                $("#ship_addr_p2").val('');
-                $("#ship_postal_code_p1").val('');
-                $("#ship_addr_p1").val('');
-                $("#ship_state_p1").val('');
-                $("#ship_city_p1").val('');
-                city_change_payment('-99');
-                $(".CityPAY_new").val('');
-                $("#ship_country_p1").val('');
-                $("#ship_phone_p1").val('');
-            }
-        }); 
-    });
-</script> 
+ 
     <div class="payment_form_block clearfix">
         <div class="shipping_copy_address">
             <input type="checkbox" id="shipping_address1"  name="shipping_checkbox" <?php if($this->session->get('shipping_checkbox')){ ?> checked <?php  } ?>tabindex="1" />
@@ -112,13 +23,13 @@
                             <?php if($this->session->get('shipping_city')){ ?>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>                                
                                     <option <?php if ($CityL->city_id == $this->session->get('shipping_city')) {
-                                        echo 'Selected="true"';
+                                        echo 'selected="selected"';
                                     }  ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                 <?php } ?>
                                 <?php } else { ?>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>                                
                                     <option <?php if ($CityL->city_url == $this->input->get('city')) {
-                                        echo 'Selected="true"';
+                                        echo 'selected="selected"';
                                     }  ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                 <?php } ?>
                                 
@@ -130,13 +41,16 @@
                     
                     <li class="left">
                         <label><?php echo $this->Lang['ADDR1']; ?> :<span class="form_star">*</span></label>
-                        <div class="fullname"><input id="ship_addr_p1" name="address1" tabindex="3" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address1')){ echo $this->session->get('shipping_address1'); } ?>" class="required" maxlength="100"/></div>
+                        <div class="fullname"><input class="ship_addr_p1 required" name="address1" tabindex="3" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" value="<?php if($this->session->get('shipping_address1')){ echo $this->session->get('shipping_address1'); } ?>" maxlength="100"/>
+                        <input class="ship_addr_p1 required" type="hidden" name="adderss1" tabindex="3" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" value="<?php if($this->session->get('shipping_address1')){ echo $this->session->get('shipping_address1'); } ?>" maxlength="100"/>
+                        </div>
                     </li>
                     <li class="right">
                         <label><?php echo $this->Lang['COUNTRY']; ?> :<span class="form_star">*</span></label>
                         <div class="fullname">
-                        <input type="text" value="Nigeria" readonly />
+                        <input type="text" name="country_name" value="Nigeria" readonly />
                         <input type="hidden" name="country" value="25" />
+                       
                         
                         </div>
                     </li>
@@ -213,6 +127,102 @@
     <!--<script type="application/javascript">
 	$(document).ready(function(e) {
 		city_change_payment("25");
+    }); -->
+</script>
+
+<script>
+	function is_valid_phone(form){
+		var url = "<?php echo PATH?>products/validphone";
+		var phone = $('#ship_phone_p1').val();
+		$.post(url, {"phone":phone}, function success(status){
+			$('#id_err_phone').text('');
+			if(status == "0"){
+				$('#id_err_phone').text('Invalid Phone Number. Enter your phone number (e.g. 070...,080...)');
+				return false;
+			}else if(status == "-1"){
+				$('#id_err_phone').text('Invalid initial digits. Begin with 070, or 080.');
+				return false;
+			} else{
+				
+				console.log("Now submitting checkout details to: "+form.action);
+				form.submit();
+				
+			}
+			});
+		
+	}
+	
+    $(document).ready(function(){
+         $(".CityPAY_new").hide();
+        
+        $("#cashForm").validate({
+            ignore: ".ignore",
+            messages: {
+                friend_name: {
+                    required: "<?php echo $this->Lang['PLS_ENT_FRD_NAM']; ?>"                         
+                },
+                friend_email: {
+                    required: "<?php echo $this->Lang['PLS_ENT_FRD_EMAIL']; ?>", 
+                    email : "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                             
+                },
+                shipping_name: {
+                    required: "<?php echo $this->Lang['PLS_ENT_NAM']; ?>"                         
+                },		  
+                adderss1: {
+                    required: "<?php echo $this->Lang['PLS_ENT_VLD_ADDR']; ?>"                         
+                },		    
+                state : {
+                    required: "<?php echo $this->Lang['PLS_ENT_STATE1']; ?>"                         
+                },
+                postal_code : {
+                    number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
+                },
+                phone : {
+                    required: "<?php echo $this->Lang['PLZ_ETR_PHO']; ?>",
+                    number: "<?php echo $this->Lang['PLS_ENT_NO']; ?>"                             
+                },
+                storecredit : {
+                    required: "Please upload store credit document",
+                },
+            },
+            submitHandler: function(form) {
+                $('div#submit').hide();
+				is_valid_phone(form);
+				
+               
+            }
+        });
+        $("#shipping_address1").change(function() {
+			 
+                $(".CityPAY").show();
+	     $(".CityPAY_new").hide();
+            if($(this).is(':checked')) {  
+                $("#ship_nam_p1").val($("#ship_nam").val());
+                $("#ship_addr_p2").val($("#ship_address2").val());
+                $("#ship_postal_code_p1").val($("#ship_zipcode").val());
+                $(".ship_addr_p1").val($("#ship_address1").val());
+                $("#ship_city_p1").val($("#ship_city").val());
+                $(".CityPAY_new").val($("#ship_city").val());
+                //city_change_payment($("#ship_country").val());
+                $("#ship_country_p1").val($("#ship_country").val());
+                $("#ship_state_p1").val($("#ship_state").val());
+                $("#ship_phone_p1").val($("#ship_phone").val());
+            } else {
+                $("#ship_nam_p1").val('');
+                $("#ship_addr_p2").val('');
+                $("#ship_postal_code_p1").val('');
+                $(".ship_addr_p1").val('');
+                $("#ship_state_p1").val('');
+                $("#ship_city_p1").val('');
+                //city_change_payment('25');
+                $(".CityPAY_new").val('');
+                $("#ship_country_p1").val('');
+                $("#ship_phone_p1").val('');
+            }
+			
+			
+			
+        }); 
     });
-</script>-->
+</script>
 

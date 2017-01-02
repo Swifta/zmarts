@@ -113,6 +113,8 @@ class Users_Model extends Model
 
                                                     //$this->db->update("users", array("online_status" => 1), array("user_id" => $a->user_id));
                                                     /* online chat */
+													
+													
 
                                                     if(strcmp($z_offer, "1") == 0)
                                                     return -999;
@@ -129,6 +131,7 @@ class Users_Model extends Model
                 }else{
                     return -2;
                 }
+				
 	}
 	
 	    /** REGISTER USERS **/
@@ -145,18 +148,21 @@ class Users_Model extends Model
 			@Live
 		*/
 		
-		/*if($post->unique_identifier !=""){ 
+		$is_club_member = 0;
+		$set_as_prime_customer = $this->session->get("set_as_prime_customer");
+		if(isset($set_as_prime_customer) && $set_as_prime_customer == "2"){ 
 			$user_auto_key = text::random($type = 'alnum', $length = 4);
 			$this->session->set("user_auto_key",$user_auto_key);
 			$this->session->set("prime_customer",1);
+			$this->session->set("Club",1);
+			
+			$is_club_member = 1;
 		} else {
 			
 			$user_auto_key ="";
 			$this->session->set("prime_customer",0);
-		}*/
+		}
 		
-		$user_auto_key ="";
-		$this->session->set("prime_customer",0);
 		
 		$result_country = $this->db->select("country_id")->from("city")->where(array("city_id" => $post->city ))->limit(1)->get();
 		$country_value = $result_country->current()->country_id;
@@ -173,7 +179,7 @@ class Users_Model extends Model
 		
 		
 		
-		$result = $this->db->insert("users", array("firstname" => $post->f_name, "email" => $post->email, "password" =>  md5($post->password),"city_id" => $post->city, "country_id" => $post->country, "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key, "AccountNumber"=> $post->nuban, "nuban"=> $post->nuban,));
+		$result = $this->db->insert("users", array("firstname" => $post->f_name, "email" => $post->email, "password" =>  md5($post->password),"city_id" => $post->city, "country_id" => $post->country, "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"gender" =>$post->gender,"age_range"=>$post->age_range,"unique_identifier"=>$post->unique_identifier,"user_auto_key"=>$user_auto_key, "AccountNumber"=> $post->nuban, "nuban"=> $post->nuban, "club_member" => $is_club_member));
 		
 			$this->session->set(array("UserID" => $result->insert_id(), "UserName" => $post->f_name, "UserEmail" => $post->email, "city_id" => $post->city, "UserType" => 4, "Club" => 0));
 		
@@ -189,6 +195,10 @@ class Users_Model extends Model
                         $category_subscribe = $category_result->current()->category_id;
 		        $result_email_subscribe = $this->db->insert("email_subscribe", array("user_id" => $result->insert_id(), "email_id" => $post->email,"city_id" => $post->city,"country_id" =>$post->country,"category_id" =>$category_subscribe));
   		      }
+			  
+			  
+			 $this->login_users($post->email,$post->password);
+
 		
 		return 1;
 	}
@@ -421,6 +431,7 @@ class Users_Model extends Model
 		$result = $this->db->count_records('users', array('email' => $email));
 		return (bool) $result;
 	}
+	
 
 	/** CHEXK OLD PASSWORD **/
 
@@ -1112,7 +1123,9 @@ class Users_Model extends Model
                 
             
         }
-	
+		
+		
+		
 	
 	
 	

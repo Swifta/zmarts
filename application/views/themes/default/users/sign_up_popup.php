@@ -17,8 +17,10 @@
                     </div>				
                 <div class="signup_content new_user_signup clearfix">
                     <div class="signup_form_block">
-                        <h2 class="signup_title"><?php echo $this->Lang['USER_SIGN_UP']; ?></h2>
-                        <form name="signup" method="post"  onsubmit="return validatesignup();" action="<?php echo PATH; ?>users/signup">
+                        
+                        
+                        <form class="user_details"  name="signup" method="post"  onsubmit="return validatesignup();" action="<?php echo PATH; ?>users/signup">
+                        <h2 class="signup_title">User Registration</h2>
                             <ul>                               
                             <li>
                                 <label><?php echo $this->Lang["NAME"]; ?>:<span class="form_star">*</span></label>
@@ -45,8 +47,9 @@
                             <li>
                                 <label><?php echo $this->Lang['EMAIL']; ?>:<span class="form_star">*</span></label>
                                 <div class="fullname">
-                                  <input name="email" tabindex="2" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
+                                  <input onChange="is_salary_acc_domain(this.value)" name="email" id="email" tabindex="2" type="text" maxlength="64" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" value="" />
                                   <em id="emai_error"></em>
+                                  
                                 </div>   
                             </li>
                             <li>
@@ -75,7 +78,11 @@
                                 <div class="fullname">
                                     <input name="nuban" tabindex="7" maxlength="10" placeholder="Please enter your account no." type="text" value="" />
                                     <em id="acc_error"></em>
-                                </div>   
+                                    <label id="id_lb_prime" style="font-size: 14px;
+color: #39EF0C; width:84%; display:block;"></label>
+                                    
+                                </div>  
+                                 
                             </li>
 
                             <li>
@@ -136,8 +143,10 @@
                             </li>
                             </ul>
                         </form>
+                        
+                        
                     </div>
-                    <div class="signup_social_block">                        
+                    <div  class="signup_social_block user_details">                        
                         <p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>
                         <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>
 <br />
@@ -162,6 +171,26 @@
                        <!-- <a class="t_connect" onclick="connectTwitter();" title="<?php echo $this->Lang['TWITTER_CONN']; ?>">&nbsp;</a> -->                       
                         <p><?php echo $this->Lang['ALREADY_A_MEMBER']; ?> <a class="forget_link" title="<?php echo $this->Lang['SIGN_IN']; ?> " href="javascript:showlogin();"><?php echo $this->Lang['SIGN_IN']; ?> </a> </p>                                                   
                     </div>
+                    <div class="signup_social_block account_otp" style="display:none">     
+                    <form>
+                    <h2 class="signup_title">Salary Account OTP Verification</h2>
+                    <p class="signup_title">Please enter below the OTP that has been sent to your email account.</p>
+                    <em id="err_otp"></em>
+                    
+                    <div class="fullname" >
+                    <input type="text" name="otp" class="otp" placeholder="Enter OTP sent to email" style="width:230px;" />
+                    
+                    </div>
+                    <div class="fullname" style="margin-top:5px">
+                    <input style="width: 247px" onClick="otp_verification();" type="button" value="Verify" class="sign_submit"/>
+                    </div>
+                    <div class="fullname" style="margin-top:5px;">
+                    <input onClick="cancel_otp_verification();" style="width: 247px; background-color:#CCC;  box-shadow: none;" type="button" value="Cancel" class="sign_submit"/>
+                    </div>
+                    </form>                   
+                                                                      
+                    </div>
+                    
                 </div>                          
             </div>
               
@@ -416,8 +445,8 @@ function validatesignup()
 	}
 	else{
 		if (email != email_confirm) {
-                        document.signup.email.value = "";
-                        document.signup.email_confirm.value = "";
+                        //document.signup.email.value = "";
+                        //document.signup.email_confirm.value = "";
                         $('#country_error').html('');
                         $('#emai_error').html('');
                         $('#city_error').html('');
@@ -427,7 +456,8 @@ function validatesignup()
                         return false;
                  }
                 else {
-                    $('#email_confirm_error').html('');                   
+                    $('#email_confirm_error').html('');    
+					        
                 }
                 
 		if (password != cpassword) {
@@ -472,9 +502,10 @@ function validatesignup()
 					return false;
 					
 			}
-		
-			if(!validateAcc($('.error_double input').val()))
+			
+			if(!new_zenith_prime_membership(($('.error_double input').val()))){
 			   return false;
+			}
 		});
 	}
 	return false;
@@ -638,6 +669,7 @@ function validatesignup()
 	 $('.error_double em').text('');
 	 console.log($('.error_double em').length);
 	 
+	 
 	 if(val === ""){
 		$errorField.text("");
 		document.signup.submit();
@@ -687,7 +719,7 @@ function validatesignup()
 		 },
 		 error: function(response) 
 		 {
-			 console.log("Error: ", "Fatal error occured.");
+			 console.log("Errorx3: ", "Fatal error occured.");
 			 $errorField.text('Error occured. Could not verify acc. no. Please try again');
 			 return false;
 		 }
@@ -702,6 +734,237 @@ function validatesignup()
 	  var reg = /^\d+$/;
 	  return reg.test(val);
   }
+  
+  function new_zenith_prime_membership(val){
+	 
+	 var $errorField = $('#acc_error');
+	 console.log($errorField.length);
+	 $errorField.text("");
+	 $('.error_double em').text('');
+	 console.log($('.error_double em').length);
+	 
+	 if(val === ""){
+		$errorField.text("");
+		is_email_unique($('#email').val());
+	 	return false;
+	 }
+	 
+	 val = $.trim(val);
+	 if(val === null){
+		$errorField.text('');
+		is_email_unique($('#email').val());
+	 	return false;
+	 }
+	 
+	  if(!isValidNumber(val)){
+		$errorField.text('Account number should contain only digits [ i.e. 0-9 ].');
+	 	return false;
+	 }
+	 
+	 if(val.length !== 10){
+		$errorField.text('Account number should be 10 digits.');
+	 	return false;
+	 }
+		
+	email = $('#email').val();
+	console.log("Acc: ", val);
+	console.log("Email: ", email);
+	 var data = {nuban:val};
+	 var url = "<?php echo PATH?>users/validate_customer_salary_account/"+val+"/"+email;
+	 
+	 
+	 $post = $.ajax(
+	 {
+		  type:'POST',
+		  url:url,
+		  data:{nuban:val},
+		  success: function(response)
+		 {
+			 console.log("data: ", response);
+			 /*
+			 	if data is 1, activate OTP verification form.
+				else if data is -2, call validateAcc to proceed with normal registration.
+				else return false for other zenith bank account types verification to be verified.
+			 */
+			 
+			 if(response == "1"){
+			 	$(".user_details").css("display","none");
+			 	$(".account_otp").css("display","block");
+				return true;
+			 }else{
+				 if(response == "-2"){
+					 validateAcc($('.error_double input').val());
+					 return true;
+				 }
+				 
+				 if(response == "-4"){
+					 $('#emai_error').text('Email address already in use on the platform. Enter a unique one or login if already registered.');
+				 }else{
+				 	$errorField.text("Could not verify salary account.");
+				 }
+				 return false;
+			 }
+			
+				
+			
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Errorx1: ", "Fatal error occured.");
+			 $errorField.text('Error occured. Could not verify salary acc. no. Please try again');
+			 return false;
+		 }
+		 
+		 	
+	});
+	
+ }
+ 
+ function cancel_otp_verification(){
+	 var url = "<?php echo PATH?>users/cancel_account_otp_verification";
+	  $errorField = $('#err_otp');
+	  $errorField.text("");
+	 $post = $.ajax(
+	 {
+		  type:'POST',
+		  url:url,
+		  success: function(response)
+		 {
+			 console.log("cancel otp data: ", response);
+			 $(".user_details").css("display","block");
+			 $(".account_otp").css("display","none");
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Errorx4: ", "Fatal error occured.");
+			 $errorField.text('Error occured. Could not verify acc. no. Please try again');
+			 return false;
+		 }
+		 
+		 	
+	});
+ }
+ 
+ function otp_verification(){
+	 var otp = $('.otp').val();
+	 $errorField = $('#err_otp');
+	 if(otp == null || $.trim(otp) == ""){
+		 $errorField.text("Please enter OTP");
+		 return false;
+	 }
+	 	
+	 var url = "<?php echo PATH?>users/account_otp_verification/"+otp;
+	 
+	  $errorField.text("");
+	 $post = $.ajax(
+	 {
+		  type:'POST',
+		  url:url,
+		  success: function(response)
+		 {
+			 /*
+			 	if response is 1, call validateAcc.
+				else show error to user;
+			 */
+			 console.log("otp verification data: ", response);
+			if(response == "1"){
+			 	validateAcc($('.error_double input').val());
+				 $(".user_details").css("display","block");
+			 	 $(".account_otp").css("display","none");
+			}else{
+				 $errorField.text('OTP could not be verified. Review and try again. Or cancel and submit form for new OTP to be sent to email.');
+				 
+			}
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Errorx5: ", "Fatal error occured.");
+			 $errorField.text('Error occured. Could not verify acc. no. Please try again');
+			 return false;
+		 }
+		 
+		 	
+	});
+ }
+ 
+  function is_email_unique(email){
+	
+	 $errorField = $('#emai_error');
+	 if(email == null || $.trim(email) == ""){
+		 $errorField.text("Please your email account");
+		 return false;
+	 }
+	 	
+	 var url = "<?php echo PATH?>users/email_available/"+email+"/true";
+	 
+	  $errorField.text("");
+	 $post = $.ajax(
+	 {
+		  type:'POST',
+		  url:url,
+		  
+		  success: function(response)
+		 {
+			 /*
+			 	if response is 1, call validateAcc.
+				else show error to user;
+			 */
+			 console.log("Email availability data: ", response);
+			if(response == "1"){
+			 	validateAcc($('.error_double input').val());
+			}else{
+				 $errorField.text('Email address already in use on the platform. Enter a unique one or login if already registered.');
+				 return false;
+				 
+			}
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Errorx2: ", "Fatal error occured.");
+			 $errorField.text('Error occured. Could not validate email address. Please try again');
+			 return false;
+		 }
+		 
+		 	
+	});
+ }
+ 
+  function is_salary_acc_domain(email){
+	
+	 $primeLable = $('#id_lb_prime');
+	 $primeLable.text("");
+	 if(email == null || $.trim(email) == ""){
+		 $errorField = $('#emai_error');
+		 return false;
+	 }
+	 	
+	 var url = "<?php echo PATH?>users/check_club_membership_domain/"+email+"/true";
+	 $post = $.ajax(
+	 {
+		  type:'POST',
+		  url:url,
+		  
+		  success: function(response)
+		 {
+			
+			 console.log("Email domain availability data: ", response);
+			if(response == "1"){
+			 	$primeLable.text("Eligible for prime membership with your salary account.");
+			}else{
+				 $primeLable.text("");
+				 return false;
+				 
+			}
+		 },
+		 error: function(response) 
+		 {
+			 console.log("Errorx2: ", "Fatal error occured.");
+			 return false;
+		 }
+		 
+		 	
+	});
+ }
   
   
  

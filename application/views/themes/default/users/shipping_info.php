@@ -83,6 +83,7 @@
                         </div>
                         <div class="mybuys_content mybuys_products">                             
                             <?php foreach ($this->user_detail as $u) { ?>
+                            
                                 <form method="post" class="admin_form" name="edit_users"  >
                                     <div class="payment_form_block clearfix">
                                         <div class="payment_form_section">
@@ -105,12 +106,17 @@
                                                    <li class="right">
                                                         <label>State<span>*</span></label>
                                                         <div class="fullname">
+                                                       
                                                             <select name="city" id="CitySD_Signup">
                                                                 <option value="">Select state</option>
     <?php foreach ($this->all_city_list as $c) { ?>
+    
+    
+    
                 <?php if ($c->country_id == $u->ship_country) { ?>
+                
                                                                     <option  <?php if ($c->city_id == $u->ship_city) {
-																		$state = $u->ship_city;
+																																				$state = $u->ship_city;
 																		 ?> selected <?php } ?> title="<?php echo $c->city_name; ?>"value="<?php echo $c->city_id; ?>" ><?php echo $c->city_name; ?></option>
     <?php } } ?>
                                                             </select> </div>
@@ -288,11 +294,3 @@ var adjustMenu = function() {
 }
 
 
-</script>
-
-<script>
-$(document).ready(function(e) {
-    $('#CitySD_Signup').val(1);
-	//alert(1111);
-});
-</script>

@@ -1851,7 +1851,7 @@ class Merchant_Controller extends website_Controller {
 										if($filename!=''){
 
 											$IMG_NAME = $deal_key."_".$i.'.png';
-											common::image($filename, 620,752, DOCROOT.'images/products/1000_800/'.$IMG_NAME);
+											common::image($filename, 620,752, DOCROOT.'images'+DIRECTORY_SEPARATOR+'products'+DIRECTORY_SEPARATOR+'1000_800'+DIRECTORY_SEPARATOR.$IMG_NAME);
 											unlink(realpath($filename));
 										}
 									}

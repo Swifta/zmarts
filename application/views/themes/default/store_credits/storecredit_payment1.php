@@ -140,7 +140,12 @@
 		
 	</script>
 
-<?php } elseif($this->UserID == $this->storecredit_user){ ?>
+<?php } elseif($this->UserID == $this->storecredit_user){ 
+
+ 
+?>
+
+
 
 <?php echo new View("themes/".THEME_NAME."/store_credits/storecredit_payment2"); ?>
 

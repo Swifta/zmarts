@@ -48,9 +48,7 @@ $this->UserName = $this->session->get("UserName");
       <td width="13%" align="center"><?php echo $this->Lang['DEALVALUE']; ?></td>
       <td width="13%" align="center"><?php echo $this->Lang['SUB_TOT']; ?></td>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-    </tr>
+    
     <tr style="font-size: 12px; font-weight: normal; font-family: Arial;color:#666;">
       <td width="13%" align="center" ><?php echo $j.". ".$u->deal_title; ?></td>
       <td width="13%" align="center"><?php if($u->colorid !=0 ) { foreach($this->product_color as $pro){ ?>
@@ -118,19 +116,10 @@ $this->UserName = $this->session->get("UserName");
         </tr>
       </table></td>
   </tr>
-  <div style="clear:both"></div>
   <tr>
     <td c>&nbsp;</td>
   </tr>
-  <?php   
-				$instalment_value =0;
-				if($u->duration_period!=""){ 
-				$instalment_value = $grand_tot/$u->duration_period;
-				} 
-			?>
-  <?php if($u->duration_period!=""){?>
  
-  <?php }?>
   
   
   
@@ -167,9 +156,7 @@ $this->UserName = $this->session->get("UserName");
         <?php } } ?>
       </table></td>
   </tr>
-<tr>
-    <td c>&nbsp;</td>
-  </tr>
+
 <tr>
     <td colspan="8" width="100%" align="center" style="text-align:center; color:#AAA; font-family:Arial, Helvetica, sans-serif; font-size:12px" > You received this message because you are a registered member on <a style="text-decoration:none" href="<?php echo PATH; ?>"  ><?php echo SITENAME; ?> </a></td>
   </tr>
@@ -182,6 +169,6 @@ $this->UserName = $this->session->get("UserName");
   
   
 </table>
-<?php echo "store credit payment mail(request approval mail)"; exit;?>
+<!--<?php echo "store credit payment mail(request approval mail)";?> -->
 </body>
 </html>

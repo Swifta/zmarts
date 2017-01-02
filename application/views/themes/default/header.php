@@ -86,7 +86,7 @@ if(!isset($this->is_first)){
                                          
                                     
                                         <?php  if($this->session->get('user_auto_key')) { ?>
-                                        <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div>
+                                        <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?> Balance: <?php echo "<b>".CURRENCY_SYMBOL.number_format(common::get_user_instalment_limit(), 2)."</b>"; ?></a></div>
                                     <?php } ?>
                                         
 					<div class="header_top_right">
@@ -592,7 +592,8 @@ if(!isset($this->is_first)){
 </div>
     
 <?php  if($this->session->get('user_auto_key')) { ?>
-    <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div>
+    <!--<div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?></a></div>-->
+    <div class="store_credit"> <a href="<?php echo PATH; ?>storecredits-products.html" > <?php echo $this->Lang["STR_CRDS"]; ?> Balance: <?php echo "<b>".CURRENCY_SYMBOL.number_format(common::get_user_instalment_limit(), 2)."</b>"; ?></a></div>
 <?php } ?>
 <div class="header_top_right">
     <a class="toggleMenu htop_navicon" href="#" title="Menu">&nbsp;</a>

@@ -71,6 +71,7 @@ class Cash_on_delivery_Controller extends Layout_Controller
             }
         }
 		if($_POST){
+			
 			$referral_amount = strip_tags(addslashes($this->input->post("p_referral_amount")));
 			$prime_customer = strip_tags(addslashes($this->input->post("prime_customer")));
 		    $this->userPost = utf8::clean($this->input->post());

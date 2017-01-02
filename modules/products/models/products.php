@@ -2246,5 +2246,16 @@ public function get_store_id($storeurl="")
 		
 	}
 	
+	
+	public function get_storecredit_shipping($storecreditid = ""){
+		
+		$txn_id = $this->db->select("id")->from("storecredit_transaction")->where(array("main_storecreditid"=>$storecreditid))->get()->current()->id;
+		
+		$r = $this->db->select("*")->from("storecredit_shipping_info")
+		->join("city", "city.city_id", "storecredit_shipping_info.city")
+		->where(array("transaction_id"=>$txn_id))->get();
+		return $r;
+	}
+	
 
 }

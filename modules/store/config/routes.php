@@ -9,13 +9,13 @@ $config['Ciara/deal/c/(.*)/(.*).html'] = "/store/deal_list/Ciara/$1/$2";
 $config['Ciara/auction/c/(.*)/(.*).html'] = "/store/auction_list/Ciara/$1/$2";
 // ABC End
 // MUSTY-SUB Start
-$config['E-Store'] = "store/stores_home_page/E-Store";
-$config['E-Store/products.html'] = "/store/product_list/E-Store";
-$config['E-Store/today-deals.html'] = "/store/deal_list/E-Store";
-$config['E-Store/auction.html'] = "/store/auction_list/E-Store";
-$config['E-Store/products/c/(.*)/(.*).html'] = "/store/product_list/E-Store/$1/$2";
-$config['E-Store/deal/c/(.*)/(.*).html'] = "/store/deal_list/E-Store/$1/$2";
-$config['E-Store/auction/c/(.*)/(.*).html'] = "/store/auction_list/E-Store/$1/$2";
+$config['Blingworld'] = "store/stores_home_page/Blingworld";
+$config['Blingworld/products.html'] = "/store/product_list/Blingworld";
+$config['Blingworld/today-deals.html'] = "/store/deal_list/Blingworld";
+$config['Blingworld/auction.html'] = "/store/auction_list/Blingworld";
+$config['Blingworld/products/c/(.*)/(.*).html'] = "/store/product_list/Blingworld/$1/$2";
+$config['Blingworld/deal/c/(.*)/(.*).html'] = "/store/deal_list/Blingworld/$1/$2";
+$config['Blingworld/auction/c/(.*)/(.*).html'] = "/store/auction_list/Blingworld/$1/$2";
 // MUSTY-SUB End
 
 

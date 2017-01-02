@@ -1208,6 +1208,7 @@ class Products_Controller extends Layout_Controller
 	public function purchase_order($storecreditid = "",$user_id = "",$product_id = "",$installment_no="")
 	{
 		
+		
 		$this->template->javascript .= html::script(array(PATH.'themes/'.THEME_NAME.'/js/jquery.validate.js'));
 		$this->is_order = 1;
 			if($_POST){
@@ -1227,17 +1228,21 @@ class Products_Controller extends Layout_Controller
 					common::message(-1,"Sorry! this product size is not available");
 					url::redirect(PATH);
 				}
-				$this->shipping_address = $this->products->get_user_data_list();
+				$this->shipping_address = $this->products->get_storecredit_shipping($this->storecreditid);
+				
+				
 				if(count($this->shipping_address)>0) { 
-					$this->session->set('shipping_name',$this->shipping_address->current()->ship_name);
-					$this->session->set('shipping_address1',$this->shipping_address->current()->ship_address1);
-					$this->session->set('shipping_address2',$this->shipping_address->current()->ship_address2);
+					$this->session->set('shipping_name',$this->shipping_address->current()->name);
+					$this->session->set('shipping_address1',$this->shipping_address->current()->adderss1);
+					$this->session->set('shipping_address2',$this->shipping_address->current()->address2);
 					$this->session->set('shipping_checkbox',"on");
-					$this->session->set('shipping_country',$this->shipping_address->current()->ship_country);
-					$this->session->set('shipping_state',$this->shipping_address->current()->ship_state);
-					$this->session->set('shipping_city',$this->shipping_address->current()->ship_city);
-					$this->session->set('shipping_postal_code',$this->shipping_address->current()->ship_zipcode);
-					$this->session->set('shipping_phone',$this->shipping_address->current()->ship_mobileno);
+					$this->session->set('shipping_country',$this->shipping_address->current()->country_id);
+					
+				
+					$this->session->set('shipping_state',$this->shipping_address->current()->state);
+					$this->session->set('shipping_city',$this->shipping_address->current()->city_id);
+					$this->session->set('shipping_postal_code',$this->shipping_address->current()->postal_code);
+					$this->session->set('shipping_phone',$this->shipping_address->current()->phone);
 				}
 				if($product_approval->current()->sizeid!=0) {
 					$this->session->set('product_size_qty'.$productid,$product_approval->current()->sizeid);
@@ -1252,6 +1257,9 @@ class Products_Controller extends Layout_Controller
 				$this->session->set('store_credit_period'.$productid,$product_approval->current()->duration_period);
 				$this->session->set('store_credit_id'.$productid,$product_approval->current()->durationid);
 				$this->session->set('main_storecreditid'.$productid,$this->storecreditid);
+				
+				
+				
 				/* if(($key=='store_credit_id'.$deal_id)){
 						$this->session->delete('product_size_qty'.$deal_id);
 						$this->session->delete('product_quantity_qty'.$deal_id);

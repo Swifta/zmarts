@@ -202,10 +202,12 @@ class common{
 	public function message($type = "", $message = "")
 	{
 		if($type == 1){
-			$this->session->set("Success", $message);
+			//$this->session->set("Success", $message);
+			$_SESSION["Success"] = $message;
 		}
 		elseif($type == -1){
-			$this->session->set("Error",$message);
+			$_SESSION["Error"] = $message;
+			//$this->session->set("Error",$message);
 		}
 	}
 
@@ -677,6 +679,12 @@ public function get_all_category_urls(){
 		$db = new Settings_Model();
 		return $db->get_all_category_urls();
 		
+	}
+	
+	public function get_user_instalment_limit()
+	{
+		$m = new Payment_product_Model();
+		return $m->get_user_instalment_limit();
 	}
 
 

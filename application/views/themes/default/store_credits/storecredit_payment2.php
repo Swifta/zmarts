@@ -217,11 +217,11 @@
 				if($products->duration_period!=""){ 
 				 $instalment_value = $total_amount/$products->duration_period;
 				} ?>
-                                        <td><?php echo CURRENCY_SYMBOL.$instalment_value ; ?></td>
+                                        <td><?php echo CURRENCY_SYMBOL.number_format($instalment_value, 2);  ?></td>
                                         <td></td>	   
                                                  <td><span></span></td>
                                                 <td></td>
-                                            <td><?php echo CURRENCY_SYMBOL.$instalment_value ; ?>
+                                            <td><?php echo CURRENCY_SYMBOL.number_format($instalment_value, 2); ?>
                                             </td>
                                         </tr>
 
@@ -238,7 +238,7 @@
                         <tr>
                                 <td align="right" colspan="12"><?php echo $this->Lang['TOTAL']; ?></td>
                                 <td align="left">=</td>
-                                <td align="left" colspan="12"><p><?php echo CURRENCY_SYMBOL; ?><span id="totalamount"><?php //echo number_format((float) $instalment_value, 2, '.', ''); ?> <?php echo $instalment_value ; ?></span><p>
+                                <td align="left" colspan="12"><p><?php echo CURRENCY_SYMBOL; ?><span id="totalamount"><?php //echo number_format((float) $instalment_value, 2, '.', ''); ?> <?php echo number_format($instalment_value, 2);?></span><p>
                                 </td>
                         </tr>
                 
@@ -254,7 +254,7 @@
                                 <h3 class="paybr_title pay_titlebg shipping_edit_title clearfix ">
                                 <span><?php echo $this->Lang['SHIP_ADD']; ?></span>
                                  
-                                <a href="<?php echo PATH; ?>cart.html" title="<?php echo $this->Lang['EDIT']; ?>" class="saddress_edit"><?php echo $this->Lang['EDIT']; ?></a>      
+                                <!--<a href="<?php echo PATH; ?>cart.html" title="<?php echo $this->Lang['EDIT']; ?>" class="saddress_edit"><?php echo $this->Lang['EDIT']; ?></a>-->      
                                 </h3>                  
                                <div id="new_shipping_address" >
                                 <address>
@@ -265,8 +265,8 @@
                                  <p>
                                 <?php foreach ($this->all_city_list as $CityL) {  ?>
                                 <?php if ($CityL->city_id == $this->session->get('shipping_city')) {  echo ucfirst($CityL->city_name); } ?>
-                                <?php } ?> , <?php echo ucfirst($this->session->get('shipping_country')); ?> </p>
-                                <p>Zipcode : <?php echo $this->session->get('shipping_postal_code'); ?></p>
+                                <?php } ?> , <?php echo ucfirst($this->session->get('shipping_country_name')); ?> </p>
+                                <p>Zip Code : <?php echo $this->session->get('shipping_postal_code'); ?></p>
                                 <p>Phone : <?php echo $this->session->get('shipping_phone'); ?></p>
                                 
                                 </address>                         
@@ -285,20 +285,20 @@
                                                                 <li>
                                                                     <label><?php echo $this->Lang['NAME']; ?>  <span> * </span></label>
                                                                     <div class="fullname">                                                                            
-                                                                        <input tabindex="1" name="firstname" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" class="required" maxlength="256" value="<?php echo $s->ship_name; ?>" autofocus />
+                                                                        <input tabindex="1" name="firstname" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" class="required" maxlength="256" value="<?php echo $s->name; ?>" autofocus />
                                                                     </div>
                                                                 </li>
                                                                 <li>
                                                                     <label><?php echo $this->Lang['ADDR1']; ?> <span> * </span></label>
                                                                     <div class="fullname">
-                                                                        <input  name="address1" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" class="required" maxlength="256" value="<?php echo $s->ship_address1; ?>" />
+                                                                        <input  name="address1" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" class="required" maxlength="256" value="<?php echo $s->adderss1; ?>" />
                                                                     </div>
                                                                 </li>
 
                                                                 <li>
                                                                 <label><?php echo $this->Lang['ADDR2']; ?> <span> * </span></label>
                                                                 <div class="fullname">
-                                                                <input name="address2" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" size="40"  maxlength="256" value="<?php echo $s->ship_address2; ?>"/>
+                                                                <input name="address2" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_ADD']; ?>" type="text" size="40"  maxlength="256" value="<?php echo $s->address2; ?>"/>
                                                                 </div>
                                                         </li>
                                                         <li>
@@ -306,8 +306,8 @@
                                                                 <div class="fullname">
                                                                         <select class="select" name="country" onchange="return city_change_merchant(this.value);">
                                                                                 <?php foreach ($this->all_country_list as $countryL) { ?>
-                                                                                <option <?php if ($countryL->country_id == $s->ship_country) {
-                                                                                echo 'Selected="true"';
+                                                                                <option <?php if ($countryL->country_id == $s->country_id) {
+                                                                                echo 'selected="selected"';
                                                                                 } ?> value="<?php echo $countryL->country_id; ?>"><?php echo ucfirst($countryL->country_name); ?></option>
                                                                                 <?php } ?>
                                                                         </select>      
@@ -316,7 +316,7 @@
                                                         <li class="frm_clr">
                                                                 <label><?php echo $this->Lang['STATE']; ?><span> * </span></label>
                                                                 <div class="fullname">
-                                                                    <input name="state" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>" type="text" size="40" class="required" maxlength="256" value="<?php echo $s->ship_state; ?>" />
+                                                                    <input name="state" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_STATE']; ?>" type="text" size="40" class="required" maxlength="256" value="<?php echo $s->state; ?>" />
                                                                 </div>
                                                         </li>
                                                          <li>
@@ -325,7 +325,7 @@
                                                                         <div class="select_box_outer country_select_box">
                                                                         <select name="city" class="select" id="CitySD">
                                                                         <?php foreach ($this->all_city_list as $CityL) { ?>
-                                                                        <option <?php if ($CityL->city_id == $s->ship_city) {
+                                                                        <option <?php if ($CityL->city_id == $s->city_id) {
                                                                         echo 'Selected="true"';
                                                                         } ?> value="<?php echo $CityL->city_id; ?>"><?php echo ucfirst($CityL->city_name); ?></option>
                                                                         <?php } ?>
@@ -336,13 +336,13 @@
                                                         <li class="frm_clr">
                                                                 <label><?php echo $this->Lang['POSTAL_CODE']; ?> <span> * </span></label>
                                                                 <div class="fullname">
-                                                                    <input  name="zip_code" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" class="required number" maxlength="256" value="<?php echo $s->ship_zipcode; ?>"/>
+                                                                    <input  name="zip_code" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_POSTAL_CODE']; ?>" type="text" class="required number" maxlength="256" value="<?php echo $s->postal_code; ?>"/>
                                                                 </div>
                                                         </li>
                                                         <li>
                                                                 <label><?php echo $this->Lang['PHONE']; ?><span> * </span></label>
                                                                 <div class="fullname">
-                                                                <input name="mobile" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" type="text" class="required number" maxlength="18" value="<?php echo $s->ship_mobileno; ?>" />
+                                                                <input name="mobile" size="40" AUTOCOMPLETE="OFF"  placeholder="<?php echo $this->Lang['ENTER_PHONE']; ?>" type="text" class="required number" maxlength="18" value="<?php echo $s->phone; ?>" />
                                                                 </div>
                                                         </li>
                                                 </ul>
@@ -379,7 +379,9 @@
                                 <div class="payment_select"> 
                                        
 												<div class="payment_sel_lft"> 
-                                                <a onclick="return store_credits();" id="store_credits"  > <input type="radio" name="name" id="store_credits_radio" /></a> <p><?php echo $this->Lang['STR_CRDS']; ?></p></div>
+                                                <a onclick="return store_credits();" id="store_credits"  > <input type="radio" name="name" id="store_credits_radio" />
+                                                
+                                                </a> <p><?php echo $this->Lang['STR_CRDS']; ?></p></div>
                                 </div>
                                  <div class="store_credits">
 									<?php echo new View("themes/" . THEME_NAME . "/store_credits/storecredit_checkout"); ?>
@@ -391,4 +393,6 @@
                         </div>
                 </div>
     </div>
+    
+    
 
