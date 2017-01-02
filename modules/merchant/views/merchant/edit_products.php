@@ -289,35 +289,31 @@
                        <?php } ?>
                      </td>
                 </tr>--> 
-        <!--<tr>
-                    <td><label>Discounted Price (Prime)</label><span></span></td>
-                    <td><label>:</label></td>
-                    <td>
-						 <input type="text" name="prime_price" maxlength="8" value="<?php if(!isset($this->form_error["prime_price"])&&isset($this->userPost["prime_price"])){ echo $this->userPost["prime_price"]; }?>" />
-                        <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?>
-                       
-                        
-                    </td>
-                </tr>-->
+        
         
         <tr>
           <td><label>Discounted Price (Ordinary)</label>
             <span></span></td>
           <td><label>:</label></td>
-          <td><?php if($u->deal_price!=0) { ?>
+          
+          <td>
+		  
+		  <?php 
+		  
+		  if($u->deal_value!=0) { ?>
             <input type="text" name="price"  onkeypress="return isNumberKey(event)"maxlength="8" value="<?php echo $u->deal_value; ?>" />
             <?php }else{?>
             <input type="text" name="price" maxlength="8" value="" />
             <?php }?>
             <?php /* <em><?php if(isset($this->form_error["price"])){ echo $this->form_error["price"]; }?></em> */?></td>
         </tr>
-        <tr style="display:none;">
+        <tr >
           <td><label>Discounted Price (<b>Club Members Only</b>)</label>
             <span></span></td>
           <td><label>:</label></td>
-          <td><?php if($u->deal_price!=0) { ?>
-            <!--<input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="<?php echo $u->deal_prime_value; ?>" />-->
-            <input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="0" />
+          <td><?php if($u->deal_prime_value !=0) { ?>
+            <input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="<?php echo $u->deal_prime_value; ?>" />
+            <!--<input type="text" name="prime_price" maxlength="8" onkeypress="return isNumberKey(event)" value="0" />-->
             <?php }else{?>
             <input type="text" name="price" maxlength="8" value="" />
             <?php }?>

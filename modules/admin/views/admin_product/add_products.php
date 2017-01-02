@@ -366,7 +366,7 @@ function toggle() {
                     </td>
                 </tr>
                 
-                <tr style="display:none;">
+                <tr style="display:nonex;">
                     <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
@@ -699,7 +699,7 @@ function toggle() {
                 	@Live
                  -->
                 
-                   <tr style="display: none;">
+                   <tr style="display: nonex;">
                     <td><label><?php echo $this->Lang['STORE_CRED']; ?></label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>

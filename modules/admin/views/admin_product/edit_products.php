@@ -254,7 +254,7 @@
                     <td><label><?php echo $this->Lang["PRICE"]; ?> </label><span>*</span></td>
                     <td><label>:</label></td>
                     <td>
-						<input type="text" name="deal_value" maxlength="8" value="<?php if($u->deal_price !=0) { echo $u->deal_price; } else { echo $u->deal_value; }  ?>" />
+						<input type="text" name="deal_value" maxlength="8" value="<?php if($u->deal_price !=0) { echo $u->deal_price; } ?>" />
                         <em><?php if(isset($this->form_error["deal_value"])){ echo $this->form_error["deal_value"]; }?></em>
                     </td>
                 </tr>
@@ -275,7 +275,7 @@
                     <td><label>Discounted Price (Ordinary)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
-                   	<?php if($u->deal_price!=0) { ?>
+                   	<?php if($u->deal_value!=0) { ?>
                       <input type="text" name="price" maxlength="8" value="<?php echo $u->deal_value; ?>" />
 					
 					<?php }else{?>
@@ -288,11 +288,11 @@
                     </td>
                 </tr>
                 
-               	 <tr style="display:none;">
+               	 <tr style="display:nonex;">
                     <td><label>Discounted Price (<b>Club Members Only</b>)</label><span></span></td>
                     <td><label>:</label></td>
                     <td>
-                   	<?php if($u->deal_price!=0) { ?>
+                   	<?php if($u->deal_prime_value!=0) { ?>
                       <input type="text" name="prime_price" maxlength="8" value="<?php echo $u->deal_prime_value; ?>" />
                       <!--<input type="text" name="price" maxlength="8" value="" />-->
 					
