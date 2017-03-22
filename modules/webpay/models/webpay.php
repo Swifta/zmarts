@@ -121,12 +121,21 @@ class Webpay_Model extends Model
         }
                 
             $result = $this->db->from("transaction")
+                        ->select("transaction.shipping_amount")
+                        ->select("transaction.product_id")
+                        ->select("stores.store_admin_id")
+                        ->select("product.deal_title")
+                        ->select("transaction.quantity")
+                        ->select("transaction.amount")
+                        ->select("transaction.id")
+                        ->select("product.deal_value")
                         ->where(array("transaction.transaction_id"=>$transaction_id))
                         ->join("product","product.deal_id","transaction.product_id")
                         ->join("users","users.user_id","transaction.user_id")
                         ->join("city","city.city_id","users.city_id")
                         ->join("stores", "product.shop_id", "stores.store_id")
                         ->get();
+
             if(count($result) > 0){
                 foreach($result as $row){
                     $loop++;
@@ -158,7 +167,7 @@ class Webpay_Model extends Model
                         $acct_num = rand(1000000000, 9999999999);//comment this out on production because merchants are supposed to have a
                     }
                     //nuban number set in there profile
-                    $temp_item_amt = (($row->amount*$row->quantity)+$row->shipping_amount) * 100;
+                    $temp_item_amt = (($row->deal_value*$row->quantity)+$row->shipping_amount) * 100;
                     //$temp_item_amt = ceil($total_amount_shopped / 10) * 10 * 100;
                     //if($total_amount > )
 //                    if(!$is_above_2k){
