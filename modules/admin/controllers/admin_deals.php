@@ -65,7 +65,7 @@ class Admin_deals_Controller extends website_Controller
 									foreach($_FILES as $key => $files){
 	                                         if($files){
                                                   $filename = upload::save($key);
-									$filename = basename($filename);
+									//$filename = basename($filename);
 									if($filename!=''){
 
 										$IMG_NAME = $deal_key."_".$i.'.png';
