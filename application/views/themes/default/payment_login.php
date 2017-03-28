@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.'); ?>
-<script type="text/javascript"> 
-        $(document).ready(function(){  
+<script type="text/javascript">
+    $(document).ready(function () {
         $('.cancel_login').hide();
         $('.what_happens').show();
         $('.what_buygift').show();
@@ -8,362 +8,416 @@
         $('#down1').hide();
         $('#down2').hide();
         $('#down3').hide();
-        });
+    });
 </script>
 
-<script type="text/javascript"> 
-        	$(document).keyup(function(e) { 
+<script type="text/javascript">
+    $(document).keyup(function (e) {
         if (e.keyCode == 27) { // esc keycode
             $('div#show').hide();
             $('div#show_tc').hide();
-			$('#fade').css({'visibility' : 'hidden'});
-	  	        //location.reload();
-		return false;
+            $('#fade').css({'visibility': 'hidden'});
+            //location.reload();
+            return false;
         }
     });
-    </script>
+</script>
 
-<script type="text/javascript"> 
-        function WhatHappens() {
-                $('.what_happens').slideToggle(300);
-                $('#down1').slideToggle(300);
-                $('#right1').slideToggle(300);
-                
-        }
-        function Whatbuygift() {
-                 $('.what_buygift').slideToggle(300);
-                 $('#down2').slideToggle(300);
-                $('#right2').slideToggle(300);
-        }
-        function CanChange() {
-                $('.can_change').slideToggle(300);
-                $('#down3').slideToggle(300);
-                $('#right3').slideToggle(300);
-        }
-        
-         function show_dis_tc()
-		{
-			        $('#fade').css({'visibility' : 'visible'});
-				$('div#show_tc').show();
-		}	
-		
-		function hide_shipping_addr_tc()
-		{
-			$('div#show_tc').hide();
-                        $('#fade').css({'visibility' : 'hidden'});
-		}
+<script type="text/javascript">
+    function WhatHappens() {
+        $('.what_happens').slideToggle(300);
+        $('#down1').slideToggle(300);
+        $('#right1').slideToggle(300);
+
+    }
+    function Whatbuygift() {
+        $('.what_buygift').slideToggle(300);
+        $('#down2').slideToggle(300);
+        $('#right2').slideToggle(300);
+    }
+    function CanChange() {
+        $('.can_change').slideToggle(300);
+        $('#down3').slideToggle(300);
+        $('#right3').slideToggle(300);
+    }
+
+    function show_dis_tc()
+    {
+        $('#fade').css({'visibility': 'visible'});
+        $('div#show_tc').show();
+    }
+
+    function hide_shipping_addr_tc()
+    {
+        $('div#show_tc').hide();
+        $('#fade').css({'visibility': 'hidden'});
+    }
 </script>      
- <div class="contianer_outer">
-            <div class="contianer_inner">
-                <div class="contianer">
-<div class="bread_crumb">
-                        <ul>
-                            <li><p><a href="<?php echo PATH;?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
-                            <li><p><?php echo $this->Lang["ORDER_DETAILS"]; ?></p></li>
-                        </ul>
-                    </div>
-                    <!--content start-->                                                
-                        <div class="payouter_block">
-                            <div class="payleft_block">
-                            <div class="payouter_block pay_br" style="margin:0;">
-                                  <?php /*  <h2 class="inner_commen_title"><?php echo $this->Lang["ORDER_DETAILS"]; ?></h2>    */ ?>
-                                <div class="cart_table clearfix"> 
-                                
-                                    <table class="mcart_table_inner" width="100%" cellspacing="0" cellpadding="5" border="0">
-                                        <thead class="pay_titlebg">
-                                            <tr>                                            
-                                                <th width="100" align="left"><?php echo $this->Lang["DESC"]; ?></th>                                                                                       
-                                                <th width="100" align="left"><?php echo $this->Lang["QUAN"]; ?></th>
-                                                <th width="20" align="left"></th>
-                                                <th width="100" align="left"><?php echo $this->Lang["PRI"]; ?></th>						
-                                                <th width="20" align="left"></th>
-                                                <th width="100" align="left"><?php echo $this->Lang["TOTAL"]; ?></th>                                            
-                                            </tr>
-                                        </thead>
-                                
-					<?php  foreach($this->deals_payment_deatils as $payment) {  ?>
-                                                                            
-                                        <tr>
-                                            <td><?php echo $payment->deal_title; ?></td>
-                                            <td>
-                                                <div class="quantity_bx quantity_bx_row">
+<div class="contianer_outer">
+    <div class="contianer_inner">
+        <div class="contianer">
+            <div class="bread_crumb">
+                <ul>
+                    <li><p><a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
+                    <li><p><?php echo $this->Lang["ORDER_DETAILS"]; ?></p></li>
+                </ul>
+            </div>
+            <!--content start-->                                                
+            <div class="payouter_block">
+                <div class="payleft_block">
+                    <div class="payouter_block pay_br" style="margin:0;">
+                        <?php /*  <h2 class="inner_commen_title"><?php echo $this->Lang["ORDER_DETAILS"]; ?></h2>    */ ?>
+                        <div class="cart_table clearfix"> 
+
+                            <table class="mcart_table_inner" width="100%" cellspacing="0" cellpadding="5" border="0">
+                                <thead class="pay_titlebg">
+                                    <tr>                                            
+                                        <th width="100" align="left"><?php echo $this->Lang["DESC"]; ?></th>                                                                                       
+                                        <th width="100" align="left"><?php echo $this->Lang["QUAN"]; ?></th>
+                                        <th width="20" align="left"></th>
+                                        <th width="100" align="left"><?php echo $this->Lang["PRI"]; ?></th>						
+                                        <th width="20" align="left"></th>
+                                        <th width="100" align="left"><?php echo $this->Lang["TOTAL"]; ?></th>                                            
+                                    </tr>
+                                </thead>
+
+                                <?php foreach ($this->deals_payment_deatils as $payment) { ?>
+
+                                    <tr>
+                                        <td><?php echo $payment->deal_title; ?></td>
+                                        <td>
+                                            <div class="quantity_bx quantity_bx_row">
                                                 <div class="lessthen">
                                                     <a class="less_min" style="cursor:pointer;" id="QtyDown" onclick="DownTotal()" title="">-</a>
                                                 </div>
                                                 <div class="lessthen1">
-                                                   <input name="QTY" id="QTY" value="1" readonly="readonly" type="text" rel="20">
+                                                    <input name="QTY" id="QTY" value="1" readonly="readonly" type="text" rel="20">
                                                 </div>
                                                 <div class="greaterthen">
                                                     <a class="plus" style="cursor:pointer;" id="QtyUp" onclick="UpTotal()" title="">+</a>
                                                 </div>
-                                                </div>
-                                            </td>
-                                            <td>x</td>
-                                                            <script>
-            function UpTotal()
-            {
-                    if($('#QTY').val()!=<?php echo $payment->user_limit_quantity; ?>) {
-                            var plus_amount = parseInt($('#QTY').val()) + 1;
-                            $('#QTY').val(plus_amount); 
-                            var total_amount = <?php echo $payment->deal_value; ?>*plus_amount;
-                            if(total_amount!="0") {
-                                    $('#amount').text(total_amount);
-                                    $('#oldamount').text(total_amount);
-                            }
-                            else {
-                                    if(val!="") {
-                                    $('#amount').text(1*<?php echo $payment->deal_value; ?>);
-                                    $('#oldamount').text(1*<?php echo $payment->deal_value; ?>);
-                                    } else {
-                                            $('#amount').text('0');
-                                            $('#oldamount').text('0');
-                                    }
-                            }
-                    }
+                                            </div>
+                                        </td>
+                                        <td>x</td>
+                                    <script>
+                                        function UpTotal()
+                                        {
+                                            if ($('#QTY').val() !=<?php echo $payment->user_limit_quantity; ?>) {
+                                                var plus_amount = parseInt($('#QTY').val()) + 1;
+                                                $('#QTY').val(plus_amount);
+                                                var total_amount = <?php echo $payment->deal_value; ?> * plus_amount;
+                                                if (total_amount != "0") {
+                                                    $('#amount').text(total_amount);
+                                                    $('#oldamount').text(total_amount);
+                                                } else {
+                                                    if (val != "") {
+                                                        $('#amount').text(1 *<?php echo $payment->deal_value; ?>);
+                                                        $('#oldamount').text(1 *<?php echo $payment->deal_value; ?>);
+                                                    } else {
+                                                        $('#amount').text('0');
+                                                        $('#oldamount').text('0');
+                                                    }
+                                                }
+                                            }
 
-            }
+                                        }
 
-            function DownTotal()
-            {
-                    if($('#QTY').val()!=1) {
-                            var plus_amount = parseInt($('#QTY').val()) - 1;
-                            $('#QTY').val(plus_amount); 
-                            var total_amount = <?php echo $payment->deal_value; ?>*plus_amount;
-                            if(total_amount!="0") {
-                                    $('#amount').text(total_amount);
-                                    $('#oldamount').text(total_amount);
-                            }
-                            else {
-                                    if(val!="") {
-                                    $('#amount').text(1*<?php echo $payment->deal_value; ?>);
-                                    $('#oldamount').text(1*<?php echo $payment->deal_value; ?>);
-                                    } else {
-                                            $('#amount').text('0');
-                                            $('#oldamount').text('0');
-                                    }
-                            }
-                    }
-            }
+                                        function DownTotal()
+                                        {
+                                            if ($('#QTY').val() != 1) {
+                                                var plus_amount = parseInt($('#QTY').val()) - 1;
+                                                $('#QTY').val(plus_amount);
+                                                var total_amount = <?php echo $payment->deal_value; ?> * plus_amount;
+                                                if (total_amount != "0") {
+                                                    $('#amount').text(total_amount);
+                                                    $('#oldamount').text(total_amount);
+                                                } else {
+                                                    if (val != "") {
+                                                        $('#amount').text(1 *<?php echo $payment->deal_value; ?>);
+                                                        $('#oldamount').text(1 *<?php echo $payment->deal_value; ?>);
+                                                    } else {
+                                                        $('#amount').text('0');
+                                                        $('#oldamount').text('0');
+                                                    }
+                                                }
+                                            }
+                                        }
 
-            </script>
+                                    </script>
 
-                                            <td><?php echo CURRENCY_SYMBOL.$payment->deal_value; ?></td>
+                                    <td><?php echo CURRENCY_SYMBOL . $payment->deal_value; ?></td>
+                                    <td>=</td>
+                                    <td><?php echo CURRENCY_SYMBOL; ?><span id="amount"><?php echo $payment->deal_value; ?></span></td>
+                                    </tr>
+                                    <tfoot>
+                                        <tr>                                                
+                                            <td colspan="4" align="right">Total to Pay</td>    
                                             <td>=</td>
-                                            <td><?php echo CURRENCY_SYMBOL; ?><span id="amount"><?php echo $payment->deal_value; ?></span></td>
+                                            <td id="balance">
+                                                <p><?php echo CURRENCY_SYMBOL; ?><span id="oldamount"><?php echo $payment->deal_value; ?></span></p>
+                                            </td>
                                         </tr>
-                                        <tfoot>
-                                            <tr>                                                
-                                                <td colspan="4" align="right">Total to Pay</td>    
-                                                <td>=</td>
-                                                <td id="balance">
-                                                     <p><?php echo CURRENCY_SYMBOL; ?><span id="oldamount"><?php echo $payment->deal_value; ?></span></p>
-                                                  </td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>                                
+                                    </tfoot>
+                                </table>                                
                             </div>                                
-                                
-	<?php }?>
 
-                                  
+                        <?php } ?>
 
 
 
 
-                            </div>
-                            <div class="payouter_block pay_br">
+
+
+                    </div>
+                    <div class="payouter_block pay_br">
                         <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang["ACC_INFO"]; ?></h3>	
                         <div class="p_inner_block">
-                    <div class="befor_login">                                                                          
-                                      <div class="payment_login_form clearfix">                                                                                                            
-                                          <div class="payment_login_text">
-                                              <p><?php echo $this->Lang['ALREADY_ACC']; ?></p>
-                                              <p><?php echo $this->Lang['PURCHACED_GR']; ?></p>
-                                          </div>                                     
-                                          <a class="buy_it pament_b_sign" onclick="return SimilarDeals();" id="SimilarDeals"  title="<?php echo $this->Lang['SIGN_IN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a>
-                                      </div>															
-                                  </div>
-                                  <div class="cancel_login">                                      
-                                      <div class="payment_login_form clearfix">
-                                          <div class="signup_form_block">
-                                              <form method="post" id="commentForm_deals13" action="<?php echo PATH; ?>payment/login">                                            
-                                                  <?php foreach ($this->deals_payment_deatils as $payment) { ?>
-                                                      <input name="dealid" type="hidden" value="<?php echo $payment->deal_key; ?>" />
-                                                      <input name="url" type="hidden" value="<?php echo $payment->url_title; ?>"/>
-                                                  <?php } ?>                                                    
-                                                  <ul>
-                                                      <li>
-                                                          <label><?php echo $this->Lang["EMAIL_F"]; ?>:<span class="form_star">*</span></label>
-                                                          <div class="fullname"> <input tabindex="10" name="email" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" type="text"  class="required"/></div>
-                                                      </li>                                                    
-                                                      <li>
-                                                          <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
-                                                          <div class="fullname"><input name="password" tabindex="11" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required" /></div>
-                                                          <p><a class="forget_link" tabindex="14" onclick="showforgotpassword();" style="cursor:pointer;" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>"><?php echo $this->Lang['FORGOT_PSWD']; ?></a></p>
-                                                      </li>   
-                                                      <li>        
-                                                          <label>&nbsp;</label>
-                                                          <input class="sign_submit" tabindex="12" name="Submit" type="submit" value="<?php echo $this->Lang['LOGIN']; ?>" />                                                                    
-                                                          <a  class="sign_cancel" tabindex="13" onclick="return SimilarProducts();"  id="SimilarProducts"  ><?php echo $this->Lang['CANCEL']; ?></a>                                                                                                                                
-                                                      </li> 
-                                                  </ul>
-                                                        
-                                              </form>
-                                          </div>
-                                      </div>	                                
-                                  </div>
+                            <div class="befor_login">                                                                          
+                                <div class="payment_login_form clearfix">                                                                                                            
+                                    <div class="payment_login_text">
+                                        <p><?php echo $this->Lang['ALREADY_ACC']; ?></p>
+                                        <p><?php echo $this->Lang['PURCHACED_GR']; ?></p>
+                                    </div>                                     
+                                    <a class="buy_it pament_b_sign" onclick="return SimilarDeals();" id="SimilarDeals"  title="<?php echo $this->Lang['SIGN_IN']; ?>"><?php echo $this->Lang['LOGIN']; ?></a>
+                                </div>															
+                            </div>
+                            <div class="cancel_login">                                      
+                                <div class="payment_login_form clearfix">
+                                    <div class="signup_form_block">
+                                        <form method="post" id="commentForm_deals13" action="<?php echo PATH; ?>payment/login">                                            
+                                            <?php foreach ($this->deals_payment_deatils as $payment) { ?>
+                                                <input name="dealid" type="hidden" value="<?php echo $payment->deal_key; ?>" />
+                                                <input name="url" type="hidden" value="<?php echo $payment->url_title; ?>"/>
+                                            <?php } ?>                                                    
+                                            <ul>
+                                                <li>
+                                                    <label><?php echo $this->Lang["EMAIL_F"]; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname"> <input tabindex="10" name="email" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" type="text"  class="required"/></div>
+                                                </li>                                                    
+                                                <li>
+                                                    <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname"><input name="password" tabindex="11" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required" /></div>
+                                                    <p><a class="forget_link" tabindex="14" onclick="showforgotpassword();" style="cursor:pointer;" title="<?php echo $this->Lang['FORGOT_PSWD']; ?>"><?php echo $this->Lang['FORGOT_PSWD']; ?></a></p>
+                                                </li>   
+                                                <li>        
+                                                    <label>&nbsp;</label>
+                                                    <input class="sign_submit" tabindex="12" name="Submit" type="submit" value="<?php echo $this->Lang['LOGIN']; ?>" />                                                                    
+                                                    <a  class="sign_cancel" tabindex="13" onclick="return SimilarProducts();"  id="SimilarProducts"  ><?php echo $this->Lang['CANCEL']; ?></a>                                                                                                                                
+                                                </li> 
+                                            </ul>
 
-                                  <div class="payment_form_block clearfix">
-                                    
-                                    
-                                      <h3 class="type_form_title">Personal Information</h3>                                      
-                                          <form method="post" id="commentForm_deals12" action="<?php echo PATH; ?>payment/signup_user">
-                                              
-                                                  <div class="payment_form_section">
-                                                      
-                                                  <?php foreach ($this->deals_payment_deatils as $payment) { ?>
-                                                      <input name="deal_key" type="hidden" value="<?php echo $payment->deal_key; ?>" size="40"/>
-                                                      <input name="url_title" type="hidden" value="<?php echo $payment->url_title; ?>" size="40"/>
-                                                  <?php } ?>
-                                                  <div class="payment_form">
-                                                      <ul>
-                                                          <li>
-                                                              <label><?php echo $this->Lang["NAME"]; ?>:<span class="form_star">*</span></label>
-                                                              <div class="fullname"><input autofocus tabindex="1" name="f_name" size="40" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" value="<?php if (!isset($this->form_error['f_name']) && isset($this->userPost['f_name'])) {
-                                                      echo $this->userPost['f_name'];
-                                                  } ?>" class="required" /></div><em>
-<?php if (isset($this->form_error['f_name'])) {
-    echo $this->form_error["f_name"];
-} ?>
-                                                              </em>
-                                                          </li>
-                                                          <li>
-                                                              <label><?php echo $this->Lang['EMAIL_F']; ?>:<span class="form_star">*</span></label>
-                                                              <div class="fullname"><input name="email" maxlength="64" tabindex="2" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" type="text" value="<?php if (!isset($this->form_error['email']) && isset($this->userPost['email'])) {
-    echo $this->userPost['email'];
-} else if (isset($this->email)) {
-    echo $this->email;
-} ?>" size="40" class="required"  /></div>
-                                                              <em>
-                                                          <?php if (isset($this->form_error['email'])) {
-                                                              echo $this->form_error["email"];
-                                                          } ?>
-                                                              </em>
-                                                          </li>
-                                                          <li>
-                                                              <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
-                                                              <div class="fullname"><input name="password" maxlength="15" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required"  value="<?php if (!isset($this->form_error['pswd']) && isset($this->userPost['pswd'])) {
-                                                                          echo $this->userPost['pswd'];
-                                                                      } ?>" size="40"/></div>
-                                                              <em>
-                                                                      <?php if (isset($this->form_error['pswd'])) {
-                                                                          echo $this->form_error["pswd"];
-                                                                      } ?>
-                                                              </em>
-                                                          </li>
-                                                          
-                                                           <li>
-                                                              <label><?php echo $this->Lang['CPSWD']; ?>:<span class="form_star">*</span></label>
-                                                              <div class="fullname"><input name="cpassword" maxlength="15" tabindex="4" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" class="required"  value="<?php if (!isset($this->form_error['cpassword']) && isset($this->userPost['cpassword'])) {
+                                        </form>
+                                    </div>
+                                </div>	                                
+                            </div>
 
-                                                                          echo $this->userPost['cpswd'];
-                                                                      } ?>" size="40"/></div>
-                                                              <em>
-                                                                      <?php if (isset($this->form_error['cpswd'])) {
-                                                                          echo $this->form_error["cpswd"];
-                                                                      } ?>
-                                                              </em>
-                                                          </li>
-                                                               <li>
-                                <label><?php echo $this->Lang['SEL_COUNTRY'];?>:<span class="form_star">*</span></label>
-                                <div class="fullname">
-                                    <select name="country" tabindex="5" onchange="return city_change_merchant(this.value);" class="required">
-                                            <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
-                                           <?php foreach ($this->all_country_list as $c) { ?>
-                                             <option  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
-    <?php } ?>
-                                    </select>
-                                     <em>
-                                                                      <?php if (isset($this->form_error['country'])) {
-                                                                          echo $this->form_error["country"];
-                                                                      } ?>
-                                                              </em>
-                                </div>
-                            
+                            <div class="payment_form_block clearfix">
 
-                            </li>            
-                                                                           
-                                                                                                                                            
-                                                        <li>
-                                                        <label><?php echo $this->Lang['SEL_CITY']; ?>:<span class="form_star">*</span></label>
-                                                        <div class="fullname">
-                                                        <select name="city" tabindex="6" id="CitySD"  class="required">
-                                                        <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
-                                                        
+
+                                <h3 class="type_form_title">Personal Information</h3>                                      
+                                <form method="post" id="commentForm_deals12" action="<?php echo PATH; ?>payment/signup_user">
+                                
+                                    <div class="payment_form_section">
+
+                                        <?php foreach ($this->deals_payment_deatils as $payment) { ?>
+                                            <input name="deal_key" type="hidden" value="<?php echo $payment->deal_key; ?>" size="40"/>
+                                            <input name="url_title" type="hidden" value="<?php echo $payment->url_title; ?>" size="40"/>
+                                        <?php } ?>
+                                        <div class="payment_form_deals">
+                                            <ul>
+                                                <li>
+                                                    <label><?php echo $this->Lang["NAME"]; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname"><input autofocus tabindex="1" name="f_name" size="40" maxlength="20"  placeholder="<?php echo $this->Lang['ENTER_NAME']; ?>" type="text" value="<?php
+                                                        if (!isset($this->form_error['f_name']) && isset($this->userPost['f_name'])) {
+                                                            echo $this->userPost['f_name'];
+                                                        }
+                                                        ?>" class="required" /></div><em>
+                                                                                 <?php
+                                                                                 if (isset($this->form_error['f_name'])) {
+                                                                                     echo $this->form_error["f_name"];
+                                                                                 }
+                                                                                 ?>
+                                                    </em>
+                                                </li>
+                                                <li>
+                                                    <label><?php echo $this->Lang['AGE_RNG']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname">
+                                                        <select name="age_range" tabindex="4">
+                                                            <option value=""><?php echo $this->Lang['SEL_AGE_RNG']; ?></option>
+                                                            <option value="1" ><?php echo $this->Lang["17_BEL"]; ?></option>
+                                                            <option value="2"><?php echo $this->Lang["18_25"]; ?></option>
+                                                            <option value="3"><?php echo $this->Lang["26_35"]; ?></option>
+                                                            <option value="4"><?php echo $this->Lang["36_45"]; ?></option>
+                                                            <option value="5"><?php echo $this->Lang["46_65"]; ?></option>
+                                                            <option value="6"><?php echo $this->Lang["66_ABV"]; ?></option>
+                                                        </select>
+                                                        <em id="age_range_error"></em>
+                                                    </div>   
+                                                </li>
+                                                <li>
+                                                    <label><?php echo $this->Lang['EMAIL_F']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname"><input name="email" maxlength="64" tabindex="2" placeholder="<?php echo $this->Lang['ENTER_EMAIL']; ?>" type="text" value="<?php
+                                                        if (!isset($this->form_error['email']) && isset($this->userPost['email'])) {
+                                                            echo $this->userPost['email'];
+                                                        } else if (isset($this->email)) {
+                                                            echo $this->email;
+                                                        }
+                                                        ?>" size="40" class="required"  /></div>
+                                                    <em>
+                                                        <?php
+                                                        if (isset($this->form_error['email'])) {
+                                                            echo $this->form_error["email"];
+                                                        }
+                                                        ?>
+                                                    </em>
+                                                </li>
+                                                <li>
+                                                    <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname"><input name="password" maxlength="15" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required"  value="<?php
+                                                        if (!isset($this->form_error['pswd']) && isset($this->userPost['pswd'])) {
+                                                            echo $this->userPost['pswd'];
+                                                        }
+                                                        ?>" size="40"/></div>
+                                                    <em>
+                                                        <?php
+                                                        if (isset($this->form_error['pswd'])) {
+                                                            echo $this->form_error["pswd"];
+                                                        }
+                                                        ?>
+                                                    </em>
+                                                </li>
+
+                                                <li>
+                                                    <label><?php echo $this->Lang['CPSWD']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname"><input name="cpassword" maxlength="15" tabindex="4" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" class="required"  value="<?php
+                                                        if (!isset($this->form_error['cpassword']) && isset($this->userPost['cpassword'])) {
+
+                                                            echo $this->userPost['CPSWD'];
+                                                        }
+                                                        ?>" size="40"/></div>
+                                                    <em>
+                                                        <?php
+                                                        if (isset($this->form_error['CPSWD'])) {
+                                                            echo $this->form_error["CPSWD"];
+                                                        }
+                                                        ?>
+                                                    </em>
+                                                </li>
+                                                <li>
+                                                    <label><?php echo $this->Lang['GENDER']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname">
+                                                        <select tabindex="9" name="gender">
+                                                            <option value=""><?php echo $this->Lang["SEL_GEN"]; ?></option>
+                                                            <option value="1"><?php echo $this->Lang["MALE"]; ?></option>
+                                                            <option value="2"><?php echo $this->Lang["FEMALE"]; ?></option>
+                                                        </select>
+                                                        <em id="gender_error"></em>
+                                                    </div>   
+                                                </li>
+                                                <li class="error_double">
+                                                    <label>Zenith Bank Account Number:<!--<span class="form_star">*</span>--></label>
+                                                    <div class="fullname">
+                                                        <input name="nuban" tabindex="7" maxlength="10" placeholder="Please enter your account no." type="text" value="" />
+                                                        <em id="acc_error"></em>
+                                                    </div>   
+                                                </li>
+                                                <li>
+                                                    <input type="hidden" name="unique_identifier" value="0000000000" />
+                                                </li>
+                                                
+                                                <li>
+                                                    <label><?php echo $this->Lang['SEL_COUNTRY']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname">
+                                                        <select name="country" tabindex="5" onchange="return city_change_merchant(this.value);" class="required">
+                                                            <option value=""><?php echo $this->Lang['SELECT_Y_COUNTRY']; ?></option>
+                                                            <?php foreach ($this->all_country_list as $c) { ?>
+                                                                <option  title="<?php echo $c->country_name; ?>" value="<?php echo $c->country_id; ?>" ><?php echo $c->country_name; ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                         <em>
-                                                                      <?php if (isset($this->form_error['city'])) {
-                                                                          echo $this->form_error["city"];
-                                                                      } ?>
-                                                              </em>
-                                                        </div>
-                                                         <div class="hideerror" id="city_validation">This Field Is Required.</div> 
-                                                        </li>
-                                                      </ul>
-                                                    <?php if(count($this->cms_tc) > 0){ ?>
-                                                      <div class="payment_terms_outer">
-                                                          <p  id="terms1" class="terms-conditons-text">
-                                                              <span class="fl font_myriad_pro"><input type="checkbox" tabindex="7" name="terms" value="terms" class="required"><?php echo $this->Lang['BY_CLICK']; ?> </span>
-                                                              <a class="font_myriad_pro mt5" tabindex="8" title="<?php echo $this->Lang['TERMS_COND']; ?>" onclick="show_dis_tc();" ><?php echo $this->Lang['TERMS_COND']; ?>.</a>
-                                                          </p>
-                                                          <em></em>
-                                                      </div>
-                                                      <?php } ?>
-                                                        <div class="buy_it complete_order_button">                                                    
-                                                          <input name="Submit" tabindex="9" type="submit" value="<?php echo $this->Lang['COMP_ODR']; ?>" />
-                                                      </div>
-                                                      </form>
-                                                  </div>
-                                             
-                                              </div>  
-                                          </form>   
-                                  </div>
-                    </div>
-                </div>
-                        </div>
-                        <?php if(count($this->cms_tc) > 0){ ?>
-                        <div id="show_tc" class="popup_block6" style="display:none;">   
-                                <div class="sign_up_outer"> 
-                                       <a onclick="hide_shipping_addr_tc()" class="close2" title="close" id="close" style="cursor:pointer;">&nbsp;</a>
-                                                <div class="signup_content clearfix">
-                                                    <h2 class="signup_title shipping_poptitle"><?php echo $this->cms_tc->current()->cms_title; ?></h2>
-                                                    <div class="content_abouts">
-                        <div class="content_abou_common">                                                                                     
-                            <div class="content_abou_text">
-				<p><?php echo $this->cms_tc->current()->cms_desc;?></p>
+                                                            <?php
+                                                            if (isset($this->form_error['country'])) {
+                                                                echo $this->form_error["country"];
+                                                            }
+                                                            ?>
+                                                        </em>
+                                                    </div>
+
+
+                                                </li>             
+
+                                                <li>
+                                                    <label><?php echo $this->Lang['SEL_CITY']; ?>:<span class="form_star">*</span></label>
+                                                    <div class="fullname">
+                                                        <select name="city" tabindex="6" id="CitySD"  class="required">
+                                                            <option value=""><?php echo $this->Lang['COUNTRY_FIRST']; ?></option>
+
+                                                        </select>
+                                                        <em>
+                                                            <?php
+                                                            if (isset($this->form_error['city'])) {
+                                                                echo $this->form_error["city"];
+                                                            }
+                                                            ?>
+                                                        </em>
+                                                    </div>
+                                                    <div class="hideerror" id="city_validation">This Field Is Required.</div> 
+                                                </li>
+                                            </ul>
+                                            <?php if (count($this->cms_tc) > 0) { ?>
+                                                <div class="payment_terms_outer">
+                                                    <p  id="terms1" class="terms-conditons-text">
+                                                        <span class="fl font_myriad_pro"><input type="checkbox" tabindex="7" name="terms" value="terms" class="required"><?php echo $this->Lang['BY_CLICK']; ?> </span>
+                                                        <a class="font_myriad_pro mt5" tabindex="8" title="<?php echo $this->Lang['TERMS_COND']; ?>" onclick="show_dis_tc();" ><?php echo $this->Lang['TERMS_COND']; ?>.</a>
+                                                    </p>
+                                                    <em></em>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="buy_it complete_order_button">                                                    
+                                                <input name="Submit" tabindex="9" type="submit" value="<?php echo $this->Lang['COMP_ODR']; ?>" />
+                                            </div>
+                                            <!--</form>-->
+                                        </div>
+
+                                    </div>  
+                                </form>   
                             </div>
-                        </div>  
+                        </div>
                     </div>
-                   </div>
                 </div>
-                </div>
+                <?php if (count($this->cms_tc) > 0) { ?>
+                    <div id="show_tc" class="popup_block6" style="display:none;">   
+                        <div class="sign_up_outer"> 
+                            <a onclick="hide_shipping_addr_tc()" class="close2" title="close" id="close" style="cursor:pointer;">&nbsp;</a>
+                            <div class="signup_content clearfix">
+                                <h2 class="signup_title shipping_poptitle"><?php echo $this->cms_tc->current()->cms_title; ?></h2>
+                                <div class="content_abouts">
+                                    <div class="content_abou_common">                                                                                     
+                                        <div class="content_abou_text">
+                                            <p><?php echo $this->cms_tc->current()->cms_desc; ?></p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <?php } ?>
-                
-                            <div class="pay_br payright_block">
-			
-							<div class="payment-faq-container">
-                        <!--<h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_MEN']; ?></h3>-->
+
+                <div class="pay_br payright_block">
+
+                    <div class="payment-faq-container">
+<!--<h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_MEN']; ?></h3>-->
                         <h3 class="paybr_title pay_titlebg"><?php echo "Add to cart FAQ"; ?></h3>
-						<div class="faq-content2 br_nn">
+                        <div class="faq-content2 br_nn">
                             <div class="faq-content-heading" onclick="return WhatHappens();">
 
                                 <div class="faq-content-heading-left active_arrw" id="right1">
                                     <a>What happens after I add a product to cart?
-</a>
+                                    </a>
                                 </div>
                                 <div class="faq-content-heading-left" id="down1">
                                     <a>What happens after I add a product to cart?
-</a>
+                                    </a>
                                 </div>
                             </div>
                             <div class="what_happens">
@@ -423,77 +477,76 @@
                             </div>
                         </div>-->
                     </div>
-			</div>
-                        </div>
-                    
-                        <!--div class="payment-login-deals-right></div-->
-			          
-        </div>
-                      
-                    <!--Blog content ends-->
                 </div>
             </div>
-        
+
+            <!--div class="payment-login-deals-right></div-->
+
         </div>
+
+        <!--Blog content ends-->
+    </div>
+</div>
+
+</div>
 <script>
-$(document).ready(function(){
-   $('.hideerror').hide();
-$("#commentForm_deals12").validate({ 
-	messages: {
-		
-			f_name: {
-			   required: "<?php echo $this->Lang['PLS_ENT_NAM']; ?>"                         
-		   },
-			password: {
-			   required: "<?php echo $this->Lang['PLS_ENT_PASS']; ?>"                         
-		   },
-		   cpassword: {
-			   required: "<?php echo $this->Lang['PLS_ENT_CPASS']; ?>"                      
-		   },
-		   country: {
-			   required: "<?php echo $this->Lang['PLS_SEL_COUNTRY']; ?>"                         
-		   },
-		   city: {
-			   required: "<?php echo $this->Lang['PLS_SEL_COUNTRY_FIR']; ?>"                         
-		   },
-		   terms: {
-		       required:"<?php echo $this->Lang['PLEASE_SELECT_TERMS']; ?>"
+    $(document).ready(function () {
+        $('.hideerror').hide();
+        $("#commentForm_deals12").validate({
+            messages: {
+                f_name: {
+                    required: "<?php echo $this->Lang['PLS_ENT_NAM']; ?>"
                 },
-		   	email: {
-			   required: "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>", 
-			   email : "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                             
-		   },
-    },
- submitHandler: function(form) {
-                if (document.getElementById('CitySD').value == ' ') { 
-                        $('.hideerror').show();
-                        $('div#submit').show();
-                        return false; 
-                }    else {
-                $('div#submit').hide();
-                form.submit();
+                password: {
+                    required: "<?php echo $this->Lang['PLS_ENT_PASS']; ?>"
+                },
+                cpassword: {
+                    required: "<?php echo $this->Lang['PLS_ENT_CPASS']; ?>"
+                },
+                country: {
+                    required: "<?php echo $this->Lang['PLS_SEL_COUNTRY']; ?>"
+                },
+                city: {
+                    required: "<?php echo $this->Lang['PLS_SEL_COUNTRY_FIR']; ?>"
+                },
+                terms: {
+                    required: "<?php echo $this->Lang['PLEASE_SELECT_TERMS']; ?>"
+                },
+                email: {
+                    required: "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
+                    email: "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"
+                },
+            },
+            submitHandler: function (form) {
+                if (document.getElementById('CitySD').value == ' ') {
+                    $('.hideerror').show();
+                    $('div#submit').show();
+                    return false;
+                } else {
+                    $('div#submit').hide();
+                    form.submit();
                 }
             }
-});
+        });
 
-$("#commentForm_deals13").validate({ 
-	messages: {
-		       password: {
-			   required: "<?php echo $this->Lang['PLS_ENT_PASS']; ?>"                         
-		   },
-		   	email: {
-			   required: "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>", 
-			   email : "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"                             
-		   },
-    },
- submitHandler: function(form) {
-   // some other code
-   // maybe disabling submit button
-   // then:
-	$('div#submit').hide();
-   form.submit();
- }
-});
-});
+        $("#commentForm_deals13").validate({
+            messages: {
+                password: {
+                    required: "<?php echo $this->Lang['PLS_ENT_PASS']; ?>"
+                },
+                email: {
+                    required: "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>",
+                    email: "<?php echo $this->Lang['PLS_ENT_EMAIL']; ?>"
+                },
+            },
+            submitHandler: function (form) {
+                // some other code
+                // maybe disabling submit button
+                // then:
+                $('div#submit').hide();
+                form.submit();
+            }
+        });
+    });
 </script>
 

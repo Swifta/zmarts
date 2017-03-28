@@ -50,10 +50,10 @@ class Payment_Controller extends Layout_Controller {
 						
 						->add_rules('f_name', 'required', 'chars[a-zA-Z_ -.,%\']')
 						->add_rules('email', 'required','valid::email', array($this, 'email_available'))
-						->add_rules('password', 'required','length[5,32]')
-						->add_rules('cpassword', 'required','length[5,32]')
-						->add_rules('city', 'required')
-						->add_rules('country', 'required');
+						->add_rules('password', 'required','length[4,32]', array($this, 'length'))
+						->add_rules('cpassword', 'required','length[4,32]', array($this, 'length'))
+						->add_rules('city', 'required', array($this, 'required'))
+						->add_rules('country', 'required', array($this, 'required'));
 			if($post->validate()){
 			        $referral_id = text::random($type = 'alnum', $length = 8);
 			        $this->signup=1;
@@ -69,6 +69,7 @@ class Payment_Controller extends Layout_Controller {
 					        email::sendgrid($from, $post->email,$subject, $message);
 				        }
 				        $this->users->login_users($this->email,$this->pswd);
+//                                echo var_dump($this->userPost);die;
 				$status = $this->users->add_users(arr::to_object($this->userPost),$referral_id,$user_referral_id);
 				$status_login = $this->users->login_users($this->email,$this->pswd);
 				if($status == 1){

@@ -175,7 +175,7 @@ $content_text = array(
 
 "ENTER_NAME"=>"Enter your first name here",
 
-"SEL_CITY" => "Select City",
+"SEL_CITY" => "Select State",
 
 "PLS_SEL_CITY" => "Please select your city here",
 
@@ -615,7 +615,7 @@ $content_text = array(
 
 "ALREADY_ACC"=>"Already have an account?",
 
-"PURCHACED_GR"=>"If you have purchased a $THIS_SITENAME before, you can sign in using your email address.",
+"PURCHACED_GR"=>"If you have registered on $THIS_SITENAME before, you can sign in using your email address.",
 
 "COMP_ODR" => "Complete Order",
 
