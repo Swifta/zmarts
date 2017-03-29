@@ -274,14 +274,14 @@
                                                 <li>
                                                     <label><?php echo $this->Lang['PSWD']; ?>:<span class="form_star">*</span></label>
                                                     <div class="fullname"><input name="password" maxlength="15" tabindex="3" placeholder="<?php echo $this->Lang['ENTER_PASS']; ?>" type="password" class="required"  value="<?php
-                                                        if (!isset($this->form_error['pswd']) && isset($this->userPost['pswd'])) {
-                                                            echo $this->userPost['pswd'];
+                                                        if (!isset($this->form_error['password']) && isset($this->userPost['password'])) {
+                                                            echo $this->userPost['password'];
                                                         }
                                                         ?>" size="40"/></div>
                                                     <em>
                                                         <?php
-                                                        if (isset($this->form_error['pswd'])) {
-                                                            echo $this->form_error["pswd"];
+                                                        if (isset($this->form_error['password'])) {
+                                                            echo $this->form_error["password"];
                                                         }
                                                         ?>
                                                     </em>
@@ -292,13 +292,13 @@
                                                     <div class="fullname"><input name="cpassword" maxlength="15" tabindex="4" placeholder="<?php echo $this->Lang['ENTER_CPASS']; ?>" type="password" class="required"  value="<?php
                                                         if (!isset($this->form_error['cpassword']) && isset($this->userPost['cpassword'])) {
 
-                                                            echo $this->userPost['CPSWD'];
+                                                            echo $this->userPost['cpassword'];
                                                         }
                                                         ?>" size="40"/></div>
                                                     <em>
                                                         <?php
-                                                        if (isset($this->form_error['CPSWD'])) {
-                                                            echo $this->form_error["CPSWD"];
+                                                        if (isset($this->form_error['cpassword'])) {
+                                                            echo $this->form_error["cpassword"];
                                                         }
                                                         ?>
                                                     </em>
