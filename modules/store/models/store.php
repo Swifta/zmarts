@@ -770,7 +770,7 @@ class Store_Model extends Model
                             ->from("product")
                             ->join("stores","stores.store_id","product.shop_id")
                             ->join($join_table, $join_a, $join_b)
-                            ->join("product_size","product_size.deal_id","product.deal_id")
+//                            ->join("product_size","product_size.deal_id","product.deal_id")
                             ->where("purchase_count < user_limit_quantity and deal_status = 1 and category.category_status = 1 and  store_status = 1  and stores.store_id = '".$store_id."'" .$conditions)
                             ->orderby("product.deal_id", "DESC")
                             ->limit($record,$offset)
