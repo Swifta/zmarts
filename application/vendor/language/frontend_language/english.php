@@ -1420,6 +1420,8 @@ $content_text = array(
 
 "THANKYOU_SAVING_PURCH" => "Thanks for your patronage with $THIS_SITENAME making a right choice with the Big Savings Purchase from $THIS_SITENAME Portal",
 
+"THANKYOU_DELIVERY_ADDRESS_DEAL_PAYMENT_ADMIN" => "A deal order has been placed on Zmart with the following details;",
+    
 "THANKYOU_DELIVERY_ADDRESS" => "We have shared this transaction alert to Merchant as per existing details of available with us. Please inform immediately if the ship to delivery address, as stated below, is not correct.",
 
 "USER_CREDIT_CHARGED"=>"Credit card will be charged",

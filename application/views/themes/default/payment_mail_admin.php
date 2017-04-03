@@ -43,23 +43,23 @@ $R = $this->result_mail;
                                     <tr>
                                         <td style="font:normal 18px/21px arial;color:#000;"><?php echo $this->Lang["HELLO"]; ?> <?php echo $this->Lang['ADMIN']; ?> ,</td> 
                                     </tr>
-                                    <tr height="10">
+<!--                                    <tr height="10">
                                         <td></td>
-                                    </tr>
-                                    <tr>
+                                    </tr>-->
+<!--                                    <tr>
                                         <td style="font:normal 17px/21px arial;color:#333;"><?php echo $this->Lang['GREE_THE_DAY']; ?></td>
-                                    </tr>
+                                    </tr>-->
                                     <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>
                                         <td>
                                         <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang['THANKYOU_SAVING_PURCH']; ?>.</p>
                                         </td>
-                                    </tr>
+                                    </tr>-->
                                     <tr>
                                         <td>
-                                        <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang['THANKYOU_DELIVERY_ADDRESS']; ?>.</p>
+                                        <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang['THANKYOU_DELIVERY_ADDRESS_DEAL_PAYMENT_ADMIN']; ?>.</p>
                                         </td>
                                     </tr>
                                     <?php
@@ -77,13 +77,13 @@ $R = $this->result_mail;
                                     </tr>
                                     
                                     <tr>
-                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_NAME']; ?>: <b style="color:#144F5D;"><?php echo $merchant_firstneme; ?> <?php echo $merchant_lastname; ?></b></td> 
+                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_SHOP_NAME']; ?>: <b style="color:#144F5D;"><?php echo $merchant_firstneme; ?> <?php echo $merchant_lastname; ?></b></td> 
                                     </tr>
                                     <tr height="10">
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_EMAIL']; ?>: <b style="color:#144F5D;"><?php echo $merchant_email; ?></b></td>
+                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_SHOP_EMAIL']; ?>: <b style="color:#144F5D;"><?php echo $merchant_email; ?></b></td>
                                     </tr>                                    
                                     <tr height="25">
                                         <td></td>
@@ -103,7 +103,7 @@ $R = $this->result_mail;
                                     <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP']; ?>  :  <?php if(isset($R->ip)){echo $R->ip;} ?></td>
                                     </tr>
                                     <?php if(isset($R->ip_city_name)){ ?>
@@ -122,7 +122,7 @@ $R = $this->result_mail;
                                     </tr>                               
                                     <tr height="25">
                                         <td></td>
-                                    </tr>
+                                    </tr>-->
                                     
                                     <tr>
                                         <td>

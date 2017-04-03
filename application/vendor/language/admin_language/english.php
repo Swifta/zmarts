@@ -967,6 +967,8 @@ $content_text = array(
 			"MERCHANT_ACC"=>"Merchant Account",
 
 			"MERCHANT_NAME"=>"Merchant Name",
+    
+                        "MERCHANT_SHOP_NAME"=>"Shop Name",
 
 			"MERCHANT_ADD"=>"Add Merchant Account",
 
@@ -1642,6 +1644,8 @@ $content_text = array(
 			"REASON" => "Reason",
 
 			"MERCHANT_EMAIL" => "Merchant Email",
+    
+                        "MERCHANT_SHOP_EMAIL" => "Shop Email",
 
 			"MERCHANT_PAY_EMAIL" => "Merchant Payment Email",
 
