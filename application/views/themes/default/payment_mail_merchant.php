@@ -41,46 +41,47 @@ $R = $this->result_mail;
                             <td>
                                 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border:1px solid #e3e3e3;padding:10px;color:#666666;font:normal 13px/19px arial;">
                                     <tr>
-                                        <td style="font:normal 18px/21px arial;color:#000;"><?php echo $this->Lang["HELLO"]; ?> <?php echo $this->merchant_firstname; ?> <?php echo $this->merchant_lastname; ?>,</td> 
+<!--                                        <td style="font:normal 18px/21px arial;color:#000;"><?php echo $this->Lang["HELLO"]; ?> <?php echo $this->merchant_firstname; ?> <?php echo $this->merchant_lastname; ?>,</td> -->
+                                        <td style="font:normal 18px/21px arial;color:#000;"><?php echo $this->Lang["HELLO"]; ?> <?php echo $this->merchant_firstname; ?>,</td> 
                                     </tr>
                                     <tr height="10">
                                         <td></td>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>
                                         <td style="font:normal 17px/21px arial;color:#333;"><?php echo $this->Lang['GREE_THE_DAY']; ?></td>
                                     </tr>
                                     <tr height="10">
                                         <td></td>
-                                    </tr>
-                                    <tr>
+                                    </tr>-->
+<!--                                    <tr>
                                         <td>
                                         <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang['THANKYOU_SAVING_PURCH']; ?>.</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                        <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang['THANKYOU_DELIVERY_ADDRESS']; ?>.</p>
+                                        <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang['THANKYOU_DELIVERY_MERCHANT_ADDRESS']; ?>.</p>
                                         </td>
                                     </tr>
 
                                     <tr height="10">
                                         <td></td>
-                                    </tr>
-
-                                    <!--<tr>
-                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['BUYERS_NAME']; ?>: <b style="color:#144F5D;"><?php echo $this->UserName; ?></b></td> 
                                     </tr>-->
-                                    <tr height="10">
-                                        <td></td>
+
+                                    <tr>
+                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['BUYERS_NAME']; ?>: <b style="color:#144F5D;"><?php echo $this->UserName; ?></b></td> 
                                     </tr>
-                                    <!--<tr>
-                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['BUYERS_EMAIL']; ?>: <b style="color:#144F5D;"><?php echo $this->UserEmail; ?></b></td>
-                                    </tr>-->          
-                                    
                                     <tr height="10">
                                         <td></td>
                                     </tr>
                                     <tr>
+                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['BUYERS_EMAIL']; ?>: <b style="color:#144F5D;"><?php echo $this->UserEmail; ?></b></td>
+                                    </tr>          
+                                    
+                                    <tr height="10">
+                                        <td></td>
+                                    </tr>
+<!--                                    <tr>
                                         <td style="font:normal 12px/12px arial;color:#333;"><?php echo $this->Lang['IP']; ?>  :  <?php if(isset($R->ip)){echo $R->ip;} ?></td>
                                     </tr>
                                     <?php if(isset($R->ip_city_name)){ ?>
@@ -100,7 +101,7 @@ $R = $this->result_mail;
                                                               
                                     <tr height="25">
                                         <td></td>
-                                    </tr>
+                                    </tr>-->
                                     
                                     <tr>
                                         <td>

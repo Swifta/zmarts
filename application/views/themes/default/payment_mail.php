@@ -54,7 +54,7 @@ $R = $this->result_mail;
                                         <?php if($this->coupon_active == 1 ) { ?>
                                         <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang["FOLLOWING_ORDERS_ACTIVE"]; ?> <a href="<?php echo PATH;?>users/my-coupons.html"><?php echo $this->Lang["MY_BUYS"]; ?></a>   <?php echo $this->Lang["WILL_ACTIVATE1"]; ?>.</p>
                                         <?php } else { ?>
-                                        <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang["FOLLOWING_ORDERS"]; ?> <a href="<?php echo PATH;?>users/my-coupons.html"><?php echo $this->Lang["MY_BUYS"]; ?></a>   <?php echo $this->Lang["WILL_ACTIVATE"]; ?>.</p>
+                                        <p style="width:641px;     padding: 6px 0 0; font:normal 12px arial; color:#696969; margin:0px;"><?php echo $this->Lang["CUSTOMER_FOLLOWING_ORDERS"]; ?> <a href="<?php echo PATH;?>users/my-coupons.html"><?php echo $this->Lang["MY_BUYS"]; ?></a>   <?php echo $this->Lang["WILL_ACTIVATE1"]; ?>.</p>
                                         <?php } ?>
                                         </td>
                                     </tr>
@@ -147,8 +147,10 @@ $R = $this->result_mail;
                         </tr>
                         <tr>
                             <td align="center" style="font:normal 13px/19px arial;color:#333;">
-                                <?php echo $this->Lang["IN_STORE"]; ?> - <?php echo ($this->coupon_active==0)?$this->Lang["BUY_CLOSE_EMAIL"]:$this->Lang["BUY_CLOSE_EMAIL1"]; ?>
-				<a href="<?php echo PATH;?>users/my-coupons.html" ><?php echo $this->Lang["MY_BUYS"]; ?></a> <?php echo $this->Lang["TICKET_PRINTED"]; ?>
+                                //<?php echo $this->Lang["IN_STORE"]; ?> -
+                                 <?php echo ($this->coupon_active==0)?$this->Lang["BUY_CLOSE_EMAIL_TICKET_PRINTED"]:$this->Lang["BUY_CLOSE_EMAIL1"]; ?>
+<!--				<a href="<?php echo PATH;?>users/my-coupons.html" ><?php echo $this->Lang["MY_BUYS"]; ?></a> -->
+                                //<?php echo $this->Lang["TICKET_PRINTED"]; ?>
                             </td>
                         </tr>
                     </table>

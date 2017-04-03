@@ -77,7 +77,8 @@ $R = $this->result_mail;
                                     </tr>
                                     
                                     <tr>
-                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_SHOP_NAME']; ?>: <b style="color:#144F5D;"><?php echo $merchant_firstneme; ?> <?php echo $merchant_lastname; ?></b></td> 
+                                        <!--<td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_SHOP_NAME']; ?>: <b style="color:#144F5D;"><?php echo $merchant_firstneme; ?> <?php echo $merchant_lastname; ?></b></td>--> 
+                                        <td style="font:normal 16px/18px arial;color:#000;"><?php echo $this->Lang['MERCHANT_SHOP_NAME']; ?>: <b style="color:#144F5D;"><?php echo $merchant_firstneme; ?></b></td>
                                     </tr>
                                     <tr height="10">
                                         <td></td>

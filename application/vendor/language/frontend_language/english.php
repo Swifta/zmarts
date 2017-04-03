@@ -110,6 +110,8 @@ $content_text = array(
 "IN_STORE" => "In Store",
 
 "BUY_CLOSE_EMAIL" => "When this buy closes, you will receive an e-mail notification that your ticket is active and can be downloaded from your ",
+    
+"BUY_CLOSE_EMAIL_TICKET_PRINTED" => "Please note that you will be required to visit the Merchant's Store to redeem this deal. Kindly go along with a copy of this email",
 
 "MY_BUYS"=>"My Buys",
 
@@ -1170,6 +1172,8 @@ $content_text = array(
 "PRODUCT_BOUGHT" => "Has bought a product for you",
 
 "FOLLOWING_ORDERS"=>"The following orders have been placed and are pending in your",
+    
+"CUSTOMER_FOLLOWING_ORDERS"=>"The following order has been placed and is pending in your",
 
 "WILL_ACTIVATE"=>" section. They will activate as specified below if the buy tips.",
 
@@ -1210,7 +1214,7 @@ $content_text = array(
 
 "THANK_U_ORDER"=>"Thank you for your order!",
 
-"FOLLOWING_ORDERS_ACTIVE"=>"The following orders have been placed and are active in your",
+"FOLLOWING_ORDERS_ACTIVE"=>"The following order has been placed and is active in your",
 
 "WILL_ACTIVATE1"=>" section",
 
@@ -1409,8 +1413,12 @@ $content_text = array(
 "USER_BUY" => "Order Received  ",
 
 "MERCHANT_NAME" =>"Merchant Name",
+    
+"MERCHANT_SHOP_NAME" =>"Shop Name",
 
 "MERCHANT_EMAIL" =>"Merchant Email",
+    
+"MERCHANT_SHOP_EMAIL" =>"Shop Email",
 
 "BUYERS_NAME" =>"Buyer Name",
 
@@ -1423,6 +1431,8 @@ $content_text = array(
 "THANKYOU_DELIVERY_ADDRESS_DEAL_PAYMENT_ADMIN" => "A deal order has been placed on Zmart with the following details;",
     
 "THANKYOU_DELIVERY_ADDRESS" => "We have shared this transaction alert to Merchant as per existing details of available with us. Please inform immediately if the ship to delivery address, as stated below, is not correct.",
+    
+"THANKYOU_DELIVERY_MERCHANT_ADDRESS" => "You have received a Deal Order with the following details;",
 
 "USER_CREDIT_CHARGED"=>"Credit card will be charged",
 
