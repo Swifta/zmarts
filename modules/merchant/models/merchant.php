@@ -1996,9 +1996,12 @@ class Merchant_Model extends Model
                                  ->from("transaction")
                                  ->join("users","users.user_id","transaction.user_id")
                                  ->join("deals","deals.deal_id","transaction.deal_id")
-                                 ->where($conditions. " and users.firstname like '%".$search_key."%' OR transaction.transaction_id like '%".$search_key."%' OR deals.deal_title like '%".$search_key."%'")
-                                 ->orderby("transaction.id", "DESC")
-                                 ->limit($limit1)
+                                 ->where($conditions. " and users.firstname like '%".$search_key."%' "
+                                         . "OR transaction.transaction_id like '%".$search_key."%' "
+                                         . "OR deals.deal_title like "
+                                         . "'%".$search_key."%' order by transaction.id DESC ".$limit1)
+//                                 ->orderby("transaction.id", "DESC")
+//                                 ->limit($limit1)
                                  ->get();
 		}
 		else{
@@ -2027,8 +2030,8 @@ class Merchant_Model extends Model
                                 ->from("transaction")
                                 ->join("users","users.user_id","transaction.user_id")
                                 ->join("deals","deals.deal_id","transaction.deal_id")
-                                ->where($conditions)
-                                ->limit($limit1)
+                                ->where($conditions."".$limit1)
+//                                ->limit($limit1)
                                 ->get();
 		}
 		return $result;
