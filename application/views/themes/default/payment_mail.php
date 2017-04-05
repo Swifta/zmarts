@@ -151,7 +151,7 @@ $R = $this->result_mail;
                                  <?php // echo ($this->coupon_active==0)?$this->Lang["BUY_CLOSE_EMAIL_TICKET_PRINTED"]:$this->Lang["BUY_CLOSE_EMAIL1"]; ?>
 				<!--<a href="<?php // echo PATH;?>users/my-coupons.html" ><?php // echo $this->Lang["MY_BUYS"]; ?></a>-->
                                 <?php // echo $this->Lang["TICKET_PRINTED"]; ?>
-                                $this->Lang["BUY_CLOSE_EMAIL_TICKET_PRINTED"]
+                                <?php $this->Lang["BUY_CLOSE_EMAIL_TICKET_PRINTED"]; ?>
                             </td>
                         </tr>
                     </table>
